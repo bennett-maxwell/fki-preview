@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Franchise KI — AI-Powered Franchise Matching">
 <meta name="twitter:description" content="8 questions. AI-personalized franchise podcast in 60 minutes. Free.">
 <meta name="twitter:image" content="https://franchiseki.com/assets/og-image.png">
-<meta name="theme-color" content="#1D1F13">
+<meta name="theme-color" content="#000000">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="canonical" href="https://franchiseki.com/">
@@ -82,21 +82,21 @@
 /* ============================================================
    PALETTE LOCKED to franchiseki.com (extract_brand.js 2026-05-09)
    Source: client_palette.json
-   Allowed: #000000 #1D1F13 #F7F8F5 #FFFFFF #F8B552 #6EA8FF #EDEDED + grays
+   Allowed: #000000 #000000 #F5F5F5 #FFFFFF #F8B552 #6EA8FF #EDEDED + grays
    Rules 12/13/14 enforced.
    ============================================================ */
 :root {
   --ink: #000000;          /* primary text — live frequency 716 */
-  --charcoal: #1D1F13;     /* headlines — live h1/h2 color (151) */
-  --cream: #F7F8F5;        /* alt section bg — live (36) */
+  --charcoal: #000000;     /* headlines — live h1/h2 color (151) */
+  --cream: #F5F5F5;        /* alt section bg — live (36) */
   --white: #FFFFFF;        /* primary bg */
   --gold: #F8B552;         /* live accent (8) */
   --sky: #6EA8FF;          /* live hero gradient start */
   --line: #EDEDED;         /* live border gray */
   --muted: #6E7180;        /* WCAG neutral allowed */
-  --shadow-1: 0 1px 3px rgba(29, 31, 19, 0.06);
-  --shadow-2: 0 12px 28px rgba(29, 31, 19, 0.10);
-  --shadow-3: 0 24px 48px rgba(29, 31, 19, 0.14);
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-2: 0 12px 28px rgba(0, 0, 0, 0.10);
+  --shadow-3: 0 24px 48px rgba(0, 0, 0, 0.14);
   --radius-card: 14px;
   --radius-pill: 100px;
 }
@@ -162,7 +162,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   background: rgba(248, 181, 82, 0.18);
-  color: #8a5e1d;
+  color: #000000;
   padding: 8px 18px;
   border-radius: var(--radius-pill);
   font-size: 13px; font-weight: 700;
@@ -208,13 +208,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .trust-bar {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-  border-top: 1px solid rgba(29, 31, 19, 0.10);
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
   padding-top: 40px;
   max-width: 920px; margin: 0 auto;
 }
 .trust-stat {
   text-align: center;
-  border-right: 1px solid rgba(29, 31, 19, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
   padding: 8px 16px;
 }
 .trust-stat:last-child { border-right: none; }
@@ -231,7 +231,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 @media (max-width: 720px) {
   .trust-bar { grid-template-columns: repeat(2, 1fr); }
-  .trust-stat { border-bottom: 1px solid rgba(29, 31, 19, 0.08); padding: 16px; }
+  .trust-stat { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding: 16px; }
   .trust-stat:nth-child(2) { border-right: none; }
   .trust-stat:nth-last-child(-n+2) { border-bottom: none; }
 }
@@ -243,7 +243,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: inline-block;
   font-size: 13px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
-  color: #8a5e1d;
+  color: #000000;
   margin-bottom: 16px;
 }
 .section-title {
@@ -291,7 +291,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: inline-block;
   font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 1.5px;
-  color: #8a5e1d;
+  color: #000000;
   padding: 4px 10px;
   background: rgba(248, 181, 82, 0.16);
   border-radius: 6px;
@@ -335,7 +335,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .audit-features li {
   display: flex; align-items: center; gap: 14px;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(29, 31, 19, 0.10);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
   font-size: 15px;
   color: var(--ink);
 }
@@ -350,7 +350,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 .audit-card-eyebrow {
   font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; color: #8a5e1d;
+  text-transform: uppercase; color: #000000;
   margin-bottom: 12px;
 }
 .audit-card h3 {
@@ -563,7 +563,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       <a href="audit.html" class="nav-cta">Take the Audit</a>
     </div>
     <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
-      <svg class="icon-feather" viewBox="0 0 24 24" style="stroke:#1D1F13"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-feather" viewBox="0 0 24 24" style="stroke:#000000"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </nav>
@@ -572,7 +572,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <section class="hero">
   <div class="hero-inner">
     <span class="hero-eyebrow">
-      <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#8a5e1d"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#000000"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       AI-Powered Franchise Matching · Free
     </span>
     <h1>Find a franchise that<br>actually fits. In 60 minutes. Free.</h1>
@@ -640,7 +640,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   <div class="audit-inner">
     <div class="audit-copy">
       <span class="hero-eyebrow">
-        <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#8a5e1d"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#000000"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         The Advaita AI Audit
       </span>
       <h2>The first AI-personalized<br>franchise audit. Free.</h2>

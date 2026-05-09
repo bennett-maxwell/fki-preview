@@ -1,28 +1,31 @@
 {
   "source_url": "https://franchiseki.com",
-  "extracted_at": "2026-05-09T07:05:00Z",
+  "extracted_at": "2026-05-09T07:50:00Z",
+  "version": "v3 — Bennett directive lock (white/black/grey + 2 live accents)",
   "extracted_via": "extract_brand.js (playwright headless 1280x900)",
   "diamond_verified": true,
-  "palette_locked": [
-    { "hex": "#000000", "rgb": "rgb(0, 0, 0)",        "uses": 716, "role": "primary text + dark CTA bg" },
-    { "hex": "#1D1F13", "rgb": "rgb(29, 31, 19)",     "uses": 151, "role": "headline charcoal (h1, h2)" },
-    { "hex": "#F7F8F5", "rgb": "rgb(247, 248, 245)",  "uses": 36,  "role": "alt section cream bg" },
-    { "hex": "#0000EE", "rgb": "rgb(0, 0, 238)",      "uses": 35,  "role": "default link blue (footer-only)" },
-    { "hex": "#FFFFFF", "rgb": "rgb(255, 255, 255)",  "uses": 11,  "role": "primary background" },
-    { "hex": "#F8B552", "rgb": "rgb(248, 181, 82)",   "uses": 8,   "role": "gold/orange accent" },
-    { "hex": "#6EA8FF", "rgb": "rgb(110, 168, 255)",  "uses": 1,   "role": "hero gradient start" },
-    { "hex": "#EDEDED", "rgb": "rgb(237, 237, 237)",  "uses": 3,   "role": "light gray border / neutral" }
+  "tone_tint_test": "PASS — no green-channel dominance > +10 on near-blacks",
+  "palette_locked_v3_strict": [
+    { "hex": "#000000", "rgb": "rgb(0, 0, 0)",        "role": "primary text + dark surfaces", "source": "pure neutral (Bennett directive)" },
+    { "hex": "#F5F5F5", "rgb": "rgb(245, 245, 245)",  "role": "alt section bg",                "source": "pure neutral grey (Bennett directive)" },
+    { "hex": "#FFFFFF", "rgb": "rgb(255, 255, 255)",  "role": "primary background",            "source": "pure neutral" },
+    { "hex": "#EDEDED", "rgb": "rgb(237, 237, 237)",  "role": "borders / dividers",            "source": "live (3 uses)" },
+    { "hex": "#6E7180", "rgb": "rgb(110, 113, 128)",  "role": "muted text",                    "source": "WCAG neutral grey" },
+    { "hex": "#F8B552", "rgb": "rgb(248, 181, 82)",   "role": "gold accent badges + step #'s", "source": "live (8 uses)" },
+    { "hex": "#6EA8FF", "rgb": "rgb(110, 168, 255)",  "role": "hero gradient start",           "source": "live (1 use)" }
   ],
-  "allowed_neutrals_added": ["#FFFFFF", "#000000", "#F5F5F7", "#6E7180"],
-  "samples": {
-    "body":          { "color": "rgb(0, 0, 0)",      "bg": "rgb(255, 255, 255)" },
-    "h1":            { "color": "rgb(29, 31, 19)",   "font": "General Sans" },
-    "h2":            { "color": "rgb(29, 31, 19)",   "font": "General Sans" },
-    "primary_cta":   { "text": "Get Started", "color": "rgb(0, 0, 238)", "bgImage": "linear-gradient(125deg, rgb(255, 255, 255) -123%, rgb(0, 0, 0) 74%)" },
-    "hero_gradient": "linear-gradient(139deg, rgb(110, 168, 255) -13%, rgb(255, 255, 255) 55%)"
-  },
+  "v2_to_v3_substitutions": [
+    { "from": "#1D1F13", "to": "#000000", "reason": "rgb(29,31,19) green-dominant by +12 — Bennett saw 'green'; substituted with pure black" },
+    { "from": "#F7F8F5", "to": "#F5F5F5", "reason": "rgb(247,248,245) green-dominant by +3 — substituted with pure light grey" },
+    { "from": "#8A5E1D", "to": "#000000", "reason": "olive accent text — derived not live; substituted with pure black" }
+  ],
   "fonts_locked": [
-    { "family": "General Sans", "license": "Fontshare paid", "substitute": "Plus Jakarta Sans (Google Fonts free, geometric grotesque, closest open-source match)" }
+    { "family": "General Sans", "license": "Fontshare paid", "substitute": "Plus Jakarta Sans (Google Fonts free, geometric grotesque)" }
   ],
-  "rules_applied": ["Rule 12 (palette lock)", "Rule 13 (font lock + substitute)", "Rule 14 (color diamond gate enforced post-build)"]
+  "rules_applied": [
+    "Rule 12 — Client Color Palette Lock",
+    "Rule 13 — Client Font Lock + Substitute",
+    "Rule 14 — Color Diamond Gate",
+    "Rule 14.1 — Tone-Tint Test (NEW v3, Bennett directive 2026-05-09)"
+  ]
 }
