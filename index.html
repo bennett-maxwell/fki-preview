@@ -25,19 +25,60 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Franchise KI",
-  "alternateName": "FKI",
-  "url": "https://franchiseki.com",
-  "logo": "https://franchiseki.com/assets/fki-logo.png",
-  "description": "AI-powered franchise consulting. Match qualified buyers with vetted franchise opportunities at no cost.",
-  "founder": { "@type": "Person", "name": "Bennett Maxwell" },
-  "areaServed": "United States",
-  "priceRange": "Free",
-  "serviceType": "Franchise Consulting",
-  "sameAs": [
-    "https://www.linkedin.com/company/franchiseki/",
-    "https://www.linkedin.com/in/bennettmaxwell/"
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://franchiseki.com/#org",
+      "name": "Franchise KI",
+      "alternateName": "FKI",
+      "url": "https://franchiseki.com",
+      "logo": "https://franchiseki.com/assets/fki-logo.png",
+      "image": "https://franchiseki.com/assets/og-image.png",
+      "description": "AI-powered franchise consulting. Match qualified buyers with vetted franchise opportunities at no cost.",
+      "founder": { "@type": "Person", "name": "Bennett Maxwell", "url": "https://www.linkedin.com/in/bennettmaxwell/" },
+      "areaServed": "United States",
+      "priceRange": "Free",
+      "serviceType": "Franchise Consulting",
+      "knowsAbout": ["Franchise Consulting", "Franchise Matching", "Territory Analysis", "Franchise Validation", "FDD Review"],
+      "sameAs": [
+        "https://www.linkedin.com/company/franchiseki/",
+        "https://www.linkedin.com/in/bennettmaxwell/",
+        "https://www.facebook.com/franchiseki",
+        "https://www.instagram.com/franchiseki",
+        "https://www.skool.com/franchiseki"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://franchiseki.com/#website",
+      "url": "https://franchiseki.com",
+      "name": "Franchise KI",
+      "publisher": { "@id": "https://franchiseki.com/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://franchiseki.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "AI-Powered Franchise Matching",
+      "provider": { "@id": "https://franchiseki.com/#org" },
+      "areaServed": "United States",
+      "description": "8-question AI audit delivers a personalized franchise podcast in under 1 hour. Match qualified buyers with vetted franchise opportunities at no cost.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How does Franchise KI make money if it's free for me?", "acceptedAnswer": { "@type": "Answer", "text": "Franchisors pay placement commissions to vetted franchise consultants out of their marketing budget — it doesn't increase your franchise fee or investment. We get paid only when a placement closes, so we have the same incentive you do: a great fit." } },
+        { "@type": "Question", "name": "What's the AI Audit, really?", "acceptedAnswer": { "@type": "Answer", "text": "An 8-question survey. We feed your answers into a Google NotebookLM project loaded with our 100-brand database, Item-19 disclosures, and MapKI territory data. It generates a personalized 10-15 minute podcast — your name, your goals, your top 3 matches and why. Delivered in under an hour." } },
+        { "@type": "Question", "name": "Will you spam me after I take the audit?", "acceptedAnswer": { "@type": "Answer", "text": "No. You'll get the audit in your inbox. After that, you only hear from us if you reply or book a call. We don't sell or share your email." } },
+        { "@type": "Question", "name": "What if I'm not ready for 6 months?", "acceptedAnswer": { "@type": "Answer", "text": "Take the audit anyway. Most placed franchisees were 4-9 months out from signing when they first engaged. The audit is the lowest-friction way to start narrowing the field." } },
+        { "@type": "Question", "name": "How is this different from FranChoice or The Franchise Consulting Company?", "acceptedAnswer": { "@type": "Answer", "text": "They match from a list. We built tooling. MapKI shows territory data — which markets are open, which are saturated. The Advaita AI Audit gives you a personalized podcast before you ever talk to a human. Our match logic is operator-type aware, not just industry-aware." } },
+        { "@type": "Question", "name": "What happens on a fit call?", "acceptedAnswer": { "@type": "Answer", "text": "15 minutes on Zoom. We confirm what the audit found, answer questions, and either book a longer Discovery if you're qualified for the brands you matched into, or honestly tell you we're not the right fit and where to look." } }
+      ]
+    }
   ]
 }
 </script>
