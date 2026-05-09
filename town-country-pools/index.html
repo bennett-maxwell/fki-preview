@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Town & Country Pools — Magnolia's Custom Pool Builder Since 1973</title>
+<meta name="description" content="117 verified five-star reviews. Three generations of craftsmanship. Custom inground pools, spas, and outdoor living — designed in your backyard, built by our crew." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1F355C;
+    --secondary: #0EAEC8;
+    --accent: #0048FE;
+    --text: #1B1B1B;
+    --mid: #6B7280;
+    --line: #E5E7EB;
+    --paper: #F5F5F7;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--primary); text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  svg { width: 100%; height: 100%; }
+
+  /* Skip link */
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 12px; top: 12px; background: var(--primary); color: var(--white); padding: 8px 14px; border-radius: 6px; z-index: 100; }
+
+  /* Utility bar */
+  .util {
+    background: var(--text);
+    color: var(--white);
+    font-size: 13px;
+    padding: 10px 0;
+  }
+  .util .row { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .util a { color: var(--white); display: inline-flex; align-items: center; gap: 8px; }
+  .util a:hover { opacity: 0.85; }
+  .util .icon { width: 14px; height: 14px; display: inline-block; }
+
+  /* Container */
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .row { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; gap: 20px; }
+  .brand { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.4px; color: var(--text); }
+  .navlinks { display: flex; gap: 28px; align-items: center; }
+  .navlinks a { color: var(--text); font-weight: 500; font-size: 15px; }
+  .navlinks a:hover { color: var(--primary); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--primary); color: var(--white);
+    padding: 12px 22px; border-radius: 100px;
+    font-weight: 700; font-size: 14px; letter-spacing: -0.1px;
+    border: none; cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .pill:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); color: var(--white); }
+  .pill .icon { width: 16px; height: 16px; }
+  .pill-ghost {
+    background: transparent; color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+  .pill-ghost:hover { background: var(--primary); color: var(--white); }
+  .pill-accent { background: var(--accent); }
+  @media (max-width: 720px) { .navlinks a:not(.pill) { display: none; } }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1F355C 0%, #0EAEC8 100%);
+    color: var(--white);
+    padding: 100px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    letter-spacing: -1.6px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    max-width: 880px;
+  }
+  .hero p.sub {
+    font-size: 19px;
+    line-height: 1.55;
+    max-width: 660px;
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 36px;
+  }
+  .hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .pill { background: var(--white); color: var(--primary); padding: 16px 28px; font-size: 16px; }
+  .hero .pill-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.6); }
+  .hero .pill-ghost:hover { background: var(--white); color: var(--primary); border-color: var(--white); }
+
+  /* Trust bar */
+  .trust {
+    background: var(--white);
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .trust .row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .stat { text-align: center; min-width: 140px; }
+  .stat .num {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 36px; font-weight: 900; color: var(--primary);
+    letter-spacing: -1px; line-height: 1;
+  }
+  .stat .lbl {
+    font-size: 12px; color: var(--mid);
+    text-transform: uppercase; letter-spacing: 1.4px; font-weight: 600;
+    margin-top: 8px;
+  }
+  .stat .stars { display: inline-flex; gap: 2px; color: var(--accent); justify-content: center; }
+  .stat .stars svg { width: 18px; height: 18px; }
+
+  /* Section base */
+  section { padding: 100px 0; }
+  .section-head { text-align: center; margin-bottom: 56px; }
+  .section-head .eyebrow {
+    font-size: 12px; color: var(--primary);
+    text-transform: uppercase; letter-spacing: 1.6px;
+    font-weight: 700; margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 900; letter-spacing: -1.2px;
+    font-size: clamp(2rem, 3.6vw, 2.6rem);
+    color: var(--text); line-height: 1.1;
+  }
+  .section-head p { font-size: 17px; color: var(--mid); max-width: 640px; margin: 14px auto 0; }
+
+  /* Services */
+  .services { background: var(--paper); }
+  .services .grid {
+    display: grid; gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .service {
+    background: var(--white); border-radius: 18px;
+    padding: 32px 28px;
+    box-shadow: 0 1px 0 var(--line), 0 12px 30px rgba(0,0,0,0.04);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .service:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--line), 0 18px 36px rgba(0,0,0,0.08); }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, #1F355C 0%, #0EAEC8 100%);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px; padding: 12px;
+  }
+  .service-name { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .service-desc { font-size: 15px; color: var(--mid); line-height: 1.55; }
+
+  /* Reviews */
+  .reviews-wrap { background: var(--white); }
+  .review {
+    background: var(--paper); border-radius: 18px;
+    padding: 36px 32px;
+    max-width: 720px; margin: 0 auto;
+    text-align: center;
+    transition: opacity .4s ease;
+  }
+  .review .stars { display: inline-flex; gap: 4px; color: var(--accent); margin-bottom: 18px; }
+  .review .stars svg { width: 22px; height: 22px; }
+  .review .quote {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 22px; line-height: 1.45; color: var(--text);
+    font-weight: 600; letter-spacing: -0.4px; margin-bottom: 18px;
+  }
+  .review .name { font-size: 13px; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; }
+  .dots { display: flex; gap: 8px; justify-content: center; margin-top: 28px; }
+  .dots .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s ease; }
+  .dots .dot.active { background: var(--primary); }
+
+  /* Credentials strip */
+  .creds {
+    display: flex; flex-wrap: wrap; gap: 16px 24px;
+    justify-content: center; margin-top: 36px;
+  }
+  .cred {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; color: var(--text); font-weight: 600;
+  }
+  .cred-icon { width: 18px; height: 18px; color: var(--primary); }
+
+  /* Form */
+  .form-wrap { background: linear-gradient(135deg, #1F355C 0%, #0EAEC8 100%); color: var(--white); }
+  .form-wrap .section-head .eyebrow { color: rgba(255,255,255,0.8); }
+  .form-wrap .section-head h2 { color: var(--white); }
+  .form-wrap .section-head p { color: rgba(255,255,255,0.85); }
+  form.lead {
+    max-width: 540px; margin: 0 auto;
+    background: var(--white); border-radius: 22px;
+    padding: 32px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+  }
+  form.lead label { display: block; font-size: 12px; color: var(--mid); text-transform: uppercase; letter-spacing: 1.4px; font-weight: 700; margin: 14px 0 6px; }
+  form.lead label:first-of-type { margin-top: 0; }
+  form.lead input, form.lead select, form.lead textarea {
+    width: 100%; padding: 14px 16px; font-size: 15px;
+    border: 1.5px solid var(--line); border-radius: 12px;
+    color: var(--text); background: var(--white);
+    font-family: inherit;
+    transition: border-color .15s ease;
+  }
+  form.lead input:focus, form.lead select:focus, form.lead textarea:focus {
+    outline: none; border-color: var(--primary);
+  }
+  form.lead .submit {
+    margin-top: 22px; width: 100%;
+    background: var(--primary); color: var(--white);
+    border: none; border-radius: 100px;
+    padding: 16px 24px; font-size: 16px; font-weight: 700;
+    cursor: pointer; letter-spacing: -0.1px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  form.lead .submit:hover { background: var(--secondary); transform: translateY(-1px); }
+  form.lead .small { font-size: 12px; color: var(--mid); margin-top: 12px; text-align: center; }
+  form.lead .after-hours {
+    background: var(--paper); border-radius: 12px; padding: 14px 16px;
+    font-size: 13px; color: var(--text);
+    margin-bottom: 22px; line-height: 1.45;
+  }
+
+  /* Footer */
+  footer { background: var(--text); color: var(--white); padding: 60px 0 36px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+  footer h4 { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 18px; margin-bottom: 14px; font-weight: 800; }
+  footer p, footer a { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.7; }
+  footer a:hover { color: var(--white); }
+  footer .legal { border-top: 1px solid rgba(255,255,255,0.12); margin-top: 36px; padding-top: 22px; font-size: 12px; color: rgba(255,255,255,0.55); text-align: center; }
+
+  /* Sticky mobile bar */
+  .stickymobile {
+    display: none;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    padding: 10px 14px;
+    z-index: 60;
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+  }
+  .stickymobile a {
+    flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 14px; border-radius: 100px;
+    font-weight: 700; font-size: 14px;
+  }
+  .stickymobile .call { background: var(--primary); color: var(--white); }
+  .stickymobile .quote { background: var(--paper); color: var(--text); border: 1.5px solid var(--line); }
+  .stickymobile .icon { width: 16px; height: 16px; }
+  @media (max-width: 720px) {
+    .stickymobile { display: flex; gap: 10px; }
+    body { padding-bottom: 70px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="util">
+  <div class="wrap row">
+    <span>Town & Country Pools · Magnolia, TX</span>
+    <a href="tel:+12813563535"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>281-356-3535</a>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap row">
+    <div class="brand">Town & Country Pools</div>
+    <nav class="navlinks" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="pill">Get Free Quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <h1>52 years of Texas backyards. Built by hand. Owned by Dennis.</h1>
+    <p class="sub">117 verified five-star reviews. Three generations of craftsmanship. Custom inground pools, spas, and outdoor living — designed in your backyard, built by our crew.</p>
+    <div class="ctas">
+      <a href="#contact" class="pill">Get Free Quote</a>
+      <a href="tel:+12813563535" class="pill pill-ghost"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>281-356-3535</a>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap row" style="padding: 0 24px;">
+    <div class="stat">
+      <div class="num">52</div>
+      <div class="lbl">Years in Business</div>
+    </div>
+    <div class="stat">
+      <div class="num">117</div>
+      <div class="lbl">Verified Reviews · 4.9 stars</div>
+      <div class="stars"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+    </div>
+    <div class="stat">
+      <div class="num" style="font-size: 24px; line-height: 1.1;">Google Guaranteed</div>
+      <div class="lbl">Top Credential</div>
+    </div>
+    <div class="stat">
+      <div class="num" style="font-size: 22px; line-height: 1.1;">Magnolia, TX</div>
+      <div class="lbl">Locally Owned</div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What We Do</div>
+      <h2>Built for the work Magnolia actually needs.</h2>
+      <p>Four decades of repeat customers don't come from generic. Every job is scoped, quoted, and crewed by name.</p>
+    </div>
+    <div class="grid">
+      
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24 c2 -2 4 -2 6 0 s4 2 6 0 s4 -2 6 0 s4 2 6 0"/><path d="M4 18 c2 -2 4 -2 6 0 s4 2 6 0 s4 -2 6 0 s4 2 6 0"/><path d="M10 12 V8 M22 12 V8"/></svg></div>
+          <div class="service-name">Custom Pools</div>
+          <div class="service-desc">Inground gunite, plaster, pebble — designed around your home and your kids.</div>
+        </div>
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="20" r="8"/><path d="M11 16 c1 -3 4 -5 5 -8 c1 3 4 5 5 8"/></svg></div>
+          <div class="service-name">Spas & Water</div>
+          <div class="service-desc">Integrated spas, sheer-descent waterfalls, fire-and-water bowls, scuppers.</div>
+        </div>
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26 H28"/><path d="M6 26 V14 H26 V26"/><path d="M4 14 L16 4 L28 14"/><path d="M14 26 V20 H18 V26"/></svg></div>
+          <div class="service-name">Outdoor Living</div>
+          <div class="service-desc">Patios, kitchens, pergolas, custom shade — full backyard transformations.</div>
+        </div>
+        <div class="service">
+          <div class="service-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22 L22 6 L26 10 L10 26 Z"/><path d="M16 12 L20 16"/><path d="M4 28 H28"/></svg></div>
+          <div class="service-name">Remodels</div>
+          <div class="service-desc">Resurface, retile, equipment swaps — modernize a 90s pool in 3 weeks.</div>
+        </div>
+    </div>
+    <div class="creds">
+      <span class="cred"><span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Google Guaranteed</span><span class="cred"><span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>BBB A+</span><span class="cred"><span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>52 Years Building Pools</span><span class="cred"><span class="cred-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Texas-Licensed</span>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-wrap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What Customers Say</div>
+      <h2>Real reviews. Real names. Real work.</h2>
+      <p>No paid testimonials. Every quote below is from a verified customer.</p>
+    </div>
+    <div class="review" id="rcard">
+      <div class="stars" id="rstars"></div>
+      <div class="quote" id="rquote"></div>
+      <div class="name" id="rname"></div>
+    </div>
+    <div class="dots" id="rdots"></div>
+  </div>
+</section>
+
+<section id="contact" class="form-wrap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Get a Free Quote</div>
+      <h2>One form. Same-day response.</h2>
+      <p>Saturday morning, kids in the backyard? Tap to start your pool design.</p>
+    </div>
+    <form class="lead" onsubmit="event.preventDefault(); alert('Thanks — we received your request. Dennis will call you back today.');">
+      <div class="after-hours">
+        <strong>After hours?</strong> Tap-to-call answers fastest: <a href="tel:+12813563535">281-356-3535</a>
+      </div>
+      <label for="f-name">Your Name</label>
+      <input id="f-name" type="text" required autocomplete="name" />
+      <label for="f-phone">Phone</label>
+      <input id="f-phone" type="tel" required autocomplete="tel" />
+      <label for="f-email">Email</label>
+      <input id="f-email" type="email" required autocomplete="email" />
+      <label for="f-zip">Property ZIP</label>
+      <input id="f-zip" type="text" required inputmode="numeric" autocomplete="postal-code" />
+      <label for="f-job">What do you need?</label>
+      <select id="f-job" required>
+        <option>Custom Pools</option><option>Spas & Water</option><option>Outdoor Living</option><option>Remodels</option>
+        <option>Other / Not sure</option>
+      </select>
+      <button class="submit" type="submit">Request Free Quote</button>
+      <div class="small">No spam. No drip emails. Dennis or his crew calls you back today.</div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<div class="stickymobile">
+  <a href="tel:+12813563535" class="call"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Call</a>
+  <a href="#contact" class="quote">Get Quote</a>
+</div>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <h4>Town & Country Pools</h4>
+      <p>Magnolia, TX<br>
+      <a href="tel:+12813563535">281-356-3535</a></p>
+    </div>
+    <div>
+      <h4>What We Do</h4>
+      <p><a href="#services">Custom Pools</a></p><p><a href="#services">Spas & Water</a></p><p><a href="#services">Outdoor Living</a></p><p><a href="#services">Remodels</a></p>
+    </div>
+    <div>
+      <h4>Credentials</h4>
+      <p>Google Guaranteed</p><p>BBB A+</p><p>52 Years Building Pools</p><p>Texas-Licensed</p>
+    </div>
+  </div>
+  <div class="wrap legal">
+    Town & Country Pools · Magnolia, TX · Licensed &amp; Insured · &copy; 2026 — All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const REVIEWS = [{"name": "S&P", "stars": 5, "quote": "We have been customers for many years now and we just cannot say enough great things about Town & Country Pools."}, {"name": "T.S.", "stars": 5, "quote": "Family operated and supported by an outstanding team of honest and competent employees."}, {"name": "M.A.", "stars": 5, "quote": "Experience from beginning to end was amazing. They made the process feel seamless."}, {"name": "J.S.", "stars": 5, "quote": "Completed my pool in record time! I highly recommend T&C for quality and service."}, {"name": "L.C.", "stars": 5, "quote": "They always go the extra mile \u2014 making sure our patio looks party ready."}, {"name": "M.K.", "stars": 5, "quote": "They treated us like family. A quality organization is worth sticking with."}, {"name": "K.S.", "stars": 5, "quote": "Pool is as beautiful and functional today as it was the day completed."}, {"name": "B. & D. V.", "stars": 5, "quote": "Entire team at T&C was professional and responsive at every step of the build."}];
+  const STAR = "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linejoin=\"round\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg>";
+  let idx = 0;
+  const card = document.getElementById('rcard');
+  const stars = document.getElementById('rstars');
+  const quote = document.getElementById('rquote');
+  const name = document.getElementById('rname');
+  const dots = document.getElementById('rdots');
+
+  REVIEWS.forEach((r, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => render(i));
+    dots.appendChild(dot);
+  });
+
+  function render(i) {
+    idx = i % REVIEWS.length;
+    const r = REVIEWS[idx];
+    card.style.opacity = 0;
+    setTimeout(() => {
+      stars.innerHTML = STAR.repeat(r.stars);
+      quote.textContent = '"' + r.quote + '"';
+      name.textContent = r.name;
+      Array.from(dots.children).forEach((d, k) => d.classList.toggle('active', k === idx));
+      card.style.opacity = 1;
+    }, 200);
+  }
+
+  render(0);
+  setInterval(() => render(idx + 1), 7000);
+</script>
+
+</body>
+</html>
