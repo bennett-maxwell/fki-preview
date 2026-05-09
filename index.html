@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franchise KI — Find a Franchise That Actually Fits. AI-Powered. Free.</title>
+<meta name="description" content="Franchise KI matches qualified buyers with vetted franchise opportunities using AI. Take the free 8-question Advaita AI Audit and get a personalized franchise podcast in under 1 hour.">
+<meta property="og:title" content="Franchise KI — AI-Powered Franchise Matching">
+<meta property="og:description" content="8 questions. AI-personalized podcast in 60 minutes. Find your franchise fit — free.">
+<meta property="og:image" content="assets/fki-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Franchise KI",
+  "alternateName": "FKI",
+  "url": "https://franchiseki.com",
+  "logo": "https://franchiseki.com/assets/fki-logo.png",
+  "description": "AI-powered franchise consulting. Match qualified buyers with vetted franchise opportunities at no cost.",
+  "founder": { "@type": "Person", "name": "Bennett Maxwell" },
+  "areaServed": "United States",
+  "priceRange": "Free",
+  "serviceType": "Franchise Consulting",
+  "sameAs": [
+    "https://www.linkedin.com/company/franchiseki/",
+    "https://www.linkedin.com/in/bennettmaxwell/"
+  ]
+}
+</script>
+
+<style>
+:root {
+  --navy: #0f1f3d;
+  --navy-2: #1a2f5a;
+  --navy-grad: linear-gradient(135deg, #0f1f3d 0%, #1a2f5a 100%);
+  --gold: #d4a857;
+  --gold-2: #b8924a;
+  --gold-grad: linear-gradient(135deg, #d4a857 0%, #b8924a 100%);
+  --ink: #0a0e1a;
+  --slate-1: #f5f5f7;
+  --slate-2: #e8e9ec;
+  --slate-3: #6e7280;
+  --white: #ffffff;
+  --shadow-1: 0 1px 3px rgba(15, 31, 61, 0.08);
+  --shadow-2: 0 8px 24px rgba(15, 31, 61, 0.12);
+  --shadow-3: 0 20px 50px rgba(15, 31, 61, 0.18);
+  --radius-card: 14px;
+  --radius-pill: 100px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+/* ==== NAV ==== */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--slate-2);
+}
+.nav-inner {
+  max-width: 1240px; margin: 0 auto;
+  padding: 16px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 800; color: var(--navy); }
+.nav-logo img { height: 36px; width: auto; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-weight: 500; color: var(--ink); font-size: 15px; transition: color .2s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  background: var(--navy);
+  color: var(--white) !important;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600; font-size: 15px;
+  transition: transform .15s, box-shadow .15s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); }
+.nav-toggle { display: none; }
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; padding: 8px; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--white); padding: 24px 5%;
+    border-bottom: 1px solid var(--slate-2);
+    box-shadow: var(--shadow-2);
+  }
+}
+
+/* ==== HERO ==== */
+.hero {
+  background: var(--navy-grad);
+  color: var(--white);
+  padding: 100px 5% 110px;
+  position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(212,168,87,0.10) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(255,255,255,0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  position: relative; z-index: 1;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(212,168,87,0.16);
+  color: var(--gold);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  border: 1px solid rgba(212,168,87,0.32);
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.04;
+  margin-bottom: 26px;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 720px; margin: 0 auto 44px;
+  color: rgba(255,255,255,0.86);
+  font-weight: 400;
+}
+.hero-ctas {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 34px;
+  font-size: 16px; font-weight: 600;
+  border-radius: var(--radius-pill);
+  transition: transform .15s, box-shadow .2s, background .2s;
+  min-height: 56px;
+}
+.btn-primary {
+  background: var(--gold-grad);
+  color: var(--navy);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,168,87,0.35); }
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.4);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: var(--white); }
+
+/* trust bar in hero */
+.trust-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 40px;
+  max-width: 920px; margin: 0 auto;
+}
+.trust-stat {
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.10);
+  padding: 8px 16px;
+}
+.trust-stat:last-child { border-right: none; }
+.trust-stat .num {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+.trust-stat .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+}
+@media (max-width: 720px) {
+  .trust-bar { grid-template-columns: repeat(2, 1fr); }
+  .trust-stat { border-bottom: 1px solid rgba(255,255,255,0.10); padding: 16px; }
+  .trust-stat:nth-child(2) { border-right: none; }
+  .trust-stat:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+/* ==== SECTION GENERAL ==== */
+.section { padding: 100px 5%; }
+.section-inner { max-width: 1240px; margin: 0 auto; }
+.section-eyebrow {
+  display: inline-block;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  line-height: 1.12;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 18px; color: var(--slate-3); line-height: 1.6;
+  max-width: 720px;
+}
+.section.center { text-align: center; }
+.section.center .section-sub { margin: 0 auto; }
+.section.dark { background: var(--ink); color: var(--white); }
+.section.dark .section-title { color: var(--white); }
+.section.dark .section-sub { color: rgba(255,255,255,0.75); }
+.section.slate { background: var(--slate-1); }
+
+/* ==== THREE-PILLAR (Bennett Directive) ==== */
+.three-pillar { padding: 100px 5%; background: var(--white); }
+.pillar-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1240px; margin: 56px auto 0;
+}
+.pillar {
+  background: var(--slate-1);
+  border-radius: var(--radius-card);
+  padding: 44px 32px;
+  transition: transform .25s, box-shadow .25s;
+}
+.pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); }
+.pillar-icon {
+  width: 56px; height: 56px;
+  background: var(--navy);
+  border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.pillar-icon svg { stroke: var(--gold); }
+.pillar-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold-2);
+  padding: 4px 10px;
+  background: rgba(212,168,87,0.12);
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+.pillar h3 {
+  font-size: 22px; font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.pillar p { color: var(--slate-3); line-height: 1.6; font-size: 15px; }
+@media (max-width: 860px) { .pillar-grid { grid-template-columns: 1fr; } }
+
+/* ==== AUDIT (lead magnet section) ==== */
+.audit {
+  background: var(--navy-grad);
+  color: var(--white);
+  padding: 110px 5%;
+  position: relative; overflow: hidden;
+}
+.audit::before {
+  content: ""; position: absolute; top: -120px; right: -120px;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(212,168,87,0.18) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.audit-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+  position: relative; z-index: 1;
+}
+.audit-copy h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.audit-copy h2 .accent { color: var(--gold); }
+.audit-copy p { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.84); margin-bottom: 28px; }
+.audit-features { list-style: none; margin-bottom: 36px; }
+.audit-features li {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  font-size: 15px;
+}
+.audit-features li:last-child { border-bottom: none; }
+.audit-features svg { stroke: var(--gold); flex-shrink: 0; }
+.audit-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 22px;
+  padding: 44px 36px;
+}
+.audit-card-eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px;
+}
+.audit-card h3 {
+  font-size: 26px; font-weight: 800; letter-spacing: -0.5px;
+  margin-bottom: 24px; line-height: 1.15;
+}
+.audit-steps { list-style: none; counter-reset: step; margin-bottom: 28px; }
+.audit-steps li {
+  position: relative; padding: 12px 0 12px 44px;
+  counter-increment: step;
+  font-size: 15px; line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+  border-bottom: 1px dashed rgba(255,255,255,0.10);
+}
+.audit-steps li:last-child { border-bottom: none; }
+.audit-steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 12px;
+  width: 28px; height: 28px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 13px;
+}
+.audit-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 860px) {
+  .audit-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* ==== HOW IT WORKS ==== */
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; margin-top: 64px;
+  counter-reset: stepper;
+}
+.step {
+  background: var(--white);
+  border: 1px solid var(--slate-2);
+  border-radius: var(--radius-card);
+  padding: 36px 28px;
+  position: relative;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.step:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); border-color: var(--gold); }
+.step-num {
+  font-size: 48px; font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -2px;
+  line-height: 1;
+  opacity: 0.45;
+  margin-bottom: 16px;
+}
+.step h4 {
+  font-size: 19px; font-weight: 800;
+  color: var(--navy); letter-spacing: -0.4px;
+  margin-bottom: 10px;
+}
+.step p { color: var(--slate-3); font-size: 14.5px; line-height: 1.55; }
+@media (max-width: 1024px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .steps { grid-template-columns: 1fr; } }
+
+/* ==== BRANDS ==== */
+.brand-strip {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0; margin-top: 56px;
+  border-top: 1px solid var(--slate-2);
+  border-bottom: 1px solid var(--slate-2);
+}
+.brand-cell {
+  flex: 1 1 180px;
+  padding: 36px 24px;
+  text-align: center;
+  border-right: 1px solid var(--slate-2);
+  background: var(--white);
+  font-weight: 700; color: var(--slate-3);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  transition: background .2s;
+}
+.brand-cell:hover { background: var(--slate-1); }
+.brand-cell strong { display: block; color: var(--navy); font-size: 18px; letter-spacing: -0.3px; margin-bottom: 4px; }
+
+/* ==== DIFFERENTIATOR ==== */
+.diff {
+  background: var(--ink); color: var(--white);
+  padding: 110px 5%; text-align: center;
+  position: relative; overflow: hidden;
+}
+.diff::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(212,168,87,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.diff-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+.diff h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 28px;
+}
+.diff h2 .accent { color: var(--gold); }
+.diff p { font-size: 19px; line-height: 1.65; color: rgba(255,255,255,0.84); margin-bottom: 36px; }
+
+/* ==== FAQ ==== */
+.faq-list { max-width: 820px; margin: 56px auto 0; }
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--slate-2);
+  border-radius: var(--radius-card);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.faq-item:hover { border-color: var(--navy); box-shadow: var(--shadow-1); }
+.faq-q {
+  width: 100%;
+  padding: 22px 26px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 16.5px; font-weight: 700; color: var(--navy);
+  text-align: left;
+  background: var(--white);
+  letter-spacing: -0.2px;
+}
+.faq-q .icon {
+  width: 28px; height: 28px;
+  background: var(--slate-1); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-left: 16px;
+  transition: transform .25s, background .25s;
+}
+.faq-q .icon svg { stroke: var(--navy); }
+.faq-item.open .faq-q .icon { transform: rotate(45deg); background: var(--navy); }
+.faq-item.open .faq-q .icon svg { stroke: var(--white); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease, padding .35s ease;
+  padding: 0 26px;
+  color: var(--slate-3); line-height: 1.65; font-size: 15.5px;
+}
+.faq-item.open .faq-a { max-height: 600px; padding: 0 26px 24px; }
+
+/* ==== FINAL CTA ==== */
+.final-cta {
+  background: var(--gold-grad);
+  color: var(--navy);
+  padding: 110px 5%;
+  text-align: center;
+}
+.final-cta-inner { max-width: 760px; margin: 0 auto; }
+.final-cta h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 22px;
+}
+.final-cta p { font-size: 18px; line-height: 1.6; margin-bottom: 36px; color: rgba(15,31,61,0.84); }
+.btn-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(15,31,61,0.35); }
+
+/* ==== FOOTER ==== */
+.footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 72px 5% 36px; }
+.footer-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.footer-brand h3 { color: var(--white); font-size: 22px; letter-spacing: -0.4px; margin-bottom: 14px; font-weight: 800; }
+.footer-brand p { font-size: 14px; line-height: 1.6; max-width: 340px; }
+.footer-col h5 {
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--white); font-weight: 700; margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { font-size: 14.5px; transition: color .2s; }
+.footer-col a:hover { color: var(--gold); }
+.footer-social { display: flex; gap: 12px; margin-top: 18px; }
+.footer-social a {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .15s;
+}
+.footer-social a:hover { background: var(--gold); transform: translateY(-2px); }
+.footer-social svg { stroke: var(--white); }
+.footer-social a:hover svg { stroke: var(--navy); }
+.footer-bottom {
+  max-width: 1240px; margin: 56px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  display: flex; justify-content: space-between; flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+}
+@media (max-width: 860px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* ==== UTILITY ==== */
+.icon-feather { width: 22px; height: 22px; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.icon-lg { width: 26px; height: 26px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="assets/fki-logo.png" alt="Franchise KI logo">
+      <span>Franchise KI</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">How It Works</a>
+      <a href="#audit">Free AI Audit</a>
+      <a href="#brands">Brands</a>
+      <a href="#why">Why Us</a>
+      <a href="#faq">FAQ</a>
+      <a href="audit.html" class="nav-cta">Take the Audit</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <svg class="icon-feather" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">
+      <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#d4a857"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      AI-Powered Franchise Matching · Free
+    </span>
+    <h1>Find a franchise that <span class="accent">actually fits.</span><br>In 60 minutes. Free.</h1>
+    <p class="hero-sub">
+      Most people spend 40&nbsp;hours and never find the right franchise.
+      Take our free 8-question Advaita AI Audit and get a personalized franchise podcast — built for you, delivered in under an hour.
+    </p>
+    <div class="hero-ctas">
+      <a href="audit.html" class="btn btn-primary">
+        Take the Free AI Audit
+        <svg class="icon-feather" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#how" class="btn btn-secondary">See how it works</a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-stat">
+        <div class="num">$0</div>
+        <div class="label">To you, ever</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">&lt; 1 hr</div>
+        <div class="label">Audit turnaround</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">100+</div>
+        <div class="label">Vetted brands</div>
+      </div>
+      <div class="trust-stat">
+        <div class="num">$250K-$2M</div>
+        <div class="label">Avg. franchisee year-1 revenue</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THREE PILLARS (BENNETT DIRECTIVE) ==================== -->
+<section class="three-pillar section center" id="why-it-works">
+  <div class="section-inner">
+    <span class="section-eyebrow">Why Franchise KI</span>
+    <h2 class="section-title">Three reasons buyers&nbsp;pick&nbsp;us.</h2>
+    <p class="section-sub">Time, money out, money in. Every claim measured against the same three pillars Bennett tests every promise on.</p>
+    <div class="pillar-grid">
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg class="icon-feather icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <span class="pillar-tag">Time saved</span>
+        <h3>40 hours of research → 60 minutes.</h3>
+        <p>The average buyer reviews 30+ franchises before deciding. Our AI audit narrows the field to your top 3 in under an hour — and tells you exactly why.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg class="icon-feather icon-lg" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <span class="pillar-tag">Money out</span>
+        <h3>$0 cost to you.</h3>
+        <p>Franchisors pay placement commissions to vetted consultants — that's how the industry works. We're paid by them, never by you. No retainer, no hourly, no surprise invoice.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg class="icon-feather icon-lg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <span class="pillar-tag">Money in</span>
+        <h3>$250K–$2M avg. year-1 revenue.</h3>
+        <p>Our placed franchisees average $250K to $2M in year-one revenue across our top concepts. Validated against franchisor Item-19 disclosures, not marketing claims.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AUDIT (LEAD MAGNET) ==================== -->
+<section class="audit" id="audit">
+  <div class="audit-inner">
+    <div class="audit-copy">
+      <span class="hero-eyebrow">
+        <svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#d4a857"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        The Advaita AI Audit
+      </span>
+      <h2>The first AI-personalized<br>franchise audit. <span class="accent">Free.</span></h2>
+      <p>Answer 8 questions. Our AI analyzes your goals, capital, lifestyle, and risk profile against 100+ vetted franchise concepts. You get a personalized 12-minute podcast — yours, by name, delivered to your inbox in under an hour.</p>
+      <ul class="audit-features">
+        <li>
+          <svg class="icon-feather" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Built on NotebookLM with the full Franchise KI brand database
+        </li>
+        <li>
+          <svg class="icon-feather" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Identifies your top 3 fits + the 3 you should rule out
+        </li>
+        <li>
+          <svg class="icon-feather" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Never sold, never shared. You only hear from us if you ask.
+        </li>
+        <li>
+          <svg class="icon-feather" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          No franchise consultancy in the US has this. Anywhere.
+        </li>
+      </ul>
+      <div class="audit-cta-row">
+        <a href="audit.html" class="btn btn-primary">
+          Start Your Audit
+          <svg class="icon-feather" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="audit-card">
+      <div class="audit-card-eyebrow">What happens next</div>
+      <h3>From quiz to podcast in under 60 minutes.</h3>
+      <ol class="audit-steps">
+        <li><strong>Take the 8-question audit</strong> — about 4 minutes. No login, no spam.</li>
+        <li><strong>AI parses your answers</strong> against capital, lifestyle, risk, geography, and operator type.</li>
+        <li><strong>NotebookLM generates your podcast</strong> — your name, your goals, your top 3 matches.</li>
+        <li><strong>Email arrives within the hour</strong> with the audio file and a 1-page brief.</li>
+        <li><strong>If you want to talk, book a call.</strong> If you don't, you keep the audit.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section center slate" id="how">
+  <div class="section-inner">
+    <span class="section-eyebrow">The Process</span>
+    <h2 class="section-title">Four steps. One franchise.</h2>
+    <p class="section-sub">Built and refined across hundreds of placements. Same process, every time.</p>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Discovery</h4>
+        <p>Take the AI audit or book a 15-minute fit call. We learn your goals, capital position, and what you actually want your week to look like.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Match</h4>
+        <p>We narrow 100+ vetted brands down to your top 3 fits. You see why each made the list — and why others didn't.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Validate</h4>
+        <p>Live conversations with the franchisor, validation calls with existing franchisees, and an independent territory analysis powered by MapKI.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Launch</h4>
+        <p>Funding strategy, FDD review with our legal partners, and ongoing support through year one. You sign with the franchisor — never with us.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BRANDS ==================== -->
+<section class="section center" id="brands">
+  <div class="section-inner">
+    <span class="section-eyebrow">Brands We Represent</span>
+    <h2 class="section-title">Vetted by us. Owned by you.</h2>
+    <p class="section-sub">A curated catalog across food, fitness, services, retail, and family — every brand audited against our 50-point validation framework.</p>
+    <div class="brand-strip">
+      <div class="brand-cell"><strong>Indy Clover</strong>Booth-rental resale boutique</div>
+      <div class="brand-cell"><strong>Salad House</strong>Premium fast-casual health</div>
+      <div class="brand-cell"><strong>Spoiled Rotten Photography</strong>In-school photography</div>
+      <div class="brand-cell"><strong>MapKI</strong>Franchise territory intelligence</div>
+      <div class="brand-cell"><strong>+ 100 more</strong>Validated brands across 16 verticals</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DIFFERENTIATOR ==================== -->
+<section class="diff" id="why">
+  <div class="diff-inner">
+    <span class="section-eyebrow" style="color:#d4a857">The Difference</span>
+    <h2>Every other franchise consultant has a Rolodex.<br><span class="accent">We built an operating system.</span></h2>
+    <p>
+      Most franchise consultants match you from a list of who's paying them. We built MapKI — the franchise territory intelligence platform — so we can show you which territories are actually open, which are saturated, and which competitors will be next door.
+      We built the Advaita AI Audit so you don't have to wait three weeks for a fit call.
+      And we built it all because Bennett's been on both sides of this — as a franchisee, a franchisor, and a buyer who got matched into the wrong concept and wished someone had used a real system.
+    </p>
+    <a href="audit.html" class="btn btn-primary">Start with the Audit</a>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section slate" id="faq">
+  <div class="section-inner center">
+    <span class="section-eyebrow">Common questions</span>
+    <h2 class="section-title">Answered straight.</h2>
+    <p class="section-sub">If your question isn't here, ask Bennett directly: bennett@franchiseki.com.</p>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>How does Franchise KI make money if it's free for me?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">Franchisors pay placement commissions to vetted franchise consultants. The commission is paid out of the franchisor's marketing budget — it doesn't increase your franchise fee or your investment. We get paid only when a placement closes, which means we have the same incentive you do: a great fit, not a fast close.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What's the AI Audit, really?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">It's an 8-question survey. We feed your answers + your business website (if you give us one) into a Google NotebookLM project that's loaded with our 100-brand database, every Item-19 disclosure we have access to, and the territory data from MapKI. It generates a personalized 10–15 minute audio podcast — your name, your goals, your top 3 matches and why. Delivered to your email in under an hour. No franchise consultancy in the US has this.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Will you spam me after I take the audit?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">No. You'll get the audit in your inbox. After that, you only hear from us if you reply or book a call. We don't sell or share your email. Period.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What if I'm not ready for 6 months?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">Take the audit anyway. Most of our placed franchisees were 4–9 months out from signing when they first engaged. The audit is the lowest-friction way to start narrowing the field. We'll be here when you're ready.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>How is this different from FranChoice or The Franchise Consulting Company?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">We respect every consultancy in the space. The difference: they match from a list. We built tooling. MapKI shows you the territory data — which markets are actually open and which are saturated. The Advaita AI Audit gives you a personalized podcast before you ever talk to a human. And our match logic is operator-type aware, not just industry-aware.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What happens on a fit call?</span>
+        <span class="icon"><svg class="icon-feather" viewBox="0 0 24 24" style="width:14px;height:14px"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      </button>
+      <div class="faq-a">15 minutes on Zoom. We confirm what the audit found, answer questions, and either book a longer Discovery if you're qualified for the brands you matched into, or honestly tell you we're not the right fit and where to look. No pressure either way.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>The franchise you should buy is probably not the one you're researching.</h2>
+    <p>Take the Advaita AI Audit. 4 minutes to fill out. 60 minutes to get back. Costs you nothing. Could change the next 10 years.</p>
+    <a href="audit.html" class="btn btn-dark">
+      Take the Free Audit
+      <svg class="icon-feather" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Franchise KI</h3>
+      <p>AI-powered franchise consulting. Vetted brands, real territory intelligence, and a process built by an operator — for operators.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/franchiseki/" aria-label="LinkedIn">
+          <svg class="icon-feather" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://www.facebook.com/franchiseki" aria-label="Facebook">
+          <svg class="icon-feather" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/franchiseki" aria-label="Instagram">
+          <svg class="icon-feather" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.skool.com/franchiseki" aria-label="Skool community">
+          <svg class="icon-feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#brands">Brands we represent</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="audit.html">AI Audit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Tools</h5>
+      <ul>
+        <li><a href="https://mapki.com">MapKI</a></li>
+        <li><a href="audit.html">Advaita AI for Business</a></li>
+        <li><a href="https://www.skool.com/franchiseki">Skool community</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></li>
+        <li><a href="mailto:contact@franchiseki.com">contact@franchiseki.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Franchise KI. All rights reserved.</span>
+    <span>Built with the Franchise KI website-build-skill · X tier · 50/50 build checklist</span>
+  </div>
+</footer>
+
+<script>
+// nav close on click (mobile)
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+</script>
+
+</body>
+</html>
