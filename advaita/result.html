@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your AI Readiness Score — Advaita</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container-narrow">
+  <nav>
+    <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">Advaita<span style="color: var(--accent);">.</span></a>
+    <a href="quiz.html" style="color: var(--muted); text-decoration: none; font-size: 14px;">Retake</a>
+  </nav>
+
+  <section class="score-hero">
+    <div class="label">Your AI Readiness Score</div>
+    <div class="score-display" id="score">--</div>
+    <h2 id="headline">Loading…</h2>
+    <p class="sub" id="subhead" style="margin-top: 12px;"></p>
+  </section>
+
+  <section class="leakage">
+    <div class="label" style="color: #C2410C;">The Money Moment</div>
+    <h3 style="margin: 12px 0 8px;">Estimated revenue leaking from your business</h3>
+    <div class="bignum-ink" id="leak">$0</div>
+    <p style="margin-top: 8px; color: #7C2D12;">per month — leaving the table</p>
+    <p style="margin-top: 20px; font-size: 15px; color: #7C2D12;">Good news: this is the easiest money you'll ever recover. The plan below shows you how.</p>
+  </section>
+
+  <section style="margin: 64px 0;">
+    <h2 style="text-align: center; margin-bottom: 32px;">Your next 3 moves</h2>
+    <div id="plan"></div>
+  </section>
+
+  <section class="cta-stack">
+    <a href="https://calendly.com/bennettmaxwell" class="btn btn-block btn-accent">Book a 15-min strategy call →</a>
+    <a href="https://open.spotify.com/show/advaita-podcast" class="btn btn-block btn-outline" id="cta-pod">Listen to the podcast →</a>
+  </section>
+
+  <section class="card-lg" style="text-align: center; margin: 48px 0;">
+    <h2>Join the Advaita Waitlist</h2>
+    <p style="color: var(--muted);">Weekly playbooks tuned to your score.</p>
+    <form class="email-capture"
+          action="https://services.leadconnectorhq.com/hooks/TBD"
+          method="POST"
+          data-form-id="advaita-waitlist-result">
+      <input type="email" name="email" placeholder="you@company.com" required>
+      <button type="submit" class="btn">Join</button>
+    </form>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Advaita. Your score is private. We never share data.</p>
+  </div>
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const score = Math.max(0, Math.min(100, parseInt(params.get('score') || '50')));
+const band = params.get('band') || 'growth';
+const rev = parseInt(params.get('rev') || '165000');
+
+// Hormozi leakage formula: gap * monthly_rev * 0.02
+const gap = 100 - score;
+const leakage = Math.round(gap * rev * 0.02);
+
+document.getElementById('score').textContent = score;
+document.getElementById('leak').textContent = '$' + leakage.toLocaleString() + '/mo';
+
+// Empowering Robbins-lens copy
+let headline, sub, plan;
+if (score >= 80) {
+  headline = "You're ahead of 95% of businesses.";
+  sub = "You've built real AI leverage. Now it's about compounding — pulling the last few thousand per month out of edge cases.";
+  plan = [
+    ["Push the edge", "Audit your top 3 workflows for the 10% AI hasn't touched yet."],
+    ["Teach others", "Your playbook is rare. Consider sharing or productizing it."],
+    ["Sharpen the moat", "Talk to us about advanced multi-agent setups."]
+  ];
+} else if (score >= 60) {
+  headline = "You're on the right track. There's a clear next step.";
+  sub = "You've started. The gap between you and the top tier is one focused 30-day sprint.";
+  plan = [
+    ["Plug the biggest leak", "The quiz flagged your weakest area. Fix that one first — usually +$5K-$20K/mo."],
+    ["Add one AI-native lead source", "Most teams in your tier double pipeline by replacing one channel with AI lead-gen."],
+    ["Tighten your data layer", "Your CRM is the foundation. We can clean it in a week."]
+  ];
+} else if (score >= 40) {
+  headline = "You have massive upside. Most of it is recoverable in 90 days.";
+  sub = "This score isn't bad — it's opportunity. Businesses that move now win the next 5 years.";
+  plan = [
+    ["Map your repeat tasks", "Write down every task you do twice. AI can take 60% of them off your plate."],
+    ["Get one win", "Pick one workflow. Automate it this month. Confidence compounds."],
+    ["Book a 15-min audit", "We'll show you the single highest-ROI move for your business — free."]
+  ];
+} else {
+  headline = "You're standing on a gold mine. You just need a map.";
+  sub = "A low score means low base — and that means the upside is biggest for you. The businesses that move first win.";
+  plan = [
+    ["Start with one tool", "Don't overhaul anything. Pick one task. Try AI on it tomorrow."],
+    ["Free 15-min consult", "We'll find your single biggest lever in one call. No pitch."],
+    ["Listen to the podcast", "Real founders, real moves, real numbers. Catch up fast."]
+  ];
+}
+
+document.getElementById('headline').textContent = headline;
+document.getElementById('subhead').textContent = sub;
+
+document.getElementById('plan').innerHTML = plan.map((p, i) => `
+  <div class="card" style="margin-bottom: 16px;">
+    <div class="label">Move ${i + 1}</div>
+    <h3 style="margin-top: 8px;">${p[0]}</h3>
+    <p style="color: var(--muted); margin-top: 8px;">${p[1]}</p>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
