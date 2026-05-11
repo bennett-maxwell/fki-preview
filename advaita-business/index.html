@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advaita AI for Business — AI Workforce for Franchises</title>
+<meta name="description" content="AI workforce that runs your franchise — built in 30 days, paid back in 60. By the team running Franchise KI's 4-brand portfolio at 70%+ autonomy.">
+<style>
+:root{--ink:#0a0a0a;--muted:#6b7280;--line:#e5e7eb;--bg:#ffffff;--accent:#0a0a0a;--soft:#fafafa;--gold:#b8895a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);z-index:50}
+nav .row{display:flex;justify-content:space-between;align-items:center;height:56px}
+.brand{font-weight:600;letter-spacing:-.01em;font-size:18px}
+.brand span{color:var(--gold)}
+.nav-links a{color:var(--ink);text-decoration:none;margin-left:24px;font-size:14px;font-weight:500}
+.cta{display:inline-block;background:var(--ink);color:#fff;padding:14px 28px;border-radius:980px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .15s,opacity .15s}
+.cta:hover{transform:translateY(-1px);opacity:.92}
+.cta.sm{padding:8px 18px;font-size:13px;margin-left:24px}
+header.hero{padding:96px 0 80px;text-align:center;background:linear-gradient(180deg,#fff 0%,#fafafa 100%)}
+h1{font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:900px;margin:0 auto 24px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--gold),#d4a574);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:clamp(18px,2vw,22px);color:var(--muted);max-width:680px;margin:0 auto 40px;line-height:1.45}
+.proof-strip{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:64px;background:#fff}
+.proof{text-align:center}
+.proof .num{font-size:32px;font-weight:700;letter-spacing:-.02em}
+.proof .lbl{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+section{padding:88px 0}
+.eyebrow{font-size:13px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;text-align:center}
+h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.02em;font-weight:700;line-height:1.1;text-align:center;margin-bottom:16px}
+.section-sub{font-size:18px;color:var(--muted);text-align:center;max-width:620px;margin:0 auto 56px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:880px){.tiers{grid-template-columns:1fr}}
+.tier{background:#fff;border:1px solid var(--line);border-radius:18px;padding:36px 28px;transition:transform .2s,box-shadow .2s}
+.tier:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(0,0,0,.12)}
+.tier.featured{border:2px solid var(--ink);position:relative}
+.tier.featured::before{content:"MOST POPULAR";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:4px 14px;border-radius:980px;font-size:11px;font-weight:600;letter-spacing:.08em}
+.tier-name{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:8px}
+.tier-price{font-size:42px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.tier-price .unit{font-size:16px;color:var(--muted);font-weight:500}
+.tier-tag{font-size:14px;color:var(--muted);margin-bottom:24px}
+.tier ul{list-style:none;margin-bottom:28px}
+.tier li{padding:10px 0;font-size:15px;display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line)}
+.tier li:last-child{border-bottom:none}
+.tier li::before{content:"";display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M6.4 11.2L3.6 8.4l1.1-1.1 1.7 1.7 4.5-4.5 1.1 1.1z'/%3E%3C/svg%3E");background-size:contain;flex-shrink:0;margin-top:2px}
+.tier .cta{display:block;text-align:center;background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.tier.featured .cta{background:var(--ink);color:#fff}
+.proof-section{background:var(--soft)}
+.proof-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;max-width:900px;margin:0 auto}
+@media(max-width:680px){.proof-grid{grid-template-columns:1fr}}
+.proof-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px}
+.proof-card .big{font-size:48px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.proof-card .lbl{font-size:14px;color:var(--muted);margin-top:8px}
+.proof-card p{margin-top:14px;font-size:15px;line-height:1.55}
+.how{background:#fff}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:1000px;margin:0 auto}
+@media(max-width:880px){.steps{grid-template-columns:1fr}}
+.step{text-align:center}
+.step .n{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;margin-bottom:20px}
+.step h3{font-size:20px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+.step p{color:var(--muted);font-size:15px;line-height:1.55}
+.cta-section{background:var(--ink);color:#fff;text-align:center}
+.cta-section h2{color:#fff}
+.cta-section .section-sub{color:rgba(255,255,255,.7)}
+.cta-section .cta{background:#fff;color:var(--ink)}
+.cta-section .cta:hover{background:#f5f5f5}
+.bonus{font-size:14px;margin-top:20px;color:rgba(255,255,255,.6)}
+footer{padding:48px 0;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:14px}
+footer a{color:var(--ink);text-decoration:none;font-weight:500}
+.tag{display:inline-block;padding:6px 14px;background:rgba(184,137,90,.1);color:var(--gold);border-radius:980px;font-size:13px;font-weight:600;margin-bottom:24px;letter-spacing:.02em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap row">
+    <div class="brand">Advaita<span>·</span>AI</div>
+    <div>
+      <a href="#offer" class="nav-links" style="margin:0">Offer</a>
+      <a href="#proof" class="nav-links">Proof</a>
+      <a href="#how" class="nav-links">How</a>
+      <a href="https://calendly.com/bennettmaxwell" class="cta sm">Book Audit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="tag">For Franchise CEOs &amp; Multi-Unit Operators</div>
+    <h1>AI workforce that runs your franchise — <em>built in 30 days, paid back in 60.</em></h1>
+    <p class="sub">We deploy the same AI stack that runs Franchise KI's 4-brand portfolio at 70%+ autonomy — into your operation. Sales, ops, marketing, finance, all on autopilot.</p>
+    <a href="https://calendly.com/bennettmaxwell" class="cta">Book your $5K audit call →</a>
+    <div class="proof-strip">
+      <div class="proof"><div class="num">70%+</div><div class="lbl">Autonomy achieved</div></div>
+      <div class="proof"><div class="num">4</div><div class="lbl">Brands running live</div></div>
+      <div class="proof"><div class="num">30d</div><div class="lbl">Time to deploy</div></div>
+      <div class="proof"><div class="num">60d</div><div class="lbl">Payback target</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="offer">
+  <div class="wrap">
+    <div class="eyebrow">The Offer</div>
+    <h2>Three steps to autonomy.</h2>
+    <p class="section-sub">Start with an audit. Scope a build. Run it on retainer. Cancel anytime once the system runs itself.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Audit</div>
+        <div class="tier-price">$5,000<span class="unit"> · one-time</span></div>
+        <div class="tier-tag">Find the $1M+ leak in 14 days</div>
+        <ul>
+          <li>Full ops, sales, finance, marketing teardown</li>
+          <li>AI-readiness scorecard (36 dimensions)</li>
+          <li>Prioritized build roadmap</li>
+          <li>ROI projection per workflow</li>
+          <li>Credited 100% toward Build phase</li>
+        </ul>
+        <a href="https://calendly.com/bennettmaxwell" class="cta">Start Audit</a>
+      </div>
+      <div class="tier featured">
+        <div class="tier-name">Build</div>
+        <div class="tier-price">$15K–50K<span class="unit"> · 30 days</span></div>
+        <div class="tier-tag">Deploy your AI workforce</div>
+        <ul>
+          <li>Custom agents for your stack (Slack, GHL, QB, more)</li>
+          <li>Sales prep + pipeline reports automated</li>
+          <li>Marketing pipeline (ads + content + creative)</li>
+          <li>Finance + ops dashboards live</li>
+          <li>Full team training + handoff docs</li>
+          <li>Diamond-certified deliverables</li>
+        </ul>
+        <a href="https://calendly.com/bennettmaxwell" class="cta">Scope Build</a>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Run</div>
+        <div class="tier-price">$2K–10K<span class="unit"> / month</span></div>
+        <div class="tier-tag">We babysit, you scale</div>
+        <ul>
+          <li>Monthly autonomy uplift target</li>
+          <li>New skills shipped every cycle</li>
+          <li>24/7 agent monitoring</li>
+          <li>Direct Slack access to Bennett</li>
+          <li>Cancel anytime — no contract lock</li>
+        </ul>
+        <a href="https://calendly.com/bennettmaxwell" class="cta">Talk Retainer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proof" class="proof-section">
+  <div class="wrap">
+    <div class="eyebrow">Built On Real Operations</div>
+    <h2>This isn't theory. It's our stack.</h2>
+    <p class="section-sub">Franchise KI operates 4 brands — Indy Clover, Salad House, SRP, FKI — using the same AI workforce we're offering you.</p>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="big">126</div>
+        <div class="lbl">Skills shipped</div>
+        <p>Every workflow — sales prep, ad creative, finance reporting, lead routing — runs as a versioned, audited skill on our stack.</p>
+      </div>
+      <div class="proof-card">
+        <div class="big">21</div>
+        <div class="lbl">AI agents in production</div>
+        <p>Each agent owns a function — sales, ops, finance, design — and reports to a router orchestrator. Full audit trail.</p>
+      </div>
+      <div class="proof-card">
+        <div class="big">$0</div>
+        <div class="lbl">Wasted spend per cycle</div>
+        <p>Every cycle is budget-gated, ROAS-tracked, and self-auditing. Losing campaigns auto-pause. Winners auto-scale.</p>
+      </div>
+      <div class="proof-card">
+        <div class="big">24/7</div>
+        <div class="lbl">Always-on execution</div>
+        <p>Crons fire while you sleep. Sales prep ready by 7am. Pipeline reports by 8. The business runs itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="how">
+  <div class="wrap">
+    <div class="eyebrow">How It Works</div>
+    <h2>30 days from kickoff to autonomy.</h2>
+    <p class="section-sub">No 6-month consulting engagements. No deck-only "strategy." Working software, in your stack, in 30 days.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Audit · Days 1–14</h3>
+        <p>We map every workflow, identify the highest-leverage automations, and quantify expected ROI per build.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Build · Days 15–30</h3>
+        <p>We deploy your AI workforce — agents, skills, dashboards, crons — all integrated with your existing tools.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Run · Day 31+</h3>
+        <p>We monitor, tune, and ship new skills monthly. You keep the gains. Cancel when the system runs itself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Your $5K audit pays for itself in 60 days.</h2>
+    <p class="section-sub">Or we'll refund the difference. Book a 30-minute call to scope what's possible.</p>
+    <a href="https://calendly.com/bennettmaxwell" class="cta">Book your $5K audit call →</a>
+    <div class="bonus">100% credited toward your Build phase if you move forward.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Advaita AI for Business</strong> · A <a href="https://franchiseki.com">Franchise KI</a> company</p>
+    <p style="margin-top:8px">Built on Project Advaita — the AI workforce stack running 4 franchise brands live.</p>
+  </div>
+</footer>
+
+</body>
+</html>
