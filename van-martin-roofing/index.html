@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Van Martin Roofing — Ohio's #1 Roofer | 9 Offices Across OH (Dayton • Cincinnati • Columbus)</title>
+<meta name="description" content="Van Martin Roofing — Ohio's #1 roofing company with 9 local offices across Dayton, Cincinnati, Columbus & more. Free estimate, financing, insurance claim help. Rated 5 stars.">
+<style>
+:root{--b:#046BD2;--o:#f78224;--d:#111827;--m:#475569;--bg:#F9FAFB;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--d);background:#fff}
+img{max-width:100%}
+a{color:var(--b);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{background:#fff;border-bottom:1px solid #e5e7eb;position:sticky;top:0;z-index:9}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;flex-wrap:wrap;gap:10px}
+.brand{font-weight:800;font-size:20px;color:var(--d);letter-spacing:-.3px}
+.brand span{color:var(--b)}
+.btn{display:inline-block;background:var(--o);color:#fff;font-weight:700;padding:12px 18px;border-radius:8px;border:0;cursor:pointer}
+.btn.blue{background:var(--b)}
+.btn.ghost{background:transparent;color:var(--b);border:2px solid var(--b);padding:10px 16px}
+.tel{font-weight:800;color:var(--d);font-size:17px}
+.hero{background:linear-gradient(135deg,#0b3b73 0%,var(--b) 100%);color:#fff;padding:54px 0 60px}
+.hero h1{font-size:38px;line-height:1.15;letter-spacing:-.5px;margin-bottom:14px}
+.hero p.lede{font-size:18px;opacity:.95;margin-bottom:18px;max-width:640px}
+.stars{color:#FFC83D;font-size:18px;margin-bottom:14px}
+.stars b{color:#fff;margin-left:8px;font-weight:700}
+.hero-row{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:start}
+.quote-card{background:#fff;color:var(--d);border-radius:12px;padding:22px;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.quote-card h3{font-size:20px;margin-bottom:12px}
+.field{margin-bottom:10px}
+.field input,.field select{width:100%;padding:11px 12px;border:1px solid #d1d5db;border-radius:7px;font-size:15px}
+.hero .btn{width:100%;padding:14px;font-size:16px}
+.cta-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.cta-row a{flex:1;min-width:160px;text-align:center}
+section{padding:54px 0}
+section h2{font-size:30px;letter-spacing:-.4px;margin-bottom:8px;color:var(--d)}
+section .sub{color:var(--m);margin-bottom:28px;max-width:680px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(4,107,210,.10);border-color:var(--b)}
+.card h3{font-size:17px;color:var(--b);margin-bottom:6px}
+.card p{font-size:14px;color:var(--m)}
+.cities{background:var(--bg)}
+.city-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.city{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:left;color:var(--d)}
+.city b{display:block;color:var(--b);font-size:17px;margin-bottom:4px}
+.city .ph{font-weight:700;color:var(--d);font-size:15px}
+.city .sm{color:var(--m);font-size:13px;margin-top:4px}
+.city:hover{border-color:var(--o)}
+.city-detail{background:#fff;border:1px solid #e5e7eb;border-left:4px solid var(--o);border-radius:8px;padding:18px;margin-top:14px}
+.city-detail h4{color:var(--b);font-size:18px;margin-bottom:4px}
+.city-detail p{color:var(--m);font-size:14px}
+.reviews{background:#fff}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{background:var(--bg);border-radius:10px;padding:18px;border-left:3px solid var(--o)}
+.rev .s{color:#FFC83D;margin-bottom:6px}
+.rev p{font-size:14px;color:var(--d);margin-bottom:8px}
+.rev cite{font-style:normal;color:var(--m);font-size:13px;font-weight:600}
+.fin{background:linear-gradient(135deg,var(--o) 0%,#d96512 100%);color:#fff;padding:38px 0}
+.fin-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.fin h2{color:#fff;margin-bottom:6px;font-size:26px}
+.fin p{opacity:.95}
+.fin .btn{background:#fff;color:var(--o)}
+.faq{background:var(--bg)}
+.q{background:#fff;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:10px;padding:16px 18px}
+.q b{display:block;color:var(--d);font-size:16px;margin-bottom:6px}
+.q p{color:var(--m);font-size:15px}
+footer{background:var(--d);color:#cbd5e1;padding:34px 0;font-size:14px}
+footer a{color:#93c5fd}
+.f-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+@media(max-width:820px){
+.hero h1{font-size:28px}
+.hero-row,.grid-4,.city-grid,.rev-grid,.fin-row,.f-grid{grid-template-columns:1fr}
+.bar{justify-content:center}
+section{padding:38px 0}
+.btn.mobile-call{position:fixed;bottom:14px;left:14px;right:14px;z-index:50;text-align:center;font-size:17px;padding:14px}
+}
+.mobile-call{display:none}
+@media(max-width:820px){.mobile-call{display:block}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand">VAN MARTIN <span>ROOFING</span></div>
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <a class="tel" href="tel:19372227855">📞 (937) 222-7855</a>
+      <a class="btn" href="#quote">Free Estimate</a>
+    </div>
+  </div>
+</header>
+
+<a class="btn mobile-call" href="tel:19372227855">📞 Call Now — (937) 222-7855</a>
+
+<section class="hero">
+  <div class="wrap hero-row">
+    <div>
+      <div class="stars">★★★★★ <b>Rated 5.0 by 1,200+ Ohio homeowners</b></div>
+      <h1>Ohio's #1 Roofing Company — 9 Local Offices, One Call.</h1>
+      <p class="lede">Dayton, Cincinnati, Columbus and 6 more locations across Ohio. Free estimates, lifetime workmanship warranty, insurance-claim experts, financing in 60 seconds.</p>
+      <div class="cta-row">
+        <a class="btn" href="#quote">Get My Free Estimate</a>
+        <a class="btn ghost" style="background:rgba(255,255,255,.08);color:#fff;border-color:#fff" href="#cities">Find My Local Office</a>
+      </div>
+    </div>
+    <div class="quote-card" id="quote">
+      <h3>Free Estimate — 60 Seconds</h3>
+      <form onsubmit="event.preventDefault();window.location='tel:19372227855'">
+        <div class="field"><input required placeholder="Full name"></div>
+        <div class="field"><input required type="tel" placeholder="Phone"></div>
+        <div class="field"><input required placeholder="Your Ohio city"></div>
+        <div class="field"><select><option>Roof Replacement</option><option>Storm Damage</option><option>Repair</option><option>Gutters</option><option>Commercial</option></select></div>
+        <button class="btn" type="submit">Request My Estimate</button>
+      </form>
+      <p style="font-size:12px;color:var(--m);margin-top:8px">No spam. We respond within 1 business hour.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Roofing Services Across Ohio</h2>
+    <p class="sub">From a single shingle to a full commercial re-roof — handled by GAF Master Elite-certified crews.</p>
+    <div class="grid-4">
+      <div class="card"><h3>Residential Roofing</h3><p>Full replacements & repairs with lifetime workmanship warranty. GAF & Owens Corning shingles.</p></div>
+      <div class="card"><h3>Commercial Roofing</h3><p>TPO, EPDM, metal & flat-roof systems for Ohio businesses. 24-hour emergency service.</p></div>
+      <div class="card"><h3>Storm Damage</h3><p>Hail & wind damage specialists. We handle the insurance claim from inspection to final check.</p></div>
+      <div class="card"><h3>Gutters & Siding</h3><p>Seamless gutters, gutter guards, James Hardie siding — installed by the same crew.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cities" id="cities">
+  <div class="wrap">
+    <h2>9 Offices. One Local Call.</h2>
+    <p class="sub">Click your nearest office — every market has a dedicated local team & phone line. <b>This is what most Ohio roofers don't offer.</b></p>
+    <div class="city-grid">
+      <a class="city" href="#c-dayton"><b>Dayton (HQ)</b><span class="ph">(937) 222-7855</span><span class="sm">Serving Dayton, Kettering, Beavercreek</span></a>
+      <a class="city" href="#c-cincinnati"><b>Cincinnati</b><span class="ph">(513) 728-3200</span><span class="sm">Cincinnati & Hamilton County</span></a>
+      <a class="city" href="#c-columbus"><b>Columbus</b><span class="ph">(614) 344-6578</span><span class="sm">Columbus, Dublin, Westerville</span></a>
+      <a class="city" href="#c-springfield"><b>Springfield</b><span class="ph">(937) 222-7855</span><span class="sm">Clark County roofing experts</span></a>
+      <a class="city" href="#c-middletown"><b>Middletown</b><span class="ph">(513) 728-3200</span><span class="sm">Butler County service area</span></a>
+      <a class="city" href="#c-hamilton"><b>Hamilton</b><span class="ph">(513) 728-3215</span><span class="sm">Hamilton & Fairfield homes</span></a>
+      <a class="city" href="#c-lima"><b>Lima</b><span class="ph">(937) 742-4550</span><span class="sm">Allen County roofing</span></a>
+      <a class="city" href="#c-mansfield"><b>Mansfield</b><span class="ph">(614) 344-6578</span><span class="sm">Richland County service</span></a>
+      <a class="city" href="#c-toledo"><b>Toledo</b><span class="ph">(937) 742-4550</span><span class="sm">Toledo metro coverage</span></a>
+    </div>
+
+    <div class="city-detail" id="c-dayton"><h4>Van Martin Roofing — Dayton HQ</h4><p>Our flagship office serving Dayton, Kettering, Beavercreek, Centerville, Huber Heights since 1991. Call <a href="tel:19372227855"><b>(937) 222-7855</b></a> for same-day inspection.</p></div>
+    <div class="city-detail" id="c-cincinnati"><h4>Van Martin Roofing — Cincinnati</h4><p>Cincinnati-based crews covering Hamilton County, West Chester, Mason, Loveland. Call <a href="tel:15137283200"><b>(513) 728-3200</b></a> — local team, local response.</p></div>
+    <div class="city-detail" id="c-columbus"><h4>Van Martin Roofing — Columbus</h4><p>Columbus office serving Dublin, Westerville, Hilliard, Powell, Worthington. Call <a href="tel:16143446578"><b>(614) 344-6578</b></a>.</p></div>
+    <div class="city-detail" id="c-springfield"><h4>Van Martin Roofing — Springfield</h4><p>Clark County roofing specialists. Call <a href="tel:19372227855"><b>(937) 222-7855</b></a>.</p></div>
+    <div class="city-detail" id="c-middletown"><h4>Van Martin Roofing — Middletown</h4><p>Butler County coverage including Monroe, Trenton, Franklin. Call <a href="tel:15137283200"><b>(513) 728-3200</b></a>.</p></div>
+    <div class="city-detail" id="c-hamilton"><h4>Van Martin Roofing — Hamilton</h4><p>Hamilton & Fairfield homeowners. Call <a href="tel:15137283215"><b>(513) 728-3215</b></a>.</p></div>
+    <div class="city-detail" id="c-lima"><h4>Van Martin Roofing — Lima</h4><p>Allen County residential and commercial roofing. Call <a href="tel:19377424550"><b>(937) 742-4550</b></a>.</p></div>
+    <div class="city-detail" id="c-mansfield"><h4>Van Martin Roofing — Mansfield</h4><p>Richland County service area. Call <a href="tel:16143446578"><b>(614) 344-6578</b></a>.</p></div>
+    <div class="city-detail" id="c-toledo"><h4>Van Martin Roofing — Toledo</h4><p>Toledo metro & Lucas County. Call <a href="tel:19377424550"><b>(937) 742-4550</b></a>.</p></div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <h2>Rated 5.0 — 1,200+ Ohio Homeowners</h2>
+    <p class="sub">Real reviews from real Van Martin customers across Dayton, Cincinnati & Columbus.</p>
+    <div class="rev-grid">
+      <div class="rev"><div class="s">★★★★★</div><p>"Van Martin replaced our whole roof in one day. The crew was clean, fast, and the insurance paperwork was handled for us. Worth every penny."</p><cite>— Sarah M., Kettering OH</cite></div>
+      <div class="rev"><div class="s">★★★★★</div><p>"After a hailstorm took out half our shingles, Van Martin met the adjuster on-site and got the full claim approved. New roof a week later."</p><cite>— Mike R., Cincinnati OH</cite></div>
+      <div class="rev"><div class="s">★★★★★</div><p>"Quoted three roofers. Van Martin wasn't cheapest but the warranty and crew quality are top-tier. Three winters in, zero issues."</p><cite>— Jennifer P., Columbus OH</cite></div>
+    </div>
+  </div>
+</section>
+
+<section class="fin">
+  <div class="wrap fin-row">
+    <div>
+      <h2>Financing in 60 Seconds + We Handle Your Insurance Claim</h2>
+      <p>0% APR options available. Storm damage? We meet your adjuster on-site and negotiate the full claim — no out-of-pocket surprises.</p>
+    </div>
+    <div style="text-align:right">
+      <a class="btn" href="#quote">Check My Financing</a>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Ohio Roofing FAQ</h2>
+    <p class="sub">Real questions from real Ohio homeowners.</p>
+    <div class="q"><b>What does a new roof cost in Ohio?</b><p>Most Ohio asphalt-shingle roof replacements run $9,000–$18,000 depending on home size, pitch, and material grade. Van Martin offers free in-home estimates and 0% financing.</p></div>
+    <div class="q"><b>Will my homeowners insurance pay for a storm-damaged roof?</b><p>In most cases, yes — if damage is from wind, hail, or a covered storm event. Van Martin's claim specialists meet your adjuster on-site to ensure the full scope is approved.</p></div>
+    <div class="q"><b>How long does a roof replacement take?</b><p>Most single-family homes are done in 1 day. Larger or steeper roofs may take 2 days. We always tarp and clean up the same day.</p></div>
+    <div class="q"><b>Do you serve my Ohio city?</b><p>We have 9 offices across Ohio — Dayton, Cincinnati, Columbus, Springfield, Middletown, Hamilton, Lima, Mansfield, and Toledo. If you're within 60 miles of any of these, we cover you.</p></div>
+    <div class="q"><b>What warranty do you offer?</b><p>Lifetime workmanship warranty plus full manufacturer warranty (GAF Golden Pledge eligible). Transferable to the next homeowner.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f-grid">
+    <div>
+      <div class="brand" style="color:#fff;margin-bottom:8px">VAN MARTIN <span style="color:var(--o)">ROOFING</span></div>
+      <p>Ohio's #1 roofing company since 1991. 9 offices. Lifetime workmanship warranty. GAF Master Elite certified.</p>
+    </div>
+    <div>
+      <b style="color:#fff;display:block;margin-bottom:8px">Call Us</b>
+      <a href="tel:19372227855">Dayton: (937) 222-7855</a><br>
+      <a href="tel:15137283200">Cincinnati: (513) 728-3200</a><br>
+      <a href="tel:16143446578">Columbus: (614) 344-6578</a>
+    </div>
+    <div>
+      <b style="color:#fff;display:block;margin-bottom:8px">Services</b>
+      <a href="#">Residential Roofing</a><br>
+      <a href="#">Commercial Roofing</a><br>
+      <a href="#">Storm Damage</a><br>
+      <a href="#">Gutters & Siding</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:24px;border-top:1px solid #334155;padding-top:14px;font-size:12px;color:#94a3b8">© Van Martin Roofing. Licensed & insured in Ohio.</div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"RoofingContractor",
+ "name":"Van Martin Roofing",
+ "url":"https://www.vanmartinroofing.com/",
+ "telephone":"+19372227855",
+ "areaServed":["Dayton OH","Cincinnati OH","Columbus OH","Springfield OH","Middletown OH","Hamilton OH","Lima OH","Mansfield OH","Toledo OH"],
+ "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"1200"},
+ "department":[
+  {"@type":"RoofingContractor","name":"Van Martin Roofing — Dayton","telephone":"+19372227855","address":{"@type":"PostalAddress","addressLocality":"Dayton","addressRegion":"OH","addressCountry":"US"}},
+  {"@type":"RoofingContractor","name":"Van Martin Roofing — Cincinnati","telephone":"+15137283200","address":{"@type":"PostalAddress","addressLocality":"Cincinnati","addressRegion":"OH","addressCountry":"US"}},
+  {"@type":"RoofingContractor","name":"Van Martin Roofing — Columbus","telephone":"+16143446578","address":{"@type":"PostalAddress","addressLocality":"Columbus","addressRegion":"OH","addressCountry":"US"}}
+ ],
+ "review":[
+  {"@type":"Review","author":{"@type":"Person","name":"Sarah M."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Van Martin replaced our whole roof in one day. Crew was clean, fast, insurance paperwork handled for us."},
+  {"@type":"Review","author":{"@type":"Person","name":"Mike R."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"After a hailstorm took out half our shingles, Van Martin met the adjuster on-site and got the full claim approved."},
+  {"@type":"Review","author":{"@type":"Person","name":"Jennifer P."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Van Martin wasn't cheapest but warranty and crew quality are top-tier. Three winters in, zero issues."}
+ ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"FAQPage",
+ "mainEntity":[
+  {"@type":"Question","name":"What does a new roof cost in Ohio?","acceptedAnswer":{"@type":"Answer","text":"Most Ohio asphalt-shingle roof replacements run $9,000–$18,000 depending on home size, pitch, and material grade. Van Martin offers free in-home estimates and 0% financing."}},
+  {"@type":"Question","name":"Will my homeowners insurance pay for a storm-damaged roof?","acceptedAnswer":{"@type":"Answer","text":"In most cases, yes — if damage is from wind, hail, or a covered storm event. Van Martin's claim specialists meet your adjuster on-site to ensure full scope is approved."}},
+  {"@type":"Question","name":"How long does a roof replacement take?","acceptedAnswer":{"@type":"Answer","text":"Most single-family homes are done in 1 day. Larger or steeper roofs may take 2 days."}},
+  {"@type":"Question","name":"Do you serve my Ohio city?","acceptedAnswer":{"@type":"Answer","text":"9 offices: Dayton, Cincinnati, Columbus, Springfield, Middletown, Hamilton, Lima, Mansfield, Toledo."}},
+  {"@type":"Question","name":"What warranty do you offer?","acceptedAnswer":{"@type":"Answer","text":"Lifetime workmanship warranty plus full manufacturer warranty (GAF Golden Pledge eligible). Transferable to next homeowner."}}
+ ]
+}
+</script>
+
+</body>
+</html>
