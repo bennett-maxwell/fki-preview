@@ -3,107 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your AI Readiness Score — Advaita</title>
+<title>You're In — Advaita Business AI</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .confirm-wrap {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .check-circle {
+    width: 80px;
+    height: 80px;
+    background: #d1fae5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    font-size: 36px;
+  }
+  .confirm-wrap h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .confirm-wrap .sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 460px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .timeline {
+    background: #f5f5f7;
+    border-radius: 14px;
+    padding: 28px 32px;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    width: 32px;
+    height: 32px;
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tl-text strong { display: block; font-size: 15px; margin-bottom: 2px; }
+  .tl-text span { font-size: 14px; color: var(--muted); }
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    border: 2px solid #1a1a2e;
+    border-radius: 8px;
+    color: #1a1a2e;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+  }
+</style>
 </head>
 <body>
 
 <div class="container-narrow">
   <nav>
     <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">Advaita<span style="color: var(--accent);">.</span></a>
-    <a href="quiz.html" style="color: var(--muted); text-decoration: none; font-size: 14px;">Retake</a>
   </nav>
 
-  <section class="score-hero">
-    <div class="label">Your AI Readiness Score</div>
-    <div class="score-display" id="score">--</div>
-    <h2 id="headline">Loading…</h2>
-    <p class="sub" id="subhead" style="margin-top: 12px;"></p>
-  </section>
+  <div class="confirm-wrap">
+    <div class="check-circle">✓</div>
 
-  <section class="leakage">
-    <div class="label" style="color: #C2410C;">The Money Moment</div>
-    <h3 style="margin: 12px 0 8px;">Estimated revenue leaking from your business</h3>
-    <div class="bignum-ink" id="leak">$0</div>
-    <p style="margin-top: 8px; color: #7C2D12;">per month — leaving the table</p>
-    <p style="margin-top: 20px; font-size: 15px; color: #7C2D12;">Good news: this is the easiest money you'll ever recover. The plan below shows you how.</p>
-  </section>
+    <h1>You're in.<br>Results within 24 hours.</h1>
+    <p class="sub">
+      We're reviewing your audit now. You'll receive a personalized AI blueprint and custom podcast — delivered to your inbox within 24 hours.
+    </p>
 
-  <section style="margin: 64px 0;">
-    <h2 style="text-align: center; margin-bottom: 32px;">Your next 3 moves</h2>
-    <div id="plan"></div>
-  </section>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-dot">✓</div>
+        <div class="tl-text">
+          <strong>Audit submitted</strong>
+          <span>We have your answers — review starts now</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-text">
+          <strong>Custom blueprint built</strong>
+          <span>We identify your highest-ROI automation moves</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-text">
+          <strong>Delivered within 24 hours</strong>
+          <span>Blueprint + podcast in your inbox — no pitch</span>
+        </div>
+      </div>
+    </div>
 
-  <section class="cta-stack">
-    <a href="https://api.leadconnectorhq.com/widget/booking/cvJNccHEVJLVUee0VMr2" class="btn btn-block btn-accent">Book a 15-min strategy call →</a>
-  </section>
+    <a href="https://api.leadconnectorhq.com/widget/booking/cvJNccHEVJLVUee0VMr2" class="btn btn-block btn-accent" style="max-width: 380px; margin-bottom: 16px;">
+      Want it faster? Book a 15-min call →
+    </a>
+    <a href="index.html" class="btn-secondary">← Back to home</a>
+  </div>
 </div>
 
 <footer>
   <div class="container">
-    <p>© 2026 Advaita. Your score is private. We never share data.</p>
+    <p>© 2026 Advaita Business AI. Your audit is private. We never share data.</p>
   </div>
 </footer>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const score = Math.max(0, Math.min(100, parseInt(params.get('score') || '50')));
-const band = params.get('band') || 'growth';
-const rev = parseInt(params.get('rev') || '165000');
-
-// Hormozi leakage formula: gap * monthly_rev * 0.02
-const gap = 100 - score;
-const leakage = Math.round(gap * rev * 0.02);
-
-document.getElementById('score').textContent = score;
-document.getElementById('leak').textContent = '$' + leakage.toLocaleString() + '/mo';
-
-// Empowering Robbins-lens copy
-let headline, sub, plan;
-if (score >= 80) {
-  headline = "You're ahead of 95% of businesses.";
-  sub = "You've built real AI leverage. Now it's about compounding — pulling the last few thousand per month out of edge cases.";
-  plan = [
-    ["Push the edge", "Audit your top 3 workflows for the 10% AI hasn't touched yet."],
-    ["Teach others", "Your playbook is rare. Consider sharing or productizing it."],
-    ["Sharpen the moat", "Talk to us about advanced multi-agent setups."]
-  ];
-} else if (score >= 60) {
-  headline = "You're on the right track. There's a clear next step.";
-  sub = "You've started. The gap between you and the top tier is one focused 30-day sprint.";
-  plan = [
-    ["Plug the biggest leak", "The quiz flagged your weakest area. Fix that one first — usually +$5K-$20K/mo."],
-    ["Add one AI-native lead source", "Most teams in your tier double pipeline by replacing one channel with AI lead-gen."],
-    ["Tighten your data layer", "Your CRM is the foundation. We can clean it in a week."]
-  ];
-} else if (score >= 40) {
-  headline = "You have massive upside. Most of it is recoverable in 90 days.";
-  sub = "This score isn't bad — it's opportunity. Businesses that move now win the next 5 years.";
-  plan = [
-    ["Map your repeat tasks", "Write down every task you do twice. AI can take 60% of them off your plate."],
-    ["Get one win", "Pick one workflow. Automate it this month. Confidence compounds."],
-    ["Book a 15-min audit", "We'll show you the single highest-ROI move for your business — free."]
-  ];
-} else {
-  headline = "You're standing on a gold mine. You just need a map.";
-  sub = "A low score means low base — and that means the upside is biggest for you. The businesses that move first win.";
-  plan = [
-    ["Start with one tool", "Don't overhaul anything. Pick one task. Try AI on it tomorrow."],
-    ["Free 15-min consult", "We'll find your single biggest lever in one call. No pitch."],
-    ["Book a 15-min audit", "We'll map your single biggest AI lever in one call. No pitch."]
-  ];
-}
-
-document.getElementById('headline').textContent = headline;
-document.getElementById('subhead').textContent = sub;
-
-document.getElementById('plan').innerHTML = plan.map((p, i) => `
-  <div class="card" style="margin-bottom: 16px;">
-    <div class="label">Move ${i + 1}</div>
-    <h3 style="margin-top: 8px;">${p[0]}</h3>
-    <p style="color: var(--muted); margin-top: 8px;">${p[1]}</p>
-  </div>
-`).join('');
-</script>
 </body>
 </html>
