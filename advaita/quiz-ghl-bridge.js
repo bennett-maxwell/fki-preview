@@ -50,10 +50,21 @@ function formatLeakage(score, monthlyRev) {
   return leakage.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 }
 
+function getUTMParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    source: params.get('utm_source') || 'organic',
+    medium: params.get('utm_medium') || 'quiz',
+    campaign: params.get('utm_campaign') || '',
+    content: params.get('utm_content') || ''
+  };
+}
+
 function buildGHLPayload(pii, quizResults) {
   const score = quizResults.total;
   const leadTier = getLeadTier(score);
   const productTier = getRecommendedTier(score, quizResults.answers);
+  const utm = getUTMParams();
 
   const noteLines = ['--- Advaita AI Readiness Quiz Results ---', ''];
   quizResults.answers.forEach((a, i) => {
@@ -66,6 +77,19 @@ function buildGHLPayload(pii, quizResults) {
   noteLines.push(`Monthly Revenue Estimate: $${quizResults.monthlyRev.toLocaleString()}`);
   noteLines.push(`Leakage Estimate: ${formatLeakage(score, quizResults.monthlyRev)}/mo`);
   noteLines.push(`Submitted: ${quizResults.timestamp}`);
+  if (utm.source !== 'organic') {
+    noteLines.push(`UTM: ${utm.source} / ${utm.medium} / ${utm.campaign} / ${utm.content}`);
+  }
+
+  const tags = [
+    'advaita-quiz',
+    leadTier,
+    TIER_DATA[productTier].tag,
+    `score-${score}`,
+    `band-${quizResults.band}`,
+    `source-${utm.source}`
+  ];
+  if (utm.campaign) tags.push(`campaign-${utm.campaign}`);
 
   return {
     firstName: pii.firstName,
@@ -73,14 +97,8 @@ function buildGHLPayload(pii, quizResults) {
     phone: pii.phone || '',
     companyName: pii.businessName || '',
     locationId: GHL_LOCATION_ID,
-    source: 'advaita-quiz',
-    tags: [
-      'advaita-quiz',
-      leadTier,
-      TIER_DATA[productTier].tag,
-      `score-${score}`,
-      `band-${quizResults.band}`
-    ],
+    source: `advaita-quiz-${utm.source}`,
+    tags,
     customFields: [
       { key: 'quiz_score', value: String(score) },
       { key: 'quiz_band', value: quizResults.band },
