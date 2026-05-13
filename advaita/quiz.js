@@ -156,17 +156,34 @@ function score() {
   let total = 0;
   let band = 'growth';
   let monthlyRev = 50000;
+  const answerDetails = [];
   QUESTIONS.forEach((q, i) => {
     const a = answers[i];
     if (a !== undefined) {
       const ch = q.choices[a];
       total += ch.s;
+      answerDetails.push({
+        label: q.label,
+        question: q.q,
+        choice: ch.t,
+        score: ch.s
+      });
       if (q.key === 'revenue') {
         band = ch.band;
         monthlyRev = { starter: 50000, growth: 165000, scale: 540000, enterprise: 1500000 }[ch.band];
       }
     }
   });
+  // BIZ-01: Persist full answer payload for result page + GHL bridge
+  const tier = total >= 80 ? 'build' : total >= 50 ? 'arsenal' : 'bootcamp';
+  localStorage.setItem('advaita-quiz-results', JSON.stringify({
+    answers: answerDetails,
+    total,
+    band,
+    monthlyRev,
+    tier,
+    timestamp: new Date().toISOString()
+  }));
   return { total, band, monthlyRev };
 }
 
