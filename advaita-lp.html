@@ -526,6 +526,92 @@
       margin: 0 auto;
     }
 
+    /* ── SLIDER ── */
+    .slider-wrap {
+      position: relative;
+      padding-top: 38px;
+      margin-top: 4px;
+    }
+
+    .slider-value {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      background: #0071E3;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: left 0.04s;
+    }
+
+    .slider-control {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #E0E0E5;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider-control::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0071E3;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,113,227,0.35);
+      border: 3px solid #fff;
+    }
+
+    .slider-control::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0071E3;
+      cursor: pointer;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,113,227,0.35);
+    }
+
+    .slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .slider-ticks span {
+      font-size: 11px;
+      color: #AEAEB2;
+      font-weight: 500;
+    }
+
+    /* ── OPTIONAL REVEAL ── */
+    .optional-reveal {
+      display: none;
+      margin-top: 16px;
+      padding: 18px 16px;
+      background: #F5F5F7;
+      border-radius: 12px;
+      border: 1.5px dashed #C7C7CC;
+    }
+
+    .optional-reveal__label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8E8E93;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+
     /* ── SUCCESS MESSAGE (hidden by default) ── */
     #form-success {
       display: none;
@@ -918,7 +1004,7 @@
         Businesses using AI agents save 15–30 hours a week. Get a free blueprint that shows exactly where YOUR hours are hiding — in 60 seconds.
       </h1>
       <p class="hero__sub">
-        AI can answer every lead in under 2 minutes, run your follow-up sequences, and generate 30 pieces of content from a 10-minute voice memo — while you focus on the work only you can do. Answer 8 questions and get a custom report showing exactly what's automatable in your business. No sales call. No spam. Free.
+        AI can answer every lead in under 2 minutes, run your follow-up sequences, and generate 30 pieces of content from a 10-minute voice memo — while you focus on the work only you can do. Answer 7 quick questions and get a custom ROI report showing exactly what's automatable in your business. No sales call. No spam. Free.
       </p>
       <a href="#quiz-form" class="btn-primary">Get My Free Blueprint →</a>
     </div>
@@ -1144,7 +1230,7 @@
     <div class="container">
       <div class="quiz-section__header">
         <h2 class="quiz-section__title">See exactly how much time and money your business is leaving on the table.</h2>
-        <p class="quiz-section__sub">Answer 8 questions → get a custom report on your exact business, tools, and automation opportunities. Free. 60 seconds.</p>
+        <p class="quiz-section__sub">Answer 7 questions → get a custom ROI report on your exact business and automation opportunities. Free. 60 seconds.</p>
       </div>
 
       <form class="quiz-form" id="blueprint-form" action="#" method="POST" novalidate>
@@ -1208,114 +1294,104 @@
           </select>
         </div>
 
-        <!-- Q5: Revenue range -->
+        <!-- Q1 ROI: Leads per month -->
         <div class="form-group">
-          <label class="form-label" for="q5_revenue">
-            <span>Q5</span>What's your annual revenue range?
-          </label>
-          <select id="q5_revenue" name="revenue_range" class="form-control" required>
-            <option value="" disabled selected>Select revenue range</option>
-            <option value="0_500k">$0 – $500,000</option>
-            <option value="501k_2m">$501,000 – $2,000,000</option>
-            <option value="2m_5m">$2,000,000 – $5,000,000</option>
-            <option value="5m_plus">$5,000,000+</option>
+          <label class="form-label"><span>Q1</span>Roughly how many leads hit your business each month?</label>
+          <div class="slider-wrap">
+            <output class="slider-value" id="leads-val">50 leads/mo</output>
+            <input type="range" id="q_leads" name="leads_per_month" min="0" max="500" value="50" class="slider-control" />
+            <div class="slider-ticks">
+              <span>10</span><span>25</span><span>50</span><span>100</span><span>250</span><span>500+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 ROI: Close rate -->
+        <div class="form-group">
+          <label class="form-label"><span>Q2</span>Of those, how many become paying customers?</label>
+          <div class="slider-wrap">
+            <output class="slider-value" id="close-val">20%</output>
+            <input type="range" id="q_close" name="close_rate_pct" min="0" max="100" value="20" class="slider-control" />
+            <div class="slider-ticks">
+              <span>5%</span><span>10%</span><span>20%</span><span>35%</span><span>50%+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 ROI: Avg customer value -->
+        <div class="form-group">
+          <label class="form-label"><span>Q3</span>Average $ a customer spends with you (first purchase)</label>
+          <div class="slider-wrap">
+            <output class="slider-value" id="value-val">$1,000</output>
+            <input type="range" id="q_value" name="avg_customer_value" min="0" max="10000" value="1000" class="slider-control" />
+            <div class="slider-ticks">
+              <span>$100</span><span>$500</span><span>$1K</span><span>$2.5K</span><span>$5K</span><span>$10K+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 ROI: Sales cycle -->
+        <div class="form-group">
+          <label class="form-label" for="q_cycle"><span>Q4</span>How long from first contact to closed deal?</label>
+          <select id="q_cycle" name="sales_cycle" class="form-control" required>
+            <option value="" disabled selected>Select your typical sales cycle</option>
+            <option value="same_day">Same day</option>
+            <option value="under_week">Under a week</option>
+            <option value="1_4_weeks">1–4 weeks</option>
+            <option value="1_3_months">1–3 months</option>
+            <option value="3plus_months">3+ months</option>
           </select>
         </div>
 
-        <!-- Q6: Tools (structured dropdowns) -->
+        <!-- Q5 ROI: Owner hours on leads -->
         <div class="form-group">
-          <label class="form-label"><span>Q6</span>What tools does your business run on?</label>
+          <label class="form-label"><span>Q5</span>Hours/week YOU personally chase leads</label>
+          <div class="slider-wrap">
+            <output class="slider-value" id="hours-val">10 hrs/wk</output>
+            <input type="range" id="q_hours" name="owner_hours_per_week" min="0" max="40" value="10" class="slider-control" />
+            <div class="slider-ticks">
+              <span>0</span><span>2</span><span>5</span><span>10</span><span>20</span><span>40</span>
+            </div>
+          </div>
+        </div>
 
-          <label class="form-sublabel" for="q6a_crm">CRM</label>
-          <select id="q6a_crm" name="crm" class="form-control" required>
-            <option value="" disabled selected>Select your CRM</option>
-            <option value="ghl">GoHighLevel</option>
-            <option value="hubspot">HubSpot</option>
-            <option value="salesforce">Salesforce</option>
-            <option value="pipedrive">Pipedrive</option>
-            <option value="zoho">Zoho CRM</option>
-            <option value="other">Other</option>
-            <option value="none">I don't have one</option>
-          </select>
-
-          <label class="form-sublabel" for="q6b_comms">Team communication</label>
-          <select id="q6b_comms" name="comms" class="form-control" required>
-            <option value="" disabled selected>Select your main comms tool</option>
-            <option value="slack">Slack</option>
-            <option value="teams">Microsoft Teams</option>
-            <option value="gchat">Google Chat</option>
-            <option value="email_only">Email only</option>
-            <option value="other">Other</option>
-            <option value="none">None</option>
-          </select>
-
-          <label class="form-sublabel" for="q6c_docs">Document storage</label>
-          <select id="q6c_docs" name="docs" class="form-control" required>
-            <option value="" disabled selected>Select your doc storage</option>
-            <option value="google_drive">Google Drive</option>
-            <option value="sharepoint">Microsoft SharePoint / OneDrive</option>
-            <option value="notion">Notion</option>
-            <option value="dropbox">Dropbox</option>
-            <option value="box">Box</option>
-            <option value="other">Other</option>
-            <option value="none">I don't have one</option>
-          </select>
-
-          <label class="form-sublabel" for="q6d_pm">Project management</label>
-          <select id="q6d_pm" name="project_mgmt" class="form-control" required>
-            <option value="" disabled selected>Select your PM tool</option>
-            <option value="notion">Notion</option>
-            <option value="asana">Asana</option>
-            <option value="monday">Monday.com</option>
-            <option value="clickup">ClickUp</option>
-            <option value="jira">Jira</option>
-            <option value="other">Other</option>
-            <option value="none">I don't use one</option>
+        <!-- Q6 ROI: Repeat purchase -->
+        <div class="form-group">
+          <label class="form-label" for="q_repeat"><span>Q6</span>Do customers buy again?</label>
+          <select id="q_repeat" name="repeat_purchase" class="form-control" required>
+            <option value="" disabled selected>Select repeat purchase pattern</option>
+            <option value="no">No — one-time purchase</option>
+            <option value="sometimes">Sometimes</option>
+            <option value="monthly">Yes — monthly</option>
+            <option value="quarterly">Yes — quarterly</option>
+            <option value="yearly">Yes — yearly</option>
           </select>
         </div>
 
-        <!-- Q7: Time drains -->
+        <!-- Q7 ROI: Bottleneck -->
         <div class="form-group">
-          <label class="form-label" for="q6_drains">
-            <span>Q7</span>What are your biggest time drains right now?
-          </label>
-          <select id="q6_drains" name="time_drains" class="form-control" required>
-            <option value="" disabled selected>Select your biggest time drain</option>
-            <option value="lead_followup">Lead follow-up</option>
-            <option value="admin_reporting">Admin &amp; reporting</option>
-            <option value="scheduling">Scheduling</option>
-            <option value="customer_onboarding">Customer onboarding</option>
-            <option value="all">All of the above</option>
-          </select>
+          <label class="form-label" for="q_bottleneck"><span>Q7</span>What's the #1 thing slowing your funnel right now?</label>
+          <input id="q_bottleneck" name="bottleneck_text" type="text" class="form-control" placeholder="speak it like you'd say it to a friend" maxlength="140" required />
+          <p style="font-size:12px;color:#AEAEB2;text-align:right;margin-top:4px;"><span id="bottle-count">0</span>/140</p>
         </div>
 
-        <!-- Q8: Process documentation -->
-        <div class="form-group">
-          <label class="form-label" for="q8_sops">
-            <span>Q8</span>How documented are your business processes?
-          </label>
-          <select id="q8_sops" name="process_docs" class="form-control" required>
-            <option value="" disabled selected>Select the best description</option>
-            <option value="50plus">50+ SOPs — fully documented playbooks for most workflows</option>
-            <option value="10_50">10–50 SOPs — core processes documented, some tribal knowledge</option>
-            <option value="under10">Fewer than 10 — scattered notes, mostly informal</option>
-            <option value="starting">Just starting — a few things written down but nothing systematic</option>
-            <option value="none">Nothing documented — processes live in people's heads</option>
-          </select>
-        </div>
-
-        <!-- Q9: AI maturity -->
-        <div class="form-group">
-          <label class="form-label" for="q9_ai">
-            <span>Q9</span>Where are you with AI right now?
-          </label>
-          <select id="q9_ai" name="ai_maturity" class="form-control" required>
-            <option value="" disabled selected>Select where you are</option>
-            <option value="chatting">Tried ChatGPT — mostly chatting and asking questions</option>
-            <option value="conversational">Use AI regularly but it's conversational only</option>
-            <option value="custom_tools">Built or used custom AI tools/GPTs for specific tasks</option>
-            <option value="agents_running">Already using AI automation — agents or integrations running</option>
-          </select>
+        <!-- Optional reveal (fires on 2s hover of submit) -->
+        <div class="optional-reveal" id="optional-reveal">
+          <p class="optional-reveal__label">Optional — skip if you'd rather not</p>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label class="form-label">Know your cost per lead?</label>
+            <div class="slider-wrap">
+              <output class="slider-value" id="cpl-val">$25</output>
+              <input type="range" id="q_cpl" name="cost_per_lead" min="0" max="500" value="25" class="slider-control" />
+              <div class="slider-ticks">
+                <span>$0</span><span>$25</span><span>$100</span><span>$250</span><span>$500+</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" for="q_mktspend">Marketing spend per month?</label>
+            <input id="q_mktspend" name="marketing_spend" type="number" class="form-control" placeholder="Optional — skip if preferred" min="0" />
+          </div>
         </div>
 
         <!-- Disqualification line -->
@@ -1481,10 +1557,115 @@
       var GHL_KEY = 'pit-81e14317-71e3-44c2-864c-0dd014f570cd';
       var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
       var GHL_API = 'https://services.leadconnectorhq.com';
+      var HOT_PIPELINE = 'BkDsA5sIzgsEon9ikJVW';
 
       var form = document.getElementById('blueprint-form');
       var success = document.getElementById('form-success');
+      var submitBtn = form.querySelector('[type="submit"]');
+      var optionalReveal = document.getElementById('optional-reveal');
 
+      // ── Sales cycle days map ──
+      var daysMap = {
+        same_day: 0,
+        under_week: 5,
+        '1_4_weeks': 14,
+        '1_3_months': 60,
+        '3plus_months': 120
+      };
+
+      // ── Repeat purchase multiplier ──
+      var repeatMap = {
+        no: 1.0,
+        sometimes: 1.3,
+        monthly: 4.0,
+        quarterly: 2.5,
+        yearly: 1.5
+      };
+
+      // ── Slider live update helper ──
+      function initSlider(inputId, outputId, formatter) {
+        var input = document.getElementById(inputId);
+        var output = document.getElementById(outputId);
+        if (!input || !output) return;
+        function update() {
+          var pct = (input.value - input.min) / (input.max - input.min);
+          output.style.left = 'calc(' + (pct * 100) + '% + ' + Math.round(8 - pct * 16) + 'px)';
+          output.textContent = formatter(+input.value);
+        }
+        input.addEventListener('input', update);
+        update();
+      }
+
+      initSlider('q_leads', 'leads-val', function(v) {
+        return v >= 500 ? '500+ leads/mo' : v + ' leads/mo';
+      });
+      initSlider('q_close', 'close-val', function(v) {
+        return v >= 100 ? '100%' : v + '%';
+      });
+      initSlider('q_value', 'value-val', function(v) {
+        if (v >= 10000) return '$10K+';
+        if (v >= 1000) return '$' + (v / 1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'K';
+        return '$' + v;
+      });
+      initSlider('q_hours', 'hours-val', function(v) {
+        return v + ' hrs/wk';
+      });
+      initSlider('q_cpl', 'cpl-val', function(v) {
+        return v >= 500 ? '$500+' : '$' + v;
+      });
+
+      // ── Bottleneck char counter ──
+      var bottleInput = document.getElementById('q_bottleneck');
+      var bottleCount = document.getElementById('bottle-count');
+      if (bottleInput && bottleCount) {
+        bottleInput.addEventListener('input', function() {
+          bottleCount.textContent = bottleInput.value.length;
+        });
+      }
+
+      // ── Optional reveal on 2s hover ──
+      var revealTimer;
+      function showReveal() {
+        revealTimer = setTimeout(function() {
+          if (optionalReveal) optionalReveal.style.display = 'block';
+        }, 2000);
+      }
+      function cancelReveal() { clearTimeout(revealTimer); }
+
+      if (submitBtn) {
+        submitBtn.addEventListener('mouseenter', showReveal);
+        submitBtn.addEventListener('mouseleave', cancelReveal);
+        submitBtn.addEventListener('touchstart', showReveal, { passive: true });
+        submitBtn.addEventListener('touchend', cancelReveal, { passive: true });
+      }
+
+      // ── ROI formula ──
+      function calcROI(d) {
+        var L = +d.leads_per_month || 0;
+        var C = (+d.close_rate_pct || 0) / 100;
+        var V = +d.avg_customer_value || 0;
+        var D = daysMap[d.sales_cycle] !== undefined ? daysMap[d.sales_cycle] : 14;
+        var H = +d.owner_hours_per_week || 0;
+        var R = repeatMap[d.repeat_purchase] || 1.0;
+
+        var M_now = L * C * V * R;
+        var M_ai  = L * (C * 1.35) * V * R;
+        var dRev  = M_ai - M_now;
+        var T     = H * 4.3 * 150;
+        var S     = dRev * (D / 30);
+        var total = dRev + T + S;
+        var revProxy = L * C * V * R * 12;
+        var roiK = Math.max(1, Math.round(total / 1000));
+
+        return {
+          roi_monthly: Math.round(total),
+          rev_proxy_annual: Math.round(revProxy),
+          is_hot: revProxy >= 1000000,
+          roi_tag: 'roi_' + roiK + 'k_mo'
+        };
+      }
+
+      // ── GHL helpers ──
       function ghlHeaders() {
         return {
           'Authorization': 'Bearer ' + GHL_KEY,
@@ -1493,45 +1674,39 @@
         };
       }
 
-      function buildTags(d) {
-        var tags = ['advaita-ai-blueprint'];
-        var docMap = {
-          '50plus': 'sop-ready',
-          '10_50': 'sop-partial',
-          'under10': 'sop-minimal',
-          'starting': 'sop-starting',
-          'none': 'sop-none'
-        };
-        if (docMap[d.process_docs]) tags.push(docMap[d.process_docs]);
-        if (d.process_docs === '50plus' || d.process_docs === '10_50') tags.push('deployment-ready');
-        var aiMap = {
-          chatting: 'ai-stage-chatgpt',
-          conversational: 'ai-stage-conversational',
-          custom_tools: 'ai-stage-custom-tools',
-          agents_running: 'ai-stage-agents-running'
-        };
-        if (aiMap[d.ai_maturity]) tags.push(aiMap[d.ai_maturity]);
-        if (d.crm === 'ghl') tags.push('crm-ghl');
-        return tags;
+      function buildTags(roi) {
+        return [
+          'advaita-ai-blueprint',
+          'source_li_blueprint_post_2026-05-16',
+          roi.roi_tag
+        ];
       }
 
-      function buildNote(d) {
+      function buildNote(d, roi) {
         return [
-          'Advaita AI Blueprint — quiz submission',
-          'Website: ' + d.website,
-          'Team size: ' + d.team_size,
-          'Revenue: ' + d.revenue_range,
-          'CRM: ' + d.crm,
-          'Comms: ' + d.comms,
-          'Docs: ' + d.docs,
-          'Project mgmt: ' + d.project_mgmt,
-          'Time drains: ' + d.time_drains,
-          'Process docs: ' + d.process_docs,
-          'AI maturity: ' + d.ai_maturity
+          'Advaita AI Blueprint — ROI quiz submission (P3 form)',
+          'Website: ' + (d.website || ''),
+          'Team size: ' + (d.team_size || ''),
+          'Leads/mo: ' + (d.leads_per_month || 0),
+          'Close rate: ' + (d.close_rate_pct || 0) + '%',
+          'Avg customer value: $' + (d.avg_customer_value || 0),
+          'Sales cycle: ' + (d.sales_cycle || ''),
+          'Owner hrs/wk on leads: ' + (d.owner_hours_per_week || 0),
+          'Repeat purchase: ' + (d.repeat_purchase || ''),
+          'Bottleneck: ' + (d.bottleneck_text || ''),
+          'Cost/lead: ' + (d.cost_per_lead ? '$' + d.cost_per_lead : 'not provided'),
+          'Mkt spend/mo: ' + (d.marketing_spend ? '$' + d.marketing_spend : 'not provided'),
+          '---',
+          'ROI (monthly): $' + roi.roi_monthly.toLocaleString(),
+          'Rev proxy (annual): $' + roi.rev_proxy_annual.toLocaleString(),
+          'BANT routing: ' + (roi.is_hot ? 'HOT → pipeline ' + HOT_PIPELINE : 'STANDARD')
         ].join('\n');
       }
 
+      // ── GHL submit ──
       async function submitToGHL(d) {
+        var roi = calcROI(d);
+
         var res = await fetch(GHL_API + '/contacts/', {
           method: 'POST',
           headers: ghlHeaders(),
@@ -1540,33 +1715,58 @@
             email: d.email,
             locationId: GHL_LOC,
             source: 'advaita-ai-blueprint',
-            tags: buildTags(d)
+            tags: buildTags(roi)
           })
         });
         if (!res.ok) return;
         var json = await res.json();
         var contactId = json.contact && json.contact.id;
         if (!contactId) return;
+
         await fetch(GHL_API + '/contacts/' + contactId + '/notes', {
           method: 'POST',
           headers: ghlHeaders(),
-          body: JSON.stringify({ body: buildNote(d) })
+          body: JSON.stringify({ body: buildNote(d, roi) })
         });
+
+        if (roi.is_hot) {
+          await fetch(GHL_API + '/opportunities/', {
+            method: 'POST',
+            headers: ghlHeaders(),
+            body: JSON.stringify({
+              pipelineId: HOT_PIPELINE,
+              locationId: GHL_LOC,
+              contactId: contactId,
+              name: (d.first_name || 'Lead') + ' — Advaita Blueprint (HOT)',
+              status: 'open'
+            })
+          }).catch(function() {});
+        }
       }
 
+      // ── Form submit ──
       form.addEventListener('submit', function (e) {
         e.preventDefault();
 
         var inputs = form.querySelectorAll('[required]');
         var allValid = true;
         inputs.forEach(function (input) {
-          if (!input.value.trim()) { allValid = false; input.style.borderColor = '#FF3B30'; }
-          else { input.style.borderColor = ''; }
+          if (!input.value.trim()) {
+            allValid = false;
+            input.style.borderColor = '#FF3B30';
+          } else {
+            input.style.borderColor = '';
+          }
         });
         if (!allValid) return;
 
         var data = {};
         new FormData(form).forEach(function (v, k) { data[k] = v; });
+        // Capture slider values (not in FormData for range inputs without form names)
+        ['q_leads','q_close','q_value','q_hours','q_cpl'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) data[el.name] = el.value;
+        });
 
         form.style.display = 'none';
         success.style.display = 'block';
@@ -1576,7 +1776,7 @@
         if (typeof fbq === 'function') { fbq('track', 'Lead'); }
       });
 
-      form.querySelectorAll('.form-control').forEach(function (el) {
+      form.querySelectorAll('.form-control, .slider-control').forEach(function (el) {
         el.addEventListener('input', function () { el.style.borderColor = ''; });
       });
     })();
