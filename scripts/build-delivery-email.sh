@@ -26,7 +26,7 @@ SEND_PREVIEW=false
 [ "${2:-}" = "--send-preview" ] && SEND_PREVIEW=true
 
 # Extract fields from JSON
-get() { python3 -c "import json; d=json.load(open('$PROFILE')); print(d.get('$1','$2'))" ; }
+get() { python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2], sys.argv[3] if len(sys.argv)>3 else ''))" "$PROFILE" "$1" "${2:-}" ; }
 
 LEAD_NAME=$(get lead_name "Unknown")
 LEAD_FIRST=$(get lead_first_name "there")
@@ -41,7 +41,7 @@ WEBSITE_URL=$(get website_url "")
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
-APPLY_SUBJECT=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LEAD_NAME - Blueprint Application'))")
+APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 
@@ -57,25 +57,32 @@ sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_SUBJECT}}|$APPLY_SUBJECT|g" "$OUTPUT"
 
 # Prompts need python for multi-line safety
-python3 << PYEOF
-with open('$OUTPUT', 'r') as f:
+python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
+import json, sys
+output_path, profile_path, industry = sys.argv[1], sys.argv[2], sys.argv[3]
+with open(output_path, 'r') as f:
     html = f.read()
-import json
-profile = json.load(open('$PROFILE'))
-html = html.replace('{{PROMPT_1}}', profile.get('prompt_1', '$PROMPT_1'))
-html = html.replace('{{PROMPT_2}}', profile.get('prompt_2', '$PROMPT_2'))
-html = html.replace('{{PROMPT_3}}', profile.get('prompt_3', '$PROMPT_3'))
-html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', '$LEAD_NAME'))
-with open('$OUTPUT', 'w') as f:
+profile = json.load(open(profile_path))
+default_p1 = f"You are a speed-to-lead response agent for a {industry} business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step."
+default_p2 = f"You are a proposal draft agent for a {industry} business. Given a prospect requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors."
+default_p3 = f"You are an outreach agent for a {industry} business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting ideal clients who need {industry} services."
+html = html.replace('{{PROMPT_1}}', profile.get('prompt_1', default_p1))
+html = html.replace('{{PROMPT_2}}', profile.get('prompt_2', default_p2))
+html = html.replace('{{PROMPT_3}}', profile.get('prompt_3', default_p3))
+html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
+with open(output_path, 'w') as f:
     f.write(html)
 PYEOF
 
 echo "Built: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
 
 # Pre-delivery check on the email
-BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || echo 0)
-CALENDAR=$(grep -ci 'calendly\|cal\.com\|calendar\.google' "$OUTPUT" 2>/dev/null || echo 0)
-APPLY=$(grep -ci 'apply' "$OUTPUT" 2>/dev/null || echo 0)
+BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || true)
+BOOKING=${BOOKING:-0}
+CALENDAR=$(grep -ci 'calendly\|cal\.com\|calendar\.google' "$OUTPUT" 2>/dev/null || true)
+CALENDAR=${CALENDAR:-0}
+APPLY=$(grep -ci 'apply' "$OUTPUT" 2>/dev/null || true)
+APPLY=${APPLY:-0}
 
 if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$APPLY" -lt 1 ]; then
     echo "FAIL: booking=$BOOKING calendar=$CALENDAR apply=$APPLY"
