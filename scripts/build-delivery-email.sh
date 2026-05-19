@@ -151,6 +151,44 @@ if [ "$SEND_PREVIEW" = true ]; then
         --no-input 2>&1 | tail -2
 fi
 
+# ============================================================
+# HARD GATE: PODCAST + BENNETT-APPROVAL REQUIRED BEFORE SEND
+# Bennett directive 2026-05-19 — never send to customer without both.
+# ============================================================
+if [ "$SEND_GHL" = true ]; then
+    # Gate 1: Podcast URL must be non-empty and return HTTP 200
+    if [ -z "$PODCAST_URL" ] || [ "$PODCAST_URL" = "" ]; then
+        echo "BLOCKED: PODCAST_URL is empty. Cannot send to customer until podcast is live."
+        echo "Run: ./build-delivery-email.sh $PROFILE --send-preview  (preview to bennett@ only)"
+        mkdir -p ~/.openclaw/logs
+        echo "{\"ts\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"lead\":\"$LEAD_NAME\",\"block\":\"empty_podcast_url\",\"profile\":\"$PROFILE\"}" >> ~/.openclaw/logs/blueprint-delivery-blocks.jsonl
+        exit 1
+    fi
+    PODCAST_HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$PODCAST_URL" 2>/dev/null || echo "000")
+    if [ "$PODCAST_HTTP" != "200" ]; then
+        echo "BLOCKED: podcast_url=$PODCAST_URL returned HTTP $PODCAST_HTTP (need 200)."
+        echo "Podcast must be live before customer delivery."
+        mkdir -p ~/.openclaw/logs
+        echo "{\"ts\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"lead\":\"$LEAD_NAME\",\"block\":\"podcast_http_$PODCAST_HTTP\",\"url\":\"$PODCAST_URL\"}" >> ~/.openclaw/logs/blueprint-delivery-blocks.jsonl
+        exit 1
+    fi
+    echo "Gate 1 PASS: podcast HTTP $PODCAST_HTTP"
+
+    # Gate 2: Require --bennett-approved flag — Bennett must have reviewed the preview first
+    BENNETT_APPROVED=false
+    for arg in "${@:2}"; do [ "$arg" = "--bennett-approved" ] && BENNETT_APPROVED=true; done
+    if [ "$BENNETT_APPROVED" = false ]; then
+        echo "BLOCKED: --bennett-approved flag required. Process:"
+        echo "  1. Run with --send-preview to send to bennett@franchiseki.com for review"
+        echo "  2. Bennett approves (Notion checkbox or reply)"
+        echo "  3. Re-run with --send-ghl --bennett-approved to deliver to customer"
+        mkdir -p ~/.openclaw/logs
+        echo "{\"ts\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"lead\":\"$LEAD_NAME\",\"block\":\"missing_bennett_approval\"}" >> ~/.openclaw/logs/blueprint-delivery-blocks.jsonl
+        exit 1
+    fi
+    echo "Gate 2 PASS: bennett-approved flag present"
+fi
+
 # Send via GHL conversations API (primary delivery to lead)
 if [ "$SEND_GHL" = true ]; then
     LEAD_EMAIL=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get('email',''))" "$PROFILE")
