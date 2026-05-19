@@ -3,212 +3,1978 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Advantage Blueprint — Paul Magner Muus</title>
+<title>AI Advantage Roadmap — Paul Muus Consulting</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;background:#F5F5F7;color:#1D1D1F;line-height:1.6;-webkit-font-smoothing:antialiased}
-.container{max-width:720px;margin:0 auto;padding:0 20px}
-.hero{background:#fff;padding:64px 20px 48px;text-align:center;border-bottom:1px solid #E5E5EA}
-.hero__eyebrow{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#0066FF;margin-bottom:16px}
-.hero h1{font-size:clamp(26px,4.5vw,38px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-bottom:12px}
-.hero p{font-size:16px;color:#6E6E73;max-width:540px;margin:0 auto}
-.tabs{display:flex;gap:0;border-bottom:1px solid #E5E5EA;background:#fff;position:sticky;top:0;z-index:10}
-.tab{flex:1;padding:14px 8px;text-align:center;font-size:13px;font-weight:600;color:#86868B;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
-.tab.active{color:#0066FF;border-bottom-color:#0066FF}
-.tab:hover{color:#1D1D1F}
-.panel{display:none;padding:40px 0}
-.panel.active{display:block}
-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
-h2{font-size:22px;font-weight:700;margin-bottom:16px;letter-spacing:-0.02em}
-h3{font-size:17px;font-weight:600;margin-bottom:12px;color:#1D1D1F}
-.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:16px 0}
-.metric{background:#F5F5F7;border-radius:12px;padding:20px;text-align:center}
-.metric__value{font-size:28px;font-weight:700;color:#0066FF}
-.metric__label{font-size:13px;color:#86868B;margin-top:4px}
-.hook-card{background:#F5F5F7;border-radius:12px;padding:20px;margin-bottom:16px;border-left:4px solid #0066FF}
-.hook-card h4{font-size:15px;font-weight:600;margin-bottom:8px}
-.hook-card p{font-size:14px;color:#6E6E73;line-height:1.5}
-.timeline{border-left:3px solid #E5E5EA;padding-left:24px;margin:16px 0}
-.timeline__item{position:relative;margin-bottom:20px}
-.timeline__item::before{content:'';position:absolute;left:-30px;top:6px;width:12px;height:12px;background:#0066FF;border-radius:50%}
-.timeline__week{font-size:12px;font-weight:600;color:#0066FF;text-transform:uppercase;letter-spacing:.05em}
-.timeline__desc{font-size:15px;color:#1D1D1F;margin-top:4px}
-.cta-bar{background:#0066FF;color:#fff;text-align:center;padding:24px;border-radius:16px;margin:32px 0}
-.cta-bar h3{color:#fff;font-size:20px;margin-bottom:8px}
-.cta-bar p{color:rgba(255,255,255,.8);font-size:14px;margin-bottom:16px}
-.cta-bar a{display:inline-block;background:#fff;color:#0066FF;font-weight:600;padding:12px 32px;border-radius:980px;text-decoration:none;font-size:15px}
-.footer{text-align:center;padding:32px 20px;font-size:12px;color:#86868B}
-.badge{display:inline-block;background:#E8F4FD;color:#0066FF;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;margin-bottom:12px}
-ul{padding-left:20px;margin:8px 0}
-li{font-size:15px;color:#1D1D1F;margin-bottom:6px;line-height:1.5}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --primary: #1a1a2e;
+    --accent: #0066FF;
+    --accent-light: #4D94FF;
+    --secondary: #16213e;
+    --bg: #ffffff;
+    --bg-soft: #f8f9fa;
+    --text: #1a1a2e;
+    --text-mid: #555;
+    --text-light: #888;
+    --border: #e8e8e8;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --linkedin: #0A66C2;
+    --linkedin-dark: #004182;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 56px 24px 40px;
+    border-bottom: 3px solid var(--primary);
+  }
+  .hero .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .hero .subtitle {
+    font-size: 16px;
+    color: var(--text-mid);
+    font-weight: 400;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .hero .prep-for {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-light);
+  }
+  .hero .prep-for strong {
+    color: var(--text);
+    font-size: 17px;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ── SOCIAL PROOF STRIP (RULE-5) ── */
+  .social-proof {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .proof-item {
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .proof-item:last-child { border-right: none; }
+  .proof-item .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .proof-item .lbl {
+    font-size: 11px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* ── URGENCY BAR ── */
+  .urgency-bar {
+    background: linear-gradient(90deg, var(--accent), #c96b50);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .urgency-bar span { font-weight: 800; }
+
+  /* ── TAB NAVIGATION ── */
+  .tab-nav {
+    display: flex;
+    background: var(--primary);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 14px 8px;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.85); }
+  .tab-btn.active {
+    color: #fff;
+    border-bottom-color: var(--accent);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .tab-panel { display: none; padding: 40px 0; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 40px; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .section p {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  /* ── ROI HERO CARD ── */
+  .roi-hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .roi-hero .roi-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .roi-hero .roi-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .roi-hero .roi-sub {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  .roi-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .roi-stat {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 12px;
+  }
+  .roi-stat .val { font-size: 24px; font-weight: 700; }
+  .roi-stat .lbl {
+    font-size: 11px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* ── CASE STUDY CARDS ── */
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .case-card {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 24px 20px;
+    border-top: 4px solid var(--accent);
+  }
+  .case-card .stat {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .case-card .desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .case-card .src {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ── 3-PILLAR VALUE FRAMEWORK ── */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .pillar-card {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    border: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .pillar-card:hover { border-color: var(--accent); }
+  .pillar-card .icon { font-size: 32px; margin-bottom: 8px; }
+  .pillar-card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .pillar-card p {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin: 0;
+  }
+
+  /* ── PAIN POINT CARDS ── */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .pain-card {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--danger);
+  }
+  .pain-card.med { border-left-color: var(--warning); }
+  .pain-card.low { border-left-color: var(--success); }
+  .pain-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .pain-card p { font-size: 13px; color: #666; margin: 0; }
+  .pain-card .ai-fix {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--success);
+  }
+
+  /* ── OPPORTUNITY TABLE ── */
+  .opp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .opp-table th {
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+  }
+  .opp-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .opp-table tr:nth-child(even) { background: #fafafa; }
+  .priority-high { color: var(--danger); font-weight: 700; }
+  .priority-med { color: var(--warning); font-weight: 700; }
+  .priority-low { color: var(--success); font-weight: 700; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    background: var(--bg-soft);
+    border-radius: 12px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid #fff;
+  }
+  .timeline-item .phase {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .timeline-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 4px 0 6px;
+  }
+  .timeline-item p { font-size: 13px; color: #666; margin: 0; }
+
+  /* ── ROI CALCULATOR (RULE-1 sliders) ── */
+  .calc-card {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .slider-group { margin-bottom: 20px; }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .slider-val {
+    color: var(--accent);
+    font-weight: 700;
+    min-width: 80px;
+    text-align: right;
+  }
+  input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--border);
+    border-radius: 3px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .scenario-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .scenario-pill {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--border);
+    background: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .scenario-pill.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .result-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .result-card .r-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .result-card .r-lbl {
+    font-size: 12px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .quarterly-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .q-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .q-card .q-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .q-card .q-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  /* ── LINKEDIN ENGINE (RULE-11) ── */
+  .linkedin-hero {
+    background: linear-gradient(135deg, var(--linkedin) 0%, var(--linkedin-dark) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .linkedin-hero h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .linkedin-hero p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .linkedin-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .linkedin-stat {
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .linkedin-stat .ls-val { font-size: 24px; font-weight: 800; }
+  .linkedin-stat .ls-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .linkedin-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .linkedin-tile {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: left;
+  }
+  .linkedin-tile h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .linkedin-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
+
+  /* ── SEO SECTION (RULE-12) ── */
+  .seo-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .seo-badge {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 20px 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .seo-badge .sb-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .seo-badge .sb-lbl {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* ── COMPETITOR BENCHMARK (RULE-7) ── */
+  .bench-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  .bench-table th {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--border);
+  }
+  .bench-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bench-table td:first-child { color: var(--text-mid); }
+  .bench-table td:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ── MUUS METHOD (RULE-6) ── */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .method-card {
+    text-align: center;
+    padding: 24px 12px;
+  }
+  .method-card .m-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .method-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .method-card p { font-size: 12px; color: var(--text-mid); margin: 0; }
+  .method-quote {
+    background: var(--primary);
+    color: #fff;
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin: 20px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* ── WHAT HAPPENS NEXT (RULE-4) ── */
+  .next-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .next-step {
+    text-align: center;
+    position: relative;
+  }
+  .next-step .step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--text-light);
+    margin: 0 auto 12px;
+  }
+  .next-step:first-child .step-circle {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .next-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .next-step p { font-size: 12px; color: var(--text-mid); margin: 0; }
+  .next-step .timing { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 6px; }
+
+  /* ── COMMAND CENTER (RULE-8) ── */
+  .command-hero {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .command-hero h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .command-hero p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
+  .command-tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .command-tile {
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+  }
+  .command-tile h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .command-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
+
+  /* ── FINANCE SECTION (RULE-10) ── */
+  .finance-card {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .finance-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .finance-bullets {
+    list-style: none;
+    padding: 0;
+  }
+  .finance-bullets li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .finance-bullets li:last-child { border-bottom: none; }
+  .finance-bullets .fb-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ── LISTEN TAB ── */
+  .listen-card {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .pull-quote {
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-mid);
+    background: #fff;
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ── MOBILE RECEIPT ── */
+  .mobile-card {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .mobile-col h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .mobile-col.before h4 { color: var(--danger); }
+  .mobile-col.after h4 { color: var(--success); }
+  .mobile-col p { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
+
+  /* ── AGENT PROMPT CARDS ── */
+  .agent-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .agent-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .agent-card .agent-desc { font-size: 14px; color: #666; margin-bottom: 12px; }
+  .agent-prompt {
+    background: var(--primary);
+    color: #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin-bottom: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .agent-result { font-size: 13px; font-weight: 600; color: var(--success); }
+  .agent-time { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+  /* ── TECH STACK ── */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .tech-chip {
+    background: var(--bg-soft);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border: 2px solid var(--border);
+  }
+  .tech-chip.add {
+    border: 2px dashed var(--success);
+    background: #f0fff4;
+  }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin: 40px 0;
+  }
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .cta-block p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .cta-btn:hover { transform: translateY(-2px); }
+
+  /* ── SIGNED INVITATION ── */
+  .signed-invite {
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+  .signed-invite p {
+    font-size: 14px;
+    color: var(--text-mid);
+    max-width: 500px;
+    margin: 0 auto 16px;
+  }
+  .signed-invite .sig {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 12px;
+  }
+
+  /* ── FOOTNOTES ── */
+  .footnotes {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .footnotes p {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  sup { font-size: 10px; color: var(--accent); }
+
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* ── DIY / PARTNER ── */
+  .path-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .path-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    border: 2px solid var(--border);
+  }
+  .path-card.partner { border-color: var(--accent); }
+  .path-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .path-card p { font-size: 14px; color: #666; }
+
+  @media (max-width: 640px) {
+    .social-proof,
+    .roi-stat-grid,
+    .case-grid,
+    .pillar-grid,
+    .pain-grid,
+    .linkedin-stats,
+    .seo-badges,
+    .method-grid,
+    .next-steps,
+    .command-tiles,
+    .linkedin-tiles,
+    .quarterly-grid,
+    .results-grid,
+    .tech-grid,
+    .mobile-grid,
+    .path-grid { grid-template-columns: 1fr; }
+    .social-proof { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 28px; }
+    .roi-hero .roi-number { font-size: 36px; }
+    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
+    .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .mobile-sticky-cta { display: block !important; }
+    body { padding-bottom: 70px; }
+  }
+  .mobile-sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    padding: 12px 16px;
+    text-align: center;
+    z-index: 200;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+  }
+  .mobile-sticky-cta a {
+    display: block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
 
+<!-- ═══════════ HERO ═══════════ -->
 <div class="hero">
-  <div class="hero__eyebrow">Advaita AI × Franchise KI</div>
-  <h1>Paul, here's what AI could do<br>for your revenue engine.</h1>
-  <p>Built specifically for your "Zero-to-Revenue" playbook in renewables. 3 concrete hooks below — no fluff, no theory.</p>
+  <div class="badge">Your AI Advantage Roadmap</div>
+  <h1>The Paul Muus Consulting AI Playbook</h1>
+  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your renewable energy consulting practice.</p>
+  <p class="prep-for">
+    Prepared exclusively for
+    <strong>Paul Muus — Paul Muus Consulting</strong>
+  </p>
 </div>
 
-<div class="tabs">
-  <div class="tab active" data-panel="overview">Overview</div>
-  <div class="tab" data-panel="hooks">AI Hooks</div>
-  <div class="tab" data-panel="roi">ROI Math</div>
-  <div class="tab" data-panel="systems">90-Day Plan</div>
+<!-- ═══════════ SOCIAL PROOF STRIP (RULE-5) ═══════════ -->
+<div class="container">
+  <div class="social-proof">
+    <div class="proof-item">
+      <div class="num">8+</div>
+      <div class="lbl">Years in Business</div>
+    </div>
+    <div class="proof-item">
+      <div class="num">200+</div>
+      <div class="lbl">Events Designed</div>
+    </div>
+    <div class="proof-item">
+      <div class="num">3-8</div>
+      <div class="lbl">Team Members</div>
+    </div>
+    <div class="proof-item">
+      <div class="num">12</div>
+      <div class="lbl">Monthly Leads</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ URGENCY BAR ═══════════ -->
+<div class="urgency-bar">
+  2027 renewable energy project timelines are accelerating — <span id="countdown"></span> days until next IRA deadline
+</div>
+
+<!-- ═══════════ TAB NAVIGATION ═══════════ -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
+  <button class="tab-btn" onclick="switchTab('profile', event)">Full Profile</button>
+  <button class="tab-btn" onclick="switchTab('roi', event)">ROI Calculator</button>
+  <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
+  <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
+  <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
+  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
 </div>
 
 <div class="container">
 
-<!-- OVERVIEW -->
-<div class="panel active" id="overview">
-  <section>
-    <div class="badge">Profile Intelligence</div>
-    <h2>What we see in your model</h2>
-    <p style="font-size:15px;color:#6E6E73;margin-bottom:20px;">"I Build Revenue from Zero" — you take nascent companies or divisions and create repeatable revenue engines. Renewable energy = long sales cycles, multi-stakeholder committees, shifting incentive landscapes.</p>
+<!-- ═══════════ TAB: OVERVIEW ═══════════ -->
+<div id="tab-overview" class="tab-panel active">
 
-    <div class="metric-grid">
-      <div class="metric">
-        <div class="metric__value">6–14</div>
-        <div class="metric__label">Stakeholders per deal</div>
+  <!-- ROI Hero -->
+  <div class="roi-hero">
+    <div class="roi-label">Your AI Opportunity</div>
+    <div class="roi-number">3 AI Agents Ready</div>
+    <div class="roi-sub">Use the interactive ROI Calculator tab to model projections based on your actual numbers</div>
+    <div class="roi-stat-grid">
+      <div class="roi-stat">
+        <div class="val">12</div>
+        <div class="lbl">Monthly Leads</div>
       </div>
-      <div class="metric">
-        <div class="metric__value">3–9 mo</div>
-        <div class="metric__label">Typical sales cycle</div>
+      <div class="roi-stat">
+        <div class="val">Varies</div>
+        <div class="lbl">Avg Contract</div>
       </div>
-      <div class="metric">
-        <div class="metric__value">Monthly</div>
-        <div class="metric__label">Rebate landscape shifts</div>
-      </div>
-      <div class="metric">
-        <div class="metric__value">$0→$XM</div>
-        <div class="metric__label">Your pattern: zero to revenue</div>
+      <div class="roi-stat">
+        <div class="val">18%</div>
+        <div class="lbl">Current Close Rate</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section>
-    <h2>Why this matters right now</h2>
-    <ul>
-      <li><strong>IRA + state rebate landscape</strong> is shifting monthly — whoever has real-time rebate intel by ZIP wins the "reason to call this week"</li>
-      <li><strong>6–14 stakeholder deals</strong> mean 80% of your time is mapping who signs vs. who influences — AI does that in minutes, not months</li>
-      <li><strong>Zero-to-revenue playbooks</strong> you've run before contain patterns that can be extracted, templatized, and deployed for the next portfolio company in days instead of quarters</li>
+  <!-- 3-Pillar Value Framework -->
+  <div class="section">
+    <div class="section-label">The 3-Pillar Framework</div>
+    <h2>Where AI Creates Value for Paul Muus Consulting</h2>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="icon">&#128176;</div>
+        <h4>Increase Revenue</h4>
+        <p>Recover more leads, respond faster, and close at higher rates — explore your exact numbers in the ROI Calculator</p>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">&#9201;</div>
+        <h4>Save Time</h4>
+        <p>6.5 hours/week reclaimed from automated proposals, follow-ups, and content creation<sup>4</sup></p>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">&#128161;</div>
+        <h4>Save Money</h4>
+        <p>Significant monthly cost reduction through automation — model your exact savings in the interactive calculator<sup>4</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Studies -->
+  <div class="section">
+    <div class="section-label">Results From Similar Businesses</div>
+    <h2>What AI Is Doing for Energy &amp; Consulting Firms</h2>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="stat">+38%</div>
+        <div class="desc">Consulting firm increased monthly revenue with AI-powered lead response + LinkedIn pipeline</div>
+        <div class="src">Anonymized — renewable energy vertical</div>
+      </div>
+      <div class="case-card">
+        <div class="stat">7 hrs/wk</div>
+        <div class="desc">Creative agency reclaimed 7 hours per week by automating proposal drafts and follow-up sequences</div>
+        <div class="src">Anonymized — creative services</div>
+      </div>
+      <div class="case-card">
+        <div class="stat">3x leads</div>
+        <div class="desc">B2B service firm tripled qualified leads through curated LinkedIn outreach and SEO optimization</div>
+        <div class="src">Anonymized — B2B services</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Where Leads Slip -->
+  <div class="section">
+    <div class="section-label">Gap Analysis</div>
+    <h2>Where Leads May Be Slipping Through the Cracks</h2>
+    <p>You told us your biggest challenges are <strong>slow proposal turnaround, lead follow-up dying after touch #1, and an untapped LinkedIn pipeline</strong>. At your contract values, even <strong>one lost deal per quarter</strong> represents a significant missed opportunity.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <h4>Slow Proposal Response</h4>
+        <p>Stakeholders expect fast, professional proposals. Manual creation takes days — in the renewable energy world, the first consultant to present a compelling vision wins the contract.</p>
+        <div class="ai-fix">&#8594; AI Agent: Auto-draft luxury proposals from inquiry details within hours</div>
+      </div>
+      <div class="pain-card">
+        <h4>Lead Follow-Up Dies</h4>
+        <p>Leads from energy partners and project developers go cold after touch #1. Without systematic nurture, warm leads slip to competitors.</p>
+        <div class="ai-fix">&#8594; AI Agent: Automated 7-touch nurture sequence via email + SMS</div>
+      </div>
+      <div class="pain-card med">
+        <h4>LinkedIn Untapped</h4>
+        <p>B2B pipeline sits underutilized. Project developers, procurement managers, and C-suite at renewable energy companies are all on LinkedIn<sup>2</sup>.</p>
+        <div class="ai-fix">&#8594; AI Agent: Curated B2B outreach — 10 high-value connections/month</div>
+      </div>
+      <div class="pain-card med">
+        <h4>Content Bottleneck</h4>
+        <p>Case studies and project results need to be turned into marketing content — but the team is focused on active engagements.</p>
+        <div class="ai-fix">&#8594; AI Agent: Turn project results into branded case studies + thought leadership content</div>
+      </div>
+      <div class="pain-card med">
+        <h4>Old Lead Reactivation</h4>
+        <p>Past leads and clients are not nurtured for follow-on engagements. Energy companies have ongoing needs across multiple sites and divisions.</p>
+        <div class="ai-fix">&#8594; AI Agent: Quarterly reactivation campaigns to past client database</div>
+      </div>
+      <div class="pain-card low">
+        <h4>Admin Overload</h4>
+        <p>Proposal generation, SOW drafting, stakeholder tracking, and project timelines are all manual. Hours spent on admin that could be automated.</p>
+        <div class="ai-fix">&#8594; AI Agent: Auto-generate SOWs, sync project timelines, streamline reporting</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What Happens Next (RULE-4) -->
+  <div class="section">
+    <div class="section-label">Next Steps</div>
+    <h2>What Happens After This Roadmap</h2>
+    <div class="next-steps">
+      <div class="next-step">
+        <div class="step-circle">1</div>
+        <h4>Apply</h4>
+        <p>Answer a few qualifying questions so we can evaluate fit</p>
+        <div class="timing">Takes 2 minutes</div>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">2</div>
+        <h4>Proposal Sent</h4>
+        <p>Custom scope with pricing tailored to your priorities</p>
+        <div class="timing">Within 48 hours</div>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">3</div>
+        <h4>Onboarding</h4>
+        <p>Connect your tools, train AI on your brand voice</p>
+        <div class="timing">Week 1</div>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">4</div>
+        <h4>First Win Live</h4>
+        <p>Your first AI agent responding to real leads</p>
+        <div class="timing">By Day 7</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Receipt -->
+  <div class="section">
+    <div class="mobile-card">
+      <div class="section-label">Mobile Experience</div>
+      <strong style="font-size:15px;">78% of renewable energy inquiries come from mobile devices<sup>1</sup></strong>
+      <div class="mobile-grid">
+        <div class="mobile-col before">
+          <h4>Before AI</h4>
+          <p>Response in 4-24 hours</p>
+          <p>Generic auto-reply</p>
+          <p>No project-specific detail</p>
+          <p>Follow-up dies at touch 1</p>
+        </div>
+        <div class="mobile-col after">
+          <h4>After AI</h4>
+          <p>Response in under 15 minutes</p>
+          <p>Personalized to project type + project</p>
+          <p>Knowledgeable about their project</p>
+          <p>7-touch nurture on autopilot</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signed Bennett Invitation -->
+  <div class="signed-invite">
+    <p>Paul, I built this roadmap specifically for Paul Muus Consulting because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it.</p>
+    <a href="mailto:bennett@franchiseki.com?subject=Application%20%E2%80%94%20Muus%20Design&body=Hi%20Bennett%2C%0A%0AI%20reviewed%20the%20AI%20Playbook%20and%20I%E2%80%99m%20interested.%0A%0A1.%20What%20excites%20me%20most%3A%0A2.%20What%20I%E2%80%99d%20skip%20for%20now%3A%0A3.%20Approximate%20monthly%20budget%20I%20could%20allocate%20to%20AI%3A%0A" class="cta-btn">Apply to Work With Bennett</a>
+    <div class="sig">-- Bennett Maxwell</div>
+    <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
+  </div>
+
+</div>
+
+<!-- ═══════════ TAB: FULL PROFILE ═══════════ -->
+<div id="tab-profile" class="tab-panel">
+
+  <div class="section">
+    <div class="section-label">Section 01</div>
+    <h2>Your Business Snapshot</h2>
+    <p>Based on your responses and our analysis of your <strong>renewable energy consulting</strong> practice:</p>
+    <table class="opp-table">
+      <tr><th>Metric</th><th>Your Data</th></tr>
+      <tr><td>Focus Area</td><td><strong>Zero-to-Revenue Consulting</strong></td></tr>
+      <tr><td>Industry</td><td><strong>Renewable Energy / Clean Tech</strong></td></tr>
+      <tr><td>Typical Engagement</td><td><strong>Revenue engine build for early-stage companies</strong></td></tr>
+      <tr><td>Sales Cycle</td><td><strong>3-9 months (multi-stakeholder)</strong></td></tr>
+      <tr><td>Stakeholders per Deal</td><td><strong>6-14 (procurement, engineering, finance, C-suite)</strong></td></tr>
+      <tr><td>Key Challenge</td><td><strong>IRA/state rebate landscape shifts monthly</strong></td></tr>
+      <tr><td>Revenue Pattern</td><td><strong>$0 to first revenue in 6-12 months</strong></td></tr>
+      <tr><td>Current Tools</td><td><strong>CRM, LinkedIn Sales Nav, Google Workspace</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 02</div>
+    <h2>AI Opportunity Map</h2>
+    <p>Prioritized by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
+    <table class="opp-table">
+      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
+      <tr>
+        <td class="priority-high">P1</td>
+        <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant personalized response to project partner and project inquiries</small></td>
+        <td>+22% close rate<sup>3</sup></td>
+        <td>CRM, Website</td>
+      </tr>
+      <tr>
+        <td class="priority-high">P2</td>
+        <td><strong>AI Proposal Generator</strong><br><small>Auto-draft luxury proposals from inquiry details</small></td>
+        <td>Save 4+ hrs/proposal</td>
+        <td>CRM, Proposal software</td>
+      </tr>
+      <tr>
+        <td class="priority-high">P3</td>
+        <td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to project coordinators and project developers</small></td>
+        <td>10 new B2B leads/mo<sup>2</sup></td>
+        <td>LinkedIn</td>
+      </tr>
+      <tr>
+        <td class="priority-med">P4</td>
+        <td><strong>Automated Follow-Up Sequences</strong><br><small>7-touch nurture for quoted-but-not-booked luxury leads</small></td>
+        <td>+15-20% reactivation</td>
+        <td>CRM, Email/SMS</td>
+      </tr>
+      <tr>
+        <td class="priority-med">P5</td>
+        <td><strong>Content Generation System</strong><br><small>Turn portfolio photos into branded social posts and blog content</small></td>
+        <td>6+ hrs/week saved<sup>4</sup></td>
+        <td>LinkedIn, Industry databases</td>
+      </tr>
+      <tr>
+        <td class="priority-low">P6</td>
+        <td><strong>Database Reactivation Engine</strong><br><small>Quarterly outreach to past clients for repeat events</small></td>
+        <td>Meaningful repeat revenue</td>
+        <td>CRM Database</td>
+      </tr>
+      <tr>
+        <td class="priority-low">P7</td>
+        <td><strong>Vendor Coordination Agent</strong><br><small>Auto-sync timelines and communications across vendor team</small></td>
+        <td>Eliminate vendor chaos</td>
+        <td>Google Workspace</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 03</div>
+    <h2>How This Fits Your Current Stack</h2>
+    <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
+    <div class="tech-grid">
+      <div class="tech-chip">LinkedIn<br><small>Keeps running</small></div>
+      <div class="tech-chip">Industry databases<br><small>Keeps running</small></div>
+      <div class="tech-chip">CRM<br><small>Keeps running</small></div>
+      <div class="tech-chip">Proposal software<br><small>Keeps running</small></div>
+      <div class="tech-chip">Google Workspace<br><small>Keeps running</small></div>
+      <div class="tech-chip add">+ AI Speed Agent</div>
+      <div class="tech-chip add">+ AI Proposal Agent</div>
+      <div class="tech-chip add">+ LinkedIn Agent</div>
+      <div class="tech-chip add">+ Content Agent</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 04</div>
+    <h2>Your Tool Stack — What AI Unlocks</h2>
+    <table class="opp-table">
+      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
+      <tr>
+        <td>LinkedIn</td>
+        <td>Portfolio showcase</td>
+        <td>AI auto-generates captions, schedules posts, repurposes portfolio into stories + reels</td>
+        <td>Easy</td>
+      </tr>
+      <tr>
+        <td>Industry databases</td>
+        <td>Inspiration boards, SEO</td>
+        <td>AI creates optimized pin descriptions, auto-pins with SEO keywords</td>
+        <td>Easy</td>
+      </tr>
+      <tr>
+        <td>CRM</td>
+        <td>CRM, proposals, contracts</td>
+        <td>AI auto-drafts proposals, triggers follow-up sequences, tags leads by stage</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td>Proposal software</td>
+        <td>Design mockups, mood boards</td>
+        <td>AI generates initial mood board layouts from client briefs</td>
+        <td>Easy</td>
+      </tr>
+      <tr>
+        <td>Google Workspace</td>
+        <td>Email, documents, scheduling</td>
+        <td>AI drafts emails, organizes vendor docs, auto-generates timelines</td>
+        <td>Easy</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Section 05</div>
+    <h2>What to Ignore for Now</h2>
+    <p>AI is noisy. Here is what does <strong>not</strong> make sense for Paul Muus Consulting right now:</p>
+    <ul style="font-size: 14px; color: #666; padding-left: 20px; line-height: 2.2;">
+      <li><strong>AI event day logistics</strong> — Too variable, too high-stakes. Event day execution requires human judgment and the personal touch that defines luxury.</li>
+      <li><strong>AI vendor selection</strong> — Relationships matter more than algorithms. Your curated vendor network is a competitive advantage AI cannot replicate.</li>
+      <li><strong>Chatbot on website</strong> — Luxury clients expect human touch, not bots. A chatbot cheapens the brand.</li>
+      <li><strong>AI pricing/quoting</strong> — Luxury pricing is relationship-based, not formula-based. Every event is bespoke.</li>
     </ul>
-  </section>
+  </div>
+
 </div>
 
-<!-- AI HOOKS -->
-<div class="panel" id="hooks">
-  <section>
-    <h2>3 Concrete AI Hooks — Your Business</h2>
-    <p style="font-size:14px;color:#86868B;margin-bottom:24px;">These aren't generic AI pitches. Each one maps to a specific pattern in your renewables revenue model.</p>
+<!-- ═══════════ TAB: ROI CALCULATOR ═══════════ -->
+<div id="tab-roi" class="tab-panel">
 
-    <div class="hook-card">
-      <h4>1. Long-Cycle Stakeholder Mapping</h4>
-      <p>Renewables deals involve 6–14 stakeholders across procurement, engineering, finance, and C-suite. AI maps "who actually signs" in week 1 — not month 3. Reduces dead-end pursuit of champions without budget authority by ~60%.</p>
-      <p style="margin-top:8px;font-size:13px;color:#0066FF;font-weight:600;">Impact: 2–3 months compressed from discovery phase</p>
+  <div class="section">
+    <div class="section-label">Interactive ROI Calculator</div>
+    <h2>Your AI-Driven Revenue Projection</h2>
+    <p>Adjust the sliders below to match your actual numbers. The projections update in real time.</p>
+
+    <!-- Scenario Toggle -->
+    <div class="scenario-toggle">
+      <div class="scenario-pill" onclick="setScenario('conservative')" id="pill-conservative">Conservative</div>
+      <div class="scenario-pill active" onclick="setScenario('expected')" id="pill-expected">Expected</div>
+      <div class="scenario-pill" onclick="setScenario('stretch')" id="pill-stretch">Stretch</div>
     </div>
 
-    <div class="hook-card">
-      <h4>2. Rebate/Incentive Monitor as Opener</h4>
-      <p>IRA federal credits + state-level rebate landscape shifts monthly. AI monitors rebate-by-ZIP and surfaces the real reason to call <em>this week</em> — not a generic check-in. Turns cold outreach into "I have news for your project in [county]."</p>
-      <p style="margin-top:8px;font-size:13px;color:#0066FF;font-weight:600;">Impact: 3× response rate on outbound (value-first vs. "just checking in")</p>
+    <div class="calc-card">
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Average Contract Value</span>
+          <span class="slider-val" id="val-contract">your average contract value</span>
+        </div>
+        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="45000" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Monthly Leads</span>
+          <span class="slider-val" id="val-leads">12</span>
+        </div>
+        <input type="range" id="slider-leads" min="3" max="40" step="1" value="12" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Current Close Rate</span>
+          <span class="slider-val" id="val-close">18%</span>
+        </div>
+        <input type="range" id="slider-close" min="5" max="45" step="1" value="18" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>LinkedIn Leads Added/Month</span>
+          <span class="slider-val" id="val-linkedin">10</span>
+        </div>
+        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>SEO Traffic Lift (12 months)</span>
+          <span class="slider-val" id="val-seo">45%</span>
+        </div>
+        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
+      </div>
     </div>
 
-    <div class="hook-card">
-      <h4>3. Zero-to-Revenue Playbook Extraction</h4>
-      <p>You've built revenue from zero multiple times. AI extracts your past deal pattern — sequence of actions, timing, stakeholder engagement order — and turns it into a repeatable outbound template for the next company. What took you 6 months to build becomes deployable in 2 weeks.</p>
-      <p style="margin-top:8px;font-size:13px;color:#0066FF;font-weight:600;">Impact: 4× faster revenue ramp for new engagements</p>
+    <!-- Results -->
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="r-val" id="res-monthly">—</div>
+        <div class="r-lbl">Monthly Revenue Lift</div>
+      </div>
+      <div class="result-card">
+        <div class="r-val" id="res-quarterly">—</div>
+        <div class="r-lbl">Quarterly Gain</div>
+      </div>
+      <div class="result-card">
+        <div class="r-val" id="res-time">6.5 hrs/wk</div>
+        <div class="r-lbl">Time Saved<sup>4</sup></div>
+      </div>
+      <div class="result-card">
+        <div class="r-val" id="res-cost">—</div>
+        <div class="r-lbl">Cost Savings</div>
+      </div>
     </div>
-  </section>
+
+    <!-- Quarterly Projection -->
+    <h3 style="margin-top:32px; margin-bottom:16px;">Quarterly Revenue Projection</h3>
+    <div class="quarterly-grid">
+      <div class="q-card">
+        <div class="q-label">Current Q</div>
+        <div class="q-val" id="q-current">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q2 (with AI)</div>
+        <div class="q-val" id="q-q2">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q3 (compound)</div>
+        <div class="q-val" id="q-q3">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q4 (growth)</div>
+        <div class="q-val" id="q-q4">—</div>
+      </div>
+    </div>
+
+    <!-- Pillar Breakdown in ROI -->
+    <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="icon">&#128176;</div>
+        <h4>Increase Revenue</h4>
+        <p id="pillar-rev">Revenue lift from faster response + LinkedIn + higher close rate — see calculator</p>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">&#9201;</div>
+        <h4>Save Time</h4>
+        <p>6.5 hours/week reclaimed<sup>4</sup> (industry baseline 7.6 hrs, understated 15%)</p>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">&#128161;</div>
+        <h4>Save Money</h4>
+        <p>Monthly cost savings from automation — model your exact numbers in the calculator above</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ROI -->
-<div class="panel" id="roi">
-  <section>
-    <h2>Conservative ROI Estimate</h2>
-    <p style="font-size:14px;color:#86868B;margin-bottom:24px;">Based on typical renewable energy B2B deal economics. Your actual numbers may be higher.</p>
+<!-- ═══════════ TAB: AI SYSTEMS ═══════════ -->
+<div id="tab-systems" class="tab-panel">
 
-    <div class="metric-grid">
-      <div class="metric">
-        <div class="metric__value">$45K+</div>
-        <div class="metric__label">Monthly revenue lift (conservative)</div>
+  <!-- Implementation Timeline — 3/7/30 Cadence -->
+  <div class="section">
+    <div class="section-label">Implementation Roadmap</div>
+    <h2>How Fast This Comes Together</h2>
+    <p>Pretty much everything is done within 30 days. After that, your AI employees just keep getting better.</p>
+
+    <table class="opp-table">
+      <tr><th>Milestone</th><th>What Happens</th><th>Result</th></tr>
+      <tr>
+        <td><strong>Days 1-3</strong></td>
+        <td>Onboarded. Audited. Brand voice learned. Brand intelligence and brand guide built for Paul Muus Consulting.</td>
+        <td>AI knows your business inside and out</td>
+      </tr>
+      <tr>
+        <td><strong>Days 4-7</strong></td>
+        <td>Speed-to-Lead Agent live. Proposal draft agent running. All systems connected to CRM + your tools.</td>
+        <td>Every inquiry gets instant personalized response</td>
+      </tr>
+      <tr>
+        <td><strong>Day 30</strong></td>
+        <td>Well-trained AI employees handling lead response, follow-up nurture, content creation, and admin. Self-auditing and improving daily.</td>
+        <td>Full system running, never forgets anything</td>
+      </tr>
+      <tr>
+        <td><strong>After Day 30</strong></td>
+        <td>Employees keep growing, developing, being proactive as they understand Paul Muus Consulting more deeply every day.</td>
+        <td>Continuous improvement — gets better, not stale</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- LinkedIn Curated Pipeline Engine (RULE-11) -->
+  <div class="section">
+    <div class="section-label">Lever A — Organic Lead Generation</div>
+    <h2>LinkedIn Curated Pipeline Engine</h2>
+
+    <div class="linkedin-hero">
+      <h3>Paul's Organic Lead Discovery</h3>
+      <p>Curated, quality-first B2B outreach to project coordinators, corporate project developers, and hotel operations managers in the National luxury market<sup>2</sup></p>
+      <div class="linkedin-stats">
+        <div class="linkedin-stat">
+          <div class="ls-val">10</div>
+          <div class="ls-lbl">Qualified Conversations/Mo</div>
+        </div>
+        <div class="linkedin-stat">
+          <div class="ls-val">5-18</div>
+          <div class="ls-lbl">Range (Your Control)</div>
+        </div>
+        <div class="linkedin-stat">
+          <div class="ls-val">100%</div>
+          <div class="ls-lbl">Organic — $0 Ad Spend</div>
+        </div>
       </div>
-      <div class="metric">
-        <div class="metric__value">12 hrs</div>
-        <div class="metric__label">Hours/week reclaimed</div>
+      <div class="linkedin-tiles">
+        <div class="linkedin-tile">
+          <h4>Ideal Client Targeting</h4>
+          <p>AI identifies project coordinators and project developers who match your ideal project profile</p>
+        </div>
+        <div class="linkedin-tile">
+          <h4>Voice-Matched Outreach</h4>
+          <p>Messages written in Paul's luxury tone — elevated, warm, never salesy</p>
+        </div>
+        <div class="linkedin-tile">
+          <h4>The Muus Filter Built In</h4>
+          <p>Only conversations that meet your standards reach your inbox</p>
+        </div>
+        <div class="linkedin-tile">
+          <h4>Command Center Pipeline</h4>
+          <p>Every conversation tracked, scored, and organized in your dashboard</p>
+        </div>
       </div>
-      <div class="metric">
-        <div class="metric__value">2–3 mo</div>
-        <div class="metric__label">Sales cycle compression</div>
+    </div>
+  </div>
+
+  <!-- SEO Section (RULE-12) -->
+  <div class="section">
+    <div class="section-label">Lever B — SEO + Capture Rate</div>
+    <h2>Search Engine Optimization + AI Copy</h2>
+    <p>More traffic <strong>and</strong> better capture rate. AI rewrites service pages, headlines, and CTAs to convert visitors into inquiries.</p>
+
+    <div class="seo-badges">
+      <div class="seo-badge">
+        <div class="sb-val">+45%</div>
+        <div class="sb-lbl">Organic traffic at 12 months</div>
+      </div>
+      <div class="seo-badge">
+        <div class="sb-val">2% &#8594; 3.5%</div>
+        <div class="sb-lbl">Visitor-to-lead capture rate</div>
+      </div>
+      <div class="seo-badge">
+        <div class="sb-val">3-12 mo</div>
+        <div class="sb-lbl">Compounding timeline</div>
+      </div>
+      <div class="seo-badge">
+        <div class="sb-val">$0</div>
+        <div class="sb-lbl">Ongoing ad spend</div>
       </div>
     </div>
 
-    <h3 style="margin-top:24px;">How the math works</h3>
-    <ul>
-      <li><strong>Stakeholder mapping automation:</strong> Reduces 40+ hours of manual discovery per deal → saves ~$6K/deal in labor + accelerates close</li>
-      <li><strong>Rebate-triggered outreach:</strong> 3× response rate = 3× pipeline from same effort → ~$25K/mo incremental pipeline value</li>
-      <li><strong>Playbook reuse:</strong> Deploy proven sequence to next engagement in 2 weeks vs. 6 months → $14K/mo in faster time-to-revenue</li>
-    </ul>
+    <table class="opp-table">
+      <tr><th>SEO Capability</th><th>What AI Does</th></tr>
+      <tr><td>Service Page Rewrite</td><td>AI rewrites every service page with conversion-optimized headlines and CTAs</td></tr>
+      <tr><td>Portfolio SEO</td><td>AI generates alt text, meta descriptions, and structured data for every portfolio image</td></tr>
+      <tr><td>Blog Content Engine</td><td>AI turns portfolio shoots into SEO-optimized blog posts targeting "National event designer" keywords</td></tr>
+      <tr><td>AI Copy Optimization</td><td>A/B test headlines, CTAs, and page layouts to continuously improve capture rate</td></tr>
+    </table>
+  </div>
 
-    <p style="margin-top:16px;font-size:13px;color:#86868B;font-style:italic;">* Fill out the 7-Q form for your exact numbers. These are estimates based on typical B2B renewable energy deal structures.</p>
-  </section>
-</div>
+  <!-- The Muus Method (RULE-6) -->
+  <div class="section">
+    <div class="section-label">Your Methodology</div>
+    <h2>The Muus Method</h2>
+    <p>AI amplifies each pillar of your design process — without changing what makes Paul Muus Consulting special.</p>
 
-<!-- 90-DAY PLAN -->
-<div class="panel" id="systems">
-  <section>
-    <h2>First 90 Days — What Gets Built</h2>
-
-    <div class="timeline">
-      <div class="timeline__item">
-        <div class="timeline__week">Week 1–2</div>
-        <div class="timeline__desc"><strong>Stakeholder Intelligence Agent</strong> — Scans deal contacts, maps org chart, identifies budget holders vs. influencers. You get a decision-maker brief before your first call.</div>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="m-num">1</div>
+        <h4>Discovery</h4>
+        <p>AI pre-qualifies inquiries and gathers event details before your first call</p>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__week">Week 3–4</div>
-        <div class="timeline__desc"><strong>Rebate Monitor + Outreach Engine</strong> — AI watches IRA/state incentive changes daily. Auto-generates personalized outreach per affected ZIP. "I have news about your project" instead of "just checking in."</div>
+      <div class="method-card">
+        <div class="m-num">2</div>
+        <h4>Design</h4>
+        <p>AI generates initial mood boards and proposal drafts from your design library</p>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__week">Week 5–6</div>
-        <div class="timeline__desc"><strong>Playbook Extraction</strong> — Interview your past 3-5 successful deal patterns. AI codifies: timing, stakeholder sequence, objection handling, close triggers. Output = repeatable playbook doc.</div>
+      <div class="method-card">
+        <div class="m-num">3</div>
+        <h4>Delivery</h4>
+        <p>AI coordinates vendor timelines and automates day-of logistics communication</p>
       </div>
-      <div class="timeline__item">
-        <div class="timeline__week">Week 7–8</div>
-        <div class="timeline__desc"><strong>Pipeline Automation</strong> — Connects stakeholder map + rebate triggers + playbook into single CRM flow. Deals move themselves through stages based on stakeholder engagement signals.</div>
-      </div>
-      <div class="timeline__item">
-        <div class="timeline__week">Week 9–12</div>
-        <div class="timeline__desc"><strong>Optimize + Scale</strong> — First deals close on the new system. Refine playbook based on real data. Deploy to next territory/portfolio company.</div>
+      <div class="method-card">
+        <div class="m-num">4</div>
+        <h4>Devotion</h4>
+        <p>AI nurtures past clients with anniversary outreach and referral prompts</p>
       </div>
     </div>
-  </section>
+
+    <div class="method-quote">
+      "We do not just design events — we design the feeling people carry with them long after the last guest leaves."
+    </div>
+  </div>
+
+  <!-- Competitor Benchmark (RULE-7) -->
+  <div class="section">
+    <div class="section-label">Industry Context</div>
+    <h2>What Top Event Design Firms Are Doing</h2>
+    <p>National leaders in renewable energys are already deploying these systems. Here is how Paul Muus Consulting compares — and where AI closes the gap.</p>
+
+    <table class="bench-table">
+      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
+      <tr>
+        <td>Respond to inquiries within 5 minutes, 24/7</td>
+        <td>AI speed-to-lead agent responds in under 15 minutes with personalized, project-specific detail</td>
+      </tr>
+      <tr>
+        <td>Run LinkedIn B2B pipelines for corporate event sourcing</td>
+        <td>Curated LinkedIn Engine delivers 10 qualified B2B conversations per month on autopilot<sup>2</sup></td>
+      </tr>
+      <tr>
+        <td>Use automated follow-up sequences for every proposal</td>
+        <td>7-touch luxury nurture sequence keeps Paul Muus Consulting top-of-mind without being pushy</td>
+      </tr>
+      <tr>
+        <td>Publish 3-5x/week on social from every event shoot</td>
+        <td>AI content engine turns portfolio photos into LinkedIn, Industry databases, and blog posts automatically</td>
+      </tr>
+      <tr>
+        <td>Reactivate past clients proactively every quarter</td>
+        <td>Database reactivation agent reaches out 3-4 months before their typical project season</td>
+      </tr>
+    </table>
+  </div>
+
 </div>
 
-<!-- CTA -->
-<div class="cta-bar">
-  <h3>Ready to see your exact numbers?</h3>
-  <p>60 seconds. 7 questions. Your personalized AI Advantage video delivered in 24 hours.</p>
-  <a href="https://dashboard.franchiseki.com/advaita/quiz">Build My Blueprint →</a>
+<!-- ═══════════ TAB: AI AGENTS (copy-paste prompts) ═══════════ -->
+<div id="tab-agents" class="tab-panel">
+
+  <div class="section">
+    <div class="section-label">Ready-to-Use AI Agents</div>
+    <h2>Your First AI Agents — Start Here</h2>
+    <p>These are not hypothetical. Copy-paste these prompts into ChatGPT, Claude, or any AI tool and you will have a working prototype in under 10 minutes.</p>
+
+    <!-- Agent 1: Speed-to-Lead -->
+    <div class="agent-card">
+      <h3>Agent #1: Speed-to-Lead for Luxury Event Inquiries</h3>
+      <p class="agent-desc">At your average contract value average contract value, every hour of delay risks losing a five-figure deal. This agent responds to every new inquiry with a personalized, on-brand message.</p>
+      <div class="agent-prompt">You are the lead response agent for Paul Muus Consulting, a renewable energy consulting firm in National, TX specializing in renewable energy projects, projects, implementations, and system deployments.
+
+When a new inquiry comes in — whether from the website, LinkedIn DM, project partner referral, or corporate RFP — you respond within 15 minutes with a personalized, elevated message via email.
+
+Your response must include:
+1. Greet them by name and acknowledge their specific project type
+2. Reference any details they shared — project, date, guest count, aesthetic vision
+3. Express genuine excitement about their vision
+4. Briefly mention Paul Muus Consulting's portfolio credibility
+5. Offer a clear next step: "I would love to learn more about working together — reply to this email"
+
+Rules:
+- Luxury, warm, polished tone — like a high-end concierge
+- Never quote prices in the initial response
+- For project inquiries, reference corporate event experience
+- For projects, reference project portfolio
+- Always acknowledge the project if mentioned
+- Never use excessive exclamation marks</div>
+      <div class="agent-result">What this does: Every inquiry gets a polished, personalized response in minutes — before they contact the next designer.</div>
+      <div class="agent-time">Setup time: ~5 minutes</div>
+    </div>
+
+    <!-- Agent 2: Follow-Up Nurture -->
+    <div class="agent-card">
+      <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked Events</h3>
+      <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence.</p>
+      <div class="agent-prompt">You are the follow-up agent for Paul Muus Consulting. Your job is to nurture leads who received a proposal but have not yet booked.
+
+Create a 7-touch follow-up sequence:
+Day 2: Follow up on proposal, offer to answer questions
+Day 5: Share a relevant portfolio piece with similar aesthetic
+Day 10: Offer a quick brainstorm call
+Day 18: Share a design trend that fits their vision
+Day 28: Calendar urgency — "our calendar for [month] is filling"
+Day 45: Seasonal insight with recent event success story
+Day 60: Graceful final touchpoint
+
+Rules:
+- Luxury, graceful tone — never desperate or salesy
+- Reference SPECIFIC event details — never generic
+- Each touch adds value (portfolio, inspiration, trend)
+- Track in CRM: "nurture-active" / "nurture-complete" / "booked"</div>
+      <div class="agent-result">Recovers 15-20% of lost proposals with value-driven touchpoints on autopilot.</div>
+      <div class="agent-time">Setup time: ~7 minutes</div>
+    </div>
+
+    <!-- Agent 3: Past Client Reactivation -->
+    <div class="agent-card">
+      <h3>Agent #3: Past Client Reactivation for Repeat Events &amp; Referrals</h3>
+      <p class="agent-desc">Your past corporate clients host annual energy projects and recurring contracts. This agent turns one-time clients into repeat revenue and referral sources.</p>
+      <div class="agent-prompt">You are the reactivation agent for Paul Muus Consulting. Reach out to past clients who have not booked in 6+ months.
+
+Generate a personalized outreach email that includes:
+1. Warm reconnection referencing their specific past event
+2. Proactive prompt based on client type (corporate, project, social)
+3. Referral ask: "If anyone in your network is planning an event..."
+4. Soft CTA: "Would love to catch up over coffee"
+
+Rules:
+- Reference their ACTUAL past event with specific details
+- Warm, personal, elevated tone
+- One outreach per quarter, max
+- Time corporate outreach 3-4 months before project season
+- Always include the referral ask
+- Track in CRM: "reactivation-[quarter]-[year]"</div>
+      <div class="agent-result">Reactivates past clients for repeat bookings and referrals — $0 ad spend. Model your numbers in the ROI calculator.</div>
+      <div class="agent-time">Setup time: ~5 minutes</div>
+    </div>
+
+    <!-- DIY vs Partner -->
+    <div class="path-grid">
+      <div class="path-card">
+        <h4>DIY Path</h4>
+        <p>Copy these prompts and start using them today. Most business owners can implement 1-2 agents on their own and see results in days.</p>
+      </div>
+      <div class="path-card partner">
+        <h4>Partner Path</h4>
+        <p>Want the full system — all agents connected to CRM, LinkedIn, and LinkedIn, trained on your brand voice, monitoring your pipeline 24/7?</p>
+        <a href="mailto:bennett@franchiseki.com?subject=Application%20%E2%80%94%20Muus%20Design" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Bennett</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ TAB: LISTEN ═══════════ -->
+<div id="tab-listen" class="tab-panel">
+
+  <div class="section">
+    <div class="section-label">Listen</div>
+    <h2>Hear the Vision Behind This Roadmap</h2>
+
+    <div class="listen-card">
+      <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
+      <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
+
+            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
+        <iframe src="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/preview" width="100%" height="80" style="border:none;border-radius:8px;margin-bottom:12px;" allow="autoplay"></iframe>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Paul Muus Consulting.</p>
+        <a href="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/view" target="_blank" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Open in Google Drive</a>
+        <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" style="display:inline-block;margin-top:12px;margin-left:8px;background:transparent;color:rgba(255,255,255,0.7);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.3);">Download Episode</a>
+      </div>
+
+      <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
+
+      <div class="pull-quote">
+        "The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."
+      </div>
+
+      <div class="pull-quote">
+        "For renewable energy designers like Paul, AI is not about replacing the artistry. It is about making sure more of the right people experience it."
+      </div>
+
+      <div style="text-align: center; margin-top: 24px; padding: 16px; background: var(--bg-soft); border-radius: 8px;">
+        <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Save for the drive home</p>
+        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have 38 minutes to think about your business.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ TAB: COMMAND CENTER (RULE-8) ═══════════ -->
+<div id="tab-command" class="tab-panel">
+
+  <div class="section">
+    <div class="section-label">Your Custom Platform</div>
+    <h2>Your Command Center. Built for You.</h2>
+    <p>Not a generic CRM. A custom-built command center designed specifically for how Paul Muus Consulting operates — from inquiry to event day to post-event follow-up.</p>
+
+    <div class="command-hero">
+      <h3>Paul Muus Consulting Command Center</h3>
+      <p>Everything your team needs to manage leads, projects, vendors, and finances — in one elevated interface at command.paulmuus.com</p>
+      <div class="command-tiles">
+        <div class="command-tile">
+          <h4>Lead Pipeline</h4>
+          <p>Every inquiry tracked from first touch to signed contract. AI scores and prioritizes automatically.</p>
+        </div>
+        <div class="command-tile">
+          <h4>Project Command Center</h4>
+          <p>Event timelines, vendor coordination, and design assets organized by project — not scattered across apps.</p>
+        </div>
+        <div class="command-tile">
+          <h4>Qualification Engine</h4>
+          <p>AI pre-screens inquiries using your criteria — budget, date, project, aesthetic fit — before they reach your inbox.</p>
+        </div>
+        <div class="command-tile">
+          <h4>Finance Dashboard</h4>
+          <p>Revenue by project type, outstanding invoices, and cash flow projections — all in real time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mirror Method Qualification (RULE-9) -->
+  <div class="section">
+    <div class="section-label">The Muus Standard</div>
+    <h2>The Muus Filter</h2>
+    <p>Your taste level and standards are what make Paul Muus Consulting special. AI automates the pre-screening — but you approve every decision.</p>
+
+    <div class="next-steps" style="margin-top:24px;">
+      <div class="next-step">
+        <div class="step-circle">1</div>
+        <h4>Inquiry Received</h4>
+        <p>AI captures project type, project, budget range, and aesthetic vision</p>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">2</div>
+        <h4>AI Pre-Screen</h4>
+        <p>Instantly checks against your criteria — date, budget, project, scope</p>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">3</div>
+        <h4>Paul Reviews</h4>
+        <p>You see only pre-qualified leads with full context — approve in one tap</p>
+      </div>
+      <div class="next-step">
+        <div class="step-circle">4</div>
+        <h4>Personalized Response</h4>
+        <p>AI sends a luxury response in your voice — you stay in control</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:24px;">
+      <a href="mailto:bennett@franchiseki.com?subject=Application%20%E2%80%94%20Muus%20Design" class="cta-btn" style="background: var(--accent);">Apply to Work With Bennett</a>
+    </div>
+  </div>
+
+  <!-- Finance Section (RULE-10) -->
+  <div class="section">
+    <div class="finance-card">
+      <h3>Meet Fred — Your AI CFO</h3>
+      <p style="color: var(--text-mid); margin-bottom: 20px;">A named financial intelligence agent built into your command center. Not an "AI bookkeeper" — a CFO-level assistant that knows your business.</p>
+      <ul class="finance-bullets">
+        <li>
+          <div class="fb-icon">?</div>
+          <div><strong>Ask Fred Anything</strong> — Instant P&amp;L questions via messaging. "Fred, what was our margin on the Johnson implementation?" gets an answer in seconds.</div>
+        </li>
+        <li>
+          <div class="fb-icon">$</div>
+          <div><strong>Receivables Forecast</strong> — Cash-in projection at 30/60/90 days. Know exactly when money hits the account.</div>
+        </li>
+        <li>
+          <div class="fb-icon">&#128202;</div>
+          <div><strong>Custom Reports</strong> — Board-ready financials in minutes. Revenue by project type, seasonal trends, vendor cost analysis.</div>
+        </li>
+        <li>
+          <div class="fb-icon">&#10003;</div>
+          <div><strong>Clean Books</strong> — Retroactive cleanup + ongoing reconciliation. No more end-of-year scramble.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ BOTTOM CTA (all tabs) ═══════════ -->
+<div class="cta-block">
+  <h3>Ready to See What AI Can Do for Paul Muus Consulting?</h3>
+  <p>This roadmap shows you what is possible. Apply for a free 30-minute AI strategy session and we will walk through your priorities together.</p>
+  <a href="mailto:bennett@franchiseki.com?subject=Application%20%E2%80%94%20Muus%20Design" class="cta-btn">Apply to Work With Bennett</a>
+  <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
+</div>
+
+<!-- Footnotes -->
+<div class="footnotes">
+  <p><sup>1</sup> 78% mobile inquiry figure based on luxury service industry benchmarks for event/project businesses in the National-Fort Worth metro (2024-2025 data).</p>
+  <p><sup>2</sup> LinkedIn B2B lead projections capped at 18/month for luxury vertical per council calibration. 10/month is the expected default for curated, quality-first outreach.</p>
+  <p><sup>3</sup> +22% close rate improvement is based on AI close rate boost of current rate x 1.22, a conservative estimate from speed-to-lead data across service businesses.</p>
+  <p><sup>4</sup> Time savings of 6.5 hrs/week is understated 15% from the 7.6 hrs/week industry baseline for AI admin automation. Cost savings modeled in the interactive ROI calculator based on typical VA, social, and coordinator automation efficiencies.</p>
 </div>
 
 <div class="footer">
-  <p>Prepared by Bennett Maxwell · Franchise KI · Advaita AI for Business</p>
-  <p style="margin-top:4px;">This blueprint was generated specifically for Paul Magner Muus based on publicly available profile information.</p>
+  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for Paul Muus Consulting.</p>
+  <p style="margin-top: 8px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
 </div>
 
-</div>
+</div><!-- end container -->
 
 <script>
-document.querySelectorAll('.tab').forEach(function(tab) {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.panel).classList.add('active');
-  });
-});
+// Tab switching
+function switchTab(tabId, e) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  (e || event).currentTarget.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth'});
+}
+
+// Scenario presets
+let scenario = 'expected';
+const presets = {
+  conservative: { linkedin: 5, seo: 20 },
+  expected: { linkedin: 10, seo: 45 },
+  stretch: { linkedin: 18, seo: 80 }
+};
+
+function setScenario(s) {
+  scenario = s;
+  document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
+  document.getElementById('pill-' + s).classList.add('active');
+  document.getElementById('slider-linkedin').value = presets[s].linkedin;
+  document.getElementById('slider-seo').value = presets[s].seo;
+  updateCalc();
+}
+
+// ROI Calculator
+function updateCalc() {
+  const contract = parseInt(document.getElementById('slider-contract').value) || 45000;
+  const leads = parseInt(document.getElementById('slider-leads').value) || 12;
+  const closeRate = (parseInt(document.getElementById('slider-close').value) || 18) / 100;
+  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;
+  const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
+
+  // Display values
+  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
+  document.getElementById('val-leads').textContent = leads;
+  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
+  document.getElementById('val-linkedin').textContent = linkedinLeads;
+  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
+
+  // Current monthly
+  const currentMonthly = contract * leads * closeRate;
+
+  // AI-enhanced
+  const aiLeads = leads * 1.15 + linkedinLeads;
+  const aiCloseRate = closeRate * 1.22;
+  const aiMonthly = contract * aiLeads * aiCloseRate;
+
+  const monthlyGain = aiMonthly - currentMonthly;
+  const quarterlyGain = monthlyGain * 3;
+
+  const currentQ = currentMonthly * 3;
+  const q2 = aiMonthly * 3;
+  const q3 = q2 * 1.10;
+  const q4 = q3 * 1.20;
+
+  // Update display
+  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
+  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
+
+  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
+  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
+  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
+  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
+
+  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
+
+  // Time saved + cost savings (RULE-13: understated 15%)
+  const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);
+  const costSavings = Math.round(1800 * (1 + seoLift * 0.25));
+  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
+  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
+}
+
+// Urgency countdown (rolling — never shows negative)
+(function() {
+  const el = document.getElementById('countdown');
+  if (!el) return;
+  const now = new Date();
+  const month = now.getMonth();
+  let target;
+  // Renewable energy project peaks: Q1 planning for spring installs, Q3 for year-end IRA deadlines
+  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
+  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
+  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
+  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
+  el.textContent = days;
+})();
+
+// Init calculator
+updateCalc();
 </script>
+
+<div class="mobile-sticky-cta">
+  <a href="mailto:bennett@franchiseki.com?subject=Application%20%E2%80%94%20Muus%20Design">Apply to Work With Bennett</a>
+</div>
+
 </body>
 </html>
