@@ -1,18 +1,18 @@
-# Unknown Business — AI Blueprint Audio Walkthrough
+# Branson Maxwell Photography — AI Blueprint Audio Walkthrough
 
 ## About This Business
-Unknown Business is a business services company led by Unknown. They currently use standard business tools and serve local and regional customers.
+Branson Maxwell Photography is a photography company led by Branson Maxwell. They currently use ShootProof, QuickBooks, Google Workspace and serve weddings, corporate events, and commercial clients.
 
-## The 6 AI Agents Built for Unknown Business
+## The 6 AI Agents Built for Branson Maxwell Photography
 
 ### Agent 1: Speed-to-Lead Response Agent
-Handles every inbound inquiry within 60 seconds. For business services, this means capturing every business services inquiry before competitors respond. Studies show 78% of customers buy from the first responder (Harvard Business Review, 2023).
+Handles every inbound inquiry within 60 seconds. For photography, this means responding to wedding and event photography inquiries before other photographers. Studies show 78% of customers buy from the first responder (Harvard Business Review, 2023).
 
 ### Agent 2: Smart Scheduling and Routing Agent
-Routes professional services requests to the right team member based on availability, expertise, and location. Eliminates the back-and-forth that costs business services businesses 5-8 hours per week.
+Routes photography services requests to the right team member based on availability, expertise, and location. Eliminates the back-and-forth that costs photography businesses 5-8 hours per week.
 
 ### Agent 3: Proposal and Quote Draft Agent
-Generates professional professional services proposals in under 2 minutes using the business's actual pricing, past projects, and industry benchmarks. Each proposal is customized to the prospect's specific needs.
+Generates professional photography services proposals in under 2 minutes using the business's actual pricing, past projects, and industry benchmarks. Each proposal is customized to the prospect's specific needs.
 
 ### Agent 4: Follow-Up Nurture Agent
 Maintains contact with leads who aren't ready to buy yet. Sends personalized follow-ups based on their specific interests and timeline — not generic drip campaigns.
@@ -21,23 +21,23 @@ Maintains contact with leads who aren't ready to buy yet. Sends personalized fol
 Automatically requests reviews from satisfied customers at the optimal moment. Monitors and alerts on new reviews across Google, Yelp, and industry-specific platforms.
 
 ### Agent 6: Analytics and Reporting Agent
-Provides a single dashboard showing leads, conversions, revenue attribution, and AI agent performance. Unknown sees exactly what's working without pulling reports manually.
+Provides a single dashboard showing leads, conversions, revenue attribution, and AI agent performance. Branson Maxwell sees exactly what's working without pulling reports manually.
 
 ## Implementation Timeline
-- Days 1-3: AI agents are configured and connected to Unknown Business's existing tools
+- Days 1-3: AI agents are configured and connected to Branson Maxwell Photography's existing tools
 - Days 4-7: Agents are live and handling real inquiries, with human oversight
 - By Day 30: Fully trained system running autonomously, saving an estimated 20+ hours per week
 
 ## Objection Handling
 
 ### "Is this going to replace my team?"
-No. These agents handle the repetitive tasks your team shouldn't be doing — data entry, initial responses, follow-up sequences. Your team focuses on the high-value work: closing deals, building relationships, delivering great professional services.
+No. These agents handle the repetitive tasks your team shouldn't be doing — data entry, initial responses, follow-up sequences. Your team focuses on the high-value work: closing deals, building relationships, delivering great photography services.
 
 ### "What about the learning curve?"
 The 3/7/30 timeline is designed for zero disruption. By day 3, you'll see the agents working. By day 7, your team will wonder how they worked without them.
 
 ### "How is this different from other AI tools?"
-These aren't generic chatbots. Every agent is built specifically for business services — using your actual services, your pricing, your brand voice. They integrate with standard business tools, not replace them.
+These aren't generic chatbots. Every agent is built specifically for photography — using your actual services, your pricing, your brand voice. They integrate with ShootProof, QuickBooks, Google Workspace, not replace them.
 
 ## What To Do Next
-If what you've heard resonates, reply to the email that brought you here. Tell Bennett what excited you most, and he'll walk you through exactly how this would work for Unknown Business.
+If what you've heard resonates, reply to the email that brought you here. Tell Bennett what excited you most, and he'll walk you through exactly how this would work for Branson Maxwell Photography.
