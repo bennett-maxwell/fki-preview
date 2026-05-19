@@ -4,23 +4,23 @@
 const GHL_LOCATION_ID = '14RD8KklxR9G4e0Rf7v2';
 
 const TIER_DATA = {
-  bootcamp: {
-    name: 'The Bootcamp',
-    price: '$99',
-    desc: '2-day live session. Learn agent harness, memory, custom GPTs, and skill architecture.',
-    tag: 'tier-bootcamp'
-  },
-  arsenal: {
-    name: 'The Arsenal',
-    price: '$500',
-    desc: 'All 86+ functional skills downloadable with integration guides and troubleshooting.',
-    tag: 'tier-arsenal'
+  audit: {
+    name: 'The Audit',
+    price: '$5,000',
+    desc: 'Full ops, sales, finance, marketing teardown. AI-readiness scorecard. Prioritized build roadmap. 100% credited toward Build.',
+    tag: 'tier-audit'
   },
   build: {
     name: 'The Build',
-    price: '$5K–$12K',
-    desc: 'Full Advaita stack deployed for your business. From calling agents to complete automation.',
+    price: '$15K–$50K',
+    desc: 'Custom AI workforce deployed in 30 days. Agents, skills, dashboards, crons — integrated with your existing tools.',
     tag: 'tier-build'
+  },
+  run: {
+    name: 'The Run',
+    price: '$2K–$10K/mo',
+    desc: 'Ongoing monitoring, tuning, and new skills shipped monthly. Cancel anytime once the system runs itself.',
+    tag: 'tier-run'
   }
 };
 
@@ -34,9 +34,9 @@ function getQuizResults() {
 }
 
 function getRecommendedTier(score, answers) {
-  if (score >= 80) return 'build';
-  if (score >= 50) return 'arsenal';
-  return 'bootcamp';
+  if (score >= 80) return 'run';
+  if (score >= 50) return 'build';
+  return 'audit';
 }
 
 function getLeadTier(score) {

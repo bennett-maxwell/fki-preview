@@ -35,7 +35,7 @@ Step 1 today: **forward your score to one person on your team.** Watch the conve
 — Bennett
 Advaita
 
-[Book a 15-min call](https://calendly.com/bennettmaxwell)
+[Apply to Work With Bennett](https://bennett-maxwell.github.io/fki-preview/apply/)
 
 ---
 
@@ -68,7 +68,7 @@ The fix was not fancy. The fix was **spotted**.
 
 That is what Advaita does — we spot the leak.
 
-[See if your business has the same leak →](https://calendly.com/bennettmaxwell)
+[See if your business has the same leak →](https://bennett-maxwell.github.io/fki-preview/apply/)
 
 — Bennett
 
@@ -126,7 +126,7 @@ Cost: $1,500 (refundable if you don't see the path).
 Next Discovery Day: **May 28**.
 Seats left: **3**.
 
-[Claim a seat →](https://calendly.com/bennettmaxwell)
+[Claim a seat →](https://bennett-maxwell.github.io/fki-preview/apply/)
 
 — Bennett
 
@@ -148,7 +148,7 @@ Three doors from here:
 
 **1. Do it yourself.** Take your plan. Run. The podcast is free forever.
 
-**2. Book a call.** 15 minutes. I will tell you the one move I would make if it were my business. [Book](https://calendly.com/bennettmaxwell)
+**2. Apply to work with us.** 15 minutes. I will tell you the one move I would make if it were my business. [Apply](https://bennett-maxwell.github.io/fki-preview/apply/)
 
 **3. Do nothing.** That is a choice too. The leak keeps leaking.
 
