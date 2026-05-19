@@ -319,7 +319,7 @@ async def stage_website(profile_path: str, profile: dict, status: LeadStatus) ->
         return True
 
     log.info(f"  [{profile['slug']}] Stage 2: Demo Website Build")
-    ok, out, err = await run_script("build-website.sh", [profile_path], timeout=120)
+    ok, out, err = await run_script("build-website.sh", [profile_path, "--no-push"], timeout=120)
     if ok:
         status.mark_stage("website", "complete", "Website built")
         return True
@@ -336,7 +336,7 @@ async def stage_blueprint(profile_path: str, profile: dict, status: LeadStatus) 
         return True
 
     log.info(f"  [{profile['slug']}] Stage 3: Blueprint HTML Clone")
-    ok, out, err = await run_script("clone-blueprint.sh", [profile_path, "--no-push"], timeout=120)
+    ok, out, err = await run_script("clone-blueprint.sh", [profile_path, "--dry-run"], timeout=120)
     if ok:
         status.mark_stage("blueprint", "complete", "Blueprint HTML generated")
         return True

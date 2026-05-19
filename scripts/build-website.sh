@@ -216,9 +216,21 @@ echo "  Output: $OUTPUT_FILE"
 # ---------- Git commit and push ----------
 cd "$REPO_ROOT"
 
+# Support --no-push for batch orchestrator (single push per batch)
+NO_PUSH=false
+for arg in "$@"; do
+  [ "$arg" = "--no-push" ] && NO_PUSH=true
+done
+
 if [ ! -d ".git" ]; then
   echo "WARNING: Not a git repo. Skipping commit/push."
   echo "  File written to: $OUTPUT_FILE"
+  exit 0
+fi
+
+if [ "$NO_PUSH" = true ]; then
+  echo "NOTE: --no-push mode. Files written to: $OUTPUT_FILE"
+  echo "  Git add/commit/push deferred to batch orchestrator."
   exit 0
 fi
 
