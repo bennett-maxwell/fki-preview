@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.advaita.blueprint-pipeline</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>/tmp/fki-preview-work/scripts/blueprint-pipeline-orchestrator.py</string>
+        <string>--batch-size</string>
+        <string>50</string>
+        <string>--workers</string>
+        <string>10</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>900</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/openclaw/.openclaw/logs/blueprint-pipeline-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/openclaw/.openclaw/logs/blueprint-pipeline-stderr.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/openclaw</string>
+        <key>PYTHONWARNINGS</key>
+        <string>ignore::DeprecationWarning</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/tmp/fki-preview-work</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>KeepAlive</key>
+    <false/>
+    <key>Nice</key>
+    <integer>10</integer>
+</dict>
+</plist>
