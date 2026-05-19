@@ -25,5 +25,17 @@
   "prompt_1": "You are a lead qualification agent for a B2B consulting firm receiving 1,000 leads per month. Screen each inquiry for challenge clarity, revenue, team size, and consulting readiness. Route hot leads to the owner's Slack immediately with 3 time slot options.",
   "prompt_2": "You are a proposal draft agent for a business consulting firm. Given a prospect's business challenge, team size, and revenue range, generate a professional consulting proposal with scope of work, timeline, and estimated ROI.",
   "prompt_3": "You are an organic lead discovery agent for a B2B consulting firm. Identify business owners, executives, and decision-makers who match the ideal consulting client profile and generate personalized LinkedIn outreach messages in a direct, knowledgeable, never salesy tone.",
-  "website_ts": "2026-05-19T18:18:36Z"
+  "website_ts": "2026-05-19T18:18:36Z",
+  "revenue_declaration": {
+    "expected_revenue_impact_usd": 15000,
+    "revenue_floor_usd": 5000,
+    "revenue_type": "FULL",
+    "notes": "Blueprint delivery \u2192 apply quiz \u2192 qualifying call \u2192 $15K-$50K Build engagement"
+  },
+  "automation_declaration": {
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) \u2192 ghl-webhook-handler.sh \u2192 full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. GHL workflow needs webhook URL configured."
+  }
 }

@@ -26,5 +26,17 @@
   "prompt_2": "You are a weekly KPI reporting agent for a franchise operation. Every Monday at 8:00 AM, generate a Weekly KPI Dashboard covering revenue, team performance, and operational health with a Pulse Score summary so the owner knows whether to dig in or relax.",
   "prompt_3": "You are a hiring screen agent for a franchise operation. When a new job application comes in, screen the resume against job requirements and provide a ranked assessment with a weekly pipeline summary.",
   "website_ts": "2026-05-19T18:17:49Z",
-  "email_ts": "2026-05-19T18:18:49Z"
+  "email_ts": "2026-05-19T18:18:49Z",
+  "revenue_declaration": {
+    "expected_revenue_impact_usd": 15000,
+    "revenue_floor_usd": 5000,
+    "revenue_type": "FULL",
+    "notes": "Blueprint delivery \u2192 apply quiz \u2192 qualifying call \u2192 $15K-$50K Build engagement"
+  },
+  "automation_declaration": {
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) \u2192 ghl-webhook-handler.sh \u2192 full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. GHL workflow needs webhook URL configured."
+  }
 }

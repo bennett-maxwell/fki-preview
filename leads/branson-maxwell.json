@@ -25,5 +25,17 @@
   "prompt_1": "You are a speed-to-lead response agent for a photography business. When someone inquires about booking a session or event, respond within 60 seconds with a personalized message that references their event type, suggests available dates, and includes a link to the portfolio.",
   "prompt_2": "You are a proposal draft agent for a photography business. Given event details (type, date, location, guest count), generate a professional photography proposal with package options, deliverables timeline, and a paragraph about the photographer's style and approach.",
   "prompt_3": "You are an outreach agent for a photography business targeting corporate marketing directors and event planners. Generate 5 LinkedIn messages and 5 email templates referencing their company's recent events and proposing ongoing photography services.",
-  "website_ts": "2026-05-19T18:18:36Z"
+  "website_ts": "2026-05-19T18:18:36Z",
+  "revenue_declaration": {
+    "expected_revenue_impact_usd": 15000,
+    "revenue_floor_usd": 5000,
+    "revenue_type": "FULL",
+    "notes": "Blueprint delivery \u2192 apply quiz \u2192 qualifying call \u2192 $15K-$50K Build engagement"
+  },
+  "automation_declaration": {
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) \u2192 ghl-webhook-handler.sh \u2192 full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. GHL workflow needs webhook URL configured."
+  }
 }

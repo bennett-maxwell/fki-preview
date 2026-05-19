@@ -31,5 +31,17 @@
   "needs_manual_review": false,
   "website_ts": "2026-05-19T18:33:06Z",
   "blueprint_ts": "2026-05-19T18:33:34Z",
-  "email_ts": "2026-05-19T18:33:57Z"
+  "email_ts": "2026-05-19T18:33:57Z",
+  "revenue_declaration": {
+    "expected_revenue_impact_usd": 15000,
+    "revenue_floor_usd": 5000,
+    "revenue_type": "FULL",
+    "notes": "Blueprint delivery \u2192 apply quiz \u2192 qualifying call \u2192 $15K-$50K Build engagement"
+  },
+  "automation_declaration": {
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) \u2192 ghl-webhook-handler.sh \u2192 full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. GHL workflow needs webhook URL configured."
+  }
 }

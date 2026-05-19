@@ -194,6 +194,60 @@ services = list(set(s.strip() for s in svc_items[:15]))
 has_form = bool(re.search(r'<form[^>]*>', html, re.I))
 has_cta_button = bool(re.search(r'(?:book|schedule|call|contact|get.?(?:a|free)|request)\s', text_lower))
 
+# UTM tracking: propagate through pipeline (Item 2)
+import urllib.parse
+parsed_url = urllib.parse.urlparse(url)
+qs = urllib.parse.parse_qs(parsed_url.query)
+utm_source = qs.get('utm_source', [''])[0]
+utm_medium = qs.get('utm_medium', [''])[0]
+utm_campaign = qs.get('utm_campaign', [''])[0]
+
+# Lead source normalization (Item 4)
+lead_source = 'unknown'
+if utm_source:
+    lead_source = utm_source.lower().strip()
+elif 'facebook' in url.lower():
+    lead_source = 'facebook'
+elif 'linkedin' in url.lower():
+    lead_source = 'linkedin'
+elif 'google' in url.lower():
+    lead_source = 'google'
+else:
+    lead_source = 'direct'
+
+# Form submission analytics stub (Item 3)
+form_count = len(re.findall(r'<form[^>]*>', html, re.I))
+input_count = len(re.findall(r'<input[^>]*>', html, re.I))
+form_analytics = {
+    'form_count': form_count,
+    'input_field_count': input_count,
+    'has_conversion_form': has_form and input_count >= 3,
+}
+
+# Tech stack detection (Item B9 - early extraction)
+tech_stack = []
+if re.search(r'wp-content|wordpress', html, re.I): tech_stack.append('WordPress')
+if re.search(r'Shopify\.theme|cdn\.shopify', html, re.I): tech_stack.append('Shopify')
+if re.search(r'squarespace', html, re.I): tech_stack.append('Squarespace')
+if re.search(r'wix\.com|wixsite', html, re.I): tech_stack.append('Wix')
+if re.search(r'webflow', html, re.I): tech_stack.append('Webflow')
+if re.search(r'next|__next', html, re.I): tech_stack.append('Next.js')
+if re.search(r'react', html, re.I) and 'Next.js' not in tech_stack: tech_stack.append('React')
+if re.search(r'google.*analytics|gtag|UA-\d+|G-[A-Z0-9]+', html, re.I): tech_stack.append('Google Analytics')
+if re.search(r'google.*tag.*manager|gtm\.js', html, re.I): tech_stack.append('GTM')
+if re.search(r'facebook.*pixel|fbq\(', html, re.I): tech_stack.append('FB Pixel')
+if re.search(r'hubspot', html, re.I): tech_stack.append('HubSpot')
+
+# Lead profile photo/logo extraction (Item 10)
+logo_url = ''
+logo_match = re.search(r'<(?:img|link)[^>]*(?:logo|brand|site-icon)[^>]*(?:src|href)=["\']([^"\']+)["\']', html, re.I)
+if not logo_match:
+    logo_match = re.search(r'<link[^>]*rel=["\'](?:icon|apple-touch-icon)["\'][^>]*href=["\']([^"\']+)["\']', html, re.I)
+if logo_match:
+    logo_url = logo_match.group(1)
+    if logo_url.startswith('/'):
+        logo_url = urllib.parse.urljoin(url, logo_url)
+
 profile = {
     'lead_name': lead_name,
     'lead_first_name': lead_first,
@@ -209,6 +263,7 @@ profile = {
     'review_signal_score': review_signal,
     'has_form': has_form,
     'has_cta': has_cta_button,
+    'form_analytics': form_analytics,
     'tools': '',
     'market': 'local and regional customers',
     'service_type': 'professional services',
@@ -220,7 +275,14 @@ profile = {
     'blueprint_url': f'https://bennett-maxwell.github.io/fki-preview/blueprints/{slug}.html',
     'website_url': f'https://bennett-maxwell.github.io/fki-preview/{slug}-website/',
     'podcast_url': '',
-    'apply_subject': f'{lead_name} - Blueprint Application'
+    'apply_subject': f'{lead_name} - Blueprint Application',
+    'utm_source': utm_source,
+    'utm_medium': utm_medium,
+    'utm_campaign': utm_campaign,
+    'lead_source': lead_source,
+    'tech_stack': tech_stack,
+    'logo_url': logo_url,
+    'lead_status': 'new',
 }
 
 with open(output, 'w') as f:

@@ -26,5 +26,17 @@
   "prompt_1": "You are a speed-to-lead response agent for a business services company. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.",
   "prompt_2": "You are a proposal draft agent for a business services firm. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.",
   "prompt_3": "You are an outreach agent for a business services company. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting business owners who need operational support and advisory services.",
-  "email_ts": "2026-05-19T18:18:40Z"
+  "email_ts": "2026-05-19T18:18:40Z",
+  "revenue_declaration": {
+    "expected_revenue_impact_usd": 15000,
+    "revenue_floor_usd": 5000,
+    "revenue_type": "FULL",
+    "notes": "Blueprint delivery \u2192 apply quiz \u2192 qualifying call \u2192 $15K-$50K Build engagement"
+  },
+  "automation_declaration": {
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) \u2192 ghl-webhook-handler.sh \u2192 full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. GHL workflow needs webhook URL configured."
+  }
 }
