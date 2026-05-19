@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get Your AI Quote — Advaita AI for Business</title>
+<title>Apply to Work With Us — Advaita AI for Business</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a1a;line-height:1.6}
@@ -47,10 +47,10 @@ h1{font-size:28px;font-weight:700;text-align:center;margin:32px 0 8px;letter-spa
 <body>
 <div class="container">
   <div class="logo-text">Advaita AI for Business</div>
-  <div class="logo-sub">AI Quote Request</div>
+  <div class="logo-sub">Application</div>
 
-  <h1>Get Your AI Quote</h1>
-  <p class="subtitle">Based on your Blueprint, we'll put together a custom AI quote for your business. Takes under 60 seconds.</p>
+  <h1>Apply to Work With Us</h1>
+  <p class="subtitle">We review every application personally and match it against the Blueprint we already built for you. Takes under 60 seconds.</p>
 
   <div class="context-box" id="contextBox">
     <h3>We already have your Blueprint data</h3>
@@ -112,7 +112,7 @@ h1{font-size:28px;font-weight:700;text-align:center;margin:32px 0 8px;letter-spa
       <textarea id="excitement" maxlength="200" placeholder="e.g., The speed-to-lead agent — we're definitely losing deals because nobody follows up fast enough..."></textarea>
     </div>
 
-    <button class="btn" id="submitBtn" onclick="submitApplication()">Get My AI Quote</button>
+    <button class="btn" id="submitBtn" onclick="submitApplication()">Submit My Application</button>
   </div>
 
   <div class="confirmation" id="confirmation">
@@ -125,6 +125,21 @@ h1{font-size:28px;font-weight:700;text-align:center;margin:32px 0 8px;letter-spa
 </div>
 
 <script>
+// "None" mutual exclusion
+document.addEventListener('DOMContentLoaded', function() {
+  const allChecks = document.querySelectorAll('input[name="tools"]');
+  const noneCheck = document.querySelector('input[name="tools"][value="none"]');
+  allChecks.forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      if (cb.value === 'none' && cb.checked) {
+        allChecks.forEach(function(o) { if (o.value !== 'none') o.checked = false; });
+      } else if (cb.value !== 'none' && cb.checked) {
+        if (noneCheck) noneCheck.checked = false;
+      }
+    });
+  });
+});
+
 function submitApplication() {
   // Validate
   const rev = document.getElementById('annual_revenue');
