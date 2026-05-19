@@ -77,9 +77,13 @@ SLACK_AI_BLUEPRINT = "C0B3QCD9UD7"  # #ai-blueprint-leads
 SLACK_LEO_AUTO = "C0AKXT2S1T2"  # #leo-auto
 
 # Pipeline stages (per blueprint-ai-skill v2.2)
+# 2026-05-19: Website stage disabled per Brent Attaway decision — deliver without website,
+# re-enable once website-build-skill produces output comparable to existing client sites.
+WEBSITE_STAGE_ENABLED = False
+
 STAGES = [
     "intake",        # Stage 1: Lead Intake + Research
-    "website",       # Stage 2: Demo Website Build
+    "website",       # Stage 2: Demo Website Build (disabled — see WEBSITE_STAGE_ENABLED)
     "blueprint",     # Stage 3: Blueprint HTML (clone v7 frame)
     "podcast_queue", # Stage 4: Queue for async podcast (HOT leads only)
     "prompts",       # Stage 5: AI Prompts (embedded in blueprint + email)
@@ -313,7 +317,13 @@ async def stage_intake(profile_path: str, profile: dict, status: LeadStatus) -> 
 
 
 async def stage_website(profile_path: str, profile: dict, status: LeadStatus) -> bool:
-    """Stage 2: Demo Website Build. MANDATORY per Rule 8."""
+    """Stage 2: Demo Website Build. Disabled 2026-05-19 per Brent Attaway — re-enable when
+    website-build-skill output is comparable to existing client sites (set WEBSITE_STAGE_ENABLED=True)."""
+    if not WEBSITE_STAGE_ENABLED:
+        log.info(f"  [{profile['slug']}] Stage 2 SKIP (website stage disabled — WEBSITE_STAGE_ENABLED=False)")
+        status.mark_stage("website", "skipped", "Disabled per 2026-05-19 decision")
+        return True
+
     if status.is_stage_complete("website"):
         log.info(f"  [{profile['slug']}] Stage 2 SKIP (already complete)")
         return True
