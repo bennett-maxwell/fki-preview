@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRMX — Chaos Ends Here</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #000000;
+      --navy: #000321;
+      --accent: #bbff01;
+      --green: #37ca37;
+      --white: #ffffff;
+      --gray-light: #e2e8f0;
+      --gray-mid: #94a3b8;
+      --gray-dark: #1e293b;
+      --card-bg: #080f2a;
+      --card-border: #1a2540;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =====================
+       UTILITY
+    ===================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .accent { color: var(--accent); }
+    .green  { color: var(--green); }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--black);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: box-shadow 0.25s ease, transform 0.2s ease;
+      box-shadow: 0 0 18px rgba(187, 255, 1, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 36px rgba(187, 255, 1, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--accent);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 30px;
+      border-radius: 4px;
+      border: 2px solid var(--accent);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--black);
+      box-shadow: 0 0 24px rgba(187, 255, 1, 0.45);
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--gray-mid);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* =====================
+       NAV
+    ===================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(0, 3, 33, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(187, 255, 1, 0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      flex-shrink: 0;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy);
+      border-top: 1px solid rgba(187, 255, 1, 0.1);
+      padding: 20px 24px 28px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+      margin-top: 16px;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: var(--black);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      background: var(--black);
+      padding: 160px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(187,255,1,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(55,202,55,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(187,255,1,0.08);
+      border: 1px solid rgba(187,255,1,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(187,255,1,0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 500;
+      color: var(--gray-mid);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .hero-stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* =====================
+       PAIN SECTION
+    ===================== */
+    .pain {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .pain-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 64px;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .pain-card {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      border-radius: 12px 12px 0 0;
+    }
+
+    .pain-card:hover {
+      border-color: rgba(187,255,1,0.2);
+    }
+
+    .pain-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      display: block;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pain-card h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .pain-card p {
+      font-size: 0.92rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+    }
+
+    /* =====================
+       FEATURES
+    ===================== */
+    .features {
+      background: var(--black);
+      padding: 100px 0;
+    }
+
+    .features-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 64px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 36px 30px;
+      transition: border-color 0.3s ease, transform 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(187,255,1,0.3);
+      transform: translateY(-4px);
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      background: rgba(187,255,1,0.1);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-list li {
+      font-size: 0.85rem;
+      color: var(--gray-mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .feature-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* =====================
+       AI AGENTS
+    ===================== */
+    .ai-agents {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .ai-agents-header {
+      max-width: 700px;
+      margin-bottom: 64px;
+    }
+
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .agent-card {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(55,202,55,0.15);
+      border-radius: 14px;
+      padding: 34px 30px;
+      transition: border-color 0.3s ease, transform 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .agent-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at top left, rgba(55,202,55,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .agent-card:hover {
+      border-color: rgba(55,202,55,0.4);
+      transform: translateY(-4px);
+    }
+
+    .agent-number {
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+
+    .agent-card h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .agent-card p {
+      font-size: 0.88rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+    }
+
+    .agent-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .agent-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(55,202,55,0.8);
+    }
+
+    /* =====================
+       HOW IT WORKS
+    ===================== */
+    .how-it-works {
+      background: var(--black);
+      padding: 100px 0;
+    }
+
+    .how-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 72px;
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: calc(16.66% + 40px);
+      right: calc(16.66% + 40px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      opacity: 0.3;
+    }
+
+    @media (max-width: 720px) {
+      .steps-row::before { display: none; }
+    }
+
+    .step {
+      padding: 0 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid rgba(187,255,1,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 28px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(187,255,1,0.12);
+    }
+
+    .step h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .step-duration {
+      display: inline-block;
+      background: rgba(55,202,55,0.1);
+      color: var(--green);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-top: 14px;
+    }
+
+    /* =====================
+       RESULTS
+    ===================== */
+    .results {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+
+    .results-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 64px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .result-card {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(187,255,1,0.1);
+      border-radius: 12px;
+      padding: 34px 28px;
+      transition: border-color 0.3s ease;
+    }
+
+    .result-card:hover {
+      border-color: rgba(187,255,1,0.25);
+    }
+
+    .result-icon-label {
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .result-card h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .result-card p {
+      font-size: 0.88rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+    }
+
+    /* =====================
+       PRICING
+    ===================== */
+    .pricing {
+      background: var(--black);
+      padding: 100px 0;
+    }
+
+    .pricing-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
+
+    .pricing-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border: 2px solid rgba(187,255,1,0.35);
+      border-radius: 20px;
+      padding: 48px 44px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(187,255,1,0.07);
+    }
+
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 3px;
+      margin-bottom: 24px;
+    }
+
+    .pricing-plan-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--gray-mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .pricing-amount {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .pricing-dollar {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+
+    .pricing-number {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .pricing-period {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gray-mid);
+      align-self: flex-end;
+      margin-bottom: 6px;
+    }
+
+    .pricing-tagline {
+      font-size: 0.88rem;
+      color: var(--gray-mid);
+      margin-bottom: 32px;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 28px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .pricing-features li {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(187,255,1,0.15);
+      border: 1px solid rgba(187,255,1,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check::after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--accent);
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translateY(-1px);
+    }
+
+    /* =====================
+       CTA BANNER
+    ===================== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy) 0%, #000a22 100%);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(187,255,1,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .cta-inner p {
+      font-size: 1rem;
+      color: var(--gray-mid);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 56px 0 36px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand img {
+      height: 36px;
+      width: auto;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--gray-mid);
+      max-width: 280px;
+      line-height: 1.65;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: rgba(148,163,184,0.6);
+      font-weight: 500;
+    }
+
+    .footer-bottom a {
+      color: rgba(148,163,184,0.6);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--accent);
+    }
+
+    /* =====================
+       SECTION SCROLL PADDING
+    ===================== */
+    section, .features, .ai-agents, .how-it-works, .results, .pricing {
+      scroll-margin-top: 72px;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 130px 0 80px;
+      }
+
+      .hero-stat-row {
+        gap: 28px;
+      }
+
+      .step {
+        padding: 0 8px;
+      }
+
+      .pricing-card {
+        padding: 36px 28px;
+      }
+
+      .footer-links {
+        gap: 32px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="#">
+          <img src="https://assets.cdn.filesafe.space/atbaJrZXRnXvvcFgZMxD/media/653029a1fb7bc28f4b032416.png" alt="CRMX Logo" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#ai-agents">AI Agents</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#results">Results</a></li>
+        </ul>
+        <a class="btn-primary nav-cta" href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX">Apply Now</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#features">Features</a>
+      <a href="#ai-agents">AI Agents</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#results">Results</a>
+      <a href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX">Apply Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Stage 2: AI-Enhanced Business Operations
+        </div>
+        <h1>
+          Chaos Ends Here.
+          <span class="highlight">One System That<br />Kills the Chaos.</span>
+        </h1>
+        <p class="hero-sub">
+          CRMX replaces the stack of tools your team hates using. One AI-powered platform handles your leads, follow-up, pipelines, and payments — so your business runs while you sleep.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX">
+            Apply to Work With CRMX
+          </a>
+          <a class="btn-outline" href="#features">See the Platform</a>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat">
+            <span class="hero-stat-value">675+</span>
+            <span class="hero-stat-label">Customers</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">$199</span>
+            <span class="hero-stat-label">Per Month</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">3-7</span>
+            <span class="hero-stat-label">Days to Live</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">1</span>
+            <span class="hero-stat-label">Platform. All-In</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN SECTION -->
+  <section class="pain">
+    <div class="container">
+      <div class="pain-header">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Sound familiar?</h2>
+        <p class="section-sub">Every home service company, gym owner, and coach we talk to is fighting the same three battles.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <span class="pain-icon">Pain 01</span>
+          <h3>Lead Chaos</h3>
+          <p>Leads come from five different places — your website, Facebook ads, Google, referrals, and that form you built six months ago. By the time someone sees the message, the lead is cold and already called your competitor.</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-icon">Pain 02</span>
+          <h3>Manual Follow-Up</h3>
+          <p>You know follow-up is where deals close — but no one has time to send the fourth text, the second email, or the reminder before the appointment. Deals fall through the cracks not because of a bad product, but because of silence.</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-icon">Pain 03</span>
+          <h3>Tracking on Spreadsheets</h3>
+          <p>Your pipeline lives in a Google Sheet no one updates. You have no idea which leads are active, which jobs are pending close, or where revenue is leaking. Managing a business without real-time visibility is flying blind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header">
+        <div class="section-label">The Platform</div>
+        <h2 class="section-title">Everything in one system</h2>
+        <p class="section-sub">CRMX replaces the tools you've been duct-taping together. Six core modules, one login, zero hand-offs.</p>
+      </div>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <span class="feature-tag">Core</span>
+          <h3>CRM &amp; Contact Management</h3>
+          <p>A centralized database for every lead, customer, and prospect. Tag, filter, segment, and act — all from one view.</p>
+          <ul class="feature-list">
+            <li>Unified inbox across SMS, email, and phone</li>
+            <li>Contact timeline and activity log</li>
+            <li>Smart tagging and segmentation</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-tag">Automation</span>
+          <h3>Automated Follow-Up</h3>
+          <p>Set sequences once. CRMX follows up every time — via text, email, and voicemail drop — without a human touching anything.</p>
+          <ul class="feature-list">
+            <li>Multi-channel drip sequences</li>
+            <li>Trigger-based automation workflows</li>
+            <li>AI-generated follow-up messaging</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-tag">Web</span>
+          <h3>Funnels &amp; Websites</h3>
+          <p>Launch conversion-ready landing pages and full websites without a developer. Built-in A/B testing baked in from day one.</p>
+          <ul class="feature-list">
+            <li>Drag-and-drop funnel builder</li>
+            <li>Pre-built industry templates</li>
+            <li>Form and survey capture</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-tag">Sales</span>
+          <h3>Sales Pipeline</h3>
+          <p>A visual deal pipeline that shows exactly where every opportunity stands. Drag stages, set close dates, and never lose a deal to poor tracking again.</p>
+          <ul class="feature-list">
+            <li>Custom pipeline stages</li>
+            <li>Automated stage-move triggers</li>
+            <li>Revenue forecasting view</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-tag">Scheduling</span>
+          <h3>Appointment Booking</h3>
+          <p>Eliminate back-and-forth. CRMX connects to your calendar and lets leads self-book, with automatic reminders sent before every appointment.</p>
+          <ul class="feature-list">
+            <li>Embedded booking calendar</li>
+            <li>Automated appointment reminders</li>
+            <li>Round-robin team booking</li>
+          </ul>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-tag">Revenue</span>
+          <h3>Payments &amp; Invoices</h3>
+          <p>Send a payment link via text in seconds. Collect deposits, take full payments, and generate professional invoices — all inside the same platform.</p>
+          <ul class="feature-list">
+            <li>Text-to-pay payment links</li>
+            <li>Branded invoice templates</li>
+            <li>Recurring billing and subscriptions</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AI AGENTS -->
+  <section class="ai-agents" id="ai-agents">
+    <div class="container">
+      <div class="ai-agents-header">
+        <div class="section-label">Blueprint AI — Stage 2</div>
+        <h2 class="section-title">AI running<br /><span class="accent">CRMX operations</span></h2>
+        <p class="section-sub">This is what a Stage 2 AI-enhanced business looks like in practice. Six AI agents working inside CRMX's own operations — qualifying leads, retaining customers, and driving growth around the clock.</p>
+      </div>
+      <div class="agents-grid">
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 01</div>
+          <h3>AI Lead Qualification Agent</h3>
+          <p>Automatically scores and routes every inbound trial signup based on business type, company size, and engagement behavior. High-intent leads get fast-tracked to a human. Low-intent leads enter a nurture sequence — no manual sorting required.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Inbound Routing
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 02</div>
+          <h3>AI Onboarding Coach</h3>
+          <p>Guides new CRMX customers through the full platform setup via automated check-in sequences, in-app prompts, and milestone-triggered messages — without a human support rep touching a single ticket.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Customer Success
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 03</div>
+          <h3>AI Churn Predictor</h3>
+          <p>Monitors engagement signals across the platform — login frequency, feature usage, support tickets — and flags at-risk accounts before they cancel. Triggers a personalized retention sequence the moment risk is detected.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Retention Layer
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 04</div>
+          <h3>AI Upsell Agent</h3>
+          <p>Identifies customers whose usage patterns signal readiness for done-for-you services — automation builds, funnel builds, and managed campaigns. Triggers a perfectly timed upsell conversation based on in-platform behavior, not guesswork.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Revenue Expansion
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 05</div>
+          <h3>AI Content Engine</h3>
+          <p>Generates weekly CRMX Academy tutorials, newsletter campaigns, and social content — calibrated to the platform's latest features and customer pain points. Brand voice stays consistent without a dedicated content team.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Content Operations
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-number">Agent 06</div>
+          <h3>AI Competitive Intel Agent</h3>
+          <p>Monitors competitor pricing pages, product announcements, and feature releases in real time. Surfaces relevant changes to the CRMX team before customers notice — so positioning and messaging stay sharp and current.</p>
+          <div class="agent-status">
+            <span class="agent-status-dot"></span>
+            Active — Market Intelligence
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="how-header">
+        <div class="section-label">The Process</div>
+        <h2 class="section-title">From decision to<br />live system in days</h2>
+        <p class="section-sub">We keep the onboarding tight. No endless back-and-forth, no hidden setup fees. Three clean steps and you're running.</p>
+      </div>
+      <div class="steps-row">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Discovery Call</h3>
+          <p>We map your current process, identify the biggest revenue leaks, and define what CRMX will replace in your stack.</p>
+          <span class="step-duration">Day 1</span>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>AI Setup</h3>
+          <p>Your CRM, automations, pipelines, and follow-up sequences are built and configured — customized to your business, not a generic template.</p>
+          <span class="step-duration">Days 2 — 7</span>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Growth Mode</h3>
+          <p>You go live with a fully operational system. Leads flow in, follow-up runs automatically, and your team focuses on closing — not managing tools.</p>
+          <span class="step-duration">Day 8 Onward</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="results">
+    <div class="container">
+      <div class="results-header">
+        <div class="section-label">The Difference</div>
+        <h2 class="section-title">What changes when<br /><span class="accent">AI handles the ops</span></h2>
+        <p class="section-sub">Companies that consolidate their systems and automate follow-up see meaningful shifts across their entire operation — not just in one area.</p>
+      </div>
+      <div class="results-grid">
+
+        <div class="result-card">
+          <div class="result-icon-label">Lead Speed</div>
+          <h3>Leads get touched instantly</h3>
+          <p>Automated follow-up fires the moment a lead enters CRMX — via text, email, or both. The window between inquiry and contact closes to seconds, not hours.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="result-icon-label">Follow-Up Consistency</div>
+          <h3>No lead goes cold by accident</h3>
+          <p>Multi-step sequences run without a human in the loop. Every lead receives the right message at the right time, regardless of your team's bandwidth.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="result-icon-label">Pipeline Clarity</div>
+          <h3>Full visibility on every deal</h3>
+          <p>A live pipeline view replaces the spreadsheet. Your team knows exactly which opportunities are active, stalled, or ready to close — at a glance.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="result-icon-label">Stack Reduction</div>
+          <h3>One platform replaces many</h3>
+          <p>CRM, email, SMS, scheduling, funnels, and payments — consolidated under a single login. Less software, less login fatigue, lower total cost.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="result-icon-label">Team Focus</div>
+          <h3>People do what software cannot</h3>
+          <p>When automation handles the repetitive work, your team shifts from administrative overhead to high-value conversations and relationship management.</p>
+        </div>
+
+        <div class="result-card">
+          <div class="result-icon-label">Business Continuity</div>
+          <h3>Operations run after hours</h3>
+          <p>Sequences, booking confirmations, and nurture campaigns run 24 hours a day. Your business generates and qualifies leads even when no one is working.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Simple, flat pricing</h2>
+        <p class="section-sub">No tiered confusion. One plan that gives you everything — the full CRMX platform, ready to run from day one.</p>
+      </div>
+      <div class="pricing-wrapper">
+        <div class="pricing-card">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-plan-name">ProEdition</div>
+          <div class="pricing-amount">
+            <span class="pricing-dollar">$</span>
+            <span class="pricing-number">199</span>
+            <span class="pricing-period">/month</span>
+          </div>
+          <p class="pricing-tagline">Everything you need. Nothing you don't.</p>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li>
+              <span class="check"></span>
+              Full CRM &amp; Contact Management
+            </li>
+            <li>
+              <span class="check"></span>
+              Automated Multi-Channel Follow-Up
+            </li>
+            <li>
+              <span class="check"></span>
+              Unlimited Funnels &amp; Websites
+            </li>
+            <li>
+              <span class="check"></span>
+              Visual Sales Pipeline
+            </li>
+            <li>
+              <span class="check"></span>
+              Appointment Booking &amp; Calendar
+            </li>
+            <li>
+              <span class="check"></span>
+              Payments, Invoices &amp; Text-to-Pay
+            </li>
+            <li>
+              <span class="check"></span>
+              AI-Assisted Automations
+            </li>
+            <li>
+              <span class="check"></span>
+              Onboarding &amp; Setup Support
+            </li>
+          </ul>
+          <a class="btn-primary" href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX" style="width:100%;text-align:center;display:block;">
+            Apply to Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="section-label" style="justify-content:center;display:flex;margin-bottom:18px;">Limited Availability</div>
+        <h2>Ready to let AI run<br />your business operations?</h2>
+        <p>Apply to work with the CRMX team. We onboard a limited number of businesses each month to make sure every setup is done right.</p>
+        <a class="btn-primary" href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX" style="font-size:1rem;padding:18px 44px;">
+          Apply to Work With CRMX
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://assets.cdn.filesafe.space/atbaJrZXRnXvvcFgZMxD/media/653029a1fb7bc28f4b032416.png" alt="CRMX Logo" />
+          <p>AI-powered CRM and marketing automation for home services, coaches, and gyms. One system. All the ops.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#ai-agents">AI Agents</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Who We Serve</h4>
+            <ul>
+              <li><a href="#">HVAC Companies</a></li>
+              <li><a href="#">Roofing Contractors</a></li>
+              <li><a href="#">Solar Installers</a></li>
+              <li><a href="#">Coaches &amp; Consultants</a></li>
+              <li><a href="#">Gyms &amp; Studios</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX">Apply Now</a></li>
+              <li><a href="mailto:team@franchiseki.com?subject=Apply%20to%20Work%20With%20CRMX">Get in Touch</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright CRMX 2024. All rights reserved.</p>
+        <div style="display:flex;gap:24px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    (function() {
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+          var isOpen = mobileMenu.classList.toggle('open');
+          hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close mobile menu on link click
+        var links = mobileMenu.querySelectorAll('a');
+        links.forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.remove('open');
+          });
+        });
+      }
+    })();
+
+    // Nav scroll effect
+    (function() {
+      var nav = document.getElementById('nav');
+      if (!nav) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 40) {
+          nav.style.borderBottomColor = 'rgba(187, 255, 1, 0.18)';
+        } else {
+          nav.style.borderBottomColor = 'rgba(187, 255, 1, 0.1)';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
