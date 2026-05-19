@@ -8,6 +8,9 @@
 
 set -euo pipefail
 
+# Ensure gog is in PATH (Homebrew install location)
+export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/gogcli/0.13.0/bin:$PATH"
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template.html"
 

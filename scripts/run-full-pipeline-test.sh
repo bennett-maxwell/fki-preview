@@ -59,13 +59,11 @@ check "Email template has apply CTA" "grep -qi 'apply' $REPO_DIR/templates/deliv
 check "Website template has BUSINESS_NAME" "grep -q '{{BUSINESS_NAME}}' $REPO_DIR/templates/website-template.html"
 
 echo ""
-echo "--- 5. Deployed Deliverables ---"
-check "Brittney Blueprint HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/blueprints/brittney-warnick.html) = 200 ]"
-check "Branson Blueprint HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/blueprints/branson-maxwell.html) = 200 ]"
-check "Court Blueprint HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/blueprints/court-lundberg.html) = 200 ]"
-check "Warnick website HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/warnick-design/) = 200 ]"
-check "Branson website HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/branson-maxwell-website/) = 200 ]"
-check "Court website HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/call-rarebreed/) = 200 ]"
+echo "--- 5. Deployed Deliverables (all 9 leads) ---"
+for slug in brittney-warnick branson-maxwell court-lundberg chris-lpnw melissa-tash-srp paul-muus rey-31consulting zachary-red-sands dave-wook; do
+    check "$slug Blueprint HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/blueprints/$slug.html) = 200 ]"
+    check "$slug website HTTP 200" "[ \$(curl -sI -o /dev/null -w '%{http_code}' https://bennett-maxwell.github.io/fki-preview/$slug-website/) = 200 ]"
+done
 
 echo ""
 echo "--- 6. Podcast Files ---"
@@ -74,12 +72,25 @@ check "Melissa podcast on Desktop" "[ -f ~/Desktop/melissa-spoiled-rotten-podcas
 check "Rey podcast on Desktop" "[ -f ~/Desktop/rey-ponce-podcast.mp4 ] && [ \$(stat -f%z ~/Desktop/rey-ponce-podcast.mp4) -gt 1000000 ]"
 
 echo ""
-echo "--- 7. Bennett Rule Compliance (all Blueprints) ---"
-for html in "$REPO_DIR"/blueprints/brittney-warnick.html "$REPO_DIR"/blueprints/branson-maxwell.html "$REPO_DIR"/blueprints/court-lundberg.html; do
+echo "--- 7. Bennett Rule Compliance (all 9 Blueprints) ---"
+for html in "$REPO_DIR"/blueprints/*.html; do
     name=$(basename "$html" .html)
     check "$name no booking" "! grep -q 'leadconnectorhq' '$html'"
     check "$name no calendar" "! grep -q 'calendly' '$html'"
     check "$name has apply CTA" "[ \$(grep -ci 'apply' '$html' 2>/dev/null || echo 0) -ge 3 ]"
+    check "$name pre-delivery PASS" "bash $SCRIPT_DIR/pre-delivery-check.sh '$html' 2>&1 | grep -q 'PASS'"
+done
+
+echo ""
+echo "--- 8. Delivery Emails (all 9) ---"
+for slug in brittney-warnick branson-maxwell court-lundberg chris-lpnw melissa-tash-srp paul-muus rey-31consulting zachary-red-sands dave-wook; do
+    check "$slug delivery email exists" "[ -f $REPO_DIR/delivery-emails/$slug-delivery-email.html ]"
+done
+
+echo ""
+echo "--- 9. Pipeline Scripts Executable ---"
+for script in clone-blueprint.sh build-website.sh build-delivery-email.sh blueprint-batch.sh pre-delivery-check.sh; do
+    check "$script executable" "[ -x $SCRIPT_DIR/$script ]"
 done
 
 echo ""

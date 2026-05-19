@@ -24,9 +24,11 @@ LOG="$LOG_DIR/blueprint-batch-$TIMESTAMP.log"
 LEADS_DIR="${1:-.}"
 PARALLEL_WEBSITES=false
 SEND_PREVIEWS=false
+SEND_GHL=false
 for arg in "$@"; do
     [ "$arg" = "--parallel-websites" ] && PARALLEL_WEBSITES=true
     [ "$arg" = "--send-previews" ] && SEND_PREVIEWS=true
+    [ "$arg" = "--send-ghl" ] && SEND_GHL=true
 done
 
 if [ "$1" = "--help" ] || [ $# -lt 1 ]; then
@@ -89,8 +91,8 @@ FAILED=0
 RESULTS=()
 
 for profile in "${LEADS[@]}"; do
-    SLUG=$(python3 -c "import json; print(json.load(open('$profile')).get('slug','unknown'))")
-    LEAD=$(python3 -c "import json; print(json.load(open('$profile')).get('lead_name','Unknown'))")
+    SLUG=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('slug','unknown'))" "$profile")
+    LEAD=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('lead_name','Unknown'))" "$profile")
     echo "" | tee -a "$LOG"
     echo "--- $LEAD ($SLUG) ---" | tee -a "$LOG"
 
@@ -145,9 +147,10 @@ for profile in "${LEADS[@]}"; do
     # Stage 7: Email Build
     echo "  Stage 7: Email build..." | tee -a "$LOG"
     if [ -x "$SCRIPT_DIR/build-delivery-email.sh" ]; then
-        SEND_FLAG=""
-        [ "$SEND_PREVIEWS" = true ] && SEND_FLAG="--send-preview"
-        "$SCRIPT_DIR/build-delivery-email.sh" "$profile" $SEND_FLAG >> "$LOG" 2>&1 && \
+        SEND_FLAGS=""
+        [ "$SEND_PREVIEWS" = true ] && SEND_FLAGS="$SEND_FLAGS --send-preview"
+        [ "$SEND_GHL" = true ] && SEND_FLAGS="$SEND_FLAGS --send-ghl"
+        "$SCRIPT_DIR/build-delivery-email.sh" "$profile" $SEND_FLAGS >> "$LOG" 2>&1 && \
             echo "    Email: DONE" | tee -a "$LOG" || \
             echo "    Email: SKIPPED (build error)" | tee -a "$LOG"
     else

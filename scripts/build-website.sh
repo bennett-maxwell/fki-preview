@@ -164,7 +164,7 @@ output = output.replace('      <!-- AI_FEATURES_RENDERED -->', ai_features_rende
 output = output.replace('            <!-- SERVICE_OPTIONS -->', service_options)
 
 # ---------- Write output ----------
-out_dir = os.path.join(repo_root, slug)
+out_dir = os.path.join(repo_root, slug + '-website')
 os.makedirs(out_dir, exist_ok=True)
 out_path = os.path.join(out_dir, 'index.html')
 
@@ -181,7 +181,7 @@ import sys, json
 with open(sys.argv[2], 'r') as f:
     p = json.load(f)
 slug = p.get('slug', p.get('business_name', 'site').lower().replace(' ', '-').replace("'", ''))
-print(slug)
+print(slug + '-website')
 PYEOF2
 )
 
