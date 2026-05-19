@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply to Work With Us — Advaita AI for Business</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a1a;line-height:1.6}
+.container{max-width:640px;margin:0 auto;padding:40px 24px 60px}
+.logo{text-align:center;margin-bottom:32px}
+.logo img{height:40px}
+.logo-text{font-size:22px;font-weight:700;letter-spacing:-0.5px;color:#1a1a1a}
+.logo-sub{font-size:13px;color:#888;margin-top:2px}
+h1{font-size:28px;font-weight:700;text-align:center;margin-bottom:8px;letter-spacing:-0.5px}
+.subtitle{text-align:center;color:#666;font-size:15px;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.progress{display:flex;gap:8px;margin-bottom:40px;justify-content:center}
+.progress .step{width:80px;height:4px;background:#e5e5e5;border-radius:2px;transition:background .3s}
+.progress .step.active{background:#1a1a1a}
+.form-section{display:none}
+.form-section.active{display:block}
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:24px;font-weight:600}
+.field{margin-bottom:24px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;color:#333}
+.field .hint{font-size:12px;color:#999;margin-bottom:6px}
+.field input[type="text"],.field input[type="email"],.field input[type="tel"],.field input[type="url"],.field select,.field textarea{
+  width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:15px;
+  font-family:inherit;background:#fafafa;transition:border .2s,background .2s;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#1a1a1a;background:#fff}
+.field textarea{resize:vertical;min-height:80px}
+.slider-wrap{position:relative;padding:8px 0}
+.slider-wrap input[type="range"]{width:100%;-webkit-appearance:none;height:6px;background:#e5e5e5;border-radius:3px;outline:none}
+.slider-wrap input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:#1a1a1a;border-radius:50%;cursor:pointer}
+.slider-value{text-align:center;font-size:20px;font-weight:700;margin-top:8px;color:#1a1a1a}
+.slider-labels{display:flex;justify-content:space-between;font-size:11px;color:#aaa;margin-top:4px}
+.checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.checkbox-grid label{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #e5e5e5;border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s}
+.checkbox-grid label:hover{border-color:#999}
+.checkbox-grid input:checked+span{font-weight:600}
+.checkbox-grid label:has(input:checked){border-color:#1a1a1a;background:#f5f5f5}
+.checkbox-grid input[type="checkbox"]{width:16px;height:16px;accent-color:#1a1a1a}
+.btn-row{display:flex;gap:12px;margin-top:36px}
+.btn{flex:1;padding:14px 24px;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-primary{background:#1a1a1a;color:#fff}
+.btn-primary:hover{background:#333}
+.btn-secondary{background:#f0f0f0;color:#333}
+.btn-secondary:hover{background:#e0e0e0}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.confirmation{text-align:center;padding:60px 20px;display:none}
+.confirmation h2{font-size:24px;margin-bottom:12px}
+.confirmation p{color:#666;font-size:15px;max-width:400px;margin:0 auto 24px}
+.check-circle{width:64px;height:64px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.check-circle svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.error{color:#d00;font-size:12px;margin-top:4px;display:none}
+@media(max-width:480px){
+  .container{padding:24px 16px 40px}
+  h1{font-size:22px}
+  .checkbox-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <div class="logo-text">Advaita AI for Business</div>
+    <div class="logo-sub">Application</div>
+  </div>
+
+  <h1>Apply to Work With Us</h1>
+  <p class="subtitle">We work with a limited number of businesses each quarter. Tell us about yours and we'll follow up within 24 hours if it's a fit.</p>
+
+  <div class="progress">
+    <div class="step active" id="prog1"></div>
+    <div class="step" id="prog2"></div>
+    <div class="step" id="prog3"></div>
+  </div>
+
+  <!-- SECTION 1: Contact -->
+  <div class="form-section active" id="section1">
+    <div class="section-title">Your Information</div>
+    <div class="field">
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" placeholder="Jane" required>
+      <div class="error" id="err_first_name">Please enter your first name</div>
+    </div>
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="jane@company.com" required>
+      <div class="error" id="err_email">Please enter a valid email</div>
+    </div>
+    <div class="field">
+      <label for="phone">Phone <span style="color:#999;font-weight:400">(optional)</span></label>
+      <input type="tel" id="phone" placeholder="(555) 123-4567">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="nextSection(2)">Continue</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Business Details -->
+  <div class="form-section" id="section2">
+    <div class="section-title">Your Business</div>
+
+    <div class="field">
+      <label for="business_name">Business Name</label>
+      <input type="text" id="business_name" placeholder="Acme Services LLC" required>
+      <div class="error" id="err_business_name">Please enter your business name</div>
+    </div>
+    <div class="field">
+      <label for="website_url">Website URL</label>
+      <div class="hint">We use this to personalize your experience</div>
+      <input type="url" id="website_url" placeholder="https://www.yourcompany.com" required>
+      <div class="error" id="err_website_url">Please enter your website URL</div>
+    </div>
+    <div class="field">
+      <label for="annual_revenue">Approximate Annual Revenue</label>
+      <select id="annual_revenue" required>
+        <option value="">Select a range</option>
+        <option value="under_500k">Under $500K</option>
+        <option value="500k_1m">$500K - $1M</option>
+        <option value="1m_3m">$1M - $3M</option>
+        <option value="3m_5m">$3M - $5M</option>
+        <option value="5m_10m">$5M - $10M</option>
+        <option value="10m_plus">$10M+</option>
+      </select>
+      <div class="error" id="err_annual_revenue">Please select your revenue range</div>
+    </div>
+    <div class="field">
+      <label for="team_size">How many people handle sales, marketing, or operations?</label>
+      <select id="team_size" required>
+        <option value="">Select</option>
+        <option value="just_me">Just me</option>
+        <option value="2_5">2 - 5 people</option>
+        <option value="6_15">6 - 15 people</option>
+        <option value="16_plus">16+ people</option>
+      </select>
+      <div class="error" id="err_team_size">Please select your team size</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevSection(1)">Back</button>
+      <button class="btn btn-primary" onclick="nextSection(3)">Continue</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Metrics + Tools -->
+  <div class="form-section" id="section3">
+    <div class="section-title">A Few Quick Numbers</div>
+
+    <div class="field">
+      <label>How many new leads or inquiries per month?</label>
+      <div class="slider-wrap">
+        <input type="range" id="leads_per_month" min="0" max="500" step="5" value="50" oninput="updateSlider(this,'leads_val','')">
+        <div class="slider-value" id="leads_val">50</div>
+        <div class="slider-labels"><span>0</span><span>100</span><span>250</span><span>500+</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Average customer or deal value?</label>
+      <div class="slider-wrap">
+        <input type="range" id="avg_deal_value" min="250" max="50000" step="250" value="2500" oninput="updateSlider(this,'deal_val','$')">
+        <div class="slider-value" id="deal_val">$2,500</div>
+        <div class="slider-labels"><span>$250</span><span>$5K</span><span>$25K</span><span>$50K+</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>What percentage of leads become paying customers?</label>
+      <div class="slider-wrap">
+        <input type="range" id="close_rate" min="0" max="100" step="1" value="20" oninput="updateSlider(this,'close_val','%')">
+        <div class="slider-value" id="close_val">20%</div>
+        <div class="slider-labels"><span>0%</span><span>25%</span><span>50%</span><span>100%</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Which of these do you currently use?</label>
+      <div class="hint">Select all that apply</div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" name="tools" value="ghl"><span>GoHighLevel</span></label>
+        <label><input type="checkbox" name="tools" value="hubspot"><span>HubSpot</span></label>
+        <label><input type="checkbox" name="tools" value="salesforce"><span>Salesforce</span></label>
+        <label><input type="checkbox" name="tools" value="jobber"><span>Jobber</span></label>
+        <label><input type="checkbox" name="tools" value="servicetitan"><span>ServiceTitan</span></label>
+        <label><input type="checkbox" name="tools" value="spreadsheets"><span>Spreadsheets / Email</span></label>
+        <label><input type="checkbox" name="tools" value="auto_followup"><span>Automated Follow-Up</span></label>
+        <label><input type="checkbox" name="tools" value="chatbot"><span>Chatbot / Live Chat</span></label>
+        <label><input type="checkbox" name="tools" value="scheduling"><span>Online Scheduling</span></label>
+        <label><input type="checkbox" name="tools" value="reviews"><span>Review Management</span></label>
+        <label><input type="checkbox" name="tools" value="email_marketing"><span>Email Marketing</span></label>
+        <label><input type="checkbox" name="tools" value="social"><span>Social Media Scheduler</span></label>
+        <label><input type="checkbox" name="tools" value="other_crm"><span>Other CRM</span></label>
+        <label><input type="checkbox" name="tools" value="none"><span>None of these</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="biggest_fix">If we could fix one thing in your business this week, what would it be?</label>
+      <div class="hint">Speak it like you'd say it to a friend</div>
+      <textarea id="biggest_fix" maxlength="200" placeholder="e.g., I lose leads because nobody follows up fast enough..."></textarea>
+      <div class="error" id="err_biggest_fix">Please tell us what you'd want fixed</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevSection(2)">Back</button>
+      <button class="btn btn-primary" id="submitBtn" onclick="submitApplication()">Submit My Application</button>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION -->
+  <div class="confirmation" id="confirmation">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h2>Application Received</h2>
+    <p>Thank you. We review every application personally. If your business is a fit, you'll hear from us within 24 hours.</p>
+    <p style="font-size:13px;color:#aaa">We work with a limited number of businesses each quarter to ensure exceptional results.</p>
+  </div>
+</div>
+
+<script>
+let currentSection = 1;
+
+function updateSlider(el, targetId, prefix) {
+  let v = Number(el.value);
+  let display = '';
+  if (prefix === '$') {
+    display = '$' + v.toLocaleString();
+  } else if (prefix === '%') {
+    display = v + '%';
+  } else {
+    display = v.toLocaleString();
+  }
+  document.getElementById(targetId).textContent = display;
+}
+
+function validate(section) {
+  let valid = true;
+  const fields = {
+    1: ['first_name', 'email'],
+    2: ['business_name', 'website_url', 'annual_revenue', 'team_size'],
+    3: ['biggest_fix']
+  };
+  // Hide all errors first
+  document.querySelectorAll('.error').forEach(e => e.style.display = 'none');
+
+  (fields[section] || []).forEach(id => {
+    const el = document.getElementById(id);
+    const err = document.getElementById('err_' + id);
+    if (!el || !err) return;
+    let empty = false;
+    if (el.tagName === 'SELECT') empty = !el.value;
+    else if (el.tagName === 'TEXTAREA') empty = el.value.trim().length < 5;
+    else empty = el.value.trim() === '';
+
+    if (id === 'email' && el.value && !el.value.includes('@')) empty = true;
+
+    if (empty) {
+      err.style.display = 'block';
+      valid = false;
+    }
+  });
+  return valid;
+}
+
+function nextSection(n) {
+  if (!validate(currentSection)) return;
+  document.getElementById('section' + currentSection).classList.remove('active');
+  document.getElementById('section' + n).classList.add('active');
+  document.getElementById('prog' + n).classList.add('active');
+  currentSection = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function prevSection(n) {
+  document.getElementById('section' + currentSection).classList.remove('active');
+  document.getElementById('section' + n).classList.add('active');
+  currentSection = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ============================================================
+// INTERNAL SCORING ENGINE — Bennett only, never shown to prospect
+// ============================================================
+function scoreApplication(data) {
+  // --- 10X ROI ---
+  const closeDecimal = data.close_rate / 100;
+  const improvementFactor = 0.35;
+  const incrementalClose = closeDecimal * improvementFactor;
+  const incrementalAnnual = data.leads_per_month * incrementalClose * data.avg_deal_value * 12;
+  // Time savings estimate: team-based hours × rate
+  const teamHoursMap = {just_me: 15, '2_5': 25, '6_15': 40, '16_plus': 60};
+  const estHours = teamHoursMap[data.team_size] || 15;
+  const timeValue = estHours * 4.3 * 75; // conservative $75/hr for saved task time
+  const totalValueAdd = incrementalAnnual + timeValue;
+
+  let roiRating, roiEmoji;
+  if (totalValueAdd > 50000) { roiRating = 'GREEN'; roiEmoji = '\u{1F7E2}'; }
+  else if (totalValueAdd >= 25000) { roiRating = 'YELLOW'; roiEmoji = '\u{1F7E1}'; }
+  else { roiRating = 'RED'; roiEmoji = '\u{1F534}'; }
+
+  // --- System Transfer % ---
+  const toolScores = {
+    ghl: 40, hubspot: 20, salesforce: 20, jobber: 20, servicetitan: 20,
+    other_crm: 20, spreadsheets: 5, auto_followup: 15, chatbot: 10,
+    scheduling: 10, reviews: 5, email_marketing: 5, social: 3, none: 0
+  };
+  let transferPct = 0;
+  // Only count CRM once (highest)
+  const crmTools = ['ghl','hubspot','salesforce','jobber','servicetitan','other_crm','spreadsheets'];
+  const nonCrmTools = ['auto_followup','chatbot','scheduling','reviews','email_marketing','social'];
+  let maxCrm = 0;
+  data.tools.forEach(t => { if (crmTools.includes(t) && toolScores[t] > maxCrm) maxCrm = toolScores[t]; });
+  transferPct += maxCrm;
+  data.tools.forEach(t => { if (nonCrmTools.includes(t)) transferPct += toolScores[t]; });
+  transferPct = Math.min(transferPct, 100);
+
+  let transferRating, transferEmoji;
+  if (transferPct >= 60) { transferRating = 'HIGH'; transferEmoji = '\u{1F7E2}'; }
+  else if (transferPct >= 30) { transferRating = 'MODERATE'; transferEmoji = '\u{1F7E1}'; }
+  else { transferRating = 'LOW'; transferEmoji = '\u{1F534}'; }
+
+  // --- Onboarding Ease ---
+  let onboardScore = 0;
+  if (transferPct >= 60) onboardScore += 40;
+  else if (transferPct >= 30) onboardScore += 25;
+  else onboardScore += 10;
+
+  const teamScores = {just_me: 30, '2_5': 25, '6_15': 15, '16_plus': 10};
+  onboardScore += teamScores[data.team_size] || 15;
+
+  if (data.biggest_fix.length > 50) onboardScore += 20;
+  else if (data.biggest_fix.length > 20) onboardScore += 15;
+  else onboardScore += 5;
+
+  const revScores = {'1m_3m': 10, '3m_5m': 10, '5m_10m': 5, '10m_plus': 5, '500k_1m': 5, 'under_500k': 0};
+  onboardScore += revScores[data.annual_revenue] || 0;
+
+  let onboardRating, onboardEmoji;
+  if (onboardScore >= 70) { onboardRating = 'EASY'; onboardEmoji = '\u{1F7E2}'; }
+  else if (onboardScore >= 40) { onboardRating = 'MODERATE'; onboardEmoji = '\u{1F7E1}'; }
+  else { onboardRating = 'HARDER'; onboardEmoji = '\u{1F534}'; }
+
+  // --- Auto-route ---
+  let recommendation, tier;
+  if (roiRating === 'GREEN' && transferRating === 'HIGH' && onboardRating === 'EASY') {
+    recommendation = 'AUTO-ACCEPT'; tier = 'Audit $5K';
+  } else if (roiRating === 'GREEN' && transferRating === 'HIGH') {
+    recommendation = 'ACCEPT'; tier = 'Audit $5K';
+  } else if (roiRating === 'GREEN' && transferRating === 'MODERATE') {
+    recommendation = 'ACCEPT'; tier = 'Build $15-50K';
+  } else if (roiRating === 'GREEN' && transferRating === 'LOW') {
+    recommendation = 'ACCEPT'; tier = 'Full Build $15-50K';
+  } else if (roiRating === 'YELLOW') {
+    recommendation = 'BENNETT REVIEWS'; tier = 'TBD';
+  } else {
+    recommendation = 'DECLINE'; tier = 'Free resources only';
+  }
+
+  // ICP gate
+  if (['under_500k', '500k_1m'].includes(data.annual_revenue) && roiRating !== 'GREEN') {
+    recommendation = 'DECLINE'; tier = 'Below ICP ($1M+ required)';
+  }
+
+  return {
+    roi: {total: totalValueAdd, incremental: incrementalAnnual, timeSavings: timeValue, rating: roiRating, emoji: roiEmoji},
+    transfer: {pct: transferPct, rating: transferRating, emoji: transferEmoji},
+    onboard: {score: onboardScore, rating: onboardRating, emoji: onboardEmoji},
+    recommendation, tier
+  };
+}
+
+function formatCurrency(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function submitApplication() {
+  if (!validate(3)) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  // Gather data
+  const tools = Array.from(document.querySelectorAll('input[name="tools"]:checked')).map(c => c.value);
+  const data = {
+    first_name: document.getElementById('first_name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    business_name: document.getElementById('business_name').value.trim(),
+    website_url: document.getElementById('website_url').value.trim(),
+    annual_revenue: document.getElementById('annual_revenue').value,
+    team_size: document.getElementById('team_size').value,
+    leads_per_month: Number(document.getElementById('leads_per_month').value),
+    avg_deal_value: Number(document.getElementById('avg_deal_value').value),
+    close_rate: Number(document.getElementById('close_rate').value),
+    tools: tools,
+    biggest_fix: document.getElementById('biggest_fix').value.trim(),
+    submitted_at: new Date().toISOString()
+  };
+
+  // Score internally
+  const score = scoreApplication(data);
+
+  // Build the internal email payload (Bennett sees this)
+  const revenueLabels = {under_500k:'Under $500K','500k_1m':'$500K-$1M','1m_3m':'$1M-$3M','3m_5m':'$3M-$5M','5m_10m':'$5M-$10M','10m_plus':'$10M+'};
+  const teamLabels = {just_me:'Just me','2_5':'2-5','6_15':'6-15','16_plus':'16+'};
+
+  const scoringEmail = {
+    to: 'bennett@franchiseki.com',
+    subject: `New Application: ${data.business_name} — ${score.roi.emoji} ${score.recommendation}`,
+    body: [
+      `APPLICATION SUMMARY — ${data.business_name}`,
+      '━'.repeat(50),
+      `Contact: ${data.first_name} | ${data.email} | ${data.phone || 'No phone'}`,
+      `Website: ${data.website_url}`,
+      `Revenue: ${revenueLabels[data.annual_revenue]}`,
+      `Team: ${teamLabels[data.team_size]}`,
+      '',
+      'SCORING',
+      '━'.repeat(50),
+      `10X ROI:         ${score.roi.emoji} ${formatCurrency(score.roi.total)}/yr potential (vs $5K fee)`,
+      `                 Leads: ${data.leads_per_month}/mo x ${data.close_rate}% x ${formatCurrency(data.avg_deal_value)} = ${formatCurrency(score.roi.incremental)}/yr uplift`,
+      `                 Time savings: ${formatCurrency(score.roi.timeSavings)}/yr`,
+      `System Transfer: ${score.transfer.emoji} ${score.transfer.pct}% — Tools: ${tools.length ? tools.join(', ') : 'None'}`,
+      `Onboarding:      ${score.onboard.emoji} ${score.onboard.score}/100 — ${score.onboard.rating}`,
+      '',
+      `RECOMMENDATION:  ${score.recommendation}`,
+      `Suggested tier:  ${score.tier}`,
+      '',
+      'THEIR WORDS',
+      '━'.repeat(50),
+      `"${data.biggest_fix}"`,
+      '',
+      `Submitted: ${data.submitted_at}`
+    ].join('\n')
+  };
+
+  // POST to webhook (GHL or custom endpoint)
+  // Replace WEBHOOK_URL with your GHL webhook or custom scoring endpoint
+  const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/REPLACE_WITH_WEBHOOK_ID';
+
+  const payload = { ...data, _scoring: score, _email: scoringEmail };
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  }).catch(() => {
+    // Fallback: open mailto with scoring data
+    const mailtoBody = encodeURIComponent(scoringEmail.body);
+    const mailtoSubject = encodeURIComponent(scoringEmail.subject);
+    // Silent fallback — don't block UX
+    console.log('Webhook failed, mailto fallback available:', `mailto:bennett@franchiseki.com?subject=${mailtoSubject}&body=${mailtoBody}`);
+  }).finally(() => {
+    // Always show confirmation to prospect
+    showConfirmation();
+  });
+
+  // Also send via GA4 event if configured
+  if (typeof gtag === 'function') {
+    gtag('event', 'application_submitted', {
+      business_name: data.business_name,
+      revenue_range: data.annual_revenue,
+      roi_rating: score.roi.rating,
+      recommendation: score.recommendation
+    });
+  }
+}
+
+function showConfirmation() {
+  document.getElementById('section3').classList.remove('active');
+  document.getElementById('confirmation').style.display = 'block';
+  document.querySelector('.progress').style.display = 'none';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
