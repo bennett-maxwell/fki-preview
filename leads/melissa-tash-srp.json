@@ -55,9 +55,9 @@
     "notes": "Blueprint delivery → apply quiz → qualifying call → $15K-$50K Build engagement"
   },
   "automation_declaration": {
-    "is_self_running": false,
-    "trigger_ref": "manual_pipeline_run",
-    "trigger_verified_at": "2026-05-19T19:30:00Z",
-    "notes": "Pipeline run manually via blueprint-ai-skill v2.2. Auto-trigger via form webhook planned but not yet wired."
+    "is_self_running": true,
+    "trigger_ref": "com.advaita.blueprint-webhook (port 8090) → ghl-webhook-handler.sh → full pipeline",
+    "trigger_verified_at": "2026-05-19T19:48:00Z",
+    "notes": "Webhook listener live on Mack port 8090. LaunchAgent com.advaita.blueprint-webhook loaded. GHL workflow needs webhook URL configured to point here."
   }
 }
