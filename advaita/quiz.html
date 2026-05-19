@@ -238,7 +238,18 @@ select.form-control { appearance: none; background-image: url("data:image/svg+xm
   }
 
   // GHL helpers — submit via webhook (no API key exposed client-side)
-  function buildTags(roi) { return ['advaita-ai-blueprint', 'source_li_blueprint_post_2026-05-16', roi.roi_tag]; }
+  function buildTags(roi) {
+    var tags = ['advaita-quiz', 'source_li_blueprint_post_2026-05-16', roi.roi_tag];
+    if (roi.is_hot) tags.push('hot');
+    else if (roi.rev_proxy_annual >= 500000) tags.push('warm');
+    else tags.push('cold');
+    if (roi.rev_proxy_annual >= 1000000) tags.push('tier-build');
+    else if (roi.rev_proxy_annual >= 500000) tags.push('tier-audit');
+    var utm = new URLSearchParams(window.location.search);
+    var src = utm.get('utm_source');
+    if (src) tags.push('source-' + src);
+    return tags;
+  }
 
   // GHL submit via webhook — all data goes server-side, GHL processes via workflow
   async function submitToGHL(d) {
