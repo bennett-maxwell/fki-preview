@@ -105,6 +105,36 @@ if '$PHONE' and not p.get('phone'): p['phone'] = '$PHONE'
 json.dump(p, open('$PROFILE','w'), indent=2)
 "
 
+# Auto-DQ Scoring — classify lead tier based on profile data
+# Tier: hot (≥$1M rev signal), warm (has website + industry), cold (minimal data)
+LEAD_TIER=$(python3 -c "
+import json
+p = json.load(open('$PROFILE'))
+score = 0
+# Has website = +2
+if p.get('url') and p['url'] not in ('', 'None'): score += 2
+# Has industry identified = +1
+if p.get('industry') and p['industry'] not in ('Unknown', ''): score += 1
+# Has email = +1
+if p.get('email') and p['email'] not in ('', 'None'): score += 1
+# Has phone = +1
+if p.get('phone') and p['phone'] not in ('', 'None'): score += 1
+# Has GHL contact ID (came through form) = +1
+if p.get('ghl_contact_id') and p['ghl_contact_id'] not in ('', 'None'): score += 1
+
+tier = 'cold'
+if score >= 5: tier = 'hot'
+elif score >= 3: tier = 'warm'
+
+# Write tier + score to profile
+p['lead_score'] = score
+p['lead_tier'] = tier
+json.dump(p, open('$PROFILE', 'w'), indent=2)
+print(tier)
+" 2>/dev/null || echo "cold")
+
+echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"scored\",\"tier\":\"$LEAD_TIER\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+
 # Stage 2-7: Run full pipeline via blueprint-batch.sh (single lead)
 # Run in background so webhook responds immediately
 nohup "$SCRIPT_DIR/blueprint-batch.sh" "$LEADS_DIR" --send-previews > "$LOG_DIR/blueprint-batch-${SLUG}-$(date +%Y%m%d%H%M).log" 2>&1 &
