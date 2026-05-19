@@ -5,6 +5,26 @@
 
 set -euo pipefail
 
+if [ "${1:-}" = "--help" ]; then
+    echo "Blueprint AI Pipeline -- Full Integration Test"
+    echo ""
+    echo "Usage: $0"
+    echo ""
+    echo "Runs a comprehensive test of the entire pipeline:"
+    echo "  1. Script existence and permissions"
+    echo "  2. Template existence and placeholders"
+    echo "  3. Lead profile validation (JSON + required fields)"
+    echo "  4. Template placeholder checks"
+    echo "  5. HTTP 200 verification for all deployed URLs"
+    echo "  6. Podcast file existence"
+    echo "  7. Bennett rule compliance (no booking, no calendar, apply CTA)"
+    echo "  8. Delivery email existence"
+    echo "  9. Script executability"
+    echo ""
+    echo "Returns exit code 0 if all tests pass, 1 if any fail."
+    exit 0
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PASS=0
@@ -89,7 +109,7 @@ done
 
 echo ""
 echo "--- 9. Pipeline Scripts Executable ---"
-for script in clone-blueprint.sh build-website.sh build-delivery-email.sh blueprint-batch.sh pre-delivery-check.sh; do
+for script in clone-blueprint.sh build-website.sh build-delivery-email.sh blueprint-batch.sh pre-delivery-check.sh pipeline-health-check.sh pipeline-metrics.sh validate-profile.sh score-leads.sh pipeline-cleanup.sh verify-deployment.sh generate-dashboard.sh; do
     check "$script executable" "[ -x $SCRIPT_DIR/$script ]"
 done
 

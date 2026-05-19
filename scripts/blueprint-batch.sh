@@ -13,6 +13,9 @@
 
 set -euo pipefail
 
+# Source structured logging
+source "$(dirname "$0")/lib-log.sh" 2>/dev/null || true
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TIMESTAMP=$(date +%Y%m%d-%H%M)
@@ -90,20 +93,34 @@ PASSED=0
 FAILED=0
 RESULTS=()
 
+CURRENT=0
+
 for profile in "${LEADS[@]}"; do
+    CURRENT=$((CURRENT + 1))
     SLUG=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('slug','unknown'))" "$profile")
     LEAD=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('lead_name','Unknown'))" "$profile")
     echo "" | tee -a "$LOG"
-    echo "--- $LEAD ($SLUG) ---" | tee -a "$LOG"
+    echo "--- [$CURRENT/$TOTAL] $LEAD ($SLUG) ---" | tee -a "$LOG"
 
     # Stage 2: Website Build
     echo "  Stage 2: Website build..." | tee -a "$LOG"
     if [ -x "$SCRIPT_DIR/build-website.sh" ]; then
-        "$SCRIPT_DIR/build-website.sh" "$profile" >> "$LOG" 2>&1 && \
-            echo "    Website: DONE" | tee -a "$LOG" || \
-            echo "    Website: SKIPPED (script error)" | tee -a "$LOG"
+        if [ "$PARALLEL_WEBSITES" = true ]; then
+            "$SCRIPT_DIR/build-website.sh" "$profile" >> "$LOG" 2>&1 &
+            echo "    Website: LAUNCHED (bg)" | tee -a "$LOG"
+        else
+            "$SCRIPT_DIR/build-website.sh" "$profile" >> "$LOG" 2>&1 && \
+                echo "    Website: DONE" | tee -a "$LOG" || \
+                echo "    Website: SKIPPED (script error)" | tee -a "$LOG"
+        fi
     else
         echo "    Website: SKIPPED (build-website.sh not found)" | tee -a "$LOG"
+    fi
+
+    # Wait for parallel website build if needed
+    if [ "$PARALLEL_WEBSITES" = true ]; then
+        wait 2>/dev/null || true
+        echo "    Website: DONE (parallel)" | tee -a "$LOG"
     fi
 
     # Stage 3: Blueprint HTML Clone
@@ -165,9 +182,20 @@ done
 echo "" | tee -a "$LOG"
 echo "Committing all changes..." | tee -a "$LOG"
 cd "$REPO_DIR"
-git add -A >> "$LOG" 2>&1 || true
-git commit -m "Blueprint batch: $TOTAL leads processed ($TIMESTAMP)" >> "$LOG" 2>&1 || echo "Nothing to commit" | tee -a "$LOG"
-git push origin main >> "$LOG" 2>&1 || echo "Push failed" | tee -a "$LOG"
+if [ -d ".git" ]; then
+    # Stage only pipeline output directories, not random files
+    git add blueprints/ delivery-emails/ */index.html leads/ 2>/dev/null >> "$LOG" 2>&1 || true
+    CHANGES=$(git diff --cached --stat 2>/dev/null || echo "")
+    if [ -n "$CHANGES" ]; then
+        git commit -m "Blueprint batch: $TOTAL leads ($PASSED passed, $FAILED failed) [$TIMESTAMP]" >> "$LOG" 2>&1 || echo "Commit failed" | tee -a "$LOG"
+        log_info "blueprint-batch.sh" "git_commit" "Committed $TOTAL leads" 2>/dev/null || true
+        git push origin main >> "$LOG" 2>&1 || echo "Push failed -- will retry on next run" | tee -a "$LOG"
+    else
+        echo "Nothing to commit (all outputs up to date)" | tee -a "$LOG"
+    fi
+else
+    echo "WARNING: Not a git repo. Skipping commit/push." | tee -a "$LOG"
+fi
 
 # Summary
 echo "" | tee -a "$LOG"

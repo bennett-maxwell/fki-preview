@@ -27,13 +27,18 @@ fi
 
 FILE="$1"
 LEADS_ARG=""
+WEBSITE_FILE=""
 
-# Parse --leads optional argument
+# Parse optional arguments
 shift
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --leads)
       LEADS_ARG="$2"
+      shift 2
+      ;;
+    --website)
+      WEBSITE_FILE="$2"
       shift 2
       ;;
     *)
@@ -258,6 +263,26 @@ else
   size_pass="false"
 fi
 
+# ── CHECK 11: website_size (if --website provided) ───────────────────────
+website_size_pass="true"
+website_bytes="0"
+website_kb="0"
+if [[ -n "$WEBSITE_FILE" ]]; then
+  if [[ -f "$WEBSITE_FILE" ]]; then
+    website_bytes=$(wc -c < "$WEBSITE_FILE")
+    website_bytes="${website_bytes//[[:space:]]/}"
+    website_kb=$((website_bytes / 1024))
+    if [[ "$website_bytes" -gt 15360 ]]; then
+      website_size_pass="true"
+    else
+      website_size_pass="false"
+    fi
+  else
+    website_size_pass="false"
+    website_bytes="0"
+  fi
+fi
+
 # ── Collect failures ──────────────────────────────────────────────────────────
 failures_json="["
 sep=""
@@ -277,6 +302,57 @@ add_failure() {
 [[ "$contamination_pass" == "false" ]] && add_failure "cross_contamination (names: ${contamination_hits})"
 [[ "$urls_pass" == "false" ]]          && add_failure "all_urls_200 (${url_fail_details})"
 [[ "$size_pass" == "false" ]]          && add_failure "file_size (${file_kb}KB, need > 50KB)"
+[[ "$website_size_pass" == "false" ]] && add_failure "website_size (${website_kb}KB, need > 15KB)"
+
+# ── CHECK 12: html_structure (proper DOCTYPE, closed tags) ───────────────
+html_structure_pass="true"
+html_issues=""
+# Check for DOCTYPE (may be after metadata comment)
+if ! head -10 "$FILE" | grep -qi '<!DOCTYPE'; then
+  html_structure_pass="false"
+  html_issues="missing_doctype"
+fi
+# Check for closing </html>
+if ! grep -q '</html>' "$FILE" 2>/dev/null; then
+  html_structure_pass="false"
+  html_issues="${html_issues:+$html_issues,}missing_closing_html"
+fi
+# Check for <head> and </head>
+if ! grep -q '<head' "$FILE" 2>/dev/null || ! grep -q '</head>' "$FILE" 2>/dev/null; then
+  html_structure_pass="false"
+  html_issues="${html_issues:+$html_issues,}missing_head"
+fi
+[[ "$html_structure_pass" == "false" ]] && add_failure "html_structure ($html_issues)"
+
+# ── CHECK 13: broken_links (empty href/src attributes) ──────────────────
+broken_link_count=$(grep -cE '(href|src)=""' "$FILE" 2>/dev/null || echo "0")
+broken_link_count="${broken_link_count//[[:space:]]/}"
+if [[ "${broken_link_count}" -eq 0 ]]; then
+  broken_links_pass="true"
+else
+  broken_links_pass="false"
+fi
+[[ "$broken_links_pass" == "false" ]] && add_failure "broken_links (${broken_link_count} empty href/src)"
+
+# ── CHECK 14: service_count (lead profile has min 3 services) ────────────
+# Only runs if we can find the matching lead profile
+service_count_pass="true"
+service_count_val="n/a"
+LEAD_SLUG_FROM_FILE=$(basename "$FILE" .html)
+POSSIBLE_PROFILE="$(dirname "$(dirname "$FILE")")/leads/${LEAD_SLUG_FROM_FILE}.json"
+if [[ -f "$POSSIBLE_PROFILE" ]]; then
+  service_count_val=$(python3 -c "
+import json,sys
+p=json.load(open(sys.argv[1]))
+svcs=p.get('services',[])
+print(len(svcs))
+" "$POSSIBLE_PROFILE" 2>/dev/null || echo "0")
+  service_count_val="${service_count_val//[[:space:]]/}"
+  if [[ "${service_count_val}" -lt 3 ]]; then
+    service_count_pass="false"
+  fi
+fi
+[[ "$service_count_pass" == "false" ]] && add_failure "service_count (${service_count_val} services, need >= 3)"
 
 failures_json+="]"
 

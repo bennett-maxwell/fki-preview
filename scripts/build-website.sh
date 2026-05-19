@@ -177,6 +177,12 @@ output = output.replace('      <!-- SERVICES_RENDERED -->', services_rendered)
 output = output.replace('      <!-- AI_FEATURES_RENDERED -->', ai_features_rendered)
 output = output.replace('            <!-- SERVICE_OPTIONS -->', service_options)
 
+# ---------- Inject build metadata ----------
+import datetime
+build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+meta_comment = f'<!-- Blueprint AI Pipeline v2.1 | Website Built: {build_ts} | Lead: {html.escape(lead_name)} | Business: {html.escape(business_name)} -->\n'
+output = meta_comment + output
+
 # ---------- Write output ----------
 out_dir = os.path.join(repo_root, slug + '-website')
 os.makedirs(out_dir, exist_ok=True)
@@ -189,19 +195,18 @@ print(f"SLUG={slug}")
 print(f"OUTPUT={out_path}")
 PYEOF
 
-# ---------- Capture slug and output path from python ----------
-BUILD_OUTPUT=$(python3 - "$TEMPLATE" "$PROFILE" "$REPO_ROOT" <<'PYEOF2'
-import sys, json
-with open(sys.argv[2], 'r') as f:
-    p = json.load(f)
-slug = p.get('slug', p.get('business_name', 'site').lower().replace(' ', '-').replace("'", ''))
-print(slug + '-website')
-PYEOF2
-)
-
-SLUG="$BUILD_OUTPUT"
+# ---------- Capture slug from profile (reuse already-loaded data) ----------
+SLUG=$(python3 -c "import json,sys; p=json.load(open(sys.argv[1])); print(p.get('slug', p.get('business_name','site').lower().replace(' ','-').replace(\"'\",''))+'-website')" "$PROFILE")
 OUTPUT_DIR="$REPO_ROOT/$SLUG"
 OUTPUT_FILE="$OUTPUT_DIR/index.html"
+
+# Stamp website build timestamp into profile
+python3 -c "
+import json, sys, datetime
+p = json.load(open(sys.argv[1]))
+p['website_ts'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+json.dump(p, open(sys.argv[1], 'w'), indent=2)
+" "$PROFILE" 2>/dev/null || true
 
 echo ""
 echo "--- Build Complete ---"

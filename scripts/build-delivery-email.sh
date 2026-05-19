@@ -27,12 +27,27 @@ fi
 PROFILE="$1"
 SEND_PREVIEW=false
 SEND_GHL=false
+TEMPLATE_VARIANT=""
 for arg in "${@:2}"; do
   case "$arg" in
     --send-preview) SEND_PREVIEW=true ;;
     --send-ghl) SEND_GHL=true ;;
+    --template-b) TEMPLATE_VARIANT="b" ;;
+    --template-c) TEMPLATE_VARIANT="c" ;;
+    --force) ;; # handled later
   esac
 done
+
+# A/B test support: use variant template if specified and exists
+if [ -n "$TEMPLATE_VARIANT" ]; then
+    VARIANT_TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template-${TEMPLATE_VARIANT}.html"
+    if [ -f "$VARIANT_TEMPLATE" ]; then
+        TEMPLATE="$VARIANT_TEMPLATE"
+        echo "Using template variant: $TEMPLATE_VARIANT"
+    else
+        echo "WARNING: Template variant '$TEMPLATE_VARIANT' not found at $VARIANT_TEMPLATE, using default"
+    fi
+fi
 
 # Extract fields from JSON
 get() { python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2], sys.argv[3] if len(sys.argv)>3 else ''))" "$PROFILE" "$1" "${2:-}" ; }
@@ -53,6 +68,20 @@ PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Gen
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
+REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
+
+# Idempotency check: skip if output exists and is newer than the profile
+if [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
+    echo "SKIP: $REPO_EMAIL already exists and is newer than $PROFILE (idempotent)"
+    echo "  Use --force to rebuild, or touch the profile to trigger rebuild."
+    # Still check for --force flag
+    FORCE=false
+    for arg in "${@:2}"; do [ "$arg" = "--force" ] && FORCE=true; done
+    if [ "$FORCE" = false ]; then
+        exit 0
+    fi
+    echo "  --force specified, rebuilding..."
+fi
 
 # Inject into template
 cp "$TEMPLATE" "$OUTPUT"
@@ -79,9 +108,22 @@ html = html.replace('{{PROMPT_1}}', profile.get('prompt_1', default_p1))
 html = html.replace('{{PROMPT_2}}', profile.get('prompt_2', default_p2))
 html = html.replace('{{PROMPT_3}}', profile.get('prompt_3', default_p3))
 html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
+# Inject build metadata
+import datetime
+build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+meta = f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
+html = meta + html
 with open(output_path, 'w') as f:
     f.write(html)
 PYEOF
+
+# Stamp email build timestamp into profile
+python3 -c "
+import json, sys, datetime
+p = json.load(open(sys.argv[1]))
+p['email_ts'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+json.dump(p, open(sys.argv[1], 'w'), indent=2)
+" "$PROFILE" 2>/dev/null || true
 
 echo "Built: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
 

@@ -756,12 +756,26 @@ html = html.replace(
     f'Employees keep growing, developing, being proactive as they understand {business_name} more deeply every day.'
 )
 
+# ── Inject build metadata as HTML comment at top of file ──
+import datetime
+build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+meta_comment = f'<!-- Blueprint AI Pipeline v2.1 | Built: {build_ts} | Lead: {lead_name} | Industry: {industry} -->\n'
+html = meta_comment + html
+
 # Write output
 with open(output_file, 'w') as f:
     f.write(html)
 
 print(f"  Replacements complete. Output: {output_file}")
 PYTHON_SCRIPT
+
+# Stamp blueprint build timestamp into profile
+python3 -c "
+import json, sys, datetime
+p = json.load(open(sys.argv[1]))
+p['blueprint_ts'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+json.dump(p, open(sys.argv[1], 'w'), indent=2)
+" "$PROFILE_JSON" 2>/dev/null || true
 
 # ─── Step 3: Validate output ───────────────────────────────────────────────
 echo "[3/7] Validating output..."

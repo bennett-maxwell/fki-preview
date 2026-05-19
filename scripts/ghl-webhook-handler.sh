@@ -11,6 +11,26 @@
 
 set -euo pipefail
 
+# Help
+if [ "${1:-}" = "--help" ]; then
+    echo "Blueprint AI Pipeline -- GHL Webhook Handler"
+    echo ""
+    echo "Usage: Receives webhook POST via socat or similar HTTP listener."
+    echo "  socat TCP-LISTEN:8090,reuseaddr,fork EXEC:\"./ghl-webhook-handler.sh\""
+    echo ""
+    echo "Features:"
+    echo "  - Parses GHL webhook JSON (first_name, last_name, email, phone, website)"
+    echo "  - Deduplicates by slug and email across existing leads"
+    echo "  - Rate limits to 10 leads/minute"
+    echo "  - Optional webhook secret verification (set GHL_WEBHOOK_SECRET env var)"
+    echo "  - Auto-scores leads into hot/warm/cold tiers"
+    echo "  - Triggers full pipeline in background"
+    echo ""
+    echo "Environment:"
+    echo "  GHL_WEBHOOK_SECRET  Optional shared secret for webhook verification"
+    exit 0
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 LEADS_DIR="$REPO_DIR/leads"
@@ -19,6 +39,19 @@ mkdir -p "$LEADS_DIR" "$LOG_DIR"
 
 # Read input — handles both raw JSON and HTTP POST format
 BODY=$(cat)
+
+# Webhook signature verification (optional shared secret)
+# Set GHL_WEBHOOK_SECRET env var to enable. GHL sends it in X-Webhook-Secret header.
+if [ -n "${GHL_WEBHOOK_SECRET:-}" ]; then
+    INCOMING_SECRET=$(echo "$BODY" | head -20 | grep -i "x-webhook-secret:" | awk '{print $2}' | tr -d '\r\n' || echo "")
+    if [ -n "$INCOMING_SECRET" ] && [ "$INCOMING_SECRET" != "$GHL_WEBHOOK_SECRET" ]; then
+        echo "HTTP/1.1 401 Unauthorized"
+        echo "Content-Type: application/json"
+        echo ""
+        echo '{"error":"invalid_webhook_secret"}'
+        exit 1
+    fi
+fi
 
 # If input starts with HTTP method, strip headers and extract body
 if echo "$BODY" | head -1 | grep -qE '^(POST|GET|PUT) '; then
@@ -58,17 +91,63 @@ SLUG=$(echo "$LEAD_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd 'a-z
 PROFILE="$LEADS_DIR/${SLUG}.json"
 TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
+# Rate limiting: max 10 leads per minute
+RATE_FILE="$LOG_DIR/webhook-rate.tmp"
+CURRENT_MINUTE=$(date +%Y%m%d%H%M)
+RATE_COUNT=0
+if [ -f "$RATE_FILE" ]; then
+    STORED_MINUTE=$(head -1 "$RATE_FILE" 2>/dev/null || echo "")
+    if [ "$STORED_MINUTE" = "$CURRENT_MINUTE" ]; then
+        RATE_COUNT=$(tail -1 "$RATE_FILE" 2>/dev/null || echo "0")
+        RATE_COUNT=$((RATE_COUNT + 0))  # ensure integer
+    fi
+fi
+if [ "$RATE_COUNT" -ge 10 ]; then
+    echo "HTTP/1.1 429 Too Many Requests"
+    echo "Content-Type: application/json"
+    echo ""
+    echo "{\"error\":\"rate_limit\",\"message\":\"Max 10 leads/minute. Try again shortly.\",\"ts\":\"$TIMESTAMP\"}"
+    echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"rate_limited\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+    exit 0
+fi
+# Update rate counter
+printf '%s\n%s\n' "$CURRENT_MINUTE" "$((RATE_COUNT + 1))" > "$RATE_FILE"
+
 # Log incoming webhook
 echo "{\"ts\":\"$TIMESTAMP\",\"lead\":\"$LEAD_NAME\",\"slug\":\"$SLUG\",\"website\":\"$WEBSITE\",\"contact_id\":\"$CONTACT_ID\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
 
-# Check if lead already exists (dedup)
+# Check if lead already exists (dedup by slug)
 if [ -f "$PROFILE" ]; then
     echo "HTTP/1.1 200 OK"
     echo "Content-Type: application/json"
     echo ""
     echo "{\"status\":\"duplicate\",\"slug\":\"$SLUG\",\"existing_profile\":\"$PROFILE\"}"
-    echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"dedup_skip\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+    echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"dedup_skip_slug\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
     exit 0
+fi
+
+# Dedup by email across all existing leads
+if [ -n "$EMAIL" ] && [ "$EMAIL" != "None" ] && [ "$EMAIL" != "" ]; then
+    EXISTING_EMAIL=$(python3 -c "
+import json, glob, sys
+email = sys.argv[1]
+leads_dir = sys.argv[2]
+for f in glob.glob(leads_dir + '/*.json'):
+    try:
+        d = json.load(open(f))
+        if d.get('email','').lower() == email.lower():
+            print(f)
+            break
+    except: pass
+" "$EMAIL" "$LEADS_DIR" 2>/dev/null || echo "")
+    if [ -n "$EXISTING_EMAIL" ]; then
+        echo "HTTP/1.1 200 OK"
+        echo "Content-Type: application/json"
+        echo ""
+        echo "{\"status\":\"duplicate_email\",\"slug\":\"$SLUG\",\"existing\":\"$EXISTING_EMAIL\"}"
+        echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"dedup_skip_email\",\"email\":\"$EMAIL\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+        exit 0
+    fi
 fi
 
 # Stage 1: Generate lead profile via lead-intake.sh

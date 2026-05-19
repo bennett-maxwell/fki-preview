@@ -6,6 +6,10 @@
 
 set -euo pipefail
 
+# Source structured logging
+SCRIPT_NAME="lead-intake.sh"
+source "$(dirname "$0")/lib-log.sh" 2>/dev/null || true
+
 if [ $# -lt 2 ] || [ "$1" = "--help" ]; then
     echo "Usage: $0 <business_url> <lead_name> [--output lead-profile.json]"
     echo ""
@@ -18,13 +22,45 @@ LEAD_NAME="$2"
 OUTPUT="${4:-lead-profile.json}"
 [ "${3:-}" = "--output" ] && OUTPUT="${4:-lead-profile.json}"
 
+# --- Input validation ---
+# URL format check
+if ! echo "$URL" | grep -qE '^https?://[a-zA-Z0-9]'; then
+    echo "ERROR: Invalid URL format: $URL (must start with http:// or https://)"
+    exit 1
+fi
+
+# Name length limits
+if [ ${#LEAD_NAME} -lt 2 ]; then
+    echo "ERROR: Lead name too short (min 2 chars): '$LEAD_NAME'"
+    exit 1
+fi
+if [ ${#LEAD_NAME} -gt 100 ]; then
+    echo "ERROR: Lead name too long (max 100 chars): '${LEAD_NAME:0:20}...'"
+    exit 1
+fi
+
+# Name must contain at least one letter
+if ! echo "$LEAD_NAME" | grep -qE '[a-zA-Z]'; then
+    echo "ERROR: Lead name must contain at least one letter: '$LEAD_NAME'"
+    exit 1
+fi
+
 LEAD_FIRST=$(echo "$LEAD_NAME" | awk '{print $1}')
 SLUG=$(echo "$LEAD_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
+log_info "$SCRIPT_NAME" "intake_start" "Scraping $URL for $LEAD_NAME" ",\"url\":\"$URL\",\"lead\":\"$LEAD_NAME\"" 2>/dev/null || true
 echo "Scraping $URL for $LEAD_NAME..."
 
-# Fetch website HTML
-PAGE_HTML=$(curl -sL --max-time 15 -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" "$URL" 2>/dev/null || echo "")
+# Fetch website HTML with retry (3 attempts, exponential backoff)
+PAGE_HTML=""
+for attempt in 1 2 3; do
+    PAGE_HTML=$(curl -sL --max-time 15 -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" "$URL" 2>/dev/null || echo "")
+    if [ -n "$PAGE_HTML" ]; then
+        break
+    fi
+    echo "  Retry $attempt/3 for $URL (waiting ${attempt}s)..."
+    sleep "$attempt"
+done
 
 if [ -z "$PAGE_HTML" ]; then
     echo "WARNING: Could not fetch $URL — generating minimal profile"
@@ -167,4 +203,14 @@ print(f'  Email: {email or "not found"}')
 print(f'  Color: {accent_color}')
 PYEOF
 
+# Stamp intake timestamp into profile
+python3 -c "
+import json, sys, datetime
+p = json.load(open(sys.argv[1]))
+p['intake_ts'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+p.setdefault('pipeline_version', '2.1')
+json.dump(p, open(sys.argv[1], 'w'), indent=2)
+" "$OUTPUT" 2>/dev/null || true
+
+log_success "$SCRIPT_NAME" "intake_complete" "Profile generated: $OUTPUT" ",\"output\":\"$OUTPUT\"" 2>/dev/null || true
 echo "Done. Review $OUTPUT before proceeding to Stage 2."

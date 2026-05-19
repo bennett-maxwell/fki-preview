@@ -7,6 +7,21 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+if [ "${1:-}" = "--help" ]; then
+    echo "Blueprint AI Pipeline -- Status Dashboard"
+    echo ""
+    echo "Usage: $0 [leads-dir] [--json]"
+    echo ""
+    echo "Shows status of all leads: Blueprint, Website, Podcast, Email."
+    echo "Status: LIVE (deployed), LOCAL (built), MISSING (not built)."
+    echo ""
+    echo "Options:"
+    echo "  leads-dir   Directory containing lead .json profiles (default: leads/)"
+    echo "  --json      Append JSON summary line at the end"
+    exit 0
+fi
+
 LEADS_DIR="${1:-$REPO_DIR/leads}"
 JSON_MODE=false
 [ "${2:-}" = "--json" ] && JSON_MODE=true
