@@ -213,13 +213,27 @@ function submitApplication() {
   };
 
   // POST to GHL webhook (auto-routes to pipeline stage)
-  const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/REPLACE_WITH_WEBHOOK_ID';
-  fetch(WEBHOOK_URL, {
+  // Primary: GHL inbound webhook. Fallback: local pipeline handler at port 8090.
+  const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/14RD8KklxR9G4e0Rf7v2';
+  const LOCAL_FALLBACK = window.location.hostname === 'localhost' ? 'http://localhost:8090' : null;
+
+  fetch(GHL_WEBHOOK, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(scoringPayload)
+  }).then(r => {
+    if (!r.ok && LOCAL_FALLBACK) {
+      return fetch(LOCAL_FALLBACK, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(scoringPayload)
+      });
+    }
   }).catch(() => {
-    console.log('Webhook fallback — data logged client-side');
+    // Store locally if both endpoints fail — retrievable via console
+    const key = 'apply_submissions_' + Date.now();
+    try { localStorage.setItem(key, JSON.stringify(scoringPayload)); } catch(e) {}
+    console.log('Stored application locally:', key, scoringPayload);
   }).finally(() => {
     document.getElementById('formSection').style.display = 'none';
     document.getElementById('contextBox').style.display = 'none';
