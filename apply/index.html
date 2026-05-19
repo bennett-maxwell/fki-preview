@@ -188,18 +188,31 @@ function submitApplication() {
   const revenueLabels = {under_500k:'Under $500K','500k_1m':'$500K-$1M','1m_3m':'$1M-$3M','3m_5m':'$3M-$5M','5m_10m':'$5M-$10M','10m_plus':'$10M+'};
   const teamLabels = {just_me:'Just me','2_5':'2-5','6_15':'6-15','16_plus':'16+'};
 
-  // Build scoring email for Bennett (gap data only — 10X ROI computed server-side from Blueprint 7Q)
+  // Pipeline stage routing based on scores
+  let pipelineStage = 'new_lead';
+  if (belowICP) {
+    pipelineStage = 'below_icp';
+  } else if (transferPct >= 70 && onboardPartial >= 60) {
+    pipelineStage = 'hot_qualified';
+  } else if (transferPct >= 40) {
+    pipelineStage = 'warm_nurture';
+  } else {
+    pipelineStage = 'cold_educate';
+  }
+
+  // Build scoring payload with pipeline routing
   const scoringPayload = {
     ...data,
     _scoring: {
       transfer: { pct: transferPct, rating: transferRating },
       onboard_partial: onboardPartial,
       icp_gate: belowICP ? 'BELOW_ICP' : 'PASS',
+      pipeline_stage: pipelineStage,
       note: '10X ROI score requires Blueprint 7Q data merge — compute server-side from GHL contact fields'
     }
   };
 
-  // POST to GHL webhook
+  // POST to GHL webhook (auto-routes to pipeline stage)
   const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/REPLACE_WITH_WEBHOOK_ID';
   fetch(WEBHOOK_URL, {
     method: 'POST',
