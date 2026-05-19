@@ -61,8 +61,23 @@ if [ "$TOTAL" -eq 0 ]; then
     exit 1
 fi
 
+# State file locking — prevent concurrent pipeline runs
+LOCK_FILE="$LOG_DIR/blueprint-batch.lock"
+if [ -f "$LOCK_FILE" ]; then
+    LOCK_PID=$(cat "$LOCK_FILE" 2>/dev/null)
+    if kill -0 "$LOCK_PID" 2>/dev/null; then
+        echo "ERROR: Pipeline already running (PID $LOCK_PID). Remove $LOCK_FILE to override."
+        exit 1
+    else
+        echo "WARNING: Stale lock found (PID $LOCK_PID not running). Removing."
+        rm -f "$LOCK_FILE"
+    fi
+fi
+echo $$ > "$LOCK_FILE"
+trap "rm -f $LOCK_FILE" EXIT INT TERM
+
 echo "========================================" | tee "$LOG"
-echo "Blueprint AI Batch Pipeline v2.0" | tee -a "$LOG"
+echo "Blueprint AI Batch Pipeline v2.1" | tee -a "$LOG"
 echo "Leads: $TOTAL" | tee -a "$LOG"
 echo "Parallel websites: $PARALLEL_WEBSITES" | tee -a "$LOG"
 echo "Send previews: $SEND_PREVIEWS" | tee -a "$LOG"
