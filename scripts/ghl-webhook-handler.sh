@@ -154,24 +154,31 @@ fi
 if [ -n "$WEBSITE" ] && [ "$WEBSITE" != "None" ] && [ "$WEBSITE" != "" ]; then
     "$SCRIPT_DIR/lead-intake.sh" "$WEBSITE" "$LEAD_NAME" --output "$PROFILE" 2>&1 | tee -a "$LOG_DIR/ghl-webhook-intake.jsonl" || true
 else
-    # No website — create minimal profile
-    python3 -c "
-import json
+    # No website — create minimal profile (safe: args via sys.argv, no shell interpolation)
+    python3 - "$LEAD_NAME" "$SLUG" "$EMAIL" "$PHONE" "$CONTACT_ID" "$PROFILE" <<'MINIMAL_PY'
+import json, sys
+lead_name = sys.argv[1]
+slug = sys.argv[2]
+email = sys.argv[3]
+phone = sys.argv[4]
+contact_id = sys.argv[5]
+output_path = sys.argv[6]
+first_name = lead_name.split()[0] if lead_name.strip() else ''
 profile = {
-    'lead_name': '$LEAD_NAME',
-    'lead_first_name': '$(echo "$LEAD_NAME" | awk "{print \$1}")',
-    'business_name': '$LEAD_NAME',
-    'slug': '$SLUG',
+    'lead_name': lead_name,
+    'lead_first_name': first_name,
+    'business_name': lead_name,
+    'slug': slug,
     'accent_color': '#2563EB',
     'industry': 'Unknown',
-    'email': '$EMAIL',
-    'phone': '$PHONE',
+    'email': email,
+    'phone': phone,
     'url': '',
-    'ghl_contact_id': '$CONTACT_ID'
+    'ghl_contact_id': contact_id
 }
-json.dump(profile, open('$PROFILE','w'), indent=2)
+json.dump(profile, open(output_path, 'w'), indent=2)
 print('Minimal profile created (no website)')
-"
+MINIMAL_PY
 fi
 
 # Inject GHL contact ID + email into profile if not already present

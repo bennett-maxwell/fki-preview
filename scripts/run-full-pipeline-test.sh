@@ -74,7 +74,7 @@ echo "--- 4. Template Placeholders ---"
 check "Email template has BUSINESS_NAME" "grep -q '{{BUSINESS_NAME}}' $REPO_DIR/templates/delivery-email-template.html"
 check "Email template has ACCENT_COLOR" "grep -q '{{ACCENT_COLOR}}' $REPO_DIR/templates/delivery-email-template.html"
 check "Email template has no booking URLs" "! grep -qi 'leadconnectorhq\|widget/booking' $REPO_DIR/templates/delivery-email-template.html"
-check "Email template has no emojis" "python3 -c \"import re; t=open('$REPO_DIR/templates/delivery-email-template.html').read(); assert len(re.findall(r'[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF]',t))==0\""
+check "Email template has no emojis" "! grep -P '[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}]' $REPO_DIR/templates/delivery-email-template.html"
 check "Email template has apply CTA" "grep -qi 'apply' $REPO_DIR/templates/delivery-email-template.html"
 check "Website template has BUSINESS_NAME" "grep -q '{{BUSINESS_NAME}}' $REPO_DIR/templates/website-template.html"
 
