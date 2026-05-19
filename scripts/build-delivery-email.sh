@@ -23,7 +23,13 @@ fi
 
 PROFILE="$1"
 SEND_PREVIEW=false
-[ "${2:-}" = "--send-preview" ] && SEND_PREVIEW=true
+SEND_GHL=false
+for arg in "${@:2}"; do
+  case "$arg" in
+    --send-preview) SEND_PREVIEW=true ;;
+    --send-ghl) SEND_GHL=true ;;
+  esac
+done
 
 # Extract fields from JSON
 get() { python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2], sys.argv[3] if len(sys.argv)>3 else ''))" "$PROFILE" "$1" "${2:-}" ; }
@@ -90,14 +96,55 @@ if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$APPLY" -lt 1 ]; then
 fi
 echo "Pre-delivery: PASS (booking=0 calendar=0 apply=$APPLY)"
 
-# Send preview if requested
+# Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
-    echo "Sending preview to bennett@franchiseki.com..."
+    echo "Sending preview to bennett@franchiseki.com via Gmail..."
     gog gmail send \
         --to=bennett@franchiseki.com \
         --subject="PREVIEW: $LEAD_NAME Blueprint Delivery Email" \
         --body-html="$(cat "$OUTPUT")" \
         --no-input 2>&1 | tail -2
+fi
+
+# Send via GHL conversations API (primary delivery to lead)
+if [ "$SEND_GHL" = true ]; then
+    LEAD_EMAIL=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get('email',''))" "$PROFILE")
+    GHL_CID=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get('ghl_contact_id',''))" "$PROFILE")
+
+    if [ -n "$GHL_CID" ] && [ "$GHL_CID" != "None" ] && [ "$GHL_CID" != "" ]; then
+        echo "Sending via GHL conversations API (contactId=$GHL_CID)..."
+        source ~/Agent\ SDK/.env 2>/dev/null
+        python3 -c "
+import json, sys
+with open(sys.argv[1]) as f: html = f.read()
+payload = {
+    'type': 'Email',
+    'contactId': sys.argv[2],
+    'subject': sys.argv[3] + ' - Your Custom Blueprint is Ready',
+    'html': html
+}
+if sys.argv[4]: payload['emailTo'] = sys.argv[4]
+print(json.dumps(payload))
+" "$OUTPUT" "$GHL_CID" "$BUSINESS_NAME" "$LEAD_EMAIL" > /tmp/ghl-delivery-payload.json
+
+        GHL_RESULT=$(curl -s -X POST 'https://services.leadconnectorhq.com/conversations/messages' \
+            -H "Authorization: Bearer $GHL_API_KEY" \
+            -H 'Version: 2021-07-28' \
+            -H 'Content-Type: application/json' \
+            -d @/tmp/ghl-delivery-payload.json 2>&1)
+        GHL_MSG_ID=$(echo "$GHL_RESULT" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('messageId',d.get('id','FAILED')))" 2>/dev/null || echo "FAILED")
+        echo "GHL send: msgId=$GHL_MSG_ID"
+        rm -f /tmp/ghl-delivery-payload.json
+    elif [ -n "$LEAD_EMAIL" ] && [ "$LEAD_EMAIL" != "None" ] && [ "$LEAD_EMAIL" != "" ]; then
+        echo "No GHL contact ID — falling back to Gmail for $LEAD_EMAIL..."
+        gog gmail send \
+            --to="$LEAD_EMAIL" \
+            --subject="$BUSINESS_NAME - Your Custom Blueprint is Ready" \
+            --body-html="$(cat "$OUTPUT")" \
+            --no-input 2>&1 | tail -2
+    else
+        echo "SKIP: No email or GHL contact ID in profile"
+    fi
 fi
 
 echo "Done."
