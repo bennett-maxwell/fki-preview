@@ -8,6 +8,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 LEADS_DIR="${1:-$REPO_DIR/leads}"
+JSON_MODE=false
+[ "${2:-}" = "--json" ] && JSON_MODE=true
 
 echo "=========================================="
 echo "  Blueprint AI Pipeline Status Dashboard"
@@ -25,8 +27,8 @@ for profile in "$LEADS_DIR"/*.json; do
     [ -f "$profile" ] || continue
     TOTAL=$((TOTAL + 1))
 
-    SLUG=$(python3 -c "import json; print(json.load(open('$profile')).get('slug','unknown'))")
-    LEAD=$(python3 -c "import json; print(json.load(open('$profile')).get('lead_first_name', json.load(open('$profile')).get('lead_name','?')[:12]))")
+    SLUG=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('slug','unknown'))" "$profile")
+    LEAD=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get('lead_first_name', d.get('lead_name','?')[:12]))" "$profile")
 
     # Check Blueprint
     BP_FILE="$REPO_DIR/blueprints/$SLUG.html"
@@ -39,7 +41,7 @@ for profile in "$LEADS_DIR"/*.json; do
     fi
 
     # Check Website
-    WS_DIR=$(python3 -c "import json; d=json.load(open('$profile')); url=d.get('website_url',''); slug=url.rstrip('/').split('/')[-1] if url else d.get('slug','')+'-website'; print(slug)")
+    WS_DIR=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); url=d.get('website_url',''); slug=url.rstrip('/').split('/')[-1] if url else d.get('slug','')+'-website'; print(slug)" "$profile")
     if [ -d "$REPO_DIR/$WS_DIR" ]; then
         WS_URL="https://bennett-maxwell.github.io/fki-preview/$WS_DIR/"
         WS_CODE=$(curl -sI -o /dev/null -w "%{http_code}" "$WS_URL" 2>/dev/null || echo "000")
@@ -49,7 +51,7 @@ for profile in "$LEADS_DIR"/*.json; do
     fi
 
     # Check Podcast
-    POD_URL=$(python3 -c "import json; print(json.load(open('$profile')).get('podcast_url',''))")
+    POD_URL=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('podcast_url',''))" "$profile")
     if [ -n "$POD_URL" ] && [ "$POD_URL" != "" ]; then
         POD="UPLOADED"
     elif ls ~/Desktop/*$SLUG*podcast* > /dev/null 2>&1; then
@@ -59,8 +61,9 @@ for profile in "$LEADS_DIR"/*.json; do
     fi
 
     # Check Email
-    EMAIL_FILE="$HOME/Desktop/${SLUG}-delivery-email.html"
-    [ -f "$EMAIL_FILE" ] && EM="BUILT" || EM="MISSING"
+    EMAIL_FILE="$REPO_DIR/delivery-emails/${SLUG}-delivery-email.html"
+    EMAIL_DESK="$HOME/Desktop/${SLUG}-delivery-email.html"
+    if [ -f "$EMAIL_FILE" ] || [ -f "$EMAIL_DESK" ]; then EM="BUILT"; else EM="MISSING"; fi
 
     # Overall status
     if [ "$BP" = "LIVE" ] && [ "$WS" = "LIVE" ] && [ "$POD" != "MISSING" ] && [ "$EM" != "MISSING" ]; then
@@ -76,3 +79,9 @@ done
 echo ""
 echo "Total: $TOTAL | Ready: $COMPLETE | WIP: $((TOTAL - COMPLETE))"
 echo "Ready rate: $(( COMPLETE * 100 / TOTAL ))%"
+
+# JSON output for monitoring
+if [ "$JSON_MODE" = true ]; then
+    echo ""
+    echo "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"total\":$TOTAL,\"ready\":$COMPLETE,\"wip\":$((TOTAL - COMPLETE)),\"ready_pct\":$(( COMPLETE * 100 / TOTAL ))}"
+fi

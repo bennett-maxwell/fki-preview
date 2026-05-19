@@ -96,42 +96,37 @@ print('Minimal profile created (no website)')
 fi
 
 # Inject GHL contact ID + email into profile if not already present
-python3 -c "
-import json
-p = json.load(open('$PROFILE'))
-if '$CONTACT_ID': p['ghl_contact_id'] = '$CONTACT_ID'
-if '$EMAIL' and not p.get('email'): p['email'] = '$EMAIL'
-if '$PHONE' and not p.get('phone'): p['phone'] = '$PHONE'
-json.dump(p, open('$PROFILE','w'), indent=2)
-"
+python3 - "$PROFILE" "$CONTACT_ID" "$EMAIL" "$PHONE" <<'INJECT_PY'
+import json, sys
+profile_path, cid, email, phone = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+p = json.load(open(profile_path))
+if cid: p['ghl_contact_id'] = cid
+if email and not p.get('email'): p['email'] = email
+if phone and not p.get('phone'): p['phone'] = phone
+json.dump(p, open(profile_path, 'w'), indent=2)
+INJECT_PY
 
 # Auto-DQ Scoring — classify lead tier based on profile data
 # Tier: hot (≥$1M rev signal), warm (has website + industry), cold (minimal data)
-LEAD_TIER=$(python3 -c "
-import json
-p = json.load(open('$PROFILE'))
+LEAD_TIER=$(python3 - "$PROFILE" <<'SCORE_PY'
+import json, sys
+profile_path = sys.argv[1]
+p = json.load(open(profile_path))
 score = 0
-# Has website = +2
 if p.get('url') and p['url'] not in ('', 'None'): score += 2
-# Has industry identified = +1
 if p.get('industry') and p['industry'] not in ('Unknown', ''): score += 1
-# Has email = +1
 if p.get('email') and p['email'] not in ('', 'None'): score += 1
-# Has phone = +1
 if p.get('phone') and p['phone'] not in ('', 'None'): score += 1
-# Has GHL contact ID (came through form) = +1
 if p.get('ghl_contact_id') and p['ghl_contact_id'] not in ('', 'None'): score += 1
-
 tier = 'cold'
 if score >= 5: tier = 'hot'
 elif score >= 3: tier = 'warm'
-
-# Write tier + score to profile
 p['lead_score'] = score
 p['lead_tier'] = tier
-json.dump(p, open('$PROFILE', 'w'), indent=2)
+json.dump(p, open(profile_path, 'w'), indent=2)
 print(tier)
-" 2>/dev/null || echo "cold")
+SCORE_PY
+2>/dev/null || echo "cold")
 
 echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"scored\",\"tier\":\"$LEAD_TIER\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
 

@@ -109,6 +109,20 @@ DEFAULT_AI_ICONS = [
     '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
 ]
 
+# ---------- Normalize services/ai_features to dicts ----------
+def normalize_items(items, default_desc=''):
+    result = []
+    for item in items:
+        if isinstance(item, str):
+            result.append({'name': item, 'description': default_desc})
+        elif isinstance(item, dict):
+            result.append(item)
+    return result
+
+industry_val = profile.get('industry', 'professional services')
+services = normalize_items(services, f'Professional {industry_val} service tailored to your needs.')
+ai_features = normalize_items(ai_features, f'AI-powered automation for {industry_val} businesses.')
+
 # ---------- Render service cards ----------
 service_html_parts = []
 for i, svc in enumerate(services):

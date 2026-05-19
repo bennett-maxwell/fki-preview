@@ -45,8 +45,8 @@ echo ""
 echo "--- 3. Lead Profiles ---"
 for f in "$REPO_DIR"/leads/*.json; do
     name=$(basename "$f")
-    check "$name valid JSON" "python3 -c \"import json; json.load(open('$f'))\""
-    check "$name has required fields" "python3 -c \"import json; d=json.load(open('$f')); assert all(k in d for k in ['lead_name','business_name','slug','accent_color','industry'])\""
+    check "$name valid JSON" "python3 -c 'import json,sys; json.load(open(sys.argv[1]))' '$f'"
+    check "$name has required fields" "python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); assert all(k in d for k in [\"lead_name\",\"business_name\",\"slug\",\"accent_color\",\"industry\"])' '$f'"
 done
 
 echo ""
