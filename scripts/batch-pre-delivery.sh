@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # batch-pre-delivery.sh — Run pre-delivery checks on all Blueprints in blueprints/ dir
 # Usage: ./batch-pre-delivery.sh [--leads "Name One,Name Two"] [--dir path/to/blueprints]
 # Output: Summary table to stdout; full JSON in /tmp/blueprint-check-results/

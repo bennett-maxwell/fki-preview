@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # pre-delivery-check.sh — Blueprint AI v2.0 Pre-Delivery Validation
 # Usage: ./pre-delivery-check.sh <blueprint.html> [--leads "Name One,Name Two"]
 # Output: JSON with pass/fail per check and overall verdict
