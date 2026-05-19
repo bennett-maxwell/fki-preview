@@ -168,6 +168,32 @@ for ind, keywords in INDUSTRY_KEYWORDS.items():
 slug = lead_name.lower().replace(' ', '-') if lead_name else 'unknown'
 lead_first = lead_name.split()[0] if lead_name else 'there'
 
+# Sales Intelligence: extract social links
+social = {}
+fb = re.search(r'href=["\']?(https?://(?:www\.)?facebook\.com/[^\s"\'<>]+)', html, re.I)
+if fb: social['facebook'] = fb.group(1)
+ig = re.search(r'href=["\']?(https?://(?:www\.)?instagram\.com/[^\s"\'<>]+)', html, re.I)
+if ig: social['instagram'] = ig.group(1)
+li = re.search(r'href=["\']?(https?://(?:www\.)?linkedin\.com/[^\s"\'<>]+)', html, re.I)
+if li: social['linkedin'] = li.group(1)
+yt = re.search(r'href=["\']?(https?://(?:www\.)?youtube\.com/[^\s"\'<>]+)', html, re.I)
+if yt: social['youtube'] = yt.group(1)
+gm = re.search(r'href=["\']?(https?://(?:www\.)?google\.com/maps[^\s"\'<>]+)', html, re.I)
+if gm: social['google_maps'] = gm.group(1)
+
+# Sales Intelligence: extract review/testimonial signals
+review_keywords = ['review', 'testimonial', 'rating', 'star', '5-star', 'customer said', 'what our clients']
+review_signal = sum(1 for kw in review_keywords if kw in text_lower)
+has_reviews = review_signal >= 2
+
+# Sales Intelligence: extract service list items
+svc_items = re.findall(r'<li[^>]*>\s*([A-Z][^<]{5,60})</li>', html)
+services = list(set(s.strip() for s in svc_items[:15]))
+
+# Sales Intelligence: detect CTA/form presence
+has_form = bool(re.search(r'<form[^>]*>', html, re.I))
+has_cta_button = bool(re.search(r'(?:book|schedule|call|contact|get.?(?:a|free)|request)\s', text_lower))
+
 profile = {
     'lead_name': lead_name,
     'lead_first_name': lead_first,
@@ -177,7 +203,12 @@ profile = {
     'accent_color': accent_color,
     'industry': industry,
     'meta_description': meta_desc[:200],
-    'services': [],
+    'services': services,
+    'social_links': social,
+    'has_reviews': has_reviews,
+    'review_signal_score': review_signal,
+    'has_form': has_form,
+    'has_cta': has_cta_button,
     'tools': '',
     'market': 'local and regional customers',
     'service_type': 'professional services',
