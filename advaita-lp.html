@@ -1141,7 +1141,7 @@
       firstName: document.getElementById('first_name').value.trim(),
       email: document.getElementById('email').value.trim(),
       website: document.getElementById('website').value.trim(),
-      locationId: 'pit-81e14317-71e3-44c2-864c-0dd014f570cd' === '' ? '' : '14RD8KklxR9G4e0Rf7v2',
+      locationId: '14RD8KklxR9G4e0Rf7v2',
       tags: ['advaita-ai-blueprint', 'source_li_blueprint_post_2026-05-16', roiTag]
     };
 
@@ -1172,62 +1172,32 @@
     ].join('\n');
 
     // GHL API calls
-    var GHL_KEY = 'pit-81e14317-71e3-44c2-864c-0dd014f570cd';
-    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
-    var GHL_API = 'https://services.leadconnectorhq.com';
+    var GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/14RD8KklxR9G4e0Rf7v2';
     var HOT_PIPELINE = 'BkDsA5sIzgsEon9ikJVW';
 
-    // Create contact
-    fetch(GHL_API + '/contacts/', {
+    // Submit via webhook — no API key exposed client-side
+    var webhookPayload = {
+      firstName: contactData.firstName,
+      email: contactData.email,
+      website: contactData.website,
+      tags: contactData.tags,
+      note: noteBody,
+      is_hot: isHot,
+      pipeline_id: isHot ? HOT_PIPELINE : '',
+      roi_monthly: Math.round(TOTAL_ROI_MONTHLY),
+      rev_proxy_annual: Math.round(rev_proxy_annual),
+      submitted_at: new Date().toISOString(),
+      source: 'advaita-lp-9q-form'
+    };
+
+    fetch(GHL_WEBHOOK, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + GHL_KEY
-      },
-      body: JSON.stringify({
-        firstName: contactData.firstName,
-        email: contactData.email,
-        website: contactData.website,
-        locationId: GHL_LOC,
-        tags: contactData.tags
-      })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var contactId = data.contact && data.contact.id;
-      if (!contactId) return;
-
-      // Add note
-      fetch(GHL_API + '/contacts/' + contactId + '/notes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + GHL_KEY
-        },
-        body: JSON.stringify({ body: noteBody })
-      });
-
-      // Create opportunity if hot
-      if (isHot) {
-        fetch(GHL_API + '/opportunities/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + GHL_KEY
-          },
-          body: JSON.stringify({
-            pipelineId: HOT_PIPELINE,
-            locationId: GHL_LOC,
-            contactId: contactId,
-            name: contactData.firstName + ' - AI Blueprint (HOT)',
-            status: 'open',
-            monetaryValue: Math.round(TOTAL_ROI_MONTHLY)
-          })
-        });
-      }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(webhookPayload)
     })
     .catch(function(err) {
-      console.log('GHL submission error:', err);
+      console.log('GHL webhook error:', err);
+      try { localStorage.setItem('lp_submit_' + Date.now(), JSON.stringify(webhookPayload)); } catch(e) {}
     });
 
     // Meta Pixel Lead event
