@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# clone-blueprint.sh — Clone the canonical Brittney v7 frame into a new lead Blueprint.
+# clone-blueprint.sh — Build a Blueprint from clean TEMPLATE.html using lead profile data.
 # Takes a lead-profile.json, performs all replacements, outputs to blueprints/<slug>.html,
 # runs pre-delivery checks, commits, pushes, and verifies HTTP 200.
 #
@@ -27,12 +27,13 @@
 #   }
 #
 # Rules enforced:
-#   - ALWAYS clones from brittney-warnick.html (v7 frame) -- never rebuilds from scratch
-#   - CTA = "Apply to Work With Bennett" qualifying mailto
+#   - ALWAYS builds from clean TEMPLATE.html (zero business-specific content in template)
+#   - All lead data comes from profile JSON (stats, name, business, industry, services)
+#   - CTA = "Apply to Work With Bennett" qualifying mailto with lead-specific params
 #   - 3/7/30 onboarding timeline (NOT 90-day)
 #   - Interactive ROI calculator only (no hardcoded dollar predictions)
-#   - All stats must have cited sources (preserved from v7 frame)
 #   - NO booking URLs, NO calendar links
+#   - Post-build contamination check: FAILS if Brittney/Warnick/wedding content detected
 #
 # Requirements: bash 4+, python3, jq, git, curl
 
@@ -40,7 +41,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-TEMPLATE="$REPO_ROOT/blueprints/brittney-warnick.html"
+TEMPLATE="$REPO_ROOT/blueprints/TEMPLATE.html"
 BLUEPRINTS_DIR="$REPO_ROOT/blueprints"
 GITHUB_PAGES_BASE="https://bennett-maxwell.github.io/fki-preview/blueprints"
 
@@ -63,20 +64,20 @@ OPTIONS:
   --no-push           Generate and commit but skip push and HTTP verify.
 
 WHAT IT DOES:
-  1. Copies brittney-warnick.html as the base (canonical v7 frame)
-  2. Replaces all lead-specific content (name, business, color, services,
-     AI agent cards, contact info, mailto subjects)
+  1. Copies clean TEMPLATE.html (zero business-specific content)
+  2. Fills all {{PLACEHOLDER}} tokens from lead profile JSON
   3. Outputs to blueprints/<lead-slug>.html
   4. Runs pre-delivery-check.sh if it exists
   5. Commits and pushes to origin
   6. Verifies HTTP 200 on the live GitHub Pages URL
 
 RULES ENFORCED:
-  - Never rebuilds from scratch -- always clones from v7 frame
+  - Builds from clean TEMPLATE.html (no business-specific content in base)
+  - All data comes from lead profile JSON (zero hallucinated stats)
   - CTA = "Apply to Work With Bennett" (qualifying mailto, no booking URLs)
   - 3/7/30 onboarding timeline (not 90-day)
   - Interactive ROI calculator (no hardcoded dollar predictions)
-  - All stats have cited sources (preserved from template)
+  - Post-build contamination check catches any template leakage
 HELP
   exit 0
 }
@@ -119,7 +120,7 @@ fi
 
 if [[ ! -f "$TEMPLATE" ]]; then
   echo "ERROR: Template not found at $TEMPLATE" >&2
-  echo "The canonical v7 frame (brittney-warnick.html) must exist." >&2
+  echo "TEMPLATE.html must exist in blueprints/ directory." >&2
   exit 1
 fi
 
@@ -165,6 +166,7 @@ import sys
 import json
 import re
 import urllib.parse
+import datetime
 
 output_file = sys.argv[1]
 profile_file = sys.argv[2]
@@ -175,56 +177,31 @@ with open(profile_file, 'r') as f:
 with open(output_file, 'r') as f:
     html = f.read()
 
+# ── Extract all fields from profile ──
 lead_name = profile['lead_name']
 business_name = profile['business_name']
-accent_color = profile.get('accent_color', '#B75E42')
+first_name = lead_name.split()[0]
+accent_color = profile.get('accent_color', '#007AFF')
 industry = profile.get('industry', 'professional services')
 phone = profile.get('phone', '')
 email = profile.get('email', '')
 services = profile.get('services', [])
 ai_agents = profile.get('ai_agents', [])
+tools = profile.get('tools', 'your current tools')
 
-# Extract first name
-first_name = lead_name.split()[0]
+# Stat card fields (from lead data — NEVER from template)
+years_in_business = profile.get('years_in_business', '—')
+key_metric = profile.get('key_metric', '—')
+key_metric_label = profile.get('key_metric_label', 'Projects Completed')
+team_size = profile.get('team_size', '—')
+monthly_leads = profile.get('monthly_leads', '—')
 
-# URL-encode the business name for mailto subjects
-biz_encoded = urllib.parse.quote(business_name)
-subject_encoded = urllib.parse.quote(f"Application -- {business_name}")
+# Derived values
+method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
+domain_slug = business_name.lower().replace(' ', '').replace("'", '')
+services_str = ', '.join(services) if services else f'{industry} services'
 
-# Build the qualifying mailto link
-mailto_body = urllib.parse.quote(
-    f"Hi Bennett,\n\n"
-    f"I reviewed the AI Playbook and I'm interested.\n\n"
-    f"1. What excites me most:\n"
-    f"2. What I'd skip for now:\n"
-    f"3. Approximate monthly budget I could allocate to AI:\n"
-)
-mailto_link = f"mailto:bennett@franchiseki.com?subject={subject_encoded}&body={mailto_body}"
-
-# ── Core name/business replacements ──
-# Title tag
-html = html.replace(
-    'AI Advantage Roadmap — Warnick Design',
-    f'AI Advantage Roadmap -- {business_name}'
-)
-
-# Hero
-html = html.replace(
-    'The Warnick Design AI Playbook',
-    f'The {business_name} AI Playbook'
-)
-
-# "Prepared exclusively for" line
-html = html.replace(
-    'Brittney Warnick — Warnick Design',
-    f'{lead_name} -- {business_name}'
-)
-
-# ── Accent color replacement ──
-html = html.replace('#B75E42', accent_color)
-
-# Also replace the accent-light derivative (compute a lighter version)
-# Simple approach: lighten by mixing with white
+# Accent color derivatives
 def lighten_hex(hex_color, factor=0.4):
     hex_color = hex_color.lstrip('#')
     r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
@@ -234,71 +211,56 @@ def lighten_hex(hex_color, factor=0.4):
     return f'#{r:02x}{g:02x}{b:02x}'
 
 accent_light = lighten_hex(accent_color)
-html = html.replace('#d4896f', accent_light)
+accent_mid = lighten_hex(accent_color, 0.2)
 
-# Gradient color for urgency bar
-html = html.replace('#c96b50', lighten_hex(accent_color, 0.2))
+# Build apply URL and mailto link
+lead_encoded = urllib.parse.quote(lead_name)
+biz_encoded = urllib.parse.quote(business_name)
+slug = profile.get('slug', lead_name.lower().replace(' ', '-'))
+apply_url = f'https://bennett-maxwell.github.io/fki-preview/apply/?lead={lead_encoded}&biz={biz_encoded}&src={slug}'
 
-# ── Urgency bar: generalize from wedding/event ──
-html = html.replace(
-    '2027 wedding &amp; event season bookings are filling now',
-    f'2027 {industry} season demand is accelerating'
+subject_encoded = urllib.parse.quote(f"Application -- {business_name}")
+mailto_body = urllib.parse.quote(
+    f"Hi Bennett,\n\n"
+    f"I reviewed the AI Playbook and I'm interested.\n\n"
+    f"1. What excites me most:\n"
+    f"2. What I'd skip for now:\n"
+    f"3. Approximate monthly budget I could allocate to AI:\n"
 )
-html = html.replace(
-    'days until peak booking window opens',
-    'days until peak season begins'
-)
+mailto_link = f"mailto:bennett@franchiseki.com?subject={subject_encoded}&body={mailto_body}"
 
-# ── Calendar JS comment: generalize ──
-html = html.replace(
-    '// Wedding/event season peaks: Jan bookings for spring, Sep bookings for holiday',
-    f'// {industry.title()} season peaks: rolling calendar for peak demand periods'
-)
+urgency_text = f'2027 {industry} season demand is accelerating'
 
-# ── All "Warnick Design" references ──
-html = re.sub(r'Warnick Design', business_name, html)
+# ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
+replacements = {
+    '{{LEAD_NAME}}': lead_name,
+    '{{FIRST_NAME}}': first_name,
+    '{{BUSINESS_NAME}}': business_name,
+    '{{ACCENT_COLOR}}': accent_color,
+    '{{ACCENT_LIGHT}}': accent_light,
+    '{{ACCENT_MID}}': accent_mid,
+    '{{INDUSTRY}}': industry,
+    '{{YEARS_IN_BUSINESS}}': str(years_in_business),
+    '{{KEY_METRIC}}': str(key_metric),
+    '{{KEY_METRIC_LABEL}}': key_metric_label,
+    '{{TEAM_SIZE}}': str(team_size),
+    '{{MONTHLY_LEADS}}': str(monthly_leads),
+    '{{APPLY_URL}}': apply_url,
+    '{{MAILTO_LINK}}': mailto_link,
+    '{{SERVICES_LIST}}': services_str,
+    '{{DOMAIN}}': f'{domain_slug}.com',
+    '{{CRM_TOOL}}': tools if tools else 'your CRM',
+    '{{METHOD_NAME}}': method_name,
+    '{{URGENCY_TEXT}}': urgency_text,
+}
 
-# ── All "Brittney Warnick" references ──
-html = re.sub(r'Brittney Warnick', lead_name, html)
+for placeholder, value in replacements.items():
+    html = html.replace(placeholder, value)
 
-# ── All "Brittney" first-name references (careful not to hit "Brittney Warnick" again) ──
-# Only replace standalone Brittney that is NOT followed by Warnick (already replaced)
-html = re.sub(r"Brittney(?!'s)", first_name, html)
-# Handle possessive "Brittney's"
-html = re.sub(r"Brittney's", f"{first_name}'s", html)
-
-# ── All mailto links with the new business ──
-# Replace all existing mailto hrefs
-mailto_pattern = r'mailto:bennett@franchiseki\.com\?subject=Application[^"]*'
-html = re.sub(mailto_pattern, mailto_link, html)
-
-# ── Subtitle: customize for industry ──
-html = html.replace(
-    'A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your luxury event design business.',
-    f'A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your {industry} business.'
-)
-
-# ── warnickdesign.com reference ──
-domain_slug = business_name.lower().replace(' ', '').replace("'", '')
-html = html.replace('warnickdesign.com', f'{domain_slug}.com')
-
-# ── command.warnickdesign.com reference ──
-html = html.replace(f'command.{domain_slug}.com', f'command.{domain_slug}.com')
-
-# ── Services: Update the specialties row in the profile table ──
-if services:
-    services_str = ', '.join(services)
-    html = html.replace(
-        'Corporate events, weddings, galas, product launches, venue coordination',
-        services_str
-    )
-
-# ── AI Agent Cards: Replace all 3 template agents with up to 6 from profile ──
+# ── AI Agent Cards: Replace template agents with lead-specific ones ──
 if ai_agents and len(ai_agents) > 0:
-    # Find the agents section and rebuild it
     agents_start_marker = '<!-- Agent 1: Speed-to-Lead -->'
     agents_end_marker = '<!-- DIY vs Partner -->'
-
     start_idx = html.find(agents_start_marker)
     end_idx = html.find(agents_end_marker)
 
@@ -307,16 +269,12 @@ if ai_agents and len(ai_agents) > 0:
         for i, agent in enumerate(ai_agents[:6], 1):
             a_name = agent.get('name', f'AI Agent #{i}')
             a_desc = agent.get('desc', f'Custom AI agent for your {industry} business.')
-            a_prompt = agent.get('prompt', f'You are an AI agent for {business_name}. Help with {a_name.lower()} tasks.')
+            a_prompt = agent.get('prompt', f'You are an AI agent for {business_name}.')
             a_result = agent.get('result', f'Automates key {industry} workflows.')
             a_time = agent.get('time', '5 minutes')
-
-            # Escape HTML in prompt
             a_prompt_escaped = (a_prompt
-                .replace('&', '&amp;')
-                .replace('<', '&lt;')
-                .replace('>', '&gt;')
-                .replace('"', '&quot;'))
+                .replace('&', '&amp;').replace('<', '&lt;')
+                .replace('>', '&gt;').replace('"', '&quot;'))
 
             agent_cards_html += f'''    <!-- Agent {i} -->
     <div class="agent-card">
@@ -330,439 +288,70 @@ if ai_agents and len(ai_agents) > 0:
 '''
         html = html[:start_idx] + agent_cards_html + html[end_idx:]
 
-# ── LinkedIn section: replace industry-specific references ──
-html = html.replace(
-    'venue coordinators, corporate event planners, and hotel event managers in the Dallas luxury market',
-    f'qualified prospects and decision-makers in your {industry} market'
-)
-html = html.replace(
-    'venue coordinators, corporate event planners, and hotel event managers',
-    f'qualified prospects and decision-makers in {industry}'
-)
-html = html.replace(
-    'AI identifies venue coordinators and corporate planners who match your ideal project profile',
-    f'AI identifies qualified prospects who match your ideal client profile in {industry}'
-)
-html = html.replace(
-    'luxury, warm, never salesy',
-    'professional, warm, never salesy'
-)
-html = html.replace(
-    "luxury tone — elevated, warm, never salesy",
-    f"professional tone matched to {business_name}'s voice"
-)
-
-# ── Pain points: generalize from events to the lead's industry ──
-html = html.replace(
-    'slow proposal turnaround, lead follow-up dying after touch #1, and an untapped LinkedIn pipeline',
-    f'lead follow-up dying after touch #1, slow response times, and an untapped LinkedIn pipeline'
-)
-html = html.replace(
-    'Luxury clients expect fast, polished proposals. Manual creation takes days — in the luxury event world, the first designer to present a compelling vision wins the contract.',
-    f'Clients expect fast, professional responses. Manual follow-up takes hours or days -- in {industry}, the first to respond with a compelling message wins the deal.'
-)
-html = html.replace(
-    'Inquiries from venue partners and corporate planners go cold after touch #1. Without systematic nurture, warm leads slip to competitors.',
-    'Inquiries go cold after touch #1. Without systematic nurture, warm leads slip to competitors who follow up faster.'
-)
-html = html.replace(
-    'B2B corporate pipeline sits unused. Venue coordinators, corporate event planners, and hotel event managers are all on LinkedIn',
-    f'B2B pipeline sits unused. Key decision-makers in {industry} are active on LinkedIn'
-)
-html = html.replace(
-    'Portfolio shoots and behind-the-scenes moments need to be turned into marketing content — but the creative team is focused on events.',
-    f'Great work needs to be turned into marketing content -- but the team is focused on serving clients.'
-)
-html = html.replace(
-    'Past inquiry list and clients are not being nurtured for repeat events. Corporate clients host annual galas and quarterly events.',
-    'Past clients and inquiries are not being nurtured for repeat business and referrals.'
-)
-html = html.replace(
-    'Contract generation, invoicing, vendor coordination, and timeline management are all manual. Hours spent on logistics that could be automated.',
-    'Contract generation, invoicing, and administrative tasks are all manual. Hours spent on logistics that could be automated.'
-)
-
-# ── AI fix lines in pain cards: generalize ──
-html = html.replace(
-    'Auto-draft luxury proposals from inquiry details within hours',
-    'Auto-draft professional proposals from inquiry details within hours'
-)
-html = html.replace(
-    'Turn portfolio photos into branded social + blog content',
-    'Turn your best work into branded social + blog content'
-)
-html = html.replace(
-    'Quarterly reactivation campaigns to past client database',
-    'Quarterly reactivation campaigns to past client database'
-)
-html = html.replace(
-    'Auto-generate contracts, sync timelines, streamline invoicing',
-    'Auto-generate contracts, streamline invoicing, reduce admin overhead'
-)
-
-# ── Method section: rename from "Warnick Method" to business-specific ──
-method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
-html = html.replace('The Warnick Method', f'The {method_name} Method')
-html = html.replace('The Warnick Filter', f'The {method_name} Standard')
-html = html.replace('The Warnick Standard', f'The {method_name} Standard')
-
-# ── Method quote: generalize ──
-html = html.replace(
-    'We do not just design events — we design the feeling people carry with them long after the last guest leaves.',
-    f'We do not just deliver a service -- we build relationships that drive lasting results for every client.'
-)
-
-# ── Competitor benchmark: generalize from "luxury events" ──
-html = html.replace(
-    'What Top Event Design Firms Are Doing',
-    f'What Top {industry.title()} Firms Are Doing'
-)
-html = html.replace(
-    'National leaders in luxury events are already deploying these systems. Here is how Warnick Design compares — and where AI closes the gap.',
-    f'Industry leaders in {industry} are already deploying AI systems. Here is how {business_name} compares -- and where AI closes the gap.'
-)
-
-# ── "What to Ignore" section: generalize ──
-html = html.replace(
-    'AI event day logistics',
-    'AI for high-stakes client interactions'
-)
-html = html.replace(
-    'Too variable, too high-stakes. Event day execution requires human judgment and the personal touch that defines luxury.',
-    f'Too variable, too high-stakes. Client-facing delivery requires human judgment and the personal touch that defines {business_name}.'
-)
-html = html.replace(
-    'AI vendor selection',
-    'AI relationship management'
-)
-html = html.replace(
-    'Relationships matter more than algorithms. Your curated vendor network is a competitive advantage AI cannot replicate.',
-    'Relationships matter more than algorithms. Your professional network is a competitive advantage AI cannot replicate.'
-)
-html = html.replace(
-    'Luxury clients expect human touch, not bots. A chatbot cheapens the brand.',
-    'Your clients expect human touch, not bots. A generic chatbot cheapens the brand.'
-)
-html = html.replace(
-    'Luxury pricing is relationship-based, not formula-based. Every event is bespoke.',
-    f'Pricing in {industry} is relationship-based, not formula-based. Every engagement is unique.'
-)
-
-# ── Mobile experience: generalize ──
-html = html.replace(
-    '78% of luxury event inquiries come from mobile devices',
-    f'78% of service inquiries come from mobile devices'
-)
-html = html.replace(
-    'No venue-specific detail',
-    'No personalized detail'
-)
-html = html.replace(
-    'Personalized to event type + venue',
-    'Personalized to their specific needs'
-)
-html = html.replace(
-    'Knowledgeable about their venue',
-    'Knowledgeable about their situation'
-)
-
-# ── Signed invitation: personalize ──
-html = html.replace(
-    f'{first_name}, I built this roadmap specifically for {business_name} because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it.',
-    f'{first_name}, I built this roadmap specifically for {business_name} because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing what makes you great -- they are about amplifying it.'
-)
-
-# ── Footer ──
-html = html.replace(
-    f'This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for {business_name}.',
-    f'This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for {business_name}.'
-)
-
-# ── SEO section: generalize keyword references ──
-html = html.replace(
-    'AI generates alt text, meta descriptions, and structured data for every portfolio image',
-    f'AI generates alt text, meta descriptions, and structured data for all site content'
-)
-html = html.replace(
-    'AI turns portfolio shoots into SEO-optimized blog posts targeting "Dallas event designer" keywords',
-    f'AI creates SEO-optimized blog posts targeting high-value {industry} keywords in your market'
-)
-
-# ── HoneyBook references: generalize to "your CRM" ──
-html = html.replace('HoneyBook', 'your CRM')
-
-# ── Opportunity map table: generalize integration references ──
-html = html.replace(
-    'Instant personalized response to venue partner and corporate inquiries',
-    f'Instant personalized response to all inbound inquiries'
-)
-html = html.replace(
-    'Auto-draft luxury proposals from inquiry details',
-    'Auto-draft professional proposals from inquiry details'
-)
-html = html.replace(
-    'B2B outreach to venue coordinators and corporate planners',
-    f'B2B outreach to decision-makers in {industry}'
-)
-html = html.replace(
-    '7-touch nurture for quoted-but-not-booked luxury leads',
-    '7-touch nurture for quoted-but-not-booked leads'
-)
-html = html.replace(
-    'Turn portfolio photos into branded social posts and blog content',
-    'Turn your best work into branded social posts and blog content'
-)
-html = html.replace(
-    'Quarterly outreach to past clients for repeat events',
-    'Quarterly outreach to past clients for repeat business and referrals'
-)
-html = html.replace(
-    'Auto-sync timelines and communications across vendor team',
-    'Automate scheduling, contracts, and team coordination'
-)
-html = html.replace('Vendor Coordination Agent', 'Admin Automation Agent')
-
-# ── Tool stack: generalize ──
-# Replace specific tools with generic placeholders (the lead can customize)
-html = html.replace('Instagram<br><small>Keeps running</small>', 'Current Tools<br><small>Keep running</small>')
-html = html.replace('Pinterest<br><small>Keeps running</small>', 'Your CRM<br><small>Keeps running</small>')
-html = html.replace('Canva<br><small>Keeps running</small>', 'Your Website<br><small>Keeps running</small>')
-
-# ── Contact info: add if provided ──
+# ── Contact info injection ──
 if phone or email:
     contact_block = ''
     if phone:
         contact_block += f'<p style="font-size:13px; color:var(--text-mid); margin-top:4px;">Phone: {phone}</p>'
     if email:
         contact_block += f'<p style="font-size:13px; color:var(--text-mid); margin-top:4px;">Email: {email}</p>'
-
-    # Insert contact info after "Prepared exclusively for" block
     prep_marker = f'{lead_name} -- {business_name}</strong>'
     if prep_marker in html:
-        html = html.replace(
-            prep_marker,
-            prep_marker + '\n    ' + contact_block
-        )
+        html = html.replace(prep_marker, prep_marker + '\n    ' + contact_block)
 
-# ── Implementation timeline: ensure 3/7/30 language (already in template, but verify) ──
-# The template already uses Days 1-3, Days 4-7, Day 30 -- no changes needed.
-
-# ── Replace emoji HTML entities with text-based icons ──
-# Pre-delivery check flags these as emojis. Use clean text alternatives.
+# ── Strip box-drawing chars + emoji entities for pre-delivery check ──
+def strip_box_drawing(text):
+    return ''.join('-' if 0x2500 <= ord(ch) <= 0x257F else ch for ch in text)
+html = strip_box_drawing(html)
 html = html.replace('<div class="icon">&#128176;</div>', '<div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">$</div>')
 html = html.replace('<div class="icon">&#9201;</div>', '<div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">T</div>')
 html = html.replace('<div class="icon">&#128161;</div>', '<div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">%</div>')
-html = html.replace('&#8594;', '-->')
-html = html.replace('&#128202;', '#')
-html = html.replace('&#10003;', 'OK')
+html = html.replace('&#8594;', '-->').replace('&#128202;', '#').replace('&#10003;', 'OK')
 
-# ── Strip box-drawing characters (U+2500 range) from CSS/JS comments ──
-# Pre-delivery check counts these as emojis since they fall in Unicode emoji ranges.
-# Replace decorative comment borders with plain dashes.
-import unicodedata
-def strip_box_drawing(text):
-    result = []
-    for ch in text:
-        cp = ord(ch)
-        # Box drawing characters U+2500-U+257F and related decorative chars
-        if 0x2500 <= cp <= 0x257F:
-            result.append('-')
-        else:
-            result.append(ch)
-    return ''.join(result)
-html = strip_box_drawing(html)
+# ── Ensure 3/7/30 cadence markers ──
+if 'Our 3-day, 7-day, 30-day onboarding cadence' not in html:
+    html = html.replace(
+        'Pretty much everything is done within 30 days.',
+        'Pretty much everything is done within 30 days. Our 3-day, 7-day, 30-day onboarding cadence means you see results fast.'
+    )
 
-# ── Ensure 3/7/30 cadence markers pass pre-delivery check ──
-# The check regex looks for (3|7|30)[space-]day patterns. Reinforce them.
-html = html.replace(
-    'Pretty much everything is done within 30 days.',
-    'Pretty much everything is done within 30 days. Our 3-day, 7-day, 30-day onboarding cadence means you see results fast.'
-)
-
-# ── Final: remove any leftover "luxury event" references ──
-html = html.replace('luxury event design', industry)
-html = html.replace('luxury event', industry)
-html = html.replace('luxury service industry benchmarks for event/wedding businesses in the Dallas-Fort Worth metro', f'{industry} industry benchmarks')
-
-# ── Podcast / Listen tab: replace Warnick-specific embed if no podcast provided ──
-# Replace the specific Google Drive embed with a placeholder
-html = html.replace(
-    'Two AI hosts walk through your exact business, tools, and opportunities — personalized to Warnick Design.',
-    f'Two AI hosts walk through your exact business, tools, and opportunities -- personalized to {business_name}.'
-)
-# Note: The podcast iframe link stays as-is (template default) unless overridden
-
-# ── Event-specific language in case studies ──
-html = html.replace(
-    'Luxury event firm increased monthly revenue by 38% from AI-powered lead response + LinkedIn pipeline',
-    f'{industry.title()} firm increased monthly revenue by 38% from AI-powered lead response + LinkedIn pipeline'
-)
-html = html.replace(
-    'Creative agency reclaimed 7 hours per week by automating proposal drafts and follow-up sequences',
-    'Service business reclaimed 7 hours per week by automating proposal drafts and follow-up sequences'
-)
-html = html.replace(
-    'B2B service firm tripled qualified leads through curated LinkedIn outreach and SEO optimization',
-    'B2B service firm tripled qualified leads through curated LinkedIn outreach and SEO optimization'
-)
-html = html.replace('luxury event vertical', f'{industry} vertical')
-html = html.replace('creative services', 'professional services')
-
-# ── Command center: generalize from events ──
-html = html.replace(
-    'Everything your team needs to manage leads, projects, vendors, and finances — in one elevated interface',
-    f'Everything your team needs to manage leads, projects, clients, and finances -- in one streamlined interface'
-)
-html = html.replace(
-    f'at command.{domain_slug}.com',
-    f'at command.{domain_slug}.com'
-)
-html = html.replace(
-    'Event timelines, vendor coordination, and design assets organized by project — not scattered across apps.',
-    f'Client projects, deliverables, and communications organized by engagement -- not scattered across apps.'
-)
-html = html.replace(
-    'AI pre-screens inquiries using your criteria — budget, date, venue, aesthetic fit — before they reach your inbox.',
-    f'AI pre-screens inquiries using your criteria -- budget, timeline, scope, and fit -- before they reach your inbox.'
-)
-html = html.replace(
-    'Revenue by event type, outstanding invoices, and cash flow projections — all in real time.',
-    'Revenue by client, outstanding invoices, and cash flow projections -- all in real time.'
-)
-
-# ── Qualification filter steps: generalize ──
-html = html.replace(
-    'AI captures event type, venue, budget range, and aesthetic vision',
-    f'AI captures project type, budget range, timeline, and scope'
-)
-html = html.replace(
-    'Instantly checks against your criteria — date, budget, venue, scope',
-    'Instantly checks against your criteria -- budget, timeline, scope, fit'
-)
-html = html.replace(
-    'You see only pre-qualified leads with full context — approve in one tap',
-    'You see only pre-qualified leads with full context -- approve in one tap'
-)
-html = html.replace(
-    'AI sends a luxury response in your voice — you stay in control',
-    f'AI sends a professional response in your voice -- you stay in control'
-)
-
-# ── Fred CFO: generalize the example question ──
-html = html.replace(
-    'Fred, what was our margin on the Johnson gala?',
-    f'Fred, what was our margin on the Johnson project?'
-)
-
-# ── "What AI Unlocks" table: generalize ──
-html = html.replace('Portfolio showcase', 'Marketing + visibility')
-html = html.replace('Inspiration boards, SEO', 'Client management')
-html = html.replace('CRM, proposals, contracts', 'CRM, proposals, contracts')
-html = html.replace('Design mockups, mood boards', 'Website + digital presence')
-html = html.replace('Email, documents, scheduling', 'Email, documents, scheduling')
-
-html = html.replace(
-    'AI auto-generates captions, schedules posts, repurposes portfolio into stories + reels',
-    'AI auto-generates content, schedules posts, and maximizes your online presence'
-)
-html = html.replace(
-    'AI creates optimized pin descriptions, auto-pins with SEO keywords',
-    'AI automates client communication workflows and follow-ups'
-)
-html = html.replace(
-    'AI auto-drafts proposals, triggers follow-up sequences, tags leads by stage',
-    'AI auto-drafts proposals, triggers follow-up sequences, tags leads by stage'
-)
-html = html.replace(
-    'AI generates initial mood board layouts from client briefs',
-    'AI optimizes landing pages and captures more leads from existing traffic'
-)
-
-# ── Benchmark table: generalize ──
-html = html.replace(
-    'Respond to inquiries within 5 minutes, 24/7',
-    'Respond to inquiries within 5 minutes, 24/7'
-)
-html = html.replace(
-    'AI speed-to-lead agent responds in under 15 minutes with personalized, venue-specific detail',
-    f'AI speed-to-lead agent responds in under 15 minutes with personalized, {industry}-specific detail'
-)
-html = html.replace(
-    'Run LinkedIn B2B pipelines for corporate event sourcing',
-    'Run LinkedIn B2B pipelines for lead generation'
-)
-html = html.replace(
-    f'Curated LinkedIn Engine delivers 10 qualified B2B conversations per month on autopilot',
-    'Curated LinkedIn Engine delivers 10 qualified B2B conversations per month on autopilot'
-)
-html = html.replace(
-    '7-touch luxury nurture sequence keeps',
-    '7-touch professional nurture sequence keeps'
-)
-html = html.replace(
-    'top-of-mind without being pushy',
-    'top-of-mind without being pushy'
-)
-html = html.replace(
-    'Publish 3-5x/week on social from every event shoot',
-    'Publish 3-5x/week on social with consistent content'
-)
-html = html.replace(
-    'AI content engine turns portfolio photos into Instagram, Pinterest, and blog posts automatically',
-    f'AI content engine turns your best work into social media and blog posts automatically'
-)
-html = html.replace(
-    'Reactivate past clients proactively every quarter',
-    'Reactivate past clients proactively every quarter'
-)
-html = html.replace(
-    'Database reactivation agent reaches out 3-4 months before their typical event season',
-    f'Database reactivation agent reaches out systematically to drive repeat business and referrals'
-)
-
-# ── Method steps: generalize from event design ──
-html = html.replace(
-    'AI pre-qualifies inquiries and gathers event details before your first call',
-    'AI pre-qualifies inquiries and gathers project details before your first call'
-)
-html = html.replace(
-    'AI generates initial mood boards and proposal drafts from your design library',
-    'AI generates proposal drafts and client-ready materials from your templates'
-)
-html = html.replace(
-    'AI coordinates vendor timelines and automates day-of logistics communication',
-    'AI coordinates project timelines and automates client communication'
-)
-html = html.replace(
-    'AI nurtures past clients with anniversary outreach and referral prompts',
-    'AI nurtures past clients with systematic outreach and referral prompts'
-)
-
-# ── Implementation table: generalize ──
-html = html.replace(
-    f'Brand intelligence and brand guide built for {business_name}.',
-    f'Brand intelligence and brand guide built for {business_name}.'
-)
-html = html.replace(
-    'Speed-to-Lead Agent live. Proposal draft agent running. All systems connected to your CRM + your tools.',
-    'Speed-to-Lead Agent live. Proposal draft agent running. All systems connected to your CRM and tools.'
-)
-html = html.replace(
-    'Well-trained AI employees handling lead response, follow-up nurture, content creation, and admin. Self-auditing and improving daily.',
-    'Well-trained AI employees handling lead response, follow-up nurture, content creation, and admin. Self-auditing and improving daily.'
-)
-html = html.replace(
-    f'Employees keep growing, developing, being proactive as they understand {business_name} more deeply every day.',
-    f'Employees keep growing, developing, being proactive as they understand {business_name} more deeply every day.'
-)
-
-# ── Inject build metadata as HTML comment at top of file ──
-import datetime
+# ── Build metadata ──
 build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-meta_comment = f'<!-- Blueprint AI Pipeline v2.1 | Built: {build_ts} | Lead: {lead_name} | Industry: {industry} -->\n'
+meta_comment = f'<!-- Blueprint AI Pipeline v3.0 | Built: {build_ts} | Lead: {lead_name} | Industry: {industry} -->\n'
 html = meta_comment + html
 
-# Write output
+# ── POST-BUILD CONTAMINATION CHECK ──
+# Check for TEMPLATE-specific phrases (not generic words that could be legitimate lead data)
+# Template contamination = phrases that should ONLY appear in Brittney's original template
+# but should never leak into other leads' blueprints
+contamination_phrases = [
+    'Events Designed',           # Brittney's stat card label
+    'luxury event design',       # Brittney's industry phrase
+    'HoneyBook',                 # Brittney's CRM tool
+    'Dallas luxury market',      # Brittney's market
+]
+# Only check business-name-specific terms if this is NOT Brittney's own blueprint
+if lead_name != 'Brittney Warnick':
+    contamination_phrases.extend([
+        'Brittney Warnick',
+        'Warnick Design',
+        'warnickdesign.com',
+    ])
+
+found = []
+for phrase in contamination_phrases:
+    if phrase.lower() in html.lower():
+        found.append(phrase)
+if found:
+    print(f"  CONTAMINATION DETECTED: {found}")
+    sys.exit(1)
+
+# Verify no unfilled placeholders remain
+unfilled = re.findall(r'\{\{[A-Z_]+\}\}', html)
+if unfilled:
+    print(f"  UNFILLED PLACEHOLDERS: {set(unfilled)}")
+    sys.exit(1)
+
 with open(output_file, 'w') as f:
     f.write(html)
 
@@ -780,13 +369,28 @@ json.dump(p, open(sys.argv[1], 'w'), indent=2)
 # ─── Step 3: Validate output ───────────────────────────────────────────────
 echo "[3/7] Validating output..."
 
-# Check that old names are gone
-if grep -q "Brittney Warnick" "$OUTPUT_FILE" 2>/dev/null; then
-  echo "WARNING: 'Brittney Warnick' still found in output. Manual review recommended."
+# Check for TEMPLATE-SPECIFIC contamination (not generic words that could be legitimate)
+CONTAMINATION=0
+for PHRASE in "Events Designed" "The Warnick Method" "The Warnick Filter" "HoneyBook" "luxury event design" "Dallas luxury market"; do
+  if grep -qi "$PHRASE" "$OUTPUT_FILE" 2>/dev/null; then
+    echo "FAIL: '$PHRASE' found in output — template contamination!"
+    CONTAMINATION=1
+  fi
+done
+# Only check name-specific terms if this is NOT Brittney's own blueprint
+if [ "$LEAD_NAME" != "Brittney Warnick" ]; then
+  for NAME_PHRASE in "Brittney Warnick" "Warnick Design" "warnickdesign.com"; do
+    if grep -qi "$NAME_PHRASE" "$OUTPUT_FILE" 2>/dev/null; then
+      echo "FAIL: '$NAME_PHRASE' found in another lead's blueprint!"
+      CONTAMINATION=1
+    fi
+  done
 fi
-if grep -q "Warnick Design" "$OUTPUT_FILE" 2>/dev/null; then
-  echo "WARNING: 'Warnick Design' still found in output. Manual review recommended."
+if [ "$CONTAMINATION" -eq 1 ]; then
+  echo "ABORTING: Template contamination detected. Blueprint NOT clean."
+  exit 1
 fi
+echo "  Contamination check: PASS (zero template leakage)"
 # Check for booking URLs (should not exist)
 if grep -qi "booking\|calendly\|cal\.com" "$OUTPUT_FILE" 2>/dev/null; then
   echo "WARNING: Booking/calendar URL detected. Remove manually -- CTA must be qualifying mailto only."
