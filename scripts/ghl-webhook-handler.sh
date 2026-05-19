@@ -17,23 +17,16 @@ LEADS_DIR="$REPO_DIR/leads"
 LOG_DIR="$HOME/.openclaw/logs"
 mkdir -p "$LEADS_DIR" "$LOG_DIR"
 
-# Read HTTP POST body from stdin
-BODY=""
-content_length=0
-while IFS= read -r line; do
-    # Skip HTTP headers, find Content-Length
-    line=$(echo "$line" | tr -d '\r')
-    [ -z "$line" ] && break
-    case "$line" in
-        Content-Length:*|content-length:*) content_length=$(echo "$line" | awk '{print $2}');;
-    esac
-done
+# Read input — handles both raw JSON and HTTP POST format
+BODY=$(cat)
 
-if [ "$content_length" -gt 0 ] 2>/dev/null; then
-    BODY=$(head -c "$content_length")
-else
-    BODY=$(cat)
+# If input starts with HTTP method, strip headers and extract body
+if echo "$BODY" | head -1 | grep -qE '^(POST|GET|PUT) '; then
+    BODY=$(echo "$BODY" | sed -n '/^$/,$p' | tail -n +2)
 fi
+
+# Trim leading/trailing whitespace only
+BODY=$(echo "$BODY" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
 # Parse JSON payload
 if [ -z "$BODY" ]; then

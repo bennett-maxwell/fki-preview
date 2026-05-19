@@ -3,16 +3,27 @@
 Blueprint AI Pipeline — Stage 4: Podcast Generation
 Generates NotebookLM podcast from Blueprint HTML content.
 
-Usage: python3 generate-podcast.py <lead-profile.json> [--output-dir ~/Desktop]
+Usage:
+  Single lead:  python3 generate-podcast.py <lead-profile.json> [--output-dir ~/Desktop]
+  Batch mode:   python3 generate-podcast.py --batch <dir-or-glob> [--output-dir ~/Desktop]
+
+Flags:
+  --delay SECONDS        Delay between notebook creations (default: 60)
+  --max-concurrent N     Max concurrent generations (default: 1 = sequential)
+  --batch <path>         Process multiple lead-profile.json files from a directory
+  --output-dir DIR       Where to save outputs (default: ~/Desktop)
 
 Requires: pip3 install notebooklm
 Auth: Run notebooklm-py auth flow once first (stores in ~/.notebooklm/)
 """
 
+import argparse
 import asyncio
+import glob
 import json
 import sys
 import os
+import time
 from pathlib import Path
 from datetime import datetime
 
@@ -61,6 +72,69 @@ These aren't generic chatbots. Every agent is built specifically for {industry} 
 If what you've heard resonates, reply to the email that brought you here. Tell Bennett what excited you most, and he'll walk you through exactly how this would work for {business_name}.
 """
 
+# ---------------------------------------------------------------------------
+# Rate-limit helpers
+# ---------------------------------------------------------------------------
+
+MAX_RETRIES = 3
+INITIAL_BACKOFF_SECONDS = 30
+
+def _ts():
+    """Compact timestamp for log lines."""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def _log(msg: str):
+    """Log to stderr with timestamp."""
+    print(f"[{_ts()}] {msg}", file=sys.stderr)
+
+def _is_rate_limit_error(exc: Exception) -> bool:
+    """Detect rate-limit (HTTP 429) or quota errors from the API."""
+    exc_str = str(exc).lower()
+    # Check for common rate-limit signals
+    if '429' in exc_str:
+        return True
+    if 'rate' in exc_str and 'limit' in exc_str:
+        return True
+    if 'quota' in exc_str:
+        return True
+    if 'too many requests' in exc_str:
+        return True
+    # Check for an HTTP status attribute (requests / httpx style)
+    status = getattr(exc, 'status_code', None) or getattr(exc, 'status', None)
+    if status == 429:
+        return True
+    return False
+
+
+async def _retry_async(coro_factory, description: str = "API call"):
+    """
+    Call *coro_factory()* (which must return a new awaitable each time) with
+    exponential-backoff retry on rate-limit errors.
+
+    Returns the result on success; raises the last exception on exhaustion.
+    """
+    last_exc = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            _log(f"Attempt {attempt}/{MAX_RETRIES} — {description}")
+            result = await coro_factory()
+            return result
+        except Exception as exc:
+            last_exc = exc
+            if _is_rate_limit_error(exc) and attempt < MAX_RETRIES:
+                wait = INITIAL_BACKOFF_SECONDS * (2 ** (attempt - 1))
+                _log(f"Rate-limited on '{description}': {exc}. "
+                     f"Retrying in {wait}s (attempt {attempt}/{MAX_RETRIES})...")
+                await asyncio.sleep(wait)
+            else:
+                raise
+    raise last_exc  # should not reach here, but safety net
+
+
+# ---------------------------------------------------------------------------
+# Core generation logic
+# ---------------------------------------------------------------------------
+
 async def generate_podcast(profile_path: str, output_dir: str = None):
     """Generate a NotebookLM podcast from lead profile."""
 
@@ -104,25 +178,34 @@ async def generate_podcast(profile_path: str, output_dir: str = None):
 
         client = await NotebookLMClient.from_storage()
         async with client:
-            # Create notebook
-            notebook = await client.notebooks.create(
-                title=f"{business_name} AI Blueprint Podcast"
+            # Create notebook (with retry)
+            notebook = await _retry_async(
+                lambda: client.notebooks.create(
+                    title=f"{business_name} AI Blueprint Podcast"
+                ),
+                description=f"create notebook for {business_name}",
             )
             nb_id = notebook.id
-            print(f"Notebook created: {nb_id}")
+            _log(f"Notebook created: {nb_id}")
 
-            # Add source
-            await client.sources.add_text(
-                nb_id,
-                f"{business_name} AI Blueprint",
-                source_content,
-                wait=True
+            # Add source (with retry)
+            await _retry_async(
+                lambda: client.sources.add_text(
+                    nb_id,
+                    f"{business_name} AI Blueprint",
+                    source_content,
+                    wait=True,
+                ),
+                description=f"add source to {nb_id}",
             )
-            print("Source added")
+            _log("Source added")
 
-            # Generate audio
-            await client.artifacts.generate_audio(nb_id)
-            print("Audio generation started...")
+            # Generate audio (with retry)
+            await _retry_async(
+                lambda: client.artifacts.generate_audio(nb_id),
+                description=f"generate audio for {nb_id}",
+            )
+            _log("Audio generation started...")
 
             # Poll for completion (max 5 min)
             for i in range(30):
@@ -130,7 +213,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None):
                 artifacts = await client.artifacts.list_audio(nb_id)
                 for art in artifacts:
                     if art.status == 3:  # COMPLETED
-                        print(f"Audio ready! Artifact: {art.id}")
+                        _log(f"Audio ready! Artifact: {art.id}")
                         # Download
                         output_path = os.path.join(output_dir, f'{slug}-blueprint-podcast.mp4')
                         await client.artifacts.download_audio(nb_id, output_path)
@@ -143,9 +226,9 @@ async def generate_podcast(profile_path: str, output_dir: str = None):
                             'size_mb': round(size_mb, 1),
                             'source_path': source_path,
                         }
-                print(f"  Polling {i+1}/30...")
+                _log(f"  Polling {i+1}/30...")
 
-            print("WARNING: Audio generation timed out after 5 min")
+            _log("WARNING: Audio generation timed out after 5 min")
             return {
                 'notebook_id': nb_id,
                 'status': 'timeout',
@@ -156,13 +239,123 @@ async def generate_podcast(profile_path: str, output_dir: str = None):
         print("ERROR: notebooklm not installed. Run: pip3 install notebooklm")
         return {'error': 'notebooklm not installed', 'source_path': source_path}
     except Exception as e:
-        print(f"ERROR: {e}")
+        _log(f"ERROR: {e}")
         return {'error': str(e), 'source_path': source_path}
 
 
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Usage: python3 generate-podcast.py <lead-profile.json> [--output-dir DIR]")
+# ---------------------------------------------------------------------------
+# Batch processing
+# ---------------------------------------------------------------------------
+
+async def _batch_worker(semaphore: asyncio.Semaphore, profile_path: str,
+                        output_dir: str, delay: float, results: list, index: int):
+    """Process a single profile inside the batch, respecting concurrency."""
+    async with semaphore:
+        _log(f"[{index}] Starting: {profile_path}")
+        result = await generate_podcast(profile_path, output_dir)
+        result['profile_path'] = profile_path
+        results.append(result)
+        _log(f"[{index}] Finished: {profile_path} -> "
+             f"{'OK' if 'error' not in result else result['error']}")
+        # Inter-creation delay (rate-limit courtesy pause)
+        if delay > 0:
+            _log(f"[{index}] Waiting {delay}s before next creation...")
+            await asyncio.sleep(delay)
+
+
+async def run_batch(profile_paths: list, output_dir: str,
+                    delay: float, max_concurrent: int):
+    """Process multiple lead profiles with concurrency control and delays."""
+    _log(f"Batch mode: {len(profile_paths)} profiles, "
+         f"delay={delay}s, max_concurrent={max_concurrent}")
+
+    semaphore = asyncio.Semaphore(max_concurrent)
+    results = []
+
+    if max_concurrent == 1:
+        # Sequential — simple loop so delays happen in order
+        for i, path in enumerate(profile_paths, 1):
+            await _batch_worker(semaphore, path, output_dir, delay, results, i)
+    else:
+        # Concurrent — launch tasks, semaphore limits parallelism
+        tasks = []
+        for i, path in enumerate(profile_paths, 1):
+            task = asyncio.create_task(
+                _batch_worker(semaphore, path, output_dir, delay, results, i)
+            )
+            tasks.append(task)
+        await asyncio.gather(*tasks)
+
+    _log(f"Batch complete: {len(results)}/{len(profile_paths)} processed")
+    successes = [r for r in results if 'error' not in r]
+    failures = [r for r in results if 'error' in r]
+    _log(f"  Successes: {len(successes)}, Failures: {len(failures)}")
+    return results
+
+
+def _collect_profiles(batch_path: str) -> list:
+    """
+    Resolve batch_path to a list of lead-profile.json files.
+    Accepts: a directory, a glob pattern, or a text file with one path per line.
+    """
+    p = Path(batch_path)
+
+    # Directory — find all lead-profile.json inside
+    if p.is_dir():
+        found = sorted(p.rglob('lead-profile.json'))
+        if not found:
+            # Fallback: any .json file
+            found = sorted(p.rglob('*.json'))
+        return [str(f) for f in found]
+
+    # Text file listing paths
+    if p.is_file() and p.suffix in ('.txt', '.list'):
+        with open(p) as f:
+            lines = [l.strip() for l in f if l.strip() and not l.startswith('#')]
+        return lines
+
+    # Glob pattern
+    found = sorted(glob.glob(batch_path, recursive=True))
+    return found
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate NotebookLM podcasts from lead profiles.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Single lead
+  python3 generate-podcast.py lead-profile.json
+
+  # Batch — directory of profiles
+  python3 generate-podcast.py --batch ./leads/ --delay 90
+
+  # Batch — glob pattern, 2 concurrent
+  python3 generate-podcast.py --batch './leads/*/lead-profile.json' --max-concurrent 2
+""",
+    )
+
+    parser.add_argument('profile', nargs='?', default=None,
+                        help='Path to a single lead-profile.json')
+    parser.add_argument('--batch', type=str, default=None,
+                        help='Directory, glob, or list file of lead-profile.json files')
+    parser.add_argument('--output-dir', type=str, default=None,
+                        help='Output directory (default: ~/Desktop)')
+    parser.add_argument('--delay', type=float, default=60,
+                        help='Seconds to wait between notebook creations (default: 60)')
+    parser.add_argument('--max-concurrent', type=int, default=1,
+                        help='Max concurrent generations (default: 1 = sequential)')
+
+    args = parser.parse_args()
+
+    # Validate: need either a single profile or --batch
+    if args.profile is None and args.batch is None:
+        parser.print_help()
         print("\nExample lead-profile.json:")
         print(json.dumps({
             "lead_name": "Jane Smith",
@@ -176,11 +369,28 @@ if __name__ == '__main__':
         }, indent=2))
         sys.exit(1)
 
-    profile_path = sys.argv[1]
-    output_dir = None
-    if '--output-dir' in sys.argv:
-        idx = sys.argv.index('--output-dir')
-        output_dir = sys.argv[idx + 1]
+    output_dir = args.output_dir
 
-    result = asyncio.run(generate_podcast(profile_path, output_dir))
+    # --- Batch mode ---
+    if args.batch is not None:
+        profile_paths = _collect_profiles(args.batch)
+        if not profile_paths:
+            print(f"ERROR: No profile files found at: {args.batch}", file=sys.stderr)
+            sys.exit(1)
+        _log(f"Found {len(profile_paths)} profile(s)")
+        for pp in profile_paths:
+            _log(f"  -> {pp}")
+
+        results = asyncio.run(
+            run_batch(profile_paths, output_dir, args.delay, args.max_concurrent)
+        )
+        print(f"\nBatch results: {json.dumps(results, indent=2)}")
+        sys.exit(0)
+
+    # --- Single-lead mode ---
+    result = asyncio.run(generate_podcast(args.profile, output_dir))
     print(f"\nResult: {json.dumps(result, indent=2)}")
+
+
+if __name__ == '__main__':
+    main()
