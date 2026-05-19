@@ -14,11 +14,13 @@ Usage:
   python3 blueprint-podcast-worker.py --dry-run
 """
 
+import asyncio
 import json
 import logging
 import os
 import sqlite3
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -113,10 +115,118 @@ No obligation. No sales pressure. Just a real conversation about whether this is
     output_path = DESKTOP / f"{slug}-notebooklm-source-v2.md"
     output_path.write_text(doc)
     log.info(f"  Source doc written: {output_path}")
-    return str(output_path)
+    return str(output_path), doc
 
 
-def main():
+async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
+    """Use notebooklm-py to create a notebook, add source, generate audio, download MP3.
+    Returns path to downloaded MP3, or None on failure."""
+    try:
+        from notebooklm import NotebookLMClient, AudioLength
+    except ImportError:
+        log.warning("notebooklm-py not installed — skipping audio generation")
+        return None
+
+    try:
+        client = NotebookLMClient.from_storage()
+    except Exception as e:
+        log.error(f"  [{slug}] NotebookLM auth failed: {e}")
+        return None
+
+    notebook = None
+    try:
+        title = f"Blueprint AI — {slug}"
+        log.info(f"  [{slug}] Creating NotebookLM notebook: {title}")
+        notebook = await asyncio.to_thread(client.notebooks.create, title)
+
+        log.info(f"  [{slug}] Adding source text ({len(source_text)} chars)")
+        source = await asyncio.to_thread(
+            client.sources.add_text,
+            notebook.id, f"{slug} AI Roadmap", source_text,
+            wait=True, wait_timeout=120.0,
+        )
+
+        log.info(f"  [{slug}] Generating podcast audio...")
+        gen_status = await asyncio.to_thread(
+            client.artifacts.generate_audio,
+            notebook.id,
+            source_ids=[source.id],
+            instructions=f"Create an engaging podcast about how AI can transform {slug}'s business. Two hosts discussing the AI Advantage Roadmap. Keep it conversational and exciting.",
+        )
+
+        log.info(f"  [{slug}] Waiting for audio generation (task {gen_status.task_id})...")
+        result = await asyncio.to_thread(
+            client.artifacts.wait_for_completion,
+            notebook.id, gen_status.task_id,
+            timeout=300.0,
+        )
+
+        if result.status != "completed":
+            log.error(f"  [{slug}] Audio generation failed: {result.status} — {result.error}")
+            return None
+
+        output_mp3 = str(DESKTOP / f"{slug}-podcast.mp3")
+        log.info(f"  [{slug}] Downloading audio to {output_mp3}")
+        await asyncio.to_thread(
+            client.artifacts.download_audio,
+            notebook.id, output_mp3,
+        )
+        log.info(f"  [{slug}] Podcast MP3 saved: {output_mp3}")
+        return output_mp3
+
+    except Exception as e:
+        log.error(f"  [{slug}] NotebookLM audio generation failed: {e}")
+        return None
+
+
+async def process_lead(conn: sqlite3.Connection, lead_id: str, slug: str, dry_run: bool) -> None:
+    """Process a single lead: generate source doc + podcast audio."""
+    profile_path = LEADS_DIR / f"{slug}.json"
+    if not profile_path.exists():
+        log.warning(f"  [{slug}] Profile not found — skipping")
+        conn.execute("UPDATE podcast_queue SET status = 'failed' WHERE lead_id = ?", (lead_id,))
+        return
+
+    profile = json.loads(profile_path.read_text())
+    log.info(f"  [{slug}] Generating NotebookLM source doc")
+
+    try:
+        source_path, source_text = generate_source_doc(profile)
+        log.info(f"  [{slug}] Source doc ready at {source_path}")
+
+        if dry_run:
+            conn.execute(
+                "UPDATE podcast_queue SET status = 'source_ready', completed_at = ? WHERE lead_id = ?",
+                (datetime.now(timezone.utc).isoformat(), lead_id),
+            )
+            log.info(f"  [{slug}] Dry-run — skipping audio generation")
+            return
+
+        mp3_path = await generate_podcast_audio(slug, source_text)
+
+        if mp3_path:
+            conn.execute(
+                "UPDATE podcast_queue SET status = 'completed', completed_at = ? WHERE lead_id = ?",
+                (datetime.now(timezone.utc).isoformat(), lead_id),
+            )
+            # Update lead profile with podcast path
+            profile["podcast_mp3"] = mp3_path
+            profile["podcast_ts"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            profile_path.write_text(json.dumps(profile, indent=2))
+            log.info(f"  [{slug}] Full podcast pipeline complete")
+        else:
+            conn.execute(
+                "UPDATE podcast_queue SET status = 'source_ready', completed_at = ? WHERE lead_id = ?",
+                (datetime.now(timezone.utc).isoformat(), lead_id),
+            )
+            log.info(f"  [{slug}] Source doc done; audio generation unavailable or failed")
+
+    except Exception as e:
+        log.error(f"  [{slug}] Failed: {e}")
+        conn.execute("UPDATE podcast_queue SET status = 'failed' WHERE lead_id = ?", (lead_id,))
+
+
+async def async_main():
     import argparse
     parser = argparse.ArgumentParser(description="Blueprint Podcast Worker")
     parser.add_argument("--max", type=int, default=MAX_PER_RUN)
@@ -140,43 +250,20 @@ def main():
 
     log.info(f"Processing {len(pending)} podcast leads")
 
+    # Process sequentially to respect NotebookLM rate limits
     for lead_id, slug in pending:
-        profile_path = LEADS_DIR / f"{slug}.json"
-        if not profile_path.exists():
-            log.warning(f"  [{slug}] Profile not found — skipping")
-            conn.execute(
-                "UPDATE podcast_queue SET status = 'failed' WHERE lead_id = ?", (lead_id,)
-            )
-            continue
-
-        profile = json.loads(profile_path.read_text())
-        log.info(f"  [{slug}] Generating NotebookLM source doc")
-
-        try:
-            source_path = generate_source_doc(profile)
-            conn.execute(
-                "UPDATE podcast_queue SET status = 'source_ready', completed_at = ? WHERE lead_id = ?",
-                (datetime.now(timezone.utc).isoformat(), lead_id),
-            )
-            log.info(f"  [{slug}] Source doc ready at {source_path}")
-
-            # TODO: When notebooklm-py is available, add:
-            # 1. Upload source doc to NotebookLM
-            # 2. Generate podcast audio
-            # 3. Download MP3
-            # 4. Upload to Google Drive
-            # 5. Update profile with podcast_url
-            # 6. Update Blueprint HTML with podcast embed
-
-        except Exception as e:
-            log.error(f"  [{slug}] Failed: {e}")
-            conn.execute(
-                "UPDATE podcast_queue SET status = 'failed' WHERE lead_id = ?", (lead_id,)
-            )
+        await process_lead(conn, lead_id, slug, args.dry_run)
+        # Rate-limit delay between leads (NotebookLM ~50/day)
+        if len(pending) > 1:
+            time.sleep(2)
 
     conn.commit()
     conn.close()
     log.info("Podcast worker complete")
+
+
+def main():
+    asyncio.run(async_main())
 
 
 if __name__ == "__main__":
