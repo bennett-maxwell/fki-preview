@@ -66,6 +66,7 @@ PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY 
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
+APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
@@ -93,6 +94,7 @@ sed -i '' "s|{{BLUEPRINT_URL}}|$BLUEPRINT_URL|g" "$OUTPUT"
 sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
 sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_SUBJECT}}|$APPLY_SUBJECT|g" "$OUTPUT"
+sed -i '' "s|{{APPLY_URL}}|$APPLY_URL|g" "$OUTPUT"
 
 # Prompts need python for multi-line safety
 python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
