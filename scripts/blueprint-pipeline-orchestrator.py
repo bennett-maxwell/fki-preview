@@ -565,7 +565,7 @@ async def process_batch(
     log.info(f"=== BATCH {batch_id}: {len(profiles)} leads, {MAX_WORKERS} workers ===")
 
     conn.execute(
-        "INSERT INTO batches (id, started_at, total_leads, status) VALUES (?, ?, ?, 'running')",
+        "INSERT OR IGNORE INTO batches (id, started_at, total_leads, status) VALUES (?, ?, ?, 'running')",
         (batch_id, datetime.now(timezone.utc).isoformat(), len(profiles)),
     )
     conn.commit()
