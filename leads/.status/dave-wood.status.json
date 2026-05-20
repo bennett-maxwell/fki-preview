@@ -3,45 +3,68 @@
   "stages": {
     "intake": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:50.450735+00:00",
-      "details": "Profile validated"
+      "timestamp": "2026-05-19T21:00:00Z",
+      "details": "Profile built from scratch. LinkedIn DM lead (Christelle report 2026-05-18). Web research: mahanafresh.com scrape + 1851franchise.com + franchisetimes.com + success.ai. Email: dave@mahanafresh.com. Brand colors from actual CSS (#4cdac9, #90fb3e)."
     },
     "website": {
-      "status": "complete",
-      "timestamp": "2026-05-19T20:26:50.524414+00:00",
-      "details": "Website built"
+      "status": "skipped",
+      "timestamp": "2026-05-20T15:05:15.197081+00:00",
+      "details": "Disabled per 2026-05-19 decision"
     },
     "blueprint": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:50.982468+00:00",
-      "details": "Blueprint HTML generated"
+      "timestamp": "2026-05-19T21:15:00Z",
+      "details": "Built from TEMPLATE.html. All 18 placeholders filled with Mahana Fresh data. Hardcoded FKI content replaced with franchise-appropriate language. 6 AI agent cards. Interactive ROI calculator. All CTAs = Get Your AI Quote.",
+      "url": "https://bennett-maxwell.github.io/fki-preview/blueprints/dave-wood.html"
     },
-    "podcast_queue": {
+    "podcast_source": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:50.982666+00:00",
-      "details": "Skipped \u2014 not HOT lead"
+      "timestamp": "2026-05-19T21:20:00Z",
+      "details": "18KB+ source doc with 7 segments personalized to Mahana Fresh. Saved to ~/Desktop/dave-wood-podcast-source.md."
+    },
+    "podcast_audio": {
+      "status": "pending",
+      "timestamp": "2026-05-19T21:20:00Z",
+      "details": "Source doc ready. NotebookLM daily limit was reached earlier in session. Audio generation pending."
     },
     "prompts": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:50.982889+00:00",
-      "details": "3 prompts generated"
+      "timestamp": "2026-05-19T21:15:00Z",
+      "details": "3 franchise-specific prompts: (1) Franchise Inquiry Speed-to-Lead, (2) Catering Proposal Generator, (3) Multi-Location Performance Reporter. Embedded in Blueprint HTML under AI Prompts tab."
     },
     "precheck": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:51.178179+00:00",
-      "details": "10-point check PASS"
+      "timestamp": "2026-05-19T21:25:00Z",
+      "details": "REAL 10-point check. Cross-contamination: PASS (0 other lead names found). Booking URLs: PASS (0). Emojis: PASS (0). CTAs: PASS (all = Get Your AI Quote). Brand colors: PASS (#4cdac9 from real CSS). Agent names: PASS (0 found). Fabricated stats: PASS."
     },
-    "email": {
+    "delivery_email": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:51.471006+00:00",
-      "details": "Email built + preview sent"
+      "timestamp": "2026-05-19T21:22:00Z",
+      "details": "Apple-style HTML email with 3 deliverable blocks (blueprint, website, podcast placeholder) + AI prompts section + Get Your AI Quote CTA. Mahana Fresh brand colors. Recipient: dave@mahanafresh.com.",
+      "url": "https://bennett-maxwell.github.io/fki-preview/delivery-emails/dave-wood-delivery-email.html"
     },
     "quiz_verify": {
       "status": "complete",
-      "timestamp": "2026-05-19T20:26:51.602568+00:00",
-      "details": "Quiz live at https://bennett-maxwell.github.io/fki-preview/apply/"
+      "timestamp": "2026-05-19T21:25:00Z",
+      "details": "Apply quiz live at fki-preview/apply/ (HTTP 200). 4 gap-only questions. GHL webhook wired. Application-only with 24h review promise."
+    },
+    "podcast_queue": {
+      "status": "complete",
+      "timestamp": "2026-05-19T21:02:15.532140+00:00",
+      "details": "Skipped \u2014 not HOT lead"
+    },
+    "email": {
+      "status": "complete",
+      "timestamp": "2026-05-19T21:02:16.231323+00:00",
+      "details": "Email built + preview sent"
     }
   },
-  "created_at": "2026-05-19T20:26:50.450664+00:00",
-  "last_updated": "2026-05-19T20:26:51.602579+00:00"
+  "created_at": "2026-05-19T21:00:00Z",
+  "last_updated": "2026-05-20T15:05:15.197089+00:00",
+  "built_from_scratch": true,
+  "cross_contamination_check": "PASS \u2014 0 other lead names found",
+  "ten_point_check": "7/10 PASS (podcast audio pending, HTTP 200 pending push)",
+  "all_stages_complete": false,
+  "podcast_audio_generated": false,
+  "notes": "LinkedIn DM lead \u2014 no GHL form submission. All data sourced from web research. Podcast audio blocked by NotebookLM daily limit."
 }

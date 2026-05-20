@@ -25,3 +25,21 @@ echo "$TS webhook=$WH_STATUS github_pages=${GP_PASS}/3 leads=$LEAD_COUNT" >> "$L
 if [ "$WH_STATUS" = "DOWN" ]; then
   echo "$TS ALERT: Webhook listener DOWN on port 8090" >> "$LOG"
 fi
+
+# Podcast status check (added overdrive 2026-05-19)
+echo ""
+echo "=== PODCAST STATUS ==="
+python3 -c "
+import sqlite3, os
+db = 'pipeline.db'
+if os.path.exists(db):
+    conn = sqlite3.connect(db)
+    c = conn.cursor()
+    c.execute('SELECT slug, has_podcast_audio, delivery_status FROM leads ORDER BY slug')
+    for r in c.fetchall():
+        status = '✅' if r[1] else '⏳'
+        print(f\"  {status} {r[0]}: {r[2]}\")
+    conn.close()
+else:
+    print('  pipeline.db not found')
+"

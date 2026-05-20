@@ -1,5 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+# PODCAST LINK VERIFICATION (added by overdrive 2026-05-19)
+verify_podcast_link() {
+  local slug="$1"
+  local podcast_url="$2"
+  if [ -z "$podcast_url" ]; then
+    echo "WARN: $slug has no podcast_url"
+    return 1
+  fi
+  local code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$podcast_url" 2>/dev/null)
+  if [ "$code" != "200" ]; then
+    echo "FAIL: $slug podcast HTTP $code: $podcast_url"
+    return 1
+  fi
+  echo "OK: $slug podcast HTTP 200"
+  return 0
+}
+
 # pre-delivery-check.sh — Blueprint AI v2.0 Pre-Delivery Validation
 # Usage: ./pre-delivery-check.sh <blueprint.html> [--leads "Name One,Name Two"]
 # Output: JSON with pass/fail per check and overall verdict
