@@ -43,6 +43,22 @@ h1{font-size:28px;font-weight:700;text-align:center;margin:32px 0 8px;letter-spa
   .checkbox-grid{grid-template-columns:1fr}
 }
 </style>
+
+<script>
+(function() {
+  const p = new URLSearchParams(window.location.search);
+  const lead = p.get('lead'), biz = p.get('biz');
+  if (lead) {
+    document.addEventListener('DOMContentLoaded', function() {
+      const el = document.querySelector('h1') || document.querySelector('.hero-title');
+      if (el && !el.dataset.personalized) {
+        el.insertAdjacentHTML('beforebegin', '<p style="font-size:14px;color:#007aff;margin-bottom:8px;font-weight:600">Prepared for ' + lead + (biz ? ' · ' + biz : '') + '</p>');
+        el.dataset.personalized = '1';
+      }
+    });
+  }
+})();
+</script>
 </head>
 <body>
 <div class="container">

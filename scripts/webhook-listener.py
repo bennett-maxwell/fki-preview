@@ -16,6 +16,12 @@ class WebhookHandler(http.server.BaseHTTPRequestHandler):
         content_length = int(self.headers.get('Content-Length', 0))
         body = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else ''
 
+        import datetime
+        payload_log = os.path.expanduser('~/.openclaw/logs/blueprint-webhook-payloads.jsonl')
+        os.makedirs(os.path.dirname(payload_log), exist_ok=True)
+        with open(payload_log, 'a') as log_f:
+            import json as _json
+            log_f.write(_json.dumps({"ts": datetime.datetime.utcnow().isoformat()+"Z", "path": self.path, "body_len": len(body), "body_preview": body[:200]}) + "\n")
         try:
             result = subprocess.run(
                 ['bash', HANDLER_SCRIPT],
