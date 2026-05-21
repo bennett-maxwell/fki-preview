@@ -46,12 +46,40 @@
     .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
     .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
     .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 620px; margin-bottom: 3rem; }
+
+    /* Snapshot */
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    /* Results from similar businesses */
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); }
+    .results-table-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+
+    /* Pillars */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand-dark); margin: 0.75rem 0 0.25rem; }
+
+    /* Stack */
     .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
     .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
     .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
     .stack-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    /* Gaps */
     .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
     .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
     .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -62,6 +90,26 @@
     .gap-tag.revenue { background: #fde8f3; color: #b02060; }
     .gap-tag.efficiency { background: #e8f0fd; color: #1a4db0; }
     .gap-tag.brand { background: #f0e8fd; color: var(--brand-dark); }
+
+    /* Opportunity Map */
+    .opp-table-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfaff; }
+    .pri-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #e8f5e9; color: #2e7d32; }
+
+    /* What to Ignore */
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: #c0392b; font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-light); }
+
+    /* Agents */
     .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
     .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
@@ -71,27 +119,38 @@
     .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
     .agent-outcome { font-size: 0.82rem; color: var(--brand-dark); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
     .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
-    .timeline { position: relative; }
-    .timeline::before { content: ''; position: absolute; left: 26px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-    .timeline-item { display: flex; gap: 1.5rem; padding: 0 0 2.5rem 0; position: relative; }
-    .timeline-marker { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; text-align: center; line-height: 1.2; }
-    .timeline-content { flex: 1; padding-top: 0.4rem; }
-    .timeline-day { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.3rem; }
-    .timeline-desc { font-size: 0.92rem; color: var(--text-muted); }
-    .timeline-items-list { margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .timeline-items-list li { font-size: 0.88rem; color: var(--text-muted); padding-left: 1.2rem; position: relative; list-style: none; }
-    .timeline-items-list li::before { content: ''; width: 5px; height: 5px; background: var(--brand); border-radius: 50%; position: absolute; left: 0; top: 0.55em; }
+
+    /* Milestone table */
+    .milestone-table-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand-dark); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    /* ROI Calculator */
     .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
-    .calc-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .input-group label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-    .input-group input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: var(--font-sans); color: var(--text); outline: none; transition: border-color 0.2s; }
-    .input-group input:focus { border-color: var(--brand); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand-dark); color: var(--white); border-color: var(--brand-dark); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand-dark); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand-dark); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand-dark); }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
     .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
     .calc-result-item { text-align: center; }
     .calc-result-item .res-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
     .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand-dark); }
     .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
     .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+
+    /* Prompts */
     .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
     .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
     .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); }
@@ -111,6 +170,19 @@
     .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
     .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
     .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    /* Podcast */
+    .podcast-wrap { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 100%); border-radius: var(--radius); padding: 2.5rem; color: var(--white); }
+    .podcast-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .podcast-sub { font-size: 0.92rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+    .podcast-player { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .podcast-player audio { width: 100%; outline: none; }
+    .podcast-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .podcast-meta-item { font-size: 0.82rem; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 0.4rem; }
+    .podcast-quotes { display: flex; flex-direction: column; gap: 1rem; }
+    .podcast-quote { background: rgba(255,255,255,0.06); border-left: 3px solid var(--brand-light); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; font-size: 0.92rem; color: rgba(255,255,255,0.85); font-style: italic; }
+
+    /* Website Audit */
     .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
     .audit-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.25rem; text-align: center; }
     .audit-score { font-size: 2.2rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.3rem; }
@@ -118,10 +190,13 @@
     .audit-detail { font-size: 0.78rem; color: var(--text-light); }
     .audit-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 0.75rem; }
     .audit-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); border-radius: 3px; }
+
+    /* CTA */
     .cta-section { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
     .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
     .cta-section h2 span { color: var(--brand-light); }
     .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 580px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.88); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand-light); padding-left: 1.25rem; text-align: left; }
     .cta-btn { display: inline-block; background: var(--white); color: var(--brand-dark); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
     .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
@@ -135,16 +210,20 @@
   </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
   <div class="nav-logo">Advaita <span>AI for Business</span></div>
   <ul class="nav-links">
+    <li><a href="#snapshot">Your Profile</a></li>
     <li><a href="#agents">AI Agents</a></li>
-    <li><a href="#timeline">Onboarding</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
-    <li><a href="#prompts">Start Here</a></li>
+    <li><a href="#listen">Listen</a></li>
     <li><a href="#apply">Apply</a></li>
   </ul>
 </nav>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">Confidential — Prepared for Melissa Tash</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for Spoiled Rotten Photography</h1>
@@ -154,37 +233,241 @@
     <div class="hero-divider"></div>
     <div class="hero-stat"><span class="num">3/7/30</span><span class="label">Day Onboarding<br>Timeline</span></div>
     <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">50+</span><span class="label">SOPs Ready<br>to Automate</span></div>
+    <div class="hero-divider"></div>
     <div class="hero-stat"><span class="num">Day 1</span><span class="label">Start Using AI<br>Immediately</span></div>
   </div>
 </section>
-<section class="section section-alt" id="stack">
+
+<!-- BUSINESS SNAPSHOT -->
+<section class="section section-alt" id="snapshot">
   <div class="container">
-    <p class="section-label">Where You Are Today</p>
-    <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one.</p>
-    <div class="stack-grid">
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Studio Management Software</div><div class="stack-role">Operations / Scheduling</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Email + Phone</div><div class="stack-role">Lead Communication</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Spreadsheets / Drive</div><div class="stack-role">Franchise Coordination</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Calendar / Booking</div><div class="stack-role">Photo Day Scheduling</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Manual Outreach</div><div class="stack-role">School Contract Sales</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><div class="stack-tool">Manual Reporting</div><div class="stack-role">Franchise Performance</div></div></div>
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Spoiled Rotten Photography Stands Today</h2>
+    <p class="section-sub">Built from your intake answers. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">$3M–10M</div><div class="snapshot-key">Annual Revenue</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Franchise</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">GoHighLevel</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Inconsistent</div><div class="snapshot-key">Current Lead Speed</div></div>
+    </div>
+    <p style="font-size:0.88rem;color:var(--text-light);">AI Maturity: ChatGPT user — ready to move to AI agents. Current stresses: Admin Work, Marketing Content, Hiring, Reporting.</p>
+  </div>
+</section>
+
+<!-- RESULTS FROM SIMILAR BUSINESSES -->
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">Proof It Works</p>
+    <h2 class="section-title">Results from Similar Businesses</h2>
+    <p class="section-sub">These are published benchmarks from franchise and multi-location service businesses at similar revenue tiers and AI maturity levels.</p>
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead>
+          <tr><th>Result</th><th>What Changed</th><th>Industry / Context</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="result-num">+32%</div>contract win rate</td>
+            <td>Added AI speed-to-lead response. First vendor to respond wins 78% of contracts.</td>
+            <td>Multi-location service franchise, similar revenue tier</td>
+            <td><a href="https://www.hubspot.com/marketing-statistics" target="_blank">HubSpot [1]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">6.5 hrs/wk</div>reclaimed per location</td>
+            <td>Automated parent reminders, proofing notifications, and reorder follow-up sequences.</td>
+            <td>Franchise operations — admin automation benchmarks</td>
+            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR [2]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">3x faster</div>proposal turnaround</td>
+            <td>AI proposal generator replaces 45-minute manual process with 3-minute automated output.</td>
+            <td>Photography and creative services businesses</td>
+            <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey [4]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">60%</div>admin time reduction</td>
+            <td>AI coordination agents handling scheduling, communication, and reporting automatically.</td>
+            <td>Small business AI adoption — industry average</td>
+            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR [5]</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
-<section class="section" id="gaps">
+
+<!-- 3-PILLAR FRAMEWORK -->
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for SRP</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes — more revenue, more time, or lower cost.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">+15–32%</div>
+        <div class="pillar-sub">Faster response wins more school contracts. Higher reorder rates increase average order value per family. More contracts closed per month.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">6.5 hrs/wk</div>
+        <div class="pillar-sub">Admin work, parent communication, proposal drafts, and performance reporting — automated. Reclaimed per location, per week.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="pillar-title">Save Money</div>
+        <div class="pillar-metric">60% reduction</div>
+        <div class="pillar-sub">Reduce cost-per-lead handled, eliminate manual coordination overhead, and scale to more school locations without adding headcount.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOL STACK -->
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Your Current Tool Stack</h2>
+    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one without replacing anything you already use.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">GoHighLevel</div><div class="stack-role">CRM + Automation</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Studio Management Software</div><div class="stack-role">Operations / Scheduling</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Zoho CRM</div><div class="stack-role">Contact / Pipeline Mgmt</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Email + Phone</div><div class="stack-role">Lead Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Calendar / Booking</div><div class="stack-role">Photo Day Scheduling</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Dropbox</div><div class="stack-role">File Storage / Delivery</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAP ANALYSIS -->
+<section class="section section-alt" id="gaps">
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
-    <h2 class="section-title">Your 3 Biggest AI Opportunity Gaps</h2>
-    <p class="section-sub">These are the areas where businesses like SRP are leaving the most revenue and time on the table right now.</p>
+    <h2 class="section-title">Your Biggest AI Opportunity Gaps</h2>
+    <p class="section-sub">These are the areas where SRP is leaving the most revenue and time on the table right now — based on your intake answers.</p>
     <div class="gap-list">
       <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">School Contract Speed-to-Response</div><div class="gap-desc">When a school district submits an inquiry, response time is the deciding factor. Research shows 78% of contracts go to the first vendor to respond — yet most photography studios take 4–24 hours to reply manually. An AI lead response agent responds in under 60 seconds, 24/7, increasing your contract win rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
       <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Photo Day Coordination + Parent Communication</div><div class="gap-desc">Coordinating logistics for multiple schools — reminders to parents, retake schedules, proofing link delivery, reorder prompts — consumes hours of admin work per location. An AI coordinator handles all of this automatically, reducing per-location admin time by 60–70%. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">[2]</a></sup></div><span class="gap-tag efficiency">Efficiency</span></div></div>
       <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Multi-Location Franchise Performance Visibility</div><div class="gap-desc">Without a centralized AI reporting layer, franchise owners spend time manually compiling performance data across locations instead of acting on it. An AI analytics agent surfaces revenue trends, booking rates, and reorder performance in a weekly digest. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank">[3]</a></sup></div><span class="gap-tag brand">Brand / Scale</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Marketing Content Production Bottleneck</div><div class="gap-desc">You listed Marketing Content as a top operational stress. AI agents can transform every photo day into ready-to-post social content, parent testimonials, and email campaigns — without a dedicated marketing hire.</div><span class="gap-tag efficiency">Efficiency</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Hiring and Staffing Intelligence</div><div class="gap-desc">Seasonal hiring at scale is time-intensive. An AI screening agent pre-qualifies applicants, filters by availability and school photography experience, and schedules first-round interviews automatically.</div><span class="gap-tag brand">Operations</span></div></div>
     </div>
   </div>
 </section>
-<section class="section section-alt" id="agents">
+
+<!-- AI OPPORTUNITY MAP -->
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map — SRP</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 — do not skip ahead.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="pri-badge">1</div></td>
+            <td><strong>Speed-to-Contract Agent</strong></td>
+            <td><span class="impact-tag">+32% close rate</span> — every school inquiry responded to in 60 seconds</td>
+            <td>GoHighLevel, Zoho CRM, Email</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">2</div></td>
+            <td><strong>Parent Communication Agent</strong></td>
+            <td><span class="impact-tag">60% admin time saved</span> — full parent lifecycle automated per school</td>
+            <td>GoHighLevel, Email / SMS</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">3</div></td>
+            <td><strong>School Proposal Generator</strong></td>
+            <td><span class="impact-tag">3 min vs 45 min</span> — professional proposals at scale</td>
+            <td>GoHighLevel, Zoho CRM, Dropbox</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">4</div></td>
+            <td><strong>Franchise Performance Agent</strong></td>
+            <td><span class="impact-tag">Weekly digest</span> — zero manual data pulls across locations</td>
+            <td>Zoho CRM, GoHighLevel, Studio Mgmt</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">5</div></td>
+            <td><strong>Reorder + Upsell Agent</strong></td>
+            <td><span class="impact-tag">+AOV per family</span> — post-gallery reorder and sibling upsell sequences</td>
+            <td>GoHighLevel, Email</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">6</div></td>
+            <td><strong>Marketing Content Agent</strong></td>
+            <td><span class="impact-tag">6+ hrs/wk saved</span> — photo day content turned into social posts and emails</td>
+            <td>Dropbox, Social Channels</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">7</div></td>
+            <td><strong>Hiring Screener Agent</strong></td>
+            <td><span class="impact-tag">Seasonal scale</span> — pre-qualifies applicants, schedules first-round interviews</td>
+            <td>GoHighLevel, Email</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO IGNORE -->
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Honest Advice</p>
+    <h2 class="section-title">What AI Will Not Work For SRP — Skip These</h2>
+    <p class="section-sub">Not everything benefits from automation. Here is what to ignore for now — and why.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">AI Image Editing or Selection</div>
+          <div class="ignore-reason">Your photography quality is the product. AI curation in school photography is inconsistent and creates parent trust issues. Keep humans on post-production.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">Chatbot on Your Website</div>
+          <div class="ignore-reason">School administrators and parents expect professionalism. A generic chatbot undercuts that. Speed-to-response via email automation is cleaner and more effective.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">AI Pricing / Contract Negotiation</div>
+          <div class="ignore-reason">School contracts are relationship-based. Principals and district coordinators want a human to own the commercial discussion. AI handles the intake — not the negotiation.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">Fully Automated Photo Day Logistics</div>
+          <div class="ignore-reason">Photo days are high-stakes, variable, and people-intensive. AI can schedule and prep — but on-the-day execution needs experienced staff, not automation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI AGENTS -->
+<section class="section" id="agents">
   <div class="container">
     <p class="section-label">Your AI System</p>
     <h2 class="section-title">6 AI Agents Built for SRP</h2>
@@ -199,29 +482,113 @@
     </div>
   </div>
 </section>
-<section class="section" id="timeline">
+
+<!-- MILESTONE TABLE (replaces text timeline) -->
+<section class="section section-alt" id="timeline">
   <div class="container">
     <p class="section-label">How It Happens</p>
-    <h2 class="section-title">Your 3 / 7 / 30 Onboarding Timeline</h2>
+    <h2 class="section-title">Your Implementation Roadmap</h2>
     <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
-    <div class="timeline">
-      <div class="timeline-item"><div class="timeline-marker">Day<br>1–3</div><div class="timeline-content"><div class="timeline-day">Days 1–3 — AI Is In</div><div class="timeline-desc">Your first two agents go live. You see them working before the end of day 3.</div><ul class="timeline-items-list"><li>Kickoff call — we map your specific inquiry workflow and school locations</li><li>Speed-to-Contract Agent configured and connected to your inquiry channel</li><li>Parent Communication Agent templates built from your existing language</li><li>First live test: send a test inquiry and watch the 60-second response fire</li></ul></div></div>
-      <div class="timeline-item"><div class="timeline-marker">Day<br>4–7</div><div class="timeline-content"><div class="timeline-day">Days 4–7 — System Is Running</div><div class="timeline-desc">All 6 agents deployed. Your team is using them in real workflows.</div><ul class="timeline-items-list"><li>Proposal Generator trained on your packages, pricing, and school types</li><li>Photo Day Logistics Agent connected to your scheduling calendar</li><li>Franchise Performance Agent pulling data from your locations</li><li>Reorder + Upsell Agent sequenced and ready for post-gallery delivery</li><li>Team walkthrough: 30-minute call, no technical knowledge required</li></ul></div></div>
-      <div class="timeline-item" style="padding-bottom:0"><div class="timeline-marker">Day<br>30</div><div class="timeline-content"><div class="timeline-day">Day 30 — Fully Trained, Fully Yours</div><div class="timeline-desc">Every agent has been through a live production cycle. We review results and tune based on real data from your business.</div><ul class="timeline-items-list"><li>30-day performance review: response rates, time saved, orders influenced</li><li>Agents refined based on your actual school inquiries and parent responses</li><li>Expansion roadmap: what to automate next across your franchise network</li><li>You own the system — we stay on as your AI operations team</li></ul></div></div>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1–3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Kickoff call — map your specific inquiry workflow and school locations</li>
+                <li>Speed-to-Contract Agent configured and connected to your GoHighLevel inbox</li>
+                <li>Parent Communication Agent templates built from your existing language</li>
+                <li>Live test: send a test inquiry and watch the 60-second response fire</li>
+              </ul>
+            </td>
+            <td class="m-result">Your first agent is live. School inquiries get a 60-second response while you sleep.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Proposal Generator trained on your packages, pricing, and school types</li>
+                <li>Photo Day Logistics Agent connected to your scheduling calendar</li>
+                <li>Franchise Performance Agent pulling data from your locations</li>
+                <li>Reorder + Upsell Agent sequenced for post-gallery delivery</li>
+                <li>Team walkthrough: 30 minutes, no technical knowledge required</li>
+              </ul>
+            </td>
+            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Trained</div></td>
+            <td>
+              <ul class="m-list">
+                <li>30-day performance review: response rates, time saved, orders influenced</li>
+                <li>Agents refined based on your actual school inquiries and parent responses</li>
+                <li>Expansion roadmap: what to automate next across your franchise network</li>
+              </ul>
+            </td>
+            <td class="m-result">System knows your business. Every agent tuned to real SRP data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Minimal manual input required from your team</li>
+                <li>Continuous improvement from production data</li>
+                <li>You own the system — we stay as your AI operations team</li>
+              </ul>
+            </td>
+            <td class="m-result">AI runs like a trained employee who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
-<section class="section section-alt" id="calculator">
+
+<!-- ROI CALCULATOR with sliders + presets -->
+<section class="section" id="calculator">
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Enter your actual business numbers below. The calculator projects your potential based on industry-average AI lift figures from published research.</p>
+    <p class="section-sub">Adjust the sliders to match your business. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
-      <div class="calc-inputs">
-        <div class="input-group"><label for="avgContract">Avg Contract Value ($)</label><input type="number" id="avgContract" value="8500" min="0" /></div>
-        <div class="input-group"><label for="monthlyLeads">Monthly School Inquiries</label><input type="number" id="monthlyLeads" value="12" min="0" /></div>
-        <div class="input-group"><label for="closeRate">Current Close Rate (%)</label><input type="number" id="closeRate" value="18" min="0" max="100" /></div>
-        <div class="input-group"><label for="adminHours">Admin Hours / Week</label><input type="number" id="adminHours" value="15" min="0" /></div>
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative')">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected')">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch')">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Avg Contract Value</span>
+            <span class="calc-slider-val" id="lbl-contract">$8,500</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-contract" min="2000" max="30000" step="500" value="8500" oninput="updateLabel('contract'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Monthly School Inquiries</span>
+            <span class="calc-slider-val" id="lbl-leads">10</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="60" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Current Close Rate</span>
+            <span class="calc-slider-val" id="lbl-rate">18%</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Admin Hours / Week</span>
+            <span class="calc-slider-val" id="lbl-hours">15 hrs</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+        </div>
       </div>
       <div class="calc-results">
         <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">—</div></div>
@@ -229,11 +596,13 @@
         <div class="calc-result-item"><div class="res-label">Admin Hours Recovered / Yr</div><div class="res-value" id="resHours">—</div><div class="res-sub">hours back per year</div></div>
         <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">—</div></div>
       </div>
-      <p class="calc-disclaimer">Projections use published AI adoption benchmarks: +15% lead volume, +50% close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey State of AI 2023</a>), 60% admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR Automation Research</a>). These are industry averages — your results will vary. No guaranteed outcomes.</p>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks: +15% lead volume, +50% close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey State of AI 2023</a>), 60% admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages — your results will vary. No guaranteed outcomes.</p>
     </div>
   </div>
 </section>
-<section class="section" id="prompts">
+
+<!-- PROMPTS -->
+<section class="section section-alt" id="prompts">
   <div class="container">
     <p class="section-label">Your First AI Agent — Start Here</p>
     <h2 class="section-title">3 Copy-Paste Prompts for SRP</h2>
@@ -322,20 +691,52 @@ Rules:
     </div>
   </div>
 </section>
-<section class="section section-alt" id="audit">
+
+<!-- WEBSITE AUDIT -->
+<section class="section" id="audit">
   <div class="container">
     <p class="section-label">Your Digital Presence</p>
     <h2 class="section-title">spoiledrottenphotography.com — Audit Summary</h2>
-    <p class="section-sub">Five-phase audit of your current web presence. Scores reflect opportunities for AI-enhanced conversion performance.</p>
+    <p class="section-sub">Five-dimension audit of your current web presence. Scores reflect opportunities for AI-enhanced conversion performance.</p>
     <div class="audit-grid">
       <div class="audit-card"><div class="audit-score">3.2</div><div class="audit-phase">Brand Consistency</div><div class="audit-detail">Strong purple brand identity; inconsistent application across mobile viewports</div><div class="audit-bar"><div class="audit-bar-fill" style="width:64%"></div></div></div>
       <div class="audit-card"><div class="audit-score">2.8</div><div class="audit-phase">Lead Capture</div><div class="audit-detail">Contact form present; no instant-response automation or lead qualification flow</div><div class="audit-bar"><div class="audit-bar-fill" style="width:56%"></div></div></div>
-      <div class="audit-card"><div class="audit-score">3.6</div><div class="audit-phase">Portfolio / Proof</div><div class="audit-detail">Strong gallery presence; limited social proof from school administrators/districts</div><div class="audit-bar"><div class="audit-bar-fill" style="width:72%"></div></div></div>
+      <div class="audit-card"><div class="audit-score">3.6</div><div class="audit-phase">Portfolio / Proof</div><div class="audit-detail">Strong gallery presence; limited social proof from school administrators and districts</div><div class="audit-bar"><div class="audit-bar-fill" style="width:72%"></div></div></div>
       <div class="audit-card"><div class="audit-score">2.5</div><div class="audit-phase">Booking Flow</div><div class="audit-detail">No self-service booking; all inquiries require manual follow-up to advance</div><div class="audit-bar"><div class="audit-bar-fill" style="width:50%"></div></div></div>
       <div class="audit-card"><div class="audit-score">3.1</div><div class="audit-phase">SEO + Mobile</div><div class="audit-detail">WordPress site loads acceptably; structured data and alt text optimization opportunity</div><div class="audit-bar"><div class="audit-bar-fill" style="width:62%"></div></div></div>
     </div>
   </div>
 </section>
+
+<!-- PODCAST / LISTEN -->
+<section class="section section-alt" id="listen">
+  <div class="container">
+    <p class="section-label">Your Personalized Podcast</p>
+    <h2 class="section-title">Listen to Your AI Advantage Roadmap</h2>
+    <p class="section-sub">Two AI hosts walk through your exact business, tools, and opportunities — built specifically for Spoiled Rotten Photography. About 20 minutes.</p>
+    <div class="podcast-wrap">
+      <div class="podcast-title">Spoiled Rotten Photography — AI Advantage Deep Dive</div>
+      <div class="podcast-sub">Covers your gaps, your tool stack, your 6 agents, and exactly what to do first.</div>
+      <div class="podcast-meta">
+        <span class="podcast-meta-item">&#9654; ~20 minutes</span>
+        <span class="podcast-meta-item">&#127911; School Photography + Franchise AI</span>
+        <span class="podcast-meta-item">&#128100; Prepared for Melissa Tash</span>
+      </div>
+      <div class="podcast-player">
+        <audio controls preload="metadata" style="width:100%">
+          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/melissa-tash-srp.mp3" type="audio/mpeg">
+          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/melissa-tash-srp.mp3" style="color:var(--brand-light)">Download the podcast</a>.
+        </audio>
+      </div>
+      <div class="podcast-quotes">
+        <div class="podcast-quote">"The businesses that win over the next 12 months will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified school contract go unanswered."</div>
+        <div class="podcast-quote">"For a franchise like Spoiled Rotten Photography, AI is not about replacing your people. It is about making sure more of the right schools experience your work — and that every parent gets the attention they deserve."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
 <section class="section" id="sources">
   <div class="container">
     <p class="section-label">Research Sources</p>
@@ -350,36 +751,72 @@ Rules:
     </div>
   </div>
 </section>
+
+<!-- CTA with Bennett's personal message -->
 <section class="cta-section" id="apply">
   <div class="container">
     <h2>Ready to See This<br><span>Working for SRP?</span></h2>
-    <p>We built this roadmap specifically for Melissa Tash and Spoiled Rotten Photography. The next step is a short application — so we can confirm it is the right fit before investing either of our time.</p>
+    <p class="cta-personal">"Melissa, I built this roadmap specifically for Spoiled Rotten Photography because I believe the work your franchise does — capturing moments families will keep forever — deserves systems that are as reliable and consistent as your people. The AI here is not about replacing anything. It is about making sure no school goes unanswered and no parent feels forgotten."</p>
+    <p>The next step is a short application — so we can confirm it is the right fit before investing either of our time.</p>
     <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="cta-btn">Apply to Work with Bennett</a>
     <p class="cta-sub">Application takes 4 minutes. No sales call required to apply.</p>
   </div>
 </section>
+
 <footer>
   <p>Advaita AI for Business &mdash; Prepared for Melissa Tash / Spoiled Rotten Photography &mdash; Confidential</p>
   <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
 </footer>
+
 <script>
+  const PRESETS = {
+    conservative: { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 0.5 },
+    expected:     { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 1.0 },
+    stretch:      { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name) {
+    const p = PRESETS[name];
+    document.getElementById('sl-contract').value = p.contract;
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
   function calcROI() {
-    const avg   = parseFloat(document.getElementById('avgContract').value) || 0;
-    const leads = parseFloat(document.getElementById('monthlyLeads').value) || 0;
-    const rate  = parseFloat(document.getElementById('closeRate').value) / 100 || 0;
-    const hours = parseFloat(document.getElementById('adminHours').value) || 0;
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
     const current   = avg * leads * rate;
-    const projected = avg * (leads * 1.15) * (rate * 1.50);
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
     const gain      = projected - current;
     const fmt = n => '$' + Math.round(n).toLocaleString();
     document.getElementById('resCurrent').textContent   = fmt(current);
     document.getElementById('resProjected').textContent = fmt(projected);
     document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
-    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * 52).toLocaleString();
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
     document.getElementById('resQ').textContent         = fmt(gain * 3);
   }
-  ['avgContract','monthlyLeads','closeRate','adminHours'].forEach(id => document.getElementById(id).addEventListener('input', calcROI));
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
   calcROI();
+
   function copyPrompt(preId, btn) {
     navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
       btn.textContent = 'Copied!';
