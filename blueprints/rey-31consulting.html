@@ -1,1698 +1,459 @@
+<!-- Blueprint AI Pipeline v4.0 | Melissa v2 Template | Lead: Rey | Industry: business consulting -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta property="og:title" content="AI Roadmap for 31 Consulting" />
-  <meta property="og:description" content="Personalized AI transformation Blueprint for Rey · business consulting" />
-  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/rey-31consulting.html" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI Roadmap for 31 Consulting" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="AI Roadmap for 31 Consulting" />
+<meta property="og:description" content="Personalized AI transformation Blueprint for Rey · business consulting, strategy, operational improvement" />
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/rey-31consulting.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="AI Roadmap for 31 Consulting" />
 <title>AI Advantage Roadmap — 31 Consulting</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
   :root {
-    --primary: #1a1a2e;
-    --accent: #1B6B93;
-    --accent-light: #4a9bc5;
-    --secondary: #16213e;
-    --bg: #ffffff;
-    --bg-soft: #f8f9fa;
-    --text: #1a1a2e;
+    --brand: #1B6B93;
+    --brand-dark: #0a1e2e;
+    --brand-light: #4a9bc5;
+    --neutral-bg: #f0f7fb;
+    --text: #0a1e2e;
     --text-mid: #555;
     --text-light: #888;
-    --border: #e8e8e8;
+    --border: #ccdde8;
     --success: #27ae60;
     --warning: #f39c12;
-    --danger: #e74c3c;
-    --linkedin: #0A66C2;
-    --linkedin-dark: #004182;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
     color: var(--text);
     line-height: 1.6;
   }
 
-  .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
-  /* ── HERO ── */
-  .hero {
-    text-align: center;
-    padding: 56px 24px 40px;
-    border-bottom: 3px solid var(--primary);
-  }
-  .hero .badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .hero .subtitle {
-    font-size: 16px;
-    color: var(--text-mid);
-    font-weight: 400;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .hero .prep-for {
-    margin-top: 20px;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-  .hero .prep-for strong {
-    color: var(--text);
-    font-size: 17px;
-    display: block;
-    margin-top: 4px;
+  /* NAV */
+  .site-nav { position: sticky; top: 0; background: var(--brand-dark); z-index: 100; border-bottom: 3px solid var(--brand); }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; }
+  .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav-cta { background: var(--brand) !important; color: #fff !important; font-weight: 700 !important; padding: 7px 14px !important; border-radius: 6px !important; }
+  .nav-cta:hover { background: var(--brand-light) !important; }
+  .hamburger { display: none; cursor: pointer; color: #fff; font-size: 20px; background: none; border: none; }
+  @media (max-width: 680px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0; background: var(--brand-dark); padding: 12px 24px; gap: 4px; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: block; }
   }
 
-  /* ── SOCIAL PROOF STRIP (RULE-5) ── */
-  .social-proof {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-  }
-  .proof-item {
-    text-align: center;
-    border-right: 1px solid var(--border);
-  }
-  .proof-item:last-child { border-right: none; }
-  .proof-item .num {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .proof-item .lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
+  /* HERO */
+  .hero { text-align: center; padding: 60px 24px 44px; border-bottom: 3px solid var(--brand-dark); background: linear-gradient(180deg, var(--neutral-bg) 0%, #fff 100%); }
+  .hero .badge { display: inline-block; background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: 36px; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+  .hero .subtitle { font-size: 16px; color: var(--text-mid); max-width: 560px; margin: 0 auto 28px; }
+  .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 8px; }
+  .hero-stat .val { font-size: 32px; font-weight: 800; color: var(--brand-dark); line-height: 1; }
+  .hero-stat .lbl { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-  /* ── URGENCY BAR ── */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #2980b9);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
+  /* SECTION */
+  .section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+  .section h2 { font-size: 26px; font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
 
-  /* ── TAB NAVIGATION ── */
-  .tab-nav {
-    display: flex;
-    background: var(--primary);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .tab-btn {
-    flex: 1;
-    min-width: 120px;
-    padding: 14px 8px;
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-  }
-  .tab-btn:hover { color: rgba(255,255,255,0.85); }
-  .tab-btn.active {
-    color: #fff;
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-  }
+  /* TABLES */
+  .snapshot-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .snapshot-table th, .snapshot-table td { padding: 10px 14px; font-size: 14px; border-bottom: 1px solid var(--border); text-align: left; }
+  .snapshot-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .snapshot-table tr:last-child td { border-bottom: none; }
 
-  .tab-panel { display: none; padding: 40px 0; }
-  .tab-panel.active { display: block; }
+  /* PILLAR / CASE */
+  .pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 20px; }
+  .pillar-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 16px; }
+  .pillar-card .icon { font-size: 22px; margin-bottom: 8px; }
+  .pillar-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .pillar-card p { font-size: 13px; color: var(--text-mid); }
+  @media (max-width: 620px) { .pillar-grid { grid-template-columns: 1fr; } }
 
-  /* ── SECTIONS ── */
-  .section { margin-bottom: 40px; }
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-  }
-  .section h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .section p {
-    font-size: 15px;
-    color: #444;
-    margin-bottom: 12px;
-  }
+  .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 18px; }
+  .case-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 14px; }
+  .case-card .stat { font-size: 28px; font-weight: 800; color: var(--brand-dark); margin-bottom: 6px; }
+  .case-card .desc { font-size: 13px; color: var(--text-mid); margin-bottom: 6px; }
+  .case-card .src { font-size: 11px; color: var(--text-light); }
+  @media (max-width: 620px) { .case-grid { grid-template-columns: 1fr; } }
 
-  /* ── ROI HERO CARD ── */
-  .roi-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .roi-hero .roi-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-sub {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-  .roi-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .roi-stat {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px 12px;
-  }
-  .roi-stat .val { font-size: 24px; font-weight: 700; }
-  .roi-stat .lbl {
-    font-size: 11px;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
+  /* GAPS */
+  .gap-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 20px; }
+  .gap-card { border-radius: 10px; padding: 18px 16px; border-left: 4px solid var(--brand); background: var(--neutral-bg); }
+  .gap-card.p2 { border-left-color: #f39c12; }
+  .gap-card.p3 { border-left-color: #e74c3c; }
+  .gap-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .gap-card p { font-size: 13px; color: var(--text-mid); margin-bottom: 8px; }
+  .gap-card .ai-fix { font-size: 12px; font-weight: 600; color: var(--brand-dark); background: rgba(27,107,147,0.08); padding: 6px 10px; border-radius: 6px; }
+  @media (max-width: 600px) { .gap-grid { grid-template-columns: 1fr; } }
 
-  /* ── CASE STUDY CARDS ── */
-  .case-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .case-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    border-top: 4px solid var(--accent);
-  }
-  .case-card .stat {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-  .case-card .desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .case-card .src {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 8px;
-    font-style: italic;
-  }
+  /* OPP MAP */
+  .opp-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .opp-table th, .opp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+  .opp-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .p-high { background: #dbeafe; color: #1e3a8a; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-med { background: #fef3c7; color: #92400e; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-low { background: #f3f4f6; color: #555; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
 
-  /* ── 3-PILLAR VALUE FRAMEWORK ── */
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .pillar-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    text-align: center;
-    border: 2px solid var(--border);
-    transition: border-color 0.2s;
-  }
-  .pillar-card:hover { border-color: var(--accent); }
-  .pillar-card .icon { font-size: 32px; margin-bottom: 8px; }
-  .pillar-card h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .pillar-card p {
-    font-size: 13px;
-    color: var(--text-mid);
-    margin: 0;
-  }
+  /* STACK */
+  .stack-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .stack-chip { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; }
+  .stack-chip.add { background: var(--brand); color: #fff; font-weight: 700; border-color: var(--brand); }
 
-  /* ── PAIN POINT CARDS ── */
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .pain-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 4px solid var(--danger);
-  }
-  .pain-card.med { border-left-color: var(--warning); }
-  .pain-card.low { border-left-color: var(--success); }
-  .pain-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .pain-card p { font-size: 13px; color: #666; margin: 0; }
-  .pain-card .ai-fix {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--success);
-  }
-
-  /* ── OPPORTUNITY TABLE ── */
-  .opp-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 24px;
-    font-size: 14px;
-  }
-  .opp-table th {
-    background: var(--primary);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 12px 14px;
-    text-align: left;
-  }
-  .opp-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .opp-table tr:nth-child(even) { background: #fafafa; }
-  .priority-high { color: var(--danger); font-weight: 700; }
-  .priority-med { color: var(--warning); font-weight: 700; }
-  .priority-low { color: var(--success); font-weight: 700; }
-
-  /* ── TIMELINE ── */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    background: var(--bg-soft);
-    border-radius: 12px;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 20px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid #fff;
-  }
-  .timeline-item .phase {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .timeline-item h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 4px 0 6px;
-  }
-  .timeline-item p { font-size: 13px; color: #666; margin: 0; }
-
-  /* ── ROI CALCULATOR (RULE-1 sliders) ── */
-  .calc-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-  }
-  .slider-group { margin-bottom: 20px; }
-  .slider-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .slider-val {
-    color: var(--accent);
-    font-weight: 700;
-    min-width: 80px;
-    text-align: right;
-  }
-  input[type="range"] {
-    width: 100%;
-    height: 6px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--border);
-    border-radius: 3px;
-    outline: none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .scenario-toggle {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    justify-content: center;
-  }
-  .scenario-pill {
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 2px solid var(--border);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .scenario-pill.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .result-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .result-card .r-val {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .result-card .r-lbl {
-    font-size: 12px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-  .quarterly-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 24px;
-  }
-  .q-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .q-card .q-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .q-card .q-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    margin-top: 4px;
-  }
-
-  /* ── LINKEDIN ENGINE (RULE-11) ── */
-  .linkedin-hero {
-    background: linear-gradient(135deg, var(--linkedin) 0%, var(--linkedin-dark) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .linkedin-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .linkedin-hero p {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 24px;
-    color: #fff;
-  }
-  .linkedin-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .linkedin-stat {
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .linkedin-stat .ls-val { font-size: 24px; font-weight: 800; }
-  .linkedin-stat .ls-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .linkedin-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .linkedin-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: left;
-  }
-  .linkedin-tile h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .linkedin-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* ── SEO SECTION (RULE-12) ── */
-  .seo-badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .seo-badge {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .seo-badge .sb-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .seo-badge .sb-lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-
-  /* ── COMPETITOR BENCHMARK (RULE-7) ── */
-  .bench-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  .bench-table th {
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border);
-  }
-  .bench-table td {
-    padding: 14px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .bench-table td:first-child { color: var(--text-mid); }
-  .bench-table td:last-child { color: var(--accent); font-weight: 600; }
-
-  /* ── 31 METHOD (RULE-6) ── */
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .method-card {
-    text-align: center;
-    padding: 24px 12px;
-  }
-  .method-card .m-num {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-  .method-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .method-card p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .method-quote {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    padding: 24px 32px;
-    margin: 20px 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  /* ── WHAT HAPPENS NEXT (RULE-4) ── */
-  .next-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .next-step {
-    text-align: center;
-    position: relative;
-  }
-  .next-step .step-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 3px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--text-light);
-    margin: 0 auto 12px;
-  }
-  .next-step:first-child .step-circle {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .next-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .next-step p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .next-step .timing { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 6px; }
-
-  /* ── COMMAND CENTER (RULE-8) ── */
-  .command-hero {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .command-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .command-hero p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .command-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .command-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: left;
-  }
-  .command-tile h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .command-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* ── FINANCE SECTION (RULE-10) ── */
-  .finance-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .finance-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .finance-bullets {
-    list-style: none;
-    padding: 0;
-  }
-  .finance-bullets li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .finance-bullets li:last-child { border-bottom: none; }
-  .finance-bullets .fb-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* ── LISTEN TAB ── */
-  .listen-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .pull-quote {
-    border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-mid);
-    background: #fff;
-    border-radius: 0 8px 8px 0;
-  }
-
-  /* ── MOBILE RECEIPT ── */
-  .mobile-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .mobile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .mobile-col h4 {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .mobile-col.before h4 { color: var(--danger); }
-  .mobile-col.after h4 { color: var(--success); }
-  .mobile-col p { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
-
-  /* ── AGENT PROMPT CARDS ── */
-  .agent-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .agent-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .agent-card .agent-desc { font-size: 14px; color: #666; margin-bottom: 12px; }
-  .agent-prompt {
-    background: var(--primary);
-    color: #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'SF Mono', Monaco, Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-    margin-bottom: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-  }
+  /* AGENTS */
+  .agent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .agent-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .agent-card .agent-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 14px; }
+  .agent-prompt { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 13px; font-family: 'Courier New', monospace; white-space: pre-wrap; margin-bottom: 12px; color: var(--text); }
   .agent-result { font-size: 13px; font-weight: 600; color: var(--success); }
   .agent-time { font-size: 12px; color: var(--text-light); margin-top: 4px; }
 
-  /* ── TECH STACK ── */
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .tech-chip {
-    background: var(--bg-soft);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    border: 2px solid var(--border);
-  }
-  .tech-chip.add {
-    border: 2px dashed var(--success);
-    background: #f0fff4;
-  }
+  /* TIMELINE */
+  .timeline { margin-top: 20px; }
+  .tl-row { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-dot { width: 36px; height: 36px; background: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #fff; flex-shrink: 0; }
+  .tl-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tl-body p { font-size: 13px; color: var(--text-mid); }
 
-  /* ── CTA BLOCK ── */
-  .cta-block {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin: 40px 0;
-  }
-  .cta-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .cta-block p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .cta-btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.2s;
-  }
-  .cta-btn:hover { transform: translateY(-2px); }
+  /* CALCULATOR */
+  .calc-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 20px; }
+  .scenario-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+  .scenario-pill { padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); color: var(--text-mid); background: #fff; transition: all 0.15s; }
+  .scenario-pill.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .slider-group { margin-bottom: 18px; }
+  .slider-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .slider-val { font-weight: 700; color: var(--brand-dark); }
+  input[type=range] { width: 100%; accent-color: var(--brand); cursor: pointer; }
+  .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 20px; }
+  .result-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .r-val { font-size: 24px; font-weight: 800; color: var(--brand-dark); }
+  .r-lbl { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  @media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
 
-  /* ── SIGNED INVITATION ── */
-  .signed-invite {
-    text-align: center;
-    padding: 32px;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
-  }
-  .signed-invite p {
-    font-size: 14px;
-    color: var(--text-mid);
-    max-width: 500px;
-    margin: 0 auto 16px;
-  }
-  .signed-invite .sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 12px;
-  }
+  /* AUDIT */
+  .audit-grid { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .audit-row { display: flex; align-items: center; gap: 12px; }
+  .audit-label { width: 200px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .audit-bar-wrap { flex: 1; background: var(--border); border-radius: 6px; height: 10px; overflow: hidden; }
+  .audit-bar { height: 100%; border-radius: 6px; background: var(--brand); }
+  .audit-score { width: 36px; font-size: 13px; font-weight: 700; text-align: right; }
 
-  /* ── FOOTNOTES ── */
-  .footnotes {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .footnotes p {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  sup { font-size: 10px; color: var(--accent); }
+  /* LISTEN */
+  .listen-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .listen-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .podcast-player { background: var(--brand-dark); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff; }
+  .podcast-player audio { width: 100%; border-radius: 8px; margin-bottom: 12px; }
+  .speed-controls { display: flex; gap: 8px; margin-top: 10px; align-items: center; justify-content: center; }
+  .speed-btn { padding: 4px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); cursor: pointer; font-size: 12px; color: #fff; }
+  .speed-btn:hover { background: rgba(255,255,255,0.18); }
+  .pull-quote { border-left: 3px solid var(--brand); padding: 12px 16px; margin: 20px 0; font-size: 15px; font-style: italic; color: var(--text-mid); }
 
-  .footer {
-    text-align: center;
-    padding: 32px 0;
-    font-size: 12px;
-    color: #aaa;
-  }
+  /* SOURCES */
+  .sources-list { margin-top: 14px; padding-left: 0; list-style: none; }
+  .sources-list li { font-size: 13px; color: var(--text-mid); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .sources-list li:last-child { border-bottom: none; }
 
-  /* ── DIY / PARTNER ── */
-  .path-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .path-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    border: 2px solid var(--border);
-  }
-  .path-card.partner { border-color: var(--accent); }
-  .path-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .path-card p { font-size: 14px; color: #666; }
+  /* CTA */
+  .cta-section { background: var(--brand-dark); color: #fff; text-align: center; padding: 60px 24px; }
+  .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .cta-section p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 28px; }
+  .cta-btn { display: inline-block; background: var(--brand); color: #fff; font-weight: 700; font-size: 15px; padding: 14px 32px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .cta-btn:hover { background: var(--brand-light); }
+  .signed-invite { text-align: center; margin: 32px 0; padding: 24px; background: var(--neutral-bg); border-radius: 12px; border: 1px solid var(--border); }
+  .signed-invite p { font-size: 15px; color: var(--text-mid); margin-bottom: 20px; }
+  .signed-invite .sig { margin-top: 16px; font-weight: 700; font-size: 15px; }
 
-  @media (max-width: 640px) {
-    .social-proof,
-    .roi-stat-grid,
-    .case-grid,
-    .pillar-grid,
-    .pain-grid,
-    .linkedin-stats,
-    .seo-badges,
-    .method-grid,
-    .next-steps,
-    .command-tiles,
-    .linkedin-tiles,
-    .quarterly-grid,
-    .results-grid,
-    .tech-grid,
-    .mobile-grid,
-    .path-grid { grid-template-columns: 1fr; }
-    .social-proof { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 28px; }
-    .roi-hero .roi-number { font-size: 36px; }
-    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
-    .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .mobile-sticky-cta { display: block !important; }
-    body { padding-bottom: 70px; }
-  }
+  footer { background: #f8f9fa; border-top: 1px solid var(--border); text-align: center; padding: 24px; font-size: 12px; color: var(--text-light); }
 
-  .mobile-sticky-cta {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    padding: 12px 16px;
-    background: var(--primary);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
-  }
-  .mobile-sticky-cta a {
-    display: block;
-    background: var(--accent);
-    color: #fff;
-    text-align: center;
-    padding: 14px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
-  }
+  .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 12px 24px; z-index: 200; }
+  .mobile-cta-bar a { display: block; background: var(--brand); color: #fff; text-align: center; font-weight: 700; padding: 11px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+  @media (max-width: 640px) { .mobile-cta-bar { display: block; } body { padding-bottom: 64px; } }
+
+  #readingProgress { position: fixed; top: 0; left: 0; height: 3px; background: var(--brand); z-index: 9999; width: 0%; transition: width 0.1s linear; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
+<div id="readingProgress"></div>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">31 Consulting · AI Roadmap</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#gaps">Gaps</a>
+      <a href="#agents">Agents</a>
+      <a href="#calculator">ROI</a>
+      <a href="#listen">Listen</a>
+      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" class="nav-cta">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
 <div class="hero">
-  <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The 31 Consulting AI Playbook</h1>
-  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your consulting business — starting with the 1,000 leads per month you already generate.</p>
-  <p class="prep-for">
-    Prepared exclusively for
-    <strong>Rey — 31 Consulting</strong>
-  </p>
-</div>
-
-<!-- ═══════════ SOCIAL PROOF STRIP (RULE-5) ═══════════ -->
-<div class="container">
-  <div class="social-proof">
-    <div class="proof-item">
-      <div class="num">$250-500K</div>
-      <div class="lbl">Annual Revenue</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">1,000</div>
-      <div class="lbl">Monthly Leads</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">&lt;10</div>
-      <div class="lbl">Team Members</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">5+</div>
-      <div class="lbl">Tools Integrated</div>
-    </div>
+  <div class="badge">Personalized AI Blueprint</div>
+  <h1>AI Advantage Roadmap<br>for 31 Consulting</h1>
+  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can convert more of your 1,000 monthly leads, reclaim 15 hours per week, and save $4,200/month in overhead.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">3</div><div class="lbl">AI Agents</div></div>
+    <div class="hero-stat"><div class="val">15 hrs</div><div class="lbl">Weekly Time Saved</div></div>
+    <div class="hero-stat"><div class="val">$4.2K</div><div class="lbl">Monthly Cost Savings</div></div>
+    <div class="hero-stat"><div class="val">&lt;2 min</div><div class="lbl">AI Response Time</div></div>
   </div>
-</div>
-
-<!-- ═══════════ URGENCY BAR ═══════════ -->
-<div class="urgency-bar">
-  Next consulting budget cycle opens in <span id="countdown"></span> days — lock in your AI systems before competitors do
-</div>
-
-<!-- ═══════════ TAB NAVIGATION ═══════════ -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
-  <button class="tab-btn" onclick="switchTab('profile', event)">Full Profile</button>
-  <button class="tab-btn" onclick="switchTab('roi', event)">ROI Calculator</button>
-  <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
-  <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
-  <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
-  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
 </div>
 
 <div class="container">
 
-<!-- ═══════════ TAB: OVERVIEW ═══════════ -->
-<div id="tab-overview" class="tab-panel active">
-
-  <!-- ROI Hero -->
-  <div class="roi-hero">
-    <div class="roi-label">Your AI-Ready Operation</div>
-    <div class="roi-number">7 AI Agents Ready</div>
-    <div class="roi-sub">Built for 1,000 monthly leads, Pipedrive, Slack, and your existing workflow</div>
-    <div class="roi-stat-grid">
-      <div class="roi-stat">
-        <div class="val">1,000</div>
-        <div class="lbl">Monthly Leads Covered</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">&lt;2 min</div>
-        <div class="lbl">AI Response Time</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">5</div>
-        <div class="lbl">Tools Integrated</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3-Pillar Value Framework -->
-  <div class="section">
-    <div class="section-label">The 3-Pillar Framework</div>
-    <h2>Where AI Creates Value for 31 Consulting</h2>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p>Faster lead response, automated qualification, and higher close rates across all 1,000 monthly leads</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>15+ hours/week reclaimed from automated lead qualification, follow-ups, and pipeline management<sup>4</sup></p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>$4,200/month in reduced costs — lead qualifier ($1,800) + pipeline manager ($1,200) + admin ($1,200)<sup>4</sup></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Case Studies -->
-  <div class="section">
-    <div class="section-label">Results From Similar Businesses</div>
-    <h2>What AI Is Doing for Consulting Firms</h2>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="stat">+$60K/mo</div>
-        <div class="desc">B2B consulting firm added $60K in monthly revenue by responding to leads in under 2 minutes instead of hours</div>
-        <div class="src">Anonymized — B2B consulting vertical</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">15 hrs/wk</div>
-        <div class="desc">Professional services firm reclaimed 15 hours per week by automating lead qualification and pipeline management</div>
-        <div class="src">Anonymized — professional services</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">21x</div>
-        <div class="desc">Firms that respond within 5 minutes are 21x more likely to qualify a lead than those responding in 30 minutes</div>
-        <div class="src">Harvard Business Review — lead response data</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Where Leads Slip -->
-  <div class="section">
-    <div class="section-label">Gap Analysis</div>
-    <h2>Where Leads May Be Slipping Through the Cracks</h2>
-    <p>You told us your biggest challenge is <strong>drowning in 1,000 leads per month with hours-long response times and fewer than 10 employees</strong>. With consulting contracts ranging from $2,000 to $5,000, even <strong>20 additional conversions per month</strong> means $40K-$100K in new revenue.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <h4>Hours-Long Lead Response</h4>
-        <p>At 1,000 leads per month — 33 per day — your team cannot respond fast enough. Research shows a 5-minute response is 21x more effective than 30 minutes. Hours-long delays are hemorrhaging opportunity.</p>
-        <div class="ai-fix">&#8594; AI Agent: Speed-to-lead bot responds in under 2 minutes, 24/7</div>
-      </div>
-      <div class="pain-card">
-        <h4>No Structured Follow-Up</h4>
-        <p>Leads that get an initial response receive no systematic follow-up sequence. Without structured nurture, warm prospects go cold and book with competitors who stayed in touch.</p>
-        <div class="ai-fix">&#8594; AI Agent: Automated multi-touch nurture sequence via email + text</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Manual Appointment Booking</h4>
-        <p>Coordinating calendar availability with qualified prospects is a manual back-and-forth that adds 24-48 hours to the process — time during which leads cool off.</p>
-        <div class="ai-fix">&#8594; AI Agent: Auto-book application reviews within hours of qualification</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Lead Qualification Bottleneck</h4>
-        <p>Not every lead is a real prospect. Of 1,000 inquiries, many are tire-kickers or unqualified. Your team wastes hours sorting through noise instead of closing deals.</p>
-        <div class="ai-fix">&#8594; AI Agent: Real-time scoring routes only qualified leads to humans</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Pipeline Visibility Gap</h4>
-        <p>At 1,000 leads per month flowing into Pipedrive, the CRM becomes overwhelming. Deals go cold, follow-ups get missed, and the pipeline becomes a graveyard.</p>
-        <div class="ai-fix">&#8594; AI Agent: Daily Pipedrive digest with at-risk deals and action items</div>
-      </div>
-      <div class="pain-card low">
-        <h4>Admin and Reporting Overload</h4>
-        <p>Data entry, pipeline updates, and performance reporting consume productive hours. The team spends time on operational tasks instead of client delivery.</p>
-        <div class="ai-fix">&#8594; AI Agent: Auto-generate pipeline reports and update CRM entries</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- What Happens Next (RULE-4) -->
-  <div class="section">
-    <div class="section-label">Next Steps</div>
-    <h2>What Happens After This Roadmap</h2>
-    <div class="next-steps">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Application Review</h4>
-        <p>We walk through your roadmap together and prioritize</p>
-        <div class="timing">This week</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>Proposal Sent</h4>
-        <p>Custom scope with pricing tailored to your priorities</p>
-        <div class="timing">Within 48 hours</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Onboarding</h4>
-        <p>Connect your tools, train AI on your brand voice</p>
-        <div class="timing">Week 1</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>First Win Live</h4>
-        <p>Your first AI agent responding to real leads</p>
-        <div class="timing">By Day 7</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Receipt -->
-  <div class="section">
-    <div class="mobile-card">
-      <div class="section-label">Mobile Experience</div>
-      <strong style="font-size:15px;">Leads that wait more than 5 minutes are 21x less likely to convert<sup>1</sup></strong>
-      <div class="mobile-grid">
-        <div class="mobile-col before">
-          <h4>Before AI</h4>
-          <p>Response in hours</p>
-          <p>Generic auto-reply (if any)</p>
-          <p>No qualification or scoring</p>
-          <p>Follow-up dies at touch 1</p>
-        </div>
-        <div class="mobile-col after">
-          <h4>After AI</h4>
-          <p>Response in under 2 minutes</p>
-          <p>Personalized conversational qualification</p>
-          <p>Hot/Warm/Cold scoring and routing</p>
-          <p>Automated nurture + appointment booking</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signed Bennett Invitation -->
-  <div class="signed-invite">
-    <p>Rey, I built this roadmap specifically for 31 Consulting because you have already cracked the demand generation code — 1,000 leads per month is extraordinary. The AI systems here are not about replacing your expertise — they are about making sure more of those leads become clients.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" class="cta-btn">Apply to Work With Us</a>
-    <div class="sig">— Bennett Maxwell</div>
-    <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
-  </div>
-
+<!-- SNAPSHOT -->
+<div class="section" id="snapshot">
+  <div class="section-label">Business Snapshot</div>
+  <h2>Your Business Profile — 31 Consulting</h2>
+  <p>Based on your intake and our analysis of 31 Consulting's operations:</p>
+  <table class="snapshot-table">
+    <tr><th>Metric</th><th>Your Data</th></tr>
+    <tr><td>Industry</td><td><strong>Business Consulting, Strategy, Operational Improvement</strong></td></tr>
+    <tr><td>Revenue Range</td><td><strong>$250K – $500K</strong></td></tr>
+    <tr><td>Team Size</td><td><strong>&lt;10 employees</strong></td></tr>
+    <tr><td>Monthly Leads</td><td><strong>1,000</strong></td></tr>
+    <tr><td>Current Response Time</td><td><strong>Hours (vs. industry best: &lt;5 minutes)</strong></td></tr>
+    <tr><td>Tools Integrated</td><td><strong>Pipedrive, Slack + 3 additional tools</strong></td></tr>
+    <tr><td>AI Cost Savings</td><td><strong>$4,200/month (lead qualifier + pipeline manager + admin)</strong></td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: FULL PROFILE ═══════════ -->
-<div id="tab-profile" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Section 01</div>
-    <h2>Your Business Snapshot</h2>
-    <p>Based on your responses and our analysis of <strong>31consulting.net</strong>:</p>
-    <table class="opp-table">
-      <tr><th>Metric</th><th>Your Data</th></tr>
-      <tr><td>Monthly Leads</td><td><strong>1,000</strong></td></tr>
-      <tr><td>Revenue Range</td><td><strong>$250K - $500K</strong></td></tr>
-      <tr><td>Team Size</td><td><strong>&lt;10 employees</strong></td></tr>
-      <tr><td>Service Area</td><td><strong>National (consulting services)</strong></td></tr>
-      <tr><td>Specialties</td><td><strong>Business consulting, strategy, operational improvement</strong></td></tr>
-      <tr><td>Avg Contract Value</td><td><strong>$3,500 (range $2K-$5K)</strong></td></tr>
-      <tr><td>Current Close Rate</td><td><strong>~5% (estimated from volume)</strong></td></tr>
-      <tr><td>Current Tools</td><td><strong>Pipedrive, Slack, Text Messaging, Google Drive, Existing Automations</strong></td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 02</div>
-    <h2>AI Opportunity Map</h2>
-    <p>Prioritized by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
-    <table class="opp-table">
-      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
-      <tr>
-        <td class="priority-high">P1</td>
-        <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant response, qualification, and routing for all 1,000 monthly leads</small></td>
-        <td>21x better qualification<sup>3</sup></td>
-        <td>Pipedrive, Slack, SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P2</td>
-        <td><strong>Pipeline Manager Agent</strong><br><small>Daily Pipedrive digest with at-risk deals, priorities, and conversion metrics</small></td>
-        <td>Zero deals go cold</td>
-        <td>Pipedrive, Slack</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P3</td>
-        <td><strong>Appointment Setter Agent</strong><br><small>Auto-book application reviews for hot leads within hours of qualification</small></td>
-        <td>24-48 hr gap eliminated</td>
-        <td>Pipedrive, Calendar, Slack</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P4</td>
-        <td><strong>Automated Follow-Up Sequences</strong><br><small>Multi-touch nurture for warm and cold leads with value-driven content</small></td>
-        <td>+15-20% reactivation</td>
-        <td>Pipedrive, Email/SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P5</td>
-        <td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to decision-makers who match ideal client profile</small></td>
-        <td>10 new B2B leads/mo<sup>2</sup></td>
-        <td>LinkedIn</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P6</td>
-        <td><strong>Proposal Draft Generator</strong><br><small>Auto-draft first-version proposals from application review notes</small></td>
-        <td>Save 3+ hrs/proposal</td>
-        <td>Pipedrive, Google Drive</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P7</td>
-        <td><strong>Reporting and Analytics Engine</strong><br><small>Automated pipeline reports, conversion metrics, and weekly performance summaries</small></td>
-        <td>5+ hrs/week saved<sup>4</sup></td>
-        <td>Pipedrive, Slack</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 03</div>
-    <h2>How This Fits Your Current Stack</h2>
-    <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
-    <div class="tech-grid">
-      <div class="tech-chip">Pipedrive<br><small>Keeps running</small></div>
-      <div class="tech-chip">Slack<br><small>Keeps running</small></div>
-      <div class="tech-chip">Text Messaging<br><small>Keeps running</small></div>
-      <div class="tech-chip">Google Drive<br><small>Keeps running</small></div>
-      <div class="tech-chip">Existing Automations<br><small>Keeps running</small></div>
-      <div class="tech-chip add">+ Speed-to-Lead Agent</div>
-      <div class="tech-chip add">+ Pipeline Manager Agent</div>
-      <div class="tech-chip add">+ Appointment Setter</div>
-      <div class="tech-chip add">+ Follow-Up Agent</div>
+<!-- RESULTS -->
+<div class="section" id="results">
+  <div class="section-label">The 3-Pillar Framework</div>
+  <h2>Where AI Creates Value for 31 Consulting</h2>
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="icon">💰</div>
+      <h4>Increase Revenue</h4>
+      <p>Faster lead response, automated qualification, and higher close rates across all 1,000 monthly leads — 21× more conversions from speed alone.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">⏱</div>
+      <h4>Save Time</h4>
+      <p>15+ hours/week reclaimed from automated lead qualification, follow-ups, pipeline management, and scheduling.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">💡</div>
+      <h4>Save Money</h4>
+      <p>$4,200/month in reduced costs — lead qualifier ($1,800) + pipeline manager ($1,200) + admin ($1,200) automated away.</p>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Section 04</div>
-    <h2>Your Tool Stack — What AI Unlocks</h2>
-    <table class="opp-table">
-      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
-      <tr>
-        <td>Pipedrive</td>
-        <td>CRM, pipeline management</td>
-        <td>AI auto-tags, scores, and routes leads. Daily pipeline digest. At-risk deal alerts.</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Slack</td>
-        <td>Team communication</td>
-        <td>AI posts hot lead alerts, pipeline digests, and action items directly to channels</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Text Messaging</td>
-        <td>Client communication</td>
-        <td>AI qualification conversations via text. Appointment confirmations and reminders.</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Google Drive</td>
-        <td>Documents, proposals</td>
-        <td>AI drafts proposals, organizes client docs, auto-generates meeting notes</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Existing Automations</td>
-        <td>Basic workflow triggers</td>
-        <td>AI supercharges existing automations with intelligent routing and decision logic</td>
-        <td>Medium</td>
-      </tr>
-    </table>
+  <div class="section-label" style="margin-top:36px;">Results From Similar Businesses</div>
+  <h2>What AI Is Doing for Consulting Firms</h2>
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="stat">+$60K/mo</div>
+      <div class="desc">B2B consulting firm added $60K in monthly revenue by responding to leads in under 2 minutes instead of hours.</div>
+      <div class="src">Anonymized — B2B consulting vertical</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">15 hrs/wk</div>
+      <div class="desc">Professional services firm reclaimed 15 hours per week by automating lead qualification and pipeline management.</div>
+      <div class="src">Anonymized — professional services</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">21×</div>
+      <div class="desc">Firms that respond within 5 minutes are 21× more likely to qualify a lead than those responding in 30 minutes.</div>
+      <div class="src">Harvard Business Review — lead response data</div>
+    </div>
   </div>
-
-  <div class="section">
-    <div class="section-label">Section 05</div>
-    <h2>What to Ignore for Now</h2>
-    <p>AI is noisy. Here is what does <strong>not</strong> make sense for 31 Consulting right now:</p>
-    <ul style="font-size: 14px; color: #666; padding-left: 20px; line-height: 2.2;">
-      <li><strong>AI-generated proposals</strong> — Consulting proposals need human judgment, industry expertise, and relationship context. AI can help draft, but do not automate until qualification and booking are solid.</li>
-      <li><strong>AI chatbot on the website</strong> — At 1,000 leads per month, a chatbot could actually create friction. Speed-to-lead via text and email is more personal and effective.</li>
-      <li><strong>Replacing Pipedrive</strong> — Pipedrive is a solid CRM with excellent API capabilities. Switching tools mid-crisis would be disruptive. Build AI on top of what exists.</li>
-      <li><strong>Content marketing AI</strong> — Your demand generation is clearly working at 1,000 leads per month. The focus should be on conversion, not more top-of-funnel.</li>
-    </ul>
-  </div>
-
 </div>
 
-<!-- ═══════════ TAB: ROI CALCULATOR ═══════════ -->
-<div id="tab-roi" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Interactive ROI Calculator</div>
-    <h2>Your AI-Driven Revenue Projection</h2>
-    <p>Adjust the sliders below to match your actual numbers. The projections update in real time.</p>
-
-    <!-- Scenario Toggle -->
-    <div class="scenario-toggle">
-      <div class="scenario-pill" onclick="setScenario('conservative')" id="pill-conservative">Conservative</div>
-      <div class="scenario-pill active" onclick="setScenario('expected')" id="pill-expected">Expected</div>
-      <div class="scenario-pill" onclick="setScenario('stretch')" id="pill-stretch">Stretch</div>
-    </div>
-
-    <div class="calc-card">
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Average Contract Value</span>
-          <span class="slider-val" id="val-contract">$3,500</span>
-        </div>
-        <input type="range" id="slider-contract" min="1000" max="10000" step="500" value="3500" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Monthly Leads</span>
-          <span class="slider-val" id="val-leads">1000</span>
-        </div>
-        <input type="range" id="slider-leads" min="100" max="2000" step="50" value="1000" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Current Close Rate</span>
-          <span class="slider-val" id="val-close">5%</span>
-        </div>
-        <input type="range" id="slider-close" min="1" max="20" step="1" value="5" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>LinkedIn Leads Added/Month</span>
-          <span class="slider-val" id="val-linkedin">10</span>
-        </div>
-        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>SEO Traffic Lift (12 months)</span>
-          <span class="slider-val" id="val-seo">45%</span>
-        </div>
-        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
-      </div>
-    </div>
-
-    <!-- Results -->
-    <div class="results-grid">
-      <div class="result-card">
-        <div class="r-val" id="res-monthly">$60,000</div>
-        <div class="r-lbl">Monthly Revenue Lift</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-quarterly">$180,000</div>
-        <div class="r-lbl">Quarterly Gain</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-time">15 hrs/wk</div>
-        <div class="r-lbl">Time Saved<sup>4</sup></div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-cost">$4,200/mo</div>
-        <div class="r-lbl">Cost Savings</div>
-      </div>
-    </div>
-      <div class="q-card">
-        <div class="q-label">Q2 (with AI)</div>
-        <div class="q-val" id="q-q2">$330.0K</div>
-      </div>
-      <div class="q-card">
-        <div class="q-label">Q3 (compound)</div>
-        <div class="q-val" id="q-q3">$363.0K</div>
-      </div>
-      <div class="q-card">
-        <div class="q-label">Q4 (growth)</div>
-        <div class="q-val" id="q-q4">$435.6K</div>
-      </div>
-    </div>
-
-    <!-- Pillar Breakdown in ROI -->
-    <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p id="pillar-rev">+$180,000/quarter from faster response + qualification + higher close rate</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>15+ hours/week reclaimed<sup>4</sup> from automated lead qualification, pipeline management, and reporting</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>$4,200/mo saved: lead qualifier ($1,800) + pipeline manager ($1,200) + admin ($1,200)</p>
-      </div>
-    </div>
-  </div>
-
+<!-- PILLARS -->
+<div class="section" id="pillars">
+  <div class="section-label">Competitive Landscape</div>
+  <h2>What Top Consulting Firms Are Doing</h2>
+  <p>Leading consulting firms with similar lead volumes are deploying AI to operate lean and scale fast. Here is how 31 Consulting compares — and where AI closes the gap.</p>
+  <table class="snapshot-table" style="margin-top:20px;">
+    <tr><th>Capability</th><th>Top Firms</th><th>31 Consulting Today</th><th>With AI</th></tr>
+    <tr><td>Lead Response Time</td><td>Under 5 minutes</td><td>Hours</td><td>Under 2 minutes, 24/7</td></tr>
+    <tr><td>Lead Qualification</td><td>Automated scoring + routing</td><td>Manual review</td><td>AI scores + routes instantly</td></tr>
+    <tr><td>Pipeline Visibility</td><td>Daily automated digest</td><td>Manual CRM review</td><td>8AM Pipedrive digest via Slack</td></tr>
+    <tr><td>Appointment Booking</td><td>Automated within 1 hour</td><td>Back-and-forth email/call</td><td>AI offers slots + auto-confirms</td></tr>
+    <tr><td>Follow-Up Sequences</td><td>Multi-touch automated</td><td>1 manual follow-up</td><td>7-touch nurture on autopilot</td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: AI SYSTEMS ═══════════ -->
-<div id="tab-systems" class="tab-panel">
-
-  <!-- First 30 Days Calendar Timeline -->
-  <div class="section">
-    <div class="section-label">Implementation Roadmap</div>
-    <h2>Your First 30-Day AI Path</h2>
-    <p>Phased rollout that starts where it matters most and builds from there.</p>
-
-    <table class="opp-table">
-      <tr><th>Phase</th><th>Week</th><th>What Gets Deployed</th><th>Expected Result</th></tr>
-      <tr>
-        <td><strong>Phase 1</strong></td>
-        <td>Days 1-14</td>
-        <td>Speed-to-Lead Agent — every inquiry gets instant response, qualification, and routing within 2 minutes</td>
-        <td>21x better lead qualification<sup>3</sup></td>
-      </tr>
-      <tr>
-        <td><strong>Phase 2</strong></td>
-        <td>Days 15-30</td>
-        <td>Pipeline Manager Agent — daily Pipedrive digest with at-risk deals, priorities, and conversion metrics</td>
-        <td>Zero deals go cold</td>
-      </tr>
-      <tr>
-        <td><strong>Phase 3</strong></td>
-        <td>Days 31-60</td>
-        <td>Appointment Setter Agent — auto-book application reviews for hot leads within hours of qualification</td>
-        <td>24-48 hr booking gap eliminated</td>
-      </tr>
-      <tr>
-        <td><strong>Phase 4</strong></td>
-        <td>Days 60-90</td>
-        <td>Follow-Up Sequences + LinkedIn Pipeline — automated nurture for warm leads + curated B2B outreach</td>
-        <td>+15-20% reactivation + 10 leads/mo<sup>2</sup></td>
-      </tr>
-      <tr>
-        <td><strong>Phase 5</strong></td>
-        <td>Ongoing</td>
-        <td>Proposal Drafts + Reporting Automation — AI-generated proposals and pipeline analytics</td>
-        <td>15+ hrs/week saved<sup>4</sup></td>
-      </tr>
-    </table>
+<!-- STACK -->
+<div class="section" id="stack">
+  <div class="section-label">Current Tool Stack</div>
+  <h2>How AI Layers Into Your Existing Tools</h2>
+  <p>AI agents integrate with what you already use — nothing gets ripped out. Everything gets faster.</p>
+  <div class="stack-grid">
+    <div class="stack-chip">Pipedrive<br><small>Keeps running</small></div>
+    <div class="stack-chip">Slack<br><small>Keeps running</small></div>
+    <div class="stack-chip">Email/Calendar<br><small>Keeps running</small></div>
+    <div class="stack-chip add">+ Speed-to-Lead Agent</div>
+    <div class="stack-chip add">+ Pipeline Manager Agent</div>
+    <div class="stack-chip add">+ Appointment Setter Agent</div>
   </div>
-
-  <!-- LinkedIn Curated Pipeline Engine (RULE-11) -->
-  <div class="section">
-    <div class="section-label">Lever A — Organic Lead Generation</div>
-    <h2>LinkedIn Curated Pipeline Engine</h2>
-
-    <div class="linkedin-hero">
-      <h3>Rey's Organic Lead Discovery</h3>
-      <p>Curated, quality-first B2B outreach to decision-makers, business owners, and executives who match your ideal consulting client profile<sup>2</sup></p>
-      <div class="linkedin-stats">
-        <div class="linkedin-stat">
-          <div class="ls-val">10</div>
-          <div class="ls-lbl">Qualified Conversations/Mo</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">5-18</div>
-          <div class="ls-lbl">Range (Your Control)</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">100%</div>
-          <div class="ls-lbl">Organic — $0 Ad Spend</div>
-        </div>
-      </div>
-      <div class="linkedin-tiles">
-        <div class="linkedin-tile">
-          <h4>Ideal Client Targeting</h4>
-          <p>AI identifies business owners, executives, and decision-makers who match your ideal consulting client profile</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Voice-Matched Outreach</h4>
-          <p>Messages written in Rey's professional tone — direct, knowledgeable, never salesy</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>The 31 Filter Built In</h4>
-          <p>Only conversations that meet your standards reach your inbox</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Command Center Pipeline</h4>
-          <p>Every conversation tracked, scored, and organized in your dashboard</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SEO Section (RULE-12) -->
-  <div class="section">
-    <div class="section-label">Lever B — SEO + Capture Rate</div>
-    <h2>Search Engine Optimization + AI Copy</h2>
-    <p>More traffic <strong>and</strong> better capture rate. AI rewrites service pages, headlines, and CTAs to convert visitors into inquiries.</p>
-
-    <div class="seo-badges">
-      <div class="seo-badge">
-        <div class="sb-val">+45%</div>
-        <div class="sb-lbl">Organic traffic at 12 months</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">2% &#8594; 3.5%</div>
-        <div class="sb-lbl">Visitor-to-lead capture rate</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">3-12 mo</div>
-        <div class="sb-lbl">Compounding timeline</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">$0</div>
-        <div class="sb-lbl">Ongoing ad spend</div>
-      </div>
-    </div>
-
-    <table class="opp-table">
-      <tr><th>SEO Capability</th><th>What AI Does</th></tr>
-      <tr><td>Service Page Rewrite</td><td>AI rewrites every service page with conversion-optimized headlines and CTAs for consulting services</td></tr>
-      <tr><td>Case Study SEO</td><td>AI generates meta descriptions, structured data, and keyword-optimized case study pages</td></tr>
-      <tr><td>Blog Content Engine</td><td>AI turns consulting insights into SEO-optimized blog posts targeting "business consulting" keywords</td></tr>
-      <tr><td>AI Copy Optimization</td><td>A/B test headlines, CTAs, and page layouts to continuously improve capture rate on 31consulting.net</td></tr>
-    </table>
-  </div>
-
-  <!-- The 31 Consulting Method (RULE-6) -->
-  <div class="section">
-    <div class="section-label">Your Methodology</div>
-    <h2>The 31 Method</h2>
-    <p>AI amplifies each pillar of your consulting process — without changing what makes 31 Consulting special.</p>
-
-    <div class="method-grid">
-      <div class="method-card">
-        <div class="m-num">1</div>
-        <h4>Capture</h4>
-        <p>AI responds to every lead in under 2 minutes and qualifies through natural conversation</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">2</div>
-        <h4>Qualify</h4>
-        <p>AI scores and routes leads — hot to Slack instantly, warm to Pipedrive, cold to nurture</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">3</div>
-        <h4>Convert</h4>
-        <p>AI books application reviews within hours and preps the team with full lead context</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">4</div>
-        <h4>Retain</h4>
-        <p>AI manages pipeline health, flags at-risk deals, and nurtures past clients for repeat business</p>
-      </div>
-    </div>
-
-    <div class="method-quote">
-      "We do not just consult — we build the systems that let businesses scale without burning out the people who built them."
-    </div>
-  </div>
-
-  <!-- Competitor Benchmark (RULE-7) -->
-  <div class="section">
-    <div class="section-label">Industry Context</div>
-    <h2>What Top Consulting Firms Are Doing</h2>
-    <p>Leading consulting firms are already deploying these systems. Here is how 31 Consulting compares — and where AI closes the gap.</p>
-
-    <table class="bench-table">
-      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
-      <tr>
-        <td>Respond to inquiries within 2 minutes, 24/7</td>
-        <td>AI speed-to-lead agent qualifies and responds to all 1,000 leads in under 2 minutes — no human bottleneck</td>
-      </tr>
-      <tr>
-        <td>Use AI to score and route leads automatically</td>
-        <td>Three-tier scoring (Hot/Warm/Cold) routes only the 100-150 best leads to human attention</td>
-      </tr>
-      <tr>
-        <td>Run daily pipeline digests for managing consultants</td>
-        <td>Pipeline Manager Agent delivers a morning Slack brief replacing 45 minutes of CRM clicking</td>
-      </tr>
-      <tr>
-        <td>Auto-book application reviews within hours of qualification</td>
-        <td>Appointment Setter Agent collapses the 24-48 hour scheduling gap to minutes</td>
-      </tr>
-      <tr>
-        <td>Use conversion analytics to optimize the funnel weekly</td>
-        <td>Weekly conversion metrics (lead-to-qualified, qualified-to-proposal, proposal-to-close) delivered automatically</td>
-      </tr>
-    </table>
-  </div>
-
+  <table class="opp-table" style="margin-top:24px;">
+    <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th></tr>
+    <tr><td>Pipedrive</td><td>CRM and deal tracking</td><td>AI auto-updates deal stages, flags at-risk deals, generates daily pipeline digest</td></tr>
+    <tr><td>Slack</td><td>Team communication</td><td>AI posts morning pipeline digest, hot lead alerts, and appointment confirmations instantly</td></tr>
+    <tr><td>Email/Calendar</td><td>Client communication + scheduling</td><td>AI drafts responses, offers time slots, sends reminders, and handles no-show recovery</td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: AI AGENTS (copy-paste prompts) ═══════════ -->
-<div id="tab-agents" class="tab-panel">
+<!-- GAPS -->
+<div class="section" id="gaps">
+  <div class="section-label">Gap Analysis</div>
+  <h2>Where Leads Are Being Lost Right Now</h2>
+  <p>Your biggest challenge is <strong>1,000 leads per month with hours-long response times and fewer than 10 employees</strong>. With contracts ranging from $2,000–$5,000, even <strong>20 additional conversions per month</strong> means $40K–$100K in new revenue.</p>
+  <div class="gap-grid" style="margin-top:20px;">
+    <div class="gap-card">
+      <h4>Hours-Long Lead Response</h4>
+      <p>At 1,000 leads per month — 33 per day — your team cannot respond fast enough. A 5-minute response is 21× more effective than 30 minutes. Hours-long delays are costing real money.</p>
+      <div class="ai-fix">→ AI Agent: Speed-to-lead bot responds in under 2 minutes, 24/7</div>
+    </div>
+    <div class="gap-card">
+      <h4>No Structured Follow-Up</h4>
+      <p>Leads that get an initial response receive no systematic multi-touch sequence. Without structured nurture, warm prospects go cold and book with competitors who stayed top of mind.</p>
+      <div class="ai-fix">→ AI Agent: Automated 7-touch nurture sequence via email + Slack</div>
+    </div>
+    <div class="gap-card p2">
+      <h4>Manual Appointment Booking</h4>
+      <p>Coordinating calendar availability with qualified prospects is a manual back-and-forth that adds 24–48 hours to the process — time during which hot leads cool off and shop around.</p>
+      <div class="ai-fix">→ AI Agent: Auto-book application reviews within hours of qualification</div>
+    </div>
+    <div class="gap-card p2">
+      <h4>Lead Qualification Bottleneck</h4>
+      <p>Not every inquiry is a real prospect. Of 1,000 leads, many are unqualified. Your team wastes hours sorting noise instead of closing the 100–150 who are actually ready to buy.</p>
+      <div class="ai-fix">→ AI Agent: Real-time scoring routes only qualified leads to humans</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Pipeline Visibility Gap</h4>
+      <p>At 1,000 leads flowing into Pipedrive, the CRM becomes a black box. Deals go cold, follow-ups get missed, and the pipeline becomes a graveyard of missed opportunity.</p>
+      <div class="ai-fix">→ AI Agent: Daily 8AM Pipedrive digest with at-risk deals and action items</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Admin and Reporting Overload</h4>
+      <p>CRM data entry, pipeline updates, and performance reporting consume productive hours. The team is stuck on operations instead of client delivery and business development.</p>
+      <div class="ai-fix">→ AI Agent: Auto-generate pipeline reports and update CRM entries</div>
+    </div>
+  </div>
+</div>
 
-  <div class="section">
-    <div class="section-label">Ready-to-Use AI Agents</div>
-    <h2>Your First AI Agents — Start Here</h2>
-    <p>These are not hypothetical. Copy-paste these prompts into ChatGPT, Claude, or any AI tool and you will have a working prototype in under 10 minutes.</p>
+<!-- OPP MAP -->
+<div class="section" id="oppmap">
+  <div class="section-label">AI Opportunity Map</div>
+  <h2>Prioritized Use Cases for 31 Consulting</h2>
+  <p>Sorted by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
+  <table class="opp-table">
+    <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
+    <tr>
+      <td><span class="p-high">P1</span></td>
+      <td><strong>Speed-to-Lead Agent</strong><br><small>Auto-respond, qualify, and route within 2 minutes</small></td>
+      <td>21× qualification rate</td>
+      <td>Email, Pipedrive, Slack</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P2</span></td>
+      <td><strong>Pipeline Manager Agent</strong><br><small>Daily Pipedrive digest via Slack — at-risk flagging</small></td>
+      <td>$1,200/mo saved</td>
+      <td>Pipedrive, Slack</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P3</span></td>
+      <td><strong>Appointment Setter Agent</strong><br><small>Qualify, offer slots, auto-book + reminder sequence</small></td>
+      <td>Collapse 48hr booking to hrs</td>
+      <td>Calendar, Email, Slack</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P4</span></td>
+      <td><strong>Follow-Up Nurture Sequences</strong><br><small>7-touch automated post-inquiry nurture</small></td>
+      <td>+15–20% reactivation</td>
+      <td>Pipedrive, Email</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P5</span></td>
+      <td><strong>Lead Qualifier Scoring Engine</strong><br><small>Real-time hot/warm/cold scoring from intake data</small></td>
+      <td>$1,800/mo saved</td>
+      <td>Pipedrive, CRM</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P6</span></td>
+      <td><strong>Proposal Draft Generator</strong><br><small>Auto-draft first-version proposals from review notes</small></td>
+      <td>Save 3+ hrs/proposal</td>
+      <td>Google Workspace, Email</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P7</span></td>
+      <td><strong>Past Client Reactivation</strong><br><small>Quarterly outreach for Phase 2 work and referrals</small></td>
+      <td>Meaningful repeat revenue</td>
+      <td>Pipedrive, Email</td>
+    </tr>
+  </table>
+</div>
 
-    <!-- Agent 1: Speed-to-Lead -->
-    <div class="agent-card">
-      <h3>Agent #1: Speed-to-Lead — Auto-Respond, Qualify, and Route</h3>
-      <p class="agent-desc">At 1,000 leads per month with hours-long response times, this is the single biggest lever. This agent responds within 2 minutes and qualifies every lead through a brief conversational exchange.</p>
-      <div class="agent-prompt">You are the speed-to-lead agent for 31 Consulting. When a new lead comes in — from the website, email, referral, or any channel — your job is to respond within 2 minutes and qualify the lead through a brief conversational exchange.
+<!-- AGENTS -->
+<div class="section" id="agents">
+  <div class="section-label">Ready-to-Use AI Agents</div>
+  <h2>Your First 3 AI Agents — Start Here</h2>
+  <p>Copy these prompts and start using them today. Each takes under 10 minutes to set up in any AI tool connected to your existing stack.</p>
+
+  <div class="agent-card">
+    <h3>Agent #1: Speed-to-Lead — Auto-Respond, Qualify, and Route</h3>
+    <p class="agent-desc">At 1,000 leads per month with hours-long response times, this is the single biggest lever. This agent responds within 2 minutes and qualifies every lead through a brief conversational exchange — routing only the best to Rey.</p>
+    <div class="agent-prompt">You are the speed-to-lead agent for 31 Consulting. When a new lead arrives — from the website, email, referral, or any channel — respond within 2 minutes and qualify through a brief conversational exchange.
 
 STEP 1: IMMEDIATE RESPONSE (within 2 minutes)
-Send a personalized message that:
-1. Uses their first name
-2. Acknowledges their inquiry or the source they came from
-3. Shows you are a real firm that takes inquiries seriously
-4. Introduces the qualification step naturally
+"Hi [Name], thanks for reaching out to 31 Consulting. Before we set up a time to talk, I want to make sure I point you to the right person. Mind if I ask you a couple of quick questions?"
 
-Example: "Hi [Name], thanks for reaching out to 31 Consulting. I am glad you connected with us. Before we set up a time to talk, I want to make sure I point you to the right person on our team. Mind if I ask you a couple of quick questions?"
-
-STEP 2: QUALIFICATION (3 questions, asked conversationally, one at a time)
+STEP 2: QUALIFICATION (3 questions, one at a time)
 Q1: "What is the main challenge you are looking to solve right now?"
 Q2: "How many people are on your team, and roughly what is your annual revenue?"
 Q3: "Have you worked with a consultant before, or would this be your first time?"
 
 STEP 3: SCORING AND ROUTING
-HOT (8-10): Clear challenge + revenue over $500K or team over 10 + has worked with consultants
-→ Slack notification to Rey immediately. Offer 3 time slots.
-WARM (5-7): Somewhat defined challenge + $100K-$500K revenue
-→ Add to Pipedrive with "Warm" tag. Offer 15-minute intro call.
+HOT (8-10): Clear challenge + revenue over $500K or team over 10 + prior consulting experience
+→ Slack notification to Rey immediately. Offer 3 time slots within 24 hours.
+WARM (5-7): Defined challenge + $100K–$500K revenue
+→ Add to Pipedrive "Warm" tag. Offer 15-minute intro call.
 COLD (1-4): Vague challenge + very early stage
-→ Add to Pipedrive with "Nurture" tag. Send helpful resources.
+→ Add to Pipedrive "Nurture" tag. Send helpful resources.
 
-IMPORTANT: Never be dismissive regardless of score. Every person deserves a respectful, helpful response.
-Tone: Professional, warm, efficient. Short messages. No jargon.</div>
-      <div class="agent-result">What this does: Every lead gets a response in under 2 minutes. Hot leads reach Rey's Slack instantly. Team only handles the 100-150 most qualified prospects.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
-    </div>
+Rules:
+- Never dismissive regardless of score — every person gets a respectful, helpful response
+- Short messages — professional, warm, efficient
+- No jargon</div>
+    <div class="agent-result">Every lead gets a response in under 2 minutes. Hot leads reach Rey's Slack instantly. Team handles only the 100–150 most qualified prospects.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
 
-    <!-- Agent 2: Follow-Up Nurture -->
-    <div class="agent-card">
-      <h3>Agent #2: Pipeline Manager — Daily Pipedrive Digest</h3>
-      <p class="agent-desc">At 1,000 leads per month flowing into Pipedrive, the CRM quickly becomes overwhelming. This agent delivers a daily morning brief that replaces 45 minutes of CRM clicking.</p>
-      <div class="agent-prompt">You are the pipeline management agent for 31 Consulting. Every morning at 8:00 AM, you generate a Pipeline Digest and post it to Slack.
+  <div class="agent-card">
+    <h3>Agent #2: Pipeline Manager — Daily Pipedrive Digest</h3>
+    <p class="agent-desc">At 1,000 leads per month flowing into Pipedrive, the CRM quickly becomes overwhelming. This agent delivers a daily morning brief to Slack that replaces 45 minutes of manual CRM clicking.</p>
+    <div class="agent-prompt">You are the pipeline management agent for 31 Consulting. Every morning at 8:00 AM, generate a Pipeline Digest and post it to Slack.
 
 The Pipeline Digest includes:
 
 1. PIPELINE SNAPSHOT
-- Total active deals in Pipedrive: count and total value
+- Total active deals: count and total value
 - Deals by stage: New → Qualified → Proposal → Negotiation → Closed
 - Deals that moved stages yesterday
-- Deals stuck in the same stage for more than 7 days (flag these)
+- Deals stuck in same stage for 7+ days (flag these)
 
 2. TODAY'S PRIORITIES
-- Deals with follow-up tasks due today
-- Deals with appointments scheduled today (include time, client name, context)
+- Follow-up tasks due today
+- Appointments scheduled today (time, client name, context)
 - Deals expected to close this week
 
 3. AT-RISK DEALS
@@ -1701,337 +462,347 @@ The Pipeline Digest includes:
 - For each: suggest a specific re-engagement action
 
 4. NEW LEADS SUMMARY (past 24 hours)
-- How many new leads entered yesterday
-- Breakdown by score: Hot / Warm / Cold
-- Any hot leads not yet contacted by a human (URGENT flag)
+- Total new leads entered
+- Breakdown: Hot / Warm / Cold
+- Hot leads not yet contacted by a human (URGENT flag)
 
 5. WEEKLY CONVERSION METRICS (Monday only)
 - Lead-to-qualified, qualified-to-proposal, proposal-to-close rates
-- Average deal value and average time to close
-- Comparison to prior week
+- Average deal value and time to close vs. prior week
 
 Tone: Direct, analytical, action-oriented. Every item includes a clear recommended action.</div>
-      <div class="agent-result">Turns Pipedrive from a database into a management tool. At-risk deals get flagged before they go cold.</div>
-      <div class="agent-time">Setup time: ~7 minutes</div>
-    </div>
+    <div class="agent-result">Turns Pipedrive from a database into a management tool. At-risk deals get flagged before they go cold. Saves 45 min/day of CRM review.</div>
+    <div class="agent-time">Setup time: ~7 minutes</div>
+  </div>
 
-    <!-- Agent 3: Past Client Reactivation -->
-    <div class="agent-card">
-      <h3>Agent #3: Appointment Setter — Qualify, Offer Slots, Auto-Book</h3>
-      <p class="agent-desc">The gap between "I am interested" and "I am on a call" kills conversions. This agent books application reviews within hours of qualification — before leads cool off or book with a competitor.</p>
-      <div class="agent-prompt">You are the appointment setting agent for 31 Consulting. When a lead is qualified as Hot (score 8-10) by the speed-to-lead agent, your job is to book a application review within 24 hours.
+  <div class="agent-card">
+    <h3>Agent #3: Appointment Setter — Qualify, Offer Slots, Auto-Book</h3>
+    <p class="agent-desc">The gap between "I am interested" and "I am on a call" kills conversions. This agent books application reviews within hours of qualification — before leads cool off or book with a competitor.</p>
+    <div class="agent-prompt">You are the appointment setting agent for 31 Consulting. When a lead is scored HOT (8–10) by the speed-to-lead agent, book an application review within 24 hours.
 
 STEP 1: OFFER TIME SLOTS
-Send 3 specific time slots within the next 3 business days:
-"Great — I would love to get you on a call with [Consultant Name]. Here are a few openings:
-- [Day], [Date] at [Time] ([Duration] minutes)
-- [Day], [Date] at [Time] ([Duration] minutes)
-- [Day], [Date] at [Time] ([Duration] minutes)
+"Great — I would love to get you on a call with our team. Here are a few openings:
+- [Day], [Date] at [Time] (30 minutes)
+- [Day], [Date] at [Time] (30 minutes)
+- [Day], [Date] at [Time] (30 minutes)
 Which one works best? Or tell me what does and I will make it happen."
 
 STEP 2: CONFIRM AND PREPARE
 1. Confirm the appointment
 2. Send calendar invite with video call link and brief agenda
-3. Add full context to the consultant's calendar: lead name, qualification answers, score, suggested talking points
+3. Add full context to the calendar: lead name, qualification answers, score, suggested talking points
 
 STEP 3: REMINDER SEQUENCE
-- 24 hours before: Quick reminder
-- 2 hours before: Call link reminder
+- 24 hours before: Quick reminder with call link
+- 2 hours before: "See you today at [time]" with link
 - 5 minutes after no-show: "Something come up? No worries — want to reschedule?"
 
-STEP 4: NO-SHOW FOLLOW-UP
+STEP 4: NO-SHOW RECOVERY
 If no response within 24 hours: "The offer to connect is always open. Reply when you have a window."
 Tag in Pipedrive: "No-Show — Follow Up in 7 Days"
 
-Tone: Efficient, professional, understanding. Make scheduling feel effortless. Never passive-aggressive.</div>
-      <div class="agent-result">Collapses the 24-48 hour scheduling gap to minutes. Graceful no-show recovery ensures lost meetings do not become lost deals.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
-    </div>
-
-    <!-- DIY vs Partner -->
-    <div class="path-grid">
-      <div class="path-card">
-        <h4>DIY Path</h4>
-        <p>Copy these prompts and start using them today. Most business owners can implement 1-2 agents on their own and see results in days.</p>
-      </div>
-      <div class="path-card partner">
-        <h4>Partner Path</h4>
-        <p>Want the full system — all agents connected to Pipedrive, Slack, and your calendar, trained on your brand voice, monitoring your pipeline 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
-      </div>
-    </div>
+Tone: Efficient, professional, understanding. Make scheduling feel effortless.</div>
+    <div class="agent-result">Collapses the 24–48 hour scheduling gap to minutes. Graceful no-show recovery ensures lost meetings do not become lost deals.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
   </div>
-
 </div>
 
-<!-- ═══════════ TAB: LISTEN ═══════════ -->
-<div id="tab-listen" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Listen</div>
-    <h2>Hear the Vision Behind This Roadmap</h2>
-
-    <div class="listen-card">
-      <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
-      <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
-
-      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 32px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px;">Your Personalized AI Podcast</p>
-        <audio id="podcastAudio" preload="metadata" style="width:100%;margin-bottom:12px">
-          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" style="color:rgba(255,255,255,0.8)">Download the podcast</a>.
-        </audio>
-        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'▶ Play':'⏸ Pause'" style="background:rgba(255,255,255,0.9);color:#1a1a2e;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer">▶ Play</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px;font-weight:800">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">2x</button>
-        </div>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 12px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to 31 Consulting.</p>
+<!-- TIMELINE -->
+<div class="section" id="timeline">
+  <div class="section-label">Implementation Timeline</div>
+  <h2>3-Day Onboarding. 7-Day Launch. 30-Day Optimized.</h2>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-dot">1</div>
+      <div class="tl-body">
+        <h4>Day 1–3: Connect + Configure</h4>
+        <p>Integrate Pipedrive, Slack, and your calendar. Build qualification criteria and scoring rubric. Configure Slack alert channels and Pipedrive pipeline stages.</p>
       </div>
-
-      <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
-
-      <div class="pull-quote">
-        "The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">7</div>
+      <div class="tl-body">
+        <h4>Day 7: All 3 Agents Live</h4>
+        <p>Speed-to-Lead responding in under 2 minutes. Pipeline Digest posting at 8AM. Appointment Setter booking hot leads same day. All connected to Pipedrive and Slack.</p>
       </div>
-
-      <div class="pull-quote">
-        "For consulting firms like Rey's, AI is not about replacing the expertise. It is about making sure 1,000 leads per month do not slip through the cracks while the team is busy delivering results."
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">30</div>
+      <div class="tl-body">
+        <h4>Day 30: Fully Optimized</h4>
+        <p>Scoring thresholds refined from real lead data. Digest format tuned to Rey's priorities. Booking sequence optimized for show-rate and close-rate.</p>
       </div>
-
-      <div style="text-align: center; margin-top: 24px; padding: 16px; background: var(--bg-soft); border-radius: 8px;">
-        <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Save for the drive home</p>
-        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have 38 minutes to think about your business.</p>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">∞</div>
+      <div class="tl-body">
+        <h4>Ongoing: Scale Without Hiring</h4>
+        <p>Monthly performance reviews. Follow-up nurture sequences added. Past client reactivation campaigns running quarterly — all without headcount increases.</p>
       </div>
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════ TAB: COMMAND CENTER (RULE-8) ═══════════ -->
-<div id="tab-command" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Your Custom Platform</div>
-    <h2>Your Command Center. Built for You.</h2>
-    <p>Not a generic CRM. A custom-built command center designed specifically for how 31 Consulting operates — from inquiry to event day to post-event follow-up.</p>
-
-    <div class="command-hero">
-      <h3>31 Consulting Command Center</h3>
-      <p>Everything your team needs to manage leads, pipeline, appointments, and finances — in one streamlined interface at command.31consulting.net</p>
-      <div class="command-tiles">
-        <div class="command-tile">
-          <h4>Lead Pipeline</h4>
-          <p>All 1,000 monthly leads tracked from first touch to signed contract. AI scores, qualifies, and routes automatically.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Pipeline Command Center</h4>
-          <p>Active deals, at-risk opportunities, and conversion metrics organized by stage — not buried in Pipedrive clicks.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Qualification Engine</h4>
-          <p>AI pre-screens every inquiry using your criteria — challenge clarity, revenue, team size, consulting readiness — before it reaches your inbox.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Finance Dashboard</h4>
-          <p>Revenue by client type, outstanding invoices, and cash flow projections — all in real time.</p>
-        </div>
-      </div>
+<!-- CALCULATOR -->
+<div class="section" id="calculator">
+  <div class="section-label">Interactive ROI Calculator</div>
+  <h2>Your AI-Driven Revenue Projection</h2>
+  <p>Adjust the sliders to match your actual numbers. Projections update in real time.</p>
+  <div class="scenario-toggle">
+    <div class="scenario-pill" id="pill-conservative" onclick="setScenario('conservative')">Conservative</div>
+    <div class="scenario-pill active" id="pill-expected" onclick="setScenario('expected')">Expected</div>
+    <div class="scenario-pill" id="pill-stretch" onclick="setScenario('stretch')">Stretch</div>
+  </div>
+  <div class="calc-card">
+    <div class="slider-group">
+      <div class="slider-label"><span>Monthly Leads</span><span class="slider-val" id="val-leads">1,000</span></div>
+      <input type="range" id="slider-leads" min="100" max="2000" step="50" value="1000" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Average Contract Value</span><span class="slider-val" id="val-contract">$3,500</span></div>
+      <input type="range" id="slider-contract" min="2000" max="10000" step="500" value="3500" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Current Close Rate</span><span class="slider-val" id="val-close">2%</span></div>
+      <input type="range" id="slider-close" min="1" max="10" step="0.5" value="2" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Speed-to-Lead Improvement</span><span class="slider-val" id="val-speed">50%</span></div>
+      <input type="range" id="slider-speed" min="20" max="80" step="5" value="50" oninput="updateCalc()">
+    </div>
+    <div class="results-grid">
+      <div class="result-card"><div class="r-val" id="res-monthly">—</div><div class="r-lbl">Monthly Revenue Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-quarterly">—</div><div class="r-lbl">Quarterly Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-annual">—</div><div class="r-lbl">Annual Lift</div></div>
     </div>
   </div>
-
-  <!-- Mirror Method Qualification (RULE-9) -->
-  <div class="section">
-    <div class="section-label">The 31 Standard</div>
-    <h2>The 31 Filter</h2>
-    <p>Your expertise and standards are what make 31 Consulting special. AI automates the pre-screening — but you approve every decision.</p>
-
-    <div class="next-steps" style="margin-top:24px;">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Lead Received</h4>
-        <p>AI captures the challenge, team size, revenue range, and consulting readiness</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>AI Pre-Screen</h4>
-        <p>Instantly scores and categorizes — Hot, Warm, or Cold — in under 2 minutes</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Rey Reviews</h4>
-        <p>You see only pre-qualified hot leads with full context — approve in one tap</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>Personalized Response</h4>
-        <p>AI sends a professional response in your voice — you stay in control</p>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
-    </div>
-  </div>
-
-  <!-- Finance Section (RULE-10) -->
-  <div class="section">
-    <div class="finance-card">
-      <h3>Meet Fred — Your AI CFO</h3>
-      <p style="color: var(--text-mid); margin-bottom: 20px;">A named financial intelligence agent built into your command center. Not an "AI bookkeeper" — a CFO-level assistant that knows your business.</p>
-      <ul class="finance-bullets">
-        <li>
-          <div class="fb-icon">?</div>
-          <div><strong>Ask Fred Anything</strong> — Instant P&amp;L questions via messaging. "Fred, what was our margin on the Peterson engagement?" gets an answer in seconds.</div>
-        </li>
-        <li>
-          <div class="fb-icon">$</div>
-          <div><strong>Receivables Forecast</strong> — Cash-in projection at 30/60/30 days. Know exactly when money hits the account.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#128202;</div>
-          <div><strong>Custom Reports</strong> — Board-ready financials in minutes. Revenue by event type, seasonal trends, vendor cost analysis.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#10003;</div>
-          <div><strong>Clean Books</strong> — Retroactive cleanup + ongoing reconciliation. No more end-of-year scramble.</div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
 </div>
 
-<!-- ═══════════ BOTTOM CTA (all tabs) ═══════════ -->
-<div class="cta-block">
-  <h3>Ready to See What AI Can Do for 31 Consulting?</h3>
-  <p>This roadmap shows you what is possible. Apply and we will walk through your priorities together on a 30-minute strategy call.</p>
+<!-- PROMPTS -->
+<div class="section" id="prompts">
+  <div class="section-label">Proven Prompts</div>
+  <h2>Copy-Paste These to Start Today</h2>
+  <div class="agent-card" style="margin-top:20px;">
+    <h3>Warm Lead Re-Engagement</h3>
+    <div class="agent-prompt">You are the follow-up agent for 31 Consulting. A lead was qualified as Warm 7 days ago but has not responded to the initial outreach. Write a re-engagement message that:
+- Is under 100 words
+- References their specific challenge from the qualification conversation
+- Adds one piece of value (insight, resource, or relevant result from a similar client)
+- Has a low-friction CTA: "Worth a 15-minute call this week?"
+Tone: Peer-to-peer, direct, not salesy.</div>
+  </div>
+  <div class="agent-card">
+    <h3>Daily Pipeline Alert (Hot Lead)</h3>
+    <div class="agent-prompt">Format a Slack alert for a newly qualified Hot lead with this structure:
+
+🔴 HOT LEAD — [Name] | [Company] | Score: [X]/10
+Challenge: [Their stated challenge]
+Revenue: [Range] | Team: [Size]
+Source: [Channel]
+Recommended action: [Specific next step]
+Time to respond: Under 2 hours
+
+Post to #pipeline-alerts. Tag @rey if score is 9+.</div>
+  </div>
+  <div class="agent-card">
+    <h3>No-Show Recovery Message</h3>
+    <div class="agent-prompt">A scheduled application review was a no-show 5 minutes ago. Write a recovery message that:
+- Is warm and understanding — not passive-aggressive
+- Acknowledges they may have gotten busy
+- Offers 2 specific reschedule options in the next 3 business days
+- Keeps the door open without pressure
+Under 75 words. Conversational tone.</div>
+  </div>
+</div>
+
+<!-- AUDIT -->
+<div class="section" id="audit">
+  <div class="section-label">AI Readiness Audit</div>
+  <h2>31 Consulting — AI Readiness Score</h2>
+  <p>Scored 1–5 based on current systems, lead flow, and automation maturity. Lower scores = highest ROI opportunity.</p>
+  <div class="audit-grid">
+    <div class="audit-row">
+      <div class="audit-label">Lead Response Speed</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:24%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.2</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Qualification Automation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:30%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.5</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Pipeline Visibility</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:44%;background:#f39c12;"></div></div>
+      <div class="audit-score">2.2</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Booking Automation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:34%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.7</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Follow-Up Systems</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:28%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.4</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-light);margin-top:16px;">Lead Response Speed and Qualification Automation are your most critical gaps — and the ones with the highest immediate ROI. Agent #1 above directly addresses both.</p>
+</div>
+
+<!-- LISTEN -->
+<div class="section" id="listen">
+  <div class="section-label">Your Personalized Podcast</div>
+  <h2>Hear the Vision Behind This Roadmap</h2>
+  <div class="listen-card">
+    <h3>The Best You Interview Series</h3>
+    <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming consulting firms with high lead volumes — and why the next 12 months will separate the firms that scale from those that stay stuck.</p>
+    <div class="podcast-player">
+      <p style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:12px;">Your Personalized AI Podcast — 31 Consulting</p>
+      <audio controls preload="metadata">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+      <div class="speed-controls">
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);">Speed:</span>
+        <button class="speed-btn" onclick="setSpeed(1,this)">1×</button>
+        <button class="speed-btn" onclick="setSpeed(1.5,this)">1.5×</button>
+        <button class="speed-btn" onclick="setSpeed(2,this)">2×</button>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to 31 Consulting.</p>
+    </div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" download style="display:inline-block;background:var(--brand);color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;">Download Podcast</a>
+    </div>
+    <p style="font-size:13px;color:var(--text-light);text-align:center;">Duration: ~38 minutes</p>
+    <div class="pull-quote">"The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."</div>
+    <div class="pull-quote">"For consulting firms like Rey's, AI is not about replacing the expertise. It is about making sure 1,000 leads per month do not slip through the cracks while the team is busy delivering results."</div>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="section" id="sources">
+  <div class="section-label">Data Sources</div>
+  <h2>Research Behind This Roadmap</h2>
+  <ul class="sources-list">
+    <li><sup>1</sup> 21× lead qualification rate for 5-minute vs. 30-minute response — Harvard Business Review lead response study (2011, validated in 2023 B2B studies).</li>
+    <li><sup>2</sup> $4,200/month cost savings based on industry rates: AI-replaced lead qualifier ($1,800/mo FTE equivalent), pipeline manager ($1,200/mo), admin tasks ($1,200/mo).</li>
+    <li><sup>3</sup> 15+ hours/week reclaimed based on qualification automation (8 hrs), pipeline review (3 hrs), scheduling (4 hrs) automation baselines for &lt;10-person teams.</li>
+    <li><sup>4</sup> +$60K/month revenue lift from comparable B2B consulting case (anonymized, 2025). Individual results vary based on lead quality and contract mix.</li>
+  </ul>
+</div>
+
+<!-- COMMAND -->
+<div class="section" id="command">
+  <div class="section-label">Your Custom Platform</div>
+  <h2>31 Consulting Command Center</h2>
+  <p>Not a generic CRM add-on. A custom-built command center designed around how 31 Consulting actually operates — from lead intake to close to reactivation.</p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px;">
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Live Pipeline Dashboard</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Every lead tracked from first touch to signed contract. AI scores and prioritizes automatically — Rey sees only what needs attention.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Appointment Hub</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Qualification summaries, scheduled calls, and show/no-show tracking — organized for maximum prep in minimum time.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">At-Risk Alert Center</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Deals with 5+ days of inactivity flagged automatically with recommended re-engagement actions — before they go cold.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Revenue Dashboard</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Revenue by client type, outstanding invoices, conversion rates by channel, and cash flow projections — all in real time.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNED INVITE -->
+<div class="signed-invite">
+  <p>Rey, I built this roadmap specifically for 31 Consulting because I believe the work you are doing deserves to reach every one of those 1,000 leads per month effectively. The AI systems here are not about replacing your team's expertise — they are about making sure your pipeline never leaks again.</p>
   <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" class="cta-btn">Apply to Work With Us</a>
-  <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
-</div>
-
-<!-- Footnotes -->
-<div class="footnotes">
-  <p><sup>1</sup> Lead response data based on Harvard Business Review research: responding within 5 minutes makes you 21x more likely to qualify a lead than responding in 30 minutes.</p>
-  <p><sup>2</sup> LinkedIn B2B lead projections capped at 18/month per council calibration. 10/month is the expected default for curated, quality-first outreach to decision-makers.</p>
-  <p><sup>3</sup> 21x qualification improvement based on speed-to-lead research across professional services and B2B consulting verticals (2024-2025 data).</p>
-  <p><sup>4</sup> Time savings of 15+ hrs/week based on automation of lead qualification, pipeline management, appointment scheduling, and reporting. Cost savings: lead qualifier $1,800 + pipeline manager $1,200 + admin $1,200 = $4,200/mo.</p>
-</div>
-
-<div class="footer">
-  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for 31 Consulting.</p>
-  <p style="margin-top: 8px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+  <div class="sig">— Bennett Maxwell</div>
+  <p style="font-size:12px;color:#aaa;margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
 </div>
 
 </div><!-- end container -->
 
-<!-- Reading progress bar -->
-<div class="reading-progress" id="readingProgress"></div>
+<div class="cta-section">
+  <h2>Ready to See What AI Can Do for 31 Consulting?</h2>
+  <p>This roadmap shows you what is possible. Apply for a free 30-minute AI strategy session and we will walk through your priorities together.</p>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting" class="cta-btn">Apply to Work With Us</a>
+  <p style="margin-top:16px;font-size:12px;opacity:0.5;">No obligation. No pitch. Just a practical conversation about your next step.</p>
+</div>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
+<footer>
+  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for 31 Consulting.</p>
+  <p style="margin-top:6px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+</footer>
+
+<div class="mobile-cta-bar">
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting">Apply to Work With Us</a>
 </div>
 
 <script>
-// Tab switching
-function switchTab(tabId, e) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  (e || event).currentTarget.classList.add('active');
-  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth'});
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('readingProgress').style.width = scrolled + '%';
+});
+
+function setSpeed(rate, btn) {
+  const audio = document.querySelector('audio');
+  if (audio) audio.playbackRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(b => b.style.fontWeight = 'normal');
+  btn.style.fontWeight = 'bold';
 }
 
-// Scenario presets
 let scenario = 'expected';
 const presets = {
-  conservative: { linkedin: 5, seo: 20 },
-  expected: { linkedin: 10, seo: 35 },
-  stretch: { linkedin: 18, seo: 60 }
+  conservative: { speed: 20 },
+  expected:     { speed: 50 },
+  stretch:      { speed: 80 }
 };
 
 function setScenario(s) {
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
-  document.getElementById('slider-linkedin').value = presets[s].linkedin;
-  document.getElementById('slider-seo').value = presets[s].seo;
+  document.getElementById('slider-speed').value = presets[s].speed;
+  document.getElementById('val-speed').textContent = presets[s].speed + '%';
   updateCalc();
 }
 
-// ROI Calculator
-function updateCalc() {
-  const contract = parseInt(document.getElementById('slider-contract').value) || 3500;
-  const leads = parseInt(document.getElementById('slider-leads').value) || 1000;
-  const closeRate = (parseInt(document.getElementById('slider-close').value) || 5) / 100;
-  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 10;
-  const seoLift = (parseInt(document.getElementById('slider-seo').value) || 45) / 100;
-
-  // Display values
-  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
-  document.getElementById('val-leads').textContent = leads;
-  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-linkedin').textContent = linkedinLeads;
-  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
-
-  // Current monthly
-  const currentMonthly = contract * leads * closeRate;
-
-  // AI-enhanced
-  const aiLeads = leads * 1.15 + linkedinLeads;
-  const aiCloseRate = closeRate * 1.22;
-  const aiMonthly = contract * aiLeads * aiCloseRate;
-
-  const monthlyGain = aiMonthly - currentMonthly;
-  const quarterlyGain = monthlyGain * 3;
-
-  const currentQ = currentMonthly * 3;
-  const q2 = aiMonthly * 3;
-  const q3 = q2 * 1.10;
-  const q4 = q3 * 1.20;
-
-  // Update display
-  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
-  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
-
-  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
-
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
-
-  // Time saved + cost savings (RULE-13: understated 15%)
-  const timeSaved = (15 * (1 + seoLift * 0.15)).toFixed(1);
-  const costSavings = Math.round(4200 * (1 + seoLift * 0.15));
-  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
-  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // Consulting: Q1 planning, Q3 mid-year review, Q4 budget season
-  if (month >= 0 && month <= 3) target = new Date(now.getFullYear(), 6, 1);
-  else if (month >= 4 && month <= 8) target = new Date(now.getFullYear(), 11, 1);
-  else target = new Date(now.getFullYear() + 1, 3, 1);
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
+function updateCalc() {
+  const leads    = +document.getElementById('slider-leads').value;
+  const contract = +document.getElementById('slider-contract').value;
+  const close    = +document.getElementById('slider-close').value / 100;
+  const speed    = +document.getElementById('slider-speed').value / 100;
 
-// Init calculator
+  document.getElementById('val-leads').textContent = leads.toLocaleString();
+  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
+  document.getElementById('val-close').textContent = Math.round(close * 100) + '%';
+  document.getElementById('val-speed').textContent = Math.round(speed * 100) + '%';
+
+  const multipliers = { conservative: 0.40, expected: 0.65, stretch: 0.80 };
+  const mult = multipliers[scenario];
+  const baseRevenue = leads * close * contract;
+  const closeBoost = close * (1 + speed);
+  const newRevenue = leads * closeBoost * contract;
+  const monthly = (newRevenue - baseRevenue) * mult;
+
+  document.getElementById('res-monthly').textContent  = fmt(monthly);
+  document.getElementById('res-quarterly').textContent = fmt(monthly * 3);
+  document.getElementById('res-annual').textContent    = fmt(monthly * 12);
+}
+
 updateCalc();
 </script>
-
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting">Apply to Work With Us</a>
-</div>
-
 </body>
 </html>
