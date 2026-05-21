@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDD Readiness Score — FranchiseKI</title>
+  <meta name="description" content="Score your franchise due diligence in 90 seconds. Find out exactly where you stand before signing anything.">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;min-height:100vh}
+    .nav{background:#fff;border-bottom:1px solid #e5e5ea;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .nav-logo{font-size:15px;font-weight:700;color:#0f1f3d;text-decoration:none}
+    .nav-logo span{color:#d4a857}
+    .nav-back{font-size:12px;color:#0071e3;text-decoration:none;background:rgba(0,113,227,.08);padding:5px 12px;border-radius:8px}
+
+    /* Hero */
+    .hero{background:#0f1f3d;color:#fff;padding:56px 24px 48px;text-align:center}
+    .hero-tag{display:inline-block;background:rgba(212,168,87,.15);color:#d4a857;border:1px solid rgba(212,168,87,.3);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px}
+    .hero h1{font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:16px}
+    .hero h1 span{color:#d4a857}
+    .hero p{font-size:16px;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 32px;line-height:1.6}
+    .hero-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .hero-meta-item{font-size:12px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px}
+    .hero-meta-item::before{content:'✓';color:#34c759;font-weight:700}
+
+    /* Progress */
+    .progress-wrap{background:#fff;border-bottom:1px solid #e5e5ea;padding:12px 24px}
+    .progress-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:12px}
+    .progress-bar{flex:1;height:4px;background:#e5e5ea;border-radius:2px;overflow:hidden}
+    .progress-fill{height:100%;background:#d4a857;border-radius:2px;transition:width .4s ease}
+    .progress-label{font-size:12px;color:#8e8e93;white-space:nowrap}
+
+    /* Quiz */
+    .quiz-wrap{max-width:640px;margin:0 auto;padding:32px 24px 80px}
+    .q-card{background:#fff;border-radius:16px;padding:32px;margin-bottom:20px;box-shadow:0 2px 8px rgba(15,31,61,.08);display:none}
+    .q-card.active{display:block;animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .q-num{font-size:11px;font-weight:700;color:#8e8e93;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+    .q-text{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:8px;color:#1d1d1f}
+    .q-sub{font-size:13px;color:#6b7280;margin-bottom:24px;line-height:1.5}
+    .options{display:flex;flex-direction:column;gap:10px}
+    .opt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid #e5e5ea;border-radius:12px;cursor:pointer;transition:all .2s;background:#fff}
+    .opt:hover{border-color:#d4a857;background:#fffdf5}
+    .opt.selected{border-color:#d4a857;background:#fffdf5}
+    .opt.selected .opt-radio{background:#d4a857;border-color:#d4a857}
+    .opt.selected .opt-radio::after{opacity:1}
+    .opt-radio{width:20px;height:20px;border-radius:50%;border:2px solid #d1d5db;flex-shrink:0;position:relative;transition:all .2s}
+    .opt-radio::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:opacity .2s}
+    .opt-label{font-size:15px;color:#1d1d1f;font-weight:500}
+    .opt-score{margin-left:auto;font-size:12px;font-weight:700;color:#8e8e93;display:none}
+
+    /* CTA row */
+    .q-actions{display:flex;justify-content:flex-end;margin-top:24px}
+    .btn-next{background:#0f1f3d;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+    .btn-next:hover{background:#1e3a5f}
+    .btn-next:disabled{opacity:.4;cursor:not-allowed}
+
+    /* Lead form */
+    .form-card{background:#fff;border-radius:16px;padding:36px;box-shadow:0 2px 8px rgba(15,31,61,.08);display:none;text-align:center}
+    .form-card.active{display:block;animation:fadeIn .3s ease}
+    .form-score-preview{font-size:64px;font-weight:800;letter-spacing:-3px;margin-bottom:4px}
+    .form-score-label{font-size:13px;color:#8e8e93;margin-bottom:24px}
+    .form-card h2{font-size:22px;font-weight:700;margin-bottom:8px}
+    .form-card p{font-size:14px;color:#6b7280;margin-bottom:28px;line-height:1.6}
+    .form-fields{display:flex;flex-direction:column;gap:12px;text-align:left;margin-bottom:20px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em}
+    .field input{padding:12px 16px;border:2px solid #e5e5ea;border-radius:10px;font-size:15px;outline:none;transition:border-color .2s;font-family:inherit}
+    .field input:focus{border-color:#d4a857}
+    .btn-submit{width:100%;background:#d4a857;color:#0f1f3d;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+    .btn-submit:hover{background:#c49444}
+    .form-trust{font-size:11px;color:#8e8e93;margin-top:12px}
+
+    /* Results */
+    .result-card{background:#fff;border-radius:16px;padding:36px;box-shadow:0 2px 8px rgba(15,31,61,.08);display:none}
+    .result-card.active{display:block;animation:fadeIn .3s ease}
+    .score-ring{width:120px;height:120px;margin:0 auto 20px;position:relative}
+    .score-ring svg{transform:rotate(-90deg)}
+    .score-ring-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:800;color:#1d1d1f;text-align:center;letter-spacing:-1px}
+    .score-ring-sub{font-size:10px;font-weight:600;color:#8e8e93;text-align:center;display:block;margin-top:2px}
+    .result-label{text-align:center;font-size:22px;font-weight:800;margin-bottom:8px}
+    .result-sublabel{text-align:center;font-size:14px;color:#6b7280;margin-bottom:28px;line-height:1.5}
+    .result-items{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .result-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:12px;background:#f5f5f7}
+    .result-item.good{background:rgba(52,199,89,.06);border-left:3px solid #34c759}
+    .result-item.warn{background:rgba(255,159,10,.06);border-left:3px solid #ff9f0a}
+    .result-item.bad{background:rgba(255,59,48,.06);border-left:3px solid #ff3b30}
+    .result-item-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+    .result-item-text{font-size:13px;color:#1d1d1f;line-height:1.5}
+    .result-item-text strong{display:block;font-weight:700;margin-bottom:2px}
+    .btn-book{display:block;width:100%;background:#0f1f3d;color:#fff;text-decoration:none;text-align:center;padding:16px;border-radius:12px;font-size:16px;font-weight:800;margin-bottom:12px;transition:background .2s}
+    .btn-book:hover{background:#1e3a5f}
+    .btn-book-sub{font-size:12px;color:#8e8e93;text-align:center}
+    .fdd-disclaimer{font-size:10px;color:#b0b0b0;text-align:center;margin-top:20px;line-height:1.5;border-top:1px solid #f0f0f0;padding-top:16px}
+
+    @media(max-width:480px){
+      .hero{padding:40px 16px 36px}
+      .quiz-wrap{padding:24px 16px 60px}
+      .q-card,.form-card,.result-card{padding:24px}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="https://mapki.franchiseki.com">FranchiseKI<span>.</span></a>
+  <a class="nav-back" href="https://mapki.franchiseki.com">← MapKI</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Free Tool · No Email Required to Start</div>
+  <h1>How Ready Are You<br>to Read an <span>FDD?</span></h1>
+  <p>7 questions. 90 seconds. Get your FDD readiness score — and find out what most franchise buyers miss before they sign.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">No cost, ever</div>
+    <div class="hero-meta-item">No obligation</div>
+    <div class="hero-meta-item">Instant results</div>
+  </div>
+</div>
+
+<div class="progress-wrap" id="progressWrap" style="display:none">
+  <div class="progress-inner">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 7</div>
+  </div>
+</div>
+
+<div class="quiz-wrap">
+
+  <!-- Q1 -->
+  <div class="q-card active" data-q="1" data-weight="15">
+    <div class="q-num">Question 1 of 7</div>
+    <div class="q-text">Have you received and read the full FDD?</div>
+    <div class="q-sub">The Franchise Disclosure Document is legally required to be given to you at least 14 days before signing. Most buyers skim it.</div>
+    <div class="options">
+      <div class="opt" data-score="15" onclick="selectOpt(this,1)"><div class="opt-radio"></div><div class="opt-label">Yes — read all 23 items</div></div>
+      <div class="opt" data-score="8" onclick="selectOpt(this,1)"><div class="opt-radio"></div><div class="opt-label">Partially — hit the key sections</div></div>
+      <div class="opt" data-score="3" onclick="selectOpt(this,1)"><div class="opt-radio"></div><div class="opt-label">Skimmed it briefly</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,1)"><div class="opt-radio"></div><div class="opt-label">Not yet / don't have it</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next1" disabled onclick="nextQ(1,2)">Next →</button></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-q="2" data-weight="20">
+    <div class="q-num">Question 2 of 7</div>
+    <div class="q-text">Do you know the Item 7 total investment range?</div>
+    <div class="q-sub">Item 7 shows the estimated initial investment. Many buyers are surprised by costs beyond the franchise fee — build-out, training, working capital, and more.</div>
+    <div class="options">
+      <div class="opt" data-score="20" onclick="selectOpt(this,2)"><div class="opt-radio"></div><div class="opt-label">Yes — I know the low, mid, and high estimates</div></div>
+      <div class="opt" data-score="10" onclick="selectOpt(this,2)"><div class="opt-radio"></div><div class="opt-label">Roughly — I know the franchise fee only</div></div>
+      <div class="opt" data-score="3" onclick="selectOpt(this,2)"><div class="opt-radio"></div><div class="opt-label">Not sure exactly</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,2)"><div class="opt-radio"></div><div class="opt-label">No idea yet</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next2" disabled onclick="nextQ(2,3)">Next →</button></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-q="3" data-weight="15">
+    <div class="q-num">Question 3 of 7</div>
+    <div class="q-text">Have you reviewed Item 19 — Financial Performance Representations?</div>
+    <div class="q-sub">Item 19 is optional for franchisors to include. If it's missing, you're flying blind on real unit economics. If it's there, do you know how to read it?</div>
+    <div class="options">
+      <div class="opt" data-score="15" onclick="selectOpt(this,3)"><div class="opt-radio"></div><div class="opt-label">Yes — analyzed average unit revenue and margins</div></div>
+      <div class="opt" data-score="8" onclick="selectOpt(this,3)"><div class="opt-radio"></div><div class="opt-label">Glanced at it but didn't dig in</div></div>
+      <div class="opt" data-score="3" onclick="selectOpt(this,3)"><div class="opt-radio"></div><div class="opt-label">The FDD didn't include an Item 19</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,3)"><div class="opt-radio"></div><div class="opt-label">Haven't looked at it yet</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next3" disabled onclick="nextQ(3,4)">Next →</button></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" data-q="4" data-weight="15">
+    <div class="q-num">Question 4 of 7</div>
+    <div class="q-text">Have you spoken with existing franchisees (Item 20)?</div>
+    <div class="q-sub">Item 20 lists every current and former franchisee. Calling them is the single highest-value thing you can do — and most buyers skip it.</div>
+    <div class="options">
+      <div class="opt" data-score="15" onclick="selectOpt(this,4)"><div class="opt-radio"></div><div class="opt-label">Yes — talked to 3 or more franchisees</div></div>
+      <div class="opt" data-score="8" onclick="selectOpt(this,4)"><div class="opt-radio"></div><div class="opt-label">Spoke with 1–2 the franchisor introduced</div></div>
+      <div class="opt" data-score="3" onclick="selectOpt(this,4)"><div class="opt-radio"></div><div class="opt-label">Have the list but haven't called yet</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,4)"><div class="opt-radio"></div><div class="opt-label">No — I haven't contacted any franchisees</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next4" disabled onclick="nextQ(4,5)">Next →</button></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" data-q="5" data-weight="15">
+    <div class="q-num">Question 5 of 7</div>
+    <div class="q-text">Do you know the royalty structure and ongoing fee obligations?</div>
+    <div class="q-sub">Royalties, marketing funds, tech fees, and minimum purchase requirements can significantly impact your actual take-home. These live in Items 5 and 6.</div>
+    <div class="options">
+      <div class="opt" data-score="15" onclick="selectOpt(this,5)"><div class="opt-radio"></div><div class="opt-label">Yes — I've modeled total fees into my P&L</div></div>
+      <div class="opt" data-score="8" onclick="selectOpt(this,5)"><div class="opt-radio"></div><div class="opt-label">I know the royalty %, not all the other fees</div></div>
+      <div class="opt" data-score="3" onclick="selectOpt(this,5)"><div class="opt-radio"></div><div class="opt-label">Roughly aware but haven't modeled it</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,5)"><div class="opt-radio"></div><div class="opt-label">Not sure what I'd owe beyond the franchise fee</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next5" disabled onclick="nextQ(5,6)">Next →</button></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" data-q="6" data-weight="10">
+    <div class="q-num">Question 6 of 7</div>
+    <div class="q-text">Have you had a franchise attorney review the FDD and franchise agreement?</div>
+    <div class="q-sub">The franchise agreement is what you actually sign — and it may differ from what the FDD describes. An attorney who specializes in franchise law is different from a general business attorney.</div>
+    <div class="options">
+      <div class="opt" data-score="10" onclick="selectOpt(this,6)"><div class="opt-radio"></div><div class="opt-label">Yes — a franchise-specific attorney reviewed everything</div></div>
+      <div class="opt" data-score="6" onclick="selectOpt(this,6)"><div class="opt-radio"></div><div class="opt-label">My general business attorney looked at it</div></div>
+      <div class="opt" data-score="2" onclick="selectOpt(this,6)"><div class="opt-radio"></div><div class="opt-label">Planning to but haven't yet</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,6)"><div class="opt-radio"></div><div class="opt-label">No attorney involved</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next6" disabled onclick="nextQ(6,7)">Next →</button></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" data-q="7" data-weight="10">
+    <div class="q-num">Question 7 of 7</div>
+    <div class="q-text">Have you compared this franchise against at least 2 others in a similar category?</div>
+    <div class="q-sub">Franchisors present their opportunity as uniquely compelling. Without comparison, you can't benchmark their unit economics, fees, or support against realistic alternatives.</div>
+    <div class="options">
+      <div class="opt" data-score="10" onclick="selectOpt(this,7)"><div class="opt-radio"></div><div class="opt-label">Yes — actively compared 3+ options</div></div>
+      <div class="opt" data-score="5" onclick="selectOpt(this,7)"><div class="opt-radio"></div><div class="opt-label">Looked at one other briefly</div></div>
+      <div class="opt" data-score="2" onclick="selectOpt(this,7)"><div class="opt-radio"></div><div class="opt-label">This is the only one I'm considering</div></div>
+      <div class="opt" data-score="0" onclick="selectOpt(this,7)"><div class="opt-radio"></div><div class="opt-label">Haven't explored alternatives yet</div></div>
+    </div>
+    <div class="q-actions"><button class="btn-next" id="next7" disabled onclick="showForm()">See My Score →</button></div>
+  </div>
+
+  <!-- Lead Capture -->
+  <div class="form-card" id="formCard">
+    <div class="form-score-preview" id="formScorePreview">—</div>
+    <div class="form-score-label">Your FDD Readiness Score (preview)</div>
+    <h2>Get Your Full Breakdown</h2>
+    <p>Enter your info to see your complete score, exactly where the gaps are, and what to do before you sign anything.</p>
+    <form class="form-fields" id="leadForm" onsubmit="submitForm(event)">
+      <div class="field">
+        <label>First Name</label>
+        <input type="text" id="fname" placeholder="First name" required>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="femail" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label>Phone (optional)</label>
+        <input type="tel" id="fphone" placeholder="(555) 000-0000">
+      </div>
+    </form>
+    <button class="btn-submit" onclick="submitForm(event)">Show My Full Score →</button>
+    <div class="form-trust">No spam. We use your info to send your score report and optionally book a free FDD review call. Unsubscribe anytime.</div>
+  </div>
+
+  <!-- Results -->
+  <div class="result-card" id="resultCard">
+    <div class="score-ring" id="scoreRing">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#e5e5ea" stroke-width="10"/>
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#d4a857" stroke-width="10"
+          stroke-dasharray="326.73" stroke-dashoffset="326.73" id="scoreArc"
+          stroke-linecap="round"/>
+      </svg>
+      <div class="score-ring-num"><span id="scoreNum">0</span><span class="score-ring-sub">/ 100</span></div>
+    </div>
+    <div class="result-label" id="resultLabel">—</div>
+    <div class="result-sublabel" id="resultSublabel">—</div>
+    <div class="result-items" id="resultItems"></div>
+    <a class="btn-book" href="https://api.leadconnectorhq.com/widget/booking/cvJNccHEVJLVUee0VMr2" target="_blank" rel="noopener">
+      Book My Free FDD Review Call →
+    </a>
+    <div class="btn-book-sub">No cost. No pressure. We review your FDD and flag exactly what to negotiate or avoid.</div>
+    <div class="fdd-disclaimer">This tool is for educational purposes only and does not constitute legal, financial, or franchise advisory advice. Franchise investments involve risk. Review all disclosure documents with a licensed franchise attorney before making any investment decision. FranchiseKI earns a commission from franchisors when franchisees sign — there is no cost to you. Individual results vary. Past performance of other franchisees does not guarantee your results.</div>
+  </div>
+
+</div>
+
+<script>
+  const answers = {};
+  let totalScore = 0;
+
+  const feedbackMap = {
+    1: {
+      good: {icon:'✅', label:'FDD Reviewed', text:'You\'ve read the FDD. Most buyers don\'t — this gives you a real edge. Make sure your attorney has seen it too.'},
+      warn: {icon:'⚠️', label:'FDD Partially Read', text:'You\'ve started — now commit to reading all 23 items. Items 5, 6, 7, 19, 20, and 21 are the most critical.'},
+      bad:  {icon:'🔴', label:'FDD Not Reviewed Yet', text:'You can\'t protect yourself without reading the FDD. Request it today — franchisors are legally required to provide it 14 days before signing.'}
+    },
+    2: {
+      good: {icon:'✅', label:'Total Investment Understood', text:'Knowing the full Item 7 range means no surprise capital calls. Make sure you\'ve modeled working capital for 6+ months.'},
+      warn: {icon:'⚠️', label:'Partial Investment Clarity', text:'The franchise fee is just the start. Build-out, equipment, training, and working capital often double the franchise fee. Read Item 7 in full.'},
+      bad:  {icon:'🔴', label:'Investment Range Unknown', text:'This is a critical gap. Before anything else, understand what you\'re actually committing. Item 7 is non-negotiable reading.'}
+    },
+    3: {
+      good: {icon:'✅', label:'Item 19 Analyzed', text:'You\'ve done what most buyers skip. If the Item 19 shows only top performers, ask the franchisor for median unit economics.'},
+      warn: {icon:'⚠️', label:'Item 19 Needs Deeper Review', text:'Item 19 is where the real unit economics live. If it\'s missing from the FDD, that\'s a yellow flag — ask why.'},
+      bad:  {icon:'🔴', label:'Item 19 Not Reviewed', text:'If you can\'t see real financial performance data, you\'re guessing. No Item 19 = ask franchisees directly what they actually earn.'}
+    },
+    4: {
+      good: {icon:'✅', label:'Franchisee Validation Done', text:'Excellent. When calling franchisees, also reach out to former ones (also in Item 20) — their candor is invaluable.'},
+      warn: {icon:'⚠️', label:'Limited Franchisee Contact', text:'Speaking only with franchisees the franchisor introduced gives you a biased sample. Pull Item 20 and call 3 franchisees yourself.'},
+      bad:  {icon:'🔴', label:'No Franchisee Contact Yet', text:'This is the single highest-value step you can take. Item 20 has every phone number. Call at least 5 — especially those who left.'}
+    },
+    5: {
+      good: {icon:'✅', label:'Fee Structure Modeled', text:'You\'ve done the P&L work most buyers skip. Verify the marketing fund usage — ask franchisees if they feel it\'s worth it.'},
+      warn: {icon:'⚠️', label:'Fee Structure Partially Known', text:'Royalties alone don\'t tell the full story. Tech fees, marketing funds, and vendor minimums all hit your bottom line. Model them all.'},
+      bad:  {icon:'🔴', label:'Fee Obligations Unclear', text:'You need to know every dollar owed before you can evaluate this opportunity honestly. Items 5 and 6 lay it all out.'}
+    },
+    6: {
+      good: {icon:'✅', label:'Franchise Attorney Engaged', text:'Franchise-specific attorneys know what to negotiate. Ask them specifically about territory protections and transfer rights.'},
+      warn: {icon:'⚠️', label:'General Attorney Only', text:'Franchise agreements have unique clauses a general attorney may miss. If possible, get a second opinion from a franchise-specific attorney.'},
+      bad:  {icon:'🔴', label:'No Attorney Review Yet', text:'The franchise agreement is a binding legal document. A franchise attorney typically costs $1,500–$3,000 — worth every dollar on a $200K+ investment.'}
+    },
+    7: {
+      good: {icon:'✅', label:'Alternatives Compared', text:'Good benchmark discipline. Make sure you\'re comparing on total investment, royalty structure, Item 19, and franchisee satisfaction — not just brand appeal.'},
+      warn: {icon:'⚠️', label:'Limited Comparison', text:'One comparison isn\'t enough to know if you\'re getting a good deal. Look at 2–3 alternatives in the same investment tier before committing.'},
+      bad:  {icon:'🔴', label:'No Alternatives Reviewed', text:'Every franchisor believes their opportunity is exceptional. Without comparison, you have no way to know if the economics are actually competitive.'}
+    }
+  };
+
+  function selectOpt(el, qNum) {
+    el.closest('.options').querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[qNum] = parseInt(el.dataset.score);
+    document.getElementById('next' + qNum).disabled = false;
+  }
+
+  function nextQ(current, next) {
+    document.querySelector('[data-q="'+current+'"]').classList.remove('active');
+    document.querySelector('[data-q="'+next+'"]').classList.add('active');
+    document.getElementById('progressWrap').style.display = 'block';
+    const pct = Math.round((current / 7) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = current + ' / 7';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function calcScore() {
+    return Object.values(answers).reduce((a,b) => a+b, 0);
+  }
+
+  function showForm() {
+    document.querySelector('[data-q="7"]').classList.remove('active');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = '7 / 7';
+    const s = calcScore();
+    document.getElementById('formScorePreview').textContent = s;
+    document.getElementById('formScorePreview').style.color = s >= 70 ? '#34c759' : s >= 45 ? '#ff9f0a' : '#ff3b30';
+    document.getElementById('formCard').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function submitForm(e) {
+    if(e) e.preventDefault();
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    if(!fname || !email) { alert('Please enter your name and email.'); return; }
+
+    // Post to GHL via mapki lead API (non-blocking)
+    const s = calcScore();
+    const payload = {
+      firstName: fname, email, phone,
+      brandName: 'FDD Score Tool',
+      type: 'fdd-score',
+      timeline: s >= 70 ? 'ready' : s >= 45 ? '3-6mo' : '6mo+',
+      source: 'fdd-score-tool'
+    };
+    fetch('https://mapki.franchiseki.com/api/lead', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    }).catch(() => {});
+
+    document.getElementById('formCard').classList.remove('active');
+    showResults(fname);
+  }
+
+  function showResults(fname) {
+    const s = calcScore();
+    totalScore = s;
+    const rc = document.getElementById('resultCard');
+    rc.classList.add('active');
+
+    // Animate score
+    const arc = document.getElementById('scoreArc');
+    const full = 326.73;
+    const offset = full - (s / 100) * full;
+    setTimeout(() => {
+      arc.style.transition = 'stroke-dashoffset 1.2s ease';
+      arc.style.strokeDashoffset = offset;
+      arc.style.stroke = s >= 70 ? '#34c759' : s >= 45 ? '#ff9f0a' : '#ff3b30';
+    }, 100);
+
+    let n = 0;
+    const counter = setInterval(() => {
+      n = Math.min(n + 2, s);
+      document.getElementById('scoreNum').textContent = n;
+      if(n >= s) clearInterval(counter);
+    }, 20);
+
+    // Label
+    let label, sublabel;
+    if(s >= 80) {
+      label = 'Well-Prepared Buyer';
+      sublabel = (fname ? fname + ', you\'re' : 'You\'re') + ' in the top tier of franchise buyers. Your gaps are minor — a quick call will close them before you sign.';
+    } else if(s >= 60) {
+      label = 'On the Right Track';
+      sublabel = (fname ? fname + ', you\'ve' : 'You\'ve') + ' done more than most. But the gaps you have are the ones that lead to regret after signing. Let\'s close them.';
+    } else if(s >= 35) {
+      label = 'Significant Gaps Found';
+      sublabel = (fname ? fname + ', there\'s' : 'There\'s') + ' important work to do before you\'re ready to sign. The good news: these are fixable in a single call.';
+    } else {
+      label = 'Not Ready to Sign Yet';
+      sublabel = (fname ? fname + ', signing' : 'Signing') + ' now would be premature. You\'re missing critical information that could save you from a costly mistake.';
+    }
+    document.getElementById('resultLabel').textContent = label;
+    document.getElementById('resultSublabel').textContent = sublabel;
+
+    // Feedback items
+    const items = document.getElementById('resultItems');
+    items.innerHTML = '';
+    for(let q = 1; q <= 7; q++) {
+      const sc = answers[q] || 0;
+      const fb = feedbackMap[q];
+      const maxes = {1:15,2:20,3:15,4:15,5:15,6:10,7:10};
+      const pct = sc / maxes[q];
+      const tier = pct >= 0.8 ? 'good' : pct >= 0.4 ? 'warn' : 'bad';
+      const f = fb[tier];
+      const div = document.createElement('div');
+      div.className = 'result-item ' + tier;
+      div.innerHTML = '<div class="result-item-icon">'+f.icon+'</div><div class="result-item-text"><strong>'+f.label+'</strong>'+f.text+'</div>';
+      items.appendChild(div);
+    }
+
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+</script>
+
+</body>
+</html>
