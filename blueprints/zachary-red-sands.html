@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
   <meta property="og:title" content="AI Roadmap for Red Sands Vacation Properties" />
-  <meta property="og:description" content="Personalized AI transformation Blueprint for Zachary · vacation rental management" />
+  <meta property="og:description" content="Personalized AI transformation Blueprint for Zak · vacation rental management" />
   <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/zachary-red-sands.html" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
@@ -966,6 +966,48 @@
     font-size: 15px;
     text-decoration: none;
   }
+
+/* === PODCAST PLAYER v1.0 — Blueprint AI Standard === */
+.pod-section { padding: 4rem 2rem; }
+.pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
+.pod-header { background: linear-gradient(160deg, var(--primary,#1a1a2e) 0%, var(--accent,#6c5ce7) 100%); padding: 1.5rem 2rem; color: #fff; }
+.pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+.pod-subtitle { font-size: .85rem; opacity: .75; margin: 0; }
+.pod-body { padding: 1.5rem 2rem; }
+.pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(108,92,231,.1); color: var(--accent,#6c5ce7); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+.pod-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; display: none; }
+.pod-eq.playing { display: inline-flex; }
+.pod-eq span { width: 3px; background: var(--accent-light,#a29bfe); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+.pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+.pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+.pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+.pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+@keyframes eqBounce { from{height:4px} to{height:18px} }
+.pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--accent,#6c5ce7); min-height: 1.2em; margin-bottom: .5rem; }
+.pod-progress-wrap { position: relative; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; cursor: pointer; touch-action: none; }
+.pod-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent,#6c5ce7); border-radius: 3px; pointer-events: none; width: 0%; }
+.pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--accent,#6c5ce7); pointer-events: none; left: 0%; }
+.pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(255,255,255,.55); border-radius: 50%; pointer-events: none; }
+.pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+.pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+.pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--accent,#6c5ce7); transition: background .15s; }
+.pod-btn:hover { background: rgba(108,92,231,.08); }
+.pod-btn.play-btn { background: var(--accent,#6c5ce7); color: #fff; min-width: 56px; min-height: 56px; }
+@media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+.pod-btn.play-btn:hover { background: var(--primary,#1a1a2e); }
+.pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+.pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+.pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.pod-mute { margin-left: auto; }
+.pod-dl { font-size: .78rem; color: var(--accent,#6c5ce7); text-decoration: none; }
+.pod-dl:hover { text-decoration: underline; }
+.pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: #c0392b; margin-top: .75rem; }
+.pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--primary,#1a1a2e); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
+.pod-mini.visible { display: flex; }
+.pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+.pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+@media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
 </style>
 </head>
 <body>
@@ -977,7 +1019,7 @@
   <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your vacation rental management business.</p>
   <p class="prep-for">
     Prepared exclusively for
-    <strong>Zachary — Red Sands Vacation Properties</strong>
+    <strong>Zak — Red Sands Vacation Properties</strong>
   </p>
 </div>
 
@@ -1189,8 +1231,8 @@
 
   <!-- Signed Bennett Invitation -->
   <div class="signed-invite">
-    <p>Zachary, I built this roadmap specifically for Red Sands Vacation Properties because the demand is there, the properties are there, and the team is there. What is missing is the speed and automation layer that turns inquiries into bookings before competitors can blink.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zachary&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
+    <p>Zak, I built this roadmap specifically for Red Sands Vacation Properties because the demand is there, the properties are there, and the team is there. What is missing is the speed and automation layer that turns inquiries into bookings before competitors can blink.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
     <div class="sig">— Bennett Maxwell</div>
     <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
   </div>
@@ -1491,7 +1533,7 @@
     <h2>Past-Guest Re-Engagement Engine</h2>
 
     <div class="linkedin-hero">
-      <h3>Zachary's Revenue Recovery System</h3>
+      <h3>Zak's Revenue Recovery System</h3>
       <p>Your past guests are your highest-value marketing channel — people who already know and love Red Sands. AI turns your dead database into a revenue engine.<sup>2</sup></p>
       <div class="linkedin-stats">
         <div class="linkedin-stat">
@@ -1712,7 +1754,7 @@ If they mention kids, highlight kid-friendly features (pools, game rooms, fenced
 Always end with: "Want me to hold these dates for you while you decide? No commitment — I just want to make sure they do not get snatched up."
 
 Tone: Helpful local expert who genuinely wants them to have an amazing trip. Never salesy.</div>
-      <div class="agent-result">Eliminates manual property matching and pre-qualifies guests so Zachary's team focuses on high-fit bookings only.</div>
+      <div class="agent-result">Eliminates manual property matching and pre-qualifies guests so Zak's team focuses on high-fit bookings only.</div>
       <div class="agent-time">Setup time: ~5 minutes</div>
     </div>
 
@@ -1725,7 +1767,7 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
       <div class="path-card partner">
         <h4>Partner Path</h4>
         <p>Want the full system — all agents connected to your booking platforms, email, and guest database, trained on your St. George expertise, responding to inquiries 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zachary&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
+        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
       </div>
     </div>
   </div>
@@ -1743,25 +1785,45 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming vacation rental management — and why the next 12 months will separate the property managers who capture every booking from those who lose them to faster competitors.</p>
 
-      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 32px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px;">Your Personalized AI Podcast</p>
-        <p style="font-size: 16px; font-weight: 600; color: #fff;">Your podcast episode is being finalized and will arrive separately by email within 24 hours.</p>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 12px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Red Sands Vacation Properties.</p>
+      <div class="pod-card">
+        <div class="pod-header">
+          <h3>Your AI Roadmap</h3>
+          <p class="pod-subtitle">Zak Oldham · Red Sands Vacation Properties</p>
+        </div>
+        <div class="pod-body">
+          <span class="pod-badge" id="podBadge">Ready to play <span class="pod-eq" id="podEq"><span style="height:4px"></span><span></span><span></span><span></span><span></span></span></span>
+          <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+          <div class="pod-progress-wrap" id="podTrack" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Podcast progress">
+            <div class="pod-fill" id="podFill"></div>
+            <div class="pod-thumb" id="podThumb"></div>
+          </div>
+          <div class="pod-times"><span id="podElapsed">0:00</span><span id="podDuration">--:--</span></div>
+          <div class="pod-controls">
+            <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg><span class="pod-btn-label">15s</span></button>
+            <button class="pod-btn play-btn" id="podPlay" aria-label="Play"><svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></button>
+            <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg><span class="pod-btn-label">30s</span></button>
+          </div>
+          <div class="pod-meta">
+            <select class="pod-speed" id="podSpeed" aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+            <button class="pod-btn pod-mute" id="podMute" aria-label="Mute"><svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
+            <a class="pod-dl" href="https://drive.google.com/file/d/1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV/view" target="_blank" download>Download MP3</a>
+          </div>
+          <div class="pod-error" id="podError">Audio unavailable. <a href="https://drive.google.com/file/d/1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV/view" target="_blank">Open in Google Drive instead</a></div>
+          <audio id="podAudio" preload="metadata"><source src="https://bennett-maxwell.github.io/fki-preview/podcasts/zachary-red-sands.mp3" type="audio/mpeg"></audio>
+        </div>
       </div>
-
-      <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
 
       <div class="pull-quote">
         "The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."
       </div>
 
       <div class="pull-quote">
-        "For vacation rental managers like Zachary, AI is not about replacing the personal touch. It is about making sure every single inquiry gets that personal touch within 2 minutes instead of the next day."
+        "For vacation rental managers like Zak, AI is not about replacing the personal touch. It is about making sure every single inquiry gets that personal touch within 2 minutes instead of the next day."
       </div>
 
       <div style="text-align: center; margin-top: 24px; padding: 16px; background: var(--bg-soft); border-radius: 8px;">
         <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Save for the drive home</p>
-        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have 38 minutes to think about your business.</p>
+        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have a few minutes to think about your business.</p>
       </div>
     </div>
   </div>
@@ -1819,7 +1881,7 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
       </div>
       <div class="next-step">
         <div class="step-circle">3</div>
-        <h4>Zachary Reviews</h4>
+        <h4>Zak Reviews</h4>
         <p>You see only qualified inquiries with full context — approve in one tap</p>
       </div>
       <div class="next-step">
@@ -1830,7 +1892,7 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
     </div>
 
     <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zachary&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
+      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
     </div>
   </div>
 
@@ -1866,7 +1928,7 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
 <div class="cta-block">
   <h3>Ready to See What AI Can Do for Red Sands Vacation Properties?</h3>
   <p>This roadmap shows you what is possible. Book a free 30-minute AI strategy call and we will walk through your priorities together.</p>
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zachary&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
   <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
 </div>
 
@@ -1875,7 +1937,7 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
   <p><sup>1</sup> 83% mobile search figure based on vacation rental industry benchmarks — travelers research and compare properties predominantly on mobile devices (2024-2025 data).</p>
   <p><sup>2</sup> Past-guest reactivation projections of 5-10 guests/quarter based on vacation rental re-engagement benchmarks. Revenue range $15K-$50K/quarter depending on portfolio size and average booking value.</p>
   <p><sup>3</sup> 4-5x conversion improvement based on speed-to-lead studies showing vacation rental inquiries that receive a response within 5 minutes convert at 4-5x the rate of those answered the next day.</p>
-  <p><sup>4</sup> Time savings of 18-25 hrs/week based on Zachary's reported 35 hrs/week admin load. Breakdown: guest comms (8-10 hrs), booking confirmations (5-7 hrs), owner reporting (3-5 hrs), follow-ups (2-3 hrs). Cost savings: $4,200/mo.</p>
+  <p><sup>4</sup> Time savings of 18-25 hrs/week based on Zak's reported 35 hrs/week admin load. Breakdown: guest comms (8-10 hrs), booking confirmations (5-7 hrs), owner reporting (3-5 hrs), follow-ups (2-3 hrs). Cost savings: $4,200/mo.</p>
 </div>
 
 <div class="footer">
@@ -1989,8 +2051,90 @@ updateCalc();
 </script>
 
 <div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zachary&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands">Apply to Work With Us</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands">Apply to Work With Us</a>
 </div>
 
+<div class="pod-mini" id="podMini" aria-live="polite">
+  <span class="pod-mini-name">AI Walkthrough · Zak Oldham</span>
+  <span class="pod-mini-time" id="podMiniTime">0:00</span>
+  <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
+    <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'bpod_zak_oldham';
+  var CHAPTERS = [
+    {pct: 0,    label: 'Segment 1 — This Is Your Business'},
+    {pct: 7.5,  label: 'Segment 2 — Where You Are With AI'},
+    {pct: 20,   label: 'Segment 3 — The Gaps We Found'},
+    {pct: 40,   label: 'Segment 4 — Running This'},
+    {pct: 60,   label: 'Segment 5 — Your Tech Stack'},
+    {pct: 72.5, label: 'Segment 6 — The Timeline'},
+    {pct: 82.5, label: 'Segment 7 — What To Do Next'}
+  ];
+  var audio     = document.getElementById('podAudio');
+  var track     = document.getElementById('podTrack');
+  var fill      = document.getElementById('podFill');
+  var thumb     = document.getElementById('podThumb');
+  var elapsed   = document.getElementById('podElapsed');
+  var duration  = document.getElementById('podDuration');
+  var playBtn   = document.getElementById('podPlay');
+  var playIcon  = document.getElementById('podPlayIcon');
+  var backBtn   = document.getElementById('podBack');
+  var fwdBtn    = document.getElementById('podFwd');
+  var badge     = document.getElementById('podBadge');
+  var eq        = document.getElementById('podEq');
+  var chapterEl = document.getElementById('podChapterName');
+  var speedSel  = document.getElementById('podSpeed');
+  var muteBtn   = document.getElementById('podMute');
+  var volIcon   = document.getElementById('podVolIcon');
+  var podError  = document.getElementById('podError');
+  var mini      = document.getElementById('podMini');
+  var miniPlay  = document.getElementById('podMiniPlay');
+  var miniIcon  = document.getElementById('podMiniIcon');
+  var miniTime  = document.getElementById('podMiniTime');
+  if (!audio) return;
+  var PLAY_SVG  = '<polygon points="5,3 19,12 5,21"/>';
+  var PAUSE_SVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  var VOL_ON    = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  var VOL_OFF   = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+  function fmt(s) { s = Math.max(0, Math.floor(s)); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+  function pct() { return audio.duration ? (audio.currentTime/audio.duration*100) : 0; }
+  function currentChapter() { var p=pct(), label=CHAPTERS[0].label; for(var i=0;i<CHAPTERS.length;i++){if(p>=CHAPTERS[i].pct)label=CHAPTERS[i].label;} return label; }
+  function updateUI() { var p=pct(); fill.style.width=p+'%'; thumb.style.left=p+'%'; elapsed.textContent=fmt(audio.currentTime); chapterEl.textContent=audio.duration?currentChapter():''; miniTime.textContent=fmt(audio.currentTime); track.setAttribute('aria-valuenow',Math.round(p)); try{localStorage.setItem(STORAGE_KEY,audio.currentTime);}catch(e){} }
+  function setPlaying(playing) { playIcon.innerHTML=playing?PAUSE_SVG:PLAY_SVG; miniIcon.innerHTML=playing?PAUSE_SVG:PLAY_SVG; playBtn.setAttribute('aria-label',playing?'Pause':'Play'); miniPlay.setAttribute('aria-label',playing?'Pause':'Play'); eq.classList.toggle('playing',playing); badge.childNodes[0].textContent=playing?'Now Playing ':(audio.currentTime>0?'Paused ':'Ready to play '); }
+  function togglePlay() { if(audio.paused){audio.play();}else{audio.pause();} }
+  CHAPTERS.forEach(function(ch){ var pip=document.createElement('div'); pip.className='pod-pip chapter-pip'; pip.style.left=ch.pct+'%'; pip.title=ch.label; track.appendChild(pip); });
+  audio.addEventListener('loadedmetadata', function(){ duration.textContent=fmt(audio.duration); try{var saved=parseFloat(localStorage.getItem(STORAGE_KEY)||'0'); if(saved>0&&saved<audio.duration-5){audio.currentTime=saved; badge.childNodes[0].textContent='Resume from '+fmt(saved)+' ';}}catch(e){} updateUI(); });
+  audio.addEventListener('timeupdate', updateUI);
+  audio.addEventListener('play',  function(){ setPlaying(true); });
+  audio.addEventListener('pause', function(){ setPlaying(false); });
+  audio.addEventListener('ended', function(){ setPlaying(false); badge.childNodes[0].textContent='Ready to play '; });
+  audio.addEventListener('error', function(){ podError.style.display='block'; });
+  playBtn.addEventListener('click', togglePlay);
+  miniPlay.addEventListener('click', togglePlay);
+  backBtn.addEventListener('click', function(){ audio.currentTime=Math.max(0,audio.currentTime-15); });
+  fwdBtn.addEventListener('click',  function(){ audio.currentTime=Math.min(audio.duration||0,audio.currentTime+30); });
+  speedSel.addEventListener('change', function(){ audio.playbackRate=parseFloat(this.value); });
+  muteBtn.addEventListener('click', function(){ audio.muted=!audio.muted; volIcon.innerHTML=audio.muted?VOL_OFF:VOL_ON; });
+  var dragging=false;
+  function seekTo(e){ var rect=track.getBoundingClientRect(); var ratio=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width)); if(audio.duration)audio.currentTime=ratio*audio.duration; updateUI(); }
+  track.addEventListener('mousedown', function(e){ dragging=true; seekTo(e); });
+  document.addEventListener('mousemove', function(e){ if(dragging)seekTo(e); });
+  document.addEventListener('mouseup',   function(){ dragging=false; });
+  function touchSeek(e){ e.preventDefault(); var rect=track.getBoundingClientRect(); var t=e.touches[0]||e.changedTouches[0]; var ratio=Math.max(0,Math.min(1,(t.clientX-rect.left)/rect.width)); if(audio.duration)audio.currentTime=ratio*audio.duration; updateUI(); }
+  track.addEventListener('touchstart', touchSeek, {passive:false});
+  track.addEventListener('touchmove',  touchSeek, {passive:false});
+  track.addEventListener('touchend',   touchSeek, {passive:false});
+  track.setAttribute('tabindex','0');
+  track.addEventListener('keydown', function(e){ if(e.key==='ArrowLeft'){audio.currentTime=Math.max(0,audio.currentTime-5);e.preventDefault();} if(e.key==='ArrowRight'){audio.currentTime=Math.min(audio.duration||0,audio.currentTime+5);e.preventDefault();} });
+  document.addEventListener('keydown', function(e){ var tag=document.activeElement?document.activeElement.tagName:''; if(['INPUT','SELECT','TEXTAREA'].indexOf(tag)!==-1)return; if(e.key===' '){e.preventDefault();togglePlay();} if(e.key==='ArrowLeft'){audio.currentTime=Math.max(0,audio.currentTime-15);} if(e.key==='ArrowRight'){audio.currentTime=Math.min(audio.duration||0,audio.currentTime+30);} });
+  document.addEventListener('visibilitychange', function(){ if(document.hidden&&!audio.paused)audio.pause(); });
+  if('IntersectionObserver' in window){ var obs=new IntersectionObserver(function(entries){ var visible=entries[0].isIntersecting; mini.classList.toggle('visible',!visible&&!audio.paused); },{threshold:0.1}); obs.observe(document.getElementById('tab-listen')||document.body); audio.addEventListener('play', function(){ var el=document.getElementById('tab-listen'); if(el){var rect=el.getBoundingClientRect(); if(rect.top<0||rect.bottom>window.innerHeight)mini.classList.add('visible');} }); audio.addEventListener('pause', function(){ mini.classList.remove('visible'); }); }
+})();
+</script>
 </body>
 </html>
