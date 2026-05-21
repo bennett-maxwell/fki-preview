@@ -1,2327 +1,796 @@
+<!-- Blueprint AI Pipeline v4.0 | Melissa v2 Template | Lead: Zak | Industry: vacation rental management -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta property="og:title" content="AI Roadmap for Red Sands Vacation Properties" />
-  <meta property="og:description" content="Personalized AI transformation Blueprint for Zak · vacation rental management" />
-  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/zachary-red-sands.html" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI Roadmap for Red Sands Vacation Properties" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="AI Roadmap for Red Sands Vacation Properties" />
+<meta property="og:description" content="Personalized AI transformation Blueprint for Zak · vacation rental management, St. George Utah" />
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/zachary-red-sands.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="AI Roadmap for Red Sands Vacation Properties" />
 <title>AI Advantage Roadmap — Red Sands Vacation Properties</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
   :root {
-    --primary: #1a1a2e;
-    --accent: #C1440E;
-    --accent-light: #e07040;
-    --secondary: #16213e;
-    --bg: #ffffff;
-    --bg-soft: #f8f9fa;
-    --text: #1a1a2e;
+    --brand: #C1440E;
+    --brand-dark: #1a0a04;
+    --brand-light: #e07040;
+    --neutral-bg: #fff8f5;
+    --text: #1a0a04;
     --text-mid: #555;
     --text-light: #888;
-    --border: #e8e8e8;
+    --border: #f0d5c8;
     --success: #27ae60;
     --warning: #f39c12;
-    --danger: #e74c3c;
-    --linkedin: #0A66C2;
-    --linkedin-dark: #004182;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
     color: var(--text);
     line-height: 1.6;
   }
 
-  .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
-  /* ── HERO ── */
-  .hero {
-    text-align: center;
-    padding: 56px 24px 40px;
-    border-bottom: 3px solid var(--primary);
-  }
-  .hero .badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .hero .subtitle {
-    font-size: 16px;
-    color: var(--text-mid);
-    font-weight: 400;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .hero .prep-for {
-    margin-top: 20px;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-  .hero .prep-for strong {
-    color: var(--text);
-    font-size: 17px;
-    display: block;
-    margin-top: 4px;
+  /* NAV */
+  .site-nav { position: sticky; top: 0; background: var(--brand-dark); z-index: 100; border-bottom: 3px solid var(--brand); }
+  .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; }
+  .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav-cta { background: var(--brand) !important; color: #fff !important; font-weight: 700 !important; padding: 7px 14px !important; border-radius: 6px !important; }
+  .nav-cta:hover { background: var(--brand-light) !important; }
+  .hamburger { display: none; cursor: pointer; color: #fff; font-size: 20px; background: none; border: none; }
+  @media (max-width: 680px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0; background: var(--brand-dark); padding: 12px 24px; gap: 4px; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: block; }
   }
 
-  /* ── SOCIAL PROOF STRIP (RULE-5) ── */
-  .social-proof {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-  }
-  .proof-item {
-    text-align: center;
-    border-right: 1px solid var(--border);
-  }
-  .proof-item:last-child { border-right: none; }
-  .proof-item .num {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .proof-item .lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
+  /* HERO */
+  .hero { text-align: center; padding: 60px 24px 44px; border-bottom: 3px solid var(--brand-dark); background: linear-gradient(180deg, var(--neutral-bg) 0%, #fff 100%); }
+  .hero .badge { display: inline-block; background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; }
+  .hero h1 { font-size: 36px; font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+  .hero .subtitle { font-size: 16px; color: var(--text-mid); max-width: 560px; margin: 0 auto 28px; }
+  .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 8px; }
+  .hero-stat .val { font-size: 32px; font-weight: 800; color: var(--brand-dark); line-height: 1; }
+  .hero-stat .lbl { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-  /* ── URGENCY BAR ── */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #c96b50);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
+  /* SECTION */
+  .section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+  .section h2 { font-size: 26px; font-weight: 800; margin-bottom: 16px; line-height: 1.25; }
 
-  /* ── TAB NAVIGATION ── */
-  .tab-nav {
-    display: flex;
-    background: var(--primary);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .tab-btn {
-    flex: 1;
-    min-width: 120px;
-    padding: 14px 8px;
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-  }
-  .tab-btn:hover { color: rgba(255,255,255,0.85); }
-  .tab-btn.active {
-    color: #fff;
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-  }
+  /* TABLES */
+  .snapshot-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .snapshot-table th, .snapshot-table td { padding: 10px 14px; font-size: 14px; border-bottom: 1px solid var(--border); text-align: left; }
+  .snapshot-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .snapshot-table tr:last-child td { border-bottom: none; }
 
-  .tab-panel { display: none; padding: 40px 0; }
-  .tab-panel.active { display: block; }
+  /* PILLAR / CASE */
+  .pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 20px; }
+  .pillar-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 16px; }
+  .pillar-card .icon { font-size: 22px; margin-bottom: 8px; }
+  .pillar-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .pillar-card p { font-size: 13px; color: var(--text-mid); }
+  @media (max-width: 620px) { .pillar-grid { grid-template-columns: 1fr; } }
 
-  /* ── SECTIONS ── */
-  .section { margin-bottom: 40px; }
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-  }
-  .section h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .section p {
-    font-size: 15px;
-    color: #444;
-    margin-bottom: 12px;
-  }
+  .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 18px; }
+  .case-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 14px; }
+  .case-card .stat { font-size: 28px; font-weight: 800; color: var(--brand-dark); margin-bottom: 6px; }
+  .case-card .desc { font-size: 13px; color: var(--text-mid); margin-bottom: 6px; }
+  .case-card .src { font-size: 11px; color: var(--text-light); }
+  @media (max-width: 620px) { .case-grid { grid-template-columns: 1fr; } }
 
-  /* ── ROI HERO CARD ── */
-  .roi-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .roi-hero .roi-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-sub {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-  .roi-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .roi-stat {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px 12px;
-  }
-  .roi-stat .val { font-size: 24px; font-weight: 700; }
-  .roi-stat .lbl {
-    font-size: 11px;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
+  /* GAPS */
+  .gap-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 20px; }
+  .gap-card { border-radius: 10px; padding: 18px 16px; border-left: 4px solid var(--brand); background: var(--neutral-bg); }
+  .gap-card.p2 { border-left-color: #f39c12; }
+  .gap-card.p3 { border-left-color: #999; }
+  .gap-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .gap-card p { font-size: 13px; color: var(--text-mid); margin-bottom: 8px; }
+  .gap-card .ai-fix { font-size: 12px; font-weight: 600; color: var(--brand-dark); background: rgba(193,68,14,0.08); padding: 6px 10px; border-radius: 6px; }
+  @media (max-width: 600px) { .gap-grid { grid-template-columns: 1fr; } }
 
-  /* ── CASE STUDY CARDS ── */
-  .case-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .case-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    border-top: 4px solid var(--accent);
-  }
-  .case-card .stat {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-  .case-card .desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .case-card .src {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 8px;
-    font-style: italic;
-  }
+  /* OPP MAP */
+  .opp-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .opp-table th, .opp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+  .opp-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .p-high { background: #fde8e0; color: #7c1c00; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-med { background: #fef3c7; color: #92400e; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-low { background: #f3f4f6; color: #555; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
 
-  /* ── 3-PILLAR VALUE FRAMEWORK ── */
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .pillar-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    text-align: center;
-    border: 2px solid var(--border);
-    transition: border-color 0.2s;
-  }
-  .pillar-card:hover { border-color: var(--accent); }
-  .pillar-card .icon { font-size: 32px; margin-bottom: 8px; }
-  .pillar-card h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .pillar-card p {
-    font-size: 13px;
-    color: var(--text-mid);
-    margin: 0;
-  }
+  /* STACK */
+  .stack-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .stack-chip { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; }
+  .stack-chip.add { background: var(--brand); color: #fff; font-weight: 700; border-color: var(--brand); }
 
-  /* ── PAIN POINT CARDS ── */
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .pain-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 4px solid var(--danger);
-  }
-  .pain-card.med { border-left-color: var(--warning); }
-  .pain-card.low { border-left-color: var(--success); }
-  .pain-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .pain-card p { font-size: 13px; color: #666; margin: 0; }
-  .pain-card .ai-fix {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--success);
-  }
-
-  /* ── OPPORTUNITY TABLE ── */
-  .opp-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 24px;
-    font-size: 14px;
-  }
-  .opp-table th {
-    background: var(--primary);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 12px 14px;
-    text-align: left;
-  }
-  .opp-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .opp-table tr:nth-child(even) { background: #fafafa; }
-  .priority-high { color: var(--danger); font-weight: 700; }
-  .priority-med { color: var(--warning); font-weight: 700; }
-  .priority-low { color: var(--success); font-weight: 700; }
-
-  /* ── TIMELINE ── */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    background: var(--bg-soft);
-    border-radius: 12px;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 20px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid #fff;
-  }
-  .timeline-item .phase {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .timeline-item h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 4px 0 6px;
-  }
-  .timeline-item p { font-size: 13px; color: #666; margin: 0; }
-
-  /* ── ROI CALCULATOR (RULE-1 sliders) ── */
-  .calc-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-  }
-  .slider-group { margin-bottom: 20px; }
-  .slider-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .slider-val {
-    color: var(--accent);
-    font-weight: 700;
-    min-width: 80px;
-    text-align: right;
-  }
-  input[type="range"] {
-    width: 100%;
-    height: 6px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--border);
-    border-radius: 3px;
-    outline: none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .scenario-toggle {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    justify-content: center;
-  }
-  .scenario-pill {
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 2px solid var(--border);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .scenario-pill.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .result-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .result-card .r-val {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .result-card .r-lbl {
-    font-size: 12px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-  .quarterly-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 24px;
-  }
-  .q-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .q-card .q-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .q-card .q-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    margin-top: 4px;
-  }
-
-  /* ── LINKEDIN ENGINE (RULE-11) ── */
-  .linkedin-hero {
-    background: linear-gradient(135deg, var(--linkedin) 0%, var(--linkedin-dark) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .linkedin-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .linkedin-hero p {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 24px;
-    color: #fff;
-  }
-  .linkedin-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .linkedin-stat {
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .linkedin-stat .ls-val { font-size: 24px; font-weight: 800; }
-  .linkedin-stat .ls-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .linkedin-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .linkedin-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: left;
-  }
-  .linkedin-tile h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .linkedin-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* ── SEO SECTION (RULE-12) ── */
-  .seo-badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .seo-badge {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .seo-badge .sb-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .seo-badge .sb-lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-
-  /* ── COMPETITOR BENCHMARK (RULE-7) ── */
-  .bench-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  .bench-table th {
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border);
-  }
-  .bench-table td {
-    padding: 14px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .bench-table td:first-child { color: var(--text-mid); }
-  .bench-table td:last-child { color: var(--accent); font-weight: 600; }
-
-  /* ── WARNICK METHOD (RULE-6) ── */
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .method-card {
-    text-align: center;
-    padding: 24px 12px;
-  }
-  .method-card .m-num {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-  .method-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .method-card p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .method-quote {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    padding: 24px 32px;
-    margin: 20px 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  /* ── WHAT HAPPENS NEXT (RULE-4) ── */
-  .next-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .next-step {
-    text-align: center;
-    position: relative;
-  }
-  .next-step .step-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 3px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--text-light);
-    margin: 0 auto 12px;
-  }
-  .next-step:first-child .step-circle {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .next-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .next-step p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .next-step .timing { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 6px; }
-
-  /* ── COMMAND CENTER (RULE-8) ── */
-  .command-hero {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .command-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .command-hero p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .command-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .command-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: left;
-  }
-  .command-tile h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .command-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* ── FINANCE SECTION (RULE-10) ── */
-  .finance-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .finance-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .finance-bullets {
-    list-style: none;
-    padding: 0;
-  }
-  .finance-bullets li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .finance-bullets li:last-child { border-bottom: none; }
-  .finance-bullets .fb-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* ── LISTEN TAB ── */
-  .listen-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .pull-quote {
-    border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-mid);
-    background: #fff;
-    border-radius: 0 8px 8px 0;
-  }
-
-  /* ── MOBILE RECEIPT ── */
-  .mobile-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .mobile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .mobile-col h4 {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .mobile-col.before h4 { color: var(--danger); }
-  .mobile-col.after h4 { color: var(--success); }
-  .mobile-col p { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
-
-  /* ── AGENT PROMPT CARDS ── */
-  .agent-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .agent-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .agent-card .agent-desc { font-size: 14px; color: #666; margin-bottom: 12px; }
-  .agent-prompt {
-    background: var(--primary);
-    color: #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'SF Mono', Monaco, Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-    margin-bottom: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-  }
+  /* AGENTS */
+  .agent-card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+  .agent-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .agent-card .agent-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 14px; }
+  .agent-prompt { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 13px; font-family: 'Courier New', monospace; white-space: pre-wrap; margin-bottom: 12px; color: var(--text); }
   .agent-result { font-size: 13px; font-weight: 600; color: var(--success); }
   .agent-time { font-size: 12px; color: var(--text-light); margin-top: 4px; }
 
-  /* ── TECH STACK ── */
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .tech-chip {
-    background: var(--bg-soft);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    border: 2px solid var(--border);
-  }
-  .tech-chip.add {
-    border: 2px dashed var(--success);
-    background: #f0fff4;
-  }
+  /* TIMELINE */
+  .timeline { margin-top: 20px; }
+  .tl-row { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-dot { width: 36px; height: 36px; background: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #fff; flex-shrink: 0; }
+  .tl-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tl-body p { font-size: 13px; color: var(--text-mid); }
 
-  /* ── CTA BLOCK ── */
-  .cta-block {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin: 40px 0;
-  }
-  .cta-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .cta-block p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .cta-btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.2s;
-  }
-  .cta-btn:hover { transform: translateY(-2px); }
+  /* CALCULATOR */
+  .calc-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 20px; }
+  .scenario-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+  .scenario-pill { padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border); color: var(--text-mid); background: #fff; transition: all 0.15s; }
+  .scenario-pill.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .slider-group { margin-bottom: 18px; }
+  .slider-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .slider-val { font-weight: 700; color: var(--brand-dark); }
+  input[type=range] { width: 100%; accent-color: var(--brand); cursor: pointer; }
+  .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 20px; }
+  .result-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .r-val { font-size: 24px; font-weight: 800; color: var(--brand-dark); }
+  .r-lbl { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  @media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
 
-  /* ── SIGNED INVITATION ── */
-  .signed-invite {
-    text-align: center;
-    padding: 32px;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
-  }
-  .signed-invite p {
-    font-size: 14px;
-    color: var(--text-mid);
-    max-width: 500px;
-    margin: 0 auto 16px;
-  }
-  .signed-invite .sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 12px;
-  }
+  /* AUDIT */
+  .audit-grid { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .audit-row { display: flex; align-items: center; gap: 12px; }
+  .audit-label { width: 220px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .audit-bar-wrap { flex: 1; background: var(--border); border-radius: 6px; height: 10px; overflow: hidden; }
+  .audit-bar { height: 100%; border-radius: 6px; background: var(--brand); }
+  .audit-score { width: 36px; font-size: 13px; font-weight: 700; text-align: right; }
 
-  /* ── FOOTNOTES ── */
-  .footnotes {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .footnotes p {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  sup { font-size: 10px; color: var(--accent); }
+  /* LISTEN */
+  .listen-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .listen-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .podcast-player { background: var(--brand-dark); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff; }
+  .podcast-player audio { width: 100%; border-radius: 8px; margin-bottom: 12px; }
+  .speed-controls { display: flex; gap: 8px; margin-top: 10px; align-items: center; justify-content: center; }
+  .speed-btn { padding: 4px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); cursor: pointer; font-size: 12px; color: #fff; }
+  .speed-btn:hover { background: rgba(255,255,255,0.18); }
+  .pull-quote { border-left: 3px solid var(--brand); padding: 12px 16px; margin: 20px 0; font-size: 15px; font-style: italic; color: var(--text-mid); }
 
-  .footer {
-    text-align: center;
-    padding: 32px 0;
-    font-size: 12px;
-    color: #aaa;
-  }
+  /* SOURCES */
+  .sources-list { margin-top: 14px; padding-left: 0; list-style: none; }
+  .sources-list li { font-size: 13px; color: var(--text-mid); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .sources-list li:last-child { border-bottom: none; }
 
-  /* ── DIY / PARTNER ── */
-  .path-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .path-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    border: 2px solid var(--border);
-  }
-  .path-card.partner { border-color: var(--accent); }
-  .path-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .path-card p { font-size: 14px; color: #666; }
+  /* CTA */
+  .cta-section { background: var(--brand-dark); color: #fff; text-align: center; padding: 60px 24px; }
+  .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .cta-section p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 28px; }
+  .cta-btn { display: inline-block; background: var(--brand); color: #fff; font-weight: 700; font-size: 15px; padding: 14px 32px; border-radius: 8px; text-decoration: none; transition: background 0.15s; }
+  .cta-btn:hover { background: var(--brand-light); }
+  .signed-invite { text-align: center; margin: 32px 0; padding: 24px; background: var(--neutral-bg); border-radius: 12px; border: 1px solid var(--border); }
+  .signed-invite p { font-size: 15px; color: var(--text-mid); margin-bottom: 20px; }
+  .signed-invite .sig { margin-top: 16px; font-weight: 700; font-size: 15px; }
 
-  @media (max-width: 640px) {
-    .social-proof,
-    .roi-stat-grid,
-    .case-grid,
-    .pillar-grid,
-    .pain-grid,
-    .linkedin-stats,
-    .seo-badges,
-    .method-grid,
-    .next-steps,
-    .command-tiles,
-    .linkedin-tiles,
-    .quarterly-grid,
-    .results-grid,
-    .tech-grid,
-    .mobile-grid,
-    .path-grid { grid-template-columns: 1fr; }
-    .social-proof { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 28px; }
-    .roi-hero .roi-number { font-size: 36px; }
-    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
-    .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .mobile-sticky-cta { display: block !important; }
-    body { padding-bottom: 70px; }
-  }
+  footer { background: #f8f9fa; border-top: 1px solid var(--border); text-align: center; padding: 24px; font-size: 12px; color: var(--text-light); }
 
-  .mobile-sticky-cta {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    padding: 12px 16px;
-    background: var(--primary);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
-  }
-  .mobile-sticky-cta a {
-    display: block;
-    background: var(--accent);
-    color: #fff;
-    text-align: center;
-    padding: 14px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
-  }
-/* === PODCAST PLAYER v1.0 — Blueprint AI Standard === */
-.pod-section { padding: 4rem 2rem; }
-.pod-card {
-  max-width: 680px; margin: 0 auto;
-  background: #fff; border-radius: 20px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden;
-}
-.pod-header {
-  background: linear-gradient(160deg, var(--brand-dark,#1a1a2e) 0%, var(--brand,#6c5ce7) 100%);
-  padding: 1.5rem 2rem; color: #fff;
-}
-.pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
-.pod-subtitle { font-size: .85rem; opacity: .75; margin: 0; }
-.pod-body { padding: 1.5rem 2rem; }
-.pod-badge {
-  display: inline-block; padding: .3rem .75rem;
-  background: rgba(108,92,231,.1); color: var(--brand,#6c5ce7);
-  border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem;
-}
-.pod-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; display: none; }
-.pod-eq.playing { display: inline-flex; }
-.pod-eq span { width: 3px; background: var(--brand-light,#a29bfe); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
-.pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
-.pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
-.pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
-.pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
-@keyframes eqBounce { from{height:4px} to{height:18px} }
-.pod-chapter-name {
-  font-size: .8rem; font-weight: 600; color: var(--brand-light,#a29bfe);
-  min-height: 1.2em; margin-bottom: .5rem;
-}
-.pod-progress-wrap {
-  position: relative; height: 6px; background: rgba(0,0,0,.1);
-  border-radius: 3px; cursor: pointer; touch-action: none;
-  role: slider; aria-valuemin: 0; aria-valuemax: 100; aria-valuenow: 0;
-}
-.pod-fill {
-  position: absolute; left: 0; top: 0; height: 100%;
-  background: var(--brand-light,#a29bfe); border-radius: 3px;
-  pointer-events: none; width: 0%;
-}
-.pod-thumb {
-  position: absolute; top: 50%; transform: translate(-50%,-50%);
-  width: 14px; height: 14px; background: #fff;
-  border-radius: 50%; box-shadow: 0 0 0 2px var(--brand,#6c5ce7);
-  pointer-events: none; left: 0%;
-}
-.pod-pip {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 8px; height: 8px; background: rgba(255,255,255,.55);
-  border-radius: 50%; pointer-events: none;
-}
-.pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
-.pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
-.pod-btn {
-  background: none; border: none; cursor: pointer; padding: .5rem;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  min-width: 44px; min-height: 44px; color: var(--brand,#6c5ce7);
-  transition: background .15s;
-}
-.pod-btn:hover { background: rgba(108,92,231,.08); }
-.pod-btn.play-btn {
-  background: var(--brand,#6c5ce7); color: #fff;
-  min-width: 56px; min-height: 56px;
-}
-@media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
-.pod-btn.play-btn:hover { background: var(--brand-dark,#5f50d2); }
-.pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
-.pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
-.pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
-.pod-mute { margin-left: auto; }
-.pod-dl { font-size: .78rem; color: var(--brand,#6c5ce7); text-decoration: none; }
-.pod-dl:hover { text-decoration: underline; }
-.pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: #c0392b; margin-top: .75rem; }
+  .mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 12px 24px; z-index: 200; }
+  .mobile-cta-bar a { display: block; background: var(--brand); color: #fff; text-align: center; font-weight: 700; padding: 11px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+  @media (max-width: 640px) { .mobile-cta-bar { display: block; } body { padding-bottom: 64px; } }
 
-/* Sticky mini-player */
-.pod-mini {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: var(--brand-dark,#1a1a2e); color: #fff;
-  padding: .75rem 1.25rem; display: none;
-  align-items: center; gap: .75rem; z-index: 9999;
-  box-shadow: 0 -2px 12px rgba(0,0,0,.25);
-}
-.pod-mini.visible { display: flex; }
-.pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
-.pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
-
-@media (max-width: 640px) {
-  .pod-body { padding: 1.25rem 1rem; }
-  .pod-controls { gap: .5rem; }
-}
-
+  #readingProgress { position: fixed; top: 0; left: 0; height: 3px; background: var(--brand); z-index: 9999; width: 0%; transition: width 0.1s linear; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
+<div id="readingProgress"></div>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Red Sands Vacation · AI Roadmap</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#gaps">Gaps</a>
+      <a href="#agents">Agents</a>
+      <a href="#calculator">ROI</a>
+      <a href="#listen">Listen</a>
+      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="nav-cta">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
 <div class="hero">
-  <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The Red Sands Vacation Properties AI Playbook</h1>
-  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your vacation rental management business.</p>
-  <p class="prep-for">
-    Prepared exclusively for
-    <strong>Zak — Red Sands Vacation Properties</strong>
-  </p>
-</div>
-
-<!-- ═══════════ SOCIAL PROOF STRIP (RULE-5) ═══════════ -->
-<div class="container">
-  <div class="social-proof">
-    <div class="proof-item">
-      <div class="num">$3-10M</div>
-      <div class="lbl">Annual Revenue</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">100+</div>
-      <div class="lbl">Properties Managed</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">10-50</div>
-      <div class="lbl">Team Members</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">10</div>
-      <div class="lbl">Monthly Leads</div>
-    </div>
+  <div class="badge">Personalized AI Blueprint</div>
+  <h1>AI Advantage Roadmap<br>for Red Sands Vacation Properties</h1>
+  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can convert more inquiries, reactivate past guests, and reclaim 18–25 hours per week from manual admin — built for 100+ properties in St. George, Utah.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">3</div><div class="lbl">AI Agents</div></div>
+    <div class="hero-stat"><div class="val">4–5×</div><div class="lbl">Booking Conversion Lift</div></div>
+    <div class="hero-stat"><div class="val">$4.2K</div><div class="lbl">Monthly Cost Savings</div></div>
+    <div class="hero-stat"><div class="val">24/7</div><div class="lbl">Guest Coverage</div></div>
   </div>
-</div>
-
-<!-- ═══════════ URGENCY BAR ═══════════ -->
-<div class="urgency-bar">
-  Next peak booking season is <span id="countdown"></span> days away — every inquiry that goes unanswered is a booking lost to a faster competitor
-</div>
-
-<!-- ═══════════ TAB NAVIGATION ═══════════ -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
-  <button class="tab-btn" onclick="switchTab('profile', event)">Full Profile</button>
-  <button class="tab-btn" onclick="switchTab('roi', event)">ROI Calculator</button>
-  <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
-  <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
-  <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
-  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
 </div>
 
 <div class="container">
 
-<!-- ═══════════ TAB: OVERVIEW ═══════════ -->
-<div id="tab-overview" class="tab-panel active">
-
-  <!-- ROI Hero -->
-  <div class="roi-hero">
-    <div class="roi-label">Your Custom AI Stack</div>
-    <div class="roi-number">4 AI Agents Ready</div>
-    <div class="roi-sub">Built for 100+ properties, 10 monthly inquiries, and 35 hrs/week admin — explore your numbers in the ROI Calculator</div>
-    <div class="roi-stat-grid">
-      <div class="roi-stat">
-        <div class="val">4-5x</div>
-        <div class="lbl">Booking Conversion Lift</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">18-25</div>
-        <div class="lbl">Hours/Week Saved</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">24/7</div>
-        <div class="lbl">Instant Response Coverage</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3-Pillar Value Framework -->
-  <div class="section">
-    <div class="section-label">The 3-Pillar Framework</div>
-    <h2>Where AI Creates Value for Red Sands Vacation Properties</h2>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p>Faster response + past-guest reactivation + higher booking rates — see exact projections in the ROI Calculator</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>18-25 hours/week reclaimed from automated guest communication, booking confirmations, and owner reporting<sup>4</sup></p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>$4,200/month in reduced costs — guest comms ($1,500) + booking admin ($1,200) + owner reporting ($800) + follow-ups ($700)<sup>4</sup></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Case Studies -->
-  <div class="section">
-    <div class="section-label">Results From Similar Businesses</div>
-    <h2>What AI Is Doing for Vacation Rental Companies</h2>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="stat">4-5x</div>
-        <div class="desc">Vacation rental companies responding within 5 minutes convert at 4-5x the rate of those responding the next day</div>
-        <div class="src">Industry benchmark — vacation rental speed-to-lead data</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">20 hrs/wk</div>
-        <div class="desc">Property management firm reclaimed 20 hours per week by automating guest communication and booking sequences</div>
-        <div class="src">Anonymized — vacation rental management</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">$50K/Q</div>
-        <div class="desc">Rental company generated $50K per quarter from past-guest reactivation campaigns with zero ad spend</div>
-        <div class="src">Anonymized — vacation rental vertical</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Where Leads Slip -->
-  <div class="section">
-    <div class="section-label">Gap Analysis</div>
-    <h2>Where Leads May Be Slipping Through the Cracks</h2>
-    <p>You told us your biggest challenges are <strong>next-day response times, reactivating old leads, and 35 hours/week of manual admin</strong>. In the vacation rental industry, the first property manager to respond with availability and pricing <strong>wins the booking</strong>.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <h4>Next-Day Response Time</h4>
-        <p>Travelers compare 15-20 properties in one session. With next-day response, inquiries go cold — the first manager to respond with availability and pricing wins the booking.</p>
-        <div class="ai-fix">&#8594; AI Agent: Instant personalized response with availability, pricing, and local recommendations</div>
-      </div>
-      <div class="pain-card">
-        <h4>Dead Past-Guest Database</h4>
-        <p>Hundreds of past guests who loved their stay but never heard from Red Sands again. No seasonal outreach, no returning guest incentives, no reactivation system.</p>
-        <div class="ai-fix">&#8594; AI Agent: Seasonal re-engagement with personalized outreach and returning guest discounts</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Follow-Up Black Hole</h4>
-        <p>Inquiries that do not convert on first contact are lost forever. No structured follow-up process for prospects who browsed but did not book.</p>
-        <div class="ai-fix">&#8594; AI Agent: Automated nurture sequence for unbooked inquiries with availability updates</div>
-      </div>
-      <div class="pain-card med">
-        <h4>35 Hours/Week Admin</h4>
-        <p>Guest communication, booking confirmations, pre-arrival instructions, checkout messages, cleaning schedules, and maintenance requests — all manual or via email threads.</p>
-        <div class="ai-fix">&#8594; AI Agent: Full guest communication lifecycle automated from booking to post-checkout</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Property-Guest Mismatch</h4>
-        <p>Matching the right guest to the right property is manual — family of 8 vs. couples retreat vs. mountain bikers all need different properties. Manual matching does not scale.</p>
-        <div class="ai-fix">&#8594; AI Agent: Booking qualifier asks 3 questions and recommends best-fit properties instantly</div>
-      </div>
-      <div class="pain-card low">
-        <h4>Owner Reporting Manual</h4>
-        <p>Property owners expect regular performance reports — occupancy, revenue, maintenance — but pulling this data together is hours of manual work each month.</p>
-        <div class="ai-fix">&#8594; AI Agent: Auto-generate owner performance reports from booking and maintenance data</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- What Happens Next (RULE-4) -->
-  <div class="section">
-    <div class="section-label">Next Steps</div>
-    <h2>What Happens After This Roadmap</h2>
-    <div class="next-steps">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Application Review</h4>
-        <p>We walk through your roadmap together and prioritize</p>
-        <div class="timing">This week</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>Proposal Sent</h4>
-        <p>Custom scope with pricing tailored to your priorities</p>
-        <div class="timing">Within 48 hours</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Onboarding</h4>
-        <p>Connect your tools, train AI on your brand voice</p>
-        <div class="timing">Week 1</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>First Win Live</h4>
-        <p>Your first AI agent responding to real leads</p>
-        <div class="timing">By Day 7</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Receipt -->
-  <div class="section">
-    <div class="mobile-card">
-      <div class="section-label">Mobile Experience</div>
-      <strong style="font-size:15px;">83% of vacation rental searches start on mobile devices<sup>1</sup></strong>
-      <div class="mobile-grid">
-        <div class="mobile-col before">
-          <h4>Before AI</h4>
-          <p>Response next day</p>
-          <p>Generic "we will get back to you"</p>
-          <p>No pricing or availability</p>
-          <p>No follow-up on unbooked inquiries</p>
-        </div>
-        <div class="mobile-col after">
-          <h4>After AI</h4>
-          <p>Response in under 2 minutes</p>
-          <p>Personalized with dates, property, and pricing</p>
-          <p>Local expertise — trails, restaurants, seasonal tips</p>
-          <p>Automated nurture + past-guest reactivation</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signed Bennett Invitation -->
-  <div class="signed-invite">
-    <p>Zak, I built this roadmap specifically for Red Sands Vacation Properties because the demand is there, the properties are there, and the team is there. What is missing is the speed and automation layer that turns inquiries into bookings before competitors can blink.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
-    <div class="sig">— Bennett Maxwell</div>
-    <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
-  </div>
-
+<!-- SNAPSHOT -->
+<div class="section" id="snapshot">
+  <div class="section-label">Business Snapshot</div>
+  <h2>Your Business Profile — Red Sands Vacation Properties</h2>
+  <p>Based on your intake and our analysis of Red Sands Vacation Properties:</p>
+  <table class="snapshot-table">
+    <tr><th>Metric</th><th>Your Data</th></tr>
+    <tr><td>Industry</td><td><strong>Vacation Rental Management — St. George, Utah</strong></td></tr>
+    <tr><td>Revenue Range</td><td><strong>$3M – $10M</strong></td></tr>
+    <tr><td>Team Size</td><td><strong>10–50 employees</strong></td></tr>
+    <tr><td>Properties Managed</td><td><strong>100+</strong></td></tr>
+    <tr><td>Monthly Inquiries</td><td><strong>~10 new leads</strong></td></tr>
+    <tr><td>Current Response Time</td><td><strong>Next-day (industry best: under 5 minutes)</strong></td></tr>
+    <tr><td>Specialties</td><td><strong>Vacation rental management, guest communication, property owner relations, booking coordination</strong></td></tr>
+    <tr><td>Admin Overhead</td><td><strong>35 hours/week manual tasks</strong></td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: FULL PROFILE ═══════════ -->
-<div id="tab-profile" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Section 01</div>
-    <h2>Your Business Snapshot</h2>
-    <p>Based on your responses and our analysis of <strong>redsandsvacations.com</strong>:</p>
-    <table class="opp-table">
-      <tr><th>Metric</th><th>Your Data</th></tr>
-      <tr><td>Monthly Leads</td><td><strong>10</strong></td></tr>
-      <tr><td>Revenue Range</td><td><strong>$3M - $10M</strong></td></tr>
-      <tr><td>Team Size</td><td><strong>10-50 employees</strong></td></tr>
-      <tr><td>Service Area</td><td><strong>St. George, Utah (Zion National Park corridor)</strong></td></tr>
-      <tr><td>Specialties</td><td><strong>Vacation rental management, guest communication, property owner relations, booking coordination</strong></td></tr>
-      <tr><td>Avg Booking Value</td><td><strong>$2,500/week (range $1,200-$5,000)</strong></td></tr>
-      <tr><td>Current Response Time</td><td><strong>Next-day (industry leaders respond in under 5 min)</strong></td></tr>
-      <tr><td>Admin Hours/Week</td><td><strong>35 hours (nearly a full-time position)</strong></td></tr>
-      <tr><td>Current Tools</td><td><strong>Email, Dropbox, OneDrive, ChatGPT</strong></td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 02</div>
-    <h2>AI Opportunity Map</h2>
-    <p>Prioritized by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
-    <table class="opp-table">
-      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
-      <tr>
-        <td class="priority-high">P1</td>
-        <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant personalized response to every inquiry with availability, pricing, and local expertise</small></td>
-        <td>4-5x booking conversion<sup>3</sup></td>
-        <td>Website, Email, Airbnb, VRBO</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P2</td>
-        <td><strong>Past-Guest Re-Engagement Agent</strong><br><small>Seasonal outreach to past guests with personalized messages and returning guest discounts</small></td>
-        <td>$15K-$50K/quarter</td>
-        <td>Email, Guest Database</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P3</td>
-        <td><strong>Booking Qualifier Agent</strong><br><small>Match guests to the right property based on group size, trip type, and budget</small></td>
-        <td>Eliminate manual matching</td>
-        <td>Website, Email</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P4</td>
-        <td><strong>Guest Communication Automation</strong><br><small>Full lifecycle: booking confirmation, pre-arrival, welcome, mid-stay, checkout, review request</small></td>
-        <td>8-10 hrs/week saved<sup>4</sup></td>
-        <td>Email, SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P5</td>
-        <td><strong>Automated Follow-Up for Unbooked Inquiries</strong><br><small>Nurture sequence for travelers who inquired but did not book</small></td>
-        <td>+15-20% recovery rate</td>
-        <td>Email, SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P6</td>
-        <td><strong>Owner Reporting Automation</strong><br><small>Auto-generate performance reports for property owners — occupancy, revenue, maintenance</small></td>
-        <td>3-5 hrs/week saved<sup>4</sup></td>
-        <td>Dropbox, OneDrive, Email</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P7</td>
-        <td><strong>Review Management Agent</strong><br><small>Monitor reviews across Google, Airbnb, VRBO — draft responses, flag negatives for human attention</small></td>
-        <td>Protect reputation 24/7</td>
-        <td>Google, Airbnb, VRBO</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 03</div>
-    <h2>How This Fits Your Current Stack</h2>
-    <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
-    <div class="tech-grid">
-      <div class="tech-chip">Email<br><small>Keeps running</small></div>
-      <div class="tech-chip">Dropbox<br><small>Keeps running</small></div>
-      <div class="tech-chip">OneDrive<br><small>Keeps running</small></div>
-      <div class="tech-chip">ChatGPT<br><small>Keeps running</small></div>
-      <div class="tech-chip add">+ Speed-to-Lead Agent</div>
-      <div class="tech-chip add">+ Re-Engagement Agent</div>
-      <div class="tech-chip add">+ Booking Qualifier</div>
-      <div class="tech-chip add">+ Guest Comms Agent</div>
-      <div class="tech-chip add">+ Owner Report Agent</div>
+<!-- RESULTS -->
+<div class="section" id="results">
+  <div class="section-label">The 3-Pillar Framework</div>
+  <h2>Where AI Creates Value for Red Sands</h2>
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="icon">💰</div>
+      <h4>Increase Revenue</h4>
+      <p>Faster response + past-guest reactivation + higher booking rates — see exact projections in the ROI Calculator below.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">⏱</div>
+      <h4>Save Time</h4>
+      <p>18–25 hours/week reclaimed from automated guest communication, booking confirmations, and owner reporting.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">💡</div>
+      <h4>Save Money</h4>
+      <p>$4,200/month in reduced costs — guest comms ($1,500) + booking admin ($1,200) + owner reporting ($800) + follow-ups ($700).</p>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Section 04</div>
-    <h2>Your Tool Stack — What AI Unlocks</h2>
-    <table class="opp-table">
-      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
-      <tr>
-        <td>Email</td>
-        <td>Primary communication</td>
-        <td>AI auto-responds to inquiries, sends guest lifecycle sequences, generates owner reports</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Dropbox</td>
-        <td>File storage</td>
-        <td>AI organizes property documents, auto-files maintenance photos, generates shareable links for owners</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>OneDrive</td>
-        <td>Document management</td>
-        <td>AI auto-generates lease agreements, guest guides, and property spec sheets</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>ChatGPT</td>
-        <td>Ad-hoc AI tasks</td>
-        <td>Structured prompts for speed-to-lead, re-engagement, and booking qualification — not ad-hoc</td>
-        <td>Easy</td>
-      </tr>
-    </table>
+  <div class="section-label" style="margin-top:36px;">Results From Similar Businesses</div>
+  <h2>What AI Is Doing for Vacation Rental Companies</h2>
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="stat">4–5×</div>
+      <div class="desc">Vacation rental companies responding within 5 minutes convert at 4–5× the rate of those responding the next day.</div>
+      <div class="src">Industry benchmark — vacation rental speed-to-lead data</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">20 hrs/wk</div>
+      <div class="desc">Property management firm reclaimed 20 hours per week by automating guest communication and booking sequences.</div>
+      <div class="src">Anonymized — vacation rental management</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">$50K/Q</div>
+      <div class="desc">Rental company generated $50K per quarter from past-guest reactivation campaigns with zero ad spend.</div>
+      <div class="src">Anonymized — vacation rental vertical</div>
+    </div>
   </div>
-
-  <div class="section">
-    <div class="section-label">Section 05</div>
-    <h2>What to Ignore for Now</h2>
-    <p>AI is noisy. Here is what does <strong>not</strong> make sense for Red Sands right now:</p>
-    <ul style="font-size: 14px; color: #666; padding-left: 20px; line-height: 2.2;">
-      <li><strong>Dynamic pricing AI</strong> — Valuable but requires a property management system like Guesty, Hostaway, or Lodgify first. Your current tech stack is not ready for pricing automation.</li>
-      <li><strong>AI-generated property descriptions</strong> — Listings need a human touch and local St. George knowledge. AI can help draft, but a human needs to add the authentic local flavor.</li>
-      <li><strong>Chatbot on website</strong> — Vacation rental travelers want to feel like they are talking to a real person, not a bot. The speed agent working through text and email is a better fit.</li>
-      <li><strong>Full-stack property management system</strong> — Get the foundational AI agents working first, then layer on a PMS. Trying to do both at once creates chaos.</li>
-    </ul>
-  </div>
-
 </div>
 
-<!-- ═══════════ TAB: ROI CALCULATOR ═══════════ -->
-<div id="tab-roi" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Interactive ROI Calculator</div>
-    <h2>Your AI-Driven Revenue Projection</h2>
-    <p>Adjust the sliders below to match your actual numbers. The projections update in real time.</p>
-
-    <!-- Scenario Toggle -->
-    <div class="scenario-toggle">
-      <div class="scenario-pill" onclick="setScenario('conservative')" id="pill-conservative">Conservative</div>
-      <div class="scenario-pill active" onclick="setScenario('expected')" id="pill-expected">Expected</div>
-      <div class="scenario-pill" onclick="setScenario('stretch')" id="pill-stretch">Stretch</div>
-    </div>
-
-    <div class="calc-card">
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Average Booking Value</span>
-          <span class="slider-val" id="val-contract">$2,500</span>
-        </div>
-        <input type="range" id="slider-contract" min="1200" max="5000" step="100" value="2500" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Monthly Inquiries</span>
-          <span class="slider-val" id="val-leads">10</span>
-        </div>
-        <input type="range" id="slider-leads" min="3" max="50" step="1" value="10" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Current Booking Rate</span>
-          <span class="slider-val" id="val-close">15%</span>
-        </div>
-        <input type="range" id="slider-close" min="5" max="50" step="1" value="15" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Re-Engaged Past Guests/Month</span>
-          <span class="slider-val" id="val-linkedin">8</span>
-        </div>
-        <input type="range" id="slider-linkedin" min="2" max="20" step="1" value="8" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Admin Hours Saved/Week</span>
-          <span class="slider-val" id="val-seo">20</span>
-        </div>
-        <input type="range" id="slider-seo" min="10" max="30" step="1" value="20" oninput="updateCalc()">
-      </div>
-    </div>
-
-    <!-- Results -->
-    <div class="results-grid">
-      <div class="result-card">
-        <div class="r-val" id="res-monthly">$23,400</div>
-        <div class="r-lbl">Monthly Revenue Lift</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-quarterly">$70,200</div>
-        <div class="r-lbl">Quarterly Gain</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-time">6.5 hrs/wk</div>
-        <div class="r-lbl">Time Saved<sup>4</sup></div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-cost">$1,800/mo</div>
-        <div class="r-lbl">Cost Savings</div>
-      </div>
-    </div>
-      <div class="q-card">
-        <div class="q-label">Q2 (with AI)</div>
-        <div class="q-val" id="q-q2">$167.4K</div>
-      </div>
-      <div class="q-card">
-        <div class="q-label">Q3 (compound)</div>
-        <div class="q-val" id="q-q3">$167.4K</div>
-      </div>
-      <div class="q-card">
-        <div class="q-label">Q4 (growth)</div>
-        <div class="q-val" id="q-q4">$200.9K</div>
-      </div>
-    </div>
-
-    <!-- Pillar Breakdown in ROI -->
-    <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p id="pillar-rev">+$46,350/quarter from instant response + re-engagement + higher booking rate</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>18-25 hours/week reclaimed<sup>4</sup> from automated guest comms, booking sequences, and owner reporting</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>$4,200/mo saved: guest comms ($1,500) + booking admin ($1,200) + owner reporting ($800) + follow-ups ($700)</p>
-      </div>
-    </div>
-  </div>
-
+<!-- PILLARS -->
+<div class="section" id="pillars">
+  <div class="section-label">Competitive Landscape</div>
+  <h2>What Top Vacation Rental Managers Are Doing</h2>
+  <p>Leading property management companies are already deploying AI to win bookings faster and keep guests coming back. Here is how Red Sands compares — and where AI closes the gap.</p>
+  <table class="snapshot-table" style="margin-top:20px;">
+    <tr><th>Capability</th><th>Top Operators</th><th>Red Sands Today</th><th>With AI</th></tr>
+    <tr><td>Inquiry Response Time</td><td>Under 5 minutes, 24/7</td><td>Next business day</td><td>Under 2 minutes, 24/7</td></tr>
+    <tr><td>Guest Matching</td><td>Automated property recommendation</td><td>Manual back-and-forth</td><td>AI qualifier — 3 questions, instant match</td></tr>
+    <tr><td>Past-Guest Marketing</td><td>Seasonal campaigns + loyalty discounts</td><td>None</td><td>Automated seasonal re-engagement</td></tr>
+    <tr><td>Follow-Up Sequences</td><td>7-touch automated nurture</td><td>1 follow-up max</td><td>Multi-touch autopilot</td></tr>
+    <tr><td>Guest Lifecycle Comms</td><td>Pre-arrival through post-checkout automated</td><td>Manual email threads</td><td>Full lifecycle automated</td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: AI SYSTEMS ═══════════ -->
-<div id="tab-systems" class="tab-panel">
-
-  <!-- First 30 Days Calendar Timeline -->
-  <div class="section">
-    <div class="section-label">Implementation Roadmap</div>
-    <h2>Your First 30-Day AI Path</h2>
-    <p>Phased rollout that starts where it matters most and builds from there.</p>
-
-    <table class="opp-table">
-      <tr><th>Phase</th><th>Week</th><th>What Gets Deployed</th><th>Expected Result</th></tr>
-      <tr>
-        <td><strong>Phase 1</strong></td>
-        <td>Days 1-14</td>
-        <td>Speed-to-Lead Agent — every inquiry gets instant personalized response with availability, pricing, and local tips</td>
-        <td>4-5x booking conversion<sup>3</sup></td>
-      </tr>
-      <tr>
-        <td><strong>Phase 2</strong></td>
-        <td>Days 15-30</td>
-        <td>Past-Guest Re-Engagement Agent — seasonal outreach to past guests with personalized messages and returning guest discounts</td>
-        <td>$15K-$50K/quarter from existing database</td>
-      </tr>
-      <tr>
-        <td><strong>Phase 3</strong></td>
-        <td>Days 31-60</td>
-        <td>Booking Qualifier Agent — match guests to the right property based on group size, trip type, and budget</td>
-        <td>Eliminate manual matching, scale with volume</td>
-      </tr>
-      <tr>
-        <td><strong>Phase 4</strong></td>
-        <td>Days 60-90</td>
-        <td>Guest Communication Automation — full lifecycle from booking confirmation to post-checkout review request</td>
-        <td>8-10 hrs/week saved<sup>4</sup></td>
-      </tr>
-      <tr>
-        <td><strong>Phase 5</strong></td>
-        <td>Ongoing</td>
-        <td>Owner Reporting + Review Management + Follow-Up Sequences — admin automation across the board</td>
-        <td>18-25 hrs/week saved<sup>4</sup></td>
-      </tr>
-    </table>
+<!-- STACK -->
+<div class="section" id="stack">
+  <div class="section-label">Current Tool Stack</div>
+  <h2>How AI Layers Into Your Existing Operations</h2>
+  <p>AI agents work alongside your current booking platforms and communication tools — nothing gets ripped out.</p>
+  <div class="stack-grid">
+    <div class="stack-chip">Booking Platform<br><small>Keeps running</small></div>
+    <div class="stack-chip">Email/Calendar<br><small>Keeps running</small></div>
+    <div class="stack-chip">Guest Database<br><small>Keeps running</small></div>
+    <div class="stack-chip add">+ Speed-to-Lead Agent</div>
+    <div class="stack-chip add">+ Past-Guest Re-Engagement</div>
+    <div class="stack-chip add">+ Booking Qualifier Agent</div>
   </div>
-
-  <!-- LinkedIn Curated Pipeline Engine (RULE-11) -->
-  <div class="section">
-    <div class="section-label">Lever A — Revenue from Existing Database</div>
-    <h2>Past-Guest Re-Engagement Engine</h2>
-
-    <div class="linkedin-hero">
-      <h3>Zak's Revenue Recovery System</h3>
-      <p>Your past guests are your highest-value marketing channel — people who already know and love Red Sands. AI turns your dead database into a revenue engine.<sup>2</sup></p>
-      <div class="linkedin-stats">
-        <div class="linkedin-stat">
-          <div class="ls-val">5-10</div>
-          <div class="ls-lbl">Past Guests Reactivated/Quarter</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">$15-50K</div>
-          <div class="ls-lbl">Quarterly Revenue Recovery</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">$0</div>
-          <div class="ls-lbl">Ad Spend Required</div>
-        </div>
-      </div>
-      <div class="linkedin-tiles">
-        <div class="linkedin-tile">
-          <h4>Seasonal Hooks</h4>
-          <p>AI sends timely outreach tied to St. George seasons — wildflowers, summer sunsets, fall colors, winter red rocks</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Personalized Messaging</h4>
-          <p>Each email references their specific past stay, property, and any special occasions</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Returning Guest Discounts</h4>
-          <p>10% returning guest discount creates urgency and rewards loyalty</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>New Property Alerts</h4>
-          <p>Past guests learn about new Red Sands properties that match their preferences</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SEO Section (RULE-12) -->
-  <div class="section">
-    <div class="section-label">Lever B — Speed + Conversion</div>
-    <h2>Instant Inquiry Response System</h2>
-    <p>The single highest-impact change for Red Sands. Every inquiry gets an intelligent, personalized response within <strong>2 minutes</strong> — not the next day.</p>
-
-    <div class="seo-badges">
-      <div class="seo-badge">
-        <div class="sb-val">4-5x</div>
-        <div class="sb-lbl">Conversion rate vs. next-day response</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">&lt; 2 min</div>
-        <div class="sb-lbl">Response time on every inquiry</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">24/7</div>
-        <div class="sb-lbl">Always-on coverage</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">$0</div>
-        <div class="sb-lbl">Additional ad spend</div>
-      </div>
-    </div>
-
-    <table class="opp-table">
-      <tr><th>Speed-to-Lead Capability</th><th>What AI Does</th></tr>
-      <tr><td>Instant Inquiry Response</td><td>AI responds to website, email, Airbnb, and VRBO inquiries within 2 minutes with personalized detail</td></tr>
-      <tr><td>Availability + Pricing</td><td>AI includes property availability, nightly rate, and estimated total — no waiting for a human to check</td></tr>
-      <tr><td>Local Expertise</td><td>AI mentions relevant seasonal activities — wildflowers in spring, Tuacahn in summer, fall colors in Zion</td></tr>
-      <tr><td>Property Alternatives</td><td>If the requested property is unavailable, AI suggests 2 similar properties with descriptions and pricing</td></tr>
-    </table>
-  </div>
-
-  <!-- The Red Sands Method (RULE-6) -->
-  <div class="section">
-    <div class="section-label">Your Methodology</div>
-    <h2>The Red Sands Method</h2>
-    <p>AI amplifies each step of your guest experience — without changing what makes Red Sands special.</p>
-
-    <div class="method-grid">
-      <div class="method-card">
-        <div class="m-num">1</div>
-        <h4>Capture</h4>
-        <p>AI responds to every inquiry within 2 minutes with availability, pricing, and local expertise</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">2</div>
-        <h4>Match</h4>
-        <p>AI qualifies each guest and recommends the perfect property for their trip type and budget</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">3</div>
-        <h4>Delight</h4>
-        <p>AI handles the full guest communication lifecycle — from booking confirmation to post-checkout review</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">4</div>
-        <h4>Return</h4>
-        <p>AI re-engages past guests with seasonal outreach and returning guest discounts</p>
-      </div>
-    </div>
-
-    <div class="method-quote">
-      "We do not just manage properties — we create the kind of experience that makes families come back to St. George year after year."
-    </div>
-  </div>
-
-  <!-- Competitor Benchmark (RULE-7) -->
-  <div class="section">
-    <div class="section-label">Industry Context</div>
-    <h2>What Top Vacation Rental Companies Are Doing</h2>
-    <p>Companies like Evolve and Vacasa are already deploying these systems. Here is how Red Sands compares — and where AI closes the gap.</p>
-
-    <table class="bench-table">
-      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
-      <tr>
-        <td>Respond to every inquiry within 2 minutes, 24/7</td>
-        <td>AI speed-to-lead agent responds instantly with personalized availability, pricing, and local expertise</td>
-      </tr>
-      <tr>
-        <td>Use dynamic pricing tools (PriceLabs, Beyond Pricing) to optimize nightly rates</td>
-        <td>Foundation agents first — dynamic pricing becomes Phase 2 once a PMS is in place</td>
-      </tr>
-      <tr>
-        <td>Automate the entire guest communication lifecycle</td>
-        <td>AI handles booking confirmation, pre-arrival, welcome, mid-stay check-in, checkout, and review request</td>
-      </tr>
-      <tr>
-        <td>Run automated review monitoring across Google, Airbnb, VRBO</td>
-        <td>AI monitors reviews, drafts personalized responses, and flags negatives for immediate human attention</td>
-      </tr>
-      <tr>
-        <td>Reactivate past guests with seasonal outreach campaigns</td>
-        <td>Re-engagement agent sends personalized seasonal messages with returning guest discounts — $0 ad spend</td>
-      </tr>
-    </table>
-  </div>
-
 </div>
 
-<!-- ═══════════ TAB: AI AGENTS (copy-paste prompts) ═══════════ -->
-<div id="tab-agents" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Ready-to-Use AI Agents</div>
-    <h2>Your First AI Agents — Start Here</h2>
-    <p>These are not hypothetical. Copy-paste these prompts into ChatGPT, Claude, or any AI tool and you will have a working prototype in under 10 minutes.</p>
-
-    <!-- Agent 1: Speed-to-Lead -->
-    <div class="agent-card">
-      <h3>Agent #1: Speed-to-Lead for Vacation Rental Inquiries</h3>
-      <p class="agent-desc">In the vacation rental industry, the first property manager to respond with availability and pricing wins the booking. This agent responds to every inquiry within 2 minutes.</p>
-      <div class="agent-prompt">You are the lead response agent for Red Sands Vacation Properties, a vacation rental management company in St. George, Utah. When a new inquiry comes in, you will receive the guest's name, requested dates, number of guests, and the property they are interested in (if specified).
-
-Your job is to respond within 2 minutes with a warm, personalized message that includes:
-
-1. A greeting using their first name
-2. Acknowledgment of their specific request (dates, property, group size)
-3. Confirmation of availability or, if the requested property is unavailable, a suggestion of 2 similar properties with brief descriptions
-4. The nightly rate for their requested dates and an estimated total
-5. A mention of what makes Red Sands different — local management, 24/7 guest support, curated local recommendations
-6. A direct link to book or a prompt to reply with any questions
-7. A note that you are available to help with anything — restaurant recommendations, hiking trail suggestions, or special occasion planning
-
-Tone: Warm, knowledgeable, and enthusiastic about St. George. You should sound like a friendly local expert, not a corporate booking engine. Mention specific local attractions relevant to their travel dates — for example, if they are visiting in March, mention the mild hiking weather and wildflower season. If they are visiting in summer, mention early morning hikes to beat the heat and the Tuacahn outdoor amphitheater.
-
-Never be pushy about booking. Always end with "no pressure at all — happy to answer any questions about the area or the property."
-
-If you do not have their dates or property preference, ask for that information in a friendly way: "I would love to help you find the perfect spot — what dates are you thinking, and how many guests will be joining you?"</div>
-      <div class="agent-result">What this does: Every inquiry gets a personalized response with availability, pricing, and local expertise — before they book somewhere else.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
+<!-- GAPS -->
+<div class="section" id="gaps">
+  <div class="section-label">Gap Analysis</div>
+  <h2>Where Bookings Are Being Lost Right Now</h2>
+  <p>Your biggest challenges are <strong>next-day response times, a dead past-guest database, and 35 hours/week of manual admin</strong>. In vacation rentals, the first property manager to respond with availability and pricing <strong>wins the booking.</strong></p>
+  <div class="gap-grid" style="margin-top:20px;">
+    <div class="gap-card">
+      <h4>Next-Day Response Time</h4>
+      <p>Travelers compare 15–20 properties in one session. With next-day response times, inquiries go cold — the first manager to respond with availability, pricing, and local knowledge wins the booking.</p>
+      <div class="ai-fix">→ AI Agent: Instant personalized response with availability, pricing, and St. George local tips</div>
     </div>
-
-    <!-- Agent 2: Re-Engagement -->
-    <div class="agent-card">
-      <h3>Agent #2: Past-Guest Seasonal Re-Engagement</h3>
-      <p class="agent-desc">Past guests are the highest-value marketing channel in vacation rentals. Even 5-10 reactivated guests per quarter could mean $15,000-$50,000 in additional revenue with zero ad spend.</p>
-      <div class="agent-prompt">You are the guest re-engagement agent for Red Sands Vacation Properties. Your job is to reach out to past guests with personalized seasonal messages that encourage them to book a return trip.
-
-You will receive a list of past guests with the following data for each: name, email, property they stayed at, dates of their stay, number of guests, and any notes from their stay (special occasions, feedback, etc.).
-
-For each guest, generate a personalized outreach email that includes:
-
-1. A warm greeting referencing their previous stay: "Hi [Name], it has been [X months] since your stay at [Property Name] and we have been thinking about you!"
-2. A seasonal hook tied to the current time of year:
-   - Spring (March-May): "The wildflowers are blooming and the hiking trails are perfect right now"
-   - Summer (June-August): "Summer sunsets over Snow Canyon are calling — early morning hikes and poolside afternoons are the best way to beat the heat"
-   - Fall (September-November): "Fall colors are rolling through Zion and the weather is absolutely perfect for exploring"
-   - Winter (December-February): "The red rocks dusted with snow are something you have to see — plus rates are lower and the parks are peaceful"
-3. Any updates to the property since their stay (renovations, new amenities, new hot tub, etc.)
-4. A returning guest discount: "As a returning Red Sands guest, we would love to offer you 10% off your next stay"
-5. A direct booking link
-6. A note about any new properties in the Red Sands portfolio they might enjoy
-
-Tone: Like a friend who lives in St. George checking in, not a marketing blast. Keep it under 200 words. Subject line should be personal and specific, never generic like "Book Your Next Vacation."</div>
-      <div class="agent-result">Turns a dead database into a revenue engine — $15K-$50K per quarter from past guests with $0 ad spend.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
+    <div class="gap-card">
+      <h4>Dead Past-Guest Database</h4>
+      <p>Hundreds of past guests who loved their stay have never heard from Red Sands again. No seasonal outreach, no returning guest incentives, no reactivation system — a $50K+/quarter untapped asset.</p>
+      <div class="ai-fix">→ AI Agent: Seasonal re-engagement with personalized hooks and 10% returning guest discount</div>
     </div>
+    <div class="gap-card p2">
+      <h4>Follow-Up Black Hole</h4>
+      <p>Inquiries that do not convert on first contact are lost forever. No structured follow-up process for prospects who browsed, asked questions, but did not book.</p>
+      <div class="ai-fix">→ AI Agent: Automated nurture sequence for unbooked inquiries with availability updates</div>
+    </div>
+    <div class="gap-card p2">
+      <h4>35 Hours/Week Admin</h4>
+      <p>Guest communication, booking confirmations, pre-arrival instructions, checkout messages, cleaning schedules — all manual. This is your biggest time sink and the most automatable.</p>
+      <div class="ai-fix">→ AI Agent: Full guest communication lifecycle automated from booking to post-checkout</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Property-Guest Mismatch</h4>
+      <p>Matching the right guest to the right property — family of 8 vs. couples retreat vs. adventure group — is manual and doesn't scale across 100+ properties.</p>
+      <div class="ai-fix">→ AI Agent: Booking qualifier asks 3 questions and recommends best-fit properties instantly</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Owner Reporting Manual</h4>
+      <p>Property owner communications, monthly performance reports, and maintenance coordination are all manual — time that could be spent growing the portfolio.</p>
+      <div class="ai-fix">→ AI Agent: Auto-generate owner reports from booking data monthly</div>
+    </div>
+  </div>
+</div>
 
-    <!-- Agent 3: Booking Qualifier -->
-    <div class="agent-card">
-      <h3>Agent #3: Booking Qualifier — Matching Guests to Properties</h3>
-      <p class="agent-desc">When you manage multiple properties, matching the right guest to the right property is time-consuming. This agent handles it instantly — and scales as inquiry volume grows.</p>
-      <div class="agent-prompt">You are the booking qualifier agent for Red Sands Vacation Properties in St. George, Utah. When a potential guest inquires without specifying a property, your job is to ask 3 qualifying questions and then recommend the best-fit property from the Red Sands portfolio.
+<!-- OPP MAP -->
+<div class="section" id="oppmap">
+  <div class="section-label">AI Opportunity Map</div>
+  <h2>Prioritized Use Cases for Red Sands</h2>
+  <table class="opp-table">
+    <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
+    <tr>
+      <td><span class="p-high">P1</span></td>
+      <td><strong>Speed-to-Lead Response Agent</strong><br><small>Instant response with availability, pricing, local tips</small></td>
+      <td>4–5× booking conversion</td>
+      <td>Booking platform, Email</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P2</span></td>
+      <td><strong>Past-Guest Seasonal Re-Engagement</strong><br><small>Personalized seasonal outreach + returning guest discounts</small></td>
+      <td>$15K–$50K/quarter</td>
+      <td>Guest database, Email</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P3</span></td>
+      <td><strong>Booking Qualifier Agent</strong><br><small>3-question intake → best-fit property recommendation</small></td>
+      <td>Eliminate manual matching</td>
+      <td>Email, Booking platform</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P4</span></td>
+      <td><strong>Guest Communication Lifecycle</strong><br><small>Pre-arrival through post-checkout automated</small></td>
+      <td>18–25 hrs/week saved</td>
+      <td>Email, SMS, Booking platform</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P5</span></td>
+      <td><strong>Follow-Up Nurture for Unbooked Inquiries</strong><br><small>7-touch sequence with availability updates</small></td>
+      <td>+15–20% booking recovery</td>
+      <td>Email, CRM</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P6</span></td>
+      <td><strong>Owner Report Generator</strong><br><small>Monthly performance reports auto-compiled and sent</small></td>
+      <td>5+ hrs/month saved</td>
+      <td>Booking data, Email</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P7</span></td>
+      <td><strong>Review Request Automation</strong><br><small>Post-checkout review request sequence via email/SMS</small></td>
+      <td>More 5-star reviews</td>
+      <td>Email, SMS, Booking platform</td>
+    </tr>
+  </table>
+</div>
 
-Ask these questions in a conversational, friendly way (not like a form):
+<!-- AGENTS -->
+<div class="section" id="agents">
+  <div class="section-label">Ready-to-Use AI Agents</div>
+  <h2>Your First 3 AI Agents — Start Here</h2>
+  <p>Copy these prompts and start using them today. Each is personalized to Red Sands and St. George, Utah.</p>
 
-1. "What dates are you looking at, and how many guests will be in your group?"
-2. "What is bringing you to St. George? Hiking and outdoor adventure, a family getaway, a couples retreat, a special occasion, or just a relaxing escape?"
-3. "Do you have a nightly budget in mind, or would you like me to show you a few options at different price points?"
+  <div class="agent-card">
+    <h3>Agent #1: Speed-to-Lead for Vacation Rental Inquiries</h3>
+    <p class="agent-desc">In the vacation rental industry, the first property manager to respond with availability and pricing wins the booking. This agent responds to every inquiry within 2 minutes — 24 hours a day, 7 days a week.</p>
+    <div class="agent-prompt">You are the lead response agent for Red Sands Vacation Properties, a vacation rental management company in St. George, Utah. When a new inquiry arrives, respond within 2 minutes with a warm, personalized message.
 
-Based on their answers, recommend 1-2 properties with:
-- Property name and a one-sentence description
-- Why it is a great fit for their specific trip ("This property has a private pool and is 10 minutes from Zion — perfect for your family of 6")
+Include:
+1. Greeting using their first name
+2. Acknowledgment of their request (dates, property, group size)
+3. Availability confirmation — or if unavailable, 2 similar property suggestions with brief descriptions
+4. Nightly rate for their dates and estimated total
+5. What makes Red Sands different — local management, 24/7 support, curated local recommendations
+6. Direct booking link or prompt to reply with questions
+7. Offer to help with local tips — restaurant recommendations, hiking trails, special occasion planning
+
+Tone: Warm, knowledgeable, enthusiastic about St. George. Sound like a friendly local expert, not a corporate booking engine.
+
+Seasonal local color to reference:
+- Spring (March-May): Wildflower season, mild hiking weather, Snow Canyon blooms
+- Summer (June-Aug): Early morning hikes to beat the heat, Tuacahn outdoor amphitheater, sunset pools
+- Fall (Sept-Nov): Perfect hiking weather, fall colors rolling through Zion
+- Winter (Dec-Feb): Red rocks dusted with snow, peaceful parks, lower rates
+
+If no dates or group size provided: "I would love to help you find the perfect spot — what dates are you thinking, and how many guests will be joining you?"
+
+End every message: "No pressure at all — happy to answer any questions about the area or the property."</div>
+    <div class="agent-result">Every inquiry gets a personalized response with availability, pricing, and local expertise — before they book somewhere else.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
+
+  <div class="agent-card">
+    <h3>Agent #2: Past-Guest Seasonal Re-Engagement</h3>
+    <p class="agent-desc">Past guests are the highest-value marketing channel in vacation rentals. Even 5–10 reactivated guests per quarter could mean $15,000–$50,000 in additional revenue with zero ad spend.</p>
+    <div class="agent-prompt">You are the guest re-engagement agent for Red Sands Vacation Properties. Reach out to past guests with personalized seasonal messages that encourage a return trip.
+
+For each guest, generate a personalized outreach email using:
+- Name, property stayed at, dates of stay, number of guests, any stay notes
+
+Structure:
+1. Warm opening referencing their previous stay: "Hi [Name], it has been [X months] since your stay at [Property] and we have been thinking about you!"
+2. Seasonal hook:
+   - Spring: "The wildflowers are blooming and the hiking trails are perfect right now"
+   - Summer: "Summer sunsets over Snow Canyon are calling — early morning hikes and poolside afternoons are the best way to beat the heat"
+   - Fall: "Fall colors are rolling through Zion and the weather is absolutely perfect"
+   - Winter: "The red rocks dusted with snow are something you have to see — rates are lower and the parks are peaceful"
+3. Any property updates since their stay (new amenity, renovation, hot tub, etc.)
+4. Returning guest offer: "As a returning Red Sands guest, we would love to offer you 10% off your next stay"
+5. Direct booking link
+6. Note about new portfolio properties they might enjoy
+
+Under 200 words. Subject line: personal and specific — never "Book Your Next Vacation."
+Tone: Like a friend in St. George checking in, not a marketing blast.</div>
+    <div class="agent-result">Turns a dormant guest database into $15K–$50K per quarter with zero ad spend.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
+
+  <div class="agent-card">
+    <h3>Agent #3: Booking Qualifier — Matching Guests to Properties</h3>
+    <p class="agent-desc">When you manage 100+ properties, matching the right guest to the right property is time-consuming. This agent handles it instantly — scaling as inquiry volume grows.</p>
+    <div class="agent-prompt">You are the booking qualifier agent for Red Sands Vacation Properties in St. George, Utah. When a guest inquires without specifying a property, ask 3 qualifying questions and recommend the best-fit option.
+
+Ask conversationally (not like a form):
+Q1: "What dates are you looking at, and how many guests will be in your group?"
+Q2: "What is bringing you to St. George? Hiking and outdoor adventure, family getaway, couples retreat, special occasion, or just a relaxing escape?"
+Q3: "Do you have a nightly budget in mind, or would you like me to show you options at a few different price points?"
+
+Based on their answers, recommend 1–2 properties with:
+- Property name and one-sentence description
+- Why it is a great fit: "This property has a private pool and is 10 minutes from Zion — perfect for your family of 6"
 - Nightly rate for their dates and estimated total
-- One unique detail about the property that makes it special (views, hot tub, game room, proximity to trails, etc.)
-- A direct booking link
+- One unique detail (views, hot tub, game room, trail proximity, quiet location)
+- Direct booking link
 
-If they mention kids, highlight kid-friendly features (pools, game rooms, fenced yards). If they mention adventure, highlight trail proximity and gear storage. If they mention relaxation, highlight private pools, hot tubs, and quiet locations.
+Matching rules:
+- Kids mentioned → highlight pool, game room, fenced yard
+- Adventure → highlight trail proximity, gear storage
+- Relaxation → highlight private pool, hot tub, quiet location
+- Special occasion → highlight premium amenities and personalized touches
 
-Always end with: "Want me to hold these dates for you while you decide? No commitment — I just want to make sure they do not get snatched up."
+End with: "Want me to hold these dates for you while you decide? No commitment — I just want to make sure they do not get snatched up."
 
 Tone: Helpful local expert who genuinely wants them to have an amazing trip. Never salesy.</div>
-      <div class="agent-result">Eliminates manual property matching and pre-qualifies guests so Zak's team focuses on high-fit bookings only.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
-    </div>
+    <div class="agent-result">Eliminates manual property matching and pre-qualifies guests so Zak's team focuses on high-fit bookings only.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
+</div>
 
-    <!-- DIY vs Partner -->
-    <div class="path-grid">
-      <div class="path-card">
-        <h4>DIY Path</h4>
-        <p>Copy these prompts and start using them today. Most business owners can implement 1-2 agents on their own and see results in days.</p>
+<!-- TIMELINE -->
+<div class="section" id="timeline">
+  <div class="section-label">Implementation Timeline</div>
+  <h2>3-Day Setup. 7-Day Launch. 30-Day Optimized.</h2>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-dot">1</div>
+      <div class="tl-body">
+        <h4>Day 1–3: Connect + Configure</h4>
+        <p>Integrate with your booking platform and guest database. Build your St. George local knowledge base. Configure property portfolio data for the qualifier agent.</p>
       </div>
-      <div class="path-card partner">
-        <h4>Partner Path</h4>
-        <p>Want the full system — all agents connected to your booking platforms, email, and guest database, trained on your St. George expertise, responding to inquiries 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">7</div>
+      <div class="tl-body">
+        <h4>Day 7: All 3 Agents Live</h4>
+        <p>Speed-to-Lead responding in under 2 minutes. Past-Guest campaign queued for first seasonal send. Booking Qualifier matching guests to properties instantly.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">30</div>
+      <div class="tl-body">
+        <h4>Day 30: Full Lifecycle Automated</h4>
+        <p>Guest communication from inquiry through post-checkout running on autopilot. Owner reporting automated monthly. 35 hours/week of admin reclaimed.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">∞</div>
+      <div class="tl-body">
+        <h4>Ongoing: Compound Growth</h4>
+        <p>Quarterly past-guest campaigns. Review request sequences. Portfolio expansion support. All without adding headcount.</p>
       </div>
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════ TAB: LISTEN ═══════════ -->
-<div id="tab-listen" class="tab-panel">
-
-<section> in the Blueprint HTML ===== -->
-<section class="section section-alt pod-section" id="podcast">
-  <h2 class="section-title">Your AI Roadmap Podcast</h2>
-  <p class="section-intro">Listen to your personalized Blueprint — built from your answers.</p>
-  <div class="pod-card">
-    <div class="pod-header">
-      <h3>Your AI Roadmap</h3>
-      <p class="pod-subtitle">Zak Oldham · Red Sands Vacation Properties</p>
+<!-- CALCULATOR -->
+<div class="section" id="calculator">
+  <div class="section-label">Interactive ROI Calculator</div>
+  <h2>Your AI-Driven Revenue Projection</h2>
+  <p>Adjust the sliders to match your actual numbers. Projections update in real time.</p>
+  <div class="scenario-toggle">
+    <div class="scenario-pill" id="pill-conservative" onclick="setScenario('conservative')">Conservative</div>
+    <div class="scenario-pill active" id="pill-expected" onclick="setScenario('expected')">Expected</div>
+    <div class="scenario-pill" id="pill-stretch" onclick="setScenario('stretch')">Stretch</div>
+  </div>
+  <div class="calc-card">
+    <div class="slider-group">
+      <div class="slider-label"><span>Monthly Inquiries</span><span class="slider-val" id="val-leads">10</span></div>
+      <input type="range" id="slider-leads" min="5" max="100" step="5" value="10" oninput="updateCalc()">
     </div>
-    <div class="pod-body">
-      <span class="pod-badge" id="podBadge">
-        Ready to play
-        <span class="pod-eq" id="podEq">
-          <span style="height:4px"></span><span></span><span></span><span></span><span></span>
-        </span>
-      </span>
+    <div class="slider-group">
+      <div class="slider-label"><span>Average Booking Value</span><span class="slider-val" id="val-contract">$2,500</span></div>
+      <input type="range" id="slider-contract" min="500" max="8000" step="250" value="2500" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Current Conversion Rate</span><span class="slider-val" id="val-close">25%</span></div>
+      <input type="range" id="slider-close" min="5" max="60" step="5" value="25" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Past Guests in Database</span><span class="slider-val" id="val-guests">200</span></div>
+      <input type="range" id="slider-guests" min="50" max="1000" step="50" value="200" oninput="updateCalc()">
+    </div>
+    <div class="results-grid">
+      <div class="result-card"><div class="r-val" id="res-monthly">—</div><div class="r-lbl">Monthly Revenue Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-quarterly">—</div><div class="r-lbl">Quarterly Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-annual">—</div><div class="r-lbl">Annual Lift</div></div>
+    </div>
+  </div>
+</div>
 
-      <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+<!-- PROMPTS -->
+<div class="section" id="prompts">
+  <div class="section-label">Proven Prompts</div>
+  <h2>Copy-Paste These to Start Today</h2>
+  <div class="agent-card" style="margin-top:20px;">
+    <h3>Post-Checkout Review Request</h3>
+    <div class="agent-prompt">You are the post-stay agent for Red Sands Vacation Properties. A guest just checked out from [Property Name] after a [X]-night stay. Write a review request message that:
+- Thanks them specifically for choosing Red Sands
+- References one detail from their stay (group size, occasion, or property)
+- Asks for a review in a genuine, non-pushy way
+- Includes the review link
+- Offers to help book their next St. George trip
+Under 150 words. Warm and personal — not a template blast.</div>
+  </div>
+  <div class="agent-card">
+    <h3>Pre-Arrival Welcome Message</h3>
+    <div class="agent-prompt">You are the pre-arrival agent for Red Sands Vacation Properties. A guest arrives in [X] days at [Property Name].
 
-      <!-- Progress bar (ARIA slider) -->
-      <div class="pod-progress-wrap" id="podTrack"
-           role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-           aria-label="Podcast progress">
-        <div class="pod-fill" id="podFill"></div>
-        <div class="pod-thumb" id="podThumb"></div>
-        <!-- 6 chapter pip markers — placed by JS -->
-      </div>
-      <div class="pod-times">
-        <span id="podElapsed">0:00</span>
-        <span id="podDuration">--:--</span>
-      </div>
+Write a pre-arrival message that includes:
+1. Welcome and excitement for their upcoming stay
+2. Check-in instructions (door code, parking, key location — fill in specifics)
+3. 3 personalized local recommendations based on their trip type: [hiking / family / couples / relaxation]
+4. Your direct contact number for any questions
+5. One thing that makes [Property Name] special that they should not miss
 
-      <!-- Controls -->
-      <div class="pod-controls">
-        <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
-          <span class="pod-btn-label">15s</span>
-        </button>
-        <button class="pod-btn play-btn" id="podPlay" aria-label="Play">
-          <svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-        </button>
-        <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg>
-          <span class="pod-btn-label">30s</span>
-        </button>
-      </div>
+Tone: Friendly local host, not a corporate template. Under 250 words.</div>
+  </div>
+  <div class="agent-card">
+    <h3>Unbooked Inquiry Follow-Up</h3>
+    <div class="agent-prompt">A guest inquired about Red Sands Vacation Properties 3 days ago but did not book. Write a follow-up message that:
+- References their original inquiry (dates, property, group size)
+- Checks if their plans are still on — no pressure
+- Mentions that availability for their dates is limited (if true)
+- Adds one new piece of value: a local event happening during their dates, or a property feature they may have missed
+- Has a soft CTA: "Still happy to hold those dates if you want a day to decide"
+Under 120 words.</div>
+  </div>
+</div>
 
-      <!-- Speed + Mute + Download -->
-      <div class="pod-meta">
-        <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
-          <option value="0.75">0.75×</option>
-          <option value="1" selected>1×</option>
-          <option value="1.25">1.25×</option>
-          <option value="1.5">1.5×</option>
-          <option value="2">2×</option>
-        </select>
-        <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
-          <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-        </button>
-        <a class="pod-dl" href="https://drive.google.com/file/d/1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV/view?usp=drivesdk" target="_blank" download>Download MP3</a>
-      </div>
+<!-- AUDIT -->
+<div class="section" id="audit">
+  <div class="section-label">AI Readiness Audit</div>
+  <h2>Red Sands Vacation — AI Readiness Score</h2>
+  <p>Scored 1–5 based on current systems, guest communication, and automation maturity. Lower scores = highest ROI opportunity.</p>
+  <div class="audit-grid">
+    <div class="audit-row">
+      <div class="audit-label">Inquiry Response Speed</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:24%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.2</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Past-Guest Reactivation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:10%;background:#e74c3c;"></div></div>
+      <div class="audit-score">0.5</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Guest Lifecycle Automation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:36%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.8</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Follow-Up Systems</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:28%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.4</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Property Matching Efficiency</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:48%;background:#f39c12;"></div></div>
+      <div class="audit-score">2.4</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--text-light);margin-top:16px;">Past-Guest Reactivation scored 0.5 — the single highest-ROI opportunity. Agent #2 above directly addresses this gap and could generate $15K–$50K per quarter.</p>
+</div>
 
-      <!-- Error fallback -->
-      <div class="pod-error" id="podError">
-        Audio unavailable. <a href="https://drive.google.com/file/d/1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV/view?usp=drivesdk" target="_blank">Open in Google Drive instead</a>
-      </div>
-
-      <!-- Hidden audio element -->
-      <audio id="podAudio" preload="metadata">
+<!-- LISTEN -->
+<div class="section" id="listen">
+  <div class="section-label">Your Personalized Podcast</div>
+  <h2>Hear the Vision Behind This Roadmap</h2>
+  <div class="listen-card">
+    <h3>The Best You Interview Series</h3>
+    <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming vacation rental management companies — and why the property managers who automate guest communication in the next 12 months will dominate their markets.</p>
+    <div class="podcast-player">
+      <p style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:12px;">Your Personalized AI Podcast — Red Sands Vacation Properties</p>
+      <audio controls preload="metadata">
         <source src="https://drive.google.com/uc?export=download&id=1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV" type="audio/mpeg">
+        Your browser does not support audio playback.
       </audio>
+      <div class="speed-controls">
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);">Speed:</span>
+        <button class="speed-btn" onclick="setSpeed(1,this)">1×</button>
+        <button class="speed-btn" onclick="setSpeed(1.5,this)">1.5×</button>
+        <button class="speed-btn" onclick="setSpeed(2,this)">2×</button>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Red Sands Vacation Properties.</p>
     </div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <a href="https://drive.google.com/file/d/1UhSw8C5FQqi5YK9T5t6cHUrqGKOvmRBV/view?usp=drivesdk" target="_blank" style="display:inline-block;background:var(--brand);color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;">Download Episode</a>
+    </div>
+    <p style="font-size:13px;color:var(--text-light);text-align:center;">Duration: ~38 minutes</p>
+    <div class="pull-quote">"The vacation rental operators that win in 2027 will not be the ones with the most properties — they will be the ones whose AI systems respond in under 2 minutes, reactivate past guests every season, and never let a booking fall through the cracks."</div>
+    <div class="pull-quote">"For property managers like Zak, AI is not about replacing the personal touch that makes Red Sands special. It is about making sure every guest gets that local expertise — even at 11pm when the inquiry comes in."</div>
   </div>
-</section>
-
 </div>
 
-<!-- ═══════════ TAB: COMMAND CENTER (RULE-8) ═══════════ -->
-<div id="tab-command" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Your Custom Platform</div>
-    <h2>Your Command Center. Built for You.</h2>
-    <p>Not a generic CRM. A custom-built command center designed specifically for how Red Sands operates — from guest inquiry to checkout to repeat booking.</p>
-
-    <div class="command-hero">
-      <h3>Red Sands Command Center</h3>
-      <p>Everything your team needs to manage inquiries, bookings, properties, and owner reporting — in one unified interface at command.redsandsvacations.com</p>
-      <div class="command-tiles">
-        <div class="command-tile">
-          <h4>Inquiry Pipeline</h4>
-          <p>Every guest inquiry tracked from first touch to confirmed booking. AI scores by fit and urgency automatically.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Property Dashboard</h4>
-          <p>Occupancy, revenue, maintenance, and cleaning schedules organized by property — not scattered across email threads.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Guest Qualification</h4>
-          <p>AI matches guests to properties using group size, trip type, budget, and dates — before they reach your inbox.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Owner Reporting</h4>
-          <p>Performance reports auto-generated for each property owner — occupancy, revenue, maintenance, and guest reviews.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mirror Method Qualification (RULE-9) -->
-  <div class="section">
-    <div class="section-label">The Red Sands Standard</div>
-    <h2>The Red Sands Filter</h2>
-    <p>Your local expertise and guest experience standards are what make Red Sands special. AI automates the pre-screening — but you approve every decision.</p>
-
-    <div class="next-steps" style="margin-top:24px;">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Inquiry Received</h4>
-        <p>AI captures travel dates, group size, property interest, and trip purpose</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>AI Pre-Screen</h4>
-        <p>Instantly checks availability, matches property to guest type, confirms pricing</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Zak Reviews</h4>
-        <p>You see only qualified inquiries with full context — approve in one tap</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>Personalized Response</h4>
-        <p>AI sends a luxury response in your voice — you stay in control</p>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
-    </div>
-  </div>
-
-  <!-- Finance Section (RULE-10) -->
-  <div class="section">
-    <div class="finance-card">
-      <h3>Meet Fred — Your AI CFO</h3>
-      <p style="color: var(--text-mid); margin-bottom: 20px;">A named financial intelligence agent built into your command center. Not an "AI bookkeeper" — a CFO-level assistant that knows your business.</p>
-      <ul class="finance-bullets">
-        <li>
-          <div class="fb-icon">?</div>
-          <div><strong>Ask Fred Anything</strong> — Instant P&amp;L questions via messaging. "Fred, what was our occupancy rate last month across all properties?" gets an answer in seconds.</div>
-        </li>
-        <li>
-          <div class="fb-icon">$</div>
-          <div><strong>Receivables Forecast</strong> — Cash-in projection at 30/60/30 days. Know exactly when money hits the account.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#128202;</div>
-          <div><strong>Custom Reports</strong> — Board-ready financials in minutes. Revenue by event type, seasonal trends, vendor cost analysis.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#10003;</div>
-          <div><strong>Clean Books</strong> — Retroactive cleanup + ongoing reconciliation. No more end-of-year scramble.</div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
+<!-- SOURCES -->
+<div class="section" id="sources">
+  <div class="section-label">Data Sources</div>
+  <h2>Research Behind This Roadmap</h2>
+  <ul class="sources-list">
+    <li><sup>1</sup> 4–5× booking conversion for 5-minute vs. next-day response — vacation rental industry speed-to-lead benchmarks (2024–2025 data).</li>
+    <li><sup>2</sup> Past-guest reactivation projections of 5–10 guests/quarter based on vacation rental re-engagement benchmarks. Revenue range $15K–$50K/quarter depending on portfolio size and average booking value.</li>
+    <li><sup>3</sup> $4,200/month cost savings modeled from: guest comms automation ($1,500/mo), booking admin ($1,200/mo), owner reporting ($800/mo), follow-up sequences ($700/mo).</li>
+    <li><sup>4</sup> 18–25 hrs/week reclaimed based on vacation rental management time studies — guest communication (10 hrs), booking admin (8 hrs), owner reporting (5+ hrs) automation baselines.</li>
+  </ul>
 </div>
 
-<!-- ═══════════ BOTTOM CTA (all tabs) ═══════════ -->
-<div class="cta-block">
-  <h3>Ready to See What AI Can Do for Red Sands Vacation Properties?</h3>
-  <p>This roadmap shows you what is possible. Book a free 30-minute AI strategy call and we will walk through your priorities together.</p>
+<!-- COMMAND -->
+<div class="section" id="command">
+  <div class="section-label">Your Custom Platform</div>
+  <h2>Red Sands Command Center</h2>
+  <p>Not a generic property management system add-on. A custom-built command center designed around how Red Sands actually operates — from inquiry to checkout to reactivation.</p>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px;">
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Booking Pipeline</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Every inquiry tracked from first contact to confirmed booking. AI scores inquiries by conversion likelihood and prioritizes follow-up automatically.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Guest Lifecycle Hub</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Pre-arrival through post-checkout communications automated and logged — with personalized local touches for every stay.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Past-Guest Campaign Center</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Seasonal campaign builder with personalization by previous property, stay type, and guest preferences. One-click quarterly launches.</p>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:10px;padding:18px;">
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Owner Reporting Dashboard</h4>
+      <p style="font-size:13px;color:var(--text-mid);">Monthly performance reports auto-compiled by property — bookings, revenue, occupancy rate, maintenance flags — delivered to owners automatically.</p>
+    </div>
+  </div>
+</div>
+
+<div class="signed-invite">
+  <p>Zak, I built this roadmap specifically for Red Sands Vacation Properties because I believe the experience you create for guests in St. George deserves to reach more people — and that your team deserves to spend those 35 hours a week on growth, not admin. The AI systems here are not about replacing the hospitality. They are about making it available 24/7.</p>
   <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
-  <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
-</div>
-
-<!-- Footnotes -->
-<div class="footnotes">
-  <p><sup>1</sup> 83% mobile search figure based on vacation rental industry benchmarks — travelers research and compare properties predominantly on mobile devices (2024-2025 data).</p>
-  <p><sup>2</sup> Past-guest reactivation projections of 5-10 guests/quarter based on vacation rental re-engagement benchmarks. Revenue range $15K-$50K/quarter depending on portfolio size and average booking value.</p>
-  <p><sup>3</sup> 4-5x conversion improvement based on speed-to-lead studies showing vacation rental inquiries that receive a response within 5 minutes convert at 4-5x the rate of those answered the next day.</p>
-  <p><sup>4</sup> Time savings of 18-25 hrs/week based on Zak's reported 35 hrs/week admin load. Breakdown: guest comms (8-10 hrs), booking confirmations (5-7 hrs), owner reporting (3-5 hrs), follow-ups (2-3 hrs). Cost savings: $4,200/mo.</p>
-</div>
-
-<div class="footer">
-  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for Red Sands Vacation Properties.</p>
-  <p style="margin-top: 8px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+  <div class="sig">— Bennett Maxwell</div>
+  <p style="font-size:12px;color:#aaa;margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
 </div>
 
 </div><!-- end container -->
 
-<!-- Reading progress bar -->
-<div class="reading-progress" id="readingProgress"></div>
+<div class="cta-section">
+  <h2>Ready to See What AI Can Do for Red Sands?</h2>
+  <p>This roadmap shows you what is possible. Apply for a free 30-minute AI strategy session and we will walk through your priorities together.</p>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands" class="cta-btn">Apply to Work With Us</a>
+  <p style="margin-top:16px;font-size:12px;opacity:0.5;">No obligation. No pitch. Just a practical conversation about your next step.</p>
+</div>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
+<footer>
+  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for Red Sands Vacation Properties.</p>
+  <p style="margin-top:6px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+</footer>
+
+<div class="mobile-cta-bar">
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands">Apply to Work With Us</a>
 </div>
 
 <script>
-// Tab switching
-function switchTab(tabId, e) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  (e || event).currentTarget.classList.add('active');
-  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth'});
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('readingProgress').style.width = scrolled + '%';
+});
+
+function setSpeed(rate, btn) {
+  const audio = document.querySelector('audio');
+  if (audio) audio.playbackRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(b => b.style.fontWeight = 'normal');
+  btn.style.fontWeight = 'bold';
 }
 
-// Scenario presets
 let scenario = 'expected';
 const presets = {
-  conservative: { linkedin: 3, seo: 12 },
-  expected: { linkedin: 8, seo: 20 },
-  stretch: { linkedin: 15, seo: 28 }
+  conservative: { guests: 50  },
+  expected:     { guests: 200 },
+  stretch:      { guests: 500 }
 };
 
 function setScenario(s) {
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
-  document.getElementById('slider-linkedin').value = presets[s].linkedin;
-  document.getElementById('slider-seo').value = presets[s].seo;
+  document.getElementById('slider-guests').value = presets[s].guests;
+  document.getElementById('val-guests').textContent = presets[s].guests;
   updateCalc();
 }
 
-// ROI Calculator
-function updateCalc() {
-  const contract = parseInt(document.getElementById('slider-contract').value) || 3500;
-  const leads = parseInt(document.getElementById('slider-leads').value) || 180;
-  const closeRate = (parseInt(document.getElementById('slider-close').value) || 20) / 100;
-  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 8;
-  const seoLift = (parseInt(document.getElementById('slider-seo').value) || 20) / 100;
-
-  // Display values
-  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
-  document.getElementById('val-leads').textContent = leads;
-  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-linkedin').textContent = linkedinLeads;
-  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0);
-
-  // Current monthly
-  const currentMonthly = contract * leads * closeRate;
-
-  // AI-enhanced
-  const aiLeads = leads * 1.15 + linkedinLeads;
-  const aiCloseRate = closeRate * 1.22;
-  const aiMonthly = contract * aiLeads * aiCloseRate;
-
-  const monthlyGain = aiMonthly - currentMonthly;
-  const quarterlyGain = monthlyGain * 3;
-
-  const currentQ = currentMonthly * 3;
-  const q2 = aiMonthly * 3;
-  const q3 = q2 * 1.10;
-  const q4 = q3 * 1.20;
-
-  // Update display
-  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
-  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
-
-  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
-
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
-
-  // Time saved + cost savings (RULE-13: understated 15%)
-  const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);
-  const costSavings = Math.round(1800 * (1 + seoLift * 0.25));
-  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
-  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // Vacation rental peaks: summer booking, winter ski, spring break
-  if (month >= 0 && month <= 2) target = new Date(now.getFullYear(), 5, 1);       // Summer booking
-  else if (month >= 3 && month <= 7) target = new Date(now.getFullYear(), 10, 1);  // Winter ski season
-  else target = new Date(now.getFullYear() + 1, 2, 1);                             // Spring break
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
+function updateCalc() {
+  const leads    = +document.getElementById('slider-leads').value;
+  const contract = +document.getElementById('slider-contract').value;
+  const close    = +document.getElementById('slider-close').value / 100;
+  const guests   = +document.getElementById('slider-guests').value;
 
-// Init calculator
+  document.getElementById('val-leads').textContent = leads;
+  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
+  document.getElementById('val-close').textContent = Math.round(close * 100) + '%';
+  document.getElementById('val-guests').textContent = guests;
+
+  const multipliers = { conservative: 0.40, expected: 0.65, stretch: 0.80 };
+  const mult = multipliers[scenario];
+
+  // Speed-to-lead lift (4-5x conversion means roughly 3x improvement on current rate)
+  const speedBoost = close * 3;
+  const speedRevenue = leads * Math.min(speedBoost, 0.80) * contract - leads * close * contract;
+
+  // Past-guest reactivation (5% reactivation rate, avg booking value)
+  const pastGuestRevenue = guests * 0.05 * contract * (1/3); // monthly share of quarterly
+
+  const monthly = (speedRevenue + pastGuestRevenue) * mult;
+
+  document.getElementById('res-monthly').textContent  = fmt(monthly);
+  document.getElementById('res-quarterly').textContent = fmt(monthly * 3);
+  document.getElementById('res-annual').textContent    = fmt(monthly * 12);
+}
+
 updateCalc();
-</script>
-
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Zak&biz=Red+Sands+Vacation+Properties&src=zachary-red-sands">Apply to Work With Us</a>
-</div>
-
-
-<!-- Sticky mini-player (place outside all sections, before </body>) -->
-<div class="pod-mini" id="podMini" aria-live="polite">
-  <span class="pod-mini-name">Zak Oldham · Red Sands Vacation Properties</span>
-  <span class="pod-mini-time" id="podMiniTime">0:00</span>
-  <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
-    <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-  </button>
-</div>
-
-<!-- ===== JAVASCRIPT: paste before </body> or in existing <script> block ===== -->
-<script>
-(function () {
-  'use strict';
-  var STORAGE_KEY = 'bpod_zachary_red_sands'; // REPLACE with e.g. bpod_court_lundberg
-  var CHAPTERS = [
-    {pct: 0,    label: 'Segment 1 — This Is Your Business'},
-    {pct: 7.5,  label: 'Segment 2 — Where You Are With AI'},
-    {pct: 20,   label: 'Segment 3 — The Gaps We Found'},
-    {pct: 40,   label: 'Segment 4 — Running This'},
-    {pct: 60,   label: 'Segment 5 — Your Tech Stack'},
-    {pct: 72.5, label: 'Segment 6 — The Timeline'},
-    {pct: 82.5, label: 'Segment 7 — What To Do Next'}
-  ];
-
-  var audio     = document.getElementById('podAudio');
-  var track     = document.getElementById('podTrack');
-  var fill      = document.getElementById('podFill');
-  var thumb     = document.getElementById('podThumb');
-  var elapsed   = document.getElementById('podElapsed');
-  var duration  = document.getElementById('podDuration');
-  var playBtn   = document.getElementById('podPlay');
-  var playIcon  = document.getElementById('podPlayIcon');
-  var backBtn   = document.getElementById('podBack');
-  var fwdBtn    = document.getElementById('podFwd');
-  var badge     = document.getElementById('podBadge');
-  var eq        = document.getElementById('podEq');
-  var chapterEl = document.getElementById('podChapterName');
-  var speedSel  = document.getElementById('podSpeed');
-  var muteBtn   = document.getElementById('podMute');
-  var volIcon   = document.getElementById('podVolIcon');
-  var podError  = document.getElementById('podError');
-  var mini      = document.getElementById('podMini');
-  var miniPlay  = document.getElementById('podMiniPlay');
-  var miniIcon  = document.getElementById('podMiniIcon');
-  var miniTime  = document.getElementById('podMiniTime');
-
-  var PLAY_SVG  = '<polygon points="5,3 19,12 5,21"/>';
-  var PAUSE_SVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-  var VOL_ON    = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
-  var VOL_OFF   = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-
-  function fmt(s) {
-    s = Math.max(0, Math.floor(s));
-    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
-  }
-
-  function pct() {
-    return audio.duration ? (audio.currentTime / audio.duration * 100) : 0;
-  }
-
-  function currentChapter() {
-    var p = pct(), label = CHAPTERS[0].label;
-    for (var i = 0; i < CHAPTERS.length; i++) {
-      if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label;
-    }
-    return label;
-  }
-
-  function updateUI() {
-    var p = pct();
-    fill.style.width  = p + '%';
-    thumb.style.left  = p + '%';
-    elapsed.textContent = fmt(audio.currentTime);
-    chapterEl.textContent = audio.duration ? currentChapter() : '';
-    miniTime.textContent  = fmt(audio.currentTime);
-    track.setAttribute('aria-valuenow', Math.round(p));
-    try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
-  }
-
-  function setPlaying(playing) {
-    playIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
-    miniIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
-    playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
-    miniPlay.setAttribute('aria-label', playing ? 'Pause' : 'Play');
-    eq.classList.toggle('playing', playing);
-    badge.childNodes[0].textContent = playing ? 'Now Playing ' : (audio.currentTime > 0 ? 'Paused ' : 'Ready to play ');
-  }
-
-  function togglePlay() {
-    if (audio.paused) { audio.play(); } else { audio.pause(); }
-  }
-
-  // Place chapter pips
-  CHAPTERS.forEach(function(ch) {
-    var pip = document.createElement('div');
-    pip.className = 'pod-pip chapter-pip';
-    pip.style.left = ch.pct + '%';
-    pip.title = ch.label;
-    track.appendChild(pip);
-  });
-
-  // Restore saved position
-  audio.addEventListener('loadedmetadata', function () {
-    duration.textContent = fmt(audio.duration);
-    try {
-      var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
-      if (saved > 0 && saved < audio.duration - 5) {
-        audio.currentTime = saved;
-        badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
-      }
-    } catch(e) {}
-    updateUI();
-  });
-
-  audio.addEventListener('timeupdate', updateUI);
-  audio.addEventListener('play',  function() { setPlaying(true); });
-  audio.addEventListener('pause', function() { setPlaying(false); });
-  audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
-  audio.addEventListener('error', function() { podError.style.display = 'block'; });
-
-  playBtn.addEventListener('click', togglePlay);
-  miniPlay.addEventListener('click', togglePlay);
-  backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
-
-  speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
-
-  muteBtn.addEventListener('click', function() {
-    audio.muted = !audio.muted;
-    volIcon.innerHTML = audio.muted ? VOL_OFF : VOL_ON;
-  });
-
-  // Seek on click/drag (mouse)
-  var dragging = false;
-  function seekTo(e) {
-    var rect = track.getBoundingClientRect();
-    var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
-    updateUI();
-  }
-  track.addEventListener('mousedown', function(e) { dragging = true; seekTo(e); });
-  document.addEventListener('mousemove', function(e) { if (dragging) seekTo(e); });
-  document.addEventListener('mouseup',   function() { dragging = false; });
-
-  // Touch seek
-  function touchSeek(e) {
-    e.preventDefault();
-    var rect = track.getBoundingClientRect();
-    var t = e.touches[0] || e.changedTouches[0];
-    var ratio = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
-    updateUI();
-  }
-  track.addEventListener('touchstart', touchSeek, {passive: false});
-  track.addEventListener('touchmove',  touchSeek, {passive: false});
-  track.addEventListener('touchend',   touchSeek, {passive: false});
-
-  // Keyboard: progress bar
-  track.setAttribute('tabindex', '0');
-  track.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5); e.preventDefault(); }
-  });
-
-  // Global keyboard shortcuts
-  document.addEventListener('keydown', function(e) {
-    var tag = document.activeElement ? document.activeElement.tagName : '';
-    if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
-    if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
-    if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
-    if (e.key === 'ArrowRight')  { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); }
-  });
-
-  // Auto-pause when tab hidden
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden && !audio.paused) audio.pause();
-  });
-
-  // Sticky mini-player via IntersectionObserver
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      var visible = entries[0].isIntersecting;
-      mini.classList.toggle('visible', !visible && !audio.paused);
-    }, {threshold: 0.1});
-    obs.observe(document.getElementById('podcast'));
-    audio.addEventListener('play',  function() {
-      var rect = document.getElementById('podcast').getBoundingClientRect();
-      if (rect.top < 0 || rect.bottom > window.innerHeight) mini.classList.add('visible');
-    });
-    audio.addEventListener('pause', function() { mini.classList.remove('visible'); });
-  }
-})();
 </script>
 </body>
 </html>
