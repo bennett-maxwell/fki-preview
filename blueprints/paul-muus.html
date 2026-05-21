@@ -113,19 +113,6 @@
     letter-spacing: 1px;
     margin-top: 2px;
   }
-
-  /* -- URGENCY BAR -- */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #3384ff);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
-
   /* -- TAB NAVIGATION -- */
   .tab-nav {
     display: flex;
@@ -1003,11 +990,6 @@
   </div>
 </div>
 
-<!-- ----------- URGENCY BAR ----------- -->
-<div class="urgency-bar">
-  2027 2027 renewable energy consulting season demand is accelerating — <span id="countdown"></span> days until peak season begins
-</div>
-
 <!-- ----------- TAB NAVIGATION ----------- -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
@@ -1873,11 +1855,7 @@ Rules:
 <!-- Reading progress bar -->
 <div class="reading-progress" id="readingProgress"></div>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
-</div>
-
+<!-- Sticky mobile CTA removed -->
 <script>
 // Tab switching
 function switchTab(tabId, e) {
@@ -1954,28 +1932,9 @@ function updateCalc() {
   document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // renewable energy consulting season peaks: rolling calendar for peak demand periods
-  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
-  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
-  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
-
 // Init calculator
 updateCalc();
 </script>
-
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Paul%20Muus&biz=Paul%20Muus%20Consulting&src=paul-muus">Apply to Work With Us</a>
-</div>
 
 </body>
 </html>
