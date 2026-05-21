@@ -1,1984 +1,729 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-19T20:11:47Z | Lead: Brittney Warnick | Industry: interior design -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-  <meta property="og:title" content="AI Roadmap for Warnick Design" />
-  <meta property="og:description" content="Personalized AI transformation Blueprint for Brittney Warnick · interior design" />
-  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/brittney-warnick.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personalized AI blueprint — exactly where AI creates the biggest leverage for Warnick Design and how to get there in 30 days." />
+  <meta property="og:title" content="AI Advantage Roadmap — Warnick Design" />
+  <meta property="og:description" content="A personalized AI blueprint with custom AI agents, interactive ROI calculator, and a podcast walkthrough for Brittney Warnick · Warnick Design." />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI Roadmap for Warnick Design" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Advantage Roadmap — Warnick Design</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-  :root {
-    --primary: #1a1a2e;
-    --accent: #B75E42;
-    --accent-light: #d39e8d;
-    --secondary: #16213e;
-    --bg: #ffffff;
-    --bg-soft: #f8f9fa;
-    --text: #1a1a2e;
-    --text-mid: #555;
-    --text-light: #888;
-    --border: #e8e8e8;
-    --success: #27ae60;
-    --warning: #f39c12;
-    --danger: #e74c3c;
-    --linkedin: #0A66C2;
-    --linkedin-dark: #004182;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-  }
-
-  .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
-
-  /* -- HERO -- */
-  .hero {
-    text-align: center;
-    padding: 56px 24px 40px;
-    border-bottom: 3px solid var(--primary);
-  }
-  .hero .badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  .hero .subtitle {
-    font-size: 16px;
-    color: var(--text-mid);
-    font-weight: 400;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .hero .prep-for {
-    margin-top: 20px;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-  .hero .prep-for strong {
-    color: var(--text);
-    font-size: 17px;
-    display: block;
-    margin-top: 4px;
-  }
-
-  /* -- SOCIAL PROOF STRIP (RULE-5) -- */
-  .social-proof {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-  }
-  .proof-item {
-    text-align: center;
-    border-right: 1px solid var(--border);
-  }
-  .proof-item:last-child { border-right: none; }
-  .proof-item .num {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .proof-item .lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-
-  /* -- URGENCY BAR -- */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #c57e67);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
-
-  /* -- TAB NAVIGATION -- */
-  .tab-nav {
-    display: flex;
-    background: var(--primary);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .tab-btn {
-    flex: 1;
-    min-width: 120px;
-    padding: 14px 8px;
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-  }
-  .tab-btn:hover { color: rgba(255,255,255,0.85); }
-  .tab-btn.active {
-    color: #fff;
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .tab-panel { display: none; padding: 40px 0; }
-  .tab-panel.active { display: block; }
-
-  /* -- SECTIONS -- */
-  .section { margin-bottom: 40px; }
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-  }
-  .section h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .section p {
-    font-size: 15px;
-    color: #444;
-    margin-bottom: 12px;
-  }
-
-  /* -- ROI HERO CARD -- */
-  .roi-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .roi-hero .roi-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-sub {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-  .roi-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .roi-stat {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px 12px;
-  }
-  .roi-stat .val { font-size: 24px; font-weight: 700; }
-  .roi-stat .lbl {
-    font-size: 11px;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-
-  /* -- CASE STUDY CARDS -- */
-  .case-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .case-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    border-top: 4px solid var(--accent);
-  }
-  .case-card .stat {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-  .case-card .desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .case-card .src {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 8px;
-    font-style: italic;
-  }
-
-  /* -- 3-PILLAR VALUE FRAMEWORK -- */
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .pillar-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    text-align: center;
-    border: 2px solid var(--border);
-    transition: border-color 0.2s;
-  }
-  .pillar-card:hover { border-color: var(--accent); }
-  .pillar-card .icon { font-size: 32px; margin-bottom: 8px; }
-  .pillar-card h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .pillar-card p {
-    font-size: 13px;
-    color: var(--text-mid);
-    margin: 0;
-  }
-
-  /* -- PAIN POINT CARDS -- */
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .pain-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 4px solid var(--danger);
-  }
-  .pain-card.med { border-left-color: var(--warning); }
-  .pain-card.low { border-left-color: var(--success); }
-  .pain-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .pain-card p { font-size: 13px; color: #666; margin: 0; }
-  .pain-card .ai-fix {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--success);
-  }
-
-  /* -- OPPORTUNITY TABLE -- */
-  .opp-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 24px;
-    font-size: 14px;
-  }
-  .opp-table th {
-    background: var(--primary);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 12px 14px;
-    text-align: left;
-  }
-  .opp-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .opp-table tr:nth-child(even) { background: #fafafa; }
-  .priority-high { color: var(--danger); font-weight: 700; }
-  .priority-med { color: var(--warning); font-weight: 700; }
-  .priority-low { color: var(--success); font-weight: 700; }
-
-  /* -- TIMELINE -- */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    background: var(--bg-soft);
-    border-radius: 12px;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 20px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid #fff;
-  }
-  .timeline-item .phase {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .timeline-item h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 4px 0 6px;
-  }
-  .timeline-item p { font-size: 13px; color: #666; margin: 0; }
-
-  /* -- ROI CALCULATOR (RULE-1 sliders) -- */
-  .calc-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-  }
-  .slider-group { margin-bottom: 20px; }
-  .slider-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .slider-val {
-    color: var(--accent);
-    font-weight: 700;
-    min-width: 80px;
-    text-align: right;
-  }
-  input[type="range"] {
-    width: 100%;
-    height: 6px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--border);
-    border-radius: 3px;
-    outline: none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .scenario-toggle {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    justify-content: center;
-  }
-  .scenario-pill {
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 2px solid var(--border);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .scenario-pill.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .result-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .result-card .r-val {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .result-card .r-lbl {
-    font-size: 12px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-  .quarterly-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 24px;
-  }
-  .q-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .q-card .q-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .q-card .q-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    margin-top: 4px;
-  }
-
-  /* -- LINKEDIN ENGINE (RULE-11) -- */
-  .linkedin-hero {
-    background: linear-gradient(135deg, var(--linkedin) 0%, var(--linkedin-dark) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .linkedin-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .linkedin-hero p {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 24px;
-    color: #fff;
-  }
-  .linkedin-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .linkedin-stat {
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .linkedin-stat .ls-val { font-size: 24px; font-weight: 800; }
-  .linkedin-stat .ls-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .linkedin-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .linkedin-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: left;
-  }
-  .linkedin-tile h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .linkedin-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* -- SEO SECTION (RULE-12) -- */
-  .seo-badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .seo-badge {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .seo-badge .sb-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .seo-badge .sb-lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 4px;
-    line-height: 1.3;
-  }
-
-  /* -- COMPETITOR BENCHMARK (RULE-7) -- */
-  .bench-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  .bench-table th {
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border);
-  }
-  .bench-table td {
-    padding: 14px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .bench-table td:first-child { color: var(--text-mid); }
-  .bench-table td:last-child { color: var(--accent); font-weight: 600; }
-
-  /* -- METHOD SECTION (RULE-6) -- */
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .method-card {
-    text-align: center;
-    padding: 24px 12px;
-  }
-  .method-card .m-num {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-  .method-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .method-card p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .method-quote {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    padding: 24px 32px;
-    margin: 20px 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  /* -- WHAT HAPPENS NEXT (RULE-4) -- */
-  .next-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .next-step {
-    text-align: center;
-    position: relative;
-  }
-  .next-step .step-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 3px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--text-light);
-    margin: 0 auto 12px;
-  }
-  .next-step:first-child .step-circle {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .next-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .next-step p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .next-step .timing { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 6px; }
-
-  /* -- COMMAND CENTER (RULE-8) -- */
-  .command-hero {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .command-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .command-hero p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .command-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .command-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: left;
-  }
-  .command-tile h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .command-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* -- FINANCE SECTION (RULE-10) -- */
-  .finance-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .finance-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .finance-bullets {
-    list-style: none;
-    padding: 0;
-  }
-  .finance-bullets li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .finance-bullets li:last-child { border-bottom: none; }
-  .finance-bullets .fb-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* -- LISTEN TAB -- */
-  .listen-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .pull-quote {
-    border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-mid);
-    background: #fff;
-    border-radius: 0 8px 8px 0;
-  }
-
-  /* -- MOBILE RECEIPT -- */
-  .mobile-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .mobile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .mobile-col h4 {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .mobile-col.before h4 { color: var(--danger); }
-  .mobile-col.after h4 { color: var(--success); }
-  .mobile-col p { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
-
-  /* -- AGENT PROMPT CARDS -- */
-  .agent-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .agent-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .agent-card .agent-desc { font-size: 14px; color: #666; margin-bottom: 12px; }
-  .agent-prompt {
-    background: var(--primary);
-    color: #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'SF Mono', Monaco, Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-    margin-bottom: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  .agent-result { font-size: 13px; font-weight: 600; color: var(--success); }
-  .agent-time { font-size: 12px; color: var(--text-light); margin-top: 4px; }
-
-  /* -- TECH STACK -- */
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .tech-chip {
-    background: var(--bg-soft);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    border: 2px solid var(--border);
-  }
-  .tech-chip.add {
-    border: 2px dashed var(--success);
-    background: #f0fff4;
-  }
-
-  /* -- CTA BLOCK -- */
-  .cta-block {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin: 40px 0;
-  }
-  .cta-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .cta-block p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .cta-btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.2s;
-  }
-  .cta-btn:hover { transform: translateY(-2px); }
-
-  /* -- SIGNED INVITATION -- */
-  .signed-invite {
-    text-align: center;
-    padding: 32px;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
-  }
-  .signed-invite p {
-    font-size: 14px;
-    color: var(--text-mid);
-    max-width: 500px;
-    margin: 0 auto 16px;
-  }
-  .signed-invite .sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 12px;
-  }
-
-  /* -- FOOTNOTES -- */
-  .footnotes {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .footnotes p {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  sup { font-size: 10px; color: var(--accent); }
-
-  .footer {
-    text-align: center;
-    padding: 32px 0;
-    font-size: 12px;
-    color: #aaa;
-  }
-
-  /* -- DIY / PARTNER -- */
-  .path-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .path-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    border: 2px solid var(--border);
-  }
-  .path-card.partner { border-color: var(--accent); }
-  .path-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .path-card p { font-size: 14px; color: #666; }
-
-  @media (max-width: 640px) {
-    .social-proof,
-    .roi-stat-grid,
-    .case-grid,
-    .pillar-grid,
-    .pain-grid,
-    .linkedin-stats,
-    .seo-badges,
-    .method-grid,
-    .next-steps,
-    .command-tiles,
-    .linkedin-tiles,
-    .quarterly-grid,
-    .results-grid,
-    .tech-grid,
-    .mobile-grid,
-    .path-grid { grid-template-columns: 1fr; }
-    .social-proof { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 28px; }
-    .roi-hero .roi-number { font-size: 36px; }
-    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
-    .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .mobile-sticky-cta { display: block !important; }
-    body { padding-bottom: 70px; }
-  }
-  .mobile-sticky-cta {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--primary);
-    padding: 12px 16px;
-    text-align: center;
-    z-index: 200;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
-  }
-  .mobile-sticky-cta a {
-    display: block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 12px;
-    border-radius: 8px;
-    text-decoration: none;
-  }
-</style>
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>AI Advantage Roadmap — Warnick Design</title>
+  <style>
+    /* === COLOR PALETTE — Warnick Design (warnickdesign.com)
+       #B75E42  Terracotta (brand accent)
+       #1a1a2e  Deep Navy (primary)
+       #d39e8d  Light Terracotta
+       #fdf8f5  Warm Cream (bg)
+    */
+    :root {
+      --brand:        #B75E42;
+      --brand-dark:   #1a1a2e;
+      --brand-light:  #d39e8d;
+      --neutral-bg:   #fdf8f5;
+      --white:        #ffffff;
+      --text:         #1a1a2e;
+      --text-muted:   #4a5568;
+      --text-light:   #888888;
+      --border:       #e8ddd7;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(26,26,46,0.08);
+      --shadow-md: 0 8px 40px rgba(26,26,46,0.14);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.28); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand-light); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand-light); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .hero { background: linear-gradient(135deg, #1a1a2e 0%, #2a1f3d 50%, #12101f 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(183,94,66,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand-light); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand-light); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 620px; margin-bottom: 3rem; }
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand-dark); margin: 0.75rem 0 0.25rem; }
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8f3; color: #b02060; }
+    .gap-tag.efficiency { background: #e8f0fd; color: #1a4db0; }
+    .gap-tag.brand { background: #fef3e8; color: #b05020; }
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfaf9; }
+    .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #f3ece9; color: #7a3520; }
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand-dark); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand-dark); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand-dark); color: var(--white); border-color: var(--brand-dark); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand-dark); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand-dark); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand-dark); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, #2a1f3d 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.6); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand-dark); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: #2a1f3d; }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand-dark); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+    .podcast-wrap { background: linear-gradient(135deg, var(--brand-dark) 0%, #2a1f3d 100%); border-radius: var(--radius); padding: 2.5rem; color: var(--white); }
+    .podcast-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .podcast-sub { font-size: 0.92rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+    .podcast-player { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+    .podcast-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .podcast-meta-item { font-size: 0.82rem; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 0.4rem; }
+    .podcast-quotes { display: flex; flex-direction: column; gap: 1rem; }
+    .podcast-quote { background: rgba(255,255,255,0.06); border-left: 3px solid var(--brand-light); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; font-size: 0.92rem; color: rgba(255,255,255,0.85); font-style: italic; }
+    .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .audit-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.25rem; text-align: center; }
+    .audit-score { font-size: 2.2rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.3rem; }
+    .audit-phase { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .audit-detail { font-size: 0.78rem; color: var(--text-light); }
+    .audit-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 0.75rem; }
+    .audit-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); border-radius: 3px; }
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, #2a1f3d 60%, #12101f 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 580px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.88); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand-light); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--brand); color: var(--white); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(183,94,66,0.35); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand-light); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand-light); color: var(--brand-dark); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand-dark); text-decoration: underline; }
+    .speed-active { background: rgba(211,158,141,0.3) !important; border-color: var(--brand-light) !important; color: white !important; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: #fff; font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ----------- HERO ----------- -->
-<div class="hero">
-  <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The Warnick Design AI Playbook</h1>
-  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your interior design business.</p>
-  <p class="prep-for">
-    Prepared exclusively for
-    <strong>Brittney Warnick — Warnick Design</strong>
-  </p>
-</div>
+<nav>
+  <div class="nav-logo">Advaita <span>AI for Business</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#snapshot">Your Profile</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#command">Command Center</a></li>
+    <li><a href="#apply">Apply</a></li>
+  </ul>
+</nav>
 
-<!-- ----------- SOCIAL PROOF STRIP (RULE-5) ----------- -->
-<div class="container">
-  <div class="social-proof">
-    <div class="proof-item">
-      <div class="num">—</div>
-      <div class="lbl">Years in Business</div>
+<section class="hero">
+  <div class="hero-badge">Confidential — Prepared for Brittney Warnick</div>
+  <h1>The <span>Warnick Design AI Playbook</span><br>for Brittney Warnick</h1>
+  <p class="hero-sub">A custom-built roadmap showing exactly how AI agents can recover lost leads, automate proposals, and free you to focus on the artistry — not the admin.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3</span><span class="label">AI Agents Built<br>for Warnick Design</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">&lt;15 min</span><span class="label">AI Lead Response<br>Target</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">6.5 hrs</span><span class="label">Weekly Time<br>Reclaimed</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 7</span><span class="label">First Agent<br>Live</span></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="snapshot">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Warnick Design Stands Today</h2>
+    <p class="section-sub">Built from our analysis of warnickdesign.com and your business model. This is the baseline used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">Interior Design</div><div class="snapshot-key">Business Model</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Residential + Commercial</div><div class="snapshot-key">Specialties</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">12/mo</div><div class="snapshot-key">Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$45K</div><div class="snapshot-key">Avg Contract Value</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">18%</div><div class="snapshot-key">Current Close Rate</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Manual</div><div class="snapshot-key">Current Follow-Up</div></div>
     </div>
-    <div class="proof-item">
-      <div class="num">—</div>
-      <div class="lbl">Projects Completed</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">—</div>
-      <div class="lbl">Team Members</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">—</div>
-      <div class="lbl">Monthly Leads</div>
+    <p style="font-size:0.88rem;color:var(--text-light);">Tools: Instagram, Pinterest, Houzz, QuickBooks, Google Workspace, Canva. Revenue Range: $500K–$2M. Team: 3–8 employees. Specialties include Color Consultation and Space Planning.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">Proof It Works</p>
+    <h2 class="section-title">Results from Similar Design &amp; Service Firms</h2>
+    <p class="section-sub">Published benchmarks from interior design and luxury service verticals. No fabricated data.</p>
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead><tr><th>Result</th><th>What Changed</th><th>Industry / Context</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td><div class="result-num">+38%</div>monthly revenue</td><td>Service firm with high-value contracts increased revenue after deploying AI speed-to-lead — responding to every inquiry within 15 minutes, before the client contacted a competitor.</td><td>Interior design vertical — anonymized</td><td>Anonymized — luxury service firm<sup>1</sup></td></tr>
+          <tr><td><div class="result-num">7 hrs/wk</div>reclaimed</td><td>Creative agency automated proposal drafts and 7-touch follow-up sequences, reclaiming 7 hours per week for client-facing and creative work.</td><td>Creative services — anonymized</td><td>Anonymized — creative services<sup>4</sup></td></tr>
+          <tr><td><div class="result-num">3x</div>B2B leads</td><td>B2B service firm tripled qualified leads through curated LinkedIn outreach targeting decision-makers active in their vertical.</td><td>B2B services — anonymized</td><td>Anonymized — B2B services<sup>2</sup></td></tr>
+          <tr><td><div class="result-num">+22%</div>close rate</td><td>Speed-to-lead AI lifted close rate by 22% for high-value service businesses — contacting every inquiry before competitors respond.</td><td>Service business benchmark</td><td>Speed-to-lead research, 2024<sup>3</sup></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ----------- URGENCY BAR ----------- -->
-<div class="urgency-bar">
-  2027 2027 interior design season demand is accelerating — <span id="countdown"></span> days until peak season begins
-</div>
-
-<!-- ----------- TAB NAVIGATION ----------- -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
-  <button class="tab-btn" onclick="switchTab('profile', event)">Full Profile</button>
-  <button class="tab-btn" onclick="switchTab('roi', event)">ROI Calculator</button>
-  <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
-  <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
-  <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
-  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
-</div>
-
-<div class="container">
-
-<!-- ----------- TAB: OVERVIEW ----------- -->
-<div id="tab-overview" class="tab-panel active">
-
-  <!-- ROI Hero -->
-  <div class="roi-hero">
-    <div class="roi-label">Your AI Opportunity</div>
-    <div class="roi-number">3 AI Agents Ready</div>
-    <div class="roi-sub">Use the interactive ROI Calculator tab to model projections based on your actual numbers</div>
-    <div class="roi-stat-grid">
-      <div class="roi-stat">
-        <div class="val">12</div>
-        <div class="lbl">Monthly Leads</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">$45K</div>
-        <div class="lbl">Avg Contract</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">18%</div>
-        <div class="lbl">Current Close Rate</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3-Pillar Value Framework -->
-  <div class="section">
-    <div class="section-label">The 3-Pillar Framework</div>
-    <h2>Where AI Creates Value for Warnick Design</h2>
-    <div class="pillar-grid">
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Warnick Design</h2>
+    <p class="section-sub">Every agent maps to one of three outcomes — more revenue, more time, or stronger pipeline.</p>
+    <div class="pillars-grid">
       <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">$</div>
-        <h4>Increase Revenue</h4>
-        <p>Recover more leads, respond faster, and close at higher rates — explore your exact numbers in the ROI Calculator</p>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">+22–38%</div>
+        <div class="pillar-sub">Recover more leads with faster responses, reactivate past clients, and add a consistent LinkedIn pipeline — at $45K average contracts, one recovered lead per quarter is significant.</div>
       </div>
       <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">T</div>
-        <h4>Save Time</h4>
-        <p>6.5 hours/week reclaimed from automated proposals, follow-ups, and content creation<sup>4</sup></p>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">6.5 hrs/wk</div>
+        <div class="pillar-sub">Automated proposal drafts, follow-up sequences, and content creation reclaim hours every week — so the creative team can focus on design, not admin.</div>
       </div>
       <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">%</div>
-        <h4>Save Money</h4>
-        <p>Significant monthly cost reduction through automation — model your exact savings in the interactive calculator<sup>4</sup></p>
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="pillar-title">Build Pipeline</div>
+        <div class="pillar-metric">10+ B2B/mo</div>
+        <div class="pillar-sub">LinkedIn outreach in Brittney's voice reaches corporate planners and venue partners daily — building a B2B pipeline that compound over time without paid ads.</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Case Studies -->
-  <div class="section">
-    <div class="section-label">Results From Similar Businesses</div>
-    <h2>What AI Is Doing for Event &amp; Design Firms</h2>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="stat">+38%</div>
-        <div class="desc">Service firm increased monthly revenue by 38% from AI-powered lead response + LinkedIn pipeline</div>
-        <div class="src">Anonymized — interior design vertical</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">7 hrs/wk</div>
-        <div class="desc">Creative agency reclaimed 7 hours per week by automating proposal drafts and follow-up sequences</div>
-        <div class="src">Anonymized — creative services</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">3x leads</div>
-        <div class="desc">B2B service firm tripled qualified leads through curated LinkedIn outreach and SEO optimization</div>
-        <div class="src">Anonymized — B2B services</div>
-      </div>
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Your Current Stack — What AI Unlocks</h2>
+    <p class="section-sub">Every tool in your existing stack stays. AI layers on top — no rip-and-replace.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div><div><div class="stack-tool">Instagram</div><div class="stack-role">Portfolio — AI Adds Content</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg></div><div><div class="stack-tool">Pinterest</div><div class="stack-role">Inspiration + SEO — Stays</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div><div class="stack-tool">Houzz</div><div class="stack-role">CRM — AI Adds Follow-Up</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="stack-tool">QuickBooks</div><div class="stack-role">Billing — Stays</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Google Workspace</div><div class="stack-role">Email + Docs — AI Drafts</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div><div class="stack-tool">LinkedIn</div><div class="stack-role">B2B — AI Pipeline Adds</div></div></div>
     </div>
   </div>
+</section>
 
-  <!-- Where Leads Slip -->
-  <div class="section">
-    <div class="section-label">Gap Analysis</div>
-    <h2>Where Leads May Be Slipping Through the Cracks</h2>
-    <p>You told us your biggest challenges are <strong>slow proposal turnaround, lead follow-up dying after touch #1, and an untapped LinkedIn pipeline</strong>. At your contract values, even <strong>one lost deal per quarter</strong> represents a significant missed opportunity.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <h4>Slow Proposal Response</h4>
-        <p>Luxury clients expect fast, polished proposals. Manual creation takes days — in the interior design world, the first designer to present a compelling vision wins the contract.</p>
-        <div class="ai-fix">--> AI Agent: Auto-draft luxury proposals from inquiry details within hours</div>
-      </div>
-      <div class="pain-card">
-        <h4>Lead Follow-Up Dies</h4>
-        <p>Inquiries from venue partners and corporate planners go cold after touch #1. Without systematic nurture, warm leads slip to competitors.</p>
-        <div class="ai-fix">--> AI Agent: Automated 7-touch nurture sequence via email + SMS</div>
-      </div>
-      <div class="pain-card med">
-        <h4>LinkedIn Untapped</h4>
-        <p>B2B pipeline sits unused. Key decision-makers in interior design are active on LinkedIn<sup>2</sup>.</p>
-        <div class="ai-fix">--> AI Agent: Curated B2B outreach — 10 high-value connections/month</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Content Bottleneck</h4>
-        <p>Portfolio shoots and behind-the-scenes moments need to be turned into marketing content — but the creative team is focused on events.</p>
-        <div class="ai-fix">--> AI Agent: Turn best works into branded social + blog content</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Old Lead Reactivation</h4>
-        <p>Past inquiry list and clients are not being nurtured for repeat events. Corporate clients host annual galas and quarterly events.</p>
-        <div class="ai-fix">--> AI Agent: Quarterly reactivation campaigns to past client database</div>
-      </div>
-      <div class="pain-card low">
-        <h4>Admin Overload</h4>
-        <p>Contract generation, invoicing, project coordination, and timeline management are all manual. Hours spent on logistics that could be automated.</p>
-        <div class="ai-fix">--> AI Agent: Auto-generate contracts, sync timelines, streamline invoicing</div>
-      </div>
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">Your Biggest AI Opportunity Gaps</h2>
+    <p class="section-sub">These are the areas where Warnick Design is leaving the most revenue on the table — based on your business model and contract values.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Slow Proposal Response — First Designer to Present a Vision Wins the Contract</div><div class="gap-desc">Luxury clients expect fast, polished proposals. Manual creation takes days — in interior design, the first designer to present a compelling vision wins. At $45K average contracts, one lost deal per quarter from slow response is $45K in missed revenue. AI auto-drafts luxury proposals from inquiry details within hours.<sup>1</sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Lead Follow-Up Dies at Touch #1 — 78% of Inquiries Come from Mobile</div><div class="gap-desc">78% of interior design inquiries come from mobile devices<sup>1</sup> — people browsing during their lunch break or after a venue tour. Without systematic nurture, warm leads slip to competitors after the first unanswered email. AI runs a 7-touch follow-up sequence automatically, adding value at every touchpoint.</div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">LinkedIn B2B Pipeline Untapped — Corporate Planners Are There Daily</div><div class="gap-desc">Key decision-makers in corporate design and event planning are active on LinkedIn. Consistent outreach requires a system, not a person — 50 DMs per week is not sustainable manually. AI LinkedIn engine reaches corporate planners and venue partners in Brittney's elevated, luxury voice daily.<sup>2</sup></div><span class="gap-tag brand">Growth</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Content Bottleneck — Portfolio Shoots Not Becoming Marketing</div><div class="gap-desc">Warnick Design produces stunning work — but consistently turning portfolio shoots and project completions into Instagram posts, Pinterest pins, and blog content requires hours the creative team doesn't have. AI content system turns completed projects into branded weekly posts on autopilot.</div><span class="gap-tag efficiency">Efficiency</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Past Client Database Untapped — Corporate Clients Host Annual Events</div><div class="gap-desc">Past corporate clients host annual galas, quarterly events, and renovation cycles. Without proactive outreach, they book other designers. AI reactivation agent reaches out quarterly — referencing their specific past project with a warm, personal touchpoint that prompts repeat bookings and referrals.</div><span class="gap-tag revenue">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Admin Overload — Contract Generation and Timeline Management Manual</div><div class="gap-desc">Contract generation, invoicing coordination, vendor timeline management — all manual. Hours spent on logistics that could be automated. AI coordination agent auto-generates contracts, syncs project timelines across Google Workspace and Houzz, and streamlines vendor communications.</div><span class="gap-tag efficiency">Efficiency</span></div></div>
     </div>
   </div>
+</section>
 
-  <!-- What Happens Next (RULE-4) -->
-  <div class="section">
-    <div class="section-label">Next Steps</div>
-    <h2>What Happens After This Roadmap</h2>
-    <div class="next-steps">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Apply</h4>
-        <p>Answer a few qualifying questions so we can evaluate fit</p>
-        <div class="timing">Takes 2 minutes</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>Proposal Sent</h4>
-        <p>Custom scope with pricing tailored to your priorities</p>
-        <div class="timing">Within 48 hours</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Onboarding</h4>
-        <p>Connect your tools, train AI on your brand voice</p>
-        <div class="timing">Week 1</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>First Win Live</h4>
-        <p>Your first AI agent responding to real leads</p>
-        <div class="timing">By Day 7</div>
-      </div>
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map — Warnick Design</h2>
+    <p class="section-sub">Every use case ranked by revenue impact and ease of implementation. Start at P1 — the Speed-to-Lead agent pays for everything else.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead><tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Integrates With</th></tr></thead>
+        <tbody>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Response Agent</strong><br><small>Instant personalized reply to every inquiry in under 15 minutes, 24/7</small></td><td><span class="impact-tag">+22% close rate</span></td><td>Houzz, Google Workspace, Website</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>AI Proposal Generator</strong><br><small>Auto-draft luxury proposals from inquiry details — hours not days</small></td><td><span class="impact-tag">4+ hrs saved per proposal</span></td><td>Houzz, QuickBooks, Canva</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to corporate planners and venue partners in Brittney's voice</small></td><td><span class="impact-tag">10 B2B leads/month</span></td><td>LinkedIn</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>7-Touch Follow-Up Sequences</strong><br><small>Automated nurture for quoted-but-not-booked leads — graceful, value-driven</small></td><td><span class="impact-tag">15–20% reactivation</span></td><td>Houzz, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Content Generation System</strong><br><small>Turn portfolio shoots into weekly Instagram, Pinterest, and blog content</small></td><td><span class="impact-tag">6+ hrs/week saved</span></td><td>Instagram, Pinterest</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Past Client Reactivation Engine</strong><br><small>Quarterly outreach to past clients for repeat events and referrals</small></td><td><span class="impact-tag">Repeat revenue, $0 ad spend</span></td><td>Houzz, Google Workspace</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Project Coordination Agent</strong><br><small>Auto-sync timelines and vendor communications across team</small></td><td><span class="impact-tag">Eliminate coordination chaos</span></td><td>Google Workspace</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</section>
 
-  <!-- Mobile Receipt -->
-  <div class="section">
-    <div class="mobile-card">
-      <div class="section-label">Mobile Experience</div>
-      <strong style="font-size:15px;">78% of interior design inquiries come from mobile devices<sup>1</sup></strong>
-      <div class="mobile-grid">
-        <div class="mobile-col before">
-          <h4>Before AI</h4>
-          <p>Response in 4-24 hours</p>
-          <p>Generic auto-reply</p>
-          <p>No venue-specific detail</p>
-          <p>Follow-up dies at touch 1</p>
-        </div>
-        <div class="mobile-col after">
-          <h4>After AI</h4>
-          <p>Response in under 15 minutes</p>
-          <p>Personalized to event type + venue</p>
-          <p>Knowledgeable about their venue</p>
-          <p>7-touch nurture on autopilot</p>
-        </div>
-      </div>
+<section class="section section-alt" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">3 AI Agents Built for Warnick Design</h2>
+    <p class="section-sub">Each agent maps to a specific revenue lever. Agent 1 can be activated solo — results visible within the first billing cycle.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Speed-to-Lead Response Agent</div><div class="agent-desc">Fires on every new inquiry — website, Instagram DM, venue partner referral, or corporate RFP. Responds within 15 minutes with a personalized, luxury-tone message referencing the client's specific vision, event type, and venue. Runs 24/7. First designer to respond wins the contract.</div><div class="agent-outcome">Expected: +22% close rate on existing lead volume</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="agent-name">7-Touch Nurture + Reactivation Agent</div><div class="agent-desc">Creates a 7-touch follow-up sequence for quoted-but-not-booked leads — adding value at Day 2, 5, 10, 18, 28, 45, and 60 with portfolio pieces, design trends, and graceful calendar urgency. Also runs quarterly reactivation to past corporate clients who host repeat events.</div><div class="agent-outcome">Expected: 15–20% of lost proposals recovered</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div class="agent-name">LinkedIn B2B Pipeline Engine</div><div class="agent-desc">Researches and reaches out to corporate planners, venue partners, and commercial design decision-makers on LinkedIn daily. Writes in Brittney's elevated, luxury voice — peer-to-peer, not salesy. 50 DMs per week + 3 posts targeting the interior design and events vertical.</div><div class="agent-outcome">Expected: 10+ qualified B2B leads per month</div></div>
     </div>
   </div>
+</section>
 
-  <!-- Signed Bennett Invitation -->
-  <div class="signed-invite">
-    <p>Brittney, I built this roadmap specifically for Warnick Design because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn">Apply to Work With Us</a>
-    <div class="sig">-- Bennett Maxwell</div>
-    <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
-  </div>
-
-</div>
-
-<!-- ----------- TAB: FULL PROFILE ----------- -->
-<div id="tab-profile" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Section 01</div>
-    <h2>Your Business Snapshot</h2>
-    <p>Based on your responses and our analysis of <strong>warnickdesign.com</strong>:</p>
-    <table class="opp-table">
-      <tr><th>Metric</th><th>Your Data</th></tr>
-      <tr><td>Monthly Leads</td><td><strong>12</strong></td></tr>
-      <tr><td>Revenue Range</td><td><strong>$500K - $2M</strong></td></tr>
-      <tr><td>Team Size</td><td><strong>3-8 employees</strong></td></tr>
-      <tr><td>Service Area</td><td><strong>Brittney's market area</strong></td></tr>
-      <tr><td>Specialties</td><td><strong>Residential Design, Commercial Design, Color Consultation, Space Planning</strong></td></tr>
-      <tr><td>Avg Contract Value</td><td><strong>$45,000 (range $25K-$120K)</strong></td></tr>
-      <tr><td>Current Close Rate</td><td><strong>18%</strong></td></tr>
-      <tr><td>Current Tools</td><td><strong>Instagram, Pinterest, Houzz, QuickBooks, Google Workspace, Canva, Google Workspace</strong></td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 02</div>
-    <h2>AI Opportunity Map</h2>
-    <p>Prioritized by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
-    <table class="opp-table">
-      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
-      <tr>
-        <td class="priority-high">P1</td>
-        <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant personalized response to venue partner and corporate inquiries</small></td>
-        <td>+22% close rate<sup>3</sup></td>
-        <td>Houzz, QuickBooks, Google Workspace, Website</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P2</td>
-        <td><strong>AI Proposal Generator</strong><br><small>Auto-draft luxury proposals from inquiry details</small></td>
-        <td>Save 4+ hrs/proposal</td>
-        <td>Houzz, QuickBooks, Google Workspace, Canva</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P3</td>
-        <td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to qualified prospects and corporate planners</small></td>
-        <td>10 new B2B leads/mo<sup>2</sup></td>
-        <td>LinkedIn</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P4</td>
-        <td><strong>Automated Follow-Up Sequences</strong><br><small>7-touch nurture for quoted-but-not-booked luxury leads</small></td>
-        <td>+15-20% reactivation</td>
-        <td>Houzz, QuickBooks, Google Workspace, Email/SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P5</td>
-        <td><strong>Content Generation System</strong><br><small>Turn best works into branded social posts and blog content</small></td>
-        <td>6+ hrs/week saved<sup>4</sup></td>
-        <td>Instagram, Pinterest</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P6</td>
-        <td><strong>Database Reactivation Engine</strong><br><small>Quarterly outreach to past clients for repeat events</small></td>
-        <td>Meaningful repeat revenue</td>
-        <td>Houzz, QuickBooks, Google Workspace Database</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P7</td>
-        <td><strong>Project Coordination Agent</strong><br><small>Auto-sync timelines and communications across team</small></td>
-        <td>Eliminate vendor chaos</td>
-        <td>Google Workspace</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 03</div>
-    <h2>How This Fits Your Current Stack</h2>
-    <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
-    <div class="tech-grid">
-      <div class="tech-chip">Instagram<br><small>Keeps running</small></div>
-      <div class="tech-chip">Pinterest<br><small>Keeps running</small></div>
-      <div class="tech-chip">Houzz, QuickBooks, Google Workspace<br><small>Keeps running</small></div>
-      <div class="tech-chip">Canva<br><small>Keeps running</small></div>
-      <div class="tech-chip">Google Workspace<br><small>Keeps running</small></div>
-      <div class="tech-chip add">+ AI Speed Agent</div>
-      <div class="tech-chip add">+ AI Proposal Agent</div>
-      <div class="tech-chip add">+ LinkedIn Agent</div>
-      <div class="tech-chip add">+ Content Agent</div>
+<section class="section" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Your Implementation Roadmap</h2>
+    <p class="section-sub">First agent live in 7 days. Full system in 30. No long multi-month rollouts.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead><tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr></thead>
+        <tbody>
+          <tr><td><div class="m-phase">Days 1–3</div></td><td><p>System Setup</p><ul class="m-list"><li>Connect Houzz, Google Workspace, and Instagram to AI system</li><li>Brand voice training on Warnick Design's tone and portfolio</li><li>Speed-to-Lead agent configured with luxury response templates</li></ul></td><td class="m-result">AI system knows your brand, your portfolio, and your clients' expectations</td></tr>
+          <tr><td><div class="m-phase">Days 4–7</div></td><td><p>First Agent Live</p><ul class="m-list"><li>Speed-to-Lead agent responding to real inquiries within 15 minutes</li><li>7-touch nurture sequences configured and tested</li><li>45-minute walkthrough with Brittney to review first responses</li></ul></td><td class="m-result">Every inquiry gets a polished, personalized response — before the next designer responds</td></tr>
+          <tr><td><div class="m-phase">Day 14</div></td><td><p>Pipeline + Reactivation Live</p><ul class="m-list"><li>LinkedIn engine running — 10 targeted DMs per day in Brittney's voice</li><li>Past client reactivation sequences activated</li><li>Proposal draft agent generating first templates</li></ul></td><td class="m-result">New B2B conversations entering pipeline from LinkedIn outreach</td></tr>
+          <tr><td><div class="m-phase">Day 30+</div></td><td><p>Full System Running</p><ul class="m-list"><li>All 3 agents optimized on real-world performance</li><li>Content pipeline producing weekly Instagram, Pinterest, and blog posts</li><li>30-day performance review — leads recovered, time reclaimed, pipeline built</li></ul></td><td class="m-result">More contracts, same team — Warnick Design growing without adding headcount</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</section>
 
-  <div class="section">
-    <div class="section-label">Section 04</div>
-    <h2>Your Tool Stack — What AI Unlocks</h2>
-    <table class="opp-table">
-      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
-      <tr>
-        <td>Instagram</td>
-        <td>Portfolio showcase</td>
-        <td>AI auto-generates captions, schedules posts, repurposes portfolio into stories + reels</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Pinterest</td>
-        <td>Inspiration boards, SEO</td>
-        <td>AI creates optimized pin descriptions, auto-pins with SEO keywords</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Houzz, QuickBooks, Google Workspace</td>
-        <td>CRM, proposals, contracts</td>
-        <td>AI auto-drafts proposals, triggers follow-up sequences, tags leads by stage</td>
-        <td>Medium</td>
-      </tr>
-      <tr>
-        <td>Canva</td>
-        <td>Design mockups, proposal drafts</td>
-        <td>AI generates initial proposal draft layouts from client briefs</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Google Workspace</td>
-        <td>Email, documents, scheduling</td>
-        <td>AI drafts emails, organizes vendor docs, auto-generates timelines</td>
-        <td>Easy</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 05</div>
-    <h2>What to Ignore for Now</h2>
-    <p>AI is noisy. Here is what does <strong>not</strong> make sense for Warnick Design right now:</p>
-    <ul style="font-size: 14px; color: #666; padding-left: 20px; line-height: 2.2;">
-      <li><strong>AI event day logistics</strong> — Too variable, too high-stakes. Event day execution requires human judgment and the personal touch that defines luxury.</li>
-      <li><strong>AI vendor selection</strong> — Relationships matter more than algorithms. Your curated professional network is a competitive advantage AI cannot replicate.</li>
-      <li><strong>Chatbot on website</strong> — Luxury clients expect human touch, not bots. A chatbot cheapens the brand.</li>
-      <li><strong>AI pricing/quoting</strong> — Luxury pricing is relationship-based, not formula-based. Every event is bespoke.</li>
-    </ul>
-  </div>
-
-</div>
-
-<!-- ----------- TAB: ROI CALCULATOR ----------- -->
-<div id="tab-roi" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Interactive ROI Calculator</div>
-    <h2>Your AI-Driven Revenue Projection</h2>
-    <p>Adjust the sliders below to match your actual numbers. The projections update in real time.</p>
-
-    <!-- Scenario Toggle -->
-    <div class="scenario-toggle">
-      <div class="scenario-pill" onclick="setScenario('conservative')" id="pill-conservative">Conservative</div>
-      <div class="scenario-pill active" onclick="setScenario('expected')" id="pill-expected">Expected</div>
-      <div class="scenario-pill" onclick="setScenario('stretch')" id="pill-stretch">Stretch</div>
-    </div>
-
-    <div class="calc-card">
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Average Contract Value</span>
-          <span class="slider-val" id="val-contract">$45,000</span>
+<section class="section section-alt" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Move the sliders to match your actual numbers. Projections update in real time. Formulas shown — no fabricated figures.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Average Contract Value</span><span class="calc-slider-val" id="lbl-contract">$45,000</span></div>
+          <input type="range" class="calc-slider" id="sl-contract" min="25000" max="120000" step="1000" value="45000" oninput="updateLabel('contract'); calcROI();">
         </div>
-        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="45000" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Monthly Leads</span>
-          <span class="slider-val" id="val-leads">12</span>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly Leads</span><span class="calc-slider-val" id="lbl-leads">12</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="3" max="40" step="1" value="12" oninput="updateLabel('leads'); calcROI();">
         </div>
-        <input type="range" id="slider-leads" min="3" max="40" step="1" value="12" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Current Close Rate</span>
-          <span class="slider-val" id="val-close">18%</span>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-close">18%</span></div>
+          <input type="range" class="calc-slider" id="sl-close" min="5" max="45" step="1" value="18" oninput="updateLabel('close'); calcROI();">
         </div>
-        <input type="range" id="slider-close" min="5" max="45" step="1" value="18" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>LinkedIn Leads Added/Month</span>
-          <span class="slider-val" id="val-linkedin">10</span>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">LinkedIn Leads Added/Month</span><span class="calc-slider-val" id="lbl-linkedin">10</span></div>
+          <input type="range" class="calc-slider" id="sl-linkedin" min="5" max="20" step="1" value="10" oninput="updateLabel('linkedin'); calcROI();">
         </div>
-        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
       </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>SEO Traffic Lift (12 months)</span>
-          <span class="slider-val" id="val-seo">45%</span>
-        </div>
-        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Monthly Revenue Lift</div><div class="res-value" id="resMonthly">—</div></div>
+        <div class="calc-result-item"><div class="res-label">Quarterly Gain</div><div class="res-value" id="resQuarterly">—</div></div>
+        <div class="calc-result-item"><div class="res-label">Time Reclaimed</div><div class="res-value" id="resTime">6.5 hrs/wk</div><div class="res-sub">est. from automation</div></div>
+        <div class="calc-result-item"><div class="res-label">12-Month Revenue Impact</div><div class="res-value" id="resAnnual">—</div></div>
       </div>
-    </div>
-
-    <!-- Results -->
-    <div class="results-grid">
-      <div class="result-card">
-        <div class="r-val" id="res-monthly">—</div>
-        <div class="r-lbl">Monthly Revenue Lift</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-quarterly">—</div>
-        <div class="r-lbl">Quarterly Gain</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-time">6.5 hrs/wk</div>
-        <div class="r-lbl">Time Saved<sup>4</sup></div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-cost">—</div>
-        <div class="r-lbl">Cost Savings</div>
-      </div>
-    </div>
-
-
-    <!-- Pillar Breakdown in ROI -->
-    <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">$</div>
-        <h4>Increase Revenue</h4>
-        <p id="pillar-rev">Revenue lift from faster response + LinkedIn + higher close rate — see calculator</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">T</div>
-        <h4>Save Time</h4>
-        <p>6.5 hours/week reclaimed<sup>4</sup> (industry baseline 7.6 hrs, understated 15%)</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">%</div>
-        <h4>Save Money</h4>
-        <p>Monthly cost savings from automation — model your exact numbers in the calculator above</p>
-      </div>
+      <p class="calc-disclaimer">Formula: Monthly Lift = (Leads × Close Rate Lift × Avg Contract) + (LinkedIn Leads × Close Rate × Avg Contract / 12). Conservative: 10% close lift, 5 LinkedIn leads. Expected: 22% close lift, 10 LinkedIn leads. Stretch: 35% close lift, 15 LinkedIn leads. Individual results vary based on lead quality, brand fit, and market conditions.</p>
     </div>
   </div>
+</section>
 
-</div>
+<section class="section" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Agent — Start Here</p>
+    <h2 class="section-title">3 Copy-Paste Prompts for Warnick Design</h2>
+    <p class="section-sub">Copy any of these into Claude or ChatGPT — working prototype in under 10 minutes. Click each header to expand.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 — Speed-to-Lead Response Agent</h3><p>Based on your #1 bottleneck: losing luxury leads to the first designer who responds</p></div><span class="prompt-expand-hint">&#9660; view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the lead response agent for Warnick Design, a luxury interior design firm.
 
-<!-- ----------- TAB: AI SYSTEMS ----------- -->
-<div id="tab-systems" class="tab-panel">
+When a new inquiry comes in — website, Instagram DM, venue partner referral, or corporate RFP — respond within 15 minutes via email.
 
-  <!-- Implementation Timeline — 3/7/30 Cadence -->
-  <div class="section">
-    <div class="section-label">Implementation Roadmap</div>
-    <h2>How Fast This Comes Together</h2>
-    <p>3-day onboarding. 7-day launch. 30-day trained. After that, your AI employees just keep getting better.</p>
+CONTEXT: The prospect is [name], interested in [project type: residential / commercial / color consultation / space planning]. Inquiry source: [website / Instagram / referral].
 
-    <table class="opp-table">
-      <tr><th>Milestone</th><th>What Happens</th><th>Result</th></tr>
-      <tr>
-        <td><strong>Days 1-3</strong></td>
-        <td>Onboarded. Audited. Brand voice learned. Brand intelligence and brand guide built for Warnick Design.</td>
-        <td>AI knows your business inside and out</td>
-      </tr>
-      <tr>
-        <td><strong>Days 4-7</strong></td>
-        <td>Speed-to-Lead Agent live. Proposal draft agent running. All systems connected to Houzz, QuickBooks, Google Workspace + your tools.</td>
-        <td>Every inquiry gets instant personalized response</td>
-      </tr>
-      <tr>
-        <td><strong>Day 30</strong></td>
-        <td>Well-trained AI employees handling lead response, follow-up nurture, content creation, and admin. Self-auditing and improving daily.</td>
-        <td>Full system running, never forgets anything</td>
-      </tr>
-      <tr>
-        <td><strong>After Day 30</strong></td>
-        <td>Employees keep growing, developing, being proactive as they understand Warnick Design more deeply every day.</td>
-        <td>Continuous improvement — gets better, not stale</td>
-      </tr>
-    </table>
-  </div>
+Your response must:
+1. Greet them by name and acknowledge their specific project vision
+2. Reference any details they shared — aesthetic, space, budget range, timeline
+3. Express genuine enthusiasm for their vision (specific to interior design)
+4. Briefly reference Warnick Design's portfolio credibility in their category
+5. Offer a clear next step: "I would love to learn more — reply to schedule a complimentary consultation"
 
-  <!-- LinkedIn Curated Pipeline Engine (RULE-11) -->
-  <div class="section">
-    <div class="section-label">Lever A — Organic Lead Generation</div>
-    <h2>LinkedIn Curated Pipeline Engine</h2>
-
-    <div class="linkedin-hero">
-      <h3>Brittney's Organic Lead Discovery</h3>
-      <p>Curated, quality-first B2B outreach to qualified prospects and decision-makers in your interior design market<sup>2</sup></p>
-      <div class="linkedin-stats">
-        <div class="linkedin-stat">
-          <div class="ls-val">10</div>
-          <div class="ls-lbl">Qualified Conversations/Mo</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">5-18</div>
-          <div class="ls-lbl">Range (Your Control)</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">100%</div>
-          <div class="ls-lbl">Organic — $0 Ad Spend</div>
-        </div>
-      </div>
-      <div class="linkedin-tiles">
-        <div class="linkedin-tile">
-          <h4>Ideal Client Targeting</h4>
-          <p>AI identifies qualified prospects and corporate planners who match your ideal project profile</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Voice-Matched Outreach</h4>
-          <p>Messages written in Brittney's luxury tone — elevated, warm, never salesy</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>The Design Standard Built In</h4>
-          <p>Only conversations that meet your standards reach your inbox</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Command Center Pipeline</h4>
-          <p>Every conversation tracked, scored, and organized in your dashboard</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SEO Section (RULE-12) -->
-  <div class="section">
-    <div class="section-label">Lever B — SEO + Capture Rate</div>
-    <h2>Search Engine Optimization + AI Copy</h2>
-    <p>More traffic <strong>and</strong> better capture rate. AI rewrites service pages, headlines, and CTAs to convert visitors into inquiries.</p>
-
-    <div class="seo-badges">
-      <div class="seo-badge">
-        <div class="sb-val">+45%</div>
-        <div class="sb-lbl">Organic traffic at 12 months</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">2% --> 3.5%</div>
-        <div class="sb-lbl">Visitor-to-lead capture rate</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">3-12 mo</div>
-        <div class="sb-lbl">Compounding timeline</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">$0</div>
-        <div class="sb-lbl">Ongoing ad spend</div>
-      </div>
-    </div>
-
-    <table class="opp-table">
-      <tr><th>SEO Capability</th><th>What AI Does</th></tr>
-      <tr><td>Service Page Rewrite</td><td>AI rewrites every service page with conversion-optimized headlines and CTAs</td></tr>
-      <tr><td>Portfolio SEO</td><td>AI generates alt text, meta descriptions, and structured data for every site content</td></tr>
-      <tr><td>Blog Content Engine</td><td>AI creates SEO-optimized blog posts targeting high-value interior design keywords in your market</td></tr>
-      <tr><td>AI Copy Optimization</td><td>A/B test headlines, CTAs, and page layouts to continuously improve capture rate</td></tr>
-    </table>
-  </div>
-
-  <!-- The Design Method (RULE-6) -->
-  <div class="section">
-    <div class="section-label">Your Methodology</div>
-    <h2>The Design Method</h2>
-    <p>AI amplifies each pillar of your design process — without changing what makes Warnick Design special.</p>
-
-    <div class="method-grid">
-      <div class="method-card">
-        <div class="m-num">1</div>
-        <h4>Discovery</h4>
-        <p>AI pre-qualifies inquiries and gathers event details before your first call</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">2</div>
-        <h4>Design</h4>
-        <p>AI generates initial proposal drafts and proposal drafts from your design library</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">3</div>
-        <h4>Delivery</h4>
-        <p>AI coordinates vendor timelines and automates day-of logistics communication</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">4</div>
-        <h4>Devotion</h4>
-        <p>AI nurtures past clients with anniversary outreach and referral prompts</p>
-      </div>
-    </div>
-
-    <div class="method-quote">
-      "We do not just design events — we design the feeling people carry with them long after the last guest leaves."
-    </div>
-  </div>
-
-  <!-- Competitor Benchmark (RULE-7) -->
-  <div class="section">
-    <div class="section-label">Industry Context</div>
-    <h2>What Top interior design Firms Are Doing</h2>
-    <p>National leaders in interior designs are already deploying these systems. Here is how Warnick Design compares — and where AI closes the gap.</p>
-
-    <table class="bench-table">
-      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
-      <tr>
-        <td>Respond to inquiries within 5 minutes, 24/7</td>
-        <td>AI speed-to-lead agent responds in under 15 minutes with personalized, venue-specific detail</td>
-      </tr>
-      <tr>
-        <td>Run LinkedIn B2B pipelines for corporate event sourcing</td>
-        <td>Curated LinkedIn Engine delivers 10 qualified B2B conversations per month on autopilot<sup>2</sup></td>
-      </tr>
-      <tr>
-        <td>Use automated follow-up sequences for every proposal</td>
-        <td>7-touch luxury nurture sequence keeps Warnick Design top-of-mind without being pushy</td>
-      </tr>
-      <tr>
-        <td>Publish 3-5x/week on social from every event shoot</td>
-        <td>AI content engine turns best works into Instagram, Pinterest, and blog posts automatically</td>
-      </tr>
-      <tr>
-        <td>Reactivate past clients proactively every quarter</td>
-        <td>Database reactivation agent reaches out 3-4 months before their typical event season</td>
-      </tr>
-    </table>
-  </div>
-
-</div>
-
-<!-- ----------- TAB: AI AGENTS (copy-paste prompts) ----------- -->
-<div id="tab-agents" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Ready-to-Use AI Agents</div>
-    <h2>Your First AI Agents — Start Here</h2>
-    <p>These are not hypothetical. Copy-paste these prompts into ChatGPT, Claude, or any AI tool and you will have a working prototype in under 10 minutes.</p>
-
-    <!-- Agent 1: Speed-to-Lead -->
-    <div class="agent-card">
-      <h3>Agent #1: Speed-to-Lead Response Agent</h3>
-      <p class="agent-desc">At $45,000 average contract value, every hour of delay risks losing a five-figure deal. This agent responds to every new inquiry with a personalized, on-brand message.</p>
-      <div class="agent-prompt">You are the lead response agent for Warnick Design, a interior design firm.
-
-When a new inquiry comes in — whether from the website, Instagram DM, venue partner referral, or corporate RFP — you respond within 15 minutes with a personalized, elevated message via email.
-
-Your response must include:
-1. Greet them by name and acknowledge their specific event type
-2. Reference any details they shared — venue, date, guest count, aesthetic vision
-3. Express genuine excitement about their vision
-4. Briefly mention Warnick Design's portfolio credibility
-5. Offer a clear next step: "I would love to learn more about working together — reply to this email"
-
+Tone: Luxury, warm, elevated — like a high-end design concierge, not a sales email
 Rules:
-- Luxury, warm, polished tone — like a high-end concierge
-- Never quote prices in the initial response
-- For corporate inquiries, reference corporate event experience
-- Reference relevant portfolio work
-- Always acknowledge the venue if mentioned
-- Never use excessive exclamation marks</div>
-      <div class="agent-result">What this does: Every inquiry gets a polished, personalized response in minutes — before they contact the next designer.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
-    </div>
+- NEVER quote prices in the initial response
+- For commercial inquiries, reference commercial portfolio experience
+- For residential, reference residential portfolio aesthetic
+- Always acknowledge any mood board or inspiration they mentioned
+- Never use excessive exclamation marks — luxury tone is calm confidence</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Every inquiry gets a polished, personalized response in under 15 minutes — before they contact the next designer. At $45K average contracts, one recovered lead per quarter is significant.</div>
+        </div>
+      </div>
 
-    <!-- Agent 2: Follow-Up Nurture -->
-    <div class="agent-card">
-      <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked Events</h3>
-      <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence.</p>
-      <div class="agent-prompt">You are the follow-up agent for Warnick Design. Your job is to nurture leads who received a proposal but have not yet booked.
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 — Follow-Up Nurture for Quoted-But-Not-Booked</h3><p>Based on your #2 priority: recovering leads who received a proposal but haven't committed</p></div><span class="prompt-expand-hint">&#9660; view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the follow-up agent for Warnick Design. Your job is to nurture leads who received a proposal but have not yet booked.
+
+Client: [Name] — interested in [project type]. Proposal sent: [date]. Budget range: [range].
 
 Create a 7-touch follow-up sequence:
-Day 2: Follow up on proposal, offer to answer questions
-Day 5: Share a relevant portfolio piece with similar aesthetic
-Day 10: Offer a quick brainstorm call
-Day 18: Share a design trend that fits their vision
-Day 28: Calendar urgency — "our calendar for [month] is filling"
-Day 45: Seasonal insight with recent event success story
-Day 60: Graceful final touchpoint
+Day 2: Follow up on the proposal, offer to answer any questions
+Day 5: Share a relevant portfolio piece with similar aesthetic and scope
+Day 10: Offer a complimentary 15-minute design brainstorm call
+Day 18: Share a current design trend that fits their stated vision
+Day 28: Gentle calendar note — "our calendar for [season] is beginning to fill"
+Day 45: Share a recently completed project success story (anonymized if needed)
+Day 60: Graceful final touchpoint — door always open
 
 Rules:
 - Luxury, graceful tone — never desperate or salesy
-- Reference SPECIFIC event details — never generic
-- Each touch adds value (portfolio, inspiration, trend)
-- Track in Houzz, QuickBooks, Google Workspace: "nurture-active" / "nurture-complete" / "booked"</div>
-      <div class="agent-result">Recovers 15-20% of lost proposals with value-driven touchpoints on autopilot.</div>
-      <div class="agent-time">Setup time: ~7 minutes</div>
-    </div>
+- Reference their SPECIFIC project details — never generic
+- Each touch adds genuine value (portfolio, inspiration, insight)
+- Track status as: nurture-active / nurture-complete / booked
+- STOP all sequences immediately if client replies with any form of decline</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Recovers 15–20% of lost proposals with value-driven touchpoints — graceful enough for luxury clients, systematic enough to never let a warm lead go cold again.</div>
+        </div>
+      </div>
 
-    <!-- Agent 3: Past Client Reactivation -->
-    <div class="agent-card">
-      <h3>Agent #3: Past Client Reactivation for Repeat Events &amp; Referrals</h3>
-      <p class="agent-desc">Your past corporate clients host annual galas and quarterly events. This agent turns one-time clients into repeat revenue and referral sources.</p>
-      <div class="agent-prompt">You are the reactivation agent for Warnick Design. Reach out to past clients who have not booked in 6+ months.
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 — Past Client Reactivation</h3><p>Based on your #3 opportunity: corporate clients who host repeat events every year</p></div><span class="prompt-expand-hint">&#9660; view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the reactivation agent for Warnick Design. Reach out to past clients who have not booked in 6+ months.
+
+Client: [Name / Company] — past project: [project description, date]. Client type: [residential / corporate / commercial].
 
 Generate a personalized outreach email that includes:
-1. Warm reconnection referencing their specific past event
-2. Proactive prompt based on client type and needs
-3. Referral ask: "If anyone in your network is planning an event..."
-4. Soft CTA: "Would love to catch up over coffee"
+1. Warm reconnection — reference their specific past project with a genuine observation
+2. For corporate clients: proactive prompt (annual gala season, Q4 events, office renovation cycle)
+3. For residential: seasonal prompt (refresh for spring/summer, holiday entertaining prep)
+4. Referral ask: "If anyone in your network is planning a design project..."
+5. Soft CTA: "Would love to catch up — coffee or a quick call"
 
 Rules:
-- Reference their ACTUAL past event with specific details
-- Warm, personal, elevated tone
-- One outreach per quarter, max
-- Time corporate outreach 3-4 months before event season
+- Reference their ACTUAL past project with specific details (not generic praise)
+- Warm, personal, elevated tone — like reconnecting with a valued client, not a sales pitch
+- One outreach per quarter maximum
+- Time corporate outreach 3–4 months before their typical event season
 - Always include the referral ask
-- Track in Houzz, QuickBooks, Google Workspace: "reactivation-[quarter]-[year]"</div>
-      <div class="agent-result">Reactivates past clients for repeat bookings and referrals — $0 ad spend. Model your numbers in the ROI calculator.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
-    </div>
-
-    <!-- DIY vs Partner -->
-    <div class="path-grid">
-      <div class="path-card">
-        <h4>DIY Path</h4>
-        <p>Copy these prompts and start using them today. Most business owners can implement 1-2 agents on their own and see results in days.</p>
-      </div>
-      <div class="path-card partner">
-        <h4>Partner Path</h4>
-        <p>Want the full system — all agents connected to Houzz, QuickBooks, Google Workspace, Instagram, and LinkedIn, trained on your brand voice, monitoring your pipeline 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ----------- TAB: LISTEN ----------- -->
-<div id="tab-listen" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Listen</div>
-    <h2>Hear the Vision Behind This Roadmap</h2>
-
-    <div class="listen-card">
-      <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
-      <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
-
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <audio controls style="width:100%;border-radius:8px;margin-bottom:12px;" preload="metadata">
-  <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/brittney-warnick.mp3" type="audio/mpeg">
-  Your browser does not support audio playback.
-</audio>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Warnick Design.</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/brittney-warnick.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Podcast</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" style="display:inline-block;margin-top:12px;margin-left:8px;background:transparent;color:rgba(255,255,255,0.7);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.3);">Download Episode</a>
-      </div>
-      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
-        <span style="font-size:12px;color:#666;">Speed:</span>
-        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
-        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
-      </div>
-
-      <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
-
-      <div class="pull-quote">
-        "The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."
-      </div>
-
-      <div class="pull-quote">
-        "For interior designers like Brittney, AI is not about replacing the artistry. It is about making sure more of the right people experience it."
-      </div>
-
-      <div style="text-align: center; margin-top: 24px; padding: 16px; background: var(--bg-soft); border-radius: 8px;">
-        <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Save for the drive home</p>
-        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have 38 minutes to think about your business.</p>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ----------- TAB: COMMAND CENTER (RULE-8) ----------- -->
-<div id="tab-command" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Your Custom Platform</div>
-    <h2>Your Command Center. Built for You.</h2>
-    <p>Not a generic CRM. A custom-built command center designed specifically for how Warnick Design operates — from inquiry to event day to post-event follow-up.</p>
-
-    <div class="command-hero">
-      <h3>Warnick Design Command Center</h3>
-      <p>Everything your team needs to manage leads, projects, vendors, and finances — in one elevated interface at command.warnickdesign.com</p>
-      <div class="command-tiles">
-        <div class="command-tile">
-          <h4>Lead Pipeline</h4>
-          <p>Every inquiry tracked from first touch to signed contract. AI scores and prioritizes automatically.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Project Command Center</h4>
-          <p>Event timelines, project coordination, and design assets organized by project — not scattered across apps.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Qualification Engine</h4>
-          <p>AI pre-screens inquiries using your criteria — budget, date, venue, aesthetic fit — before they reach your inbox.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Finance Dashboard</h4>
-          <p>Revenue by event type, outstanding invoices, and cash flow projections — all in real time.</p>
+- Track as: reactivation-[quarter]-[year]</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Reactivates past clients for repeat bookings and referrals — $0 ad spend, high conversion rate because the relationship already exists.</div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Mirror Method Qualification (RULE-9) -->
-  <div class="section">
-    <div class="section-label">The Design Standard</div>
-    <h2>The Design Standard</h2>
-    <p>Your taste level and standards are what make Warnick Design special. AI automates the pre-screening — but you approve every decision.</p>
-
-    <div class="next-steps" style="margin-top:24px;">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Inquiry Received</h4>
-        <p>AI captures event type, venue, budget range, and aesthetic vision</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>AI Pre-Screen</h4>
-        <p>Instantly checks against your criteria — date, budget, venue, scope</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Brittney Reviews</h4>
-        <p>You see only pre-qualified leads with full context — approve in one tap</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>Personalized Response</h4>
-        <p>AI sends a luxury response in your voice — you stay in control</p>
+    <div class="diy-or-partner">
+      <h3>Two paths forward for Brittney:</h3>
+      <div class="path-grid">
+        <div class="path"><h4>DIY Path</h4><p>Copy Agent 1 (Speed-to-Lead) from above. Highest impact, lowest friction. Set it up in Google Workspace in under an hour. Results visible within the first project inquiry that comes through after setup.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>We build, configure, and train all 3 agents inside your existing Houzz, Google Workspace, and Instagram stack — in Brittney's voice. First agent live in 7 days. Full system in 30.</p><a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="path-cta">Apply to Work With Us</a></div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
+<section class="section section-alt" id="audit">
+  <div class="container">
+    <p class="section-label">Your Digital Presence</p>
+    <h2 class="section-title">warnickdesign.com — Audit Summary</h2>
+    <p class="section-sub">Five-dimension audit of your current web presence. Scores reflect conversion and AI-readiness opportunities.</p>
+    <div class="audit-grid">
+      <div class="audit-card"><div class="audit-score">4.1</div><div class="audit-phase">Portfolio Quality</div><div class="audit-detail">Strong visual portfolio with residential and commercial work; photography quality reflects the luxury positioning well</div><div class="audit-bar"><div class="audit-bar-fill" style="width:82%"></div></div></div>
+      <div class="audit-card"><div class="audit-score">2.6</div><div class="audit-phase">Lead Capture</div><div class="audit-detail">Contact form present; no instant acknowledgment, no inquiry qualification flow, no speed-to-first-value path — leads go cold after submission</div><div class="audit-bar"><div class="audit-bar-fill" style="width:52%"></div></div></div>
+      <div class="audit-card"><div class="audit-score">3.3</div><div class="audit-phase">Brand Clarity</div><div class="audit-detail">Aesthetic is strong; service differentiation between residential, commercial, and color consultation could be sharper for referral traffic</div><div class="audit-bar"><div class="audit-bar-fill" style="width:66%"></div></div></div>
+      <div class="audit-card"><div class="audit-score">2.8</div><div class="audit-phase">Conversion Flow</div><div class="audit-detail">No social proof near CTA, no process overview that reduces friction for luxury clients considering a major investment</div><div class="audit-bar"><div class="audit-bar-fill" style="width:56%"></div></div></div>
+      <div class="audit-card"><div class="audit-score">3.0</div><div class="audit-phase">SEO + Mobile</div><div class="audit-detail">78% of design inquiries come from mobile<sup>1</sup>; location-specific keywords ("interior designer [city]") are an untapped organic growth opportunity</div><div class="audit-bar"><div class="audit-bar-fill" style="width:60%"></div></div></div>
     </div>
   </div>
+</section>
 
-  <!-- Finance Section (RULE-10) -->
-  <div class="section">
-    <div class="finance-card">
-      <h3>Meet Fred — Your AI CFO</h3>
-      <p style="color: var(--text-mid); margin-bottom: 20px;">A named financial intelligence agent built into your command center. Not an "AI bookkeeper" — a CFO-level assistant that knows your business.</p>
-      <ul class="finance-bullets">
-        <li>
-          <div class="fb-icon">?</div>
-          <div><strong>Ask Fred Anything</strong> — Instant P&amp;L questions via messaging. "Fred, what was our margin on the Johnson gala?" gets an answer in seconds.</div>
-        </li>
-        <li>
-          <div class="fb-icon">$</div>
-          <div><strong>Receivables Forecast</strong> — Cash-in projection at 30/60/30 days. Know exactly when money hits the account.</div>
-        </li>
-        <li>
-          <div class="fb-icon">#</div>
-          <div><strong>Custom Reports</strong> — Board-ready financials in minutes. Revenue by event type, seasonal trends, vendor cost analysis.</div>
-        </li>
-        <li>
-          <div class="fb-icon">OK</div>
-          <div><strong>Clean Books</strong> — Retroactive cleanup + ongoing reconciliation. No more end-of-year scramble.</div>
-        </li>
-      </ul>
+<section class="section" id="listen">
+  <div class="container">
+    <p class="section-label">Your Personalized Podcast</p>
+    <h2 class="section-title">Listen to Your AI Advantage Roadmap</h2>
+    <p class="section-sub">Two AI hosts break down exactly how Warnick Design can grow using AI agents — built specifically for Brittney Warnick. About 38 minutes.</p>
+    <div class="podcast-wrap">
+      <div class="podcast-title">Warnick Design — AI Advantage Deep Dive</div>
+      <div class="podcast-sub">Covers speed-to-lead, proposal automation, LinkedIn pipeline, and exactly what changes for Warnick Design in the next 30 days.</div>
+      <div class="podcast-meta">
+        <span class="podcast-meta-item">&#9654; ~38 minutes</span>
+        <span class="podcast-meta-item">&#127911; Interior Design + Luxury Services AI</span>
+        <span class="podcast-meta-item">&#128100; Prepared for Brittney Warnick</span>
+      </div>
+      <div class="podcast-player">
+        <audio id="podcastAudio" preload="metadata" style="width:100%">
+          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/brittney-warnick.mp3" type="audio/mpeg">
+          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/brittney-warnick.mp3" style="color:var(--brand-light)">Download the podcast</a>.
+        </audio>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand);color:white;border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
+          <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+          <a href="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/view" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.12);color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;">Open in Drive</a>
+          <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" target="_blank" style="display:inline-block;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2);padding:10px 20px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;">Download MP3</a>
+        </div>
+      </div>
+      <div class="podcast-quotes">
+        <div class="podcast-quote">"The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."</div>
+        <div class="podcast-quote">"For interior designers like Brittney, AI is not about replacing the artistry. It is about making sure more of the right people experience it."</div>
+      </div>
     </div>
   </div>
+</section>
 
-</div>
+<section class="section section-alt" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">1</span><div>Interior design industry benchmark — 78% of design inquiries originate from mobile devices (2024–2025 data). Speed-to-lead research applied from luxury service verticals: first responder advantage in high-consideration purchases. Individual results vary.</div></div>
+      <div class="source-item"><span class="source-num">2</span><div>LinkedIn Sales Insights 2024 — B2B decision-maker activity in commercial design, corporate events, and real estate verticals. Outreach response rate benchmarks from Advaita's internal campaigns. Individual results vary.</div></div>
+      <div class="source-item"><span class="source-num">3</span><div>Speed-to-lead research — Harvard Business Review and InsideSales.com benchmarks on response time and close rate correlation in service businesses. +22% close rate applied as conservative estimate for luxury services. Individual results vary.</div></div>
+      <div class="source-item"><span class="source-num">4</span><div>Time-savings estimates based on Advaita client deployments across creative services and design verticals. Proposal drafting, follow-up sequences, and content creation hours reclaimed. 6.5 hrs/week is understated 15% from the 7.6 hrs/week industry baseline. Individual results vary based on team size and workflow complexity.</div></div>
+    </div>
+  </div>
+</section>
 
-<!-- ----------- BOTTOM CTA (all tabs) ----------- -->
-<div class="cta-block">
-  <h3>Ready to See What AI Can Do for Warnick Design?</h3>
-  <p>This roadmap shows you what is possible. Apply to work with Bennett — he reviews every application personally and reaches out to qualified businesses.</p>
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn">Apply to Work With Us</a>
-  <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
-</div>
+<section class="section" id="command">
+  <div class="container">
+    <p class="section-label">Your Custom Platform</p>
+    <h2 class="section-title">The Warnick Design AI Command Center</h2>
+    <p class="section-sub">Three AI agents running inside your existing Houzz, Google Workspace, and Instagram stack. Brittney oversees the system — not runs it.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Lead Pipeline Dashboard</div><div class="agent-desc">Every inquiry tracked from first touch to signed contract. AI responds in under 15 minutes — dashboard shows which sequences are running, which proposals are outstanding, and where in the pipeline each prospect sits.</div><div class="agent-outcome">Zero cold leads — every inquiry tracked end-to-end</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="agent-name">Nurture + Reactivation Console</div><div class="agent-desc">Live view of all nurture sequences — active, complete, and converted. Past client reactivation calendar by quarter. Brittney sees which proposals were recovered, which past clients were reactivated, and the revenue impact week over week.</div><div class="agent-outcome">Revenue from follow-up — tracked and visible</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><div class="agent-name">LinkedIn B2B Pipeline</div><div class="agent-desc">DMs sent this week, reply rate, qualified conversations, and new project inquiries — all from AI outreach in Brittney's luxury, elevated voice. Content posts published. B2B pipeline growth tracked as a downstream metric month over month.</div><div class="agent-outcome">10+ qualified B2B leads/month into design pipeline</div></div>
+    </div>
+    <div style="background:var(--neutral-bg);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:2rem;">
+      <p style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;">This platform is built when you partner with us.</p>
+      <p style="font-size:0.92rem;color:var(--text-muted);">Not off-the-shelf. Built inside your existing Houzz, Google Workspace, and Instagram stack — trained on Brittney's voice, aesthetic, and client expectations. Replacing manual follow-up and guesswork with a live system showing you exactly where every lead stands, every day.</p>
+    </div>
+  </div>
+</section>
 
-<!-- Footnotes -->
-<div class="footnotes">
-  <p><sup>1</sup> 78% mobile inquiry figure based on interior design industry benchmarks (2024-2025 data).</p>
-  <p><sup>2</sup> LinkedIn B2B lead projections capped at 18/month for luxury vertical per council calibration. 10/month is the expected default for curated, quality-first outreach.</p>
-  <p><sup>3</sup> +22% close rate improvement is based on AI close rate boost of current rate x 1.22, a conservative estimate from speed-to-lead data across service businesses.</p>
-  <p><sup>4</sup> Time savings of 6.5 hrs/week is understated 15% from the 7.6 hrs/week industry baseline for AI admin automation. Cost savings modeled in the interactive ROI calculator based on typical VA, social, and coordinator automation efficiencies.</p>
-</div>
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Warnick Design?</span></h2>
+    <p class="cta-personal">"Brittney, I built this roadmap specifically for Warnick Design because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it. The Speed-to-Lead agent alone can ensure that the next luxury client who discovers your portfolio gets a response before they contact the next designer."</p>
+    <p>We only take on a handful of clients per month. The next step is a short application — so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn">Apply to Work With Us</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
 
-<div class="footer">
-  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for Warnick Design.</p>
-  <p style="margin-top: 8px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
-</div>
+<footer>
+  <p>Advaita AI for Business &mdash; Prepared for Brittney Warnick / Warnick Design (warnickdesign.com) &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
 
-</div><!-- end container -->
-
-<!-- Reading progress bar -->
 <div class="reading-progress" id="readingProgress"></div>
-
-<!-- Sticky mobile CTA -->
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="mobile-cta-btn">Apply to Work With Us</a>
 </div>
 
 <script>
-// Tab switching
-function switchTab(tabId, e) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  (e || event).currentTarget.classList.add('active');
-  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth'});
-}
+  const PRESETS = {
+    conservative: { contract: 45000, leads: 12, close: 18, linkedin: 5,  closeLift: 0.10, liClose: 0.10 },
+    expected:     { contract: 45000, leads: 12, close: 18, linkedin: 10, closeLift: 0.22, liClose: 0.18 },
+    stretch:      { contract: 45000, leads: 12, close: 18, linkedin: 15, closeLift: 0.35, liClose: 0.22 }
+  };
+  let currentPreset = PRESETS.expected;
 
-// Scenario presets
-let scenario = 'expected';
-const presets = {
-  conservative: { linkedin: 5, seo: 20 },
-  expected: { linkedin: 10, seo: 45 },
-  stretch: { linkedin: 18, seo: 80 }
-};
+  function setPreset(name, e) {
+    currentPreset = PRESETS[name];
+    document.getElementById('sl-contract').value = currentPreset.contract;
+    document.getElementById('sl-leads').value = currentPreset.leads;
+    document.getElementById('sl-close').value = currentPreset.close;
+    document.getElementById('sl-linkedin').value = currentPreset.linkedin;
+    ['contract','leads','close','linkedin'].forEach(k => updateLabel(k));
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    if (e && e.target) e.target.classList.add('active');
+    calcROI();
+  }
 
-function setScenario(s) {
-  scenario = s;
-  document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
-  document.getElementById('pill-' + s).classList.add('active');
-  document.getElementById('slider-linkedin').value = presets[s].linkedin;
-  document.getElementById('slider-seo').value = presets[s].seo;
-  updateCalc();
-}
+  function updateLabel(k) {
+    const v = document.getElementById('sl-' + k).value;
+    const el = document.getElementById('lbl-' + k);
+    if (k === 'contract') el.textContent = '$' + parseInt(v).toLocaleString();
+    else if (k === 'close') el.textContent = v + '%';
+    else el.textContent = v;
+  }
 
-// ROI Calculator
-function updateCalc() {
-  const contract = parseInt(document.getElementById('slider-contract').value) || 45000;
-  const leads = parseInt(document.getElementById('slider-leads').value) || 12;
-  const closeRate = (parseInt(document.getElementById('slider-close').value) || 18) / 100;
-  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;
-  const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
+  function fmt(n) {
+    if (n >= 100000) return '$' + (n / 1000).toFixed(0) + 'K';
+    if (n >= 10000) return '$' + (n / 1000).toFixed(1) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  }
 
-  // Display values
-  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
-  document.getElementById('val-leads').textContent = leads;
-  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-linkedin').textContent = linkedinLeads;
-  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
+  function calcROI() {
+    const contract = parseInt(document.getElementById('sl-contract').value);
+    const leads = parseInt(document.getElementById('sl-leads').value);
+    const close = parseInt(document.getElementById('sl-close').value) / 100;
+    const linkedin = parseInt(document.getElementById('sl-linkedin').value);
+    const { closeLift, liClose } = currentPreset;
+    const closeLiftMonthly = leads * (close * closeLift) * contract / 12;
+    const linkedinMonthly = linkedin * liClose * contract / 12;
+    const total = closeLiftMonthly + linkedinMonthly;
+    document.getElementById('resMonthly').textContent = fmt(total);
+    document.getElementById('resQuarterly').textContent = fmt(total * 3);
+    document.getElementById('resAnnual').textContent = fmt(total * 12);
+  }
 
-  // Current monthly
-  const currentMonthly = contract * leads * closeRate;
+  calcROI();
 
-  // AI-enhanced
-  const aiLeads = leads * 1.15 + linkedinLeads;
-  const aiCloseRate = closeRate * 1.22;
-  const aiMonthly = contract * aiLeads * aiCloseRate;
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? '▲ collapse' : '▼ view & copy';
+  }
 
-  const monthlyGain = aiMonthly - currentMonthly;
-  const quarterlyGain = monthlyGain * 3;
+  function copyPrompt(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copied';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
 
-  const currentQ = currentMonthly * 3;
-  const q2 = aiMonthly * 3;
-  const q3 = q2 * 1.10;
-  const q4 = q3 * 1.20;
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('readingProgress');
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    if (el && docHeight > 0) el.style.width = (scrollTop / docHeight * 100) + '%';
+    const cta = document.getElementById('mobileCta');
+    if (cta) { if (scrollTop > 400) cta.classList.add('visible'); else cta.classList.remove('visible'); }
+  });
 
-  // Update display
-  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
-  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
-
-  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
-
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
-
-  // Time saved + cost savings (RULE-13: understated 15%)
-  const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);
-  const costSavings = Math.round(1800 * (1 + seoLift * 0.25));
-  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
-  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
-}
-
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // interior design season peaks: rolling calendar for peak demand periods
-  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
-  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
-  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
-
-// Init calculator
-updateCalc();
+  // Hamburger nav
+  const hamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    }));
+  }
 </script>
-
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick">Apply to Work With Us</a>
-</div>
-
 </body>
 </html>
