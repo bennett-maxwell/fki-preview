@@ -113,18 +113,6 @@
     margin-top: 2px;
   }
 
-  /* ── URGENCY BAR ── */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #3d6aaa);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
-
   /* ── TAB NAVIGATION ── */
   .tab-nav {
     display: flex;
@@ -940,27 +928,13 @@
     .roi-hero .roi-number { font-size: 36px; }
     .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
     .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .mobile-sticky-cta { display: block !important; }
-    body { padding-bottom: 70px; }
+    body { padding-bottom: 0; }
   }
   .mobile-sticky-cta {
     display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    padding: 12px 16px;
-    background: var(--primary);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
   }
   .mobile-sticky-cta a {
-    display: block;
-    background: var(--accent);
-    color: #fff;
-    text-align: center;
-    padding: 14px;
-    border-radius: 8px;
+    display: none;
     font-weight: 700;
     font-size: 15px;
     text-decoration: none;
@@ -1000,11 +974,6 @@
       <div class="lbl">Franchise Locations</div>
     </div>
   </div>
-</div>
-
-<!-- ═══════════ URGENCY BAR ═══════════ -->
-<div class="urgency-bar">
-  Franchise planning window closing — <span id="countdown"></span> days until next operational cycle begins. Lock in AI systems now.
 </div>
 
 <!-- ═══════════ TAB NAVIGATION ═══════════ -->
@@ -1797,24 +1766,20 @@ Tone: Objective and analytical. Never dismiss a candidate casually.</div>
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming franchise operations at the $10M+ level — and why the next 12 months will separate efficient operators from overwhelmed ones.</p>
 
-      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 32px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px;">Your Personalized AI Podcast</p>
-        <div class="podcast-player">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
+      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px auto; color: #fff; max-width: 560px;">
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
+        <audio controls style="width:100%;border-radius:8px;margin-bottom:12px;" preload="metadata">
           <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/chris-lpnw.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/chris-lpnw.mp3" style="color:var(--brand-light)">Download the podcast</a>.
+          Your browser does not support audio playback.
         </audio>
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-light);color:var(--brand-dark);border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
-          <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
-        </div>
-        <style>.speed-active{background:rgba(255,180,128,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to LPNW LLC.</p>
+        <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/chris-lpnw.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Podcast</a>
       </div>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 12px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to LPNW LLC.</p>
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center;max-width:560px;margin-left:auto;margin-right:auto;">
+        <span style="font-size:12px;color:#666;">Speed:</span>
+        <button onclick="document.querySelector('#podcast-player audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
+        <button onclick="document.querySelector('#podcast-player audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
+        <button onclick="document.querySelector('#podcast-player audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
 
       <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
@@ -1956,11 +1921,6 @@ Tone: Objective and analytical. Never dismiss a candidate casually.</div>
 <!-- Reading progress bar -->
 <div class="reading-progress" id="readingProgress"></div>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
-</div>
-
 <script>
 // Tab switching
 function switchTab(tabId, e) {
@@ -2039,27 +1999,9 @@ function updateCalc() {
   document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // Franchise operations: seasonal planning cycles
-  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);
-  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15);
-  else target = new Date(now.getFullYear() + 1, 2, 1);
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
-
 // Init calculator
 updateCalc();
 </script>
 
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Chris&biz=LPNW+LLC&src=chris-lpnw">Apply to Work With Us</a>
-</div>
 </body>
 </html>
