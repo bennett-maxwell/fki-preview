@@ -1,394 +1,480 @@
-<!-- Blueprint AI Pipeline v2.1 | Website Built: 2026-05-19T20:11:47Z | Lead: Branson Maxwell | Business: Branson Maxwell Photography -->
+<!-- Blueprint AI Pipeline v2.9 | Website Rebuilt: 2026-05-21 | Lead: Branson Maxwell | Business: Branson Maxwell Photo & Video | Colors: #6b6764/#dbbd76/#f5f1f0 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Branson Maxwell Photography | Branson Maxwell Photography, Elevated by AI</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --accent:#2A5C8A;
-    --accent-dark:#1e4568;
-    --dark:#111118;
-    --white:#ffffff;
-    --light:#f7f7f9;
-    --gray:#6b6b76;
-    --border:#e2e2e6;
-  }
-  html{scroll-behavior:smooth;font-size:16px}
-  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--dark);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
-  img{max-width:100%;display:block}
-  a{text-decoration:none;color:inherit}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Branson Maxwell Photo & Video — professional photography and video production, powered by AI to deliver faster responses and a seamless client experience." />
+  <meta property="og:title" content="Branson Maxwell Photo & Video | AI-Powered Studio" />
+  <meta property="og:description" content="Professional photography and video production with intelligent automation. Faster responses, smarter scheduling, world-class results." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/branson-maxwell-website/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Branson Maxwell Photo & Video | AI-Powered Studio" />
+  <title>Branson Maxwell Photo & Video | AI-Powered Studio</title>
+  <style>
+    :root {
+      --brand:        #6b6764;
+      --brand-dark:   #4a4543;
+      --brand-light:  #d2d1d0;
+      --accent:       #dbbd76;
+      --accent-dark:  #c4a55e;
+      --neutral-bg:   #f5f1f0;
+      --white:        #ffffff;
+      --text:         #2a2624;
+      --text-muted:   #5a5250;
+      --text-light:   #9a9490;
+      --border:       #e4e0de;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(42,38,36,0.08);
+      --shadow-md: 0 8px 40px rgba(42,38,36,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
 
-  /* ---- NAV ---- */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
-  .nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.06)}
-  .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between}
-  .nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:-.02em;color:var(--dark)}
-  .nav-logo span{color:var(--accent)}
-  .nav-links{display:flex;gap:32px;align-items:center}
-  .nav-links a{font-size:.875rem;font-weight:500;letter-spacing:.02em;color:var(--gray);transition:color .2s}
-  .nav-links a:hover{color:var(--dark)}
-  .nav-cta{background:var(--accent);color:var(--white);padding:10px 22px;border-radius:8px;font-size:.875rem;font-weight:600;transition:background .2s}
-  .nav-cta:hover{background:var(--accent-dark)}
-  .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
-  .mobile-toggle span{width:22px;height:2px;background:var(--dark);border-radius:2px;transition:transform .3s,opacity .3s}
-  .mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(255,255,255,.98);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:24px;flex-direction:column;gap:20px;z-index:99}
-  .mobile-menu.open{display:flex}
-  .mobile-menu a{font-size:1rem;font-weight:500;color:var(--dark);padding:8px 0}
-  .mobile-menu .nav-cta{text-align:center;display:block;margin-top:8px}
+    /* === READING PROGRESS BAR === */
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--accent)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
 
-  /* ---- HERO ---- */
-  .hero{padding:160px 24px 120px;text-align:center;background:var(--white)}
-  .hero-inner{max-width:800px;margin:0 auto}
-  .hero-badge{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:40px;padding:6px 18px;margin-bottom:28px}
-  .hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:700;line-height:1.1;letter-spacing:-.025em;color:var(--dark);margin-bottom:20px}
-  .hero h1 span{color:var(--accent)}
-  .hero p{font-size:1.15rem;color:var(--gray);max-width:560px;margin:0 auto 36px;line-height:1.7}
-  .hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-  .btn-primary{background:var(--accent);color:var(--white);padding:14px 32px;border-radius:10px;font-size:.95rem;font-weight:600;transition:all .25s;border:2px solid var(--accent);cursor:pointer}
-  .btn-primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
-  .btn-secondary{background:transparent;color:var(--dark);padding:14px 32px;border-radius:10px;font-size:.95rem;font-weight:600;border:2px solid var(--border);transition:all .25s}
-  .btn-secondary:hover{border-color:var(--dark)}
+    /* === NAV === */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links .nav-cta { background: var(--accent); color: var(--text); padding: 0.5rem 1.2rem; border-radius: 8px; font-weight: 700; font-size: 0.82rem; transition: background 0.2s, color 0.2s; min-height: 44px; display: inline-flex; align-items: center; }
+    .nav-links .nav-cta:hover { background: var(--accent-dark); color: var(--white); }
+    /* === HAMBURGER NAV === */
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      #navMenu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      #navMenu.open { display: flex; }
+      #navMenu li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      #navMenu a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+      #navMenu .nav-cta { border-radius: 0; background: transparent; color: var(--accent); font-size: 0.98rem; }
+    }
 
-  /* ---- SECTIONS ---- */
-  section{padding:100px 24px}
-  .section-inner{max-width:1200px;margin:0 auto}
-  .section-label{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-  .section-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--dark);margin-bottom:16px}
-  .section-subtitle{font-size:1.05rem;color:var(--gray);max-width:560px;line-height:1.7}
-  .section-header{margin-bottom:64px}
-  .section-header.center{text-align:center}
-  .section-header.center .section-subtitle{margin:0 auto}
+    /* === HERO === */
+    .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 55%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(219,189,118,0.15); border: 1px solid rgba(219,189,118,0.5); color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub { font-size: 1.08rem; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+    .hero-stat .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.18); align-self: center; }
+    .cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: var(--text); font-weight: 800; font-size: 0.95rem; padding: 0.85rem 2rem; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s, color 0.2s; min-height: 44px; }
+    .cta-btn:hover { background: var(--accent-dark); color: var(--white); }
+    .cta-btn-outline { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: rgba(255,255,255,0.85); font-weight: 600; font-size: 0.95rem; padding: 0.85rem 2rem; border-radius: 8px; border: 2px solid rgba(255,255,255,0.25); cursor: pointer; transition: border-color 0.2s, color 0.2s; margin-left: 0.75rem; min-height: 44px; }
+    .cta-btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* ---- SERVICES ---- */
-  .services{background:var(--white)}
-  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .service-card{background:var(--light);border-radius:16px;padding:40px 28px;transition:transform .25s,box-shadow .25s}
-  .service-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.06)}
-  .service-icon{width:48px;height:48px;background:var(--dark);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
-  .service-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .service-card h3{font-size:1.1rem;font-weight:600;margin-bottom:10px;color:var(--dark)}
-  .service-card p{font-size:.9rem;color:var(--gray);line-height:1.65}
+    /* === SECTIONS === */
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
+    .section-label-light { color: var(--accent); }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 0.75rem; }
+    .section-title-light { color: var(--white); }
+    .section-sub { font-size: 1.02rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; line-height: 1.7; }
+    .section-sub-light { color: rgba(255,255,255,0.72); }
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin-left: auto; margin-right: auto; }
 
-  /* ---- AI FEATURES ---- */
-  .ai-section{background:var(--dark);color:var(--white)}
-  .ai-section .section-label{color:var(--accent)}
-  .ai-section .section-title{color:var(--white)}
-  .ai-section .section-subtitle{color:rgba(255,255,255,.55)}
-  .ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .ai-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:36px 28px;transition:background .25s}
-  .ai-card:hover{background:rgba(255,255,255,.07)}
-  .ai-card-icon{width:44px;height:44px;background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-  .ai-card-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .ai-card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;color:var(--white)}
-  .ai-card p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.65}
+    /* === SERVICES === */
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .service-icon { width: 44px; height: 44px; background: var(--brand-dark); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+    .service-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
 
-  /* ---- PROCESS ---- */
-  .process{background:var(--white)}
-  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-  .step{text-align:center}
-  .step-num{font-size:.75rem;font-weight:700;letter-spacing:.08em;color:var(--accent);margin-bottom:16px}
-  .step-circle{width:56px;height:56px;border-radius:50%;background:var(--light);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.2rem;font-weight:700;color:var(--accent)}
-  .step h3{font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--dark)}
-  .step p{font-size:.875rem;color:var(--gray);line-height:1.6}
+    /* === AI FEATURES (dark bg) === */
+    .ai-section { background: var(--brand-dark); }
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .ai-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 2rem 1.5rem; transition: background 0.2s; }
+    .ai-card:hover { background: rgba(255,255,255,0.09); }
+    .ai-card-icon { width: 44px; height: 44px; background: rgba(219,189,118,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .ai-card-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .ai-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white); }
+    .ai-card p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
 
-  /* ---- CTA BAND ---- */
-  .cta-band{background:linear-gradient(135deg,var(--accent) 0%,var(--dark) 100%);text-align:center;padding:100px 24px}
-  .cta-band h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--white);margin-bottom:16px;letter-spacing:-.02em}
-  .cta-band p{font-size:1.05rem;color:rgba(255,255,255,.6);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
-  .cta-band .btn-primary{background:var(--white);color:var(--accent);border-color:var(--white)}
-  .cta-band .btn-primary:hover{background:var(--light);border-color:var(--light)}
+    /* === PROCESS === */
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+    .step { text-align: center; }
+    .step-num { font-size: 0.80rem; font-weight: 700; letter-spacing: 0.08em; color: var(--brand); margin-bottom: 1rem; text-transform: uppercase; }
+    .step-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.25rem; font-weight: 800; color: var(--accent); }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
 
-  /* ---- CONTACT ---- */
-  .contact{background:var(--light)}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-  .contact-info h3{font-size:1.4rem;font-weight:700;margin-bottom:16px;color:var(--dark)}
-  .contact-info p{font-size:1rem;color:var(--gray);line-height:1.7;margin-bottom:24px}
-  .contact-detail{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:.95rem;color:var(--gray)}
-  .contact-detail svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-  .contact-form{background:var(--white);border-radius:16px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
-  .form-group{margin-bottom:20px}
-  .form-group label{display:block;font-size:.85rem;font-weight:600;color:var(--dark);margin-bottom:6px}
-  .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:.95rem;font-family:inherit;color:var(--dark);background:var(--white);transition:border-color .2s}
-  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--accent)}
-  .form-group textarea{resize:vertical;min-height:100px}
-  .form-submit{width:100%;padding:14px;background:var(--accent);color:var(--white);border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;font-family:inherit}
-  .form-submit:hover{background:var(--accent-dark)}
+    /* === CTA BAND === */
+    .cta-band { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--text) 100%); text-align: center; padding: 5rem 2rem; }
+    .cta-band h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; color: var(--white); margin-bottom: 1rem; }
+    .cta-band p { font-size: 1.02rem; color: rgba(255,255,255,0.65); margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
 
-  /* ---- FOOTER ---- */
-  .footer{background:var(--dark);color:rgba(255,255,255,.4);padding:48px 24px;text-align:center}
-  .footer-inner{max-width:1200px;margin:0 auto}
-  .footer-brand{font-size:1rem;font-weight:600;color:var(--white);margin-bottom:8px}
-  .footer p{font-size:.85rem;line-height:1.6;margin-bottom:4px}
-  .footer a{color:var(--accent);transition:opacity .2s}
-  .footer a:hover{opacity:.8}
-  .footer-demo{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);font-size:.8rem;color:rgba(255,255,255,.3)}
+    /* === CONTACT === */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+    .contact-info h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; }
+    .contact-info p { font-size: 0.97rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .contact-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-muted); }
+    .contact-detail svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .contact-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.83rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-family: inherit; color: var(--text); background: var(--white); transition: border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 96px; }
+    .form-submit { width: 100%; padding: 0.9rem; background: var(--brand-dark); color: var(--white); border: none; border-radius: 8px; font-size: 0.97rem; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit; min-height: 44px; }
+    .form-submit:hover { background: var(--text); }
 
-  /* ---- RESPONSIVE ---- */
-  @media(max-width:900px){
-    .services-grid{grid-template-columns:repeat(2,1fr)}
-    .ai-grid{grid-template-columns:repeat(2,1fr)}
-    .process-steps{grid-template-columns:repeat(2,1fr);gap:40px}
-    .contact-grid{grid-template-columns:1fr}
-  }
-  @media(max-width:640px){
-    .nav-links{display:none}
-    .mobile-toggle{display:flex}
-    .services-grid{grid-template-columns:1fr}
-    .ai-grid{grid-template-columns:1fr}
-    .process-steps{grid-template-columns:1fr}
-    .hero{padding:130px 20px 80px}
-    .hero h1{font-size:2rem}
-    section{padding:72px 20px}
-    .contact-form{padding:28px}
-  }
-</style>
+    /* === FOOTER === */
+    footer { background: var(--text); color: rgba(255,255,255,0.45); padding: 3rem 2rem; text-align: center; }
+    .footer-brand { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    footer p { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.25rem; }
+    footer a { color: var(--accent); }
+    footer a:hover { opacity: 0.8; }
+    .footer-demo { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+
+    /* === STICKY MOBILE CTA === */
+    .mobile-cta-bar { display: none; }
+
+    /* === OVERFLOW SCROLL WRAPPERS === */
+    .scroll-wrap { -webkit-overflow-scrolling: touch; }
+    .services-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ai-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .process-steps-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .ai-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .ai-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .cta-btn-outline { margin-left: 0; margin-top: 0.5rem; }
+      .hero-stats { gap: 1.5rem; }
+      /* touch targets */
+      .cta-btn, .path-cta, .cta-btn-outline, .form-submit { min-height: 44px; }
+      /* sticky mobile CTA */
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--accent); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- READING PROGRESS -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- STICKY MOBILE CTA -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://blueprint.meetadvaita.com/apply" class="mobile-cta-btn">Apply to Work With Us</a>
+</div>
+
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">Branson Maxwell Photography</a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#ai-features">AI Features</a>
-      <a href="#process">Process</a>
-      <a href="#contact">Contact</a>
-      <a href="mailto:bennett@franchiseki.com?subject=Branson%20Maxwell%20-%20Blueprint%20Application" class="nav-cta">Get Your AI Quote</a>
-    </div>
-    <div class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#services" onclick="closeMenu()">Services</a>
-    <a href="#ai-features" onclick="closeMenu()">AI Features</a>
-    <a href="#process" onclick="closeMenu()">Process</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-    <a href="mailto:bennett@franchiseki.com?subject=Branson%20Maxwell%20-%20Blueprint%20Application" class="nav-cta">Get Your AI Quote</a>
-  </div>
+<nav>
+  <a href="#" class="nav-logo">Branson Maxwell <span>Photo & Video</span></a>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#ai">AI Features</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://blueprint.meetadvaita.com/apply" class="nav-cta">Apply to Work With Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">AI-Powered Business Operations</div>
-    <h1><span>Branson Maxwell Photography, Elevated by AI</span></h1>
-    <p>Branson Maxwell Photography combines expert service with intelligent automation -- faster responses, smarter operations, and a seamless client experience from first contact to final delivery.</p>
-    <div class="hero-buttons">
-      <a href="mailto:bennett@franchiseki.com?subject=Branson%20Maxwell%20-%20Blueprint%20Application" class="btn-primary">Get Your AI Quote</a>
-      <a href="#services" class="btn-secondary">View Services</a>
+  <div class="container">
+    <div class="hero-badge">AI-Powered Photography Studio</div>
+    <h1>Branson Maxwell <span>Photo & Video,</span> Elevated by AI</h1>
+    <p class="hero-sub">Professional photography and video production with intelligent operations — faster responses, effortless scheduling, and a seamless client experience from first inquiry to final gallery.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">140</span>
+        <span class="lbl">Monthly Leads</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="num">&lt;5 min</span>
+        <span class="lbl">AI Response Time</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="num">30-Day</span>
+        <span class="lbl">AI Onboarding</span>
+      </div>
     </div>
+    <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn path-cta">Apply to Work With Us</a>
+    <a href="#services" class="cta-btn-outline">View Services</a>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services" id="services">
-  <div class="section-inner">
-    <div class="section-header center">
-      <div class="section-label">What We Do</div>
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-subtitle">Every project receives the same attention to detail and professional polish that defines our work.</p>
-    </div>
-    <div class="services-grid" id="servicesGrid">
+<section class="section section-alt" id="services">
+  <div class="container text-center">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Professional Photography & Video</h2>
+    <p class="section-sub">Every project receives expert craft, intentional storytelling, and an AI-streamlined experience that makes working together effortless.</p>
+    <div class="services-grid-wrap"><div class="services-grid">
       <div class="service-card">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="4"/><path d="M5 7H3a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2l-3-4H8L5 7z"/></svg>
         </div>
         <h3>Wedding Photography</h3>
-        <p>Professional photography service tailored to your needs.</p>
+        <p>Timeless coverage of your most important day — candid moments, portraits, and the details that matter most.</p>
       </div>
       <div class="service-card">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
         </div>
-        <h3>Corporate Events</h3>
-        <p>Professional photography service tailored to your needs.</p>
+        <h3>Video Production</h3>
+        <p>Cinematic storytelling for weddings, brands, and events — edited to highlight every meaningful moment.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Portrait Sessions</h3>
+        <p>Headshots, families, seniors, and personal branding — authentic portraits that reflect who you are.</p>
       </div>
       <div class="service-card">
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <h3>Portrait Sessions</h3>
-        <p>Professional photography service tailored to your needs.</p>
+        <h3>Commercial & Brand</h3>
+        <p>Product photography, brand campaigns, and content creation that builds visual identity and drives sales.</p>
       </div>
-      <div class="service-card">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <h3>Commercial Photography</h3>
-        <p>Professional photography service tailored to your needs.</p>
-      </div>
-    </div>
+    </div></div>
   </div>
 </section>
 
 <!-- AI FEATURES -->
-<section class="ai-section" id="ai-features">
-  <div class="section-inner">
-    <div class="section-header center">
-      <div class="section-label">AI-Powered</div>
-      <h2 class="section-title">Intelligent Operations</h2>
-      <p class="section-subtitle">Behind every interaction is a suite of AI tools that make working with us faster, smoother, and more personalized.</p>
-    </div>
-    <div class="ai-grid" id="aiFeaturesGrid">
 
-    </div>
+<section class="section ai-section" id="ai">
+  <div class="container text-center">
+    <p class="section-label section-label-light">AI-Powered Operations</p>
+    <h2 class="section-title section-title-light">6 AI Agents Working Behind the Scenes</h2>
+    <p class="section-sub section-sub-light">Every inquiry, booking, follow-up, and delivery — handled intelligently so you experience a studio that responds in minutes, never drops a lead, and keeps every project on track.</p>
+    <div class="ai-grid-wrap"><div class="ai-grid">
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Lead Response Agent</h3>
+        <p>Replies to every new inquiry in under 5 minutes — personalized, professional, and always on. Eliminates the 60-minute response gap.</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3>Booking & Scheduling Agent</h3>
+        <p>Handles calendar coordination, confirms dates, sends contracts, and preps every client before their session — zero back-and-forth.</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6z"/></svg>
+        </div>
+        <h3>Client Communication Agent</h3>
+        <p>Automated reminders, day-before prep messages, gallery delivery notifications, and post-session check-ins — every touchpoint handled.</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Marketing Content Agent</h3>
+        <p>Generates social media captions, blog drafts, and email campaigns from your work — consistent content without the weekly grind.</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h3>Lead Reactivation Agent</h3>
+        <p>Automatically follows up with cold leads who never booked — re-engages past inquiries with personalized messages at the right moment.</p>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Post-Session Operations Agent</h3>
+        <p>Sends invoices, delivers galleries, requests reviews, and archives project files — your back-office runs itself after every shoot.</p>
+      </div>
+    </div></div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section class="process" id="process">
-  <div class="section-inner">
-    <div class="section-header center">
-      <div class="section-label">How It Works</div>
-      <h2 class="section-title">From Inquiry to Results</h2>
-      <p class="section-subtitle">A streamlined four-step process designed to make every project effortless from start to finish.</p>
-    </div>
-    <div class="process-steps">
+<section class="section section-alt" id="process">
+  <div class="container text-center">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">From Application to Results in 30 Days</h2>
+    <p class="section-sub">A clear, guided path to an AI-powered studio — no tech overwhelm, no disruption to your current work.</p>
+    <div class="process-steps-wrap"><div class="process-steps">
       <div class="step">
         <div class="step-circle">1</div>
-        <div class="step-num">STEP ONE</div>
-        <h3>Apply</h3>
-        <p>Submit your project details through our application. You will receive a personalized response within minutes.</p>
+        <div class="step-num">Days 1–3</div>
+        <h3>Apply & Align</h3>
+        <p>Submit your application. We review your workflow, goals, and lead volume to design your custom AI stack.</p>
       </div>
       <div class="step">
         <div class="step-circle">2</div>
-        <div class="step-num">STEP TWO</div>
-        <h3>Discover</h3>
-        <p>We align on goals, timeline, and logistics. AI handles coordination and prep so nothing falls through the cracks.</p>
+        <div class="step-num">Days 4–7</div>
+        <h3>Build & Connect</h3>
+        <p>Your 6 AI agents are configured and connected to your existing tools — CRM, calendar, email, and social.</p>
       </div>
       <div class="step">
         <div class="step-circle">3</div>
-        <div class="step-num">STEP THREE</div>
-        <h3>Build</h3>
-        <p>Your custom solution is built and deployed with precision -- every detail is intentional and purposeful.</p>
+        <div class="step-num">Day 7+</div>
+        <h3>Go Live</h3>
+        <p>Agents go live. Every new inquiry gets a sub-5-minute response. Every lead is followed up. Every project is tracked.</p>
       </div>
       <div class="step">
         <div class="step-circle">4</div>
-        <div class="step-num">STEP FOUR</div>
-        <h3>Launch</h3>
-        <p>Go live with intelligent automation running across your operation -- with ongoing support and optimization.</p>
+        <div class="step-num">Day 30</div>
+        <h3>Optimize & Scale</h3>
+        <p>Review results, close conversion gaps, and expand the system — your studio runs smarter with each passing week.</p>
       </div>
-    </div>
+    </div></div>
   </div>
 </section>
 
 <!-- CTA BAND -->
 <section class="cta-band">
-  <h2>Ready to Transform Your Operations?</h2>
-  <p>Let us bring your vision to life with precision, intelligence, and world-class execution.</p>
-  <a href="mailto:bennett@franchiseki.com?subject=Branson%20Maxwell%20-%20Blueprint%20Application" class="btn-primary">Get Your AI Quote</a>
+  <h2>Ready to Run a Smarter Studio?</h2>
+  <p>Apply to work with us — we will review your business and show you exactly where AI creates the biggest leverage.</p>
+  <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn path-cta">Apply to Work With Us</a>
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-inner">
-    <div class="section-header center">
-      <div class="section-label">Get in Touch</div>
-      <h2 class="section-title">Start a Conversation</h2>
-      <p class="section-subtitle">Tell us about your business needs. We will respond with a personalized plan within one business day.</p>
-    </div>
+<section class="section" id="contact">
+  <div class="container">
     <div class="contact-grid">
       <div class="contact-info">
-        <h3>Branson Maxwell Photography</h3>
-        <p>Professional services powered by intelligent systems that keep every project on track and every client informed.</p>
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Let's Start a Conversation</h2>
+        <p>Tell us about your photography or video business. We will respond within one business day with a personalized overview of what AI can do for your specific operation.</p>
         <div class="contact-detail">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span></span>
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6z"/></svg>
+          <span>(801) 623-3848</span>
         </div>
         <div class="contact-detail">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span></span>
+          <span>bransonmaxwell11@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+          <span>bransonmaxwell.com</span>
         </div>
       </div>
       <form class="contact-form" onsubmit="handleSubmit(event)">
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
         </div>
         <div class="form-group">
           <label for="service-type">Service of Interest</label>
           <select id="service-type" name="service-type">
             <option value="">Select a service</option>
             <option value="wedding-photography">Wedding Photography</option>
-            <option value="corporate-events">Corporate Events</option>
+            <option value="video-production">Video Production</option>
             <option value="portrait-sessions">Portrait Sessions</option>
-            <option value="commercial-photography">Commercial Photography</option>
+            <option value="commercial-brand">Commercial & Brand</option>
           </select>
         </div>
         <div class="form-group">
           <label for="message">Project Details</label>
           <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and goals..."></textarea>
         </div>
-        <button type="submit" class="form-submit">Submit Application</button>
+        <button type="submit" class="form-submit">Send Message</button>
       </form>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">Branson Maxwell Photography</div>
-    <p>Branson Maxwell Photography, Elevated by AI</p>
-    <p style="margin-top:8px"><a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
-    <div class="footer-demo">This is a demo website created by <a href="https://franchiseki.com" target="_blank" rel="noopener">Franchise Key Intelligence</a> to illustrate AI-powered client experience capabilities.</div>
-  </div>
+<footer>
+  <div class="footer-brand">Branson Maxwell Photo & Video</div>
+  <p>Professional photography and video production — elevated by AI</p>
+  <p style="margin-top:0.5rem"><a href="tel:8016233848">(801) 623-3848</a> &nbsp;·&nbsp; <a href="https://bransonmaxwell.com" target="_blank" rel="noopener">bransonmaxwell.com</a></p>
+  <div class="footer-demo">This is a demo site created by <a href="https://franchiseki.com" target="_blank" rel="noopener">Franchise KI</a> to illustrate AI-powered client experience capabilities for Branson Maxwell Photo & Video.</div>
 </footer>
 
 <script>
-  // Nav scroll effect
-  var nav = document.getElementById('nav');
+  // Reading progress
+  var prog = document.getElementById('readingProgress');
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 20) { nav.classList.add('scrolled'); }
-    else { nav.classList.remove('scrolled'); }
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    prog.style.width = (scrollTop / scrollHeight * 100) + '%';
   });
 
-  // Mobile menu
-  var toggle = document.getElementById('mobileToggle');
-  var menu = document.getElementById('mobileMenu');
-  toggle.addEventListener('click', function() {
-    menu.classList.toggle('open');
-    var spans = toggle.querySelectorAll('span');
-    if (menu.classList.contains('open')) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
-    }
+  // Mobile CTA bar
+  var mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { mobileCta.classList.add('visible'); }
+    else { mobileCta.classList.remove('visible'); }
   });
-  function closeMenu() {
-    menu.classList.remove('open');
-    var spans = toggle.querySelectorAll('span');
-    spans[0].style.transform = 'none';
-    spans[1].style.opacity = '1';
-    spans[2].style.transform = 'none';
-  }
 
-  // Form handler -- sends mailto with form data
+  // Hamburger nav
+  var hamburger = document.getElementById('navHamburger');
+  var navMenu = document.getElementById('navMenu');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+
+  // Podcast audio feedback listeners
+  var audioEls = document.querySelectorAll('audio');
+  audioEls.forEach(function(audio) {
+    audio.addEventListener('waiting', function() { console.log('audio: buffering'); });
+    audio.addEventListener('canplay', function() { console.log('audio: ready'); });
+    audio.addEventListener('playing', function() { console.log('audio: playing'); });
+    audio.addEventListener('pause', function() { console.log('audio: paused'); });
+    audio.addEventListener('ended', function() { console.log('audio: ended'); });
+  });
+
+  // Form handler
   function handleSubmit(e) {
     e.preventDefault();
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var type = document.getElementById('service-type').value;
     var message = document.getElementById('message').value;
-    var subject = encodeURIComponent('Application from ' + name + ' -- Branson Maxwell Photography');
+    var subject = encodeURIComponent('Inquiry from ' + name + ' — Branson Maxwell Photo & Video');
     var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nService: ' + type + '\n\nDetails:\n' + message);
-    window.location.href = 'mailto:bennett@franchiseki.com?subject=' + subject + '&body=' + body;
+    window.location.href = 'mailto:bransonmaxwell11@gmail.com?subject=' + subject + '&body=' + body;
   }
 </script>
 </body>
