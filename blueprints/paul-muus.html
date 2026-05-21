@@ -1722,16 +1722,17 @@ Rules:
 
             <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <iframe src="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/preview" width="100%" height="80" style="border:none;border-radius:8px;margin-bottom:12px;" allow="autoplay"></iframe>
+        <audio id="podcastAudio" preload="metadata" style="width:100%;margin-bottom:12px">
+          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/paul-muus.mp3" type="audio/mpeg">
+          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/paul-muus.mp3" style="color:rgba(255,255,255,0.8)">Download the podcast</a>.
+        </audio>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
+          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'▶ Play':'⏸ Pause'" style="background:rgba(255,255,255,0.9);color:#1a1a2e;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer">▶ Play</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px;font-weight:800">1x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">1.5x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">2x</button>
+        </div>
         <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Paul Muus Consulting.</p>
-        <a href="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/view" target="_blank" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Open in Google Drive</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" style="display:inline-block;margin-top:12px;margin-left:8px;background:transparent;color:rgba(255,255,255,0.7);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.3);">Download Episode</a>
-      </div>
-      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
-        <span style="font-size:12px;color:#666;">Speed:</span>
-        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
-        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
 
       <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>

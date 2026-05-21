@@ -1745,7 +1745,16 @@ Tone: Helpful local expert who genuinely wants them to have an amazing trip. Nev
 
       <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 32px; text-align: center; margin: 20px 0; color: #fff;">
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px;">Your Personalized AI Podcast</p>
-        <p style="font-size: 16px; font-weight: 600; color: #fff;">Your podcast episode is being finalized and will arrive separately by email within 24 hours.</p>
+        <audio id="podcastAudio" preload="metadata" style="width:100%;margin-bottom:12px">
+          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/zachary-red-sands.mp3" type="audio/mpeg">
+          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/zachary-red-sands.mp3" style="color:rgba(255,255,255,0.8)">Download the podcast</a>.
+        </audio>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
+          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'▶ Play':'⏸ Pause'" style="background:rgba(255,255,255,0.9);color:#1a1a2e;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer">▶ Play</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px;font-weight:800">1x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">1.5x</button>
+          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.style.fontWeight='400');this.style.fontWeight='800'" class="speed-btn" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;cursor:pointer;font-size:12px">2x</button>
+        </div>
         <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 12px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Red Sands Vacation Properties.</p>
       </div>
 
