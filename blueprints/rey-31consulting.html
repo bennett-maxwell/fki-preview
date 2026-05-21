@@ -114,16 +114,6 @@
   }
 
   /* ── URGENCY BAR ── */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #2980b9);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
 
   /* ── TAB NAVIGATION ── */
   .tab-nav {
@@ -1004,10 +994,6 @@
 </div>
 
 <!-- ═══════════ URGENCY BAR ═══════════ -->
-<div class="urgency-bar">
-  Next consulting budget cycle opens in <span id="countdown"></span> days — lock in your AI systems before competitors do
-</div>
-
 <!-- ═══════════ TAB NAVIGATION ═══════════ -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
@@ -1027,7 +1013,7 @@
   <!-- ROI Hero -->
   <div class="roi-hero">
     <div class="roi-label">Your AI-Ready Operation</div>
-    <div class="roi-number">7 AI Agents Ready</div>
+    <div class="roi-number">3 AI Agents Ready</div>
     <div class="roi-sub">Built for 1,000 monthly leads, Pipedrive, Slack, and your existing workflow</div>
     <div class="roi-stat-grid">
       <div class="roi-stat">
@@ -1775,10 +1761,20 @@ Tone: Efficient, professional, understanding. Make scheduling feel effortless. N
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
-      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 32px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 8px;">Your Personalized AI Podcast</p>
-        <p style="font-size: 16px; font-weight: 600; color: #fff;">Your podcast episode is being finalized and will arrive separately by email within 24 hours.</p>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 12px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to 31 Consulting.</p>
+      <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
+        <audio controls style="width:100%;border-radius:8px;margin-bottom:12px;" preload="metadata">
+  <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" type="audio/mpeg">
+  Your browser does not support audio playback.
+</audio>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to 31 Consulting.</p>
+        <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rey-31consulting.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Podcast</a>
+      </div>
+      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
+        <span style="font-size:12px;color:#666;">Speed:</span>
+        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
+        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
+        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
 
       <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
@@ -1920,11 +1916,7 @@ Tone: Efficient, professional, understanding. Make scheduling feel effortless. N
 <!-- Reading progress bar -->
 <div class="reading-progress" id="readingProgress"></div>
 
-<!-- Sticky mobile CTA -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/" class="mobile-cta-btn">Get Your AI Agent Quote</a>
-</div>
-
+<!-- Sticky mobile CTA removed -->
 <script>
 // Tab switching
 function switchTab(tabId, e) {
@@ -2001,28 +1993,9 @@ function updateCalc() {
   document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // Consulting: Q1 planning, Q3 mid-year review, Q4 budget season
-  if (month >= 0 && month <= 3) target = new Date(now.getFullYear(), 6, 1);
-  else if (month >= 4 && month <= 8) target = new Date(now.getFullYear(), 11, 1);
-  else target = new Date(now.getFullYear() + 1, 3, 1);
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
-
 // Init calculator
 updateCalc();
 </script>
-
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rey&biz=31+Consulting&src=rey-31consulting">Apply to Work With Us</a>
-</div>
 
 </body>
 </html>
