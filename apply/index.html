@@ -75,6 +75,18 @@ h1{font-size:28px;font-weight:700;text-align:center;margin:32px 0 8px;letter-spa
 
   <div id="formSection">
     <div class="field">
+      <label for="full_name">Your name</label>
+      <input type="text" id="full_name" placeholder="First Last" style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit;background:#fafafa;transition:border .2s,background .2s;outline:none" onfocus="this.style.borderColor='#1a1a1a';this.style.background='#fff'" onblur="this.style.borderColor='#ddd';this.style.background='#fafafa'">
+      <div class="error" id="err_name">Please enter your name</div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="you@company.com" style="width:100%;padding:12px 14px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit;background:#fafafa;transition:border .2s,background .2s;outline:none" onfocus="this.style.borderColor='#1a1a1a';this.style.background='#fff'" onblur="this.style.borderColor='#ddd';this.style.background='#fafafa'">
+      <div class="error" id="err_email">Please enter a valid email</div>
+    </div>
+
+    <div class="field">
       <label for="annual_revenue">What's your approximate annual revenue?</label>
       <div class="hint">This helps us right-size the engagement</div>
       <select id="annual_revenue" required>
@@ -158,10 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function submitApplication() {
   // Validate
+  const nameEl = document.getElementById('full_name');
+  const emailEl = document.getElementById('email');
   const rev = document.getElementById('annual_revenue');
   const team = document.getElementById('team_size');
   let valid = true;
   document.querySelectorAll('.error').forEach(e => e.style.display = 'none');
+  if (!nameEl.value.trim()) { document.getElementById('err_name').style.display = 'block'; valid = false; }
+  if (!emailEl.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { document.getElementById('err_email').style.display = 'block'; valid = false; }
   if (!rev.value) { document.getElementById('err_revenue').style.display = 'block'; valid = false; }
   if (!team.value) { document.getElementById('err_team').style.display = 'block'; valid = false; }
   if (!valid) return;
@@ -171,7 +187,11 @@ function submitApplication() {
   btn.textContent = 'Submitting...';
 
   const tools = Array.from(document.querySelectorAll('input[name="tools"]:checked')).map(c => c.value);
+  const nameParts = nameEl.value.trim().split(' ');
   const data = {
+    firstName: nameParts[0] || '',
+    lastName: nameParts.slice(1).join(' ') || '',
+    email: emailEl.value.trim(),
     annual_revenue: rev.value,
     team_size: team.value,
     current_tools: tools,
