@@ -1025,12 +1025,9 @@ If any answer is N: revise that section before sending.
         </button>
       </div>
 
-      <div class="pod-error" id="podError">
-        Audio pending generation. The podcast source document has been created and is ready for NotebookLM processing.
-      </div>
+      <div class="pod-error" id="podError" style="display:none;"></div>
 
-      <audio id="podAudio" preload="metadata">
-        <!-- PLACEHOLDER: podcast MP3 URL will be inserted after NotebookLM generation -->
+      <audio id="podAudio" preload="metadata" src="">
       </audio>
     </div>
   </div>
@@ -1315,10 +1312,13 @@ If any answer is N: revise that section before sending.
   });
 
   audio.addEventListener('timeupdate', updateUI);
-  audio.addEventListener('play',  function() { setPlaying(true); });
-  audio.addEventListener('pause', function() { setPlaying(false); });
-  audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
-  audio.addEventListener('error', function() { podError.style.display = 'block'; });
+  audio.addEventListener('play',    function() { setPlaying(true); });
+  audio.addEventListener('playing', function() { setPlaying(true); podError.style.display = 'none'; });
+  audio.addEventListener('pause',   function() { setPlaying(false); });
+  audio.addEventListener('ended',   function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
+  audio.addEventListener('waiting', function() { badge.childNodes[0].textContent = 'Buffering… '; });
+  audio.addEventListener('canplay', function() { badge.childNodes[0].textContent = audio.paused ? 'Ready to play ' : 'Now Playing '; });
+  audio.addEventListener('error',   function() { podError.style.display = 'block'; });
 
   playBtn.addEventListener('click', togglePlay);
   miniPlay.addEventListener('click', togglePlay);
