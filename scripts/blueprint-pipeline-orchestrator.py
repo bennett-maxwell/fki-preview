@@ -426,31 +426,73 @@ async def stage_prompts(profile_path: str, profile: dict, status: LeadStatus) ->
 
 
 async def stage_precheck(profile_path: str, profile: dict, status: LeadStatus) -> bool:
-    """Stage 6: Pre-Delivery Check — 10-point automated scan."""
+    """Stage 6: Pre-Delivery Check — 14-point + red-line audit per audit-skill v1.4."""
     if status.is_stage_complete("precheck"):
         log.info(f"  [{profile['slug']}] Stage 6 SKIP (already complete)")
         return True
 
-    log.info(f"  [{profile['slug']}] Stage 6: Pre-Delivery Check")
+    log.info(f"  [{profile['slug']}] Stage 6: Pre-Delivery Check + Red-Line Audit")
 
     blueprint_html = BLUEPRINTS_DIR / f"{profile['slug']}.html"
     if not blueprint_html.exists():
         status.mark_stage("precheck", "failed", "Blueprint HTML not found")
         return False
 
-    ok, out, err = await run_script("pre-delivery-check.sh", [str(blueprint_html)], timeout=60)
-    if ok and '"overall": "PASS"' in out:
-        status.mark_stage("precheck", "complete", "10-point check PASS")
-        return True
-    elif ok:
-        # Check passed but some individual checks may have failed — log but continue
-        log.warning(f"  [{profile['slug']}] Pre-delivery check has warnings: {out[:200]}")
-        status.mark_stage("precheck", "complete", f"Passed with warnings")
-        return True
-    else:
+    # Build cross-contamination leads list from all known lead JSON files
+    other_leads = []
+    for lf in LEADS_DIR.glob("*.json"):
+        lead_name = lf.stem.replace("-", " ").title()
+        slug_name = lf.stem
+        if slug_name != profile["slug"]:
+            other_leads.append(lead_name)
+    leads_arg = ",".join(other_leads) if other_leads else ""
+
+    args = [str(blueprint_html)]
+    if leads_arg:
+        args.extend(["--leads", leads_arg])
+
+    ok, out, err = await run_script("pre-delivery-check.sh", args, timeout=120)
+
+    if not ok:
         status.mark_stage("precheck", "failed", err[:200])
-        log.error(f"  [{profile['slug']}] Stage 6 FAILED: {err[:100]}")
+        log.error(f"  [{profile['slug']}] Stage 6 FAILED (script error): {err[:100]}")
         return False
+
+    # Strict: FAIL means FAIL — no "passed with warnings" escape hatch
+    if '"overall": "PASS"' not in out:
+        status.mark_stage("precheck", "failed", f"Pre-delivery check FAIL: {out[:200]}")
+        log.error(f"  [{profile['slug']}] Stage 6 FAIL: {out[:200]}")
+        return False
+
+    # Additional red-line checks from blueprint-ai-audit-skill v1.4
+    html_content = blueprint_html.read_text(encoding="utf-8", errors="replace")
+    redline_fails = []
+
+    # RL: Audio player placeholder URLs must be resolved
+    for placeholder in ["YOUR_PODCAST_URL", "PODCAST_PLACEHOLDER", "podcast-url-here"]:
+        if placeholder in html_content:
+            redline_fails.append(f"audio_placeholder:{placeholder}")
+
+    # RL: CTA must be "Get Your AI Quote" (not deprecated variants)
+    if "Apply to Work With Us" in html_content:
+        redline_fails.append("deprecated_cta:Apply to Work With Us")
+    if "Get My AI Quote" in html_content:
+        redline_fails.append("deprecated_cta:Get My AI Quote")
+
+    # RL: No unresolved template tokens
+    import re
+    unresolved = re.findall(r'\{[A-Z_]{3,}\}', html_content)
+    if unresolved:
+        redline_fails.append(f"unresolved_tokens:{','.join(unresolved[:5])}")
+
+    if redline_fails:
+        fail_msg = f"Red-line FAIL: {'; '.join(redline_fails)}"
+        status.mark_stage("precheck", "failed", fail_msg)
+        log.error(f"  [{profile['slug']}] {fail_msg}")
+        return False
+
+    status.mark_stage("precheck", "complete", "14-point + red-line audit PASS")
+    return True
 
 
 async def stage_email(profile_path: str, profile: dict, status: LeadStatus, dry_run: bool) -> bool:

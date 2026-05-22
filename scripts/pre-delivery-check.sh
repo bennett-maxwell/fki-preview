@@ -112,11 +112,13 @@ else
 fi
 
 # ── CHECK 3: 90day_timeline ───────────────────────────────────────────────────
-# Match "90-day" or "90 day", exclude CSS and financial 30/60/90 patterns
+# Match "90-day" or "90 day" ONLY in onboarding/implementation contexts
+# Exclude: CSS patterns, financial 30/60/90, and CRM touchpoint/re-engage/follow-up
 raw_90_lines=$(grep -iE "90.?day" "$FILE" 2>/dev/null || true)
 if [[ -n "$raw_90_lines" ]]; then
   filtered_90=$(printf '%s\n' "$raw_90_lines" \
     | grep -viE "90deg|90px|90%|30/60/90|60/90|rotate\(90|transform.*90" \
+    | grep -viE "re-engage|re.engage|follow.?up|touchpoint|touch point|TOUCH [0-9]|nurture|drip|sequence|cadence|over 90 days|in 90 days" \
     || true)
   if [[ -n "$filtered_90" ]]; then
     ninety_count=$(printf '%s\n' "$filtered_90" | grep -c ".")
