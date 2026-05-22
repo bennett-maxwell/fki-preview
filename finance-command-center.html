@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKI Finance Command Center v4 — Live</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2236;
+    --border: #1e2d45;
+    --accent: #00d4ff;
+    --green: #00ff88;
+    --red: #ff4444;
+    --yellow: #ffcc00;
+    --orange: #ff8800;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; }
+
+  /* Header */
+  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo { font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: 2px; }
+  .header-badge { background: var(--bg3); border: 1px solid var(--green); color: var(--green); padding: 2px 8px; border-radius: 3px; font-size: 10px; }
+  .header-badge.warn { border-color: var(--yellow); color: var(--yellow); }
+  .header-badge.red { border-color: var(--red); color: var(--red); }
+  .timestamp { color: var(--text3); font-size: 11px; }
+
+  /* Grid layout */
+  .main { padding: 16px 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  /* KPI Cards */
+  .kpi { background: var(--bg2); border: 1px solid var(--border); padding: 14px 16px; border-radius: 4px; }
+  .kpi.accent { border-color: var(--accent); }
+  .kpi.green { border-color: var(--green); }
+  .kpi.red-border { border-color: var(--red); }
+  .kpi.yellow-border { border-color: var(--yellow); }
+  .kpi-label { color: var(--text3); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .kpi-value { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1; }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.red { color: var(--red); }
+  .kpi-value.accent { color: var(--accent); }
+  .kpi-value.yellow { color: var(--yellow); }
+  .kpi-sub { color: var(--text3); font-size: 10px; margin-top: 5px; }
+  .kpi-delta { font-size: 11px; margin-top: 4px; }
+  .kpi-delta.up { color: var(--green); }
+  .kpi-delta.down { color: var(--red); }
+
+  /* Wide cards */
+  .col-2 { grid-column: span 2; }
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+
+  /* Sections */
+  .section { background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; }
+  .section-title { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .section-title .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  /* P&L Table */
+  .pl-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .pl-row:last-child { border-bottom: none; }
+  .pl-label { color: var(--text2); }
+  .pl-value { font-weight: 600; }
+  .pl-row.total .pl-label { color: var(--text); font-weight: 700; }
+  .pl-row.total .pl-value { font-size: 15px; }
+  .pl-row.income .pl-value { color: var(--green); }
+  .pl-row.expense .pl-value { color: var(--red); }
+  .pl-row.net .pl-value { color: var(--accent); font-size: 18px; }
+  .pl-row.net .pl-label { color: var(--accent); font-size: 14px; font-weight: 700; }
+
+  /* Bar chart */
+  .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 80px; margin-top: 8px; }
+  .bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .bar-wrap { width: 100%; display: flex; flex-direction: column; justify-content: flex-end; height: 65px; }
+  .bar { width: 100%; border-radius: 2px 2px 0 0; transition: height 0.3s; min-height: 2px; }
+  .bar.income { background: var(--green); opacity: 0.85; }
+  .bar.net { background: var(--accent); opacity: 0.85; }
+  .bar-label { font-size: 9px; color: var(--text3); white-space: nowrap; }
+  .bar-val { font-size: 9px; color: var(--text2); }
+
+  /* Cash breakdown */
+  .cash-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .cash-row:last-child { border-bottom: none; }
+  .cash-icon { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cash-name { color: var(--text2); flex: 1; }
+  .cash-amount { font-weight: 600; }
+  .cash-bar { height: 4px; border-radius: 2px; margin-top: 3px; }
+
+  /* AR Table */
+  .ar-row { display: grid; grid-template-columns: 1fr 80px 80px 80px; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 11px; }
+  .ar-row.header { color: var(--text3); font-size: 10px; text-transform: uppercase; }
+  .ar-row:last-child { border-bottom: none; }
+
+  /* Expense breakdown */
+  .exp-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+  .exp-name { color: var(--text2); flex: 1; font-size: 11px; }
+  .exp-bar-wrap { width: 80px; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .exp-bar { height: 100%; border-radius: 3px; background: var(--accent); }
+  .exp-amount { width: 70px; text-align: right; font-size: 11px; color: var(--text); }
+
+  /* Blockers */
+  .blocker { display: flex; align-items: flex-start; gap: 10px; padding: 8px; background: var(--bg3); border-radius: 3px; margin-bottom: 6px; border-left: 3px solid var(--red); }
+  .blocker.warn { border-left-color: var(--yellow); }
+  .blocker.ok { border-left-color: var(--green); }
+  .blocker-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .blocker-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .blocker-sub { color: var(--text3); font-size: 10px; }
+
+  /* Monthly grid */
+  .month-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .month-card { background: var(--bg3); border: 1px solid var(--border); padding: 10px; border-radius: 3px; }
+  .month-card.loss { border-color: var(--red); }
+  .month-card.best { border-color: var(--green); }
+  .month-name { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .month-revenue { font-size: 15px; font-weight: 700; color: var(--green); }
+  .month-net { font-size: 11px; margin-top: 3px; }
+  .month-margin { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 2px 6px; border-radius: 2px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .badge-green { background: rgba(0,255,136,0.15); color: var(--green); }
+  .badge-red { background: rgba(255,68,68,0.15); color: var(--red); }
+  .badge-yellow { background: rgba(255,204,0,0.15); color: var(--yellow); }
+  .badge-blue { background: rgba(0,212,255,0.15); color: var(--accent); }
+
+  /* Live indicator */
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; display: inline-block; margin-right: 4px; }
+
+  /* Footer */
+  .footer { padding: 12px 20px; border-top: 1px solid var(--border); color: var(--text3); font-size: 10px; display: flex; justify-content: space-between; }
+
+  /* Credit card row */
+  .cc-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 11px; border-bottom: 1px solid var(--border); }
+  .cc-row:last-child { border-bottom: none; }
+  .cc-name { color: var(--text2); }
+  .cc-amount { color: var(--red); font-weight: 600; }
+
+  /* Runway meter */
+  .runway-meter { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .runway-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green), var(--accent)); }
+
+  /* Tab navigation */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--bg2); padding: 0 20px; }
+  .tab { padding: 10px 16px; cursor: pointer; color: var(--text3); font-size: 11px; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: grid; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">FKI FINANCE CC</div>
+    <span class="header-badge"><span class="live-dot"></span>LIVE QB DATA</span>
+    <span class="header-badge warn">GOOGLE ADS MISSING</span>
+    <span class="header-badge red">QB AUTO-ROTATION PENDING DEPLOY</span>
+  </div>
+  <div class="timestamp">Franchise KI LLC · Realm 9341456705435708 · Pulled 2026-05-21 via QB MCP · v4</div>
+</div>
+
+<!-- KPI ROW 1 -->
+<div class="main">
+
+  <div class="kpi green">
+    <div class="kpi-label">YTD Revenue</div>
+    <div class="kpi-value green">$390,197</div>
+    <div class="kpi-sub">Jan 1 – May 21, 2026</div>
+    <div class="kpi-delta up">Sales $192.5K · Services $197.7K</div>
+  </div>
+
+  <div class="kpi accent">
+    <div class="kpi-label">YTD Net Income</div>
+    <div class="kpi-value accent">$252,676</div>
+    <div class="kpi-sub">64.8% net margin</div>
+    <div class="kpi-delta up">↑ Strong profitability YTD</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label">Total Bank Cash</div>
+    <div class="kpi-value">$306,762</div>
+    <div class="kpi-sub">3 accounts confirmed in QB</div>
+    <div class="kpi-delta" style="color:var(--text3)">Operating $40K · Savings $188K · Cash $79K</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label">Cash End of Period</div>
+    <div class="kpi-value accent">$411,364</div>
+    <div class="kpi-sub">Incl. $104.6K undeposited</div>
+    <div class="kpi-delta up">↑ $242K net cash increase YTD</div>
+  </div>
+
+  <!-- ROW 2 -->
+
+  <div class="kpi red-border">
+    <div class="kpi-label">Credit Card Debt</div>
+    <div class="kpi-value red">$133,465</div>
+    <div class="kpi-sub">5 cards — see breakdown</div>
+    <div class="kpi-delta down">Blue Amex (1005) $92.8K largest</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label">Accounts Receivable</div>
+    <div class="kpi-value">$20,000</div>
+    <div class="kpi-sub">All current · 0 overdue</div>
+    <div class="kpi-delta" style="color:var(--text3)">Jamie $10K · Tyler Peery $10K</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label">SRP Startup Advance</div>
+    <div class="kpi-value yellow">$20,000</div>
+    <div class="kpi-sub">Liability on balance sheet</div>
+    <div class="kpi-delta" style="color:var(--yellow)">⚠ Confirm: payback terms with SRP?</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-label">Runway Estimate</div>
+    <div class="kpi-value green">~11 mo</div>
+    <div class="kpi-sub">$27.5K avg monthly burn</div>
+    <div class="runway-meter"><div class="runway-fill" style="width:85%"></div></div>
+  </div>
+
+  <!-- MONTHLY PERFORMANCE — full width -->
+  <div class="section col-4">
+    <div class="section-title"><span class="dot"></span> Monthly P&amp;L — Jan–May 2026 (Live QB)</div>
+    <div class="month-grid">
+      <div class="month-card">
+        <div class="month-name">Jan 2026</div>
+        <div class="month-revenue">$70,000</div>
+        <div class="month-net" style="color:var(--green)">Net: +$45,674</div>
+        <div class="month-margin">Margin: 65.2%</div>
+      </div>
+      <div class="month-card">
+        <div class="month-name">Feb 2026</div>
+        <div class="month-revenue">$57,102</div>
+        <div class="month-net" style="color:var(--green)">Net: +$48,203</div>
+        <div class="month-margin">Margin: 84.4%</div>
+      </div>
+      <div class="month-card loss">
+        <div class="month-name">Mar 2026</div>
+        <div class="month-revenue">$27,892</div>
+        <div class="month-net" style="color:var(--red)">Net: -$14,003</div>
+        <div class="month-margin" style="color:var(--red)">Loss month — high ad/labor</div>
+      </div>
+      <div class="month-card best">
+        <div class="month-name">Apr 2026</div>
+        <div class="month-revenue">$135,203</div>
+        <div class="month-net" style="color:var(--green)">Net: +$120,224</div>
+        <div class="month-margin">Margin: 88.9% 🏆</div>
+      </div>
+      <div class="month-card best">
+        <div class="month-name">May 1–21</div>
+        <div class="month-revenue">$100,000</div>
+        <div class="month-net" style="color:var(--green)">Net: +$99,524</div>
+        <div class="month-margin">Margin: 99.5% 🔥</div>
+      </div>
+    </div>
+    <!-- Bar chart -->
+    <div class="bar-chart" style="margin-top:16px; height:90px;">
+      <div class="bar-col">
+        <div class="bar-wrap"><div class="bar income" style="height:52%"></div></div>
+        <div class="bar-label">Jan</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-wrap"><div class="bar income" style="height:42%"></div></div>
+        <div class="bar-label">Feb</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-wrap"><div class="bar income" style="height:21%"></div></div>
+        <div class="bar-label">Mar</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-wrap"><div class="bar income" style="height:100%"></div></div>
+        <div class="bar-label">Apr</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-wrap"><div class="bar income" style="height:74%"></div></div>
+        <div class="bar-label">May*</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P&L DETAIL -->
+  <div class="section col-2">
+    <div class="section-title"><span class="dot"></span> P&amp;L Breakdown — YTD</div>
+    <div class="pl-row income">
+      <span class="pl-label">Sales</span>
+      <span class="pl-value">$192,500</span>
+    </div>
+    <div class="pl-row income">
+      <span class="pl-label">Services</span>
+      <span class="pl-value">$197,697</span>
+    </div>
+    <div class="pl-row total income">
+      <span class="pl-label">Total Revenue</span>
+      <span class="pl-value">$390,197</span>
+    </div>
+    <div style="margin: 8px 0 4px; color: var(--text3); font-size: 10px; text-transform: uppercase;">Expenses</div>
+    <div class="pl-row expense">
+      <span class="pl-label">Contract Labor</span>
+      <span class="pl-value">$48,728</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Payroll</span>
+      <span class="pl-value">$45,462</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Advertising &amp; Mktg</span>
+      <span class="pl-value">$23,749</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Software &amp; Subs</span>
+      <span class="pl-value">$9,339</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Office + Rent</span>
+      <span class="pl-value">$6,948</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Professional Svcs</span>
+      <span class="pl-value">$2,456</span>
+    </div>
+    <div class="pl-row expense">
+      <span class="pl-label">Other (fees/util)</span>
+      <span class="pl-value">$838</span>
+    </div>
+    <div class="pl-row total expense">
+      <span class="pl-label">Total Expenses</span>
+      <span class="pl-value">$137,520</span>
+    </div>
+    <div class="pl-row net" style="margin-top:8px; padding-top:8px; border-top: 1px solid var(--accent);">
+      <span class="pl-label">NET INCOME</span>
+      <span class="pl-value">$252,676</span>
+    </div>
+  </div>
+
+  <!-- CASH POSITION -->
+  <div class="section col-2">
+    <div class="section-title"><span class="dot"></span> Cash Position (Balance Sheet)</div>
+    <div class="cash-row">
+      <div class="cash-icon" style="background:var(--green)"></div>
+      <div class="cash-name">Cash on Hand</div>
+      <div class="cash-amount" style="color:var(--green)">$78,656</div>
+    </div>
+    <div class="cash-row">
+      <div class="cash-icon" style="background:var(--accent)"></div>
+      <div class="cash-name">FKI Operating (5000)</div>
+      <div class="cash-amount" style="color:var(--accent)">$40,006</div>
+    </div>
+    <div class="cash-row">
+      <div class="cash-icon" style="background:#8b5cf6"></div>
+      <div class="cash-name">FKI Savings (8833)</div>
+      <div class="cash-amount" style="color:#8b5cf6">$188,100</div>
+    </div>
+    <div class="cash-row" style="border-top: 1px solid var(--border); margin-top:4px; padding-top:8px;">
+      <div class="cash-icon" style="background:var(--text3)"></div>
+      <div class="cash-name" style="font-weight:700; color:var(--text)">Total Bank Accounts</div>
+      <div class="cash-amount" style="color:var(--text); font-size:16px; font-weight:700">$306,762</div>
+    </div>
+    <div class="cash-row">
+      <div class="cash-icon" style="background:var(--yellow)"></div>
+      <div class="cash-name">Undeposited Funds</div>
+      <div class="cash-amount" style="color:var(--yellow)">$104,602</div>
+    </div>
+    <div style="margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--border);">
+      <div style="color: var(--text3); font-size: 10px; margin-bottom: 6px;">LIABILITIES</div>
+      <div class="cc-row"><div class="cc-name">Blue Amex (1005)</div><div class="cc-amount">$92,757</div></div>
+      <div class="cc-row"><div class="cc-name">PCE Credit (0864)</div><div class="cc-amount">$40,227</div></div>
+      <div class="cc-row"><div class="cc-name">Blue Amex (5003)</div><div class="cc-amount">$13,750</div></div>
+      <div class="cc-row"><div class="cc-name">Divvy Card</div><div class="cc-amount">$7,247</div></div>
+      <div class="cc-row" style="border-top: 1px solid var(--border); margin-top:4px; padding-top:6px; font-weight:700;">
+        <div class="cc-name" style="color:var(--text)">Total CC Debt</div>
+        <div class="cc-amount" style="font-size:14px;">$133,465</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCKERS -->
+  <div class="section col-2">
+    <div class="section-title"><span class="dot" style="background:var(--red)"></span> Open Blockers — Finance CC</div>
+
+    <div class="blocker">
+      <div class="blocker-icon">🔴</div>
+      <div>
+        <div class="blocker-title">QB Auto-Rotation LaunchAgent Not Deployed</div>
+        <div class="blocker-sub">quickbooks-skill deploy.sh written but Ivan must run it. OAuth will expire again without this. WO posted #leo-coaches 2026-05-21.</div>
+      </div>
+    </div>
+
+    <div class="blocker">
+      <div class="blocker-icon">🔴</div>
+      <div>
+        <div class="blocker-title">Google Ads Data — MISSING</div>
+        <div class="blocker-sub">Dashboard shows [MISSING] for Google Ads spend/ROAS. Ivan WO dispatched. Need Google Ads API credentials wired.</div>
+      </div>
+    </div>
+
+    <div class="blocker warn">
+      <div class="blocker-icon">🟡</div>
+      <div>
+        <div class="blocker-title">Undeposited Funds $104,601 — Needs Reconciliation</div>
+        <div class="blocker-sub">Sitting in QB undeposited funds. Confirm these are real pending deposits and match bank feed. Bennett + Kay to reconcile.</div>
+      </div>
+    </div>
+
+    <div class="blocker warn">
+      <div class="blocker-icon">🟡</div>
+      <div>
+        <div class="blocker-title">SRP Startup Advance $20,000 — Liability Confirmed</div>
+        <div class="blocker-sub">Correctly classified as liability in QB (not income). Confirm repayment terms with SRP. Previous question about "$10K" — QB shows $20K.</div>
+      </div>
+    </div>
+
+    <div class="blocker ok">
+      <div class="blocker-icon">🟢</div>
+      <div>
+        <div class="blocker-title">$188K Savings — RESOLVED (FKI Savings 8833)</div>
+        <div class="blocker-sub">Confirmed by QB balance sheet: "FKI Savings (8833) - 1" = $188,100. Real savings account. Not SBA, not unclassified. Bennett gate CLOSED.</div>
+      </div>
+    </div>
+
+    <div class="blocker ok">
+      <div class="blocker-icon">🟢</div>
+      <div>
+        <div class="blocker-title">QB MCP Connection — LIVE</div>
+        <div class="blocker-sub">QB MCP authenticated this session. Realm 9341456705435708. P&amp;L + Balance Sheet + AR Aging + Cash Flow all pulled 2026-05-21.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AR AGING -->
+  <div class="section col-2">
+    <div class="section-title"><span class="dot" style="background:var(--green)"></span> AR Aging — As of 2026-05-21</div>
+    <div class="ar-row header">
+      <span>Customer</span><span>Current</span><span>31–60d</span><span>Total</span>
+    </div>
+    <div class="ar-row">
+      <span style="color:var(--text2)">Jamie</span>
+      <span style="color:var(--green)">$10,000</span>
+      <span style="color:var(--text3)">—</span>
+      <span style="font-weight:600">$10,000</span>
+    </div>
+    <div class="ar-row">
+      <span style="color:var(--text2)">Tyler Peery</span>
+      <span style="color:var(--green)">$10,000</span>
+      <span style="color:var(--text3)">—</span>
+      <span style="font-weight:600">$10,000</span>
+    </div>
+    <div class="ar-row">
+      <span style="color:var(--text2)">Salad House</span>
+      <span style="color:var(--text3)">—</span>
+      <span style="color:var(--yellow)">$40K credit</span>
+      <span style="color:var(--text3)">$0 net</span>
+    </div>
+    <div class="ar-row" style="border-top: 1px solid var(--accent); margin-top:4px; padding-top:6px; font-weight:700;">
+      <span>TOTAL AR</span>
+      <span style="color:var(--green)">$20,000</span>
+      <span style="color:var(--text3)">0 overdue</span>
+      <span style="color:var(--accent)">$20,000</span>
+    </div>
+
+    <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border);">
+      <div class="section-title" style="margin-bottom:8px;"><span class="dot" style="background:var(--text3)"></span> Cash Flow YTD</div>
+      <div class="pl-row">
+        <span class="pl-label">Operating Cash Flow</span>
+        <span class="pl-value" style="color:var(--green)">+$275,554</span>
+      </div>
+      <div class="pl-row">
+        <span class="pl-label">Investing Activities</span>
+        <span class="pl-value" style="color:var(--text3)">$0</span>
+      </div>
+      <div class="pl-row">
+        <span class="pl-label">Financing Activities</span>
+        <span class="pl-value" style="color:var(--red)">-$33,315</span>
+      </div>
+      <div class="pl-row">
+        <span class="pl-label">Owner Draws YTD</span>
+        <span class="pl-value" style="color:var(--yellow)">-$13,200</span>
+      </div>
+      <div class="pl-row net" style="margin-top:6px; padding-top:6px; border-top:1px solid var(--border);">
+        <span class="pl-label" style="font-size:12px; color:var(--accent)">Net Cash Increase</span>
+        <span class="pl-value" style="font-size:16px;">+$242,239</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT ACTIONS -->
+  <div class="section col-4">
+    <div class="section-title"><span class="dot" style="background:var(--yellow)"></span> Action Queue — To Reach Diamond</div>
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px;">
+      <div style="background:var(--bg3); padding:10px; border-radius:3px; border-left:3px solid var(--red);">
+        <div style="color:var(--red); font-size:10px; text-transform:uppercase; margin-bottom:4px;">Ivan (SSH)</div>
+        <div style="font-size:11px; color:var(--text);">Run <code>bash deploy.sh</code> for quickbooks-skill LaunchAgent</div>
+        <div style="color:var(--text3); font-size:10px; margin-top:4px;">Enables auto-rotation — no more OAuth expiry</div>
+      </div>
+      <div style="background:var(--bg3); padding:10px; border-radius:3px; border-left:3px solid var(--red);">
+        <div style="color:var(--red); font-size:10px; text-transform:uppercase; margin-bottom:4px;">Ivan (SSH)</div>
+        <div style="font-size:11px; color:var(--text);">Connect Google Ads live feed to dashboard port 8732</div>
+        <div style="color:var(--text3); font-size:10px; margin-top:4px;">Uses finance-command-center-skill + Google Ads API creds</div>
+      </div>
+      <div style="background:var(--bg3); padding:10px; border-radius:3px; border-left:3px solid var(--yellow);">
+        <div style="color:var(--yellow); font-size:10px; text-transform:uppercase; margin-bottom:4px;">Bennett (1 answer)</div>
+        <div style="font-size:11px; color:var(--text);">Confirm $104.6K undeposited funds — pending deposits or stale?</div>
+        <div style="color:var(--text3); font-size:10px; margin-top:4px;">Could represent real cash not yet in bank feed</div>
+      </div>
+      <div style="background:var(--bg3); padding:10px; border-radius:3px; border-left:3px solid var(--yellow);">
+        <div style="color:var(--yellow); font-size:10px; text-transform:uppercase; margin-bottom:4px;">Bennett (1 answer)</div>
+        <div style="font-size:11px; color:var(--text);">SRP Startup Advance $20K — repayment schedule?</div>
+        <div style="color:var(--text3); font-size:10px; margin-top:4px;">Liability confirmed in QB. Need repayment terms for runway accuracy.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>Franchise KI LLC · Realm 9341456705435708 · Data pulled live via QB MCP · 2026-05-21</span>
+  <span>finance-command-center-skill v4 · <span style="color:var(--green)">$188K savings RESOLVED</span> · 2 Bennett gates remaining · Ivan deploy pending</span>
+</div>
+
+</body>
+</html>
