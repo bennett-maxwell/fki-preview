@@ -238,6 +238,11 @@
 
   /* READING PROGRESS */
   #readingProgress { position: fixed; top: 0; left: 0; height: 3px; background: var(--brand); z-index: 9999; width: 0%; transition: width 0.1s linear; }
+
+  /* === M3 Mobile Table Scroll Wrappers === */
+  .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+  .snapshot-table    { overflow-x: auto; display: block; }
+  .opp-table         { overflow-x: auto; display: block; }
 </style>
 </head>
 <body>
@@ -248,7 +253,7 @@
 <nav class="site-nav">
   <div class="nav-inner">
     <a class="nav-logo" href="#">Paul Muus Consulting · AI Roadmap</a>
-    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <button class="hamburger" id="navHamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
     <div class="nav-links">
       <a href="#snapshot">Snapshot</a>
       <a href="#gaps">Gaps</a>
@@ -1034,5 +1039,22 @@ function updateCalc() {
 
 updateCalc();
 </script>
+
+  // === M1 navHamburger compat ===
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenuEl = document.querySelector('.nav-links');
+  if (navHamburger && navMenuEl) {
+    navHamburger.addEventListener('click', function() {
+      navMenuEl.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('nav')) {
+        navMenuEl.classList.remove('open');
+        navHamburger.classList.remove('open');
+      }
+    });
+  }
+
 </body>
 </html>

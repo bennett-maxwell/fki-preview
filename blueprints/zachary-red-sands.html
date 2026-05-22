@@ -1057,6 +1057,11 @@
   .pod-controls { gap: .5rem; }
 }
 
+
+  /* === M3 Mobile Table Scroll Wrappers === */
+  .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+  .snapshot-table    { overflow-x: auto; display: block; }
+  .opp-table         { overflow-x: auto; display: block; }
 </style>
 </head>
 <body>
@@ -2196,5 +2201,22 @@ updateCalc();
   if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){var visible=entries[0].isIntersecting;mini.classList.toggle('visible',!visible&&!audio.paused);},{threshold:0.1});obs.observe(document.getElementById('podcast'));audio.addEventListener('play',function(){var rect=document.getElementById('podcast').getBoundingClientRect();if(rect.top<0||rect.bottom>window.innerHeight)mini.classList.add('visible');});audio.addEventListener('pause',function(){mini.classList.remove('visible');});}
 })();
 </script>
+
+  // === M1 navHamburger compat ===
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenuEl = document.querySelector('.nav-links');
+  if (navHamburger && navMenuEl) {
+    navHamburger.addEventListener('click', function() {
+      navMenuEl.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('nav')) {
+        navMenuEl.classList.remove('open');
+        navHamburger.classList.remove('open');
+      }
+    });
+  }
+
 </body>
 </html>
