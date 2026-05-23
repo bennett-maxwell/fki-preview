@@ -2221,8 +2221,8 @@ updateCalc();
 <script>
 // M5: Reading progress bar — updates on scroll
 var readingProgress = document.getElementById('readingProgress');
-// M6: Mobile CTA bar — shows after scroll depth
-var mobileCta = document.getElementById('mobileCta');
+// M6: Mobile CTA bar (.mobile-cta-bar) — shows after scroll depth
+var mobileCta = document.querySelector('.mobile-cta-bar') || document.getElementById('mobileCta');
 window.addEventListener('scroll', function() {
   var docH = document.documentElement.scrollHeight - window.innerHeight;
   var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
