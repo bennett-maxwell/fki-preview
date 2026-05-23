@@ -4,7 +4,7 @@
 # Council v19: 10 improvements applied. Auth via chrome-cookie-bridge.
 # Run: bash scripts/podcast-batch-v15.sh
 
-set -euo pipefail
+set -uo pipefail
 
 REPO=/Users/openclaw/fki-preview
 PODCASTS="$REPO/podcasts"
