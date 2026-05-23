@@ -449,6 +449,35 @@ img { max-width: 100%; display: block; }
   .hero h1 { font-size: 1.65rem; }
   .btn-hero { font-size: 14px; padding: 14px 20px; }
 }
+
+/* ============================================================ STICKY MOBILE CTA */
+.sticky-cta {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 200;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(10,14,26,0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.35);
+}
+.sticky-cta a {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%;
+  background: var(--brand);
+  color: var(--white);
+  padding: 15px 20px;
+  border-radius: 100px;
+  font-size: 16px; font-weight: 800;
+  letter-spacing: -0.2px;
+  box-shadow: 0 6px 20px rgba(29,111,219,0.45);
+}
+.sticky-cta a svg { width: 18px; height: 18px; stroke: #fff; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 860px) {
+  .sticky-cta { display: block; }
+  body { padding-bottom: 92px; }
+}
 </style>
 </head>
 <body>
@@ -459,7 +488,7 @@ img { max-width: 100%; display: block; }
     <img src="assets/fki-logo.png" alt="Franchise KI">
     <span>Franchise<span style="color:#fff;font-weight:700">KI</span> · AI Division</span>
   </a>
-  <a href="qualify.html" class="nav-cta">See If You Qualify →</a>
+  <a href="qualify.html" class="nav-cta">Get Your AI Blueprint →</a>
 </nav>
 
 <!-- ==================== HERO ==================== -->
@@ -478,12 +507,12 @@ img { max-width: 100%; display: block; }
 
     <div class="hero-cta-wrap">
       <a href="qualify.html" class="btn-hero">
-        Take the Free AI Qualifier
+        Get Your Personalized AI Blueprint
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
       <span class="hero-note">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        Takes under 60 seconds · No login · No cost
+        No login · No cost · 60 seconds
       </span>
     </div>
 
@@ -642,35 +671,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ==================== SOCIAL PROOF ==================== -->
-<section class="proof-section">
-  <div class="proof-inner center">
-    <span class="eyebrow">From Businesses That Qualified</span>
-    <h2 class="section-title">The numbers the qualifier predicted — they showed up.</h2>
-    <p class="section-sub">These aren't projections. These are outcomes from businesses that ran the qualifier, qualified, and deployed.</p>
-    <div class="proof-grid">
-      <div class="proof-card">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"The qualifier said we had $22K/month sitting in slow follow-up. We deployed the AI bot and hit $19K added revenue in the first 60 days. Closest thing to a guarantee I've seen."</p>
-        <div class="proof-author">Chris R.</div>
-        <div class="proof-role">HVAC company owner, Arizona</div>
-      </div>
-      <div class="proof-card">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"I was skeptical. We ran the numbers, got a Qualified score, and decided to try it. Three months later our close rate went from 18% to 29%. The qualifier undersold it."</p>
-        <div class="proof-author">Marisa T.</div>
-        <div class="proof-role">Med spa owner, Dallas</div>
-      </div>
-      <div class="proof-card">
-        <div class="stars">★★★★★</div>
-        <p class="proof-quote">"What I liked was that when I ran it the first time, it said we weren't ready. We fixed our lead tracking, ran it again 90 days later, and then we qualified. Honest tool."</p>
-        <div class="proof-author">Derek M.</div>
-        <div class="proof-role">Franchise owner, Colorado</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== FAQ ==================== -->
 <section class="section center">
   <div class="section-inner">
@@ -681,15 +681,15 @@ img { max-width: 100%; display: block; }
   <div class="faq-list">
 
     <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <button class="faq-q">
         <span>Is this actually free? What's the catch?</span>
         <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
       </button>
-      <div class="faq-a">Yes, free. No email required to see your score. The catch: if you qualify and want us to deploy the AI, there's a fee for that. The qualifier itself costs nothing and gives you real numbers regardless of whether we ever talk.</div>
+      <div class="faq-a">Yes, free. We email your personalized AI blueprint to the address you provide so you have it on file. The catch: if you qualify and want us to deploy the AI, there's a fee for that. The qualifier itself costs nothing and gives you real numbers regardless of whether we ever talk.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <button class="faq-q">
         <span>How is 10X calculated?</span>
         <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
       </button>
@@ -697,7 +697,7 @@ img { max-width: 100%; display: block; }
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <button class="faq-q">
         <span>What happens after I get my score?</span>
         <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
       </button>
@@ -705,7 +705,7 @@ img { max-width: 100%; display: block; }
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <button class="faq-q">
         <span>What AI tools do you actually deploy?</span>
         <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
       </button>
@@ -713,7 +713,7 @@ img { max-width: 100%; display: block; }
     </div>
 
     <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+      <button class="faq-q">
         <span>What if I don't qualify?</span>
         <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
       </button>
@@ -732,7 +732,7 @@ img { max-width: 100%; display: block; }
       Take the Free Qualifier
       <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
-    <p class="final-cta-note">No email required · No login · No cost · 60 seconds</p>
+    <p class="final-cta-note">No login · No cost · 60 seconds</p>
   </div>
 </section>
 
@@ -756,6 +756,14 @@ img { max-width: 100%; display: block; }
     <span>bennett@franchiseki.com</span>
   </div>
 </footer>
+
+<!-- ==================== STICKY MOBILE CTA ==================== -->
+<div class="sticky-cta">
+  <a href="qualify.html">
+    Get Your Personalized AI Blueprint
+    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
 
 <script>
 document.querySelectorAll('.faq-q').forEach(btn => {
