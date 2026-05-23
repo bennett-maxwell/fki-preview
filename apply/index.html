@@ -809,6 +809,10 @@ function checkROITrigger() {
     successEl.style.display = 'block';
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     submitToGHL(d).catch(function() {});
+    // Redirect to thank-you page after brief delay so GHL call can fire
+    setTimeout(function() {
+      window.location.href = '../thank-you-apply.html';
+    }, 1200);
   });
 })();
 </script>

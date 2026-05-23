@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Received — What Happens Next · Franchise KI</title>
+<meta name="description" content="Your application to work with Bennett Maxwell is in. Here's exactly what happens next and what to expect from the FKI process.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0E1A">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+:root {
+  --navy:        #0A0E1A;
+  --navy-mid:    #0f1f3d;
+  --brand:       #1D6FDB;
+  --brand-light: #4A90E2;
+  --gold:        #d4a857;
+  --green:       #4ade80;
+  --white:       #ffffff;
+  --off-white:   #f8f9fc;
+  --text:        #0A0E1A;
+  --muted:       #4a4a5a;
+  --light:       #888899;
+  --border:      #e2e5f0;
+  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius: 14px;
+  --shadow: 0 4px 24px rgba(10,14,26,0.10);
+  --shadow-md: 0 12px 40px rgba(10,14,26,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+.nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-logo { color: var(--white); font-weight: 800; font-size: 15px; }
+.nav-logo span { color: var(--gold); }
+.nav-tag { font-size: 12px; color: rgba(255,255,255,0.38); font-weight: 500; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--navy-mid) 0%, #0a1628 55%, var(--navy) 100%);
+  color: var(--white);
+  padding: 80px 2rem 72px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 45% at 50% 25%, rgba(212,168,87,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+
+.confirm-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 80px; height: 80px;
+  background: rgba(212,168,87,0.12);
+  border: 2px solid rgba(212,168,87,0.3);
+  border-radius: 50%;
+  margin-bottom: 28px;
+}
+.confirm-badge svg { width: 36px; height: 36px; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: rgba(255,255,255,0.72);
+  max-width: 580px; margin: 0 auto 44px;
+  line-height: 1.65;
+}
+
+.confirm-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(212,168,87,0.1);
+  border: 1px solid rgba(212,168,87,0.25);
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 14px; color: rgba(255,255,255,0.65);
+}
+.confirm-pill strong { color: var(--gold); font-weight: 800; font-size: 15px; }
+
+/* SECTIONS */
+.section { padding: 80px 2rem; }
+.section.cream { background: var(--off-white); }
+.section.dark { background: var(--navy); color: var(--white); }
+.section-inner { max-width: 860px; margin: 0 auto; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 12px; display: block; }
+.section.dark .eyebrow { color: var(--gold); }
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -1px; line-height: 1.12; margin-bottom: 14px; }
+.section.dark .section-title { color: var(--white); }
+.section-sub { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 620px; }
+.section.dark .section-sub { color: rgba(255,255,255,0.62); }
+
+/* PROCESS STEPS */
+.steps-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+.step-row { display: grid; grid-template-columns: 64px 1fr; gap: 0; position: relative; }
+.step-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 31px; top: 64px; bottom: -8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.3;
+}
+.step-num-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+.step-circle {
+  width: 44px; height: 44px;
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: var(--gold);
+  flex-shrink: 0;
+}
+.step-body { padding: 4px 0 48px 24px; }
+.step-eta {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(212,168,87,0.10);
+  padding: 3px 10px; border-radius: 100px;
+  margin-bottom: 10px;
+}
+.step-body h3 { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.4px; margin-bottom: 8px; }
+.step-body p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* WHAT MAKES THIS DIFFERENT */
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.diff-copy p { font-size: 16px; color: rgba(255,255,255,0.68); line-height: 1.7; margin-top: 14px; }
+.diff-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+}
+.diff-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+.diff-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.diff-row:last-child { border-bottom: none; padding-bottom: 0; }
+.diff-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.diff-row span { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.55; }
+.diff-row strong { color: var(--white); display: block; font-size: 14.5px; font-weight: 700; margin-bottom: 2px; }
+@media (max-width: 720px) { .diff-grid { grid-template-columns: 1fr; } }
+
+/* WHO THIS IS FOR */
+.frame-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+.frame-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.frame-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+.frame-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+.frame-card h4 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.3px; }
+.frame-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+@media (max-width: 720px) { .frame-grid { grid-template-columns: 1fr; } }
+
+/* PROOF */
+.proof-quote-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  margin-top: 40px;
+  box-shadow: var(--shadow);
+}
+.proof-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 14px; }
+.proof-quote { font-size: 18px; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 20px; font-weight: 500; }
+.proof-author { font-size: 14px; font-weight: 700; color: var(--muted); }
+.proof-role { font-size: 13px; color: var(--light); margin-top: 3px; }
+
+/* WHAT HAPPENS if you're not a fit */
+.honest-box {
+  background: rgba(212,168,87,0.06);
+  border: 1.5px solid rgba(212,168,87,0.2);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-top: 28px;
+}
+.honest-box h4 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.honest-box p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 40px 2rem 24px; }
+.footer-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { color: var(--white); font-weight: 800; font-size: 15px; }
+.footer-brand span { color: var(--gold); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { max-width: 860px; margin: 24px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.22); text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">Franchise<span>KI</span></span>
+  <span class="nav-tag">Application Received</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="confirm-badge">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <h1>Your application is<br><span>in our hands.</span></h1>
+    <p class="hero-sub">
+      Applying is the hardest part — most people research for months and never pull the trigger. You did. Here's exactly what happens next and what to expect from Bennett's process.
+    </p>
+    <div class="confirm-pill">
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--gold);stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <strong>Application received</strong>&nbsp;— Bennett reviews within 48 hours
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">The Process — No Surprises</span>
+    <h2 class="section-title">What happens from here, step by step.</h2>
+    <p class="section-sub">Bennett reviews every application personally. This isn't a funnel — it's a filter. He only takes clients he believes will succeed. Here's how that decision gets made.</p>
+
+    <div class="steps-list">
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">1</div></div>
+        <div class="step-body">
+          <span class="step-eta">Within 48 hours</span>
+          <h3>Bennett reviews your application</h3>
+          <p>He looks at your financial position, your goals, your timeline, and your top franchise categories. He's looking for one thing: whether there are 2–3 concepts in our portfolio that genuinely fit your profile. If there are, you move forward. If not, he'll tell you that directly and point you somewhere better.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">2</div></div>
+        <div class="step-body">
+          <span class="step-eta">If you're a match</span>
+          <h3>You receive a personalized AI Blueprint</h3>
+          <p>Before any call happens, you get a document built around your profile — your top 3 franchise matches, territory analysis for your market, Item-19 revenue data from those franchisors, and a podcast episode built from your specific answers. This is your starting point, not a pitch.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">3</div></div>
+        <div class="step-body">
+          <span class="step-eta">15 minutes</span>
+          <h3>Fit call — confirm or close the loop</h3>
+          <p>A 15-minute Zoom with Bennett. Not a presentation. A conversation to confirm what the Blueprint surfaced, answer your top questions, and decide whether a full Discovery Day makes sense. If it does, Bennett books it. If it doesn't — for any reason on either side — you part ways with clarity and no hard feelings.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">4</div></div>
+        <div class="step-body">
+          <span class="step-eta">Discovery Day — if you're both in</span>
+          <h3>Go deep on your top 2–3 concepts</h3>
+          <p>Full-day session covering franchise validation, territory walks with MapKI data, calls with existing franchisees in your matches, and FDD review with our legal partners. You leave knowing exactly what you'd be buying, from whom, and at what terms. No surprises after this point.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MAKES THIS DIFFERENT -->
+<section class="section dark">
+  <div class="section-inner">
+    <div class="diff-grid">
+      <div class="diff-copy">
+        <span class="eyebrow">Why FKI Is Different</span>
+        <h2 class="section-title">Every other franchise consultant has a list. We built an operating system.</h2>
+        <p>Most franchise consultants get paid to place you — fast. We only get paid when you succeed, which means we have the same incentive you do: the right fit, not the fastest close. We built tooling that no other consultancy in the US has: MapKI for territory intelligence and the Advaita AI system to personalize your match before you ever talk to a human.</p>
+        <p>Bennett's been a franchisee, a franchisor, and a buyer who got matched into the wrong concept. That experience is why the process works — he's already made the expensive mistakes so you don't have to.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-title">How FKI compares</div>
+        <div class="diff-row">
+          <div class="diff-icon">🗺️</div>
+          <span><strong>Territory Intelligence (MapKI)</strong>We show you which markets are open, which are saturated, and who your competitors will be. Other consultants guess.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">🤖</div>
+          <span><strong>AI Personalization</strong>Your Blueprint is built from your specific answers — not a template. No franchise consultancy in the US has this.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">🎯</div>
+          <span><strong>Operator-Type Matching</strong>We match on lifestyle, capital, risk tolerance, and management style. Not just industry preference.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">$0</div>
+          <span><strong>Free to you</strong>Franchisors pay placement commissions from their marketing budget. You never pay FKI. Not a dollar.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">Who Gets the Most from This Process</span>
+    <h2 class="section-title">Serious buyers move faster than they expect.</h2>
+    <p class="section-sub">Most of the franchisees we've placed were 4–9 months from signing when they first applied. What the process does is compress and clarify — so you arrive at a decision faster and with far more confidence than you would going it alone.</p>
+
+    <div class="frame-grid">
+      <div class="frame-card">
+        <span class="frame-tag">Strongest Fit</span>
+        <h4>W-2 executives looking for an exit</h4>
+        <p>High income, capital access, and operational skills that translate directly into franchise success. Typically looking at semi-absentee models with scalable territory potential.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-tag">Strong Fit</span>
+        <h4>Current business owners looking to diversify</h4>
+        <p>You've run something before. You understand operations, hiring, and P&L. Franchise adds a proven system to skills you already have — and a second revenue stream that doesn't depend on you being present every day.</p>
+      </div>
+      <div class="frame-card">
+        <span class="frame-tag">Strong Fit</span>
+        <h4>Investors looking for active income</h4>
+        <p>$150K–$500K to deploy, want better returns than passive assets, and are willing to manage a team. Franchise gives you control and cash flow without building from scratch.</p>
+      </div>
+    </div>
+
+    <div class="honest-box">
+      <h4>One thing Bennett says to every applicant</h4>
+      <p>If you apply and your profile doesn't match any concept in our portfolio, he'll tell you that in the first 48 hours — and if he knows who you should talk to instead, he'll tell you that too. The goal isn't to close you. The goal is to get you into the right thing. Sometimes that's us. Sometimes it isn't. Either way, you'll know fast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section" style="padding-top:80px;padding-bottom:80px;">
+  <div class="section-inner" style="text-align:center;">
+    <span class="eyebrow">From Someone Who Applied and Went All the Way</span>
+    <h2 class="section-title">The best decision is the one you make with real data.</h2>
+    <div class="proof-quote-block" style="text-align:left;">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-quote">"I'd been looking at franchises on my own for eight months and was completely overwhelmed. Within 48 hours of submitting my application, I had a Blueprint in my inbox with my top three matches and territory data for my market. Three of the five brands I'd been obsessing over weren't even on the list — and when Bennett explained why, it made total sense. Four months later I signed. No regrets."</p>
+      <div class="proof-author">Jennifer K.</div>
+      <div class="proof-role">Former marketing director · Now franchisee, Colorado · Signed within 4 months of applying</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand">Franchise<span>KI</span></span>
+    <div class="footer-links">
+      <a href="mailto:bennett@franchiseki.com">Questions? Email Bennett</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Franchise KI. All rights reserved. · bennett@franchiseki.com · Free to you, always.
+  </div>
+</footer>
+
+</body>
+</html>
