@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Application Received — What Happens Next · Franchise KI</title>
-<meta name="description" content="Your application to work with Bennett Maxwell is in. Here's exactly what happens next and what to expect from the FKI process.">
+<title>Application Received — Your AI Blueprint is Being Built · Advaita AI</title>
+<meta name="description" content="Your application is in. Within 24 hours you'll receive a personalized podcast and AI implementation blueprint built from your exact answers.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0A0E1A">
 <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -105,6 +105,29 @@ a { color: inherit; text-decoration: none; }
 .section-sub { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 620px; }
 .section.dark .section-sub { color: rgba(255,255,255,0.62); }
 
+/* WHAT YOU'RE GETTING — 3-card grid */
+.deliverable-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.deliverable-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.deliverable-card:hover { border-color: var(--brand-light); box-shadow: var(--shadow); }
+.deliverable-icon {
+  width: 48px; height: 48px;
+  background: rgba(29,111,219,0.08);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.deliverable-icon svg { width: 22px; height: 22px; stroke: var(--brand); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.deliverable-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; display: block; }
+.deliverable-card h3 { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 10px; letter-spacing: -0.3px; }
+.deliverable-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+@media (max-width: 720px) { .deliverable-grid { grid-template-columns: 1fr; } }
+
 /* PROCESS STEPS */
 .steps-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
 .step-row { display: grid; grid-template-columns: 64px 1fr; gap: 0; position: relative; }
@@ -160,46 +183,6 @@ a { color: inherit; text-decoration: none; }
 .diff-row strong { color: var(--white); display: block; font-size: 14.5px; font-weight: 700; margin-bottom: 2px; }
 @media (max-width: 720px) { .diff-grid { grid-template-columns: 1fr; } }
 
-/* WHO THIS IS FOR */
-.frame-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-.frame-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 22px;
-  transition: border-color .2s, box-shadow .2s;
-}
-.frame-card:hover { border-color: var(--gold); box-shadow: var(--shadow); }
-.frame-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
-.frame-card h4 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.3px; }
-.frame-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
-@media (max-width: 720px) { .frame-grid { grid-template-columns: 1fr; } }
-
-/* PROOF */
-.proof-quote-block {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 36px 40px;
-  margin-top: 40px;
-  box-shadow: var(--shadow);
-}
-.proof-stars { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin-bottom: 14px; }
-.proof-quote { font-size: 18px; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 20px; font-weight: 500; }
-.proof-author { font-size: 14px; font-weight: 700; color: var(--muted); }
-.proof-role { font-size: 13px; color: var(--light); margin-top: 3px; }
-
-/* WHAT HAPPENS if you're not a fit */
-.honest-box {
-  background: rgba(74,144,226,0.06);
-  border: 1.5px solid rgba(74,144,226,0.2);
-  border-radius: var(--radius);
-  padding: 28px 32px;
-  margin-top: 28px;
-}
-.honest-box h4 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
-.honest-box p { font-size: 15px; color: var(--muted); line-height: 1.65; }
-
 /* FOOTER */
 .footer { background: var(--navy); padding: 40px 2rem 24px; }
 .footer-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
@@ -210,9 +193,7 @@ a { color: inherit; text-decoration: none; }
 .footer-links a:hover { color: var(--gold); }
 .footer-bottom { max-width: 860px; margin: 24px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.22); text-align: center; }
 
-/* ============================================================ MOBILE (≤480px)
-   Added 2026-05-23 — full mobile optimization
-   ============================================================ */
+/* MOBILE */
 @media (max-width: 480px) {
   html, body { overflow-x: hidden; }
   .nav { padding: 0 1rem; height: 54px; }
@@ -225,6 +206,8 @@ a { color: inherit; text-decoration: none; }
   .section { padding: 56px 1.25rem; }
   .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
   .section-sub { font-size: 15px; }
+  .deliverable-grid { gap: 14px; margin-top: 28px; }
+  .deliverable-card { padding: 22px 18px; }
   .steps-list { margin-top: 32px; }
   .step-row { grid-template-columns: 48px 1fr; }
   .step-circle { width: 38px; height: 38px; font-size: 14px; }
@@ -233,11 +216,6 @@ a { color: inherit; text-decoration: none; }
   .step-row:not(:last-child)::after { left: 23px; top: 58px; }
   .diff-grid { grid-template-columns: 1fr; gap: 28px; }
   .diff-card { padding: 22px 18px; }
-  .frame-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
-  .frame-card { padding: 22px 18px; }
-  .proof-quote-block { padding: 22px 18px; }
-  .proof-quote { font-size: 16px; }
-  .honest-box { padding: 20px 18px; }
   .footer { padding: 32px 1.25rem 20px; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
   .footer-links { flex-wrap: wrap; gap: 12px; }
@@ -251,7 +229,7 @@ a { color: inherit; text-decoration: none; }
 
 <!-- NAV -->
 <nav class="nav">
-  <span class="nav-logo">Franchise<span>KI</span></span>
+  <span class="nav-logo">Advaita <span>AI</span></span>
   <span class="nav-tag">Application Received</span>
 </nav>
 
@@ -261,59 +239,90 @@ a { color: inherit; text-decoration: none; }
     <div class="confirm-badge">
       <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     </div>
-    <h1>Your application is<br><span>in our hands.</span></h1>
+    <h1>Your blueprint is<br><span>being built.</span></h1>
     <p class="hero-sub">
-      Applying is the hardest part — most people research for months and never pull the trigger. You did. Here's exactly what happens next and what to expect from Bennett's process.
+      Your application is in. Within 24 hours, you'll receive a personalized podcast and AI implementation blueprint built entirely from your answers — not a template, not a generic guide.
     </p>
     <div class="confirm-pill">
-      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--gold);stroke-width:2;fill:none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <strong>Application received</strong>&nbsp;— Bennett reviews within 48 hours
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--gold);stroke-width:2;fill:none"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <strong>Delivered within 24 hours</strong>&nbsp;— check your inbox
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'RE GETTING -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">What You're Receiving</span>
+    <h2 class="section-title">Three things built specifically for your business.</h2>
+    <p class="section-sub">This isn't a generic AI overview. Everything below is generated from the answers you just submitted — your tools, your team size, your biggest time drains, and your goals.</p>
+
+    <div class="deliverable-grid">
+
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <span class="deliverable-tag">Personalized Podcast</span>
+        <h3>Your AI implementation roadmap — in audio</h3>
+        <p>A custom podcast episode that walks through exactly how AI agents apply to your specific business: which processes to automate first, where the highest ROI is, and how to get your team aligned from day one.</p>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <span class="deliverable-tag">3 Starter Prompts</span>
+        <h3>Your first three AI agents — ready to deploy</h3>
+        <p>Three production-ready prompts engineered for your exact workflow. Not examples. Not templates. Prompts you can paste into Claude, ChatGPT, or your existing tools today and start saving time immediately.</p>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="deliverable-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <span class="deliverable-tag">Full AI Blueprint</span>
+        <h3>A complete 90-day implementation plan</h3>
+        <p>A detailed blueprint covering your AI stack, integration sequence, which tools to add or replace, ROI projections based on your team size and hours, and a phased rollout plan your team can actually execute.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section class="section cream">
+<section class="section">
   <div class="section-inner">
-    <span class="eyebrow">The Process — No Surprises</span>
-    <h2 class="section-title">What happens from here, step by step.</h2>
-    <p class="section-sub">Bennett reviews every application personally. This isn't a funnel — it's a filter. He only takes clients he believes will succeed. Here's how that decision gets made.</p>
+    <span class="eyebrow">What Happens From Here</span>
+    <h2 class="section-title">Three steps. No surprises.</h2>
+    <p class="section-sub">Here's exactly how your blueprint gets built and delivered — and what comes after.</p>
 
     <div class="steps-list">
 
       <div class="step-row">
         <div class="step-num-col"><div class="step-circle">1</div></div>
         <div class="step-body">
-          <span class="step-eta">Within 48 hours</span>
-          <h3>Bennett reviews your application</h3>
-          <p>He looks at your financial position, your goals, your timeline, and your top franchise categories. He's looking for one thing: whether there are 2–3 concepts in our portfolio that genuinely fit your profile. If there are, you move forward. If not, he'll tell you that directly and point you somewhere better.</p>
+          <span class="step-eta">Right now</span>
+          <h3>Your answers are being analyzed</h3>
+          <p>The Advaita AI system is processing your application — mapping your current tool stack, identifying your highest-impact automation opportunities, and calculating the ROI potential specific to your revenue range and team size.</p>
         </div>
       </div>
 
       <div class="step-row">
         <div class="step-num-col"><div class="step-circle">2</div></div>
         <div class="step-body">
-          <span class="step-eta">If you're a match</span>
-          <h3>You receive a personalized AI Blueprint</h3>
-          <p>Before any call happens, you get a document built around your profile — your top 3 franchise matches, territory analysis for your market, Item-19 revenue data from those franchisors, and a podcast episode built from your specific answers. This is your starting point, not a pitch.</p>
+          <span class="step-eta">Within 24 hours</span>
+          <h3>Your blueprint, podcast, and prompts arrive</h3>
+          <p>You'll receive an email with a link to your personalized AI blueprint page, your custom podcast episode, and your three starter prompts. Review everything at your own pace — no call required, no pressure, no pitch.</p>
         </div>
       </div>
 
       <div class="step-row">
         <div class="step-num-col"><div class="step-circle">3</div></div>
         <div class="step-body">
-          <span class="step-eta">15 minutes</span>
-          <h3>Fit call — confirm or close the loop</h3>
-          <p>A 15-minute Zoom with Bennett. Not a presentation. A conversation to confirm what the Blueprint surfaced, answer your top questions, and decide whether a full Discovery Day makes sense. If it does, Bennett books it. If it doesn't — for any reason on either side — you part ways with clarity and no hard feelings.</p>
-        </div>
-      </div>
-
-      <div class="step-row">
-        <div class="step-num-col"><div class="step-circle">4</div></div>
-        <div class="step-body">
-          <span class="step-eta">Discovery Day — if you're both in</span>
-          <h3>Go deep on your top 2–3 concepts</h3>
-          <p>Full-day session covering franchise validation, territory walks with MapKI data, calls with existing franchisees in your matches, and FDD review with our legal partners. You leave knowing exactly what you'd be buying, from whom, and at what terms. No surprises after this point.</p>
+          <span class="step-eta">Optional — if you want to go deeper</span>
+          <h3>Strategy session with Bennett</h3>
+          <p>Once you've reviewed your blueprint, if you want help implementing it — or you want a second opinion on your AI stack — you can request a 30-minute strategy session with Bennett. There's no obligation. Most clients get 80% of the value from the blueprint alone.</p>
         </div>
       </div>
 
@@ -321,81 +330,35 @@ a { color: inherit; text-decoration: none; }
   </div>
 </section>
 
-<!-- WHAT MAKES THIS DIFFERENT -->
+<!-- WHY THIS IS DIFFERENT -->
 <section class="section dark">
   <div class="section-inner">
     <div class="diff-grid">
       <div class="diff-copy">
-        <span class="eyebrow">Why FKI Is Different</span>
-        <h2 class="section-title">Every other franchise consultant has a list. We built an operating system.</h2>
-        <p>Most franchise consultants get paid to place you — fast. We only get paid when you succeed, which means we have the same incentive you do: the right fit, not the fastest close. We built tooling that no other consultancy in the US has: MapKI for territory intelligence and the Advaita AI system to personalize your match before you ever talk to a human.</p>
-        <p>Bennett's been a franchisee, a franchisor, and a buyer who got matched into the wrong concept. That experience is why the process works — he's already made the expensive mistakes so you don't have to.</p>
+        <span class="eyebrow">Why Advaita AI Is Different</span>
+        <h2 class="section-title">Generic AI advice is everywhere. This isn't that.</h2>
+        <p>Every consultant, agency, and online course will tell you to "use AI to save time." None of them have seen your business, your tools, or your team. Advaita AI builds from your actual answers — so the blueprint you receive reflects what's actually true about your operation, not a hypothetical one.</p>
+        <p>Bennett has implemented AI systems in franchise operations, service businesses, and sales organizations. The prompts and roadmap you receive are field-tested — not generated from theory.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-card-title">How FKI compares</div>
-        <div class="diff-row">
-          <div class="diff-icon">🗺️</div>
-          <span><strong>Territory Intelligence (MapKI)</strong>We show you which markets are open, which are saturated, and who your competitors will be. Other consultants guess.</span>
-        </div>
+        <div class="diff-card-title">What makes this different</div>
         <div class="diff-row">
           <div class="diff-icon">🤖</div>
-          <span><strong>AI Personalization</strong>Your Blueprint is built from your specific answers — not a template. No franchise consultancy in the US has this.</span>
+          <span><strong>Built from your answers</strong>Every element of your blueprint is generated from your specific application — not pulled from a library of generic templates.</span>
         </div>
         <div class="diff-row">
-          <div class="diff-icon">🎯</div>
-          <span><strong>Operator-Type Matching</strong>We match on lifestyle, capital, risk tolerance, and management style. Not just industry preference.</span>
+          <div class="diff-icon">⚡</div>
+          <span><strong>Deployable from day one</strong>The three starter prompts work with tools you already have. No new subscriptions, no IT projects, no 6-month rollout required.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">📊</div>
+          <span><strong>ROI calculated for your business</strong>Your blueprint includes time savings and revenue impact projections based on your actual team size and current hours — not industry averages.</span>
         </div>
         <div class="diff-row">
           <div class="diff-icon">$0</div>
-          <span><strong>Free to you</strong>Franchisors pay placement commissions from their marketing budget. You never pay FKI. Not a dollar.</span>
+          <span><strong>Free. No catch.</strong>Your blueprint, podcast, and prompts are delivered at no cost. The only ask is that you read it with an open mind.</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO THIS IS FOR -->
-<section class="section cream">
-  <div class="section-inner">
-    <span class="eyebrow">Who Gets the Most from This Process</span>
-    <h2 class="section-title">Serious buyers move faster than they expect.</h2>
-    <p class="section-sub">Most of the franchisees we've placed were 4–9 months from signing when they first applied. What the process does is compress and clarify — so you arrive at a decision faster and with far more confidence than you would going it alone.</p>
-
-    <div class="frame-grid">
-      <div class="frame-card">
-        <span class="frame-tag">Strongest Fit</span>
-        <h4>W-2 executives looking for an exit</h4>
-        <p>High income, capital access, and operational skills that translate directly into franchise success. Typically looking at semi-absentee models with scalable territory potential.</p>
-      </div>
-      <div class="frame-card">
-        <span class="frame-tag">Strong Fit</span>
-        <h4>Current business owners looking to diversify</h4>
-        <p>You've run something before. You understand operations, hiring, and P&L. Franchise adds a proven system to skills you already have — and a second revenue stream that doesn't depend on you being present every day.</p>
-      </div>
-      <div class="frame-card">
-        <span class="frame-tag">Strong Fit</span>
-        <h4>Investors looking for active income</h4>
-        <p>$150K–$500K to deploy, want better returns than passive assets, and are willing to manage a team. Franchise gives you control and cash flow without building from scratch.</p>
-      </div>
-    </div>
-
-    <div class="honest-box">
-      <h4>One thing Bennett says to every applicant</h4>
-      <p>If you apply and your profile doesn't match any concept in our portfolio, he'll tell you that in the first 48 hours — and if he knows who you should talk to instead, he'll tell you that too. The goal isn't to close you. The goal is to get you into the right thing. Sometimes that's us. Sometimes it isn't. Either way, you'll know fast.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PROOF -->
-<section class="section" style="padding-top:80px;padding-bottom:80px;">
-  <div class="section-inner" style="text-align:center;">
-    <span class="eyebrow">From Someone Who Applied and Went All the Way</span>
-    <h2 class="section-title">The best decision is the one you make with real data.</h2>
-    <div class="proof-quote-block" style="text-align:left;">
-      <div class="proof-stars">★★★★★</div>
-      <p class="proof-quote">"I'd been looking at franchises on my own for eight months and was completely overwhelmed. Within 48 hours of submitting my application, I had a Blueprint in my inbox with my top three matches and territory data for my market. Three of the five brands I'd been obsessing over weren't even on the list — and when Bennett explained why, it made total sense. Four months later I signed. No regrets."</p>
-      <div class="proof-author">Jennifer K.</div>
-      <div class="proof-role">Former marketing director · Now franchisee, Colorado · Signed within 4 months of applying</div>
     </div>
   </div>
 </section>
@@ -403,14 +366,14 @@ a { color: inherit; text-decoration: none; }
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-brand">Franchise<span>KI</span></span>
+    <span class="footer-brand">Advaita <span>AI</span></span>
     <div class="footer-links">
       <a href="mailto:bennett@franchiseki.com">Questions? Email Bennett</a>
       <a href="privacy.html">Privacy</a>
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; 2026 Franchise KI. All rights reserved. · bennett@franchiseki.com · Free to you, always.
+    &copy; 2026 Advaita AI · Powered by Franchise KI · bennett@franchiseki.com · Free, always.
   </div>
 </footer>
 
