@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Will AI Make You 10× Your Investment in 90 Days? — FKI Qualifier</title>
-<meta name="description" content="Answer 6 questions. Find out if AI will make you at least $50,000 in your first 90 days — and how much work it takes to deliver.">
+<meta name="description" content="Answer 7 questions. Find out if AI will make you at least $50,000 in your first 90 days. Takes under 60 seconds.">
 <style>
   :root {
     --brand:       #1D6FDB;
@@ -34,9 +34,6 @@
   .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
   .hero h1 span { color: var(--brand-light); }
   .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 540px; margin: 0 auto 1rem; }
-  .hero-rule { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.8rem; flex-wrap: wrap; }
-  .hero-rule-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.9); }
-  .hero-rule-item strong { color: var(--brand-light); }
 
   .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; align-items: start; }
   @media (max-width: 860px) { .main-wrap { grid-template-columns: 1fr; } }
@@ -47,11 +44,11 @@
   .q-title { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
   .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.4rem; }
 
-  /* EXPONENTIAL SLIDER INPUT */
+  /* DEAL VALUE TEXT INPUT */
   .exp-input-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
   .exp-input-row label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
   .exp-input-row input[type=number] {
-    width: 120px; font-size: 1.1rem; font-weight: 700; padding: 0.45rem 0.7rem;
+    width: 140px; font-size: 1.1rem; font-weight: 700; padding: 0.45rem 0.7rem;
     border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit;
     color: var(--text); background: var(--neutral-bg); outline: none;
     -moz-appearance: textfield;
@@ -69,12 +66,11 @@
   input[type=range] {
     width: 100%; height: 6px; border-radius: 3px; outline: none;
     appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 0.6rem;
-    background: linear-gradient(to right, var(--brand) 0%, var(--brand) 25%, var(--border) 25%, var(--border) 100%);
+    background: linear-gradient(to right, var(--brand) 0%, var(--brand) 0%, var(--border) 0%, var(--border) 100%);
   }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
   input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); }
   .exp-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-bottom: 1.2rem; }
-  .exp-scale .scale-anchor { color: var(--brand); font-weight: 700; }
 
   /* CHIPS */
   .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
@@ -134,7 +130,7 @@
 <div class="hero">
   <div class="hero-badge">Free 60-Second Assessment</div>
   <h1>Will AI make you <span>10× your investment</span><br>in the first 90 days?</h1>
-  <p class="hero-sub">Answer 6 questions. Get a real number — not a pitch. We only take clients where the math works on both sides. Takes under 60 seconds.</p>
+  <p class="hero-sub">Answer 7 questions. Get a real number — not a pitch. We only take clients where the math works on both sides. Takes under 60 seconds.</p>
 </div>
 
 <div class="main-wrap">
@@ -142,53 +138,40 @@
 
     <div class="section-divider">Revenue Potential — Can We Hit $50K in 90 Days?</div>
 
-    <!-- Q1: Monthly Leads — EXPONENTIAL ANCHORED -->
+    <!-- Q1: Monthly Leads — SIMPLE EXPONENTIAL SLIDER (10-5000) -->
     <div class="q-section">
-      <div class="q-label">Question 1 of 6</div>
+      <div class="q-label">Question 1 of 7</div>
       <div class="q-title">How many new leads or inquiries does your business receive each month?</div>
       <div class="q-sub">Include all channels — phone, web, referral, walk-in.</div>
-      <div class="exp-input-row">
-        <label for="inp-leads">Your monthly leads:</label>
-        <input type="number" id="inp-leads" value="50" min="1" max="99999" oninput="anchorSlider('leads')">
-        <span class="exp-unit">leads/mo</span>
-      </div>
       <div class="slider-row">
         <span class="slider-name">Monthly Leads</span>
-        <span class="slider-val" id="lbl-leads">50 leads/mo</span>
+        <span class="slider-val needs-input" id="lbl-leads">← slide to set yours</span>
       </div>
-      <input type="range" id="sl-leads" min="0" max="1000" step="1" value="250" oninput="slideUpdate('leads')">
+      <input type="range" id="sl-leads" min="0" max="100" step="1" value="0" oninput="leadsUpdate()">
       <div class="exp-scale">
-        <span id="scale-min-leads">17</span>
-        <span class="scale-anchor" id="scale-anchor-leads">50 (yours)</span>
-        <span id="scale-max-leads">500</span>
+        <span>10</span><span>50</span><span>250</span><span>1,000</span><span>5,000</span>
       </div>
     </div>
 
-    <!-- Q2: Deal Value — EXPONENTIAL ANCHORED -->
+    <!-- Q2: Deal Value — FILL IN THE BLANK ONLY -->
     <div class="q-section">
-      <div class="q-label">Question 2 of 6</div>
+      <div class="q-label">Question 2 of 7</div>
       <div class="q-title">What is your average contract or transaction value?</div>
       <div class="q-sub">The typical dollar amount when you close a deal.</div>
       <div class="exp-input-row">
         <label for="inp-deal">Your avg deal:</label>
-        <input type="number" id="inp-deal" value="" placeholder="e.g. 5000" min="1" max="9999999" oninput="anchorSlider('deal')">
+        <input type="number" id="inp-deal" value="" placeholder="e.g. 5000" min="1" max="9999999" oninput="dealUpdate()">
         <span class="exp-unit">$</span>
       </div>
       <div class="slider-row">
         <span class="slider-name">Average Deal Value</span>
-        <span class="slider-val needs-input" id="lbl-deal">← enter your number above</span>
-      </div>
-      <input type="range" id="sl-deal" min="0" max="1000" step="1" value="250" oninput="slideUpdate('deal')" disabled>
-      <div class="exp-scale">
-        <span id="scale-min-deal">—</span>
-        <span class="scale-anchor" id="scale-anchor-deal">your # (25%)</span>
-        <span id="scale-max-deal">—</span>
+        <span class="slider-val needs-input" id="lbl-deal">← type your number above</span>
       </div>
     </div>
 
     <!-- Q3: Leads Per Sale — Fine-grained 1-500 slider -->
     <div class="q-section">
-      <div class="q-label">Question 3 of 6</div>
+      <div class="q-label">Question 3 of 7</div>
       <div class="q-title">How many leads do you typically need to close one sale?</div>
       <div class="q-sub">If 10 leads come in and you close 2, the answer is 5. Be honest — this drives the math.</div>
       <div class="slider-row">
@@ -201,9 +184,9 @@
       </div>
     </div>
 
-    <!-- Q4: Response Speed — CHIPS (unchanged) -->
+    <!-- Q4: Response Speed — CHIPS -->
     <div class="q-section">
-      <div class="q-label">Question 4 of 6 — Biggest AI Lever</div>
+      <div class="q-label">Question 4 of 7 — Biggest AI Lever</div>
       <div class="q-title">How fast does your business typically respond to a new lead?</div>
       <div class="q-sub">Speed-to-lead is the single largest driver of close rate improvement with AI. Be honest.</div>
       <div class="chips" id="chips-speed">
@@ -216,11 +199,26 @@
       </div>
     </div>
 
-    <div class="section-divider" style="margin-top:2rem;">Deployment & Investment — What Comes First?</div>
-
-    <!-- Q5: Blueprint Capability First — CHIPS (unchanged) -->
+    <!-- Q5: Hours per week on sales outreach — SIMPLE SLIDER (1-40+) -->
     <div class="q-section">
-      <div class="q-label">Question 5 of 6</div>
+      <div class="q-label">Question 5 of 7</div>
+      <div class="q-title">How many hours per week does your team spend on lead follow-up and sales outreach?</div>
+      <div class="q-sub">Includes calling, texting, emailing, and manually updating your CRM.</div>
+      <div class="slider-row">
+        <span class="slider-name">Hours per Week</span>
+        <span class="slider-val needs-input" id="lbl-hours">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-hours" min="0" max="42" step="1" value="0" oninput="hoursUpdate()">
+      <div class="exp-scale">
+        <span>1 hr</span><span>10</span><span>20</span><span>30</span><span>40+</span>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2rem;">Deployment — What Comes First?</div>
+
+    <!-- Q6: Blueprint Capability First — CHIPS -->
+    <div class="q-section">
+      <div class="q-label">Question 6 of 7</div>
       <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
       <div class="q-sub">This determines how much setup time is required on our end to get you results immediately.</div>
       <div class="chips" id="chips-capability">
@@ -232,9 +230,9 @@
       </div>
     </div>
 
-    <!-- Q6: Marketing Spend — EXPONENTIAL ANCHORED -->
+    <!-- Q7: Marketing Spend — EXPONENTIAL ANCHORED -->
     <div class="q-section">
-      <div class="q-label">Question 6 of 6</div>
+      <div class="q-label">Question 7 of 7</div>
       <div class="q-title">How much are you currently spending per month on marketing, including ad spend?</div>
       <div class="q-sub">Include paid ads, agency fees, lead gen services — everything you spend to attract new business.</div>
       <div class="exp-input-row">
@@ -263,7 +261,7 @@
 
       <div class="progress-bar-wrap">
         <div class="progress-bar-label">
-          <span id="progress-label">0 of 6 answered</span>
+          <span id="progress-label">0 of 7 answered</span>
           <span id="progress-pct">0%</span>
         </div>
         <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
@@ -294,20 +292,65 @@
 </p>
 
 <script>
-// ── EXPONENTIAL ANCHOR METHODOLOGY ───────────────────────────────────────────
-// V anchors at 25% of slider travel (pos 250 of 0-1000).
-// 0-25%  → V/3 to V   (piecewise exponential)
-// 25-100% → V  to 10V  (piecewise exponential)
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let leadsVal = null;   // set by leadsUpdate()
+let dealVal  = null;   // set by dealUpdate()
+let lpsVal   = null;   // set by lpsUpdate()
+let hoursVal = null;   // set by hoursUpdate()
 
-const anchors = { leads: 50, deal: null, mktg: null };
+// Anchored system — used only for Q7 marketing spend
+const anchors = { mktg: null };
+const chips   = { speed: null, capability: null };
 
-// ── LEADS PER SALE SCALE ─────────────────────────────────────────────────────
-// pos 0-14 → 1-15 exact (every integer) | pos 15-100 → 16-500 (log curve)
-let lpsVal = null;  // null = not entered
+// ── Q1: MONTHLY LEADS — exponential 10-5000 ──────────────────────────────────
+function posToLeads(pos) {
+  const raw = Math.round(10 * Math.pow(500, pos / 100));
+  if (raw < 20)   return Math.round(raw);
+  if (raw < 50)   return Math.round(raw / 5)  * 5;
+  if (raw < 200)  return Math.round(raw / 10) * 10;
+  if (raw < 500)  return Math.round(raw / 25) * 25;
+  if (raw < 1000) return Math.round(raw / 50) * 50;
+  if (raw < 2000) return Math.round(raw / 100) * 100;
+  return Math.round(raw / 250) * 250;
+}
 
+function leadsUpdate() {
+  const pos = +document.getElementById('sl-leads').value;
+  const sl  = document.getElementById('sl-leads');
+  const lbl = document.getElementById('lbl-leads');
+  if (pos === 0) {
+    leadsVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    leadsVal = posToLeads(pos);
+    lbl.textContent = fmtLeads(leadsVal) + ' leads/mo';
+    lbl.className   = 'slider-val';
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  update();
+}
+
+// ── Q2: DEAL VALUE — text input only ─────────────────────────────────────────
+function dealUpdate() {
+  const raw = parseFloat(document.getElementById('inp-deal').value);
+  const lbl = document.getElementById('lbl-deal');
+  if (!raw || raw <= 0) {
+    dealVal = null;
+    lbl.textContent = '← type your number above';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    dealVal = raw;
+    lbl.textContent = fmtMoney(raw);
+    lbl.className   = 'slider-val';
+  }
+  update();
+}
+
+// ── Q3: LEADS PER SALE — 1-500 (1-15 exact, 16-500 log) ─────────────────────
 function posToLPS(pos) {
   if (pos <= 14) return pos + 1;           // 1, 2, 3 … 15 exact
-  const t = (pos - 15) / 85;              // 0→1 across remaining range
+  const t = (pos - 15) / 85;
   const raw = Math.round(16 * Math.pow(500 / 16, t));
   if (raw <= 30)  return raw;
   if (raw <= 75)  return Math.round(raw / 5)  * 5;
@@ -325,25 +368,35 @@ function lpsUpdate() {
     lbl.textContent = lpsVal + (lpsVal === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + impliedPct + '% close)';
     lbl.className = 'slider-val';
     const sl = document.getElementById('sl-lps');
-    const pct = pos;  // 0-100
+    sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  }
+  update();
+}
+
+// ── Q5: HOURS PER WEEK — 1-40+ ───────────────────────────────────────────────
+function hoursUpdate() {
+  const h   = +document.getElementById('sl-hours').value;
+  const lbl = document.getElementById('lbl-hours');
+  const sl  = document.getElementById('sl-hours');
+  if (h === 0) {
+    hoursVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    hoursVal = h;
+    const display = h >= 40 ? '40+ hrs/week' : h + (h === 1 ? ' hr/week' : ' hrs/week');
+    lbl.textContent = display;
+    lbl.className   = 'slider-val';
+    const pct = h / 42 * 100;
     sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
   }
   update();
 }
 
+// ── Q7: MARKETING SPEND — anchored exponential ───────────────────────────────
 function expValue(V, p) {
   if (p <= 0.25) return (V / 3) * Math.pow(3, 4 * p);
   return V * Math.pow(10, (p - 0.25) / 0.75);
-}
-
-function valueToPos(V, val) {
-  if (val <= V) {
-    const p = Math.max(0, Math.log(val * 3 / V) / Math.log(3) / 4);
-    return Math.round(Math.min(250, p * 1000));
-  } else {
-    const p = 0.25 + 0.75 * Math.log10(val / V);
-    return Math.round(Math.max(250, Math.min(1000, p * 1000)));
-  }
 }
 
 function updateSliderFill(id, pos) {
@@ -353,7 +406,6 @@ function updateSliderFill(id, pos) {
 }
 
 function fmtNum(n, mode) {
-  if (mode === 'pct') return Math.min(100, Math.round(n * 10) / 10) + '%';
   if (mode === 'money') {
     if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
     if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
@@ -363,66 +415,52 @@ function fmtNum(n, mode) {
   return String(Math.round(n));
 }
 
-const modes = { leads: 'num', deal: 'money', mktg: 'money' };
-
 function updateScale(key) {
   const V = anchors[key];
   if (!V) return;
-  const m = modes[key];
-  document.getElementById('scale-min-' + key).textContent    = fmtNum(V / 3, m);
-  document.getElementById('scale-anchor-' + key).textContent = fmtNum(V, m) + ' (yours)';
-  document.getElementById('scale-max-' + key).textContent    = fmtNum(V * 10, m);
+  document.getElementById('scale-min-' + key).textContent    = fmtNum(V / 3, 'money');
+  document.getElementById('scale-anchor-' + key).textContent = fmtNum(V, 'money') + ' (yours)';
+  document.getElementById('scale-max-' + key).textContent    = fmtNum(V * 10, 'money');
 }
 
-// Called when user types in a number input
 function anchorSlider(key) {
   const inp = document.getElementById('inp-' + key);
   const raw = parseFloat(inp.value);
   if (!raw || raw <= 0) { anchors[key] = null; update(); return; }
-  const V = raw;
-  anchors[key] = V;
+  anchors[key] = raw;
 
   const sl = document.getElementById('sl-' + key);
-  sl.value = 250;  // anchor at 25%
+  sl.value = 250;
   sl.disabled = false;
   updateSliderFill('sl-' + key, 250);
   updateScale(key);
 
-  // Sync display label
   const lbl = document.getElementById('lbl-' + key);
-  lbl.textContent = fmtNum(V, modes[key]) + (key === 'leads' ? ' leads/mo' : key === 'rate' ? '' : '/mo' );
-  if (key === 'deal') lbl.textContent = fmtNum(V, 'money');
-  lbl.className = 'slider-val';
+  lbl.textContent = fmtNum(raw, 'money') + '/mo';
+  lbl.className   = 'slider-val';
 
   update();
 }
 
-// Called when user drags a slider
 function slideUpdate(key) {
   const V = anchors[key];
   if (!V) return;
-  const sl = document.getElementById('sl-' + key);
+  const sl  = document.getElementById('sl-' + key);
   const pos = +sl.value;
   const val = expValue(V, pos / 1000);
-
   updateSliderFill('sl-' + key, pos);
 
   const lbl = document.getElementById('lbl-' + key);
-  const m = modes[key];
-  lbl.textContent = fmtNum(val, m) + (key === 'leads' ? ' leads/mo' : '');
-  lbl.className = 'slider-val';
+  lbl.textContent = fmtNum(val, 'money') + '/mo';
+  lbl.className   = 'slider-val';
 
-  // Sync number input to match dragged value
   const inp = document.getElementById('inp-' + key);
-  if (key === 'rate') inp.value = Math.min(100, Math.round(val * 10) / 10);
-  else                inp.value = Math.round(val);
+  inp.value = Math.round(val);
 
   update();
 }
 
 // ── CHIP SELECTION ───────────────────────────────────────────────────────────
-const chips = { speed: null, capability: null };
-
 function selectChip(group, val) {
   document.getElementById('chips-' + group).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('chips-' + group).querySelector('[data-val="' + val + '"]').classList.add('selected');
@@ -440,33 +478,32 @@ function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
 
 // ── MAIN CALCULATOR ──────────────────────────────────────────────────────────
 function update() {
-  // Read current displayed values from slider positions
   function currentVal(key) {
     if (!anchors[key]) return null;
     const pos = +document.getElementById('sl-' + key).value;
     return expValue(anchors[key], pos / 1000);
   }
 
-  const leads = currentVal('leads');
-  const deal  = currentVal('deal');
-  const mktg  = currentVal('mktg');
+  const mktg = currentVal('mktg');
 
-  const leadsOk     = leads !== null && anchors.leads > 0;
-  const dealEntered = deal  !== null && deal  > 0;
-  const lpsEntered  = lpsVal !== null;
-  const mktgEntered = mktg  !== null && mktg  >= 0;
+  const leadsOk      = leadsVal !== null && leadsVal > 0;
+  const dealEntered  = dealVal  !== null && dealVal  > 0;
+  const lpsEntered   = lpsVal   !== null;
+  const hoursEntered = hoursVal !== null;
+  const mktgEntered  = mktg     !== null && mktg     >= 0;
 
-  // Progress
+  // Progress — 7 total
   let answered = 0;
   if (leadsOk)          answered++;
   if (dealEntered)      answered++;
   if (lpsEntered)       answered++;
   if (chips.speed)      answered++;
+  if (hoursEntered)     answered++;
   if (chips.capability) answered++;
   if (mktgEntered)      answered++;
-  answered = Math.min(answered, 6);
-  const pct = Math.round(answered / 6 * 100);
-  document.getElementById('progress-label').textContent = answered + ' of 6 answered';
+  answered = Math.min(answered, 7);
+  const pct = Math.round(answered / 7 * 100);
+  document.getElementById('progress-label').textContent = answered + ' of 7 answered';
   document.getElementById('progress-pct').textContent   = pct + '%';
   document.getElementById('progress-fill').style.width  = pct + '%';
 
@@ -477,9 +514,9 @@ function update() {
 
   let q90Gain = null;
   if (canROI) {
-    const curRate = 1 / lpsVal;                          // e.g. lps=5 → 20% close
+    const curRate = 1 / lpsVal;
     const newRate = Math.min(curRate + speedLift, 0.80);
-    const moGain  = Math.max(0, Math.round(leads) * (newRate - curRate) * deal);
+    const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
     q90Gain = moGain * 3;
 
     document.getElementById('roi-value').textContent = fmtMoney(q90Gain);
@@ -498,7 +535,7 @@ function update() {
   const vSub    = document.getElementById('verdict-sub');
   const bdText  = document.getElementById('breakdown-text');
   const cta     = document.getElementById('cta-apply');
-  const allDone = answered >= 6;
+  const allDone = answered >= 7;
 
   if (canROI) {
     const isGreen  = q90Gain >= 50000;
@@ -524,11 +561,13 @@ function update() {
     const liftPct  = Math.round(speedLift * 100);
     const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '—';
     const mktgStr  = mktgEntered ? (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo' : '—';
+    const hrsStr   = hoursEntered ? (hoursVal >= 40 ? '40+' : hoursVal) + ' hrs/wk' : '—';
     bdText.innerHTML =
-      '<span>Leads:</span> ' + fmtLeads(Math.round(leads)) + '/mo &nbsp;·&nbsp; ' +
+      '<span>Leads:</span> ' + fmtLeads(Math.round(leadsVal)) + '/mo &nbsp;·&nbsp; ' +
       '<span>Leads/sale:</span> ' + lpsVal + ' &nbsp;·&nbsp; ' +
-      '<span>Deal:</span> ' + fmtMoney(deal) + '<br>' +
+      '<span>Deal:</span> ' + fmtMoney(dealVal) + '<br>' +
       '<span>AI lift:</span> +' + liftPct + '% close rate &nbsp;·&nbsp; ' +
+      '<span>Team hrs:</span> ' + hrsStr + '<br>' +
       '<span>First deploy:</span> ' + capLabel + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + mktgStr;
 
     cta.style.opacity       = allDone ? '1'    : '0.5';
@@ -536,7 +575,7 @@ function update() {
   } else {
     vBlock.className        = 'verdict-block neutral';
     vIcon.textContent       = '📊';
-    vLabel.textContent      = 'Answer all 6 questions';
+    vLabel.textContent      = 'Answer all 7 questions';
     vSub.textContent        = 'Your fit score appears here';
     bdText.innerHTML        = '';
     cta.style.opacity       = '0.5';
@@ -544,8 +583,7 @@ function update() {
   }
 }
 
-// Init Q1 (leads has a default of 50)
-anchorSlider('leads');
+// Init
 update();
 </script>
 </body>
