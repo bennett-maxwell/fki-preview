@@ -80,9 +80,12 @@ for lead_entry in "${LEADS[@]}"; do
   
   echo ""
   echo "--- [$(date '+%H:%M:%S')] Processing: $NAME ($SLUG) ---"
-  
+
+  # Refresh Chrome cookies before each notebook to prevent 12-min session expiry
+  /Users/openclaw/fki-preview/.venv/bin/python3 /Users/openclaw/fki-preview/scripts/chrome-cookie-bridge.py 2>&1 | grep -E "VALID|ERROR|expired"
+
   SIZE_KB=$(du -k "$SOURCE_DOC" | cut -f1)
-  
+
   # Create notebook
   NOTEBOOK_NAME="FKI Blueprint - $NAME - v1.4"
   echo "Creating notebook: $NOTEBOOK_NAME"
