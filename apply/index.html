@@ -54,7 +54,9 @@
     .section-sub { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; }
 
     /* WHAT YOU GET */
-    .what-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+    .what-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    @media (max-width: 860px) { .what-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .what-grid { grid-template-columns: 1fr; } }
     .what-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.5rem; text-align: center; box-shadow: var(--shadow); }
     .what-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
     .what-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -89,17 +91,12 @@
     input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); cursor: pointer; }
     .slider-range-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-light); margin-top: 0.3rem; }
 
-    /* TOOL TOGGLE CHIPS */
-    .tool-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.65rem; }
-    .tool-chip { position: relative; }
-    .tool-chip input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
-    .tool-chip label { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.18s; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); background: var(--neutral-bg); user-select: none; min-height: 48px; }
-    .tool-chip label:hover { border-color: var(--brand); background: var(--white); color: var(--text); }
-    .tool-chip input:checked + label { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
-    .tool-chip label .chip-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.18s; background: var(--white); }
-    .tool-chip input:checked + label .chip-check { background: var(--brand-light); border-color: var(--brand-light); }
-    .tool-chip label .chip-check::after { content: '✓'; font-size: 0.7rem; font-weight: 900; color: var(--white); display: none; }
-    .tool-chip input:checked + label .chip-check::after { display: block; }
+    /* TOOL DROPDOWNS GRID */
+    .tool-dropdowns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 640px) { .tool-dropdowns { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 420px) { .tool-dropdowns { grid-template-columns: 1fr; } }
+    .tool-dropdown-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .tool-dropdown-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
 
     /* ROI REVEAL */
     .roi-reveal { display: none; margin-bottom: 1.5rem; background: var(--neutral-bg); border: 1.5px solid var(--brand); border-radius: var(--radius); overflow: hidden; }
@@ -148,7 +145,7 @@
       .form-wrap { padding: 1.5rem; }
       .hero { padding: 3.5rem 1.25rem 3rem; }
       .hero-divider { display: none; }
-      .tool-chips { grid-template-columns: 1fr; }
+      .tool-dropdowns { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -255,34 +252,85 @@
           <input type="hidden" id="revenue_label_hidden" name="revenue_label" value="$500K" />
         </div>
 
-        <!-- Q5: Tools — Toggle Chips -->
+        <!-- Q5: Tools — Per-category dropdowns -->
         <div class="form-group">
-          <label class="form-label"><span class="q-badge">5</span>Tools your business runs on <span style="font-weight:500;color:var(--text-light);font-size:0.8rem;">(tap all that apply)</span></label>
-          <p class="form-hint">Tap to select or deselect — you can choose multiple</p>
-          <div class="tool-chips">
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_crm" name="tools_crm" value="yes" />
-              <label for="tool_crm"><span class="chip-check"></span>CRM (GoHighLevel, HubSpot, Salesforce…)</label>
+          <label class="form-label"><span class="q-badge">5</span>Which tools does your business use?</label>
+          <p class="form-hint">Select the specific tool you use in each category — pick "None" if you don't use that type</p>
+          <div class="tool-dropdowns">
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">CRM</span>
+              <select name="tool_crm" class="form-control">
+                <option value="none">None</option>
+                <option value="gohighlevel">GoHighLevel</option>
+                <option value="hubspot">HubSpot</option>
+                <option value="salesforce">Salesforce</option>
+                <option value="pipedrive">Pipedrive</option>
+                <option value="zoho">Zoho CRM</option>
+                <option value="keap">Keap / Infusionsoft</option>
+                <option value="other_crm">Other CRM</option>
+              </select>
             </div>
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_comms" name="tools_comms" value="yes" />
-              <label for="tool_comms"><span class="chip-check"></span>Email / Comms (Gmail, Outlook, Slack…)</label>
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Email / Comms</span>
+              <select name="tool_email" class="form-control">
+                <option value="none">None</option>
+                <option value="gmail">Gmail / Google Workspace</option>
+                <option value="outlook">Outlook / Microsoft 365</option>
+                <option value="mailchimp">Mailchimp</option>
+                <option value="activecampaign">ActiveCampaign</option>
+                <option value="klaviyo">Klaviyo</option>
+                <option value="slack">Slack (team comms)</option>
+                <option value="other_email">Other</option>
+              </select>
             </div>
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_docs" name="tools_docs" value="yes" />
-              <label for="tool_docs"><span class="chip-check"></span>Docs / Storage (Google Drive, Notion, Airtable…)</label>
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Docs / Storage</span>
+              <select name="tool_docs" class="form-control">
+                <option value="none">None</option>
+                <option value="google_drive">Google Drive</option>
+                <option value="notion">Notion</option>
+                <option value="airtable">Airtable</option>
+                <option value="dropbox">Dropbox</option>
+                <option value="sharepoint">SharePoint / OneDrive</option>
+                <option value="other_docs">Other</option>
+              </select>
             </div>
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_pm" name="tools_project_mgmt" value="yes" />
-              <label for="tool_pm"><span class="chip-check"></span>Project Mgmt (Asana, Monday, ClickUp…)</label>
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Project Management</span>
+              <select name="tool_pm" class="form-control">
+                <option value="none">None</option>
+                <option value="asana">Asana</option>
+                <option value="monday">Monday.com</option>
+                <option value="clickup">ClickUp</option>
+                <option value="trello">Trello</option>
+                <option value="jira">Jira</option>
+                <option value="basecamp">Basecamp</option>
+                <option value="other_pm">Other</option>
+              </select>
             </div>
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_phone" name="tools_phone" value="yes" />
-              <label for="tool_phone"><span class="chip-check"></span>Phone / SMS (OpenPhone, RingCentral, Twilio…)</label>
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Phone / SMS</span>
+              <select name="tool_phone" class="form-control">
+                <option value="none">None</option>
+                <option value="openphone">OpenPhone</option>
+                <option value="ringcentral">RingCentral</option>
+                <option value="twilio">Twilio</option>
+                <option value="dialpad">Dialpad</option>
+                <option value="aircall">Aircall</option>
+                <option value="other_phone">Other</option>
+              </select>
             </div>
-            <div class="tool-chip">
-              <input type="checkbox" id="tool_social" name="tools_social" value="yes" />
-              <label for="tool_social"><span class="chip-check"></span>Social / Marketing (Meta Ads, Mailchimp, Canva…)</label>
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Social / Marketing</span>
+              <select name="tool_social" class="form-control">
+                <option value="none">None</option>
+                <option value="meta_ads">Meta Ads Manager</option>
+                <option value="google_ads">Google Ads</option>
+                <option value="canva">Canva</option>
+                <option value="buffer">Buffer / Hootsuite</option>
+                <option value="metricool">Metricool</option>
+                <option value="other_social">Other</option>
+              </select>
             </div>
           </div>
         </div>
@@ -530,12 +578,12 @@ function checkROITrigger() {
 
   function buildNote(d) {
     var tools = [];
-    if (d.tools_crm) tools.push('CRM');
-    if (d.tools_comms) tools.push('Comms');
-    if (d.tools_docs) tools.push('Docs');
-    if (d.tools_project_mgmt) tools.push('Project Mgmt');
-    if (d.tools_phone) tools.push('Phone/SMS');
-    if (d.tools_social) tools.push('Social/Marketing');
+    if (d.tool_crm && d.tool_crm !== 'none') tools.push('CRM: ' + d.tool_crm);
+    if (d.tool_email && d.tool_email !== 'none') tools.push('Email: ' + d.tool_email);
+    if (d.tool_docs && d.tool_docs !== 'none') tools.push('Docs: ' + d.tool_docs);
+    if (d.tool_pm && d.tool_pm !== 'none') tools.push('PM: ' + d.tool_pm);
+    if (d.tool_phone && d.tool_phone !== 'none') tools.push('Phone: ' + d.tool_phone);
+    if (d.tool_social && d.tool_social !== 'none') tools.push('Social: ' + d.tool_social);
     return [
       'Advaita AI Blueprint — Intake Form v3 (CEO design)',
       '---',
