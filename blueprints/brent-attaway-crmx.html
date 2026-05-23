@@ -222,7 +222,6 @@
     <li><a href="#snapshot">Your Profile</a></li>
     <li><a href="#agents">AI Agents</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
-    <li><a href="#listen">Listen</a></li>
     <li><a href="#apply">Apply</a></li>
   </ul>
 </nav>
@@ -546,9 +545,9 @@
         <div>
           <div class="calc-label-row">
             <span class="calc-slider-label">Avg Engagement Value</span>
-            <span class="calc-slider-val" id="lbl-contract">$12,000</span>
+            <span class="calc-slider-val" id="lbl-contract">(enter yours)</span>
           </div>
-          <input type="range" class="calc-slider" id="sl-contract" min="2000" max="60000" step="1000" value="12000" oninput="updateLabel('contract'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-contract" min="2000" max="60000" step="1000" value="2000" data-no-default="true" oninput="updateLabel('contract'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row">
@@ -560,9 +559,9 @@
         <div>
           <div class="calc-label-row">
             <span class="calc-slider-label">Current Close Rate</span>
-            <span class="calc-slider-val" id="lbl-rate">35%</span>
+            <span class="calc-slider-val" id="lbl-rate">(enter yours)</span>
           </div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="70" step="1" value="35" oninput="updateLabel('rate'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="70" step="1" value="5" data-no-default="true" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row">
@@ -1060,7 +1059,7 @@ CRM Xperts — a Perfozi Company
         <div class="path">
           <h4>Partner Path</h4>
           <p>We build the full 6-agent system on your existing Salesforce and Zoho infrastructure, trained on CRM Xperts' qualification criteria, voice, and workflows. Starting in 48 hours.</p>
-          <a href="https://blueprint.meetadvaita.com/apply" class="path-cta">Get Your AI Quote</a>
+          <a href="https://blueprint.meetadvaita.com/apply" class="path-cta">Apply to Work with Bennett</a>
         </div>
       </div>
     </div>
@@ -1078,43 +1077,6 @@ CRM Xperts — a Perfozi Company
       <div class="audit-card"><div class="audit-score">31</div><div class="audit-phase">Speed-to-Lead</div><div class="audit-detail">No automated response to inquiry forms — manual follow-up only</div><div class="audit-bar"><div class="audit-bar-fill" style="width:31%"></div></div></div>
       <div class="audit-card"><div class="audit-score">22</div><div class="audit-phase">AI Readiness</div><div class="audit-detail">ChatGPT used ad-hoc with no systematic automation or agent infrastructure</div><div class="audit-bar"><div class="audit-bar-fill" style="width:22%"></div></div></div>
       <div class="audit-card"><div class="audit-score">44</div><div class="audit-phase">Content Pipeline</div><div class="audit-detail">Active site but limited automated content production for thought leadership</div><div class="audit-bar"><div class="audit-bar-fill" style="width:44%"></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PODCAST / LISTEN -->
-<section class="section section-alt" id="listen">
-  <div class="container">
-    <p class="section-label">Your Personalized Podcast</p>
-    <h2 class="section-title">Listen to Your AI Advantage Roadmap</h2>
-    <p class="section-sub">Two AI hosts walk through your exact business, tools, and opportunities &mdash; built specifically for CRM Xperts. About 20 minutes.</p>
-    <div class="podcast-wrap">
-      <div class="podcast-title">CRM Xperts &mdash; AI Advantage Deep Dive</div>
-      <div class="podcast-sub">Brent Attaway &middot; CRM Xperts &mdash; covers your gaps, your tool stack, your 6 agents, and exactly what to do first.</div>
-      <div class="podcast-meta">
-        <span class="podcast-meta-item">&#9654; ~20 minutes</span>
-        <span class="podcast-meta-item">&#127911; CRM Consulting + AI</span>
-        <span class="podcast-meta-item">&#128100; Prepared for Brent Attaway</span>
-      </div>
-      <div class="podcast-player">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
-          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/brent-attaway-crmx.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/brent-attaway-crmx.mp3" style="color:var(--brand-light)">Download the podcast</a>.
-        </audio>
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-light);color:var(--brand-dark);border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
-          <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
-        </div>
-        <style>.speed-active{background:rgba(29,111,219,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
-      </div>
-      <div class="podcast-quotes">
-        <div class="podcast-quote">"The CRM consulting firms that compound over the next 3 years will not be the ones with the biggest bench &mdash; they will be the ones whose systems respond first, prepare better, and never let a client go at-risk without a flag."</div>
-        <div class="podcast-quote">"For a firm like CRM Xperts, AI is not about replacing your certified developers. It is about making sure more of the right clients experience your work &mdash; and that the ones you already have never feel like they are falling through the cracks."</div>
-      </div>
     </div>
   </div>
 </section>
@@ -1143,7 +1105,7 @@ CRM Xperts — a Perfozi Company
     <h2>Ready to See This<br><span>Working for CRM Xperts?</span></h2>
     <p class="cta-personal">"Brent, I want to be direct with you. CRM Xperts already has the infrastructure &mdash; 50 developers, Salesforce and Zoho expertise, a bench ready to deploy. The gap is in how leads come in, how proposals go out, and how client health is tracked at scale. We only take on a handful of clients per month. If you want to see what custom pricing looks like for your specific situation, the link below takes 2 minutes."</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn">Get Your AI Quote</a>
+    <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn">Apply to Work with Bennett</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -1158,7 +1120,7 @@ CRM Xperts — a Perfozi Company
 
 <!-- Sticky mobile CTA -->
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://blueprint.meetadvaita.com/apply" class="mobile-cta-btn">Get Your AI Quote</a>
+  <a href="https://blueprint.meetadvaita.com/apply" class="mobile-cta-btn">Apply to Work with Bennett</a>
 </div>
 
 <script>
