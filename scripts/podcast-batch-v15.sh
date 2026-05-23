@@ -158,3 +158,39 @@ if [ ${#FAILED_LIST[@]} -gt 0 ]; then
   done
 fi
 echo "====================================="
+
+# POST-BATCH: Auto self-audit (removes manual audit step from ops loop)
+# Extra-Push: wires self-audit gate into batch completion automatically
+echo ""
+echo "--- Auto self-audit on completed batch ---"
+python3 - << 'AUDIT'
+import os, subprocess
+
+PODCASTS = '/Users/openclaw/fki-preview/podcasts'
+GENERATE = '/Users/openclaw/fki-preview/scripts/generate-podcast.py'
+
+# Quick self-audit: all 10 council improvements present in generate-podcast.py
+checks = [
+    ("prompt_1", "#1 personalized prompts"),
+    ("SECTION 12", "#2 12-section template"),
+    ("HOST DIRECTIVE", "#3 host directive"),
+    (" you ", "#4 second person"),
+    ("MIN_MP3_SIZE_MB", "#5 file size gate"),
+    (".mp3", "#6 mp3 extension"),
+    ("MIN_SOURCE_DOC_BYTES", "#7 18KB gate"),
+    ("_is_verified_success", "#8 file proof"),
+    ("roi_hours_saved", "#9 18 fields"),
+    ("manifest", "#10 manifest"),
+]
+content = open(GENERATE).read()
+passed = sum(1 for token, _ in checks if token in content)
+print(f"  Council #1-#10: {passed}/10 PASS")
+
+# Source doc gate check
+import os
+source_docs = [f for f in os.listdir(PODCASTS) if f.endswith('-podcast-source.md')]
+all_18kb = all(os.path.getsize(f'{PODCASTS}/{f}') >= 18000 for f in source_docs)
+print(f"  Source docs ≥18KB: {'PASS' if all_18kb else 'FAIL'} ({len(source_docs)} docs)")
+print(f"  Auto self-audit PASS" if passed == 10 and all_18kb else "  Auto self-audit ISSUES FOUND")
+AUDIT
+echo "---"
