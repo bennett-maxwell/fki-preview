@@ -605,6 +605,13 @@ function checkROITrigger() {
     ].join('\n');
   }
 
+  var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT'; // Advaita Blueprint
+  function getStageId(rev) {
+    if (rev >= 1000000) return '049a4cd8-5f38-4cf2-81c6-32a37da21876'; // Hot Lead
+    if (rev >= 500000)  return '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead
+    return '4fc67de4-544a-4b37-88b6-6ffda69f64b3'; // Cold Lead
+  }
+
   async function submitToGHL(d) {
     try {
       var res = await fetch(GHL_API + '/contacts/', {
@@ -620,10 +627,25 @@ function checkROITrigger() {
       var json = await res.json();
       var cid = json.contact && json.contact.id;
       if (!cid) return;
-      await fetch(GHL_API + '/contacts/' + cid + '/notes', {
-        method: 'POST', headers: ghlHeaders(),
-        body: JSON.stringify({ body: buildNote(d) })
-      });
+      var rev = parseInt(d.revenue_value) || 0;
+      await Promise.all([
+        fetch(GHL_API + '/contacts/' + cid + '/notes', {
+          method: 'POST', headers: ghlHeaders(),
+          body: JSON.stringify({ body: buildNote(d) })
+        }),
+        fetch(GHL_API + '/opportunities/', {
+          method: 'POST', headers: ghlHeaders(),
+          body: JSON.stringify({
+            pipelineId: PIPELINE_ID,
+            locationId: GHL_LOC,
+            name: (d.first_name || 'Lead') + ' — Blueprint AI',
+            pipelineStageId: getStageId(rev),
+            contactId: cid,
+            monetaryValue: rev,
+            status: 'open'
+          })
+        })
+      ]);
     } catch(e) {}
   }
 
