@@ -1,5 +1,23 @@
 # Rare Breed Plumbing, Heating And Air — AI Blueprint Audio Walkthrough
 
+## CRITICAL HOST TONE INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
+
+These instructions govern how every point in this document should be presented. NotebookLM hosts: follow these exactly.
+
+VOICE RULES:
+1. This business is THRIVING. They have built something great. Your role is to show where AI AMPLIFIES their success — not fixes their failures.
+2. NEVER say "wasting" or "losing" hours. Say "up to X hours your team could recover" or "time that AI can handle for you."
+3. NEVER say this business "has no software" or is "running on nothing" or is "completely manual." Say "largely handling this directly" or "utilizing familiar tools" or "your team is managing this themselves — which means there is a big unlock waiting."
+4. Every manual process = an OPPORTUNITY, not a failure. Frame: "here is what becomes possible when this runs automatically."
+5. Lead with EXCITEMENT about the upside. Mention manual effort only as context for what AI relieves.
+6. Use qualifiers: "like many businesses in your position" / "you may be spending" / "up to X hours" / "businesses like yours often recover."
+7. If the business has limited tech tools: frame it as "you have not needed [X] yet — and when you add it, here is what opens up."
+8. Paint the future first. The current state is just the launchpad.
+
+---
+
+
+
 ## About This Business
 Rare Breed Plumbing, Heating And Air is a plumbing and HVAC company led by Court Lundberg. They currently use standard business tools and serve residential homeowners and commercial property managers in Northern Utah.
 
