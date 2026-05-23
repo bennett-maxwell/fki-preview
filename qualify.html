@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will AI Make You 10× Your Investment in 90 Days? — FKI Qualifier</title>
-<meta name="description" content="Answer 7 questions. Find out if AI will make you at least $50,000 in your first 90 days. Takes under 60 seconds.">
+<title>Does AI Qualify You for a 10X Return in 90 Days? — FKI Qualifier</title>
+<meta name="description" content="Answer 7 questions. Find out if AI can generate a 10X return on your investment within 90 days. Takes under 60 seconds.">
 <style>
   :root {
     --brand:       #1D6FDB;
@@ -33,7 +33,7 @@
   .hero-badge { display: inline-block; background: rgba(29,111,219,0.2); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
   .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
   .hero h1 span { color: var(--brand-light); }
-  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 540px; margin: 0 auto 1rem; }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto 1rem; }
 
   .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; align-items: start; }
   @media (max-width: 860px) { .main-wrap { grid-template-columns: 1fr; } }
@@ -93,18 +93,18 @@
   .result-block-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem; }
   .result-block-sub { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
   .result-block.green .result-block-value { color: #4ade80; }
+  .result-block.green .result-block-label { color: rgba(74,222,128,0.6); }
   .result-block.yellow .result-block-value { color: #fbbf24; }
-  .result-block.red .result-block-value { color: #f87171; }
   .result-block.neutral .result-block-value { color: rgba(255,255,255,0.3); font-size: 1.1rem; font-weight: 500; font-style: italic; }
 
-  .verdict-block { border-radius: 10px; padding: 1.4rem; margin-bottom: 1.5rem; text-align: center; }
+  .verdict-block { border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; text-align: center; }
   .verdict-block.green  { background: rgba(74,222,128,0.12);  border: 1.5px solid rgba(74,222,128,0.3); }
   .verdict-block.yellow { background: rgba(251,191,36,0.12);  border: 1.5px solid rgba(251,191,36,0.3); }
   .verdict-block.red    { background: rgba(248,113,113,0.1);  border: 1.5px solid rgba(248,113,113,0.25); }
   .verdict-block.neutral{ background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); }
   .verdict-icon  { font-size: 2rem; margin-bottom: 0.4rem; }
-  .verdict-label { font-size: 1.1rem; font-weight: 800; color: var(--white); }
-  .verdict-sub   { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+  .verdict-label { font-size: 1.05rem; font-weight: 800; color: var(--white); line-height: 1.25; }
+  .verdict-sub   { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; }
 
   .results-breakdown { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; line-height: 1.9; }
   .results-breakdown span { color: rgba(255,255,255,0.65); font-weight: 600; }
@@ -129,14 +129,14 @@
 
 <div class="hero">
   <div class="hero-badge">Free 60-Second Assessment</div>
-  <h1>Will AI make you <span>10× your investment</span><br>in the first 90 days?</h1>
-  <p class="hero-sub">Answer 7 questions. Get a real number — not a pitch. We only take clients where the math works on both sides. Takes under 60 seconds.</p>
+  <h1>Can AI generate a <span>10X return</span><br>on your investment in 90 days?</h1>
+  <p class="hero-sub">Answer 7 questions. We'll tell you if your business qualifies — and what you stand to gain. We only work with businesses where the math works. Takes under 60 seconds.</p>
 </div>
 
 <div class="main-wrap">
   <div class="questions-col">
 
-    <div class="section-divider">Revenue Potential — Can We Hit $50K in 90 Days?</div>
+    <div class="section-divider">Revenue Potential — Do the Numbers Qualify?</div>
 
     <!-- Q1: Monthly Leads — SIMPLE EXPONENTIAL SLIDER (10-5000) -->
     <div class="q-section">
@@ -199,7 +199,7 @@
       </div>
     </div>
 
-    <!-- Q5: Hours per week on sales outreach — SIMPLE SLIDER (1-40+) -->
+    <!-- Q5: Hours per week — SIMPLE SLIDER (1-40+) -->
     <div class="q-section">
       <div class="q-label">Question 5 of 7</div>
       <div class="q-title">How many hours per week does your team spend on lead follow-up and sales outreach?</div>
@@ -267,21 +267,23 @@
         <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
       </div>
 
-      <div class="result-block neutral" id="roi-block">
-        <div class="result-block-label">Estimated 90-Day Revenue Opportunity</div>
-        <div class="result-block-value" id="roi-value">—</div>
-        <div class="result-block-sub" id="roi-sub">Answer questions 1–4 to calculate</div>
-      </div>
-
+      <!-- 10X Qualification Verdict -->
       <div class="verdict-block neutral" id="verdict-block">
         <div class="verdict-icon" id="verdict-icon">📊</div>
-        <div class="verdict-label" id="verdict-label">Fill in your numbers above</div>
-        <div class="verdict-sub" id="verdict-sub">Your fit score appears here</div>
+        <div class="verdict-label" id="verdict-label">Your qualification appears here</div>
+        <div class="verdict-sub" id="verdict-sub">Answer questions 1–4 to calculate</div>
+      </div>
+
+      <!-- Time Savings Block — shows when Q5 answered -->
+      <div class="result-block neutral" id="savings-block" style="display:none;">
+        <div class="result-block-label">Potential Weekly Time Savings</div>
+        <div class="result-block-value" id="savings-value">—</div>
+        <div class="result-block-sub" id="savings-sub">hrs/week freed from manual follow-up</div>
       </div>
 
       <div class="results-breakdown" id="breakdown-text"></div>
 
-      <a class="cta-btn" id="cta-apply" href="https://blueprint.meetadvaita.com/apply" target="_blank" style="opacity:0.5;pointer-events:none;">Get Your AI Quote →</a>
+      <a class="cta-btn" id="cta-apply" href="https://blueprint.meetadvaita.com/apply" target="_blank" style="opacity:0.5;pointer-events:none;">Apply to Work With Bennett →</a>
     </div>
   </div>
 
@@ -293,12 +295,11 @@
 
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────────
-let leadsVal = null;   // set by leadsUpdate()
-let dealVal  = null;   // set by dealUpdate()
-let lpsVal   = null;   // set by lpsUpdate()
-let hoursVal = null;   // set by hoursUpdate()
+let leadsVal = null;
+let dealVal  = null;
+let lpsVal   = null;
+let hoursVal = null;
 
-// Anchored system — used only for Q7 marketing spend
 const anchors = { mktg: null };
 const chips   = { speed: null, capability: null };
 
@@ -349,7 +350,7 @@ function dealUpdate() {
 
 // ── Q3: LEADS PER SALE — 1-500 (1-15 exact, 16-500 log) ─────────────────────
 function posToLPS(pos) {
-  if (pos <= 14) return pos + 1;           // 1, 2, 3 … 15 exact
+  if (pos <= 14) return pos + 1;
   const t = (pos - 15) / 85;
   const raw = Math.round(16 * Math.pow(500 / 16, t));
   if (raw <= 30)  return raw;
@@ -393,6 +394,17 @@ function hoursUpdate() {
   update();
 }
 
+// ── TIME SAVINGS CALCULATOR ───────────────────────────────────────────────────
+// Estimate: AI automates ~50% of manual follow-up time
+// Range shown: -50% to +30% of that estimate (e.g. 10 hrs → 5–13 hrs)
+function calcTimeSavings(h) {
+  if (!h) return null;
+  const estimate = h * 0.5;
+  const low  = Math.max(1, Math.round(estimate * 0.5));
+  const high = Math.round(estimate * 1.3);
+  return { low, high };
+}
+
 // ── Q7: MARKETING SPEND — anchored exponential ───────────────────────────────
 function expValue(V, p) {
   if (p <= 0.25) return (V / 3) * Math.pow(3, 4 * p);
@@ -405,23 +417,12 @@ function updateSliderFill(id, pos) {
     `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
 }
 
-function fmtNum(n, mode) {
-  if (mode === 'money') {
-    if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
-    if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
-    return '$' + Math.round(n).toLocaleString();
-  }
-  if (n >= 1000) return Math.round(n).toLocaleString();
-  return String(Math.round(n));
+function fmtMoney(n) {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n).toLocaleString();
 }
-
-function updateScale(key) {
-  const V = anchors[key];
-  if (!V) return;
-  document.getElementById('scale-min-' + key).textContent    = fmtNum(V / 3, 'money');
-  document.getElementById('scale-anchor-' + key).textContent = fmtNum(V, 'money') + ' (yours)';
-  document.getElementById('scale-max-' + key).textContent    = fmtNum(V * 10, 'money');
-}
+function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
 
 function anchorSlider(key) {
   const inp = document.getElementById('inp-' + key);
@@ -433,10 +434,14 @@ function anchorSlider(key) {
   sl.value = 250;
   sl.disabled = false;
   updateSliderFill('sl-' + key, 250);
-  updateScale(key);
+
+  const V = raw;
+  document.getElementById('scale-min-' + key).textContent    = fmtMoney(V / 3);
+  document.getElementById('scale-anchor-' + key).textContent = fmtMoney(V) + ' (yours)';
+  document.getElementById('scale-max-' + key).textContent    = fmtMoney(V * 10);
 
   const lbl = document.getElementById('lbl-' + key);
-  lbl.textContent = fmtNum(raw, 'money') + '/mo';
+  lbl.textContent = fmtMoney(raw) + '/mo';
   lbl.className   = 'slider-val';
 
   update();
@@ -451,12 +456,10 @@ function slideUpdate(key) {
   updateSliderFill('sl-' + key, pos);
 
   const lbl = document.getElementById('lbl-' + key);
-  lbl.textContent = fmtNum(val, 'money') + '/mo';
+  lbl.textContent = fmtMoney(val) + '/mo';
   lbl.className   = 'slider-val';
 
-  const inp = document.getElementById('inp-' + key);
-  inp.value = Math.round(val);
-
+  document.getElementById('inp-' + key).value = Math.round(val);
   update();
 }
 
@@ -467,14 +470,6 @@ function selectChip(group, val) {
   chips[group] = val;
   update();
 }
-
-// ── FORMAT HELPERS ───────────────────────────────────────────────────────────
-function fmtMoney(n) {
-  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
-  if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
-  return '$' + Math.round(n).toLocaleString();
-}
-function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
 
 // ── MAIN CALCULATOR ──────────────────────────────────────────────────────────
 function update() {
@@ -507,67 +502,55 @@ function update() {
   document.getElementById('progress-pct').textContent   = pct + '%';
   document.getElementById('progress-fill').style.width  = pct + '%';
 
-  // ── ROI ──────────────────────────────────────────────────────────────────
+  // ── 10X ROI CALCULATION (used for qualification only — no dollar shown) ───
   const speedLift = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
-  const canROI    = leadsOk && dealEntered && lpsEntered && chips.speed;
-  const roiBlock  = document.getElementById('roi-block');
+  const canQualify = leadsOk && dealEntered && lpsEntered && chips.speed;
 
-  let q90Gain = null;
-  if (canROI) {
+  let qualifies10x = null;  // 'strong' | 'possible' | 'no'
+  if (canQualify) {
     const curRate = 1 / lpsVal;
     const newRate = Math.min(curRate + speedLift, 0.80);
     const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
-    q90Gain = moGain * 3;
-
-    document.getElementById('roi-value').textContent = fmtMoney(q90Gain);
-    document.getElementById('roi-sub').textContent   = fmtMoney(moGain) + '/mo additional from AI response speed';
-    roiBlock.className = 'result-block ' + (q90Gain >= 50000 ? 'green' : q90Gain >= 20000 ? 'yellow' : 'red');
-  } else {
-    roiBlock.className = 'result-block neutral';
-    document.getElementById('roi-value').textContent = '—';
-    document.getElementById('roi-sub').textContent   = 'Answer questions 1–4 to calculate';
+    const q90Gain = moGain * 3;
+    qualifies10x  = q90Gain >= 50000 ? 'strong' : q90Gain >= 20000 ? 'possible' : 'no';
   }
 
-  // ── VERDICT ──────────────────────────────────────────────────────────────
-  const vBlock  = document.getElementById('verdict-block');
-  const vIcon   = document.getElementById('verdict-icon');
-  const vLabel  = document.getElementById('verdict-label');
-  const vSub    = document.getElementById('verdict-sub');
-  const bdText  = document.getElementById('breakdown-text');
-  const cta     = document.getElementById('cta-apply');
+  // ── VERDICT: 10X QUALIFICATION ───────────────────────────────────────────
+  const vBlock = document.getElementById('verdict-block');
+  const vIcon  = document.getElementById('verdict-icon');
+  const vLabel = document.getElementById('verdict-label');
+  const vSub   = document.getElementById('verdict-sub');
+  const bdText = document.getElementById('breakdown-text');
+  const cta    = document.getElementById('cta-apply');
   const allDone = answered >= 7;
 
-  if (canROI) {
-    const isGreen  = q90Gain >= 50000;
-    const isYellow = q90Gain >= 20000;
-
-    if (isGreen) {
-      vBlock.className   = 'verdict-block green';
+  if (canQualify) {
+    if (qualifies10x === 'strong') {
+      vBlock.className = 'verdict-block green';
       vIcon.textContent  = '✅';
-      vLabel.textContent = 'Strong Fit — 10x+ Opportunity';
-      vSub.textContent   = 'The numbers support a strong outcome. Apply below.';
-    } else if (isYellow) {
-      vBlock.className   = 'verdict-block yellow';
+      vLabel.textContent = 'Qualifies for 10X Return in 90 Days';
+      vSub.textContent   = 'Your numbers support a strong outcome. Apply below to get started.';
+    } else if (qualifies10x === 'possible') {
+      vBlock.className = 'verdict-block yellow';
       vIcon.textContent  = '⚠️';
-      vLabel.textContent = 'Possible Fit — Talk With Someone First';
-      vSub.textContent   = 'There\'s opportunity here, but let\'s verify the details together.';
+      vLabel.textContent = 'Borderline — Worth a Conversation';
+      vSub.textContent   = 'There\'s real potential here. Let\'s verify the details together.';
     } else {
-      vBlock.className   = 'verdict-block red';
+      vBlock.className = 'verdict-block red';
       vIcon.textContent  = '❌';
-      vLabel.textContent = 'Poor Fit at Current Numbers';
-      vSub.textContent   = 'Volume or deal size doesn\'t generate enough upside right now.';
+      vLabel.textContent = 'Doesn\'t Qualify at Current Volume';
+      vSub.textContent   = 'Your current lead volume or deal size may not generate enough return yet.';
     }
 
     const liftPct  = Math.round(speedLift * 100);
     const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '—';
-    const mktgStr  = mktgEntered ? (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo' : '—';
+    const mktgStr  = mktgEntered ? fmtMoney(mktg) + '/mo' : '—';
     const hrsStr   = hoursEntered ? (hoursVal >= 40 ? '40+' : hoursVal) + ' hrs/wk' : '—';
     bdText.innerHTML =
       '<span>Leads:</span> ' + fmtLeads(Math.round(leadsVal)) + '/mo &nbsp;·&nbsp; ' +
       '<span>Leads/sale:</span> ' + lpsVal + ' &nbsp;·&nbsp; ' +
       '<span>Deal:</span> ' + fmtMoney(dealVal) + '<br>' +
-      '<span>AI lift:</span> +' + liftPct + '% close rate &nbsp;·&nbsp; ' +
-      '<span>Team hrs:</span> ' + hrsStr + '<br>' +
+      '<span>AI close lift:</span> +' + liftPct + '% &nbsp;·&nbsp; <span>Team hrs:</span> ' + hrsStr + '<br>' +
       '<span>First deploy:</span> ' + capLabel + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + mktgStr;
 
     cta.style.opacity       = allDone ? '1'    : '0.5';
@@ -575,11 +558,23 @@ function update() {
   } else {
     vBlock.className        = 'verdict-block neutral';
     vIcon.textContent       = '📊';
-    vLabel.textContent      = 'Answer all 7 questions';
-    vSub.textContent        = 'Your fit score appears here';
+    vLabel.textContent      = 'Your qualification appears here';
+    vSub.textContent        = 'Answer questions 1–4 to calculate';
     bdText.innerHTML        = '';
     cta.style.opacity       = '0.5';
     cta.style.pointerEvents = 'none';
+  }
+
+  // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
+  const savingsBlock = document.getElementById('savings-block');
+  if (hoursEntered) {
+    const s = calcTimeSavings(hoursVal);
+    savingsBlock.style.display = '';
+    savingsBlock.className = 'result-block green';
+    document.getElementById('savings-value').textContent = s.low + '–' + s.high;
+    document.getElementById('savings-sub').textContent   = 'hrs/week freed from manual follow-up';
+  } else {
+    savingsBlock.style.display = 'none';
   }
 }
 
