@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will AI Make You 10× Your Investment in 90 Days? — FKI Qualifier</title>
+<meta name="description" content="Answer 8 questions. Find out if AI will make you at least $50,000 in your first 90 days — and how much work it takes to deliver.">
+<style>
+  :root {
+    --brand:       #1D6FDB;
+    --brand-dark:  #0A0E1A;
+    --brand-light: #4A90E2;
+    --neutral-bg:  #f8f8f8;
+    --white:       #ffffff;
+    --text:        #0A0E1A;
+    --text-muted:  #3a3a3a;
+    --text-light:  #888888;
+    --border:      #e2e2e2;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(29,111,219,0.08);
+    --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --yellow: #d97706;
+    --yellow-bg: #fffbeb;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; text-decoration: none; }
+  .nav-logo span { color: var(--brand-light); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 4rem 2rem 3.5rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(29,111,219,0.2); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: var(--brand-light); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 540px; margin: 0 auto 1rem; }
+  .hero-rule { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.8rem; flex-wrap: wrap; }
+  .hero-rule-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.9); }
+  .hero-rule-item strong { color: var(--brand-light); }
+
+  /* MAIN LAYOUT */
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; align-items: start; }
+  @media (max-width: 860px) { .main-wrap { grid-template-columns: 1fr; } }
+
+  /* QUESTIONS */
+  .questions-col {}
+  .q-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+  .q-section:last-child { margin-bottom: 0; }
+  .q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
+  .q-title { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.4rem; }
+
+  /* SLIDERS */
+  .slider-row { margin-bottom: 0.4rem; display: flex; justify-content: space-between; align-items: center; }
+  .slider-name { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+  .slider-val { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .slider-val.needs-input { color: var(--text-light); font-style: italic; font-size: 0.88rem; font-weight: 500; }
+  input[type=range] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand-dark); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 2px solid var(--white); box-shadow: 0 1px 6px rgba(0,0,0,0.18); }
+
+  /* CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
+  .chip { padding: 0.5rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.88rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; user-select: none; line-height: 1.3; }
+  .chip:hover { border-color: var(--brand-light); color: var(--brand); background: #f0f6ff; }
+  .chip.selected { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
+  .chip.multi-selected { border-color: var(--brand); background: #eef4ff; color: var(--brand); }
+
+  /* RESULTS PANEL */
+  .results-col { position: sticky; top: 80px; }
+  .results-card { background: var(--brand-dark); border-radius: var(--radius); padding: 2rem; color: var(--white); box-shadow: var(--shadow-md); }
+  .results-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
+  .result-block { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; }
+  .result-block-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 0.4rem; }
+  .result-block-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem; }
+  .result-block-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+  .result-block.green .result-block-value { color: #4ade80; }
+  .result-block.yellow .result-block-value { color: #fbbf24; }
+  .result-block.red .result-block-value { color: #f87171; }
+  .result-block.neutral .result-block-value { color: rgba(255,255,255,0.35); font-size: 1.1rem; font-weight: 500; font-style: italic; }
+
+  .verdict-block { border-radius: 10px; padding: 1.4rem; margin-bottom: 1.5rem; text-align: center; }
+  .verdict-block.green { background: rgba(74,222,128,0.12); border: 1.5px solid rgba(74,222,128,0.3); }
+  .verdict-block.yellow { background: rgba(251,191,36,0.12); border: 1.5px solid rgba(251,191,36,0.3); }
+  .verdict-block.red { background: rgba(248,113,113,0.1); border: 1.5px solid rgba(248,113,113,0.25); }
+  .verdict-block.neutral { background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); }
+  .verdict-icon { font-size: 2rem; margin-bottom: 0.4rem; }
+  .verdict-label { font-size: 1.1rem; font-weight: 800; color: var(--white); }
+  .verdict-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 0.3rem; }
+
+  .results-breakdown { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; line-height: 1.8; }
+  .results-breakdown span { color: rgba(255,255,255,0.7); font-weight: 600; }
+
+  .cta-btn { display: block; width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 9px; padding: 0.95rem; font-size: 1rem; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
+  .cta-btn:hover { background: var(--brand-light); }
+  .cta-btn:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.35); cursor: not-allowed; }
+
+  .progress-bar-wrap { margin-bottom: 1.5rem; }
+  .progress-bar-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-light), #4ade80); border-radius: 2px; transition: width 0.4s ease; }
+
+  /* SECTION DIVIDER */
+  .section-divider { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); padding: 0.4rem 0; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* MOBILE RESULTS */
+  @media (max-width: 860px) {
+    .results-col { position: static; }
+    .results-card { margin-top: 1rem; }
+  }
+
+  /* DISCLAIMER */
+  .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
+  .disclaimer a { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://franchiseki.com">Franchise<span>KI</span> · AI Qualifier</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Free 60-Second Assessment</div>
+  <h1>Will AI make you <span>10× your investment</span><br>in the first 90 days?</h1>
+  <p class="hero-sub">Answer 8 questions. Get a real number — not a pitch. We only take clients where the math works on both sides.</p>
+  <div class="hero-rule">
+    <div class="hero-rule-item">Setup fee: <strong>$5,000</strong></div>
+    <div class="hero-rule-item">Target return: <strong>$50,000+</strong> in 90 days</div>
+    <div class="hero-rule-item">Bennett's time: <strong>≤ 1 hour</strong> to deliver</div>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <!-- QUESTIONS COLUMN -->
+  <div class="questions-col">
+
+    <!-- SECTION A: REVENUE POTENTIAL -->
+    <div class="section-divider">Revenue Potential — Can We Hit $50K in 90 Days?</div>
+
+    <!-- Q1: Monthly Leads -->
+    <div class="q-section">
+      <div class="q-label">Question 1 of 8</div>
+      <div class="q-title">How many new leads or inquiries does your business receive each month?</div>
+      <div class="q-sub">Include all channels — phone, web, referral, walk-in.</div>
+      <div class="slider-row">
+        <span class="slider-name">Monthly Leads</span>
+        <span class="slider-val" id="lbl-leads">20</span>
+      </div>
+      <input type="range" id="sl-leads" min="5" max="300" step="5" value="20" oninput="update()">
+    </div>
+
+    <!-- Q2: Deal Value -->
+    <div class="q-section">
+      <div class="q-label">Question 2 of 8</div>
+      <div class="q-title">What is your average contract or transaction value?</div>
+      <div class="q-sub">The typical dollar amount when you close a deal.</div>
+      <div class="slider-row">
+        <span class="slider-name">Average Deal Value</span>
+        <span class="slider-val needs-input" id="lbl-deal" data-no-default="true">← slide to enter yours</span>
+      </div>
+      <input type="range" id="sl-deal" min="500" max="50000" step="500" value="500" data-no-default="true" oninput="update()">
+    </div>
+
+    <!-- Q3: Close Rate -->
+    <div class="q-section">
+      <div class="q-label">Question 3 of 8</div>
+      <div class="q-title">What percentage of your leads do you currently close?</div>
+      <div class="q-sub">Out of 100 leads, how many become paying customers?</div>
+      <div class="slider-row">
+        <span class="slider-name">Current Close Rate</span>
+        <span class="slider-val needs-input" id="lbl-rate" data-no-default="true">← slide to enter yours</span>
+      </div>
+      <input type="range" id="sl-rate" min="2" max="70" step="1" value="2" data-no-default="true" oninput="update()">
+    </div>
+
+    <!-- Q4: Response Speed -->
+    <div class="q-section">
+      <div class="q-label">Question 4 of 8 — Biggest AI Lever</div>
+      <div class="q-title">How fast does your business typically respond to a new lead?</div>
+      <div class="q-sub">Speed-to-lead is the #1 driver of close rate improvement with AI. Be honest.</div>
+      <div class="chips" id="chips-speed">
+        <div class="chip" data-val="instant" onclick="selectChip('speed','instant')">Under 5 minutes</div>
+        <div class="chip" data-val="30min" onclick="selectChip('speed','30min')">Within 30 minutes</div>
+        <div class="chip" data-val="1to4hr" onclick="selectChip('speed','1to4hr')">1–4 hours</div>
+        <div class="chip" data-val="sameday" onclick="selectChip('speed','sameday')">Same day</div>
+        <div class="chip" data-val="nextday" onclick="selectChip('speed','nextday')">Next day</div>
+        <div class="chip" data-val="inconsistent" onclick="selectChip('speed','inconsistent')">Inconsistent</div>
+      </div>
+    </div>
+
+    <!-- SECTION B: ONBOARDING EFFORT -->
+    <div class="section-divider" style="margin-top:2rem;">Delivery Feasibility — Can Bennett Do It in ≤ 1 Hour?</div>
+
+    <!-- Q5: CRM -->
+    <div class="q-section">
+      <div class="q-label">Question 5 of 8</div>
+      <div class="q-title">What do you currently use to track your leads and customers?</div>
+      <div class="q-sub">This determines how much setup work is involved on our end.</div>
+      <div class="chips" id="chips-crm">
+        <div class="chip" data-val="ghl" onclick="selectChip('crm','ghl')">GoHighLevel / HL</div>
+        <div class="chip" data-val="hubspot" onclick="selectChip('crm','hubspot')">HubSpot</div>
+        <div class="chip" data-val="salesforce" onclick="selectChip('crm','salesforce')">Salesforce</div>
+        <div class="chip" data-val="spreadsheets" onclick="selectChip('crm','spreadsheets')">Spreadsheets / Email</div>
+        <div class="chip" data-val="nothing" onclick="selectChip('crm','nothing')">Nothing yet</div>
+      </div>
+    </div>
+
+    <!-- Q6: Business Type -->
+    <div class="q-section">
+      <div class="q-label">Question 6 of 8</div>
+      <div class="q-title">Which best describes your business?</div>
+      <div class="q-sub">We have ready-to-deploy AI templates for certain business types — this determines how much custom work is needed.</div>
+      <div class="chips" id="chips-biz">
+        <div class="chip" data-val="homeservice" onclick="selectChip('biz','homeservice')">Home Service</div>
+        <div class="chip" data-val="franchise" onclick="selectChip('biz','franchise')">Franchise</div>
+        <div class="chip" data-val="restaurant" onclick="selectChip('biz','restaurant')">Restaurant / Food</div>
+        <div class="chip" data-val="medspa" onclick="selectChip('biz','medspa')">Med Spa / Wellness</div>
+        <div class="chip" data-val="realestate" onclick="selectChip('biz','realestate')">Real Estate</div>
+        <div class="chip" data-val="agency" onclick="selectChip('biz','agency')">Agency</div>
+        <div class="chip" data-val="consultant" onclick="selectChip('biz','consultant')">Consultant / Coach</div>
+        <div class="chip" data-val="other" onclick="selectChip('biz','other')">Other</div>
+      </div>
+    </div>
+
+    <!-- Q7: Locations -->
+    <div class="q-section">
+      <div class="q-label">Question 7 of 8</div>
+      <div class="q-title">How many locations or markets does your business operate in?</div>
+      <div class="q-sub">Each additional location adds setup complexity.</div>
+      <div class="slider-row">
+        <span class="slider-name">Number of Locations</span>
+        <span class="slider-val" id="lbl-locs">1</span>
+      </div>
+      <input type="range" id="sl-locs" min="1" max="20" step="1" value="1" oninput="update()">
+    </div>
+
+    <!-- Q8: Decision Maker -->
+    <div class="q-section">
+      <div class="q-label">Question 8 of 8</div>
+      <div class="q-title">Who makes the final call on new tools and vendor relationships?</div>
+      <div class="q-sub">Stakeholder complexity is the #1 driver of implementation drag.</div>
+      <div class="chips" id="chips-decision">
+        <div class="chip" data-val="justme" onclick="selectChip('decision','justme')">Just me</div>
+        <div class="chip" data-val="partner" onclick="selectChip('decision','partner')">Me + 1 partner</div>
+        <div class="chip" data-val="smallteam" onclick="selectChip('decision','smallteam')">Small team (3–10)</div>
+        <div class="chip" data-val="committee" onclick="selectChip('decision','committee')">Requires committee</div>
+      </div>
+    </div>
+
+  </div><!-- /questions-col -->
+
+  <!-- RESULTS COLUMN -->
+  <div class="results-col">
+    <div class="results-card">
+      <div class="results-title">Live Qualification Score</div>
+
+      <!-- Progress -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label">
+          <span id="progress-label">0 of 8 answered</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+
+      <!-- ROI Result -->
+      <div class="result-block neutral" id="roi-block">
+        <div class="result-block-label">90-Day Revenue Gain</div>
+        <div class="result-block-value" id="roi-value">—</div>
+        <div class="result-block-sub" id="roi-sub">Answer questions 1–4 to calculate</div>
+      </div>
+
+      <!-- Effort Result -->
+      <div class="result-block neutral" id="effort-block">
+        <div class="result-block-label">Est. Onboarding Effort</div>
+        <div class="result-block-value" id="effort-value">—</div>
+        <div class="result-block-sub" id="effort-sub">Answer questions 5–8 to calculate</div>
+      </div>
+
+      <!-- Verdict -->
+      <div class="verdict-block neutral" id="verdict-block">
+        <div class="verdict-icon" id="verdict-icon">📊</div>
+        <div class="verdict-label" id="verdict-label">Fill in your numbers above</div>
+        <div class="verdict-sub" id="verdict-sub">The math will update in real time</div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="results-breakdown" id="breakdown-text"></div>
+
+      <!-- CTA -->
+      <a class="cta-btn" id="cta-apply" href="https://blueprint.meetadvaita.com/apply" target="_blank">Apply to Work with Bennett →</a>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<p class="disclaimer">
+  Projections based on published speed-to-lead research: <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review (2011)</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management study</a>. Close rate improvements are industry benchmarks — your results will vary. This is a qualification tool, not a guarantee of results.
+</p>
+
+<script>
+  // ─── STATE ───────────────────────────────────────────────
+  const chips = { speed: null, crm: null, biz: null, decision: null };
+  const dealDefault = 500, rateDefault = 2; // sentinel values = not entered
+
+  // ─── CHIP SELECTION ──────────────────────────────────────
+  function selectChip(group, val) {
+    const container = document.getElementById('chips-' + group);
+    container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    container.querySelector('[data-val="' + val + '"]').classList.add('selected');
+    chips[group] = val;
+    update();
+  }
+
+  // ─── LABELS ──────────────────────────────────────────────
+  function fmtMoney(n) {
+    if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+    if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  // ─── MAIN UPDATE ─────────────────────────────────────────
+  function update() {
+    const leads = +document.getElementById('sl-leads').value;
+    const deal  = +document.getElementById('sl-deal').value;
+    const rate  = +document.getElementById('sl-rate').value;
+    const locs  = +document.getElementById('sl-locs').value;
+
+    const dealEntered = deal > dealDefault;
+    const rateEntered = rate > rateDefault;
+
+    // Labels
+    document.getElementById('lbl-leads').textContent = leads + ' leads/mo';
+    const dealEl = document.getElementById('lbl-deal');
+    if (dealEntered) { dealEl.textContent = fmtMoney(deal); dealEl.className = 'slider-val'; }
+    else { dealEl.textContent = '← slide to enter yours'; dealEl.className = 'slider-val needs-input'; }
+    const rateEl = document.getElementById('lbl-rate');
+    if (rateEntered) { rateEl.textContent = rate + '%'; rateEl.className = 'slider-val'; }
+    else { rateEl.textContent = '← slide to enter yours'; rateEl.className = 'slider-val needs-input'; }
+    document.getElementById('lbl-locs').textContent = locs === 20 ? '20+' : locs + (locs === 1 ? ' location' : ' locations');
+
+    // Progress
+    let answered = 0;
+    if (leads > 5) answered++;            // they moved it
+    if (dealEntered) answered++;
+    if (rateEntered) answered++;
+    if (chips.speed) answered++;
+    if (chips.crm)   answered++;
+    if (chips.biz)   answered++;
+    if (locs > 1 || answered >= 1) answered++; // locs has a valid default of 1
+    if (chips.decision) answered++;
+    answered = Math.min(answered, 8);
+    const pct = Math.round(answered / 8 * 100);
+    document.getElementById('progress-label').textContent = answered + ' of 8 answered';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    // ── ROI CALCULATION ───────────────────────────────────
+    const speedLift = {
+      instant: 0.04, '30min': 0.12, '1to4hr': 0.22,
+      sameday: 0.30, nextday: 0.40, inconsistent: 0.28
+    }[chips.speed] || null;
+
+    const canCalcROI = dealEntered && rateEntered && chips.speed;
+    const roiBlock = document.getElementById('roi-block');
+    const roiVal   = document.getElementById('roi-value');
+    const roiSub   = document.getElementById('roi-sub');
+
+    if (canCalcROI) {
+      const currentRate  = rate / 100;
+      const improvedRate = Math.min(currentRate + speedLift, 0.80);
+      const monthlyGain  = leads * (improvedRate - currentRate) * deal;
+      const q90Gain      = monthlyGain * 3;
+
+      roiVal.textContent = fmtMoney(q90Gain);
+      roiSub.textContent = fmtMoney(monthlyGain) + '/mo additional revenue from AI';
+
+      roiBlock.className = 'result-block ' + (q90Gain >= 50000 ? 'green' : q90Gain >= 25000 ? 'yellow' : 'red');
+    } else {
+      roiBlock.className = 'result-block neutral';
+      roiVal.textContent = '—';
+      roiSub.textContent = 'Answer questions 1–4 to calculate';
+    }
+
+    // ── EFFORT CALCULATION ────────────────────────────────
+    const crmHrs = { ghl: 0.2, hubspot: 0.4, salesforce: 0.9, spreadsheets: 0.6, nothing: 0.4 }[chips.crm] || null;
+    const bizHrs = { homeservice: 0, franchise: 0, restaurant: 0, medspa: 0.2, realestate: 0.15, agency: 0.4, consultant: 0.4, other: 0.6 }[chips.biz] || null;
+    const locHrs = locs === 1 ? 0 : locs <= 5 ? 0.2 : locs <= 10 ? 0.6 : 1.2;
+    const decHrs = { justme: 0, partner: 0.2, smallteam: 0.4, committee: 1.4 }[chips.decision] || null;
+
+    const canCalcEffort = chips.crm && chips.biz && chips.decision;
+    const effortBlock = document.getElementById('effort-block');
+    const effortVal   = document.getElementById('effort-value');
+    const effortSub   = document.getElementById('effort-sub');
+
+    let totalHrs = null;
+    if (canCalcEffort) {
+      totalHrs = 0.5 + crmHrs + bizHrs + locHrs + decHrs;
+      effortVal.textContent = totalHrs.toFixed(1) + ' hrs';
+      effortSub.textContent = totalHrs <= 1 ? 'Fits within Bennett\'s 1-hour delivery target' : 'Exceeds 1-hour target — needs scope discussion';
+      effortBlock.className = 'result-block ' + (totalHrs <= 1 ? 'green' : totalHrs <= 2 ? 'yellow' : 'red');
+    } else {
+      effortBlock.className = 'result-block neutral';
+      effortVal.textContent = '—';
+      effortSub.textContent = 'Answer questions 5–8 to calculate';
+    }
+
+    // ── VERDICT ───────────────────────────────────────────
+    const verdictBlock = document.getElementById('verdict-block');
+    const verdictIcon  = document.getElementById('verdict-icon');
+    const verdictLabel = document.getElementById('verdict-label');
+    const verdictSub   = document.getElementById('verdict-sub');
+    const breakdown    = document.getElementById('breakdown-text');
+    const cta          = document.getElementById('cta-apply');
+
+    if (canCalcROI && canCalcEffort) {
+      const currentRate   = rate / 100;
+      const improvedRate  = Math.min(currentRate + speedLift, 0.80);
+      const monthlyGain   = leads * (improvedRate - currentRate) * deal;
+      const q90Gain       = monthlyGain * 3;
+      const roiOk         = q90Gain >= 50000;
+      const effortOk      = totalHrs <= 1;
+
+      if (roiOk && effortOk) {
+        verdictBlock.className = 'verdict-block green';
+        verdictIcon.textContent = '✅';
+        verdictLabel.textContent = 'Strong Fit';
+        verdictSub.textContent = 'The math works on both sides. Apply below.';
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+      } else if (roiOk && !effortOk) {
+        verdictBlock.className = 'verdict-block yellow';
+        verdictIcon.textContent = '⚠️';
+        verdictLabel.textContent = 'Revenue Qualifies — Scope to Discuss';
+        verdictSub.textContent = 'Great ROI potential. Delivery complexity needs a conversation.';
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+      } else if (!roiOk && effortOk) {
+        verdictBlock.className = 'verdict-block yellow';
+        verdictIcon.textContent = '⚠️';
+        verdictLabel.textContent = 'Easy to Deliver — Revenue Gap';
+        verdictSub.textContent = 'Simple to onboard, but current numbers don\'t hit $50K in 90 days.';
+        cta.style.opacity = '0.7';
+        cta.style.pointerEvents = 'auto';
+      } else {
+        verdictBlock.className = 'verdict-block red';
+        verdictIcon.textContent = '❌';
+        verdictLabel.textContent = 'Not the Right Fit Right Now';
+        verdictSub.textContent = 'The economics don\'t support $5K investment at current volume.';
+        cta.style.opacity = '0.5';
+        cta.style.pointerEvents = 'auto';
+      }
+
+      // Breakdown text
+      const liftPct = Math.round(speedLift * 100);
+      breakdown.innerHTML =
+        '<span>Leads:</span> ' + leads + '/mo &nbsp;·&nbsp; ' +
+        '<span>Deal value:</span> ' + fmtMoney(deal) + ' &nbsp;·&nbsp; ' +
+        '<span>Close rate:</span> ' + rate + '% → ' + Math.round(improvedRate * 100) + '%<br>' +
+        '<span>Speed lift:</span> +' + liftPct + '% close rate from AI response &nbsp;·&nbsp; ' +
+        '<span>Onboarding:</span> ' + totalHrs.toFixed(1) + ' hrs';
+    } else {
+      verdictBlock.className = 'verdict-block neutral';
+      verdictIcon.textContent = '📊';
+      verdictLabel.textContent = 'Answer all 8 questions';
+      verdictSub.textContent = 'Your live qualification score appears here';
+      breakdown.innerHTML = '';
+      cta.style.opacity = '0.5';
+      cta.style.pointerEvents = 'none';
+    }
+  }
+
+  // Init
+  update();
+</script>
+</body>
+</html>
