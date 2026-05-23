@@ -123,7 +123,7 @@ for lead_entry in "${LEADS[@]}"; do
   # Download audio
   MP3_OUT="${PODCASTS}/${SLUG}-v14.mp3"
   echo "Downloading MP3..."
-  "$NLM" download audio -n "$NOTEBOOK_ID" --output "$MP3_OUT" 2>&1 | head -5
+  "$NLM" download audio -n "$NOTEBOOK_ID" "$MP3_OUT" --force 2>&1 | head -5
   
   if [ -f "$MP3_OUT" ]; then
     MP3_SIZE=$(du -k "$MP3_OUT" | cut -f1)
