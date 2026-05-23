@@ -87,7 +87,7 @@ for lead_entry in "${LEADS[@]}"; do
   NOTEBOOK_NAME="FKI Blueprint - $NAME - v1.4"
   echo "Creating notebook: $NOTEBOOK_NAME"
   CREATE_RESULT=$("$NLM" create "$NOTEBOOK_NAME" --json 2>&1)
-  NOTEBOOK_ID=$(echo "$CREATE_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("id",""))' 2>/dev/null)
+  NOTEBOOK_ID=$(echo "$CREATE_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); nb=d.get("notebook",d); print(nb.get("id",""))' 2>/dev/null)
   
   if [ -z "$NOTEBOOK_ID" ]; then
     echo "ERROR: Could not create notebook for $SLUG"
@@ -102,18 +102,25 @@ for lead_entry in "${LEADS[@]}"; do
   echo "Adding source doc (${SIZE_KB}KB)..."
   "$NLM" source add "$SOURCE_DOC" 2>/dev/null
   
-  # Generate audio
+  # Generate audio — capture task_id for wait
   echo "Generating audio..."
-  "$NLM" generate audio 2>/dev/null
-  
-  # Wait for audio
-  echo "Waiting for audio to complete..."
-  "$NLM" artifact wait 2>/dev/null
-  
+  GEN_RESULT=$("$NLM" generate audio --json -n "$NOTEBOOK_ID" 2>&1)
+  TASK_ID=$(echo "$GEN_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("task_id",""))' 2>/dev/null)
+
+  if [ -z "$TASK_ID" ]; then
+    echo "ERROR: Audio generation did not start for $SLUG"
+    echo "$GEN_RESULT"
+    continue
+  fi
+
+  echo "Audio generation started: $TASK_ID"
+  echo "Waiting for audio (up to 15 min)..."
+  "$NLM" artifact wait "$TASK_ID" -n "$NOTEBOOK_ID" --timeout 900 2>&1
+
   # Download audio
   MP3_OUT="${PODCASTS}/${SLUG}-v14.mp3"
   echo "Downloading MP3..."
-  "$NLM" download audio --output "$MP3_OUT" 2>/dev/null
+  "$NLM" download audio -n "$NOTEBOOK_ID" --output "$MP3_OUT" 2>&1 | head -5
   
   if [ -f "$MP3_OUT" ]; then
     MP3_SIZE=$(du -k "$MP3_OUT" | cut -f1)

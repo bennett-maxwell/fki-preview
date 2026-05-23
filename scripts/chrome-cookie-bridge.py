@@ -57,12 +57,22 @@ def decrypt_value(enc: bytes, key: bytes) -> str:
     if not enc:
         return ""
     if enc[:3] == b"v10":
-        enc = enc[3:]
-        iv = b" " * 16
-        cipher = AES.new(key, AES.MODE_CBC, IV=iv)
-        dec = cipher.decrypt(enc)
+        body = enc[3:]
+        cipher = AES.new(key, AES.MODE_CBC, IV=b" " * 16)
+        dec = cipher.decrypt(body)
+        # Chrome prepends a 32-byte fixed header before encrypting — skip it
+        dec = dec[32:]
+        # Remove PKCS7 padding
         pad = dec[-1]
-        return dec[:-pad].decode("utf-8", errors="replace")
+        if 1 <= pad <= 16:
+            dec = dec[:-pad]
+        try:
+            result = dec.decode("utf-8")
+            if all(0x20 <= ord(c) < 0x7F for c in result):
+                return result
+        except Exception:
+            pass
+        return ""
     return enc.decode("utf-8", errors="replace")
 
 
