@@ -181,32 +181,34 @@
       </div>
     </div>
 
-    <div class="section-divider" style="margin-top:2rem;">Delivery Feasibility — Can Bennett Deliver in ≤ 1 Hour?</div>
+    <div class="section-divider" style="margin-top:2rem;">Deployment & Investment — What Comes First?</div>
 
-    <!-- Q5: CRM -->
+    <!-- Q5: Blueprint Capability First -->
     <div class="q-section">
       <div class="q-label">Question 5 of 6</div>
-      <div class="q-title">What do you currently use to track your leads and customers?</div>
-      <div class="q-sub">This determines how much technical setup is required on our end.</div>
-      <div class="chips" id="chips-crm">
-        <div class="chip" data-val="ghl"         onclick="selectChip('crm','ghl')">GoHighLevel / HL</div>
-        <div class="chip" data-val="hubspot"     onclick="selectChip('crm','hubspot')">HubSpot</div>
-        <div class="chip" data-val="salesforce"  onclick="selectChip('crm','salesforce')">Salesforce</div>
-        <div class="chip" data-val="spreadsheets" onclick="selectChip('crm','spreadsheets')">Spreadsheets / Email</div>
-        <div class="chip" data-val="nothing"     onclick="selectChip('crm','nothing')">Nothing yet</div>
+      <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
+      <div class="q-sub">This determines how much setup time is required on our end to get you results immediately.</div>
+      <div class="chips" id="chips-capability">
+        <div class="chip" data-val="speed-bot"    onclick="selectChip('capability','speed-bot')">AI Speed-to-Lead Bot</div>
+        <div class="chip" data-val="lead-filter"  onclick="selectChip('capability','lead-filter')">Lead Qualification Filter</div>
+        <div class="chip" data-val="follow-up"    onclick="selectChip('capability','follow-up')">Automated Follow-Up Sequences</div>
+        <div class="chip" data-val="crm-auto"     onclick="selectChip('capability','crm-auto')">CRM Automation</div>
+        <div class="chip" data-val="voice-ai"     onclick="selectChip('capability','voice-ai')">Voice AI / Outbound Calling</div>
       </div>
     </div>
 
-    <!-- Q6: Decision Maker -->
+    <!-- Q6: Monthly Marketing Spend -->
     <div class="q-section">
       <div class="q-label">Question 6 of 6</div>
-      <div class="q-title">Who makes the final call on new tools and vendor relationships?</div>
-      <div class="q-sub">Stakeholder complexity is the #1 driver of implementation drag.</div>
-      <div class="chips" id="chips-decision">
-        <div class="chip" data-val="justme"    onclick="selectChip('decision','justme')">Just me</div>
-        <div class="chip" data-val="partner"   onclick="selectChip('decision','partner')">Me + 1 partner</div>
-        <div class="chip" data-val="smallteam" onclick="selectChip('decision','smallteam')">Small team (3–10)</div>
-        <div class="chip" data-val="committee" onclick="selectChip('decision','committee')">Requires committee</div>
+      <div class="q-title">How much are you currently spending per month on marketing, including ad spend?</div>
+      <div class="q-sub">Include paid ads, agency fees, lead gen services — everything you spend to attract new business.</div>
+      <div class="slider-row">
+        <span class="slider-name">Monthly Marketing Spend</span>
+        <span class="slider-val needs-input" id="lbl-mktg">← slide to enter yours</span>
+      </div>
+      <input type="range" id="sl-mktg" min="0" max="100" step="1" value="0" oninput="update()">
+      <div class="leads-scale">
+        <span>$0</span><span>$500</span><span>$2.5K</span><span>$10K</span><span>$25K</span><span>$50K+</span>
       </div>
     </div>
 
@@ -272,8 +274,21 @@
     return Math.round(raw / 250) * 250;
   }
 
+  // ── MARKETING SPEND SCALE ─────────────────────────────────
+  // pos 0 = $0 (no spend), pos 1-100 → $100 to $50,000 (log scale)
+  function posToSpend(pos) {
+    if (pos === 0) return 0;
+    const raw = Math.round(100 * Math.pow(500, pos / 100));
+    if (raw < 500)   return Math.round(raw / 50)   * 50;
+    if (raw < 2000)  return Math.round(raw / 250)  * 250;
+    if (raw < 5000)  return Math.round(raw / 500)  * 500;
+    if (raw < 15000) return Math.round(raw / 1000) * 1000;
+    if (raw < 30000) return Math.round(raw / 2500) * 2500;
+    return Math.round(raw / 5000) * 5000;
+  }
+
   // ── STATE ─────────────────────────────────────────────────
-  const chips = { speed: null, crm: null, decision: null };
+  const chips = { speed: null, capability: null };
   const DEAL_MIN = 500, RATE_MIN = 2; // sentinel = not entered
 
   function selectChip(group, val) {
@@ -296,13 +311,16 @@
 
   // ── MAIN UPDATE ───────────────────────────────────────────
   function update() {
-    const pos   = +document.getElementById('sl-leads').value;
-    const leads = posToLeads(pos);
-    const deal  = +document.getElementById('sl-deal').value;
-    const rate  = +document.getElementById('sl-rate').value;
+    const pos     = +document.getElementById('sl-leads').value;
+    const leads   = posToLeads(pos);
+    const deal    = +document.getElementById('sl-deal').value;
+    const rate    = +document.getElementById('sl-rate').value;
+    const mktgPos = +document.getElementById('sl-mktg').value;
+    const mktg    = posToSpend(mktgPos);
 
     const dealEntered = deal > DEAL_MIN;
     const rateEntered = rate > RATE_MIN;
+    const mktgEntered = mktgPos > 0;
 
     // Labels
     document.getElementById('lbl-leads').textContent = fmtLeads(leads) + ' leads/mo';
@@ -316,14 +334,23 @@
     if (rateEntered) { rateEl.textContent = rate + '%'; rateEl.className = 'slider-val'; }
     else             { rateEl.textContent = '← slide to enter yours'; rateEl.className = 'slider-val needs-input'; }
 
+    const mktgEl = document.getElementById('lbl-mktg');
+    if (mktgEntered) {
+      mktgEl.textContent = (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo';
+      mktgEl.className = 'slider-val';
+    } else {
+      mktgEl.textContent = '← slide to enter yours';
+      mktgEl.className = 'slider-val needs-input';
+    }
+
     // Progress (6 questions)
     let answered = 0;
-    if (pos > 0)         answered++;  // moved from default
-    if (dealEntered)     answered++;
-    if (rateEntered)     answered++;
-    if (chips.speed)     answered++;
-    if (chips.crm)       answered++;
-    if (chips.decision)  answered++;
+    if (pos > 0)           answered++;  // leads moved from default
+    if (dealEntered)       answered++;
+    if (rateEntered)       answered++;
+    if (chips.speed)       answered++;
+    if (chips.capability)  answered++;
+    if (mktgEntered)       answered++;
     answered = Math.min(answered, 6);
     const pct = Math.round(answered / 6 * 100);
     document.getElementById('progress-label').textContent = answered + ' of 6 answered';
@@ -351,14 +378,13 @@
     }
 
     // ── EFFORT ───────────────────────────────────────────────
-    const crmHrs = { ghl: 0.2, hubspot: 0.4, salesforce: 0.9, spreadsheets: 0.6, nothing: 0.4 }[chips.crm] || null;
-    const decHrs = { justme: 0, partner: 0.2, smallteam: 0.4, committee: 1.4 }[chips.decision] || null;
-    const canEff  = chips.crm && chips.decision;
+    const capHrs  = { 'speed-bot': 0.2, 'lead-filter': 0.3, 'follow-up': 0.2, 'crm-auto': 0.5, 'voice-ai': 0.4 }[chips.capability] || null;
+    const canEff  = chips.capability !== null;
     const efBlock = document.getElementById('effort-block');
     let   totalHrs = null;
 
     if (canEff) {
-      totalHrs = 0.5 + crmHrs + decHrs;
+      totalHrs = 0.5 + capHrs;
       document.getElementById('effort-value').textContent = totalHrs.toFixed(1) + ' hrs';
       document.getElementById('effort-sub').textContent   = totalHrs <= 1
         ? 'Within Bennett\'s 1-hour delivery target ✓'
@@ -367,7 +393,7 @@
     } else {
       efBlock.className = 'result-block neutral';
       document.getElementById('effort-value').textContent = '—';
-      document.getElementById('effort-sub').textContent   = 'Answer questions 5–6 to calculate';
+      document.getElementById('effort-sub').textContent   = 'Answer question 5 to calculate';
     }
 
     // ── VERDICT ───────────────────────────────────────────────
@@ -409,12 +435,15 @@
       }
 
       const liftPct = Math.round(speedLift * 100);
+      const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '';
+      const mktgStr  = mktgEntered ? (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo ad spend' : 'ad spend not entered';
       bdText.innerHTML =
         '<span>Leads:</span> ' + fmtLeads(leads) + '/mo &nbsp;·&nbsp; ' +
         '<span>Deal:</span> ' + fmtMoney(deal) + ' &nbsp;·&nbsp; ' +
         '<span>Close rate:</span> ' + rate + '% → ' + Math.round(Math.min(curRate + speedLift, 0.80) * 100) + '%<br>' +
         '<span>AI lift:</span> +' + liftPct + '% from faster response &nbsp;·&nbsp; ' +
-        '<span>Setup:</span> ~' + totalHrs.toFixed(1) + ' hrs';
+        '<span>First deploy:</span> ' + capLabel + '<br>' +
+        '<span>Marketing spend:</span> ' + mktgStr + ' &nbsp;·&nbsp; <span>Setup:</span> ~' + totalHrs.toFixed(1) + ' hrs';
 
       cta.style.opacity        = '1';
       cta.style.pointerEvents  = 'auto';
@@ -422,7 +451,7 @@
       vBlock.className = 'verdict-block neutral';
       vIcon.textContent  = '📊';
       vLabel.textContent = 'Answer all 6 questions';
-      vSub.textContent   = 'Your live score appears here';
+      vSub.textContent   = 'ROI score + deployment fit appear here';
       bdText.innerHTML   = '';
       cta.style.opacity       = '0.5';
       cta.style.pointerEvents = 'none';
