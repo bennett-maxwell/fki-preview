@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Your AI Blueprint — Advaita AI for Business</title>
-  <meta name="description" content="Answer 11 questions. Get a custom AI blueprint, podcast, and ROI breakdown built specifically for your business — free, in 24 hours." />
+  <meta name="description" content="Answer 12 questions. Get a custom AI blueprint, podcast, and ROI breakdown built specifically for your business — free, in 24 hours." />
   <style>
     :root {
       --brand:       #1D6FDB;
@@ -98,6 +98,14 @@
     .tool-dropdown-group { display: flex; flex-direction: column; gap: 0.35rem; }
     .tool-dropdown-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
 
+    /* MULTI-SELECT CHECKBOXES (Social/Marketing) */
+    .tool-dropdown-group--full { grid-column: 1 / -1; }
+    .multi-check-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+    .multi-check-item { display: flex; align-items: center; gap: 0.4rem; background: var(--neutral-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 0.45rem 0.85rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: all 0.15s; user-select: none; }
+    .multi-check-item:hover { border-color: var(--brand-light); color: var(--brand-dark); background: rgba(29,111,219,0.04); }
+    .multi-check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; }
+    .multi-check-item:has(input:checked) { border-color: var(--brand); background: rgba(29,111,219,0.08); color: var(--brand-dark); }
+
     /* ROI REVEAL */
     .roi-reveal { display: none; margin-bottom: 1.5rem; background: var(--neutral-bg); border: 1.5px solid var(--brand); border-radius: var(--radius); overflow: hidden; }
     .roi-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; cursor: pointer; user-select: none; }
@@ -159,9 +167,9 @@
 <section class="hero">
   <div class="hero-badge">Free AI Blueprint — Personalized for Your Business</div>
   <h1>Find Out Exactly What AI Can<br><span>Automate in YOUR Business</span></h1>
-  <p class="hero-sub">Answer 11 quick questions. We build a custom AI playbook, podcast walkthrough, and ROI breakdown specific to your exact business — free.</p>
+  <p class="hero-sub">Answer 12 quick questions. We build a custom AI playbook, podcast walkthrough, and ROI breakdown specific to your exact business — free.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="num">11</span><span class="label">Quick<br>Questions</span></div>
+    <div class="hero-stat"><span class="num">12</span><span class="label">Quick<br>Questions</span></div>
     <div class="hero-divider"></div>
     <div class="hero-stat"><span class="num">24hr</span><span class="label">Blueprint<br>Delivered</span></div>
     <div class="hero-divider"></div>
@@ -206,7 +214,7 @@
   <div class="container">
     <p class="section-label">Your Free Blueprint</p>
     <h2 class="section-title">Tell us about your business →</h2>
-    <p class="section-sub">11 questions · under 3 minutes · delivered in 24 hours · free</p>
+    <p class="section-sub">12 questions · under 3 minutes · delivered in 24 hours · free</p>
 
     <div class="form-wrap">
       <div class="form-header">
@@ -252,7 +260,7 @@
           <input type="hidden" id="revenue_label_hidden" name="revenue_label" value="$500K" />
         </div>
 
-        <!-- Q5: Tools — Per-category dropdowns -->
+        <!-- Q5: Tools — Per-category dropdowns + Team Comms + Social multi-select -->
         <div class="form-group">
           <label class="form-label"><span class="q-badge">5</span>Which tools does your business use?</label>
           <p class="form-hint">Select the specific tool you use in each category — pick "None" if you don't use that type</p>
@@ -271,16 +279,16 @@
               </select>
             </div>
             <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Email / Comms</span>
-              <select name="tool_email" class="form-control">
+              <span class="tool-dropdown-label">Team Comms</span>
+              <select name="tool_comms" class="form-control">
                 <option value="none">None</option>
-                <option value="gmail">Gmail / Google Workspace</option>
-                <option value="outlook">Outlook / Microsoft 365</option>
-                <option value="mailchimp">Mailchimp</option>
-                <option value="activecampaign">ActiveCampaign</option>
-                <option value="klaviyo">Klaviyo</option>
-                <option value="slack">Slack (team comms)</option>
-                <option value="other_email">Other</option>
+                <option value="slack">Slack</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="teams">Microsoft Teams</option>
+                <option value="google_chat">Google Chat</option>
+                <option value="discord">Discord</option>
+                <option value="telegram">Telegram</option>
+                <option value="other_comms">Other</option>
               </select>
             </div>
             <div class="tool-dropdown-group">
@@ -320,17 +328,18 @@
                 <option value="other_phone">Other</option>
               </select>
             </div>
-            <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Social / Marketing</span>
-              <select name="tool_social" class="form-control">
-                <option value="none">None</option>
-                <option value="meta_ads">Meta Ads Manager</option>
-                <option value="google_ads">Google Ads</option>
-                <option value="canva">Canva</option>
-                <option value="buffer">Buffer / Hootsuite</option>
-                <option value="metricool">Metricool</option>
-                <option value="other_social">Other</option>
-              </select>
+            <!-- Social / Marketing — multi-select checkboxes -->
+            <div class="tool-dropdown-group tool-dropdown-group--full">
+              <span class="tool-dropdown-label">Social / Marketing <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
+              <div class="multi-check-grid">
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_meta" value="meta_ads"> Meta Ads Manager</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_google" value="google_ads"> Google Ads</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_canva" value="canva"> Canva</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_buffer" value="buffer"> Buffer / Hootsuite</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_metricool" value="metricool"> Metricool</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_tiktok" value="tiktok_ads"> TikTok Ads</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_other" value="other"> Other</label>
+              </div>
             </div>
           </div>
         </div>
@@ -373,22 +382,22 @@
           <textarea id="q8_vision" name="perfect_world" class="form-control" placeholder="Example: My CRM automatically qualifies leads, my team never has to do manual data entry, and I'm working on strategy — not admin..." required></textarea>
         </div>
 
-        <!-- Q9: Personal Hours Slider -->
+        <!-- Q9: Personal Hours Slider — max 40+ -->
         <div class="form-group">
           <label class="form-label"><span class="q-badge">9</span>Hours YOU personally spend on computer work per week</label>
           <p class="form-hint">Include email, CRM, reporting, content, scheduling — anything on a computer or phone</p>
           <div class="slider-wrap">
             <div class="slider-display">
-              <span class="slider-val" id="personal-hours-display">30 hrs/wk</span>
+              <span class="slider-val" id="personal-hours-display">20 hrs/wk</span>
               <span class="slider-sublabel">Your Personal Hours</span>
             </div>
             <div class="slider-track">
-              <input type="range" id="q9_personal_hours" name="personal_hours_num" min="1" max="81" step="1" value="30"
+              <input type="range" id="q9_personal_hours" name="personal_hours_num" min="1" max="41" step="1" value="20"
                 oninput="updatePersonalHours(this.value)" />
-              <div class="slider-range-labels"><span>1 hr</span><span>20 hrs</span><span>50 hrs</span><span>80+ hrs</span></div>
+              <div class="slider-range-labels"><span>1 hr</span><span>15 hrs</span><span>30 hrs</span><span>40+</span></div>
             </div>
           </div>
-          <input type="hidden" id="personal_hours_hidden" name="personal_hours" value="30" />
+          <input type="hidden" id="personal_hours_hidden" name="personal_hours" value="20" />
         </div>
 
         <!-- Q10: Company Hours Slider -->
@@ -409,11 +418,30 @@
           <input type="hidden" id="company_hours_hidden" name="company_hours" value="100" />
         </div>
 
-        <!-- Q11: Pain Points -->
+        <!-- Q11: Monthly Marketing / Ad Spend -->
         <div class="form-group">
-          <label class="form-label" for="q11_pain"><span class="q-badge">11</span>What are your biggest pain points right now?</label>
+          <label class="form-label"><span class="q-badge">11</span>Monthly marketing spend (including ad spend)</label>
+          <p class="form-hint">Estimate total across all paid channels — Meta Ads, Google Ads, influencer, etc.</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="marketing-display">$5K/mo</span>
+              <span class="slider-sublabel">Monthly Ad Spend</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q11_marketing" name="marketing_spend_num" min="0" max="19" step="1" value="4"
+                oninput="updateMarketingSpend(this.value)" />
+              <div class="slider-range-labels"><span>$1K</span><span>$10K</span><span>$25K</span><span>$50K+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="marketing_hidden" name="marketing_spend" value="5000" />
+          <input type="hidden" id="marketing_label_hidden" name="marketing_label" value="$5K/mo" />
+        </div>
+
+        <!-- Q12: Pain Points -->
+        <div class="form-group">
+          <label class="form-label" for="q12_pain"><span class="q-badge">12</span>What are your biggest pain points right now?</label>
           <p class="form-hint">The more specific you are, the more precise your blueprint will be. What keeps you up at night? What do you wish you could just fix?</p>
-          <textarea id="q11_pain" name="pain_points" class="form-control" style="min-height:120px;" placeholder="Example: We lose leads because nobody follows up fast enough. I'm manually copy-pasting data between tools for hours each week. My team doesn't know what to prioritize. Reporting takes a full day every month..." required></textarea>
+          <textarea id="q12_pain" name="pain_points" class="form-control" style="min-height:120px;" placeholder="Example: We lose leads because nobody follows up fast enough. I'm manually copy-pasting data between tools for hours each week. My team doesn't know what to prioritize. Reporting takes a full day every month..." required></textarea>
         </div>
 
         <!-- ROI REVEAL -->
@@ -458,7 +486,7 @@
   <h2>Your competitors are building<br><span>AI agents right now.</span></h2>
   <p>The businesses that deploy AI in the next 12 months will have a compounding advantage that's nearly impossible to close. Find out exactly what that looks like for your business.</p>
   <a href="#intake-form" class="cta-btn">Get My Free Blueprint →</a>
-  <p class="cta-sub">11 questions · Free · No sales call</p>
+  <p class="cta-sub">12 questions · Free · No sales call</p>
 </section>
 
 <footer>
@@ -489,9 +517,9 @@ function updateTeam(val) {
 
 function updatePersonalHours(val) {
   val = parseInt(val);
-  var label = val >= 81 ? '80+ hrs/wk' : val + ' hrs/wk';
+  var label = val >= 41 ? '40+ hrs/wk' : val + ' hrs/wk';
   document.getElementById('personal-hours-display').textContent = label;
-  document.getElementById('personal_hours_hidden').value = val >= 81 ? '80+' : String(val);
+  document.getElementById('personal_hours_hidden').value = val >= 41 ? '40+' : String(val);
   checkROITrigger();
 }
 
@@ -503,9 +531,21 @@ function updateCompanyHours(val) {
   checkROITrigger();
 }
 
+// Marketing spend slider — $1K to $50K+
+var marketingSteps  = [1000,2000,3000,4000,5000,7500,10000,12500,15000,20000,25000,30000,35000,40000,45000,50000,50000,50000,50000,50000];
+var marketingLabels = ['$1K/mo','$2K/mo','$3K/mo','$4K/mo','$5K/mo','$7.5K/mo','$10K/mo','$12.5K/mo','$15K/mo','$20K/mo','$25K/mo','$30K/mo','$35K/mo','$40K/mo','$45K/mo','$50K+/mo','$50K+/mo','$50K+/mo','$50K+/mo','$50K+/mo'];
+
+function updateMarketingSpend(val) {
+  val = parseInt(val);
+  var label = marketingLabels[val] || '$50K+/mo';
+  document.getElementById('marketing-display').textContent = label;
+  document.getElementById('marketing_hidden').value = marketingSteps[val] || 50000;
+  document.getElementById('marketing_label_hidden').value = label;
+}
+
 // ─── ROI CALCULATOR ──────────────────────────────────────────
 function calculateROI() {
-  var pHours = parseInt(document.getElementById('personal_hours_hidden').value) || 30;
+  var pHours = parseInt(document.getElementById('personal_hours_hidden').value) || 20;
   var cHours = parseInt(document.getElementById('company_hours_hidden').value) || 100;
   var revenue = parseInt(document.getElementById('revenue_hidden').value) || 500000;
 
@@ -526,12 +566,10 @@ function showROI() {
   var el = document.getElementById('roi-reveal');
   if (el.style.display !== 'block') {
     el.style.display = 'block';
-    // Auto-open the content
     document.getElementById('roi-content').style.display = 'block';
     document.getElementById('roi-toggle-txt').textContent = 'Hide ▲';
     setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 150);
   } else {
-    // Just update values
     document.getElementById('roi-personal-hours').textContent = r.pSaved + ' hrs';
     document.getElementById('roi-company-hours').textContent = r.cSaved + ' hrs';
   }
@@ -567,7 +605,6 @@ function checkROITrigger() {
     var tags = ['advaita-ai-blueprint'];
     var drainMap = { lead_followup: 'drain-lead-followup', admin_reporting: 'drain-admin', scheduling: 'drain-scheduling', customer_onboarding: 'drain-onboarding', content_creation: 'drain-content', all: 'drain-everything' };
     if (drainMap[d.time_drains]) tags.push(drainMap[d.time_drains]);
-    // Revenue tier tag
     var rev = parseInt(d.revenue_value) || 0;
     if (rev >= 5000000) tags.push('revenue-5m-plus');
     else if (rev >= 1000000) tags.push('revenue-1m-5m');
@@ -576,16 +613,28 @@ function checkROITrigger() {
     return tags;
   }
 
+  function buildSocialTools(d) {
+    var social = [];
+    if (d.tool_social_meta) social.push('Meta Ads');
+    if (d.tool_social_google) social.push('Google Ads');
+    if (d.tool_social_canva) social.push('Canva');
+    if (d.tool_social_buffer) social.push('Buffer/Hootsuite');
+    if (d.tool_social_metricool) social.push('Metricool');
+    if (d.tool_social_tiktok) social.push('TikTok Ads');
+    if (d.tool_social_other) social.push('Other');
+    return social.length ? social.join(', ') : 'None';
+  }
+
   function buildNote(d) {
     var tools = [];
     if (d.tool_crm && d.tool_crm !== 'none') tools.push('CRM: ' + d.tool_crm);
-    if (d.tool_email && d.tool_email !== 'none') tools.push('Email: ' + d.tool_email);
+    if (d.tool_comms && d.tool_comms !== 'none') tools.push('Team Comms: ' + d.tool_comms);
     if (d.tool_docs && d.tool_docs !== 'none') tools.push('Docs: ' + d.tool_docs);
     if (d.tool_pm && d.tool_pm !== 'none') tools.push('PM: ' + d.tool_pm);
     if (d.tool_phone && d.tool_phone !== 'none') tools.push('Phone: ' + d.tool_phone);
-    if (d.tool_social && d.tool_social !== 'none') tools.push('Social: ' + d.tool_social);
+    tools.push('Social: ' + buildSocialTools(d));
     return [
-      'Advaita AI Blueprint — Intake Form v3 (CEO design)',
+      'Advaita AI Blueprint — Intake Form v4 (12Q)',
       '---',
       'Website: ' + (d.website || 'N/A'),
       'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
@@ -594,6 +643,7 @@ function checkROITrigger() {
       'Time drain: ' + (d.time_drains || 'N/A'),
       'Personal hrs/wk: ' + (d.personal_hours || 'N/A'),
       'Company hrs/wk: ' + (d.company_hours || 'N/A'),
+      'Monthly marketing spend: ' + (d.marketing_label || d.marketing_spend || 'N/A'),
       '---',
       'Perfect world vision:',
       d.perfect_world || '(not provided)',
@@ -601,15 +651,15 @@ function checkROITrigger() {
       'Pain points:',
       d.pain_points || '(not provided)',
       '---',
-      'Form version: 2026-05-23-v3'
+      'Form version: 2026-05-23-v4'
     ].join('\n');
   }
 
-  var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT'; // Advaita Blueprint
+  var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
   function getStageId(rev) {
-    if (rev >= 1000000) return '049a4cd8-5f38-4cf2-81c6-32a37da21876'; // Hot Lead
-    if (rev >= 500000)  return '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead
-    return '4fc67de4-544a-4b37-88b6-6ffda69f64b3'; // Cold Lead
+    if (rev >= 1000000) return '049a4cd8-5f38-4cf2-81c6-32a37da21876';
+    if (rev >= 500000)  return '998beee1-22f5-4f99-80e3-97d121ed298f';
+    return '4fc67de4-544a-4b37-88b6-6ffda69f64b3';
   }
 
   async function submitToGHL(d) {
@@ -620,7 +670,7 @@ function checkROITrigger() {
           firstName: d.first_name, email: d.email,
           locationId: GHL_LOC, source: 'advaita-ai-blueprint',
           tags: buildTags(d),
-          customFields: { form_version: '2026-05-23-v3' }
+          customFields: { form_version: '2026-05-23-v4' }
         })
       });
       if (!res.ok) return;
@@ -673,6 +723,8 @@ function checkROITrigger() {
 
     var d = {};
     new FormData(form).forEach(function(v, k) { d[k] = v; });
+    // Also capture checkboxes
+    form.querySelectorAll('input[type="checkbox"]:checked').forEach(function(cb) { d[cb.name] = cb.value; });
     form.style.display = 'none';
     successEl.style.display = 'block';
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
