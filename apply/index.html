@@ -148,6 +148,11 @@
     footer { background: var(--text); color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
     footer a { color: var(--brand-light); text-decoration: none; }
 
+    /* VALIDATION */
+    .form-error { font-size: 0.8rem; color: #c0392b; margin-top: 0.35rem; margin-left: 2rem; display: none; }
+    .form-control.field-invalid { border-color: #c0392b !important; background: #fff8f8; }
+    .form-control.field-valid { border-color: #27ae60; }
+
     @media (max-width: 640px) {
       .section { padding: 3rem 1.25rem; }
       .form-wrap { padding: 1.5rem; }
@@ -233,13 +238,15 @@
         <!-- Q2: Email -->
         <div class="form-group">
           <label class="form-label" for="q2_email"><span class="q-badge">2</span>Email address</label>
-          <input id="q2_email" name="email" type="email" class="form-control" placeholder="you@yourcompany.com" required />
+          <input id="q2_email" name="email" type="email" class="form-control" placeholder="you@yourcompany.com" required autocomplete="email" />
+          <p class="form-error" id="q2_email_error">Please enter a valid email address (e.g. you@yourcompany.com)</p>
         </div>
 
         <!-- Q3: Website -->
         <div class="form-group">
           <label class="form-label" for="q3_website"><span class="q-badge">3</span>Business website</label>
-          <input id="q3_website" name="website" type="url" class="form-control" placeholder="https://yourcompany.com" required />
+          <input id="q3_website" name="website" type="text" class="form-control" placeholder="yourcompany.com" required autocomplete="url" />
+          <p class="form-error" id="q3_website_error">Please enter a valid website (e.g. yourcompany.com)</p>
         </div>
 
         <!-- Q4: Revenue Slider -->
@@ -328,16 +335,30 @@
                 <option value="other_phone">Other</option>
               </select>
             </div>
-            <!-- Social / Marketing — multi-select checkboxes -->
+            <!-- Social Platforms — multi-select checkboxes -->
             <div class="tool-dropdown-group tool-dropdown-group--full">
-              <span class="tool-dropdown-label">Social / Marketing <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
+              <span class="tool-dropdown-label">Social Platforms <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
               <div class="multi-check-grid">
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_meta" value="meta_ads"> Meta Ads Manager</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_google" value="google_ads"> Google Ads</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_canva" value="canva"> Canva</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_buffer" value="buffer"> Buffer / Hootsuite</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_facebook" value="facebook"> Facebook</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_instagram" value="instagram"> Instagram</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_google_ads" value="google_ads"> Google Ads</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_tiktok" value="tiktok"> TikTok</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_youtube" value="youtube"> YouTube</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_linkedin" value="linkedin"> LinkedIn</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_pinterest" value="pinterest"> Pinterest</label>
+                <label class="multi-check-item"><input type="checkbox" name="platform_x" value="x_twitter"> X (Twitter)</label>
+              </div>
+            </div>
+            <!-- Social Management Tools — multi-select checkboxes -->
+            <div class="tool-dropdown-group tool-dropdown-group--full">
+              <span class="tool-dropdown-label">Social Media Management Tools <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(if any — select all that apply)</span></span>
+              <div class="multi-check-grid">
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_buffer" value="buffer"> Buffer</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_hootsuite" value="hootsuite"> Hootsuite</label>
                 <label class="multi-check-item"><input type="checkbox" name="tool_social_metricool" value="metricool"> Metricool</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_tiktok" value="tiktok_ads"> TikTok Ads</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_canva" value="canva"> Canva</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_later" value="later"> Later</label>
+                <label class="multi-check-item"><input type="checkbox" name="tool_social_sprout" value="sprout_social"> Sprout Social</label>
                 <label class="multi-check-item"><input type="checkbox" name="tool_social_other" value="other"> Other</label>
               </div>
             </div>
@@ -494,6 +515,34 @@
 </footer>
 
 <script>
+// ─── VALIDATION ──────────────────────────────────────────────
+function validateEmail(val) {
+  // Must have exactly one @, something before it, a dot after @, and ≥2 chars after last dot
+  var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  return re.test(val.trim());
+}
+
+function validateWebsite(val) {
+  // Strip protocol if typed, then check it has a dot and looks like a real domain
+  var v = val.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+  // Must have at least one dot, at least 2 chars after the last dot, no spaces
+  return /\S+\.\S{2,}/.test(v) && !/\s/.test(v) && v.length > 3;
+}
+
+function showFieldError(inputId, errorId, show) {
+  var inp = document.getElementById(inputId);
+  var err = document.getElementById(errorId);
+  if (show) {
+    inp.classList.add('field-invalid');
+    inp.classList.remove('field-valid');
+    if (err) err.style.display = 'block';
+  } else {
+    inp.classList.remove('field-invalid');
+    inp.classList.add('field-valid');
+    if (err) err.style.display = 'none';
+  }
+}
+
 // ─── SLIDER HELPERS ───────────────────────────────────────────
 var revenueSteps = [100000,250000,500000,750000,1000000,1500000,2000000,3000000,5000000,7500000,10000000];
 var revenueLabels = ['$100K','$250K','$500K','$750K','$1M','$1.5M','$2M','$3M','$5M','$7.5M','$10M+'];
@@ -613,16 +662,29 @@ function checkROITrigger() {
     return tags;
   }
 
-  function buildSocialTools(d) {
-    var social = [];
-    if (d.tool_social_meta) social.push('Meta Ads');
-    if (d.tool_social_google) social.push('Google Ads');
-    if (d.tool_social_canva) social.push('Canva');
-    if (d.tool_social_buffer) social.push('Buffer/Hootsuite');
-    if (d.tool_social_metricool) social.push('Metricool');
-    if (d.tool_social_tiktok) social.push('TikTok Ads');
-    if (d.tool_social_other) social.push('Other');
-    return social.length ? social.join(', ') : 'None';
+  function buildSocialPlatforms(d) {
+    var p = [];
+    if (d.platform_facebook) p.push('Facebook');
+    if (d.platform_instagram) p.push('Instagram');
+    if (d.platform_google_ads) p.push('Google Ads');
+    if (d.platform_tiktok) p.push('TikTok');
+    if (d.platform_youtube) p.push('YouTube');
+    if (d.platform_linkedin) p.push('LinkedIn');
+    if (d.platform_pinterest) p.push('Pinterest');
+    if (d.platform_x) p.push('X (Twitter)');
+    return p.length ? p.join(', ') : 'None';
+  }
+
+  function buildSocialMgmtTools(d) {
+    var t = [];
+    if (d.tool_social_buffer) t.push('Buffer');
+    if (d.tool_social_hootsuite) t.push('Hootsuite');
+    if (d.tool_social_metricool) t.push('Metricool');
+    if (d.tool_social_canva) t.push('Canva');
+    if (d.tool_social_later) t.push('Later');
+    if (d.tool_social_sprout) t.push('Sprout Social');
+    if (d.tool_social_other) t.push('Other');
+    return t.length ? t.join(', ') : 'None';
   }
 
   function buildNote(d) {
@@ -632,9 +694,10 @@ function checkROITrigger() {
     if (d.tool_docs && d.tool_docs !== 'none') tools.push('Docs: ' + d.tool_docs);
     if (d.tool_pm && d.tool_pm !== 'none') tools.push('PM: ' + d.tool_pm);
     if (d.tool_phone && d.tool_phone !== 'none') tools.push('Phone: ' + d.tool_phone);
-    tools.push('Social: ' + buildSocialTools(d));
+    tools.push('Social platforms: ' + buildSocialPlatforms(d));
+    tools.push('Social mgmt tools: ' + buildSocialMgmtTools(d));
     return [
-      'Advaita AI Blueprint — Intake Form v4 (12Q)',
+      'Advaita AI Blueprint — Intake Form v5 (12Q)',
       '---',
       'Website: ' + (d.website || 'N/A'),
       'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
@@ -651,7 +714,7 @@ function checkROITrigger() {
       'Pain points:',
       d.pain_points || '(not provided)',
       '---',
-      'Form version: 2026-05-23-v4'
+      'Form version: 2026-05-23-v5'
     ].join('\n');
   }
 
@@ -670,7 +733,7 @@ function checkROITrigger() {
           firstName: d.first_name, email: d.email,
           locationId: GHL_LOC, source: 'advaita-ai-blueprint',
           tags: buildTags(d),
-          customFields: { form_version: '2026-05-23-v4' }
+          customFields: { form_version: '2026-05-23-v5' }
         })
       });
       if (!res.ok) return;
@@ -702,9 +765,33 @@ function checkROITrigger() {
   var form = document.getElementById('blueprint-form');
   var successEl = document.getElementById('form-success');
 
+  // ─── INLINE VALIDATION — email + website ────────────────────
+  var emailEl = document.getElementById('q2_email');
+  var websiteEl = document.getElementById('q3_website');
+
+  function checkEmailField() {
+    var v = emailEl.value.trim();
+    if (v === '') { showFieldError('q2_email','q2_email_error', false); emailEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validateEmail(v);
+    showFieldError('q2_email','q2_email_error', !ok);
+    return ok;
+  }
+  function checkWebsiteField() {
+    var v = websiteEl.value.trim();
+    if (v === '') { showFieldError('q3_website','q3_website_error', false); websiteEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validateWebsite(v);
+    showFieldError('q3_website','q3_website_error', !ok);
+    return ok;
+  }
+
+  emailEl.addEventListener('blur', checkEmailField);
+  emailEl.addEventListener('input', function() { if (emailEl.classList.contains('field-invalid')) checkEmailField(); checkROITrigger(); });
+  websiteEl.addEventListener('blur', checkWebsiteField);
+  websiteEl.addEventListener('input', function() { if (websiteEl.classList.contains('field-invalid')) checkWebsiteField(); });
+
   form.querySelectorAll('.form-control').forEach(function(el) {
-    el.addEventListener('input', function() { el.style.borderColor = ''; checkROITrigger(); });
-    el.addEventListener('change', function() { el.style.borderColor = ''; checkROITrigger(); });
+    el.addEventListener('input', function() { if (!el.id || (el.id !== 'q2_email' && el.id !== 'q3_website')) el.style.borderColor = ''; checkROITrigger(); });
+    el.addEventListener('change', function() { if (!el.id || (el.id !== 'q2_email' && el.id !== 'q3_website')) el.style.borderColor = ''; checkROITrigger(); });
   });
 
   form.addEventListener('submit', function(e) {
@@ -719,12 +806,19 @@ function checkROITrigger() {
         if (!firstInvalid) firstInvalid = el;
       } else { el.style.borderColor = ''; }
     });
+    // Extra: validate email format
+    var emailOk = checkEmailField();
+    var websiteOk = checkWebsiteField();
+    if (!emailOk) { allValid = false; if (!firstInvalid) firstInvalid = emailEl; }
+    if (!websiteOk) { allValid = false; if (!firstInvalid) firstInvalid = websiteEl; }
     if (!allValid) { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
 
     var d = {};
     new FormData(form).forEach(function(v, k) { d[k] = v; });
-    // Also capture checkboxes
+    // Capture all checked checkboxes (platforms + social tools)
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(function(cb) { d[cb.name] = cb.value; });
+    // Normalize website — add https:// if missing
+    if (d.website && !/^https?:\/\//i.test(d.website)) d.website = 'https://' + d.website;
     form.style.display = 'none';
     successEl.style.display = 'block';
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
