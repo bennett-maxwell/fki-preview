@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Your AI Blueprint — Advaita AI for Business</title>
-  <meta name="description" content="Answer 8 questions. Get a custom AI blueprint, podcast, and ROI breakdown built specifically for your business — free, in 24 hours." />
+  <meta name="description" content="Answer 11 questions. Get a custom AI blueprint, podcast, and ROI breakdown built specifically for your business — free, in 24 hours." />
   <style>
     :root {
       --brand:       #1D6FDB;
@@ -53,49 +53,63 @@
     .section-title { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 0.75rem; }
     .section-sub { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; }
 
-    /* WHAT YOU GET CARDS */
-    .what-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+    /* WHAT YOU GET */
+    .what-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
     .what-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.5rem; text-align: center; box-shadow: var(--shadow); }
     .what-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
     .what-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .what-title { font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 0.4rem; }
     .what-sub { font-size: 0.85rem; color: var(--text-muted); }
 
-    /* HOW IT WORKS */
-    .steps { display: flex; flex-direction: column; gap: 1.25rem; }
-    .step { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
-    .step-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .step-body { flex: 1; }
-    .step-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.3rem; }
-    .step-desc { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* FORM SECTION */
+    /* FORM */
     .form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow-md); }
     .form-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
     .form-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
     .form-header p { font-size: 0.92rem; color: var(--text-muted); }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-label { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
-    .form-label .q-badge { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-size: 0.72rem; font-weight: 800; flex-shrink: 0; }
+    .form-group { margin-bottom: 1.75rem; }
+    .form-label { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .form-label .q-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-size: 0.72rem; font-weight: 800; flex-shrink: 0; }
+    .form-hint { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.6rem; margin-left: 2rem; }
+
+    /* TEXT / SELECT INPUTS */
     .form-control { display: block; width: 100%; font-family: var(--font-sans); font-size: 0.95rem; color: var(--text); background: var(--neutral-bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 1rem; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s; appearance: none; -webkit-appearance: none; outline: none; }
     .form-control:focus { border-color: var(--brand); background: var(--white); box-shadow: 0 0 0 3px rgba(29,111,219,0.12); }
     .form-control::placeholder { color: var(--text-light); }
     select.form-control { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E6E73' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-    .checkbox-list { display: flex; flex-direction: column; gap: 0.6rem; }
-    .checkbox-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; transition: border-color 0.18s, background 0.18s; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); background: var(--neutral-bg); }
-    .checkbox-row:hover { border-color: var(--brand); background: var(--white); }
-    .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--brand-dark); cursor: pointer; flex-shrink: 0; }
-    .checkbox-row.checked { border-color: var(--brand-dark); background: var(--white); color: var(--text); }
+    textarea.form-control { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+    /* SLIDERS */
+    .slider-wrap { padding: 0.25rem 0; }
+    .slider-display { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .slider-val { font-size: 1.2rem; font-weight: 800; color: var(--brand-dark); }
+    .slider-sublabel { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .slider-track { position: relative; padding: 0.5rem 0; }
+    input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; accent-color: var(--brand-dark); }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); cursor: pointer; box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
+    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); cursor: pointer; }
+    .slider-range-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-light); margin-top: 0.3rem; }
+
+    /* TOOL TOGGLE CHIPS */
+    .tool-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.65rem; }
+    .tool-chip { position: relative; }
+    .tool-chip input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .tool-chip label { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem 1rem; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.18s; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); background: var(--neutral-bg); user-select: none; min-height: 48px; }
+    .tool-chip label:hover { border-color: var(--brand); background: var(--white); color: var(--text); }
+    .tool-chip input:checked + label { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
+    .tool-chip label .chip-check { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.18s; background: var(--white); }
+    .tool-chip input:checked + label .chip-check { background: var(--brand-light); border-color: var(--brand-light); }
+    .tool-chip label .chip-check::after { content: '✓'; font-size: 0.7rem; font-weight: 900; color: var(--white); display: none; }
+    .tool-chip input:checked + label .chip-check::after { display: block; }
 
     /* ROI REVEAL */
     .roi-reveal { display: none; margin-bottom: 1.5rem; background: var(--neutral-bg); border: 1.5px solid var(--brand); border-radius: var(--radius); overflow: hidden; }
     .roi-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; cursor: pointer; user-select: none; }
     .roi-header-left { display: flex; align-items: center; gap: 0.75rem; }
-    .roi-header-left .roi-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); flex-shrink: 0; }
+    .roi-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); flex-shrink: 0; }
     .roi-header h4 { font-size: 0.95rem; font-weight: 800; color: var(--brand-dark); margin: 0; }
-    .roi-toggle { font-size: 0.75rem; color: var(--brand); font-weight: 700; }
-    .roi-content { display: none; padding: 0 1.5rem 1.5rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
-    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+    .roi-toggle-txt { font-size: 0.75rem; color: var(--brand); font-weight: 700; }
+    .roi-content { display: none; padding: 0 1.5rem 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
     .roi-item { text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1rem; }
     .roi-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); }
     .roi-lbl { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-top: 0.25rem; }
@@ -105,7 +119,6 @@
     .form-submit-area { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
     .submit-btn { display: block; width: 100%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); border: none; border-radius: 100px; padding: 1rem 2rem; font-size: 1rem; font-weight: 800; font-family: var(--font-sans); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.02em; }
     .submit-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .submit-btn:active { transform: none; }
     .submit-note { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 0.75rem; }
 
     /* SUCCESS */
@@ -115,7 +128,6 @@
     .success-title { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.75rem; }
     .success-body { font-size: 0.95rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 1.5rem; line-height: 1.6; }
     .success-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .success-stat { text-align: center; }
     .success-stat .s-val { font-size: 1.4rem; font-weight: 800; color: var(--brand-dark); display: block; }
     .success-stat .s-lbl { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
 
@@ -128,7 +140,6 @@
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
     .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
 
-    /* FOOTER */
     footer { background: var(--text); color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
     footer a { color: var(--brand-light); text-decoration: none; }
 
@@ -136,26 +147,24 @@
       .section { padding: 3rem 1.25rem; }
       .form-wrap { padding: 1.5rem; }
       .hero { padding: 3.5rem 1.25rem 3rem; }
-      .hero-stats { gap: 1.5rem; }
       .hero-divider { display: none; }
+      .tool-chips { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Advaita <span>AI for Business</span></div>
   <div class="nav-tagline">Free · No sales call · 24-hour delivery</div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-badge">Free AI Blueprint — Personalized for Your Business</div>
   <h1>Find Out Exactly What AI Can<br><span>Automate in YOUR Business</span></h1>
-  <p class="hero-sub">Answer 8 quick questions. We build a custom AI playbook, podcast walkthrough, and ROI breakdown specific to your tools and revenue goals — free.</p>
+  <p class="hero-sub">Answer 11 quick questions. We build a custom AI playbook, podcast walkthrough, and ROI breakdown specific to your exact business — free.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="num">8</span><span class="label">Quick<br>Questions</span></div>
+    <div class="hero-stat"><span class="num">11</span><span class="label">Quick<br>Questions</span></div>
     <div class="hero-divider"></div>
     <div class="hero-stat"><span class="num">24hr</span><span class="label">Blueprint<br>Delivered</span></div>
     <div class="hero-divider"></div>
@@ -166,7 +175,6 @@
   <a href="#intake-form" class="hero-cta">Get My Free Blueprint →</a>
 </section>
 
-<!-- WHAT YOU GET -->
 <section class="section section-alt">
   <div class="container">
     <p class="section-label">What's Included</p>
@@ -174,208 +182,205 @@
     <p class="section-sub">Built specifically for your business. Not a template — a real AI analysis of your exact workflows, tools, and revenue model.</p>
     <div class="what-grid">
       <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-        </div>
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
         <div class="what-title">Custom AI Playbook</div>
-        <div class="what-sub">HTML blueprint with 6+ AI agents mapped to your specific workflows and tools</div>
+        <div class="what-sub">6+ AI agents mapped to your specific workflows and tools</div>
       </div>
       <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4M12 4v3m0 0a7 7 0 017 7"/></svg>
-        </div>
-        <div class="what-title">30-Min AI Podcast</div>
-        <div class="what-sub">Custom audio walkthrough of your blueprint — listen while you drive</div>
-      </div>
-      <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
+        <div class="what-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
         <div class="what-title">ROI Breakdown</div>
-        <div class="what-sub">Hours saved per week and projected revenue impact for your exact business</div>
+        <div class="what-sub">Hours saved and projected revenue impact for your business</div>
       </div>
       <div class="what-card">
-        <div class="what-icon">
-          <svg viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        </div>
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4M12 4v3"/></svg></div>
+        <div class="what-title">30-Min AI Podcast</div>
+        <div class="what-sub">Custom audio walkthrough — listen while you drive</div>
+      </div>
+      <div class="what-card">
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
         <div class="what-title">3 Ready-to-Use Prompts</div>
-        <div class="what-sub">Copy-paste AI prompts built for your top 3 time drains — deploy today</div>
+        <div class="what-sub">Copy-paste AI prompts for your top 3 time drains</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section">
-  <div class="container">
-    <p class="section-label">How It Works</p>
-    <h2 class="section-title">From form to blueprint in 24 hours</h2>
-    <p class="section-sub">No discovery call. No sales pitch. Just a real AI output built for your business.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">Answer 8 questions about your business</div>
-          <div class="step-desc">Revenue, team size, tools, biggest time drains, AI maturity — takes under 2 minutes.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Our AI builds your custom blueprint</div>
-          <div class="step-desc">A dedicated AI agent researches your industry, maps your workflows, and designs a 6-agent system specific to your business.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">You receive your full package in 24 hours</div>
-          <div class="step-desc">HTML playbook, AI podcast, ROI calculator, and ready-to-use prompts — all built around your exact situation.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE FORM -->
 <section class="section section-alt" id="intake-form">
   <div class="container">
     <p class="section-label">Your Free Blueprint</p>
-    <h2 class="section-title">Get your custom AI blueprint →</h2>
-    <p class="section-sub">60 seconds to complete. Delivered in 24 hours. Free.</p>
+    <h2 class="section-title">Tell us about your business →</h2>
+    <p class="section-sub">11 questions · under 3 minutes · delivered in 24 hours · free</p>
 
     <div class="form-wrap">
       <div class="form-header">
-        <h2>Tell us about your business</h2>
-        <p>Every answer makes your blueprint more specific — more useful, more actionable.</p>
+        <h2>Let's build your blueprint</h2>
+        <p>Every answer makes your blueprint more specific and more useful.</p>
       </div>
 
       <form id="blueprint-form" novalidate>
 
+        <!-- Q1: Name -->
         <div class="form-group">
-          <label class="form-label" for="q1_name">
-            <span class="q-badge">1</span> First name
-          </label>
+          <label class="form-label" for="q1_name"><span class="q-badge">1</span>First name</label>
           <input id="q1_name" name="first_name" type="text" class="form-control" placeholder="Your first name" required />
         </div>
 
+        <!-- Q2: Email -->
         <div class="form-group">
-          <label class="form-label" for="q2_email">
-            <span class="q-badge">2</span> Email address
-          </label>
+          <label class="form-label" for="q2_email"><span class="q-badge">2</span>Email address</label>
           <input id="q2_email" name="email" type="email" class="form-control" placeholder="you@yourcompany.com" required />
         </div>
 
+        <!-- Q3: Website -->
         <div class="form-group">
-          <label class="form-label" for="q3_website">
-            <span class="q-badge">3</span> Business website
-          </label>
+          <label class="form-label" for="q3_website"><span class="q-badge">3</span>Business website</label>
           <input id="q3_website" name="website" type="url" class="form-control" placeholder="https://yourcompany.com" required />
         </div>
 
+        <!-- Q4: Revenue Slider -->
         <div class="form-group">
-          <label class="form-label" for="q4_revenue">
-            <span class="q-badge">4</span> Annual revenue range
-          </label>
-          <select id="q4_revenue" name="revenue_range" class="form-control" required>
-            <option value="" disabled selected>Select revenue range</option>
-            <option value="under_500k">Under $500K</option>
-            <option value="500k_1m">$500K — $1M</option>
-            <option value="1m_5m">$1M — $5M</option>
-            <option value="5m_10m">$5M — $10M</option>
-            <option value="10m_plus">$10M+</option>
-          </select>
+          <label class="form-label"><span class="q-badge">4</span>Annual revenue</label>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="revenue-display">$500K</span>
+              <span class="slider-sublabel">Annual Revenue</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q4_revenue" name="revenue_range" min="0" max="10" step="1" value="2"
+                oninput="updateRevenue(this.value)" />
+              <div class="slider-range-labels"><span>$100K</span><span>$1M</span><span>$5M</span><span>$10M+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="revenue_hidden" name="revenue_value" value="500000" />
+          <input type="hidden" id="revenue_label_hidden" name="revenue_label" value="$500K" />
         </div>
 
+        <!-- Q5: Tools — Toggle Chips -->
         <div class="form-group">
-          <label class="form-label">
-            <span class="q-badge">5</span> Tools your business runs on (select all)
-          </label>
-          <div class="checkbox-list" id="tools-list">
-            <label class="checkbox-row" id="cb-crm">
-              <input type="checkbox" name="tools_crm" value="yes" />
-              CRM (GoHighLevel, HubSpot, Salesforce, Pipedrive, etc.)
-            </label>
-            <label class="checkbox-row" id="cb-comms">
-              <input type="checkbox" name="tools_comms" value="yes" />
-              Email / Comms (Gmail, Outlook, Mailchimp, Slack, etc.)
-            </label>
-            <label class="checkbox-row" id="cb-docs">
-              <input type="checkbox" name="tools_docs" value="yes" />
-              Docs / Storage (Google Drive, Notion, Airtable, etc.)
-            </label>
-            <label class="checkbox-row" id="cb-pm">
-              <input type="checkbox" name="tools_project_mgmt" value="yes" />
-              Project Mgmt (Asana, Monday, ClickUp, Jira, etc.)
-            </label>
+          <label class="form-label"><span class="q-badge">5</span>Tools your business runs on <span style="font-weight:500;color:var(--text-light);font-size:0.8rem;">(tap all that apply)</span></label>
+          <p class="form-hint">Tap to select or deselect — you can choose multiple</p>
+          <div class="tool-chips">
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_crm" name="tools_crm" value="yes" />
+              <label for="tool_crm"><span class="chip-check"></span>CRM (GoHighLevel, HubSpot, Salesforce…)</label>
+            </div>
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_comms" name="tools_comms" value="yes" />
+              <label for="tool_comms"><span class="chip-check"></span>Email / Comms (Gmail, Outlook, Slack…)</label>
+            </div>
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_docs" name="tools_docs" value="yes" />
+              <label for="tool_docs"><span class="chip-check"></span>Docs / Storage (Google Drive, Notion, Airtable…)</label>
+            </div>
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_pm" name="tools_project_mgmt" value="yes" />
+              <label for="tool_pm"><span class="chip-check"></span>Project Mgmt (Asana, Monday, ClickUp…)</label>
+            </div>
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_phone" name="tools_phone" value="yes" />
+              <label for="tool_phone"><span class="chip-check"></span>Phone / SMS (OpenPhone, RingCentral, Twilio…)</label>
+            </div>
+            <div class="tool-chip">
+              <input type="checkbox" id="tool_social" name="tools_social" value="yes" />
+              <label for="tool_social"><span class="chip-check"></span>Social / Marketing (Meta Ads, Mailchimp, Canva…)</label>
+            </div>
           </div>
         </div>
 
+        <!-- Q6: Team Size Slider -->
         <div class="form-group">
-          <label class="form-label" for="q6_team">
-            <span class="q-badge">6</span> Team size
-          </label>
-          <select id="q6_team" name="team_size" class="form-control" required>
-            <option value="" disabled selected>Select team size</option>
-            <option value="just_me">Just me</option>
-            <option value="2_5">2–5 people</option>
-            <option value="6_20">6–20 people</option>
-            <option value="20_plus">20+ people</option>
-          </select>
+          <label class="form-label"><span class="q-badge">6</span>Team size</label>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="team-display">5 people</span>
+              <span class="slider-sublabel">Team Size</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q6_team" name="team_size_num" min="1" max="51" step="1" value="5"
+                oninput="updateTeam(this.value)" />
+              <div class="slider-range-labels"><span>Just me</span><span>10</span><span>25</span><span>50+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="team_hidden" name="team_size" value="5" />
         </div>
 
+        <!-- Q7: Time Drain Dropdown -->
         <div class="form-group">
-          <label class="form-label" for="q7_drains">
-            <span class="q-badge">7</span> Biggest time drain right now
-          </label>
-          <select id="q7_drains" name="time_drains" class="form-control" required>
+          <label class="form-label" for="q7_drain"><span class="q-badge">7</span>Biggest time drain right now</label>
+          <select id="q7_drain" name="time_drains" class="form-control" required>
             <option value="" disabled selected>Select your biggest drain</option>
             <option value="lead_followup">Lead follow-up &amp; outreach</option>
             <option value="admin_reporting">Admin &amp; reporting</option>
             <option value="scheduling">Scheduling &amp; coordination</option>
             <option value="customer_onboarding">Customer onboarding</option>
-            <option value="all">All of the above</option>
+            <option value="content_creation">Content &amp; marketing creation</option>
+            <option value="all">All of the above — everything takes too long</option>
           </select>
         </div>
 
+        <!-- Q8: Perfect World -->
         <div class="form-group">
-          <label class="form-label" for="q8_ai">
-            <span class="q-badge">8</span> Where are you with AI right now?
-          </label>
-          <select id="q8_ai" name="ai_maturity" class="form-control" required>
-            <option value="" disabled selected>Select where you are</option>
-            <option value="chatting">Tried ChatGPT — mostly chatting and asking questions</option>
-            <option value="conversational">Use AI regularly but it's conversational only</option>
-            <option value="custom_tools">Built or used custom AI tools / GPTs for specific tasks</option>
-            <option value="agents_running">Already running AI automation — agents or integrations live</option>
-          </select>
+          <label class="form-label" for="q8_vision"><span class="q-badge">8</span>In a perfect world, what does this look like?</label>
+          <p class="form-hint">If AI could handle anything in your business — what would your day look like? What's running without you?</p>
+          <textarea id="q8_vision" name="perfect_world" class="form-control" placeholder="Example: My CRM automatically qualifies leads, my team never has to do manual data entry, and I'm working on strategy — not admin..." required></textarea>
         </div>
 
-        <!-- ROI REVEAL (shows when form is complete) -->
+        <!-- Q9: Personal Hours Slider -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">9</span>Hours YOU personally spend on computer work per week</label>
+          <p class="form-hint">Include email, CRM, reporting, content, scheduling — anything on a computer or phone</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="personal-hours-display">30 hrs/wk</span>
+              <span class="slider-sublabel">Your Personal Hours</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q9_personal_hours" name="personal_hours_num" min="1" max="81" step="1" value="30"
+                oninput="updatePersonalHours(this.value)" />
+              <div class="slider-range-labels"><span>1 hr</span><span>20 hrs</span><span>50 hrs</span><span>80+ hrs</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="personal_hours_hidden" name="personal_hours" value="30" />
+        </div>
+
+        <!-- Q10: Company Hours Slider -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">10</span>Hours your entire company spends on computer work per week</label>
+          <p class="form-hint">Best estimate across your whole team — email, admin, reporting, data entry, coordination, etc.</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="company-hours-display">100 hrs/wk</span>
+              <span class="slider-sublabel">Company Total</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q10_company_hours" name="company_hours_num" min="5" max="505" step="5" value="100"
+                oninput="updateCompanyHours(this.value)" />
+              <div class="slider-range-labels"><span>5 hrs</span><span>100 hrs</span><span>300 hrs</span><span>500+ hrs</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="company_hours_hidden" name="company_hours" value="100" />
+        </div>
+
+        <!-- Q11: Pain Points -->
+        <div class="form-group">
+          <label class="form-label" for="q11_pain"><span class="q-badge">11</span>What are your biggest pain points right now?</label>
+          <p class="form-hint">The more specific you are, the more precise your blueprint will be. What keeps you up at night? What do you wish you could just fix?</p>
+          <textarea id="q11_pain" name="pain_points" class="form-control" style="min-height:120px;" placeholder="Example: We lose leads because nobody follows up fast enough. I'm manually copy-pasting data between tools for hours each week. My team doesn't know what to prioritize. Reporting takes a full day every month..." required></textarea>
+        </div>
+
+        <!-- ROI REVEAL -->
         <div class="roi-reveal" id="roi-reveal">
           <div class="roi-header" onclick="toggleROI()">
-            <div class="roi-header-left">
-              <div class="roi-dot"></div>
-              <h4>Your estimated ROI impact</h4>
-            </div>
-            <span class="roi-toggle" id="roi-toggle-txt">Show ▼</span>
+            <div class="roi-header-left"><div class="roi-dot"></div><h4>Your estimated automation impact</h4></div>
+            <span class="roi-toggle-txt" id="roi-toggle-txt">Show ▼</span>
           </div>
           <div class="roi-content" id="roi-content">
             <div class="roi-grid">
-              <div class="roi-item">
-                <div class="roi-val" id="roi-hours">20+</div>
-                <div class="roi-lbl">Hours/Week Saved</div>
-              </div>
-              <div class="roi-item">
-                <div class="roi-val" id="roi-pipeline">$500K</div>
-                <div class="roi-lbl">Pipeline Impact</div>
-              </div>
-              <div class="roi-item">
-                <div class="roi-val" id="roi-fte">1.0</div>
-                <div class="roi-lbl">FTE Equivalent</div>
-              </div>
+              <div class="roi-item"><div class="roi-val" id="roi-personal-hours">—</div><div class="roi-lbl">Your Hrs Saved/Wk</div></div>
+              <div class="roi-item"><div class="roi-val" id="roi-company-hours">—</div><div class="roi-lbl">Company Hrs Saved/Wk</div></div>
+              <div class="roi-item"><div class="roi-val" id="roi-pipeline">—</div><div class="roi-lbl">Annual Impact</div></div>
             </div>
-            <p class="roi-note">Your full blueprint includes a detailed ROI calculator built for your exact business model.</p>
+            <p class="roi-note">Based on 30% automation rate on computer work. Your blueprint will include a detailed ROI model for your exact business.</p>
           </div>
         </div>
 
@@ -386,11 +391,8 @@
 
       </form>
 
-      <!-- SUCCESS STATE -->
       <div class="form-success" id="form-success">
-        <div class="success-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
+        <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
         <div class="success-title">Your blueprint is being built.</div>
         <div class="success-body">Check your email in 24 hours. We're building a custom AI playbook and podcast walkthrough for your exact business — no sales call, no fluff.</div>
         <div class="success-stats">
@@ -404,35 +406,110 @@
   </div>
 </section>
 
-<!-- CTA BOTTOM -->
 <section class="cta-section">
   <h2>Your competitors are building<br><span>AI agents right now.</span></h2>
-  <p>The businesses that deploy AI in the next 12 months will have a compounding advantage that's nearly impossible to close. See exactly what that looks like for your business.</p>
+  <p>The businesses that deploy AI in the next 12 months will have a compounding advantage that's nearly impossible to close. Find out exactly what that looks like for your business.</p>
   <a href="#intake-form" class="cta-btn">Get My Free Blueprint →</a>
-  <p class="cta-sub">60 seconds · Free · No sales call</p>
+  <p class="cta-sub">11 questions · Free · No sales call</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Advaita AI · Powered by Franchise KI · <a href="mailto:contact@franchiseki.com">contact@franchiseki.com</a></p>
 </footer>
 
 <script>
-(function () {
+// ─── SLIDER HELPERS ───────────────────────────────────────────
+var revenueSteps = [100000,250000,500000,750000,1000000,1500000,2000000,3000000,5000000,7500000,10000000];
+var revenueLabels = ['$100K','$250K','$500K','$750K','$1M','$1.5M','$2M','$3M','$5M','$7.5M','$10M+'];
+
+function updateRevenue(val) {
+  val = parseInt(val);
+  var label = revenueLabels[val];
+  document.getElementById('revenue-display').textContent = label;
+  document.getElementById('revenue_hidden').value = revenueSteps[val];
+  document.getElementById('revenue_label_hidden').value = label;
+  checkROITrigger();
+}
+
+function updateTeam(val) {
+  val = parseInt(val);
+  var label = val >= 51 ? '50+ people' : val === 1 ? 'Just me' : val + ' people';
+  document.getElementById('team-display').textContent = label;
+  document.getElementById('team_hidden').value = val >= 51 ? '50+' : String(val);
+  checkROITrigger();
+}
+
+function updatePersonalHours(val) {
+  val = parseInt(val);
+  var label = val >= 81 ? '80+ hrs/wk' : val + ' hrs/wk';
+  document.getElementById('personal-hours-display').textContent = label;
+  document.getElementById('personal_hours_hidden').value = val >= 81 ? '80+' : String(val);
+  checkROITrigger();
+}
+
+function updateCompanyHours(val) {
+  val = parseInt(val);
+  var label = val >= 505 ? '500+ hrs/wk' : val + ' hrs/wk';
+  document.getElementById('company-hours-display').textContent = label;
+  document.getElementById('company_hours_hidden').value = val >= 505 ? '500+' : String(val);
+  checkROITrigger();
+}
+
+// ─── ROI CALCULATOR ──────────────────────────────────────────
+function calculateROI() {
+  var pHours = parseInt(document.getElementById('personal_hours_hidden').value) || 30;
+  var cHours = parseInt(document.getElementById('company_hours_hidden').value) || 100;
+  var revenue = parseInt(document.getElementById('revenue_hidden').value) || 500000;
+
+  var pSaved = Math.round(pHours * 0.30);
+  var cSaved = Math.round(cHours * 0.30);
+  var annualImpact = Math.round(revenue * 0.12);
+
+  return { pSaved: pSaved, cSaved: cSaved, annualImpact: annualImpact };
+}
+
+function showROI() {
+  var r = calculateROI();
+  document.getElementById('roi-personal-hours').textContent = r.pSaved + ' hrs';
+  document.getElementById('roi-company-hours').textContent = r.cSaved + ' hrs';
+  var a = r.annualImpact;
+  document.getElementById('roi-pipeline').textContent = a >= 1000000 ? '$' + (a/1000000).toFixed(1) + 'M' : '$' + Math.round(a/1000) + 'K';
+
+  var el = document.getElementById('roi-reveal');
+  if (el.style.display !== 'block') {
+    el.style.display = 'block';
+    // Auto-open the content
+    document.getElementById('roi-content').style.display = 'block';
+    document.getElementById('roi-toggle-txt').textContent = 'Hide ▲';
+    setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 150);
+  } else {
+    // Just update values
+    document.getElementById('roi-personal-hours').textContent = r.pSaved + ' hrs';
+    document.getElementById('roi-company-hours').textContent = r.cSaved + ' hrs';
+  }
+}
+
+function toggleROI() {
+  var c = document.getElementById('roi-content');
+  var t = document.getElementById('roi-toggle-txt');
+  var open = c.style.display === 'block';
+  c.style.display = open ? 'none' : 'block';
+  t.textContent = open ? 'Show ▼' : 'Hide ▲';
+}
+
+// ─── ROI TRIGGER ─────────────────────────────────────────────
+function checkROITrigger() {
+  var name = document.getElementById('q1_name').value.trim();
+  var email = document.getElementById('q2_email').value.trim();
+  var drain = document.getElementById('q7_drain').value;
+  if (name && email && drain) showROI();
+}
+
+// ─── GHL SUBMISSION ──────────────────────────────────────────
+(function() {
   var GHL_KEY = 'pit-81e14317-71e3-44c2-864c-0dd014f570cd';
   var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
   var GHL_API = 'https://services.leadconnectorhq.com';
-
-  var form = document.getElementById('blueprint-form');
-  var successEl = document.getElementById('form-success');
-
-  // Checkbox styling
-  document.querySelectorAll('.checkbox-row input[type="checkbox"]').forEach(function(cb) {
-    cb.addEventListener('change', function() {
-      this.closest('.checkbox-row').classList.toggle('checked', this.checked);
-      checkROITrigger();
-    });
-  });
 
   function ghlHeaders() {
     return { 'Authorization': 'Bearer ' + GHL_KEY, 'Version': '2021-07-28', 'Content-Type': 'application/json' };
@@ -440,10 +517,14 @@
 
   function buildTags(d) {
     var tags = ['advaita-ai-blueprint'];
-    var sopMap = { yes: 'sop-ready', some: 'sop-partial', no: 'sop-none' };
-    if (sopMap[d.existing_sops]) tags.push(sopMap[d.existing_sops]);
-    var aiMap = { chatting: 'ai-stage-chatgpt', conversational: 'ai-stage-conversational', custom_tools: 'ai-stage-custom-tools', agents_running: 'ai-stage-agents-running' };
-    if (aiMap[d.ai_maturity]) tags.push(aiMap[d.ai_maturity]);
+    var drainMap = { lead_followup: 'drain-lead-followup', admin_reporting: 'drain-admin', scheduling: 'drain-scheduling', customer_onboarding: 'drain-onboarding', content_creation: 'drain-content', all: 'drain-everything' };
+    if (drainMap[d.time_drains]) tags.push(drainMap[d.time_drains]);
+    // Revenue tier tag
+    var rev = parseInt(d.revenue_value) || 0;
+    if (rev >= 5000000) tags.push('revenue-5m-plus');
+    else if (rev >= 1000000) tags.push('revenue-1m-5m');
+    else if (rev >= 500000) tags.push('revenue-500k-1m');
+    else tags.push('revenue-under-500k');
     return tags;
   }
 
@@ -453,64 +534,39 @@
     if (d.tools_comms) tools.push('Comms');
     if (d.tools_docs) tools.push('Docs');
     if (d.tools_project_mgmt) tools.push('Project Mgmt');
+    if (d.tools_phone) tools.push('Phone/SMS');
+    if (d.tools_social) tools.push('Social/Marketing');
     return [
-      'Advaita AI Blueprint — intake form v2 (blue-point design)',
+      'Advaita AI Blueprint — Intake Form v3 (CEO design)',
+      '---',
       'Website: ' + (d.website || 'N/A'),
-      'Revenue range: ' + d.revenue_range,
-      'Team size: ' + d.team_size,
+      'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
+      'Team size: ' + (d.team_size || 'N/A'),
       'Tools: ' + (tools.length ? tools.join(', ') : 'None selected'),
-      'Time drains: ' + d.time_drains,
-      'AI maturity: ' + d.ai_maturity,
-      'Form version: 2026-05-23-v2'
+      'Time drain: ' + (d.time_drains || 'N/A'),
+      'Personal hrs/wk: ' + (d.personal_hours || 'N/A'),
+      'Company hrs/wk: ' + (d.company_hours || 'N/A'),
+      '---',
+      'Perfect world vision:',
+      d.perfect_world || '(not provided)',
+      '---',
+      'Pain points:',
+      d.pain_points || '(not provided)',
+      '---',
+      'Form version: 2026-05-23-v3'
     ].join('\n');
   }
-
-  function calculateROI(d) {
-    var roi = { hours: 20, pipeline: 500000, fte: 1.0 };
-    var tm = { just_me: 1, '2_5': 1.5, '6_20': 2.5, '20_plus': 4 };
-    if (tm[d.team_size]) {
-      roi.hours = Math.round(roi.hours * tm[d.team_size]);
-      roi.pipeline = Math.round(roi.pipeline * tm[d.team_size]);
-      roi.fte = Math.round(roi.fte * tm[d.team_size] * 10) / 10;
-    }
-    var db = { lead_followup: 1.3, admin_reporting: 1.2, scheduling: 1.1, customer_onboarding: 1.4, all: 1.5 };
-    if (db[d.time_drains]) {
-      roi.hours = Math.round(roi.hours * db[d.time_drains]);
-      roi.pipeline = Math.round(roi.pipeline * db[d.time_drains]);
-    }
-    return roi;
-  }
-
-  function showROI(d) {
-    var roi = calculateROI(d);
-    document.getElementById('roi-hours').textContent = roi.hours + '+';
-    document.getElementById('roi-pipeline').textContent = '$' + (roi.pipeline >= 1000000 ? (roi.pipeline/1000000).toFixed(1) + 'M' : (roi.pipeline/1000).toFixed(0) + 'K');
-    document.getElementById('roi-fte').textContent = roi.fte;
-    var el = document.getElementById('roi-reveal');
-    el.style.display = 'block';
-    setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 120);
-  }
-
-  function checkROITrigger() {
-    var required = form.querySelectorAll('[required]');
-    var allFilled = Array.from(required).every(function(el) { return el.value && el.value.trim(); });
-    if (allFilled && document.getElementById('roi-reveal').style.display !== 'block') {
-      var d = {};
-      new FormData(form).forEach(function(v, k) { d[k] = v; });
-      showROI(d);
-    }
-  }
-
-  form.querySelectorAll('.form-control').forEach(function(el) {
-    el.addEventListener('change', checkROITrigger);
-    el.addEventListener('input', function() { el.style.borderColor = ''; checkROITrigger(); });
-  });
 
   async function submitToGHL(d) {
     try {
       var res = await fetch(GHL_API + '/contacts/', {
         method: 'POST', headers: ghlHeaders(),
-        body: JSON.stringify({ firstName: d.first_name, email: d.email, locationId: GHL_LOC, source: 'advaita-ai-blueprint', tags: buildTags(d), customFields: { form_version: '2026-05-23-v2' } })
+        body: JSON.stringify({
+          firstName: d.first_name, email: d.email,
+          locationId: GHL_LOC, source: 'advaita-ai-blueprint',
+          tags: buildTags(d),
+          customFields: { form_version: '2026-05-23-v3' }
+        })
       });
       if (!res.ok) return;
       var json = await res.json();
@@ -523,15 +579,28 @@
     } catch(e) {}
   }
 
+  var form = document.getElementById('blueprint-form');
+  var successEl = document.getElementById('form-success');
+
+  form.querySelectorAll('.form-control').forEach(function(el) {
+    el.addEventListener('input', function() { el.style.borderColor = ''; checkROITrigger(); });
+    el.addEventListener('change', function() { el.style.borderColor = ''; checkROITrigger(); });
+  });
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     var required = form.querySelectorAll('[required]');
     var allValid = true;
+    var firstInvalid = null;
     required.forEach(function(el) {
-      if (!el.value || !el.value.trim()) { allValid = false; el.style.borderColor = '#c0392b'; }
-      else { el.style.borderColor = ''; }
+      if (!el.value || !el.value.trim()) {
+        allValid = false;
+        el.style.borderColor = '#c0392b';
+        if (!firstInvalid) firstInvalid = el;
+      } else { el.style.borderColor = ''; }
     });
-    if (!allValid) { form.querySelector('[style*="c0392b"]').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    if (!allValid) { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
     var d = {};
     new FormData(form).forEach(function(v, k) { d[k] = v; });
     form.style.display = 'none';
@@ -540,14 +609,6 @@
     submitToGHL(d).catch(function() {});
   });
 })();
-
-function toggleROI() {
-  var c = document.getElementById('roi-content');
-  var t = document.getElementById('roi-toggle-txt');
-  var open = c.style.display === 'block';
-  c.style.display = open ? 'none' : 'block';
-  t.textContent = open ? 'Show ▼' : 'Hide ▲';
-}
 </script>
 </body>
 </html>
