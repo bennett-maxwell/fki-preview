@@ -2218,5 +2218,19 @@ updateCalc();
     });
   }
 
+<script>
+// M5: Reading progress bar — updates on scroll
+var readingProgress = document.getElementById('readingProgress');
+// M6: Mobile CTA bar — shows after scroll depth
+var mobileCta = document.getElementById('mobileCta');
+window.addEventListener('scroll', function() {
+  var docH = document.documentElement.scrollHeight - window.innerHeight;
+  var pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+  if (readingProgress) readingProgress.style.width = Math.min(100, pct).toFixed(1) + '%';
+  if (mobileCta) {
+    mobileCta.classList.toggle('visible', window.scrollY > 350);
+  }
+});
+</script>
 </body>
 </html>
