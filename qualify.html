@@ -47,14 +47,34 @@
   .q-title { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
   .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.4rem; }
 
+  /* EXPONENTIAL SLIDER INPUT */
+  .exp-input-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .exp-input-row label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+  .exp-input-row input[type=number] {
+    width: 120px; font-size: 1.1rem; font-weight: 700; padding: 0.45rem 0.7rem;
+    border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit;
+    color: var(--text); background: var(--neutral-bg); outline: none;
+    -moz-appearance: textfield;
+  }
+  .exp-input-row input[type=number]:focus { border-color: var(--brand); background: var(--white); }
+  .exp-input-row input[type=number]::-webkit-outer-spin-button,
+  .exp-input-row input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .exp-input-row .exp-unit { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+
   /* SLIDER */
   .slider-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
   .slider-name { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
   .slider-val { font-size: 1.05rem; font-weight: 800; color: var(--brand-dark); }
   .slider-val.needs-input { color: var(--text-light); font-style: italic; font-size: 0.88rem; font-weight: 500; }
-  input[type=range] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand-dark); }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 2px solid var(--white); box-shadow: 0 1px 8px rgba(0,0,0,0.2); }
-  .leads-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-top: -1rem; margin-bottom: 1.2rem; }
+  input[type=range] {
+    width: 100%; height: 6px; border-radius: 3px; outline: none;
+    appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 0.6rem;
+    background: linear-gradient(to right, var(--brand) 0%, var(--brand) 25%, var(--border) 25%, var(--border) 100%);
+  }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); }
+  .exp-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-bottom: 1.2rem; }
+  .exp-scale .scale-anchor { color: var(--brand); font-weight: 700; }
 
   /* CHIPS */
   .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
@@ -127,46 +147,73 @@
 
     <div class="section-divider">Revenue Potential — Can We Hit $50K in 90 Days?</div>
 
-    <!-- Q1: Monthly Leads — EXPONENTIAL -->
+    <!-- Q1: Monthly Leads — EXPONENTIAL ANCHORED -->
     <div class="q-section">
       <div class="q-label">Question 1 of 6</div>
       <div class="q-title">How many new leads or inquiries does your business receive each month?</div>
       <div class="q-sub">Include all channels — phone, web, referral, walk-in.</div>
+      <div class="exp-input-row">
+        <label for="inp-leads">Your monthly leads:</label>
+        <input type="number" id="inp-leads" value="50" min="1" max="99999" oninput="anchorSlider('leads')">
+        <span class="exp-unit">leads/mo</span>
+      </div>
       <div class="slider-row">
         <span class="slider-name">Monthly Leads</span>
-        <span class="slider-val" id="lbl-leads">10</span>
+        <span class="slider-val" id="lbl-leads">50 leads/mo</span>
       </div>
-      <input type="range" id="sl-leads" min="0" max="100" step="1" value="0" oninput="update()">
-      <div class="leads-scale">
-        <span>10</span><span>~50</span><span>~200</span><span>~500</span><span>~1,500</span><span>5,000</span>
+      <input type="range" id="sl-leads" min="0" max="1000" step="1" value="250" oninput="slideUpdate('leads')">
+      <div class="exp-scale">
+        <span id="scale-min-leads">17</span>
+        <span class="scale-anchor" id="scale-anchor-leads">50 (yours)</span>
+        <span id="scale-max-leads">500</span>
       </div>
     </div>
 
-    <!-- Q2: Deal Value -->
+    <!-- Q2: Deal Value — EXPONENTIAL ANCHORED -->
     <div class="q-section">
       <div class="q-label">Question 2 of 6</div>
       <div class="q-title">What is your average contract or transaction value?</div>
       <div class="q-sub">The typical dollar amount when you close a deal.</div>
+      <div class="exp-input-row">
+        <label for="inp-deal">Your avg deal:</label>
+        <input type="number" id="inp-deal" value="" placeholder="e.g. 5000" min="1" max="9999999" oninput="anchorSlider('deal')">
+        <span class="exp-unit">$</span>
+      </div>
       <div class="slider-row">
         <span class="slider-name">Average Deal Value</span>
-        <span class="slider-val needs-input" id="lbl-deal" data-no-default="true">← slide to enter yours</span>
+        <span class="slider-val needs-input" id="lbl-deal">← enter your number above</span>
       </div>
-      <input type="range" id="sl-deal" min="500" max="50000" step="500" value="500" data-no-default="true" oninput="update()">
+      <input type="range" id="sl-deal" min="0" max="1000" step="1" value="250" oninput="slideUpdate('deal')" disabled>
+      <div class="exp-scale">
+        <span id="scale-min-deal">—</span>
+        <span class="scale-anchor" id="scale-anchor-deal">your # (25%)</span>
+        <span id="scale-max-deal">—</span>
+      </div>
     </div>
 
-    <!-- Q3: Close Rate -->
+    <!-- Q3: Close Rate — EXPONENTIAL ANCHORED -->
     <div class="q-section">
       <div class="q-label">Question 3 of 6</div>
       <div class="q-title">What percentage of your leads do you currently close?</div>
       <div class="q-sub">Out of 100 leads that come in, how many become paying customers?</div>
+      <div class="exp-input-row">
+        <label for="inp-rate">Your close rate:</label>
+        <input type="number" id="inp-rate" value="" placeholder="e.g. 20" min="1" max="100" oninput="anchorSlider('rate')">
+        <span class="exp-unit">%</span>
+      </div>
       <div class="slider-row">
         <span class="slider-name">Current Close Rate</span>
-        <span class="slider-val needs-input" id="lbl-rate" data-no-default="true">← slide to enter yours</span>
+        <span class="slider-val needs-input" id="lbl-rate">← enter your number above</span>
       </div>
-      <input type="range" id="sl-rate" min="2" max="70" step="1" value="2" data-no-default="true" oninput="update()">
+      <input type="range" id="sl-rate" min="0" max="1000" step="1" value="250" oninput="slideUpdate('rate')" disabled>
+      <div class="exp-scale">
+        <span id="scale-min-rate">—</span>
+        <span class="scale-anchor" id="scale-anchor-rate">your % (25%)</span>
+        <span id="scale-max-rate">—</span>
+      </div>
     </div>
 
-    <!-- Q4: Response Speed -->
+    <!-- Q4: Response Speed — CHIPS (unchanged) -->
     <div class="q-section">
       <div class="q-label">Question 4 of 6 — Biggest AI Lever</div>
       <div class="q-title">How fast does your business typically respond to a new lead?</div>
@@ -183,7 +230,7 @@
 
     <div class="section-divider" style="margin-top:2rem;">Deployment & Investment — What Comes First?</div>
 
-    <!-- Q5: Blueprint Capability First -->
+    <!-- Q5: Blueprint Capability First — CHIPS (unchanged) -->
     <div class="q-section">
       <div class="q-label">Question 5 of 6</div>
       <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
@@ -197,18 +244,25 @@
       </div>
     </div>
 
-    <!-- Q6: Monthly Marketing Spend -->
+    <!-- Q6: Marketing Spend — EXPONENTIAL ANCHORED -->
     <div class="q-section">
       <div class="q-label">Question 6 of 6</div>
       <div class="q-title">How much are you currently spending per month on marketing, including ad spend?</div>
       <div class="q-sub">Include paid ads, agency fees, lead gen services — everything you spend to attract new business.</div>
+      <div class="exp-input-row">
+        <label for="inp-mktg">Your monthly spend:</label>
+        <input type="number" id="inp-mktg" value="" placeholder="e.g. 2000" min="0" max="9999999" oninput="anchorSlider('mktg')">
+        <span class="exp-unit">$/mo</span>
+      </div>
       <div class="slider-row">
         <span class="slider-name">Monthly Marketing Spend</span>
-        <span class="slider-val needs-input" id="lbl-mktg">← slide to enter yours</span>
+        <span class="slider-val needs-input" id="lbl-mktg">← enter your number above</span>
       </div>
-      <input type="range" id="sl-mktg" min="0" max="100" step="1" value="0" oninput="update()">
-      <div class="leads-scale">
-        <span>$0</span><span>$500</span><span>$2.5K</span><span>$10K</span><span>$25K</span><span>$50K+</span>
+      <input type="range" id="sl-mktg" min="0" max="1000" step="1" value="250" oninput="slideUpdate('mktg')" disabled>
+      <div class="exp-scale">
+        <span id="scale-min-mktg">—</span>
+        <span class="scale-anchor" id="scale-anchor-mktg">your spend (25%)</span>
+        <span id="scale-max-mktg">—</span>
       </div>
     </div>
 
@@ -247,7 +301,7 @@
 
       <div class="results-breakdown" id="breakdown-text"></div>
 
-      <a class="cta-btn" id="cta-apply" href="https://blueprint.meetadvaita.com/apply" target="_blank" style="opacity:0.5;pointer-events:none;">Apply to Work with Bennett →</a>
+      <a class="cta-btn" id="cta-apply" href="https://blueprint.meetadvaita.com/apply" target="_blank" style="opacity:0.5;pointer-events:none;">Get Your AI Quote →</a>
     </div>
   </div>
 
@@ -258,207 +312,257 @@
 </p>
 
 <script>
-  // ── EXPONENTIAL LEAD SCALE ────────────────────────────────
-  // Slider position 0-100 → lead count 10-5000 (log curve)
-  // Most people live at 0-65 (10–450 leads). Last 35% accelerates to 5000.
-  function posToLeads(pos) {
-    // f(0)=10, f(100)=5000, log scale
-    const raw = Math.round(10 * Math.pow(500, pos / 100));
-    // Snap to clean numbers
-    if (raw < 20)   return Math.round(raw);
-    if (raw < 50)   return Math.round(raw / 5)  * 5;
-    if (raw < 200)  return Math.round(raw / 10) * 10;
-    if (raw < 500)  return Math.round(raw / 25) * 25;
-    if (raw < 1000) return Math.round(raw / 50) * 50;
-    if (raw < 2000) return Math.round(raw / 100) * 100;
-    return Math.round(raw / 250) * 250;
+// ── EXPONENTIAL ANCHOR METHODOLOGY ───────────────────────────────────────────
+// V anchors at 25% of slider travel (pos 250 of 0-1000).
+// 0-25%  → V/3 to V   (piecewise exponential)
+// 25-100% → V  to 10V  (piecewise exponential)
+
+const anchors = { leads: 50, deal: null, rate: null, mktg: null };
+
+function expValue(V, p) {
+  if (p <= 0.25) return (V / 3) * Math.pow(3, 4 * p);
+  return V * Math.pow(10, (p - 0.25) / 0.75);
+}
+
+function valueToPos(V, val) {
+  if (val <= V) {
+    const p = Math.max(0, Math.log(val * 3 / V) / Math.log(3) / 4);
+    return Math.round(Math.min(250, p * 1000));
+  } else {
+    const p = 0.25 + 0.75 * Math.log10(val / V);
+    return Math.round(Math.max(250, Math.min(1000, p * 1000)));
   }
+}
 
-  // ── MARKETING SPEND SCALE ─────────────────────────────────
-  // pos 0 = $0 (no spend), pos 1-100 → $100 to $50,000 (log scale)
-  function posToSpend(pos) {
-    if (pos === 0) return 0;
-    const raw = Math.round(100 * Math.pow(500, pos / 100));
-    if (raw < 500)   return Math.round(raw / 50)   * 50;
-    if (raw < 2000)  return Math.round(raw / 250)  * 250;
-    if (raw < 5000)  return Math.round(raw / 500)  * 500;
-    if (raw < 15000) return Math.round(raw / 1000) * 1000;
-    if (raw < 30000) return Math.round(raw / 2500) * 2500;
-    return Math.round(raw / 5000) * 5000;
-  }
+function updateSliderFill(id, pos) {
+  const pct = pos / 10;
+  document.getElementById(id).style.background =
+    `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+}
 
-  // ── STATE ─────────────────────────────────────────────────
-  const chips = { speed: null, capability: null };
-  const DEAL_MIN = 500, RATE_MIN = 2; // sentinel = not entered
-
-  function selectChip(group, val) {
-    document.getElementById('chips-' + group).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-    document.getElementById('chips-' + group).querySelector('[data-val="' + val + '"]').classList.add('selected');
-    chips[group] = val;
-    update();
-  }
-
-  function fmtMoney(n) {
+function fmtNum(n, mode) {
+  if (mode === 'pct') return Math.min(100, Math.round(n * 10) / 10) + '%';
+  if (mode === 'money') {
     if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
     if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
     return '$' + Math.round(n).toLocaleString();
   }
+  if (n >= 1000) return Math.round(n).toLocaleString();
+  return String(Math.round(n));
+}
 
-  function fmtLeads(n) {
-    if (n >= 1000) return n.toLocaleString();
-    return String(n);
-  }
+const modes = { leads: 'num', deal: 'money', rate: 'pct', mktg: 'money' };
 
-  // ── MAIN UPDATE ───────────────────────────────────────────
-  function update() {
-    const pos     = +document.getElementById('sl-leads').value;
-    const leads   = posToLeads(pos);
-    const deal    = +document.getElementById('sl-deal').value;
-    const rate    = +document.getElementById('sl-rate').value;
-    const mktgPos = +document.getElementById('sl-mktg').value;
-    const mktg    = posToSpend(mktgPos);
+function updateScale(key) {
+  const V = anchors[key];
+  if (!V) return;
+  const m = modes[key];
+  document.getElementById('scale-min-' + key).textContent    = fmtNum(V / 3, m);
+  document.getElementById('scale-anchor-' + key).textContent = fmtNum(V, m) + ' (yours)';
+  document.getElementById('scale-max-' + key).textContent    = fmtNum(V * 10, m);
+}
 
-    const dealEntered = deal > DEAL_MIN;
-    const rateEntered = rate > RATE_MIN;
-    const mktgEntered = mktgPos > 0;
+// Called when user types in a number input
+function anchorSlider(key) {
+  const inp = document.getElementById('inp-' + key);
+  const raw = parseFloat(inp.value);
+  if (!raw || raw <= 0) { anchors[key] = null; update(); return; }
+  const V = raw;
+  anchors[key] = V;
 
-    // Labels
-    document.getElementById('lbl-leads').textContent = fmtLeads(leads) + ' leads/mo';
-    document.getElementById('lbl-leads').className = 'slider-val';
+  const sl = document.getElementById('sl-' + key);
+  sl.value = 250;  // anchor at 25%
+  sl.disabled = false;
+  updateSliderFill('sl-' + key, 250);
+  updateScale(key);
 
-    const dealEl = document.getElementById('lbl-deal');
-    if (dealEntered) { dealEl.textContent = fmtMoney(deal); dealEl.className = 'slider-val'; }
-    else             { dealEl.textContent = '← slide to enter yours'; dealEl.className = 'slider-val needs-input'; }
-
-    const rateEl = document.getElementById('lbl-rate');
-    if (rateEntered) { rateEl.textContent = rate + '%'; rateEl.className = 'slider-val'; }
-    else             { rateEl.textContent = '← slide to enter yours'; rateEl.className = 'slider-val needs-input'; }
-
-    const mktgEl = document.getElementById('lbl-mktg');
-    if (mktgEntered) {
-      mktgEl.textContent = (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo';
-      mktgEl.className = 'slider-val';
-    } else {
-      mktgEl.textContent = '← slide to enter yours';
-      mktgEl.className = 'slider-val needs-input';
-    }
-
-    // Progress (6 questions)
-    let answered = 0;
-    if (pos > 0)           answered++;  // leads moved from default
-    if (dealEntered)       answered++;
-    if (rateEntered)       answered++;
-    if (chips.speed)       answered++;
-    if (chips.capability)  answered++;
-    if (mktgEntered)       answered++;
-    answered = Math.min(answered, 6);
-    const pct = Math.round(answered / 6 * 100);
-    document.getElementById('progress-label').textContent = answered + ' of 6 answered';
-    document.getElementById('progress-pct').textContent   = pct + '%';
-    document.getElementById('progress-fill').style.width  = pct + '%';
-
-    // ── ROI ──────────────────────────────────────────────────
-    const speedLift = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
-    const canROI    = dealEntered && rateEntered && chips.speed && pos > 0;
-    const roiBlock  = document.getElementById('roi-block');
-
-    if (canROI) {
-      const curRate  = rate / 100;
-      const newRate  = Math.min(curRate + speedLift, 0.80);
-      const moGain   = leads * (newRate - curRate) * deal;
-      const q90Gain  = moGain * 3;
-
-      document.getElementById('roi-value').textContent = fmtMoney(q90Gain);
-      document.getElementById('roi-sub').textContent   = fmtMoney(moGain) + '/mo additional from AI response speed';
-      roiBlock.className = 'result-block ' + (q90Gain >= 50000 ? 'green' : q90Gain >= 25000 ? 'yellow' : 'red');
-    } else {
-      roiBlock.className = 'result-block neutral';
-      document.getElementById('roi-value').textContent = '—';
-      document.getElementById('roi-sub').textContent   = 'Answer questions 1–4 to calculate';
-    }
-
-    // ── EFFORT ───────────────────────────────────────────────
-    const capHrs  = { 'speed-bot': 0.2, 'lead-filter': 0.3, 'follow-up': 0.2, 'crm-auto': 0.5, 'voice-ai': 0.4 }[chips.capability] || null;
-    const canEff  = chips.capability !== null;
-    const efBlock = document.getElementById('effort-block');
-    let   totalHrs = null;
-
-    if (canEff) {
-      totalHrs = 0.5 + capHrs;
-      document.getElementById('effort-value').textContent = totalHrs.toFixed(1) + ' hrs';
-      document.getElementById('effort-sub').textContent   = totalHrs <= 1
-        ? 'Within Bennett\'s 1-hour delivery target ✓'
-        : 'Exceeds 1-hour target — scope conversation needed';
-      efBlock.className = 'result-block ' + (totalHrs <= 1 ? 'green' : totalHrs <= 2 ? 'yellow' : 'red');
-    } else {
-      efBlock.className = 'result-block neutral';
-      document.getElementById('effort-value').textContent = '—';
-      document.getElementById('effort-sub').textContent   = 'Answer question 5 to calculate';
-    }
-
-    // ── VERDICT ───────────────────────────────────────────────
-    const vBlock  = document.getElementById('verdict-block');
-    const vIcon   = document.getElementById('verdict-icon');
-    const vLabel  = document.getElementById('verdict-label');
-    const vSub    = document.getElementById('verdict-sub');
-    const bdText  = document.getElementById('breakdown-text');
-    const cta     = document.getElementById('cta-apply');
-
-    if (canROI && canEff) {
-      const curRate = rate / 100;
-      const newRate = Math.min(curRate + speedLift, 0.80);
-      const moGain  = leads * (newRate - curRate) * deal;
-      const q90     = moGain * 3;
-      const roiOk   = q90 >= 50000;
-      const effOk   = totalHrs <= 1;
-
-      if (roiOk && effOk) {
-        vBlock.className = 'verdict-block green';
-        vIcon.textContent  = '✅';
-        vLabel.textContent = 'Strong Fit';
-        vSub.textContent   = 'The math works on both sides. Apply below.';
-      } else if (roiOk && !effOk) {
-        vBlock.className = 'verdict-block yellow';
-        vIcon.textContent  = '⚠️';
-        vLabel.textContent = 'Revenue Qualifies — Scope to Discuss';
-        vSub.textContent   = 'Great ROI potential. Delivery complexity needs a call.';
-      } else if (!roiOk && effOk) {
-        vBlock.className = 'verdict-block yellow';
-        vIcon.textContent  = '⚠️';
-        vLabel.textContent = 'Easy to Deliver — Revenue Gap';
-        vSub.textContent   = 'Simple to onboard, but volume doesn\'t yet hit $50K in 90 days.';
-      } else {
-        vBlock.className = 'verdict-block red';
-        vIcon.textContent  = '❌';
-        vLabel.textContent = 'Not the Right Fit Right Now';
-        vSub.textContent   = 'Economics don\'t support the $5K investment at current numbers.';
-      }
-
-      const liftPct = Math.round(speedLift * 100);
-      const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '';
-      const mktgStr  = mktgEntered ? (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo ad spend' : 'ad spend not entered';
-      bdText.innerHTML =
-        '<span>Leads:</span> ' + fmtLeads(leads) + '/mo &nbsp;·&nbsp; ' +
-        '<span>Deal:</span> ' + fmtMoney(deal) + ' &nbsp;·&nbsp; ' +
-        '<span>Close rate:</span> ' + rate + '% → ' + Math.round(Math.min(curRate + speedLift, 0.80) * 100) + '%<br>' +
-        '<span>AI lift:</span> +' + liftPct + '% from faster response &nbsp;·&nbsp; ' +
-        '<span>First deploy:</span> ' + capLabel + '<br>' +
-        '<span>Marketing spend:</span> ' + mktgStr + ' &nbsp;·&nbsp; <span>Setup:</span> ~' + totalHrs.toFixed(1) + ' hrs';
-
-      cta.style.opacity        = '1';
-      cta.style.pointerEvents  = 'auto';
-    } else {
-      vBlock.className = 'verdict-block neutral';
-      vIcon.textContent  = '📊';
-      vLabel.textContent = 'Answer all 6 questions';
-      vSub.textContent   = 'ROI score + deployment fit appear here';
-      bdText.innerHTML   = '';
-      cta.style.opacity       = '0.5';
-      cta.style.pointerEvents = 'none';
-    }
-  }
+  // Sync display label
+  const lbl = document.getElementById('lbl-' + key);
+  lbl.textContent = fmtNum(V, modes[key]) + (key === 'leads' ? ' leads/mo' : key === 'rate' ? '' : '/mo' );
+  if (key === 'deal') lbl.textContent = fmtNum(V, 'money');
+  lbl.className = 'slider-val';
 
   update();
+}
+
+// Called when user drags a slider
+function slideUpdate(key) {
+  const V = anchors[key];
+  if (!V) return;
+  const sl = document.getElementById('sl-' + key);
+  const pos = +sl.value;
+  const val = expValue(V, pos / 1000);
+
+  updateSliderFill('sl-' + key, pos);
+
+  const lbl = document.getElementById('lbl-' + key);
+  const m = modes[key];
+  lbl.textContent = fmtNum(val, m) + (key === 'leads' ? ' leads/mo' : '');
+  lbl.className = 'slider-val';
+
+  // Sync number input to match dragged value
+  const inp = document.getElementById('inp-' + key);
+  if (key === 'rate') inp.value = Math.min(100, Math.round(val * 10) / 10);
+  else                inp.value = Math.round(val);
+
+  update();
+}
+
+// ── CHIP SELECTION ───────────────────────────────────────────────────────────
+const chips = { speed: null, capability: null };
+
+function selectChip(group, val) {
+  document.getElementById('chips-' + group).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('chips-' + group).querySelector('[data-val="' + val + '"]').classList.add('selected');
+  chips[group] = val;
+  update();
+}
+
+// ── FORMAT HELPERS ───────────────────────────────────────────────────────────
+function fmtMoney(n) {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
+
+// ── MAIN CALCULATOR ──────────────────────────────────────────────────────────
+function update() {
+  // Read current displayed values from slider positions
+  function currentVal(key) {
+    if (!anchors[key]) return null;
+    const pos = +document.getElementById('sl-' + key).value;
+    return expValue(anchors[key], pos / 1000);
+  }
+
+  const leads = currentVal('leads');
+  const deal  = currentVal('deal');
+  const rate  = currentVal('rate');
+  const mktg  = currentVal('mktg');
+
+  const leadsOk = leads !== null && anchors.leads > 0;
+  const dealEntered  = deal  !== null && deal  > 0;
+  const rateEntered  = rate  !== null && rate  > 0;
+  const mktgEntered  = mktg  !== null && mktg  >= 0;
+
+  // Progress
+  let answered = 0;
+  if (leadsOk)          answered++;
+  if (dealEntered)      answered++;
+  if (rateEntered)      answered++;
+  if (chips.speed)      answered++;
+  if (chips.capability) answered++;
+  if (mktgEntered)      answered++;
+  answered = Math.min(answered, 6);
+  const pct = Math.round(answered / 6 * 100);
+  document.getElementById('progress-label').textContent = answered + ' of 6 answered';
+  document.getElementById('progress-pct').textContent   = pct + '%';
+  document.getElementById('progress-fill').style.width  = pct + '%';
+
+  // ── ROI ──────────────────────────────────────────────────────────────────
+  const speedLift = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
+  const canROI    = leadsOk && dealEntered && rateEntered && chips.speed;
+  const roiBlock  = document.getElementById('roi-block');
+
+  if (canROI) {
+    const curRate  = Math.min(rate, 100) / 100;
+    const newRate  = Math.min(curRate + speedLift, 0.80);
+    const moGain   = Math.round(leads) * (newRate - curRate) * deal;
+    const q90Gain  = moGain * 3;
+
+    document.getElementById('roi-value').textContent = fmtMoney(q90Gain);
+    document.getElementById('roi-sub').textContent   = fmtMoney(moGain) + '/mo additional from AI response speed';
+    roiBlock.className = 'result-block ' + (q90Gain >= 50000 ? 'green' : q90Gain >= 25000 ? 'yellow' : 'red');
+  } else {
+    roiBlock.className = 'result-block neutral';
+    document.getElementById('roi-value').textContent = '—';
+    document.getElementById('roi-sub').textContent   = 'Answer questions 1–4 to calculate';
+  }
+
+  // ── EFFORT ───────────────────────────────────────────────────────────────
+  const capHrs  = { 'speed-bot': 0.2, 'lead-filter': 0.3, 'follow-up': 0.2, 'crm-auto': 0.5, 'voice-ai': 0.4 }[chips.capability] || null;
+  const canEff  = chips.capability !== null;
+  const efBlock = document.getElementById('effort-block');
+  let   totalHrs = null;
+
+  if (canEff) {
+    totalHrs = 0.5 + capHrs;
+    document.getElementById('effort-value').textContent = totalHrs.toFixed(1) + ' hrs';
+    document.getElementById('effort-sub').textContent   = totalHrs <= 1
+      ? 'Within Bennett\'s 1-hour delivery target ✓'
+      : 'Exceeds 1-hour target — scope conversation needed';
+    efBlock.className = 'result-block ' + (totalHrs <= 1 ? 'green' : totalHrs <= 2 ? 'yellow' : 'red');
+  } else {
+    efBlock.className = 'result-block neutral';
+    document.getElementById('effort-value').textContent = '—';
+    document.getElementById('effort-sub').textContent   = 'Answer question 5 to calculate';
+  }
+
+  // ── VERDICT ──────────────────────────────────────────────────────────────
+  const vBlock = document.getElementById('verdict-block');
+  const vIcon  = document.getElementById('verdict-icon');
+  const vLabel = document.getElementById('verdict-label');
+  const vSub   = document.getElementById('verdict-sub');
+  const bdText = document.getElementById('breakdown-text');
+  const cta    = document.getElementById('cta-apply');
+
+  if (canROI && canEff) {
+    const curRate = Math.min(rate, 100) / 100;
+    const newRate = Math.min(curRate + speedLift, 0.80);
+    const moGain  = Math.round(leads) * (newRate - curRate) * deal;
+    const q90     = moGain * 3;
+    const roiOk   = q90 >= 50000;
+    const effOk   = totalHrs <= 1;
+
+    if (roiOk && effOk) {
+      vBlock.className = 'verdict-block green';
+      vIcon.textContent  = '✅';
+      vLabel.textContent = 'Strong Fit';
+      vSub.textContent   = 'The math works on both sides. Apply below.';
+    } else if (roiOk && !effOk) {
+      vBlock.className = 'verdict-block yellow';
+      vIcon.textContent  = '⚠️';
+      vLabel.textContent = 'Revenue Qualifies — Scope to Discuss';
+      vSub.textContent   = 'Great ROI potential. Delivery complexity needs a call.';
+    } else if (!roiOk && effOk) {
+      vBlock.className = 'verdict-block yellow';
+      vIcon.textContent  = '⚠️';
+      vLabel.textContent = 'Easy to Deliver — Revenue Gap';
+      vSub.textContent   = 'Simple to onboard, but volume doesn\'t yet hit $50K in 90 days.';
+    } else {
+      vBlock.className = 'verdict-block red';
+      vIcon.textContent  = '❌';
+      vLabel.textContent = 'Not the Right Fit Right Now';
+      vSub.textContent   = 'Economics don\'t support the $5K investment at current numbers.';
+    }
+
+    const liftPct  = Math.round(speedLift * 100);
+    const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '';
+    const mktgStr  = mktgEntered ? (mktg >= 50000 ? '$50K+' : fmtMoney(mktg)) + '/mo ad spend' : 'ad spend not entered';
+    bdText.innerHTML =
+      '<span>Leads:</span> ' + fmtLeads(Math.round(leads)) + '/mo &nbsp;·&nbsp; ' +
+      '<span>Deal:</span> ' + fmtMoney(deal) + ' &nbsp;·&nbsp; ' +
+      '<span>Close rate:</span> ' + Math.round(rate * 10) / 10 + '% → ' + Math.round(Math.min(curRate + speedLift, 0.80) * 100) + '%<br>' +
+      '<span>AI lift:</span> +' + liftPct + '% from faster response &nbsp;·&nbsp; ' +
+      '<span>First deploy:</span> ' + capLabel + '<br>' +
+      '<span>Marketing spend:</span> ' + mktgStr + ' &nbsp;·&nbsp; <span>Setup:</span> ~' + totalHrs.toFixed(1) + ' hrs';
+
+    cta.style.opacity       = '1';
+    cta.style.pointerEvents = 'auto';
+  } else {
+    vBlock.className = 'verdict-block neutral';
+    vIcon.textContent  = '📊';
+    vLabel.textContent = 'Answer all 6 questions';
+    vSub.textContent   = 'ROI score + deployment fit appear here';
+    bdText.innerHTML   = '';
+    cta.style.opacity       = '0.5';
+    cta.style.pointerEvents = 'none';
+  }
+}
+
+// Init Q1 (leads has a default of 50)
+anchorSlider('leads');
+update();
 </script>
 </body>
 </html>
