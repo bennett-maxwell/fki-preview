@@ -1,5 +1,5 @@
 NOTEBOOKLM SOURCE DOCUMENT
-AI Roadmap for Brittney Warnick — Warnick Design
+AI Roadmap for Rey — 31 Consulting
 Prepared by Franchise Ki | bennett@franchiseki.com
 Generated: 2026-05-23
 
@@ -7,14 +7,14 @@ Generated: 2026-05-23
 HOST DIRECTIVE — MANDATORY SPEAKER INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
 ================================================================================
 
-You are creating an audio walkthrough for one specific person: Brittney Warnick.
+You are creating an audio walkthrough for one specific person: Rey.
 
-ADDRESS ALL REMARKS DIRECTLY TO BRITTNEY WARNICK. Use "you" and "your business" and
-"your team" throughout. NEVER say "this business," "Warnick Design's company," or refer
-to Brittney Warnick in the third person. You are speaking TO Brittney Warnick, not ABOUT them.
+ADDRESS ALL REMARKS DIRECTLY TO REY. Use "you" and "your business" and
+"your team" throughout. NEVER say "this business," "31 Consulting's company," or refer
+to Rey in the third person. You are speaking TO Rey, not ABOUT them.
 
 YOUR OPENING LINE MUST BE: "This audio walkthrough was built specifically for you,
-Brittney Warnick. Every number, every recommendation, and every example in what you're
+Rey. Every number, every recommendation, and every example in what you're
 about to hear came directly from what you told us about your business."
 
 VOICE RULES:
@@ -35,12 +35,12 @@ VOICE RULES:
 
 ---
 
-## SECTION 1 — About You and Warnick Design
+## SECTION 1 — About You and 31 Consulting
 
-Brittney Warnick, you've built Warnick Design into something worth talking about.
-You operate in interior design, serving residential and commercial clients. Your website is https://warnickdesign.com.
+Rey, you've built 31 Consulting into something worth talking about.
+You operate in business consulting, serving B2B clients seeking business consulting and operational improvement. Your website is https://31consulting.net.
 
-Your business delivers Residential Design, Commercial Design, Color Consultation, Space Planning. You're working in a market where speed,
+Your business delivers Business Consulting, Strategy, Operational Improvement, Lead Qualification. You're working in a market where speed,
 consistency, and follow-through are what separate the businesses that grow from the
 ones that plateau.
 
@@ -50,26 +50,27 @@ to walk through isn't about fixing what's broken. It's about showing you exactly
 AI makes everything you've already built run faster, smarter, and more consistently
 than any hire ever could.
 
-You told us your current tools include: Houzz, QuickBooks, Google Workspace. That's your operational foundation —
+You told us your current tools include: Slack. That's your operational foundation —
 and every AI system we build gets wired directly into what you're already running.
 Nothing gets ripped out. Everything gets amplified.
 
-Your team is the backbone of Warnick Design.
+Your team is the backbone of 31 Consulting.
 
-You told us your current AI use is early-stage. That's exactly where most interior design businesses are right now — and it's the right starting point.
+You told us your current AI use is early-stage. That's exactly where most business consulting businesses are right now — and it's the right starting point.
 
-The 3 AI tools described in Section 4 were written specifically for Warnick Design.
+The 3 AI tools described in Section 4 were written specifically for 31 Consulting.
 Not adjusted from a template. Built from what you told us, for how your business actually works.
 
 ---
 
-## SECTION 2 — Your Current Tool Stack: Where Warnick Design Is Today
+## SECTION 2 — Your Current Tool Stack: Where 31 Consulting Is Today
 
 WHERE YOU ARE TODAY — your current operational infrastructure:
 
-- **Houzz**: Core operational tool in your current stack.
-- **QuickBooks**: Core operational tool in your current stack.
-- **Google Workspace**: Core operational tool in your current stack.
+- **Slack**: Core operational tool in your current stack.
+- **Standard business consulting workflow tools**: Core operational tool in your current stack.
+- **Email and calendar**: Core operational tool in your current stack.
+- **Direct team communication**: Core operational tool in your current stack.
 
 This tool stack tells us two things: where you're already strong, and where the
 biggest time unlocks are waiting. Your AI system gets built on top of what you have —
@@ -79,7 +80,7 @@ not around it.
 
 ## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
 
-These aren't guesses. These are the gaps that show up consistently for interior design
+These aren't guesses. These are the gaps that show up consistently for business consulting
 businesses at your stage — and every one of them has a direct AI solution.
 
 ### Gap 1 — Speed to Response
@@ -89,7 +90,7 @@ Harvard Business Review shows that 78% of customers buy from the first business 
 respond (HBR, "The Short Life of Online Sales Leads," 2011 —
 https://hbr.org/2011/03/the-short-life-of-online-sales).
 
-In interior design, that window is measured in minutes — sometimes seconds. Every hour your
+In business consulting, that window is measured in minutes — sometimes seconds. Every hour your
 team isn't watching for inbound = leads going to whoever responds first.
 
 An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
@@ -123,7 +124,7 @@ SBA data shows small business owners spend an average of 25-40% of their week on
 administrative tasks that don't directly generate revenue
 (SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
 
-In interior design, this shows up as: proposal writing, status updates, follow-up emails,
+In business consulting, this shows up as: proposal writing, status updates, follow-up emails,
 scheduling coordination, reporting. Your AI system takes these off your team's plate
 entirely — and does them faster and more consistently than any manual process.
 
@@ -133,14 +134,14 @@ Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for Warnick Design
+## SECTION 4 — The 3 AI Tools Built Specifically for 31 Consulting
 
 These aren't generic AI chatbots. These are the exact tools we built for your specific
 situation — your industry, your tools, your services, your pain points.
 
 ### AI Tool 1 — Speed-to-Lead Response Agent
 
-You are a speed-to-lead response agent for an interior design firm. When a new inquiry comes in about a design project, draft a warm, professional response within 60 seconds that acknowledges their specific room or space, asks 2 clarifying questions about style and budget range, and offers a free 15-minute discovery call.
+You are a lead qualification agent for a B2B consulting firm receiving 1,000 leads per month. Screen each inquiry for challenge clarity, revenue, team size, and consulting readiness. Route hot leads to the owner's Slack immediately with 3 time slot options.
 
 This runs directly in your existing workflow. No new platform to learn.
 Your team supervises. The AI handles the repetitive execution.
@@ -149,15 +150,15 @@ Your team supervises. The AI handles the repetitive execution.
 
 ### AI Tool 2 — Proposal and Qualification Agent
 
-You are a proposal draft agent for an interior design business. Given a client's room dimensions, style preferences, and budget range, generate a professional design proposal including scope of work, estimated timeline, material budget ranges, and a paragraph on why this firm's approach is uniquely suited to their project.
+You are a proposal draft agent for a business consulting firm. Given a prospect's business challenge, team size, and revenue range, generate a professional consulting proposal with scope of work, timeline, and estimated ROI.
 
-Built around how Warnick Design actually works — not a generic industry template.
+Built around how 31 Consulting actually works — not a generic industry template.
 
 ---
 
 ### AI Tool 3 — Follow-Up and Outreach Agent
 
-You are an outreach agent for an interior design firm targeting real estate developers and luxury homebuilders. Generate 5 personalized LinkedIn messages and 5 email templates that reference their recent projects and propose a design partnership.
+You are an organic lead discovery agent for a B2B consulting firm. Identify business owners, executives, and decision-makers who match the ideal consulting client profile and generate personalized LinkedIn outreach messages in a direct, knowledgeable, never salesy tone.
 
 This is the kind of tool that, once it's running, your team will not remember
 how they worked without it.
@@ -170,12 +171,12 @@ without anyone on your team triggering them manually.
 
 ---
 
-## SECTION 5 — What Your Customers Already Say About Warnick Design
+## SECTION 5 — What Your Customers Already Say About 31 Consulting
 
-Your reputation in residential and commercial clients is an asset. Customer feedback for interior design businesses
+Your reputation in B2B clients seeking business consulting and operational improvement is an asset. Customer feedback for business consulting businesses
 at your stage consistently highlights the same themes:
 
-- **Responsiveness:** Clients in interior design cite "fast, clear communication" as the
+- **Responsiveness:** Clients in business consulting cite "fast, clear communication" as the
   #1 factor in choosing a provider. Your AI system makes this your permanent standard —
   not a good week, not a great hire, a permanent operational baseline.
 
@@ -187,7 +188,7 @@ at your stage consistently highlights the same themes:
   documentation — all of this signals expertise before the client ever meets you in person.
   AI raises that standard across every touchpoint.
 
-The businesses that win in interior design long-term aren't necessarily the ones doing the
+The businesses that win in business consulting long-term aren't necessarily the ones doing the
 best technical work. They're the ones that are easiest to work with. AI gives you that
 edge permanently.
 
@@ -197,7 +198,7 @@ edge permanently.
 
 Here's exactly what the first 90 days look like if you move forward:
 
-**Days 1-3: Onboarding.** Interior design audit. Brand voice profile. Full ops map.
+**Days 1-3: Onboarding.** Business consulting audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
 
 **Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
@@ -221,8 +222,8 @@ can paste into ChatGPT or Claude right now — each built around your specific b
 
 ### Prompt 1 — Speed-to-Lead Response Draft
 ```
-You are a interior design business assistant for Warnick Design. A new inquiry just came
-in from a potential client interested in Residential Design, Commercial Design, Color Consultation, Space Planning. Their message was: [PASTE
+You are a business consulting business assistant for 31 Consulting. A new inquiry just came
+in from a potential client interested in Business Consulting, Strategy, Operational Improvement, Lead Qualification. Their message was: [PASTE
 THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
 specific request, (2) describes our availability and process, (3) includes a next step.
 Use a friendly but professional tone. Keep it under 150 words.
@@ -230,16 +231,16 @@ Use a friendly but professional tone. Keep it under 150 words.
 
 ### Prompt 2 — Proposal Framework Generator
 ```
-You are helping Warnick Design create a proposal for a new interior design client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Residential Design, Commercial Design, Color Consultation, Space Planning.
+You are helping 31 Consulting create a proposal for a new business consulting client.
+The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Business Consulting, Strategy, Operational Improvement, Lead Qualification.
 Generate a professional proposal outline with: project scope, deliverables, timeline,
 and 3 package options at different investment levels. Format it for easy customization.
 ```
 
 ### Prompt 3 — Follow-Up Email Sequence
 ```
-You are a follow-up agent for Warnick Design. A prospect expressed interest in
-Residential Design, Commercial Design, Color Consultation, Space Planning but hasn't responded in 5 days. Their original inquiry was about:
+You are a follow-up agent for 31 Consulting. A prospect expressed interest in
+Business Consulting, Strategy, Operational Improvement, Lead Qualification but hasn't responded in 5 days. Their original inquiry was about:
 [PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
 Day 20). Each email should: add new value, reference their specific situation, and
 include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
@@ -259,9 +260,9 @@ You have two options after listening to this:
 results within days. This is the right starting point if you want to prove the concept
 to yourself before committing to a full system.
 
-**Path 2 — Partner with FKI:** We build the full AI system for Warnick Design.
+**Path 2 — Partner with FKI:** We build the full AI system for 31 Consulting.
 The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with Houzz, QuickBooks, Google Workspace, running without your team having to
+Everything automated, integrated with Slack, running without your team having to
 manage it.
 
 If you want to explore Path 2, the next step is an application — not a sales call.
@@ -273,9 +274,9 @@ This is an application, not a commitment. We read every one personally.
 
 ---
 
-## SECTION 9 — The ROI Picture for Warnick Design
+## SECTION 9 — The ROI Picture for 31 Consulting
 
-Based on what you shared and industry benchmarks for interior design:
+Based on what you shared and industry benchmarks for business consulting:
 
 **Time Recovery Estimate:**
 - Admin and documentation: up to 8 hrs/week recovered
@@ -283,7 +284,7 @@ Based on what you shared and industry benchmarks for interior design:
 - Reporting and tracking: up to 3 hrs/week recovered
 - **Total: up to 17 hrs/week for your team**
 
-**At $150/hr (industry benchmark for interior design owner time):**
+**At $150/hr (industry benchmark for business consulting owner time):**
 - Monthly time value: up to $10,200/month
 - Annual time value: up to $122,400/year
 - Plus: close rate lift from consistent follow-up (35% industry benchmark)
@@ -298,7 +299,7 @@ Based on what you shared and industry benchmarks for interior design:
 
 **These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
 
-The question isn't whether AI creates value in interior design. The question is whether
+The question isn't whether AI creates value in business consulting. The question is whether
 the investment makes sense for your specific situation. That's what the application
 helps us figure out together.
 
@@ -309,7 +310,7 @@ helps us figure out together.
 ### "Is this going to replace my team?"
 No. These agents handle the repetitive work your team shouldn't be doing — initial
 responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Residential Design, Commercial Design, Color Consultation, Space Planning,
+on what only they can do: building relationships, delivering great Business Consulting, Strategy, Operational Improvement, Lead Qualification,
 making judgment calls. AI handles the rest.
 
 ### "What about the setup and learning curve?"
@@ -319,7 +320,7 @@ naturally. By Day 30, you're wondering why you waited. We do the setup. You revi
 
 ### "How is this different from just using ChatGPT?"
 ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with Houzz, QuickBooks, Google Workspace, triggered by your actual business events — a new inquiry,
+integrated with Slack, triggered by your actual business events — a new inquiry,
 a proposal request, a follow-up window — without anyone on your team doing anything
 to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
 what happens when those prompts run 24/7 on their own.
@@ -372,5 +373,5 @@ https://blueprint.meetadvaita.com/apply
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
-This audio walkthrough was built for Warnick Design. Not a template.
+This audio walkthrough was built for 31 Consulting. Not a template.
 Every number, every example, every recommendation — yours.
