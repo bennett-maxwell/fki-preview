@@ -21,7 +21,7 @@
 <style>
 /* ============================================================
    FKI AI Qualifier — Landing Page
-   Palette: --brand-dark #0A0E1A, --brand #1D6FDB, --gold #F8B552
+   Palette: --brand-dark #0A0E1A, --brand #1D6FDB, --brand-light #4A90E2
    Matches qualify.html design system
    ============================================================ */
 :root {
@@ -29,7 +29,7 @@
   --brand-dark:  #0A0E1A;
   --brand-light: #4A90E2;
   --brand-mid:   #163B7C;
-  --gold:        #F8B552;
+  --gold:        #4A90E2;
   --green:       #4ade80;
   --white:       #ffffff;
   --off-white:   #f8f9fc;
@@ -269,7 +269,7 @@ img { max-width: 100%; display: block; }
 .output-item:last-child { margin-bottom: 0; }
 .output-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .output-dot.green { background: var(--green); box-shadow: 0 0 8px rgba(74,222,128,0.5); }
-.output-dot.gold { background: var(--gold); box-shadow: 0 0 8px rgba(248,181,82,0.5); }
+.output-dot.gold { background: var(--gold); box-shadow: 0 0 8px rgba(74,144,226,0.5); }
 .output-dot.blue { background: var(--brand-light); box-shadow: 0 0 8px rgba(74,144,226,0.5); }
 .output-text { font-size: 14.5px; color: rgba(255,255,255,0.78); line-height: 1.4; }
 .output-text strong { color: var(--white); display: block; margin-bottom: 2px; }
@@ -406,6 +406,49 @@ img { max-width: 100%; display: block; }
   display: flex; justify-content: space-between; flex-wrap: wrap;
   gap: 12px; font-size: 12.5px; color: rgba(255,255,255,0.28);
 }
+
+/* ============================================================ MOBILE (≤480px)
+   Added 2026-05-23 — full mobile optimization
+   ============================================================ */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  .nav { padding: 0 1rem; height: 56px; }
+  .nav-logo { font-size: 0.88rem; }
+  .nav-logo img { height: 24px; }
+  .nav-cta { padding: 7px 14px; font-size: 12px; }
+  .hero { padding: 64px 1.25rem 56px; }
+  .hero h1 { font-size: clamp(1.75rem, 7.5vw, 2.4rem); letter-spacing: -0.8px; }
+  .hero-badge { font-size: 10px; padding: 6px 14px; }
+  .hero-sub { font-size: 0.97rem; margin-bottom: 32px; }
+  .btn-hero { padding: 15px 28px; font-size: 15px; width: 100%; justify-content: center; }
+  .section { padding: 64px 1.25rem; }
+  .section-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .section-sub { font-size: 15px; }
+  .steps-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+  .step-card { padding: 28px 22px; }
+  .what-section { padding: 64px 1.25rem; }
+  .what-inner { grid-template-columns: 1fr; gap: 36px; }
+  .what-card { padding: 28px 22px; }
+  .who-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .who-card { padding: 26px 20px; }
+  .who-not { padding: 22px 18px; margin-top: 16px; }
+  .proof-section { padding: 64px 1.25rem; }
+  .proof-grid { grid-template-columns: 1fr; gap: 16px; }
+  .proof-card { padding: 24px 20px; }
+  .faq-list { margin-top: 36px; }
+  .faq-q { padding: 16px 18px; font-size: 14.5px; }
+  .final-cta { padding: 72px 1.25rem; }
+  .final-cta h2 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .final-cta p { font-size: 16px; margin-bottom: 32px; }
+  .footer { padding: 40px 1.25rem 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .footer-links { flex-wrap: wrap; gap: 14px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.65rem; }
+  .btn-hero { font-size: 14px; padding: 14px 20px; }
+}
 </style>
 </head>
 <body>
@@ -454,7 +497,7 @@ img { max-width: 100%; display: block; }
         <div class="stat-label">To get your qualifier score</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-num green">$0</div>
+        <div class="stat-num">$0</div>
         <div class="stat-label">Cost to qualify</div>
       </div>
       <div class="hero-stat">
@@ -593,7 +636,7 @@ img { max-width: 100%; display: block; }
       </div>
     </div>
     <div class="who-not" style="max-width:860px;margin:28px auto 0;">
-      <h4>⚠️ Who we can't help yet</h4>
+      <h4>Who we can't help yet</h4>
       <p>Businesses under $500K/year in revenue, pre-revenue startups, or businesses with fewer than 10 leads per month. The ROI math doesn't hit 10X at that scale. Take the qualifier — it'll tell you where you stand and what to fix first.</p>
     </div>
   </div>
