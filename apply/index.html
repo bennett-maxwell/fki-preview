@@ -92,7 +92,7 @@
     .slider-range-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-light); margin-top: 0.3rem; }
 
     /* TOOL DROPDOWNS GRID */
-    .tool-dropdowns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .tool-dropdowns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     @media (max-width: 640px) { .tool-dropdowns { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 420px) { .tool-dropdowns { grid-template-columns: 1fr; } }
     .tool-dropdown-group { display: flex; flex-direction: column; gap: 0.35rem; }
@@ -105,6 +105,9 @@
     .multi-check-item:hover { border-color: var(--brand-light); color: var(--brand-dark); background: rgba(29,111,219,0.04); }
     .multi-check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; }
     .multi-check-item:has(input:checked) { border-color: var(--brand); background: rgba(29,111,219,0.08); color: var(--brand-dark); }
+    .check-sub { display: block; font-size: 0.68rem; font-weight: 400; color: var(--text-light); margin-top: 0.1rem; line-height: 1.2; }
+    .multi-check-item--tall { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+    .multi-check-item--tall .check-top { display: flex; align-items: center; gap: 0.4rem; }
 
     /* ROI REVEAL */
     .roi-reveal { display: none; margin-bottom: 1.5rem; background: var(--neutral-bg); border: 1.5px solid var(--brand); border-radius: var(--radius); overflow: hidden; }
@@ -267,28 +270,31 @@
           <input type="hidden" id="revenue_label_hidden" name="revenue_label" value="$500K" />
         </div>
 
-        <!-- Q5: Tools — Per-category dropdowns + Team Comms + Social multi-select -->
+        <!-- Q5: Tools -->
         <div class="form-group">
           <label class="form-label"><span class="q-badge">5</span>Which tools does your business use?</label>
-          <p class="form-hint">Select the specific tool you use in each category — pick "None" if you don't use that type</p>
+          <p class="form-hint">We use this to map how our AI connects with your existing systems on day one</p>
           <div class="tool-dropdowns">
+
+            <!-- Docs / Storage -->
             <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">CRM</span>
-              <select name="tool_crm" class="form-control">
-                <option value="none">None</option>
-                <option value="gohighlevel">GoHighLevel</option>
-                <option value="hubspot">HubSpot</option>
-                <option value="salesforce">Salesforce</option>
-                <option value="pipedrive">Pipedrive</option>
-                <option value="zoho">Zoho CRM</option>
-                <option value="keap">Keap / Infusionsoft</option>
-                <option value="other_crm">Other CRM</option>
+              <span class="tool-dropdown-label">Where docs are stored</span>
+              <select name="tool_docs" class="form-control">
+                <option value="none">None / not sure</option>
+                <option value="google_drive">Google Drive</option>
+                <option value="notion">Notion</option>
+                <option value="sharepoint">SharePoint / OneDrive</option>
+                <option value="dropbox">Dropbox</option>
+                <option value="box">Box</option>
+                <option value="other_docs">Other</option>
               </select>
             </div>
+
+            <!-- Team Comms -->
             <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Team Comms</span>
+              <span class="tool-dropdown-label">Team communication</span>
               <select name="tool_comms" class="form-control">
-                <option value="none">None</option>
+                <option value="none">None / just email</option>
                 <option value="slack">Slack</option>
                 <option value="whatsapp">WhatsApp</option>
                 <option value="teams">Microsoft Teams</option>
@@ -298,70 +304,57 @@
                 <option value="other_comms">Other</option>
               </select>
             </div>
+
+            <!-- Project Management -->
             <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Docs / Storage</span>
-              <select name="tool_docs" class="form-control">
-                <option value="none">None</option>
-                <option value="google_drive">Google Drive</option>
-                <option value="notion">Notion</option>
-                <option value="airtable">Airtable</option>
-                <option value="dropbox">Dropbox</option>
-                <option value="sharepoint">SharePoint / OneDrive</option>
-                <option value="other_docs">Other</option>
-              </select>
-            </div>
-            <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Project Management</span>
+              <span class="tool-dropdown-label">Project management</span>
               <select name="tool_pm" class="form-control">
-                <option value="none">None</option>
+                <option value="none">None / spreadsheets</option>
+                <option value="notion">Notion</option>
+                <option value="clickup">ClickUp</option>
                 <option value="asana">Asana</option>
                 <option value="monday">Monday.com</option>
-                <option value="clickup">ClickUp</option>
                 <option value="trello">Trello</option>
                 <option value="jira">Jira</option>
                 <option value="basecamp">Basecamp</option>
                 <option value="other_pm">Other</option>
               </select>
             </div>
+
+            <!-- CRM -->
             <div class="tool-dropdown-group">
-              <span class="tool-dropdown-label">Phone / SMS</span>
-              <select name="tool_phone" class="form-control">
-                <option value="none">None</option>
-                <option value="openphone">OpenPhone</option>
-                <option value="ringcentral">RingCentral</option>
-                <option value="twilio">Twilio</option>
-                <option value="dialpad">Dialpad</option>
-                <option value="aircall">Aircall</option>
-                <option value="other_phone">Other</option>
+              <span class="tool-dropdown-label">CRM</span>
+              <select name="tool_crm" class="form-control">
+                <option value="none">None / spreadsheets</option>
+                <option value="gohighlevel">GoHighLevel</option>
+                <option value="hubspot">HubSpot</option>
+                <option value="salesforce">Salesforce</option>
+                <option value="pipedrive">Pipedrive</option>
+                <option value="zoho">Zoho CRM</option>
+                <option value="keap">Keap / Infusionsoft</option>
+                <option value="other_crm">Other CRM</option>
               </select>
             </div>
-            <!-- Social Platforms — multi-select checkboxes -->
+
+            <!-- Other Tools — 12-option multi-select -->
             <div class="tool-dropdown-group tool-dropdown-group--full">
-              <span class="tool-dropdown-label">Social Platforms <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
+              <span class="tool-dropdown-label">Other tools your business uses <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
               <div class="multi-check-grid">
-                <label class="multi-check-item"><input type="checkbox" name="platform_facebook" value="facebook"> Facebook</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_instagram" value="instagram"> Instagram</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_google_ads" value="google_ads"> Google Ads</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_tiktok" value="tiktok"> TikTok</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_youtube" value="youtube"> YouTube</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_linkedin" value="linkedin"> LinkedIn</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_pinterest" value="pinterest"> Pinterest</label>
-                <label class="multi-check-item"><input type="checkbox" name="platform_x" value="x_twitter"> X (Twitter)</label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_email_marketing" value="email_marketing"> Email Marketing</span><span class="check-sub">Mailchimp, Klaviyo, ActiveCampaign</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_scheduling" value="scheduling"> Booking / Scheduling</span><span class="check-sub">Calendly, Acuity, Mindbody</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_accounting" value="accounting"> Accounting / Invoicing</span><span class="check-sub">QuickBooks, Xero, FreshBooks</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_payments" value="payments"> Payments Processing</span><span class="check-sub">Stripe, Square, PayPal</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_ecommerce" value="ecommerce"> E-commerce / Online Store</span><span class="check-sub">Shopify, WooCommerce</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_support" value="customer_support"> Customer Support / Help Desk</span><span class="check-sub">Zendesk, Intercom, Freshdesk</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_phone_sms" value="phone_sms"> Business Phone / SMS</span><span class="check-sub">OpenPhone, RingCentral, Twilio</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_social_platforms" value="social_platforms"> Social Platforms</span><span class="check-sub">Facebook, Instagram, TikTok, LinkedIn, YouTube</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_paid_ads" value="paid_ads"> Paid Advertising</span><span class="check-sub">Google Ads, Meta Ads, TikTok Ads</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_social_mgmt" value="social_mgmt"> Social Media Management</span><span class="check-sub">Buffer, Hootsuite, Metricool, Canva</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_field_service" value="field_service"> Field Service / Job Mgmt</span><span class="check-sub">Jobber, ServiceTitan, Housecall Pro</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_hr_payroll" value="hr_payroll"> HR &amp; Payroll</span><span class="check-sub">Gusto, ADP, BambooHR, Rippling</span></label>
               </div>
             </div>
-            <!-- Social Management Tools — multi-select checkboxes -->
-            <div class="tool-dropdown-group tool-dropdown-group--full">
-              <span class="tool-dropdown-label">Social Media Management Tools <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(if any — select all that apply)</span></span>
-              <div class="multi-check-grid">
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_buffer" value="buffer"> Buffer</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_hootsuite" value="hootsuite"> Hootsuite</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_metricool" value="metricool"> Metricool</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_canva" value="canva"> Canva</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_later" value="later"> Later</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_sprout" value="sprout_social"> Sprout Social</label>
-                <label class="multi-check-item"><input type="checkbox" name="tool_social_other" value="other"> Other</label>
-              </div>
-            </div>
+
           </div>
         </div>
 
@@ -662,29 +655,24 @@ function checkROITrigger() {
     return tags;
   }
 
-  function buildSocialPlatforms(d) {
-    var p = [];
-    if (d.platform_facebook) p.push('Facebook');
-    if (d.platform_instagram) p.push('Instagram');
-    if (d.platform_google_ads) p.push('Google Ads');
-    if (d.platform_tiktok) p.push('TikTok');
-    if (d.platform_youtube) p.push('YouTube');
-    if (d.platform_linkedin) p.push('LinkedIn');
-    if (d.platform_pinterest) p.push('Pinterest');
-    if (d.platform_x) p.push('X (Twitter)');
-    return p.length ? p.join(', ') : 'None';
-  }
-
-  function buildSocialMgmtTools(d) {
-    var t = [];
-    if (d.tool_social_buffer) t.push('Buffer');
-    if (d.tool_social_hootsuite) t.push('Hootsuite');
-    if (d.tool_social_metricool) t.push('Metricool');
-    if (d.tool_social_canva) t.push('Canva');
-    if (d.tool_social_later) t.push('Later');
-    if (d.tool_social_sprout) t.push('Sprout Social');
-    if (d.tool_social_other) t.push('Other');
-    return t.length ? t.join(', ') : 'None';
+  function buildOtherTools(d) {
+    var map = {
+      other_email_marketing: 'Email Marketing',
+      other_scheduling: 'Booking/Scheduling',
+      other_accounting: 'Accounting/Invoicing',
+      other_payments: 'Payments Processing',
+      other_ecommerce: 'E-commerce',
+      other_support: 'Customer Support',
+      other_phone_sms: 'Business Phone/SMS',
+      other_social_platforms: 'Social Platforms',
+      other_paid_ads: 'Paid Advertising',
+      other_social_mgmt: 'Social Media Mgmt',
+      other_field_service: 'Field Service/Job Mgmt',
+      other_hr_payroll: 'HR & Payroll'
+    };
+    var selected = [];
+    Object.keys(map).forEach(function(k) { if (d[k]) selected.push(map[k]); });
+    return selected.length ? selected.join(', ') : 'None';
   }
 
   function buildNote(d) {
@@ -693,11 +681,9 @@ function checkROITrigger() {
     if (d.tool_comms && d.tool_comms !== 'none') tools.push('Team Comms: ' + d.tool_comms);
     if (d.tool_docs && d.tool_docs !== 'none') tools.push('Docs: ' + d.tool_docs);
     if (d.tool_pm && d.tool_pm !== 'none') tools.push('PM: ' + d.tool_pm);
-    if (d.tool_phone && d.tool_phone !== 'none') tools.push('Phone: ' + d.tool_phone);
-    tools.push('Social platforms: ' + buildSocialPlatforms(d));
-    tools.push('Social mgmt tools: ' + buildSocialMgmtTools(d));
+    tools.push('Other tools: ' + buildOtherTools(d));
     return [
-      'Advaita AI Blueprint — Intake Form v5 (12Q)',
+      'Advaita AI Blueprint — Intake Form v6 (12Q)',
       '---',
       'Website: ' + (d.website || 'N/A'),
       'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
@@ -714,7 +700,7 @@ function checkROITrigger() {
       'Pain points:',
       d.pain_points || '(not provided)',
       '---',
-      'Form version: 2026-05-23-v5'
+      'Form version: 2026-05-23-v6'
     ].join('\n');
   }
 
@@ -733,7 +719,7 @@ function checkROITrigger() {
           firstName: d.first_name, email: d.email,
           locationId: GHL_LOC, source: 'advaita-ai-blueprint',
           tags: buildTags(d),
-          customFields: { form_version: '2026-05-23-v5' }
+          customFields: { form_version: '2026-05-23-v6' }
         })
       });
       if (!res.ok) return;
