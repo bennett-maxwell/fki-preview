@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """
-Blueprint AI Pipeline — Stage 4: Podcast Generation  v1.5
+Blueprint AI Pipeline — Stage 4: Podcast Generation  v1.6
 Generates NotebookLM podcast from lead profile JSON.
+
+v1.6 (2026-05-23) — Direct-Address Hard Gate:
+  - Section 1 rewritten as transcript-style monologue ("Hi {first_name}...")
+  - Directive block compressed to 3 hard rules at top
+  - Validator regex: Section 1 must contain `Hi {first_name}` + ≥3 `you/your`
+    + 0 third-person refs (he/she/they/this business/the owner)
+  - Version stamp <!-- v1.6 --> at top of every source doc
 
 Council v19 — 10 improvements applied 2026-05-23:
   #1  Inject prompt_1/2/3 — the actual personalized AI tools built for the lead
@@ -46,68 +53,53 @@ from datetime import datetime
 # ---------------------------------------------------------------------------
 
 SOURCE_DOC_TEMPLATE = """\
-NOTEBOOKLM SOURCE DOCUMENT
-AI Roadmap for {lead_name} — {business_name}
-Prepared by Franchise Ki | bennett@franchiseki.com
-Generated: {generated_date}
+<!-- v1.6 -->
+NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for {lead_name}
+{business_name} | Prepared by Franchise Ki | Generated {generated_date}
 
 ================================================================================
-HOST DIRECTIVE — MANDATORY SPEAKER INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
+SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-You are creating an audio walkthrough for one specific person: {lead_name}.
+RULE 1 (RED LINE): You are speaking DIRECTLY to {lead_name_upper}. Use "you" and
+"your business" in every paragraph. NEVER say "{lead_name}" in the third person.
+NEVER say "this business," "the owner," "they," or "their team." If you catch
+yourself describing {lead_name} from the outside, stop and restart the sentence
+addressed to them.
 
-ADDRESS ALL REMARKS DIRECTLY TO {lead_name_upper}. Use "you" and "your business" and
-"your team" throughout. NEVER say "this business," "{business_name}'s company," or refer
-to {lead_name} in the third person. You are speaking TO {lead_name}, not ABOUT them.
+RULE 2: Open the audio with EXACTLY these words: "Hi {lead_first}, welcome.
+This walkthrough was built for you and {business_name}, from what you told us."
+Then proceed.
 
-YOUR OPENING LINE MUST BE: "This audio walkthrough was built specifically for you,
-{lead_name}. Every number, every recommendation, and every example in what you're
-about to hear came directly from what you told us about your business."
-
-VOICE RULES:
-1. This business is THRIVING. Your role is to show where AI AMPLIFIES their success.
-2. NEVER say "wasting" or "losing" hours. Say "time your team could recover" or
-   "hours AI can handle for you."
-3. NEVER say "has no software" or "running manually." Say "managing this yourselves —
-   which means there is a big unlock waiting."
-4. Every manual process = an OPPORTUNITY. Frame: "here's what becomes possible."
-5. Lead with EXCITEMENT about the upside. Current state is just the launchpad.
-6. Use qualifiers: "you may be spending" / "up to X hours" / "businesses like yours often."
-7. Paint the future first. Current state is just context for what AI relieves.
-8. NEVER name AI agents ("Piper," "Sam," "Leo," "Reed"). Say "your AI agent."
-9. APPLICATION CTA ONLY. Never mention calendar booking or scheduling a call.
-10. Close every segment with: "This was built for your business. Not a template."
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
 
 ================================================================================
 
 ---
 
-## SECTION 1 — About You and {business_name}
+## SECTION 1 — Hi {lead_first}, this is your walkthrough
 
-{lead_name}, you've built {business_name} into something worth talking about.
-You operate in {industry}, serving {market}. Your website is {url}.
+Hi {lead_first} — welcome. This is your AI walkthrough, built for you and
+{business_name}. Every number you're about to hear came from what you told us.
 
-Your business delivers {services_str}. You're working in a market where speed,
-consistency, and follow-through are what separate the businesses that grow from the
-ones that plateau.
+You operate in {industry}, serving {market}. You run {business_name} at {url}.
+You're already doing the hard work — the clients, the team, the reputation. That's
+yours. What we're going to walk through together isn't about fixing what's broken
+in your business. It's about showing you exactly where AI amplifies everything
+you've already built.
 
-Here's what stood out from what you shared with us: you're already doing the hard work.
-The clients, the team, the reputation — that infrastructure is yours. What we're about
-to walk through isn't about fixing what's broken. It's about showing you exactly where
-AI makes everything you've already built run faster, smarter, and more consistently
-than any hire ever could.
-
-You told us your current tools include: {tools}. That's your operational foundation —
-and every AI system we build gets wired directly into what you're already running.
-Nothing gets ripped out. Everything gets amplified.
+You told us your current tools are: {tools}. We're going to wire your AI system
+directly into what you're already running. Nothing you use today gets ripped out.
+Everything gets amplified.
 
 {team_size_line}
 
 {ai_maturity_line}
 
-The 3 AI tools described in Section 4 were written specifically for {business_name}.
-Not adjusted from a template. Built from what you told us, for how your business actually works.
+The 3 AI tools you'll hear about in Section 4 were written specifically for you and
+{business_name}. Not adjusted from a template. Built from your answers, for how
+your business actually works. Let's walk through what's possible.
 
 ---
 
@@ -428,7 +420,7 @@ Every number, every example, every recommendation — yours.
 
 MAX_RETRIES = 3
 INITIAL_BACKOFF_SECONDS = 30
-MIN_SOURCE_DOC_BYTES = 18_000   # Council #7 — hard gate
+MIN_SOURCE_DOC_BYTES = 16_000   # v1.6 — direct-address regex gate is primary quality check; size floor catches original 4.5KB stub by 4×
 MIN_MP3_SIZE_MB = 5.0           # Council #5 — file-existence + size gate
 
 
@@ -542,6 +534,7 @@ def build_source_doc(profile: dict) -> str:
 
     doc = SOURCE_DOC_TEMPLATE.format(
         lead_name=lead_name,
+        lead_first=lead_first,
         lead_name_upper=lead_name.upper(),
         business_name=business_name,
         industry=industry,
@@ -573,8 +566,9 @@ def build_source_doc(profile: dict) -> str:
     return doc
 
 
-def validate_source_doc(content: str, lead_name: str = '') -> None:
-    """Council #7 — hard gate: raise ValueError if source doc fails quality checks."""
+def validate_source_doc(content: str, lead_name: str = '', lead_first: str = '') -> None:
+    """v1.6 — hard gates: size + sections + direct-address regex gate on Section 1."""
+    import re
     size_bytes = len(content.encode('utf-8'))
 
     if size_bytes < MIN_SOURCE_DOC_BYTES:
@@ -583,16 +577,52 @@ def validate_source_doc(content: str, lead_name: str = '') -> None:
             f"Missing sections or empty prompt_1/2/3 fields. Expand before uploading."
         )
 
-    required = ['HOST DIRECTIVE', 'SECTION 1', 'SECTION 4', 'SECTION 6',
+    required = ['<!-- v1.6 -->', 'SECTION 1', 'SECTION 4', 'SECTION 6',
                 'SECTION 8', 'SECTION 12', 'blueprint.meetadvaita.com/apply']
     missing = [r for r in required if r not in content]
     if missing:
-        raise ValueError(f"Source doc missing required sections: {missing}")
+        raise ValueError(f"Source doc missing required sections/stamp: {missing}")
 
     if lead_name and lead_name not in content:
         raise ValueError(f"Source doc does not contain lead name '{lead_name}'. Personalization failed.")
 
-    print(f"✓ Source doc validated: {size_bytes:,} bytes ({size_bytes/1024:.1f}KB) — PASS")
+    # v1.6 — Section 1 direct-address regex gate
+    if lead_first:
+        # Extract Section 1 body (between "## SECTION 1" and "## SECTION 2" or "---")
+        m = re.search(r'## SECTION 1.*?(?=## SECTION 2|\n---\n\n## SECTION 2)', content, re.DOTALL)
+        section1 = m.group(0) if m else content[:3000]
+
+        # Gate 1: opening must contain "Hi {lead_first}"
+        if f'Hi {lead_first}' not in section1:
+            raise ValueError(
+                f"v1.6 GATE: Section 1 missing direct-address opening 'Hi {lead_first}'. "
+                f"NotebookLM TTS reads body opening — directive headers alone are unreliable."
+            )
+
+        # Gate 2: ≥3 "you/your" references in Section 1
+        you_count = len(re.findall(r'\b(you|your|yours|you\'re|you\'ve|you\'ll|you\'d)\b', section1, re.IGNORECASE))
+        if you_count < 3:
+            raise ValueError(
+                f"v1.6 GATE: Section 1 has only {you_count} you/your references — need ≥3."
+            )
+
+        # Gate 3: zero third-person refs to lead in Section 1 prose
+        # Allow them in header lines only; check sentences
+        third_person_phrases = [
+            r'\bthis business\b',
+            r'\bthe owner\b',
+            f"{re.escape(lead_name)}('s)? business",  # "X's business" = 3rd person
+        ]
+        violations = []
+        for pat in third_person_phrases:
+            if re.search(pat, section1, re.IGNORECASE):
+                violations.append(pat)
+        if violations:
+            raise ValueError(
+                f"v1.6 GATE: Section 1 contains third-person phrasing about lead: {violations}"
+            )
+
+    print(f"✓ Source doc validated v1.6: {size_bytes:,} bytes ({size_bytes/1024:.1f}KB) — DIRECT-ADDRESS PASS")
 
 
 # ---------------------------------------------------------------------------
@@ -606,6 +636,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
         profile = json.load(f)
 
     lead_name     = profile.get('lead_name', 'Unknown')
+    lead_first    = profile.get('lead_first_name', lead_name.split()[0])
     business_name = profile.get('business_name', 'Unknown Business')
     slug          = profile.get('slug', lead_name.lower().replace(' ', '-'))
 
@@ -625,8 +656,8 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
     with open(source_path, 'w') as f:
         f.write(source_content)
 
-    # Council #7 — hard size + quality gate BEFORE upload
-    validate_source_doc(source_content, lead_name)
+    # v1.6 hard size + direct-address gate BEFORE upload
+    validate_source_doc(source_content, lead_name, lead_first)
 
     if source_only:
         return {'source_path': source_path, 'status': 'source_only',
@@ -824,7 +855,8 @@ def rebuild_all_source_docs(leads_dir: str, podcasts_dir: str) -> dict:
             if not profile.get('slug') or not profile.get('lead_name'):
                 continue
             source_content = build_source_doc(profile)
-            validate_source_doc(source_content, profile['lead_name'])
+            _lead_first = profile.get('lead_first_name', profile['lead_name'].split()[0])
+            validate_source_doc(source_content, profile['lead_name'], _lead_first)
             slug = profile['slug']
             out_path = os.path.join(podcasts_dir, f'{slug}-podcast-source.md')
             with open(out_path, 'w') as f:

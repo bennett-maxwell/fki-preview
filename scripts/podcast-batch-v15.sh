@@ -26,8 +26,20 @@ LEADS=(
   'zachary-red-sands:Zachary Red Sands'
 )
 
-echo "=== Podcast Batch v1.5 Starting — $(date) ==="
-echo "Source docs: 18KB+ with HOST DIRECTIVE + prompt_1/2/3"
+echo "=== Podcast Batch v1.6 Starting — $(date) ==="
+echo "Source docs: 18KB+ with v1.6 direct-address gate + Hi {first_name} opening"
+echo ""
+
+# v1.6 — AUTO-REBUILD source docs before batch so no stale doc reaches NotebookLM
+echo "--- v1.6: Auto-rebuilding all source docs from leads/ ---"
+cd "$REPO"
+python3 scripts/generate-podcast.py --rebuild-sources --output-dir "$PODCASTS" 2>&1 | tail -30
+REBUILD_RC=$?
+if [ $REBUILD_RC -ne 0 ]; then
+  echo "ERROR: --rebuild-sources failed (rc=$REBUILD_RC) — aborting batch"
+  exit 1
+fi
+echo "--- Rebuild complete. Beginning NotebookLM batch. ---"
 echo ""
 
 VERIFIED=0

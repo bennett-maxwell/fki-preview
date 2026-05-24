@@ -1,65 +1,50 @@
-NOTEBOOKLM SOURCE DOCUMENT
-AI Roadmap for Brent Attaway — CRMX
-Prepared by Franchise Ki | bennett@franchiseki.com
-Generated: 2026-05-23
+<!-- v1.6 -->
+NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Brent Attaway
+CRMX | Prepared by Franchise Ki | Generated 2026-05-23
 
 ================================================================================
-HOST DIRECTIVE — MANDATORY SPEAKER INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
+SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-You are creating an audio walkthrough for one specific person: Brent Attaway.
+RULE 1 (RED LINE): You are speaking DIRECTLY to BRENT ATTAWAY. Use "you" and
+"your business" in every paragraph. NEVER say "Brent Attaway" in the third person.
+NEVER say "this business," "the owner," "they," or "their team." If you catch
+yourself describing Brent Attaway from the outside, stop and restart the sentence
+addressed to them.
 
-ADDRESS ALL REMARKS DIRECTLY TO BRENT ATTAWAY. Use "you" and "your business" and
-"your team" throughout. NEVER say "this business," "CRMX's company," or refer
-to Brent Attaway in the third person. You are speaking TO Brent Attaway, not ABOUT them.
+RULE 2: Open the audio with EXACTLY these words: "Hi Brent, welcome.
+This walkthrough was built for you and CRMX, from what you told us."
+Then proceed.
 
-YOUR OPENING LINE MUST BE: "This audio walkthrough was built specifically for you,
-Brent Attaway. Every number, every recommendation, and every example in what you're
-about to hear came directly from what you told us about your business."
-
-VOICE RULES:
-1. This business is THRIVING. Your role is to show where AI AMPLIFIES their success.
-2. NEVER say "wasting" or "losing" hours. Say "time your team could recover" or
-   "hours AI can handle for you."
-3. NEVER say "has no software" or "running manually." Say "managing this yourselves —
-   which means there is a big unlock waiting."
-4. Every manual process = an OPPORTUNITY. Frame: "here's what becomes possible."
-5. Lead with EXCITEMENT about the upside. Current state is just the launchpad.
-6. Use qualifiers: "you may be spending" / "up to X hours" / "businesses like yours often."
-7. Paint the future first. Current state is just context for what AI relieves.
-8. NEVER name AI agents ("Piper," "Sam," "Leo," "Reed"). Say "your AI agent."
-9. APPLICATION CTA ONLY. Never mention calendar booking or scheduling a call.
-10. Close every segment with: "This was built for your business. Not a template."
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
 
 ================================================================================
 
 ---
 
-## SECTION 1 — About You and CRMX
+## SECTION 1 — Hi Brent, this is your walkthrough
 
-Brent Attaway, you've built CRMX into something worth talking about.
-You operate in SaaS CRM for home service businesses, serving home service business owners including plumbing, HVAC, landscaping, roofing, and cleaning companies. Your website is https://gocrmx.com.
+Hi Brent — welcome. This is your AI walkthrough, built for you and
+CRMX. Every number you're about to hear came from what you told us.
 
-Your business delivers AI-Powered Lead Management, Automated Follow-Up Sequences, Job Tracking & Scheduling, Client Communication Hub, Sales Pipeline Automation, Reputation Management. You're working in a market where speed,
-consistency, and follow-through are what separate the businesses that grow from the
-ones that plateau.
+You operate in SaaS CRM for home service businesses, serving home service business owners including plumbing, HVAC, landscaping, roofing, and cleaning companies. You run CRMX at https://gocrmx.com.
+You're already doing the hard work — the clients, the team, the reputation. That's
+yours. What we're going to walk through together isn't about fixing what's broken
+in your business. It's about showing you exactly where AI amplifies everything
+you've already built.
 
-Here's what stood out from what you shared with us: you're already doing the hard work.
-The clients, the team, the reputation — that infrastructure is yours. What we're about
-to walk through isn't about fixing what's broken. It's about showing you exactly where
-AI makes everything you've already built run faster, smarter, and more consistently
-than any hire ever could.
-
-You told us your current tools include: GHL, Stripe, Google Workspace, Twilio. That's your operational foundation —
-and every AI system we build gets wired directly into what you're already running.
-Nothing gets ripped out. Everything gets amplified.
+You told us your current tools are: GHL, Stripe, Google Workspace, Twilio. We're going to wire your AI system
+directly into what you're already running. Nothing you use today gets ripped out.
+Everything gets amplified.
 
 Your team is the backbone of CRMX.
 
 You told us your current AI use is early-stage. That's exactly where most SaaS CRM for home service businesses businesses are right now — and it's the right starting point.
 
-The 3 AI tools described in Section 4 were written specifically for CRMX.
-Not adjusted from a template. Built from what you told us, for how your business actually works.
+The 3 AI tools you'll hear about in Section 4 were written specifically for you and
+CRMX. Not adjusted from a template. Built from your answers, for how
+your business actually works. Let's walk through what's possible.
 
 ---
 

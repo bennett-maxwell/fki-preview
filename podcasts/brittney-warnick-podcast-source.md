@@ -1,65 +1,50 @@
-NOTEBOOKLM SOURCE DOCUMENT
-AI Roadmap for Brittney Warnick — Warnick Design
-Prepared by Franchise Ki | bennett@franchiseki.com
-Generated: 2026-05-23
+<!-- v1.6 -->
+NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Brittney Warnick
+Warnick Design | Prepared by Franchise Ki | Generated 2026-05-23
 
 ================================================================================
-HOST DIRECTIVE — MANDATORY SPEAKER INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
+SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-You are creating an audio walkthrough for one specific person: Brittney Warnick.
+RULE 1 (RED LINE): You are speaking DIRECTLY to BRITTNEY WARNICK. Use "you" and
+"your business" in every paragraph. NEVER say "Brittney Warnick" in the third person.
+NEVER say "this business," "the owner," "they," or "their team." If you catch
+yourself describing Brittney Warnick from the outside, stop and restart the sentence
+addressed to them.
 
-ADDRESS ALL REMARKS DIRECTLY TO BRITTNEY WARNICK. Use "you" and "your business" and
-"your team" throughout. NEVER say "this business," "Warnick Design's company," or refer
-to Brittney Warnick in the third person. You are speaking TO Brittney Warnick, not ABOUT them.
+RULE 2: Open the audio with EXACTLY these words: "Hi Brittney, welcome.
+This walkthrough was built for you and Warnick Design, from what you told us."
+Then proceed.
 
-YOUR OPENING LINE MUST BE: "This audio walkthrough was built specifically for you,
-Brittney Warnick. Every number, every recommendation, and every example in what you're
-about to hear came directly from what you told us about your business."
-
-VOICE RULES:
-1. This business is THRIVING. Your role is to show where AI AMPLIFIES their success.
-2. NEVER say "wasting" or "losing" hours. Say "time your team could recover" or
-   "hours AI can handle for you."
-3. NEVER say "has no software" or "running manually." Say "managing this yourselves —
-   which means there is a big unlock waiting."
-4. Every manual process = an OPPORTUNITY. Frame: "here's what becomes possible."
-5. Lead with EXCITEMENT about the upside. Current state is just the launchpad.
-6. Use qualifiers: "you may be spending" / "up to X hours" / "businesses like yours often."
-7. Paint the future first. Current state is just context for what AI relieves.
-8. NEVER name AI agents ("Piper," "Sam," "Leo," "Reed"). Say "your AI agent."
-9. APPLICATION CTA ONLY. Never mention calendar booking or scheduling a call.
-10. Close every segment with: "This was built for your business. Not a template."
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
 
 ================================================================================
 
 ---
 
-## SECTION 1 — About You and Warnick Design
+## SECTION 1 — Hi Brittney, this is your walkthrough
 
-Brittney Warnick, you've built Warnick Design into something worth talking about.
-You operate in interior design, serving residential and commercial clients. Your website is https://warnickdesign.com.
+Hi Brittney — welcome. This is your AI walkthrough, built for you and
+Warnick Design. Every number you're about to hear came from what you told us.
 
-Your business delivers Residential Design, Commercial Design, Color Consultation, Space Planning. You're working in a market where speed,
-consistency, and follow-through are what separate the businesses that grow from the
-ones that plateau.
+You operate in interior design, serving residential and commercial clients. You run Warnick Design at https://warnickdesign.com.
+You're already doing the hard work — the clients, the team, the reputation. That's
+yours. What we're going to walk through together isn't about fixing what's broken
+in your business. It's about showing you exactly where AI amplifies everything
+you've already built.
 
-Here's what stood out from what you shared with us: you're already doing the hard work.
-The clients, the team, the reputation — that infrastructure is yours. What we're about
-to walk through isn't about fixing what's broken. It's about showing you exactly where
-AI makes everything you've already built run faster, smarter, and more consistently
-than any hire ever could.
-
-You told us your current tools include: Houzz, QuickBooks, Google Workspace. That's your operational foundation —
-and every AI system we build gets wired directly into what you're already running.
-Nothing gets ripped out. Everything gets amplified.
+You told us your current tools are: Houzz, QuickBooks, Google Workspace. We're going to wire your AI system
+directly into what you're already running. Nothing you use today gets ripped out.
+Everything gets amplified.
 
 Your team is the backbone of Warnick Design.
 
 You told us your current AI use is early-stage. That's exactly where most interior design businesses are right now — and it's the right starting point.
 
-The 3 AI tools described in Section 4 were written specifically for Warnick Design.
-Not adjusted from a template. Built from what you told us, for how your business actually works.
+The 3 AI tools you'll hear about in Section 4 were written specifically for you and
+Warnick Design. Not adjusted from a template. Built from your answers, for how
+your business actually works. Let's walk through what's possible.
 
 ---
 
