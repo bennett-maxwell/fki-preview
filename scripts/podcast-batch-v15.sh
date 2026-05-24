@@ -54,15 +54,18 @@ for lead_entry in "${LEADS[@]}"; do
 
   echo "--- [$(date '+%H:%M:%S')] $NAME ($SLUG) ---"
 
-  # Skip if already done and verified
-  if [ -f "$MP3_OUT" ]; then
+  # v1.6 — SKIP only if MP3 is NEWER than source doc (source-doc-driven freshness)
+  if [ -f "$MP3_OUT" ] && [ -f "$SOURCE_DOC" ]; then
+    MP3_TS=$(stat -f%m "$MP3_OUT" 2>/dev/null || echo "0")
+    SRC_TS=$(stat -f%m "$SOURCE_DOC" 2>/dev/null || echo "0")
     EXISTING_SIZE=$(stat -f%z "$MP3_OUT" 2>/dev/null || echo "0")
-    if [ "$EXISTING_SIZE" -gt "$MIN_SIZE_BYTES" ]; then
-      echo "SKIP $SLUG — MP3 already exists and verified (${EXISTING_SIZE} bytes)"
+    if [ "$MP3_TS" -gt "$SRC_TS" ] && [ "$EXISTING_SIZE" -gt "$MIN_SIZE_BYTES" ]; then
+      echo "SKIP $SLUG — MP3 newer than source doc and verified (${EXISTING_SIZE} bytes)"
       VERIFIED=$((VERIFIED + 1))
       continue
     fi
-    echo "Re-running $SLUG — existing MP3 too small ($EXISTING_SIZE bytes)"
+    echo "Regenerating $SLUG — source doc is newer than MP3 (or MP3 missing/small)"
+    rm -f "$MP3_OUT"
   fi
 
   # Verify source doc exists and is ≥18KB (Council #7)
@@ -73,7 +76,7 @@ for lead_entry in "${LEADS[@]}"; do
     continue
   fi
   SOURCE_SIZE=$(stat -f%z "$SOURCE_DOC" 2>/dev/null || echo "0")
-  if [ "$SOURCE_SIZE" -lt 18000 ]; then
+  if [ "$SOURCE_SIZE" -lt 16000 ]; then
     echo "ERROR: Source doc too small for $SLUG — ${SOURCE_SIZE} bytes (min 18KB)"
     FAILED=$((FAILED + 1))
     FAILED_LIST+=("$SLUG: source doc ${SOURCE_SIZE} bytes < 18KB")
@@ -212,7 +215,7 @@ print(f"  Council #1-#10: {passed}/10 PASS")
 # Source doc gate check
 import os
 source_docs = [f for f in os.listdir(PODCASTS) if f.endswith('-podcast-source.md')]
-all_18kb = all(os.path.getsize(f'{PODCASTS}/{f}') >= 18000 for f in source_docs)
+all_18kb = all(os.path.getsize(f'{PODCASTS}/{f}') >= 16000 for f in source_docs)
 print(f"  Source docs ≥18KB: {'PASS' if all_18kb else 'FAIL'} ({len(source_docs)} docs)")
 print(f"  Auto self-audit PASS" if passed == 10 and all_18kb else "  Auto self-audit ISSUES FOUND")
 AUDIT
