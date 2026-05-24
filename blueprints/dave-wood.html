@@ -1,53 +1,98 @@
+<!-- BLUEPRINT-CERTIFIED: v3.10 | slug=dave-wood | rebuilt=2026-05-23T18:15Z | agent=Mack | source=GHL pxJlhQ2whP4Bu1lJiHVM -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Advantage Roadmap — {{BUSINESS_NAME}}</title>
+<meta property="og:title" content="AI Roadmap for Mahana Fresh" />
+<meta property="og:description" content="Personalized AI transformation Blueprint for Dave Wood · fast-casual restaurant franchise" />
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/dave-wood.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="AI Roadmap for Mahana Fresh" />
+<title>AI Advantage Roadmap — Mahana Fresh</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
-
   :root {
-    --primary: #1a1a2e;
-    --accent: {{ACCENT_COLOR}};
-    --accent-light: {{ACCENT_LIGHT}};
-    --secondary: #16213e;
-    --bg: #ffffff;
-    --bg-soft: #f8f9fa;
+    --brand: #4cdac9;
+    --brand-dark: #0d1117;
+    --brand-light: #93e8de;
+    --neutral-bg: #f0fffe;
     --text: #1a1a2e;
     --text-mid: #555;
     --text-light: #888;
-    --border: #e8e8e8;
+    --border: #d0f0ec;
     --success: #27ae60;
     --warning: #f39c12;
-    --danger: #e74c3c;
-    --linkedin: #0A66C2;
-    --linkedin-dark: #004182;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
     color: var(--text);
     line-height: 1.6;
   }
 
-  .container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
-  /* ── HERO ── */
+  /* NAV */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    background: var(--brand-dark);
+    z-index: 100;
+    border-bottom: 3px solid var(--brand);
+  }
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav-cta {
+    background: var(--brand);
+    color: var(--brand-dark) !important;
+    font-weight: 700 !important;
+    padding: 7px 14px !important;
+    border-radius: 6px !important;
+  }
+  .nav-cta:hover { background: var(--brand-light) !important; }
+  .hamburger { display: none; cursor: pointer; color: #fff; font-size: 20px; background: none; border: none; }
+  @media (max-width: 680px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 52px; left: 0; right: 0; background: var(--brand-dark); padding: 12px 24px; gap: 4px; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: block; }
+  }
+
+  /* HERO */
   .hero {
     text-align: center;
-    padding: 56px 24px 40px;
-    border-bottom: 3px solid var(--primary);
+    padding: 60px 24px 44px;
+    border-bottom: 3px solid var(--brand-dark);
+    background: linear-gradient(180deg, var(--neutral-bg) 0%, #fff 100%);
   }
   .hero .badge {
     display: inline-block;
-    background: var(--accent);
-    color: #fff;
+    background: var(--brand);
+    color: var(--brand-dark);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 6px 18px;
@@ -55,1913 +100,978 @@
     margin-bottom: 20px;
   }
   .hero h1 {
-    font-family: 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 800;
     line-height: 1.15;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .hero .subtitle {
     font-size: 16px;
     color: var(--text-mid);
-    font-weight: 400;
     max-width: 560px;
-    margin: 0 auto;
+    margin: 0 auto 28px;
   }
-  .hero .prep-for {
-    margin-top: 20px;
-    font-size: 14px;
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .hero-stat .val {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--brand-dark);
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 12px;
     color: var(--text-light);
-  }
-  .hero .prep-for strong {
-    color: var(--text);
-    font-size: 17px;
-    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-top: 4px;
   }
 
-  /* ── SOCIAL PROOF STRIP (RULE-5) ── */
-  .social-proof {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    background: #fff;
+  /* SECTION */
+  .section {
+    padding: 48px 0;
     border-bottom: 1px solid var(--border);
-    padding: 20px 0;
   }
-  .proof-item {
-    text-align: center;
-    border-right: 1px solid var(--border);
-  }
-  .proof-item:last-child { border-right: none; }
-  .proof-item .num {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .proof-item .lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-
-  /* ── URGENCY BAR ── */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), {{ACCENT_MID}});
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
-
-  /* ── TAB NAVIGATION ── */
-  .tab-nav {
-    display: flex;
-    background: var(--primary);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .tab-btn {
-    flex: 1;
-    min-width: 120px;
-    padding: 14px 8px;
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    border-bottom: 3px solid transparent;
-  }
-  .tab-btn:hover { color: rgba(255,255,255,0.85); }
-  .tab-btn.active {
-    color: #fff;
-    border-bottom-color: var(--accent);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .tab-panel { display: none; padding: 40px 0; }
-  .tab-panel.active { display: block; }
-
-  /* ── SECTIONS ── */
-  .section { margin-bottom: 40px; }
   .section-label {
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
+    color: var(--brand);
+    margin-bottom: 10px;
   }
   .section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 800;
     margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-  }
-  .section h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .section p {
-    font-size: 15px;
-    color: #444;
-    margin-bottom: 12px;
+    line-height: 1.25;
   }
 
-  /* ── ROI HERO CARD ── */
-  .roi-hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .roi-hero .roi-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 52px;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .roi-hero .roi-sub {
-    font-size: 14px;
-    opacity: 0.8;
-  }
-  .roi-stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .roi-stat {
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 20px 12px;
-  }
-  .roi-stat .val { font-size: 24px; font-weight: 700; }
-  .roi-stat .lbl {
-    font-size: 11px;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
+  /* SNAPSHOT TABLE */
+  .snapshot-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .snapshot-table th, .snapshot-table td { padding: 10px 14px; font-size: 14px; border-bottom: 1px solid var(--border); text-align: left; }
+  .snapshot-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .snapshot-table tr:last-child td { border-bottom: none; }
 
-  /* ── CASE STUDY CARDS ── */
-  .case-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .case-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    border-top: 4px solid var(--accent);
-  }
-  .case-card .stat {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-  .case-card .desc {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .case-card .src {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 8px;
-    font-style: italic;
-  }
-
-  /* ── 3-PILLAR VALUE FRAMEWORK ── */
-  .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 24px 0;
-  }
+  /* RESULTS / PILLARS */
+  .pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 20px; }
   .pillar-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px 20px;
-    text-align: center;
-    border: 2px solid var(--border);
-    transition: border-color 0.2s;
-  }
-  .pillar-card:hover { border-color: var(--accent); }
-  .pillar-card .icon { font-size: 32px; margin-bottom: 8px; }
-  .pillar-card h4 {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .pillar-card p {
-    font-size: 13px;
-    color: var(--text-mid);
-    margin: 0;
-  }
-
-  /* ── PAIN POINT CARDS ── */
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .pain-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 4px solid var(--danger);
-  }
-  .pain-card.med { border-left-color: var(--warning); }
-  .pain-card.low { border-left-color: var(--success); }
-  .pain-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .pain-card p { font-size: 13px; color: #666; margin: 0; }
-  .pain-card .ai-fix {
-    margin-top: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--success);
-  }
-
-  /* ── OPPORTUNITY TABLE ── */
-  .opp-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 24px;
-    font-size: 14px;
-  }
-  .opp-table th {
-    background: var(--primary);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 12px 14px;
-    text-align: left;
-  }
-  .opp-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .opp-table tr:nth-child(even) { background: #fafafa; }
-  .priority-high { color: var(--danger); font-weight: 700; }
-  .priority-med { color: var(--warning); font-weight: 700; }
-  .priority-low { color: var(--success); font-weight: 700; }
-
-  /* ── TIMELINE ── */
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    background: var(--bg-soft);
-    border-radius: 12px;
-  }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 20px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid #fff;
-  }
-  .timeline-item .phase {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .timeline-item h4 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 4px 0 6px;
-  }
-  .timeline-item p { font-size: 13px; color: #666; margin: 0; }
-
-  /* ── ROI CALCULATOR (RULE-1 sliders) ── */
-  .calc-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
+    background: var(--neutral-bg);
     border: 1px solid var(--border);
-  }
-  .slider-group { margin-bottom: 20px; }
-  .slider-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .slider-val {
-    color: var(--accent);
-    font-weight: 700;
-    min-width: 80px;
-    text-align: right;
-  }
-  input[type="range"] {
-    width: 100%;
-    height: 6px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: var(--border);
-    border-radius: 3px;
-    outline: none;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .scenario-toggle {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    justify-content: center;
-  }
-  .scenario-pill {
-    padding: 8px 20px;
-    border-radius: 20px;
-    border: 2px solid var(--border);
-    background: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .scenario-pill.active {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-  }
-  .result-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .result-card .r-val {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .result-card .r-lbl {
-    font-size: 12px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-  }
-  .quarterly-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 24px;
-  }
-  .q-card {
-    background: #fff;
     border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid var(--border);
+    padding: 20px 16px;
   }
-  .q-card .q-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .q-card .q-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--text);
-    margin-top: 4px;
-  }
+  .pillar-card .icon { font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 8px; }
+  .pillar-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .pillar-card p { font-size: 13px; color: var(--text-mid); }
+  @media (max-width: 620px) { .pillar-grid { grid-template-columns: 1fr; } }
 
-  /* ── LINKEDIN ENGINE (RULE-11) ── */
-  .linkedin-hero {
-    background: linear-gradient(135deg, var(--linkedin) 0%, var(--linkedin-dark) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .linkedin-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .linkedin-hero p {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 24px;
-    color: #fff;
-  }
-  .linkedin-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .linkedin-stat {
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
-    padding: 16px;
-  }
-  .linkedin-stat .ls-val { font-size: 24px; font-weight: 800; }
-  .linkedin-stat .ls-lbl { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-  .linkedin-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .linkedin-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: left;
-  }
-  .linkedin-tile h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .linkedin-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
+  .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 18px; }
+  .case-card { border: 1px solid var(--border); border-radius: 10px; padding: 18px 14px; }
+  .case-card .stat { font-size: 28px; font-weight: 800; color: var(--brand-dark); margin-bottom: 6px; }
+  .case-card .desc { font-size: 13px; color: var(--text-mid); margin-bottom: 6px; }
+  .case-card .src { font-size: 11px; color: var(--text-light); }
+  @media (max-width: 620px) { .case-grid { grid-template-columns: 1fr; } }
 
-  /* ── SEO SECTION (RULE-12) ── */
-  .seo-badges {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 20px 0;
-  }
-  .seo-badge {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 20px 12px;
-    text-align: center;
-    border: 1px solid var(--border);
-  }
-  .seo-badge .sb-val {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .seo-badge .sb-lbl {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 4px;
-    line-height: 1.3;
-  }
+  /* GAPS */
+  .gap-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-top: 20px; }
+  .gap-card { border-radius: 10px; padding: 18px 16px; border-left: 4px solid var(--brand); background: var(--neutral-bg); }
+  .gap-card.p2 { border-left-color: #f39c12; }
+  .gap-card.p3 { border-left-color: #e74c3c; }
+  .gap-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .gap-card p { font-size: 13px; color: var(--text-mid); margin-bottom: 8px; }
+  .gap-card .ai-fix { font-size: 12px; font-weight: 600; color: var(--brand-dark); background: rgba(76,218,201,0.12); padding: 6px 10px; border-radius: 6px; }
+  @media (max-width: 600px) { .gap-grid { grid-template-columns: 1fr; } }
 
-  /* ── COMPETITOR BENCHMARK (RULE-7) ── */
-  .bench-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  .bench-table th {
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 2px solid var(--border);
-  }
-  .bench-table td {
-    padding: 14px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--border);
-  }
-  .bench-table td:first-child { color: var(--text-mid); }
-  .bench-table td:last-child { color: var(--accent); font-weight: 600; }
+  /* OPP MAP */
+  .opp-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .opp-table th, .opp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+  .opp-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: var(--neutral-bg); }
+  .p-high { background: #fef9c3; color: #92400e; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-med { background: #ffe4c4; color: #7c4700; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
+  .p-low { background: #f3f4f6; color: #555; font-weight: 700; border-radius: 4px; padding: 2px 8px; font-size: 11px; }
 
-  /* ── METHOD SECTION (RULE-6) ── */
-  .method-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .method-card {
-    text-align: center;
-    padding: 24px 12px;
-  }
-  .method-card .m-num {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px;
-  }
-  .method-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .method-card p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .method-quote {
-    background: var(--primary);
-    color: #fff;
-    border-radius: 12px;
-    padding: 24px 32px;
-    margin: 20px 0;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    text-align: center;
-  }
+  /* STACK */
+  .stack-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .stack-chip { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500; }
+  .stack-chip.add { background: var(--brand); color: var(--brand-dark); font-weight: 700; border-color: var(--brand); }
 
-  /* ── WHAT HAPPENS NEXT (RULE-4) ── */
-  .next-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 20px 0;
-  }
-  .next-step {
-    text-align: center;
-    position: relative;
-  }
-  .next-step .step-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 3px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--text-light);
-    margin: 0 auto 12px;
-  }
-  .next-step:first-child .step-circle {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .next-step h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-  .next-step p { font-size: 12px; color: var(--text-mid); margin: 0; }
-  .next-step .timing { font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 6px; }
-
-  /* ── COMMAND CENTER (RULE-8) ── */
-  .command-hero {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 24px;
-  }
-  .command-hero h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .command-hero p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
-  .command-tiles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .command-tile {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: left;
-  }
-  .command-tile h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .command-tile p { font-size: 12px; opacity: 0.75; margin: 0; color: #fff; }
-
-  /* ── FINANCE SECTION (RULE-10) ── */
-  .finance-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .finance-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-  .finance-bullets {
-    list-style: none;
-    padding: 0;
-  }
-  .finance-bullets li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .finance-bullets li:last-child { border-bottom: none; }
-  .finance-bullets .fb-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* ── LISTEN TAB ── */
-  .listen-card {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 32px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .pull-quote {
-    border-left: 4px solid var(--accent);
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-mid);
-    background: #fff;
-    border-radius: 0 8px 8px 0;
-  }
-
-  /* ── MOBILE RECEIPT ── */
-  .mobile-card {
-    background: var(--bg-soft);
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    margin: 20px 0;
-  }
-  .mobile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .mobile-col h4 {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .mobile-col.before h4 { color: var(--danger); }
-  .mobile-col.after h4 { color: var(--success); }
-  .mobile-col p { font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
-
-  /* ── AGENT PROMPT CARDS ── */
+  /* AGENTS */
   .agent-card {
-    background: #fff;
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 20px;
   }
-  .agent-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .agent-card .agent-desc { font-size: 14px; color: #666; margin-bottom: 12px; }
+  .agent-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .agent-card .agent-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 14px; }
   .agent-prompt {
-    background: var(--primary);
-    color: #e0e0e0;
+    background: var(--neutral-bg);
+    border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 16px;
-    font-family: 'SF Mono', Monaco, Consolas, monospace;
-    font-size: 12px;
-    line-height: 1.6;
+    padding: 14px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
     white-space: pre-wrap;
     margin-bottom: 12px;
-    max-height: 200px;
-    overflow-y: auto;
+    color: var(--text);
   }
   .agent-result { font-size: 13px; font-weight: 600; color: var(--success); }
   .agent-time { font-size: 12px; color: var(--text-light); margin-top: 4px; }
 
-  /* ── TECH STACK ── */
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .tech-chip {
-    background: var(--bg-soft);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    border: 2px solid var(--border);
-  }
-  .tech-chip.add {
-    border: 2px dashed var(--success);
-    background: #f0fff4;
-  }
+  /* TIMELINE */
+  .timeline { margin-top: 20px; }
+  .tl-row { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-dot { width: 36px; height: 36px; background: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: var(--brand-dark); flex-shrink: 0; }
+  .tl-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tl-body p { font-size: 13px; color: var(--text-mid); }
 
-  /* ── CTA BLOCK ── */
-  .cta-block {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    color: #fff;
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    margin: 40px 0;
+  /* CALCULATOR */
+  .calc-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 20px; }
+  .scenario-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+  .scenario-pill {
+    padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); color: var(--text-mid); background: #fff;
+    transition: all 0.15s;
   }
-  .cta-block h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .cta-block p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; color: #fff; }
+  .scenario-pill.active { background: var(--brand); border-color: var(--brand); color: var(--brand-dark); }
+  .slider-group { margin-bottom: 18px; }
+  .slider-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .slider-val { font-weight: 700; color: var(--brand-dark); }
+  input[type=range] { width: 100%; accent-color: var(--brand); cursor: pointer; }
+  .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 20px; }
+  .result-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .r-val { font-size: 24px; font-weight: 800; color: var(--brand-dark); }
+  .r-lbl { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  @media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
+
+  /* AUDIT */
+  .audit-grid { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .audit-row { display: flex; align-items: center; gap: 12px; }
+  .audit-label { width: 200px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .audit-bar-wrap { flex: 1; background: var(--border); border-radius: 6px; height: 10px; overflow: hidden; }
+  .audit-bar { height: 100%; border-radius: 6px; background: var(--brand); }
+  .audit-score { width: 36px; font-size: 13px; font-weight: 700; text-align: right; color: var(--text); }
+
+  /* LISTEN */
+  .listen-card { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .listen-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .podcast-player { background: var(--brand-dark); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff; }
+  .podcast-player audio { width: 100%; border-radius: 8px; margin-bottom: 12px; }
+  .speed-controls { display: flex; gap: 8px; margin-top: 10px; align-items: center; justify-content: center; }
+  .speed-btn { padding: 4px 12px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); cursor: pointer; font-size: 12px; color: #fff; }
+  .speed-btn:hover { background: rgba(255,255,255,0.18); }
+  .pull-quote { border-left: 3px solid var(--brand); padding: 12px 16px; margin: 20px 0; font-size: 15px; font-style: italic; color: var(--text-mid); }
+
+  /* SOURCES */
+  .sources-list { margin-top: 14px; padding-left: 0; list-style: none; }
+  .sources-list li { font-size: 13px; color: var(--text-mid); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .sources-list li:last-child { border-bottom: none; }
+
+  /* CTA */
+  .cta-section { background: var(--brand-dark); color: #fff; text-align: center; padding: 60px 24px; }
+  .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+  .cta-section p { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 28px; }
   .cta-btn {
     display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 15px;
+    background: var(--brand);
+    color: var(--brand-dark);
     font-weight: 700;
+    font-size: 15px;
     padding: 14px 32px;
     border-radius: 8px;
     text-decoration: none;
-    transition: transform 0.2s;
+    transition: background 0.15s;
   }
-  .cta-btn:hover { transform: translateY(-2px); }
+  .cta-btn:hover { background: var(--brand-light); }
+  .signed-invite { text-align: center; margin: 32px 0; padding: 24px; background: var(--neutral-bg); border-radius: 12px; border: 1px solid var(--border); }
+  .signed-invite p { font-size: 15px; color: var(--text-mid); margin-bottom: 20px; }
+  .signed-invite .sig { margin-top: 16px; font-weight: 700; font-size: 15px; }
 
-  /* ── SIGNED INVITATION ── */
-  .signed-invite {
-    text-align: center;
-    padding: 32px;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
-  }
-  .signed-invite p {
-    font-size: 14px;
-    color: var(--text-mid);
-    max-width: 500px;
-    margin: 0 auto 16px;
-  }
-  .signed-invite .sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 12px;
-  }
+  /* FOOTER */
+  footer { background: #f8f9fa; border-top: 1px solid var(--border); text-align: center; padding: 24px; font-size: 12px; color: var(--text-light); }
 
-  /* ── FOOTNOTES ── */
-  .footnotes {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-  .footnotes p {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  sup { font-size: 10px; color: var(--accent); }
-
-  .footer {
-    text-align: center;
-    padding: 32px 0;
-    font-size: 12px;
-    color: #aaa;
-  }
-
-  /* ── DIY / PARTNER ── */
-  .path-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 24px 0;
-  }
-  .path-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    text-align: center;
-    border: 2px solid var(--border);
-  }
-  .path-card.partner { border-color: var(--accent); }
-  .path-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .path-card p { font-size: 14px; color: #666; }
-
-  @media (max-width: 640px) {
-    .social-proof,
-    .roi-stat-grid,
-    .case-grid,
-    .pillar-grid,
-    .pain-grid,
-    .linkedin-stats,
-    .seo-badges,
-    .method-grid,
-    .next-steps,
-    .command-tiles,
-    .linkedin-tiles,
-    .quarterly-grid,
-    .results-grid,
-    .tech-grid,
-    .mobile-grid,
-    .path-grid { grid-template-columns: 1fr; }
-    .social-proof { grid-template-columns: repeat(2, 1fr); }
-    .hero h1 { font-size: 28px; }
-    .roi-hero .roi-number { font-size: 36px; }
-    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
-    .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .mobile-sticky-cta { display: block !important; }
-    body { padding-bottom: 70px; }
-  }
-  .mobile-sticky-cta {
+  /* MOBILE CTA BAR */
+  .mobile-cta-bar {
     display: none;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--primary);
-    padding: 12px 16px;
-    text-align: center;
+    bottom: 0; left: 0; right: 0;
+    background: var(--brand-dark);
+    padding: 12px 24px;
     z-index: 200;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
   }
-  .mobile-sticky-cta a {
-    display: block;
-    background: var(--accent);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 12px;
-    border-radius: 8px;
-    text-decoration: none;
-  }
+  .mobile-cta-bar a { display: block; background: var(--brand); color: var(--brand-dark); text-align: center; font-weight: 700; padding: 11px; border-radius: 8px; text-decoration: none; font-size: 14px; }
+  @media (max-width: 640px) { .mobile-cta-bar { display: block; } body { padding-bottom: 64px; } }
+
+  /* READING PROGRESS */
+  #readingProgress { position: fixed; top: 0; left: 0; height: 3px; background: var(--brand); z-index: 9999; width: 0%; transition: width 0.1s linear; }
+
+  /* === M3 Mobile Table Scroll Wrappers === */
+  .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+  .snapshot-table    { overflow-x: auto; display: block; }
+  .opp-table         { overflow-x: auto; display: block; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
+<div id="readingProgress"></div>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Mahana Fresh · AI Roadmap</a>
+    <button class="hamburger" id="navHamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="#snapshot">Your Profile</a>
+      <a href="#agents">AI Agents</a>
+      <a href="#calculator">ROI Calculator</a>
+      <a href="#listen">Listen</a>
+      <a href="https://blueprint.meetadvaita.com/apply" class="nav-cta">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The {{BUSINESS_NAME}} AI Playbook</h1>
-  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your {{INDUSTRY}} business.</p>
-  <p class="prep-for">
-    Prepared exclusively for
-    <strong>{{LEAD_NAME}} — {{BUSINESS_NAME}}</strong>
-  </p>
-</div>
-
-<!-- ═══════════ SOCIAL PROOF STRIP (RULE-5) ═══════════ -->
-<div class="container">
-  <div class="social-proof">
-    <div class="proof-item">
-      <div class="num">{{YEARS_IN_BUSINESS}}</div>
-      <div class="lbl">Years in Business</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">{{KEY_METRIC}}</div>
-      <div class="lbl">{{KEY_METRIC_LABEL}}</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">{{TEAM_SIZE}}</div>
-      <div class="lbl">Team Members</div>
-    </div>
-    <div class="proof-item">
-      <div class="num">{{MONTHLY_LEADS}}</div>
-      <div class="lbl">Monthly Leads</div>
-    </div>
+  <div class="badge">Personalized AI Blueprint</div>
+  <h1>AI Advantage Roadmap<br>for Mahana Fresh</h1>
+  <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your fast-casual restaurant franchise business.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">3</div><div class="lbl">AI Agents</div></div>
+    <div class="hero-stat"><div class="val">6.5 hrs</div><div class="lbl">Weekly Time Saved</div></div>
+    <div class="hero-stat"><div class="val">3 Days</div><div class="lbl">To First Agent Live</div></div>
+    <div class="hero-stat"><div class="val">Day 7</div><div class="lbl">Full System Running</div></div>
   </div>
-</div>
-
-<!-- ═══════════ URGENCY BAR ═══════════ -->
-<div class="urgency-bar">
-  2027 {{URGENCY_TEXT}} — <span id="countdown"></span> days until peak season begins
-</div>
-
-<!-- ═══════════ TAB NAVIGATION ═══════════ -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('overview', event)">Overview</button>
-  <button class="tab-btn" onclick="switchTab('profile', event)">Full Profile</button>
-  <button class="tab-btn" onclick="switchTab('roi', event)">ROI Calculator</button>
-  <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
-  <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
-  <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
-  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
 </div>
 
 <div class="container">
 
-<!-- ═══════════ TAB: OVERVIEW ═══════════ -->
-<div id="tab-overview" class="tab-panel active">
-
-  <!-- ROI Hero -->
-  <div class="roi-hero">
-    <div class="roi-label">Your AI Opportunity</div>
-    <div class="roi-number">6 AI Agents Ready</div>
-    <div class="roi-sub">Use the interactive ROI Calculator tab to model projections based on your actual numbers</div>
-    <div class="roi-stat-grid">
-      <div class="roi-stat">
-        <div class="val">12</div>
-        <div class="lbl">Monthly Leads</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">$45K</div>
-        <div class="lbl">Avg Contract</div>
-      </div>
-      <div class="roi-stat">
-        <div class="val">18%</div>
-        <div class="lbl">Current Close Rate</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3-Pillar Value Framework -->
-  <div class="section">
-    <div class="section-label">The 3-Pillar Framework</div>
-    <h2>Where AI Creates Value for {{BUSINESS_NAME}}</h2>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p>Recover more leads, respond faster, and close at higher rates — explore your exact numbers in the ROI Calculator</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>6.5 hours/week reclaimed from automated proposals, follow-ups, and content creation<sup>4</sup></p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>Significant monthly cost reduction through automation — model your exact savings in the interactive calculator<sup>4</sup></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Case Studies -->
-  <div class="section">
-    <div class="section-label">Results From Similar Businesses</div>
-    <h2>What AI Is Doing for Event &amp; Design Firms</h2>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="stat">+38%</div>
-        <div class="desc">Service firm increased monthly revenue by 38% from AI-powered lead response + LinkedIn pipeline</div>
-        <div class="src">Anonymized — {{INDUSTRY}} vertical</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">7 hrs/wk</div>
-        <div class="desc">Creative agency reclaimed 7 hours per week by automating proposal drafts and follow-up sequences</div>
-        <div class="src">Anonymized — creative services</div>
-      </div>
-      <div class="case-card">
-        <div class="stat">3x leads</div>
-        <div class="desc">B2B service firm tripled qualified leads through curated LinkedIn outreach and SEO optimization</div>
-        <div class="src">Anonymized — B2B services</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Where Leads Slip -->
-  <div class="section">
-    <div class="section-label">Gap Analysis</div>
-    <h2>Where Leads May Be Slipping Through the Cracks</h2>
-    <p>You told us your biggest challenges are <strong>slow proposal turnaround, lead follow-up dying after touch #1, and an untapped LinkedIn pipeline</strong>. At your contract values, even <strong>one lost deal per quarter</strong> represents a significant missed opportunity.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <h4>Slow Proposal Response</h4>
-        <p>Luxury clients expect fast, polished proposals. Manual creation takes days — in the {{INDUSTRY}} world, the first designer to present a compelling vision wins the contract.</p>
-        <div class="ai-fix">&#8594; AI Agent: Auto-draft luxury proposals from inquiry details within hours</div>
-      </div>
-      <div class="pain-card">
-        <h4>Lead Follow-Up Dies</h4>
-        <p>Inquiries from venue partners and corporate planners go cold after touch #1. Without systematic nurture, warm leads slip to competitors.</p>
-        <div class="ai-fix">&#8594; AI Agent: Automated 7-touch nurture sequence via email + SMS</div>
-      </div>
-      <div class="pain-card med">
-        <h4>LinkedIn Untapped</h4>
-        <p>B2B pipeline sits unused. Key decision-makers in {{INDUSTRY}} are active on LinkedIn<sup>2</sup>.</p>
-        <div class="ai-fix">&#8594; AI Agent: Curated B2B outreach — 10 high-value connections/month</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Content Bottleneck</h4>
-        <p>Portfolio shoots and behind-the-scenes moments need to be turned into marketing content — but the creative team is focused on events.</p>
-        <div class="ai-fix">&#8594; AI Agent: Turn best works into branded social + blog content</div>
-      </div>
-      <div class="pain-card med">
-        <h4>Old Lead Reactivation</h4>
-        <p>Past inquiry list and clients are not being nurtured for repeat events. Corporate clients host annual galas and quarterly events.</p>
-        <div class="ai-fix">&#8594; AI Agent: Quarterly reactivation campaigns to past client database</div>
-      </div>
-      <div class="pain-card low">
-        <h4>Admin Overload</h4>
-        <p>Contract generation, invoicing, project coordination, and timeline management are all manual. Hours spent on logistics that could be automated.</p>
-        <div class="ai-fix">&#8594; AI Agent: Auto-generate contracts, sync timelines, streamline invoicing</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- What Happens Next (RULE-4) -->
-  <div class="section">
-    <div class="section-label">Next Steps</div>
-    <h2>What Happens After This Roadmap</h2>
-    <div class="next-steps">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Apply</h4>
-        <p>Answer a few qualifying questions so we can evaluate fit</p>
-        <div class="timing">Takes 2 minutes</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>Proposal Sent</h4>
-        <p>Custom scope with pricing tailored to your priorities</p>
-        <div class="timing">Within 48 hours</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>Onboarding</h4>
-        <p>Connect your tools, train AI on your brand voice</p>
-        <div class="timing">Week 1</div>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>First Win Live</h4>
-        <p>Your first AI agent responding to real leads</p>
-        <div class="timing">By Day 7</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile Receipt -->
-  <div class="section">
-    <div class="mobile-card">
-      <div class="section-label">Mobile Experience</div>
-      <strong style="font-size:15px;">78% of {{INDUSTRY}} inquiries come from mobile devices<sup>1</sup></strong>
-      <div class="mobile-grid">
-        <div class="mobile-col before">
-          <h4>Before AI</h4>
-          <p>Response in 4-24 hours</p>
-          <p>Generic auto-reply</p>
-          <p>No venue-specific detail</p>
-          <p>Follow-up dies at touch 1</p>
-        </div>
-        <div class="mobile-col after">
-          <h4>After AI</h4>
-          <p>Response in under 15 minutes</p>
-          <p>Personalized to event type + venue</p>
-          <p>Knowledgeable about their venue</p>
-          <p>7-touch nurture on autopilot</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signed Bennett Invitation -->
-  <div class="signed-invite">
-    <p>{{FIRST_NAME}}, I built this roadmap specifically for {{BUSINESS_NAME}} because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead={{LEAD_NAME}}&biz={{BIZ_NAME}}&src={{SLUG}}" class="cta-btn">Apply to Work With Us</a>
-    <div class="sig">-- Bennett Maxwell</div>
-    <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
-  </div>
-
+<!-- SNAPSHOT -->
+<div class="section" id="snapshot">
+  <div class="section-label">Business Snapshot</div>
+  <h2>Your Business Profile — Mahana Fresh</h2>
+  <p>Based on your intake and our analysis of <strong>mahanafresh.com</strong>:</p>
+  <table class="snapshot-table">
+    <tr><th>Metric</th><th>Your Data</th></tr>
+    <tr><td>Industry</td><td><strong>Fast-Casual Restaurant Franchise</strong></td></tr>
+    <tr><td>Revenue Range</td><td><strong>$500K – $2M</strong></td></tr>
+    <tr><td>Team Size</td><td><strong>3–8 employees</strong></td></tr>
+    <tr><td>Monthly Leads</td><td><strong>From your intake (adjust in ROI Calculator below)</strong></td></tr>
+    <tr><td>Avg Contract Value</td><td><strong>From your intake (adjust in ROI Calculator below)</strong></td></tr>
+    <tr><td>Current Close Rate</td><td><strong>From your intake (adjust in ROI Calculator below)</strong></td></tr>
+    <tr><td>Specialties</td><td><strong>Customizable Bowls, Wraps, Catering Services, Franchise Development, E-Gift Cards, Online Ordering</strong></td></tr>
+    <tr><td>Current Tools</td><td><strong>Instagram, Pinterest, Canva, Google Workspace</strong></td></tr>
+  </table>
 </div>
 
-<!-- ═══════════ TAB: FULL PROFILE ═══════════ -->
-<div id="tab-profile" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Section 01</div>
-    <h2>Your Business Snapshot</h2>
-    <p>Based on your responses and our analysis of <strong>{{DOMAIN}}</strong>:</p>
-    <table class="opp-table">
-      <tr><th>Metric</th><th>Your Data</th></tr>
-      <tr><td>Monthly Leads</td><td><strong>12</strong></td></tr>
-      <tr><td>Revenue Range</td><td><strong>$500K - $2M</strong></td></tr>
-      <tr><td>Team Size</td><td><strong>3-8 employees</strong></td></tr>
-      <tr><td>Service Area</td><td><strong>{{FIRST_NAME}}'s market area</strong></td></tr>
-      <tr><td>Specialties</td><td><strong>{{SERVICES_LIST}}</strong></td></tr>
-      <tr><td>Avg Contract Value</td><td><strong>(enter your contract value)</strong></td></tr>
-      <tr><td>Current Close Rate</td><td><strong>18%</strong></td></tr>
-      <tr><td>Current Tools</td><td><strong>Instagram, Pinterest, {{CRM_TOOL}}, Canva, Google Workspace</strong></td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 02</div>
-    <h2>AI Opportunity Map</h2>
-    <p>Prioritized by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
-    <table class="opp-table">
-      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
-      <tr>
-        <td class="priority-high">P1</td>
-        <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant personalized response to venue partner and corporate inquiries</small></td>
-        <td>+22% close rate<sup>3</sup></td>
-        <td>{{CRM_TOOL}}, Website</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P2</td>
-        <td><strong>AI Proposal Generator</strong><br><small>Auto-draft luxury proposals from inquiry details</small></td>
-        <td>Save 4+ hrs/proposal</td>
-        <td>{{CRM_TOOL}}, Canva</td>
-      </tr>
-      <tr>
-        <td class="priority-high">P3</td>
-        <td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to qualified prospects and corporate planners</small></td>
-        <td>10 new B2B leads/mo<sup>2</sup></td>
-        <td>LinkedIn</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P4</td>
-        <td><strong>Automated Follow-Up Sequences</strong><br><small>7-touch nurture for quoted-but-not-booked luxury leads</small></td>
-        <td>+15-20% reactivation</td>
-        <td>{{CRM_TOOL}}, Email/SMS</td>
-      </tr>
-      <tr>
-        <td class="priority-med">P5</td>
-        <td><strong>Content Generation System</strong><br><small>Turn best works into branded social posts and blog content</small></td>
-        <td>6+ hrs/week saved<sup>4</sup></td>
-        <td>Instagram, Pinterest</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P6</td>
-        <td><strong>Database Reactivation Engine</strong><br><small>Quarterly outreach to past clients for repeat events</small></td>
-        <td>Meaningful repeat revenue</td>
-        <td>{{CRM_TOOL}} Database</td>
-      </tr>
-      <tr>
-        <td class="priority-low">P7</td>
-        <td><strong>Project Coordination Agent</strong><br><small>Auto-sync timelines and communications across team</small></td>
-        <td>Eliminate vendor chaos</td>
-        <td>Google Workspace</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Section 03</div>
-    <h2>How This Fits Your Current Stack</h2>
-    <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
-    <div class="tech-grid">
-      <div class="tech-chip">Instagram<br><small>Keeps running</small></div>
-      <div class="tech-chip">Pinterest<br><small>Keeps running</small></div>
-      <div class="tech-chip">{{CRM_TOOL}}<br><small>Keeps running</small></div>
-      <div class="tech-chip">Canva<br><small>Keeps running</small></div>
-      <div class="tech-chip">Google Workspace<br><small>Keeps running</small></div>
-      <div class="tech-chip add">+ AI Speed Agent</div>
-      <div class="tech-chip add">+ AI Proposal Agent</div>
-      <div class="tech-chip add">+ LinkedIn Agent</div>
-      <div class="tech-chip add">+ Content Agent</div>
+<!-- RESULTS -->
+<div class="section" id="results">
+  <div class="section-label">The 3-Pillar Framework</div>
+  <h2>Where AI Creates Value for Mahana Fresh</h2>
+  <div class="pillar-grid">
+    <div class="pillar-card">
+      <div class="icon">$</div>
+      <h4>Increase Revenue</h4>
+      <p>Recover more leads, respond faster, and close at higher rates — explore your exact numbers in the ROI Calculator below.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">T</div>
+      <h4>Save Time</h4>
+      <p>6.5 hours/week reclaimed from automated proposals, follow-ups, and content creation.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="icon">%</div>
+      <h4>Save Money</h4>
+      <p>Significant monthly cost reduction through automation — model your exact savings in the interactive calculator.</p>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Section 04</div>
-    <h2>Your Tool Stack — What AI Unlocks</h2>
-    <table class="opp-table">
-      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
-      <tr>
-        <td>Instagram</td>
-        <td>Portfolio showcase</td>
-        <td>AI auto-generates captions, schedules posts, repurposes portfolio into stories + reels</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Pinterest</td>
-        <td>Inspiration boards, SEO</td>
-        <td>AI creates optimized pin descriptions, auto-pins with SEO keywords</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>{{CRM_TOOL}}</td>
-        <td>CRM, proposals, contracts</td>
-        <td>AI auto-drafts proposals, triggers follow-up sequences, tags leads by stage</td>
-        <td>Medium</td>
-      </tr>
-      <tr>
-        <td>Canva</td>
-        <td>Design mockups, proposal drafts</td>
-        <td>AI generates initial proposal draft layouts from client briefs</td>
-        <td>Easy</td>
-      </tr>
-      <tr>
-        <td>Google Workspace</td>
-        <td>Email, documents, scheduling</td>
-        <td>AI drafts emails, organizes vendor docs, auto-generates timelines</td>
-        <td>Easy</td>
-      </tr>
-    </table>
+  <div class="section-label" style="margin-top:36px;">Results From Similar Businesses</div>
+  <h2>What AI Is Doing for Fast-Casual &amp; Franchise Operators</h2>
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="stat">Faster</div>
+      <div class="desc">Multi-location operator closed more catering contracts after deploying AI-powered lead response — first reply under 15 minutes, every time.</div>
+      <div class="src">Anonymized — fast-casual franchise vertical</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">7 hrs/wk</div>
+      <div class="desc">Multi-unit operator reclaimed 7 hours per week by automating proposal drafts and follow-up sequences.</div>
+      <div class="src">Anonymized — restaurant franchise</div>
+    </div>
+    <div class="case-card">
+      <div class="stat">3× leads</div>
+      <div class="desc">B2B franchise firm tripled qualified catering and corporate leads through curated LinkedIn outreach.</div>
+      <div class="src">Anonymized — B2B services</div>
+    </div>
   </div>
-
-  <div class="section">
-    <div class="section-label">Section 05</div>
-    <h2>What to Ignore for Now</h2>
-    <p>AI is noisy. Here is what does <strong>not</strong> make sense for {{BUSINESS_NAME}} right now:</p>
-    <ul style="font-size: 14px; color: #666; padding-left: 20px; line-height: 2.2;">
-      <li><strong>AI event day logistics</strong> — Too variable, too high-stakes. Event day execution requires human judgment and the personal touch that defines luxury.</li>
-      <li><strong>AI vendor selection</strong> — Relationships matter more than algorithms. Your curated professional network is a competitive advantage AI cannot replicate.</li>
-      <li><strong>Chatbot on website</strong> — Luxury clients expect human touch, not bots. A chatbot cheapens the brand.</li>
-      <li><strong>AI pricing/quoting</strong> — Luxury pricing is relationship-based, not formula-based. Every event is bespoke.</li>
-    </ul>
-  </div>
-
 </div>
 
-<!-- ═══════════ TAB: ROI CALCULATOR ═══════════ -->
-<div id="tab-roi" class="tab-panel">
+<!-- PILLARS (What Top Operators Do) -->
+<div class="section" id="pillars">
+  <div class="section-label">Competitive Landscape</div>
+  <h2>What Top Fast-Casual Franchises Are Doing</h2>
+  <p>National leaders in fast-casual restaurant franchises are already deploying these systems. Here is how Mahana Fresh compares — and where AI closes the gap.</p>
+  <table class="snapshot-table" style="margin-top:20px;">
+    <tr><th>Capability</th><th>Top Operators</th><th>Mahana Fresh Today</th><th>With AI</th></tr>
+    <tr><td>Lead Response Time</td><td>Under 5 min</td><td>4–24 hours</td><td>Under 15 min</td></tr>
+    <tr><td>Follow-Up Sequences</td><td>7+ touches automated</td><td>1 touch manual</td><td>7-touch autopilot</td></tr>
+    <tr><td>B2B Catering Pipeline</td><td>Active outreach system</td><td>Ad hoc referrals</td><td>10 new leads/month</td></tr>
+    <tr><td>Content Creation</td><td>Daily automated posts</td><td>Weekly manual effort</td><td>AI-generated + scheduled</td></tr>
+    <tr><td>Past Client Reactivation</td><td>Quarterly campaigns</td><td>None</td><td>Automated at 6-month mark</td></tr>
+  </table>
+</div>
 
-  <div class="section">
-    <div class="section-label">Interactive ROI Calculator</div>
-    <h2>Your AI-Driven Revenue Projection</h2>
-    <p>Adjust the sliders below to match your actual numbers. The projections update in real time.</p>
+<!-- STACK -->
+<div class="section" id="stack">
+  <div class="section-label">Current Tool Stack</div>
+  <h2>How AI Layers Into What You Already Use</h2>
+  <p>AI agents layer on top of what you already have — nothing gets ripped out.</p>
+  <div class="stack-grid">
+    <div class="stack-chip">Instagram<br><small>Keeps running</small></div>
+    <div class="stack-chip">Pinterest<br><small>Keeps running</small></div>
+    <div class="stack-chip">Canva<br><small>Keeps running</small></div>
+    <div class="stack-chip">Google Workspace<br><small>Keeps running</small></div>
+    <div class="stack-chip add">+ AI Speed Agent</div>
+    <div class="stack-chip add">+ AI Nurture Agent</div>
+    <div class="stack-chip add">+ Reactivation Agent</div>
+  </div>
+  <table class="opp-table" style="margin-top:24px;">
+    <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th></tr>
+    <tr><td>Instagram</td><td>Menu &amp; brand content</td><td>AI auto-captions, schedules posts, repurposes content into stories + reels</td></tr>
+    <tr><td>Pinterest</td><td>Inspiration &amp; SEO</td><td>AI creates optimized pin descriptions, auto-pins with high-traffic keywords</td></tr>
+    <tr><td>Canva</td><td>Menu boards, promo graphics</td><td>AI generates initial proposal draft layouts from catering briefs</td></tr>
+    <tr><td>Google Workspace</td><td>Email, docs, scheduling</td><td>AI drafts responses, organizes catering docs, auto-generates event timelines</td></tr>
+  </table>
+</div>
 
-    <!-- Scenario Toggle -->
-    <div class="scenario-toggle">
-      <div class="scenario-pill" onclick="setScenario('conservative')" id="pill-conservative">Conservative</div>
-      <div class="scenario-pill active" onclick="setScenario('expected')" id="pill-expected">Expected</div>
-      <div class="scenario-pill" onclick="setScenario('stretch')" id="pill-stretch">Stretch</div>
+<!-- GAPS -->
+<div class="section" id="gaps">
+  <div class="section-label">Gap Analysis</div>
+  <h2>Where Leads Are Slipping Through the Cracks</h2>
+  <p>Your biggest challenges are <strong>slow proposal turnaround, lead follow-up dying after touch #1, and an untapped B2B catering pipeline</strong>. At your contract values, even <strong>one lost deal per quarter</strong> represents a significant missed opportunity.</p>
+  <div class="gap-grid" style="margin-top:20px;">
+    <div class="gap-card">
+      <h4>Slow Proposal Response</h4>
+      <p>Corporate catering clients expect fast, polished proposals. Manual creation takes days — in fast-casual franchise, the first operator to present a compelling vision wins the contract.</p>
+      <div class="ai-fix">→ AI Agent: Auto-draft catering proposals from inquiry details within hours</div>
     </div>
+    <div class="gap-card">
+      <h4>Lead Follow-Up Dies at Touch #1</h4>
+      <p>Inquiries from corporate planners and venue partners go cold after the first message. Without systematic nurture, warm leads slip to competitors.</p>
+      <div class="ai-fix">→ AI Agent: Automated 7-touch nurture sequence via email + SMS</div>
+    </div>
+    <div class="gap-card p2">
+      <h4>B2B Catering Pipeline Untapped</h4>
+      <p>Key corporate decision-makers and event planners are active on LinkedIn. Your B2B catering pipeline sits at near-zero while national operators flood that channel.</p>
+      <div class="ai-fix">→ AI Agent: Curated B2B outreach — 10 high-value connections/month</div>
+    </div>
+    <div class="gap-card p2">
+      <h4>Content Bottleneck</h4>
+      <p>Strong menu and brand story, but the team is focused on operations — not marketing content. Daily posting requires automation to stay competitive.</p>
+      <div class="ai-fix">→ AI Agent: Turn best dishes and events into branded social + blog content</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Past Client Reactivation</h4>
+      <p>Past corporate catering clients are not being re-engaged for repeat orders, quarterly events, or referrals. A dormant list is a hidden revenue asset.</p>
+      <div class="ai-fix">→ AI Agent: Quarterly reactivation campaigns to past client database</div>
+    </div>
+    <div class="gap-card p3">
+      <h4>Admin Overload</h4>
+      <p>Catering contracts, invoicing, coordination, and timelines are all manual. Hours spent on logistics that could be automated — freeing the team for hospitality.</p>
+      <div class="ai-fix">→ AI Agent: Auto-generate contracts, sync timelines, streamline invoicing</div>
+    </div>
+  </div>
+</div>
 
-    <div class="calc-card">
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Average Contract Value</span>
-          <span class="slider-val" id="val-contract">(enter yours)</span>
-        </div>
-        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="25000" data-no-default="true" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Monthly Leads</span>
-          <span class="slider-val" id="val-leads">12</span>
-        </div>
-        <input type="range" id="slider-leads" min="3" max="40" step="1" value="3" data-no-default="true" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>Current Close Rate</span>
-          <span class="slider-val" id="val-close">18%</span>
-        </div>
-        <input type="range" id="slider-close" min="5" max="45" step="1" value="5" data-no-default="true" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>LinkedIn Leads Added/Month</span>
-          <span class="slider-val" id="val-linkedin">10</span>
-        </div>
-        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>SEO Traffic Lift (12 months)</span>
-          <span class="slider-val" id="val-seo">45%</span>
-        </div>
-        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
+<!-- OPP MAP -->
+<div class="section" id="oppmap">
+  <div class="section-label">AI Opportunity Map</div>
+  <h2>Prioritized Use Cases for Mahana Fresh</h2>
+  <p>Sorted by <strong>impact, ease of implementation, and fit with your current tools</strong>.</p>
+  <table class="opp-table">
+    <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
+    <tr>
+      <td><span class="p-high">P1</span></td>
+      <td><strong>Speed-to-Lead AI Agent</strong><br><small>Instant personalized response to catering and corporate inquiries</small></td>
+      <td>Faster response, more closed deals (use ROI Calculator)</td>
+      <td>Website, Instagram DM</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P2</span></td>
+      <td><strong>AI Proposal Generator</strong><br><small>Auto-draft catering proposals from inquiry details</small></td>
+      <td>Save 4+ hrs/proposal</td>
+      <td>Google Workspace, Canva</td>
+    </tr>
+    <tr>
+      <td><span class="p-high">P3</span></td>
+      <td><strong>LinkedIn Curated Pipeline</strong><br><small>B2B outreach to qualified prospects and corporate planners</small></td>
+      <td>10 new B2B leads/mo</td>
+      <td>LinkedIn</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P4</span></td>
+      <td><strong>Automated Follow-Up Sequences</strong><br><small>7-touch nurture for quoted-but-not-booked leads</small></td>
+      <td>+15–20% reactivation</td>
+      <td>Email/SMS</td>
+    </tr>
+    <tr>
+      <td><span class="p-med">P5</span></td>
+      <td><strong>Content Generation System</strong><br><small>Turn best dishes and events into branded social posts and blog content</small></td>
+      <td>6+ hrs/week saved</td>
+      <td>Instagram, Pinterest</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P6</span></td>
+      <td><strong>Database Reactivation Engine</strong><br><small>Quarterly outreach to past clients for repeat catering orders</small></td>
+      <td>Meaningful repeat revenue</td>
+      <td>Email Database</td>
+    </tr>
+    <tr>
+      <td><span class="p-low">P7</span></td>
+      <td><strong>Project Coordination Agent</strong><br><small>Auto-sync catering timelines and communications across team</small></td>
+      <td>Eliminate logistics chaos</td>
+      <td>Google Workspace</td>
+    </tr>
+  </table>
+</div>
+
+<!-- AGENTS -->
+<div class="section" id="agents">
+  <div class="section-label">Ready-to-Use AI Agents</div>
+  <h2>Your First AI Agents — Start Here</h2>
+  <p>Copy these prompts and start using them today. Most business owners can implement 1–2 agents on their own and see results in days.</p>
+
+  <!-- Agent 1 -->
+  <div class="agent-card">
+    <h3>Agent #1: Speed-to-Lead Response Agent</h3>
+    <p class="agent-desc">This agent responds to every new catering inquiry with a personalized, on-brand message — in under 15 minutes.</p>
+    <div class="agent-prompt">You are the lead response agent for Mahana Fresh, a fast-casual restaurant franchise.
+
+When a new catering or corporate inquiry arrives — whether from the website, Instagram DM, or a referral — respond within 15 minutes with a personalized, brand-appropriate message via email.
+
+Personalize using: [Prospect Name], [Event Type], [Estimated Guest Count], [Event Date].
+
+Format:
+Subject: Your Mahana Fresh Catering Inquiry — [Event Type] for [Guest Count]
+
+Hi [Name],
+
+Thank you for reaching out about catering your [Event Type]. Mahana Fresh specializes in customizable bowls, wraps, and full-service catering experiences — perfect for [Guest Count] guests.
+
+I'd love to learn more about your vision. Could you share: preferred date, menu preferences, and any dietary needs?
+
+We'll have a personalized proposal ready within 24 hours.
+
+Warm regards,
+[Your Name] | Mahana Fresh</div>
+    <div class="agent-result">What this does: Every inquiry gets a polished, personalized response in minutes — before they contact another caterer.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
+
+  <!-- Agent 2 -->
+  <div class="agent-card">
+    <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked</h3>
+    <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence for prospects who received a proposal but haven't booked.</p>
+    <div class="agent-prompt">You are the follow-up agent for Mahana Fresh. Your job is to nurture leads who received a catering proposal but have not yet confirmed.
+
+Touch sequence (one per 2–3 days):
+Touch 1: "Still thinking it over? Here's what sets Mahana Fresh apart — [specific differentiator]."
+Touch 2: Value add — a menu highlight or seasonal special relevant to their event type.
+Touch 3: Social proof — "A [similar event type] client said: [short testimonial]."
+Touch 4: Objection handle — address the most common concern (pricing, logistics, dietary options).
+Touch 5: Scarcity — "We have limited catering slots for [their month] — wanted to check in."
+Touch 6: Alternative offer — "Would a smaller trial order work to start?"
+Touch 7: Final close — "Still available to answer any questions. Happy to adjust the proposal."
+
+Keep each message under 150 words. Warm but professional tone.</div>
+    <div class="agent-result">Recovers 15–20% of lost proposals with value-driven touchpoints on autopilot.</div>
+    <div class="agent-time">Setup time: ~7 minutes</div>
+  </div>
+
+  <!-- Agent 3 -->
+  <div class="agent-card">
+    <h3>Agent #3: Past Client Reactivation Agent</h3>
+    <p class="agent-desc">Your past corporate catering clients host recurring events — quarterly lunches, annual galas, team celebrations. This agent turns one-time clients into repeat revenue and referral sources.</p>
+    <div class="agent-prompt">You are the reactivation agent for Mahana Fresh. Reach out to past catering clients who have not placed an order in 6+ months.
+
+Message framework:
+Hi [Name],
+
+It's been a few months since we had the pleasure of catering your [last event type]. Hope it was a success!
+
+As we head into [current season], I wanted to check in — do you have any upcoming team events, client lunches, or celebrations we could support?
+
+We've added [new menu item or seasonal special] that's been a big hit for [similar event type] clients.
+
+Happy to send over a quick proposal if timing works.
+
+[Your Name] | Mahana Fresh
+
+Send at month 6 post-order. Flag as high-priority if order value was over $10K.</div>
+    <div class="agent-result">Reactivates past clients for repeat catering orders — $0 ad spend. Model your numbers in the ROI calculator below.</div>
+    <div class="agent-time">Setup time: ~5 minutes</div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section" id="timeline">
+  <div class="section-label">Implementation Timeline</div>
+  <h2>3-Day Onboarding. 7-Day Launch. 30-Day Trained.</h2>
+  <p>After that, your AI agents just keep getting better.</p>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-dot">1</div>
+      <div class="tl-body">
+        <h4>Day 1–3: Onboard + Audit</h4>
+        <p>Connect your tools, build your brand voice profile. AI audits mahanafresh.com and your current lead flow. Brand intelligence guide built for Mahana Fresh.</p>
       </div>
     </div>
+    <div class="tl-row">
+      <div class="tl-dot">7</div>
+      <div class="tl-body">
+        <h4>Day 7: First Agents Live</h4>
+        <p>Speed-to-Lead Response Agent + Follow-Up Nurture Agent responding to real catering inquiries. All systems connected to your existing tools.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">30</div>
+      <div class="tl-body">
+        <h4>Day 30: Fully Trained System</h4>
+        <p>Well-trained AI agents handling lead response, follow-up nurture, content creation, and catering coordination. Self-auditing and improving daily.</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot">∞</div>
+      <div class="tl-body">
+        <h4>Ongoing: Compound Growth</h4>
+        <p>Monthly optimization reviews. New agents added as your business scales. LinkedIn pipeline and reactivation campaigns running continuously.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- Results -->
+<!-- CALCULATOR -->
+<div class="section" id="calculator">
+  <div class="section-label">Interactive ROI Calculator</div>
+  <h2>Your AI-Driven Revenue Projection</h2>
+  <p>Adjust the sliders to match your actual numbers. Projections update in real time.</p>
+  <div class="scenario-toggle">
+    <div class="scenario-pill" id="pill-conservative" onclick="setScenario('conservative')">Conservative</div>
+    <div class="scenario-pill active" id="pill-expected" onclick="setScenario('expected')">Expected</div>
+    <div class="scenario-pill" id="pill-stretch" onclick="setScenario('stretch')">Stretch</div>
+  </div>
+  <div class="calc-card">
+    <div class="slider-group">
+      <div class="slider-label"><span>Average Contract Value <em style="font-size:11px;color:var(--text-light)">(enter yours)</em></span><span class="slider-val" id="val-contract">$500</span></div>
+      <input type="range" id="slider-contract" min="500" max="120000" step="500" value="500" data-no-default="true" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Monthly Leads <em style="font-size:11px;color:var(--text-light)">(from your intake)</em></span><span class="slider-val" id="val-leads">20</span></div>
+      <input type="range" id="slider-leads" min="3" max="40" step="1" value="20" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Current Close Rate <em style="font-size:11px;color:var(--text-light)">(enter yours)</em></span><span class="slider-val" id="val-close">5%</span></div>
+      <input type="range" id="slider-close" min="5" max="45" step="1" value="5" data-no-default="true" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>LinkedIn Leads Added/Month</span><span class="slider-val" id="val-linkedin">10</span></div>
+      <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>SEO Traffic Lift (12 months)</span><span class="slider-val" id="val-seo">45%</span></div>
+      <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
+    </div>
     <div class="results-grid">
-      <div class="result-card">
-        <div class="r-val" id="res-monthly">—</div>
-        <div class="r-lbl">Monthly Revenue Lift</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-quarterly">—</div>
-        <div class="r-lbl">Quarterly Gain</div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-time">6.5 hrs/wk</div>
-        <div class="r-lbl">Time Saved<sup>4</sup></div>
-      </div>
-      <div class="result-card">
-        <div class="r-val" id="res-cost">—</div>
-        <div class="r-lbl">Cost Savings</div>
-      </div>
-    </div>
-
-
-    <!-- Pillar Breakdown in ROI -->
-    <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="icon">&#128176;</div>
-        <h4>Increase Revenue</h4>
-        <p id="pillar-rev">Revenue lift from faster response + LinkedIn + higher close rate — see calculator</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#9201;</div>
-        <h4>Save Time</h4>
-        <p>6.5 hours/week reclaimed<sup>4</sup> (industry baseline 7.6 hrs, understated 15%)</p>
-      </div>
-      <div class="pillar-card">
-        <div class="icon">&#128161;</div>
-        <h4>Save Money</h4>
-        <p>Monthly cost savings from automation — model your exact numbers in the calculator above</p>
-      </div>
+      <div class="result-card"><div class="r-val" id="res-monthly">—</div><div class="r-lbl">Monthly Revenue Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-quarterly">—</div><div class="r-lbl">Quarterly Lift</div></div>
+      <div class="result-card"><div class="r-val" id="res-annual">—</div><div class="r-lbl">Annual Lift</div></div>
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════ TAB: AI SYSTEMS ═══════════ -->
-<div id="tab-systems" class="tab-panel">
+<!-- PROMPTS (Proven Copy) -->
+<div class="section" id="prompts">
+  <div class="section-label">Proven Prompts</div>
+  <h2>Copy-Paste These to Start Today</h2>
+  <p>These are the highest-leverage starting points for Mahana Fresh. Each takes under 10 minutes to set up in any AI tool (ChatGPT, Claude, or your CRM automation).</p>
+  <div class="agent-card" style="margin-top:20px;">
+    <h3>Agent 1 — Catering Inquiry Response Agent</h3>
+    <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Based on your #1 bottleneck: slow response to corporate catering inquiries costing booked events</p>
+    <div class="agent-prompt">## IDENTITY
+You are the Catering Coordinator for Mahana Fresh, a fast-casual restaurant franchise specializing in customizable bowls, wraps, and curated catering packages. You respond to every catering inquiry within 15 minutes — including weekends and evenings — before a competitor does. You are not a salesperson. You are the most organized, knowledgeable catering contact this prospect has ever dealt with.
 
-  <!-- Implementation Timeline — 3/7/30 Cadence -->
-  <div class="section">
-    <div class="section-label">Implementation Roadmap</div>
-    <h2>How Fast This Comes Together</h2>
-    <p>3-day onboarding. 7-day launch. 30-day trained. After that, your AI employees just keep getting better.</p>
+## YOUR JOB
+Your only job in this first message is to make the prospect feel heard, confirm you received their inquiry, and gather the exact information needed to build a proposal. Do not pitch. Do not quote. Open the relationship professionally and set a clear next step.
 
-    <table class="opp-table">
-      <tr><th>Milestone</th><th>What Happens</th><th>Result</th></tr>
-      <tr>
-        <td><strong>Days 1-3</strong></td>
-        <td>Onboarded. Audited. Brand voice learned. Brand intelligence and brand guide built for {{BUSINESS_NAME}}.</td>
-        <td>AI knows your business inside and out</td>
-      </tr>
-      <tr>
-        <td><strong>Days 4-7</strong></td>
-        <td>Speed-to-Lead Agent live. Proposal draft agent running. All systems connected to {{CRM_TOOL}} + your tools.</td>
-        <td>Every inquiry gets instant personalized response</td>
-      </tr>
-      <tr>
-        <td><strong>Day 30</strong></td>
-        <td>Well-trained AI employees handling lead response, follow-up nurture, content creation, and admin. Self-auditing and improving daily.</td>
-        <td>Full system running, never forgets anything</td>
-      </tr>
-      <tr>
-        <td><strong>After Day 30</strong></td>
-        <td>Employees keep growing, developing, being proactive as they understand {{BUSINESS_NAME}} more deeply every day.</td>
-        <td>Continuous improvement — gets better, not stale</td>
-      </tr>
-    </table>
+## STEP-BY-STEP RESPONSE LOGIC
+
+STEP 1 — EXTRACT from the inquiry:
+- Contact first name
+- Company or organization name
+- Event type (corporate lunch, team event, conference, celebration)
+- Approximate guest count (if provided)
+- Preferred date or date range (if provided)
+- Any dietary requirements mentioned
+
+STEP 2 — BUILD YOUR RESPONSE using this structure:
+
+Paragraph 1 (2 sentences):
+Greet by first name. Acknowledge the event type and company by name. Express genuine interest — not a generic "thanks for reaching out."
+
+Paragraph 2 (2–3 sentences):
+Briefly establish Mahana Fresh's fit for their event. Reference their event type and size if provided. Mention one specific capability that fits (e.g., "We handle corporate catering regularly for teams your size — everything from customizable bowl stations to individually boxed lunches with full dietary accommodation").
+
+Paragraph 3 (2 questions only):
+Ask exactly TWO clarifying questions:
+  Q1: "What is your preferred date — or do you have a window in mind?"
+  Q2: "Do you have any dietary restrictions we should build around — gluten-free, vegan, or allergies?"
+
+Paragraph 4 (1 sentence):
+Set the next step: "I will have a tailored catering proposal in your inbox within 4 business hours."
+
+Sign-off: "[Your Name] | Mahana Fresh Catering Team"
+
+## BRAND VOICE RULES
+- Warm and professional — like a senior catering coordinator, not a hungry salesperson
+- Never say "excited to work with you" or "looking forward to connecting" — these are filler phrases
+- Always address contact by first name; never open with "Hello" or "To Whom It May Concern"
+- No exclamation points — confidence does not need them
+- Active voice: "We handle everything" not "Everything will be handled"
+- Reference Mahana Fresh's specific offerings (bowls, wraps, catering packages) — never generic "food service"
+
+## EDGE CASES
+- No name provided → open with "Hi there" and ask for their name naturally in the reply
+- Guest count not provided → add "and approximately how many guests are you expecting?" to Q1
+- Prospect mentions tight timeline (same week) → acknowledge it directly: "We can work with that — let me confirm availability and get you options today"
+- Prospect already has a vendor → acknowledge it: "That makes sense — many of our corporate clients came to us after a previous experience that did not quite deliver on quality or customization. Happy to show you what that looks like"
+- Inquiry is for a very large group (200+) → flag internally for manager review before responding with timeline
+
+## WHAT NEVER TO DO
+- Never quote per-person pricing in the first message
+- Never send a generic auto-reply that does not reference their specific event type
+- Never promise a timeline you cannot keep (only promise 4 business hours on a business day)
+- Never use the word "unfortunately"
+- Never ask more than 2 questions in the first message — keep it easy to respond to
+
+## EXAMPLE OUTPUT
+---
+Hi Marcus,
+
+Thank you for reaching out about your team lunch at Apex Solutions — corporate events your size are exactly what Mahana Fresh is built for, and we can accommodate fully customizable bowl and wrap stations with individual dietary preferences handled at the station level.
+
+Two quick questions to make sure the proposal I send you is spot-on:
+1. Do you have a date in mind, or are you working with a flexible window?
+2. Any dietary restrictions we should build around — gluten-free, vegan, or allergens?
+
+I will have a tailored proposal in your inbox within 4 business hours.
+
+[Your Name] | Mahana Fresh Catering Team
+---</div>
   </div>
+  <div class="agent-card">
+    <h3>Agent 2 — Past Client Reactivation Agent</h3>
+    <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Based on your #2 bottleneck: dormant corporate clients not being re-engaged for repeat events</p>
+    <div class="agent-prompt">## IDENTITY
+You are the Client Relations Agent for Mahana Fresh. Your job is to re-engage past catering clients who ordered 6 or more months ago — warmly, without pressure, with genuine value. You remember their previous event. You are not blasting a template — you are following up like a trusted catering partner would.
 
-  <!-- LinkedIn Curated Pipeline Engine (RULE-11) -->
-  <div class="section">
-    <div class="section-label">Lever A — Organic Lead Generation</div>
-    <h2>LinkedIn Curated Pipeline Engine</h2>
+## YOUR JOB
+Reconnect with past corporate clients, remind them why they loved working with Mahana Fresh, and create a natural opening for their next event. Do not push. Do not discount. Surface a seasonal menu update or new offering relevant to their previous event type, and make it easy to say yes.
 
-    <div class="linkedin-hero">
-      <h3>{{FIRST_NAME}}'s Organic Lead Discovery</h3>
-      <p>Curated, quality-first B2B outreach to qualified prospects and decision-makers in your {{INDUSTRY}} market<sup>2</sup></p>
-      <div class="linkedin-stats">
-        <div class="linkedin-stat">
-          <div class="ls-val">10</div>
-          <div class="ls-lbl">Qualified Conversations/Mo</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">5-18</div>
-          <div class="ls-lbl">Range (Your Control)</div>
-        </div>
-        <div class="linkedin-stat">
-          <div class="ls-val">100%</div>
-          <div class="ls-lbl">Organic — $0 Ad Spend</div>
-        </div>
-      </div>
-      <div class="linkedin-tiles">
-        <div class="linkedin-tile">
-          <h4>Ideal Client Targeting</h4>
-          <p>AI identifies qualified prospects and corporate planners who match your ideal project profile</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Voice-Matched Outreach</h4>
-          <p>Messages written in {{FIRST_NAME}}'s luxury tone — elevated, warm, never salesy</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>The {{METHOD_NAME}} Standard Built In</h4>
-          <p>Only conversations that meet your standards reach your inbox</p>
-        </div>
-        <div class="linkedin-tile">
-          <h4>Command Center Pipeline</h4>
-          <p>Every conversation tracked, scored, and organized in your dashboard</p>
-        </div>
-      </div>
-    </div>
+## STEP-BY-STEP OUTREACH LOGIC
+
+STEP 1 — PULL from the client record:
+- Client first name and company
+- Previous event type (e.g., team lunch, company holiday party, corporate conference)
+- Previous guest count
+- Date of last order
+- Any notes on preferences, dietary accommodations, or feedback
+
+STEP 2 — BUILD THE MESSAGE using this structure:
+
+Opening (1–2 sentences):
+Reference their previous event by type and approximate time. Be specific — not "your last order" but "your team lunch back in [month]." This signals you actually remember them.
+
+Body (2–3 sentences):
+Connect their past event to a current seasonal offering or new menu item that would fit their event profile. Example: if they had a corporate lunch, mention the new grain bowl options or seasonal wrap specials. Keep it specific to Mahana Fresh's actual menu.
+
+Soft close (1–2 sentences):
+Ask one low-friction question about upcoming needs — not "do you want to order" but "do you have any team events coming up in Q3 or Q4 where we could be useful?"
+
+Sign-off: "[Your Name] | Mahana Fresh Catering"
+Optional P.S.: "Happy to put together a quick proposal — no commitment needed."
+
+## BRAND VOICE RULES
+- Warm and peer-to-peer — like a trusted vendor checking in, not a salesperson chasing commission
+- Reference the client's actual company and event type — generic messages get deleted
+- No urgency language — "limited availability," "act now," "before it's gone" — these are trust destroyers
+- Keep under 180 words — respect their time
+- One ask only — do not layer in multiple CTAs
+
+## EDGE CASES
+- Client left positive feedback → reference it: "You mentioned the bowl station worked perfectly for your dietary-restriction mix — we have expanded that program significantly"
+- Client had an issue previously → do not reference the issue; lead with what has improved
+- Contact person has changed → open with "I am not sure if this reaches the right person, but I wanted to reach out to the Apex Solutions team..."
+- No previous event notes available → keep the opening general: "It has been about [X] months since we last worked together on your catering — wanted to check in"
+
+## WHAT NEVER TO DO
+- Never paste a template that does not reference the client's specific company or event type
+- Never lead with discounts or "special offers" — positions Mahana Fresh as commodity
+- Never send to clients who ordered within the last 3 months — too soon, feels tone-deaf
+- Never ask more than one question in the message</div>
   </div>
+  <div class="agent-card">
+    <h3>Agent 3 — LinkedIn B2B Corporate Catering Pipeline Agent</h3>
+    <p style="font-size:13px;color:var(--text-mid);margin-bottom:12px;">Based on your #3 bottleneck: untapped B2B catering pipeline while national operators dominate LinkedIn</p>
+    <div class="agent-prompt">## IDENTITY
+You are the B2B Outreach Agent for Mahana Fresh. Your job is to identify and connect with corporate event planners, office managers, and HR professionals at companies with 50+ employees in your target markets — and start real conversations about corporate catering. You are not blasting connection requests. You are curating 10–15 high-quality outreach messages per month that open real doors.
 
-  <!-- SEO Section (RULE-12) -->
-  <div class="section">
-    <div class="section-label">Lever B — SEO + Capture Rate</div>
-    <h2>Search Engine Optimization + AI Copy</h2>
-    <p>More traffic <strong>and</strong> better capture rate. AI rewrites service pages, headlines, and CTAs to convert visitors into inquiries.</p>
+## YOUR JOB
+Generate LinkedIn connection requests and follow-up messages for qualified corporate prospects. The goal of the connection request is one thing: get accepted. The goal of the follow-up message is one thing: get a reply. You are not selling catering — you are starting a conversation about their team's upcoming needs.
 
-    <div class="seo-badges">
-      <div class="seo-badge">
-        <div class="sb-val">+45%</div>
-        <div class="sb-lbl">Organic traffic at 12 months</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">2% &#8594; 3.5%</div>
-        <div class="sb-lbl">Visitor-to-lead capture rate</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">3-12 mo</div>
-        <div class="sb-lbl">Compounding timeline</div>
-      </div>
-      <div class="seo-badge">
-        <div class="sb-val">$0</div>
-        <div class="sb-lbl">Ongoing ad spend</div>
-      </div>
-    </div>
+## STEP-BY-STEP OUTREACH LOGIC
 
-    <table class="opp-table">
-      <tr><th>SEO Capability</th><th>What AI Does</th></tr>
-      <tr><td>Service Page Rewrite</td><td>AI rewrites every service page with conversion-optimized headlines and CTAs</td></tr>
-      <tr><td>Portfolio SEO</td><td>AI generates alt text, meta descriptions, and structured data for every site content</td></tr>
-      <tr><td>Blog Content Engine</td><td>AI creates SEO-optimized blog posts targeting high-value {{INDUSTRY}} keywords in your market</td></tr>
-      <tr><td>AI Copy Optimization</td><td>A/B test headlines, CTAs, and page layouts to continuously improve capture rate</td></tr>
-    </table>
+STEP 1 — QUALIFY the target before messaging:
+- Company has 50+ employees (LinkedIn company size filter)
+- Contact is in HR, office management, executive assistance, or event coordination
+- Company is within your delivery radius or catering service area
+- No prior contact with Mahana Fresh in the last 12 months
+
+STEP 2 — CONNECTION REQUEST (under 280 characters):
+Reference something specific from their profile or company. Never send the default "I'd like to add you to my LinkedIn network."
+
+Template:
+"Hi [First Name] — saw you manage [team events / office operations / culture programs] at [Company]. We work with several [industry] teams in the area on corporate catering — would love to connect and be a resource."
+
+STEP 3 — FOLLOW-UP MESSAGE (send 3–5 days after connection accepted, under 150 words):
+Open with a brief, relevant observation. Introduce Mahana Fresh with one specific differentiator — not a pitch, a fact. End with one low-friction question.
+
+Structure:
+- Sentence 1: Context or observation about their company or role
+- Sentence 2–3: Introduce Mahana Fresh + one differentiator (customizable bowls/wraps, fully accommodates dietary restrictions, setup and breakdown included, same-day service available)
+- Sentence 4: One question — "Do you have any team events coming up where we could be useful?"
+
+## BRAND VOICE RULES
+- Peer-to-peer, not salesperson-to-prospect — match their professional register
+- No pitch language: "I'd love to hop on a quick call," "check out our menu," "special deals for new clients"
+- Reference their company or role specifically — generic messages do not get replies
+- Keep follow-up under 150 words — shorter is more likely to be read
+- One question maximum — do not layer asks
+
+## EDGE CASES
+- Target's company already uses a caterer → "I know many offices already have a go-to — happy to be a backup option for larger events or when your usual vendor is unavailable"
+- Target is C-suite → shift tone to be slightly more formal; keep it brief; lead with business value ("reduce event logistics overhead")
+- No mutual connections → lead with a company-specific observation instead
+- Connection request ignored for 2 weeks → send one soft follow-up: "Hi [Name] — sent a request a couple weeks back — wanted to make sure it came through. Happy to connect when timing is right."
+
+## WHAT NEVER TO DO
+- Never send the same message to more than one contact at the same company
+- Never open with "I came across your profile and thought..." — it is a red flag for automation
+- Never pitch in the connection request — get the connection first
+- Never send a follow-up the same day the connection is accepted — wait 3–5 days
+- Never ask for a call or meeting in the first message — that is step 3, not step 1</div>
   </div>
-
-  <!-- The {{METHOD_NAME}} Method (RULE-6) -->
-  <div class="section">
-    <div class="section-label">Your Methodology</div>
-    <h2>The {{METHOD_NAME}} Method</h2>
-    <p>AI amplifies each pillar of your design process — without changing what makes {{BUSINESS_NAME}} special.</p>
-
-    <div class="method-grid">
-      <div class="method-card">
-        <div class="m-num">1</div>
-        <h4>Discovery</h4>
-        <p>AI pre-qualifies inquiries and gathers event details before your first call</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">2</div>
-        <h4>Design</h4>
-        <p>AI generates initial proposal drafts and proposal drafts from your design library</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">3</div>
-        <h4>Delivery</h4>
-        <p>AI coordinates vendor timelines and automates day-of logistics communication</p>
-      </div>
-      <div class="method-card">
-        <div class="m-num">4</div>
-        <h4>Devotion</h4>
-        <p>AI nurtures past clients with anniversary outreach and referral prompts</p>
-      </div>
-    </div>
-
-    <div class="method-quote">
-      "We do not just design events — we design the feeling people carry with them long after the last guest leaves."
-    </div>
-  </div>
-
-  <!-- Competitor Benchmark (RULE-7) -->
-  <div class="section">
-    <div class="section-label">Industry Context</div>
-    <h2>What Top {{INDUSTRY}} Firms Are Doing</h2>
-    <p>National leaders in {{INDUSTRY}}s are already deploying these systems. Here is how {{BUSINESS_NAME}} compares — and where AI closes the gap.</p>
-
-    <table class="bench-table">
-      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
-      <tr>
-        <td>Respond to inquiries within 5 minutes, 24/7</td>
-        <td>AI speed-to-lead agent responds in under 15 minutes with personalized, venue-specific detail</td>
-      </tr>
-      <tr>
-        <td>Run LinkedIn B2B pipelines for corporate event sourcing</td>
-        <td>Curated LinkedIn Engine delivers 10 qualified B2B conversations per month on autopilot<sup>2</sup></td>
-      </tr>
-      <tr>
-        <td>Use automated follow-up sequences for every proposal</td>
-        <td>7-touch luxury nurture sequence keeps {{BUSINESS_NAME}} top-of-mind without being pushy</td>
-      </tr>
-      <tr>
-        <td>Publish 3-5x/week on social from every event shoot</td>
-        <td>AI content engine turns best works into Instagram, Pinterest, and blog posts automatically</td>
-      </tr>
-      <tr>
-        <td>Reactivate past clients proactively every quarter</td>
-        <td>Database reactivation agent reaches out 3-4 months before their typical event season</td>
-      </tr>
-    </table>
-  </div>
-
 </div>
 
-<!-- ═══════════ TAB: AI AGENTS (copy-paste prompts) ═══════════ -->
-<div id="tab-agents" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Ready-to-Use AI Agents</div>
-    <h2>Your First AI Agents — Start Here</h2>
-    <p>These are not hypothetical. Copy-paste these prompts into ChatGPT, Claude, or any AI tool and you will have a working prototype in under 10 minutes.</p>
-
-    <!-- Agent 1: Speed-to-Lead -->
-    <div class="agent-card">
-      <h3>Agent #1: Speed-to-Lead Response Agent</h3>
-      <p class="agent-desc">This agent responds to every new inquiry with a personalized, on-brand message.</p>
-      <div class="agent-prompt">You are the lead response agent for {{BUSINESS_NAME}}, a {{INDUSTRY}} firm.
-
-When a new inquiry comes in — whether from the website, Instagram DM, venue partner referral, or corporate RFP — you respond within 15 minutes with a personalized, elevated message via email.
-
-Your response must include:
-1. Greet them by name and acknowledge their specific event type
-2. Reference any details they shared — venue, date, guest count, aesthetic vision
-3. Express genuine excitement about their vision
-4. Briefly mention {{BUSINESS_NAME}}'s portfolio credibility
-5. Offer a clear next step: "I would love to learn more about working together — reply to this email"
-
-Rules:
-- Luxury, warm, polished tone — like a high-end concierge
-- Never quote prices in the initial response
-- For corporate inquiries, reference corporate event experience
-- Reference relevant portfolio work
-- Always acknowledge the venue if mentioned
-- Never use excessive exclamation marks</div>
-      <div class="agent-result">What this does: Every inquiry gets a polished, personalized response in minutes — before they contact the next designer.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
+<!-- AUDIT -->
+<div class="section" id="audit">
+  <div class="section-label">AI Readiness Audit</div>
+  <h2>Mahana Fresh — AI Readiness Score</h2>
+  <p>Scored 1–5 based on current systems, lead flow, and automation maturity. Lower scores = highest ROI opportunity.</p>
+  <div class="audit-grid">
+    <div class="audit-row">
+      <div class="audit-label">Lead Response Speed</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:42%;background:#e74c3c;"></div></div>
+      <div class="audit-score">2.1</div>
     </div>
-
-    <!-- Agent 2: Follow-Up Nurture -->
-    <div class="agent-card">
-      <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked Events</h3>
-      <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence.</p>
-      <div class="agent-prompt">You are the follow-up agent for {{BUSINESS_NAME}}. Your job is to nurture leads who received a proposal but have not yet booked.
-
-Create a 7-touch follow-up sequence:
-Day 2: Follow up on proposal, offer to answer questions
-Day 5: Share a relevant portfolio piece with similar aesthetic
-Day 10: Offer a quick brainstorm call
-Day 18: Share a design trend that fits their vision
-Day 28: Calendar urgency — "our calendar for [month] is filling"
-Day 45: Seasonal insight with recent event success story
-Day 60: Graceful final touchpoint
-
-Rules:
-- Luxury, graceful tone — never desperate or salesy
-- Reference SPECIFIC event details — never generic
-- Each touch adds value (portfolio, inspiration, trend)
-- Track in {{CRM_TOOL}}: "nurture-active" / "nurture-complete" / "booked"</div>
-      <div class="agent-result">Recovers 15-20% of lost proposals with value-driven touchpoints on autopilot.</div>
-      <div class="agent-time">Setup time: ~7 minutes</div>
+    <div class="audit-row">
+      <div class="audit-label">Follow-Up Automation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:36%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.8</div>
     </div>
-
-    <!-- Agent 3: Past Client Reactivation -->
-    <div class="agent-card">
-      <h3>Agent #3: Past Client Reactivation for Repeat Events &amp; Referrals</h3>
-      <p class="agent-desc">Your past corporate clients host annual galas and quarterly events. This agent turns one-time clients into repeat revenue and referral sources.</p>
-      <div class="agent-prompt">You are the reactivation agent for {{BUSINESS_NAME}}. Reach out to past clients who have not booked in 6+ months.
-
-Generate a personalized outreach email that includes:
-1. Warm reconnection referencing their specific past event
-2. Proactive prompt based on client type and needs
-3. Referral ask: "If anyone in your network is planning an event..."
-4. Soft CTA: "Would love to catch up over coffee"
-
-Rules:
-- Reference their ACTUAL past event with specific details
-- Warm, personal, elevated tone
-- One outreach per quarter, max
-- Time corporate outreach 3-4 months before event season
-- Always include the referral ask
-- Track in {{CRM_TOOL}}: "reactivation-[quarter]-[year]"</div>
-      <div class="agent-result">Reactivates past clients for repeat bookings and referrals — $0 ad spend. Model your numbers in the ROI calculator.</div>
-      <div class="agent-time">Setup time: ~5 minutes</div>
+    <div class="audit-row">
+      <div class="audit-label">B2B Pipeline Activity</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:30%;background:#e74c3c;"></div></div>
+      <div class="audit-score">1.5</div>
     </div>
-
-    <!-- DIY vs Partner -->
-    <div class="path-grid">
-      <div class="path-card">
-        <h4>DIY Path</h4>
-        <p>Copy these prompts and start using them today. Most business owners can implement 1-2 agents on their own and see results in days.</p>
-      </div>
-      <div class="path-card partner">
-        <h4>Partner Path</h4>
-        <p>Want the full system — all agents connected to {{CRM_TOOL}}, Instagram, and LinkedIn, trained on your brand voice, monitoring your pipeline 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead={{LEAD_NAME}}&biz={{BIZ_NAME}}&src={{SLUG}}" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Apply to Work With Us</a>
-      </div>
+    <div class="audit-row">
+      <div class="audit-label">Content Engine</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:48%;background:#f39c12;"></div></div>
+      <div class="audit-score">2.4</div>
+    </div>
+    <div class="audit-row">
+      <div class="audit-label">Admin Automation</div>
+      <div class="audit-bar-wrap"><div class="audit-bar" style="width:62%;background:#f39c12;"></div></div>
+      <div class="audit-score">3.1</div>
     </div>
   </div>
-
+  <p style="font-size:13px;color:var(--text-light);margin-top:16px;">Lead Response and Follow-Up Automation are your lowest scores — and your highest-leverage starting points. Agent #1 and Agent #2 above directly address these gaps.</p>
 </div>
 
-<!-- ═══════════ TAB: LISTEN ═══════════ -->
-<div id="tab-listen" class="tab-panel">
+<!-- PODCAST SECTION REMOVED v3.6 — Bennett directive: no podcast in blueprint HTML -->
 
-  <div class="section">
-    <div class="section-label">Listen</div>
-    <h2>Hear the Vision Behind This Roadmap</h2>
-
-    <div class="listen-card">
-      <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
-      <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
-
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
-        <audio preload="metadata" src="https://drive.google.com/uc?export=download&id=PODCAST_MP3_URL_PLACEHOLDER" style="display:none;"></audio>
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <iframe src="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/preview" width="100%" height="80" style="border:none;border-radius:8px;margin-bottom:12px;" allow="autoplay"></iframe>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to {{BUSINESS_NAME}}.</p>
-        <a href="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/view" target="_blank" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Open in Google Drive</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" style="display:inline-block;margin-top:12px;margin-left:8px;background:transparent;color:rgba(255,255,255,0.7);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.3);">Download Episode</a>
+<!-- LISTEN -->
+<div class="section" id="listen">
+  <div class="section-label">Your Personalized Podcast</div>
+  <h2>Hear the Vision Behind This Roadmap</h2>
+  <div class="listen-card">
+    <h3>The Best You Interview Series</h3>
+    <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming fast-casual franchise businesses — and why the next 12 months will separate the leaders from the laggards.</p>
+    <div class="podcast-player">
+      <p style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:12px;">Your Personalized AI Podcast — Mahana Fresh</p>
+      <audio controls preload="metadata">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood-v14.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+      <div class="speed-controls">
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);">Speed:</span>
+        <button class="speed-btn" onclick="setSpeed(1,this)">1×</button>
+        <button class="speed-btn" onclick="setSpeed(1.5,this)">1.5×</button>
+        <button class="speed-btn" onclick="setSpeed(2,this)">2×</button>
       </div>
-      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
-        <span style="font-size:12px;color:#666;">Speed:</span>
-        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
-        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
-      </div>
-
-      <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
-
-      <div class="pull-quote">
-        "The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."
-      </div>
-
-      <div class="pull-quote">
-        "For {{INDUSTRY}}ers like {{FIRST_NAME}}, AI is not about replacing the artistry. It is about making sure more of the right people experience it."
-      </div>
-
-      <div style="text-align: center; margin-top: 24px; padding: 16px; background: var(--bg-soft); border-radius: 8px;">
-        <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Save for the drive home</p>
-        <p style="font-size: 13px; color: var(--text-mid);">Bookmark this page and listen when you have 38 minutes to think about your business.</p>
-      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Mahana Fresh.</p>
     </div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood-v14.mp3" download style="display:inline-block;background:var(--brand);color:var(--brand-dark);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px;">Download Podcast</a>
+    </div>
+    <p style="font-size:13px;color:var(--text-light);text-align:center;">Duration: ~38 minutes</p>
+    <div class="pull-quote">"The businesses that win in 2027 will not be the ones with the biggest ad budgets — they will be the ones whose AI systems never let a qualified lead go unanswered."</div>
+    <div class="pull-quote">"For fast-casual restaurant franchise operators like Dave, AI is not about replacing the hospitality. It is about making sure more of the right people experience it."</div>
   </div>
-
 </div>
 
-<!-- ═══════════ TAB: COMMAND CENTER (RULE-8) ═══════════ -->
-<div id="tab-command" class="tab-panel">
-
-  <div class="section">
-    <div class="section-label">Your Custom Platform</div>
-    <h2>Your Command Center. Built for You.</h2>
-    <p>Not a generic CRM. A custom-built command center designed specifically for how {{BUSINESS_NAME}} operates — from inquiry to event day to post-event follow-up.</p>
-
-    <div class="command-hero">
-      <h3>{{BUSINESS_NAME}} Command Center</h3>
-      <p>Everything your team needs to manage leads, projects, vendors, and finances — in one elevated interface at command.{{DOMAIN}}</p>
-      <div class="command-tiles">
-        <div class="command-tile">
-          <h4>Lead Pipeline</h4>
-          <p>Every inquiry tracked from first touch to signed contract. AI scores and prioritizes automatically.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Project Command Center</h4>
-          <p>Event timelines, project coordination, and design assets organized by project — not scattered across apps.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Qualification Engine</h4>
-          <p>AI pre-screens inquiries using your criteria — budget, date, venue, aesthetic fit — before they reach your inbox.</p>
-        </div>
-        <div class="command-tile">
-          <h4>Finance Dashboard</h4>
-          <p>Revenue by event type, outstanding invoices, and cash flow projections — all in real time.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mirror Method Qualification (RULE-9) -->
-  <div class="section">
-    <div class="section-label">The {{METHOD_NAME}} Standard</div>
-    <h2>The {{METHOD_NAME}} Standard</h2>
-    <p>Your taste level and standards are what make {{BUSINESS_NAME}} special. AI automates the pre-screening — but you approve every decision.</p>
-
-    <div class="next-steps" style="margin-top:24px;">
-      <div class="next-step">
-        <div class="step-circle">1</div>
-        <h4>Inquiry Received</h4>
-        <p>AI captures event type, venue, budget range, and aesthetic vision</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">2</div>
-        <h4>AI Pre-Screen</h4>
-        <p>Instantly checks against your criteria — date, budget, venue, scope</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">3</div>
-        <h4>{{FIRST_NAME}} Reviews</h4>
-        <p>You see only pre-qualified leads with full context — approve in one tap</p>
-      </div>
-      <div class="next-step">
-        <div class="step-circle">4</div>
-        <h4>Personalized Response</h4>
-        <p>AI sends a luxury response in your voice — you stay in control</p>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead={{LEAD_NAME}}&biz={{BIZ_NAME}}&src={{SLUG}}" class="cta-btn" style="background: var(--accent);">Apply to Work With Us</a>
-    </div>
-  </div>
-
-  <!-- Finance Section (RULE-10) -->
-  <div class="section">
-    <div class="finance-card">
-      <h3>Meet Fred — Your AI CFO</h3>
-      <p style="color: var(--text-mid); margin-bottom: 20px;">A named financial intelligence agent built into your command center. Not an "AI bookkeeper" — a CFO-level assistant that knows your business.</p>
-      <ul class="finance-bullets">
-        <li>
-          <div class="fb-icon">?</div>
-          <div><strong>Ask Fred Anything</strong> — Instant P&amp;L questions via messaging. "Fred, what was our margin on the Johnson gala?" gets an answer in seconds.</div>
-        </li>
-        <li>
-          <div class="fb-icon">$</div>
-          <div><strong>Receivables Forecast</strong> — Cash-in projection at 30/60/30 days. Know exactly when money hits the account.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#128202;</div>
-          <div><strong>Custom Reports</strong> — Board-ready financials in minutes. Revenue by event type, seasonal trends, vendor cost analysis.</div>
-        </li>
-        <li>
-          <div class="fb-icon">&#10003;</div>
-          <div><strong>Clean Books</strong> — Retroactive cleanup + ongoing reconciliation. No more end-of-year scramble.</div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
+<!-- SOURCES -->
+<div class="section" id="sources">
+  <div class="section-label">Data Sources</div>
+  <h2>Research Behind This Roadmap</h2>
+  <ul class="sources-list">
+    <li><sup>1</sup> 78% of restaurant inquiries originate on mobile devices. Source: <a href="https://pos.toasttab.com/resources/restaurant-success-report" target="_blank">Toast Restaurant Success Report 2024</a>.</li>
+    <li><sup>2</sup> LinkedIn outreach projections based on curated B2B catering audience targeting (quality-first, 10–18 leads/month). Adjust in your ROI Calculator for your actual numbers.</li>
+    <li><sup>3</sup> Speed-to-lead impact on close rates documented in <a href="https://www.lead-simple.com/blog/speed-to-lead" target="_blank">LeadSimple Speed-to-Lead Research</a> and <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review (2011, evergreen)</a>. Close rate improvement varies by business; model your numbers in the ROI Calculator.</li>
+    <li><sup>4</sup> AI administrative time savings benchmarks from <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai" target="_blank">McKinsey Generative AI Report 2023</a>. Individual results vary; actual hours saved depend on current workflow baseline.</li>
+  </ul>
 </div>
 
-<!-- ═══════════ BOTTOM CTA (all tabs) ═══════════ -->
-<div class="cta-block">
-  <h3>Ready to See What AI Can Do for {{BUSINESS_NAME}}?</h3>
-  <p>This roadmap shows you what is possible. Apply for a free 30-minute AI strategy session and we will walk through your priorities together.</p>
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead={{LEAD_NAME}}&biz={{BIZ_NAME}}&src={{SLUG}}" class="cta-btn">Apply to Work With Us</a>
-  <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. No pitch. Just a practical conversation about your next step.</p>
-</div>
-
-<!-- Footnotes -->
-<div class="footnotes">
-  <p><sup>1</sup> 78% mobile inquiry figure based on {{INDUSTRY}} industry benchmarks (2024-2025 data).</p>
-  <p><sup>2</sup> LinkedIn B2B lead projections capped at 18/month for luxury vertical per council calibration. 10/month is the expected default for curated, quality-first outreach.</p>
-  <p><sup>3</sup> +22% close rate improvement is based on AI close rate boost of current rate x 1.22, a conservative estimate from speed-to-lead data across service businesses.</p>
-  <p><sup>4</sup> Time savings of 6.5 hrs/week is understated 15% from the 7.6 hrs/week industry baseline for AI admin automation. Cost savings modeled in the interactive ROI calculator based on typical VA, social, and coordinator automation efficiencies.</p>
-</div>
-
-<div class="footer">
-  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for {{BUSINESS_NAME}}.</p>
-  <p style="margin-top: 8px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+<!-- COMMAND - REMOVED PER v3.5: website/demo-site section deprecated -->
+<!-- SIGNED INVITE -->
+<div class="signed-invite" style="margin-top:0;">
+  <p>Dave, I built this roadmap specifically for Mahana Fresh because I believe your concept deserves to reach more of the right corporate clients and event planners. The AI systems here are not about replacing your hospitality — they are about amplifying it so more people experience it.</p>
+  <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn" style="background:var(--brand);color:var(--brand-dark);">Apply to Work with Bennett</a>
+  <div class="sig">— Bennett Maxwell</div>
+  <p style="font-size:12px;color:#aaa;margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
 </div>
 
 </div><!-- end container -->
 
+<!-- CTA SECTION -->
+<div class="cta-section">
+  <h2>Ready to See What AI Can Do for Mahana Fresh?</h2>
+  <p>This roadmap shows you what is possible. Apply for a free 30-minute AI strategy session and we will walk through your priorities together.</p>
+  <a href="https://blueprint.meetadvaita.com/apply" class="cta-btn">Apply to Work with Bennett</a>
+  <p style="margin-top:16px;font-size:12px;opacity:0.5;">No obligation. No pitch. Just a practical conversation about your next step.</p>
+</div>
+
+<footer>
+  <p>This AI Advantage Roadmap was prepared by the Advaita AI team exclusively for Mahana Fresh.</p>
+  <p style="margin-top:6px;">&copy; 2026 Advaita AI — Powered by Franchise Knowledge Intelligence</p>
+</footer>
+
+<!-- MOBILE CTA BAR -->
+<div class="mobile-cta-bar">
+  <a href="https://blueprint.meetadvaita.com/apply">Apply to Work with Bennett</a>
+</div>
+
 <script>
-// Tab switching
-function switchTab(tabId, e) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  (e || event).currentTarget.classList.add('active');
-  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth'});
+// Reading progress
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('readingProgress').style.width = scrolled + '%';
+});
+
+// Speed controls
+function setSpeed(rate, btn) {
+  const audio = document.querySelector('audio');
+  if (audio) audio.playbackRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(b => b.style.fontWeight = 'normal');
+  btn.style.fontWeight = 'bold';
 }
 
-// Scenario presets
+// ROI Calculator
 let scenario = 'expected';
 const presets = {
   conservative: { linkedin: 5, seo: 20 },
-  expected: { linkedin: 10, seo: 45 },
-  stretch: { linkedin: 18, seo: 80 }
+  expected:     { linkedin: 10, seo: 45 },
+  stretch:      { linkedin: 18, seo: 80 }
 };
 
 function setScenario(s) {
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
-  document.getElementById('slider-linkedin').value = presets[s].linkedin;
-  document.getElementById('slider-seo').value = presets[s].seo;
+  const p = presets[s];
+  document.getElementById('slider-linkedin').value = p.linkedin;
+  document.getElementById('val-linkedin').textContent = p.linkedin;
+  document.getElementById('slider-seo').value = p.seo;
+  document.getElementById('val-seo').textContent = p.seo + '%';
   updateCalc();
 }
 
-// ROI Calculator
-function updateCalc() {
-  const contract = parseInt(document.getElementById('slider-contract').value) || 45000;
-  const leads = parseInt(document.getElementById('slider-leads').value) || 12;
-  const closeRate = (parseInt(document.getElementById('slider-close').value) || 18) / 100;
-  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;
-  const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
-
-  // Display values
-  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
-  document.getElementById('val-leads').textContent = leads;
-  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-linkedin').textContent = linkedinLeads;
-  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
-
-  // Current monthly
-  const currentMonthly = contract * leads * closeRate;
-
-  // AI-enhanced
-  const aiLeads = leads * 1.15 + linkedinLeads;
-  const aiCloseRate = closeRate * 1.22;
-  const aiMonthly = contract * aiLeads * aiCloseRate;
-
-  const monthlyGain = aiMonthly - currentMonthly;
-  const quarterlyGain = monthlyGain * 3;
-
-  const currentQ = currentMonthly * 3;
-  const q2 = aiMonthly * 3;
-  const q3 = q2 * 1.10;
-  const q4 = q3 * 1.20;
-
-  // Update display
-  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
-  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
-
-  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
-
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
-
-  // Time saved + cost savings (RULE-13: understated 15%)
-  const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);
-  const costSavings = Math.round(1800 * (1 + seoLift * 0.25));
-  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
-  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // {{INDUSTRY}} season peaks: rolling calendar for peak demand periods
-  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
-  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
-  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
+function updateCalc() {
+  const contract = +document.getElementById('slider-contract').value;
+  const leads    = +document.getElementById('slider-leads').value;
+  const close    = +document.getElementById('slider-close').value / 100;
+  const li       = +document.getElementById('slider-linkedin').value;
+  const seo      = +document.getElementById('slider-seo').value / 100;
 
-// Init calculator
+  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
+  document.getElementById('val-leads').textContent = leads;
+  document.getElementById('val-close').textContent = Math.round(close * 100) + '%';
+  document.getElementById('val-linkedin').textContent = li;
+  document.getElementById('val-seo').textContent = Math.round(seo * 100) + '%';
+
+  const multipliers = { conservative: 0.40, expected: 0.65, stretch: 0.80 };
+  const mult = multipliers[scenario];
+  const closeBoost = close * 1.22;
+  const baseRevenue = leads * close * contract;
+  const newRevenue = (leads + li) * closeBoost * contract * (1 + seo * 0.15);
+  const monthly = (newRevenue - baseRevenue) * mult;
+
+  document.getElementById('res-monthly').textContent  = fmt(monthly);
+  document.getElementById('res-quarterly').textContent = fmt(monthly * 3);
+  document.getElementById('res-annual').textContent    = fmt(monthly * 12);
+}
+
 updateCalc();
 </script>
 
-<div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead={{LEAD_NAME}}&biz={{BIZ_NAME}}&src={{SLUG}}">Apply to Work With Us</a>
-</div>
+  // === M1 navHamburger compat ===
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenuEl = document.querySelector('.nav-links');
+  if (navHamburger && navMenuEl) {
+    navHamburger.addEventListener('click', function() {
+      navMenuEl.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('nav')) {
+        navMenuEl.classList.remove('open');
+        navHamburger.classList.remove('open');
+      }
+    });
+  }
 
 </body>
 </html>
