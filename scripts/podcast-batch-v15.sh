@@ -88,12 +88,23 @@ for lead_entry in "${LEADS[@]}"; do
   # Add source doc
   ADD_RESULT=$("$NLM" source add "$SOURCE_DOC" -n "$NB_ID" 2>&1)
   echo "$ADD_RESULT" | head -2
-  # Small wait for source to index
-  sleep 10
+  # Wait for source to index + avoid rate limits
+  sleep 45
 
-  # Generate audio
+  # Generate audio (retry once on RATE_LIMITED)
   GEN_RESULT=$("$NLM" generate audio --json -n "$NB_ID" 2>&1)
   TASK_ID=$(echo "$GEN_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("task_id",""))' 2>/dev/null)
+
+  if [ -z "$TASK_ID" ]; then
+    # Check if rate limited — wait 120s and retry once
+    if echo "$GEN_RESULT" | grep -q "RATE_LIMITED"; then
+      echo "Rate limited for $SLUG — waiting 120s before retry..."
+      sleep 120
+      "$BRIDGE" "$BRIDGE_SCRIPT" 2>&1 | grep -E "VALID|ERROR"
+      GEN_RESULT=$("$NLM" generate audio --json -n "$NB_ID" 2>&1)
+      TASK_ID=$(echo "$GEN_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("task_id",""))' 2>/dev/null)
+    fi
+  fi
 
   if [ -z "$TASK_ID" ]; then
     echo "ERROR: No task_id returned for $SLUG: $GEN_RESULT"
@@ -142,8 +153,8 @@ for lead_entry in "${LEADS[@]}"; do
   echo "PUSHED: https://bennett-maxwell.github.io/fki-preview/podcasts/${SLUG}-blueprint-podcast.mp3"
   echo ""
 
-  # 30s delay between leads (not 60 — save time, auth is stable)
-  sleep 30
+  # 90s delay between leads — prevent Google rate limiting
+  sleep 90
 done
 
 echo ""
