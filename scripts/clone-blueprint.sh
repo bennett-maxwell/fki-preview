@@ -233,6 +233,8 @@ urgency_text = f'2027 {industry} season demand is accelerating'
 
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
 replacements = {
+    '{{SLUG}}': slug,
+    '{{PODCAST_URL}}': f'https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3',
     '{{LEAD_NAME}}': lead_name,
     '{{FIRST_NAME}}': first_name,
     '{{BUSINESS_NAME}}': business_name,

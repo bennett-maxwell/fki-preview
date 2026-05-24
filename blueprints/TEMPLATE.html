@@ -959,6 +959,21 @@
     border-radius: 8px;
     text-decoration: none;
   }
+
+  html, body { overflow-x: hidden; }
+  @media (max-width: 480px) {
+    .hero { padding: 60px 20px !important; }
+    .container, .section { padding-left: 16px !important; padding-right: 16px !important; }
+    h1 { font-size: 28px !important; }
+    h2 { font-size: 22px !important; }
+    .grid, [class*="grid"] { grid-template-columns: 1fr !important; }
+    a.btn, button, .cta { min-height: 44px; }
+    iframe, img, audio { max-width: 100%; }
+  }
+  @media (max-width: 360px) {
+    h1 { font-size: 24px !important; }
+    .hero { padding: 40px 16px !important; }
+  }
 </style>
 </head>
 <body>
@@ -1714,12 +1729,10 @@ Rules:
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
             <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
-        <audio preload="metadata" src="https://drive.google.com/uc?export=download&id=PODCAST_MP3_URL_PLACEHOLDER" style="display:none;"></audio>
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <iframe src="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/preview" width="100%" height="80" style="border:none;border-radius:8px;margin-bottom:12px;" allow="autoplay"></iframe>
+        <audio controls preload="metadata" src="{{PODCAST_URL}}" style="width:100%;margin-bottom:12px;"></audio>
         <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to {{BUSINESS_NAME}}.</p>
-        <a href="https://drive.google.com/file/d/1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz/view" target="_blank" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Open in Google Drive</a>
-        <a href="https://drive.google.com/uc?export=download&id=1Nwopr_SRimHwDy3-TkLUenp6Km_YWPUz" style="display:inline-block;margin-top:12px;margin-left:8px;background:transparent;color:rgba(255,255,255,0.7);padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.3);">Download Episode</a>
+        <a href="{{PODCAST_URL}}" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
       </div>
       <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
         <span style="font-size:12px;color:#666;">Speed:</span>
