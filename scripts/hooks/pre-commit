@@ -1,0 +1,53 @@
+#!/bin/bash
+# Blueprint AI v3.3 — Gate 16: Pre-commit hook for SKILL.md
+# Install: cp this file to .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Blocks commits that remove required gate strings from blueprint-ai-skill SKILL.md.
+SKILL="$(git rev-parse --show-toplevel)/.claude/skills/blueprint-ai-skill/SKILL.md"
+RUN_G16=1
+[ -f "$SKILL" ] || RUN_G16=0  # Not in skills repo — skip G16 only, still run G17
+
+# Required gate strings that must always be present
+REQUIRED=(
+  "audit = 100"
+  "HTTP 200"
+  "MP3 exists"
+  ".audit-100.lock"
+  "send-blueprint-email.sh"
+  "gate-stage4.sh"
+  "25 MECHANICAL GATES"
+)
+if [ "$RUN_G16" = "1" ]; then
+  FAIL=0
+  for str in "${REQUIRED[@]}"; do
+    if ! grep -q "$str" "$SKILL"; then
+      echo "❌ G16 BLOCKED: SKILL.md is missing required gate string: '$str'"
+      FAIL=1
+    fi
+  done
+  [ "$FAIL" = "0" ] || { echo "G16: Commit rejected — restore removed gate strings first."; exit 1; }
+  echo "G16 PASS: All gate strings present in SKILL.md"
+fi
+
+# ─── G17 (added 2026-05-25): No-shrinkage guard on blueprint HTMLs ───
+# Prevents the failure mode where orchestrator stages a deletion or massive shrinkage
+# of an existing blueprint HTML while still marking the lead PASS.
+# Root cause: dave-wood.html was deleted (1080 lines) in batch B202605251112-1.
+DELETED_BLUEPRINTS=$(git diff --cached --name-status --diff-filter=D | awk '$2 ~ /^blueprints\/[^_].*\.html$/ {print $2}')
+if [ -n "$DELETED_BLUEPRINTS" ]; then
+  echo "❌ G17 BLOCKED: commit deletes blueprint HTML(s):"
+  echo "$DELETED_BLUEPRINTS" | sed 's/^/    /'
+  echo "    If intentional, move to blueprints/_obsolete/ instead."
+  exit 1
+fi
+# Block any shrinkage > 50% of existing tracked blueprint
+SHRUNK=$(git diff --cached --numstat -- 'blueprints/*.html' 2>/dev/null | awk '$1 !~ /^-$/ && $2+0 > 200 && $1+0 < $2/2 {print $3" (+"$1" -"$2")"}')
+if [ -n "$SHRUNK" ]; then
+  echo "❌ G17 BLOCKED: commit shrinks blueprint HTML(s) by >50%:"
+  echo "$SHRUNK" | sed 's/^/    /'
+  echo "    If intentional, run with: git -c hooks.allow-shrinkage=1 commit ..."
+  if [ "$(git config --bool hooks.allow-shrinkage 2>/dev/null)" != "true" ]; then
+    exit 1
+  fi
+fi
+echo "G17 PASS: No blueprint HTML deletions or >50% shrinkage."
+exit 0
