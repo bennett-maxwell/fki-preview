@@ -344,6 +344,13 @@
           <p class="form-error" id="q2_email_error">Please enter a valid email address (e.g. you@yourcompany.com)</p>
         </div>
 
+        <!-- Q2b: Phone -->
+        <div class="form-group">
+          <label class="form-label" for="q2b_phone"><span class="q-badge" style="background:linear-gradient(135deg,#0a5a2a,#1a9a4a);">P</span>Phone number</label>
+          <input id="q2b_phone" name="phone" type="tel" class="form-control" placeholder="(555) 867-5309" required autocomplete="tel" />
+          <p class="form-error" id="q2b_phone_error">Please enter a valid US phone number (e.g. 555-867-5309)</p>
+        </div>
+
         <!-- Q3: Website -->
         <div class="form-group">
           <label class="form-label" for="q3_website"><span class="q-badge">3</span>Business website</label>
@@ -618,6 +625,12 @@ function validateEmail(val) {
   return re.test(val.trim());
 }
 
+function validatePhone(val) {
+  // Accepts: +1 (555) 867-5309, 555-867-5309, 5558675309, (555)8675309, etc.
+  var re = /^\+?1?\s*\(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}$/;
+  return re.test(val.trim().replace(/\s+/g,' '));
+}
+
 function validateWebsite(val) {
   // Strip protocol if typed, then check it has a dot and looks like a real domain
   var v = val.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '');
@@ -736,6 +749,46 @@ function checkROITrigger() {
   if (name && email && drain) showROI();
 }
 
+// ─── UTM CAPTURE (Project B — Brand Auto-Attribution) ────────
+(function() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_brand'];
+    utmKeys.forEach(function(k) {
+      var v = params.get(k);
+      if (v) {
+        sessionStorage.setItem(k, v);
+      }
+    });
+    // If no utm_brand explicitly set, infer from utm_source
+    if (!sessionStorage.getItem('utm_brand')) {
+      var src = (sessionStorage.getItem('utm_source') || '').toLowerCase();
+      var cam = (sessionStorage.getItem('utm_campaign') || '').toLowerCase();
+      var brand = 'direct';
+      if (src.indexOf('fki') !== -1 || src.indexOf('franchise') !== -1 || cam.indexOf('fki') !== -1) brand = 'fki';
+      else if (src.indexOf('indyclover') !== -1 || src.indexOf('ic-') !== -1 || cam.indexOf('indyclover') !== -1) brand = 'ic';
+      else if (src.indexOf('saladhouse') !== -1 || cam.indexOf('salad') !== -1) brand = 'sh';
+      else if (src.indexOf('srp') !== -1 || src.indexOf('spoiledrotten') !== -1 || cam.indexOf('srp') !== -1) brand = 'srp';
+      else if (src.indexOf('advaita') !== -1 || cam.indexOf('advaita') !== -1) brand = 'advaita';
+      sessionStorage.setItem('utm_brand', brand);
+    }
+    // Inject hidden fields into form on DOM load
+    var form = document.getElementById('blueprint-form');
+    if (form) {
+      utmKeys.forEach(function(k) {
+        var val = sessionStorage.getItem(k);
+        if (val) {
+          var hid = document.createElement('input');
+          hid.type = 'hidden';
+          hid.name = k;
+          hid.value = val;
+          form.appendChild(hid);
+        }
+      });
+    }
+  } catch(e) {}
+})();
+
 // ─── GHL SUBMISSION ──────────────────────────────────────────
 (function() {
   var GHL_KEY = 'pit-81e14317-71e3-44c2-864c-0dd014f570cd';
@@ -820,9 +873,13 @@ function checkROITrigger() {
         method: 'POST', headers: ghlHeaders(),
         body: JSON.stringify({
           firstName: d.first_name, email: d.email,
+          phone: d.phone || '',
           locationId: GHL_LOC, source: 'advaita-ai-blueprint',
           tags: buildTags(d),
-          customFields: { form_version: '2026-05-23-v6' }
+          customFields: [
+            { key: 'form_version', field_value: '2026-05-25-v7' },
+            { id: 'mQiY5BHHi9gWVFHOTgQP', field_value: d.utm_brand || d.utm_source || 'direct' }
+          ]
         })
       });
       if (!res.ok) return;
@@ -856,6 +913,7 @@ function checkROITrigger() {
 
   // ─── INLINE VALIDATION — email + website ────────────────────
   var emailEl = document.getElementById('q2_email');
+  var phoneEl = document.getElementById('q2b_phone');
   var websiteEl = document.getElementById('q3_website');
 
   function checkEmailField() {
@@ -863,6 +921,13 @@ function checkROITrigger() {
     if (v === '') { showFieldError('q2_email','q2_email_error', false); emailEl.classList.remove('field-valid','field-invalid'); return true; }
     var ok = validateEmail(v);
     showFieldError('q2_email','q2_email_error', !ok);
+    return ok;
+  }
+  function checkPhoneField() {
+    var v = phoneEl.value.trim();
+    if (v === '') { showFieldError('q2b_phone','q2b_phone_error', false); phoneEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validatePhone(v);
+    showFieldError('q2b_phone','q2b_phone_error', !ok);
     return ok;
   }
   function checkWebsiteField() {
@@ -875,6 +940,8 @@ function checkROITrigger() {
 
   emailEl.addEventListener('blur', checkEmailField);
   emailEl.addEventListener('input', function() { if (emailEl.classList.contains('field-invalid')) checkEmailField(); checkROITrigger(); });
+  phoneEl.addEventListener('blur', checkPhoneField);
+  phoneEl.addEventListener('input', function() { if (phoneEl.classList.contains('field-invalid')) checkPhoneField(); });
   websiteEl.addEventListener('blur', checkWebsiteField);
   websiteEl.addEventListener('input', function() { if (websiteEl.classList.contains('field-invalid')) checkWebsiteField(); });
 
@@ -895,10 +962,12 @@ function checkROITrigger() {
         if (!firstInvalid) firstInvalid = el;
       } else { el.style.borderColor = ''; }
     });
-    // Extra: validate email format
+    // Extra: validate email, phone, website format
     var emailOk = checkEmailField();
+    var phoneOk = checkPhoneField();
     var websiteOk = checkWebsiteField();
     if (!emailOk) { allValid = false; if (!firstInvalid) firstInvalid = emailEl; }
+    if (!phoneOk) { allValid = false; if (!firstInvalid) firstInvalid = phoneEl; }
     if (!websiteOk) { allValid = false; if (!firstInvalid) firstInvalid = websiteEl; }
     if (!allValid) { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
 
