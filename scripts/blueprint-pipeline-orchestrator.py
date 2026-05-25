@@ -340,20 +340,41 @@ async def stage_website(profile_path: str, profile: dict, status: LeadStatus) ->
 
 
 async def stage_blueprint(profile_path: str, profile: dict, status: LeadStatus) -> bool:
-    """Stage 3: Blueprint HTML (clone v7 frame). MANDATORY per Rule 7."""
+    """Stage 3: Blueprint HTML (clone v7 frame). MANDATORY per Rule 7.
+    Post-build: Oz orchestrator --validate-only gate enforces all 8 validators
+    (placeholder, contamination, link, audio_player — no lockfile required).
+    Oz path: ~/.claude/skills/blueprint-ai-skill/orchestrator/blueprint_orchestrator.py
+    """
     if status.is_stage_complete("blueprint"):
         log.info(f"  [{profile['slug']}] Stage 3 SKIP (already complete)")
         return True
 
     log.info(f"  [{profile['slug']}] Stage 3: Blueprint HTML Clone")
     ok, out, err = await run_script("clone-blueprint.sh", [profile_path], timeout=120)
-    if ok:
-        status.mark_stage("blueprint", "complete", "Blueprint HTML generated")
-        return True
-    else:
+    if not ok:
         status.mark_stage("blueprint", "failed", err[:200])
         log.error(f"  [{profile['slug']}] Stage 3 FAILED: {err[:100]}")
         return False
+
+    # Post-build: Oz validator gate (blueprint_orchestrator.py --validate-only)
+    OZ_ORCH = Path.home() / ".claude" / "skills" / "blueprint-ai-skill" / "orchestrator" / "blueprint_orchestrator.py"
+    if OZ_ORCH.exists():
+        log.info(f"  [{profile['slug']}] Stage 3.5: Oz validator gate")
+        oz_result = subprocess.run(
+            [sys.executable, str(OZ_ORCH), "--lead", profile["slug"], "--validate-only"],
+            capture_output=True, text=True, timeout=60
+        )
+        if oz_result.returncode != 0:
+            oz_err = (oz_result.stdout + oz_result.stderr)[:300]
+            status.mark_stage("blueprint", "failed", f"Oz validator gate FAIL: {oz_err}")
+            log.error(f"  [{profile['slug']}] Stage 3.5 Oz FAIL: {oz_err[:120]}")
+            return False
+        log.info(f"  [{profile['slug']}] Stage 3.5 Oz: PASS")
+    else:
+        log.warning(f"  [{profile['slug']}] Stage 3.5 Oz: SKIP (orchestrator not found at {OZ_ORCH})")
+
+    status.mark_stage("blueprint", "complete", "Blueprint HTML generated + Oz validators PASS")
+    return True
 
 
 async def stage_podcast_queue(profile: dict, status: LeadStatus, conn: sqlite3.Connection) -> bool:
