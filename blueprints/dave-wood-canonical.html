@@ -209,7 +209,12 @@
     .source-num { background: var(--brand-light); color: var(--brand-dark); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
     .source-item a { color: var(--brand); text-decoration: underline; }
     @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
-  </style>
+  .citations{font-size:0.82rem;color:var(--text-light);margin-top:1.2rem;line-height:1.5}
+.citations a{color:var(--brand)}
+{MOB}
+
+@media (max-width:480px){.hero h1{font-size:1.9rem;line-height:1.25}.snapshot-grid,.agents-grid,.pillars-grid,.ignore-grid,.gap-list,.audit-grid,.path-grid,.prompt-cards{grid-template-columns:1fr}.section{padding:2.4rem 1.1rem}.hero-stats{flex-wrap:wrap;gap:1rem}nav{padding:0 1rem}.opp-table-wrap{overflow-x:auto}}
+</style>
 </head>
 <body>
 
@@ -229,7 +234,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-badge">Confidential &mdash; Prepared for Dave Wood</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for Mahana Fresh</h1>
   <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for a fast-casual franchise firm &mdash; and how to get there in 30 days.</p>
@@ -246,15 +251,15 @@
 
 <!-- BUSINESS SNAPSHOT -->
 <section class="section section-alt" id="snapshot"><h2 class="section-title">Where Mahana Fresh Stands Today</h2>
-<div class="profile-grid">
-  <div class="profile-item"><div class="profile-num">Fast-Casual Franchise</div><div class="profile-label">Business Type</div></div>
-  <div class="profile-item"><div class="profile-num">8</div><div class="profile-label">Open Franchise Units</div></div>
-  <div class="profile-item"><div class="profile-num">12</div><div class="profile-label">Units in Development</div></div>
-  <div class="profile-item"><div class="profile-num">$212K&ndash;$759K</div><div class="profile-label">Unit Investment Range</div></div>
-  <div class="profile-item"><div class="profile-num">5</div><div class="profile-label">Revenue Streams</div></div>
-  <div class="profile-item"><div class="profile-num">100% GF</div><div class="profile-label">Gluten-Free Menu</div></div>
-  <div class="profile-item"><div class="profile-num">2019</div><div class="profile-label">Franchising Since</div></div>
-  <div class="profile-item"><div class="profile-num">Multi-State</div><div class="profile-label">Footprint (NJ &middot; NC &middot; GA &middot; MD &middot; ID)</div></div>
+<div class="snapshot-grid">
+  <div class="snapshot-card"><div class="snapshot-val">Fast-Casual Franchise</div><div class="snapshot-key">Business Type</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">8</div><div class="snapshot-key">Open Franchise Units</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">12</div><div class="snapshot-key">Units in Development</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">$212K&ndash;$759K</div><div class="snapshot-key">Unit Investment Range</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">5</div><div class="snapshot-key">Revenue Streams</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">100% GF</div><div class="snapshot-key">Gluten-Free Menu</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">2019</div><div class="snapshot-key">Franchising Since</div></div>
+  <div class="snapshot-card"><div class="snapshot-val">Multi-State</div><div class="snapshot-key">Footprint (NJ &middot; NC &middot; GA &middot; MD &middot; ID)</div></div>
 </div>
 <p style="margin-top:24px">AI Maturity: Strong operational concept &mdash; no fryers, no microwaves, no freezers, 100% gluten-free menu &mdash; with 8 open units and 12 in development. Manual franchise-inquiry response, manual catering intake, and ad-hoc multi-location reporting. Ready to layer AI agents on the franchise development pipeline, catering desk, and unit-level operations without changing the brand or the menu.</p>
 </section>
@@ -275,70 +280,70 @@
 <!-- 3-PILLAR FRAMEWORK -->
 <section class="section section-alt" id="pillars"><h2 class="section-title">Three Ways AI Moves the Needle for Mahana Fresh</h2>
 <p>Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost.</p>
-<div class="pillar-grid">
+<div class="pillars-grid">
   <div class="pillar-card">
-    <div class="pillar-tag">Increase Revenue</div>
-    <div class="pillar-num">Catering + Franchise</div>
+    <div class="pillar-sub">Increase Revenue</div>
+    <div class="pillar-metric">Catering + Franchise</div>
     <p>Faster catering quotes and faster franchise-inquiry response convert a larger share of inbound demand. The two highest-ticket lead types each get a 60-second AI first touch.</p>
   </div>
   <div class="pillar-card">
-    <div class="pillar-tag">Save Time</div>
-    <div class="pillar-num">4&ndash;7 hrs/week per GM</div>
+    <div class="pillar-sub">Save Time</div>
+    <div class="pillar-metric">4&ndash;7 hrs/week per GM</div>
     <p>DM triage, review monitoring, and routine catering qualifying off the GM's phone &mdash; GMs run the floor, not the inbox.</p>
   </div>
   <div class="pillar-card">
-    <div class="pillar-tag">Lower Cost</div>
-    <div class="pillar-num">2&ndash;3 FTE equivalents</div>
+    <div class="pillar-sub">Lower Cost</div>
+    <div class="pillar-metric">2&ndash;3 FTE equivalents</div>
     <p>Six agents handle the cross-unit coordination, franchise development pipeline, and reputation work that would otherwise require dedicated corporate hires.</p>
   </div>
 </div>
 </section>
 
 <!-- TOOL STACK -->
-<section class="section" id="stack"><h2 class="section-title">Mahana Fresh' Current Tool Stack</h2>
+<section class="section" id="stack"><h2 class="section-title">Mahana Fresh's Current Tool Stack</h2>
 <p>Here is how Mahana Fresh's systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
 <div class="stack-grid">
-  <div class="stack-item"><strong>POS / Online Ordering</strong><div>Per-unit ticket data</div></div>
-  <div class="stack-item"><strong>Catering Inquiry Form</strong><div>Primary catering pipeline</div></div>
-  <div class="stack-item"><strong>Franchise Inquiry Form</strong><div>Franchise development pipeline</div></div>
-  <div class="stack-item"><strong>Instagram / Facebook DMs</strong><div>Guest comms + local-unit DMs</div></div>
-  <div class="stack-item"><strong>Google Business Profiles</strong><div>Per-unit reviews + local SEO</div></div>
-  <div class="stack-item"><strong>Third-Party Delivery</strong><div>DoorDash / Uber Eats / Grubhub</div></div>
+  <div class="stack-card"><strong>POS / Online Ordering</strong><div>Per-unit ticket data</div></div>
+  <div class="stack-card"><strong>Catering Inquiry Form</strong><div>Primary catering pipeline</div></div>
+  <div class="stack-card"><strong>Franchise Inquiry Form</strong><div>Franchise development pipeline</div></div>
+  <div class="stack-card"><strong>Instagram / Facebook DMs</strong><div>Guest comms + local-unit DMs</div></div>
+  <div class="stack-card"><strong>Google Business Profiles</strong><div>Per-unit reviews + local SEO</div></div>
+  <div class="stack-card"><strong>Third-Party Delivery</strong><div>DoorDash / Uber Eats / Grubhub</div></div>
 </div>
 </section>
 
 <!-- GAP ANALYSIS -->
-<section class="section section-alt" id="gaps"><h2 class="section-title">Mahana Fresh' Biggest AI Opportunity Gaps</h2>
+<section class="section section-alt" id="gaps"><h2 class="section-title">Mahana Fresh's Biggest AI Opportunity Gaps</h2>
 <p>These are the areas where Mahana Fresh is leaving the most revenue and time on the table right now.</p>
-<div class="gap">
+<div class="gap-card">
   <div class="gap-num">1</div>
   <div class="gap-body">
     <h3>Franchise Inquiry Response Time</h3>
     <p>Every franchise inquiry that waits more than a business day for a response goes cold or starts comparing other concepts. With 12 units already in development and an aggressive growth runway, the franchise-development desk is the single highest-leverage AI surface in the business. A 60-second response that qualifies on net worth, target market, and timeline pushes meaningfully more candidates into the discovery stage.</p>
   </div>
 </div>
-<div class="gap">
+<div class="gap-card">
   <div class="gap-num">2</div>
   <div class="gap-body">
     <h3>Catering Quote Turnaround</h3>
     <p>Catering closes at a 6&times; higher rate when quoted within 10 minutes. Today, most catering inquiries land in a queue and wait for a human to draft headcount, dietary accommodation, and pricing. AI auto-replies with a tailored quote, locks in the date, and routes the deposit step before the customer pings a competitor.</p>
   </div>
 </div>
-<div class="gap">
+<div class="gap-card">
   <div class="gap-num">3</div>
   <div class="gap-body">
     <h3>Multi-Location Performance Visibility</h3>
     <p>Eight open units across five states means daily ops data lives in eight different reports. Without a single morning roll-up, drift in one market (slower tickets, declining ratings, slowing catering pipeline) takes weeks to surface at corporate. A multi-location performance agent solves this without adding a corporate analyst.</p>
   </div>
 </div>
-<div class="gap">
+<div class="gap-card">
   <div class="gap-num">4</div>
   <div class="gap-body">
     <h3>Review Volume + Recovery</h3>
     <p>Per-unit Google reviews drive local-search rank and walk-in traffic. Without a system that times the ask to peak satisfaction and routes 1&ndash;3 star signals to the GM privately before they post, units lose both volume and rating. AI fixes both ends &mdash; more reviews, fewer public negatives.</p>
   </div>
 </div>
-<div class="gap">
+<div class="gap-card">
   <div class="gap-num">5</div>
   <div class="gap-body">
     <h3>Franchise Development Pipeline Hygiene</h3>
@@ -350,7 +355,7 @@
 <!-- AI OPPORTUNITY MAP -->
 <section class="section" id="oppmap"><h2 class="section-title">AI Opportunity Map &mdash; Mahana Fresh</h2>
 <p>Every use case ranked by impact and ease of implementation with Mahana Fresh's current stack. Start at P1 &mdash; do not skip ahead.</p>
-<table class="oppmap-table">
+<table class="opp-table">
 <thead><tr><th>Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>Franchise Inquiry Speed-to-Lead Agent</td><td>+22% franchise lead-to-discovery &mdash; every candidate qualified in 60 seconds with FDD-safe questions</td><td>Franchise inquiry form, calendar, candidate CRM</td></tr>
@@ -365,36 +370,36 @@
 <!-- WHAT TO IGNORE -->
 <section class="section section-alt" id="ignore"><h2 class="section-title">What AI Will Not Work for Mahana Fresh &mdash; Skip These</h2>
 <p>Not everything benefits from automation. Here is what to ignore for now &mdash; and why.</p>
-<div class="ignore"><span class="x">&times;</span> <div><h3>Discovery Day Conversations with Franchise Candidates</h3><p>Discovery Day is where a candidate decides if Mahana Fresh is the brand for them. That moment is human &mdash; Dave and the leadership team in a room with the candidate. AI handles intake, qualification, and follow-up paperwork around Discovery Day, but the day itself stays human.</p></div></div>
-<div class="ignore"><span class="x">&times;</span> <div><h3>In-Unit Guest Experience</h3><p>The bowl assembly line, the greeting at the door, the make-it-right moment when an order is wrong &mdash; these are why guests come back. AI does not touch the line, the greeting, or the recovery. Those stay 100% human.</p></div></div>
-<div class="ignore"><span class="x">&times;</span> <div><h3>Menu and Brand Identity Decisions</h3><p>New menu items, brand voice direction, and the no-fryer / no-microwave / no-freezer / 100%-gluten-free identity decisions stay with leadership. AI surfaces sales-pattern signals, but the brand call is human.</p></div></div>
-<div class="ignore"><span class="x">&times;</span> <div><h3>Franchisee Relationship Management</h3><p>Franchisee phone calls, conflict resolution, and the trust-built relationships across the multi-unit owners stay personal. AI prepares the data, drafts the agenda, and follows up on action items &mdash; the conversation itself is human.</p></div></div>
+<div class="ignore-card"><span class="ignore-x">&times;</span> <div><h3>Discovery Day Conversations with Franchise Candidates</h3><p>Discovery Day is where a candidate decides if Mahana Fresh is the brand for them. That moment is human &mdash; Dave and the leadership team in a room with the candidate. AI handles intake, qualification, and follow-up paperwork around Discovery Day, but the day itself stays human.</p></div></div>
+<div class="ignore-card"><span class="ignore-x">&times;</span> <div><h3>In-Unit Guest Experience</h3><p>The bowl assembly line, the greeting at the door, the make-it-right moment when an order is wrong &mdash; these are why guests come back. AI does not touch the line, the greeting, or the recovery. Those stay 100% human.</p></div></div>
+<div class="ignore-card"><span class="ignore-x">&times;</span> <div><h3>Menu and Brand Identity Decisions</h3><p>New menu items, brand voice direction, and the no-fryer / no-microwave / no-freezer / 100%-gluten-free identity decisions stay with leadership. AI surfaces sales-pattern signals, but the brand call is human.</p></div></div>
+<div class="ignore-card"><span class="ignore-x">&times;</span> <div><h3>Franchisee Relationship Management</h3><p>Franchisee phone calls, conflict resolution, and the trust-built relationships across the multi-unit owners stay personal. AI prepares the data, drafts the agenda, and follows up on action items &mdash; the conversation itself is human.</p></div></div>
 </section>
 
 <!-- AI AGENTS -->
 <section class="section" id="agents"><h2 class="section-title">6 AI Agents Built for Mahana Fresh</h2>
 <p>Each agent maps directly to a specific workflow in Mahana Fresh's franchise and unit operations.</p>
-<div class="agent">
+<div class="agent-card">
   <h3>Franchise Inquiry Speed-to-Lead Agent</h3>
   <p>Responds to every franchise inquiry within 60 seconds with personalized info about Mahana Fresh's $212K&ndash;$759K investment range, territory availability, and the next-step scheduling. Qualifies on net worth, target market, and timeline before routing the candidate to the franchise development team. FDD-safe language only &mdash; no earnings claims outside Item 19.</p>
 </div>
-<div class="agent">
+<div class="agent-card">
   <h3>Catering Proposal Generator</h3>
   <p>Creates professional catering proposals from inquiry details &mdash; menu customization, headcount pricing, dietary accommodations leveraging Mahana Fresh's 100% gluten-free menu. Pulls from the catering menu, applies the closest unit, calculates lead-time feasibility, and returns a quote within 10 minutes of the form fill.</p>
 </div>
-<div class="agent">
+<div class="agent-card">
   <h3>Multi-Location Performance Reporter</h3>
   <p>Aggregates daily sales, customer reviews, and operational metrics across all 8 Mahana Fresh locations into a single executive summary delivered to Dave and the ops lead before opening. Flags any unit drifting on sales, review rating, or catering pipeline so the corporate team can act in days, not weeks.</p>
 </div>
-<div class="agent">
+<div class="agent-card">
   <h3>Customer Review Response Agent</h3>
   <p>Monitors Google Business reviews across all 8 units, drafts personalized public responses for 4&ndash;5 star reviews, and routes any 1&ndash;3 star signal privately to the unit GM for recovery before it goes public. Maintains brand voice and tropical-positive tone across every response.</p>
 </div>
-<div class="agent">
+<div class="agent-card">
   <h3>Franchise Development Pipeline Agent</h3>
   <p>Tracks every candidate in the development pipeline by stage &mdash; lead, discovery, FDD acknowledgment, training, site selection, build-out, opening. Fires weekly bottleneck reports, flags timeline slippage on the 12 units in development, and surfaces the next decision the leadership team needs to make on each candidate.</p>
 </div>
-<div class="agent">
+<div class="agent-card">
   <h3>Menu Optimization Agent</h3>
   <p>Reads per-unit POS data weekly to surface top sellers, slow movers, and dayparts with margin opportunity. Suggests LTO candidates anchored to the existing ingredient set (no new SKUs needed), and flags ingredients trending toward waste so each unit cuts food cost without changing the menu.</p>
 </div>
@@ -605,10 +610,10 @@ Output as a single Slack message or SMS, under 800 characters when possible, for
 <section class="section" id="audit"><h2 class="section-title">mahanafresh.com &mdash; Audit Summary</h2>
 <p>Four-dimension audit of Mahana Fresh's current web presence at mahanafresh.com. Scores reflect opportunities for AI-enhanced conversion performance.</p>
 <div class="audit-grid">
-  <div class="audit-card"><div class="audit-score">58</div><div class="audit-label">Conversion</div><p>Clear brand identity and a dedicated franchise inquiry path. Both the catering and franchise paths funnel to standard forms without inline qualification &mdash; budget and timeline for franchise, headcount and date for catering &mdash; which lengthens the qualification cycle for the two highest-ticket lead types.</p></div>
-  <div class="audit-card"><div class="audit-score">24</div><div class="audit-label">Speed-to-Lead</div><p>Inquiry forms send a standard confirmation only. No personalized response, no instant catering quote, no franchise-development calendar offer. Both franchise and catering leads wait for manual reply during business hours &mdash; the single largest revenue gap in the current funnel.</p></div>
-  <div class="audit-card"><div class="audit-score">22</div><div class="audit-label">AI Readiness</div><p>No AI tooling visible in the public stack. No catering quote bot, no franchise qualifier, no review-response automation, no multi-location dashboard. Every inbound and operational signal is handled manually today.</p></div>
-  <div class="audit-card"><div class="audit-score">74</div><div class="audit-label">Brand Trust</div><p>Strong differentiated positioning (no fryers / no microwaves / no freezers / 100% gluten-free), real franchisee credibility (Kyle Kuzma and a former 30-year Domino's multi-unit operator), and clean per-unit Google footprints. The brand-trust foundation is in place &mdash; the bottleneck is operational speed, not credibility.</p></div>
+  <div class="audit-card"><div class="audit-score">58</div><div class="audit-phase">Conversion</div><p>Clear brand identity and a dedicated franchise inquiry path. Both the catering and franchise paths funnel to standard forms without inline qualification &mdash; budget and timeline for franchise, headcount and date for catering &mdash; which lengthens the qualification cycle for the two highest-ticket lead types.</p></div>
+  <div class="audit-card"><div class="audit-score">24</div><div class="audit-phase">Speed-to-Lead</div><p>Inquiry forms send a standard confirmation only. No personalized response, no instant catering quote, no franchise-development calendar offer. Both franchise and catering leads wait for manual reply during business hours &mdash; the single largest revenue gap in the current funnel.</p></div>
+  <div class="audit-card"><div class="audit-score">22</div><div class="audit-phase">AI Readiness</div><p>No AI tooling visible in the public stack. No catering quote bot, no franchise qualifier, no review-response automation, no multi-location dashboard. Every inbound and operational signal is handled manually today.</p></div>
+  <div class="audit-card"><div class="audit-score">74</div><div class="audit-phase">Brand Trust</div><p>Strong differentiated positioning (no fryers / no microwaves / no freezers / 100% gluten-free), real franchisee credibility (Kyle Kuzma and a former 30-year Domino's multi-unit operator), and clean per-unit Google footprints. The brand-trust foundation is in place &mdash; the bottleneck is operational speed, not credibility.</p></div>
 </div>
 </section>
 
@@ -665,8 +670,8 @@ Output as a single Slack message or SMS, under 800 characters when possible, for
 
 <!-- CTA -->
 <section class="cta-section" id="apply"><h2>Ready to See This<br><span>Working for Mahana Fresh?</span></h2>
-<blockquote style="font-size:18px;line-height:1.6;color:#1a1a1a;border-left:4px solid #bbff01;padding-left:24px;margin:32px 0">"Dave, I want to be direct with you. Mahana Fresh already has the foundation &mdash; the brand identity, the operational simplicity, the 100% gluten-free menu, 8 open units, 12 in development, and the kind of franchisee roster (Kyle Kuzma) most emerging systems would trade their FDD for. The gap is operational: franchise inquiries that wait for business hours, catering quotes that take a day instead of ten minutes, eight units of performance data living in eight different reports. Six agents close that gap without changing the menu, the brand, or how franchisees run their floors. We only take on a handful of franchise systems per quarter. If you want to see what custom pricing looks like for your specific footprint and franchise pipeline, reply to this email or apply below."</blockquote>
-<p style="text-align:center;margin-top:32px"><a href="https://blueprint.meetadvaita.com" class="apply-btn" style="display:inline-block;background:#000321;color:#bbff01;font-weight:800;padding:16px 36px;text-decoration:none;border-radius:8px;font-size:16px">Apply for a Custom Pricing Call</a></p>
+<blockquote style="font-size:18px;line-height:1.6;color:#1a1a1a;border-left:4px solid #ffffff;padding-left:24px;margin:32px 0">"Dave, I want to be direct with you. Mahana Fresh already has the foundation &mdash; the brand identity, the operational simplicity, the 100% gluten-free menu, 8 open units, 12 in development, and the kind of franchisee roster (Kyle Kuzma) most emerging systems would trade their FDD for. The gap is operational: franchise inquiries that wait for business hours, catering quotes that take a day instead of ten minutes, eight units of performance data living in eight different reports. Six agents close that gap without changing the menu, the brand, or how franchisees run their floors. We only take on a handful of franchise systems per quarter. If you want to see what custom pricing looks like for your specific footprint and franchise pipeline, reply to this email or apply below."</blockquote>
+<p style="text-align:center;margin-top:32px"><a href="https://blueprint.meetadvaita.com" class="apply-btn" style="display:inline-block;background:#0A0E1A;color:#ffffff;font-weight:800;padding:16px 36px;text-decoration:none;border-radius:8px;font-size:16px">Apply for a Custom Pricing Call</a></p>
 </section>
 
 <footer>
