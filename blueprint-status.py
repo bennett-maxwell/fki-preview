@@ -41,7 +41,7 @@ for slug in sorted(all_slugs):
         if os.path.exists(rpt):
             try:
                 d = json.load(open(rpt))
-                s = d.get('score', d.get('total_score', d.get('score_pct','?')))
+                s = d.get('score', d.get('total_score','?'))
                 audit_col = f"{s}%"
             except: audit_col = "err"
             break
