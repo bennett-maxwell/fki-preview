@@ -13,9 +13,10 @@
   <title>AI Advantage Roadmap — Mahana Fresh</title>
   <style>
     :root {
-      --brand:       #1D6FDB;
+      /* Mahana Fresh brand palette (extracted from mahanafresh.com): teal #4cdac9, mid-teal #3ab8a9, lime #90fb3e, black #0A0E1A */
+      --brand:       #3ab8a9;
       --brand-dark:  #0A0E1A;
-      --brand-light: #4A90E2;
+      --brand-light: #4cdac9;
       --neutral-bg:  #f8f8f8;
       --white:       #ffffff;
       --text:        #0A0E1A;
@@ -24,8 +25,8 @@
       --border:      #e2e2e2;
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
-      --shadow: 0 4px 24px rgba(29,111,219,0.08);
-      --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
+      --shadow: 0 4px 24px rgba(58,184,169,0.08);
+      --shadow-md: 0 8px 40px rgba(58,184,169,0.12);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -57,7 +58,7 @@
       .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     }
     .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
-    .hero-badge { display: inline-block; background: rgba(29,111,219,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero-badge { display: inline-block; background: rgba(58,184,169,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
     .hero h1 span { color: var(--brand-light); }
     .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2.5rem; }
@@ -104,7 +105,7 @@
     .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
     .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
     .gap-tag.revenue { background: #fde8f3; color: #b02060; }
-    .gap-tag.efficiency { background: #e8f0fd; color: #1a4db0; }
+    .gap-tag.efficiency { background: #e8f7f4; color: #2a8276; }
     .gap-tag.brand { background: #f0e8fd; color: var(--brand-dark); }
     .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
     .opp-table { width: 100%; border-collapse: collapse; }
@@ -265,7 +266,7 @@
 <thead><tr><th>Result</th><th>What Changed</th><th>Industry / Context</th><th>Source</th></tr></thead>
 <tbody>
 <tr><td>6&times; catering close rate</td><td>Catering inquiries quoted within 10 minutes convert at a multiple of next-business-day quotes. Speed-to-quote is the single largest catering-revenue lever.</td><td>Fast-casual multi-unit operators</td><td>Toast 2024</td></tr>
-<tr><td>+22% franchise lead-to-discovery</td><td>Franchise inquiries answered in under 60 seconds with FDD-aware qualifying questions push more leads into the discovery-call stage.</td><td>Emerging franchise systems, 5&ndash;25 units</td><td>FranConnect 2024</td></tr>
+<tr><td>+22% franchise lead-to-discovery</td><td>Franchise inquiries answered in under 60 seconds with FDD-aware qualifying questions push more leads into the discovery stage.</td><td>Emerging franchise systems, 5&ndash;25 units</td><td>FranConnect 2024</td></tr>
 <tr><td>3&ndash;5&times; Google review velocity</td><td>Review request timed to post-meal moment, with low-star concerns routed privately to the GM before posting publicly.</td><td>Fast-casual chains</td><td>BrightLocal 2024</td></tr>
 <tr><td>4&ndash;7 hrs/week per GM</td><td>Automated DM triage, review monitoring, and routine inquiry handling pulled off the GM's plate &mdash; time goes back to floor operations.</td><td>Multi-unit restaurant operations</td><td>HBR 2023</td></tr>
 </tbody></table>
@@ -375,7 +376,7 @@
 <p>Each agent maps directly to a specific workflow in Mahana Fresh's franchise and unit operations.</p>
 <div class="agent">
   <h3>Franchise Inquiry Speed-to-Lead Agent</h3>
-  <p>Responds to every franchise inquiry within 60 seconds with personalized info about Mahana Fresh's $212K&ndash;$759K investment range, territory availability, and the discovery-call next step. Qualifies on net worth, target market, and timeline before routing the candidate to the franchise development team. FDD-safe language only &mdash; no earnings claims outside Item 19.</p>
+  <p>Responds to every franchise inquiry within 60 seconds with personalized info about Mahana Fresh's $212K&ndash;$759K investment range, territory availability, and the next-step scheduling. Qualifies on net worth, target market, and timeline before routing the candidate to the franchise development team. FDD-safe language only &mdash; no earnings claims outside Item 19.</p>
 </div>
 <div class="agent">
   <h3>Catering Proposal Generator</h3>
@@ -509,7 +510,7 @@
         <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
         <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
       </div>
-      <p class="calc-disclaimer">Projections use published AI adoption benchmarks: +15% lead volume, +50% close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey State of AI 2023</a>), 60% admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks: +15% lead volume, +50% close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey State of AI 2023</a>), 60% admin time reduction (source: <a href="https://hbr.org/topic/subject/automation" target="_blank">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
     </div>
   </div>
 </section>
@@ -526,7 +527,7 @@ When a new franchise inquiry arrives (website form, LinkedIn DM, 1851franchise.c
 1. Acknowledges the candidate by first name and references the specific market they mentioned (or asks which market they are targeting if not specified)
 2. Names two Mahana Fresh differentiators that match their profile: the operational simplicity (no fryers / no microwaves / no freezers) and the 100% gluten-free menu
 3. Asks 3 (and only 3) qualifying questions: (a) liquid capital available &mdash; ranges only: under $150K, $150K&ndash;$300K, $300K&ndash;$500K, $500K+, (b) target market and timeframe to open, (c) restaurant operating background &mdash; ranges: none, multi-unit franchisee in another concept, single-unit operator, corporate restaurant background
-4. Offers a 20-minute discovery call with 3 specific time slots in the next 5 business days
+4. Offers a 20-minute intro call with 3 specific time slots in the next 5 business days
 5. Sends the Franchise Information Packet link
 6. Signs off "Looking forward &mdash; Mahana Fresh Franchise Development"
 
@@ -539,7 +540,7 @@ Edge cases:
 - Candidate liquid capital below $150K: thank them for the interest, share the investment range honestly, suggest they revisit Mahana Fresh when financing is in place &mdash; do not waste a Discovery Day slot
 
 Example output:
-"Hi Marcus &mdash; thanks for reaching out about Mahana Fresh in the Charlotte market. Two things candidates usually love about our operating model: (1) no fryers, no microwaves, no freezers &mdash; the kitchen is simpler than any QSR you have run, and (2) the entire menu is 100% gluten-free, so we are the only fast-casual on most blocks that an entire family can eat at. Three quick questions to make our first call useful: (1) Liquid capital available &mdash; under $150K, $150K&ndash;$300K, $300K&ndash;$500K, or $500K+? (2) Target market and rough timeframe to open? (3) Restaurant operating background &mdash; none, multi-unit franchisee elsewhere, single-unit operator, or corporate restaurant? Discovery call &mdash; Wednesday 11am ET, Thursday 2pm ET, or Monday 10am ET? Looking forward &mdash; Mahana Fresh Franchise Development"</pre>
+"Hi Marcus &mdash; thanks for reaching out about Mahana Fresh in the Charlotte market. Two things candidates usually love about our operating model: (1) no fryers, no microwaves, no freezers &mdash; the kitchen is simpler than any QSR you have run, and (2) the entire menu is 100% gluten-free, so we are the only fast-casual on most blocks that an entire family can eat at. Three quick questions to make our first call useful: (1) Liquid capital available &mdash; under $150K, $150K&ndash;$300K, $300K&ndash;$500K, or $500K+? (2) Target market and rough timeframe to open? (3) Restaurant operating background &mdash; none, multi-unit franchisee elsewhere, single-unit operator, or corporate restaurant? Discovery Day call &mdash; Wednesday 11am ET, Thursday 2pm ET, or Monday 10am ET? Looking forward &mdash; Mahana Fresh Franchise Development"</pre>
 </div>
 
 <div class="prompt">
@@ -638,7 +639,7 @@ Output as a single Slack message or SMS, under 800 characters when possible, for
           <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
           <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
         </div>
-        <style>.speed-active{background:rgba(29,111,219,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
+        <style>.speed-active{background:rgba(58,184,169,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
       </div>
       <div class="podcast-quotes">
         <div class="podcast-quote">"The fast-casual franchise firms that compound over the next 3 years will not be the ones with the biggest bench &mdash; they will be the ones whose systems respond first, prepare better, and never let a client go at-risk without a flag."</div>
