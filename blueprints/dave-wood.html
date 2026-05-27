@@ -1040,6 +1040,15 @@ Structure:
   <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood">See If You Qualify</a>
 </div>
 
+
+const CHAPTERS = [
+  {time: 0,    label: "Intro: Why AI Now"},
+  {time: 360,  label: "Dave Wood Business Gap Analysis"},
+  {time: 840,  label: "6 AI Agents for Mahana Fresh"},
+  {time: 1440, label: "ROI Model & Projections"},
+  {time: 2040, label: "Implementation Roadmap"}
+];
+
 <script>
 // Reading progress
 window.addEventListener('scroll', () => {
@@ -1143,10 +1152,16 @@ updateCalc();
         <span style="font-size:13px;color:rgba(255,255,255,0.65);">&#128100; Prepared for Dave Wood</span>
       </div>
       <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:24px;">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
+        <audio id="podAudio" preload="metadata" style="width:100%">
           <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" type="audio/mpeg">
           Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" style="color:var(--brand-light)">Download the podcast</a>.
         </audio>
+        <!-- Chapter markers -->
+        <div class="pod-pip chapter-pip" data-time="0" style="display:none;" title="Intro: Why AI Now"></div>
+        <div class="pod-pip chapter-pip" data-time="360" style="display:none;" title="Dave Wood Business Gap Analysis"></div>
+        <div class="pod-pip chapter-pip" data-time="840" style="display:none;" title="6 AI Agents for Mahana Fresh"></div>
+        <div class="pod-pip chapter-pip" data-time="1440" style="display:none;" title="ROI Model & Projections"></div>
+        <div class="pod-pip chapter-pip" data-time="2040" style="display:none;" title="Implementation Roadmap"></div>
         <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
           <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand);color:#0d1117;border:none;border-radius:8px;padding:8px 20px;font-size:14px;font-weight:700;cursor:pointer;">Play</button>
           <span style="font-size:13px;color:rgba(255,255,255,0.55);">Speed:</span>
@@ -1163,5 +1178,19 @@ updateCalc();
     </div>
   </div>
 </section>
+
+<script>
+// Podcast player state persistence
+(function() {
+  var STORAGE_KEY = 'bpod_dave-wood';
+  var aud = document.getElementById('podAudio');
+  if (!aud) return;
+  var saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) { try { var s = JSON.parse(saved); if (s.time > 0) aud.currentTime = s.time; } catch(e){} }
+  aud.addEventListener('timeupdate', function() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({time: aud.currentTime, rate: aud.playbackRate}));
+  });
+})();
+</script>
 </body>
 </html>
