@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T01:09:20Z | Lead: Rush Evans | Industry: Photography & Video -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T01:24:43Z | Lead: Rush Evans | Industry: Photography & Video -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1729,17 +1729,26 @@ Rules:
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+            <div id="podcast" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <audio controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="width:100%;margin-bottom:12px;"></audio>
+        <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="width:100%;margin-bottom:12px;"></audio>
+
+        <!-- Chapter markers (chapter-pip) -->
+        <div style="display:flex;gap:6px;justify-content:center;margin:10px 0 4px;">
+          <span class="chapter-pip" data-time="0" style="width:10px;height:10px;border-radius:50%;background:var(--accent);cursor:pointer;display:inline-block;" title="Intro"></span>
+          <span class="chapter-pip" data-time="570" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="AI Opportunity"></span>
+          <span class="chapter-pip" data-time="1140" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="LinkedIn Engine"></span>
+          <span class="chapter-pip" data-time="1710" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="Next Steps"></span>
+        </div>
+
         <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Riah Evans Photography + Video.</p>
         <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
       </div>
-      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
+      <div id="podPlay" class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
         <span style="font-size:12px;color:#666;">Speed:</span>
-        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
-        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
+        <button onclick="setPodSpeed(1,this)" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
+        <button onclick="setPodSpeed(1.5,this)" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
+        <button onclick="setPodSpeed(2,this)" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
 
       <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
@@ -1971,6 +1980,55 @@ function updateCalc() {
 
 // Init calculator
 updateCalc();
+
+// ---- Podcast Player: Chapter Navigation + State Persistence ----
+const CHAPTERS = [
+  { time: 0,    label: "Intro — Rush Evans Photography + Video" },
+  { time: 570,  label: "AI Opportunity Map" },
+  { time: 1140, label: "LinkedIn Curated Engine" },
+  { time: 1710, label: "Next Steps + Apply" }
+];
+
+(function initPodPlayer() {
+  const audio = document.getElementById('podAudio');
+  if (!audio) return;
+
+  // bpod_ localStorage: restore playback position
+  const bpod_key = 'bpod_rush-evans';
+  const saved = parseFloat(localStorage.getItem(bpod_key) || '0');
+  if (saved > 5) audio.currentTime = saved;
+
+  audio.addEventListener('timeupdate', function() {
+    localStorage.setItem(bpod_key, audio.currentTime.toString());
+    updateActivePip();
+  });
+
+  // Chapter pip click handlers
+  document.querySelectorAll('.chapter-pip').forEach(function(pip) {
+    pip.addEventListener('click', function() {
+      const t = parseFloat(this.getAttribute('data-time') || '0');
+      audio.currentTime = t;
+      audio.play();
+    });
+  });
+
+  function updateActivePip() {
+    const pips = document.querySelectorAll('.chapter-pip');
+    const ct = audio.currentTime;
+    let activeIdx = 0;
+    CHAPTERS.forEach(function(ch, i) { if (ct >= ch.time) activeIdx = i; });
+    pips.forEach(function(p, i) {
+      p.style.background = i === activeIdx ? 'var(--accent)' : 'rgba(255,255,255,0.4)';
+    });
+  }
+})();
+
+function setPodSpeed(rate, btn) {
+  const audio = document.getElementById('podAudio');
+  if (audio) audio.playbackRate = rate;
+  document.querySelectorAll('#podPlay button').forEach(function(b) { b.style.fontWeight = 'normal'; });
+  btn.style.fontWeight = 'bold';
+}
 </script>
 
 <div class="mobile-sticky-cta">
