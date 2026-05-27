@@ -13,8 +13,9 @@
 <meta name="twitter:title" content="AI Roadmap for Mahana Fresh" />
 <title>AI Advantage Roadmap — Mahana Fresh</title>
 <style>
-html, body { overflow-x: hidden; max-width: 100%; }
+html, body { overflow-x: hidden; max-width: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
 .cta, .nav-link, .preset-btn, .copy-btn { min-height: 44px; min-width: 44px; }
+.dw-speed { display: inline-block; }
 
   :root {
     /* Mahana Fresh palette: primary_teal #4cdac9, accent_mid #3ab8a9, accent_green #90fb3e */
@@ -1128,40 +1129,135 @@ updateCalc();
   }
 </script>
 
-<!-- gold-standard podcast player refreshed for Dave Wood canonical 2026-05-27 -->
-<section class="section section-alt" id="listen" style="padding:64px 24px;background:#f8f9fa;">
-  <div style="max-width:860px;margin:0 auto;">
-    <p style="font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--brand);margin:0 0 8px;">Your Personalized Podcast</p>
-    <h2 style="font-size:28px;font-weight:800;color:#1a1a2e;margin:0 0 10px;">Listen to Your AI Advantage Roadmap</h2>
-    <p style="font-size:15px;color:#555;margin:0 0 28px;line-height:1.6;">Two AI hosts walk through your exact business, tools, and opportunities &mdash; built specifically for Mahana Fresh. About 20 minutes.</p>
-    <div style="background:linear-gradient(135deg,#1a1a2e 0%,#0d1117 100%);border-radius:16px;padding:40px;color:#fff;">
-      <div style="font-size:21px;font-weight:800;margin-bottom:8px;">Mahana Fresh &mdash; AI Advantage Deep Dive</div>
-      <div style="font-size:14.5px;color:rgba(255,255,255,0.7);margin-bottom:28px;line-height:1.5;">Dave Wood &middot; Mahana Fresh &mdash; covers your gaps, your tool stack, your 6 agents, and exactly what to do first.</div>
-      <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:24px;">
-        <span style="font-size:13px;color:rgba(255,255,255,0.65);">&#9654; ~20 minutes</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.65);">&#127911; Multi-Unit Franchise + AI</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.65);">&#128100; Prepared for Dave Wood</span>
+<!-- gold-standard podcast player v3 STRICT — Dave Wood 2026-05-27 -->
+<section class="section pod-section" id="listen">
+  <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Mahana Fresh answers. Adjust speed with the controls below.</p>
+  <div class="pod-card">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Dave Wood &middot; Mahana Fresh</p>
+    </div>
+    <div class="pod-body">
+      <span class="pod-badge" id="podBadge">
+        Ready to play
+        <span class="pod-eq" id="podEq">
+          <span style="height:4px"></span><span></span><span></span><span></span><span></span>
+        </span>
+      </span>
+      <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+      <div class="pod-progress-wrap" id="podTrack" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Podcast progress" tabindex="0">
+        <div class="pod-fill" id="podFill"></div>
+        <div class="pod-thumb" id="podThumb"></div>
       </div>
-      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:24px;">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
-          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" style="color:var(--brand-light)">Download the podcast</a>.
-        </audio>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand);color:#0d1117;border:none;border-radius:8px;padding:8px 20px;font-size:14px;font-weight:700;cursor:pointer;">Play</button>
-          <span style="font-size:13px;color:rgba(255,255,255,0.55);">Speed:</span>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.dw-speed').forEach(function(b){b.setAttribute('style','background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')});this.setAttribute('style','background:rgba(76,218,201,0.42);color:#fff;border:1px solid #90fb3e;border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')" class="dw-speed" style="background:rgba(76,218,201,0.42);color:#fff;border:1px solid #90fb3e;border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.dw-speed').forEach(function(b){b.setAttribute('style','background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')});this.setAttribute('style','background:rgba(76,218,201,0.42);color:#fff;border:1px solid #90fb3e;border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')" class="dw-speed" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;">1.25x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.dw-speed').forEach(function(b){b.setAttribute('style','background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')});this.setAttribute('style','background:rgba(76,218,201,0.42);color:#fff;border:1px solid #90fb3e;border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')" class="dw-speed" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.dw-speed').forEach(function(b){b.setAttribute('style','background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')});this.setAttribute('style','background:rgba(76,218,201,0.42);color:#fff;border:1px solid #90fb3e;border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;')" class="dw-speed" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 13px;font-size:13px;font-weight:700;cursor:pointer;">2x</button>
-        </div>
+      <div class="pod-times">
+        <span id="podElapsed">0:00</span>
+        <span id="podDuration">--:--</span>
       </div>
-      <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
-        <div style="background:rgba(255,255,255,0.06);border-left:3px solid var(--brand);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14px;color:rgba(255,255,255,0.85);font-style:italic;">"The franchise brands that compound over the next 3 years won't be the ones with the biggest ad budget &mdash; they'll be the ones whose systems respond to every franchise inquiry first and never let a catering lead go cold."</div>
-        <div style="background:rgba(255,255,255,0.06);border-left:3px solid var(--brand);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14px;color:rgba(255,255,255,0.85);font-style:italic;">"For a brand like Mahana Fresh, AI isn't about replacing your team. It's about making sure more of the right franchise candidates and catering clients experience what makes your 100% gluten-free concept different."</div>
+      <div class="pod-controls">
+        <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+          <span class="pod-btn-label">15s</span>
+        </button>
+        <button class="pod-btn play-btn" id="podPlay" aria-label="Play">
+          <svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg>
+          <span class="pod-btn-label">30s</span>
+        </button>
       </div>
+      <div class="pod-meta">
+        <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+        <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
+          <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" target="_blank" download>Download MP3</a>
+      </div>
+      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3"></audio>
     </div>
   </div>
 </section>
+<script>
+(function() {
+  var STORAGE_KEY = 'bpod_dave_wood';
+  var CHAPTERS = [
+    {pct: 0,    label: 'Segment 1 — Mahana Fresh Today'},
+    {pct: 12.5, label: 'Segment 2 — Where AI Fits'},
+    {pct: 25,   label: 'Segment 3 — Franchise Inquiry Agent'},
+    {pct: 37.5, label: 'Segment 4 — Catering Lead System'},
+    {pct: 50,   label: 'Segment 5 — Ops Automation Stack'},
+    {pct: 62.5, label: 'Segment 6 — Franchisee Support AI'},
+    {pct: 75,   label: 'Segment 7 — ROI Model'},
+    {pct: 87.5, label: 'Segment 8 — Your Implementation Path'}
+  ];
+  var audio     = document.getElementById('podAudio');
+  var playBtn   = document.getElementById('podPlay');
+  var playIcon  = document.getElementById('podPlayIcon');
+  var fill      = document.getElementById('podFill');
+  var thumb     = document.getElementById('podThumb');
+  var track     = document.getElementById('podTrack');
+  var elapsed   = document.getElementById('podElapsed');
+  var duration  = document.getElementById('podDuration');
+  var badge     = document.getElementById('podBadge');
+  var eq        = document.getElementById('podEq');
+  var chName    = document.getElementById('podChapterName');
+  var speedSel  = document.getElementById('podSpeed');
+  var muteBtn   = document.getElementById('podMute');
+  var volIcon   = document.getElementById('podVolIcon');
+  var backBtn   = document.getElementById('podBack');
+  var fwdBtn    = document.getElementById('podFwd');
+  function fmt(s) { var m=Math.floor(s/60),sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
+  function pct()  { return audio.duration ? audio.currentTime/audio.duration*100 : 0; }
+  function updateUI() {
+    var p = pct(), label = CHAPTERS[0].label;
+    for (var i = 0; i < CHAPTERS.length; i++) { if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label; }
+    fill.style.width  = p + '%';
+    thumb.style.left  = p + '%';
+    elapsed.textContent = fmt(audio.currentTime);
+    if (chName) chName.textContent = label;
+    try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
+  }
+  audio.addEventListener('loadedmetadata', function() { duration.textContent = fmt(audio.duration); });
+  audio.addEventListener('timeupdate', updateUI);
+  audio.addEventListener('play',  function() { playIcon.innerHTML='<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'; badge.textContent='Now Playing'; eq.classList.add('playing'); });
+  audio.addEventListener('pause', function() { playIcon.innerHTML='<polygon points="5,3 19,12 5,21"/>'; badge.textContent='Paused'; eq.classList.remove('playing'); });
+  audio.addEventListener('ended', function() { badge.textContent='Finished'; eq.classList.remove('playing'); });
+  playBtn.addEventListener('click', function() { audio.paused ? audio.play() : audio.pause(); });
+  backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration||0, audio.currentTime + 30); });
+  speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
+  muteBtn.addEventListener('click', function() {
+    audio.muted = !audio.muted;
+    volIcon.innerHTML = audio.muted
+      ? '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>'
+      : '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  });
+  function seek(e) {
+    var r = track.getBoundingClientRect(), x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
+    if (audio.duration) audio.currentTime = Math.max(0,Math.min(1,x/r.width)) * audio.duration;
+  }
+  var dragging = false;
+  track.addEventListener('mousedown', function(e) { dragging=true; seek(e); });
+  document.addEventListener('mousemove', function(e) { if (dragging) seek(e); });
+  document.addEventListener('mouseup',  function() { dragging=false; });
+  track.addEventListener('touchstart', seek, {passive:true});
+  track.addEventListener('touchmove',  seek, {passive:true});
+  CHAPTERS.forEach(function(ch) {
+    var pip = document.createElement('div');
+    pip.className = 'pod-pip chapter-pip';
+    pip.style.left = ch.pct + '%';
+    track.appendChild(pip);
+  });
+  try { var t=parseFloat(localStorage.getItem(STORAGE_KEY)||0); if(t>5) audio.currentTime=t; } catch(e) {}
+})();
+</script>
+
 </body>
 </html>
