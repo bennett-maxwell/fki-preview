@@ -512,7 +512,10 @@ function hydrateIdentity() {
   };
   Object.keys(fields).forEach(id => {
     const el = document.getElementById(id);
-    if (el && fields[id]) el.value = fields[id].replace(/\+/g, ' ');
+    if (!el || !fields[id]) return;
+    el.value = (id === 'lead-email' || id === 'lead-phone')
+      ? fields[id]
+      : fields[id].replace(/\+/g, ' ');
   });
 }
 
