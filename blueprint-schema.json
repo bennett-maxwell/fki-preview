@@ -1,0 +1,84 @@
+{
+  "_meta": {
+    "name": "blueprint-schema",
+    "version": "1.0",
+    "created": "2026-05-27",
+    "description": "Single source of truth for all Blueprint AI page rules, text, and structure",
+    "canonical_drive_folder": "1qdUEbUb_BpkVBt_YCX686nnu-O7lW0pY",
+    "enforced_by": ["blueprint-ai-skill Rule 2", "blueprint-ai-audit-skill D2-25 [RL]", "pre-commit hook G16"]
+  },
+  "cta": {
+    "approved_phrases": [
+      "See If You Qualify",
+      "See If You Qualify →",
+      "See If You Qualify for AI Automations",
+      "Apply to See If You Qualify"
+    ],
+    "banned_phrases": [
+      "Apply to Work with Bennett",
+      "Apply to work with Bennett",
+      "Book a Call",
+      "Schedule a Call",
+      "Get Your AI Agent Quote",
+      "Get Your AI Quote",
+      "Get Your Blueprint Quote"
+    ],
+    "canonical_url": "https://bennett-maxwell.github.io/fki-preview/qualify.html",
+    "rule_source": "blueprint-ai-skill Rule 2 + Bennett directive 2026-05-27 (permanent)",
+    "audit_check": "D2-25 [RL] — HARD REJECT if banned phrase appears ANYWHERE in HTML"
+  },
+  "podcast": {
+    "position": {
+      "rule": "Podcast callout MUST appear within first 4 sections (immediately after hero)",
+      "max_section_before_callout": 1,
+      "audit_check": "D3-16 [RL]",
+      "forefront_element": "podcast-forefront callout banner with Listen Now button",
+      "anchor_id": "listen"
+    },
+    "player": {
+      "standard": "gold-standard v3 STRICT",
+      "required_elements": ["podAudio", "CHAPTERS", "bpod_localStorage_key", "chapter-pip >= 2"],
+      "storage_key_pattern": "bpod_{lead_slug_underscored}",
+      "chapters_min": 4,
+      "audio_url_pattern": "https://bennett-maxwell.github.io/fki-preview/podcasts/{lead-slug}.mp3"
+    },
+    "links": {
+      "rule": "All podcast-related hrefs must be absolute URLs — no relative paths",
+      "audit_check": "D3-17"
+    }
+  },
+  "structure": {
+    "section_order": [
+      "hero",
+      "podcast-forefront-callout",
+      "business-snapshot",
+      "ai-gaps",
+      "agents",
+      "roi-calculator",
+      "partner-path",
+      "podcast-player",
+      "apply-cta"
+    ],
+    "required_meta": ["title", "description", "og:title", "og:description", "canonical"],
+    "copyright_year": "2026",
+    "brand_name": "FKI · Franchise KI"
+  },
+  "links": {
+    "qualify_url": "https://bennett-maxwell.github.io/fki-preview/qualify.html",
+    "apply_url": "https://bennett-maxwell.github.io/fki-preview/apply/",
+    "base_url": "https://bennett-maxwell.github.io/fki-preview/",
+    "rule": "All internal links must be absolute — never relative paths"
+  },
+  "audit_enforcement": {
+    "pre_commit_hook": ".git/hooks/pre-commit",
+    "orchestrator_validators": [
+      "placeholder_validator",
+      "contamination_validator",
+      "link_validator",
+      "audio_player_validator v3 STRICT"
+    ],
+    "audit_skill": "blueprint-ai-audit-skill v2.2.1",
+    "drive_file_id": "1Wp7zzDlp4uzeEX8vTIQv0_RsJp70ORLM",
+    "gatekeeper": "gk-ledger-write.sh (hard ship-gate enforcer)"
+  }
+}
