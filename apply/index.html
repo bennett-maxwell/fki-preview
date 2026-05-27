@@ -802,7 +802,7 @@ function checkROITrigger() {
 // ─── GHL WEBHOOK SUBMISSION ─────────────────────────────────
 (function() {
   var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
-  var GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/' + GHL_LOC;
+  var GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
   var STORAGE_KEY = 'advaitaLeadIdentity';
   var SESSION_KEY = 'advaitaLeadSessionId';
 
@@ -903,6 +903,16 @@ function checkROITrigger() {
     return identity;
   }
 
+  function persistReturnedContactId(contactId) {
+    if (!contactId) return;
+    try {
+      var identity = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {};
+      identity.contactId = contactId;
+      identity.updatedAt = new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(identity));
+    } catch(e) {}
+  }
+
   async function submitToGHL(d) {
     var identity = persistLeadIdentity(d);
     var rev = parseInt(d.revenue_value) || 0;
@@ -933,11 +943,17 @@ function checkROITrigger() {
       submitted_at: new Date().toISOString()
     };
     try {
-      await fetch(GHL_WEBHOOK, {
+      var response = await fetch(GHL_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      if (response.ok) {
+        var result = await response.json().catch(function() { return {}; });
+        persistReturnedContactId(result.contactId || '');
+      } else {
+        try { localStorage.setItem('advaitaApplyPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+      }
     } catch(e) {
       try { localStorage.setItem('advaitaApplyPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
     }

@@ -423,7 +423,7 @@ const chips = { speed: null, capability: null };
 let lastQualificationBand = null;
 
 const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
-const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/' + GHL_LOC;
+const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
 const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
@@ -489,6 +489,14 @@ function persistIdentity() {
   const stored = Object.assign({}, readStoredIdentity(), id, { updatedAt: new Date().toISOString() });
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch(e) {}
   return stored;
+}
+
+function persistReturnedContactId(contactId) {
+  if (!contactId) return;
+  try {
+    const identity = Object.assign({}, readStoredIdentity(), { contactId, updatedAt: new Date().toISOString() });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(identity));
+  } catch(e) {}
 }
 
 function hydrateIdentity() {
@@ -888,11 +896,17 @@ function buildQualifierPayload() {
 async function submitQualification() {
   const payload = buildQualifierPayload();
   try {
-    await fetch(GHL_WEBHOOK, {
+    const response = await fetch(GHL_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    if (response.ok) {
+      const result = await response.json().catch(() => ({}));
+      persistReturnedContactId(result.contactId || '');
+    } else {
+      try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+    }
   } catch(e) {
     try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
   }
