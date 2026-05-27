@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T01:40:08Z | Lead: Rush Evans | Industry: Photography & Video -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T02:26:04Z | Lead: Rush Evans | Industry: Photography & Video -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1729,12 +1729,50 @@ Rules:
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
-        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <audio controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="width:100%;margin-bottom:12px;"></audio>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Riah Evans Photography + Video.</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
+            <section class="section section-alt" id="podcast">
+  <div class="container">
+    <p class="section-label">Your Personalized Podcast</p>
+    <h2 class="section-title">Listen to Your AI Advantage Roadmap</h2>
+    <p class="section-sub">Two AI hosts walk through your exact business, tools, and opportunities &mdash; built specifically for Riah Evans Photography + Video. About 20 minutes.</p>
+    <div class="podcast-wrap">
+      <div class="podcast-title">Riah Evans Photography + Video &mdash; AI Advantage Deep Dive</div>
+      <div class="podcast-sub">Austin &middot; Riah Evans Photography + Video &mdash; covers your gaps, your tool stack, your 6 agents, and exactly what to do first.</div>
+      <div class="podcast-meta">
+        <span class="podcast-meta-item">&#9654; ~20 minutes</span>
+        <span class="podcast-meta-item">&#127911; Gun Store + AI</span>
+        <span class="podcast-meta-item">&#128100; Prepared for Austin</span>
       </div>
+      <div class="podcast-player">
+        <audio id="podAudio" preload="metadata" style="width:100%">
+          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" type="audio/mpeg">
+          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="color:var(--brand-light)">Download the podcast</a>.
+        </audio>
+
+        <!-- Chapter markers (chapter-pip) -->
+        <div style="display:flex;gap:6px;justify-content:center;margin:10px 0 4px;">
+          <span class="chapter-pip" data-time="0" style="width:10px;height:10px;border-radius:50%;background:var(--brand-light);cursor:pointer;display:inline-block;" title="Intro"></span>
+          <span class="chapter-pip" data-time="300" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="AI Opportunity"></span>
+          <span class="chapter-pip" data-time="720" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="Agent Stack"></span>
+          <span class="chapter-pip" data-time="1080" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;display:inline-block;" title="Next Steps"></span>
+        </div>
+
+        <div id="podPlay" style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;">
+          <button onclick="var a=document.getElementById('podAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-light);color:var(--brand-dark);border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
+          <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
+        </div>
+        <style>.speed-active{background:rgba(199,22,16,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
+      </div>
+      <div class="podcast-quotes">
+        <div class="podcast-quote">"The gun stores that grow over the next 3 years will not necessarily be the ones with the biggest inventory. They will be the ones whose customers always know what is happening with their transfer, always feel remembered after a sale, and never have to wait for an answer."</div>
+        <div class="podcast-quote">"For a store like Riah Evans Photography + Video, AI is not about replacing your staff. It is about making sure every photography inquiry gets a response within minutes &mdash; even during a full weekend of shoots."</div>
+      </div>
+    </div>
+  </div>
+</section>
       <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
         <span style="font-size:12px;color:#666;">Speed:</span>
         <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
@@ -1977,5 +2015,51 @@ updateCalc();
   <a href="https://bennett-maxwell.github.io/fki-preview/apply/?lead=Rush Evans&biz=Riah Evans Photography + Video&src=rush-evans">Apply to Work With Us</a>
 </div>
 
+
+
+
+<script>
+// ---- Podcast Player: Chapter Navigation + State Persistence ----
+const CHAPTERS = [
+  { time: 0,    label: "Intro — Riah Evans Photography + Video" },
+  { time: 300,  label: "AI Opportunity Map" },
+  { time: 720,  label: "Agent Stack Walkthrough" },
+  { time: 1080, label: "Next Steps + Apply" }
+];
+
+(function initPodPlayer() {
+  const audio = document.getElementById('podAudio');
+  if (!audio) return;
+
+  // bpod_ localStorage: restore playback position
+  const bpod_key = 'bpod_rush-evans';
+  const saved = parseFloat(localStorage.getItem(bpod_key) || '0');
+  if (saved > 5) audio.currentTime = saved;
+
+  audio.addEventListener('timeupdate', function() {
+    localStorage.setItem(bpod_key, audio.currentTime.toString());
+    updateActivePip();
+  });
+
+  // Chapter pip click handlers
+  document.querySelectorAll('.chapter-pip').forEach(function(pip) {
+    pip.addEventListener('click', function() {
+      const t = parseFloat(this.getAttribute('data-time') || '0');
+      audio.currentTime = t;
+      audio.play();
+    });
+  });
+
+  function updateActivePip() {
+    const pips = document.querySelectorAll('.chapter-pip');
+    const ct = audio.currentTime;
+    let activeIdx = 0;
+    CHAPTERS.forEach(function(ch, i) { if (ct >= ch.time) activeIdx = i; });
+    pips.forEach(function(p, i) {
+      p.style.background = i === activeIdx ? 'var(--brand-light)' : 'rgba(255,255,255,0.4)';
+    });
+  }
+})();
+</script>
 </body>
 </html>
