@@ -334,7 +334,12 @@
         <!-- Q1: Name -->
         <div class="form-group">
           <label class="form-label" for="q1_name"><span class="q-badge">1</span>First name</label>
-          <input id="q1_name" name="first_name" type="text" class="form-control" placeholder="Your first name" required />
+          <input id="q1_name" name="first_name" type="text" class="form-control" placeholder="Your first name" required autocomplete="given-name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="q1_last"><span class="q-badge">1b</span>Last name</label>
+          <input id="q1_last" name="last_name" type="text" class="form-control" placeholder="Your last name" required autocomplete="family-name" />
         </div>
 
         <!-- Q2: Email -->
@@ -352,6 +357,11 @@
         </div>
 
         <!-- Q3: Website -->
+        <div class="form-group">
+          <label class="form-label" for="q3_business"><span class="q-badge">B</span>Business name</label>
+          <input id="q3_business" name="business_name" type="text" class="form-control" placeholder="Your business name" required autocomplete="organization" />
+        </div>
+
         <div class="form-group">
           <label class="form-label" for="q3_website"><span class="q-badge">3</span>Business website</label>
           <input id="q3_website" name="website" type="text" class="form-control" placeholder="yourcompany.com" required autocomplete="url" />
@@ -789,18 +799,15 @@ function checkROITrigger() {
   } catch(e) {}
 })();
 
-// ─── GHL SUBMISSION ──────────────────────────────────────────
+// ─── GHL WEBHOOK SUBMISSION ─────────────────────────────────
 (function() {
-  var GHL_KEY = 'pit-81e14317-71e3-44c2-864c-0dd014f570cd';
   var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
-  var GHL_API = 'https://services.leadconnectorhq.com';
-
-  function ghlHeaders() {
-    return { 'Authorization': 'Bearer ' + GHL_KEY, 'Version': '2021-07-28', 'Content-Type': 'application/json' };
-  }
+  var GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/' + GHL_LOC;
+  var STORAGE_KEY = 'advaitaLeadIdentity';
+  var SESSION_KEY = 'advaitaLeadSessionId';
 
   function buildTags(d) {
-    var tags = ['advaita-ai-blueprint'];
+    var tags = ['advaita-ai-blueprint', 'ai blueprint opt-in', 'blueprint_ai_apply'];
     var drainMap = { lead_followup: 'drain-lead-followup', admin_reporting: 'drain-admin', scheduling: 'drain-scheduling', customer_onboarding: 'drain-onboarding', content_creation: 'drain-content', all: 'drain-everything' };
     if (drainMap[d.time_drains]) tags.push(drainMap[d.time_drains]);
     var rev = parseInt(d.revenue_value) || 0;
@@ -841,6 +848,7 @@ function checkROITrigger() {
     return [
       'Advaita AI Blueprint — Intake Form v6 (12Q)',
       '---',
+      'Business name: ' + (d.business_name || 'N/A'),
       'Website: ' + (d.website || 'N/A'),
       'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
       'Team size: ' + (d.team_size || 'N/A'),
@@ -860,52 +868,79 @@ function checkROITrigger() {
     ].join('\n');
   }
 
-  var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
-  function getStageId(rev) {
-    if (rev >= 1000000) return '049a4cd8-5f38-4cf2-81c6-32a37da21876';
-    if (rev >= 500000)  return '998beee1-22f5-4f99-80e3-97d121ed298f';
-    return '4fc67de4-544a-4b37-88b6-6ffda69f64b3';
+  function getLeadSessionId() {
+    try {
+      var existing = localStorage.getItem(SESSION_KEY);
+      if (existing) return existing;
+      var created = 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(SESSION_KEY, created);
+      return created;
+    } catch(e) {
+      return 'advaita-' + Date.now().toString(36);
+    }
+  }
+
+  function getQueryValue(name) {
+    try { return new URLSearchParams(window.location.search).get(name) || ''; }
+    catch(e) { return ''; }
+  }
+
+  function persistLeadIdentity(d) {
+    var identity = {
+      firstName: d.first_name || '',
+      lastName: d.last_name || '',
+      email: d.email || '',
+      phone: d.phone || '',
+      businessName: d.business_name || '',
+      website: d.website || '',
+      source: d.utm_source || d.src || getQueryValue('src') || 'apply',
+      blueprintSlug: d.utm_content || d.blueprint_slug || getQueryValue('src') || '',
+      contactId: d.contact_id || getQueryValue('contactId') || getQueryValue('cid') || '',
+      leadSessionId: getLeadSessionId(),
+      updatedAt: new Date().toISOString()
+    };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(identity)); } catch(e) {}
+    return identity;
   }
 
   async function submitToGHL(d) {
+    var identity = persistLeadIdentity(d);
+    var rev = parseInt(d.revenue_value) || 0;
+    var payload = {
+      event_name: 'blueprint_apply_submit',
+      form_version: '2026-05-27-identity-webhook-v1',
+      locationId: GHL_LOC,
+      firstName: d.first_name,
+      lastName: d.last_name || '',
+      email: d.email,
+      phone: d.phone || '',
+      businessName: d.business_name || '',
+      website: d.website || '',
+      source: 'blueprint_ai_apply',
+      original_source: identity.source,
+      blueprint_slug: identity.blueprintSlug,
+      contact_id: identity.contactId,
+      lead_session_id: identity.leadSessionId,
+      tags: buildTags(d),
+      note: buildNote(d),
+      revenue_value: rev,
+      revenue_label: d.revenue_label || '',
+      time_drains: d.time_drains || '',
+      personal_hours: d.personal_hours || '',
+      company_hours: d.company_hours || '',
+      marketing_spend: d.marketing_spend || '',
+      marketing_label: d.marketing_label || '',
+      submitted_at: new Date().toISOString()
+    };
     try {
-      var res = await fetch(GHL_API + '/contacts/', {
-        method: 'POST', headers: ghlHeaders(),
-        body: JSON.stringify({
-          firstName: d.first_name, email: d.email,
-          phone: d.phone || '',
-          locationId: GHL_LOC, source: 'advaita-ai-blueprint',
-          tags: buildTags(d),
-          customFields: [
-            { key: 'form_version', field_value: '2026-05-25-v7' },
-            { id: 'mQiY5BHHi9gWVFHOTgQP', field_value: d.utm_brand || d.utm_source || 'direct' }
-          ]
-        })
+      await fetch(GHL_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-      if (!res.ok) return;
-      var json = await res.json();
-      var cid = json.contact && json.contact.id;
-      if (!cid) return;
-      var rev = parseInt(d.revenue_value) || 0;
-      await Promise.all([
-        fetch(GHL_API + '/contacts/' + cid + '/notes', {
-          method: 'POST', headers: ghlHeaders(),
-          body: JSON.stringify({ body: buildNote(d) })
-        }),
-        fetch(GHL_API + '/opportunities/', {
-          method: 'POST', headers: ghlHeaders(),
-          body: JSON.stringify({
-            pipelineId: PIPELINE_ID,
-            locationId: GHL_LOC,
-            name: (d.first_name || 'Lead') + ' — Blueprint AI',
-            pipelineStageId: getStageId(rev),
-            contactId: cid,
-            monetaryValue: rev,
-            status: 'open'
-          })
-        })
-      ]);
-    } catch(e) {}
+    } catch(e) {
+      try { localStorage.setItem('advaitaApplyPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+    }
   }
 
   var form = document.getElementById('blueprint-form');

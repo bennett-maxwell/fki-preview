@@ -29,10 +29,10 @@
 # Rules enforced:
 #   - ALWAYS builds from clean TEMPLATE.html (zero business-specific content in template)
 #   - All lead data comes from profile JSON (stats, name, business, industry, services)
-#   - CTA = "Apply to Work With Bennett" qualifying mailto with lead-specific params
+#   - CTA = "See If You Qualify" with lead-specific params into the tracked qualifier
 #   - 3/7/30 onboarding timeline (NOT 90-day)
 #   - Interactive ROI calculator only (no hardcoded dollar predictions)
-#   - NO booking URLs, NO calendar links
+#   - NO direct booking URLs in blueprint pages; booking opens only after tracked qualifier submit
 #   - Post-build contamination check: FAILS if Brittney/Warnick/wedding content detected
 #
 # Requirements: bash 4+, python3, jq, git, curl
@@ -74,7 +74,7 @@ WHAT IT DOES:
 RULES ENFORCED:
   - Builds from clean TEMPLATE.html (no business-specific content in base)
   - All data comes from lead profile JSON (zero hallucinated stats)
-  - CTA = "Apply to Work With Bennett" (qualifying mailto, no booking URLs)
+  - CTA = "See If You Qualify" (tracked qualifier URL, no direct booking URLs)
   - 3/7/30 onboarding timeline (not 90-day)
   - Interactive ROI calculator (no hardcoded dollar predictions)
   - Post-build contamination check catches any template leakage
@@ -213,11 +213,11 @@ def lighten_hex(hex_color, factor=0.4):
 accent_light = lighten_hex(accent_color)
 accent_mid = lighten_hex(accent_color, 0.2)
 
-# Build apply URL and mailto link
+# Build tracked qualifier URL and mailto link
 lead_encoded = urllib.parse.quote(lead_name)
 biz_encoded = urllib.parse.quote(business_name)
 slug = profile.get('slug', lead_name.lower().replace(' ', '-'))
-apply_url = f'https://bennett-maxwell.github.io/fki-preview/apply/?lead={lead_encoded}&biz={biz_encoded}&src={slug}'
+qualify_url = f'https://bennett-maxwell.github.io/fki-preview/qualify.html?lead={lead_encoded}&biz={biz_encoded}&src={slug}'
 
 subject_encoded = urllib.parse.quote(f"Application -- {business_name}")
 mailto_body = urllib.parse.quote(
@@ -248,7 +248,8 @@ replacements = {
     '{{KEY_METRIC_LABEL}}': key_metric_label,
     '{{TEAM_SIZE}}': str(team_size),
     '{{MONTHLY_LEADS}}': str(monthly_leads),
-    '{{APPLY_URL}}': apply_url,
+    '{{APPLY_URL}}': qualify_url,
+    '{{QUALIFY_URL}}': qualify_url,
     '{{MAILTO_LINK}}': mailto_link,
     '{{SERVICES_LIST}}': services_str,
     '{{DOMAIN}}': f'{domain_slug}.com',
@@ -394,16 +395,16 @@ if [ "$CONTAMINATION" -eq 1 ]; then
   exit 1
 fi
 echo "  Contamination check: PASS (zero template leakage)"
-# Check for booking URLs (should not exist)
+# Check for direct booking URLs (should not exist in blueprint pages)
 if grep -qi "booking\|calendly\|cal\.com" "$OUTPUT_FILE" 2>/dev/null; then
-  echo "WARNING: Booking/calendar URL detected. Remove manually -- CTA must be qualifying mailto only."
+  echo "WARNING: Direct booking/calendar URL detected. Route through qualify.html instead."
 fi
 
 # Verify CTA is correct
-if grep -q "Apply to Work With Bennett" "$OUTPUT_FILE"; then
-  echo "  CTA verified: 'Apply to Work With Bennett' present."
+if grep -q "See If You Qualify" "$OUTPUT_FILE"; then
+  echo "  CTA verified: 'See If You Qualify' present."
 else
-  echo "WARNING: CTA 'Apply to Work With Bennett' not found."
+  echo "WARNING: CTA 'See If You Qualify' not found."
 fi
 
 # Verify 3/7/30 timeline

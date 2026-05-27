@@ -120,6 +120,22 @@
 
   .cta-btn { display: block; width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 9px; padding: 0.95rem; font-size: 1rem; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
   .cta-btn:hover { background: var(--brand-light); }
+  .cta-btn[disabled] { opacity: 0.5; pointer-events: none; }
+  .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.48); margin-top: 0.75rem; text-align: center; line-height: 1.4; }
+  .identity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .identity-grid .full { grid-column: 1 / -1; }
+  .identity-field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.35rem; }
+  .identity-field input { width: 100%; font-size: 0.95rem; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; color: var(--text); background: var(--neutral-bg); outline: none; }
+  .identity-field input:focus { border-color: var(--brand); background: var(--white); }
+  .identity-status { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-light); }
+  .identity-status.ready { color: #19713a; font-weight: 700; }
+  .booking-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(10,14,26,0.72); }
+  .booking-modal.open { display: flex; }
+  .booking-dialog { width: min(920px, 100%); max-height: 92vh; background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 80px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
+  .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+  .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
   .disclaimer a { color: var(--brand); }
@@ -143,6 +159,7 @@
   .exp-input-row { flex-wrap: wrap; gap: 0.5rem; }
   .exp-input-row label { min-width: unset; }
   .exp-input-row input[type=number] { width: 100px; }
+  .identity-grid { grid-template-columns: 1fr; }
   .results-card { padding: 1.5rem; }
   .result-block { padding: 1.1rem; }
   .result-block-value { font-size: 1.6rem; }
@@ -167,6 +184,35 @@
 
 <div class="main-wrap">
   <div class="questions-col">
+
+    <div class="q-section" id="identity-section">
+      <div class="q-label">Contact Tracking</div>
+      <div class="q-title">Confirm where this qualification should be saved.</div>
+      <div class="q-sub">This keeps your score, application, and call request tied to the same CRM record.</div>
+      <div class="identity-grid">
+        <div class="identity-field">
+          <label for="lead-first">First name</label>
+          <input id="lead-first" name="firstName" type="text" autocomplete="given-name" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-last">Last name</label>
+          <input id="lead-last" name="lastName" type="text" autocomplete="family-name" required>
+        </div>
+        <div class="identity-field full">
+          <label for="lead-business">Business name</label>
+          <input id="lead-business" name="businessName" type="text" autocomplete="organization" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-email">Email</label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-phone">Phone</label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+        </div>
+      </div>
+      <div class="identity-status" id="identity-status">Name, email, phone, and business are required before booking.</div>
+    </div>
 
     <div class="section-divider">Revenue Potential — Do the Numbers Qualify?</div>
 
@@ -340,7 +386,8 @@
 
       <div class="results-breakdown" id="breakdown-text"></div>
 
-      <a class="cta-btn" id="cta-apply" href="thank-you-blueprint.html" style="opacity:0.5;pointer-events:none;">Apply for Advaita AI for Business →</a>
+      <button class="cta-btn" id="cta-apply" type="button" disabled>Submit Qualification First</button>
+      <div class="cta-note" id="cta-note">Complete the contact fields and all 8 questions.</div>
     </div>
   </div>
 
@@ -349,6 +396,16 @@
 <p class="disclaimer">
   Close rate lift benchmarks from <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review speed-to-lead research</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management Institute</a>. These are industry averages — your results will vary. This tool qualifies fit; it does not guarantee outcomes.
 </p>
+
+<div class="booking-modal" id="booking-modal" aria-hidden="true">
+  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="booking-head">
+      <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
+      <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
+    </div>
+    <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar"></iframe>
+  </div>
+</div>
 
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -363,6 +420,105 @@ let teamHrsVal = null;   // Q6b — avg hrs/week per member
 let spendVal   = null;   // Q8 — ad spend
 
 const chips = { speed: null, capability: null };
+let lastQualificationBand = null;
+
+const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/' + GHL_LOC;
+const STORAGE_KEY = 'advaitaLeadIdentity';
+const SESSION_KEY = 'advaitaLeadSessionId';
+const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+
+function getParams() {
+  try { return new URLSearchParams(window.location.search); }
+  catch(e) { return new URLSearchParams(); }
+}
+
+function getLeadSessionId() {
+  try {
+    const existing = localStorage.getItem(SESSION_KEY);
+    if (existing) return existing;
+    const created = 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem(SESSION_KEY, created);
+    return created;
+  } catch(e) {
+    return 'advaita-' + Date.now().toString(36);
+  }
+}
+
+function readStoredIdentity() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {}; }
+  catch(e) { return {}; }
+}
+
+function splitName(fullName) {
+  const clean = String(fullName || '').replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/\s+/);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
+function getIdentity() {
+  return {
+    firstName: document.getElementById('lead-first').value.trim(),
+    lastName: document.getElementById('lead-last').value.trim(),
+    businessName: document.getElementById('lead-business').value.trim(),
+    email: document.getElementById('lead-email').value.trim(),
+    phone: document.getElementById('lead-phone').value.trim(),
+    contactId: getParams().get('contactId') || getParams().get('cid') || readStoredIdentity().contactId || '',
+    source: getParams().get('src') || getParams().get('utm_source') || readStoredIdentity().source || 'qualify',
+    blueprintSlug: getParams().get('src') || readStoredIdentity().blueprintSlug || '',
+    leadSessionId: getLeadSessionId()
+  };
+}
+
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function validPhone(phone) {
+  return phone.replace(/\D/g, '').length >= 10;
+}
+
+function isIdentityComplete() {
+  const id = getIdentity();
+  return !!(id.firstName && id.lastName && id.businessName && validEmail(id.email) && validPhone(id.phone));
+}
+
+function persistIdentity() {
+  const id = getIdentity();
+  const stored = Object.assign({}, readStoredIdentity(), id, { updatedAt: new Date().toISOString() });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch(e) {}
+  return stored;
+}
+
+function hydrateIdentity() {
+  const params = getParams();
+  const stored = readStoredIdentity();
+  const split = splitName(params.get('lead') || stored.leadName || '');
+  const fields = {
+    'lead-first': params.get('firstName') || params.get('first') || stored.firstName || split.first,
+    'lead-last': params.get('lastName') || params.get('last') || stored.lastName || split.last,
+    'lead-business': params.get('businessName') || params.get('biz') || stored.businessName || '',
+    'lead-email': params.get('email') || stored.email || '',
+    'lead-phone': params.get('phone') || stored.phone || ''
+  };
+  Object.keys(fields).forEach(id => {
+    const el = document.getElementById(id);
+    if (el && fields[id]) el.value = fields[id].replace(/\+/g, ' ');
+  });
+}
+
+function updateIdentityStatus() {
+  const status = document.getElementById('identity-status');
+  if (!status) return;
+  if (isIdentityComplete()) {
+    status.textContent = 'Ready. This qualification will be saved against this contact.';
+    status.className = 'identity-status ready';
+  } else {
+    status.textContent = 'Name, email, phone, and business are required before booking.';
+    status.className = 'identity-status';
+  }
+}
 
 // ── Q1: MONTHLY LEADS — exponential 10–5,000 ─────────────────────────────────
 function posToLeads(pos) {
@@ -581,7 +737,10 @@ function update() {
   const vSub    = document.getElementById('verdict-sub');
   const bdText  = document.getElementById('breakdown-text');
   const cta     = document.getElementById('cta-apply');
+  const ctaNote = document.getElementById('cta-note');
   const allDone = answered >= 8;
+  const identityDone = isIdentityComplete();
+  lastQualificationBand = qualifies10x;
 
   if (canQualify) {
     const ICON_CHECK = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12.5 11 15.5 16 9.5"/></svg>';
@@ -592,7 +751,7 @@ function update() {
       vBlock.className   = 'verdict-block green';
       vIcon.innerHTML    = ICON_CHECK;
       vLabel.textContent = 'Qualifies for 10X Return in 90 Days';
-      vSub.textContent   = 'Your numbers support a strong outcome. Apply below to get started.';
+      vSub.textContent   = 'Your numbers support a strong outcome. Book below after your qualification is saved.';
     } else if (qualifies10x === 'possible') {
       vBlock.className   = 'verdict-block yellow';
       vIcon.innerHTML    = ICON_INFO;
@@ -618,16 +777,20 @@ function update() {
       '<span>Team:</span> ' + teamStr + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + spendStr + '<br>' +
       '<span>First deploy:</span> ' + capLabel;
 
-    cta.style.opacity       = allDone ? '1'    : '0.5';
-    cta.style.pointerEvents = allDone ? 'auto' : 'none';
+    cta.disabled = !(allDone && identityDone);
+    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
+    ctaNote.textContent = allDone && identityDone
+      ? (qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.')
+      : 'Complete the contact fields and all 8 questions.';
   } else {
     vBlock.className        = 'verdict-block neutral';
-    vIcon.textContent       = '📊';
+    vIcon.textContent       = 'Score';
     vLabel.textContent      = 'Your qualification appears here';
     vSub.textContent        = 'Answer questions 1–4 to calculate';
     bdText.innerHTML        = '';
-    cta.style.opacity       = '0.5';
-    cta.style.pointerEvents = 'none';
+    cta.disabled            = true;
+    cta.textContent         = 'Submit Qualification First';
+    ctaNote.textContent     = 'Complete the contact fields and all 8 questions.';
   }
 
   // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
@@ -645,7 +808,156 @@ function update() {
   }
 }
 
+function buildQualifierNote(payload) {
+  return [
+    'Advaita AI Qualifier — tracked application event',
+    '---',
+    'Business: ' + (payload.businessName || 'N/A'),
+    'Lead session: ' + payload.lead_session_id,
+    'Source: ' + payload.source,
+    'Blueprint slug: ' + (payload.blueprint_slug || 'N/A'),
+    'Qualification band: ' + payload.qualification_band,
+    'Score progress: ' + payload.questions_answered + '/8',
+    '---',
+    'Monthly leads: ' + payload.monthly_leads,
+    'Average deal: ' + payload.average_deal_value,
+    'Leads per sale: ' + payload.leads_per_sale,
+    'Response speed: ' + payload.response_speed,
+    'Owner computer hours/week: ' + payload.owner_hours_per_week,
+    'Team members: ' + payload.team_members,
+    'Team hours/member/week: ' + payload.team_hours_per_member,
+    'First deploy: ' + payload.first_deploy,
+    'Monthly ad spend: ' + payload.monthly_ad_spend,
+    'Submitted at: ' + payload.submitted_at
+  ].join('\n');
+}
+
+function currentAnswerCount() {
+  let answered = 0;
+  if (leadsVal !== null && leadsVal > 0) answered++;
+  if (dealVal !== null && dealVal > 0) answered++;
+  if (lpsVal !== null) answered++;
+  if (chips.speed) answered++;
+  if (hoursVal !== null) answered++;
+  if (teamVal !== null && teamHrsVal !== null) answered++;
+  if (chips.capability) answered++;
+  if (spendVal !== null) answered++;
+  return Math.min(answered, 8);
+}
+
+function buildQualifierPayload() {
+  const id = persistIdentity();
+  const band = lastQualificationBand || 'unknown';
+  const payload = {
+    event_name: 'blueprint_qualifier_submit',
+    form_version: '2026-05-27-identity-webhook-v1',
+    locationId: GHL_LOC,
+    firstName: id.firstName,
+    lastName: id.lastName,
+    email: id.email,
+    phone: id.phone,
+    businessName: id.businessName,
+    source: 'blueprint_ai_qualifier',
+    original_source: id.source,
+    blueprint_slug: id.blueprintSlug,
+    contact_id: id.contactId,
+    lead_session_id: id.leadSessionId,
+    qualification_band: band,
+    ai_qualified: band === 'strong' || band === 'possible',
+    monthly_leads: leadsVal || 0,
+    average_deal_value: dealVal || 0,
+    leads_per_sale: lpsVal || 0,
+    response_speed: chips.speed || '',
+    owner_hours_per_week: hoursVal || 0,
+    team_members: teamVal || 0,
+    team_hours_per_member: teamHrsVal || 0,
+    first_deploy: chips.capability || '',
+    monthly_ad_spend: spendVal || 0,
+    questions_answered: currentAnswerCount(),
+    tags: [
+      'advaita-ai-qualifier',
+      band === 'strong' ? 'advaita-qualified' : band === 'possible' ? 'advaita-review-needed' : 'advaita-not-fit',
+      'blueprint_ai_qualifier'
+    ],
+    submitted_at: new Date().toISOString()
+  };
+  payload.note = buildQualifierNote(payload);
+  return payload;
+}
+
+async function submitQualification() {
+  const payload = buildQualifierPayload();
+  try {
+    await fetch(GHL_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch(e) {
+    try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+  }
+  return payload;
+}
+
+function buildBookingUrl() {
+  const id = persistIdentity();
+  const url = new URL(BOOKING_URL, window.location.href);
+  const parts = {
+    first_name: id.firstName,
+    last_name: id.lastName,
+    name: (id.firstName + ' ' + id.lastName).trim(),
+    email: id.email,
+    phone: id.phone,
+    business_name: id.businessName,
+    contact_id: id.contactId,
+    source: 'blueprint_ai_qualifier',
+    lead_session_id: id.leadSessionId,
+    blueprint_slug: id.blueprintSlug
+  };
+  Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
+  return url.toString();
+}
+
+function openBookingModal() {
+  document.getElementById('booking-frame').src = buildBookingUrl();
+  document.getElementById('booking-modal').classList.add('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
+}
+
+async function handleCtaClick() {
+  const cta = document.getElementById('cta-apply');
+  if (cta.disabled) return;
+  cta.disabled = true;
+  const originalText = cta.textContent;
+  cta.textContent = 'Saving...';
+  const payload = await submitQualification();
+  if (payload.ai_qualified) {
+    cta.textContent = originalText;
+    cta.disabled = false;
+    openBookingModal();
+  } else {
+    window.location.href = 'thank-you-blueprint.html';
+  }
+}
+
 // Init
+hydrateIdentity();
+document.querySelectorAll('#identity-section input').forEach(el => {
+  el.addEventListener('input', function() {
+    persistIdentity();
+    updateIdentityStatus();
+    update();
+  });
+});
+document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+document.getElementById('booking-close').addEventListener('click', function() {
+  document.getElementById('booking-modal').classList.remove('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
+});
+document.getElementById('booking-modal').addEventListener('click', function(e) {
+  if (e.target === this) document.getElementById('booking-close').click();
+});
+updateIdentityStatus();
 update();
 </script>
 </body>
