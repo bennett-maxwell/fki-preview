@@ -1001,7 +1001,7 @@ function checkROITrigger() {
     el.addEventListener('change', function() { if (!el.id || (el.id !== 'q2_email' && el.id !== 'q3_website')) el.style.borderColor = ''; checkROITrigger(); });
   });
 
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
     var required = form.querySelectorAll('[required]');
     var allValid = true;
@@ -1031,11 +1031,10 @@ function checkROITrigger() {
     form.style.display = 'none';
     successEl.style.display = 'block';
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    submitToGHL(d).catch(function() {});
-    // Redirect to thank-you page after brief delay so GHL call can fire
-    setTimeout(function() {
-      window.location.href = '../thank-you-apply.html';
-    }, 1200);
+    var submitPromise = submitToGHL(d).catch(function() {});
+    var timeoutPromise = new Promise(function(resolve) { setTimeout(resolve, 5000); });
+    await Promise.race([submitPromise, timeoutPromise]);
+    window.location.href = '../thank-you-apply.html';
   });
 })();
 </script>
