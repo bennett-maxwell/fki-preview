@@ -189,6 +189,8 @@ if [ -d ".git" ]; then
     if [ -n "$CHANGES" ]; then
         git commit -m "Blueprint batch: $TOTAL leads ($PASSED passed, $FAILED failed) [$TIMESTAMP]" >> "$LOG" 2>&1 || echo "Commit failed" | tee -a "$LOG"
         log_info "blueprint-batch.sh" "git_commit" "Committed $TOTAL leads" 2>/dev/null || true
+        # Pull-before-push: prevents "fetch first" rejection (root cause of May 20 crash)
+        git pull --rebase origin main >> "$LOG" 2>&1 || echo "Pull-rebase failed — push may still succeed" | tee -a "$LOG"
         git push origin main >> "$LOG" 2>&1 || echo "Push failed -- will retry on next run" | tee -a "$LOG"
     else
         echo "Nothing to commit (all outputs up to date)" | tee -a "$LOG"
