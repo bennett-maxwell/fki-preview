@@ -976,6 +976,10 @@
     .hero { padding: 40px 16px !important; }
   }
 </style>
+<style id="podv3-css">
+.chapter-pip { position:absolute; top:50%; width:4px; height:16px; background:rgba(255,255,255,0.62); border-radius:2px; transform:translate(-50%,-50%); }
+.pod-track { background:rgba(255,255,255,0.12); border-radius:2px; }
+</style>
 </head>
 <body>
 
@@ -1014,7 +1018,7 @@
 
 <!-- ----------- URGENCY BAR ----------- -->
 <div class="urgency-bar">
-  2027 2027 plumbing and HVAC season demand is accelerating — <span id="countdown"></span> days until peak season begins
+  2027 2027 plumbing and HVAC season demand is accelerating — <span id="cd-x"></span> days until peak season begins
 </div>
 
 <!-- ----------- TAB NAVIGATION ----------- -->
@@ -1025,7 +1029,6 @@
   <button class="tab-btn" onclick="switchTab('systems', event)">AI Systems</button>
   <button class="tab-btn" onclick="switchTab('agents', event)">AI Agents</button>
   <button class="tab-btn" onclick="switchTab('listen', event)">Listen</button>
-  <button class="tab-btn" onclick="switchTab('command', event)">Command Center</button>
 </div>
 
 <div class="container">
@@ -1729,17 +1732,24 @@ Rules:
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+            <div id="podcast" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <audio controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" style="width:100%;margin-bottom:12px;"></audio>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Rare Breed Plumbing, Heating And Air.</p>
+        <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" style="width:100%;margin-bottom:12px;"></audio>
+        <div class="pod-track" style="position:relative;height:16px;margin:10px 0;">
+          <div class="pod-pip chapter-pip" data-time="0" title="Intro"></div>
+          <div class="pod-pip chapter-pip" data-time="600" title="Your Business"></div>
+          <div class="pod-pip chapter-pip" data-time="1200" title="AI Agents"></div>
+          <div class="pod-pip chapter-pip" data-time="1800" title="ROI & Roadmap"></div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:8px;">
+          <button id="podPlay" onclick="var a=document.getElementById('podAudio');if(a.paused){a.play();this.textContent='Pause';}else{a.pause();this.textContent='Play';}" style="padding:8px 22px;border-radius:100px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;font-size:14px;">Play</button>
+          <span style="font-size:12px;color:rgba(255,255,255,0.75);">Speed:</span>
+          <button onclick="document.getElementById('podAudio').playbackRate=1;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=1.25;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1.25x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=1.5;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1.5x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=2;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">2x</button>
+        </div>
         <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
-      </div>
-      <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
-        <span style="font-size:12px;color:#666;">Speed:</span>
-        <button onclick="document.querySelector('audio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.querySelector('audio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
-        <button onclick="document.querySelector('audio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
 
       <p style="font-size:13px; color:var(--text-light); text-align:center;">Duration: ~38 minutes</p>
@@ -1977,5 +1987,36 @@ updateCalc();
   <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Court Lundberg&biz=Rare Breed Plumbing, Heating And Air&src=court-lundberg">See If You Qualify</a>
 </div>
 
+<script>
+// Audio Player v3 — chapter pips + resume persistence
+const CHAPTERS = [
+  {time:0,title:"Intro"},
+  {time:600,title:"Your Business"},
+  {time:1200,title:"AI Agents"},
+  {time:1800,title:"ROI & Roadmap"}
+];
+(function(){
+  var STORAGE_KEY = 'bpod_court-lundberg';
+  var a = document.getElementById('podAudio');
+  if(!a) return;
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    a.addEventListener('loadedmetadata', function(){
+      if(saved.time && saved.time < a.duration) a.currentTime = saved.time;
+      if(saved.rate) a.playbackRate = saved.rate;
+      document.querySelectorAll('.chapter-pip').forEach(function(p){
+        var t = parseFloat(p.getAttribute('data-time'))||0;
+        if(a.duration) p.style.left = (t/a.duration*100)+'%';
+        p.style.display='block';
+      });
+    });
+    a.addEventListener('timeupdate', function(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({time:a.currentTime, rate:a.playbackRate}));
+    });
+    var pb = document.getElementById('podPlay');
+    if(pb){ a.addEventListener('play',function(){pb.textContent='Pause';}); a.addEventListener('pause',function(){pb.textContent='Play';}); }
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
