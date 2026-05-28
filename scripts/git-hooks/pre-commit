@@ -52,10 +52,13 @@ for bp_path in $STAGED_BLUEPRINTS; do
   slug="$filename"
   echo "  → Validating: $slug"
 
-  # Fix 7: .blueprint-ci-skip marker — skip validators for this slug
-  if [ -f "$CI_SKIP_DIR/blueprints/$slug.html.blueprint-ci-skip" ]; then
-    echo "  ⏭  $slug: CI-SKIP marker found — skipping validators"
-    continue
+  # v2.2 (2026-05-28): .blueprint-ci-skip bypass REMOVED — it hid real gate failures (rush-evans incident).
+  # Instead, AUTO-HEAL the staged blueprint before validating so generator-reverted defects self-repair.
+  AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"
+  if [ -f "$AUTOFIX" ]; then
+    healout=$(python3 "$AUTOFIX" "$CI_SKIP_DIR/$bp_path" 2>/dev/null)
+    echo "  🩹 $healout"
+    case "$healout" in *HEALED*) git add "$bp_path" 2>/dev/null ;; esac
   fi
 
   if python3 "$ORCH" --lead "$slug" --validate-only 2>&1; then

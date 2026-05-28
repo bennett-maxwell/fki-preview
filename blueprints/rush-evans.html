@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-28T23:28:06Z | Lead: Rush Evans | Industry: Photography & Video -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-28T23:43:38Z | Lead: Rush Evans | Industry: Photography & Video -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1739,7 +1739,7 @@ Rules:
           <div class="pod-pip chapter-pip" data-time="0" title="Intro"></div>
           <div class="pod-pip chapter-pip" data-time="600" title="Your Business"></div>
           <div class="pod-pip chapter-pip" data-time="1200" title="AI Agents"></div>
-          <div class="pod-pip chapter-pip" data-time="1800" title="ROI & Roadmap"></div>
+          <div class="pod-pip chapter-pip" data-time="1800" title="ROI &amp; Roadmap"></div>
         </div>
         <div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:8px;">
           <button id="podPlay" onclick="var a=document.getElementById('podAudio');if(a.paused){a.play();this.textContent='Pause';}else{a.pause();this.textContent='Play';}" style="padding:8px 22px;border-radius:100px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;font-size:14px;">Play</button>
@@ -1988,35 +1988,17 @@ updateCalc();
 </div>
 
 <script>
-// Audio Player v3 — chapter pips + resume persistence
-const CHAPTERS = [
-  {time:0,title:"Intro"},
-  {time:600,title:"Your Business"},
-  {time:1200,title:"AI Agents"},
-  {time:1800,title:"ROI & Roadmap"}
-];
+// Audio Player v3 — chapter pips + resume persistence (blueprint_autofix)
+const CHAPTERS = [{time:0,title:"Intro"},{time:600,title:"Your Business"},{time:1200,title:"AI Agents"},{time:1800,title:"ROI & Roadmap"}];
 (function(){
-  var STORAGE_KEY = 'bpod_rush-evans';
-  var a = document.getElementById('podAudio');
-  if(!a) return;
-  try {
-    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    a.addEventListener('loadedmetadata', function(){
-      if(saved.time && saved.time < a.duration) a.currentTime = saved.time;
-      if(saved.rate) a.playbackRate = saved.rate;
-      document.querySelectorAll('.chapter-pip').forEach(function(p){
-        var t = parseFloat(p.getAttribute('data-time'))||0;
-        if(a.duration) p.style.left = (t/a.duration*100)+'%';
-        p.style.display='block';
-      });
-    });
-    a.addEventListener('timeupdate', function(){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({time:a.currentTime, rate:a.playbackRate}));
-    });
-    var pb = document.getElementById('podPlay');
-    if(pb){ a.addEventListener('play',function(){pb.textContent='Pause';}); a.addEventListener('pause',function(){pb.textContent='Play';}); }
-  } catch(e) {}
-})();
+  var STORAGE_KEY='bpod_rush-evans';
+  var a=document.getElementById('podAudio'); if(!a) return;
+  try{ var s=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+    a.addEventListener('loadedmetadata',function(){ if(s.time&&s.time<a.duration)a.currentTime=s.time; if(s.rate)a.playbackRate=s.rate;
+      document.querySelectorAll('.chapter-pip').forEach(function(p){var t=parseFloat(p.getAttribute('data-time'))||0; if(a.duration)p.style.left=(t/a.duration*100)+'%'; p.style.display='block';}); });
+    a.addEventListener('timeupdate',function(){ localStorage.setItem(STORAGE_KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate})); });
+    var pb=document.getElementById('podPlay'); if(pb){a.addEventListener('play',function(){pb.textContent='Pause';});a.addEventListener('pause',function(){pb.textContent='Play';});}
+  }catch(e){} })();
 </script>
 </body>
 </html>
