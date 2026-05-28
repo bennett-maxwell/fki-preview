@@ -1,0 +1,89 @@
+#!/bin/bash
+# Blueprint AI — Pre-commit hook v2.0 (Orchestrator-wired, 2026-05-25)
+# Runs: (1) SKILL.md gate string check (G16) + (2) orchestrator validators on staged blueprint HTML
+
+# Allow per-file CI skip: touch blueprints/<slug>.html.blueprint-ci-skip to bypass gate
+CI_SKIP_DIR="$(git rev-parse --show-toplevel)"
+
+
+SKILL="$(git rev-parse --show-toplevel)/.claude/skills/blueprint-ai-skill/SKILL.md"
+ORCH="$HOME/.claude/skills/blueprint-ai-skill/orchestrator/blueprint_orchestrator.py"
+
+# ── G16: SKILL.md gate strings ─────────────────────────────────────────────
+if [ -f "$SKILL" ]; then
+  REQUIRED=(
+    "audit = 100"
+    "HTTP 200"
+    "MP3 exists"
+    ".audit-100.lock"
+    "send-blueprint-email.sh"
+    "gate-stage4.sh"
+    "25 MECHANICAL GATES"
+  )
+  FAIL=0
+  for str in "${REQUIRED[@]}"; do
+    if ! grep -q "$str" "$SKILL"; then
+      echo "❌ G16 BLOCKED: SKILL.md missing required gate string: '$str'"
+      FAIL=1
+    fi
+  done
+  [ "$FAIL" = "0" ] || { echo "G16: Commit rejected — restore removed gate strings."; exit 1; }
+  echo "✅ G16 PASS: All gate strings present in SKILL.md"
+fi
+
+# ── Orchestrator validator: run on any staged blueprint HTML ────────────────
+STAGED_BLUEPRINTS=$(git diff --cached --name-only | grep "^blueprints/.*\.html$" || true)
+
+if [ -z "$STAGED_BLUEPRINTS" ]; then
+  echo "✅ OV SKIP: No blueprint HTML staged — skipping orchestrator validators"
+  exit 0
+fi
+
+if [ ! -f "$ORCH" ]; then
+  echo "⚠️  OV WARN: Orchestrator not found at $ORCH — skipping validator check"
+  exit 0
+fi
+
+echo "Running orchestrator validators on staged blueprints..."
+OVERALL_FAIL=0
+
+for bp_path in $STAGED_BLUEPRINTS; do
+  filename=$(basename "$bp_path" .html)
+  slug="$filename"
+  echo "  → Validating: $slug"
+
+  # Fix 7: .blueprint-ci-skip marker — skip validators for this slug
+  if [ -f "$CI_SKIP_DIR/blueprints/$slug.html.blueprint-ci-skip" ]; then
+    echo "  ⏭  $slug: CI-SKIP marker found — skipping validators"
+    continue
+  fi
+
+  if python3 "$ORCH" --lead "$slug" --validate-only 2>&1; then
+    echo "  ✅ $slug: All validators PASS"
+  else
+    echo "  ❌ $slug: Validator FAILED — commit blocked"
+    OVERALL_FAIL=1
+  fi
+
+  # ── Second gate (v2.1 2026-05-28): blueprint_completion_gate 50-breakpoint, double coverage ──
+  GATE2="/Users/openclaw/Documents/New project/scripts/blueprint_completion_gate.py"
+  if [ -f "$GATE2" ]; then
+    if python3 "$GATE2" --html "$CI_SKIP_DIR/$bp_path" --receipt-dir /tmp/bp-precommit --lead "$slug" --json-output 2>/dev/null \
+        | python3 -c "import json,sys; sys.exit(0 if json.load(sys.stdin)['summary']['overall_pass'] else 1)" 2>/dev/null; then
+      echo "  ✅ $slug: completion-gate PASS"
+    else
+      echo "  ❌ $slug: completion-gate FAILED — commit blocked"
+      OVERALL_FAIL=1
+    fi
+  fi
+done
+
+if [ "$OVERALL_FAIL" = "1" ]; then
+  echo ""
+  echo "❌ PRE-COMMIT BLOCKED: Fix validator errors before committing."
+  echo "   Run: python3 $ORCH --lead <slug> --validate-only"
+  exit 1
+fi
+
+echo "✅ OV PASS: All staged blueprints passed orchestrator validators"
+exit 0
