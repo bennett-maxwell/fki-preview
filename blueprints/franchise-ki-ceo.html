@@ -731,20 +731,7 @@ RULES:
   </div>
 </section
 
-<!-- WEBSITE AUDIT -->
-<section class="section" id="audit">
-  <div class="container">
-    <p class="section-label">Your Digital Presence</p>
-    <h2 class="section-title">crmxperts.com &mdash; Audit Summary</h2>
-    <p class="section-sub">Four-dimension audit of your current web presence. Scores reflect opportunities for AI-enhanced conversion performance.</p>
-    <div class="audit-grid">
-      <div class="audit-card"><div class="audit-score">58</div><div class="audit-phase">Conversion</div><div class="audit-detail">Strong credibility section but no instant response mechanism for inbound inquiries</div><div class="audit-bar"><div class="audit-bar-fill" style="width:58%"></div></div></div>
-      <div class="audit-card"><div class="audit-score">31</div><div class="audit-phase">Speed-to-Lead</div><div class="audit-detail">No automated response to inquiry forms — manual follow-up only</div><div class="audit-bar"><div class="audit-bar-fill" style="width:31%"></div></div></div>
-      <div class="audit-card"><div class="audit-score">22</div><div class="audit-phase">AI Readiness</div><div class="audit-detail">ChatGPT used ad-hoc with no systematic automation or agent infrastructure</div><div class="audit-bar"><div class="audit-bar-fill" style="width:22%"></div></div></div>
-      <div class="audit-card"><div class="audit-score">44</div><div class="audit-phase">Content Pipeline</div><div class="audit-detail">Active site but limited automated content production for thought leadership</div><div class="audit-bar"><div class="audit-bar-fill" style="width:44%"></div></div></div>
-    </div>
-  </div>
-</section>
+<!-- Website Audit section removed — deprecated Stage 2 (2026-05-27) -->
 
 <!-- PODCAST / LISTEN -->
 <section class="section section-alt" id="listen">
@@ -760,19 +747,26 @@ RULES:
         <span class="podcast-meta-item">Franchise Consulting + AI</span>
         <span class="podcast-meta-item">Prepared for Bennett Maxwell</span>
       </div>
-      <div class="podcast-player">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
+      <div id="podcast" class="podcast-player">
+        <audio id="podAudio" preload="metadata" style="width:100%">
           <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/franchise-ki-ceo.mp3" type="audio/mpeg">
           Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/franchise-ki-ceo.mp3" style="color:var(--brand-light)">Download the podcast</a>.
         </audio>
+        <div style="display:flex;gap:0.35rem;margin:0.75rem 0 0.5rem;flex-wrap:wrap;">
+          <div class="pod-pip chapter-pip" data-time="0" title="Intro" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.7)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'"></div>
+          <div class="pod-pip chapter-pip" data-time="90" title="AI Gaps" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.7)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'"></div>
+          <div class="pod-pip chapter-pip" data-time="360" title="6 Agents" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.7)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'"></div>
+          <div class="pod-pip chapter-pip" data-time="720" title="ROI Model" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.7)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'"></div>
+          <div class="pod-pip chapter-pip" data-time="1080" title="Next Steps" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.7)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'"></div>
+        </div>
         <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-light);color:var(--brand-dark);border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
+          <button id="podPlay" onclick="var a=document.getElementById('podAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-light);color:var(--brand-dark);border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
           <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
+          <button onclick="var a=document.getElementById('podAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
         </div>
         <style>.speed-active{background:rgba(29,111,219,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
       </div>
@@ -917,14 +911,45 @@ RULES:
 
   // Podcast loading state feedback
   (function() {
-    var audio = document.getElementById('podcastAudio');
-    var playBtn = document.querySelector('.podcast-player button');
+    var audio = document.getElementById('podAudio');
+    var playBtn = document.getElementById('podPlay');
     if (!audio || !playBtn) return;
     audio.addEventListener('waiting', function() { playBtn.textContent = 'Loading...'; });
     audio.addEventListener('canplay', function() { if (audio.paused) playBtn.textContent = 'Play'; });
     audio.addEventListener('playing', function() { playBtn.textContent = 'Pause'; });
     audio.addEventListener('pause', function() { playBtn.textContent = 'Play'; });
     audio.addEventListener('ended', function() { playBtn.textContent = 'Play'; });
+  })();
+
+  // Chapter pip navigation
+  const CHAPTERS = [
+    {time: 0,    label: "Intro"},
+    {time: 90,   label: "AI Gaps"},
+    {time: 360,  label: "6 Agents"},
+    {time: 720,  label: "ROI Model"},
+    {time: 1080, label: "Next Steps"}
+  ];
+  (function() {
+    var audio = document.getElementById('podAudio');
+    if (!audio) return;
+    document.querySelectorAll('.chapter-pip').forEach(function(pip) {
+      pip.addEventListener('click', function() {
+        var t = parseFloat(this.dataset.time) || 0;
+        audio.currentTime = t;
+        if (audio.paused) audio.play();
+      });
+    });
+  })();
+
+  // Player state persistence
+  (function() {
+    var KEY = 'bpod_franchise-ki-ceo';
+    var audio = document.getElementById('podAudio');
+    if (!audio) return;
+    try { var saved = localStorage.getItem(KEY); if (saved) audio.currentTime = parseFloat(saved); } catch(e){}
+    audio.addEventListener('timeupdate', function() {
+      try { localStorage.setItem(KEY, audio.currentTime); } catch(e){}
+    });
   })();
 </script>
 </body>

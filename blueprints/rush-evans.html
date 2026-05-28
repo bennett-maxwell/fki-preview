@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T23:06:11Z | Lead: Rush Evans | Industry: Photography & Video -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-28T15:03:12Z | Lead: Rush Evans | Industry: Photography & Video -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1012,7 +1012,10 @@
   </div>
 </div>
 
-<!-- Urgency bar removed per Bennett directive 2026-05-27 -->
+<!-- ----------- URGENCY BAR ----------- -->
+<div class="urgency-bar">
+  2027 2027 Photography & Video season demand is accelerating —  days until peak season begins
+</div>
 
 <!-- ----------- TAB NAVIGATION ----------- -->
 <div class="tab-nav">
@@ -1725,22 +1728,24 @@ Rules:
       <h3 style="margin-bottom:16px;">The Best You Interview Series</h3>
       <p>In this episode, Bennett Maxwell breaks down exactly how AI agents are transforming luxury service businesses — and why the next 12 months will separate the leaders from the laggards.</p>
 
-            <div id="podcast-player" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+            <div id="podcast" style="background: var(--primary); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
         <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
-        <div id="podcast" style="display:none;"></div><audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="width:100%;margin-bottom:12px;"></audio>
-        <!-- Chapter markers -->
-        <div class="pod-pip chapter-pip" data-time="0" style="display:none;" title="Intro: AI in Photography"></div>
-        <div class="pod-pip chapter-pip" data-time="300" style="display:none;" title="Business Gap Analysis"></div>
-        <div class="pod-pip chapter-pip" data-time="720" style="display:none;" title="6 AI Agents for Riah Evans"></div>
-        <div class="pod-pip chapter-pip" data-time="1200" style="display:none;" title="ROI Model for Photography"></div>
-        <div class="pod-pip chapter-pip" data-time="1800" style="display:none;" title="Next Steps & Implementation"></div>
+        <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" style="width:100%;margin-bottom:12px;"></audio>
         <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 8px;">Two AI hosts walk through your exact business, tools, and opportunities — personalized to Riah Evans Photography + Video.</p>
+        
+        <div style="display:flex;gap:0.35rem;margin:0.5rem 0;flex-wrap:wrap;">
+          <div class="pod-pip chapter-pip" data-time="0"    style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;"></div>
+          <div class="pod-pip chapter-pip" data-time="90"   style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;"></div>
+          <div class="pod-pip chapter-pip" data-time="360"  style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;"></div>
+          <div class="pod-pip chapter-pip" data-time="720"  style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;"></div>
+          <div class="pod-pip chapter-pip" data-time="1080" style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;"></div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap;"><button id="podPlay" onclick="var a=document.getElementById('podAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'▶ Play':'⏸ Pause'" style="background:var(--accent);color:white;border:none;border-radius:6px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;">▶ Play</button></div>
         <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/rush-evans.mp3" download style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
       </div>
       <div class="speed-controls" style="display:flex;gap:8px;margin-top:8px;align-items:center;">
         <span style="font-size:12px;color:#666;">Speed:</span>
         <button onclick="document.getElementById('podAudio').playbackRate=1;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1x</button>
-        <button onclick="document.getElementById('podAudio').playbackRate=1.25;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.25x</button>
         <button onclick="document.getElementById('podAudio').playbackRate=1.5;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">1.5x</button>
         <button onclick="document.getElementById('podAudio').playbackRate=2;this.style.fontWeight='bold';" style="padding:4px 10px;border-radius:4px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:12px;">2x</button>
       </div>
@@ -1882,15 +1887,6 @@ Rules:
 </div><!-- end container -->
 
 <script>
-const CHAPTERS = [
-  {time: 0,    label: "Intro: AI in Photography & Video"},
-  {time: 300,  label: "Your Business Gap Analysis"},
-  {time: 720,  label: "6 AI Agents for Riah Evans"},
-  {time: 1200, label: "ROI Model for Photography"},
-  {time: 1800, label: "Next Steps & Implementation"}
-];
-
-
 // Tab switching
 function switchTab(tabId, e) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1966,28 +1962,57 @@ function updateCalc() {
   document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
 }
 
-// Countdown removed per Bennett directive 2026-05-27
+// Urgency countdown (rolling — never shows negative)
+(function() {
+  const el = document.getElementById('countdown');
+  if (!el) return;
+  const now = new Date();
+  const month = now.getMonth();
+  let target;
+  // Photography & Video season peaks: rolling calendar for peak demand periods
+  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
+  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
+  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
+  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
+  el.textContent = days;
+})();
 
 // Init calculator
 updateCalc();
+
+  // Chapter pip navigation
+  const CHAPTERS = [
+    {time: 0,    label: "Intro"},
+    {time: 90,   label: "AI Gaps"},
+    {time: 360,  label: "6 Agents"},
+    {time: 720,  label: "ROI Model"},
+    {time: 1080, label: "Next Steps"}
+  ];
+  (function() {
+    var audio = document.getElementById('podAudio');
+    if (!audio) return;
+    document.querySelectorAll('.chapter-pip').forEach(function(pip) {
+      pip.addEventListener('click', function() {
+        audio.currentTime = parseFloat(this.dataset.time) || 0;
+        if (audio.paused) audio.play();
+      });
+    });
+  })();
+  // Player state persistence
+  (function() {
+    var KEY = 'bpod_rush-evans';
+    var audio = document.getElementById('podAudio');
+    if (!audio) return;
+    try { var s = localStorage.getItem(KEY); if (s) audio.currentTime = parseFloat(s); } catch(e){}
+    audio.addEventListener('timeupdate', function() {
+      try { localStorage.setItem(KEY, audio.currentTime); } catch(e){}
+    });
+  })();
 </script>
 
 <div class="mobile-sticky-cta">
   <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush Evans&biz=Riah Evans Photography + Video&src=rush-evans">See If You Qualify</a>
 </div>
 
-
-<script>
-(function() {
-  var STORAGE_KEY = 'bpod_rush-evans';
-  var aud = document.getElementById('podAudio');
-  if (!aud) return;
-  var saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) { try { var s = JSON.parse(saved); if (s.time > 0) aud.currentTime = s.time; } catch(e){} }
-  aud.addEventListener('timeupdate', function() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({time: aud.currentTime, rate: aud.playbackRate}));
-  });
-})();
-</script>
 </body>
 </html>
