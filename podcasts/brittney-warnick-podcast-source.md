@@ -1,6 +1,6 @@
 <!-- v1.6 -->
 NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Brittney Warnick
-Warnick Design | Prepared by Franchise Ki | Generated 2026-05-23
+Warnick Design | Prepared by Franchise Ki | Generated 2026-05-27
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)

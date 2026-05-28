@@ -1,6 +1,6 @@
 <!-- v1.6 -->
 NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Rey
-31 Consulting | Prepared by Franchise Ki | Generated 2026-05-23
+31 Consulting | Prepared by Franchise Ki | Generated 2026-05-27
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
