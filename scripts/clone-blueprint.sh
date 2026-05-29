@@ -423,14 +423,55 @@ fi
 
 echo "  Validation complete."
 
-# ─── Step 4: Pre-delivery check ────────────────────────────────────────────
-echo "[4/7] Running pre-delivery check..."
+# ─── Step 4: HARD GATE — auto-heal -> D9 -> pre-delivery (v2 2026-05-29) ─────
+# Council-approved generator gate. Blocks commit/push of any regressed re-emit
+# (Command Center / countdown / old-player / contamination / CTA / cadence).
+# Additive + reversible: does NOT alter generation logic above.
+echo "[4/7] Running HARD gates (auto-heal -> D9 -> pre-delivery)..."
 PRE_DELIVERY="$SCRIPT_DIR/pre-delivery-check.sh"
-if [[ -f "$PRE_DELIVERY" && -x "$PRE_DELIVERY" ]]; then
-  "$PRE_DELIVERY" "$OUTPUT_FILE" || echo "  Pre-delivery check returned warnings (non-fatal)."
-else
-  echo "  No pre-delivery-check.sh found -- skipping."
+GATE_FAIL=0
+
+# 4a. Auto-heal generator reverts before gating
+AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"
+if [[ -f "$AUTOFIX" ]]; then
+  healout=$(python3 "$AUTOFIX" "$OUTPUT_FILE" 2>/dev/null || true)
+  echo "  autofix: ${healout:-no-op}"
 fi
+
+# 4b. D9 render-integrity audit (HARD — 20 binary checks, network-free)
+D9_AUDIT="$HOME/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
+if [[ -f "$D9_AUDIT" ]]; then
+  if python3 "$D9_AUDIT" "$OUTPUT_FILE" --business-name "$BUSINESS_NAME" >/dev/null 2>&1; then
+    echo "  D9: PASS (20/20)"
+  else
+    echo "  D9: FAIL -- render-integrity audit failed (run: python3 $D9_AUDIT $OUTPUT_FILE --business-name \"$BUSINESS_NAME\")"
+    GATE_FAIL=1
+  fi
+else
+  echo "  WARNING: d9-audit.py not found -- D9 gate skipped"
+fi
+
+# 4c. Pre-delivery 10-check (HARD). --leads MUST be the OTHER canonical leads
+#     (memory gotcha: own-name in --leads false-fails cross_contamination).
+if [[ -f "$PRE_DELIVERY" && -x "$PRE_DELIVERY" ]]; then
+  OTHER_LEADS=$(cd "$REPO_ROOT/blueprints" 2>/dev/null && ls *.html 2>/dev/null \
+    | sed 's/\.html$//' | grep -v "^${LEAD_SLUG}$" | grep -v "^TEMPLATE$" | paste -sd, -)
+  if "$PRE_DELIVERY" "$OUTPUT_FILE" --leads "$OTHER_LEADS" >/dev/null 2>&1; then
+    echo "  pre-delivery: PASS"
+  else
+    echo "  pre-delivery: FAIL -- run: $PRE_DELIVERY $OUTPUT_FILE --leads \"$OTHER_LEADS\""
+    GATE_FAIL=1
+  fi
+else
+  echo "  No pre-delivery-check.sh found -- pre-delivery gate skipped"
+fi
+
+if [[ "$GATE_FAIL" == "1" ]]; then
+  echo "ERROR: HARD GATE FAILED -- refusing to commit/push a regressed blueprint." >&2
+  echo "  File left at: $OUTPUT_FILE (fix the failing gate above, then re-run)." >&2
+  exit 1
+fi
+echo "  Validation complete -- all HARD gates PASS."
 
 if [[ "$DRY_RUN" == "true" ]]; then
   echo ""
