@@ -54,6 +54,14 @@ LEAD_INDUSTRY = {
     "brent-attaway":    "crm_software",       # CRMX
     "alex-ramos":       "medical_devices",    # DePuy Synthes
     "zachary-oldham":   "property_mgmt",      # Red Sands Vacation Properties
+    # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
+    # business identity in the page <title> — the SAME standard the canon 15 use — so the
+    # financial gate keeps VERIFYING their bands instead of silently skipping them. A demo
+    # showing a wrong-industry slider (e.g. a $45K plumber) is the exact defect we ban for
+    # real clients; NON_LEAD exclusion would reintroduce the silent-skip bug this script warns about.
+    "jason-martinez":   "home_services",      # Peak Comfort HVAC
+    "mike-johnson":     "home_services",      # Johnson Plumbing LLC
+    "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
 }
 
 def grab(pattern, html, flags=0):
