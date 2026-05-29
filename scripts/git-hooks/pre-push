@@ -28,16 +28,23 @@ while IFS= read -r line; do
       ((FAIL++)) || true
     fi
 
-    # Opt 2 (2026-05-29): verify the podcast MP3 this blueprint references is also live
+    # Opt 2 (2026-05-29): verify the podcast MP3 this blueprint references is also live.
+    # v2 (2026-05-29): REAL sized GET, not -I HEAD. A HEAD 200 was the exact shallow check
+    # behind the false "30/30 verified" claim — it never proved the file was a real MP3.
+    # Now require HTTP 200 AND downloaded size >= floor (a 404 stub / empty object fails).
+    POD_MIN_BYTES="${POD_MIN_BYTES:-1000000}"
     podpath=$(grep -oE 'podcasts/[A-Za-z0-9_-]+\.mp3' "$REPO_ROOT/$f" 2>/dev/null | head -1)
     if [[ -n "$podpath" ]]; then
       podurl="https://bennett-maxwell.github.io/fki-preview/$podpath"
-      pcode=$(curl -s -o /dev/null -w "%{http_code}" -I --max-time 8 "$podurl" 2>/dev/null || echo "000")
-      if [[ "$pcode" == "200" ]]; then
-        echo "  HTTP 200  podcast: $podpath"
+      read pcode psize < <(curl -sL -o /dev/null -w "%{http_code} %{size_download}" --max-time 120 "$podurl" 2>/dev/null || echo "000 0")
+      if [[ "$pcode" == "200" && "${psize:-0}" -ge "$POD_MIN_BYTES" ]]; then
+        echo "  HTTP 200 (${psize}b)  podcast: $podpath"
         ((CHECKED++)) || true
       elif [[ "$pcode" == "000" ]]; then
         echo "  SKIP (no network) podcast: $podpath"
+      elif [[ "$pcode" == "200" ]]; then
+        echo "  HTTP 200 but TOO SMALL (${psize}b < ${POD_MIN_BYTES}) FAIL  podcast: $podpath"
+        ((FAIL++)) || true
       else
         echo "  HTTP $pcode FAIL  podcast: $podpath — $podurl"
         ((FAIL++)) || true

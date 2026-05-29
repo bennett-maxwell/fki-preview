@@ -141,8 +141,13 @@ if [[ "$BUSINESS_NAME" == "null" || -z "$BUSINESS_NAME" ]]; then
   exit 1
 fi
 
-# Generate slug from lead name
-LEAD_SLUG=$(echo "$LEAD_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+# Slug: honor explicit profile.slug (canonical filename); else derive from lead name.
+PROFILE_SLUG=$(jq -r '.slug // empty' "$PROFILE_JSON")
+if [[ -n "$PROFILE_SLUG" && "$PROFILE_SLUG" != "null" ]]; then
+  LEAD_SLUG="$PROFILE_SLUG"
+else
+  LEAD_SLUG=$(echo "$LEAD_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+fi
 OUTPUT_FILE="$BLUEPRINTS_DIR/$LEAD_SLUG.html"
 
 echo "=== Blueprint Clone ==="
@@ -234,7 +239,7 @@ urgency_text = f'2027 {industry} season demand is accelerating'
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
 replacements = {
     '{{SLUG}}': slug,
-    '{{PODCAST_URL}}': f'https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3',
+    '{{PODCAST_URL}}': profile.get('podcast_url') or f'https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3',
     '{{LEAD_NAME}}': lead_name,
     '{{FIRST_NAME}}': first_name,
     '{{BUSINESS_NAME}}': business_name,
