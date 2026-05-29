@@ -1346,35 +1346,35 @@
           <span>Average Contract Value</span>
           <span class="slider-val" id="val-contract">(enter yours)</span>
         </div>
-        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="25000" data-no-default="true" oninput="updateCalc()">
+        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="25000" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
           <span>Monthly Leads</span>
-          <span class="slider-val" id="val-leads">12</span>
+          <span class="slider-val" id="val-leads">(enter yours)</span>
         </div>
-        <input type="range" id="slider-leads" min="3" max="40" step="1" value="3" data-no-default="true" oninput="updateCalc()">
+        <input type="range" id="slider-leads" min="3" max="40" step="1" value="3" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
           <span>Current Close Rate</span>
-          <span class="slider-val" id="val-close">18%</span>
+          <span class="slider-val" id="val-close">(enter yours)</span>
         </div>
-        <input type="range" id="slider-close" min="5" max="45" step="1" value="5" data-no-default="true" oninput="updateCalc()">
+        <input type="range" id="slider-close" min="5" max="45" step="1" value="5" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
           <span>LinkedIn Leads Added/Month</span>
           <span class="slider-val" id="val-linkedin">10</span>
         </div>
-        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="updateCalc()">
+        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
           <span>SEO Traffic Lift (12 months)</span>
           <span class="slider-val" id="val-seo">45%</span>
         </div>
-        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="updateCalc()">
+        <input type="range" id="slider-seo" min="20" max="80" step="5" value="45" oninput="calcTouched=true;updateCalc()">
       </div>
     </div>
 
@@ -1389,7 +1389,7 @@
         <div class="r-lbl">Quarterly Gain</div>
       </div>
       <div class="result-card">
-        <div class="r-val" id="res-time">6.5 hrs/wk</div>
+        <div class="r-val" id="res-time">&mdash;</div>
         <div class="r-lbl">Time Saved<sup>4</sup></div>
       </div>
       <div class="result-card">
@@ -1410,7 +1410,7 @@
       <div class="pillar-card">
         <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">T</div>
         <h4>Save Time</h4>
-        <p>6.5 hours/week reclaimed<sup>4</sup> (industry baseline 7.6 hrs, understated 15%)</p>
+        <p>Hours/week reclaimed from automation &mdash; model your exact numbers in the calculator above</p>
       </div>
       <div class="pillar-card">
         <div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">%</div>
@@ -1883,6 +1883,7 @@ const presets = {
 };
 
 function setScenario(s) {
+  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1892,10 +1893,12 @@ function setScenario(s) {
 }
 
 // ROI Calculator
+var calcTouched = false;
 function updateCalc() {
-  const contract = parseInt(document.getElementById('slider-contract').value) || 45000;
-  const leads = parseInt(document.getElementById('slider-leads').value) || 12;
-  const closeRate = (parseInt(document.getElementById('slider-close').value) || 18) / 100;
+  if (!calcTouched) { return; }
+  const contract = parseInt(document.getElementById('slider-contract').value) || 0;
+  const leads = parseInt(document.getElementById('slider-leads').value) || 0;
+  const closeRate = (parseInt(document.getElementById('slider-close').value) || 0) / 100;
   const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;
   const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
 
