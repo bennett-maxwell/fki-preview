@@ -37,7 +37,12 @@ chris-lpnw        court-lundberg      dave-wood         jaden-mecham    melissa-
 paul-muus         rey-31-consulting   rush-evans        watson          zachary-oldham
 ```
 
-melissa-tash-srp is the gold-standard baseline. Clone from it for new leads.
+`blueprints/TEMPLATE.html` is the canonical baseline — a tokenized 21-section scaffold
+(primary `#1a1a2e`, Inter font). Every blueprint is generated from it so all 15 stay visually
+consistent; only the per-client `--accent` color varies. Do NOT clone from an individual
+client blueprint (e.g. melissa-tash-srp) — that path caused the cross-blueprint drift Bennett
+flagged ("they're all different, the color is off"). The pre-commit consistency gate
+(`scripts/blueprint-consistency-check.py`) enforces conformance to TEMPLATE.html.
 
 ---
 
@@ -62,7 +67,10 @@ time — but when you *build the email* you must use the correct override or the
 ## 3. Generate / clone a blueprint
 
 ```bash
-bash scripts/clone-blueprint.sh <slug> "<Business Name>"
+# Generator takes a lead-profile JSON (NOT slug + business name).
+# Output filename = profile.slug; podcast URL honors profile.podcast_url if set.
+bash scripts/clone-blueprint.sh leads/<slug>.json            # build + commit + push
+bash scripts/clone-blueprint.sh leads/<slug>.json --dry-run  # build + gates only, no git
 ```
 
 The generator's Step 4 is a **hard blocking gate** (added 2026-05-29): it runs auto-heal →

@@ -6,6 +6,7 @@
 # Installs:
 #   pre-commit  — G16 SKILL.md gate strings + orchestrator validators
 #                 + completion-gate + D9 render-integrity (network-free)
+#                 + cross-blueprint consistency vs TEMPLATE.html
 #   pre-push    — HTTP 200 check on changed blueprint HTML + referenced podcast MP3
 #
 # Canonical source: scripts/git-hooks/  (kept in sync with the verified live hooks)
