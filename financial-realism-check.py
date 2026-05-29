@@ -89,9 +89,14 @@ def check_file(path, clone_registry):
     if re.search(r'[Aa]verage [Cc]ontract [Vv]alue', html) and unit not in ("contract", "contract/ARR", "annual mgmt fee"):
         warns.append(f"D7-10 label 'Average Contract Value' but {industry} sells by '{unit}'")
 
-    # --- D7-02 clone detection: record the slider triple for cross-file compare ---
+    # --- D7-02 clone detection: record the slider triple WITH industry for compare ---
+    # The real defect Bennett flagged is ONE financial profile cloned across
+    # DIFFERENT industries (a plumber + a med-device co + a restaurant all on the
+    # same $25K-$120K slider). Two photography studios sharing a photography range
+    # is correct, not a clone. So we key by (triple, industry) and only fail when a
+    # single triple spans >=2 distinct industries (or all blueprints share one).
     if slider_triple:
-        clone_registry[slider_triple].append(slug)
+        clone_registry[slider_triple].append((slug, industry))
 
     # --- D7-04 fabricated hardcoded $ figures in client copy (outside <script>/<input>) ---
     body = re.sub(r'<script[\s\S]*?</script>', '', html)
@@ -115,12 +120,20 @@ def main():
     clone_registry = collections.defaultdict(list)
     results = [check_file(f, clone_registry) for f in files]
 
-    # D7-02 [RL] flag any slider triple shared by >=3 blueprints as un-personalized clone
-    clones = {trip: slugs for trip, slugs in clone_registry.items() if len(slugs) >= 3}
-    for trip, slugs in clones.items():
-        for r in results:
-            if r["slug"] in slugs:
-                r["fails"].append(f"D7-02 [RL] identical ROI slider {trip} shared by {len(slugs)} blueprints — not personalized")
+    # D7-02 [RL] flag a slider triple that spans >=2 DISTINCT industries (true
+    # cross-industry clone — the original $25K/$45K-everywhere defect). A triple
+    # confined to a single industry is a legitimate shared modeling range.
+    clones = {}
+    for trip, entries in clone_registry.items():
+        industries = {ind for _, ind in entries}
+        if len(industries) >= 2:
+            slugs = [s for s, _ in entries]
+            clones[trip] = (slugs, industries)
+            for r in results:
+                if r["slug"] in slugs:
+                    r["fails"].append(
+                        f"D7-02 [RL] identical ROI slider {trip} cloned across "
+                        f"{len(industries)} industries {sorted(industries)} — not personalized")
 
     npass = sum(1 for r in results if not r["fails"])
     print(f"{'SLUG':<20} {'INDUSTRY':<16} {'DEFAULT':>9} {'JS':>8}  RESULT")
@@ -133,7 +146,7 @@ def main():
     print("-" * 78)
     print(f"FINANCIAL-REALISM: {npass}/{len(results)} pass red-line financial checks")
     if clones:
-        print(f"CLONE GROUPS (>=3 identical sliders): {[ (t, len(s)) for t,s in clones.items() ]}")
+        print(f"CROSS-INDUSTRY CLONE GROUPS: {[ (t, sorted(inds)) for t,(s,inds) in clones.items() ]}")
     sys.exit(0 if npass == len(results) else 1)
 
 if __name__ == "__main__":

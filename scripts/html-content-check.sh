@@ -59,6 +59,11 @@ if [ "${1:-}" = "--all" ]; then
   if [ -f "$PLAUSIBILITY" ]; then
     if python3 "$PLAUSIBILITY" >/dev/null 2>&1; then echo "  ✅ data-plausibility: no fabricated/implausible client numbers"; else echo "  ❌ data-plausibility FAILED (run: python3 $PLAUSIBILITY)"; OVERALL=1; fi
   fi
+  # financial-realism (industry-band ROI slider check — catches cross-industry clones + out-of-band $)
+  REALISM="$REPO/financial-realism-check.py"
+  if [ -f "$REALISM" ]; then
+    if python3 "$REALISM" --all >/dev/null 2>&1; then echo "  ✅ financial-realism: ROI sliders industry-appropriate, no cross-industry clone"; else echo "  ❌ financial-realism FAILED (run: python3 $REALISM --all)"; OVERALL=1; fi
+  fi
 else
   [ $# -ge 1 ] || { echo "usage: $0 <blueprint.html> | --all"; exit 2; }
   check_one "$1" || OVERALL=1

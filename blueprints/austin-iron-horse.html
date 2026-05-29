@@ -1346,7 +1346,7 @@
           <span>Average Contract Value</span>
           <span class="slider-val" id="val-contract">(enter yours)</span>
         </div>
-        <input type="range" id="slider-contract" min="500" max="100000" step="500" value="500" data-no-default="true" oninput="calcTouched=true;updateCalc()">
+        <input type="range" id="slider-contract" min="300" max="6000" step="50" value="300" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
@@ -1899,7 +1899,7 @@ var calcTouched = false;
 function updateCalc() {
   if (!calcTouched) { return; }
   if (!calcTouched) { return; }
-  const contract = parseInt(document.getElementById('slider-contract').value) || 0;
+  const contract = parseInt(document.getElementById('slider-contract').value) || 300;
   const leads = parseInt(document.getElementById('slider-leads').value) || 0;
   const closeRate = (parseInt(document.getElementById('slider-close').value) || 0) / 100;
   const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;

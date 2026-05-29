@@ -236,8 +236,48 @@ mailto_link = f"mailto:bennett@franchiseki.com?subject={subject_encoded}&body={m
 
 urgency_text = f'2027 {industry} season demand is accelerating'
 
+# ── ROI calculator slider: INDUSTRY-APPROPRIATE range (no cloned/fabricated $) ──
+# Source of truth = scripts/roi-industry-config.json. Default value sits at min +
+# data-no-default + calcTouched guard, so nothing displays as the client's own
+# number until they drag it. Range lets the client model THEIR real transaction
+# size instead of one generic franchise-consulting figure cloned onto every page.
+import os as _os
+_cfg_path = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(output_file))), 'scripts', 'roi-industry-config.json')
+roi_min, roi_max, roi_step = 500, 100000, 500  # safe generic fallback
+try:
+    with open(_cfg_path) as _cf:
+        _roi = json.load(_cf)
+    _bt = (profile.get('business_type') or industry or '').lower()
+    _bt_map = {
+        'plumbing': 'home_services', 'hvac': 'home_services', 'electrical': 'home_services',
+        'home services': 'home_services', 'home-services': 'home_services', 'restoration': 'home_services',
+        'photography': 'photography', 'photographer': 'photography',
+        'video': 'video_production', 'videography': 'video_production',
+        'medspa': 'medspa', 'med spa': 'medspa', 'aesthetics': 'medspa',
+        'restaurant': 'food_franchise', 'food': 'food_franchise', 'franchise': 'food_franchise',
+        'firearms': 'retail_firearms', 'retail': 'retail_firearms',
+        'design': 'design_agency', 'agency': 'design_agency', 'marketing': 'design_agency',
+        'consulting': 'consulting', 'consultant': 'consulting', 'coaching': 'consulting',
+        'crm': 'crm_software', 'software': 'crm_software', 'saas': 'crm_software',
+        'medical device': 'medical_devices', 'medtech': 'medical_devices',
+        'property management': 'property_mgmt', 'property': 'property_mgmt', 'vacation rental': 'property_mgmt',
+    }
+    _ind = _roi['slug_industry'].get(slug)
+    if not _ind:
+        for _k, _v in _bt_map.items():
+            if _k in _bt:
+                _ind = _v; break
+    if _ind and _ind in _roi['industry_slider']:
+        _s = _roi['industry_slider'][_ind]
+        roi_min, roi_max, roi_step = _s['min'], _s['max'], _s['step']
+except Exception:
+    pass
+
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
 replacements = {
+    '{{ROI_MIN}}': str(roi_min),
+    '{{ROI_MAX}}': str(roi_max),
+    '{{ROI_STEP}}': str(roi_step),
     '{{SLUG}}': slug,
     '{{PODCAST_URL}}': profile.get('podcast_url') or f'https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3',
     '{{LEAD_NAME}}': lead_name,
