@@ -1346,7 +1346,7 @@
           <span>Average Contract Value</span>
           <span class="slider-val" id="val-contract">(enter yours)</span>
         </div>
-        <input type="range" id="slider-contract" min="25000" max="120000" step="1000" value="25000" data-no-default="true" oninput="calcTouched=true;updateCalc()">
+        <input type="range" id="slider-contract" min="500" max="100000" step="500" value="500" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
@@ -1884,6 +1884,7 @@ const presets = {
 
 function setScenario(s) {
   calcTouched = true;
+  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1894,7 +1895,9 @@ function setScenario(s) {
 
 // ROI Calculator
 var calcTouched = false;
+var calcTouched = false;
 function updateCalc() {
+  if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   const contract = parseInt(document.getElementById('slider-contract').value) || 0;
   const leads = parseInt(document.getElementById('slider-leads').value) || 0;

@@ -54,6 +54,11 @@ if [ "${1:-}" = "--all" ]; then
   if [ -f "$CONSISTENCY" ]; then
     if python3 "$CONSISTENCY" >/dev/null 2>&1; then echo "  ✅ consistency: all 15 conform to TEMPLATE.html"; else echo "  ❌ consistency FAILED"; OVERALL=1; fi
   fi
+  # data-plausibility (catches wrong-per-business + fabricated current-state numbers)
+  PLAUSIBILITY="$REPO/scripts/blueprint-data-plausibility.py"
+  if [ -f "$PLAUSIBILITY" ]; then
+    if python3 "$PLAUSIBILITY" >/dev/null 2>&1; then echo "  ✅ data-plausibility: no fabricated/implausible client numbers"; else echo "  ❌ data-plausibility FAILED (run: python3 $PLAUSIBILITY)"; OVERALL=1; fi
+  fi
 else
   [ $# -ge 1 ] || { echo "usage: $0 <blueprint.html> | --all"; exit 2; }
   check_one "$1" || OVERALL=1

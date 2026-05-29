@@ -21,6 +21,9 @@ FILES = [BP / "TEMPLATE.html"] + [BP / f"{s}.html" for s in CANON]
 
 # (description, old, new) — literal string replacements
 REPL = [
+    ("contract slider range (trade-safe)",
+     'id="slider-contract" min="25000" max="120000" step="1000" value="25000"',
+     'id="slider-contract" min="500" max="100000" step="500" value="500"'),
     ("leads label",  'id="val-leads">12<',  'id="val-leads">(enter yours)<'),
     ("close label",  'id="val-close">18%<', 'id="val-close">(enter yours)<'),
     ("res-time static", 'id="res-time">6.5 hrs/wk<', 'id="res-time">&mdash;<'),
