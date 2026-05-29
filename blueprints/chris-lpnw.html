@@ -253,6 +253,7 @@
 .section-intro { font-size: 1.1rem; color: var(--brand-dark, #1E1E3F); margin-bottom: 2rem; opacity: .85; }
 .speed-btn { background: none; border: 1px solid currentColor; border-radius: 4px; padding: .1rem .4rem; font-size: .8rem; cursor: pointer; opacity: .7; }
 .speed-btn:hover { opacity: 1; }
+  @media (max-width: 480px) { .container { padding-left: 14px; padding-right: 14px; } h1 { font-size: 26px; } }
 </style>
 </head>
 <body>
@@ -271,7 +272,7 @@
   </ul>
 </nav>
 
-<section class="hero">
+<section id="hero" class="hero">
   <div class="hero-badge">Confidential — Prepared for Chris / LPNW LLC</div>
   <h1>The <span>LPNW LLC AI Playbook</span><br>for Chris</h1>
   <p class="hero-sub">A custom-built roadmap showing exactly how AI agents can eliminate coordination overhead, automate reporting, and reclaim 18+ hours per week for your $10M+ franchise operation.</p>
@@ -792,7 +793,7 @@ Rules:
 <section class="section section-alt pod-section" id="listen">
   <h2 class="section-title">Your AI Roadmap Podcast</h2>
   <p class="section-intro">Listen to your personalized Blueprint — built from your answers.</p>
-  <div class="pod-card">
+  <div class="pod-card" id="podcast">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
       <p class="pod-subtitle">Chris — LPNW · LPNW LLC</p>
@@ -840,7 +841,7 @@ Rules:
         <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
           <option value="0.75">0.75×</option>
           <option value="1" selected>1×</option>
-          <option value="1.25">1.25×</option>
+          <option value="1.25">1.25x</option>
           <option value="1.5">1.5×</option>
           <option value="2">2×</option>
         </select>

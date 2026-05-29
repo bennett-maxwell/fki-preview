@@ -240,7 +240,8 @@
     .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
-  </style>
+    @media (max-width: 480px) { .container { padding-left: 14px; padding-right: 14px; } h1 { font-size: 26px; } }
+</style>
 </head>
 <body>
 
@@ -260,7 +261,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section id="hero" class="hero">
   <div class="hero-badge">Confidential — Prepared for Rey</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for 31 Consulting</h1>
   <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for a fractional COO consulting firm — and how to get there in 30 days.</p>
@@ -761,7 +762,7 @@ TRIGGER: stage_1_timestamp plus 4 days
 ONLY SEND IF: prospect has not booked a call AND has not replied to Stage 2
 
 MESSAGE:
-"Hi [First Name], wanted to share a quick example since it might be relevant. We worked with a [similar industry] company doing about [similar revenue range] — their main challenge was [relevant pain point]. Within the first 90 days we [specific outcome: systematized their ops, aligned their team, built their cash flow model, etc.]. If that sounds relevant to where [Company Name] is right now, I am happy to walk you through how we approached it."
+"Hi [First Name], wanted to share a quick example since it might be relevant. We worked with a [similar industry] company doing about [similar revenue range] — their main challenge was [relevant pain point]. Within the first few weeks we [specific outcome: systematized their ops, aligned their team, built their cash flow model, etc.]. If that sounds relevant to where [Company Name] is right now, I am happy to walk you through how we approached it."
 
 RULES FOR THIS STAGE:
 - Use a real or composite case study that matches their industry
@@ -877,7 +878,7 @@ IMPLEMENTATION PHASE (Weeks 2-6):
 - Process buildout for the top 3 identified areas
 - Tech stack optimization and AI tool integration where applicable
 - Team alignment sessions: role clarity, KPI assignment, accountability frameworks
-- Cash flow model buildout with 90-day forward projections
+- Cash flow model buildout with 30/60/90 forward projections
 - Weekly check-in calls with Rey and the 31 Consulting team
 
 ONGOING SUPPORT (Post-implementation):
@@ -957,7 +958,7 @@ If any answer is N: revise that section before sending.
 <section class="section section-alt pod-section" id="listen">
   <h2 class="section-title">Your AI Roadmap Podcast</h2>
   <p class="section-sub" style="text-align:center;margin:0 auto 2rem;">Listen to your personalized Blueprint — built from your answers.</p>
-  <div class="pod-card">
+  <div class="pod-card" id="podcast">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
       <p class="pod-subtitle">Rey -- 31 Consulting</p>
