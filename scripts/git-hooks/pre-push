@@ -1,0 +1,56 @@
+#!/bin/bash
+# pre-push hook: verify all staged blueprint HTML files return HTTP 200 on GitHub Pages
+# build: 2026-05-28
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+BASE_URL="https://bennett-maxwell.github.io/fki-preview/blueprints"
+FAIL=0
+CHECKED=0
+
+# Get list of blueprint HTML files being pushed
+while IFS= read -r line; do
+  sha=$(echo "$line" | awk '{print $2}')
+  [[ "$sha" == "0000000000000000000000000000000000000000" ]] && continue
+  
+  files=$(git diff --name-only "$sha"~1.."$sha" 2>/dev/null | grep '^blueprints/.*\.html$' | grep -v TEMPLATE | grep -v '/chris\.' | grep -v '/melissa-tash\.' | grep -v '/rey\.' || true)
+  
+  for f in $files; do
+    slug=$(basename "$f" .html)
+    url="$BASE_URL/$slug.html"
+    code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null || echo "000")
+    if [[ "$code" == "200" ]]; then
+      echo "  HTTP 200  $slug"
+      ((CHECKED++)) || true
+    elif [[ "$code" == "000" ]]; then
+      echo "  SKIP (no network or not yet deployed) $slug"
+    else
+      echo "  HTTP $code FAIL  $slug — $url"
+      ((FAIL++)) || true
+    fi
+
+    # Opt 2 (2026-05-29): verify the podcast MP3 this blueprint references is also live
+    podpath=$(grep -oE 'podcasts/[A-Za-z0-9_-]+\.mp3' "$REPO_ROOT/$f" 2>/dev/null | head -1)
+    if [[ -n "$podpath" ]]; then
+      podurl="https://bennett-maxwell.github.io/fki-preview/$podpath"
+      pcode=$(curl -s -o /dev/null -w "%{http_code}" -I --max-time 8 "$podurl" 2>/dev/null || echo "000")
+      if [[ "$pcode" == "200" ]]; then
+        echo "  HTTP 200  podcast: $podpath"
+        ((CHECKED++)) || true
+      elif [[ "$pcode" == "000" ]]; then
+        echo "  SKIP (no network) podcast: $podpath"
+      else
+        echo "  HTTP $pcode FAIL  podcast: $podpath — $podurl"
+        ((FAIL++)) || true
+      fi
+    fi
+  done
+done
+
+if [[ $FAIL -gt 0 ]]; then
+  echo ""
+  echo "Pre-push BLOCKED: $FAIL blueprint(s) returned non-200. Deploy or fix before push."
+  exit 1
+fi
+
+[[ $CHECKED -gt 0 ]] && echo "Pre-push: $CHECKED blueprint(s) verified HTTP 200."
+exit 0

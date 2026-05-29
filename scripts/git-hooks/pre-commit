@@ -79,6 +79,17 @@ for bp_path in $STAGED_BLUEPRINTS; do
       OVERALL_FAIL=1
     fi
   fi
+
+  # ── Third gate (Opt 3 2026-05-29): D9 render-integrity (network-free; 19 checks, business-name check auto-skips) ──
+  D9_AUDIT="$HOME/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
+  if [ -f "$D9_AUDIT" ]; then
+    if python3 "$D9_AUDIT" "$CI_SKIP_DIR/$bp_path" >/dev/null 2>&1; then
+      echo "  ✅ $slug: D9 render-integrity PASS"
+    else
+      echo "  ❌ $slug: D9 render-integrity FAILED — commit blocked"
+      OVERALL_FAIL=1
+    fi
+  fi
 done
 
 if [ "$OVERALL_FAIL" = "1" ]; then
