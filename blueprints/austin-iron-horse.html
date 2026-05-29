@@ -13,25 +13,25 @@
   <title>AI Advantage Roadmap — Iron Horse Armory</title>
   <style>
     :root {
-      /* Lead Brand Palette — Iron Horse Armory
-         primary: #2c1810  dark: #1a0d08  light: #8b4513  neutral: #f5f0eb  accent: #8b4513 */
-      --brand:       #C71610;
-      --brand-dark:  #0A0E1A;
-      --brand-light: #D20F15;
-      --neutral-bg:  #f8f8f8;
-      --lead-primary: #2c1810;
-      --lead-dark:    #1a0d08;
-      --lead-accent:  #8b4513;
-      --lead-neutral: #f5f0eb;
+      /* Advaita Apple-light — MANDATORY chrome standard (advaita-design-skill).
+         Lead brand color (#C71610 Iron Horse red) appears as exactly ONE accent: --lead-accent. */
+      --brand:       #0071E3;   /* Advaita blue — chrome/primary */
+      --brand-dark:  #1D1D1F;   /* Advaita navy — dark surfaces/headings */
+      --brand-light: #0062C4;   /* blue hover/accent */
+      --neutral-bg:  #F5F5F7;   /* page bg — never pure white */
+      --lead-primary: #1D1D1F;
+      --lead-dark:    #1D1D1F;
+      --lead-accent:  #C71610;  /* Iron Horse red — single brand accent */
+      --lead-neutral: #F5F5F7;
       --white:       #ffffff;
-      --text:        #0A0E1A;
-      --text-muted:  #3a3a3a;
-      --text-light:  #888888;
-      --border:      #e2e2e2;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --text:        #1D1D1F;
+      --text-muted:  #6E6E73;
+      --text-light:  #A1A1A6;
+      --border:      #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
-      --shadow: 0 4px 24px rgba(199,22,16,0.08);
-      --shadow-md: 0 8px 40px rgba(199,22,16,0.12);
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.10);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -63,7 +63,7 @@
       .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     }
     .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
-    .hero-badge { display: inline-block; background: rgba(199,22,16,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero-badge { display: inline-block; background: rgba(199,22,16,0.10); border: 1px solid var(--lead-accent); color: var(--lead-accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
     .hero h1 span { color: var(--brand-light); }
     .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2.5rem; }
@@ -554,7 +554,7 @@
         <div>
           <div class="calc-label-row">
             <span class="calc-slider-label">Avg Sale / Ticket Value</span>
-            <span class="calc-slider-val" id="lbl-contract">(enter yours)</span>
+            <span class="calc-slider-val" id="lbl-contract">&larr; set your average sale</span>
           </div>
           <input type="range" class="calc-slider" id="sl-contract" min="100" max="5000" step="50" value="100" data-no-default="true" oninput="updateLabel('contract'); calcROI();">
         </div>
@@ -567,10 +567,10 @@
         </div>
         <div>
           <div class="calc-label-row">
-            <span class="calc-slider-label">Current Close Rate</span>
-            <span class="calc-slider-val" id="lbl-rate">(enter yours)</span>
+            <span class="calc-slider-label">Leads Needed Per Sale</span>
+            <span class="calc-slider-val" id="lbl-rate">&larr; slide to set yours</span>
           </div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="90" step="1" value="5" data-no-default="true" oninput="updateLabel('rate'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-rate" min="1" max="50" step="1" value="4" data-no-default="true" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row">
@@ -865,7 +865,7 @@ This opens the review compose screen directly &mdash; no searching required.
         <div class="path">
           <h4>Partner Path</h4>
           <p>We build the full 6-agent system wired to your SMS channel, email, and FFL transfer workflow &mdash; trained on Iron Horse Armory&rsquo;s products, services, and brand voice. Starting in 48 hours.</p>
-          <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse" class="path-cta">See If You Qualify</a>
+          <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse&email=austin%40ironhorsearmory.com&agents=Speed-to-Lead%20Response%20Agent,FFL%20Transfer%20Status%20Agent,Follow-Up%20and%20Nurture%20Agent,Review%20Collection%20Agent,Inventory%20Waitlist%20Alert%20Agent,Gunsmithing%20Service%20Scheduler" class="path-cta">See If You Qualify</a>
         </div>
       </div>
     </div>
@@ -889,7 +889,7 @@ This opens the review compose screen directly &mdash; no searching required.
         <span class="podcast-meta-item">&#128100; Prepared for Austin</span>
       </div>
       <div class="podcast-player">
-        <audio id="podAudio" preload="metadata" style="width:100%">
+        <audio id="podAudio" controls preload="metadata" style="width:100%;display:block;margin-bottom:0.5rem;">
           <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3" type="audio/mpeg">
           Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3" style="color:var(--brand-light)">Download the podcast</a>.
         </audio>
@@ -910,7 +910,7 @@ This opens the review compose screen directly &mdash; no searching required.
           <button onclick="var a=document.getElementById('podAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
           <button onclick="var a=document.getElementById('podAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
         </div>
-        <style>.speed-active{background:rgba(199,22,16,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
+        <style>.speed-active{background:rgba(0,113,227,0.3)!important;border-color:var(--brand-light)!important;color:white!important;}</style>
       </div>
       <div class="podcast-quotes">
         <div class="podcast-quote">"The gun stores that grow over the next 3 years will not necessarily be the ones with the biggest inventory. They will be the ones whose customers always know what is happening with their transfer, always feel remembered after a sale, and never have to wait for an answer."</div>
@@ -944,7 +944,7 @@ This opens the review compose screen directly &mdash; no searching required.
     <h2>Ready to See This<br><span>Working for Iron Horse Armory?</span></h2>
     <p class="cta-personal">"Austin, I want to be direct with you. Iron Horse Armory already has something most businesses do not &mdash; a loyal customer base in Parker who trusts you with their firearms. The gap is in what happens after they walk in the door: how fast you respond when they text, how they find out their transfer is ready, whether they ever come back. We only take on a handful of clients per month. If you want to see what this looks like for your store, the link below takes 2 minutes."</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse" class="cta-btn">See If You Qualify</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse&email=austin%40ironhorsearmory.com&agents=Speed-to-Lead%20Response%20Agent,FFL%20Transfer%20Status%20Agent,Follow-Up%20and%20Nurture%20Agent,Review%20Collection%20Agent,Inventory%20Waitlist%20Alert%20Agent,Gunsmithing%20Service%20Scheduler" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -959,14 +959,14 @@ This opens the review compose screen directly &mdash; no searching required.
 
 <!-- Sticky mobile CTA -->
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron%20Horse%20Armory&src=austin-iron-horse&email=austin%40ironhorsearmory.com&agents=Speed-to-Lead%20Response%20Agent,FFL%20Transfer%20Status%20Agent,Follow-Up%20and%20Nurture%20Agent,Review%20Collection%20Agent,Inventory%20Waitlist%20Alert%20Agent,Gunsmithing%20Service%20Scheduler" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
   const PRESETS = {
-    conservative: { contract: 500,  leads: 25, rate: 40, hours: 8,  lift: 0.5 },
-    expected:     { contract: 800,  leads: 30, rate: 50, hours: 12, lift: 1.0 },
-    stretch:      { contract: 1200, leads: 40, rate: 60, hours: 18, lift: 1.3 }
+    conservative: { contract: 500,  leads: 25, rate: 5, hours: 8,  lift: 0.5 },
+    expected:     { contract: 800,  leads: 30, rate: 4, hours: 12, lift: 1.0 },
+    stretch:      { contract: 1200, leads: 40, rate: 3, hours: 18, lift: 1.3 }
   };
   let currentLift = 1.0;
 
@@ -990,7 +990,7 @@ This opens the review compose screen directly &mdash; no searching required.
     const val = document.getElementById('sl-' + key).value;
     const lbl = document.getElementById('lbl-' + key);
     if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
-    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'rate') { const lps = Math.max(1, parseInt(val)); const pct = Math.round(100 / lps); lbl.textContent = lps + (lps === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + pct + '% close)'; }
     else if (key === 'hours') lbl.textContent = val + ' hrs';
     else lbl.textContent = val;
   }
@@ -998,7 +998,8 @@ This opens the review compose screen directly &mdash; no searching required.
   function calcROI() {
     const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
     const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
-    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const lps   = Math.max(1, parseFloat(document.getElementById('sl-rate').value) || 1);
+    const rate  = 1 / lps;  // leads-per-sale → close rate (mirrors qualifier leads-per-sale slider)
     const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
     const current   = avg * leads * rate;
     const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));

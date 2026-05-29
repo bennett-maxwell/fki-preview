@@ -271,7 +271,7 @@
         <div class="chip" data-val="instant"      onclick="selectChip('speed','instant')">Under 5 minutes</div>
         <div class="chip" data-val="30min"        onclick="selectChip('speed','30min')">Within 30 minutes</div>
         <div class="chip" data-val="1to4hr"       onclick="selectChip('speed','1to4hr')">1–4 hours</div>
-        <div class="chip" data-val="sameday"      onclick="selectChip('speed','sameday')">Same day</div>
+        <div class="chip" data-val="sameday"      onclick="selectChip('speed','sameday')">Within 24 hours</div>
         <div class="chip" data-val="nextday"      onclick="selectChip('speed','nextday')">Next day</div>
         <div class="chip" data-val="inconsistent" onclick="selectChip('speed','inconsistent')">Inconsistent</div>
       </div>
@@ -519,6 +519,23 @@ function hydrateIdentity() {
   });
 }
 
+// Q7 DYNAMIC PER-LEAD (Bennett directive 2026-05-29): render the lead's actual blueprint agents.
+// Reads ?agents=Name1,Name2,... from the blueprint CTA. Falls back to the generic 5 chips when absent.
+function hydrateAgents() {
+  const params = getParams();
+  const raw = params.get('agents');
+  if (!raw) return; // no per-lead agents passed → keep default generic 5 chips
+  const agents = raw.split(',').map(s => decodeURIComponent(s.replace(/\+/g,' ')).trim()).filter(Boolean);
+  if (!agents.length) return;
+  const box = document.getElementById('chips-capability');
+  if (!box) return;
+  box.innerHTML = agents.map(function(name){
+    const val = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const safe = name.replace(/"/g,'&quot;');
+    return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" onclick="selectChip(\'capability\',\''+val+'\')">'+safe+'</div>';
+  }).join('');
+}
+
 function updateIdentityStatus() {
   const status = document.getElementById('identity-status');
   if (!status) return;
@@ -697,7 +714,7 @@ function calcTimeSavings(yourHrs, teamCount, teamHrs) {
   const teamTotal = (teamCount !== null && teamHrs !== null) ? teamCount * teamHrs : 0;
   const totalHrs  = (yourHrs || 0) + teamTotal;
   if (totalHrs === 0) return null;
-  const estimate = totalHrs * 0.5;       // AI saves ~50% of total screen time
+  const estimate = totalHrs * 0.4;       // AI saves ~40% of total screen time (20% more conservative — Bennett directive 2026-05-29)
   const low  = Math.max(1, Math.round(estimate * 0.5));
   const high = Math.round(estimate * 1.3);
   return { low, high };
@@ -776,7 +793,8 @@ function update() {
     }
 
     const liftPct  = Math.round(speedLift * 100);
-    const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || '—';
+    const capChipEl = document.querySelector('#chips-capability .chip[data-val="' + chips.capability + '"]');
+    const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || (capChipEl && capChipEl.getAttribute('data-label')) || chips.capability || '—';
     const spendStr = spendEntered ? fmtMoney(spendVal) + '/mo' : '—';
     const teamStr  = teamEntered  ? teamVal + ' people · ' + teamHrsVal + ' hrs/wk' : '—';
     const hrsStr   = hoursEntered ? (hoursVal >= 40 ? '40+' : hoursVal) + ' hrs/wk' : '—';
@@ -959,6 +977,7 @@ async function handleCtaClick() {
 
 // Init
 hydrateIdentity();
+hydrateAgents();
 document.querySelectorAll('#identity-section input').forEach(el => {
   el.addEventListener('input', function() {
     persistIdentity();
