@@ -75,7 +75,12 @@ def check_file(path, clone_registry):
     slider_triple = tuple(int(x) for x in sl) if sl else None
 
     if industry == "unknown":
-        warns.append(f"D7-11 industry unclassified — cannot verify financials (band=unknown)")
+        # D10-05 [RL]: an unclassified lead means we CANNOT verify its money math fits
+        # the industry — exactly the condition that let Court Lundberg's $45k clone ship.
+        # Per the audit skill this is a RED-LINE FAIL (don't ship unverified), not a warning.
+        # We never guess an industry (guessed numbers = the original defect); add the lead to
+        # LEAD_INDUSTRY from real intake before it can pass.
+        fails.append(f"D10-05 [RL] industry unclassified — cannot verify financials (add '{slug}' to LEAD_INDUSTRY from intake)")
     if lo is not None and js_fallback is not None and not (lo <= js_fallback <= hi):
         fails.append(f"D7-17 [RL] JS fallback ${js_fallback:,} outside {industry} band ${lo:,}-${hi:,}")
     if lo is not None and slider_default is not None and not (lo <= slider_default <= hi):
@@ -115,8 +120,16 @@ def main():
     if "--file" in args:
         files = [args[args.index("--file") + 1]]
     else:
+        # NON_LEAD = build template + internal demos + canonical duplicates. Everything
+        # else is treated as a real prospect blueprint and MUST be financially verifiable.
+        # Previously --all filtered to only slugs already in LEAD_INDUSTRY, which SILENTLY
+        # skipped any unmapped lead — a brand-new blueprint with a $45k clone slider would
+        # never be checked. Now --all scans every real-lead file; unmapped => D10-05 fail.
+        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "rush-evans-canonical"}
         files = sorted(glob.glob(os.path.join(BLUEPRINTS, "*.html")))
-        files = [f for f in files if os.path.basename(f)[:-5] in LEAD_INDUSTRY]
+        files = [f for f in files
+                 if not os.path.basename(f).startswith("_")
+                 and os.path.basename(f)[:-5] not in NON_LEAD]
     clone_registry = collections.defaultdict(list)
     results = [check_file(f, clone_registry) for f in files]
 
