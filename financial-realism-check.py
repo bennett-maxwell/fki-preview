@@ -64,6 +64,26 @@ LEAD_INDUSTRY = {
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
 }
 
+# Industries whose buyers realistically run a LinkedIn lead-gen / social-selling
+# motion. Single source of truth = scripts/roi-industry-config.json
+# ("b2b_linkedin_industries"); fall back to this inline default if the config is
+# missing so the gate never silently no-ops. The ROI calculator's
+# "LinkedIn Leads Added/Month" slider feeds the headline revenue lift, so showing
+# it on a trades/consumer-local business (a plumber, a restaurant) inflates the
+# projection with an irrelevant channel — the same industry-inappropriateness
+# class as a $45K average contract on a plumber.
+def _load_b2b_linkedin():
+    cfg = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       "scripts", "roi-industry-config.json")
+    try:
+        with open(cfg) as f:
+            return set(json.load(f).get("b2b_linkedin_industries", []))
+    except Exception:
+        return {"consulting", "crm_software", "medical_devices",
+                "design_agency", "video_production"}
+
+B2B_LINKEDIN = _load_b2b_linkedin()
+
 def grab(pattern, html, flags=0):
     m = re.search(pattern, html, flags)
     return m.groups() if m else None
@@ -101,6 +121,23 @@ def check_file(path, clone_registry):
     # --- D7-10 label uses the right transaction noun for the industry ---
     if re.search(r'[Aa]verage [Cc]ontract [Vv]alue', html) and unit not in ("contract", "contract/ARR", "annual mgmt fee"):
         warns.append(f"D7-10 label 'Average Contract Value' but {industry} sells by '{unit}'")
+
+    # --- D7-18 calculator FIELD RELEVANCE: B2B-only LinkedIn lever on non-B2B ---
+    # The "LinkedIn Leads Added/Month" slider (id="slider-linkedin") feeds the
+    # headline AI revenue lift (aiLeads = leads*1.15 + linkedinLeads). On a
+    # trades/consumer-local business that has no LinkedIn pipeline, this inflates
+    # the ROI projection with an irrelevant channel — same industry-inappropriateness
+    # class Bennett flagged for the $45K-contract-on-a-plumber. Emitted as a WARN
+    # (not a red-line FAIL) on purpose: the live pages currently DO show this field,
+    # so failing here would turn the whole content board RED and block all Blueprint
+    # sends (the exact R1 silent-block trap). It promotes to a FAIL only AFTER the
+    # template/generator gate ships that removes/zeros the field for non-B2B industries.
+    if industry not in ("unknown",) and industry not in B2B_LINKEDIN \
+       and re.search(r'id="slider-linkedin"', html):
+        warns.append(
+            f"D7-18 [WARN] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
+            f"'{industry}' — inflates ROI projection with an irrelevant channel "
+            f"(stage: template gate to remove/zero for trades; promotes to FAIL after)")
 
     # --- D7-02 clone detection: record the slider triple WITH industry for compare ---
     # The real defect Bennett flagged is ONE financial profile cloned across
@@ -164,8 +201,14 @@ def main():
         print(f"{r['slug']:<20} {r['industry']:<16} {str(r['slider_default']):>9} {str(r['js_fallback']):>8}  {res}")
         for f in r["fails"]:
             print(f"      ✗ {f}")
+        for w in r["warns"]:
+            print(f"      ⚠ {w}")
     print("-" * 78)
     print(f"FINANCIAL-REALISM: {npass}/{len(results)} pass red-line financial checks")
+    d7_18 = [r["slug"] for r in results if any("D7-18" in w for w in r["warns"])]
+    if d7_18:
+        print(f"D7-18 FIELD-RELEVANCE WARN: {len(d7_18)} non-B2B blueprint(s) show the LinkedIn lever "
+              f"(staged for template gate): {sorted(d7_18)}")
     if clones:
         print(f"CROSS-INDUSTRY CLONE GROUPS: {[ (t, sorted(inds)) for t,(s,inds) in clones.items() ]}")
     sys.exit(0 if npass == len(results) else 1)
