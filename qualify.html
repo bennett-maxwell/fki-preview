@@ -169,6 +169,22 @@
   .chip { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '731853659590910');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -925,6 +941,12 @@ async function submitQualification() {
     if (response.ok) {
       const result = await response.json().catch(() => ({}));
       persistReturnedContactId(result.contactId || '');
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+          content_name: 'FKI AI Qualifier',
+          content_category: payload.tags && payload.tags[1] ? payload.tags[1] : 'advaita-ai-qualifier'
+        });
+      }
     } else {
       try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
     }
