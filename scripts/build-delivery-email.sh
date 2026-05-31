@@ -67,6 +67,9 @@ PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
+# Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
+# Template uses {{QUALIFY_URL}}, which was NEVER substituted before -> every email shipped a dead CTA.
+QUALIFY_URL="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=${SLUG}&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery"
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
@@ -95,6 +98,9 @@ sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
 sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_SUBJECT}}|$APPLY_SUBJECT|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_URL}}|$APPLY_URL|g" "$OUTPUT"
+# & is the whole-match operator in a sed RHS — escape it so the query string isn't corrupted.
+QUALIFY_URL_SED=$(printf '%s' "$QUALIFY_URL" | sed 's/&/\\&/g')
+sed -i '' "s|{{QUALIFY_URL}}|$QUALIFY_URL_SED|g" "$OUTPUT"
 
 # Prompts need python for multi-line safety
 python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
