@@ -473,6 +473,20 @@ function splitName(fullName) {
   return { first: parts.shift() || '', last: parts.join(' ') || '' };
 }
 
+function titleCase(s) {
+  return String(s || '').toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+}
+
+// Parse a URL lead slug (e.g. "court-lundberg") into First/Last.
+// Splits on hyphens AND whitespace, title-cases each part. First token = first
+// name, remaining tokens = last name. Returns {first:'',last:''} when empty.
+function parseLeadSlug(slug) {
+  const clean = decodeURIComponent(String(slug || '')).replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/[-\s]+/).map(titleCase).filter(Boolean);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
 function getIdentity() {
   return {
     firstName: document.getElementById('lead-first').value.trim(),
@@ -518,10 +532,15 @@ function persistReturnedContactId(contactId) {
 function hydrateIdentity() {
   const params = getParams();
   const stored = readStoredIdentity();
-  const split = splitName(params.get('lead') || stored.leadName || '');
+  // URL ?lead=court-lundberg → First=Court Last=Lundberg (hyphen-split + title-case).
+  const leadParam = params.get('lead');
+  const slug = parseLeadSlug(leadParam || '');
+  // Priority: explicit firstName/first URL param > parsed lead slug > stored localStorage.
+  // A fresh lead slug must NOT be overridden by stale stored identity, so when a lead
+  // param is present we drop the stored fallback for name fields.
   const fields = {
-    'lead-first': params.get('firstName') || params.get('first') || stored.firstName || split.first,
-    'lead-last': params.get('lastName') || params.get('last') || stored.lastName || split.last,
+    'lead-first': params.get('firstName') || params.get('first') || slug.first || (leadParam ? '' : stored.firstName) || '',
+    'lead-last': params.get('lastName') || params.get('last') || slug.last || (leadParam ? '' : stored.lastName) || '',
     'lead-business': params.get('businessName') || params.get('biz') || stored.businessName || '',
     'lead-email': params.get('email') || stored.email || '',
     'lead-phone': params.get('phone') || stored.phone || ''
