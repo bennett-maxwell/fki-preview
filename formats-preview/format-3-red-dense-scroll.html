@@ -12,20 +12,20 @@
   <title>AI Advantage Roadmap — CRMX</title>
   <style>
     :root {
-      /* CRMX palette — primary red #E8192C, navy #0A0E1A, steel #4A5270, off-white #F4F6FB */
-      --brand:        #E8192C;
-      --brand-dark:   #0A0E1A;
-      --brand-light:  #f7c2c7;
-      --steel:        #4A5270;
-      --neutral-bg:   #F4F6FB;
-      --brand-red:    #E8192C; /* CRMX primary accent #E8192C */
-      --crmx-red:     #E8192C; /* alias for CRMX brand red #E8192C */
-      --accent-bg:    rgba(232, 25, 44, 0.08); /* #E8192C with 8% alpha */
+      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
+      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
       --white:        #ffffff;
-      --text:         #0A0E1A;
-      --text-muted:   #4A5270;
-      --text-light:   #8a90a3;
-      --border:       #e3e6ee;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
       --shadow: 0 4px 24px rgba(10,14,26,0.08);
@@ -61,7 +61,7 @@
       .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     }
     .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
-    .hero-badge { display: inline-block; background: rgba(232,25,44,0.14); border: 1px solid var(--brand); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
     .hero h1 span { color: var(--brand); }
     .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
@@ -211,6 +211,7 @@
     .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
     .source-item a { color: var(--brand); text-decoration: underline; }
     @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 1.45rem; } .hero-sub { font-size: 1rem; } .section { padding: 2.75rem 1rem; } }
 
     .pod-section { padding: 4rem 2rem; }
     .pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
@@ -218,7 +219,7 @@
     .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
     .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
     .pod-body { padding: 1.5rem 2rem; }
-    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(232,25,44,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
     .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
     .pod-eq.playing { display: inline-flex; }
     .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
@@ -235,7 +236,7 @@
     .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
     .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
     .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
-    .pod-btn:hover { background: rgba(232,25,44,.08); }
+    .pod-btn:hover { background: rgba(0,113,227,.08); }
     .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
     @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
     .pod-btn.play-btn:hover { background: var(--brand-dark); }
@@ -270,7 +271,7 @@
   </ul>
 </nav>
 
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-badge">Confidential — Prepared for Brent Attaway</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for CRMX</h1>
   <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the CRM platform serving 675+ home service businesses — and how to get there in 30 days.</p>
@@ -306,42 +307,16 @@
 
 <section class="section" id="results">
   <div class="container">
-    <p class="section-label">Proof It Works</p>
-    <h2 class="section-title">Results from Similar Businesses</h2>
-    <p class="section-sub">These are published benchmarks from SaaS, CRM agency, and multi-account service businesses at comparable revenue ranges and AI maturity levels. Every figure links to its source.</p>
-    <div class="results-table-wrap">
-      <table class="results-table">
-        <thead>
-          <tr><th>Result</th><th>What Changed</th><th>Industry / Context</th><th>Source</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="result-num">First-Responder Wins</div>majority of deals</td>
-            <td>Added AI speed-to-lead response. The first vendor to respond wins the clear majority of deals at this price point.</td>
-            <td>SaaS &amp; agency businesses, $250K&ndash;$1M revenue range</td>
-            <td><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">HubSpot [1]</a></td>
-          </tr>
-          <tr>
-            <td><div class="result-num">6.5 hrs/wk</div>reclaimed per teammate</td>
-            <td>Automated client onboarding, support ticket triage, and weekly reporting compilation.</td>
-            <td>CRM agency operations &mdash; published automation benchmarks</td>
-            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR [2]</a></td>
-          </tr>
-          <tr>
-            <td><div class="result-num">3x faster</div>proposal turnaround</td>
-            <td>AI proposal generator replaces 45-minute manual process with 3-minute automated output.</td>
-            <td>Digital agencies and CRM consultancies</td>
-            <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey [4]</a></td>
-          </tr>
-          <tr>
-            <td><div class="result-num">Hours Back</div>weekly admin reclaim</td>
-            <td>AI coordination agents handle client setup, ticket routing, and status reporting automatically.</td>
-            <td>Small business AI adoption &mdash; industry average</td>
-            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR [5]</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <p class="section-label">What Your Industry Is Already Doing</p>
+    <h2 class="section-title">SaaS &amp; CRM Companies Like Yours Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves software and CRM businesses in your space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether CRMX runs them before the competitor down the street does.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every signup in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> SaaS and CRM companies now put an AI speed-to-lead agent on every demo request and trial signup, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first vendor to respond wins the clear majority of deals at this price point &mdash; they capture trials your slower competitors never even see. <strong>How I deliver it for CRMX:</strong> a speed-to-lead agent wired into your GoHighLevel that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They onboard 1,000+ accounts with a team of 3</div><div class="gap-desc"><strong>What they're doing:</strong> vertical SaaS companies are handing new-customer setup to an AI onboarding agent &mdash; account provisioning, template deployment, welcome sequences, kickoff scheduling. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a tiny team serves hundreds more accounts without a single new hire. <strong>How I deliver it for CRMX:</strong> an onboarding agent that handles every repeatable setup step so your team of 3 only touches the strategy conversations. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one product release into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> software companies run an AI content agent that turns every feature ship into ready-to-post social, email, and blog content. <strong>How it helps them:</strong> they stay top-of-mind with their market every single week &mdash; no marketing hire, no content backlog. <strong>How I deliver it for CRMX:</strong> a content agent trained on your brand voice from gocrmx.com that converts each CRMX update into a full week of publish-ready content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They catch churn before the cancel button</div><div class="gap-desc"><strong>What they're doing:</strong> subscription businesses run an AI health-monitoring agent across their whole account base to flag at-risk customers early. <strong>How it helps them:</strong> they save recurring revenue that would otherwise quietly walk out the door &mdash; the cheapest dollar in SaaS is the one you keep. <strong>How I deliver it for CRMX:</strong> a retention agent watching login and usage signals across all 675+ accounts, surfacing churn risk while there is still time to act. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
     </div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside companies that sell what you sell. The ones who move first do not just save time &mdash; they take the customers everyone else was too slow to answer. CRMX can be the company they are worried about, or the one they leave behind.</p>
   </div>
 </section>
 
@@ -431,14 +406,14 @@
 
 <section class="section section-alt" id="ignore">
   <div class="container">
-    <p class="section-label">Honest Advice</p>
-    <h2 class="section-title">What AI Will Not Work For CRMX &mdash; Skip These</h2>
-    <p class="section-sub">Not everything benefits from automation. Here is what to ignore for now &mdash; and why.</p>
+    <p class="section-label">Sequencing, Not Limits</p>
+    <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
     <div class="ignore-grid">
-      <div class="ignore-card"><div class="ignore-x"><span>X</span></div><div><div class="ignore-title">AI-Generated Custom Automations for Clients</div><div class="ignore-reason">Your automation quality is the product. AI-built client workflows without human review risk breaking client systems and eroding trust. Keep humans on every custom automation build for paying CRMX customers.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>X</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">Pricing at $199/mo with FastStart add-ons requires strategic judgment. AI can surface data &mdash; but pricing decisions stay with leadership, not an autonomous agent.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>X</span></div><div><div class="ignore-title">AI Replacing Live Support</div><div class="ignore-reason">24/7 live chat with real humans is a competitive advantage for CRMX. Use AI to triage and route &mdash; but the final customer interaction stays human. That is what keeps recurring revenue locked in.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>X</span></div><div><div class="ignore-title">Generic Chatbot on gocrmx.com</div><div class="ignore-reason">Home service business owners expect real conversations, not chatbot menus. A speed-to-lead agent over email and SMS outperforms a website chatbot at this price point every time.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI will happily model and recommend pricing &mdash; and eventually run tests on its own. For now, let it surface the data and keep the final $199/mo and add-on calls with leadership. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more home-service owners than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
     </div>
   </div>
 </section>
@@ -816,29 +791,13 @@ If any answer is N: revise that section before sending.
   </div>
 </section>
 
-<section class="section" id="audit">
-  <div class="container">
-    <p class="section-label">Your Digital Presence</p>
-    <h2 class="section-title">gocrmx.com &mdash; Audit Summary</h2>
-    <p class="section-sub">Five-dimension review of your current web presence. Scores reflect time recovery opportunities for AI-enhanced conversion performance.</p>
-    <div class="snapshot-grid">
-      <div class="snapshot-card"><div class="snapshot-val">4.1 / 5</div><div class="snapshot-key">Brand Consistency</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">3.4 / 5</div><div class="snapshot-key">Lead Capture</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">3.8 / 5</div><div class="snapshot-key">Social Proof</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">3.2 / 5</div><div class="snapshot-key">Conversion Flow</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">3.6 / 5</div><div class="snapshot-key">SEO + Mobile</div></div>
-    </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">Brand: strong dark theme, consistent typography. Lead Capture: sign-up and demo forms present, no instant-response automation yet. Social Proof: 3 named testimonials, 675+ customer count cited. Conversion: free trial and FastStart upsell present, no interactive demo tour. SEO + Mobile: clean responsive design, well-structured industry pages, active blog. Each score links a specific time recovery opportunity to a specific AI agent in the roadmap above.</p>
-  </div>
-</section>
-
 <section class="section section-alt" id="demo">
   <div class="container">
     <p class="section-label">Live Preview</p>
     <h2 class="section-title">CRMX Speed-to-Lead Demo</h2>
     <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound CRMX inquiry, day or night, every vertical. The same flow runs across your 675+ existing accounts for client onboarding too.</p>
     <div style="text-align:center;margin:2rem 0;">
-      <a href="https://gocrmx.com" target="_blank" rel="noopener" style="display:inline-block;background:var(--brand);color:#fff;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;text-decoration:none;box-shadow:0 4px 18px rgba(232,25,44,0.35);">
+      <a href="https://gocrmx.com" target="_blank" rel="noopener" style="display:inline-block;background:var(--brand);color:#fff;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;text-decoration:none;box-shadow:0 4px 18px rgba(0,113,227,0.35);">
         View gocrmx.com (your live site)
       </a>
     </div>
@@ -1201,7 +1160,7 @@ If any answer is N: revise that section before sending.
 <!-- player widget cloned from melissa-tash-srp gold via inject-player.py 2026-05-25 -->
 <section class="section section-alt pod-section" id="listen">
   <h2 class="section-title">Your AI Roadmap Podcast</h2>
-  <p class="section-intro">Listen to your personalized Blueprint — built from your answers.</p>
+  <p class="section-sub">Listen to your personalized Blueprint — built from your answers.</p>
   <div class="pod-card">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
