@@ -102,6 +102,19 @@ def check(html_path: pathlib.Path, podcast_path: pathlib.Path | None = None):
     checks.append(("FC-05", "player JS wired (togglePlay+click listener, no typo)", js_ok,
                    None if js_ok else f"toggle={has_toggle} listener={has_listener} no_typo={no_typo}"))
 
+    # FC-07 [RL] play-button hardening present (2026-06-01 live-bug fix).
+    # The large unbuffered podcast needs (a) a forced load() when readyState===0
+    # and (b) a .catch() on the play() Promise to surface AbortError instead of a
+    # silent dead button. FC-05 only proves togglePlay exists; FC-07 proves it is
+    # the HARDENED togglePlay so a future edit can't strip the fix and still pass.
+    has_play_catch = bool(re.search(r"\.play\(\)", html)) and bool(
+        re.search(r"p\s*&&\s*p\.catch|\.play\(\)\s*\)?\s*;?\s*[^\n]*\.catch\(", html)
+    )
+    has_ready_guard = bool(re.search(r"readyState\s*===?\s*0", html)) and "load()" in html
+    hard_ok = has_play_catch and has_ready_guard
+    checks.append(("FC-07", "[RL] play-button hardened (play().catch + readyState load guard)",
+                   hard_ok, None if hard_ok else f"play_catch={has_play_catch} ready_guard={has_ready_guard}"))
+
     # FC-06 [RL] audio container is a REAL mp3 (not AAC/MP4 mislabeled .mp3).
     # iOS/Safari refuses AAC-in-MP4 served as audio/mpeg. Only check if a path given.
     if podcast_path is not None:

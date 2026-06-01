@@ -194,7 +194,7 @@ html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
 # Inject build metadata
 import datetime
 build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-meta = f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
+meta = '<!-- BLUEPRINT-DELIVERY-EMAIL v2 -->\n' + f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
 html = meta + html
 with open(output_path, 'w') as f:
     f.write(html)

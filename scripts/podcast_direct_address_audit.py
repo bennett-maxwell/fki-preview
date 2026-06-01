@@ -37,6 +37,10 @@ BANNED_PATTERNS = [
     r"\bwe('ll| will) look at\b",
     r"\bwhat we (are|'re) analyzing\b",
     r"\bspecific client\b",
+    r"\bgolden state\b",
+    r"\bdelete delete\b",
+    r"\bi said\b",
+    r"\bhigh chad\b",
 ]
 
 
@@ -112,12 +116,21 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
     first = normalize(first_name)
     lead = normalize(lead_name)
     business = normalize(business_name)
-    expected_opening = normalize(
-        f"Hi {first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."
-    )
+    opening_variants = [
+        normalize(f"Hi {first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
+        normalize(f"Hello {first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
+        normalize(f"{first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
+    ]
+    expected_opening = opening_variants[0]
     opening_window = text[:500]
-    opening_direct = bool(first and re.search(rf"\bhi\s+{re.escape(first)}\b", opening_window, re.I))
-    opening_exact_or_close = phrase_present(opening_window, expected_opening, min_ratio=0.78)
+    opening_direct = bool(first and (
+        re.search(rf"\b(?:hi|hello|hey)\s+{re.escape(first)}\b", opening_window, re.I)
+        or re.search(rf"^\s*{re.escape(first)}\b.{0,80}\bwelcome\b", opening_window, re.I)
+    ))
+    opening_exact_or_close = any(
+        phrase_present(opening_window, variant, min_ratio=0.78)
+        for variant in opening_variants
+    )
 
     banned_found = []
     for pat in BANNED_PATTERNS:

@@ -54,7 +54,7 @@ from datetime import datetime
 
 SOURCE_DOC_TEMPLATE = """\
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for {lead_name}
+PRIVATE AUDIO BRIEFING — Personal AI Walkthrough for {lead_name}
 {business_name} | Prepared by Franchise Ki | Generated {generated_date}
 
 ================================================================================
@@ -137,7 +137,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at {roi_rate}/hr: up to {gap1_roi}/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -153,7 +153,7 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -167,7 +167,7 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At {team_size_admin} people × {roi_rate}/hr × 5 hrs/week recovered = up to {gap3_roi}/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
@@ -233,7 +233,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
 **Days 1-3: Onboarding.** {industry_cap} audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -305,7 +305,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 This is an application, not a commitment. We read every one personally.
 
@@ -370,7 +370,7 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
 All statistics and benchmarks referenced in this document:
 
@@ -406,7 +406,7 @@ Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
 If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
@@ -631,7 +631,7 @@ def validate_source_doc(content: str, lead_name: str = '', lead_first: str = '')
         )
 
     required = ['<!-- v1.6 -->', 'SECTION 1', 'SECTION 4', 'SECTION 6',
-                'SECTION 8', 'SECTION 12', 'blueprint.meetadvaita.com/apply']
+                'SECTION 8', 'SECTION 12', 'qualify.html']
     missing = [r for r in required if r not in content]
     if missing:
         raise ValueError(f"Source doc missing required sections/stamp: {missing}")

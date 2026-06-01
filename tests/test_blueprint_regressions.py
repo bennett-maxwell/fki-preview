@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 test_blueprint_regressions.py — stdlib-only regression suite that pins the
-8 hard-won Blueprint AI invariants so a future edit can't silently reintroduce
+12 hard-won Blueprint AI invariants so a future edit can't silently reintroduce
 a fixed defect.
 
 Every check below is currently TRUE. Each one corresponds to a real bug that
@@ -119,6 +119,48 @@ def check_d1_01_checks_title():
         "run-audit.py missing name_in_title() implementation"
 
 
+def check_format3_gate_wired():
+    """9. Format-3 dense-scroll is the only allowed customer-facing format."""
+    src = _read(RUN_AUDIT)
+    assert "format-conformance-check.py" in src, \
+        "run-audit.py does not invoke format-conformance-check.py"
+    assert "PF0-5_format3_dense_scroll_RL" in src, \
+        "run-audit.py missing the Format-3 red-line result"
+
+
+def check_restaurant_drift_gate_wired():
+    """10. Restaurant leads must fail on plumber/SaaS/demo leftovers."""
+    src = _read(RUN_AUDIT)
+    assert "def restaurant_content_gate(" in src, \
+        "run-audit.py missing restaurant_content_gate()"
+    for phrase in [
+        "plumber test business",
+        "water heater",
+        "client success onboarding agent",
+        "proposal specialist",
+        "restaurant-specific vocabulary below threshold",
+    ]:
+        assert phrase in src, f"restaurant drift gate missing phrase: {phrase}"
+    assert "D10-23_restaurant_copy_clean_RL" in src, \
+        "run-audit.py missing restaurant drift red-line result"
+
+
+def check_podcast_direct_address_artifact_gate():
+    """11. Podcast audit blocks source-material framing and known ASR artifacts."""
+    src = _read(os.path.join(REPO, "scripts", "podcast_direct_address_audit.py")).lower()
+    for phrase in ["source materials?", "golden state", "delete delete", "i said", "high chad"]:
+        assert phrase in src, f"podcast direct-address gate missing: {phrase}"
+
+
+def check_local_audio_audit_not_public_deploy_blocked():
+    """12. Local audit can run before first public deploy; production receipts verify 200 later."""
+    src = _read(RUN_AUDIT)
+    assert "BLUEPRINT_REQUIRE_PUBLIC_AUDIO" in src, \
+        "run-audit.py must gate public audio 200 behind an explicit production env"
+    assert '"public_url_200": True if not require_public_audio' in src, \
+        "run-audit.py still hard-blocks local first deploy on public podcast URL"
+
+
 CHECKS = [
     ("NO_LINKEDIN_SLIDER_IN_TEMPLATE", check_no_linkedin_slider_in_template),
     ("NO_NONB2B_LINKEDIN_VIOLATION", check_no_nonb2b_linkedin_violation),
@@ -128,6 +170,10 @@ CHECKS = [
     ("D9_01_IS_REAL_NOT_STUB", check_d9_01_is_real_not_stub),
     ("PODCAST_ALIAS_EXPLICIT", check_podcast_alias_explicit),
     ("D1_01_CHECKS_TITLE", check_d1_01_checks_title),
+    ("FORMAT3_GATE_WIRED", check_format3_gate_wired),
+    ("RESTAURANT_DRIFT_GATE_WIRED", check_restaurant_drift_gate_wired),
+    ("PODCAST_DIRECT_ADDRESS_ARTIFACT_GATE", check_podcast_direct_address_artifact_gate),
+    ("LOCAL_AUDIO_AUDIT_NOT_PUBLIC_DEPLOY_BLOCKED", check_local_audio_audit_not_public_deploy_blocked),
 ]
 
 

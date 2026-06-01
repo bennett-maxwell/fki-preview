@@ -41,9 +41,10 @@ if [ -z "$STAGED_BLUEPRINTS" ]; then
   exit 0
 fi
 
+ORCH_AVAILABLE=1
 if [ ! -f "$ORCH" ]; then
-  echo "⚠️  OV WARN: Orchestrator not found at $ORCH — skipping validator check"
-  exit 0
+  echo "⚠️  OV WARN: Orchestrator not found at $ORCH — continuing with repo-local gates"
+  ORCH_AVAILABLE=0
 fi
 
 echo "Running orchestrator validators on staged blueprints..."
@@ -63,11 +64,15 @@ for bp_path in $STAGED_BLUEPRINTS; do
     case "$healout" in *HEALED*) git add "$bp_path" 2>/dev/null ;; esac
   fi
 
-  if python3 "$ORCH" --lead "$slug" --validate-only 2>&1; then
-    echo "  ✅ $slug: All validators PASS"
+  if [ "$ORCH_AVAILABLE" = "1" ]; then
+    if python3 "$ORCH" --lead "$slug" --validate-only 2>&1; then
+      echo "  ✅ $slug: All validators PASS"
+    else
+      echo "  ❌ $slug: Validator FAILED — commit blocked"
+      OVERALL_FAIL=1
+    fi
   else
-    echo "  ❌ $slug: Validator FAILED — commit blocked"
-    OVERALL_FAIL=1
+    echo "  ⚠️  $slug: Orchestrator unavailable — repo-local gates still enforced"
   fi
 
   # ── Second gate (v2.1 2026-05-28): blueprint_completion_gate 50-breakpoint, double coverage ──
@@ -91,6 +96,22 @@ for bp_path in $STAGED_BLUEPRINTS; do
       echo "  ❌ $slug: D9 render-integrity FAILED — commit blocked"
       OVERALL_FAIL=1
     fi
+  fi
+
+  # ── Financial realism red-line (2026-06-01): staged blueprints must use
+  # industry-appropriate transaction economics before commit.
+  FINANCIAL="$CI_SKIP_DIR/financial-realism-check.py"
+  if [ -f "$FINANCIAL" ]; then
+    if python3 "$FINANCIAL" --file "$CI_SKIP_DIR/$bp_path" >/dev/null 2>&1; then
+      echo "  ✅ $slug: financial-realism PASS"
+    else
+      echo "  ❌ $slug: financial-realism FAILED — commit blocked"
+      python3 "$FINANCIAL" --file "$CI_SKIP_DIR/$bp_path" 2>&1 | sed 's/^/     /'
+      OVERALL_FAIL=1
+    fi
+  else
+    echo "  ❌ $slug: financial-realism-check.py missing — commit blocked"
+    OVERALL_FAIL=1
   fi
 
   # ── Gatekeeper 100 local gate (2026-06-01): no malformed visible labels, no

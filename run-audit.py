@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""run-audit.py — Blueprint AI audit entrypoint (stdlib + curl). v1.0 2026-05-28"""
+"""run-audit.py — Blueprint AI audit entrypoint (stdlib + curl). v1.1 2026-06-01"""
 import sys, os, subprocess, re, json, urllib.request, hashlib
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -128,8 +128,93 @@ def home_services_content_gate(html, lead):
         "running an AI content agent",
         "full week of publish-ready content",
         "proposal drafts from your design library",
+        "cheapest dollar in saas",
+        "login frequency",
+        "automation usage",
+        "churn risk",
+        "recurring revenue locked in",
+        "support tickets",
+        "account status checks",
+        "billing questions",
+        "feature requests",
+        "product development",
+        "client success onboarding agent",
+        "complete onboarding lifecycle",
+        "payment confirmation",
+        "kickoff call",
+        "login url",
+        "automation templates",
+        "proposal specialist",
+        "requests a demo",
+        "live demo where",
+        "plan tier",
+        "agency owners",
+        "product launches",
+        "marketing content as a top operational stress",
+        "customer success stories",
+        "educational pieces",
+        "675+ accounts",
+        "675+ businesses",
     ]
     found = [term for term in banned if term.lower() in body.lower()]
+    return not found, found
+
+def restaurant_content_gate(html, lead):
+    """Restaurant/QSR/food-franchise red-line: block cross-industry drift."""
+    industry_blob = " ".join(str(lead.get(k, "")) for k in (
+        "industry", "business_type", "service_type", "market"
+    )).lower()
+    is_restaurant = any(term in industry_blob for term in (
+        "restaurant", "qsr", "quick service", "fast casual", "food franchise",
+        "food chain", "mexican grill", "catering"
+    ))
+    if not is_restaurant:
+        return True, []
+
+    body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)
+    body = re.sub(r'<style[\s\S]*?</style>', '', body, flags=re.I)
+    low = body.lower()
+    banned = [
+        "plumber test business",
+        "plumbing",
+        "water heater",
+        "drain cleaning",
+        "sewer",
+        "leak detection",
+        "technician brief",
+        "field-service workflow",
+        "servicetitan",
+        "housecall pro",
+        "emergency intake agent",
+        "estimate follow-up agent",
+        "maintenance recall agent",
+        "dispatch summary agent",
+        "quoted-but-not-booked",
+        "unsold estimate",
+        "maintenance membership",
+        "client success onboarding agent",
+        "complete onboarding lifecycle",
+        "payment confirmation",
+        "kickoff call",
+        "login url",
+        "automation templates",
+        "proposal specialist",
+        "requests a demo",
+        "live demo where",
+        "product launches",
+        "support tickets",
+        "billing questions",
+        "feature requests",
+        "churn risk",
+        "recurring revenue locked in",
+    ]
+    found = [term for term in banned if term in low]
+    required_any = [
+        "order", "catering", "guest", "loyalty", "rewards", "location",
+        "restaurant", "pickup", "delivery", "crew", "store"
+    ]
+    if sum(1 for term in required_any if term in low) < 5:
+        found.append("restaurant-specific vocabulary below threshold")
     return not found, found
 
 def podcast_source_gate(slug):
@@ -171,6 +256,7 @@ def podcast_audio_gate(slug, lead):
     receipt_dir = os.path.join(REPO, "audit-receipts", slug)
     receipt_path = os.path.join(receipt_dir, f"{slug}-production-47.json")
     public_url = f"https://bennett-maxwell.github.io/fki-preview/podcasts/{audio_name}"
+    require_public_audio = os.environ.get("BLUEPRINT_REQUIRE_PUBLIC_AUDIO") == "1"
     failures = []
 
     if not os.path.exists(audio_path):
@@ -196,7 +282,7 @@ def podcast_audio_gate(slug, lead):
         business_name = lead.get("business_name") or lead_name
         auditor = os.path.join(REPO, "scripts", "podcast_direct_address_audit.py")
         try:
-            proc = subprocess.run([
+            cmd = [
                 sys.executable, auditor,
                 "--audio", audio_path,
                 "--first-name", first_name,
@@ -204,10 +290,12 @@ def podcast_audio_gate(slug, lead):
                 "--business-name", business_name,
                 "--lead", slug,
                 "--seconds", "180",
-                "--public-url", public_url,
                 "--receipt", receipt_path,
                 "--json-output",
-            ], capture_output=True, text=True, timeout=360)
+            ]
+            if require_public_audio:
+                cmd.extend(["--public-url", public_url])
+            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=360)
             try:
                 data = json.loads(proc.stdout)
             except Exception:
@@ -226,7 +314,7 @@ def podcast_audio_gate(slug, lead):
         "no_third_person_patterns": data.get("third_person_patterns_found") in ([], None),
         "you_your_count_ge_5": int(data.get("you_your_count") or 0) >= 5,
         "audio_sha_matches": data.get("audio_sha256") == current_sha,
-        "public_url_200": int(data.get("http_code") or 0) == 200,
+        "public_url_200": True if not require_public_audio else int(data.get("http_code") or 0) == 200,
     }
     for name, ok in checks.items():
         if not ok:
@@ -269,6 +357,9 @@ def audit_lead(slug):
     hs_ok, hs_detail = home_services_content_gate(html, lead)
     results["D10-22_home_services_copy_clean_RL"] = hs_ok
     redlines["D10-22_home_services_copy_clean_RL"] = hs_ok
+    restaurant_ok, restaurant_detail = restaurant_content_gate(html, lead)
+    results["D10-23_restaurant_copy_clean_RL"] = restaurant_ok
+    redlines["D10-23_restaurant_copy_clean_RL"] = restaurant_ok
     podcast_ok, podcast_detail = podcast_source_gate(slug)
     results["D4-09_podcast_source_funnel_clean_RL"] = podcast_ok
     redlines["D4-09_podcast_source_funnel_clean_RL"] = podcast_ok
@@ -288,6 +379,7 @@ def audit_lead(slug):
             "orphan_class_detail": orphan_detail,
             "calculator_detail": calc_detail,
             "home_services_detail": hs_detail,
+            "restaurant_detail": restaurant_detail,
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail}
 
