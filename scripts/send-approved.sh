@@ -10,17 +10,24 @@ SCRIPT_DIR="$REPO_DIR/scripts"
 LEADS_DIR="$REPO_DIR/leads"
 
 BENNETT_APPROVED=false
+GATE_TOKEN_DIR=""
 SLUGS=()
 
-for arg in "$@"; do
+while [ "$#" -gt 0 ]; do
+    arg="$1"
     case "$arg" in
         --bennett-approved|--approved) BENNETT_APPROVED=true ;;
+        --gate-token-dir)
+            shift
+            GATE_TOKEN_DIR="${1:-}"
+            ;;
         --all)
             for f in "$LEADS_DIR"/*.json; do
                 [ -f "$f" ] && SLUGS+=("$(basename "$f" .json)")
             done ;;
         *) SLUGS+=("$arg") ;;
     esac
+    shift || true
 done
 
 if ! $BENNETT_APPROVED; then
@@ -30,7 +37,13 @@ if ! $BENNETT_APPROVED; then
 fi
 
 if [ ${#SLUGS[@]} -eq 0 ]; then
-    echo "Usage: $0 --all --bennett-approved OR $0 court-lundberg melissa-tash-srp --bennett-approved"
+    echo "Usage: $0 --all --bennett-approved --gate-token-dir <receipts> OR $0 court-lundberg --bennett-approved --gate-token-dir <receipts>"
+    exit 1
+fi
+
+if [ -z "$GATE_TOKEN_DIR" ]; then
+    echo "❌ BLOCKED: Require --gate-token-dir <receipts>."
+    echo "Each slug must have <receipts>/<slug>-gatekeeper-pass-token.json from scripts/blueprint_gatekeeper_100.py --mode production."
     exit 1
 fi
 
@@ -41,8 +54,13 @@ for slug in "${SLUGS[@]}"; do
         echo "❌ $slug: profile not found, skip"
         continue
     fi
+    token="$GATE_TOKEN_DIR/${slug}-gatekeeper-pass-token.json"
+    if [ ! -f "$token" ]; then
+        echo "❌ $slug: production Gatekeeper token not found: $token"
+        continue
+    fi
     echo "→ Sending $slug..."
-    bash "$SCRIPT_DIR/build-delivery-email.sh" "$profile" --send-ghl --bennett-approved && \
+    bash "$SCRIPT_DIR/build-delivery-email.sh" "$profile" --send-ghl --bennett-approved --gate-token "$token" && \
         echo "  ✅ $slug: sent" || \
         echo "  ❌ $slug: failed"
 done

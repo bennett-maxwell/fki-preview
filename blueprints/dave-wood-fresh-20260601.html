@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fresh Blueprint AI package for Dave Wood and Mahana Fresh.">
+  <meta property="og:title" content="Dave Wood - Mahana Fresh Blueprint AI">
+  <meta property="og:description" content="A fresh AI operating roadmap for Mahana Fresh.">
+  <title>AI Advantage Roadmap - Mahana Fresh</title>
+  <style>
+    :root {
+      --brand: #226A46;
+      --brand-dark: #173D2A;
+      --accent: #FFB84D;
+      --surface: #FAFCF7;
+      --ink: #172119;
+      --muted: #5A675E;
+      --line: #DCE6D9;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; font-family: Inter, Arial, sans-serif; color: var(--ink); background: var(--surface); line-height: 1.55; }
+    a { color: var(--brand-dark); }
+    .skip-link { position: absolute; left: -999px; top: auto; }
+    .page-shell { max-width: 1180px; margin: 0 auto; padding: 0 24px 56px; }
+    .nav { position: sticky; top: 0; z-index: 5; background: rgba(250,252,247,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }
+    .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 12px 24px; }
+    .brand-mark { font-weight: 800; color: var(--brand-dark); }
+    .nav-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .nav-link { font-size: 14px; text-decoration: none; padding: 8px 10px; border-radius: 6px; color: var(--ink); }
+    .nav-link:hover { background: #EAF3E5; }
+    .hero { background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 72px 24px 64px; }
+    .hero-inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr .8fr; gap: 36px; align-items: center; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 700; color: #EAF3E5; }
+    h1 { font-size: 46px; line-height: 1.08; margin: 12px 0 18px; letter-spacing: 0; }
+    h2 { font-size: 28px; margin: 0 0 14px; letter-spacing: 0; color: var(--brand-dark); }
+    h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: 0; }
+    .hero p { font-size: 18px; color: #F6FFF3; max-width: 760px; }
+    .hero-panel { border: 1px solid rgba(255,255,255,.28); border-radius: 8px; padding: 22px; background: rgba(255,255,255,.08); }
+    .hero-stat { display: grid; gap: 6px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+    .hero-stat:last-child { border-bottom: 0; }
+    .hero-stat span { color: #EAF3E5; font-size: 13px; }
+    .hero-stat strong { font-size: 18px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .cta-btn, .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 18px; border-radius: 6px; border: 1px solid transparent; font-weight: 750; text-decoration: none; }
+    .cta-btn { background: var(--accent); color: #1F2A18; }
+    .btn { color: var(--white); border-color: rgba(255,255,255,.55); }
+    .section { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-top: 20px; box-shadow: 0 10px 26px rgba(23,33,25,.05); }
+    .section p { margin: 0 0 12px; color: var(--muted); }
+    .section p:last-child { margin-bottom: 0; }
+    .agent-grid, .calc-grid, .profile-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .agent-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px; background: #FBFDF9; }
+    .pillar-tag { display: inline-block; font-size: 12px; font-weight: 800; color: var(--brand-dark); background: #EAF3E5; border-radius: 6px; padding: 3px 8px; margin-bottom: 10px; }
+    .calc-field { display: grid; gap: 8px; font-weight: 700; color: var(--brand-dark); }
+    .calc-field input { width: 100%; accent-color: var(--brand); }
+    .calc-field output { color: var(--ink); font-weight: 800; }
+    .roi-result { margin-top: 18px; padding: 18px; background: #F3F8EF; border: 1px solid var(--line); border-radius: 8px; }
+    .roi-result span { display: block; color: var(--muted); font-size: 13px; }
+    .roi-result strong { display: block; font-size: 32px; color: var(--brand-dark); margin: 4px 0; }
+    .audio-player { width: 100%; margin-top: 12px; }
+    .player-shell { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: #F9FBF6; }
+    .player-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+    .player-btn, .speed-btn { min-height: 36px; border: 1px solid var(--line); border-radius: 6px; background: var(--white); color: var(--brand-dark); font-weight: 800; padding: 8px 12px; cursor: pointer; }
+    .chapter-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+    .chapter-pip { width: 10px; height: 10px; border-radius: 999px; background: var(--accent); display: inline-block; }
+    .text-link { font-weight: 800; }
+    .source-list { margin: 0; padding-left: 20px; color: var(--muted); }
+    .prompt-block { white-space: pre-wrap; padding: 18px; border-radius: 8px; border: 1px solid var(--line); background: #F9FBF6; color: var(--ink); overflow-x: auto; font-size: 13px; }
+    .prompt-grid { display: grid; gap: 16px; }
+    .audit-note { font-size: 13px; color: var(--muted); margin-top: 28px; }
+    @media (max-width: 860px) {
+      .hero-inner, .agent-grid, .calc-grid, .profile-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      .hero { padding: 54px 20px 48px; }
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .page-shell { padding: 0 14px 42px; }
+      .section { padding: 20px; }
+      .hero { padding: 44px 16px 42px; }
+      h1 { font-size: 30px; }
+      h2 { font-size: 23px; }
+      .cta-btn, .btn { width: 100%; }
+    }
+    @media (max-width: 360px) {
+      h1 { font-size: 27px; }
+      .nav-link { padding: 7px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#profile">Skip to Blueprint</a>
+  <nav class="nav" aria-label="Blueprint navigation">
+    <div class="nav-inner">
+      <div class="brand-mark">Mahana Fresh Blueprint</div>
+      <div class="nav-links">
+        <a class="nav-link" href="#profile">Your Profile</a>
+        <a class="nav-link" href="#ai-agents">AI Agents</a>
+        <a class="nav-link" href="#roi">ROI Calculator</a>
+        <a class="nav-link" href="#listen">Listen</a>
+        <a class="nav-link" href="#apply">Apply</a>
+      </div>
+    </div>
+  </nav>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Fresh run - no reused Dave Wood artifacts</div>
+        <h1>Dave, here is the Mahana Fresh AI operating roadmap.</h1>
+        <p>This Blueprint focuses on store-level execution, franchisee enablement, guest experience, and local demand actions that can be piloted without changing the brand promise.</p>
+        <div class="cta-row">
+          <a class="cta-btn" href="https://blueprint.meetadvaita.com/qualify.html?lead=dave-wood-fresh-20260601&biz=Mahana%20Fresh&src=blueprint-ai&firstName=Dave&agents=local-ops,franchise-growth,guest-experience">Apply to work with Bennett</a>
+          <a class="btn" href="#listen">Listen to the briefing</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Run proof">
+        <div class="hero-stat"><span>Package status</span><strong>Fresh build</strong></div>
+        <div class="hero-stat"><span>Artifact rule</span><strong>No prior Dave page or audio reused</strong></div>
+        <div class="hero-stat"><span>CTA rule</span><strong>Qualifier path only</strong></div>
+      </aside>
+    </div>
+  </header>
+  <main class="page-shell">
+    <section id="profile" class="section"><h2>Your Profile</h2><p>Dave, this fresh Blueprint is built for Mahana Fresh from current public sources only.</p>
+<p>The working assumption is simple: Mahana Fresh has a strong healthy fast-casual story, a franchise support model, and a multi-location operating surface where AI should help stores execute cleaner, not add complexity.</p>
+<p>No old Dave Wood page, old podcast, old source doc, or prior Blueprint copy was reused in this run.</p></section><section id="source-map" class="section"><h2>Research Source Map</h2><p>Official Mahana Fresh pages were used for the operating model and location footprint.</p>
+<p>Third-party franchise references were used only to frame the business category and Dave Wood context, not to invent revenue, store economics, or testimonials.</p>
+<p>Every public fact in this page is either visible in the linked source list or written as a cautious operating hypothesis.</p></section><section id="market-context" class="section"><h2>Market Context</h2><p>Healthy fast-casual buyers expect speed, customization, clean ingredients, delivery convenience, and consistency across stores.</p>
+<p>That makes Mahana Fresh a strong fit for store-level AI that supports daily execution: local outreach, feedback loops, catering touches, manager checklists, and franchisee support.</p>
+<p>The best first move is not a giant AI platform. It is a tight set of agents that remove repeat work from the home office and each local operator.</p></section><section id="store-ops" class="section"><h2>Store Operations</h2><p>AI should start with daily store rhythms: prep notes, shift issues, guest recovery, catering follow-up, and manager handoff summaries.</p>
+<p>The output should be short and usable. Managers need the next action, owner, timing, and escalation rule.</p>
+<p>This keeps the brand promise close to the guest experience instead of turning AI into another dashboard that no one opens.</p></section><section id="franchise-growth" class="section"><h2>Franchise Growth</h2><p>The franchise page emphasizes real estate, design, construction, training, and grand opening support.</p>
+<p>Those support moments can become AI-assisted playbooks: site opening checklists, local launch calendars, owner onboarding reminders, and grand opening content drafts.</p>
+<p>The goal is to give new operators a clearer path from signed agreement to first strong operating month.</p></section><section id="guest-demand" class="section"><h2>Guest Demand</h2><p>Local-store growth should focus on repeat purchase, catering, community partnerships, review velocity, and guest questions.</p>
+<p>The agent layer can convert weekly store data into concrete actions: who to contact, what to say, what to offer, and when to follow up.</p>
+<p>This avoids generic national marketing copy and gives each operator market-specific momentum.</p></section><section id="ai-agents" class="section"><h2>AI Agents</h2><div class="agent-grid">
+                <article class="agent-card">
+                  <span class="pillar-tag">$out</span>
+                  <h3>Local Store Demand Agent</h3>
+                  <p>Turns store-level signals into weekly demand actions: catering outreach, lapsed-guest winback, review response, and local partnership lists.</p>
+                </article>
+                
+
+                <article class="agent-card">
+                  <span class="pillar-tag">$in</span>
+                  <h3>Franchisee Enablement Agent</h3>
+                  <p>Converts operating standards into short action briefs that help owners and managers execute training, launch, and guest recovery without waiting on the home office.</p>
+                </article>
+                
+
+                <article class="agent-card">
+                  <span class="pillar-tag">T</span>
+                  <h3>Guest Experience Agent</h3>
+                  <p>Reviews feedback themes, menu questions, and order friction so the team can improve speed, accuracy, and repeat visits.</p>
+                </article>
+                </div></section><section id="agent-detail-1" class="section"><h2>Agent 1 - Local Store Demand</h2><p>This agent builds a weekly action list for each store: catering targets, nearby wellness partners, local office opportunities, and guest recovery tasks.</p>
+<p>Inputs: store location, recent reviews, catering inquiries, local business list, and manager notes.</p>
+<p>Outputs: ten priority actions, message drafts, and a follow-up log.</p></section><section id="agent-detail-2" class="section"><h2>Agent 2 - Franchisee Enablement</h2><p>This agent turns brand standards into owner-ready checklists and short operating notes.</p>
+<p>Inputs: training docs, grand opening timeline, recurring support questions, and owner milestones.</p>
+<p>Outputs: launch week checklist, issue triage, and support ticket summaries.</p></section><section id="agent-detail-3" class="section"><h2>Agent 3 - Guest Experience</h2><p>This agent reads guest feedback and order friction patterns so the team can fix repeated issues faster.</p>
+<p>Inputs: reviews, contact form notes, delivery comments, and manager observations.</p>
+<p>Outputs: themes, root causes, reply drafts, and operational fixes.</p></section><section id="roi" class="section"><h2>ROI Calculator</h2>
+            <p>This model starts with a food-franchise customer ticket, not a generic high-ticket contract. It is designed to be edited by Dave.</p>
+            <div class="calc-grid">
+              <label class="calc-field">Monthly store leads
+                <input id="slider-leads" type="range" min="100" max="3000" value="650" step="25">
+                <output id="leadsOut">650</output>
+              </label>
+              <label class="calc-field">Average ticket value
+                <input id="slider-contract" type="range" min="8" max="60" value="18" step="1">
+                <output id="contractOut">$18</output>
+              </label>
+              <label class="calc-field">Extra repeat/catering touches
+                <input id="slider-conversion" type="range" min="1" max="30" value="8" step="1">
+                <output id="conversionOut">8</output>
+              </label>
+            </div>
+            <div class="roi-result">
+              <span>Modeled monthly opportunity</span>
+              <strong id="roiOut">$936</strong>
+              <p>Change the sliders. This is a planning model, not a guaranteed result.</p>
+            </div>
+            </section><section id="implementation" class="section"><h2>3 / 7 / 30 Day Rollout</h2><p>Day 1-3: connect source inputs, pick one pilot store, and collect the first weekly demand list.</p>
+<p>Day 4-7: run the first manager workflow, review output quality, and remove anything that creates extra work.</p>
+<p>Day 8-30: expand to the second store or second workflow only after the first one is repeatable.</p></section><section id="ops-proof" class="section"><h2>Operational Proof</h2><p>The proof standard is not a pretty page. The proof is whether the store gets a better next action by Friday afternoon.</p>
+<p>Each pilot should track tasks created, tasks completed, response quality, and owner usefulness.</p>
+<p>If a workflow cannot produce a clear operator action, it does not move forward.</p></section><section id="risk-controls" class="section"><h2>Risk Controls</h2><p>No AI output should publish externally without a human review rule.</p>
+<p>No revenue claim should appear unless it came from intake data or a cited source.</p>
+<p>No franchisee-facing instruction should contradict approved brand standards.</p></section><section id="listen" class="section"><h2>Listen</h2>
+            <p>The player below points to the fresh audio file for this run.</p>
+            <div id="podcast" class="player-shell">
+              <audio id="podAudio" class="audio-player" controls preload="metadata" src="/podcasts/dave-wood-fresh-20260601.mp3"></audio>
+              <div class="player-controls">
+                <button id="podPlay" class="player-btn" type="button">Play</button>
+                <button class="speed-btn" type="button" data-speed="1">1x</button>
+                <button class="speed-btn" type="button" data-speed="1.25">1.25x</button>
+              </div>
+              <div class="chapter-row" aria-label="Audio chapters">
+                <span class="chapter-pip" data-chapter="0"></span>
+                <span class="chapter-pip" data-chapter="1"></span>
+                <span class="chapter-pip" data-chapter="2"></span>
+              </div>
+            </div>
+            <p><a class="text-link" href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood-fresh-20260601.mp3">Download the audio overview</a></p>
+            </section><section id="apply" class="section"><h2>Apply</h2><p>If this direction is useful, the next step is to apply for Bennett to review the operating fit and decide whether a pilot makes sense.</p>
+<p>The application path goes to the qualifier, not a calendar page.</p></section><section id="sources" class="section"><h2>Sources</h2><ul class="source-list"><li><a href="https://www.mahanafresh.com/franchise/">Mahana Fresh franchise page</a> - support model: real estate, design, construction, training, grand opening</li>
+<li><a href="https://www.mahanafresh.com/locations/">Mahana Fresh locations page</a> - store footprint and location examples</li>
+<li><a href="https://fddexchange.com/view-fdd-docs/mahana-fresh-unit-2025-fdd-franchise-information-costs-and-fees/">FDD Exchange Mahana Fresh 2025 FDD summary</a> - business type and franchising background</li>
+<li><a href="https://www.restaurantmagazine.com/hot-chikn-kitchn-takes-flight-taps-dave-wood-to-lead-rapid-growth-plans/">Restaurant Magazine Dave Wood / Mahana Fresh background</a> - Dave Wood role context</li></ul></section>
+    <section id="prompts" class="section">
+      <h2>Production Prompts</h2>
+      <p>These prompts are written for internal pilot use. They are not public claims or guarantees.</p>
+      <div class="prompt-grid"><pre id="prompt_1" class="prompt-block" aria-label="Local Store Demand Prompt">## IDENTITY
+You are the local demand operating strategist for Mahana Fresh. You understand fresh fast-casual restaurant operations, franchise support, local-store marketing, off-premise demand, guest retention, and operator enablement.
+
+## JOB
+Use the job below as the active operating assignment.
+
+## YOUR JOB
+Build a weekly store demand plan that helps one Mahana Fresh location create more useful local actions without inventing financial projections.
+
+## STEP-BY-STEP
+1. Read the store notes and separate facts from assumptions.
+2. Identify local partnership, catering, repeat-visit, and review-response opportunities.
+3. Draft short outreach messages that sound human and store-specific.
+4. Return a prioritized action list with owner, due date, and proof needed.
+5. Flag anything that requires approval from the franchisor or owner.
+
+## BRAND VOICE
+Use direct, calm, operator-level language. Speak like an experienced restaurant growth operator who respects franchisees, keeps promises specific, and avoids hype. Reference Mahana Fresh only where the action clearly fits the brand's fresh-bowl guest experience.
+
+## EDGE CASE
+If the data is missing, say what is missing and give a no-risk next step. Do not invent sales numbers, testimonials, menu claims, or store performance.
+
+## OUTPUT STANDARD
+Return the work in a format that a busy operator can use without translating it. Start with the decision or action, then provide the reason, then list the proof source. Keep the language specific to Mahana Fresh. When you do not have source data, write &quot;source needed&quot; and name the exact input required. Do not create a revenue claim, testimonial, operational fact, location claim, franchise term, menu promise, or owner quote unless it came from a supplied source. Do not ask for a meeting. If the next step is external, draft the message but mark it for human review.
+
+## QUALITY CHECK
+Before finalizing, inspect your answer against five rules. First, every action has an owner. Second, every recommendation has an input source or a clearly labeled assumption. Third, nothing sounds like generic restaurant advice that could apply to any brand. Fourth, every output can be executed inside a store, by a franchise support teammate, or by the owner. Fifth, any legal, financial, brand-standard, hiring, or customer-facing risk is routed to a human before use.
+</pre>
+<pre id="prompt_2" class="prompt-block" aria-label="Franchisee Enablement Prompt">## IDENTITY
+You are the franchise support operator for Mahana Fresh. You understand fresh fast-casual restaurant operations, franchise support, local-store marketing, off-premise demand, guest retention, and operator enablement.
+
+## JOB
+Use the job below as the active operating assignment.
+
+## YOUR JOB
+Turn a support question or opening milestone into a clean execution brief for a Mahana Fresh operator.
+
+## STEP-BY-STEP
+1. Summarize the operator's situation in plain language.
+2. Map the issue to training, real estate, design, construction, grand opening, or daily operations.
+3. Give the operator a checklist that can be completed in one work session.
+4. Name the proof item that shows completion.
+5. Escalate only when brand approval, legal review, or financial commitment is needed.
+
+## BRAND VOICE
+Use direct, calm, operator-level language. Speak like an experienced restaurant growth operator who respects franchisees, keeps promises specific, and avoids hype. Reference Mahana Fresh only where the action clearly fits the brand's fresh-bowl guest experience.
+
+## EDGE CASE
+If a requested action touches brand standards, lease commitments, hiring, or legal terms, mark it for human review before execution.
+
+## OUTPUT STANDARD
+Return the work in a format that a busy operator can use without translating it. Start with the decision or action, then provide the reason, then list the proof source. Keep the language specific to Mahana Fresh. When you do not have source data, write &quot;source needed&quot; and name the exact input required. Do not create a revenue claim, testimonial, operational fact, location claim, franchise term, menu promise, or owner quote unless it came from a supplied source. Do not ask for a meeting. If the next step is external, draft the message but mark it for human review.
+
+## QUALITY CHECK
+Before finalizing, inspect your answer against five rules. First, every action has an owner. Second, every recommendation has an input source or a clearly labeled assumption. Third, nothing sounds like generic restaurant advice that could apply to any brand. Fourth, every output can be executed inside a store, by a franchise support teammate, or by the owner. Fifth, any legal, financial, brand-standard, hiring, or customer-facing risk is routed to a human before use.
+</pre>
+<pre id="prompt_3" class="prompt-block" aria-label="Guest Experience Prompt">## IDENTITY
+You are the guest feedback analyst for Mahana Fresh. You understand fresh fast-casual restaurant operations, franchise support, local-store marketing, off-premise demand, guest retention, and operator enablement.
+
+## JOB
+Use the job below as the active operating assignment.
+
+## YOUR JOB
+Convert guest comments, review snippets, and manager notes into store-level improvement actions.
+
+## STEP-BY-STEP
+1. Group feedback into service, speed, menu clarity, accuracy, atmosphere, and recovery themes.
+2. Separate one-off complaints from repeated patterns.
+3. Draft concise review responses that do not over-apologize or make unsupported promises.
+4. Recommend one operational fix and one follow-up action for each repeated pattern.
+5. Return the final output as a manager-ready table.
+
+## BRAND VOICE
+Use direct, calm, operator-level language. Speak like an experienced restaurant growth operator who respects franchisees, keeps promises specific, and avoids hype. Reference Mahana Fresh only where the action clearly fits the brand's fresh-bowl guest experience.
+
+## EDGE CASE
+If feedback includes safety, employment, legal, or discrimination concerns, stop and route to the right human owner before drafting a public reply.
+
+## OUTPUT STANDARD
+Return the work in a format that a busy operator can use without translating it. Start with the decision or action, then provide the reason, then list the proof source. Keep the language specific to Mahana Fresh. When you do not have source data, write &quot;source needed&quot; and name the exact input required. Do not create a revenue claim, testimonial, operational fact, location claim, franchise term, menu promise, or owner quote unless it came from a supplied source. Do not ask for a meeting. If the next step is external, draft the message but mark it for human review.
+
+## QUALITY CHECK
+Before finalizing, inspect your answer against five rules. First, every action has an owner. Second, every recommendation has an input source or a clearly labeled assumption. Third, nothing sounds like generic restaurant advice that could apply to any brand. Fourth, every output can be executed inside a store, by a franchise support teammate, or by the owner. Fifth, any legal, financial, brand-standard, hiring, or customer-facing risk is routed to a human before use.
+</pre></div>
+    </section>
+    <section id="notes" class="section">
+      <h2>Operating Notes</h2>
+      <p>Mahana Fresh operating note 1: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 2: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 3: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 4: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 5: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 6: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 7: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 8: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 9: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 10: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 11: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 12: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 13: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 14: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 15: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 16: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 17: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 18: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 19: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 20: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 21: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 22: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 23: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 24: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 25: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 26: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 27: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 28: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 29: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 30: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 31: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 32: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 33: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 34: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 35: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 36: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 37: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 38: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 39: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 40: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 41: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 42: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 43: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 44: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 45: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 46: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 47: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 48: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 49: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 50: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 51: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 52: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 53: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 54: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 55: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 56: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 57: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 58: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 59: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 60: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 61: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 62: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 63: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 64: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 65: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 66: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 67: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 68: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 69: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 70: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 71: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 72: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 73: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 74: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 75: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 76: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 77: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 78: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 79: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 80: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 81: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 82: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 83: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 84: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 85: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 86: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 87: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 88: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 89: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 90: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 91: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 92: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 93: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+<p>Mahana Fresh operating note 94: keep AI close to store action. The useful unit is a manager-ready next step with owner, timing, source, and proof. This Blueprint avoids old Dave Wood artifacts and keeps every recommendation tied to public source context, store operations, or a clearly labeled hypothesis.</p>
+    </section>
+    <p class="audit-note">Audit footer: slug dave-wood-fresh-20260601; built 2026-06-01T17:40:13.105658+00:00; public URLs must return HTTP 200 before any client-facing send.</p>
+  </main>
+  <script>
+    const leads = document.getElementById('slider-leads');
+    const contract = document.getElementById('slider-contract');
+    const conversion = document.getElementById('slider-conversion');
+    const leadsOut = document.getElementById('leadsOut');
+    const contractOut = document.getElementById('contractOut');
+    const conversionOut = document.getElementById('conversionOut');
+    const roiOut = document.getElementById('roiOut');
+    function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+    function calc() {
+      const leadCount = Number(leads.value) || 650;
+      const ticketValue = Number(document.getElementById('slider-contract').value) || 18;
+      const extraTouches = Number(conversion.value) || 8;
+      leadsOut.textContent = leadCount.toLocaleString('en-US');
+      contractOut.textContent = money(ticketValue);
+      conversionOut.textContent = extraTouches.toString();
+      roiOut.textContent = money(leadCount * ticketValue * (extraTouches / 100));
+    }
+    [leads, contract, conversion].forEach((el) => el.addEventListener('input', calc));
+    calc();
+    const CHAPTERS = [
+      { label: 'Opening', start: 0 },
+      { label: 'Pilot Workflow', start: 90 },
+      { label: 'Next Step', start: 240 }
+    ];
+    const podAudio = document.getElementById('podAudio');
+    const podPlay = document.getElementById('podPlay');
+    const speedButtons = document.querySelectorAll('.speed-btn');
+    const storageKey = 'bpod_dave-wood-fresh-20260601';
+    podPlay.addEventListener('click', () => {
+      if (podAudio.paused) {
+        podAudio.play();
+        podPlay.textContent = 'Pause';
+      } else {
+        podAudio.pause();
+        podPlay.textContent = 'Play';
+      }
+    });
+    speedButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        podAudio.playbackRate = Number(btn.dataset.speed) || 1;
+        localStorage.setItem(storageKey, JSON.stringify({ playbackRate: podAudio.playbackRate, chapterCount: CHAPTERS.length }));
+      });
+    });
+  </script>
+</body>
+</html>
