@@ -64,6 +64,21 @@ LEAD_INDUSTRY = {
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
 }
 
+def _load_slug_industry():
+    cfg = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       "scripts", "roi-industry-config.json")
+    try:
+        with open(cfg) as f:
+            slug_industry = json.load(f).get("slug_industry", {})
+    except Exception:
+        return
+    if isinstance(slug_industry, dict):
+        for slug, industry in slug_industry.items():
+            if industry in INDUSTRY_BANDS:
+                LEAD_INDUSTRY[str(slug)] = str(industry)
+
+_load_slug_industry()
+
 # Industries whose buyers realistically run a LinkedIn lead-gen / social-selling
 # motion. Single source of truth = scripts/roi-industry-config.json
 # ("b2b_linkedin_industries"); fall back to this inline default if the config is
