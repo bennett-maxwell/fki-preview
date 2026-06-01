@@ -22,6 +22,14 @@ from typing import Optional, Tuple
 from urllib.parse import unquote, urlparse
 
 
+# Production audio is a WINDOW, not a one-sided floor. A delivery walkthrough
+# must be substantial but not an overlong lecture: roughly 6-20 minutes at
+# 128kbps.
+MIN_PRODUCTION_AUDIO_BYTES = 6 * 1024 * 1024
+MAX_PRODUCTION_AUDIO_BYTES = 20 * 1024 * 1024
+MAX_PRODUCTION_AUDIO_MINUTES = 20
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # CATEGORY DEFINITIONS (from SKILL.md v3.14 §Category Gates)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -100,6 +108,33 @@ def load_receipt(path: Path) -> dict:
     return data if isinstance(data, dict) else {}
 
 
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def receipt_audio_hash_matches(data: dict, html_path: Optional[Path]) -> bool:
+    expected = data.get("audio_sha256")
+    audio = data.get("audio")
+    if not expected or not audio:
+        return False
+    audio_path = Path(audio)
+    candidates = []
+    if audio_path.is_absolute():
+        candidates.append(audio_path)
+    else:
+        candidates.append((Path.cwd() / audio_path).resolve())
+        if html_path is not None:
+            candidates.extend([
+                (html_path.parent / audio_path).resolve(),
+                (html_path.parent.parent / audio_path).resolve(),
+            ])
+    return any(candidate.exists() and file_sha256(candidate) == expected for candidate in candidates)
+
+
 def production_receipt_result(num: int, path: Path, html: str,
                               html_path: Optional[Path]) -> Tuple[bool, str]:
     """Schema-specific production proof validators.
@@ -156,16 +191,34 @@ def production_receipt_result(num: int, path: Path, html: str,
 
     if num == 47:
         local_audio_ok, local_audio_detail = audio_size_check(html, html_path)
+        remote_size = int(data.get("size_download") or 0)
         remote_ok = (
             base_pass
             and int(data.get("http_code") or 0) == 200
-            and int(data.get("size_download") or 0) >= 29 * 1024 * 1024
+            and MIN_PRODUCTION_AUDIO_BYTES <= remote_size <= MAX_PRODUCTION_AUDIO_BYTES
         )
-        ok = remote_ok and local_audio_ok
+        direct_ok = (
+            data.get("direct_address_audio_verified") is True
+            and data.get("opening_direct_address_verified") is True
+            and data.get("opening_exact_or_close") is True
+            and data.get("banned_audio_phrases_found") in ([], None)
+            and data.get("third_person_patterns_found") in ([], None)
+            and int(data.get("you_your_count") or 0) >= 5
+        )
+        hash_ok = receipt_audio_hash_matches(data, html_path)
+        ok = remote_ok and local_audio_ok and direct_ok and hash_ok
         if ok:
-            return True, f"Public and local podcast audio verified ({data.get('size_download')} bytes)"
+            return True, f"Public/local podcast and direct-address audio verified ({remote_size} bytes)"
         if not remote_ok:
-            return False, "Public podcast receipt must include pass=true, http_code=200, and size_download >= 29MB"
+            return False, (
+                "Public podcast receipt must include pass=true, http_code=200, and size_download within "
+                f"[{MIN_PRODUCTION_AUDIO_BYTES}, {MAX_PRODUCTION_AUDIO_BYTES}] bytes "
+                f"(~6-{MAX_PRODUCTION_AUDIO_MINUTES} min @128kbps)"
+            )
+        if not direct_ok:
+            return False, "Podcast receipt must prove direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, and >=5 you/your references"
+        if not hash_ok:
+            return False, "Podcast receipt audio_sha256 must match the current local MP3"
         return False, local_audio_detail
 
     if num == 48:
@@ -180,8 +233,13 @@ def production_receipt_result(num: int, path: Path, html: str,
     return receipt_pass(path), "OK" if receipt_pass(path) else f"Missing or failing receipt for check {num}"
 
 
-def audio_size_check(html: str, html_path: Optional[Path], min_bytes: int = 29 * 1024 * 1024) -> Tuple[bool, str]:
-    """Verify the referenced local MP3 exists and meets the production-size floor."""
+def audio_size_check(
+    html: str,
+    html_path: Optional[Path],
+    min_bytes: int = MIN_PRODUCTION_AUDIO_BYTES,
+    max_bytes: int = MAX_PRODUCTION_AUDIO_BYTES,
+) -> Tuple[bool, str]:
+    """Verify the referenced local MP3 exists inside the production-size window."""
     refs = re.findall(r'(?:src|href)=["\']([^"\']*podcasts/[^"\']+\.mp3[^"\']*)["\']', html, re.I)
     if not refs:
         return False, "No podcast MP3 reference found"
@@ -208,9 +266,14 @@ def audio_size_check(html: str, html_path: Optional[Path], min_bytes: int = 29 *
             inspected.append(candidate)
             if candidate.exists():
                 size = candidate.stat().st_size
-                if size >= min_bytes:
-                    return True, f"{rel} size {size:,} bytes"
-                return False, f"{rel} too small: {size:,} bytes < {min_bytes:,}"
+                if size < min_bytes:
+                    return False, f"{rel} too small: {size:,} bytes < {min_bytes:,} (floor)"
+                if size > max_bytes:
+                    return False, (
+                        f"{rel} too large: {size:,} bytes > {max_bytes:,} "
+                        f"(ceiling ~{MAX_PRODUCTION_AUDIO_MINUTES} min)"
+                    )
+                return True, f"{rel} size {size:,} bytes (within window)"
 
     return False, "Referenced MP3 not found locally"
 
@@ -705,7 +768,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
         44: "Notion Sprint row present",
         45: "Current GHL readback (contact tagged)",
         46: "Repeat-submit same-contact proof",
-        47: "NotebookLM-size audio (≥29MB)",
+        47: "Walkthrough-size audio (6-20MB / direct-address verified)",
         48: "Bennett approval scope recorded",
     }
     for num, desc in prod_checks.items():
