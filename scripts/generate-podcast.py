@@ -432,6 +432,59 @@ def _log(msg: str):
     print(f"[{_ts()}] {msg}", file=sys.stderr)
 
 
+def _probe_container(path: str) -> str:
+    """Return ffprobe format_name for a media file ('mp3', 'mov,mp4,m4a,...', etc.). '' on error."""
+    import subprocess
+    try:
+        return subprocess.run(
+            ["ffprobe", "-v", "quiet", "-show_entries", "format=format_name",
+             "-of", "csv=p=0", path],
+            capture_output=True, text=True, timeout=30).stdout.strip()
+    except Exception as e:
+        _log(f"ffprobe error on {path}: {e}")
+        return ""
+
+
+def _ensure_real_mp3(path: str) -> str:
+    """
+    Task #8 (2026-06-01) — Podcast transcode hardening.
+    NotebookLM frequently hands back AAC-in-MP4 (m4a) even when the file is named .mp3.
+    iOS/Safari refuse AAC-in-MP4 served as audio/mpeg, so the listen button silently fails.
+    This forces the on-disk file to be a REAL libmp3lame MP3 so FC-06 passes at the source,
+    not just in the audit. Idempotent: a true mp3 is left untouched.
+    Returns the path to the verified-real mp3.
+    """
+    import subprocess
+    fmt = _probe_container(path)
+    if fmt == "mp3":
+        _log(f"Container already real mp3: {path}")
+        return path
+    if not fmt:
+        _log(f"WARNING: could not probe {path}; leaving as-is (FC-06 will catch it)")
+        return path
+
+    _log(f"Container is '{fmt}', not mp3 — transcoding to real MP3 via libmp3lame")
+    tmp_out = path + ".transcode.mp3"
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", path, "-vn", "-c:a", "libmp3lame",
+             "-b:a", "128k", "-ar", "44100", tmp_out],
+            capture_output=True, text=True, timeout=600, check=True)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(
+            f"ffmpeg transcode to MP3 failed for {path}: {e.stderr[-400:] if e.stderr else e}")
+    except Exception as e:
+        raise RuntimeError(f"ffmpeg transcode error for {path}: {e}")
+
+    new_fmt = _probe_container(tmp_out)
+    if new_fmt != "mp3":
+        raise RuntimeError(
+            f"Transcode produced non-mp3 container '{new_fmt}' for {tmp_out}; refusing to ship")
+    os.replace(tmp_out, path)
+    _log(f"✓ Transcoded to real MP3 (was '{fmt}'): {path}")
+    return path
+
+
 def _is_rate_limit_error(exc: Exception) -> bool:
     exc_str = str(exc).lower()
     if '429' in exc_str:
@@ -704,6 +757,11 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                             raise RuntimeError(
                                 f"Download reported success but file not found: {output_path}"
                             )
+
+                        # Task #8 — transcode hardening: force a REAL mp3 before the
+                        # size/ship gates so FC-06 passes at the source (iOS listen button).
+                        output_path = _ensure_real_mp3(output_path)
+
                         size_bytes = os.path.getsize(output_path)
                         size_mb = size_bytes / (1024 * 1024)
                         if size_mb < MIN_MP3_SIZE_MB:

@@ -48,6 +48,30 @@ else
   warnings+=("gh_cli_unavailable")
 fi
 
+# Format-3 conformance lock (full-chain PF0-5 — 2026-06-01).
+# Any deliverable blueprint that carries the format-3 brand signature (#0071E3) MUST
+# pass scripts/format-conformance-check.py (exit 0) or it is a hard failure — a format-3
+# blueprint can never silently drift. Legacy (pre-format-3) blueprints are migration-pending
+# WARN, not fail, and auto-promote to the hard lock the moment they are regenerated on gold.
+CONF="scripts/format-conformance-check.py"
+if [[ -f "$CONF" ]]; then
+  for h in blueprints/*.html; do
+    [[ -e "$h" ]] || continue
+    b="$(basename "$h" .html)"
+    [[ "$b" == "TEMPLATE" ]] && continue
+    case "$h" in *.bak*) continue;; esac
+    if grep -q "0071E3" "$h"; then
+      if ! python3 "$CONF" "$h" >/dev/null 2>&1; then
+        failures+=("format3_conformance_drift_${b//[^a-zA-Z0-9]/_}")
+      fi
+    else
+      warnings+=("format3_migration_pending_${b//[^a-zA-Z0-9]/_}")
+    fi
+  done
+else
+  warnings+=("format_conformance_check_missing")
+fi
+
 status="pass"
 if (( ${#failures[@]} > 0 )); then
   status="fail"
