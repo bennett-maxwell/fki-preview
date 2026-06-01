@@ -135,21 +135,7 @@
   .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
   .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
   .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
-  .booking-body { position: relative; min-height: min(74vh, 720px); }
-  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; display: block; }
-  .booking-loading,
-  .booking-fallback {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    padding: 2rem; text-align: center; background: var(--white); color: var(--text-muted);
-  }
-  .booking-loading.hidden, .booking-fallback.hidden { display: none; }
-  .booking-fallback-inner { max-width: 360px; }
-  .booking-fallback-title { font-weight: 800; color: var(--brand-dark); margin-bottom: 0.45rem; }
-  .booking-fallback-copy { font-size: 0.9rem; margin-bottom: 1rem; }
-  .booking-fallback-link {
-    display: inline-block; background: var(--brand); color: var(--white); border-radius: 8px;
-    padding: 0.75rem 1rem; font-weight: 700; text-decoration: none;
-  }
+  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
   .disclaimer a { color: var(--brand); }
@@ -429,17 +415,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
       <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
     </div>
-    <div class="booking-body">
-      <div class="booking-loading" id="booking-loading">Loading calendar...</div>
-      <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar" referrerpolicy="no-referrer" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
-      <div class="booking-fallback hidden" id="booking-fallback">
-        <div class="booking-fallback-inner">
-          <div class="booking-fallback-title">Calendar still loading</div>
-          <div class="booking-fallback-copy">Open the secure booking page in a new tab if it does not load here.</div>
-          <a class="booking-fallback-link" id="booking-fallback-link" href="#" target="_blank" rel="noopener noreferrer">Open calendar</a>
-        </div>
-      </div>
-    </div>
+    <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar"></iframe>
   </div>
 </div>
 
@@ -465,6 +441,7 @@ let lastQualificationBand = null;
 const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
 const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+<<<<<<< HEAD
 // A/B toggle — set false to skip modal and route qualified leads to THANK_YOU_URL
 const BOOKING_MODAL_ENABLED = true;
 
@@ -477,6 +454,8 @@ function logFunnelEvent(event, data) {
     localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
   } catch(e) {}
 }
+=======
+>>>>>>> 387bad7e19bec18a7066f1035c684368747c600b
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
 const THANK_YOU_URL = 'thank-you-apply.html';
@@ -981,31 +960,33 @@ async function submitQualification() {
     });
     if (response.ok) {
       const result = await response.json().catch(() => ({}));
-      const returnedContactId = result.contactId || result.contact_id || result.id || payload.contact_id || '';
-      persistReturnedContactId(returnedContactId);
-      if (returnedContactId) payload.contact_id = returnedContactId;
+      persistReturnedContactId(result.contactId || '');
       if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
           content_name: 'FKI AI Qualifier',
           content_category: payload.tags && payload.tags[1] ? payload.tags[1] : 'advaita-ai-qualifier'
         });
       }
-      return { saved: true, payload, contactId: returnedContactId, response: result };
     } else {
       try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
-      return { saved: false, payload, contactId: payload.contact_id || '', error: 'crm_http_' + response.status };
     }
   } catch(e) {
     try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
-    return { saved: false, payload, contactId: payload.contact_id || '', error: e && e.message ? e.message : 'crm_network_error' };
   }
+  return payload;
 }
 
-function buildBookingUrl(contactId) {
+function buildBookingUrl() {
   const id = persistIdentity();
   const url = new URL(BOOKING_URL, window.location.href);
   const parts = {
-    contact_id: contactId || id.contactId,
+    first_name: id.firstName,
+    last_name: id.lastName,
+    name: (id.firstName + ' ' + id.lastName).trim(),
+    email: id.email,
+    phone: id.phone,
+    business_name: id.businessName,
+    contact_id: id.contactId,
     source: 'blueprint_ai_qualifier',
     lead_session_id: id.leadSessionId,
     blueprint_slug: id.blueprintSlug
@@ -1014,30 +995,9 @@ function buildBookingUrl(contactId) {
   return url.toString();
 }
 
-let bookingFallbackTimer = null;
-function openBookingModal(contactId) {
-  const url = buildBookingUrl(contactId);
-  logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!contactId });
-  const frame = document.getElementById('booking-frame');
-  const loading = document.getElementById('booking-loading');
-  const fallback = document.getElementById('booking-fallback');
-  const fallbackLink = document.getElementById('booking-fallback-link');
-  loading.classList.remove('hidden');
-  fallback.classList.add('hidden');
-  fallbackLink.href = url;
-  frame.onload = function() {
-    loading.classList.add('hidden');
-  };
-  frame.onerror = function() {
-    loading.classList.add('hidden');
-    fallback.classList.remove('hidden');
-  };
-  frame.src = url;
-  clearTimeout(bookingFallbackTimer);
-  bookingFallbackTimer = setTimeout(function() {
-    if (!document.getElementById('booking-modal').classList.contains('open')) return;
-    fallback.classList.remove('hidden');
-  }, 4500);
+function openBookingModal() {
+  logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED });
+  document.getElementById('booking-frame').src = buildBookingUrl();
   document.getElementById('booking-modal').classList.add('open');
   document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
 }
@@ -1047,28 +1007,26 @@ async function handleCtaClick() {
   if (cta.disabled) return;
   cta.disabled = true;
   cta.textContent = 'Saving...';
-  const result = await submitQualification();
-  const ctaNote = document.getElementById('cta-note');
-  if (!result.saved) {
-    logFunnelEvent('crm_save_failed', { error: result.error || 'unknown' });
-    cta.textContent = 'Try Saving Again';
-    cta.disabled = false;
-    ctaNote.textContent = 'We could not confirm the CRM save yet. Please retry so the call is tied to the correct contact.';
-    return;
-  }
-  if (result.payload.ai_qualified) {
-    logFunnelEvent('qualified', { modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!result.contactId });
+  const payload = await submitQualification();
+  if (payload.ai_qualified) {
+<<<<<<< HEAD
+    logFunnelEvent('qualified', { modal_enabled: BOOKING_MODAL_ENABLED });
     if (BOOKING_MODAL_ENABLED) {
       cta.textContent = 'Book a Call with Bennett';
       cta.disabled = false;
-      ctaNote.textContent = 'Saved in GHL. Calendar opening now.';
-      openBookingModal(result.contactId);
+      openBookingModal();
     } else {
       logFunnelEvent('qualified_no_modal_redirect', {});
       window.location.href = THANK_YOU_URL;
     }
   } else {
-    logFunnelEvent('disqualified', { contact_id_present: !!result.contactId });
+    logFunnelEvent('disqualified', {});
+=======
+    cta.textContent = 'Book a Call with Bennett';
+    cta.disabled = false;
+    openBookingModal();
+  } else {
+>>>>>>> 387bad7e19bec18a7066f1035c684368747c600b
     window.location.href = THANK_YOU_URL;
   }
 }
@@ -1085,8 +1043,6 @@ document.querySelectorAll('#identity-section input').forEach(el => {
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
 document.getElementById('booking-close').addEventListener('click', function() {
-  clearTimeout(bookingFallbackTimer);
-  document.getElementById('booking-frame').src = 'about:blank';
   document.getElementById('booking-modal').classList.remove('open');
   document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
 });
