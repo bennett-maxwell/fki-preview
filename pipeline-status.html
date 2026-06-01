@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blueprint AI Pipeline Status</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f7; }
+h1 { font-size: 28px; font-weight: 700; color: #1d1d1f; }
+.card { background: white; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px; border-bottom: 2px solid #e0e0e0; color: #666; }
+td { padding: 10px; border-bottom: 1px solid #f0f0f0; }
+.ok { color: #34c759; font-weight: 600; }
+.warn { color: #ff9500; font-weight: 600; }
+.fail { color: #ff3b30; font-weight: 600; }
+.metric { text-align: center; padding: 16px; }
+.metric .val { font-size: 36px; font-weight: 700; color: #1d1d1f; }
+.metric .lbl { font-size: 12px; color: #999; margin-top: 4px; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+</style>
+</head>
+<body>
+<h1>Blueprint AI Pipeline Status</h1>
+<p style="color:#666">Live status — auto-populated from lead profiles | Last updated: <span id="ts"></span></p>
+
+<div class="card">
+<div class="grid" id="metrics"></div>
+</div>
+
+<div class="card">
+<table>
+<thead><tr><th>Lead</th><th>Blueprint</th><th>Podcast</th><th>Apply URL</th><th>Delivered</th></tr></thead>
+<tbody id="leads-table"></tbody>
+</table>
+</div>
+
+<script>
+document.getElementById('ts').textContent = new Date().toLocaleString();
+
+const leads = [
+  {slug:'branson-maxwell', name:'Branson Maxwell'},
+  {slug:'brent-attaway', name:'Brent Attaway'},
+  {slug:'brittney-warnick', name:'Brittney Warnick'},
+  {slug:'chris-lpnw', name:'Chris LPNW'},
+  {slug:'court-lundberg', name:'Court Lundberg'},
+  {slug:'dave-wood', name:'Dave Wood'},
+  {slug:'melissa-tash-srp', name:'Melissa Tash'},
+  {slug:'paul-muus', name:'Paul Muus'},
+  {slug:'rey-31consulting', name:'Rey 31 Consulting'},
+  {slug:'zachary-red-sands', name:'Zachary Red Sands'},
+];
+
+const BASE = 'https://bennett-maxwell.github.io/fki-preview';
+
+async function checkUrl(url) {
+  try {
+    const r = await fetch(url, {method:'HEAD', mode:'no-cors'});
+    return 'ok';
+  } catch { return 'unknown'; }
+}
+
+const tbody = document.getElementById('leads-table');
+leads.forEach(lead => {
+  const blueprintUrl = `${BASE}/blueprints/${lead.slug}.html`;
+  const podcastUrl = `${BASE}/podcasts/${lead.slug}.mp3`;
+  const applyUrl = `${BASE}/apply/?lead=${encodeURIComponent(lead.name)}&src=${lead.slug}`;
+  
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><strong>${lead.name}</strong></td>
+    <td><a href="${blueprintUrl}" target="_blank" class="ok">View →</a></td>
+    <td><a href="${podcastUrl}" target="_blank" class="${lead.slug === 'paul-muus' ? 'fail' : 'ok'}">${lead.slug === 'paul-muus' ? '⚠️ Missing' : '▶ Play'}</a></td>
+    <td><a href="${applyUrl}" target="_blank" class="ok">Quiz →</a></td>
+    <td class="warn">Pending Bennett</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+const metrics = document.getElementById('metrics');
+const stats = [{val:'10', lbl:'Leads Built'},{val:'9', lbl:'Podcast Ready'},{val:'0', lbl:'Delivered'},{val:'$350K', lbl:'Pipeline Value'}];
+stats.forEach(s => {
+  const d = document.createElement('div');
+  d.className = 'metric';
+  d.innerHTML = `<div class="val">${s.val}</div><div class="lbl">${s.lbl}</div>`;
+  metrics.appendChild(d);
+});
+</script>
+</body>
+</html>

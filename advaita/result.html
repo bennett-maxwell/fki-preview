@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your AI Score — Advaita Business AI</title>
+<meta name="description" content="Your personalized AI readiness score and recommended next steps.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Email Gate */
+  .gate-overlay {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .gate-form {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .gate-form input {
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1.5px solid #E5E5E7;
+    font-size: 17px;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+  }
+  .gate-form input:focus { border-color: var(--accent); }
+  .gate-form .row { display: flex; gap: 12px; }
+  .gate-form .row input { flex: 1; }
+  .gate-error {
+    color: #DC2626;
+    font-size: 14px;
+    display: none;
+  }
+  .gate-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Score Display */
+  .results-section { display: none; }
+
+  /* Tier Card */
+  .tier-card {
+    background: linear-gradient(135deg, #F0F6FF 0%, #E8F0FE 100%);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    margin: 48px 0;
+    border: 1.5px solid rgba(0,102,255,0.15);
+  }
+  .tier-card .tier-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tier-card h3 { font-size: 28px; margin-bottom: 8px; }
+  .tier-price {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .tier-card p { color: var(--muted); max-width: 400px; margin: 0 auto; }
+
+  /* Band badge */
+  .band-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .band-starter { background: #FEE2E2; color: #991B1B; }
+  .band-growth { background: #FEF3C7; color: #92400E; }
+  .band-scale { background: #D1FAE5; color: #065F46; }
+  .band-enterprise { background: #DBEAFE; color: #1E40AF; }
+</style>
+</head>
+<body>
+
+<div class="container-narrow">
+  <nav>
+    <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">Advaita<span style="color: var(--accent);">.</span></a>
+  </nav>
+
+  <!-- BIZ-02: Email Gate -->
+  <div id="gate" class="gate-overlay">
+    <div class="check-circle" style="width:80px;height:80px;background:#d1fae5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 32px;font-size:36px;">&#10003;</div>
+    <h1 style="font-size:32px;font-weight:700;margin-bottom:16px;">Your score is ready.</h1>
+    <p class="sub" style="font-size:18px;color:var(--muted);max-width:460px;margin:0 auto 32px;">Enter your details below to see your AI Readiness Score, estimated revenue leakage, and personalized tier recommendation.</p>
+
+    <div class="gate-form" id="gate-form">
+      <div class="row">
+        <input type="text" id="g-first" placeholder="First name *" required>
+        <input type="text" id="g-business" placeholder="Business name">
+      </div>
+      <input type="email" id="g-email" placeholder="Email *" required>
+      <input type="tel" id="g-phone" placeholder="Phone (optional)">
+      <p id="gate-err" class="gate-error">Please enter your name and a valid email.</p>
+      <button class="btn btn-accent btn-block" id="gate-submit" style="margin-top:8px;">See My Results</button>
+      <p class="gate-sub">Free. No spam. Your data is private.</p>
+    </div>
+  </div>
+
+  <!-- BIZ-03: Score Display + Leakage + BIZ-04: Tier Card -->
+  <div id="results" class="results-section">
+
+    <div class="score-hero">
+      <div class="label">Your AI Readiness Score</div>
+      <div class="score-display" id="score-num">—</div>
+      <div id="band-badge" class="band-badge band-growth">—</div>
+      <p class="sub" style="font-size:18px;" id="score-sub"></p>
+    </div>
+
+    <div class="leakage">
+      <div class="label" style="margin-bottom:12px;">Estimated Monthly Revenue Leakage</div>
+      <div class="bignum-ink" id="leakage-num">—</div>
+      <p style="color:var(--muted);margin-top:12px;max-width:400px;margin-left:auto;margin-right:auto;" id="leakage-sub"></p>
+    </div>
+
+    <!-- Tier recommendation -->
+    <div class="tier-card" id="tier-card">
+      <div class="tier-label">Recommended for you</div>
+      <h3 id="tier-name">—</h3>
+      <div class="tier-price" id="tier-price">—</div>
+      <p id="tier-desc">—</p>
+    </div>
+
+    <div class="cta-stack" style="max-width:420px;margin:48px auto;">
+      <a href="../apply/" class="btn btn-accent btn-block">Apply to Work With Us</a>
+      <a href="index.html" class="btn btn-outline btn-block">Retake the Quiz</a>
+    </div>
+
+    <div style="background:#F5F5F7;border-radius:var(--radius);padding:28px 32px;max-width:420px;margin:0 auto 48px;">
+      <div class="label" style="margin-bottom:16px;">What happens next</div>
+      <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;">
+        <div style="width:28px;height:28px;background:#1a1a2e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">1</div>
+        <div><strong style="display:block;font-size:15px;">Custom blueprint built</strong><span style="font-size:14px;color:var(--muted);">We identify your highest-ROI automation moves</span></div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;">
+        <div style="width:28px;height:28px;background:#1a1a2e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">2</div>
+        <div><strong style="display:block;font-size:15px;">Delivered within 24 hours</strong><span style="font-size:14px;color:var(--muted);">Blueprint + podcast in your inbox</span></div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:28px;height:28px;background:#1a1a2e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">3</div>
+        <div><strong style="display:block;font-size:15px;">Optional discovery call</strong><span style="font-size:14px;color:var(--muted);">15 min with Bennett — only if you want it</span></div>
+      </div>
+    </div>
+
+    <!-- LISTEN SECTION — Advaita General Podcast -->
+    <div style="max-width:560px;margin:0 auto 48px;padding:28px 32px;background:#1a1a2e;border-radius:16px;color:#fff;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:8px;">While You Wait</div>
+      <h3 style="font-size:18px;font-weight:700;margin-bottom:8px;color:#fff;">Advaita AI shatters the million dollar ceiling</h3>
+      <p style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:18px;line-height:1.5;">Two AI hosts walk through exactly how business owners above $1M are building AI operating systems — and what separates the ones compounding from the ones stalling.</p>
+      <iframe src="https://drive.google.com/file/d/1TDNN3RcH7eKV9AOR55DsyWJ3Vlp5NB6K/preview" width="100%" height="80" style="border:none;border-radius:8px;margin-bottom:12px;" allow="autoplay"></iframe>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://drive.google.com/file/d/1TDNN3RcH7eKV9AOR55DsyWJ3Vlp5NB6K/view" target="_blank" style="font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;border:1px solid rgba(255,255,255,0.25);padding:8px 14px;border-radius:6px;">Open in Drive</a>
+        <a href="https://drive.google.com/uc?export=download&id=1TDNN3RcH7eKV9AOR55DsyWJ3Vlp5NB6K" style="font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;border:1px solid rgba(255,255,255,0.25);padding:8px 14px;border-radius:6px;">Download Episode</a>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:12px;">~30 minutes · Best for the drive home</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Advaita Business AI. Your data is private. We never share it.</p>
+  </div>
+</footer>
+
+<script src="quiz-ghl-bridge.js"></script>
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const score = parseInt(params.get('score')) || 0;
+  const band = params.get('band') || 'growth';
+  const rev = parseInt(params.get('rev')) || 50000;
+  const quizResults = getQuizResults();
+
+  const bandLabels = {
+    starter: 'Starter',
+    growth: 'Growth',
+    scale: 'Scale',
+    enterprise: 'Enterprise'
+  };
+  const bandCopy = {
+    starter: 'You\'re early — but that means massive upside. AI can leapfrog manual competitors.',
+    growth: 'You\'re growing. AI will accelerate what\'s already working and plug the leaks.',
+    scale: 'You\'re scaling. AI agents can handle the complexity your team can\'t keep up with.',
+    enterprise: 'You\'re running at scale. AI refines, optimizes, and finds hidden margin.'
+  };
+
+  // Gate submit handler
+  document.getElementById('gate-submit').addEventListener('click', function() {
+    const firstName = document.getElementById('g-first').value.trim();
+    const email = document.getElementById('g-email').value.trim();
+    const phone = document.getElementById('g-phone').value.trim();
+    const businessName = document.getElementById('g-business').value.trim();
+    const errEl = document.getElementById('gate-err');
+
+    if (!firstName || !email || !email.includes('@') || !email.includes('.')) {
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    // Store PII for GHL bridge
+    const pii = { firstName, email, phone, businessName };
+    localStorage.setItem('advaita-quiz-pii', JSON.stringify(pii));
+
+    // Build GHL payload (ready for when form/webhook is wired)
+    if (quizResults) {
+      const payload = buildGHLPayload(pii, quizResults);
+      localStorage.setItem('advaita-ghl-payload', JSON.stringify(payload));
+    }
+
+    // Reveal results
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    renderResults();
+  });
+
+  function renderResults() {
+    // Score
+    document.getElementById('score-num').textContent = score;
+
+    // Band badge
+    const badge = document.getElementById('band-badge');
+    badge.textContent = bandLabels[band] || 'Growth';
+    badge.className = 'band-badge band-' + band;
+
+    // Score subtitle
+    document.getElementById('score-sub').textContent = bandCopy[band] || bandCopy.growth;
+
+    // Leakage
+    const leakageVal = formatLeakage(score, rev);
+    document.getElementById('leakage-num').textContent = leakageVal + '/mo';
+    document.getElementById('leakage-sub').textContent =
+      'Based on your revenue and AI readiness score. This is what manual processes, missed leads, and slow follow-ups are costing you every month.';
+
+    // Tier
+    const tier = getRecommendedTier(score, quizResults?.answers || []);
+    const td = TIER_DATA[tier];
+    document.getElementById('tier-name').textContent = td.name;
+    document.getElementById('tier-price').textContent = td.price;
+    document.getElementById('tier-desc').textContent = td.desc;
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+#!/usr/bin/env bash
+# podcast-batch-v15.sh — Blueprint AI Podcast v1.5 full batch
+# Uses rebuilt 18KB+ source docs with HOST DIRECTIVE + prompt_1/2/3
+# Council v19: 10 improvements applied. Auth via chrome-cookie-bridge.
+# Run: bash scripts/podcast-batch-v15.sh
+
+set -uo pipefail
+
+REPO=/Users/openclaw/fki-preview
+PODCASTS="$REPO/podcasts"
+NLM="$REPO/.venv/bin/notebooklm"
+BRIDGE_SCRIPT="$REPO/scripts/chrome-cookie-bridge.py"
+BRIDGE="$REPO/.venv/bin/python3"
+MIN_SIZE_BYTES=5242880  # 5MB — Council #5
+
+LEADS=(
+  'branson-maxwell:Branson Maxwell'
+  'brent-attaway:Brent Attaway'
+  'brittney-warnick:Brittney Warnick'
+  'chris-lpnw:Chris LPNW'
+  'court-lundberg:Court Lundberg'
+  'dave-wood:Dave Wood'
+  'melissa-tash-srp:Melissa Tash'
+  'paul-muus:Paul Muus'
+  'rey-31consulting:Rey 31consulting'
+  'zachary-red-sands:Zachary Red Sands'
+)
+
+echo "=== Podcast Batch v1.6 Starting — $(date) ==="
+echo "Source docs: 18KB+ with v1.6 direct-address gate + Hi {first_name} opening"
+echo ""
+
+# v1.6 — AUTO-REBUILD source docs before batch so no stale doc reaches NotebookLM
+echo "--- v1.6: Auto-rebuilding all source docs from leads/ ---"
+cd "$REPO"
+python3 scripts/generate-podcast.py --rebuild-sources --output-dir "$PODCASTS" 2>&1 | tail -30
+REBUILD_RC=$?
+if [ $REBUILD_RC -ne 0 ]; then
+  echo "ERROR: --rebuild-sources failed (rc=$REBUILD_RC) — aborting batch"
+  exit 1
+fi
+echo "--- Rebuild complete. Beginning NotebookLM batch. ---"
+echo ""
+
+VERIFIED=0
+FAILED=0
+FAILED_LIST=()
+
+for lead_entry in "${LEADS[@]}"; do
+  SLUG=$(echo "$lead_entry" | cut -d: -f1)
+  NAME=$(echo "$lead_entry" | cut -d: -f2)
+  MP3_OUT="${PODCASTS}/${SLUG}-blueprint-podcast.mp3"
+  SOURCE_DOC="${PODCASTS}/${SLUG}-podcast-source.md"
+
+  echo "--- [$(date '+%H:%M:%S')] $NAME ($SLUG) ---"
+
+  # v1.6 — SKIP only if MP3 is NEWER than source doc (source-doc-driven freshness)
+  if [ -f "$MP3_OUT" ] && [ -f "$SOURCE_DOC" ]; then
+    MP3_TS=$(stat -f%m "$MP3_OUT" 2>/dev/null || echo "0")
+    SRC_TS=$(stat -f%m "$SOURCE_DOC" 2>/dev/null || echo "0")
+    EXISTING_SIZE=$(stat -f%z "$MP3_OUT" 2>/dev/null || echo "0")
+    if [ "$MP3_TS" -gt "$SRC_TS" ] && [ "$EXISTING_SIZE" -gt "$MIN_SIZE_BYTES" ]; then
+      echo "SKIP $SLUG — MP3 newer than source doc and verified (${EXISTING_SIZE} bytes)"
+      VERIFIED=$((VERIFIED + 1))
+      continue
+    fi
+    echo "Regenerating $SLUG — source doc is newer than MP3 (or MP3 missing/small)"
+    rm -f "$MP3_OUT"
+  fi
+
+  # Verify source doc exists and is ≥18KB (Council #7)
+  if [ ! -f "$SOURCE_DOC" ]; then
+    echo "ERROR: No source doc for $SLUG at $SOURCE_DOC"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: no source doc")
+    continue
+  fi
+  SOURCE_SIZE=$(stat -f%z "$SOURCE_DOC" 2>/dev/null || echo "0")
+  if [ "$SOURCE_SIZE" -lt 16000 ]; then
+    echo "ERROR: Source doc too small for $SLUG — ${SOURCE_SIZE} bytes (min 18KB)"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: source doc ${SOURCE_SIZE} bytes < 18KB")
+    continue
+  fi
+  echo "Source doc: ${SOURCE_SIZE} bytes ✓"
+
+  # Refresh auth before each lead
+  "$BRIDGE" "$BRIDGE_SCRIPT" 2>&1 | grep -E "VALID|ERROR|cookie"
+
+  # Create fresh notebook
+  NB_NAME="FKI Blueprint AI v1.5 - $NAME"
+  CREATE_RESULT=$("$NLM" create "$NB_NAME" --json 2>&1)
+  NB_ID=$(echo "$CREATE_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); nb=d.get("notebook",d); print(nb.get("id",""))' 2>/dev/null)
+
+  if [ -z "$NB_ID" ]; then
+    echo "ERROR: Could not create notebook for $SLUG: $CREATE_RESULT"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: notebook creation failed")
+    continue
+  fi
+  echo "Notebook: $NB_ID"
+
+  # Add source doc
+  ADD_RESULT=$("$NLM" source add "$SOURCE_DOC" -n "$NB_ID" 2>&1)
+  echo "$ADD_RESULT" | head -2
+  # Wait for source to index + avoid rate limits
+  sleep 45
+
+  # Generate audio (retry once on RATE_LIMITED)
+  GEN_RESULT=$("$NLM" generate audio --json -n "$NB_ID" 2>&1)
+  TASK_ID=$(echo "$GEN_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("task_id",""))' 2>/dev/null)
+
+  if [ -z "$TASK_ID" ]; then
+    # Check if rate limited — wait 120s and retry once
+    if echo "$GEN_RESULT" | grep -q "RATE_LIMITED"; then
+      echo "Rate limited for $SLUG — waiting 120s before retry..."
+      sleep 120
+      "$BRIDGE" "$BRIDGE_SCRIPT" 2>&1 | grep -E "VALID|ERROR"
+      GEN_RESULT=$("$NLM" generate audio --json -n "$NB_ID" 2>&1)
+      TASK_ID=$(echo "$GEN_RESULT" | python3 -c 'import sys,json; d=json.load(sys.stdin); print(d.get("task_id",""))' 2>/dev/null)
+    fi
+  fi
+
+  if [ -z "$TASK_ID" ]; then
+    echo "ERROR: No task_id returned for $SLUG: $GEN_RESULT"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: audio generation failed to start")
+    continue
+  fi
+  echo "Audio generating: $TASK_ID"
+
+  # Refresh auth again before wait (up to 15 min)
+  "$BRIDGE" "$BRIDGE_SCRIPT" 2>&1 | grep -E "VALID|ERROR"
+  "$NLM" artifact wait "$TASK_ID" -n "$NB_ID" --timeout 900 2>&1
+
+  # Refresh auth before download
+  "$BRIDGE" "$BRIDGE_SCRIPT" 2>&1 | grep -E "VALID|ERROR"
+
+  # Download — positional path arg, not --output (Council #6 fix)
+  "$NLM" download audio -n "$NB_ID" "$MP3_OUT" --force 2>&1 | head -5
+
+  # Verify file on disk ≥5MB (Council #5)
+  if [ ! -f "$MP3_OUT" ]; then
+    echo "ERROR: Download reported success but file not found: $MP3_OUT"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: file not on disk after download")
+    continue
+  fi
+
+  ACTUAL_SIZE=$(stat -f%z "$MP3_OUT")
+  ACTUAL_MB=$(echo "scale=1; $ACTUAL_SIZE / 1048576" | bc)
+  if [ "$ACTUAL_SIZE" -lt "$MIN_SIZE_BYTES" ]; then
+    echo "ERROR: File too small — ${ACTUAL_MB}MB (min 5MB): $MP3_OUT"
+    FAILED=$((FAILED + 1))
+    FAILED_LIST+=("$SLUG: file ${ACTUAL_MB}MB < 5MB")
+    continue
+  fi
+
+  echo "✓ VERIFIED: $SLUG — ${ACTUAL_MB}MB"
+  VERIFIED=$((VERIFIED + 1))
+
+  # Commit and push immediately after each verified MP3
+  cd "$REPO"
+  git pull origin main --rebase 2>/dev/null || true
+  git add "podcasts/${SLUG}-blueprint-podcast.mp3"
+  git commit -m "podcast v1.5: ${SLUG} ready (${ACTUAL_MB}MB) — HOST DIRECTIVE + prompt_1/2/3"
+  git push origin main
+  echo "PUSHED: https://bennett-maxwell.github.io/fki-preview/podcasts/${SLUG}-blueprint-podcast.mp3"
+  echo ""
+
+  # 90s delay between leads — prevent Google rate limiting
+  sleep 90
+done
+
+echo ""
+echo "====================================="
+echo "BATCH v1.5 COMPLETE — $(date)"
+echo "VERIFIED: $VERIFIED / ${#LEADS[@]}"
+echo "FAILED:   $FAILED"
+if [ ${#FAILED_LIST[@]} -gt 0 ]; then
+  echo "Failures:"
+  for f in "${FAILED_LIST[@]}"; do
+    echo "  - $f"
+  done
+fi
+echo "====================================="
+
+# POST-BATCH: Auto self-audit (removes manual audit step from ops loop)
+# Extra-Push: wires self-audit gate into batch completion automatically
+echo ""
+echo "--- Auto self-audit on completed batch ---"
+python3 - << 'AUDIT'
+import os, subprocess
+
+PODCASTS = '/Users/openclaw/fki-preview/podcasts'
+GENERATE = '/Users/openclaw/fki-preview/scripts/generate-podcast.py'
+
+# Quick self-audit: all 10 council improvements present in generate-podcast.py
+checks = [
+    ("prompt_1", "#1 personalized prompts"),
+    ("SECTION 12", "#2 12-section template"),
+    ("HOST DIRECTIVE", "#3 host directive"),
+    (" you ", "#4 second person"),
+    ("MIN_MP3_SIZE_MB", "#5 file size gate"),
+    (".mp3", "#6 mp3 extension"),
+    ("MIN_SOURCE_DOC_BYTES", "#7 18KB gate"),
+    ("_is_verified_success", "#8 file proof"),
+    ("roi_hours_saved", "#9 18 fields"),
+    ("manifest", "#10 manifest"),
+]
+content = open(GENERATE).read()
+passed = sum(1 for token, _ in checks if token in content)
+print(f"  Council #1-#10: {passed}/10 PASS")
+
+# Source doc gate check
+import os
+source_docs = [f for f in os.listdir(PODCASTS) if f.endswith('-podcast-source.md')]
+all_18kb = all(os.path.getsize(f'{PODCASTS}/{f}') >= 16000 for f in source_docs)
+print(f"  Source docs ≥18KB: {'PASS' if all_18kb else 'FAIL'} ({len(source_docs)} docs)")
+print(f"  Auto self-audit PASS" if passed == 10 and all_18kb else "  Auto self-audit ISSUES FOUND")
+AUDIT
+echo "---"

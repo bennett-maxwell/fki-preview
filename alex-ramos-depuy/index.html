@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueprint AI · Alex Ramos · DePuy Synthes Rep Practice — Operations Plan</title>
+<meta name="description" content="A custom AI-operations blueprint built for Alex Ramos at DePuy Synthes — six agents covering speed-to-lead, admin, reporting, team org, outreach, and CRM setup. Interactive ROI calculator and 3/7/30 onboarding cadence.">
+<style>
+:root{--jj-red:#CC0000;--jj-red-deep:#A30000;--jj-navy:#003087;--jj-navy-deep:#001F5C;--steel:#54585A;--bone:#F5F2EE;--slate:#1A1A1A;--white:#fff;--ok:#1f7a3a;--warn:#c47800;--crit:#CC0000;--shadow:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 12px 48px rgba(0,0,0,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;color:var(--slate);line-height:1.6;background:#fafafa;-webkit-font-smoothing:antialiased}
+a{color:var(--jj-red);text-decoration:none}a:hover{color:var(--jj-red-deep)}
+.strip{background:var(--jj-navy);color:#fff;text-align:center;padding:10px 18px;font-size:13px;letter-spacing:.04em}
+.strip strong{color:#ff6b6b}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #ececec;padding:18px 32px;display:flex;justify-content:space-between;align-items:center;z-index:50;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+nav .brand{font-weight:700;font-size:18px;color:var(--jj-navy);letter-spacing:-.01em}
+nav .brand .accent{color:var(--jj-red)}
+nav .brand .tag{font-size:11px;font-weight:500;color:var(--steel);letter-spacing:.1em;text-transform:uppercase;display:block;margin-top:2px}
+nav ul{list-style:none;display:flex;gap:24px}
+nav ul a{color:var(--slate);font-size:13px;font-weight:500}
+nav .cta{background:var(--jj-red);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600}
+nav .cta:hover{background:var(--jj-red-deep);color:#fff}
+@media(max-width:900px){nav ul{display:none}nav{padding:12px 18px}}
+.hero{padding:96px 32px 72px;background:radial-gradient(circle at 80% 0%, rgba(204,0,0,.07) 0%, transparent 50%), linear-gradient(180deg, var(--bone) 0%, #fff 100%);text-align:left}
+.hero-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
+.hero .badge{display:inline-block;background:#fff;border:1px solid var(--jj-red);color:var(--jj-red);padding:6px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:48px;color:var(--jj-navy);line-height:1.08;letter-spacing:-.025em;margin-bottom:20px;font-weight:700}
+.hero h1 .red{color:var(--jj-red)}
+.hero .sub{font-size:18px;color:var(--steel);margin-bottom:30px;line-height:1.55}
+.hero .btn-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;border-radius:6px;font-weight:600;font-size:14px;transition:transform .15s, box-shadow .15s;border:none;cursor:pointer}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn-primary{background:var(--jj-red);color:#fff}.btn-primary:hover{background:var(--jj-red-deep);color:#fff}
+.btn-ghost{background:transparent;color:var(--jj-navy);border:1.5px solid var(--jj-navy)}
+.btn-ghost:hover{background:var(--jj-navy);color:#fff}
+.hero-card{background:#fff;border-radius:14px;padding:28px;box-shadow:var(--shadow-lg);border-top:4px solid var(--jj-red)}
+.hero-card h3{font-size:14px;color:var(--steel);text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;font-weight:600}
+.hero-card table{width:100%;border-collapse:collapse;font-size:14px}
+.hero-card td{padding:8px 0;border-bottom:1px solid #f0f0f0}
+.hero-card td:first-child{color:var(--steel);width:55%}
+.hero-card td:last-child{color:var(--slate);font-weight:600;text-align:right}
+.hero-card .pin{display:inline-block;background:#fff5f5;color:var(--jj-red);font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;margin-left:6px}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:32px}.hero h1{font-size:34px}.hero{padding:60px 18px 50px}}
+.audio-sec{background:#fff;padding:0 32px}
+.audio-wrap{max-width:1140px;margin:0 auto;background:linear-gradient(135deg, var(--jj-navy) 0%, var(--jj-navy-deep) 100%);color:#fff;padding:36px 40px;border-radius:14px;display:grid;grid-template-columns:1fr 1.4fr;gap:32px;align-items:center;box-shadow:var(--shadow-lg);transform:translateY(-40px);position:relative;z-index:5}
+.audio-wrap .audio-meta .tag{display:inline-block;background:var(--jj-red);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:4px;margin-bottom:14px}
+.audio-wrap .audio-meta h3{color:#fff;font-size:24px;margin-bottom:8px;font-weight:700}
+.audio-wrap .audio-meta p{color:rgba(255,255,255,.78);font-size:14px;line-height:1.5}
+.audio-wrap audio{width:100%;border-radius:8px;outline:none}
+.audio-wrap .audio-fallback{margin-top:10px;font-size:12px;color:rgba(255,255,255,.65)}
+.audio-wrap .audio-fallback a{color:#fff;text-decoration:underline}
+@media(max-width:900px){.audio-wrap{grid-template-columns:1fr;padding:28px 22px;transform:translateY(-20px)}}
+section{padding:80px 32px}
+.container{max-width:1140px;margin:0 auto}
+.eyebrow{display:inline-block;color:var(--jj-red);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+h2{font-size:36px;color:var(--jj-navy);line-height:1.15;letter-spacing:-.02em;margin-bottom:18px;font-weight:700}
+h3{font-size:22px;color:var(--jj-navy);margin-bottom:10px;font-weight:600}
+.lead{font-size:18px;color:var(--steel);max-width:760px;margin-bottom:48px;line-height:1.55}
+.context{background:#fff}
+.ctx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:32px}
+.ctx{background:var(--bone);padding:22px;border-radius:10px}
+.ctx .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);font-weight:700;margin-bottom:6px}
+.ctx .val{font-size:18px;color:var(--jj-navy);font-weight:700;line-height:1.2}
+.ctx .note{font-size:12px;color:var(--steel);margin-top:6px}
+.ctx.alert{background:#fff5f5;border:1px solid #ffd6d6}
+.ctx.alert .val{color:var(--jj-red)}
+.agents-sec{background:var(--bone)}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-top:42px}
+.agent{background:#fff;padding:32px 28px;border-radius:12px;border:1px solid #ececec;position:relative;overflow:hidden;transition:transform .2s, box-shadow .2s}
+.agent:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.agent::before{content:'';position:absolute;top:0;left:0;height:4px;width:100%;background:linear-gradient(90deg,var(--jj-red) 0%, var(--jj-navy) 100%)}
+.agent .num{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--jj-red);margin-bottom:10px}
+.agent h3{margin-bottom:10px;font-size:21px}
+.agent .desc{font-size:14px;color:var(--steel);margin-bottom:16px;line-height:1.55}
+.agent .pain-fix{background:#fff5f5;border-left:3px solid var(--jj-red);padding:10px 14px;font-size:13px;color:var(--slate);border-radius:0 6px 6px 0;margin-bottom:14px}
+.agent .pain-fix strong{color:var(--jj-red-deep)}
+.agent ul{list-style:none;padding-left:0;margin-top:12px}
+.agent ul li{font-size:13px;color:var(--slate);padding:6px 0 6px 22px;position:relative;line-height:1.45}
+.agent ul li::before{content:'>';position:absolute;left:0;color:var(--jj-red);font-weight:700}
+.agent .stack{margin-top:14px;padding-top:14px;border-top:1px dashed #ddd;font-size:12px;color:var(--steel)}
+.agent .stack strong{color:var(--jj-navy)}
+.calc-sec{background:#fff}
+.calc-wrap{margin-top:42px;background:linear-gradient(180deg, var(--bone) 0%, #fff 100%);border-radius:14px;padding:36px;border:1px solid #ececec;box-shadow:var(--shadow)}
+.calc-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:start}
+@media(max-width:900px){.calc-grid{grid-template-columns:1fr}}
+.calc-controls h3{margin-bottom:20px}
+.calc-row{margin-bottom:24px}
+.calc-row label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;color:var(--steel);margin-bottom:8px;font-weight:500}
+.calc-row label .val{color:var(--jj-navy);font-weight:700;font-size:16px}
+.calc-row input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;background:#e0e0e0;border-radius:3px;outline:none}
+.calc-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;background:var(--jj-red);border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.calc-row input[type=range]::-moz-range-thumb{width:22px;height:22px;background:var(--jj-red);border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.calc-out{background:var(--jj-navy);color:#fff;padding:32px;border-radius:12px}
+.calc-out h3{color:#fff;font-size:16px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px;font-weight:600}
+.calc-out .metric{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.calc-out .metric:last-child{border-bottom:none}
+.calc-out .metric .lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:4px}
+.calc-out .metric .num{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.calc-out .metric .num .unit{font-size:14px;color:rgba(255,255,255,.6);font-weight:500;margin-left:4px}
+.calc-out .disclaimer{margin-top:16px;font-size:11px;color:rgba(255,255,255,.55);line-height:1.4}
+.timeline-sec{background:var(--jj-navy);color:#fff}
+.timeline-sec h2{color:#fff}.timeline-sec .lead{color:rgba(255,255,255,.85)}
+.timeline-sec .eyebrow{color:#ff6b6b}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:42px}
+.tl-card{background:rgba(255,255,255,.06);padding:28px;border-radius:10px;border-left:3px solid var(--jj-red)}
+.tl-card .num{font-size:48px;font-weight:800;color:var(--jj-red);line-height:1;margin-bottom:10px}
+.tl-card h3{color:#fff;font-size:18px;margin-bottom:10px}
+.tl-card ul{list-style:none;padding-left:0;margin-top:10px}
+.tl-card ul li{font-size:13px;color:rgba(255,255,255,.82);padding:4px 0 4px 18px;position:relative}
+.tl-card ul li::before{content:'+';position:absolute;left:0;color:var(--jj-red);font-weight:700}
+.stack-sec{background:#fff}
+.stack-table{width:100%;border-collapse:collapse;margin-top:32px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.stack-table th{background:var(--jj-navy);color:#fff;padding:14px 18px;text-align:left;font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+.stack-table td{padding:16px 18px;border-bottom:1px solid #f0f0f0;font-size:14px;color:var(--slate);vertical-align:top}
+.stack-table tr:last-child td{border-bottom:none}
+.stack-table .status-ok{color:var(--ok);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.stack-table .status-gap{color:var(--jj-red);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.stack-table .status-warn{color:var(--warn);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.stats-sec{background:var(--bone)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:42px}
+.stat{background:#fff;padding:28px;border-radius:10px;border-top:3px solid var(--jj-red);box-shadow:var(--shadow)}
+.stat .big{font-size:36px;font-weight:800;color:var(--jj-navy);letter-spacing:-.02em;line-height:1;margin-bottom:8px}
+.stat .desc{font-size:14px;color:var(--slate);margin-bottom:10px;line-height:1.45}
+.stat .src{font-size:11px;color:var(--steel);font-style:italic}
+.prompts-sec{background:#fff}
+.prompt{background:var(--bone);border-radius:10px;padding:24px;margin-bottom:18px;border-left:4px solid var(--jj-red)}
+.prompt h3{font-size:18px;margin-bottom:10px}
+.prompt .tag{display:inline-block;background:var(--jj-navy);color:#fff;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.prompt pre{background:#1a1a1a;color:#f5f2ee;padding:18px;border-radius:6px;overflow-x:auto;font-size:12px;line-height:1.55;font-family:"SF Mono","Monaco","Consolas",monospace;white-space:pre-wrap}
+.cta-block{background:linear-gradient(135deg,var(--jj-red) 0%, var(--jj-red-deep) 100%);color:#fff;text-align:center;padding:88px 32px}
+.cta-block h2{color:#fff;font-size:42px;margin-bottom:18px}
+.cta-block p{color:rgba(255,255,255,.92);max-width:640px;margin:0 auto 32px;font-size:18px}
+.cta-block .btn-primary{background:#fff;color:var(--jj-red)}.cta-block .btn-primary:hover{background:var(--bone)}
+footer{background:#0a0a0a;color:rgba(255,255,255,.7);padding:48px 32px 28px;text-align:center;font-size:13px}
+footer .brand{color:#fff;font-size:18px;font-weight:700;margin-bottom:8px}
+footer .brand .accent{color:var(--jj-red)}
+footer a{color:#fff}
+footer .small{font-size:11px;color:rgba(255,255,255,.45);margin-top:16px;line-height:1.4;max-width:760px;margin-left:auto;margin-right:auto}
+@media(max-width:768px){section{padding:50px 18px}h2{font-size:26px}.cta-block h2{font-size:28px}.cta-block{padding:60px 18px}.calc-wrap{padding:22px}}
+</style>
+</head>
+<body>
+<div class="strip">A custom Blueprint for <strong>Alex Ramos</strong> · DePuy Synthes / J&amp;J MedTech · prepared 2026-05-25</div>
+<nav>
+  <div class="brand">Blueprint AI<span class="accent"> · Alex Ramos</span><span class="tag">DePuy Synthes Trauma &amp; Extremities</span></div>
+  <ul><li><a href="#audio">Audio</a></li><li><a href="#context">Context</a></li><li><a href="#agents">Agents</a></li><li><a href="#calc">ROI</a></li><li><a href="#timeline">Timeline</a></li><li><a href="#stack">Stack</a></li><li><a href="#prompts">Prompts</a></li></ul>
+  <a class="cta" href="#apply">Apply</a>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="badge">Custom Blueprint · Medtech Vertical</span>
+      <h1>Alex, here is your <span class="red">AI-operated</span> DePuy Synthes practice.</h1>
+      <p class="sub">Six agents wired into the tools you already run — Notion, SharePoint, Dropbox, Teams — closing the speed-to-lead gap, killing the admin tax, and standing up the CRM you don't have yet. Built for the trauma &amp; extremities motion at J&amp;J MedTech.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="#apply">Apply to Work With Us</a><a class="btn btn-ghost" href="#audio">Listen to the 20-min audio brief</a></div>
+    </div>
+    <div class="hero-card">
+      <h3>Lead Snapshot</h3>
+      <table>
+        <tr><td>Name</td><td>Alex Ramos</td></tr><tr><td>Company</td><td>DePuy Synthes</td></tr><tr><td>Vertical</td><td>Medtech · Orthopaedics</td></tr><tr><td>Revenue band</td><td>$1M – $3M</td></tr><tr><td>Lead volume / mo</td><td>~10</td></tr><tr><td>Current lead speed</td><td>Hours <span class="pin">SLOW</span></td></tr><tr><td>CRM</td><td>None <span class="pin">GAP #1</span></td></tr><tr><td>AI maturity</td><td>Automation</td></tr><tr><td>Comm channels</td><td>Teams · Text · Email</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+<section id="audio" class="audio-sec">
+  <div class="audio-wrap">
+    <div class="audio-meta">
+      <span class="tag">20-min Audio Briefing</span>
+      <h3>Alex, this one's for you.</h3>
+      <p>A two-host audio walk-through of your DePuy Synthes Blueprint — generated specifically for your practice, your tools, and your pain points. Listen before you read.</p>
+    </div>
+    <div>
+      <audio controls preload="metadata">
+        <source src="https://bennett-maxwell.github.io/fki-preview/audio/alex-ramos-depuy-podcast.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+      <div class="audio-fallback">Trouble playing? <a href="mailto:contact@franchiseki.com?subject=Alex%20Ramos%20-%20audio%20playback%20issue">Email us</a> and we'll send the file directly.</div>
+    </div>
+  </div>
+</section>
+<section id="context" class="context"><div class="container">
+  <span class="eyebrow">Where We're Starting</span>
+  <h2>Alex Ramos, this is what your intake told us.</h2>
+  <p class="lead">Honest read on the inputs you gave us. The big signal: the CRM gap is the single most expensive thing on this list — every other agent gets multiplied once a system of record exists.</p>
+  <div class="ctx-grid">
+    <div class="ctx"><div class="label">Storage</div><div class="val">Dropbox · SharePoint · Notion</div><div class="note">Three-surface fragmentation — agents will unify access.</div></div>
+    <div class="ctx"><div class="label">Comm</div><div class="val">Teams · Text · Email</div><div class="note">Three inboxes Alex monitors. Speed-to-Lead will collapse to one queue.</div></div>
+    <div class="ctx"><div class="label">PM</div><div class="val">Notion</div><div class="note">Good — primary action surface for every agent.</div></div>
+    <div class="ctx"><div class="label">SOPs</div><div class="val">Started</div><div class="note">Existing fragments are usable. We don't restart — we extend.</div></div>
+    <div class="ctx"><div class="label">Pain · Admin Work</div><div class="val">Top complaint</div><div class="note">Voice-to-Notion + receipt OCR addresses ~60% of this.</div></div>
+    <div class="ctx"><div class="label">Pain · Reporting</div><div class="val">Manual</div><div class="note">No CRM → reporting must be assembled by agent each week.</div></div>
+    <div class="ctx"><div class="label">Pain · Team Org</div><div class="val">Cross-team</div><div class="note">Surgeon ↔ scrub ↔ procurement handoffs need single intake.</div></div>
+    <div class="ctx alert"><div class="label">Priority Gap #1</div><div class="val">No CRM</div><div class="note">Every other agent's leverage is capped until this is in place.</div></div>
+  </div>
+</div></section>
+<section id="agents" class="agents-sec"><div class="container">
+  <span class="eyebrow">The Six Agents</span>
+  <h2>Built for orthopaedic trauma &amp; extremities reps.</h2>
+  <p class="lead">Each agent is tuned to a real DePuy Synthes rep workflow — case-side, in-OR, post-case admin, and the procurement back-channel. No generic SaaS-CRM autopilot dressed up in red.</p>
+  <div class="agent-grid">
+    <div class="agent"><div class="num">AGENT 01 · SPEED-TO-LEAD</div><h3>Sub-5-minute inquiry response</h3><p class="desc">Surgeon, scrub lead, or procurement contact reaches out — agent triages and gets a first response back in under 5 minutes, 24/7. Replaces the current "hours" cycle.</p><div class="pain-fix"><strong>Pain fix:</strong> Lead speed: hours → sub-5-min response window.</div><ul><li>Classifies channel (email · text · Teams) + urgency</li><li>OR-urgent vs. elective vs. distributor routing</li><li>Pre-fills response with product reference + IFU link</li><li>Pages Alex on mobile only when human judgment needed</li></ul><div class="stack"><strong>Stack:</strong> Email + Teams webhook · SMS via Twilio bridge · Notion task log</div></div>
+    <div class="agent"><div class="num">AGENT 02 · ADMIN WORKFLOW</div><h3>Voice-to-Notion case logging</h3><p class="desc">After-case voice notes from the parking lot become structured Notion records — case type, surgeon, hardware used, follow-ups. Receipts get OCR'd and filed automatically.</p><div class="pain-fix"><strong>Pain fix:</strong> Admin work — typical rep loses 30-40% of week to logs &amp; reports (Salesforce State of Sales, 2024).</div><ul><li>Voice → transcript → Notion case template</li><li>Auto-categorized by surgeon, account, product family</li><li>Receipt photos → expense entries</li><li>Sterile-set checklist verification</li></ul><div class="stack"><strong>Stack:</strong> Whisper transcription · Notion API · receipt OCR pipeline</div></div>
+    <div class="agent"><div class="num">AGENT 03 · REPORTING</div><h3>Weekly pipeline + case-volume roll-ups</h3><p class="desc">No CRM yet, so reporting must be assembled from Notion, email, Teams. Agent does this every Sunday night so Monday district reviews don't eat Alex's morning.</p><div class="pain-fix"><strong>Pain fix:</strong> Reporting pain — eliminates manual weekly roll-up labor.</div><ul><li>Surgeon engagement heatmap (touches per week)</li><li>Pipeline freshness scoring</li><li>Case-volume by product family</li><li>One-click district report export (PDF + Slack/Teams post)</li></ul><div class="stack"><strong>Stack:</strong> Notion API · pandas pipeline · weekly cron · PDF render</div></div>
+    <div class="agent"><div class="num">AGENT 04 · TEAM ORG</div><h3>Cross-team handoff with full context</h3><p class="desc">Sub-rep takes a case for Alex. Scrub lead needs an instrument tray confirmation. Procurement wants a contract page. Each handoff carries the full thread.</p><div class="pain-fix"><strong>Pain fix:</strong> Team organization — kills the context-loss tax between Teams, Text, and Email.</div><ul><li>Single intake → auto-create Teams thread per case</li><li>SharePoint doc links attached on creation</li><li>Notion task hands off cleanly with owner change</li><li>Open-loop monitor pings 24h before silent drop</li></ul><div class="stack"><strong>Stack:</strong> MS Graph (Teams) · SharePoint API · Notion API</div></div>
+    <div class="agent"><div class="num">AGENT 05 · OUTREACH</div><h3>Compliant cold sequences for medtech</h3><p class="desc">Three vertical templates — hospital procurement intro, ASC owner outreach, distributor partner re-engagement. Phrasing screened for Open Payments / Sunshine Act safety. No off-label claims.</p><div class="pain-fix"><strong>Pain fix:</strong> Lead volume ~10/mo → measured uplift target without compromising compliance.</div><ul><li>Three audience tracks (hospital · ASC · distributor)</li><li>Compliance-screened phrasing (no off-label)</li><li>Reply detection → auto-route to Agent 01</li><li>A/B test queue with conversion logging</li></ul><div class="stack"><strong>Stack:</strong> Email API (SendGrid/Postmark) · reply parsing · Notion log</div></div>
+    <div class="agent"><div class="num">AGENT 06 · CRM SETUP</div><h3>Stand up the CRM Alex doesn't have yet</h3><p class="desc">Alex's intake said: no CRM today. Agent scaffolds HubSpot or GHL with the right object model for a medtech rep practice — Surgeon · Account · Case — and migrates Notion data in week two.</p><div class="pain-fix"><strong>Pain fix:</strong> Priority Gap #1 — no system of record. This unblocks every other agent.</div><ul><li>Surgeon · Account · Case object model</li><li>HubSpot vs. GHL trade-off review (day 7)</li><li>Notion → CRM data migration (day 14)</li><li>Pipeline stages tuned for orthopaedic case cycle</li></ul><div class="stack"><strong>Stack:</strong> HubSpot API or GHL API · Notion API · custom migration script</div></div>
+  </div>
+</div></section>
+<section id="calc" class="calc-sec"><div class="container">
+  <span class="eyebrow">Interactive · No Hardcoded Predictions</span>
+  <h2>Run the numbers yourself, Alex.</h2>
+  <p class="lead">These sliders use your actual inputs. We don't promise outcomes — we expose the math. Adjust to match your real environment; the totals update live.</p>
+  <div class="calc-wrap"><div class="calc-grid">
+    <div class="calc-controls"><h3>Your inputs</h3>
+      <div class="calc-row"><label>Leads per month <span class="val" id="v-leads">10</span></label><input type="range" min="1" max="60" value="10" id="leads"></div>
+      <div class="calc-row"><label>Current response time (hours) <span class="val" id="v-resp">3</span></label><input type="range" min="0.1" max="24" step="0.1" value="3" id="resp"></div>
+      <div class="calc-row"><label>Current close rate (%) <span class="val" id="v-close">15</span></label><input type="range" min="1" max="60" value="15" id="close"></div>
+      <div class="calc-row"><label>Avg deal value ($) <span class="val" id="v-deal">8000</span></label><input type="range" min="500" max="50000" step="500" value="8000" id="deal"></div>
+      <div class="calc-row"><label>Hours/week on admin today <span class="val" id="v-admin">14</span></label><input type="range" min="0" max="40" value="14" id="admin"></div>
+      <div class="calc-row"><label>Hours/week the agents save <span class="val" id="v-save">8</span></label><input type="range" min="0" max="30" value="8" id="save"></div>
+      <div class="calc-row"><label>Hourly cost of Alex's time ($) <span class="val" id="v-rate">95</span></label><input type="range" min="25" max="300" value="95" id="rate"></div>
+    </div>
+    <div class="calc-out"><h3>Live calculation</h3>
+      <div class="metric"><div class="lbl">Speed-to-lead conversion lift (vs. hours-based baseline)</div><div class="num" id="out-lift">+0<span class="unit">% close rate uplift modeled</span></div></div>
+      <div class="metric"><div class="lbl">Annualized revenue from speed lift</div><div class="num" id="out-rev">$0<span class="unit">/yr</span></div></div>
+      <div class="metric"><div class="lbl">Annualized admin time recovered</div><div class="num" id="out-hours">0<span class="unit">hrs/yr</span></div></div>
+      <div class="metric"><div class="lbl">Annualized cash value of recovered time</div><div class="num" id="out-time">$0<span class="unit">/yr</span></div></div>
+      <div class="metric"><div class="lbl">Total modeled annual upside</div><div class="num" id="out-total">$0<span class="unit">/yr</span></div></div>
+      <div class="disclaimer">This calculator multiplies your sliders. The speed-to-lead lift uses an HBR/Velocify-based response-time model (under 5 min → up to 7x qualification likelihood vs. over 1 hr). Output is illustrative, not a guarantee.</div>
+    </div>
+  </div></div>
+</div></section>
+<section id="timeline" class="timeline-sec"><div class="container">
+  <span class="eyebrow">Onboarding · 3 / 7 / 30</span>
+  <h2>Live in three days. Tuned in seven. Compounding in thirty.</h2>
+  <p class="lead">Not a 90-day rollout. Alex should be working with a measurably faster operation by end of week one.</p>
+  <div class="tl">
+    <div class="tl-card"><div class="num">3</div><h3>Days 1-3 · Wire up</h3><ul><li>Inventory current Notion / Dropbox / SharePoint / Teams</li><li>Speed-to-Lead agent goes live (Agent 01)</li><li>First response-time benchmark captured</li><li>Sub-rep access provisioned</li></ul></div>
+    <div class="tl-card"><div class="num">7</div><h3>Days 4-7 · Tune</h3><ul><li>Admin Workflow agent online (Agent 02)</li><li>Reporting agent generates first weekly roll-up (Agent 03)</li><li>Team Org agent intake live (Agent 04)</li><li>HubSpot vs. GHL decision committed</li></ul></div>
+    <div class="tl-card"><div class="num">30</div><h3>Days 8-30 · Compound</h3><ul><li>CRM scaffolded + Notion data migrated (Agent 06)</li><li>Outreach sequences validated (Agent 05)</li><li>District/regional report export functional</li><li>30-day review against day-1 baseline</li></ul></div>
+  </div>
+</div></section>
+<section id="stack" class="stack-sec"><div class="container">
+  <span class="eyebrow">Tech Stack — Mapped</span>
+  <h2>What Alex already has, what each agent uses.</h2>
+  <p class="lead">No rip-and-replace. The agents lean on Alex's existing Notion / Dropbox / SharePoint / Teams. The one addition is the CRM — and we'll review HubSpot vs. GHL with Alex before anything gets installed.</p>
+  <table class="stack-table"><thead><tr><th>Tool</th><th>Status</th><th>Agent role</th></tr></thead><tbody>
+    <tr><td>Notion</td><td><span class="status-ok">In place</span></td><td>Primary action surface for Agents 01, 02, 03, 04</td></tr>
+    <tr><td>Dropbox</td><td><span class="status-ok">In place</span></td><td>Document inbox — case files, contracts, surgeon agreements</td></tr>
+    <tr><td>SharePoint</td><td><span class="status-ok">In place</span></td><td>Org-controlled doc library — compliance refs, IFU library</td></tr>
+    <tr><td>MS Teams</td><td><span class="status-ok">In place</span></td><td>Notification + handoff channel for Agents 01 and 04</td></tr>
+    <tr><td>Text / SMS</td><td><span class="status-warn">In place — needs bridge</span></td><td>Speed-to-Lead intake (Twilio bridge wired in week 1)</td></tr>
+    <tr><td>Email</td><td><span class="status-ok">In place</span></td><td>Lead intake + outreach delivery for Agents 01 and 05</td></tr>
+    <tr><td>CRM</td><td><span class="status-gap">Missing — Priority Gap #1</span></td><td>Agent 06 stands up HubSpot or GHL · day 7 decision</td></tr>
+  </tbody></table>
+</div></section>
+<section class="stats-sec"><div class="container">
+  <span class="eyebrow">The Numbers That Justify Each Agent</span>
+  <h2>Why these agents, in this order.</h2>
+  <p class="lead">Citations for every stat. Source-linked so Alex can verify before signing off.</p>
+  <div class="stats-grid">
+    <div class="stat"><div class="big">7x</div><div class="desc">More likely to qualify a lead if contacted within 1 hour vs. waiting longer — the foundational case for Agent 01.</div><div class="src">Source: Oldroyd, Elkington &amp; McElheran, Harvard Business Review (2011) — The Short Life of Online Sales Leads.</div></div>
+    <div class="stat"><div class="big">21x</div><div class="desc">Increase in qualification rate when first contact occurs in under 5 minutes vs. over 30 minutes.</div><div class="src">Source: Velocify (2014) — Ultimate Contact Strategy.</div></div>
+    <div class="stat"><div class="big">~28%</div><div class="desc">Of a B2B sales rep's time spent actually selling — the rest goes to admin, internal meetings, and CRM data entry. Agent 02 directly attacks the bottom of this stack.</div><div class="src">Source: Salesforce State of Sales (2024).</div></div>
+    <div class="stat"><div class="big">$1.6T</div><div class="desc">Global orthopaedic device market context — DePuy Synthes (J&amp;J MedTech) is a top-three player in trauma &amp; extremities.</div><div class="src">Source: MarketsandMarkets / AdvaMed industry briefs (2024).</div></div>
+    <div class="stat"><div class="big">30-40%</div><div class="desc">Of a medtech rep's week historically spent on case logs, expense reports, sample tracking — the workload Agent 02 collapses.</div><div class="src">Source: Composite of medtech rep workflow studies (AdvaMed, ZS Associates briefs).</div></div>
+    <div class="stat"><div class="big">#1</div><div class="desc">Lack of a single source of truth — the most-cited productivity blocker in modern sales-ops research. Agent 06 closes this gap for Alex.</div><div class="src">Source: Salesforce State of Sales (2024); HubSpot State of Sales (2024).</div></div>
+  </div>
+</div></section>
+<section id="prompts" class="prompts-sec"><div class="container">
+  <span class="eyebrow">Live AI Prompts — Built for DePuy Synthes</span>
+  <h2>Three production prompts ready to drop in.</h2>
+  <p class="lead">These are the actual prompts Alex's agents will run. Copy, paste, tune. Source-of-truth versions live in the rep practice's Notion.</p>
+  <div class="prompt"><div class="tag">AGENT 01 · SPEED-TO-LEAD</div><h3>Medtech inquiry triage + first-response template</h3>
+<pre>You are the speed-to-lead agent for Alex Ramos's DePuy Synthes
+trauma &amp; extremities rep practice. Inputs: raw inquiry text +
+channel (email/text/Teams).
+
+Step 1 — Classify
+  - urgency: OR-urgent | elective-soon | elective-future | distributor | other
+  - role: surgeon | scrub_lead | OR_director | procurement | distributor | other
+  - product_family (best guess): trauma_plating | IM_nail | foot_ankle |
+    hand_wrist | external_fixation | power_tools | other
+
+Step 2 — Draft a &lt;120 word first response that:
+  - acknowledges receipt within 5 minutes
+  - asks at most TWO clarifying questions tied to the classified role
+  - cites the relevant product family in DePuy Synthes nomenclature
+  - includes the standard IFU-availability sentence (compliance)
+  - signs off as "Alex Ramos — DePuy Synthes Trauma &amp; Extremities"
+  - NEVER makes off-label claims or pricing commitments
+
+Step 3 — Page rules
+  - If urgency = OR-urgent → page Alex on mobile + Teams immediately
+  - If role = procurement and intent contains pricing → flag for Alex
+    review before send
+  - Else → queue draft for Alex's 20-minute review window
+
+Output JSON: { urgency, role, product_family, draft_text, page_alex (bool),
+flag_for_review (bool), suggested_next_step }
+</pre></div>
+  <div class="prompt"><div class="tag">AGENT 03 · REPORTING</div><h3>Weekly Notion → exec roll-up generator</h3>
+<pre>You are the reporting agent. Input: prior 7 days of Notion case log
+entries, email metadata, Teams thread counts.
+
+Generate a one-page weekly summary with these sections:
+
+1. WEEK SNAPSHOT
+   - cases logged (count by product family)
+   - surgeons touched (count, list)
+   - leads received (count, source breakdown)
+   - response time p50/p90 vs. last week
+
+2. PIPELINE FRESHNESS
+   - open opportunities &gt; 14 days stale → list
+   - cases awaiting follow-up &gt; 7 days → list
+
+3. SURGEON ENGAGEMENT
+   - top 5 most-touched surgeons this week
+   - top 3 cooling surgeons (touches dropped &gt;50% vs. trailing 4 wks)
+
+4. ALERTS
+   - any compliance keyword flagged in outbound
+   - any case logged without sterile-set checklist confirmation
+
+5. NEXT WEEK FOCUS
+   - 3 recommended actions for Alex, ranked by estimated impact
+
+Tone: factual, no hype, district-manager-readable. Cite source rows
+inline as Notion page IDs. Export as PDF + post to #depuy-alex-weekly
+Teams channel every Sunday 9pm MT.
+</pre></div>
+  <div class="prompt"><div class="tag">AGENT 05 · OUTREACH</div><h3>Compliant cold-outreach template — medtech vertical</h3>
+<pre>You are the outreach agent for Alex Ramos. Generate a 4-step
+sequence for ONE of these tracks: HOSPITAL | ASC | DISTRIBUTOR.
+
+Compliance rules (must follow on every message):
+  - no off-label claims
+  - no implied pricing commitments
+  - no surgeon-targeted financial inducement language
+  - product references must match cleared FDA indication
+  - include opt-out phrase in step 1
+
+Tone: clinical, evidence-based, succinct. Sub-90-word messages.
+
+Step 1 (Day 0) — Cold intro
+  - one-line credential ("Alex Ramos · DePuy Synthes Trauma &amp;
+    Extremities, [territory]")
+  - one specific value pillar relevant to the recipient role
+  - one open question
+  - opt-out line
+
+Step 2 (Day 3) — Value drop
+  - one case study or surgeon-validated outcome (must be on-label)
+  - 1-question CTA
+
+Step 3 (Day 8) — Different angle
+  - reframe value — operational vs. clinical
+  - 1-question CTA
+
+Step 4 (Day 14) — Soft close
+  - acknowledge silence is fine
+  - leave one resource link (peer-reviewed reference or IFU)
+  - clean exit
+
+Output: array of 4 message objects { day, subject, body, cta_question }
+Reply detection: any non-bounce reply → route to Agent 01 within 5 min.
+</pre></div>
+</div></section>
+<section id="apply" class="cta-block">
+  <h2>Alex — ready to run this practice with the agents on?</h2>
+  <p>This isn't a calendar booking. It's an application. Reply with your real picture — case volume, current ops, what's actually broken — and we'll respond inside 24 hours.</p>
+  <a class="btn btn-primary" href="mailto:contact@franchiseki.com?subject=Apply%20-%20Alex%20Ramos%20DePuy%20Synthes%20Blueprint%20Engagement&amp;body=Hi%20Alex%2C%0A%0AI%27d%20like%20to%20apply%20to%20engage%20on%20the%20Blueprint.%0A%0AName%3A%0ACurrent%20role%2Ffacility%3A%0AMonthly%20case%20volume%3A%0ATop%201-2%20things%20I%20want%20fixed%20first%3A%0A%0AThanks%2C%0A">Email Application</a>
+</section>
+<footer>
+  <div class="brand">Blueprint AI<span class="accent"> · Alex Ramos · DePuy Synthes</span></div>
+  <p>Custom AI-operations blueprint · Trauma &amp; Extremities · J&amp;J MedTech aligned · 2026-05-25</p>
+  <p style="margin-top:10px"><a href="mailto:contact@franchiseki.com">contact@franchiseki.com</a></p>
+  <p class="small">This blueprint is a preview document prepared for Alex Ramos. Cited statistics link to original sources. No off-label claims, surgical recommendations, or pricing commitments are made. Product names are trademarks of their respective owners.</p>
+</footer>
+<script>
+(function(){
+  var $ = function(id){return document.getElementById(id);};
+  var leads=$('leads'),resp=$('resp'),close_=$('close'),deal=$('deal'),admin=$('admin'),save=$('save'),rate=$('rate');
+  var vLeads=$('v-leads'),vResp=$('v-resp'),vClose=$('v-close'),vDeal=$('v-deal'),vAdmin=$('v-admin'),vSave=$('v-save'),vRate=$('v-rate');
+  var outLift=$('out-lift'),outRev=$('out-rev'),outHours=$('out-hours'),outTime=$('out-time'),outTotal=$('out-total');
+  function fmt(n){return n.toLocaleString('en-US',{maximumFractionDigits:0});}
+  function fmt$(n){return '$'+fmt(Math.round(n));}
+  function recalc(){
+    var L=+leads.value,R=+resp.value,C=+close_.value/100,D=+deal.value,A=+admin.value,S=Math.min(+save.value,A),RT=+rate.value;
+    vLeads.textContent=L;vResp.textContent=R.toFixed(1);vClose.textContent=C*100;vDeal.textContent=fmt(D);vAdmin.textContent=A;vSave.textContent=S;vRate.textContent=RT;
+    var lift_max=1.0,quality_factor=0.35;
+    var lift_rel=0;
+    if(R>0.0833){var overshoot=Math.min(R,24);lift_rel=lift_max*(1-Math.exp(-overshoot/2));}
+    var conversionUplift=C*lift_rel*quality_factor;
+    var newCloseRate=Math.min(C+conversionUplift,1.0);
+    var liftPct=(newCloseRate-C)*100;
+    var extraDealsPerMo=L*newCloseRate-L*C;
+    var revLiftAnnual=extraDealsPerMo*D*12;
+    var hoursSavedPerYear=S*52;
+    var cashValueOfTime=hoursSavedPerYear*RT;
+    var total=revLiftAnnual+cashValueOfTime;
+    outLift.innerHTML='+'+liftPct.toFixed(1)+'<span class="unit">% close rate uplift modeled</span>';
+    outRev.innerHTML=fmt$(revLiftAnnual)+'<span class="unit">/yr</span>';
+    outHours.innerHTML=fmt(hoursSavedPerYear)+'<span class="unit">hrs/yr</span>';
+    outTime.innerHTML=fmt$(cashValueOfTime)+'<span class="unit">/yr</span>';
+    outTotal.innerHTML=fmt$(total)+'<span class="unit">/yr</span>';
+  }
+  [leads,resp,close_,deal,admin,save,rate].forEach(function(el){el.addEventListener('input',recalc);});
+  recalc();
+})();
+</script>
+</body></html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Spoiled Rotten Photography — AI-Powered Franchise Growth">
+<meta property="og:description" content="See how Spoiled Rotten Photography is using AI to scale franchise development, school outreach, and franchisee support.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/melissa-tash-srp/">
+<meta name="description" content="Spoiled Rotten Photography franchise AI platform — qualifying leads, supporting franchisees, and retaining schools at scale.">
+<title>Spoiled Rotten Photography | AI-Powered Growth Platform</title>
+<style>
+  :root{--brand:#9770b8;--brand-dark:#59118e;--brand-light:#dbbcf5;--bg:#f8f3fd;--white:#fff;--text:#231820;--muted:#3a3a3a;--border:#e8dff1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+  nav{position:sticky;top:0;z-index:100;background:var(--brand-dark);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+  .nav-logo{color:var(--white);font-weight:700;font-size:1rem}.nav-logo span{color:var(--brand-light)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--brand-light)}
+  .nav-cta{background:var(--brand-light);color:var(--brand-dark)!important;padding:.35rem .9rem;border-radius:20px;font-weight:700!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:10px;min-width:44px;min-height:44px}
+  .hamburger span{width:22px;height:2px;background:rgba(255,255,255,.9);border-radius:2px;display:block}
+  .reading-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--brand-dark),var(--brand-light));z-index:9999;width:0%;transition:width .12s linear;pointer-events:none}
+  /* Hero */
+  .hero{background:linear-gradient(135deg,var(--brand-dark) 0%,#7a3aaa 60%,var(--brand) 100%);color:var(--white);padding:5rem 2rem 4rem;text-align:center}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.3rem .9rem;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:.05em;margin-bottom:1.5rem}
+  .hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.15;max-width:720px;margin:0 auto 1rem}
+  .hero h1 span{color:var(--brand-light)}
+  .hero-sub{font-size:1.05rem;opacity:.85;max-width:560px;margin:0 auto 2.5rem}
+  .hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem}
+  .stat{text-align:center}.stat-num{font-size:2rem;font-weight:800;color:var(--brand-light)}.stat-label{font-size:.78rem;opacity:.8;margin-top:.2rem}
+  .hero-cta{display:inline-block;background:var(--white);color:var(--brand-dark);padding:.9rem 2.2rem;border-radius:40px;font-weight:700;font-size:1rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+  .hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+  /* Sections */
+  section{padding:4rem 2rem}
+  .container{max-width:1080px;margin:0 auto}
+  .section-label{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);margin-bottom:.5rem}
+  .section-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:1rem;color:var(--text)}
+  .section-sub{color:var(--muted);max-width:600px;margin-bottom:3rem}
+  /* Services */
+  .services{background:var(--bg)}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+  .service-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.8rem 1.5rem;text-align:center}
+  .service-icon{font-size:2rem;margin-bottom:.75rem}
+  .service-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+  .service-card p{font-size:.85rem;color:var(--muted)}
+  /* AI Agents */
+  .agents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+  .agent-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.8rem}
+  .agent-num{display:inline-block;background:var(--brand-dark);color:var(--white);width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;font-size:.8rem;font-weight:700;margin-bottom:.75rem}
+  .agent-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+  .agent-card p{font-size:.85rem;color:var(--muted)}
+  /* Results */
+  .results{background:var(--brand-dark);color:var(--white)}
+  .results .section-label{color:var(--brand-light)}
+  .results .section-title{color:var(--white)}
+  .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:2rem}
+  .result-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:1.8rem;text-align:center}
+  .result-num{font-size:2.2rem;font-weight:800;color:var(--brand-light)}
+  .result-label{font-size:.82rem;opacity:.8;margin-top:.3rem}
+  /* Process */
+  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;counter-reset:step}
+  .step{background:var(--bg);border-radius:14px;padding:1.8rem;position:relative}
+  .step-num{background:var(--brand);color:var(--white);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;margin-bottom:.9rem}
+  .step h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+  .step p{font-size:.83rem;color:var(--muted)}
+  /* CTA */
+  .cta-section{background:linear-gradient(135deg,var(--brand-dark),var(--brand));color:var(--white);text-align:center;padding:5rem 2rem}
+  .cta-section h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:1rem}
+  .cta-section p{opacity:.85;max-width:520px;margin:0 auto 2rem}
+  .cta-btn{display:inline-block;background:var(--white);color:var(--brand-dark);padding:.9rem 2.4rem;border-radius:40px;font-weight:700;font-size:1rem;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+  footer{background:var(--text);color:rgba(255,255,255,.6);text-align:center;padding:2rem;font-size:.82rem}
+  footer strong{color:var(--white)}
+  /* Mobile CTA */
+  .mobile-cta-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--brand-dark);padding:.85rem 1.5rem;z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.25)}
+  .mobile-cta-btn{display:block;background:var(--brand-light);color:var(--brand-dark);text-align:center;padding:.75rem;border-radius:30px;font-weight:700;text-decoration:none;font-size:.9rem}
+  @media(max-width:640px){
+    .nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:var(--brand-dark);flex-direction:column;padding:.5rem 0;gap:0;box-shadow:0 4px 16px rgba(0,0,0,.3);z-index:99}
+    .nav-links.open{display:flex}
+    .nav-links li{padding:.6rem 2rem}
+    .hamburger{display:flex}
+    .hero-stats{gap:1.2rem}
+    .mobile-cta-bar{display:block}
+    body{padding-bottom:72px}
+  }
+</style>
+</head>
+<body>
+<div class="reading-progress" id="rp"></div>
+<nav>
+  <div class="nav-logo">Spoiled Rotten <span>Photography</span></div>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#agents">AI Platform</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="hero">
+  <div class="hero-badge">AI-POWERED FRANCHISE PLATFORM</div>
+  <h1>The In-School Photography Franchise <span>Built to Scale</span></h1>
+  <p class="hero-sub">23 years of proven brand. 41 territories. Now powered by AI systems that qualify your leads, retain your schools, and support your franchisees — automatically.</p>
+  <a href="#apply" class="hero-cta">Explore Franchise Ownership</a>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">23</div><div class="stat-label">Years in Business</div></div>
+    <div class="stat"><div class="stat-num">41</div><div class="stat-label">Territories Awarded</div></div>
+    <div class="stat"><div class="stat-num">93%</div><div class="stat-label">School Retention Rate</div></div>
+    <div class="stat"><div class="stat-num">$303K</div><div class="stat-label">Avg Franchisee Revenue (2025 FDD)</div></div>
+  </div>
+</div>
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">School Photography at Scale</h2>
+    <p class="section-sub">Portrait sessions, yearbook production, and school events — delivered with consistency franchisees and schools both rely on.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">📸</div><h3>School Portraits</h3><p>Fall and spring portrait days with professional equipment and same-day preview technology.</p></div>
+      <div class="service-card"><div class="service-icon">📚</div><h3>Yearbook Production</h3><p>Full yearbook services representing ~40% of flagship revenue. High-margin, high-retention.</p></div>
+      <div class="service-card"><div class="service-icon">🎓</div><h3>Graduation Photos</h3><p>Milestone photography for Pre-K through 8th grade ceremonies across territories.</p></div>
+      <div class="service-card"><div class="service-icon">📅</div><h3>School Events</h3><p>Class photos, sports days, and special events — one vendor relationship per school.</p></div>
+    </div>
+  </div>
+</section>
+<section id="agents">
+  <div class="container">
+    <div class="section-label">AI Platform</div>
+    <h2 class="section-title">6 AI Agents Running Your Franchise</h2>
+    <p class="section-sub">Not generic software. Six systems trained on SRP's actual data, processes, and 23-year playbook — live before you open your territory.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-num">1</div><h3>Franchise Lead Qualifier</h3><p>Screens every inquiry against SRP's 13-year ideal candidate profile before a human sees it. Eliminates misaligned leads automatically.</p></div>
+      <div class="agent-card"><div class="agent-num">2</div><h3>School Outreach Agent</h3><p>Researches target schools, personalizes pitch sequences, and manages follow-up cadence. Franchisees fill their territory faster.</p></div>
+      <div class="agent-card"><div class="agent-num">3</div><h3>Franchisee Onboarding Coach</h3><p>Available 24/7. Trained on 50+ SRP SOPs. Answers operational questions consistently and instantly — freeing corporate for strategic coaching.</p></div>
+      <div class="agent-card"><div class="agent-num">4</div><h3>School Retention Monitor</h3><p>Tracks every contract renewal across 41 territories. Flags risk early. Drafts proactive renewal conversations before a school looks elsewhere.</p></div>
+      <div class="agent-card"><div class="agent-num">5</div><h3>Performance Benchmark Agent</h3><p>Shows each franchisee exactly where they stand vs. top performers and routes them to specific actions — not generic advice.</p></div>
+      <div class="agent-card"><div class="agent-num">6</div><h3>Marketing ROI Analyzer</h3><p>Tracks every franchise inquiry from source to outcome. Identifies which channels produce real candidates and shifts budget accordingly.</p></div>
+    </div>
+  </div>
+</section>
+<section class="results" id="results">
+  <div class="container">
+    <div class="section-label">By the Numbers</div>
+    <h2 class="section-title">A Proven Brand, Now AI-Amplified</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-num">$1.1M</div><div class="result-label">Flagship Annual Revenue (2025)</div></div>
+      <div class="result-card"><div class="result-num">13yr</div><div class="result-label">Franchising Track Record</div></div>
+      <div class="result-card"><div class="result-num">37</div><div class="result-label">Franchised Outlets (2025)</div></div>
+      <div class="result-card"><div class="result-num">0</div><div class="result-label">Terminations — Ever (3yr documented)</div></div>
+    </div>
+  </div>
+</section>
+<section id="process">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">From Agreement to Full Territory in 30 Days</h2>
+    <p class="section-sub">AI systems are configured to your territory before your first school call. You launch at 90% accuracy — not after a learning curve.</p>
+    <div class="process-steps">
+      <div class="step"><div class="step-num">1</div><h3>Days 1–3: Setup</h3><p>AI agents configured with your territory data. Brand voice built from SRP's 23-year playbook. Lead qualifier goes live.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Days 4–7: Running</h3><p>School Outreach Agent begins prospecting. Onboarding Coach fielding questions. Retention Monitor tracking existing contracts.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Day 30: Trained</h3><p>All 6 agents calibrated to your specific schools and markets. Performance Benchmark live vs. system averages.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Month 2+: Scale</h3><p>Marketing ROI Analyzer identifies top lead sources. School pipeline grows systematically. Corporate coaching focused on strategy — not operations.</p></div>
+    </div>
+  </div>
+</section>
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to Own a Territory?</h2>
+    <p>Tell us about yourself and your market. Our team reviews every application personally — the same care we apply to every school relationship in the system.</p>
+    <a href="https://franchiseki.com/apply" class="cta-btn">Apply for Franchise Ownership</a>
+  </div>
+</section>
+<footer>
+  <strong>Spoiled Rotten Photography</strong> — Huntsville, Alabama | 23 Years | 41 Territories<br>
+  AI platform implemented by <strong>FKI — Franchise KI</strong>
+</footer>
+<div class="mobile-cta-bar">
+  <a href="https://franchiseki.com/apply" class="mobile-cta-btn">Apply for Franchise Ownership</a>
+</div>
+<script>
+  // Reading progress
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    document.getElementById('rp').style.width=pct+'%';
+  });
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

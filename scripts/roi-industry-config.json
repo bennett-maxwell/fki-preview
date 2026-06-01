@@ -1,0 +1,37 @@
+{
+  "_comment": "Single source of truth for the ROI calculator's per-industry 'Average Contract Value' slider. Range = realistic single-transaction band for the industry so the client can model THEIR real numbers. Default value sits at min + data-no-default + calcTouched guard, so NOTHING is shown as the client's own figure until they drag it (no fabricated current-state). Read by scripts/fix-roi-slider-industry.py AND scripts/clone-blueprint.sh so direct-patch and regenerate stay identical.",
+  "industry_slider": {
+    "home_services":    {"min": 300,  "max": 20000,  "step": 50,   "unit": "job/ticket"},
+    "photography":      {"min": 250,  "max": 8000,   "step": 50,   "unit": "session/package"},
+    "video_production": {"min": 800,  "max": 50000,  "step": 200,  "unit": "project"},
+    "medspa":           {"min": 150,  "max": 6000,   "step": 50,   "unit": "treatment/package"},
+    "food_franchise":   {"min": 8,    "max": 60,     "step": 1,    "unit": "ticket"},
+    "retail_firearms":  {"min": 300,  "max": 6000,   "step": 50,   "unit": "ticket"},
+    "design_agency":    {"min": 1500, "max": 40000,  "step": 100,  "unit": "project"},
+    "consulting":       {"min": 3000, "max": 150000, "step": 500,  "unit": "engagement"},
+    "crm_software":     {"min": 1200, "max": 75000,  "step": 300,  "unit": "contract"},
+    "medical_devices":  {"min": 5000, "max": 500000, "step": 1000, "unit": "contract"},
+    "property_mgmt":    {"min": 1000, "max": 50000,  "step": 250,  "unit": "annual mgmt fee"}
+  },
+  "_comment_b2b": "Industries whose buyers realistically have a LinkedIn lead-gen / social-selling motion. The ROI calculator's 'LinkedIn Leads Added/Month' slider (which feeds the headline revenue lift) is ONLY appropriate for these. For trades/retail/consumer-local industries (home_services, food_franchise, retail_firearms, medspa, photography, property_mgmt) a LinkedIn-pipeline lever is industry-inappropriate — same defect class as a $45K avg-contract on a plumber. financial-realism-check.py reads this list for the D7-18 field-relevance check; the template/generator gate that removes/zeros the field for non-B2B is the staged follow-up.",
+  "b2b_linkedin_industries": ["consulting", "crm_software", "medical_devices", "design_agency", "video_production"],
+  "slug_industry": {
+    "court-lundberg":    "home_services",
+    "branson-maxwell":   "photography",
+    "melissa-tash-srp":  "photography",
+    "rush-evans":        "photography",
+    "watson":            "video_production",
+    "jaden-mecham":      "medspa",
+    "dave-wood":         "food_franchise",
+    "dave-wood-fresh-20260601": "food_franchise",
+    "plumber-test-business-20260601": "home_services",
+    "austin-iron-horse": "retail_firearms",
+    "brittney-warnick":  "design_agency",
+    "paul-muus":         "consulting",
+    "rey-31-consulting": "consulting",
+    "chris-lpnw":        "consulting",
+    "brent-attaway":     "crm_software",
+    "alex-ramos":        "medical_devices",
+    "zachary-oldham":    "property_mgmt"
+  }
+}

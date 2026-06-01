@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See If AI Is a Fit for Your Business — FKI Qualifier</title>
+<meta name="description" content="Answer 8 questions to see if AI is a fit for your business. Takes under 60 seconds.">
+<style>
+  :root {
+    --brand:       #1D6FDB;
+    --brand-dark:  #0A0E1A;
+    --brand-light: #4A90E2;
+    --neutral-bg:  #f8f8f8;
+    --white:       #ffffff;
+    --text:        #0A0E1A;
+    --text-muted:  #3a3a3a;
+    --text-light:  #888888;
+    --border:      #e2e2e2;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(29,111,219,0.08);
+    --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; text-decoration: none; }
+  .nav-logo span { color: var(--brand-light); }
+
+  .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 4rem 2rem 3.5rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(29,111,219,0.2); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: var(--brand-light); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto 1rem; }
+
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; align-items: start; }
+  @media (max-width: 860px) { .main-wrap { grid-template-columns: 1fr; } }
+
+  .q-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+  .q-section:last-child { margin-bottom: 0; }
+  .q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
+  .q-title { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.4rem; }
+
+  /* TEXT INPUTS */
+  .exp-input-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .exp-input-row label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; min-width: 140px; }
+  .exp-input-row input[type=number] {
+    width: 130px; font-size: 1.1rem; font-weight: 700; padding: 0.45rem 0.7rem;
+    border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit;
+    color: var(--text); background: var(--neutral-bg); outline: none;
+    -moz-appearance: textfield;
+  }
+  .exp-input-row input[type=number]:focus { border-color: var(--brand); background: var(--white); }
+  .exp-input-row input[type=number]::-webkit-outer-spin-button,
+  .exp-input-row input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .exp-input-row .exp-unit { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+
+  /* SLIDER */
+  .slider-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+  .slider-name { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+  .slider-val { font-size: 1.05rem; font-weight: 800; color: var(--brand-dark); }
+  .slider-val.needs-input { color: var(--text-light); font-style: italic; font-size: 0.88rem; font-weight: 500; }
+  input[type=range] {
+    width: 100%; height: 6px; border-radius: 3px; outline: none;
+    appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 0.6rem;
+    background: linear-gradient(to right, var(--brand) 0%, var(--brand) 0%, var(--border) 0%, var(--border) 100%);
+  }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); }
+  .exp-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-bottom: 1.2rem; }
+
+  /* CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
+  .chip { padding: 0.52rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.88rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; user-select: none; line-height: 1.3; }
+  .chip:hover { border-color: var(--brand-light); color: var(--brand); background: #f0f6ff; }
+  .chip.selected { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
+
+  /* SECTION DIVIDER */
+  .section-divider { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); padding: 0.4rem 0; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* DUAL INPUT (Q6 team) */
+  .dual-input-block { background: var(--neutral-bg); border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 0.5rem; }
+  .dual-input-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.75rem; }
+
+  /* RESULTS PANEL */
+  .results-col { position: sticky; top: 80px; }
+  @media (max-width: 860px) { .results-col { position: static; } }
+  .results-card { background: var(--brand-dark); border-radius: var(--radius); padding: 2rem; color: var(--white); box-shadow: var(--shadow-md); }
+  .results-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; }
+
+  .result-block { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; }
+  .result-block-label { font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem; }
+  .result-block-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem; }
+  .result-block-sub { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+  .result-block.green .result-block-value { color: #4ade80; }
+  .result-block.green .result-block-label { color: rgba(74,222,128,0.6); }
+  .result-block.yellow .result-block-value { color: #fbbf24; }
+  .result-block.neutral .result-block-value { color: rgba(255,255,255,0.3); font-size: 1.1rem; font-weight: 500; font-style: italic; }
+
+  .verdict-block { border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; text-align: center; }
+  .verdict-block.green  { background: rgba(74,222,128,0.12);  border: 1.5px solid rgba(74,222,128,0.3); }
+  .verdict-block.yellow { background: rgba(251,191,36,0.12);  border: 1.5px solid rgba(251,191,36,0.3); }
+  .verdict-block.red    { background: rgba(248,113,113,0.1);  border: 1.5px solid rgba(248,113,113,0.25); }
+  .verdict-block.neutral{ background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); }
+  .verdict-icon  { font-size: 2rem; margin-bottom: 0.4rem; }
+  .verdict-label { font-size: 1.05rem; font-weight: 800; color: var(--white); line-height: 1.25; }
+  .verdict-sub   { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; }
+
+  .results-breakdown { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; line-height: 1.9; }
+  .results-breakdown span { color: rgba(255,255,255,0.65); font-weight: 600; }
+
+  .progress-bar-wrap { margin-bottom: 1.5rem; }
+  .progress-bar-label { font-size: 0.75rem; color: rgba(255,255,255,0.38); margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-light), #4ade80); border-radius: 2px; transition: width 0.4s ease; }
+
+  .cta-btn { display: block; width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 9px; padding: 0.95rem; font-size: 1rem; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
+  .cta-btn:hover { background: var(--brand-light); }
+  .cta-btn[disabled] { opacity: 0.5; pointer-events: none; }
+  .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.48); margin-top: 0.75rem; text-align: center; line-height: 1.4; }
+  .identity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .identity-grid .full { grid-column: 1 / -1; }
+  .identity-field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.35rem; }
+  .identity-field input { width: 100%; font-size: 0.95rem; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; color: var(--text); background: var(--neutral-bg); outline: none; }
+  .identity-field input:focus { border-color: var(--brand); background: var(--white); }
+  .identity-status { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-light); }
+  .identity-status.ready { color: #19713a; font-weight: 700; }
+  .booking-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(10,14,26,0.72); }
+  .booking-modal.open { display: flex; }
+  .booking-dialog { width: min(920px, 100%); max-height: 92vh; background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 80px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
+  .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+  .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .booking-body { position: relative; min-height: min(74vh, 720px); }
+  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; display: block; }
+  .booking-loading,
+  .booking-fallback {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: 2rem; text-align: center; background: var(--white); color: var(--text-muted);
+  }
+  .booking-loading.hidden, .booking-fallback.hidden { display: none; }
+  .booking-fallback-inner { max-width: 360px; }
+  .booking-fallback-title { font-weight: 800; color: var(--brand-dark); margin-bottom: 0.45rem; }
+  .booking-fallback-copy { font-size: 0.9rem; margin-bottom: 1rem; }
+  .booking-fallback-link {
+    display: inline-block; background: var(--brand); color: var(--white); border-radius: 8px;
+    padding: 0.75rem 1rem; font-weight: 700; text-decoration: none;
+  }
+
+  .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
+  .disclaimer a { color: var(--brand); }
+
+/* ============================================================ MOBILE (≤480px)
+   Added 2026-05-23 — full mobile optimization
+   ============================================================ */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  nav { padding: 0 1rem; height: 52px; }
+  .nav-logo { font-size: 0.88rem; }
+  .hero { padding: 2.5rem 1.25rem 2rem; }
+  .hero h1 { font-size: clamp(1.5rem, 6.5vw, 2rem); }
+  .hero-badge { font-size: 0.7rem; }
+  .hero-sub { font-size: 0.9rem; }
+  .main-wrap { padding: 1.5rem 1rem 3rem; gap: 1.5rem; }
+  .q-section { padding: 1.4rem; }
+  .q-title { font-size: 1rem; }
+  .chips { gap: 0.45rem; }
+  .chip { padding: 0.45rem 0.85rem; font-size: 0.82rem; }
+  .exp-input-row { flex-wrap: wrap; gap: 0.5rem; }
+  .exp-input-row label { min-width: unset; }
+  .exp-input-row input[type=number] { width: 100px; }
+  .identity-grid { grid-template-columns: 1fr; }
+  .results-card { padding: 1.5rem; }
+  .result-block { padding: 1.1rem; }
+  .result-block-value { font-size: 1.6rem; }
+}
+@media (max-width: 360px) {
+  .main-wrap { padding: 1rem 0.75rem 2.5rem; }
+  .chip { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '731853659590910');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://franchiseki.com">Franchise<span>KI</span> · AI Qualifier</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Free 60-Second Assessment</div>
+  <h1>See if <span>AI is a fit</span><br>for your business</h1>
+  <p class="hero-sub">Answer 8 questions. We'll tell you if your business is a fit for AI — and where it could help most. We only work with businesses where it makes sense. Takes under 60 seconds.</p>
+</div>
+
+<div class="main-wrap">
+  <div class="questions-col">
+
+    <div class="q-section" id="identity-section">
+      <div class="q-label">Contact Tracking</div>
+      <div class="q-title">Confirm where this qualification should be saved.</div>
+      <div class="q-sub">This keeps your score and application tied to the same CRM record.</div>
+      <div class="identity-grid">
+        <div class="identity-field">
+          <label for="lead-first">First name</label>
+          <input id="lead-first" name="firstName" type="text" autocomplete="given-name" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-last">Last name</label>
+          <input id="lead-last" name="lastName" type="text" autocomplete="family-name" required>
+        </div>
+        <div class="identity-field full">
+          <label for="lead-business">Business name</label>
+          <input id="lead-business" name="businessName" type="text" autocomplete="organization" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-email">Email</label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="identity-field">
+          <label for="lead-phone">Phone</label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+        </div>
+      </div>
+      <div class="identity-status" id="identity-status">Name, email, phone, and business are required to submit.</div>
+    </div>
+
+    <div class="section-divider">Revenue Potential — Do the Numbers Qualify?</div>
+
+    <!-- Q1: Monthly Leads -->
+    <div class="q-section">
+      <div class="q-label">Question 1 of 8</div>
+      <div class="q-title">How many new leads or inquiries does your business receive each month?</div>
+      <div class="q-sub">Include all channels — phone, web, referral, walk-in.</div>
+      <div class="slider-row">
+        <span class="slider-name">Monthly Leads</span>
+        <span class="slider-val needs-input" id="lbl-leads">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-leads" min="0" max="100" step="1" value="0" oninput="leadsUpdate()">
+      <div class="exp-scale">
+        <span>10</span><span>50</span><span>250</span><span>1,000</span><span>5,000</span>
+      </div>
+    </div>
+
+    <!-- Q2: Deal Value — text only -->
+    <div class="q-section">
+      <div class="q-label">Question 2 of 8</div>
+      <div class="q-title">What is your average contract or transaction value?</div>
+      <div class="q-sub">The typical dollar amount when you close a deal.</div>
+      <div class="exp-input-row">
+        <label for="inp-deal">Your avg deal:</label>
+        <input type="number" id="inp-deal" value="" placeholder="e.g. 5000" min="1" max="9999999" oninput="dealUpdate()">
+        <span class="exp-unit">$</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-name">Average Deal Value</span>
+        <span class="slider-val needs-input" id="lbl-deal">← type your number above</span>
+      </div>
+    </div>
+
+    <!-- Q3: Leads Per Sale -->
+    <div class="q-section">
+      <div class="q-label">Question 3 of 8</div>
+      <div class="q-title">How many leads do you typically need to close one sale?</div>
+      <div class="q-sub">If 10 leads come in and you close 2, the answer is 5. Be honest — this drives the math.</div>
+      <div class="slider-row">
+        <span class="slider-name">Leads Needed Per Sale</span>
+        <span class="slider-val needs-input" id="lbl-lps">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-lps" min="0" max="100" step="1" value="0" oninput="lpsUpdate()">
+      <div class="exp-scale">
+        <span>1</span><span>5</span><span>15</span><span>50</span><span>150</span><span>500</span>
+      </div>
+    </div>
+
+    <!-- Q4: Response Speed -->
+    <div class="q-section">
+      <div class="q-label">Question 4 of 8 — Biggest AI Lever</div>
+      <div class="q-title">How fast does your business typically respond to a new lead?</div>
+      <div class="q-sub">Speed-to-lead is the single largest driver of close rate improvement with AI. Be honest.</div>
+      <div class="chips" id="chips-speed">
+        <div class="chip" data-val="instant"      onclick="selectChip('speed','instant')">Under 5 minutes</div>
+        <div class="chip" data-val="30min"        onclick="selectChip('speed','30min')">Within 30 minutes</div>
+        <div class="chip" data-val="1to4hr"       onclick="selectChip('speed','1to4hr')">1–4 hours</div>
+        <div class="chip" data-val="sameday"      onclick="selectChip('speed','sameday')">Within 24 hours</div>
+        <div class="chip" data-val="nextday"      onclick="selectChip('speed','nextday')">Next day</div>
+        <div class="chip" data-val="inconsistent" onclick="selectChip('speed','inconsistent')">Inconsistent</div>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2rem;">Your Time & Team — Scope of the AI Opportunity</div>
+
+    <!-- Q5: Your hours/week on computer -->
+    <div class="q-section">
+      <div class="q-label">Question 5 of 8</div>
+      <div class="q-title">How many hours per week do you personally spend on the computer for your business?</div>
+      <div class="q-sub">Include email, CRM updates, follow-ups, scheduling, admin — everything screen-time related.</div>
+      <div class="slider-row">
+        <span class="slider-name">Your Hours per Week</span>
+        <span class="slider-val needs-input" id="lbl-hours">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-hours" min="0" max="42" step="1" value="0" oninput="hoursUpdate()">
+      <div class="exp-scale">
+        <span>1 hr</span><span>10</span><span>20</span><span>30</span><span>40+</span>
+      </div>
+    </div>
+
+    <!-- Q6: Team size + avg computer hours -->
+    <div class="q-section">
+      <div class="q-label">Question 6 of 8</div>
+      <div class="q-title">Tell us about your team's computer time.</div>
+      <div class="q-sub">This helps us calculate the total AI automation opportunity across your entire operation.</div>
+
+      <div class="dual-input-block">
+        <div class="dual-input-label">Number of Team Members (not counting you)</div>
+        <div class="exp-input-row" style="margin-bottom:0;">
+          <label for="inp-team">Team members:</label>
+          <input type="number" id="inp-team" value="" placeholder="e.g. 3" min="0" max="999" oninput="teamUpdate()">
+          <span class="exp-unit">people</span>
+        </div>
+      </div>
+
+      <div class="dual-input-block" style="margin-top:0.75rem;">
+        <div class="dual-input-label">Average Computer Hours per Week — per Team Member</div>
+        <div class="exp-input-row" style="margin-bottom:0;">
+          <label for="inp-teamhrs">Avg hrs/week each:</label>
+          <input type="number" id="inp-teamhrs" value="" placeholder="e.g. 10" min="1" max="80" oninput="teamHrsUpdate()">
+          <span class="exp-unit">hrs/wk</span>
+        </div>
+      </div>
+
+      <div class="slider-row" style="margin-top:1rem;">
+        <span class="slider-name">Total Team Screen Time</span>
+        <span class="slider-val needs-input" id="lbl-team">← fill in both fields above</span>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2rem;">Deployment — What Comes First?</div>
+
+    <!-- Q7: Blueprint Capability First -->
+    <div class="q-section">
+      <div class="q-label">Question 7 of 8</div>
+      <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
+      <div class="q-sub">This determines how much setup time is required on our end to get you results immediately.</div>
+      <div class="chips" id="chips-capability">
+        <div class="chip" data-val="speed-bot"    onclick="selectChip('capability','speed-bot')">AI Speed-to-Lead Bot</div>
+        <div class="chip" data-val="lead-filter"  onclick="selectChip('capability','lead-filter')">Lead Qualification Filter</div>
+        <div class="chip" data-val="follow-up"    onclick="selectChip('capability','follow-up')">Automated Follow-Up Sequences</div>
+        <div class="chip" data-val="crm-auto"     onclick="selectChip('capability','crm-auto')">CRM Automation</div>
+        <div class="chip" data-val="voice-ai"     onclick="selectChip('capability','voice-ai')">Voice AI / Outbound Calling</div>
+      </div>
+    </div>
+
+    <!-- Q8: Marketing Spend — SIMPLE SLIDER ($500–$50K) -->
+    <div class="q-section">
+      <div class="q-label">Question 8 of 8</div>
+      <div class="q-title">How much are you currently spending per month on marketing, including ad spend?</div>
+      <div class="q-sub">Include paid ads, agency fees, lead gen services — everything you spend to attract new business.</div>
+      <div class="slider-row">
+        <span class="slider-name">Monthly Ad Spend</span>
+        <span class="slider-val needs-input" id="lbl-spend">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-spend" min="0" max="100" step="1" value="0" oninput="spendUpdate()">
+      <div class="exp-scale">
+        <span>$500</span><span>$2K</span><span>$5K</span><span>$15K</span><span>$50K</span>
+      </div>
+    </div>
+
+  </div><!-- /questions-col -->
+
+  <!-- RESULTS PANEL -->
+  <div class="results-col">
+    <div class="results-card">
+      <div class="results-title">Live Qualification Score</div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label">
+          <span id="progress-label">0 of 8 answered</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+
+      <!-- Qualification Verdict -->
+      <div class="verdict-block neutral" id="verdict-block">
+        <div class="verdict-icon" id="verdict-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="verdict-label" id="verdict-label">Your qualification appears here</div>
+        <div class="verdict-sub" id="verdict-sub">Answer questions 1–4 to calculate</div>
+      </div>
+
+      <!-- Time Savings Block — shows when Q5 answered -->
+      <div class="result-block neutral" id="savings-block" style="display:none;">
+        <div class="result-block-label">Potential Weekly Time Savings</div>
+        <div class="result-block-value" id="savings-value">—</div>
+        <div class="result-block-sub" id="savings-sub">hrs/week freed from manual work</div>
+      </div>
+
+      <div class="results-breakdown" id="breakdown-text"></div>
+
+      <button class="cta-btn" id="cta-apply" type="button" disabled>Submit Qualification First</button>
+      <div class="cta-note" id="cta-note">Complete the contact fields and all 8 questions.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="booking-modal" id="booking-modal" aria-hidden="true">
+  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="booking-head">
+      <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
+      <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
+    </div>
+    <div class="booking-body">
+      <div class="booking-loading" id="booking-loading">Loading calendar...</div>
+      <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar" referrerpolicy="no-referrer" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+      <div class="booking-fallback hidden" id="booking-fallback">
+        <div class="booking-fallback-inner">
+          <div class="booking-fallback-title">Calendar still loading</div>
+          <div class="booking-fallback-copy">Open the secure booking page in a new tab if it does not load here.</div>
+          <a class="booking-fallback-link" id="booking-fallback-link" href="#" target="_blank" rel="noopener noreferrer">Open calendar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="disclaimer">
+  Close rate lift benchmarks from <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review speed-to-lead research</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management Institute</a>. These are industry averages — your results will vary. This tool qualifies fit; it does not guarantee outcomes.
+</p>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let leadsVal   = null;   // Q1
+let dealVal    = null;   // Q2
+let lpsVal     = null;   // Q3
+// chips.speed               Q4
+let hoursVal   = null;   // Q5 — your hours/week
+let teamVal    = null;   // Q6a — number of team members
+let teamHrsVal = null;   // Q6b — avg hrs/week per member
+// chips.capability          Q7
+let spendVal   = null;   // Q8 — ad spend
+
+const chips = { speed: null, capability: null };
+let lastQualificationBand = null;
+
+const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+// A/B toggle — set false to skip modal and route qualified leads to THANK_YOU_URL
+const BOOKING_MODAL_ENABLED = true;
+
+function logFunnelEvent(event, data) {
+  try {
+    const entry = { ts: Date.now(), event, ...data };
+    const key = 'advaitaFunnelEvents';
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.push(entry);
+    localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
+  } catch(e) {}
+}
+const STORAGE_KEY = 'advaitaLeadIdentity';
+const SESSION_KEY = 'advaitaLeadSessionId';
+const THANK_YOU_URL = 'thank-you-apply.html';
+
+function getParams() {
+  try { return new URLSearchParams(window.location.search); }
+  catch(e) { return new URLSearchParams(); }
+}
+
+function getLeadSessionId() {
+  try {
+    const existing = localStorage.getItem(SESSION_KEY);
+    if (existing) return existing;
+    const created = 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem(SESSION_KEY, created);
+    return created;
+  } catch(e) {
+    return 'advaita-' + Date.now().toString(36);
+  }
+}
+
+function readStoredIdentity() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {}; }
+  catch(e) { return {}; }
+}
+
+function splitName(fullName) {
+  const clean = String(fullName || '').replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/\s+/);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
+function titleCase(s) {
+  return String(s || '').toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+}
+
+// Parse a URL lead slug (e.g. "court-lundberg") into First/Last.
+// Splits on hyphens AND whitespace, title-cases each part. First token = first
+// name, remaining tokens = last name. Returns {first:'',last:''} when empty.
+function parseLeadSlug(slug) {
+  const clean = decodeURIComponent(String(slug || '')).replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/[-\s]+/).map(titleCase).filter(Boolean);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
+function getIdentity() {
+  return {
+    firstName: document.getElementById('lead-first').value.trim(),
+    lastName: document.getElementById('lead-last').value.trim(),
+    businessName: document.getElementById('lead-business').value.trim(),
+    email: document.getElementById('lead-email').value.trim(),
+    phone: document.getElementById('lead-phone').value.trim(),
+    contactId: getParams().get('contactId') || getParams().get('cid') || readStoredIdentity().contactId || '',
+    source: getParams().get('src') || getParams().get('utm_source') || readStoredIdentity().source || 'qualify',
+    blueprintSlug: getParams().get('src') || readStoredIdentity().blueprintSlug || '',
+    leadSessionId: getLeadSessionId()
+  };
+}
+
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function validPhone(phone) {
+  return phone.replace(/\D/g, '').length >= 10;
+}
+
+function isIdentityComplete() {
+  const id = getIdentity();
+  return !!(id.firstName && id.lastName && id.businessName && validEmail(id.email) && validPhone(id.phone));
+}
+
+function persistIdentity() {
+  const id = getIdentity();
+  const stored = Object.assign({}, readStoredIdentity(), id, { updatedAt: new Date().toISOString() });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch(e) {}
+  return stored;
+}
+
+function persistReturnedContactId(contactId) {
+  if (!contactId) return;
+  try {
+    const identity = Object.assign({}, readStoredIdentity(), { contactId, updatedAt: new Date().toISOString() });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(identity));
+  } catch(e) {}
+}
+
+function hydrateIdentity() {
+  // Bennett directive 2026-06-01: the qualifier must NEVER pre-fill any visible
+  // field. No name / business / email / phone from URL params or localStorage —
+  // every lead starts on a blank form and types their own answers. Hidden CRM
+  // attribution (contactId, source, blueprintSlug) is unaffected: getIdentity()
+  // reads those from URL params directly at submit time, not from the form fields.
+  getLeadSessionId();
+}
+
+// Q7 DYNAMIC PER-LEAD (Bennett directive 2026-05-29): render the lead's actual blueprint agents.
+// Reads ?agents=Name1,Name2,... from the blueprint CTA. Falls back to the generic 5 chips when absent.
+function hydrateAgents() {
+  const params = getParams();
+  const raw = params.get('agents');
+  if (!raw) return; // no per-lead agents passed → keep default generic 5 chips
+  const agents = raw.split(',').map(s => decodeURIComponent(s.replace(/\+/g,' ')).trim()).filter(Boolean);
+  if (!agents.length) return;
+  const box = document.getElementById('chips-capability');
+  if (!box) return;
+  box.innerHTML = agents.map(function(name){
+    const val = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const safe = name.replace(/"/g,'&quot;');
+    return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" onclick="selectChip(\'capability\',\''+val+'\')">'+safe+'</div>';
+  }).join('');
+}
+
+function updateIdentityStatus() {
+  const status = document.getElementById('identity-status');
+  if (!status) return;
+  if (isIdentityComplete()) {
+    status.textContent = 'Ready. This qualification will be saved against this contact.';
+    status.className = 'identity-status ready';
+  } else {
+    status.textContent = 'Name, email, phone, and business are required to submit.';
+    status.className = 'identity-status';
+  }
+}
+
+// ── Q1: MONTHLY LEADS — exponential 10–5,000 ─────────────────────────────────
+function posToLeads(pos) {
+  const raw = Math.round(10 * Math.pow(500, pos / 100));
+  if (raw < 20)   return Math.round(raw);
+  if (raw < 50)   return Math.round(raw / 5)  * 5;
+  if (raw < 200)  return Math.round(raw / 10) * 10;
+  if (raw < 500)  return Math.round(raw / 25) * 25;
+  if (raw < 1000) return Math.round(raw / 50) * 50;
+  if (raw < 2000) return Math.round(raw / 100) * 100;
+  return Math.round(raw / 250) * 250;
+}
+
+function leadsUpdate() {
+  const pos = +document.getElementById('sl-leads').value;
+  const sl  = document.getElementById('sl-leads');
+  const lbl = document.getElementById('lbl-leads');
+  if (pos === 0) {
+    leadsVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    leadsVal = posToLeads(pos);
+    lbl.textContent = fmtLeads(leadsVal) + ' leads/mo';
+    lbl.className   = 'slider-val';
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  update();
+}
+
+// ── Q2: DEAL VALUE — text only ────────────────────────────────────────────────
+function dealUpdate() {
+  const raw = parseFloat(document.getElementById('inp-deal').value);
+  const lbl = document.getElementById('lbl-deal');
+  if (!raw || raw <= 0) {
+    dealVal = null;
+    lbl.textContent = '← type your number above';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    dealVal = raw;
+    lbl.textContent = fmtMoney(raw);
+    lbl.className   = 'slider-val';
+  }
+  update();
+}
+
+// ── Q3: LEADS PER SALE — 1-15 exact, 16-500 log ──────────────────────────────
+function posToLPS(pos) {
+  if (pos <= 14) return pos + 1;
+  const t = (pos - 15) / 85;
+  const raw = Math.round(16 * Math.pow(500 / 16, t));
+  if (raw <= 30)  return raw;
+  if (raw <= 75)  return Math.round(raw / 5)  * 5;
+  if (raw <= 200) return Math.round(raw / 25) * 25;
+  return Math.round(raw / 50) * 50;
+}
+
+function lpsUpdate() {
+  const pos = +document.getElementById('sl-lps').value;
+  if (pos === 0) { lpsVal = null; }
+  else {
+    lpsVal = posToLPS(pos);
+    const impliedPct = Math.round(100 / lpsVal);
+    const lbl = document.getElementById('lbl-lps');
+    lbl.textContent = lpsVal + (lpsVal === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + impliedPct + '% close)';
+    lbl.className = 'slider-val';
+    const sl = document.getElementById('sl-lps');
+    sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  }
+  update();
+}
+
+// ── Q5: YOUR HOURS/WEEK — 1–40+ ──────────────────────────────────────────────
+function hoursUpdate() {
+  const h   = +document.getElementById('sl-hours').value;
+  const lbl = document.getElementById('lbl-hours');
+  const sl  = document.getElementById('sl-hours');
+  if (h === 0) {
+    hoursVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    hoursVal = h;
+    lbl.textContent = h >= 40 ? '40+ hrs/week' : h + (h === 1 ? ' hr/week' : ' hrs/week');
+    lbl.className   = 'slider-val';
+    const pct = h / 42 * 100;
+    sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+  }
+  update();
+}
+
+// ── Q6: TEAM SIZE + AVG HRS ───────────────────────────────────────────────────
+function teamUpdate() {
+  const raw = parseFloat(document.getElementById('inp-team').value);
+  teamVal = (!isNaN(raw) && raw >= 0) ? raw : null;
+  refreshTeamLabel();
+  update();
+}
+
+function teamHrsUpdate() {
+  const raw = parseFloat(document.getElementById('inp-teamhrs').value);
+  teamHrsVal = (raw && raw > 0) ? raw : null;
+  refreshTeamLabel();
+  update();
+}
+
+function refreshTeamLabel() {
+  const lbl = document.getElementById('lbl-team');
+  if (teamVal !== null && teamHrsVal !== null) {
+    const totalHrs = Math.round(teamVal * teamHrsVal);
+    lbl.textContent = teamVal + ' people · ' + teamHrsVal + ' hrs/wk each = ' + totalHrs + ' total hrs/wk';
+    lbl.className   = 'slider-val';
+  } else {
+    lbl.textContent = '← fill in both fields above';
+    lbl.className   = 'slider-val needs-input';
+  }
+}
+
+// ── Q8: AD SPEND — simple exponential $500–$50K ──────────────────────────────
+function posToSpend(pos) {
+  // pos 0 → $500, pos 100 → $50,000
+  const raw = Math.round(500 * Math.pow(100, pos / 100));
+  if (raw < 1000)  return Math.round(raw / 100)  * 100;
+  if (raw < 5000)  return Math.round(raw / 500)  * 500;
+  if (raw < 20000) return Math.round(raw / 1000) * 1000;
+  return Math.round(raw / 2500) * 2500;
+}
+
+function spendUpdate() {
+  const pos = +document.getElementById('sl-spend').value;
+  const sl  = document.getElementById('sl-spend');
+  const lbl = document.getElementById('lbl-spend');
+  if (pos === 0) {
+    spendVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    spendVal = posToSpend(pos);
+    lbl.textContent = fmtMoney(spendVal) + '/mo';
+    lbl.className   = 'slider-val';
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  update();
+}
+
+// ── CHIP SELECTION ───────────────────────────────────────────────────────────
+function selectChip(group, val) {
+  document.getElementById('chips-' + group).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('chips-' + group).querySelector('[data-val="' + val + '"]').classList.add('selected');
+  chips[group] = val;
+  update();
+}
+
+// ── FORMAT HELPERS ───────────────────────────────────────────────────────────
+function fmtMoney(n) {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
+
+// ── TIME SAVINGS — range formula (estimate ×0.5 low, ×1.3 high) ──────────────
+function calcTimeSavings(yourHrs, teamCount, teamHrs) {
+  // Total addressable hours = your hrs + (team count × avg hrs)
+  const teamTotal = (teamCount !== null && teamHrs !== null) ? teamCount * teamHrs : 0;
+  const totalHrs  = (yourHrs || 0) + teamTotal;
+  if (totalHrs === 0) return null;
+  const estimate = totalHrs * 0.4;       // AI saves ~40% of total screen time (20% more conservative — Bennett directive 2026-05-29)
+  const low  = Math.max(1, Math.round(estimate * 0.5));
+  const high = Math.round(estimate * 1.3);
+  return { low, high };
+}
+
+// ── MAIN CALCULATOR ──────────────────────────────────────────────────────────
+function update() {
+  const leadsOk       = leadsVal   !== null && leadsVal   > 0;
+  const dealEntered   = dealVal    !== null && dealVal    > 0;
+  const lpsEntered    = lpsVal     !== null;
+  const hoursEntered  = hoursVal   !== null;
+  const teamEntered   = teamVal    !== null && teamHrsVal !== null;
+  const spendEntered  = spendVal   !== null;
+
+  // Progress — 8 total
+  let answered = 0;
+  if (leadsOk)           answered++;
+  if (dealEntered)       answered++;
+  if (lpsEntered)        answered++;
+  if (chips.speed)       answered++;
+  if (hoursEntered)      answered++;
+  if (teamEntered)       answered++;
+  if (chips.capability)  answered++;
+  if (spendEntered)      answered++;
+  answered = Math.min(answered, 8);
+  const pct = Math.round(answered / 8 * 100);
+  document.getElementById('progress-label').textContent = answered + ' of 8 answered';
+  document.getElementById('progress-pct').textContent   = pct + '%';
+  document.getElementById('progress-fill').style.width  = pct + '%';
+
+  // ── FIT MATH (used for qualification gate only — no dollar or multiplier shown) ─────
+  const speedLift  = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
+  const canQualify = leadsOk && dealEntered && lpsEntered && chips.speed;
+
+  let qualifies10x = null;
+  if (canQualify) {
+    const curRate = 1 / lpsVal;
+    const newRate = Math.min(curRate + speedLift, 0.80);
+    const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
+    const q90     = moGain * 3;
+    qualifies10x  = q90 >= 50000 ? 'strong' : q90 >= 20000 ? 'possible' : 'no';
+  }
+
+  // ── VERDICT ───────────────────────────────────────────────────────────────
+  const vBlock  = document.getElementById('verdict-block');
+  const vIcon   = document.getElementById('verdict-icon');
+  const vLabel  = document.getElementById('verdict-label');
+  const vSub    = document.getElementById('verdict-sub');
+  const bdText  = document.getElementById('breakdown-text');
+  const cta     = document.getElementById('cta-apply');
+  const ctaNote = document.getElementById('cta-note');
+  const allDone = answered >= 8;
+  const identityDone = isIdentityComplete();
+  lastQualificationBand = qualifies10x;
+
+  if (canQualify) {
+    const ICON_CHECK = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12.5 11 15.5 16 9.5"/></svg>';
+    const ICON_INFO  = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg>';
+    const ICON_X     = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>';
+
+    if (qualifies10x === 'strong') {
+      vBlock.className   = 'verdict-block green';
+      vIcon.innerHTML    = ICON_CHECK;
+      vLabel.textContent = 'Strong Fit for AI';
+      vSub.textContent   = 'Your numbers point to a strong fit. Submit your qualification below to continue.';
+    } else if (qualifies10x === 'possible') {
+      vBlock.className   = 'verdict-block yellow';
+      vIcon.innerHTML    = ICON_INFO;
+      vLabel.textContent = 'Possible Fit — Worth a Conversation';
+      vSub.textContent   = 'There\'s real potential here. Let\'s verify the details together.';
+    } else {
+      vBlock.className   = 'verdict-block red';
+      vIcon.innerHTML    = ICON_X;
+      vLabel.textContent = 'May Not Be a Fit Yet';
+      vSub.textContent   = 'Your current lead volume or deal size may not be the right fit for AI yet.';
+    }
+
+    const liftPct  = Math.round(speedLift * 100);
+    const capChipEl = document.querySelector('#chips-capability .chip[data-val="' + chips.capability + '"]');
+    const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || (capChipEl && capChipEl.getAttribute('data-label')) || chips.capability || '—';
+    const spendStr = spendEntered ? fmtMoney(spendVal) + '/mo' : '—';
+    const teamStr  = teamEntered  ? teamVal + ' people · ' + teamHrsVal + ' hrs/wk' : '—';
+    const hrsStr   = hoursEntered ? (hoursVal >= 40 ? '40+' : hoursVal) + ' hrs/wk' : '—';
+    bdText.innerHTML =
+      '<span>Leads:</span> ' + fmtLeads(Math.round(leadsVal)) + '/mo &nbsp;·&nbsp; ' +
+      '<span>Leads/sale:</span> ' + lpsVal + ' &nbsp;·&nbsp; ' +
+      '<span>Deal:</span> ' + fmtMoney(dealVal) + '<br>' +
+      '<span>AI close lift:</span> +' + liftPct + '% &nbsp;·&nbsp; <span>Your hrs:</span> ' + hrsStr + '<br>' +
+      '<span>Team:</span> ' + teamStr + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + spendStr + '<br>' +
+      '<span>First deploy:</span> ' + capLabel;
+
+    cta.disabled = !(allDone && identityDone);
+    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
+    ctaNote.textContent = allDone && identityDone
+      ? (qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.')
+      : 'Complete the contact fields and all 8 questions.';
+  } else {
+    const ICON_NEUTRAL = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>';
+    vBlock.className        = 'verdict-block neutral';
+    vIcon.innerHTML         = ICON_NEUTRAL;
+    vLabel.textContent      = 'Your qualification appears here';
+    vSub.textContent        = 'Answer questions 1–4 to calculate';
+    bdText.innerHTML        = '';
+    cta.disabled            = true;
+    cta.textContent         = 'Submit Qualification First';
+    ctaNote.textContent     = 'Complete the contact fields and all 8 questions.';
+  }
+
+  // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
+  const savingsBlock = document.getElementById('savings-block');
+  if (hoursEntered || teamEntered) {
+    const s = calcTimeSavings(hoursVal, teamVal, teamHrsVal);
+    if (s) {
+      savingsBlock.style.display = '';
+      savingsBlock.className = 'result-block green';
+      document.getElementById('savings-value').textContent = s.low + '–' + s.high;
+      document.getElementById('savings-sub').textContent   = 'hrs/week freed from manual work (across you + team)';
+    }
+  } else {
+    savingsBlock.style.display = 'none';
+  }
+}
+
+function buildQualifierNote(payload) {
+  return [
+    'Advaita AI Qualifier — tracked application event',
+    '---',
+    'Business: ' + (payload.businessName || 'N/A'),
+    'Lead session: ' + payload.lead_session_id,
+    'Source: ' + payload.source,
+    'Blueprint slug: ' + (payload.blueprint_slug || 'N/A'),
+    'Qualification band: ' + payload.qualification_band,
+    'Score progress: ' + payload.questions_answered + '/8',
+    '---',
+    'Monthly leads: ' + payload.monthly_leads,
+    'Average deal: ' + payload.average_deal_value,
+    'Leads per sale: ' + payload.leads_per_sale,
+    'Response speed: ' + payload.response_speed,
+    'Owner computer hours/week: ' + payload.owner_hours_per_week,
+    'Team members: ' + payload.team_members,
+    'Team hours/member/week: ' + payload.team_hours_per_member,
+    'First deploy: ' + payload.first_deploy,
+    'Monthly ad spend: ' + payload.monthly_ad_spend,
+    'Submitted at: ' + payload.submitted_at
+  ].join('\n');
+}
+
+function currentAnswerCount() {
+  let answered = 0;
+  if (leadsVal !== null && leadsVal > 0) answered++;
+  if (dealVal !== null && dealVal > 0) answered++;
+  if (lpsVal !== null) answered++;
+  if (chips.speed) answered++;
+  if (hoursVal !== null) answered++;
+  if (teamVal !== null && teamHrsVal !== null) answered++;
+  if (chips.capability) answered++;
+  if (spendVal !== null) answered++;
+  return Math.min(answered, 8);
+}
+
+function buildQualifierPayload() {
+  const id = persistIdentity();
+  const band = lastQualificationBand || 'unknown';
+  const payload = {
+    event_name: 'blueprint_qualifier_submit',
+    form_version: '2026-05-27-identity-webhook-v1',
+    locationId: GHL_LOC,
+    firstName: id.firstName,
+    lastName: id.lastName,
+    email: id.email,
+    phone: id.phone,
+    businessName: id.businessName,
+    source: 'blueprint_ai_qualifier',
+    original_source: id.source,
+    blueprint_slug: id.blueprintSlug,
+    contact_id: id.contactId,
+    lead_session_id: id.leadSessionId,
+    qualification_band: band,
+    ai_qualified: band === 'strong' || band === 'possible',
+    monthly_leads: leadsVal || 0,
+    average_deal_value: dealVal || 0,
+    leads_per_sale: lpsVal || 0,
+    response_speed: chips.speed || '',
+    owner_hours_per_week: hoursVal || 0,
+    team_members: teamVal || 0,
+    team_hours_per_member: teamHrsVal || 0,
+    first_deploy: chips.capability || '',
+    monthly_ad_spend: spendVal || 0,
+    questions_answered: currentAnswerCount(),
+    tags: [
+      'advaita-ai-qualifier',
+      band === 'strong' ? 'advaita-qualified' : band === 'possible' ? 'advaita-review-needed' : 'advaita-not-fit',
+      'blueprint_ai_qualifier'
+    ],
+    submitted_at: new Date().toISOString()
+  };
+  payload.note = buildQualifierNote(payload);
+  return payload;
+}
+
+async function submitQualification() {
+  const payload = buildQualifierPayload();
+  try {
+    const response = await fetch(GHL_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+      const result = await response.json().catch(() => ({}));
+      const returnedContactId = result.contactId || result.contact_id || result.id || payload.contact_id || '';
+      persistReturnedContactId(returnedContactId);
+      if (returnedContactId) payload.contact_id = returnedContactId;
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+          content_name: 'FKI AI Qualifier',
+          content_category: payload.tags && payload.tags[1] ? payload.tags[1] : 'advaita-ai-qualifier'
+        });
+      }
+      return { saved: true, payload, contactId: returnedContactId, response: result };
+    } else {
+      try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+      return { saved: false, payload, contactId: payload.contact_id || '', error: 'crm_http_' + response.status };
+    }
+  } catch(e) {
+    try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+    return { saved: false, payload, contactId: payload.contact_id || '', error: e && e.message ? e.message : 'crm_network_error' };
+  }
+}
+
+function buildBookingUrl(contactId) {
+  const id = persistIdentity();
+  const url = new URL(BOOKING_URL, window.location.href);
+  const parts = {
+    contact_id: contactId || id.contactId,
+    source: 'blueprint_ai_qualifier',
+    lead_session_id: id.leadSessionId,
+    blueprint_slug: id.blueprintSlug
+  };
+  Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
+  return url.toString();
+}
+
+let bookingFallbackTimer = null;
+function openBookingModal(contactId) {
+  const url = buildBookingUrl(contactId);
+  logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!contactId });
+  const frame = document.getElementById('booking-frame');
+  const loading = document.getElementById('booking-loading');
+  const fallback = document.getElementById('booking-fallback');
+  const fallbackLink = document.getElementById('booking-fallback-link');
+  loading.classList.remove('hidden');
+  fallback.classList.add('hidden');
+  fallbackLink.href = url;
+  frame.onload = function() {
+    loading.classList.add('hidden');
+  };
+  frame.onerror = function() {
+    loading.classList.add('hidden');
+    fallback.classList.remove('hidden');
+  };
+  frame.src = url;
+  clearTimeout(bookingFallbackTimer);
+  bookingFallbackTimer = setTimeout(function() {
+    if (!document.getElementById('booking-modal').classList.contains('open')) return;
+    fallback.classList.remove('hidden');
+  }, 4500);
+  document.getElementById('booking-modal').classList.add('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
+}
+
+async function handleCtaClick() {
+  const cta = document.getElementById('cta-apply');
+  if (cta.disabled) return;
+  cta.disabled = true;
+  cta.textContent = 'Saving...';
+  const result = await submitQualification();
+  const ctaNote = document.getElementById('cta-note');
+  if (!result.saved) {
+    logFunnelEvent('crm_save_failed', { error: result.error || 'unknown' });
+    cta.textContent = 'Try Saving Again';
+    cta.disabled = false;
+    ctaNote.textContent = 'We could not confirm the CRM save yet. Please retry so the call is tied to the correct contact.';
+    return;
+  }
+  if (result.payload.ai_qualified) {
+    logFunnelEvent('qualified', { modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!result.contactId });
+    if (BOOKING_MODAL_ENABLED) {
+      cta.textContent = 'Book a Call with Bennett';
+      cta.disabled = false;
+      ctaNote.textContent = 'Saved in GHL. Calendar opening now.';
+      openBookingModal(result.contactId);
+    } else {
+      logFunnelEvent('qualified_no_modal_redirect', {});
+      window.location.href = THANK_YOU_URL;
+    }
+  } else {
+    logFunnelEvent('disqualified', { contact_id_present: !!result.contactId });
+    window.location.href = THANK_YOU_URL;
+  }
+}
+
+// Init
+hydrateIdentity();
+hydrateAgents();
+document.querySelectorAll('#identity-section input').forEach(el => {
+  el.addEventListener('input', function() {
+    persistIdentity();
+    updateIdentityStatus();
+    update();
+  });
+});
+document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+document.getElementById('booking-close').addEventListener('click', function() {
+  clearTimeout(bookingFallbackTimer);
+  document.getElementById('booking-frame').src = 'about:blank';
+  document.getElementById('booking-modal').classList.remove('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
+});
+document.getElementById('booking-modal').addEventListener('click', function(e) {
+  if (e.target === this) document.getElementById('booking-close').click();
+});
+updateIdentityStatus();
+update();
+</script>
+</body>
+</html>

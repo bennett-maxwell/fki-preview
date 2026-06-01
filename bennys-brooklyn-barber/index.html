@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benny's Barbershop — Prospect Heights Brooklyn's Premium Men's Grooming</title>
+<meta name="description" content="Benny's Barbershop in Prospect Heights, Brooklyn. Premium men's grooming, hot-towel shaves, beard sculpting, and membership. 809 Franklin Ave. Book a specific barber online.">
+<style>
+:root{--bg:#faf5ea;--ink:#0a0a0a;--ink2:#141414;--accent:#ff8442;--mute:#bababa;--white:#fff;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:16px/1.55 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;background:var(--accent);color:var(--ink);padding:13px 22px;border-radius:4px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:14px;border:2px solid var(--accent)}
+.btn.alt{background:transparent;color:var(--bg);border-color:var(--bg)}
+.btn:hover{filter:brightness(.95)}
+nav{position:sticky;top:0;background:var(--ink);color:var(--bg);z-index:50;padding:12px 0;border-bottom:1px solid #222}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.logo{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:1px}
+.logo i{color:var(--accent);font-style:normal}
+nav ul{display:flex;gap:18px;list-style:none;font-size:14px;flex-wrap:wrap}
+nav .call{font-weight:700;color:var(--accent)}
+.hero{background:var(--ink);color:var(--bg);padding:54px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:36px;align-items:center}
+.kicker{color:var(--accent);font-size:13px;letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-bottom:14px}
+h1{font-family:Georgia,serif;font-size:46px;line-height:1.08;margin-bottom:16px}
+.hero p.lead{font-size:18px;color:#e9e2cf;margin-bottom:22px;max-width:520px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.trust{font-size:13px;color:var(--mute)}
+.trust b{color:var(--accent)}
+.book-card{background:var(--bg);color:var(--ink);padding:22px;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.book-card h3{font-family:Georgia,serif;font-size:22px;margin-bottom:14px}
+.book-card label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px}
+.book-card select,.book-card input{width:100%;padding:10px;border:1px solid #d6cfba;border-radius:4px;background:#fff;font:inherit}
+.book-card button{width:100%;margin-top:14px;background:var(--accent);color:var(--ink);border:none;padding:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:4px;cursor:pointer}
+section{padding:62px 0}
+section h2{font-family:Georgia,serif;font-size:34px;margin-bottom:8px;text-align:center}
+section .sub{text-align:center;color:#5a5448;margin-bottom:32px;max-width:640px;margin-left:auto;margin-right:auto}
+.barbers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.barber{background:#fff;border-radius:6px;padding:18px;text-align:center;border:1px solid #ecdfc7}
+.avatar{width:84px;height:84px;border-radius:50%;background:var(--ink) linear-gradient(135deg,#1a1a1a,#0a0a0a);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:var(--accent);font:700 28px Georgia,serif}
+.barber h4{font-family:Georgia,serif;font-size:18px;margin-bottom:4px}
+.barber .spec{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.barber p{font-size:13px;color:#5a5448}
+.menu{background:#fff;border-radius:6px;padding:30px;border:1px solid #ecdfc7}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 36px}
+.menu-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px dotted #d6cfba}
+.menu-row b{font-family:Georgia,serif;font-size:17px}
+.menu-row .price{color:var(--accent);font-weight:700;font-size:17px}
+.menu-row span.small{display:block;font-size:12px;color:#7a7466;font-weight:400}
+.member{background:var(--ink);color:var(--bg);border-radius:6px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.member h3{font-family:Georgia,serif;font-size:30px;color:var(--accent);margin-bottom:10px}
+.member ul{list-style:none;margin:14px 0}
+.member li{padding:6px 0;font-size:15px}
+.member li::before{content:"✓ ";color:var(--accent);font-weight:700}
+.member .price-tag{font-size:48px;font-family:Georgia,serif;color:var(--accent)}
+.member .price-tag small{font-size:14px;color:var(--bg);display:block;text-transform:uppercase;letter-spacing:2px}
+.ig{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.ig div{aspect-ratio:1/1;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#ff8442 100%);position:relative;overflow:hidden;border-radius:3px}
+.ig div::after{content:"@bennysbrooklynbarber";position:absolute;bottom:6px;left:8px;font-size:10px;color:rgba(250,245,234,.55);letter-spacing:.5px}
+.ig div:nth-child(2){background:linear-gradient(135deg,#141414,#3a2418)}
+.ig div:nth-child(3){background:linear-gradient(135deg,#0a0a0a,#5a3018)}
+.ig div:nth-child(4){background:linear-gradient(135deg,#141414,#0a0a0a)}
+.ig div:nth-child(5){background:linear-gradient(135deg,#3a2418,#ff8442)}
+.ig div:nth-child(6){background:linear-gradient(135deg,#1a1a1a,#2a1810)}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:#fff;padding:24px;border-radius:6px;border:1px solid #ecdfc7}
+.stars{color:var(--accent);font-size:18px;margin-bottom:10px}
+.review p{font-style:italic;margin-bottom:12px;color:#3a3528}
+.review cite{font-style:normal;font-weight:700;font-size:14px}
+.review cite small{display:block;color:#7a7466;font-weight:400;font-size:12px}
+.rev-head{text-align:center;margin-bottom:24px}
+.rev-head .big{font-size:54px;color:var(--accent);font-family:Georgia,serif;line-height:1}
+.rev-head .stars{font-size:22px}
+details{background:#fff;border:1px solid #ecdfc7;border-radius:6px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;font-family:Georgia,serif;font-size:17px}
+details[open] summary{color:var(--accent);margin-bottom:10px}
+details p{color:#3a3528;font-size:15px}
+footer{background:var(--ink);color:var(--bg);padding:40px 0 30px;font-size:14px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:24px}
+footer h5{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+footer p,footer li{color:#d6cfba;line-height:1.7}
+footer ul{list-style:none}
+.copy{border-top:1px solid #222;padding-top:18px;text-align:center;color:#7a7466;font-size:12px}
+.dark-section{background:#fff5e1}
+@media(max-width:820px){
+ h1{font-size:32px}.hero-grid,.member,.foot-grid{grid-template-columns:1fr}
+ .barbers{grid-template-columns:repeat(2,1fr)}
+ .menu-grid{grid-template-columns:1fr}.reviews{grid-template-columns:1fr}
+ .ig{grid-template-columns:repeat(3,1fr)}
+ nav ul{display:none}
+}
+</style>
+<script src="/fki-preview/assets/analytics.js" defer></script></head>
+<body>
+
+<nav>
+ <div class="wrap">
+  <a href="#" class="logo">BENNY'<i>S</i> BARBERSHOP</a>
+  <ul>
+   <li><a href="#barbers">Barbers</a></li>
+   <li><a href="#services">Services</a></li>
+   <li><a href="#membership">Membership</a></li>
+   <li><a href="#reviews">Reviews</a></li>
+   <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a class="call" href="tel:+17186371200">📞 (718) 637-1200</a>
+ </div>
+</nav>
+
+<header class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <div class="kicker">Prospect Heights · Brooklyn</div>
+   <h1>Elevated Men's Grooming in Prospect Heights</h1>
+   <p class="lead">Timeless cuts, hot-towel shaves, and beard sculpting from Brooklyn's most-requested barbers. Walk in confident. Walk out sharper.</p>
+   <div class="hero-cta">
+    <a class="btn" href="#book">Book a Barber</a>
+    <a class="btn alt" href="tel:+17186371200">Call (718) 637-1200</a>
+   </div>
+   <div class="trust">★★★★★ <b>4.9</b> · 480+ Google reviews · Open 7 days · 809 Franklin Ave</div>
+  </div>
+  <div class="book-card" id="book">
+   <h3>Book your barber</h3>
+   <label>Barber</label>
+   <select><option>Any available barber</option><option>Benny — Master Barber</option><option>Marco — Classic Cuts</option><option>Diego — Skin Fades</option><option>Jamal — Beard Sculpt</option></select>
+   <label>Service</label>
+   <select><option>Classic Haircut — $45</option><option>Skin Fade — $55</option><option>Beard Sculpt — $35</option><option>Hot Towel Shave — $50</option><option>The Works — $95</option></select>
+   <label>When</label>
+   <input type="datetime-local">
+   <button type="button">Reserve My Chair</button>
+  </div>
+ </div>
+</header>
+
+<section id="barbers">
+ <div class="wrap">
+  <h2>Meet Our Expert Barbers</h2>
+  <p class="sub">Pick your barber. Each one is trained in classic and modern technique — with a specialty of their own.</p>
+  <div class="barbers">
+   <div class="barber"><div class="avatar">B</div><h4>Benny</h4><div class="spec">Founder · Master</div><p>15 yrs · Italian-trained scissor-over-comb specialist.</p></div>
+   <div class="barber"><div class="avatar">M</div><h4>Marco</h4><div class="spec">Classic Cuts</div><p>Razor-line precision. Old-school finish. Wedding-day favorite.</p></div>
+   <div class="barber"><div class="avatar">D</div><h4>Diego</h4><div class="spec">Skin Fades</div><p>Bald fades, tapers, and modern textures. Booked solid on Saturdays.</p></div>
+   <div class="barber"><div class="avatar">J</div><h4>Jamal</h4><div class="spec">Beard Sculpt</div><p>Hot-towel shaves and beard architecture. Black-owned grooming heritage.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="services" class="dark-section">
+ <div class="wrap">
+  <h2>Services &amp; Pricing</h2>
+  <p class="sub">Clear pricing. No upsell surprises at the chair.</p>
+  <div class="menu">
+   <div class="menu-grid">
+    <div class="menu-row"><div><b>Classic Haircut</b><span class="small">Wash, cut, style — 45 min</span></div><div class="price">$45</div></div>
+    <div class="menu-row"><div><b>Skin Fade</b><span class="small">Bald or taper fade — 50 min</span></div><div class="price">$55</div></div>
+    <div class="menu-row"><div><b>Beard Sculpt</b><span class="small">Trim, line-up, oil — 25 min</span></div><div class="price">$35</div></div>
+    <div class="menu-row"><div><b>Hot Towel Shave</b><span class="small">Straight razor + steam — 40 min</span></div><div class="price">$50</div></div>
+    <div class="menu-row"><div><b>The Works</b><span class="small">Cut + shave + beard + brow — 90 min</span></div><div class="price">$95</div></div>
+    <div class="menu-row"><div><b>Father &amp; Son</b><span class="small">Two haircuts, side by side</span></div><div class="price">$75</div></div>
+    <div class="menu-row"><div><b>Gray Blending</b><span class="small">Subtle color, 20 min</span></div><div class="price">$40</div></div>
+    <div class="menu-row"><div><b>Kids Cut (12 &amp; under)</b><span class="small">Patient hands, lollipop on us</span></div><div class="price">$30</div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="membership">
+ <div class="wrap">
+  <div class="member">
+   <div>
+    <h3>The Benny's Club</h3>
+    <p>Two cuts a month + 10% off shaves and product. Cancel anytime. The way Brooklyn's sharpest men stay sharp.</p>
+    <ul>
+     <li>2 haircuts every month with any barber</li>
+     <li>10% off shaves, beard work, and retail</li>
+     <li>Priority booking — Saturdays included</li>
+     <li>Complimentary drink at every visit</li>
+    </ul>
+    <a class="btn" href="#book">Join the Club</a>
+   </div>
+   <div style="text-align:center">
+    <div class="price-tag">$79<small>per month</small></div>
+    <p style="font-size:13px;color:#bababa;margin-top:10px">Save ~$40 vs walk-in pricing</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="dark-section">
+ <div class="wrap">
+  <h2>Our Shop in Images</h2>
+  <p class="sub">Follow <b>@bennysbrooklynbarber</b> for the latest fades, fits, and fades.</p>
+  <div class="ig">
+   <div></div><div></div><div></div><div></div><div></div><div></div>
+  </div>
+ </div>
+</section>
+
+<section id="reviews">
+ <div class="wrap">
+  <div class="rev-head">
+   <div class="big">4.9</div>
+   <div class="stars">★★★★★</div>
+   <div>Based on <b>480+</b> Google reviews</div>
+  </div>
+  <h2>What Brooklyn Says</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="reviews">
+   <div class="review"><div class="stars">★★★★★</div><p>"Best fade in Brooklyn — full stop. Diego knows exactly what to do without me explaining. Worth every cent."</p><cite>Andre J.<small>Crown Heights</small></cite></div>
+   <div class="review"><div class="stars">★★★★★</div><p>"Hot towel shave from Jamal is the move. Felt like I left a spa, not a barbershop. The membership pays for itself."</p><cite>Michael T.<small>Park Slope</small></cite></div>
+   <div class="review"><div class="stars">★★★★★</div><p>"Took my 8-year-old for his first real haircut. Marco was patient, kind, and the cut was perfect. We're regulars now."</p><cite>David K.<small>Prospect Heights</small></cite></div>
+  </div>
+ </div>
+</section>
+
+<section class="dark-section" id="faq">
+ <div class="wrap" style="max-width:780px">
+  <h2>Frequently Asked</h2>
+  <p class="sub">&nbsp;</p>
+  <details><summary>Do I need an appointment, or can I walk in?</summary><p>Walk-ins are welcome but Saturdays book solid. We recommend reserving a chair through the booking widget above to lock in your barber.</p></details>
+  <details><summary>Can I request a specific barber?</summary><p>Always. Each of our four barbers has a specialty — Benny for classic scissor work, Diego for skin fades, Jamal for shaves and beard sculpting, Marco for razor-line classics.</p></details>
+  <details><summary>How does the Benny's Club membership work?</summary><p>$79/month gets you two haircuts with any barber, 10% off shaves and retail, priority booking, and a complimentary drink. No contract — cancel anytime.</p></details>
+  <details><summary>What's your cancellation policy?</summary><p>Cancel or reschedule up to 4 hours before your appointment with no charge. Within 4 hours, we charge 50% of the service fee.</p></details>
+  <details><summary>Do you do hot-towel straight-razor shaves?</summary><p>Yes — Jamal is our specialist. Steam, hot towel, traditional straight razor, beard oil finish. 40 minutes. $50.</p></details>
+ </div>
+</section>
+
+<footer id="visit">
+ <div class="wrap">
+  <div class="foot-grid">
+   <div>
+    <h5>Benny's Barbershop</h5>
+    <p>Brooklyn's premium men's grooming destination in the heart of Prospect Heights. Classic technique. Modern fades. Honest pricing.</p>
+    <p style="margin-top:10px">📞 <a href="tel:+17186371200" style="color:var(--accent);font-weight:700">(718) 637-1200</a></p>
+    <p>✉️ <a href="mailto:hello@bennysbrooklynbarber.com" style="color:#d6cfba">hello@bennysbrooklynbarber.com</a></p>
+   </div>
+   <div>
+    <h5>Visit Us</h5>
+    <p>809 Franklin Ave<br>Brooklyn, NY 11216<br>(Prospect Heights)</p>
+    <p style="margin-top:10px"><a href="https://maps.google.com/?q=809+Franklin+Ave+Brooklyn+NY+11216" style="color:var(--accent)">Get Directions →</a></p>
+   </div>
+   <div>
+    <h5>Hours</h5>
+    <ul>
+     <li>Mon–Fri · 10am – 8pm</li>
+     <li>Saturday · 9am – 8pm</li>
+     <li>Sunday · 10am – 6pm</li>
+    </ul>
+   </div>
+  </div>
+  <div class="copy">© Benny's Barbershop · Prospect Heights, Brooklyn · Licensed NY barbershop</div>
+ </div>
+</footer>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {
+   "@type":"HairSalon",
+   "@id":"https://bennysbrooklynbarber.com/#shop",
+   "name":"Benny's Barbershop",
+   "image":"https://bennysbrooklynbarber.com/og.jpg",
+   "url":"https://bennysbrooklynbarber.com/",
+   "telephone":"+1-718-637-1200",
+   "email":"hello@bennysbrooklynbarber.com",
+   "priceRange":"$$",
+   "address":{"@type":"PostalAddress","streetAddress":"809 Franklin Ave","addressLocality":"Brooklyn","addressRegion":"NY","postalCode":"11216","addressCountry":"US"},
+   "geo":{"@type":"GeoCoordinates","latitude":40.6740,"longitude":-73.9560},
+   "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"20:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"20:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"18:00"}
+   ],
+   "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"480"},
+   "employee":[
+    {"@type":"Person","name":"Benny","jobTitle":"Master Barber & Founder","knowsAbout":"Classic scissor-over-comb"},
+    {"@type":"Person","name":"Marco","jobTitle":"Senior Barber","knowsAbout":"Razor-line classics"},
+    {"@type":"Person","name":"Diego","jobTitle":"Senior Barber","knowsAbout":"Skin fades and tapers"},
+    {"@type":"Person","name":"Jamal","jobTitle":"Senior Barber","knowsAbout":"Hot-towel shaves, beard sculpt"}
+   ],
+   "hasOfferCatalog":{
+    "@type":"OfferCatalog","name":"Services",
+    "itemListElement":[
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Classic Haircut"},"price":"45","priceCurrency":"USD"},
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Skin Fade"},"price":"55","priceCurrency":"USD"},
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Beard Sculpt"},"price":"35","priceCurrency":"USD"},
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Hot Towel Shave"},"price":"50","priceCurrency":"USD"},
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"The Works"},"price":"95","priceCurrency":"USD"}
+    ]
+   }
+  },
+  {"@type":"Review","itemReviewed":{"@id":"https://bennysbrooklynbarber.com/#shop"},"author":{"@type":"Person","name":"Andre J."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Best fade in Brooklyn — full stop."},
+  {"@type":"Review","itemReviewed":{"@id":"https://bennysbrooklynbarber.com/#shop"},"author":{"@type":"Person","name":"Michael T."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Hot towel shave from Jamal is the move."},
+  {"@type":"Review","itemReviewed":{"@id":"https://bennysbrooklynbarber.com/#shop"},"author":{"@type":"Person","name":"David K."},"reviewRating":{"@type":"Rating","ratingValue":"5"},"reviewBody":"Took my 8-year-old for his first real haircut. Marco was patient."},
+  {
+   "@type":"FAQPage",
+   "mainEntity":[
+    {"@type":"Question","name":"Do I need an appointment, or can I walk in?","acceptedAnswer":{"@type":"Answer","text":"Walk-ins are welcome but Saturdays book solid. Reserve a chair to lock your barber."}},
+    {"@type":"Question","name":"Can I request a specific barber?","acceptedAnswer":{"@type":"Answer","text":"Always. Each of our four barbers has a specialty — Benny for classic scissor, Diego for fades, Jamal for shaves, Marco for razor-line classics."}},
+    {"@type":"Question","name":"How does the Benny's Club membership work?","acceptedAnswer":{"@type":"Answer","text":"$79/month gets two haircuts, 10% off shaves and retail, priority booking. No contract."}},
+    {"@type":"Question","name":"What's your cancellation policy?","acceptedAnswer":{"@type":"Answer","text":"Cancel up to 4 hours before with no charge. Within 4 hours, 50% fee."}},
+    {"@type":"Question","name":"Do you do hot-towel straight-razor shaves?","acceptedAnswer":{"@type":"Answer","text":"Yes. Jamal specializes. 40 minutes. $50."}}
+   ]
+  }
+ ]
+}
+</script>
+</body>
+</html>

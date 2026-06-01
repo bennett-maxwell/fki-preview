@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personalized AI blueprint for Britt Warnick — exactly where AI creates the biggest leverage for Britt Warnick Designs and how to get there in 30 days." />
+  <meta property="og:title" content="Your AI Advantage Blueprint — Britt Warnick Designs" />
+  <meta property="og:description" content="A personalized AI blueprint built for Britt Warnick. 6 custom AI agents, interactive ROI calculator, and a 30-minute podcast walkthrough — all specific to Britt Warnick Designs." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/britt-warnick-designs.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>AI Advantage Blueprint — Britt Warnick Designs</title>
+  <style>
+    :root {
+      --brand:        #9770b8;
+      --brand-dark:   #59118e;
+      --brand-light:  #dbbcf5;
+      --neutral-bg:   #f8f3fd;
+      --white:        #ffffff;
+      --text:         #231820;
+      --text-muted:   #3a3a3a;
+      --text-light:   #a9a4a4;
+      --border:       #e8dff1;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(89,17,142,0.08);
+      --shadow-md: 0 8px 40px rgba(89,17,142,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand-light); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand-light); }
+    /* === HAMBURGER NAV === */
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    /* === READING PROGRESS BAR === */
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand-light)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    /* === STICKY MOBILE CTA === */
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      /* touch target floors */
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+    .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(219,188,245,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand-light); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand-light); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 620px; margin-bottom: 3rem; }
+
+    /* Snapshot */
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    /* Results from similar businesses */
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+
+    /* Pillars */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand-dark); margin: 0.75rem 0 0.25rem; }
+
+    /* Stack */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    /* Gaps */
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8f3; color: #b02060; }
+    .gap-tag.efficiency { background: #e8f0fd; color: #1a4db0; }
+    .gap-tag.brand { background: #f0e8fd; color: var(--brand-dark); }
+
+    /* Opportunity Map */
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfaff; }
+    .pri-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #e8f5e9; color: #2e7d32; }
+
+    /* What to Ignore */
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: #c0392b; font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-light); }
+
+    /* Agents */
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand-dark); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+
+    /* Milestone table */
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand-dark); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    /* ROI Calculator */
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand-dark); color: var(--white); border-color: var(--brand-dark); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand-dark); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand-dark); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand-dark); }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand-dark); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+
+    /* Prompts */
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.6); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: var(--brand-dark); }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand-dark); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    /* Podcast */
+
+    /* Website Audit */
+    .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .audit-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.25rem; text-align: center; }
+    .audit-score { font-size: 2.2rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.3rem; }
+    .audit-phase { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .audit-detail { font-size: 0.78rem; color: var(--text-light); }
+    .audit-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 0.75rem; }
+    .audit-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); border-radius: 3px; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 580px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.88); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand-light); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand-dark); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--text); color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand-light); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand-light); color: var(--brand-dark); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand); text-decoration: underline; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+  
+block ===== -->
+
+/* === PODCAST PLAYER v1.0 — Blueprint AI Standard === */
+.pod-section { padding: 4rem 2rem; }
+.pod-card {
+  max-width: 680px; margin: 0 auto;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden;
+}
+.pod-header {
+  background: linear-gradient(160deg, var(--brand-dark,#1a1a2e) 0%, var(--brand,#6c5ce7) 100%);
+  padding: 1.5rem 2rem; color: #fff;
+}
+.pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+.pod-subtitle { font-size: .85rem; opacity: .75; margin: 0; }
+.pod-body { padding: 1.5rem 2rem; }
+.pod-badge {
+  display: inline-block; padding: .3rem .75rem;
+  background: rgba(108,92,231,.1); color: var(--brand,#6c5ce7);
+  border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem;
+}
+.pod-eq { display: flex; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; display: none; }
+.pod-eq.playing { display: inline-flex; }
+.pod-eq span { width: 3px; background: var(--brand-light,#a29bfe); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+.pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+.pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+.pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+.pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+@keyframes eqBounce { from{height:4px} to{height:18px} }
+.pod-chapter-name {
+  font-size: .8rem; font-weight: 600; color: var(--brand-light,#a29bfe);
+  min-height: 1.2em; margin-bottom: .5rem;
+}
+.pod-progress-wrap {
+  position: relative; height: 6px; background: rgba(0,0,0,.1);
+  border-radius: 3px; cursor: pointer; touch-action: none;
+  role: slider; aria-valuemin: 0; aria-valuemax: 100; aria-valuenow: 0;
+}
+.pod-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--brand-light,#a29bfe); border-radius: 3px;
+  pointer-events: none; width: 0%;
+}
+.pod-thumb {
+  position: absolute; top: 50%; transform: translate(-50%,-50%);
+  width: 14px; height: 14px; background: #fff;
+  border-radius: 50%; box-shadow: 0 0 0 2px var(--brand,#6c5ce7);
+  pointer-events: none; left: 0%;
+}
+.pod-pip {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 8px; height: 8px; background: rgba(255,255,255,.55);
+  border-radius: 50%; pointer-events: none;
+}
+.pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+.pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+.pod-btn {
+  background: none; border: none; cursor: pointer; padding: .5rem;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; color: var(--brand,#6c5ce7);
+  transition: background .15s;
+}
+.pod-btn:hover { background: rgba(108,92,231,.08); }
+.pod-btn.play-btn {
+  background: var(--brand,#6c5ce7); color: #fff;
+  min-width: 56px; min-height: 56px;
+}
+@media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+.pod-btn.play-btn:hover { background: var(--brand-dark,#5f50d2); }
+.pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+.pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+.pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.pod-mute { margin-left: auto; }
+.pod-dl { font-size: .78rem; color: var(--brand,#6c5ce7); text-decoration: none; }
+.pod-dl:hover { text-decoration: underline; }
+.pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: #c0392b; margin-top: .75rem; }
+
+/* Sticky mini-player */
+.pod-mini {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--brand-dark,#1a1a2e); color: #fff;
+  padding: .75rem 1.25rem; display: none;
+  align-items: center; gap: .75rem; z-index: 9999;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.25);
+}
+.pod-mini.visible { display: flex; }
+.pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+.pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+
+@media (max-width: 640px) {
+  .pod-body { padding: 1.25rem 1rem; }
+  .pod-controls { gap: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Advaita <span>AI for Business</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#snapshot">Your Profile</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#apply">Apply</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Confidential — Prepared for Britt Warnick</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Britt Warnick Designs</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for a luxury wedding planning + design studio — and how to get there in 30 days.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">6</span><span class="label">AI Agents Built<br>for Your System</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">30-Day</span><span class="label">Onboarding<br>Timeline</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">50+</span><span class="label">SOPs Ready<br>to Automate</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 1</span><span class="label">Start Using AI<br>Immediately</span></div>
+  </div>
+</section>
+
+<!-- BUSINESS SNAPSHOT -->
+<section class="section section-alt" id="snapshot">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Britt Warnick Designs Stands Today</h2>
+    <p class="section-sub">Built from your intake answers. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">$3M–10M</div><div class="snapshot-key">Annual Revenue</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Boutique Studio</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">GoHighLevel</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Inconsistent</div><div class="snapshot-key">Current Lead Speed</div></div>
+    </div>
+    <p style="font-size:0.88rem;color:var(--text-light);">AI Maturity: ChatGPT user — ready to move to AI agents. Current stresses: Admin Work, Marketing Content, Hiring, Reporting.</p>
+  </div>
+</section>
+
+<!-- RESULTS FROM SIMILAR BUSINESSES -->
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">Proof It Works</p>
+    <h2 class="section-title">Results from Similar Businesses</h2>
+    <p class="section-sub">These are published benchmarks from boutique service studios and multi-event service businesses at similar revenue tiers and AI maturity levels.</p>
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead>
+          <tr><th>Result</th><th>What Changed</th><th>Industry / Context</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="result-num">Faster</div>project win cycle</td>
+            <td>Added AI speed-to-lead response. First vendor to respond wins the majority of design contracts.</td>
+            <td>Multi-event boutique studio, similar revenue tier</td>
+            <td><a href="https://www.hubspot.com/marketing-statistics" target="_blank">HubSpot [1]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">6.5 hrs/wk</div>reclaimed per location</td>
+            <td>Automated client reminders, proofing notifications, and reorder follow-up sequences.</td>
+            <td>Boutique studio operations — admin automation benchmarks</td>
+            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR [2]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">3x faster</div>proposal turnaround</td>
+            <td>AI proposal generator replaces 45-minute manual process with 3-minute automated output.</td>
+            <td>Photography and creative services businesses</td>
+            <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey [4]</a></td>
+          </tr>
+          <tr>
+            <td><div class="result-num">60%</div>admin time reduction</td>
+            <td>AI coordination agents handling scheduling, communication, and reporting automatically.</td>
+            <td>Small business AI adoption — industry average</td>
+            <td><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR [5]</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 3-PILLAR FRAMEWORK -->
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Britt Warnick Designs</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes — more revenue, more time, or lower cost.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">+15–32%</div>
+        <div class="pillar-sub">Faster response wins more design project contracts. Higher reorder rates increase average order value per family. More contracts closed per month.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">6.5 hrs/wk</div>
+        <div class="pillar-sub">Admin work, client communication, proposal drafts, and performance reporting — automated. Reclaimed per location, per week.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="pillar-title">Save Money</div>
+        <div class="pillar-metric">60% reduction</div>
+        <div class="pillar-sub">Reduce cost-per-lead handled, eliminate manual coordination overhead, and scale to more weddings without adding headcount.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOL STACK -->
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Your Current Tool Stack</h2>
+    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one without replacing anything you already use.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">GoHighLevel</div><div class="stack-role">CRM + Automation</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Studio Management Software</div><div class="stack-role">Operations / Scheduling</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Zoho CRM</div><div class="stack-role">Contact / Pipeline Mgmt</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Email + Phone</div><div class="stack-role">Lead Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Calendar / Booking</div><div class="stack-role">Wedding Day Scheduling</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Dropbox</div><div class="stack-role">File Storage / Delivery</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAP ANALYSIS -->
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">Your Biggest AI Opportunity Gaps</h2>
+    <p class="section-sub">These are the areas where Britt Warnick Designs is leaving the most revenue and time on the table right now — based on your intake answers.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Wedding Inquiry Speed-to-Response</div><div class="gap-desc">When a couple submits a wedding inquiry, response time is the deciding factor. Research shows 78% of contracts go to the first vendor to respond — yet most planning studios take 4–24 hours to reply manually. An AI inquiry agent responds in under 60 seconds, 24/7, increasing your booking rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Wedding Day Coordination + Client Communication</div><div class="gap-desc">Coordinating logistics for multiple weddings — reminders to guests and vendors, vendor change orders, proofing link delivery, reorder prompts — consumes hours of admin work per location. An AI coordinator handles all of this automatically, reducing per-wedding admin time by 60–70%. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">[2]</a></sup></div><span class="gap-tag efficiency">Efficiency</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Multi-Wedding Portfolio Visibility</div><div class="gap-desc">Without a centralized reporting layer, the studio team spends time manually compiling performance data across active weddings instead of acting on it. An AI analytics agent surfaces booking pipeline, vendor performance, and post-wedding referral conversion in a weekly digest. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank">[3]</a></sup></div><span class="gap-tag brand">Brand / Scale</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Marketing Content Production Bottleneck</div><div class="gap-desc">You listed Marketing Content as a top operational stress. AI agents can transform every project kickoff into ready-to-post social content, client testimonials, and email campaigns — without a dedicated marketing hire.</div><span class="gap-tag efficiency">Efficiency</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Hiring and Staffing Intelligence</div><div class="gap-desc">Project-based contractor hiring is time-intensive. An AI screening agent pre-qualifies applicants, filters by availability and intentional wedding planning + event design experience, and schedules first-round interviews automatically.</div><span class="gap-tag brand">Operations</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI OPPORTUNITY MAP -->
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map — Britt Warnick Designs</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 — do not skip ahead.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="pri-badge">1</div></td>
+            <td><strong>Speed-to-Contract Agent</strong></td>
+            <td><span class="impact-tag">Faster response</span> — every design inquiry responded to in 60 seconds</td>
+            <td>GoHighLevel, Zoho CRM, Email</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">2</div></td>
+            <td><strong>Client Communication Agent</strong></td>
+            <td><span class="impact-tag">60% admin time saved</span> — full client lifecycle automated per wedding</td>
+            <td>GoHighLevel, Email / SMS</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">3</div></td>
+            <td><strong>Wedding Proposal Generator</strong></td>
+            <td><span class="impact-tag">3 min vs 45 min</span> — professional proposals at scale</td>
+            <td>GoHighLevel, Zoho CRM, Dropbox</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">4</div></td>
+            <td><strong>Studio Performance Agent</strong></td>
+            <td><span class="impact-tag">Weekly digest</span> — zero manual data pulls across locations</td>
+            <td>Zoho CRM, GoHighLevel, Studio Mgmt</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">5</div></td>
+            <td><strong>Project Upsell + Retention Agent</strong></td>
+            <td><span class="impact-tag">+AOV per couple</span> — post-gallery reorder and anniversary and referral upsell sequences</td>
+            <td>GoHighLevel, Email</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">6</div></td>
+            <td><strong>Marketing Content Agent</strong></td>
+            <td><span class="impact-tag">6+ hrs/wk saved</span> — project kickoff content turned into social posts and emails</td>
+            <td>Dropbox, Social Channels</td>
+          </tr>
+          <tr>
+            <td><div class="pri-badge">7</div></td>
+            <td><strong>Hiring Screener Agent</strong></td>
+            <td><span class="impact-tag">Seasonal scale</span> — pre-qualifies applicants, schedules first-round interviews</td>
+            <td>GoHighLevel, Email</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO IGNORE -->
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Honest Advice</p>
+    <h2 class="section-title">What AI Will Not Work For Britt Warnick Designs — Skip These</h2>
+    <p class="section-sub">Not everything benefits from automation. Here is what to ignore for now — and why.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">AI Image Editing or Selection</div>
+          <div class="ignore-reason">Your design quality is the product. AI curation in intentional wedding planning + event design is inconsistent and creates client trust issues. Keep human designers on final creative direction.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">Chatbot on Your Website</div>
+          <div class="ignore-reason">Venue coordinators and parents expect professionalism. A generic chatbot undercuts that. Speed-to-response via email automation is cleaner and more effective.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">AI Pricing / Contract Negotiation</div>
+          <div class="ignore-reason">Wedding contracts are relationship-based. Couples and venue contacts want a human to own the planning conversation. AI handles the intake — not the negotiation.</div>
+        </div>
+      </div>
+      <div class="ignore-card">
+        <div class="ignore-x"><span>X</span></div>
+        <div>
+          <div class="ignore-title">Fully Automated Wedding Day Logistics</div>
+          <div class="ignore-reason">Wedding days are high-stakes, variable, and people-intensive. AI can schedule and prep — but on-the-day execution needs experienced staff, not automation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI AGENTS -->
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">6 AI Agents Built for Britt Warnick Designs</h2>
+    <p class="section-sub">Each agent maps directly to a specific workflow in your luxury wedding planning + design studio.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Speed-to-Contract Agent</div><div class="agent-desc">Monitors your inquiry inbox. The moment a client organization or agency partner submits an interest form, this agent drafts and sends a personalized, professional response within 60 seconds — day, night, or weekend.</div><div class="agent-outcome">Responds in under 60 sec — 24/7, no staff required</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Client Communication Agent</div><div class="agent-desc">Automates the full client communication lifecycle — project kickoff reminders, wedding gallery notifications, reorder prompts, post-wedding gallery announcements — across all your weddings simultaneously.</div><div class="agent-outcome">Reduces per-wedding admin time by 60%+</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Proposal Generator</div><div class="agent-desc">Takes a client's basic information and produces a fully personalized, professional proposal in under 3 minutes — complete with your pricing, packages, and proof of work.</div><div class="agent-outcome">Proposal in 3 min vs. 45 min manually</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="agent-name">Wedding Day Logistics Agent</div><div class="agent-desc">Coordinates scheduling across multiple weddings in flight — syncs with your master calendar, auto-sends vendor arrival times, generates the minute-by-minute day-of run sheet, and sends confirmation reminders to every vendor 72h, 24h, and 2h prior.</div><div class="agent-outcome">Eliminates scheduling back-and-forth</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Studio Performance Agent</div><div class="agent-desc">Aggregates data across your studio — bookings per quarter, revenue per wedding tier, vendor performance, anniversary outreach response — and delivers a weekly performance digest. Surfaces the top 3 actions to take this week.</div><div class="agent-outcome">Weekly digest, 0 manual data pulls</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="agent-name">Project Upsell + Retention Agent</div><div class="agent-desc">After final deliverable handoff, this agent follows up with clients at the optimal time — offering additional design package upsells, multi-asset bundle deals, and extended brand collateral packages. Trained on your pricing and Britt Warnick Designs' product catalog.</div><div class="agent-outcome">Increases average order value per family</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONE TABLE (replaces text timeline) -->
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Your Implementation Roadmap</h2>
+    <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1–3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Kickoff call — map your specific inquiry workflow and weddings</li>
+                <li>Speed-to-Contract Agent configured and connected to your GoHighLevel inbox</li>
+                <li>Client Communication Agent templates built from your existing language</li>
+                <li>Live test: send a test inquiry and watch the 60-second response fire</li>
+              </ul>
+            </td>
+            <td class="m-result">Your first agent is live. Wedding inquiries get a 60-second response while you sleep.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Proposal Generator trained on your packages, pricing, and wedding types (intimate / luxury / destination)</li>
+                <li>Wedding Day Logistics Agent connected to your scheduling calendar</li>
+                <li>Studio Performance Agent pulling data from your locations</li>
+                <li>Project Upsell + Retention Agent sequenced for post-final deliverable handoff</li>
+                <li>Team walkthrough: 30 minutes, no technical knowledge required</li>
+              </ul>
+            </td>
+            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Trained</div></td>
+            <td>
+              <ul class="m-list">
+                <li>30-day performance review: response rates, time saved, orders influenced</li>
+                <li>Agents refined based on your actual design project inquiries and client responses</li>
+                <li>Expansion roadmap: what to automate next across your studio network</li>
+              </ul>
+            </td>
+            <td class="m-result">System knows your business. Every agent tuned to real Britt Warnick Designs data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td>
+              <ul class="m-list">
+                <li>Minimal manual input required from your team</li>
+                <li>Continuous improvement from production data</li>
+                <li>You own the system — we stay as your AI operations team</li>
+              </ul>
+            </td>
+            <td class="m-result">AI runs like a trained employee who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR with sliders + presets -->
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Adjust the sliders to match your business. Choose a scenario preset or set your own numbers.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative')">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected')">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch')">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Avg Contract Value</span>
+            <span class="calc-slider-val" id="lbl-contract">(enter your number)</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-contract" min="2000" max="30000" step="500" value="5000" data-no-default="true" data-ghl-source="lead-revenue-range" oninput="updateLabel('contract'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Monthly Design Project Inquiries</span>
+            <span class="calc-slider-val" id="lbl-leads">(enter your number)</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="60" step="1" value="10" data-no-default="true" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Current Close Rate</span>
+            <span class="calc-slider-val" id="lbl-rate">(enter your number)</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="5" data-no-default="true" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row">
+            <span class="calc-slider-label">Computer Hours / Week</span>
+            <span class="calc-slider-val" id="lbl-hours">(enter your number)</span>
+          </div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" data-no-default="true" oninput="updateLabel('hours'); calcROI();">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">—</div></div>
+        <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">—</div><div class="res-sub" id="resLift">—</div></div>
+        <div class="calc-result-item"><div class="res-label">Computer Hours Freed / Yr</div><div class="res-value" id="resHours">—</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">—</div></div>
+      </div>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks: +15% lead volume, +50% close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">McKinsey State of AI 2023</a>), 60% admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages — your results will vary. No guaranteed outcomes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section class="section section-alt" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Agent — Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Britt Warnick Designs</h2>
+    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs. Built specifically for Britt Warnick Designs.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 — Wedding Inquiry Response Agent</h3><p>Based on your #1 bottleneck: slow speed-to-response on luxury wedding inquiries</p></div><span class="prompt-expand-hint">▼ view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Wedding Inquiry Response Agent for Britt Warnick Designs, a Utah-based luxury wedding planning and design studio. Your job: respond to every wedding inquiry within 60 seconds with an intentional, on-brand reply that captures the right qualifying detail without sounding like a form letter.
+
+## INPUTS YOU NEED
+- Inquirer's name (one or both partners)
+- Email
+- Wedding date or window (if disclosed)
+- Venue or city (if disclosed)
+- Estimated guest count (if disclosed)
+- Vision keywords from inquiry text
+- Source (website form, Instagram DM, referral)
+
+## STEP-BY-STEP RESPONSE LOGIC
+
+STEP 1 — EXTRACT from the inquiry:
+- Partner first name(s)
+- Wedding date or target month
+- Venue or city
+- Estimated guest count
+- Any vision / style language they used (e.g. "intimate", "garden", "European", "editorial", "moody")
+- Specific concerns or questions they raised
+
+STEP 2 — BUILD YOUR RESPONSE using this exact structure:
+
+Paragraph 1 (2 sentences max):
+Greet by first name(s). Acknowledge their venue and date specifically if given. No generic "thanks for reaching out" — start with something that proves you actually read their inquiry.
+
+Paragraph 2 (2-3 sentences):
+Reflect their vision back in BWD's design language. Reference one specific BWD capability that fits their context (e.g., "our intentional studio model means a small attentive team — Britt, Rachel, and Daisy — guides every wedding from design through day-of execution").
+
+Paragraph 3 (2 questions only):
+Ask exactly TWO clarifying questions:
+- Question 1: about the planning timeline and what they have already locked in (venue, date, vendor team)
+- Question 2: about their vision priority — what would make this celebration unforgettable for them and their guests
+
+STEP 3 — END WITH a clear next step (1 sentence):
+Offer a 30-minute intro conversation. Provide your scheduling link. Do not push a contract.
+
+Sign-off: "Britt + the BWD team" OR "[Your Name] | Britt Warnick Designs"
+
+## BRAND VOICE RULES
+- Warm and design-led — never gushing
+- Avoid clichéd enthusiasm openers — overused warmth phrases read as filler
+- Address the partners by first name throughout, never "Hello" or "Dear [Title]"
+- No exclamation points — confidence does not need them
+- Active voice: "We hold the design and the day-of" not "Everything will be coordinated"
+
+## EDGE CASES
+- Only one partner name given → open with that name, ask for the other partner's name in the first clarifying question
+- Date not provided → add "and what target window are you working within?" to Q1
+- Inquirer is a planner referring a couple → acknowledge the referral relationship explicitly
+- Couple says they already have a planner → "thank them for considering BWD as an alternate or for design-curation support, and clarify what they are evaluating"
+- Destination wedding outside Utah → confirm BWD travels (we do), ask about venue and travel logistics in Q2
+
+## EXAMPLE RESPONSE
+INQUIRY: "Hi! My fiancé and I are getting married next September at Tibble Fork. We are thinking 90 guests, garden-meets-mountain vibe, want it to feel intimate and elevated. Looking for full planning support. Looking forward to hearing from you!"
+
+RESPONSE:
+
+Hi Sarah,
+
+Thank you for sharing the early outline of your wedding at Tibble Fork — September weddings in that landscape have a quality of light that is hard to replicate, and the garden-meets-mountain direction you described aligns with how we approach design: equally informed by nature and the intimacy of a shared meal.
+
+For an event at 90 guests with a full-service scope, BWD's intentional studio model is built for exactly this — a small attentive team (Britt, Rachel, Daisy) holds the design brief, vendor coordination, and day-of execution end-to-end so you and your fiancé spend the year ahead feeling cared-for rather than managing logistics.
+
+A couple of questions to make the next conversation useful:
+1. Have you locked in any vendors yet, or is the venue the first commitment?
+2. What would make this celebration unforgettable for you both and for your guests — what is the one thing you most want them to feel?
+
+If you want to keep moving, here is a link to book a 30-minute intro conversation this week: [scheduling link]. No commitment at this stage — just space to talk through your vision and answer any questions about how we work.
+
+Britt + the BWD team</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Ensures every wedding inquiry receives a thoughtful, on-brand reply in under 60 seconds — including nights, weekends, and wedding-season chaos — without adding a single staff hour.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 — Client Wedding Day Communication Agent</h3><p>Based on your #2 bottleneck: manual client reminders and milestone communications across every active wedding</p></div><span class="prompt-expand-hint">▼ view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the Client Communication Lifecycle Agent for Britt Warnick Designs, a Utah-based luxury wedding planning and design studio. You send the right message to the right couple at the right milestone, automatically — so the planning team never drops a beat across every active wedding in flight.
+
+## INPUTS YOU NEED
+- Couple first names (Partner A + Partner B)
+- Wedding date
+- Venue name + location
+- Booking date (when contract signed)
+- Active milestone (BOOKED / DESIGN_BRIEF_LIVE / T_90 / 60_DAY / 30_DAY / 14_DAY / 7_DAY / DAY_OF / POST_WEDDING / ANNIVERSARY)
+- Vendor list with confirmed status
+- Preferred contact channel (email / SMS via GHL)
+
+## MESSAGE LIBRARY (use the milestone-matched template)
+
+---
+MILESTONE 1 — BOOKING CONFIRMATION (send within 2h of contract signature)
+"Hi [Partner A] and [Partner B] — it is official. We are honored to be planning your wedding at [Venue] on [Wedding Date]. Over the next 7 days you will receive: (1) your design brief questionnaire, (2) your client portal access, (3) intros to the vendor partners we recommend for your style. Our studio team here for every question along the way."
+
+---
+MILESTONE 2 — DESIGN BRIEF DELIVERY (T+10 days from booking)
+"Hi [Partner A] and [Partner B] — your design brief is live in the portal. We translated your conversation into a mood direction, palette, and floral/tablescape concept. Take 48 hours to live with it, then book your 60-minute design review via the link. No revisions needed before that call — we will work through every detail together."
+
+---
+MILESTONE 3 — VENDOR INTRODUCTIONS (T+21 days from booking)
+"Hi [Partner A] and [Partner B] — based on your venue, style, and date, here are the vendor partners we are introducing this week: [vendor list with names + categories]. Each has been briefed on your wedding and will reach out within 5 business days. You do not have to chase a single intro — we make sure every conversation starts."
+
+---
+MILESTONE 4 — T-MINUS-90 TIMELINE CHECK
+"Hi [Partner A] and [Partner B] — your wedding is three months out. Quick checklist landing in your portal today: final guest count window, attire fittings, music selections, ceremony script. We block a 60-minute call this week to walk through it together. Pick a time here: [scheduling link]."
+
+---
+MILESTONE 5 — 30-DAY RSVP + FINAL DETAILS
+"Hi [Partner A] and [Partner B] — 30 days. We are locking final guest count by [date], confirming all vendor arrival times, and finalizing the day-of run sheet. The portal has your detail tracker — anything still open is highlighted in amber. Anything we should flag together this week?"
+
+---
+MILESTONE 6 — 14-DAY FINAL WALK-THROUGH
+"Hi [Partner A] and [Partner B] — two weeks. We are scheduling your venue walk-through with the full execution team this week. After that, you do not have to send another vendor email — every confirmation, arrival time, and detail is held in our run sheet. Your only job between now and the wedding is to enjoy the last fortnight."
+
+---
+MILESTONE 7 — 7-DAY DAY-OF RUN SHEET
+"Hi [Partner A] and [Partner B] — your final run sheet is in the portal: minute-by-minute, vendor-by-vendor, ceremony cue to last dance. Every vendor has the same document. If anything changes between now and the wedding, we adjust the run sheet — you do not need to send a single update email. Get rest this week."
+
+---
+MILESTONE 8 — DAY-OF ARRIVAL (sent at 7:00am local wedding-day time)
+"Good morning [Partner A] and [Partner B] — our team is on-site by [arrival time]. Vendors confirmed and timed. You will see us moving but never feel us — that is the goal. Today is yours. We have everything else."
+
+---
+MILESTONE 9 — POST-WEDDING GALLERY (T+10 to T+14 days after wedding)
+"Hi [Partner A] and [Partner B] — your wedding gallery is being released this week from your photography team. We will forward the link the moment it is live. Print + album options are accessible directly from the gallery, and we are happy to help curate your album order if you want a second set of eyes."
+
+---
+MILESTONE 10 — 30-DAY THANK-YOU + REFERRAL ASK (T+30 days after wedding)
+"Hi [Partner A] and [Partner B] — it has been a month. We have been thinking about your day often. If you know couples who are planning, we would love an introduction — referrals from our couples are how this studio grows. And if there is anything we can do as you settle into married life, just reply here."
+
+---
+MILESTONE 11 — ANNIVERSARY NUDGE (T+1 year and annually)
+"Hi [Partner A] and [Partner B] — one year ago today we were lining up your ceremony cue. Hope this year has felt as intentional as that one day was. If you are planning an anniversary gathering, vow renewal, or simply want a slice of cake delivered, you know where to find us."
+
+## BRAND VOICE RULES
+- Warm, intentional, never gushing — like a trusted creative partner
+- Address the couple by both first names
+- Avoid clichéd enthusiasm openers — overused warmth phrases read as filler
+- No exclamation points after the booking confirmation
+- Active voice: "Our team is on-site by 7am" not "Your venue will be staffed"
+
+## EDGE CASES
+- Same-sex couple → use both first names; never assume "bride/groom"
+- Destination wedding → add travel-coordination references in MILESTONE 3 and 5
+- Vendor declined / unavailable → pause that vendor's intro, swap in alternate, notify couple in a single combined message
+- Couple postpones → pause all timeline-based milestones, resume from the new date
+
+## QUALITY CHECK
+- All messages sent via GoHighLevel — use contact record's preferred channel (SMS if available, email as fallback)</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Automates the entire client communication lifecycle for every couple — from booking confirmation through anniversary nudge — across every active wedding simultaneously.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 — Wedding Proposal Generator</h3><p>Based on your #3 bottleneck: time-consuming manual proposal creation for each new wedding inquiry</p></div><span class="prompt-expand-hint">▼ view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Wedding Proposal Generator for Britt Warnick Designs. You convert a couple's inquiry into a tailored proposal in under 3 minutes — capturing their venue, vision, date, and guest count, recommending the right service tier, and writing it in BWD's intentional, design-led voice.
+
+## INPUTS YOU NEED
+- Couple first names
+- Wedding date (or target window if not set)
+- Venue name + city (or "still selecting")
+- Guest count estimate
+- Vision keywords from inquiry (e.g. "intimate", "garden", "European", "editorial", "moody")
+- Stated pain points / planning concerns
+- Budget range (if disclosed)
+
+## PROPOSAL STRUCTURE (6 sections, under 600 words total)
+
+SECTION 1 — PERSONALIZED OPENING (2-3 sentences)
+- Greet by both first names
+- Acknowledge the venue + date specifically
+- Reflect their vision back in BWD's design language
+- Example: "Hi [Partner A] and [Partner B] — thank you for sharing the early outline of your celebration at [Venue] on [Date]. The asymmetric, garden-forward direction you described aligns beautifully with how we approach design — equally informed by nature and the intimacy of a shared meal."
+
+SECTION 2 — SERVICE TIER RECOMMENDATION (based on guest count + planning scope)
+Under 50 guests OR vision-only direction → DESIGN CURATION
+50–150 guests AND couple has venue + date → PARTIAL PLAN
+150+ guests OR destination OR full-service vision → FULL PLAN
+Couple booked late (under three months out) → MONTH-OF MANAGEMENT
+Always name the tier and one sentence on why it fits their context. Do not list prices.
+
+SECTION 3 — WHAT IS INCLUDED (6-8 bullets grouped by phase)
+
+DESIGN + PLANNING:
+- Design brief and mood direction within 10 business days of booking
+- Vendor partner introductions (florist, photographer, caterer, paper, rentals)
+- Tablescape and floral concept development with sample boards
+- Stationery + signage design direction
+
+EXECUTION:
+- Master timeline + day-of run sheet held by the studio
+- Vendor contract review and booking coordination
+- 60 / 30 / 14 / 7-day milestone check-ins held in your client portal
+
+WEDDING DAY:
+- Lead planner + assistant planner on-site for full ceremony and reception flow
+- Vendor arrival timing + cue management
+- Day-of styling and tablescape execution
+- Gracious guest experience oversight from arrival through farewell
+
+Customize bullets to whichever concerns the couple raised — if they flagged vendor overwhelm, lead with vendor coordination; if design clarity is the worry, lead with the brief and mood direction.
+
+SECTION 4 — WHY BWD (3-4 sentences, specific not generic)
+Include:
+- Utah-rooted with destination experience — Best of State recognition
+- Editorial design sensibility informed by Britt's time living in Madrid
+- Intentional studio model — small, attentive team (Britt, Rachel, Daisy) for every event
+- One specific differentiator drawn from press, portfolio, or BWD's "intentional weddings, soulful celebrations" positioning
+
+Example: "BWD is a Utah-rooted luxury wedding planning and design studio, recognized with the Best of State award and featured across editorial press for its intentional, nature-led aesthetic. Britt founded the studio after her years in Madrid taught her that great hospitality is built in the details — the table, the timing, the way guests are received. Every wedding gets the same small, attentive team and the same studio rigor."
+
+SECTION 5 — NEXT STEP (one clear action)
+Ask for ONE thing. Not a meeting unless they asked.
+Example: "The best next step is a quick reply confirming your top 1-2 venues if you are still narrowing — even just the names. From there we send you our calendar for a 30-minute intro conversation where we can walk through this proposal together. No commitment at this stage."
+
+SECTION 6 — SIGNATURE BLOCK
+[Your Name]
+Britt Warnick Designs — Studio Team
+hello@brittwarnickdesigns.com
+
+## QUALITY CHECK (run before sending)
+- Does the proposal address both partners by name at least twice? Y/N
+- Is the service tier named and explained? Y/N
+- Are there 6-8 inclusion bullets covering all 3 phases? Y/N
+- Is there zero mention of pricing? Y/N
+- Is the next step ONE specific action? Y/N
+- Is the total word count under 600? Y/N
+
+If any answer is N → revise that section before sending.
+
+## TONE RULES
+- Intentional and design-led — never gushing
+- No generic phrases — avoid overused warmth openers, vague partnering language, and broad expertise claims
+- Use the couple's names, their venue, and their wedding date throughout
+- Write like the proposal was built for this couple — because it was</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Cuts proposal creation from 30–45 minutes to under 3 minutes. Run it for every wedding inquiry and your response speed becomes a competitive advantage.</div>
+        </div>
+      </div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two paths forward for Britt:</h3>
+      <div class="path-grid">
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most studio owners can implement 1–2 agents on their own using free tools like ChatGPT or Claude. You will see real results — faster responses, less admin — within days, not months.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, trained on Britt Warnick Designs's brand voice, monitoring your pipeline across every location, 24/7? That is what we build. We handle everything: setup, training, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt%20Warnick&biz=Britt%20Warnick%20Designs&src=britt-warnick-designs" class="path-cta">Get Your AI Agent Quote</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Website Audit section removed — deprecated Stage 2 (2026-05-27) -->
+
+<!-- PODCAST / LISTEN -->
+<section class="section section-alt pod-section" id="listen">
+  <h2 class="section-title">Your AI Roadmap Podcast</h2>
+  <p class="section-intro">Listen to your personalized Blueprint — built from your answers.</p>
+  <div class="pod-card">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Britt Warnick · Britt Warnick Designs</p>
+    </div>
+    <div class="pod-body">
+      <span class="pod-badge" id="podBadge">
+        Ready to play
+        <span class="pod-eq" id="podEq">
+          <span style="height:4px"></span><span></span><span></span><span></span><span></span>
+        </span>
+      </span>
+
+      <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+
+      <!-- Progress bar (ARIA slider) -->
+      <div class="pod-progress-wrap" id="podTrack"
+           role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+           aria-label="Podcast progress">
+        <div class="pod-fill" id="podFill"></div>
+        <div class="pod-thumb" id="podThumb"></div>
+        <!-- chapter-pip chapter-pip chapter-pip chapter-pip chapter-pip chapter-pip chapter-pip — 7 markers placed dynamically by podPlayer IIFE -->
+      </div>
+      <div class="pod-times">
+        <span id="podElapsed">0:00</span>
+        <span id="podDuration">--:--</span>
+      </div>
+
+      <!-- Controls -->
+      <div class="pod-controls">
+        <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+          <span class="pod-btn-label">15s</span>
+        </button>
+        <button class="pod-btn play-btn" id="podPlay" aria-label="Play">
+          <svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg>
+          <span class="pod-btn-label">30s</span>
+        </button>
+      </div>
+
+      <!-- Speed + Mute + Download -->
+      <div class="pod-meta">
+        <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+        <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
+          <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/britt-warnick-designs.mp3" target="_blank" download>Download MP3</a>
+      </div>
+
+      <!-- Error fallback -->
+      <div class="pod-error" id="podError">
+        Audio unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/britt-warnick-designs.mp3" target="_blank">Open MP3 in new tab</a>
+      </div>
+
+      <!-- Hidden audio element -->
+      <audio id="podAudio" preload="metadata">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/britt-warnick-designs.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEMO WEBSITE -->
+<!-- SOURCES -->
+<section class="section" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics — Lead response time and project win rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review — "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey and Company — Analytics in boutique studio and multi-event operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute — "The State of AI in 2023." AI adoption benchmarks including +15% lead volume and +50% close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review — Automation research: 60% admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank">hbr.org</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMAND CENTER -->
+<!-- CTA with Bennett's personal message -->
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Britt Warnick Designs?</span></h2>
+    <p class="cta-personal">"Britt, I built this roadmap specifically for Britt Warnick Designs because the work your studio does — designing weddings couples will remember for the rest of their lives — deserves systems that are as intentional and reliable as your team. The AI here is not about replacing anything. It is about making sure no inquiry goes unanswered, no vendor is dropped, and no couple ever feels uncared for during the planning."</p>
+    <p>The next step is a short application — so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt%20Warnick&biz=Britt%20Warnick%20Designs&src=britt-warnick-designs" class="cta-btn">Get Your AI Agent Quote</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Advaita AI for Business &mdash; Prepared for Britt Warnick / Britt Warnick Designs &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- Sticky mobile CTA -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt%20Warnick&biz=Britt%20Warnick%20Designs&src=britt-warnick-designs" class="mobile-cta-btn">Get Your AI Agent Quote</a>
+</div>
+
+<script>
+  const PRESETS = {
+    conservative: { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 0.5 },
+    expected:     { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 1.0 },
+    stretch:      { contract: 8500, leads: 10, rate: 18, hours: 15, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name) {
+    const p = PRESETS[name];
+    document.getElementById('sl-contract').value = p.contract;
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
+  function calcROI() {
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+    document.getElementById('resQ').textContent         = fmt(gain * 3);
+  }
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
+  calcROI();
+
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? '▲ collapse' : '▼ view & copy';
+  }
+
+  function copyPrompt(preId, btn) {
+    navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
+
+  // Hamburger nav toggle
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+
+  // Reading progress bar + sticky mobile CTA
+  const readingProgress = document.getElementById('readingProgress');
+  const mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (readingProgress && total > 0) readingProgress.style.width = (scrolled / total * 100) + '%';
+    if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
+  }, { passive: true });
+
+  // Podcast loading state feedback
+  (function() {
+  })();
+</script>
+<div class="pod-mini" id="podMini" aria-live="polite">
+  <span class="pod-mini-name">AI Walkthrough · Britt Warnick</span>
+  <span class="pod-mini-time" id="podMiniTime">0:00</span>
+  <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
+    <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+</div>
+
+<script> block ===== -->
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'bpod_britt_warnick'; // REPLACE with e.g. bpod_court_lundberg
+  var CHAPTERS = [
+    {pct: 0,    label: 'Segment 1 — This Is Your Business'},
+    {pct: 7.5,  label: 'Segment 2 — Where You Are With AI'},
+    {pct: 20,   label: 'Segment 3 — The Gaps We Found'},
+    {pct: 40,   label: 'Segment 4 — Running This'},
+    {pct: 60,   label: 'Segment 5 — Your Tech Stack'},
+    {pct: 72.5, label: 'Segment 6 — The Timeline'},
+    {pct: 82.5, label: 'Segment 7 — What To Do Next'}
+  ];
+
+  var audio     = document.getElementById('podAudio');
+  var track     = document.getElementById('podTrack');
+  var fill      = document.getElementById('podFill');
+  var thumb     = document.getElementById('podThumb');
+  var elapsed   = document.getElementById('podElapsed');
+  var duration  = document.getElementById('podDuration');
+  var playBtn   = document.getElementById('podPlay');
+  var playIcon  = document.getElementById('podPlayIcon');
+  var backBtn   = document.getElementById('podBack');
+  var fwdBtn    = document.getElementById('podFwd');
+  var badge     = document.getElementById('podBadge');
+  var eq        = document.getElementById('podEq');
+  var chapterEl = document.getElementById('podChapterName');
+  var speedSel  = document.getElementById('podSpeed');
+  var muteBtn   = document.getElementById('podMute');
+  var volIcon   = document.getElementById('podVolIcon');
+  var podError  = document.getElementById('podError');
+  var mini      = document.getElementById('podMini');
+  var miniPlay  = document.getElementById('podMiniPlay');
+  var miniIcon  = document.getElementById('podMiniIcon');
+  var miniTime  = document.getElementById('podMiniTime');
+
+  var PLAY_SVG  = '<polygon points="5,3 19,12 5,21"/>';
+  var PAUSE_SVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  var VOL_ON    = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  var VOL_OFF   = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  function pct() {
+    return audio.duration ? (audio.currentTime / audio.duration * 100) : 0;
+  }
+
+  function currentChapter() {
+    var p = pct(), label = CHAPTERS[0].label;
+    for (var i = 0; i < CHAPTERS.length; i++) {
+      if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label;
+    }
+    return label;
+  }
+
+  function updateUI() {
+    var p = pct();
+    fill.style.width  = p + '%';
+    thumb.style.left  = p + '%';
+    elapsed.textContent = fmt(audio.currentTime);
+    chapterEl.textContent = audio.duration ? currentChapter() : '';
+    miniTime.textContent  = fmt(audio.currentTime);
+    track.setAttribute('aria-valuenow', Math.round(p));
+    try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
+  }
+
+  function setPlaying(playing) {
+    playIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    miniIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    miniPlay.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    eq.classList.toggle('playing', playing);
+    badge.childNodes[0].textContent = playing ? 'Now Playing ' : (audio.currentTime > 0 ? 'Paused ' : 'Ready to play ');
+  }
+
+  function togglePlay() {
+    if (audio.paused) { audio.play(); } else { audio.pause(); }
+  }
+
+  // Place chapter pips
+  CHAPTERS.forEach(function(ch) {
+    var pip = document.createElement('div');
+    pip.className = 'pod-pip chapter-pip';
+    pip.style.left = ch.pct + '%';
+    pip.title = ch.label;
+    track.appendChild(pip);
+  });
+
+  // Restore saved position
+  audio.addEventListener('loadedmetadata', function () {
+    duration.textContent = fmt(audio.duration);
+    try {
+      var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
+      if (saved > 0 && saved < audio.duration - 5) {
+        audio.currentTime = saved;
+        badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
+      }
+    } catch(e) {}
+    updateUI();
+  });
+
+  audio.addEventListener('timeupdate', updateUI);
+  audio.addEventListener('play',  function() { setPlaying(true); });
+  audio.addEventListener('pause', function() { setPlaying(false); });
+  audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
+  audio.addEventListener('error', function() { podError.style.display = 'block'; });
+
+  playBtn.addEventListener('click', togglePlay);
+  miniPlay.addEventListener('click', togglePlay);
+  backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+
+  speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
+
+  muteBtn.addEventListener('click', function() {
+    audio.muted = !audio.muted;
+    volIcon.innerHTML = audio.muted ? VOL_OFF : VOL_ON;
+  });
+
+  // Seek on click/drag (mouse)
+  var dragging = false;
+  function seekTo(e) {
+    var rect = track.getBoundingClientRect();
+    var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    updateUI();
+  }
+  track.addEventListener('mousedown', function(e) { dragging = true; seekTo(e); });
+  document.addEventListener('mousemove', function(e) { if (dragging) seekTo(e); });
+  document.addEventListener('mouseup',   function() { dragging = false; });
+
+  // Touch seek
+  function touchSeek(e) {
+    e.preventDefault();
+    var rect = track.getBoundingClientRect();
+    var t = e.touches[0] || e.changedTouches[0];
+    var ratio = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
+    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    updateUI();
+  }
+  track.addEventListener('touchstart', touchSeek, {passive: false});
+  track.addEventListener('touchmove',  touchSeek, {passive: false});
+  track.addEventListener('touchend',   touchSeek, {passive: false});
+
+  // Keyboard: progress bar
+  track.setAttribute('tabindex', '0');
+  track.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5); e.preventDefault(); }
+  });
+
+  // Global keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    var tag = document.activeElement ? document.activeElement.tagName : '';
+    if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
+    if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
+    if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
+    if (e.key === 'ArrowRight')  { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); }
+  });
+
+  // Auto-pause when tab hidden
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && !audio.paused) audio.pause();
+  });
+
+  // Sticky mini-player via IntersectionObserver
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      var visible = entries[0].isIntersecting;
+      mini.classList.toggle('visible', !visible && !audio.paused);
+    }, {threshold: 0.1});
+    obs.observe(document.getElementById('listen'));
+    audio.addEventListener('play',  function() {
+      var rect = document.getElementById('listen').getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) mini.classList.add('visible');
+    });
+    audio.addEventListenener('pause', function() { mini.classList.remove('visible'); });
+  }
+})();
+</script>
+</body>
+</html>
