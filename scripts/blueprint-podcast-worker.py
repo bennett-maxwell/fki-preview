@@ -119,8 +119,14 @@ No obligation. No sales pressure. Just a real conversation about whether this is
 
 
 async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
-    """Use notebooklm-py to create a notebook, add source, generate audio, download MP3.
+    """blueprint_podcast_pipeline contract: size-check → create → add source → wait → generate → wait → download.
     Returns path to downloaded MP3, or None on failure."""
+    # Size gate: mirrors mcp__notebooklm__blueprint_podcast_pipeline (>18KB required)
+    source_bytes = len(source_text.encode("utf-8"))
+    if source_bytes < 18_432:
+        log.error(f"  [{slug}] Source doc too small ({source_bytes}B < 18KB) — podcast skipped")
+        return None
+
     try:
         from notebooklm import NotebookLMClient, AudioLength
     except ImportError:
@@ -139,7 +145,7 @@ async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
         log.info(f"  [{slug}] Creating NotebookLM notebook: {title}")
         notebook = await asyncio.to_thread(client.notebooks.create, title)
 
-        log.info(f"  [{slug}] Adding source text ({len(source_text)} chars)")
+        log.info(f"  [{slug}] Adding source text ({source_bytes}B)")
         source = await asyncio.to_thread(
             client.sources.add_text,
             notebook.id, f"{slug} AI Roadmap", source_text,
