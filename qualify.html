@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Does AI Qualify You for a 10X Return in 90 Days? — FKI Qualifier</title>
-<meta name="description" content="Answer 8 questions. Find out if AI can generate a 10X return on your investment within 90 days. Takes under 60 seconds.">
+<title>See If AI Is a Fit for Your Business — FKI Qualifier</title>
+<meta name="description" content="Answer 8 questions to see if AI is a fit for your business. Takes under 60 seconds.">
 <style>
   :root {
     --brand:       #1D6FDB;
@@ -129,13 +129,6 @@
   .identity-field input:focus { border-color: var(--brand); background: var(--white); }
   .identity-status { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-light); }
   .identity-status.ready { color: #19713a; font-weight: 700; }
-  .booking-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(10,14,26,0.72); }
-  .booking-modal.open { display: flex; }
-  .booking-dialog { width: min(920px, 100%); max-height: 92vh; background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 80px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
-  .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
-  .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
-  .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
-  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
   .disclaimer a { color: var(--brand); }
@@ -194,8 +187,8 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 
 <div class="hero">
   <div class="hero-badge">Free 60-Second Assessment</div>
-  <h1>Can AI generate a <span>10X return</span><br>on your investment in 90 days?</h1>
-  <p class="hero-sub">Answer 8 questions. We'll tell you if your business qualifies — and what you stand to gain. We only work with businesses where the math works. Takes under 60 seconds.</p>
+  <h1>See if <span>AI is a fit</span><br>for your business</h1>
+  <p class="hero-sub">Answer 8 questions. We'll tell you if your business is a fit for AI — and where it could help most. We only work with businesses where it makes sense. Takes under 60 seconds.</p>
 </div>
 
 <div class="main-wrap">
@@ -204,7 +197,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
     <div class="q-section" id="identity-section">
       <div class="q-label">Contact Tracking</div>
       <div class="q-title">Confirm where this qualification should be saved.</div>
-      <div class="q-sub">This keeps your score, application, and call request tied to the same CRM record.</div>
+      <div class="q-sub">This keeps your score and application tied to the same CRM record.</div>
       <div class="identity-grid">
         <div class="identity-field">
           <label for="lead-first">First name</label>
@@ -227,7 +220,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
           <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
         </div>
       </div>
-      <div class="identity-status" id="identity-status">Name, email, phone, and business are required before booking.</div>
+      <div class="identity-status" id="identity-status">Name, email, phone, and business are required to submit.</div>
     </div>
 
     <div class="section-divider">Revenue Potential — Do the Numbers Qualify?</div>
@@ -386,9 +379,9 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
         <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
       </div>
 
-      <!-- 10X Qualification Verdict -->
+      <!-- Qualification Verdict -->
       <div class="verdict-block neutral" id="verdict-block">
-        <div class="verdict-icon" id="verdict-icon">📊</div>
+        <div class="verdict-icon" id="verdict-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
         <div class="verdict-label" id="verdict-label">Your qualification appears here</div>
         <div class="verdict-sub" id="verdict-sub">Answer questions 1–4 to calculate</div>
       </div>
@@ -413,16 +406,6 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
   Close rate lift benchmarks from <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review speed-to-lead research</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management Institute</a>. These are industry averages — your results will vary. This tool qualifies fit; it does not guarantee outcomes.
 </p>
 
-<div class="booking-modal" id="booking-modal" aria-hidden="true">
-  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
-    <div class="booking-head">
-      <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
-      <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
-    </div>
-    <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar"></iframe>
-  </div>
-</div>
-
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let leadsVal   = null;   // Q1
@@ -442,7 +425,7 @@ const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
-const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+const THANK_YOU_URL = 'thank-you-apply.html';
 
 function getParams() {
   try { return new URLSearchParams(window.location.search); }
@@ -530,28 +513,12 @@ function persistReturnedContactId(contactId) {
 }
 
 function hydrateIdentity() {
-  const params = getParams();
-  const stored = readStoredIdentity();
-  // URL ?lead=court-lundberg → First=Court Last=Lundberg (hyphen-split + title-case).
-  const leadParam = params.get('lead');
-  const slug = parseLeadSlug(leadParam || '');
-  // Priority: explicit firstName/first URL param > parsed lead slug > stored localStorage.
-  // A fresh lead slug must NOT be overridden by stale stored identity, so when a lead
-  // param is present we drop the stored fallback for name fields.
-  const fields = {
-    'lead-first': params.get('firstName') || params.get('first') || slug.first || (leadParam ? '' : stored.firstName) || '',
-    'lead-last': params.get('lastName') || params.get('last') || slug.last || (leadParam ? '' : stored.lastName) || '',
-    'lead-business': params.get('businessName') || params.get('biz') || stored.businessName || '',
-    'lead-email': params.get('email') || stored.email || '',
-    'lead-phone': params.get('phone') || stored.phone || ''
-  };
-  Object.keys(fields).forEach(id => {
-    const el = document.getElementById(id);
-    if (!el || !fields[id]) return;
-    el.value = (id === 'lead-email' || id === 'lead-phone')
-      ? fields[id]
-      : fields[id].replace(/\+/g, ' ');
-  });
+  // Bennett directive 2026-06-01: the qualifier must NEVER pre-fill any visible
+  // field. No name / business / email / phone from URL params or localStorage —
+  // every lead starts on a blank form and types their own answers. Hidden CRM
+  // attribution (contactId, source, blueprintSlug) is unaffected: getIdentity()
+  // reads those from URL params directly at submit time, not from the form fields.
+  getLeadSessionId();
 }
 
 // Q7 DYNAMIC PER-LEAD (Bennett directive 2026-05-29): render the lead's actual blueprint agents.
@@ -578,7 +545,7 @@ function updateIdentityStatus() {
     status.textContent = 'Ready. This qualification will be saved against this contact.';
     status.className = 'identity-status ready';
   } else {
-    status.textContent = 'Name, email, phone, and business are required before booking.';
+    status.textContent = 'Name, email, phone, and business are required to submit.';
     status.className = 'identity-status';
   }
 }
@@ -780,7 +747,7 @@ function update() {
   document.getElementById('progress-pct').textContent   = pct + '%';
   document.getElementById('progress-fill').style.width  = pct + '%';
 
-  // ── 10X ROI MATH (used for qualification gate only — no dollar shown) ─────
+  // ── FIT MATH (used for qualification gate only — no dollar or multiplier shown) ─────
   const speedLift  = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
   const canQualify = leadsOk && dealEntered && lpsEntered && chips.speed;
 
@@ -813,18 +780,18 @@ function update() {
     if (qualifies10x === 'strong') {
       vBlock.className   = 'verdict-block green';
       vIcon.innerHTML    = ICON_CHECK;
-      vLabel.textContent = 'Qualifies for 10X Return in 90 Days';
-      vSub.textContent   = 'Your numbers support a strong outcome. Book below after your qualification is saved.';
+      vLabel.textContent = 'Strong Fit for AI';
+      vSub.textContent   = 'Your numbers point to a strong fit. Submit your qualification below to continue.';
     } else if (qualifies10x === 'possible') {
       vBlock.className   = 'verdict-block yellow';
       vIcon.innerHTML    = ICON_INFO;
-      vLabel.textContent = 'Borderline — Worth a Conversation';
+      vLabel.textContent = 'Possible Fit — Worth a Conversation';
       vSub.textContent   = 'There\'s real potential here. Let\'s verify the details together.';
     } else {
       vBlock.className   = 'verdict-block red';
       vIcon.innerHTML    = ICON_X;
-      vLabel.textContent = 'Doesn\'t Qualify at Current Volume';
-      vSub.textContent   = 'Your current lead volume or deal size may not generate enough return yet.';
+      vLabel.textContent = 'May Not Be a Fit Yet';
+      vSub.textContent   = 'Your current lead volume or deal size may not be the right fit for AI yet.';
     }
 
     const liftPct  = Math.round(speedLift * 100);
@@ -842,13 +809,14 @@ function update() {
       '<span>First deploy:</span> ' + capLabel;
 
     cta.disabled = !(allDone && identityDone);
-    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
+    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Submit My Qualification';
     ctaNote.textContent = allDone && identityDone
-      ? (qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.')
+      ? 'Your answers will be saved and our team will follow up.'
       : 'Complete the contact fields and all 8 questions.';
   } else {
+    const ICON_NEUTRAL = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>';
     vBlock.className        = 'verdict-block neutral';
-    vIcon.textContent       = 'Score';
+    vIcon.innerHTML         = ICON_NEUTRAL;
     vLabel.textContent      = 'Your qualification appears here';
     vSub.textContent        = 'Answer questions 1–4 to calculate';
     bdText.innerHTML        = '';
@@ -975,45 +943,15 @@ async function submitQualification() {
   return payload;
 }
 
-function buildBookingUrl() {
-  const id = persistIdentity();
-  const url = new URL(BOOKING_URL, window.location.href);
-  const parts = {
-    first_name: id.firstName,
-    last_name: id.lastName,
-    name: (id.firstName + ' ' + id.lastName).trim(),
-    email: id.email,
-    phone: id.phone,
-    business_name: id.businessName,
-    contact_id: id.contactId,
-    source: 'blueprint_ai_qualifier',
-    lead_session_id: id.leadSessionId,
-    blueprint_slug: id.blueprintSlug
-  };
-  Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
-  return url.toString();
-}
-
-function openBookingModal() {
-  document.getElementById('booking-frame').src = buildBookingUrl();
-  document.getElementById('booking-modal').classList.add('open');
-  document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
-}
-
 async function handleCtaClick() {
   const cta = document.getElementById('cta-apply');
   if (cta.disabled) return;
   cta.disabled = true;
-  const originalText = cta.textContent;
   cta.textContent = 'Saving...';
-  const payload = await submitQualification();
-  if (payload.ai_qualified) {
-    cta.textContent = originalText;
-    cta.disabled = false;
-    openBookingModal();
-  } else {
-    window.location.href = 'thank-you-blueprint.html';
-  }
+  // Submit the qualification to GHL, then route to the thank-you/confirmation
+  // page. No booking calendar is opened — the funnel ends at qualification submit.
+  await submitQualification();
+  window.location.href = THANK_YOU_URL;
 }
 
 // Init
@@ -1027,13 +965,6 @@ document.querySelectorAll('#identity-section input').forEach(el => {
   });
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
-document.getElementById('booking-close').addEventListener('click', function() {
-  document.getElementById('booking-modal').classList.remove('open');
-  document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
-});
-document.getElementById('booking-modal').addEventListener('click', function(e) {
-  if (e.target === this) document.getElementById('booking-close').click();
-});
 updateIdentityStatus();
 update();
 </script>
