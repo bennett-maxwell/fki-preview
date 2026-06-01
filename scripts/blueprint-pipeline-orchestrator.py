@@ -243,8 +243,8 @@ class LeadStatus:
 
 async def run_script(script_name: str, args: list, timeout: int = 300) -> tuple:
     """Run a bash script asynchronously. Returns (success, stdout, stderr).
-    Treats non-zero exit as failure ONLY if stdout doesn't contain success markers.
-    Python DeprecationWarnings on stderr are non-fatal."""
+    Non-zero exits are failures; warnings must be fixed at the source or
+    explicitly handled by the called script."""
     script_path = SCRIPTS_DIR / script_name
     if not script_path.exists():
         return False, "", f"Script not found: {script_path}"
@@ -267,20 +267,7 @@ async def run_script(script_name: str, args: list, timeout: int = 300) -> tuple:
         stdout_str = stdout.decode()
         stderr_str = stderr.decode()
 
-        # Success = zero exit OR output contains success markers despite non-zero
-        success = proc.returncode == 0
-        if not success:
-            # Check if stderr is just warnings (not real errors)
-            real_errors = [
-                line for line in stderr_str.strip().split("\n")
-                if line and "DeprecationWarning" not in line
-                and "UserWarning" not in line
-                and not line.strip().startswith("<stdin>:")
-            ]
-            if not real_errors and stdout_str.strip():
-                success = True  # Only warnings, stdout has output — treat as success
-
-        return success, stdout_str, stderr_str
+        return proc.returncode == 0, stdout_str, stderr_str
     except asyncio.TimeoutError:
         proc.kill()
         return False, "", f"Script timed out after {timeout}s"
@@ -350,7 +337,7 @@ async def stage_blueprint(profile_path: str, profile: dict, status: LeadStatus) 
         return True
 
     log.info(f"  [{profile['slug']}] Stage 3: Blueprint HTML Clone")
-    ok, out, err = await run_script("clone-blueprint.sh", [profile_path], timeout=120)
+    ok, out, err = await run_script("clone-blueprint.sh", ["--no-commit", profile_path], timeout=120)
     if not ok:
         status.mark_stage("blueprint", "failed", err[:200])
         log.error(f"  [{profile['slug']}] Stage 3 FAILED: {err[:100]}")
@@ -524,9 +511,46 @@ async def stage_email(profile_path: str, profile: dict, status: LeadStatus, dry_
 
     log.info(f"  [{profile['slug']}] Stage 7: Email Build")
 
-    args = [profile_path]
+    receipt_dir = REPO_DIR / "audit-receipts" / profile["slug"]
+    token_path = receipt_dir / f"{profile['slug']}-gatekeeper-pass-token.json"
+    html_path = BLUEPRINTS_DIR / f"{profile['slug']}.html"
+
+    build_ok, build_out, build_err = await run_script("build-delivery-email.sh", [profile_path], timeout=120)
+    if not build_ok:
+        status.mark_stage("email", "failed", build_err[:200])
+        log.error(f"  [{profile['slug']}] Stage 7 build FAILED: {build_err[:100]}")
+        return False
+
+    log.info(f"  [{profile['slug']}] Stage 7.0: Gatekeeper production token")
+    token_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPTS_DIR / "blueprint_gatekeeper_100.py"),
+            "--mode", "production",
+            "--lead", profile["slug"],
+            "--html", str(html_path),
+            "--receipt-dir", str(receipt_dir),
+            "--delivery-email", str(REPO_DIR / "delivery-emails" / f"{profile['slug']}-delivery-email.html"),
+            "--profile", profile_path,
+            "--json-output",
+        ],
+        cwd=str(REPO_DIR),
+        capture_output=True,
+        text=True,
+        timeout=240,
+    )
+    if token_proc.returncode != 0:
+        detail = (token_proc.stdout + token_proc.stderr)[-500:]
+        status.mark_stage("email", "failed", f"Gatekeeper token missing/failing: {detail}")
+        log.error(f"  [{profile['slug']}] Gatekeeper token FAIL before email: {detail[:200]}")
+        return False
+
+    args = [profile_path, "--gate-token", str(token_path)]
     if not dry_run:
         args.append("--send-preview")
+    else:
+        status.mark_stage("email", "complete", "Email built + Gatekeeper token verified")
+        return True
 
     ok, out, err = await run_script("build-delivery-email.sh", args, timeout=120)
     if ok:
@@ -546,7 +570,7 @@ async def stage_quiz_verify(profile: dict, status: LeadStatus) -> bool:
 
     log.info(f"  [{profile['slug']}] Stage 7.5: Quiz Verification")
 
-    quiz_url = f"{GITHUB_PAGES_BASE}/apply/"
+    quiz_url = f"{GITHUB_PAGES_BASE}/qualify.html"
     try:
         req = urllib.request.Request(quiz_url, method="HEAD")
         req.add_header("User-Agent", "BlueprintPipeline/2.3")
@@ -678,7 +702,7 @@ async def batch_git_push(batch_id: str, lead_count: int) -> Optional[str]:
     log.info(f"  Git: committing batch {batch_id} ({lead_count} leads)")
     try:
         proc = await asyncio.create_subprocess_exec(
-            "git", "add", "blueprints/", "delivery-emails/", "leads/",
+            "git", "add", "blueprints/", "delivery-emails/", "leads/", "podcasts/",
             cwd=str(REPO_DIR),
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
@@ -696,15 +720,6 @@ async def batch_git_push(batch_id: str, lead_count: int) -> Optional[str]:
         if not stdout.strip():
             log.info("  Git: nothing to commit")
             return None
-
-        # Also add any new website directories
-        proc = await asyncio.create_subprocess_exec(
-            "git", "add", "-A",
-            cwd=str(REPO_DIR),
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        await proc.communicate()
 
         ts = datetime.now().strftime("%Y%m%d-%H%M")
         msg = f"Blueprint batch {batch_id}: {lead_count} leads [{ts}]"

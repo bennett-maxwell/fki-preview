@@ -36,6 +36,8 @@ done
 
 if [ "$1" = "--help" ] || [ $# -lt 1 ]; then
     echo "Blueprint AI Batch Pipeline v2.0"
+    echo "DEPRECATED: use scripts/blueprint-pipeline-orchestrator.py."
+    echo "This legacy script is blocked because it bypasses Gatekeeper 100 tokens."
     echo ""
     echo "Usage: $0 <leads-dir> [--parallel-websites] [--send-previews]"
     echo ""
@@ -56,6 +58,10 @@ if [ "$1" = "--help" ] || [ $# -lt 1 ]; then
     echo "  7. Email Delivery (preview to Bennett first)"
     exit 0
 fi
+
+echo "BLOCKED: scripts/blueprint-batch.sh is deprecated and cannot ship Blueprint AI work."
+echo "Use scripts/blueprint-pipeline-orchestrator.py so every email send requires a Gatekeeper 100 token."
+exit 1
 
 # Count leads
 LEADS=($(find "$LEADS_DIR" -name "*.json" -type f | sort))

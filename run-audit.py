@@ -37,6 +37,67 @@ def financial_gate(html_path):
     except Exception as e:
         return False, f"financial check error: {e}"
 
+def load_lead(slug):
+    path = os.path.join(REPO, "leads", f"{slug}.json")
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path) as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+def attr_int(html, element_id, attr):
+    m = re.search(rf'id="{re.escape(element_id)}"[^>]*\b{re.escape(attr)}="(\d+)"', html)
+    return int(m.group(1)) if m else None
+
+def calculator_gate(html, lead):
+    failures = []
+    ids = set(re.findall(r'id="([^"]+)"', html))
+    referenced = set(re.findall(r"getElementById\('([^']+)'\)", html))
+    for required in ("q-current", "q-q2", "q-q3", "q-q4"):
+        if required in referenced and required not in ids:
+            failures.append(f"missing calculator target #{required}")
+    monthly_leads = lead.get("monthly_leads") or (lead.get("revenue_declaration") or {}).get("monthly_leads")
+    if monthly_leads not in (None, "", "unknown"):
+        slider_max = attr_int(html, "slider-leads", "max")
+        try:
+            monthly_leads = int(float(monthly_leads))
+        except Exception:
+            monthly_leads = None
+        if monthly_leads and slider_max and monthly_leads > slider_max:
+            failures.append(f"profile monthly_leads={monthly_leads} exceeds slider-leads max={slider_max}")
+    return not failures, failures
+
+def home_services_content_gate(html, lead):
+    industry_blob = " ".join(str(lead.get(k, "")) for k in ("industry", "business_type", "service_type", "market")).lower()
+    if not any(term in industry_blob for term in ("plumb", "hvac", "electrical", "home service", "restoration")):
+        return True, []
+    body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)
+    banned = [
+        "handing repeatable client setup and onboarding",
+        "running an AI content agent",
+        "full week of publish-ready content",
+        "proposal drafts from your design library",
+    ]
+    found = [term for term in banned if term.lower() in body.lower()]
+    return not found, found
+
+def podcast_source_gate(slug):
+    path = os.path.join(REPO, "podcasts", f"{slug}-podcast-source.md")
+    if not os.path.exists(path):
+        return False, ["missing podcast source"]
+    text = open(path, encoding="utf-8", errors="ignore").read()
+    failures = []
+    if "blueprint.meetadvaita.com/apply" in text:
+        failures.append("old apply URL remains")
+    if "qualify.html" not in text:
+        failures.append("tracked qualifier URL missing")
+    if re.search(r"first\s+90\s+days", text, re.I):
+        failures.append("first 90 days copy remains")
+    return not failures, failures
+
 def audit_lead(slug):
     results = {}
     redlines = {}  # keys here are HARD red-lines: any False => VERDICT FAIL regardless of score
@@ -45,6 +106,7 @@ def audit_lead(slug):
         return {"error": f"{html_path} not found", "score": 0}
     with open(html_path) as f:
         html = f.read()
+    lead = load_lead(slug)
     size = len(html)
     results["PF0-1_size_ge_40kb"] = size >= 40000
     pass_ph, tokens = check_placeholder(html)
@@ -53,6 +115,15 @@ def audit_lead(slug):
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
     results["D3-01_podcast_exists"] = os.path.exists(os.path.join(REPO, "podcasts", f"{slug}.mp3"))
     results["D9-01_no_orphan_classes"] = True  # simplified
+    calc_ok, calc_detail = calculator_gate(html, lead)
+    results["D7-22_calculator_matches_profile_RL"] = calc_ok
+    redlines["D7-22_calculator_matches_profile_RL"] = calc_ok
+    hs_ok, hs_detail = home_services_content_gate(html, lead)
+    results["D10-22_home_services_copy_clean_RL"] = hs_ok
+    redlines["D10-22_home_services_copy_clean_RL"] = hs_ok
+    podcast_ok, podcast_detail = podcast_source_gate(slug)
+    results["D4-09_podcast_source_funnel_clean_RL"] = podcast_ok
+    redlines["D4-09_podcast_source_funnel_clean_RL"] = podcast_ok
     fin_ok, fin_detail = financial_gate(html_path)
     results["D10-01_financial_realism_RL"] = fin_ok
     redlines["D10-01_financial_realism_RL"] = fin_ok
@@ -64,7 +135,10 @@ def audit_lead(slug):
     redline_fail = [k for k, v in redlines.items() if not v]
     return {"slug": slug, "score": score, "passed": passed, "total": total,
             "checks": results, "size": size,
-            "redline_fail": redline_fail, "financial_detail": fin_detail}
+            "redline_fail": redline_fail, "financial_detail": fin_detail,
+            "calculator_detail": calc_detail,
+            "home_services_detail": hs_detail,
+            "podcast_detail": podcast_detail}
 
 def main():
     import argparse
