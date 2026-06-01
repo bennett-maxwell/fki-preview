@@ -142,8 +142,14 @@ verify_gate_token() {
 
 REUSE_EXISTING=false
 
-# Idempotency check: reuse if output exists and is newer than the profile
-if [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
+# Idempotency check: once a Gatekeeper token exists, do not rewrite the email or
+# profile timestamp before send. The token is hash-bound to the exact artifacts.
+if [ -n "$GATE_TOKEN" ] && [ -f "$REPO_EMAIL" ] && [ "$FORCE" = false ]; then
+    echo "REUSE: gate token supplied; using existing hash-bound email artifact"
+    cp "$REPO_EMAIL" "$OUTPUT"
+    REUSE_EXISTING=true
+    echo "Desktop copy refreshed: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
+elif [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
     echo "REUSE: $REPO_EMAIL already exists and is newer than $PROFILE (idempotent)"
     echo "  Use --force to rebuild, or touch the profile to trigger rebuild."
     if [ "$FORCE" = false ]; then
