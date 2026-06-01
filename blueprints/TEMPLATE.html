@@ -1061,7 +1061,13 @@ If any answer is N: revise that section before sending.
     eq.classList.toggle('playing', playing);
     badge.childNodes[0].textContent = playing ? 'Now Playing ' : (audio.currentTime > 0 ? 'Paused ' : 'Ready to play ');
   }
-  function togglePlay() { if (audio.paused) { audio.play(); } else { audio.pause(); } }
+  function togglePlay() {
+    if (audio.paused) {
+      if (audio.readyState === 0) { audio.load(); }
+      var p = audio.play();
+      if (p && p.catch) { p.catch(function(err){ podError.style.display = 'block'; badge.childNodes[0].textContent = 'Tap again to play '; console.error('audio play failed:', err); }); }
+    } else { audio.pause(); }
+  }
 
   CHAPTERS.forEach(function(ch) {
     var pip = document.createElement('div');
