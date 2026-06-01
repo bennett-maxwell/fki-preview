@@ -104,7 +104,10 @@ def html_surface_gates(html: str) -> Tuple[bool, List[str]]:
         (r'>\s*Apply to work with Bennett\s*<', "banned CTA copy: Apply to work with Bennett"),
         (r'>\s*Apply to Work With Us\s*<', "banned CTA copy: Apply to Work With Us"),
         (r'>\s*Apply\s*<', "ambiguous CTA copy: Apply"),
-        (r'\bCommand Center\b', "deprecated Command Center content"),
+        # Match only the deprecated standalone "Command Center" label (nav/section/button
+        # text bracketed by tags), NOT legitimate inline marketing prose like
+        # "AI-powered command center" (brent-attaway false-positive, 2026-06-01).
+        (r'>\s*Command Center\s*<', "deprecated Command Center content"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*\$out\s*</span>', "corrupt visible badge: $out"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*\$in\s*</span>', "corrupt visible badge: $in"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*T\s*</span>', "corrupt visible badge: T"),
