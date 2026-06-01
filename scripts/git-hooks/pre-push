@@ -5,6 +5,7 @@
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 BASE_URL="https://bennett-maxwell.github.io/fki-preview/blueprints"
 FAIL=0
+WARN=0
 CHECKED=0
 
 # Get list of blueprint HTML files being pushed
@@ -16,6 +17,21 @@ while IFS= read -r line; do
   
   for f in $files; do
     slug=$(basename "$f" .html)
+
+    GK100="$REPO_ROOT/scripts/blueprint_gatekeeper_100.py"
+    if [[ -f "$GK100" ]]; then
+      mkdir -p /tmp/bp-prepush
+      if python3 "$GK100" --html "$REPO_ROOT/$f" --receipt-dir /tmp/bp-prepush --lead "$slug" --mode local --json-output >/tmp/bp-prepush/${slug}-gatekeeper-100.json 2>/tmp/bp-prepush/${slug}-gatekeeper-100.err; then
+        echo "  Gatekeeper 100 local PASS  $slug"
+      else
+        echo "  Gatekeeper 100 local FAIL  $slug"
+        ((FAIL++)) || true
+      fi
+    else
+      echo "  Gatekeeper 100 script missing FAIL  $slug"
+      ((FAIL++)) || true
+    fi
+
     url="$BASE_URL/$slug.html"
     code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null || echo "000")
     if [[ "$code" == "200" ]]; then
@@ -24,8 +40,8 @@ while IFS= read -r line; do
     elif [[ "$code" == "000" ]]; then
       echo "  SKIP (no network or not yet deployed) $slug"
     else
-      echo "  HTTP $code FAIL  $slug — $url"
-      ((FAIL++)) || true
+      echo "  HTTP $code POST-PUSH REQUIRED  $slug — $url"
+      ((WARN++)) || true
     fi
 
     # Opt 2 (2026-05-29): verify the podcast MP3 this blueprint references is also live.
@@ -43,11 +59,11 @@ while IFS= read -r line; do
       elif [[ "$pcode" == "000" ]]; then
         echo "  SKIP (no network) podcast: $podpath"
       elif [[ "$pcode" == "200" ]]; then
-        echo "  HTTP 200 but TOO SMALL (${psize}b < ${POD_MIN_BYTES}) FAIL  podcast: $podpath"
-        ((FAIL++)) || true
+        echo "  HTTP 200 but TOO SMALL (${psize}b < ${POD_MIN_BYTES}) POST-PUSH REQUIRED  podcast: $podpath"
+        ((WARN++)) || true
       else
-        echo "  HTTP $pcode FAIL  podcast: $podpath — $podurl"
-        ((FAIL++)) || true
+        echo "  HTTP $pcode POST-PUSH REQUIRED  podcast: $podpath — $podurl"
+        ((WARN++)) || true
       fi
     fi
   done
@@ -55,9 +71,13 @@ done
 
 if [[ $FAIL -gt 0 ]]; then
   echo ""
-  echo "Pre-push BLOCKED: $FAIL blueprint(s) returned non-200. Deploy or fix before push."
+  echo "Pre-push BLOCKED: $FAIL local Gatekeeper 100 check(s) failed. Fix before push."
   exit 1
 fi
 
 [[ $CHECKED -gt 0 ]] && echo "Pre-push: $CHECKED blueprint(s) verified HTTP 200."
+if [[ $WARN -gt 0 ]]; then
+  echo "Pre-push warning: $WARN public URL check(s) need post-push verification."
+  echo "Before any send or ready claim, run: python3 scripts/blueprint_gatekeeper_100.py --mode production --lead <slug> --html blueprints/<slug>.html --receipt-dir <receipts>"
+fi
 exit 0

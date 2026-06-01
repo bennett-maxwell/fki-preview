@@ -28,14 +28,23 @@ PROFILE="$1"
 SEND_PREVIEW=false
 SEND_GHL=false
 TEMPLATE_VARIANT=""
-for arg in "${@:2}"; do
+GATE_TOKEN=""
+EXTRA_ARGS=("${@:2}")
+i=0
+while [ "$i" -lt "${#EXTRA_ARGS[@]}" ]; do
+  arg="${EXTRA_ARGS[$i]}"
   case "$arg" in
     --send-preview) SEND_PREVIEW=true ;;
     --send-ghl) SEND_GHL=true ;;
     --template-b) TEMPLATE_VARIANT="b" ;;
     --template-c) TEMPLATE_VARIANT="c" ;;
+    --gate-token)
+      i=$((i + 1))
+      GATE_TOKEN="${EXTRA_ARGS[$i]:-}"
+      ;;
     --force) ;; # handled later
   esac
+  i=$((i + 1))
 done
 
 # A/B test support: use variant template if specified and exists
@@ -73,6 +82,26 @@ QUALIFY_URL="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=${S
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
+
+verify_gate_token() {
+    if [ -z "$GATE_TOKEN" ]; then
+        echo "BLOCKED: --gate-token is required before any Bennett preview or customer send."
+        echo "Run production Gatekeeper first:"
+        echo "  python3 scripts/blueprint_gatekeeper_100.py --mode production --lead $SLUG --html blueprints/$SLUG.html --receipt-dir <receipts>"
+        exit 1
+    fi
+    if [ ! -f "$GATE_TOKEN" ]; then
+        echo "BLOCKED: gate token not found: $GATE_TOKEN"
+        exit 1
+    fi
+    TOKEN_CHECK="/tmp/${SLUG}-gate-token-check.json"
+    if ! python3 "$SCRIPT_DIR/blueprint_gatekeeper_100.py" --verify-token --mode production --lead "$SLUG" --token "$GATE_TOKEN" --json-output > "$TOKEN_CHECK"; then
+        echo "BLOCKED: gate token is invalid."
+        cat "$TOKEN_CHECK"
+        exit 1
+    fi
+    echo "Gatekeeper token PASS: $GATE_TOKEN"
+}
 
 # Idempotency check: skip if output exists and is newer than the profile
 if [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
@@ -151,6 +180,7 @@ echo "Pre-delivery: PASS (booking=0 calendar=0 apply=$APPLY)"
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
+    verify_gate_token
     echo "Sending preview to bennett@franchiseki.com via Gmail..."
     gog gmail send \
         --to=bennett@franchiseki.com \
@@ -164,6 +194,7 @@ fi
 # Bennett directive 2026-05-19 — never send to customer without both.
 # ============================================================
 if [ "$SEND_GHL" = true ]; then
+    verify_gate_token
     # Gate 1: Podcast URL must be non-empty and return HTTP 200
     if [ -z "$PODCAST_URL" ] || [ "$PODCAST_URL" = "" ]; then
         echo "BLOCKED: PODCAST_URL is empty. Cannot send to customer until podcast is live."

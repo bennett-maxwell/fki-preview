@@ -71,7 +71,7 @@ for bp_path in $STAGED_BLUEPRINTS; do
   fi
 
   # ── Second gate (v2.1 2026-05-28): blueprint_completion_gate 50-breakpoint, double coverage ──
-  GATE2="/Users/openclaw/Documents/New project/scripts/blueprint_completion_gate.py"
+  GATE2="$CI_SKIP_DIR/scripts/blueprint_completion_gate.py"
   if [ -f "$GATE2" ]; then
     if python3 "$GATE2" --html "$CI_SKIP_DIR/$bp_path" --receipt-dir /tmp/bp-precommit --lead "$slug" --json-output 2>/dev/null \
         | python3 -c "import json,sys; sys.exit(0 if json.load(sys.stdin)['summary']['overall_pass'] else 1)" 2>/dev/null; then
@@ -91,6 +91,32 @@ for bp_path in $STAGED_BLUEPRINTS; do
       echo "  ❌ $slug: D9 render-integrity FAILED — commit blocked"
       OVERALL_FAIL=1
     fi
+  fi
+
+  # ── Gatekeeper 100 local gate (2026-06-01): no malformed visible labels, no
+  # banned CTA copy, and repo-local completion/audit/financial/D9 gates all pass.
+  GK100="$CI_SKIP_DIR/scripts/blueprint_gatekeeper_100.py"
+  if [ -f "$GK100" ]; then
+    GK_OUT="/tmp/bp-precommit/${slug}-gatekeeper-100.json"
+    mkdir -p /tmp/bp-precommit
+    if python3 "$GK100" --html "$CI_SKIP_DIR/$bp_path" --receipt-dir /tmp/bp-precommit --lead "$slug" --mode local --json-output > "$GK_OUT" 2>/tmp/bp-precommit/${slug}-gatekeeper-100.err; then
+      echo "  ✅ $slug: Gatekeeper 100 local PASS"
+    else
+      echo "  ❌ $slug: Gatekeeper 100 local FAILED — commit blocked"
+      python3 - "$GK_OUT" <<'PY' 2>/dev/null || true
+import json, sys
+try:
+    data = json.load(open(sys.argv[1]))
+    for failure in data.get("failures", [])[:10]:
+        print("     └─ " + failure)
+except Exception:
+    pass
+PY
+      OVERALL_FAIL=1
+    fi
+  else
+    echo "  ❌ $slug: Gatekeeper 100 script missing — commit blocked"
+    OVERALL_FAIL=1
   fi
 done
 
