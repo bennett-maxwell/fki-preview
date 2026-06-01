@@ -77,8 +77,31 @@ PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Gen
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
-# Template uses {{QUALIFY_URL}}, which was NEVER substituted before -> every email shipped a dead CTA.
-QUALIFY_URL="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=${SLUG}&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery"
+# Prefer the profile's already-personalized qualifier URL, then enforce identity
+# params so email click-through updates the same GHL contact instead of spawning
+# a duplicate record.
+PROFILE_QUALIFY_URL=$(get apply_url "")
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
+import sys
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+
+profile_url, lead_name, business_name, slug, contact_id = sys.argv[1:6]
+url = profile_url or "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+parts = urlsplit(url)
+if not parts.scheme:
+    parts = urlsplit("https://bennett-maxwell.github.io/fki-preview/qualify.html")
+params = dict(parse_qsl(parts.query, keep_blank_values=True))
+params["lead"] = lead_name
+params["biz"] = business_name
+params["src"] = slug
+params["utm_source"] = "blueprint_email"
+params["utm_medium"] = "email"
+params["utm_campaign"] = "blueprint_delivery"
+if contact_id:
+    params["contactId"] = contact_id
+print(urlunsplit((parts.scheme, parts.netloc, parts.path or "/fki-preview/qualify.html", urlencode(params), "")))
+PYEOF
+)
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
@@ -163,6 +186,9 @@ json.dump(p, open(sys.argv[1], 'w'), indent=2)
 " "$PROFILE" 2>/dev/null || true
 
 echo "Built: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
+mkdir -p "$(dirname "$REPO_EMAIL")"
+cp "$OUTPUT" "$REPO_EMAIL"
+echo "Repo copy: $REPO_EMAIL ($(wc -c < "$REPO_EMAIL" | tr -d ' ') bytes)"
 
 # Pre-delivery check on the email
 BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || true)
@@ -195,6 +221,17 @@ fi
 # ============================================================
 if [ "$SEND_GHL" = true ]; then
     verify_gate_token
+    if ! python3 - "$GATE_TOKEN" << 'PYEOF'
+import json, sys
+data = json.load(open(sys.argv[1]))
+token = data.get("pass_token", data)
+actions = token.get("allowed_actions", [])
+sys.exit(0 if "external_send" in actions else 1)
+PYEOF
+    then
+        echo "BLOCKED: gate token allows Bennett preview only. Regenerate after Bennett approval before customer send."
+        exit 1
+    fi
     # Gate 1: Podcast URL must be non-empty and return HTTP 200
     if [ -z "$PODCAST_URL" ] || [ "$PODCAST_URL" = "" ]; then
         echo "BLOCKED: PODCAST_URL is empty. Cannot send to customer until podcast is live."

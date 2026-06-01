@@ -332,6 +332,23 @@ def patch_home_services(html: str, profile: dict) -> str:
     html = html.replace("COMMAND CENTER", "LOCAL OPERATING SYSTEM")
     html = html.replace("command-", "local-system-")
 
+    mobile_nav_fix = """
+  /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
+  @media (max-width: 640px) {
+    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .tab-btn {
+      flex: 0 0 auto;
+      min-width: 118px;
+      font-size: 10px;
+      padding: 12px 10px;
+      letter-spacing: 0.5px;
+      scroll-snap-align: start;
+    }
+  }
+"""
+    if "Home-services mobile tab fix" not in html:
+        html = html.replace("</style>", mobile_nav_fix + "</style>", 1)
+
     if "Apply to Work With Us" in html or "Apply to work with Bennett" in html:
         raise SystemExit("home-services patch failed: banned CTA remains")
     return html

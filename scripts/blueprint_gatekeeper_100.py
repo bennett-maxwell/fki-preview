@@ -152,6 +152,17 @@ def validate_token(token_path: Path, lead: str, require_production: bool) -> Tup
     return not failures, failures
 
 
+def external_send_approved(receipt_dir: Path, lead: str) -> bool:
+    approval_path = receipt_dir / f"{lead}-production-48.json"
+    if not approval_path.exists():
+        return False
+    try:
+        data = load_json(approval_path)
+    except Exception:
+        return False
+    return data.get("external_customer_send_approved") is True or data.get("bennett_approved") is True
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Blueprint Gatekeeper 100")
     parser.add_argument("--html", help="Blueprint HTML path")
@@ -267,16 +278,20 @@ def main() -> int:
     }
 
     if pass_now and args.mode == "production":
+        allowed_actions = ["internal_preview", "bennett_preview"]
+        if external_send_approved(receipt_dir, args.lead):
+            allowed_actions.append("external_send")
         output["pass_token"] = {
             "pass": True,
             "lead": args.lead,
             "score": 100,
             "diamond": "PASS",
             "strict_production": True,
+            "approval_state": "external_send_approved" if "external_send" in allowed_actions else "bennett_preview_only",
             "generated_at": utc_now(),
             "html_path": str(html_path),
             "receipt_dir": str(receipt_dir),
-            "allowed_actions": ["internal_preview", "bennett_preview", "external_send"],
+            "allowed_actions": allowed_actions,
         }
         write_json(gatekeeper_receipt, output)
 
