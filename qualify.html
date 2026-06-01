@@ -664,16 +664,19 @@ function posToLPS(pos) {
 
 function lpsUpdate() {
   const pos = +document.getElementById('sl-lps').value;
-  if (pos === 0) { lpsVal = null; }
-  else {
+  const sl  = document.getElementById('sl-lps');
+  const lbl = document.getElementById('lbl-lps');
+  if (pos === 0) {
+    lpsVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
     lpsVal = posToLPS(pos);
     const impliedPct = Math.round(100 / lpsVal);
-    const lbl = document.getElementById('lbl-lps');
     lbl.textContent = lpsVal + (lpsVal === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + impliedPct + '% close)';
-    lbl.className = 'slider-val';
-    const sl = document.getElementById('sl-lps');
-    sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+    lbl.className   = 'slider-val';
   }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
   update();
 }
 
@@ -981,8 +984,8 @@ async function submitQualification() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    const result = await response.json().catch(() => ({}));
     if (response.ok) {
-      const result = await response.json().catch(() => ({}));
       const returnedContactId = result.contactId || result.contact_id || result.id || payload.contact_id || '';
       persistReturnedContactId(returnedContactId);
       if (returnedContactId) payload.contact_id = returnedContactId;
@@ -994,6 +997,12 @@ async function submitQualification() {
       }
       return { saved: true, payload, contactId: returnedContactId, response: result };
     } else {
+      // Duplicate contact = already in GHL; treat as soft success so modal still opens
+      const detail = String(result.detail || result.message || result.error || '').toLowerCase();
+      if (detail.includes('duplicate') || detail.includes('duplicated')) {
+        logFunnelEvent('crm_duplicate_contact', { contact_id: payload.contact_id });
+        return { saved: true, payload, contactId: payload.contact_id || '', response: result, duplicate: true };
+      }
       try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
       return { saved: false, payload, contactId: payload.contact_id || '', error: 'crm_http_' + response.status };
     }
