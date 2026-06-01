@@ -943,6 +943,14 @@
     .hero h1 { font-size: 28px; }
     .roi-hero .roi-number { font-size: 36px; }
     .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .tab-nav::after {
+      content: "";
+      position: sticky;
+      right: 0;
+      flex: 0 0 24px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(10,14,26,0), var(--primary));
+    }
     .tab-btn {
       flex: 0 0 auto;
       min-width: 118px;
@@ -1075,10 +1083,10 @@
         <div class="desc"><strong>What they're doing:</strong> putting an AI speed-to-lead agent on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first business to respond wins the clear majority of deals &mdash; they capture leads slower competitors never see. <strong>How I deliver it for Plumber Test Business:</strong> a speed-to-lead agent wired into GoHighLevel, Google Workspace, Microsoft Teams, ServiceTitan or Housecall Pro-style field service workflow, call tracking, Google Ads that answers every inbound in under 60 seconds and routes it to the right stage.</div>
       </div>
       <div class="case-card">
-        <div class="desc"><strong>What they're doing:</strong> handing repeatable client setup and onboarding to an AI agent. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a small team serves far more clients without a new hire. <strong>How I deliver it for Plumber Test Business:</strong> an onboarding agent that handles every repeatable step so your team only touches the high-value conversations.</div>
+        <div class="desc"><strong>What they're doing:</strong> using AI to turn every service request into a dispatch-ready job brief. <strong>How it helps them:</strong> office staff stop chasing missing addresses, issue details, photos, and access notes before a technician can roll. <strong>How I deliver it for Plumber Test Business:</strong> a dispatch intake agent that captures urgency, location, job type, photos, and next step inside GoHighLevel before the lead cools off.</div>
       </div>
       <div class="case-card">
-        <div class="desc"><strong>What they're doing:</strong> running an AI content agent that turns one update into a week of social, email, and blog content. <strong>How it helps them:</strong> they stay top-of-mind every week with no marketing hire and no content backlog. <strong>How I deliver it for Plumber Test Business:</strong> a content agent trained on your brand voice that converts each update into a full week of publish-ready content.</div>
+        <div class="desc"><strong>What they're doing:</strong> automating estimate follow-up, maintenance reminders, and review requests after every job. <strong>How it helps them:</strong> more open estimates convert, past customers return, and happy customers leave reviews while the work is still fresh. <strong>How I deliver it for Plumber Test Business:</strong> follow-up, recall, and review-loop agents trained around emergency repairs, drains, water heaters, leaks, sewer lines, and maintenance plans.</div>
       </div>
     </div>
     <p style="margin-top:1.4rem;font-weight:600;color:var(--text);">Every one of these is already running inside businesses that do what you do. The ones who move first do not just save time &mdash; they take the customers everyone else was too slow to answer. Plumber Test Business can be the business they worry about, or the one they leave behind.</p>
@@ -1286,7 +1294,7 @@
           <span>Monthly Leads</span>
           <span class="slider-val" id="val-leads">(enter yours)</span>
         </div>
-        <input type="range" id="slider-leads" min="3" max="40" step="1" value="3" data-no-default="true" oninput="calcTouched=true;updateCalc()">
+        <input type="range" id="slider-leads" min="3" max="250" step="1" value="3" data-no-default="true" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
@@ -1324,6 +1332,25 @@
       </div>
     </div>
 
+
+    <div class="quarterly-grid" aria-label="Quarterly revenue projection">
+      <div class="q-card">
+        <div class="q-label">Current Quarter</div>
+        <div class="q-val" id="q-current">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">First AI Quarter</div>
+        <div class="q-val" id="q-q2">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Optimized Quarter</div>
+        <div class="q-val" id="q-q3">—</div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Compounding Quarter</div>
+        <div class="q-val" id="q-q4">—</div>
+      </div>
+    </div>
 
     <!-- Pillar Breakdown in ROI -->
     <h3 style="margin-top:32px; margin-bottom:16px;">Value Breakdown by Pillar</h3>
@@ -1612,7 +1639,6 @@ const presets = {
 
 function setScenario(s) {
   calcTouched = true;
-  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1622,9 +1648,11 @@ function setScenario(s) {
 
 // ROI Calculator
 var calcTouched = false;
-var calcTouched = false;
+function setCalcText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
 function updateCalc() {
-  if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   const contract = parseInt(document.getElementById('slider-contract').value) || 300;
   const leads = parseInt(document.getElementById('slider-leads').value) || 0;
@@ -1632,10 +1660,10 @@ function updateCalc() {
   const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
 
   // Display values
-  document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
-  document.getElementById('val-leads').textContent = leads;
-  document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
+  setCalcText('val-contract', '$' + contract.toLocaleString());
+  setCalcText('val-leads', leads);
+  setCalcText('val-close', (closeRate * 100).toFixed(0) + '%');
+  setCalcText('val-seo', (seoLift * 100).toFixed(0) + '%');
 
   // Current monthly
   const currentMonthly = contract * leads * closeRate;
@@ -1654,21 +1682,21 @@ function updateCalc() {
   const q4 = q3 * 1.20;
 
   // Update display
-  document.getElementById('res-monthly').textContent = '$' + Math.round(monthlyGain).toLocaleString();
-  document.getElementById('res-quarterly').textContent = '$' + Math.round(quarterlyGain).toLocaleString();
+  setCalcText('res-monthly', '$' + Math.round(monthlyGain).toLocaleString());
+  setCalcText('res-quarterly', '$' + Math.round(quarterlyGain).toLocaleString());
 
-  document.getElementById('q-current').textContent = '$' + (currentQ / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q2').textContent = '$' + (q2 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
-  document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
+  setCalcText('q-current', '$' + (currentQ / 1000).toFixed(1) + 'K');
+  setCalcText('q-q2', '$' + (q2 / 1000).toFixed(1) + 'K');
+  setCalcText('q-q3', '$' + (q3 / 1000).toFixed(1) + 'K');
+  setCalcText('q-q4', '$' + (q4 / 1000).toFixed(1) + 'K');
 
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + higher close rate';
+  setCalcText('pillar-rev', '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + higher close rate');
 
   // Time saved + cost savings (RULE-13: understated 15%)
   const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);
   const costSavings = Math.round(1800 * (1 + seoLift * 0.25));
-  document.getElementById('res-time').textContent = timeSaved + ' hrs/wk';
-  document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
+  setCalcText('res-time', timeSaved + ' hrs/wk');
+  setCalcText('res-cost', '$' + costSavings.toLocaleString() + '/mo');
 }
 
 // Urgency countdown (rolling — never shows negative)

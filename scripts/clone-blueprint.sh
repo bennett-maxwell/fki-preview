@@ -61,6 +61,7 @@ ARGUMENTS:
 OPTIONS:
   --help              Show this help message and exit.
   --dry-run           Generate the HTML but skip git commit/push and HTTP verify.
+  --no-commit         Generate the HTML but skip git commit/push and HTTP verify.
   --no-push           Generate and commit but skip push and HTTP verify.
 
 WHAT IT DOES:
@@ -84,6 +85,7 @@ HELP
 
 # ─── Arg parsing ────────────────────────────────────────────────────────────
 DRY_RUN=false
+NO_COMMIT=false
 NO_PUSH=false
 PROFILE_JSON=""
 
@@ -91,6 +93,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --help|-h) usage ;;
     --dry-run) DRY_RUN=true; shift ;;
+    --no-commit) NO_COMMIT=true; shift ;;
     --no-push) NO_PUSH=true; shift ;;
     -*) echo "ERROR: Unknown option: $1" >&2; exit 1 ;;
     *) PROFILE_JSON="$1"; shift ;;
@@ -526,9 +529,9 @@ if [[ "$GATE_FAIL" == "1" ]]; then
 fi
 echo "  Validation complete -- all HARD gates PASS."
 
-if [[ "$DRY_RUN" == "true" ]]; then
+if [[ "$DRY_RUN" == "true" || "$NO_COMMIT" == "true" ]]; then
   echo ""
-  echo "=== DRY RUN COMPLETE ==="
+  echo "=== NO-COMMIT COMPLETE ==="
   echo "Output: $OUTPUT_FILE"
   echo "Skipping git commit, push, and HTTP verify."
   exit 0

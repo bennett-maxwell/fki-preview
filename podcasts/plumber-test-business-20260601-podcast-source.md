@@ -183,7 +183,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
 **Days 1-3: Onboarding.** Plumbing and home services audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -255,7 +255,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html?src=plumber-test-business-20260601&utm_source=blueprint_podcast&utm_medium=audio&utm_campaign=blueprint_delivery
 
 This is an application, not a commitment. We read every one personally.
 
@@ -356,9 +356,9 @@ Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
 If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+https://bennett-maxwell.github.io/fki-preview/qualify.html?src=plumber-test-business-20260601&utm_source=blueprint_podcast&utm_medium=audio&utm_campaign=blueprint_delivery
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
 This audio walkthrough was built for Plumber Test Business. Not a template.
-Every number, every example, every recommendation — yours.
+Every example and recommendation is built from the test intake for Plumber Test Business.

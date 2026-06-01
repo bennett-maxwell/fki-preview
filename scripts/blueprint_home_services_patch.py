@@ -83,6 +83,26 @@ def patch_home_services(html: str, profile: dict) -> str:
     html = html.replace(", Instagram, and LinkedIn", " and your field-service stack")
     html = html.replace("Google Workspace, Microsoft Teams, ServiceTitan or Housecall Pro-style field service workflow, call tracking, Google Ads Database", "GoHighLevel Database")
 
+    html = replace_section(html, "sec-2", f"""
+  <section id="sec-2" class="section">
+    <div class="section-label">What Your Industry Is Already Doing</div>
+    <h2>Plumbing and Home Services Businesses Like Yours Are Already Running on AI</h2>
+    <p>These are the exact moves businesses in your space are making right now. The question is not whether AI runs these functions. It is whether {business} runs them before the competitor down the street does.</p>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> putting an AI speed-to-lead agent on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first business to respond wins the clear majority of urgent repair jobs. <strong>How I deliver it for {business}:</strong> a speed-to-lead agent wired into {tools} that answers every inbound in under 60 seconds and routes it to the right stage.</div>
+      </div>
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> using AI to turn every service request into a dispatch-ready job brief. <strong>How it helps them:</strong> office staff stop chasing missing addresses, issue details, photos, and access notes before a technician can roll. <strong>How I deliver it for {business}:</strong> a dispatch intake agent that captures urgency, location, job type, photos, and next step inside GoHighLevel before the lead cools off.</div>
+      </div>
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> automating estimate follow-up, maintenance reminders, and review requests after every job. <strong>How it helps them:</strong> more open estimates convert, past customers return, and happy customers leave reviews while the work is still fresh. <strong>How I deliver it for {business}:</strong> follow-up, recall, and review-loop agents trained around {services or "emergency repairs, maintenance calls, and local service work"}.</div>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem;font-weight:600;color:var(--text);">Every one of these is already running inside businesses that do what you do. The ones who move first do not just save time -- they take the customers everyone else was too slow to answer.</p>
+  </section>
+""")
+
     html = replace_section(html, "sec-3", f"""
   <section id="sec-3" class="section">
     <div class="section-label">Gap Analysis</div>
@@ -336,6 +356,14 @@ def patch_home_services(html: str, profile: dict) -> str:
   /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
   @media (max-width: 640px) {
     .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .tab-nav::after {
+      content: "";
+      position: sticky;
+      right: 0;
+      flex: 0 0 24px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(10,14,26,0), var(--primary));
+    }
     .tab-btn {
       flex: 0 0 auto;
       min-width: 118px;

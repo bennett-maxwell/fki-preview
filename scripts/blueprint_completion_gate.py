@@ -90,6 +90,96 @@ def receipt_pass(path: Path) -> bool:
     return status in {"PASS", "PASSED", "OK", "SUCCESS", "GREEN", "DIAMOND_PASS"}
 
 
+def load_receipt(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def production_receipt_result(num: int, path: Path, html: str,
+                              html_path: Optional[Path]) -> Tuple[bool, str]:
+    """Schema-specific production proof validators.
+
+    Generic "status: PASS" is not enough for production checks because preview
+    receipts can be honest but narrower than customer-send approval.
+    """
+    data = load_receipt(path)
+    if not data:
+        return False, f"PRODUCTION REQUIRED: Missing or invalid receipt for check {num}"
+
+    base_pass = data.get("pass") is True or str(data.get("status") or "").upper() == "PASS"
+
+    if num == 42:
+        ok = base_pass and int(data.get("http_code") or 0) == 200 and bool(data.get("url"))
+        return ok, "Public page HTTP 200 verified" if ok else "Public page receipt must include pass=true, http_code=200, and url"
+
+    if num == 43:
+        ok = base_pass and bool(data.get("registry_file")) and data.get("verified") is True
+        return ok, "Drive artifact registry verified" if ok else "Drive receipt must include registry_file and verified=true"
+
+    if num == 44:
+        ok = base_pass and bool(data.get("notion_page_id")) and data.get("row_current") is True
+        return ok, "Notion Sprint row current" if ok else "Notion receipt must include notion_page_id and row_current=true"
+
+    if num == 45:
+        contact = data.get("contact") if isinstance(data.get("contact"), dict) else {}
+        conversation = data.get("conversation") if isinstance(data.get("conversation"), dict) else {}
+        ok = (
+            base_pass
+            and int(data.get("exact_contact_count") or 0) == 1
+            and bool(contact.get("id"))
+            and data.get("instant_response_verified") is True
+            and bool(conversation.get("id"))
+        )
+        detail = "GHL exact contact readback and instant response verified" if ok else (
+            "GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true"
+        )
+        return ok, detail
+
+    if num == 46:
+        ok = (
+            base_pass
+            and int(data.get("relay_http_status") or 0) == 200
+            and data.get("relay_mode") in {"updated", "matched"}
+            and bool(data.get("returned_contact_id"))
+            and data.get("returned_contact_id") == data.get("expected_contact_id")
+            and int(data.get("exact_contact_count_after_repeat") or 0) == 1
+        )
+        detail = "Repeat submit updated same GHL contact" if ok else (
+            "Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
+        )
+        return ok, detail
+
+    if num == 47:
+        local_audio_ok, local_audio_detail = audio_size_check(html, html_path)
+        remote_ok = (
+            base_pass
+            and int(data.get("http_code") or 0) == 200
+            and int(data.get("size_download") or 0) >= 29 * 1024 * 1024
+        )
+        ok = remote_ok and local_audio_ok
+        if ok:
+            return True, f"Public and local podcast audio verified ({data.get('size_download')} bytes)"
+        if not remote_ok:
+            return False, "Public podcast receipt must include pass=true, http_code=200, and size_download >= 29MB"
+        return False, local_audio_detail
+
+    if num == 48:
+        external = data.get("external_customer_send_approved") is True or data.get("bennett_approved") is True
+        preview = data.get("bennett_preview_requested") is True or data.get("approval_scope") == "bennett_preview_only"
+        if base_pass and external:
+            return True, "Approval scope: external customer send approved"
+        if base_pass and preview:
+            return True, "Approval scope: Bennett preview only; customer send remains blocked"
+        return False, "Approval receipt must record Bennett preview scope or external customer-send approval"
+
+    return receipt_pass(path), "OK" if receipt_pass(path) else f"Missing or failing receipt for check {num}"
+
+
 def audio_size_check(html: str, html_path: Optional[Path], min_bytes: int = 29 * 1024 * 1024) -> Tuple[bool, str]:
     """Verify the referenced local MP3 exists and meets the production-size floor."""
     refs = re.findall(r'(?:src|href)=["\']([^"\']*podcasts/[^"\']+\.mp3[^"\']*)["\']', html, re.I)
@@ -616,24 +706,21 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
         45: "Current GHL readback (contact tagged)",
         46: "Repeat-submit same-contact proof",
         47: "NotebookLM-size audio (≥29MB)",
-        48: "Bennett approval obtained",
+        48: "Bennett approval scope recorded",
     }
     for num, desc in prod_checks.items():
         if require_production:
-            # Check for production receipt files
-            prod_receipt = receipt_pass(receipt_dir / f"{lead_slug}-production-{num}.json")
-            audio_ok, audio_detail = (True, "OK")
-            if num == 47:
-                audio_ok, audio_detail = audio_size_check(html, html_path)
+            prod_receipt, prod_detail = production_receipt_result(
+                num,
+                receipt_dir / f"{lead_slug}-production-{num}.json",
+                html,
+                html_path,
+            )
             results[num] = {
                 "desc": desc,
-                "pass": prod_receipt and audio_ok,
+                "pass": prod_receipt,
                 "severity": "critical",
-                "detail": (
-                    f"PRODUCTION REQUIRED: Missing or failing receipt for check {num}" if not prod_receipt
-                    else audio_detail if num == 47 and not audio_ok
-                    else "OK"
-                )
+                "detail": prod_detail,
             }
         else:
             results[num] = {

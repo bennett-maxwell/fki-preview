@@ -8,6 +8,7 @@ strict completion gate all pass.
 """
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -34,6 +35,26 @@ def load_json(path: Path) -> Dict[str, Any]:
 def write_json(path: Path, data: Dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def optional_artifact_hash(path: Path) -> str:
+    return file_sha256(path) if path.exists() else ""
+
+
+def default_delivery_email_path(lead: str) -> Path:
+    return REPO / "delivery-emails" / f"{lead}-delivery-email.html"
+
+
+def default_lead_profile_path(lead: str) -> Path:
+    return REPO / "leads" / f"{lead}.json"
 
 
 def receipt_pass(path: Path) -> bool:
@@ -130,7 +151,9 @@ def audio_size_gate(html: str, html_path: Path) -> Tuple[bool, str]:
     return False, "all referenced MP3 files below production floor or missing: " + ", ".join(details)
 
 
-def validate_token(token_path: Path, lead: str, require_production: bool) -> Tuple[bool, List[str]]:
+def validate_token(token_path: Path, lead: str, require_production: bool,
+                   html_path: Path = None, delivery_email_path: Path = None,
+                   lead_profile_path: Path = None) -> Tuple[bool, List[str]]:
     failures = []
     if not token_path.exists():
         return False, [f"missing token: {token_path}"]
@@ -149,6 +172,28 @@ def validate_token(token_path: Path, lead: str, require_production: bool) -> Tup
         failures.append("token diamond is not PASS")
     if require_production and token.get("strict_production") is not True:
         failures.append("token is not a strict production token")
+    artifact_hashes = token.get("artifact_hashes")
+    if html_path or delivery_email_path or lead_profile_path:
+        if not isinstance(artifact_hashes, dict):
+            failures.append("token missing artifact_hashes")
+        else:
+            comparisons = [
+                ("blueprint_html_sha256", html_path),
+                ("delivery_email_sha256", delivery_email_path),
+                ("lead_profile_sha256", lead_profile_path),
+            ]
+            for key, path in comparisons:
+                if path is None:
+                    continue
+                if not path.exists():
+                    failures.append(f"artifact missing for hash verification: {path}")
+                    continue
+                expected = artifact_hashes.get(key)
+                actual = file_sha256(path)
+                if not expected:
+                    failures.append(f"token missing {key}")
+                elif expected != actual:
+                    failures.append(f"token {key} mismatch")
     return not failures, failures
 
 
@@ -172,6 +217,8 @@ def main() -> int:
     parser.add_argument("--json-output", action="store_true")
     parser.add_argument("--verify-token", action="store_true", help="Only verify a pass token")
     parser.add_argument("--token", help="Gatekeeper pass-token JSON path")
+    parser.add_argument("--delivery-email", help="Delivery email artifact to bind/verify")
+    parser.add_argument("--profile", help="Lead profile JSON artifact to bind/verify")
     args = parser.parse_args()
 
     receipt_dir = Path(args.receipt_dir)
@@ -182,7 +229,17 @@ def main() -> int:
         if not args.token:
             print("ERROR: --token is required with --verify-token", file=sys.stderr)
             return 2
-        ok, failures = validate_token(Path(args.token).resolve(), args.lead, args.mode == "production")
+        verify_html = resolve_html(args.html) if args.html else None
+        verify_delivery = resolve_html(args.delivery_email) if args.delivery_email else None
+        verify_profile = resolve_html(args.profile) if args.profile else None
+        ok, failures = validate_token(
+            Path(args.token).resolve(),
+            args.lead,
+            args.mode == "production",
+            verify_html,
+            verify_delivery,
+            verify_profile,
+        )
         out = {"status": "PASS" if ok else "FAIL", "lead": args.lead, "failures": failures}
         print(json.dumps(out, indent=2) if args.json_output else out["status"])
         return 0 if ok else 1
@@ -281,6 +338,8 @@ def main() -> int:
         allowed_actions = ["internal_preview", "bennett_preview"]
         if external_send_approved(receipt_dir, args.lead):
             allowed_actions.append("external_send")
+        delivery_email = resolve_html(args.delivery_email) if args.delivery_email else default_delivery_email_path(args.lead)
+        lead_profile = resolve_html(args.profile) if args.profile else default_lead_profile_path(args.lead)
         output["pass_token"] = {
             "pass": True,
             "lead": args.lead,
@@ -292,6 +351,16 @@ def main() -> int:
             "html_path": str(html_path),
             "receipt_dir": str(receipt_dir),
             "allowed_actions": allowed_actions,
+            "artifact_hashes": {
+                "blueprint_html_sha256": file_sha256(html_path),
+                "delivery_email_sha256": optional_artifact_hash(delivery_email),
+                "lead_profile_sha256": optional_artifact_hash(lead_profile),
+            },
+            "artifact_paths": {
+                "blueprint_html": str(html_path),
+                "delivery_email": str(delivery_email),
+                "lead_profile": str(lead_profile),
+            },
         }
         write_json(gatekeeper_receipt, output)
 
