@@ -11,9 +11,13 @@
   <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/court-lundberg.html" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>AI Advantage Roadmap — Rare Breed Plumbing, Heating and Air (Court Lundberg)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       /* design-system palette — Rare Breed brand: navy #124D77 / dark #004976 / accent #FF7C2B */
+      --primary:      #1a1a2e;
       --brand:        #004976;
       --brand-dark:   #06243a;
       --brand-light:  #124D77;
@@ -25,14 +29,14 @@
       --text-muted:  #3a3a3a;
       --text-light:  #888888;
       --border:      #e2e2e2;
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
       --shadow: 0 4px 24px rgba(18,77,119,0.08);
       --shadow-md: 0 8px 40px rgba(18,77,119,0.12);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
     .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
     .nav-logo span { color: var(--brand-accent); }
@@ -69,6 +73,9 @@
     .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand-accent); display: block; }
     .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
     .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .pod-track { background: rgba(255,255,255,0.15); border-radius: 8px; }
+    .pod-pip { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; background: var(--brand-accent); border-radius: 50%; pointer-events: none; display: none; }
+    .chapter-pip { position: absolute; top: 50%; width: 4px; height: 16px; background: rgba(255,255,255,0.62); border-radius: 2px; transform: translate(-50%,-50%); }
     .section { padding: 5rem 2rem; }
     .section-alt { background: var(--neutral-bg); }
     .container { max-width: 1000px; margin: 0 auto; }
@@ -228,6 +235,7 @@
     <li><a href="#agents">AI Agents</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
     <li><a href="#listen">Listen</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#apply">Apply</a></li>
   </ul>
 </nav>
@@ -878,7 +886,7 @@ Rare Breed Plumbing, Heating and Air
     <h2 class="section-title">callrarebreed.com &mdash; AI Opportunity Summary</h2>
     <p class="section-sub">Four places, based on what you told us, where AI would lift conversion and free up your team. These reflect your stated current state &mdash; not a guess.</p>
     <div class="audit-grid">
-      <div class="audit-card"><div class="audit-score" style="font-size:1.4rem;line-height:1.2;">~60 min</div><div class="audit-phase">Speed-to-Lead</div><div class="audit-detail">Leads currently wait around 60 minutes for a response. AI closes that to under 60 seconds, 24/7.</div><div class="audit-bar"><div class="audit-bar-fill" style="width:30%"></div></div></div>
+      <div class="audit-card"><div class="audit-score" style="font-size:1.4rem;line-height:1.2;">~60 min</div><div class="audit-phase">Lead Response</div><div class="audit-detail">Leads currently wait around 60 minutes for a response. AI closes that to under 60 seconds, 24/7.</div><div class="audit-bar"><div class="audit-bar-fill" style="width:30%"></div></div></div>
       <div class="audit-card"><div class="audit-score" style="font-size:1.4rem;line-height:1.2;">24/7</div><div class="audit-phase">Missed Calls</div><div class="audit-detail">You run 24/7 emergency service. An AI phone agent makes sure no after-hours call goes unanswered.</div><div class="audit-bar"><div class="audit-bar-fill" style="width:35%"></div></div></div>
       <div class="audit-card"><div class="audit-score" style="font-size:1.4rem;line-height:1.2;">ChatGPT</div><div class="audit-phase">AI Readiness</div><div class="audit-detail">ChatGPT is used ad-hoc today. The next step is systematic agents wired into your tools.</div><div class="audit-bar"><div class="audit-bar-fill" style="width:25%"></div></div></div>
       <div class="audit-card"><div class="audit-score" style="font-size:1.4rem;line-height:1.2;">Touch #1</div><div class="audit-phase">Follow-Up</div><div class="audit-detail">Follow-up is a stated drain. Automated estimate and lead follow-up keeps deals warm without manual chasing.</div><div class="audit-bar"><div class="audit-bar-fill" style="width:30%"></div></div></div>
@@ -900,20 +908,24 @@ Rare Breed Plumbing, Heating and Air
         <span class="podcast-meta-item">&#127911; Plumbing &amp; HVAC + AI</span>
         <span class="podcast-meta-item">&#128100; Prepared for Court Lundberg</span>
       </div>
-      <div class="podcast-player">
-        <audio id="podcastAudio" preload="metadata" style="width:100%">
-          <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" type="audio/mpeg">
-          Your browser does not support the audio element. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" style="color:var(--brand-accent)">Download the podcast</a>.
-        </audio>
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;">
-          <button onclick="var a=document.getElementById('podcastAudio');a.paused?a.play():a.pause();this.textContent=a.paused?'Play':'Pause'" style="background:var(--brand-accent);color:#ffffff;border:none;border-radius:8px;padding:0.45rem 1.1rem;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:var(--font-sans)">Play</button>
-          <span style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-right:0.25rem;">Speed:</span>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn speed-active" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.25;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.25x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=1.5;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">1.5x</button>
-          <button onclick="var a=document.getElementById('podcastAudio');a.playbackRate=2;document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('speed-active'));this.classList.add('speed-active')" class="speed-btn" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:0.3rem 0.75rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:var(--font-sans);transition:all 0.15s">2x</button>
+      <div id="podcast" class="podcast-player" style="background: var(--brand-dark); border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0; color: #fff;">
+        <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 12px;">Your Personalized AI Podcast</p>
+        <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" style="width:100%;margin-bottom:12px;"></audio>
+        <div class="pod-track" style="position:relative;height:16px;margin:10px 0;">
+          <div class="pod-pip chapter-pip" data-time="0" title="Intro"></div>
+          <div class="pod-pip chapter-pip" data-time="300" title="Your Business"></div>
+          <div class="pod-pip chapter-pip" data-time="700" title="AI Agents"></div>
+          <div class="pod-pip chapter-pip" data-time="1000" title="ROI & Roadmap"></div>
         </div>
-        <style>.speed-active{background:rgba(255,124,43,0.3)!important;border-color:var(--brand-accent)!important;color:white!important;}</style>
+        <div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:8px;">
+          <button id="podPlay" onclick="var a=document.getElementById('podAudio');if(a.paused){a.play();this.textContent='Pause';}else{a.pause();this.textContent='Play';}" style="padding:8px 22px;border-radius:100px;border:none;background:var(--brand-accent);color:#fff;font-weight:700;cursor:pointer;font-size:14px;font-family:var(--font-sans);">Play</button>
+          <span style="font-size:12px;color:rgba(255,255,255,0.75);">Speed:</span>
+          <button onclick="document.getElementById('podAudio').playbackRate=1;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=1.25;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1.25x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=1.5;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">1.5x</button>
+          <button onclick="document.getElementById('podAudio').playbackRate=2;" style="padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:12px;">2x</button>
+        </div>
+        <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/court-lundberg.mp3" download style="display:inline-block;margin-top:12px;background:var(--brand-accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">Download Episode</a>
       </div>
       <div class="podcast-quotes">
         <div class="podcast-quote">"The home-services companies that pull ahead over the next few years will not be the ones with the most trucks &mdash; they will be the ones whose phone gets answered first, every time, day or night."</div>
@@ -939,7 +951,20 @@ Rare Breed Plumbing, Heating and Air
   </div>
 </section>
 
-<!-- COMMAND CENTER -->
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <p class="section-label">Common Questions</p>
+    <h2 class="section-title">What Court Usually Asks First</h2>
+    <p class="section-sub">The questions every owner has before bringing AI into a home-services business &mdash; answered straight for Rare Breed Plumbing, Heating and Air.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">Q</span><div><strong>Does this replace my techs or my office staff?</strong><br>No. The 6 agents catch what slips through the cracks &mdash; missed calls, after-hours leads, un-followed-up estimates, and review requests. Your team stops doing the repetitive chasing; nobody loses a job.</div></div>
+      <div class="source-item"><span class="source-num">Q</span><div><strong>How long until it is actually running?</strong><br>The 30-day plan above is the real timeline. The phone-and-lead agents go live in the first two weeks; estimate and review follow-up come online by day 30.</div></div>
+      <div class="source-item"><span class="source-num">Q</span><div><strong>Will it sound robotic to my customers?</strong><br>Every agent is trained on Rare Breed&rsquo;s own voice and your 24/7 promise. Customers get a fast, on-brand response &mdash; not a generic script.</div></div>
+      <div class="source-item"><span class="source-num">Q</span><div><strong>What do I have to do to keep it working?</strong><br>Almost nothing day-to-day. You review a simple dashboard. We handle the setup, the tuning, and the maintenance.</div></div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="cta-section" id="apply">
@@ -1054,16 +1079,34 @@ Rare Breed Plumbing, Heating and Air
     if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
   }, { passive: true });
 
-  // Podcast loading state feedback
+  // Podcast player — chapter pips + resume-position persistence
+  const CHAPTERS = [
+    {time:0,title:"Intro"},
+    {time:300,title:"Your Business"},
+    {time:700,title:"AI Agents"},
+    {time:1000,title:"ROI & Roadmap"}
+  ];
   (function() {
-    var audio = document.getElementById('podcastAudio');
-    var playBtn = document.querySelector('.podcast-player button');
-    if (!audio || !playBtn) return;
-    audio.addEventListener('waiting', function() { playBtn.textContent = 'Loading...'; });
-    audio.addEventListener('canplay', function() { if (audio.paused) playBtn.textContent = 'Play'; });
-    audio.addEventListener('playing', function() { playBtn.textContent = 'Pause'; });
-    audio.addEventListener('pause', function() { playBtn.textContent = 'Play'; });
-    audio.addEventListener('ended', function() { playBtn.textContent = 'Play'; });
+    var STORAGE_KEY = 'bpod_court-lundberg';
+    var a = document.getElementById('podAudio');
+    if (!a) return;
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      a.addEventListener('loadedmetadata', function() {
+        if (saved.time && saved.time < a.duration) a.currentTime = saved.time;
+        if (saved.rate) a.playbackRate = saved.rate;
+        document.querySelectorAll('.chapter-pip').forEach(function(p) {
+          var t = parseFloat(p.getAttribute('data-time')) || 0;
+          if (a.duration) p.style.left = (t / a.duration * 100) + '%';
+          p.style.display = 'block';
+        });
+      });
+      a.addEventListener('timeupdate', function() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({time:a.currentTime, rate:a.playbackRate}));
+      });
+      var pb = document.getElementById('podPlay');
+      if (pb) { a.addEventListener('play', function(){pb.textContent='Pause';}); a.addEventListener('pause', function(){pb.textContent='Play';}); }
+    } catch(e) {}
   })();
 </script>
 </body>

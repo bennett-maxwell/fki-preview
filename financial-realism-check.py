@@ -38,6 +38,31 @@ INDUSTRY_BANDS = {
 }
 
 # Per-lead industry classification (from business name / known intake).
+# Single source of truth = scripts/roi-industry-config.json ("slug_industry").
+# The inline dict below is a FALLBACK/BASE: we load the JSON and let it WIN on any
+# slug it covers, but we DON'T drop slugs the JSON omits (e.g. the demo blueprints
+# that have no leads/*.json intake) — merging guarantees zero classification
+# regressions if the config is incomplete, absent, or malformed.
+REPO = os.path.dirname(os.path.abspath(__file__))
+
+def _load_slug_industry():
+    cfg = os.path.join(REPO, "scripts", "roi-industry-config.json")
+    try:
+        with open(cfg) as f:
+            data = json.load(f)
+        mapping = data.get("slug_industry", data)
+        out = {}
+        for slug, val in mapping.items():
+            # Normalize to the {slug: industry_string} shape the rest of the
+            # script consumes, tolerating a nested {"industry": ...} form.
+            if isinstance(val, dict):
+                val = val.get("industry")
+            if isinstance(val, str):
+                out[slug] = val
+        return out
+    except Exception:
+        return {}
+
 LEAD_INDUSTRY = {
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
@@ -63,6 +88,11 @@ LEAD_INDUSTRY = {
     "mike-johnson":     "home_services",      # Johnson Plumbing LLC
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
 }
+
+# JSON is the canonical source: it WINS on every slug it covers (overlaying the
+# inline base above), while slugs only present inline (e.g. demo blueprints the
+# JSON omits) are preserved so no lead is silently dropped or misclassified.
+LEAD_INDUSTRY = {**LEAD_INDUSTRY, **_load_slug_industry()}
 
 # Industries whose buyers realistically run a LinkedIn lead-gen / social-selling
 # motion. Single source of truth = scripts/roi-industry-config.json
@@ -127,17 +157,17 @@ def check_file(path, clone_registry):
     # headline AI revenue lift (aiLeads = leads*1.15 + linkedinLeads). On a
     # trades/consumer-local business that has no LinkedIn pipeline, this inflates
     # the ROI projection with an irrelevant channel — same industry-inappropriateness
-    # class Bennett flagged for the $45K-contract-on-a-plumber. Emitted as a WARN
-    # (not a red-line FAIL) on purpose: the live pages currently DO show this field,
-    # so failing here would turn the whole content board RED and block all Blueprint
-    # sends (the exact R1 silent-block trap). It promotes to a FAIL only AFTER the
-    # template/generator gate ships that removes/zeros the field for non-B2B industries.
+    # class Bennett flagged for the $45K-contract-on-a-plumber. PROMOTED 2026-05-31 from
+    # WARN to a RED-LINE FAIL: all 7 client blueprints that had this defect are now fixed
+    # (0 WARNs remain), so per the FKI "same-defect-twice → permanent structural fix" rule
+    # this lever can NEVER ship on a non-B2B industry again. A hit counts against the
+    # red-line pass and forces a nonzero exit in --file mode (run-audit D10-01 → FAIL).
     if industry not in ("unknown",) and industry not in B2B_LINKEDIN \
        and re.search(r'id="slider-linkedin"', html):
-        warns.append(
-            f"D7-18 [WARN] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
+        fails.append(
+            f"D7-18 [RL] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
             f"'{industry}' — inflates ROI projection with an irrelevant channel "
-            f"(stage: template gate to remove/zero for trades; promotes to FAIL after)")
+            f"(hard fail: remove/zero the slider-linkedin field for this industry)")
 
     # --- D7-02 clone detection: record the slider triple WITH industry for compare ---
     # The real defect Bennett flagged is ONE financial profile cloned across
@@ -205,10 +235,10 @@ def main():
             print(f"      ⚠ {w}")
     print("-" * 78)
     print(f"FINANCIAL-REALISM: {npass}/{len(results)} pass red-line financial checks")
-    d7_18 = [r["slug"] for r in results if any("D7-18" in w for w in r["warns"])]
+    d7_18 = [r["slug"] for r in results if any("D7-18" in f for f in r["fails"])]
     if d7_18:
-        print(f"D7-18 FIELD-RELEVANCE WARN: {len(d7_18)} non-B2B blueprint(s) show the LinkedIn lever "
-              f"(staged for template gate): {sorted(d7_18)}")
+        print(f"D7-18 FIELD-RELEVANCE FAIL [RL]: {len(d7_18)} non-B2B blueprint(s) show the LinkedIn lever "
+              f"— remove/zero the slider-linkedin field: {sorted(d7_18)}")
     if clones:
         print(f"CROSS-INDUSTRY CLONE GROUPS: {[ (t, sorted(inds)) for t,(s,inds) in clones.items() ]}")
     sys.exit(0 if npass == len(results) else 1)

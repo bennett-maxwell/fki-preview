@@ -1343,7 +1343,7 @@
     <div class="calc-card">
       <div class="slider-group">
         <div class="slider-label">
-          <span>Average Contract Value</span>
+          <span>Average Ticket Value</span>
           <span class="slider-val" id="val-contract">(enter yours)</span>
         </div>
         <input type="range" id="slider-contract" min="8" max="60" step="1" value="8" data-no-default="true" oninput="calcTouched=true;updateCalc()">
@@ -1361,13 +1361,6 @@
           <span class="slider-val" id="val-close">(enter yours)</span>
         </div>
         <input type="range" id="slider-close" min="5" max="45" step="1" value="5" data-no-default="true" oninput="calcTouched=true;updateCalc()">
-      </div>
-      <div class="slider-group">
-        <div class="slider-label">
-          <span>LinkedIn Leads Added/Month</span>
-          <span class="slider-val" id="val-linkedin">10</span>
-        </div>
-        <input type="range" id="slider-linkedin" min="5" max="18" step="1" value="10" oninput="calcTouched=true;updateCalc()">
       </div>
       <div class="slider-group">
         <div class="slider-label">
@@ -1877,9 +1870,9 @@ function switchTab(tabId, e) {
 // Scenario presets
 let scenario = 'expected';
 const presets = {
-  conservative: { linkedin: 5, seo: 20 },
-  expected: { linkedin: 10, seo: 45 },
-  stretch: { linkedin: 18, seo: 80 }
+  conservative: { seo: 20 },
+  expected: { seo: 45 },
+  stretch: { seo: 80 }
 };
 
 function setScenario(s) {
@@ -1888,7 +1881,6 @@ function setScenario(s) {
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
-  document.getElementById('slider-linkedin').value = presets[s].linkedin;
   document.getElementById('slider-seo').value = presets[s].seo;
   updateCalc();
 }
@@ -1902,21 +1894,19 @@ function updateCalc() {
   const contract = parseInt(document.getElementById('slider-contract').value) || 8;
   const leads = parseInt(document.getElementById('slider-leads').value) || 0;
   const closeRate = (parseInt(document.getElementById('slider-close').value) || 0) / 100;
-  const linkedinLeads = parseInt(document.getElementById('slider-linkedin').value) || 0;
   const seoLift = (parseInt(document.getElementById('slider-seo').value) || 0) / 100;
 
   // Display values
   document.getElementById('val-contract').textContent = '$' + contract.toLocaleString();
   document.getElementById('val-leads').textContent = leads;
   document.getElementById('val-close').textContent = (closeRate * 100).toFixed(0) + '%';
-  document.getElementById('val-linkedin').textContent = linkedinLeads;
   document.getElementById('val-seo').textContent = (seoLift * 100).toFixed(0) + '%';
 
   // Current monthly
   const currentMonthly = contract * leads * closeRate;
 
   // AI-enhanced
-  const aiLeads = leads * 1.15 + linkedinLeads;
+  const aiLeads = leads * 1.15;
   const aiCloseRate = closeRate * 1.22;
   const aiMonthly = contract * aiLeads * aiCloseRate;
 
@@ -1937,7 +1927,7 @@ function updateCalc() {
   document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
   document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
 
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + LinkedIn + higher close rate';
+  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + higher close rate';
 
   // Time saved + cost savings (RULE-13: understated 15%)
   const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);

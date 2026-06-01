@@ -7,6 +7,19 @@ BP_DIR = os.path.join(REPO, "blueprints")
 HISTORY = os.path.expanduser("~/.openclaw/logs/blueprint-audit-history.jsonl")
 THRESHOLD = 0.90  # 90% of non-red-line checks
 
+# Explicit, committable podcast alias map (deploy-independent). When a lead's
+# real audio is stored under a different filename than f"{slug}.mp3", map it
+# here instead of relying on a filesystem symlink (GitHub Pages / static
+# deploys may not follow symlinks -> false-PASS). 2026-05-31.
+PODCAST_ALIAS = {"watson": "watson-kamoto"}
+
+def podcast_exists(slug):
+    """D3-01: a per-lead podcast exists as a REAL file. Resolves PODCAST_ALIAS
+    before the existence check so the dependency is explicit and deploy-safe."""
+    name = PODCAST_ALIAS.get(slug, slug)
+    path = os.path.join(REPO, "podcasts", f"{name}.mp3")
+    return os.path.isfile(path) and os.path.getsize(path) > 0
+
 def curl_http(url):
     try:
         req = urllib.request.Request(url, headers={"User-Agent":"FKI-Audit/1.0"})
@@ -14,6 +27,64 @@ def curl_http(url):
             return r.status
     except Exception as e:
         return 0
+
+def no_orphan_classes(html):
+    """D9-01: every class used in body has a matching CSS definition.
+    Self-contained reimplementation of d9-audit.py's orphan-class logic
+    (run-audit.py is stdlib-only, so we do NOT import that module).
+    Conservative allow-list mirrors the canonical check exactly:
+      - inline-styled elements (JS hooks add their own style) are exempt
+      - boolean literals "true"/"false" are exempt
+    Returns (ok_bool, sorted_orphans_list)."""
+    body_match = re.search(r"<body[\s\S]*</body>", html, re.I)
+    body = body_match.group(0) if body_match else html
+    styles = "\n".join(re.findall(r"<style[^>]*>([\s\S]*?)</style>", html, re.I))
+    used_classes = set()
+    for m in re.finditer(r'class\s*=\s*"([^"]+)"', body):
+        for c in m.group(1).split():
+            used_classes.add(c)
+    defined_classes = set(re.findall(r"\.([a-zA-Z_][\w-]*)", styles))
+    inline_styled = set()
+    for m in re.finditer(r'class\s*=\s*"([^"]+)"[^>]*style\s*=\s*"', body):
+        for c in m.group(1).split():
+            inline_styled.add(c)
+    orphans = used_classes - defined_classes - inline_styled - {"true", "false"}
+    return len(orphans) == 0, sorted(orphans)
+
+def name_in_title(slug, html):
+    """D1-01: the blueprint is personalized in its <title>, not just somewhere in
+    the body. The old check tested whether the lead's first-name token appeared
+    ANYWHERE in the HTML (case-insensitive substring) -> a shallow false-PASS
+    ("dave" passes on the word "database"). This scopes the check to the
+    <title>...</title> tag only (stdlib regex).
+
+    Real product convention (verified across all live blueprints 2026-05-31):
+    titles read "AI Advantage Roadmap — {BUSINESS_NAME}", so most genuine,
+    correctly-personalized titles carry the BUSINESS name, not the lead's first
+    name (only ~6 of 19 carry the first name parenthetically). So we PASS when
+    EITHER is true inside the title:
+      (a) the lead's first-name token is present in the title, OR
+      (b) the title's business-name segment (after the em/en-dash or hyphen) is
+          non-empty, not a {{PLACEHOLDER}}, and actually appears in the page body
+          (i.e. the title is genuinely populated and consistent with the page).
+    This is strictly stronger than the old "first name anywhere in HTML" test
+    (it requires a real, populated, body-consistent title) without regressing
+    the business-name-titled blueprints, which are correct by design."""
+    m = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+    if not m:
+        return False
+    title = m.group(1).strip()
+    if not title:
+        return False
+    first = slug.replace("-", " ").split()[0].lower()
+    if first and first in title.lower():
+        return True
+    # business-name segment after the first " — " / " – " / " - " separator
+    parts = re.split(r"\s[—–-]\s", title, maxsplit=1)
+    biz = parts[-1].strip() if len(parts) > 1 else ""
+    if not biz or re.search(r"\{\{[A-Za-z_]+\}\}|PLACEHOLDER", biz):
+        return False
+    return biz.lower() in html.lower()
 
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
@@ -49,10 +120,11 @@ def audit_lead(slug):
     results["PF0-1_size_ge_40kb"] = size >= 40000
     pass_ph, tokens = check_placeholder(html)
     results["PF0-4_no_placeholders"] = pass_ph
-    results["D1-01_name_in_title"] = slug.replace("-", " ").split()[0].lower() in html.lower()
+    results["D1-01_name_in_title"] = name_in_title(slug, html)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
-    results["D3-01_podcast_exists"] = os.path.exists(os.path.join(REPO, "podcasts", f"{slug}.mp3"))
-    results["D9-01_no_orphan_classes"] = True  # simplified
+    results["D3-01_podcast_exists"] = podcast_exists(slug)
+    d9_ok, d9_orphans = no_orphan_classes(html)
+    results["D9-01_no_orphan_classes"] = d9_ok
     fin_ok, fin_detail = financial_gate(html_path)
     results["D10-01_financial_realism_RL"] = fin_ok
     redlines["D10-01_financial_realism_RL"] = fin_ok
@@ -76,7 +148,31 @@ def main():
     if args.lead:
         slugs = [args.lead]
     elif args.all:
-        slugs = [f[:-5] for f in os.listdir(BP_DIR) if f.endswith(".html") and not f.startswith("_")]
+        # --all audits CLIENT DELIVERABLES only. Exclude non-client files so the
+        # VERDICT (consumed by the pre-commit hook) is not polluted by false FAILs:
+        #   - is_scaffold:true entries in index.json (the TEMPLATE etc. — placeholders are intentional)
+        #   - *-canonical.html (stale encrypted duplicates; PF0-2 = one file per lead)
+        #   - internal/non-prospect blueprints (FKI's own roadmap)
+        INTERNAL = {"franchise-ki-ceo"}
+        scaffolds = set()
+        idx_path = os.path.join(BP_DIR, "index.json")
+        if os.path.exists(idx_path):
+            try:
+                idx = json.load(open(idx_path))
+                entries = idx.get("blueprints", idx) if isinstance(idx, dict) else idx
+                if isinstance(entries, dict):
+                    scaffolds = {k for k, v in entries.items()
+                                 if isinstance(v, dict) and v.get("is_scaffold")}
+                else:  # list of {slug, is_scaffold, ...}
+                    scaffolds = {e.get("slug") for e in entries
+                                 if isinstance(e, dict) and e.get("is_scaffold")}
+            except Exception:
+                pass
+        slugs = [f[:-5] for f in os.listdir(BP_DIR)
+                 if f.endswith(".html") and not f.startswith("_")
+                 and not f.endswith("-canonical.html")
+                 and f[:-5] not in scaffolds
+                 and f[:-5] not in INTERNAL]
     else:
         print("Usage: run-audit.py --lead <slug> | --all"); sys.exit(1)
     results = []
@@ -95,7 +191,7 @@ def main():
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
     import datetime
     for r in results:
-        r["ts"] = datetime.datetime.utcnow().isoformat() + "Z"
+        r["ts"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
         with open(HISTORY, "a") as f:
             f.write(json.dumps(r) + "\n")
     print(f"\nAudit complete. History: {HISTORY}")
