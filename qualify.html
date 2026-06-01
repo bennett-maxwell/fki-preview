@@ -129,6 +129,13 @@
   .identity-field input:focus { border-color: var(--brand); background: var(--white); }
   .identity-status { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-light); }
   .identity-status.ready { color: #19713a; font-weight: 700; }
+  .booking-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(10,14,26,0.72); }
+  .booking-modal.open { display: flex; }
+  .booking-dialog { width: min(920px, 100%); max-height: 92vh; background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 80px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
+  .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+  .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .booking-frame { width: 100%; height: min(74vh, 720px); border: 0; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
   .disclaimer a { color: var(--brand); }
@@ -402,6 +409,16 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 
 </div>
 
+<div class="booking-modal" id="booking-modal" aria-hidden="true">
+  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="booking-head">
+      <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
+      <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
+    </div>
+    <iframe class="booking-frame" id="booking-frame" title="Advaita AI booking calendar"></iframe>
+  </div>
+</div>
+
 <p class="disclaimer">
   Close rate lift benchmarks from <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review speed-to-lead research</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management Institute</a>. These are industry averages — your results will vary. This tool qualifies fit; it does not guarantee outcomes.
 </p>
@@ -423,6 +440,7 @@ let lastQualificationBand = null;
 
 const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
 const THANK_YOU_URL = 'thank-you-apply.html';
@@ -809,9 +827,9 @@ function update() {
       '<span>First deploy:</span> ' + capLabel;
 
     cta.disabled = !(allDone && identityDone);
-    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Submit My Qualification';
+    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
     ctaNote.textContent = allDone && identityDone
-      ? 'Your answers will be saved and our team will follow up.'
+      ? (qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.')
       : 'Complete the contact fields and all 8 questions.';
   } else {
     const ICON_NEUTRAL = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>';
@@ -943,15 +961,44 @@ async function submitQualification() {
   return payload;
 }
 
+function buildBookingUrl() {
+  const id = persistIdentity();
+  const url = new URL(BOOKING_URL, window.location.href);
+  const parts = {
+    first_name: id.firstName,
+    last_name: id.lastName,
+    name: (id.firstName + ' ' + id.lastName).trim(),
+    email: id.email,
+    phone: id.phone,
+    business_name: id.businessName,
+    contact_id: id.contactId,
+    source: 'blueprint_ai_qualifier',
+    lead_session_id: id.leadSessionId,
+    blueprint_slug: id.blueprintSlug
+  };
+  Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
+  return url.toString();
+}
+
+function openBookingModal() {
+  document.getElementById('booking-frame').src = buildBookingUrl();
+  document.getElementById('booking-modal').classList.add('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
+}
+
 async function handleCtaClick() {
   const cta = document.getElementById('cta-apply');
   if (cta.disabled) return;
   cta.disabled = true;
   cta.textContent = 'Saving...';
-  // Submit the qualification to GHL, then route to the thank-you/confirmation
-  // page. No booking calendar is opened — the funnel ends at qualification submit.
-  await submitQualification();
-  window.location.href = THANK_YOU_URL;
+  const payload = await submitQualification();
+  if (payload.ai_qualified) {
+    cta.textContent = 'Book a Call with Bennett';
+    cta.disabled = false;
+    openBookingModal();
+  } else {
+    window.location.href = THANK_YOU_URL;
+  }
 }
 
 // Init
@@ -965,6 +1012,13 @@ document.querySelectorAll('#identity-section input').forEach(el => {
   });
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+document.getElementById('booking-close').addEventListener('click', function() {
+  document.getElementById('booking-modal').classList.remove('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
+});
+document.getElementById('booking-modal').addEventListener('click', function(e) {
+  if (e.target === this) document.getElementById('booking-close').click();
+});
 updateIdentityStatus();
 update();
 </script>
