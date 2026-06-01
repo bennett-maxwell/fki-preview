@@ -441,6 +441,7 @@ let lastQualificationBand = null;
 const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
 const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+<<<<<<< HEAD
 // A/B toggle — set false to skip modal and route qualified leads to THANK_YOU_URL
 const BOOKING_MODAL_ENABLED = true;
 
@@ -453,6 +454,8 @@ function logFunnelEvent(event, data) {
     localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
   } catch(e) {}
 }
+=======
+>>>>>>> 387bad7e19bec18a7066f1035c684368747c600b
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
 const THANK_YOU_URL = 'thank-you-apply.html';
@@ -1006,6 +1009,7 @@ async function handleCtaClick() {
   cta.textContent = 'Saving...';
   const payload = await submitQualification();
   if (payload.ai_qualified) {
+<<<<<<< HEAD
     logFunnelEvent('qualified', { modal_enabled: BOOKING_MODAL_ENABLED });
     if (BOOKING_MODAL_ENABLED) {
       cta.textContent = 'Book a Call with Bennett';
@@ -1017,6 +1021,12 @@ async function handleCtaClick() {
     }
   } else {
     logFunnelEvent('disqualified', {});
+=======
+    cta.textContent = 'Book a Call with Bennett';
+    cta.disabled = false;
+    openBookingModal();
+  } else {
+>>>>>>> 387bad7e19bec18a7066f1035c684368747c600b
     window.location.href = THANK_YOU_URL;
   }
 }
