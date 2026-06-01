@@ -81,6 +81,9 @@ def html_surface_gates(html: str) -> Tuple[bool, List[str]]:
     failures = []
     checks = [
         (r'>\s*Apply to work with Bennett\s*<', "banned CTA copy: Apply to work with Bennett"),
+        (r'>\s*Apply to Work With Us\s*<', "banned CTA copy: Apply to Work With Us"),
+        (r'>\s*Apply\s*<', "ambiguous CTA copy: Apply"),
+        (r'\bCommand Center\b', "deprecated Command Center content"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*\$out\s*</span>', "corrupt visible badge: $out"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*\$in\s*</span>', "corrupt visible badge: $in"),
         (r'<span[^>]*class=["\'][^"\']*(?:pillar-tag|agent-tag|tag)[^"\']*["\'][^>]*>\s*T\s*</span>', "corrupt visible badge: T"),

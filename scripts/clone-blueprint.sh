@@ -407,6 +407,14 @@ with open(output_file, 'w') as f:
 print(f"  Replacements complete. Output: {output_file}")
 PYTHON_SCRIPT
 
+# Convert legacy event-design/B2B sections into a home-services page before any
+# gate can pass. The frame is still canonical; this patch removes wrong-industry
+# content for plumbing/HVAC/electrical/home-service profiles.
+HOME_SERVICES_PATCH="$SCRIPT_DIR/blueprint_home_services_patch.py"
+if [[ -f "$HOME_SERVICES_PATCH" ]]; then
+  python3 "$HOME_SERVICES_PATCH" "$OUTPUT_FILE" "$PROFILE_JSON"
+fi
+
 # Stamp blueprint build timestamp into profile
 python3 -c "
 import json, sys, datetime

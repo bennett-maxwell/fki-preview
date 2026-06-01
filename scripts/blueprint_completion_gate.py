@@ -454,13 +454,17 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     # 27. CTA points to qualify.html and does not use the banned Bennett-work phrasing
     bad_cta = bool(re.search(r'href=["\'][^"\']*(?:(?<!/qualify)\/apply|meetadvaita\.com/apply)["\']', html, re.I))
     banned_cta_copy = bool(re.search(r'>\s*Apply to work with Bennett\s*<', html, re.I))
+    banned_work_with_us = bool(re.search(r'>\s*Apply to Work With Us\s*<', html, re.I))
+    ambiguous_apply = bool(re.search(r'>\s*Apply\s*<', html, re.I))
     results[27] = {
-        "desc": "CTA points to qualify.html and avoids banned 'Apply to work with Bennett' copy",
-        "pass": not bad_cta and not banned_cta_copy,
+        "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
+        "pass": not bad_cta and not banned_cta_copy and not banned_work_with_us and not ambiguous_apply,
         "severity": "critical",
         "detail": (
             "CTA pointing to /apply or meetadvaita.com/apply found" if bad_cta
             else "Banned CTA copy found: Apply to work with Bennett" if banned_cta_copy
+            else "Banned CTA copy found: Apply to Work With Us" if banned_work_with_us
+            else "Ambiguous CTA copy found: Apply" if ambiguous_apply
             else "OK"
         )
     }

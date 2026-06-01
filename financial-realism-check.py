@@ -137,22 +137,39 @@ def check_file(path, clone_registry):
     if re.search(r'[Aa]verage [Cc]ontract [Vv]alue', html) and unit not in ("contract", "contract/ARR", "annual mgmt fee"):
         warns.append(f"D7-10 label 'Average Contract Value' but {industry} sells by '{unit}'")
 
-    # --- D7-18 calculator FIELD RELEVANCE: B2B-only LinkedIn lever on non-B2B ---
+    # --- D7-18 calculator/content FIELD RELEVANCE: B2B-only LinkedIn on non-B2B ---
     # The "LinkedIn Leads Added/Month" slider (id="slider-linkedin") feeds the
     # headline AI revenue lift (aiLeads = leads*1.15 + linkedinLeads). On a
     # trades/consumer-local business that has no LinkedIn pipeline, this inflates
-    # the ROI projection with an irrelevant channel — same industry-inappropriateness
-    # class Bennett flagged for the $45K-contract-on-a-plumber. Emitted as a WARN
-    # (not a red-line FAIL) on purpose: the live pages currently DO show this field,
-    # so failing here would turn the whole content board RED and block all Blueprint
-    # sends (the exact R1 silent-block trap). It promotes to a FAIL only AFTER the
-    # template/generator gate ships that removes/zeros the field for non-B2B industries.
+    # the ROI projection with an irrelevant channel, the same defect class Bennett
+    # flagged for the $45K-contract-on-a-plumber. This is now a red-line fail for
+    # the checked file, because the generator has a home-services sanitizer.
     if industry not in ("unknown",) and industry not in B2B_LINKEDIN \
        and re.search(r'id="slider-linkedin"', html):
-        warns.append(
-            f"D7-18 [WARN] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
+        fails.append(
+            f"D7-18 [RL] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
             f"'{industry}' — inflates ROI projection with an irrelevant channel "
-            f"(stage: template gate to remove/zero for trades; promotes to FAIL after)")
+            f"(remove/replace it for trades)")
+
+    if industry == "home_services":
+        body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)
+        legacy_terms = [
+            "LinkedIn",
+            "luxury",
+            "venue",
+            "corporate planner",
+            "event shoot",
+            "gala",
+            "Pinterest",
+            "Apply to Work With Us",
+            "Command Center",
+        ]
+        leaked = [term for term in legacy_terms if re.search(r"\b" + re.escape(term) + r"\b", body, re.I)]
+        if leaked:
+            fails.append(
+                "D10-21 [RL] home-services blueprint contains wrong-industry/template language: "
+                + ", ".join(sorted(set(leaked), key=str.lower))
+            )
 
     # --- D7-02 clone detection: record the slider triple WITH industry for compare ---
     # The real defect Bennett flagged is ONE financial profile cloned across
