@@ -67,6 +67,8 @@ PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
+# QUALIFY_URL — "See If You Qualify" CTA must route to qualify.html ONLY (Bennett CTA rule). Was previously unsubstituted -> dead {{QUALIFY_URL}} token shipped to leads.
+QUALIFY_URL="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
@@ -95,13 +97,16 @@ sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
 sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_SUBJECT}}|$APPLY_SUBJECT|g" "$OUTPUT"
 sed -i '' "s|{{APPLY_URL}}|$APPLY_URL|g" "$OUTPUT"
+# QUALIFY_URL substituted in python below (URL has & which sed treats as the matched text — mangles the link).
 
 # Prompts need python for multi-line safety
-python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
+python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" "$QUALIFY_URL" << 'PYEOF'
 import json, sys
 output_path, profile_path, industry = sys.argv[1], sys.argv[2], sys.argv[3]
+qualify_url = sys.argv[4] if len(sys.argv) > 4 else ''
 with open(output_path, 'r') as f:
     html = f.read()
+html = html.replace('{{QUALIFY_URL}}', qualify_url)
 profile = json.load(open(profile_path))
 default_p1 = f"You are a speed-to-lead response agent for a {industry} business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step."
 default_p2 = f"You are a proposal draft agent for a {industry} business. Given a prospect requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors."
@@ -134,14 +139,15 @@ BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || tr
 BOOKING=${BOOKING:-0}
 CALENDAR=$(grep -ci 'calendly\|cal\.com\|calendar\.google' "$OUTPUT" 2>/dev/null || true)
 CALENDAR=${CALENDAR:-0}
-APPLY=$(grep -ci 'apply' "$OUTPUT" 2>/dev/null || true)
+# CTA is "See If You Qualify" -> qualify.html (Bennett CTA rule). Accept apply OR qualify as the valid conversion CTA.
+APPLY=$(grep -ciE 'apply|qualify' "$OUTPUT" 2>/dev/null || true)
 APPLY=${APPLY:-0}
 
 if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$APPLY" -lt 1 ]; then
-    echo "FAIL: booking=$BOOKING calendar=$CALENDAR apply=$APPLY"
+    echo "FAIL: booking=$BOOKING calendar=$CALENDAR cta(apply|qualify)=$APPLY"
     exit 1
 fi
-echo "Pre-delivery: PASS (booking=0 calendar=0 apply=$APPLY)"
+echo "Pre-delivery: PASS (booking=0 calendar=0 cta=$APPLY)"
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
