@@ -17,6 +17,7 @@ Usage:
 import asyncio
 import json
 import logging
+import importlib.util
 import os
 import sqlite3
 import sys
@@ -28,6 +29,7 @@ STATE_DIR = Path.home() / ".openclaw" / "state"
 DB_PATH = STATE_DIR / "blueprint-dedup.db"
 REPO_DIR = Path(__file__).resolve().parent.parent
 LEADS_DIR = REPO_DIR / "leads"
+PODCASTS_DIR = REPO_DIR / "podcasts"
 DESKTOP = Path.home() / "Desktop"
 LOG_DIR = Path.home() / ".openclaw" / "logs"
 MAX_PER_RUN = int(os.environ.get("PODCAST_MAX_PER_RUN", "5"))
@@ -44,138 +46,51 @@ logging.basicConfig(
 log = logging.getLogger("podcast-worker")
 
 
+def _load_canonical_podcast_module():
+    """Load generate-podcast.py even though the filename is not importable."""
+    path = REPO_DIR / "scripts" / "generate-podcast.py"
+    spec = importlib.util.spec_from_file_location("blueprint_generate_podcast", path)
+    if not spec or not spec.loader:
+        raise RuntimeError(f"Unable to load canonical podcast generator: {path}")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def generate_source_doc(profile: dict) -> str:
-    """Generate NotebookLM v2 source doc with objection handling.
+    """Generate the canonical NotebookLM direct-address source doc.
     Returns path to the generated markdown file."""
+    podcast_mod = _load_canonical_podcast_module()
     slug = profile["slug"]
-    name = profile.get("lead_first_name", profile["lead_name"].split()[0])
-    business = profile.get("business_name", "the business")
-    industry = profile.get("industry", "business services")
-    services = profile.get("services", [])
-    services_str = ", ".join(services[:5]) if isinstance(services, list) else str(services)
+    doc = podcast_mod.build_source_doc(profile)
+    lead_name = profile.get("lead_name", "Business Owner")
+    lead_first = profile.get("lead_first_name", lead_name.split()[0])
+    podcast_mod.validate_source_doc(doc, lead_name, lead_first)
 
-    doc = f"""# AI Advantage Roadmap — {profile['lead_name']}, {business}
-
-## Segment 1: The Hook
-What if AI could handle the most time-consuming parts of running {business}? Not in some distant future — but starting this week, with tools that already exist?
-
-{name}, this AI Advantage Roadmap was built specifically for your {industry} business. Every recommendation is based on your actual operations, your team size, and the tools you already use.
-
-## Segment 2: Current State
-{business} operates in the {industry} space, offering {services_str}. Like most businesses at this stage, there are predictable bottlenecks: lead response time, proposal generation, follow-up consistency, and content creation.
-
-The gap is not effort — it is systems. The manual processes that worked at one scale become the ceiling at the next.
-
-## Segment 3: The 6 AI Agents
-Here is what changes when AI handles the repetitive work:
-
-1. Speed-to-Lead Agent: Responds to every inquiry within 60 seconds with a personalized message.
-2. Follow-Up Nurture Agent: Runs a 7-touch sequence so no warm lead falls through the cracks.
-3. Proposal Draft Agent: Generates professional proposals in minutes, not hours.
-4. Content Engine Agent: Turns your expertise into social posts, emails, and articles automatically.
-5. Review and Reputation Agent: Solicits reviews at the right moment and responds to feedback.
-6. Admin Automation Agent: Handles scheduling, data entry, and routine communications.
-
-Each agent is configured for {industry} specifically — not generic templates.
-
-## Segment 4: ROI Walkthrough
-Rather than promise specific dollar amounts, we built an interactive calculator into your Blueprint. Plug in your real numbers — average deal size, close rate, lead volume — and see what the math says for {business} specifically.
-
-The conservative baseline across our clients: 35% efficiency lift in the first 30 days.
-
-## Segment 5: Objection Handling
-
-### Objection 1: Cost and Investment
-"This sounds expensive." The implementation cost is a fraction of one employee's monthly salary. Most businesses see positive ROI within the first 2 weeks because the agents work 24/7 at zero incremental cost per interaction.
-
-### Objection 2: Past AI or Tech Failures
-"We tried automation before and it did not work." Previous tools required constant management. These agents are self-running after a 3-day setup. They monitor themselves and alert you only when human judgment is actually needed.
-
-### Objection 3: Industry-Specific Concerns
-"Does this work for {industry}?" Every agent recommendation is built from {industry}-specific use cases. The Speed-to-Lead agent, for example, understands {industry} terminology and common inquiry patterns.
-
-### Objection 4: Time and Bandwidth
-"We do not have time to implement this." The onboarding timeline is 3 days to get agents live, 7 days running independently, 30 days fully trained on your business patterns. Your team's involvement drops to near-zero after week one.
-
-## Segment 6: Implementation Timeline
-Day 1-3: Core agent setup. Speed-to-Lead and Follow-Up agents go live.
-Day 4-7: Proposal, Content, and Review agents activated. First automated outputs reviewed.
-Day 8-30: Agents learn your patterns. Performance data feeds back into optimization.
-
-No 90-day rollout. No phase 2 that never happens. Agents are working within 72 hours.
-
-## Segment 7: Call to Action
-{name}, your Blueprint is ready. Your rebuilt website preview is live. The interactive ROI calculator has your actual numbers.
-
-The next step: reply to the email that brought you here and tell us what excited you most. Or use the apply link to start the conversation about implementation.
-
-No obligation. No sales pressure. Just a real conversation about whether this is the right fit for {business}.
-"""
-
-    output_path = DESKTOP / f"{slug}-notebooklm-source-v2.md"
+    output_path = PODCASTS_DIR / f"{slug}-podcast-source.md"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(doc)
     log.info(f"  Source doc written: {output_path}")
     return str(output_path), doc
 
 
 async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
-    """Use notebooklm-py to create a notebook, add source, generate audio, download MP3.
-    Returns path to downloaded MP3, or None on failure."""
+    """Run the canonical NotebookLM generator and return the verified MP3 path."""
     try:
-        from notebooklm import NotebookLMClient, AudioLength
-    except ImportError:
-        log.warning("notebooklm-py not installed — skipping audio generation")
-        return None
-
-    try:
-        client = NotebookLMClient.from_storage()
-    except Exception as e:
-        log.error(f"  [{slug}] NotebookLM auth failed: {e}")
-        return None
-
-    notebook = None
-    try:
-        title = f"Blueprint AI — {slug}"
-        log.info(f"  [{slug}] Creating NotebookLM notebook: {title}")
-        notebook = await asyncio.to_thread(client.notebooks.create, title)
-
-        log.info(f"  [{slug}] Adding source text ({len(source_text)} chars)")
-        source = await asyncio.to_thread(
-            client.sources.add_text,
-            notebook.id, f"{slug} AI Roadmap", source_text,
-            wait=True, wait_timeout=120.0,
+        podcast_mod = _load_canonical_podcast_module()
+        result = await podcast_mod.generate_podcast(
+            str(LEADS_DIR / f"{slug}.json"),
+            str(PODCASTS_DIR),
+            source_only=False,
         )
-
-        log.info(f"  [{slug}] Generating podcast audio...")
-        gen_status = await asyncio.to_thread(
-            client.artifacts.generate_audio,
-            notebook.id,
-            source_ids=[source.id],
-            instructions=f"Create an engaging podcast about how AI can transform {slug}'s business. Two hosts discussing the AI Advantage Roadmap. Keep it conversational and exciting.",
-        )
-
-        log.info(f"  [{slug}] Waiting for audio generation (task {gen_status.task_id})...")
-        result = await asyncio.to_thread(
-            client.artifacts.wait_for_completion,
-            notebook.id, gen_status.task_id,
-            timeout=300.0,
-        )
-
-        if result.status != "completed":
-            log.error(f"  [{slug}] Audio generation failed: {result.status} — {result.error}")
+        if result.get("status") != "VERIFIED" or not result.get("output_path"):
+            log.error(f"  [{slug}] Canonical podcast generation failed: {result}")
             return None
-
-        output_mp3 = str(DESKTOP / f"{slug}-podcast.mp3")
-        log.info(f"  [{slug}] Downloading audio to {output_mp3}")
-        await asyncio.to_thread(
-            client.artifacts.download_audio,
-            notebook.id, output_mp3,
-        )
-        log.info(f"  [{slug}] Podcast MP3 saved: {output_mp3}")
-        return output_mp3
+        log.info(f"  [{slug}] Canonical podcast verified: {result['output_path']}")
+        return result["output_path"]
 
     except Exception as e:
-        log.error(f"  [{slug}] NotebookLM audio generation failed: {e}")
+        log.error(f"  [{slug}] Canonical podcast generation failed: {e}")
         return None
 
 

@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-Blueprint AI Pipeline — Stage 4: Podcast Generation  v1.6
+Blueprint AI Pipeline — Stage 4: Podcast Generation  v1.8
 Generates NotebookLM podcast from lead profile JSON.
+
+v1.8 (2026-06-01) — Audio steering + customer-facing source hygiene:
+  - Removes "source document/material/brief" framing from generated NotebookLM sources
+  - Adds explicit audio-generation instructions, because NotebookLM often ignores
+    source-doc opening rules when no instructions are passed
+  - Bans "source material" and third-person prospect framing in the steering prompt
 
 v1.6 (2026-05-23) — Direct-Address Hard Gate:
   - Section 1 rewritten as transcript-style monologue ("Hi {first_name}...")
@@ -43,6 +49,7 @@ import glob
 import json
 import sys
 import os
+import re
 import time
 from pathlib import Path
 from datetime import datetime
@@ -53,13 +60,16 @@ from datetime import datetime
 # ---------------------------------------------------------------------------
 
 SOURCE_DOC_TEMPLATE = """\
-<!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for {lead_name}
+<!-- v1.8 -->
+PERSONAL AUDIO WALKTHROUGH FOR {lead_first}
 {business_name} | Prepared by Franchise Ki | Generated {generated_date}
 
 ================================================================================
-SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
+AUDIO OPENING AND DELIVERY — 5 HARD RULES
 ================================================================================
+
+Use these rules silently. Never mention rules, files, preparation, or instructions.
+Speak as if {lead_first} is wearing headphones right now.
 
 RULE 1 (RED LINE): You are speaking DIRECTLY to {lead_name_upper}. Use "you" and
 "your business" in every paragraph. NEVER say "{lead_name}" in the third person.
@@ -71,8 +81,14 @@ RULE 2: Open the audio with EXACTLY these words: "Hi {lead_first}, welcome.
 This walkthrough was built for you and {business_name}, from what you told us."
 Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+RULE 3: Your business is THRIVING. Frame every gap as an AI amplification, not
 a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
+
+RULE 4: The first 60 seconds must include {lead_first}, {business_name}, and at
+least five uses of "you" or "your."
+
+RULE 5: Do not narrate prompt blocks. Convert any prompt into plain-language
+workflow benefits for {lead_first}.
 
 ================================================================================
 
@@ -97,7 +113,7 @@ Everything gets amplified.
 
 {ai_maturity_line}
 
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
+The 3 AI workflows you'll hear about in Section 4 were written specifically for you and
 {business_name}. Not adjusted from a template. Built from your answers, for how
 your business actually works. Let's walk through what's possible.
 
@@ -137,7 +153,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at {roi_rate}/hr: up to {gap1_roi}/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -153,7 +169,7 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -167,43 +183,43 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At {team_size_admin} people × {roi_rate}/hr × 5 hrs/week recovered = up to {gap3_roi}/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for {business_name}
+## SECTION 4 — The 3 AI Workflows Built Specifically for {business_name}
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
+These aren't generic AI chatbots. These are the exact workflows we built for your specific
 situation — your industry, your tools, your services, your pain points.
 
-### AI Tool 1 — {prompt_1_label}
+### Workflow 1 — {prompt_1_label}
 
-{prompt_1}
+What it does for you: {prompt_1_narrative}
 
 This runs directly in your existing workflow. No new platform to learn.
 Your team supervises. The AI handles the repetitive execution.
 
 ---
 
-### AI Tool 2 — {prompt_2_label}
+### Workflow 2 — {prompt_2_label}
 
-{prompt_2}
+What it does for you: {prompt_2_narrative}
 
 Built around how {business_name} actually works — not a generic industry template.
 
 ---
 
-### AI Tool 3 — {prompt_3_label}
+### Workflow 3 — {prompt_3_label}
 
-{prompt_3}
+What it does for you: {prompt_3_narrative}
 
 This is the kind of tool that, once it's running, your team will not remember
 how they worked without it.
 
 ---
 
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
+These 3 workflows represent what your AI system looks like in its first 30 days.
+By month 3, the system handles everything these workflows do — automatically,
 without anyone on your team triggering them manually.
 
 ---
@@ -233,7 +249,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
 **Days 1-3: Onboarding.** {industry_cap} audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -305,7 +321,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Qualify here: {qualifier_url}
 
 This is an application, not a commitment. We read every one personally.
 
@@ -370,9 +386,9 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
+All statistics and benchmarks used in this walkthrough:
 
 [1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
     Metric: 78% of customers buy from the first business to respond
@@ -406,7 +422,7 @@ Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
 If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+{qualifier_url}
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
@@ -485,6 +501,49 @@ def _ensure_real_mp3(path: str) -> str:
     return path
 
 
+def _audio_direct_address_gate(path: str, profile: dict) -> dict:
+    """Transcribe the opening and fail generation if NotebookLM used overview framing."""
+    from podcast_direct_address_audit import audit_transcript, transcribe_with_speech_recognition
+
+    lead_name = profile.get("lead_name", "Business Owner")
+    lead_first = profile.get("lead_first_name", lead_name.split()[0])
+    business_name = profile.get("business_name", "Your Business")
+    transcript = transcribe_with_speech_recognition(Path(path), 180)
+    result = audit_transcript(transcript, lead_first, lead_name, business_name)
+    if not result.get("pass"):
+        raise RuntimeError(
+            "Downloaded audio failed direct-address transcript gate: "
+            f"banned={result.get('banned_audio_phrases_found')}, "
+            f"third_person={result.get('third_person_patterns_found')}, "
+            f"opening_direct={result.get('opening_direct_address_verified')}, "
+            f"opening_close={result.get('opening_exact_or_close')}"
+        )
+    return result
+
+
+async def _notebooklm_client_from_storage(NotebookLMClient):
+    """Load NotebookLM auth from the configured or known local storage state."""
+    storage_candidates = [
+        os.environ.get("NOTEBOOKLM_STORAGE_STATE", ""),
+        str(Path.home() / ".notebooklm" / "storage_state.json"),
+        str(Path.home() / ".notebooklm" / "profiles" / "default" / "storage_state.json"),
+    ]
+    errors = []
+    for storage in [p for p in storage_candidates if p]:
+        if not os.path.exists(storage):
+            errors.append(f"{storage}: missing")
+            continue
+        try:
+            return await NotebookLMClient.from_storage(path=storage)
+        except Exception as exc:
+            errors.append(f"{storage}: {exc}")
+    try:
+        return await NotebookLMClient.from_storage()
+    except Exception as exc:
+        errors.append(f"default: {exc}")
+        raise RuntimeError("NotebookLM auth unavailable. Tried: " + " | ".join(errors)) from exc
+
+
 def _is_rate_limit_error(exc: Exception) -> bool:
     exc_str = str(exc).lower()
     if '429' in exc_str:
@@ -533,6 +592,10 @@ def build_source_doc(profile: dict) -> str:
     speed_context    = profile.get('speed_to_lead_context',
                                    f'responding to {industry} inquiries before competitors')
     url              = profile.get('url', '')
+    qualifier_url    = (
+        f'https://bennett-maxwell.github.io/fki-preview/qualify.html?src={slug}'
+        '&utm_source=blueprint_podcast&utm_medium=audio&utm_campaign=blueprint_delivery'
+    )
 
     # Council #1 — personalized AI tools (the core deliverable)
     prompt_1         = profile.get('prompt_1', f'[No custom prompt provided — describe key AI speed-to-lead opportunity for {industry}]')
@@ -541,6 +604,9 @@ def build_source_doc(profile: dict) -> str:
     prompt_1_label   = profile.get('prompt_1_label', 'Speed-to-Lead Response Agent')
     prompt_2_label   = profile.get('prompt_2_label', 'Proposal and Qualification Agent')
     prompt_3_label   = profile.get('prompt_3_label', 'Follow-Up and Outreach Agent')
+    prompt_1_narrative = prompt_to_narrative(prompt_1, business_name, lead_first)
+    prompt_2_narrative = prompt_to_narrative(prompt_2, business_name, lead_first)
+    prompt_3_narrative = prompt_to_narrative(prompt_3, business_name, lead_first)
 
     # Council #9 — extended profile fields
     services         = profile.get('services', [service_type])
@@ -602,9 +668,9 @@ def build_source_doc(profile: dict) -> str:
         team_size_line=team_size_line,
         ai_maturity_line=ai_maturity_line,
         team_size_admin=team_size_admin,
-        prompt_1=prompt_1,
-        prompt_2=prompt_2,
-        prompt_3=prompt_3,
+        prompt_1_narrative=prompt_1_narrative,
+        prompt_2_narrative=prompt_2_narrative,
+        prompt_3_narrative=prompt_3_narrative,
         prompt_1_label=prompt_1_label,
         prompt_2_label=prompt_2_label,
         prompt_3_label=prompt_3_label,
@@ -615,6 +681,7 @@ def build_source_doc(profile: dict) -> str:
         gap1_roi=gap1_roi,
         gap3_roi=gap3_roi,
         generated_date=datetime.now().strftime('%Y-%m-%d'),
+        qualifier_url=qualifier_url,
     )
     return doc
 
@@ -630,8 +697,8 @@ def validate_source_doc(content: str, lead_name: str = '', lead_first: str = '')
             f"Missing sections or empty prompt_1/2/3 fields. Expand before uploading."
         )
 
-    required = ['<!-- v1.6 -->', 'SECTION 1', 'SECTION 4', 'SECTION 6',
-                'SECTION 8', 'SECTION 12', 'blueprint.meetadvaita.com/apply']
+    required = ['<!-- v1.8 -->', 'SECTION 1', 'SECTION 4', 'SECTION 6',
+                'SECTION 8', 'SECTION 12']
     missing = [r for r in required if r not in content]
     if missing:
         raise ValueError(f"Source doc missing required sections/stamp: {missing}")
@@ -675,7 +742,47 @@ def validate_source_doc(content: str, lead_name: str = '', lead_first: str = '')
                 f"v1.6 GATE: Section 1 contains third-person phrasing about lead: {violations}"
             )
 
-    print(f"✓ Source doc validated v1.6: {size_bytes:,} bytes ({size_bytes/1024:.1f}KB) — DIRECT-ADDRESS PASS")
+    print(f"✓ Source doc validated v1.8: {size_bytes:,} bytes ({size_bytes/1024:.1f}KB) — DIRECT-ADDRESS PASS")
+
+
+def prompt_to_narrative(prompt: str, business_name: str, lead_first: str) -> str:
+    """Convert a raw agent prompt into prose safe for NotebookLM narration."""
+    text = " ".join(str(prompt or "").split())
+    if not text:
+        return f"This workflow helps your team respond faster and keep every next step visible for {business_name}."
+
+    text = re.sub(r"^You are an? [^.]+?\.\s*", "", text, flags=re.I)
+    text = re.sub(r"^You are helping [^.]+?\.\s*", "", text, flags=re.I)
+    text = text.replace("Plumber Test Business", business_name)
+    text = text.replace(" the contact ", " your contact ")
+    text = text.replace(" the prospect ", " your prospect ")
+    text = text[:420].rstrip()
+    if not text.endswith((".", "!", "?")):
+        text += "."
+    return (
+        f"{lead_first}, this workflow {text[0].lower() + text[1:]} "
+        "It is meant to sound like your team on its best day, with every lead, estimate, and follow-up tracked."
+    )
+
+
+def audio_steering_description(profile: dict) -> str:
+    """NotebookLM audio instructions. This is the reliable steering layer."""
+    lead_name = profile.get("lead_name", "the business owner")
+    lead_first = profile.get("lead_first_name", str(lead_name).split()[0])
+    business_name = profile.get("business_name", "your business")
+    industry = profile.get("industry", "your industry")
+    return (
+        f'OPENING LINE MUST BE EXACTLY: "Hi {lead_first}, welcome. This walkthrough was built for you '
+        f'and {business_name}, from what you told us." '
+        f'{lead_first} is the listener. Speak TO {lead_first}, not ABOUT {lead_first}. '
+        f'Use "you" and "your business" throughout. In the first 60 seconds, say "{lead_first}", '
+        f'"{business_name}", and at least five uses of "you" or "your". '
+        f'DO NOT say "source material", "source document", "brief", "analysis", "we are looking at", '
+        f'"we are analyzing", "specific client", "owner of", "this business", "the owner", "they", or "their team". '
+        f'DO NOT narrate raw prompt text such as "you are a speed-to-lead agent"; summarize it as what the workflow does for {lead_first}. '
+        f'Tone: direct, useful, positive, and specific to {business_name} in {industry}. '
+        f'Frame gaps as AI amplification opportunities, not flaws. Close with the qualifier/application CTA, never a calendar booking.'
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -720,7 +827,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
     try:
         from notebooklm import NotebookLMClient
 
-        client = await NotebookLMClient.from_storage()
+        client = await _notebooklm_client_from_storage(NotebookLMClient)
         async with client:
             notebook = await _retry_async(
                 lambda: client.notebooks.create(title=f"{business_name} AI Blueprint Podcast"),
@@ -736,7 +843,10 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
             _log("Source added")
 
             await _retry_async(
-                lambda: client.artifacts.generate_audio(nb_id),
+                lambda: client.artifacts.generate_audio(
+                    nb_id,
+                    instructions=audio_steering_description(profile),
+                ),
                 description=f"generate audio for {nb_id}",
             )
             _log("Audio generation started...")
@@ -749,7 +859,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                         _log(f"Audio ready — artifact: {art.id}")
 
                         # Council #6 — .mp3 not .mp4
-                        output_path = os.path.join(output_dir, f'{slug}-blueprint-podcast.mp3')
+                        output_path = os.path.join(output_dir, f'{slug}.mp3')
                         await client.artifacts.download_audio(nb_id, output_path)
 
                         # Council #5 — file-existence + size gate
@@ -769,6 +879,8 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                                 f"Downloaded file too small: {size_mb:.1f}MB (minimum {MIN_MP3_SIZE_MB}MB). "
                                 f"File may be corrupt or truncated: {output_path}"
                             )
+
+                        audio_audit = _audio_direct_address_gate(output_path, profile)
                         print(f"✓ Downloaded + verified: {output_path} ({size_mb:.1f}MB)")
 
                         return {
@@ -778,6 +890,9 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                             'output_path': output_path,
                             'size_mb': round(size_mb, 1),
                             'source_path': source_path,
+                            'direct_address_audio_verified': True,
+                            'opening_direct_address_verified': audio_audit.get('opening_direct_address_verified'),
+                            'opening_exact_or_close': audio_audit.get('opening_exact_or_close'),
                         }
                 _log(f"  Polling {i+1}/30...")
 
@@ -786,7 +901,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                 'status': 'TIMEOUT',
                 'notebook_id': nb_id,
                 'source_path': source_path,
-                'expected_output_path': os.path.join(output_dir, f'{slug}-blueprint-podcast.mp3'),
+                'expected_output_path': os.path.join(output_dir, f'{slug}.mp3'),
                 'error': 'Audio generation timed out. Check NotebookLM dashboard for artifact status.',
             }
 
@@ -994,10 +1109,15 @@ def main():
         results = asyncio.run(
             run_batch(profile_paths, output_dir, args.delay, args.max_concurrent, args.source_only)
         )
-        sys.exit(0)
+        if args.source_only:
+            sys.exit(0 if all(r.get("status") == "source_only" for r in results) else 1)
+        sys.exit(0 if all(_is_verified_success(r) for r in results) else 1)
 
     result = asyncio.run(generate_podcast(args.profile, output_dir, args.source_only))
     print(f"\nResult: {json.dumps(result, indent=2)}")
+    if args.source_only:
+        sys.exit(0 if result.get("status") == "source_only" else 1)
+    sys.exit(0 if result.get("status") == "VERIFIED" and _is_verified_success(result) else 1)
 
 
 if __name__ == '__main__':

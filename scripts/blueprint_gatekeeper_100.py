@@ -151,9 +151,41 @@ def audio_size_gate(html: str, html_path: Path) -> Tuple[bool, str]:
     return False, "all referenced MP3 files below production floor or missing: " + ", ".join(details)
 
 
+def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
+    path = receipt_dir / f"{lead}-production-47.json"
+    if not path.exists():
+        return False, f"missing podcast production receipt: {path.name}"
+    try:
+        data = load_json(path)
+    except Exception as exc:
+        return False, f"invalid podcast production receipt: {exc}"
+    expected_sha = data.get("audio_sha256")
+    audio_path = data.get("audio")
+    hash_ok = False
+    if expected_sha and audio_path:
+        path = Path(audio_path)
+        candidates = [path] if path.is_absolute() else [(REPO / path).resolve(), (Path.cwd() / path).resolve()]
+        hash_ok = any(candidate.exists() and file_sha256(candidate) == expected_sha for candidate in candidates)
+    ok = (
+        data.get("direct_address_audio_verified") is True
+        and data.get("opening_direct_address_verified") is True
+        and data.get("opening_exact_or_close") is True
+        and data.get("banned_audio_phrases_found") in ([], None)
+        and data.get("third_person_patterns_found") in ([], None)
+        and int(data.get("you_your_count") or 0) >= 5
+        and hash_ok
+    )
+    if ok:
+        return True, "direct-address audio receipt passed"
+    return False, (
+        "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, "
+        "no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+    )
+
+
 def validate_token(token_path: Path, lead: str, require_production: bool,
                    html_path: Path = None, delivery_email_path: Path = None,
-                   lead_profile_path: Path = None) -> Tuple[bool, List[str]]:
+                   lead_profile_path: Path = None, receipt_dir: Path = None) -> Tuple[bool, List[str]]:
     failures = []
     if not token_path.exists():
         return False, [f"missing token: {token_path}"]
@@ -182,6 +214,11 @@ def validate_token(token_path: Path, lead: str, require_production: bool,
                 ("delivery_email_sha256", delivery_email_path),
                 ("lead_profile_sha256", lead_profile_path),
             ]
+            if receipt_dir is not None:
+                comparisons.append((
+                    "podcast_production_47_sha256",
+                    receipt_dir / f"{lead}-production-47.json",
+                ))
             for key, path in comparisons:
                 if path is None:
                     continue
@@ -239,6 +276,7 @@ def main() -> int:
             verify_html,
             verify_delivery,
             verify_profile,
+            receipt_dir,
         )
         out = {"status": "PASS" if ok else "FAIL", "lead": args.lead, "failures": failures}
         print(json.dumps(out, indent=2) if args.json_output else out["status"])
@@ -317,6 +355,11 @@ def main() -> int:
         if not audio_ok:
             failures.append(f"production audio size failed: {audio_detail}")
 
+        audio_direct_ok, audio_direct_detail = audio_direct_address_gate(receipt_dir, args.lead)
+        checks.append({"name": "production_audio_direct_address", "pass": audio_direct_ok, "detail": audio_direct_detail})
+        if not audio_direct_ok:
+            failures.append(f"production audio direct-address failed: {audio_direct_detail}")
+
     pass_now = not failures
     token_path = receipt_dir / f"{args.lead}-gatekeeper-pass-token.json"
     gatekeeper_receipt = receipt_dir / f"{args.lead}-gatekeeper.json"
@@ -355,6 +398,7 @@ def main() -> int:
                 "blueprint_html_sha256": file_sha256(html_path),
                 "delivery_email_sha256": optional_artifact_hash(delivery_email),
                 "lead_profile_sha256": optional_artifact_hash(lead_profile),
+                "podcast_production_47_sha256": optional_artifact_hash(receipt_dir / f"{args.lead}-production-47.json"),
             },
             "artifact_paths": {
                 "blueprint_html": str(html_path),
@@ -385,6 +429,10 @@ def main() -> int:
     elif pass_now:
         write_json(receipt_dir / f"{args.lead}-gatekeeper-local.json", output)
     else:
+        if token_path.exists():
+            token_path.unlink()
+        if gatekeeper_receipt.exists():
+            gatekeeper_receipt.unlink()
         write_json(receipt_dir / f"{args.lead}-gatekeeper-fail.json", output)
 
     if args.json_output:

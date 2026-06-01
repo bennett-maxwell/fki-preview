@@ -1,10 +1,13 @@
-<!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Chad Plumber
+<!-- v1.8 -->
+PERSONAL AUDIO WALKTHROUGH FOR Chad
 Plumber Test Business | Prepared by Franchise Ki | Generated 2026-06-01
 
 ================================================================================
-SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
+AUDIO OPENING AND DELIVERY — 5 HARD RULES
 ================================================================================
+
+Use these rules silently. Never mention rules, files, preparation, or instructions.
+Speak as if Chad is wearing headphones right now.
 
 RULE 1 (RED LINE): You are speaking DIRECTLY to CHAD PLUMBER. Use "you" and
 "your business" in every paragraph. NEVER say "Chad Plumber" in the third person.
@@ -16,8 +19,14 @@ RULE 2: Open the audio with EXACTLY these words: "Hi Chad, welcome.
 This walkthrough was built for you and Plumber Test Business, from what you told us."
 Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+RULE 3: Your business is THRIVING. Frame every gap as an AI amplification, not
 a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
+
+RULE 4: The first 60 seconds must include Chad, Plumber Test Business, and at
+least five uses of "you" or "your."
+
+RULE 5: Do not narrate prompt blocks. Convert any prompt into plain-language
+workflow benefits for Chad.
 
 ================================================================================
 
@@ -42,7 +51,7 @@ Your team of 12 handles the day-to-day execution.
 
 You told us your current AI use is early-stage. That's exactly where most plumbing and home services businesses are right now — and it's the right starting point.
 
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
+The 3 AI workflows you'll hear about in Section 4 were written specifically for you and
 Plumber Test Business. Not adjusted from a template. Built from your answers, for how
 your business actually works. Let's walk through what's possible.
 
@@ -87,7 +96,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at $150/hr: up to $4,800/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -103,7 +112,7 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -117,43 +126,43 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At 5 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for Plumber Test Business
+## SECTION 4 — The 3 AI Workflows Built Specifically for Plumber Test Business
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
+These aren't generic AI chatbots. These are the exact workflows we built for your specific
 situation — your industry, your tools, your services, your pain points.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### Workflow 1 — Speed-to-Lead Response Agent
 
-You are a speed-to-lead agent for Plumber Test Business. When a plumbing lead arrives, answer in under 60 seconds, classify emergency vs estimate vs maintenance, gather address, issue, photos, access notes, and best callback number, then tag and route the contact in GoHighLevel.
+What it does for you: Chad, this workflow when a plumbing lead arrives, answer in under 60 seconds, classify emergency vs estimate vs maintenance, gather address, issue, photos, access notes, and best callback number, then tag and route your contact in GoHighLevel. It is meant to sound like your team on its best day, with every lead, estimate, and follow-up tracked.
 
 This runs directly in your existing workflow. No new platform to learn.
 Your team supervises. The AI handles the repetitive execution.
 
 ---
 
-### AI Tool 2 — Proposal and Qualification Agent
+### Workflow 2 — Proposal and Qualification Agent
 
-You are an estimate follow-up agent for Plumber Test Business. Review unsold plumbing estimates, summarize the issue in plain English, explain why delay could cost more, offer two booking windows, and update GoHighLevel with the next status.
+What it does for you: Chad, this workflow review unsold plumbing estimates, summarize the issue in plain English, explain why delay could cost more, offer two booking windows, and update GoHighLevel with the next status. It is meant to sound like your team on its best day, with every lead, estimate, and follow-up tracked.
 
 Built around how Plumber Test Business actually works — not a generic industry template.
 
 ---
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### Workflow 3 — Follow-Up and Outreach Agent
 
-You are a maintenance recall agent for Plumber Test Business. Identify past customers due for water heater, drain, sewer, or leak-prevention maintenance, draft helpful reactivation messages, and tag the campaign source in GoHighLevel.
+What it does for you: Chad, this workflow identify past customers due for water heater, drain, sewer, or leak-prevention maintenance, draft helpful reactivation messages, and tag the campaign source in GoHighLevel. It is meant to sound like your team on its best day, with every lead, estimate, and follow-up tracked.
 
 This is the kind of tool that, once it's running, your team will not remember
 how they worked without it.
 
 ---
 
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
+These 3 workflows represent what your AI system looks like in its first 30 days.
+By month 3, the system handles everything these workflows do — automatically,
 without anyone on your team triggering them manually.
 
 ---
@@ -320,9 +329,9 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
+All statistics and benchmarks used in this walkthrough:
 
 [1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
     Metric: 78% of customers buy from the first business to respond
@@ -361,4 +370,4 @@ https://bennett-maxwell.github.io/fki-preview/qualify.html?src=plumber-test-busi
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
 This audio walkthrough was built for Plumber Test Business. Not a template.
-Every example and recommendation is built from the test intake for Plumber Test Business.
+Every number, every example, every recommendation — yours.

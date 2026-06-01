@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """run-audit.py — Blueprint AI audit entrypoint (stdlib + curl). v1.0 2026-05-28"""
-import sys, os, subprocess, re, json, urllib.request
+import sys, os, subprocess, re, json, urllib.request, hashlib
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 BP_DIR = os.path.join(REPO, "blueprints")
@@ -14,6 +14,13 @@ def curl_http(url):
             return r.status
     except Exception as e:
         return 0
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
@@ -94,8 +101,98 @@ def podcast_source_gate(slug):
         failures.append("old apply URL remains")
     if "qualify.html" not in text:
         failures.append("tracked qualifier URL missing")
+    if re.search(r"qualify\.html\?[^)\s]*\b(?:lead|biz)=", text, re.I):
+        failures.append("podcast source qualifier URL contains prefilled lead/biz fields")
     if re.search(r"first\s+90\s+days", text, re.I):
         failures.append("first 90 days copy remains")
+    banned_framing = [
+        "NOTEBOOKLM SOURCE DOCUMENT",
+        "source material",
+        "source document",
+        "Sources and Citations",
+        "Source:",
+        "This page",
+        "this document",
+        "we are analyzing",
+        "we're analyzing",
+        "specific client",
+    ]
+    for phrase in banned_framing:
+        if phrase.lower() in text.lower():
+            failures.append(f"podcast source contains narrator-risk framing: {phrase}")
+    if not re.search(r"Open the audio with EXACTLY these words", text):
+        failures.append("podcast source missing direct opening instruction")
+    return not failures, failures
+
+def podcast_audio_gate(slug, lead):
+    audio_path = os.path.join(REPO, "podcasts", f"{slug}.mp3")
+    receipt_dir = os.path.join(REPO, "audit-receipts", slug)
+    receipt_path = os.path.join(receipt_dir, f"{slug}-production-47.json")
+    public_url = f"https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3"
+    failures = []
+
+    if not os.path.exists(audio_path):
+        return False, [f"missing canonical podcast audio: podcasts/{slug}.mp3"]
+
+    size = os.path.getsize(audio_path)
+    if size < 5 * 1024 * 1024:
+        failures.append(f"podcast audio too small: {size} bytes")
+
+    current_sha = file_sha256(audio_path)
+    data = {}
+    if os.path.exists(receipt_path):
+        try:
+            with open(receipt_path, encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception as e:
+            failures.append(f"invalid podcast transcript receipt: {e}")
+
+    if data.get("audio_sha256") != current_sha:
+        os.makedirs(receipt_dir, exist_ok=True)
+        lead_name = lead.get("lead_name") or slug.replace("-", " ").title()
+        first_name = lead.get("lead_first_name") or str(lead_name).split()[0]
+        business_name = lead.get("business_name") or lead_name
+        auditor = os.path.join(REPO, "scripts", "podcast_direct_address_audit.py")
+        try:
+            proc = subprocess.run([
+                sys.executable, auditor,
+                "--audio", audio_path,
+                "--first-name", first_name,
+                "--lead-name", lead_name,
+                "--business-name", business_name,
+                "--lead", slug,
+                "--seconds", "180",
+                "--public-url", public_url,
+                "--receipt", receipt_path,
+                "--json-output",
+            ], capture_output=True, text=True, timeout=360)
+            try:
+                data = json.loads(proc.stdout)
+            except Exception:
+                with open(receipt_path, encoding="utf-8") as f:
+                    data = json.load(f)
+            if proc.returncode != 0 and not data:
+                failures.append(f"podcast transcript auditor failed: {(proc.stderr or proc.stdout)[-300:]}")
+        except Exception as e:
+            failures.append(f"podcast transcript auditor error: {e}")
+
+    checks = {
+        "direct_address_audio_verified": data.get("direct_address_audio_verified") is True,
+        "opening_direct_address_verified": data.get("opening_direct_address_verified") is True,
+        "opening_exact_or_close": data.get("opening_exact_or_close") is True,
+        "no_banned_audio_phrases": data.get("banned_audio_phrases_found") in ([], None),
+        "no_third_person_patterns": data.get("third_person_patterns_found") in ([], None),
+        "you_your_count_ge_5": int(data.get("you_your_count") or 0) >= 5,
+        "audio_sha_matches": data.get("audio_sha256") == current_sha,
+        "public_url_200": int(data.get("http_code") or 0) == 200,
+    }
+    for name, ok in checks.items():
+        if not ok:
+            failures.append(name)
+    if data.get("banned_audio_phrases_found"):
+        failures.append(f"banned={data.get('banned_audio_phrases_found')}")
+    if data.get("third_person_patterns_found"):
+        failures.append(f"third_person={data.get('third_person_patterns_found')}")
     return not failures, failures
 
 def audit_lead(slug):
@@ -113,7 +210,12 @@ def audit_lead(slug):
     results["PF0-4_no_placeholders"] = pass_ph
     results["D1-01_name_in_title"] = slug.replace("-", " ").split()[0].lower() in html.lower()
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
-    results["D3-01_podcast_exists"] = os.path.exists(os.path.join(REPO, "podcasts", f"{slug}.mp3"))
+    podcast_exists = os.path.exists(os.path.join(REPO, "podcasts", f"{slug}.mp3"))
+    results["D3-01_podcast_exists"] = podcast_exists
+    redlines["D3-01_podcast_exists_RL"] = podcast_exists
+    podcast_audio_ok, podcast_audio_detail = podcast_audio_gate(slug, lead)
+    results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
+    redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     results["D9-01_no_orphan_classes"] = True  # simplified
     calc_ok, calc_detail = calculator_gate(html, lead)
     results["D7-22_calculator_matches_profile_RL"] = calc_ok
@@ -138,7 +240,8 @@ def audit_lead(slug):
             "redline_fail": redline_fail, "financial_detail": fin_detail,
             "calculator_detail": calc_detail,
             "home_services_detail": hs_detail,
-            "podcast_detail": podcast_detail}
+            "podcast_detail": podcast_detail,
+            "podcast_audio_detail": podcast_audio_detail}
 
 def main():
     import argparse

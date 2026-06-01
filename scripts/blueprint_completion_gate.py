@@ -100,6 +100,56 @@ def load_receipt(path: Path) -> dict:
     return data if isinstance(data, dict) else {}
 
 
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def receipt_audio_hash_matches(data: dict, html_path: Optional[Path]) -> bool:
+    expected = data.get("audio_sha256")
+    audio = data.get("audio")
+    if not expected or not audio:
+        return False
+    audio_path = Path(audio)
+    candidates = []
+    if audio_path.is_absolute():
+        candidates.append(audio_path)
+    else:
+        candidates.append((Path.cwd() / audio_path).resolve())
+        if html_path is not None:
+            candidates.extend([
+                (html_path.parent / audio_path).resolve(),
+                (html_path.parent.parent / audio_path).resolve(),
+            ])
+    for candidate in candidates:
+        if candidate.exists() and file_sha256(candidate) == expected:
+            return True
+    return False
+
+
+def gatekeeper_receipt_result(path: Path, require_production: bool) -> Tuple[bool, str]:
+    """Check #40 with production-token semantics when production is required."""
+    if not require_production:
+        ok = receipt_pass(path)
+        return ok, "OK" if ok else "Missing gatekeeper receipt"
+
+    data = load_receipt(path)
+    token = data.get("pass_token") if isinstance(data.get("pass_token"), dict) else {}
+    ok = (
+        data.get("status") == "PASS"
+        and token.get("pass") is True
+        and token.get("strict_production") is True
+        and int(token.get("score") or 0) == 100
+        and str(token.get("diamond") or "").upper() == "PASS"
+    )
+    if ok:
+        return True, "Production Gatekeeper pass token verified"
+    return False, "Missing production Gatekeeper receipt with pass_token.strict_production=true"
+
+
 def production_receipt_result(num: int, path: Path, html: str,
                               html_path: Optional[Path]) -> Tuple[bool, str]:
     """Schema-specific production proof validators.
@@ -157,15 +207,27 @@ def production_receipt_result(num: int, path: Path, html: str,
     if num == 47:
         local_audio_ok, local_audio_detail = audio_size_check(html, html_path)
         remote_ok = (
-            base_pass
-            and int(data.get("http_code") or 0) == 200
+            int(data.get("http_code") or 0) == 200
             and int(data.get("size_download") or 0) >= 29 * 1024 * 1024
         )
-        ok = remote_ok and local_audio_ok
+        direct_ok = (
+            data.get("direct_address_audio_verified") is True
+            and data.get("opening_direct_address_verified") is True
+            and data.get("opening_exact_or_close") is True
+            and data.get("banned_audio_phrases_found") in ([], None)
+            and data.get("third_person_patterns_found") in ([], None)
+            and int(data.get("you_your_count") or 0) >= 5
+        )
+        hash_ok = receipt_audio_hash_matches(data, html_path)
+        ok = remote_ok and local_audio_ok and direct_ok and hash_ok
         if ok:
-            return True, f"Public and local podcast audio verified ({data.get('size_download')} bytes)"
+            return True, f"Public/local podcast and direct-address audio verified ({data.get('size_download')} bytes)"
         if not remote_ok:
             return False, "Public podcast receipt must include pass=true, http_code=200, and size_download >= 29MB"
+        if not direct_ok:
+            return False, "Podcast receipt must prove direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, and >=5 you/your references"
+        if not hash_ok:
+            return False, "Podcast receipt audio_sha256 must match the current local MP3"
         return False, local_audio_detail
 
     if num == 48:
@@ -680,12 +742,15 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     }
 
     # 40. Gatekeeper ledger receipt
-    gk_receipt = receipt_pass(receipt_dir / f"{lead_slug}-gatekeeper.json")
+    gk_receipt, gk_detail = gatekeeper_receipt_result(
+        receipt_dir / f"{lead_slug}-gatekeeper.json",
+        require_production and already_sent,
+    )
     results[40] = {
         "desc": "Gatekeeper pass receipt exists",
         "pass": gk_receipt if already_sent else None,
         "severity": proof_severity,
-        "detail": "Missing gatekeeper receipt" if not gk_receipt else "OK"
+        "detail": gk_detail
     }
 
     # 41. Closeout receipt
