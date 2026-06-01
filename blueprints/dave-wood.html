@@ -116,17 +116,7 @@
     margin-top: 2px;
   }
 
-  /* -- URGENCY BAR -- */
-  .urgency-bar {
-    background: linear-gradient(90deg, var(--accent), #6fe1d3);
-    color: #fff;
-    text-align: center;
-    padding: 10px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-  .urgency-bar span { font-weight: 800; }
+  
 
   /* -- TAB NAVIGATION -- */
   .tab-nav {
@@ -1005,10 +995,7 @@
   </p>
 </div>
 
-<!-- ----------- URGENCY BAR ----------- -->
-<div class="urgency-bar">
-  fast-casual restaurant franchise season demand is accelerating — <span id="cd-x"></span> days until peak season begins
-</div>
+
 
 <!-- ----------- TAB NAVIGATION ----------- -->
 <div class="tab-nav">
@@ -1936,20 +1923,7 @@ function updateCalc() {
   document.getElementById('res-cost').textContent = '$' + costSavings.toLocaleString() + '/mo';
 }
 
-// Urgency countdown (rolling — never shows negative)
-(function() {
-  const el = document.getElementById('countdown');
-  if (!el) return;
-  const now = new Date();
-  const month = now.getMonth();
-  let target;
-  // fast-casual restaurant franchise season peaks: rolling calendar for peak demand periods
-  if (month >= 0 && month <= 5) target = new Date(now.getFullYear(), 8, 1);      // Fall season
-  else if (month >= 6 && month <= 9) target = new Date(now.getFullYear() + 1, 0, 15); // New Year
-  else target = new Date(now.getFullYear() + 1, 2, 1);                            // Spring
-  const days = Math.max(1, Math.ceil((target - now) / (1000 * 60 * 60 * 24)));
-  el.textContent = days;
-})();
+
 
 // Init calculator
 updateCalc();
