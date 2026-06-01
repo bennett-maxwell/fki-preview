@@ -69,6 +69,10 @@ SLUG=$(get slug "lead")
 GHL_CONTACT_ID=$(get ghl_contact_id "")
 ACCENT_COLOR=$(get accent_color "#007AFF")
 INDUSTRY=$(get industry "business services")
+# Email-safe industry: the template appends " businesses" after {{INDUSTRY}}, so an
+# industry value that already ends in "business/businesses" doubles ("... businesses businesses").
+# Strip a trailing business/businesses for email copy only (blueprint industry untouched).
+EMAIL_INDUSTRY=$(python3 -c "import re,sys; print(re.sub(r'\s+business(es)?\s*$','',sys.argv[1]).strip() or sys.argv[1])" "$INDUSTRY")
 BLUEPRINT_URL=$(get blueprint_url "")
 PODCAST_URL=$(get podcast_url "")
 WEBSITE_URL=$(get website_url "")
@@ -78,10 +82,11 @@ PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Gen
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
-# Prefer the profile's already-personalized qualifier URL, then enforce identity
-# params so email click-through updates the same GHL contact instead of spawning
-# a duplicate record.
-PROFILE_QUALIFY_URL=$(get apply_url "")
+# Read ONLY a dedicated qualify_url field — NEVER seed from apply_url. apply/ is a
+# different page; seeding QUALIFY_URL from apply_url made the "See If You Qualify"
+# button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
+# Empty default => the python block below falls back to the canonical qualify.html.
+PROFILE_QUALIFY_URL=$(get qualify_url "")
 QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
 import sys
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -156,7 +161,7 @@ cp "$TEMPLATE" "$OUTPUT"
 sed -i '' "s|{{LEAD_FIRST_NAME}}|$LEAD_FIRST|g" "$OUTPUT"
 sed -i '' "s|{{BUSINESS_NAME}}|$BUSINESS_NAME|g" "$OUTPUT"
 sed -i '' "s|{{ACCENT_COLOR}}|$ACCENT_COLOR|g" "$OUTPUT"
-sed -i '' "s|{{INDUSTRY}}|$INDUSTRY|g" "$OUTPUT"
+sed -i '' "s|{{INDUSTRY}}|$EMAIL_INDUSTRY|g" "$OUTPUT"
 sed -i '' "s|{{BLUEPRINT_URL}}|$BLUEPRINT_URL|g" "$OUTPUT"
 sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
 sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
@@ -208,14 +213,17 @@ BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || tr
 BOOKING=${BOOKING:-0}
 CALENDAR=$(grep -ci 'calendly\|cal\.com\|calendar\.google' "$OUTPUT" 2>/dev/null || true)
 CALENDAR=${CALENDAR:-0}
-APPLY=$(grep -ci 'apply' "$OUTPUT" 2>/dev/null || true)
-APPLY=${APPLY:-0}
+# Conversion-CTA gate: the canonical CTA target is qualify.html (bennett-rule), but a
+# legacy email may still route to apply/. Accept either so the gate verifies "a
+# conversion CTA exists" without forcing the apply/ link the bennett-rule forbids.
+CTA=$(grep -ci 'qualify\|apply' "$OUTPUT" 2>/dev/null || true)
+CTA=${CTA:-0}
 
-if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$APPLY" -lt 1 ]; then
-    echo "FAIL: booking=$BOOKING calendar=$CALENDAR apply=$APPLY"
+if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$CTA" -lt 1 ]; then
+    echo "FAIL: booking=$BOOKING calendar=$CALENDAR cta=$CTA"
     exit 1
 fi
-echo "Pre-delivery: PASS (booking=0 calendar=0 apply=$APPLY)"
+echo "Pre-delivery: PASS (booking=0 calendar=0 cta=$CTA)"
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
