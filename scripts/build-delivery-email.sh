@@ -239,6 +239,7 @@ if [ "$SEND_PREVIEW" = true ]; then
     SEND_LOG="/tmp/${SLUG}-bennett-preview-send.log"
     if ! gog gmail send \
         --to=bennett@franchiseki.com \
+        --cc=madison@franchiseki.com \
         --subject="PREVIEW: $LEAD_NAME Blueprint Delivery Email" \
         --body-html="$(cat "$OUTPUT")" \
         --no-input > "$SEND_LOG" 2>&1; then
@@ -281,6 +282,7 @@ receipt = {
     "pass": True,
     "status": "PASS",
     "to": "bennett@franchiseki.com",
+    "cc": "madison@franchiseki.com",
     "external_customer_send": False,
     "approval_scope": "bennett_preview_only",
     "gate_token": str(Path(token_path).resolve()),
