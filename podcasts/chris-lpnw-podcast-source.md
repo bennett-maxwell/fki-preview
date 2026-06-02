@@ -1,363 +1,313 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Chris
-LPNW LLC | Prepared by Franchise Ki | Generated 2026-05-27
+# LPNW LLC — Your AI Advantage Walkthrough
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to CHRIS. Use "you" and
-"your business" in every paragraph. NEVER say "Chris" in the third person.
-NEVER say "this business," "the owner," "they," or "their team." If you catch
-yourself describing Chris from the outside, stop and restart the sentence
-addressed to them.
+RULE 1 (RED LINE): You are speaking DIRECTLY to CHRIS. Use "you" and "your" in every paragraph. NEVER refer to Chris in the third person. NEVER say "this business," "the owner," "they," or "their team." If you catch yourself describing Chris from the outside, stop and restart the sentence addressed to them.
 
-RULE 2: Open the audio with EXACTLY these words: "Hi Chris, welcome.
-This walkthrough was built for you and LPNW LLC, from what you told us."
-Then proceed.
+RULE 2: Open the audio with EXACTLY these words: "Hi Chris, welcome. This walkthrough was built for you and LPNW LLC, from what you told us." Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
-a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
-
-================================================================================
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking.
 
 ---
 
 ## SECTION 1 — Hi Chris, this is your walkthrough
 
-Hi Chris — welcome. This is your AI walkthrough, built for you and
-LPNW LLC. Every number you're about to hear came from what you told us.
+Hi Chris, welcome. This walkthrough was built for you and LPNW LLC, from what you told us. Everything you're about to hear came straight from your form and your own studio.
 
-You operate in franchise operations, serving franchise operations at $10M+ scale. You run LPNW LLC at https://lpnw.com.
-You're already doing the hard work — the clients, the team, the reputation. That's
-yours. What we're going to walk through together isn't about fixing what's broken
-in your business. It's about showing you exactly where AI amplifies everything
-you've already built.
+You run LPNW LLC, a $10M+ multi-unit franchise operation. That work is yours, and nothing here replaces it. What you'll hear is exactly where AI gives you your time back so you can pour more of yourself into the work only you can do.
 
-You told us your current tools are: Microsoft Teams, WhatsApp. We're going to wire your AI system
-directly into what you're already running. Nothing you use today gets ripped out.
-Everything gets amplified.
-
-Your team is the backbone of LPNW LLC.
-
-You told us your current AI use is early-stage. That's exactly where most franchise operations businesses are right now — and it's the right starting point.
-
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
-LPNW LLC. Not adjusted from a template. Built from your answers, for how
-your business actually works. Let's walk through what's possible.
+You told us your single biggest goal is taming the day-to-day operational chaos, and that the most demanding part of your week is follow-up, team organization, reporting, internal communication, and hiring. You're using ChatGPT day to day, which is a strong place to start. Keep those two things in mind — every tool below is aimed right at them.
 
 ---
 
 ## SECTION 2 — Your Current Tool Stack: Where LPNW LLC Is Today
 
-WHERE YOU ARE TODAY — your current operational infrastructure:
+Here is the operational stack you're running today, and where AI plugs in on top of it — nothing gets ripped out:
 
-- **Microsoft Teams**: Core operational tool in your current stack.
-- **WhatsApp**: Core operational tool in your current stack.
-- **Standard franchise operations workflow tools**: Core operational tool in your current stack.
-- **Email and calendar**: Core operational tool in your current stack.
-- **Direct team communication**: Core operational tool in your current stack.
+- **Microsoft Teams** — Team Communication
+- **WhatsApp** — Team + Field Communication
+- **Text / SMS** — Fast Communication
+- **Google Drive + OneDrive** — File Storage (split)
+- **ChatGPT** — Current AI Tool
+- **No CRM / No PM Tool** — Priority Gap — no central system yet
 
-This tool stack tells us two things: where you're already strong, and where the
-biggest time unlocks are waiting. Your AI system gets built on top of what you have —
-not around it.
-
----
-
-## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
-
-These aren't guesses. These are the gaps that show up consistently for franchise operations
-businesses at your stage — and every one of them has a direct AI solution.
-
-### Gap 1 — Speed to Response
-
-You're competing for the first response every time a lead comes in. Research from
-Harvard Business Review shows that 78% of customers buy from the first business to
-respond (HBR, "The Short Life of Online Sales Leads," 2011 —
-https://hbr.org/2011/03/the-short-life-of-online-sales).
-
-In franchise operations, that window is measured in minutes — sometimes seconds. Every hour your
-team isn't watching for inbound = leads going to whoever responds first.
-
-An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
-your brand voice, your pricing context, your services. You stop competing on response
-time because you're always first.
-
-**Time your team could recover: up to 8 hours/week**
-**ROI at $150/hr: up to $4,800/month back in productive time**
-
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
-
-### Gap 2 — Follow-Up Consistency
-
-McKinsey research shows that 80% of sales require 5+ follow-up touches, but 44% of
-salespeople give up after just one follow-up (McKinsey & Company, "The B2B digital
-inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
-
-For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where they are in the
-decision process, and sends the right message at the right moment — without anyone
-on your team having to remember to do it.
-
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
-
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-### Gap 3 — Admin and Documentation Overhead
-
-SBA data shows small business owners spend an average of 25-40% of their week on
-administrative tasks that don't directly generate revenue
-(SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
-
-In franchise operations, this shows up as: proposal writing, status updates, follow-up emails,
-scheduling coordination, reporting. Your AI system takes these off your team's plate
-entirely — and does them faster and more consistently than any manual process.
-
-**At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
-
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+The biggest signal here: there's no central client system yet, so every inquiry and team member lives in your inbox and texts. That's the first place AI gives you leverage.
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for LPNW LLC
+## SECTION 3 — Where AI Gives You the Most Time Back
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
-situation — your industry, your tools, your services, your pain points.
+These aren't guesses — they come straight from your answers. None of it is a critique of the studio; it's simply where AI carries the load so your team doesn't have to.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### Opportunity 1 — Internal Communication Across Three Apps
 
-You are a daily operations briefing agent for a $10M+ franchise operation. Every morning at 7:30 AM, generate a morning standup brief that includes each team member's priorities, outstanding tasks, and items requiring the owner's decision — delivered via Microsoft Teams.
+You flagged internal communication as a top stress, and it's no wonder — the team runs across Microsoft Teams, WhatsApp, and text, with files split between Google Drive and OneDrive. Important things slip between apps. An AI communication agent summarizes threads, routes what matters to the right people, and surfaces what needs a decision — one clear signal instead of three noisy channels.
 
-This runs directly in your existing workflow. No new platform to learn.
-Your team supervises. The AI handles the repetitive execution.
+### Opportunity 2 — Team Organization & Accountability
 
----
+You flagged team organization as a stress. With no project or task system and processes only 10&ndash;50% documented, who-owns-what lives in people's heads. An AI accountability agent tracks commitments, follows up on open items, and keeps everyone's next step visible — so the operation runs on a system, not reminders.
 
-### AI Tool 2 — Proposal and Qualification Agent
+### Opportunity 3 — Reporting
 
-You are a weekly KPI reporting agent for a franchise operation. Every Monday at 8:00 AM, generate a Weekly KPI Dashboard covering revenue, team performance, and operational health with a Pulse Score summary so the owner knows whether to dig in or relax.
+You flagged reporting as a stress. Pulling operational and unit-level numbers together by hand is slow and always a little out of date. An AI reporting agent compiles your weekly numbers automatically, so you lead with current data instead of midnight spreadsheets.
 
-Built around how LPNW LLC actually works — not a generic industry template.
+### Opportunity 4 — Follow-Up
 
----
+You flagged follow-up as a stress. Across a $10M operation, the follow-ups that fall through — with vendors, candidates, team members, partners — quietly cost time and trust. An AI follow-up agent makes sure every loop gets closed.
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### Opportunity 5 — Hiring & Staffing
 
-You are a hiring screen agent for a franchise operation. When a new job application comes in, screen the resume against job requirements and provide a ranked assessment with a weekly pipeline summary.
+You flagged hiring as a stress. For a growing multi-unit operation, staffing is a constant load. An AI hiring agent writes the posts, screens applicants, runs first-touch outreach, and schedules interviews — so roles fill faster and you only spend time on the strongest candidates.
 
-This is the kind of tool that, once it's running, your team will not remember
-how they worked without it.
+### Opportunity 6 — No Central System or Documented Process
 
----
-
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
-without anyone on your team triggering them manually.
+With no CRM or project tool and processes 10&ndash;50% documented, the business depends on memory and hustle. An AI operations layer documents and runs the repeatable steps — turning a $10M operation that runs on people into one that runs on a system.
 
 ---
 
-## SECTION 5 — What Your Customers Already Say About LPNW LLC
+## SECTION 4 — The AI System Built Specifically for LPNW LLC
 
-Your reputation in franchise operations at $10M+ scale is an asset. Customer feedback for franchise operations businesses
-at your stage consistently highlights the same themes:
+These were written for your studio — your inquiries, your team members, your voice. Not adjusted from a template:
 
-- **Responsiveness:** Clients in franchise operations cite "fast, clear communication" as the
-  #1 factor in choosing a provider. Your AI system makes this your permanent standard —
-  not a good week, not a great hire, a permanent operational baseline.
+### Operations Command Center
 
-- **Reliability:** Follow-through on commitments is what drives repeat business and
-  referrals. Your AI system tracks every commitment and ensures nothing falls through
-  the cracks — even at 2am.
+Pulls activity from Microsoft Teams, WhatsApp, and text into one daily source of truth — today's priorities, open items, and who owns what. Replaces the scattered-threads chaos with a single place the whole operation runs from.
 
-- **Professionalism:** The quality of your proposals, your follow-up, your
-  documentation — all of this signals expertise before the client ever meets you in person.
-  AI raises that standard across every touchpoint.
+*What you feel:* The whole operation, in one view
 
-The businesses that win in franchise operations long-term aren't necessarily the ones doing the
-best technical work. They're the ones that are easiest to work with. AI gives you that
-edge permanently.
+### Internal Communication Agent
+
+Summarizes long threads across all three messaging apps, routes the right information to the right people, and flags what actually needs a decision — so nothing important gets lost between channels. Directly relieves the internal-communication stress you flagged.
+
+*What you feel:* One clear signal, not three noisy apps
+
+### Team Accountability Agent
+
+Tracks every commitment and open item, nudges owners before things slip, and keeps each person's next step visible. Turns team organization from a memory exercise into a system.
+
+*What you feel:* Nothing slips through the cracks
+
+### Reporting Agent
+
+Compiles your weekly and unit-level operational numbers from your files automatically and writes clean reports — directly relieving the reporting stress you flagged, so decisions run on current data.
+
+*What you feel:* Weekly reports, written for you
+
+### Hiring & Onboarding Agent
+
+Writes job posts, screens applicants against your criteria, runs first-touch outreach, and schedules interviews — so roles fill faster and your time goes only to the strongest candidates. Relieves the hiring stress you flagged.
+
+*What you feel:* Roles filled without the scramble
+
+### Follow-Up Agent
+
+Makes sure every loop gets closed across the operation — vendors, candidates, team members, partners — so the follow-ups that used to fall through simply don't anymore.
+
+*What you feel:* Every follow-up, handled
+
+---
+
+## SECTION 5 — Your Brand Voice, Built In From Day One
+
+Your AI doesn't learn your voice slowly over months. We build it before launch from your operation and your own language, so every reply a team member receives sounds like LPNW LLC from the very first message — 90% accurate on day one, then fine-tuned with you.
 
 ---
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+**Days 1-3 — AI Is In**
+- Kickoff call — map how the operation actually runs across Teams, WhatsApp, and text
+- Operations Command Center configured as your single daily source of truth
+- Brand and operating voice built from your existing communication
+- Live test: run a real day's activity through the command center
+_Result: Your first agent is live. The operation has one place to look instead of three apps._
 
-**Days 1-3: Onboarding.** Franchise operations audit. Brand voice profile. Full ops map.
-We listen. Nothing gets built until we understand how you actually work.
+**Days 4-7 — System Is Running**
+- Internal Communication Agent unifying Teams, WhatsApp, and text
+- Team Accountability Agent tracking commitments and next steps
+- Reporting Agent producing your first automated weekly report
+- Hiring & Follow-Up agents connected
+- Team walkthrough: 30 minutes, no technical knowledge required
+_Result: All 6 agents deployed and running across the real operation. Team trained._
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
-agent skills. You see the first results. Your team gives feedback. The system adjusts.
+**Day 30 — Fully Calibrated**
+- 30-day review: hours saved, follow-ups closed, reporting time eliminated
+- Agents refined on how your team actually works
+- Expansion roadmap: what to systematize next as you grow
+_Result: The system knows your operation. Every agent calibrated to real LPNW data._
 
-**Day 30: The system runs your business rhythm.** It compounds. It never forgets.
-You're spending time on what only you can do.
-
-**Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way they use their phone — naturally, without thinking.
-
-**After Month 3: System and team integrated.** World-class employee, 24/7, fully
-autonomous. Not "getting better every week." Already there.
+**Month 2+ — Compounding**
+- Minimal manual input — the operation runs on the system, not memory
+- More process documented every week
+- You own the system — we stay on as your AI operations team
+_Result: A $10M+ operation that runs on order instead of chaos — and holds that order as you grow._
 
 ---
 
 ## SECTION 7 — Three Prompts You Can Use Today, Without Waiting
 
-You don't need to be a client to start getting value from AI. Here are 3 prompts you
-can paste into ChatGPT or Claude right now — each built around your specific business:
+You don't have to wait for us to feel this. Paste these into ChatGPT — which you already use — and you have a working agent in minutes.
 
-### Prompt 1 — Speed-to-Lead Response Draft
+### Agent 1 — LPNW Operations Daily Briefing
+
+_Based on your internal-communication and team-organization stresses_
+
 ```
-You are a franchise operations business assistant for LPNW LLC. A new inquiry just came
-in from a potential client interested in Team Coordination, Franchise Management, Operational Reporting, Hiring & HR Screening. Their message was: [PASTE
-THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
-specific request, (2) describes our availability and process, (3) includes a next step.
-Use a friendly but professional tone. Keep it under 150 words.
+## IDENTITY
+You are the Operations Coordinator for LPNW LLC, a $10M+ multi-unit franchise operation with a team of 8. Your job is to turn a chaotic, multi-channel day into one clear, calm picture. You are organized, concise, and proactive.
+
+## INPUTS (paste or connect)
+- Today's key messages/threads from Microsoft Teams, WhatsApp, and text
+- Open commitments from yesterday
+- Any deadlines, escalations, or decisions pending
+
+## YOUR JOB — produce a DAILY BRIEFING with these sections
+1. TOP PRIORITIES (3-5): the things that must move today, each with an owner.
+2. OPEN ITEMS / FOLLOW-UPS: anything waiting on someone, with who and since when.
+3. NEEDS A DECISION: items where you (Chris) or a lead must decide, summarized in one line each.
+4. STALE / AT RISK: commitments older than 2 days with no movement.
+5. FYI: notable updates that don't need action.
+
+## RULES
+- Every priority and open item has a named owner -- never leave it ambiguous.
+- One line per item; link or quote the source thread.
+- Surface only what matters; suppress noise.
+- If something needs a human decision, put it in section 3, never bury it.
+- Keep the whole briefing scannable in under 60 seconds.
+
+## TONE
+- Calm, organized, no drama. You are the steady hand that makes a busy operation feel under control.
+
+## EXAMPLE OUTPUT
+---
+**LPNW Daily Briefing — Tuesday**
+TOP PRIORITIES
+1. Unit 3 staffing gap — owner: Maria — interview 2 candidates today
+2. Vendor invoice dispute — owner: Chris — needs your call by noon
+OPEN ITEMS
+- Waiting on James for the weekly numbers (since Friday)
+NEEDS A DECISION
+- Approve overtime for weekend coverage? (Maria)
+AT RISK
+- Onboarding checklist for new hire — untouched 3 days
+---
 ```
 
-### Prompt 2 — Proposal Framework Generator
+What this does: turns the scattered activity across Teams, WhatsApp, and text into one clear daily briefing -- priorities, open items, and who owns what -- so the operation runs from a system instead of memory.
+
+### Agent 2 — Weekly Reporting Agent
+
+_Based on the reporting stress you flagged_
+
 ```
-You are helping LPNW LLC create a proposal for a new franchise operations client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Team Coordination, Franchise Management, Operational Reporting, Hiring & HR Screening.
-Generate a professional proposal outline with: project scope, deliverables, timeline,
-and 3 package options at different investment levels. Format it for easy customization.
+## IDENTITY
+You are the Reporting Analyst for LPNW LLC. Each week you turn raw operational data into a clear, consistent report leadership can act on. You are accurate, structured, and plain-spoken -- no jargon.
+
+## INPUTS
+- This week's operational data (sales/units, staffing, key metrics) from your files (Google Drive / OneDrive)
+- Last week's report for comparison
+- Any targets or budgets to measure against
+
+## REPORT STRUCTURE
+1. HEADLINE (2-3 sentences): how the week went, in plain language.
+2. KEY NUMBERS (table): metric | this week | last week | trend.
+3. BY UNIT (if multi-unit): one line each, flag anything off-pace.
+4. WINS: 2-3 specific things that went well.
+5. WATCH ITEMS: 2-3 things trending the wrong way, with the likely cause.
+6. RECOMMENDED ACTIONS: 1-3 concrete next steps, each with an owner.
+
+## RULES
+- Never invent a number; if data is missing, say so and flag it.
+- Always compare to last week and to target where available.
+- Keep it to one page; lead with the headline.
+- Frame watch items as opportunities, not blame.
+
+## QUALITY CHECK
+- Every number sourced? Y/N
+- Trends and comparisons included? Y/N
+- Actions have owners? Y/N
+If any N, fix before sending.
 ```
 
-### Prompt 3 — Follow-Up Email Sequence
+What this does: compiles your operational numbers into a clean weekly report automatically -- so you lead with current data instead of pulling spreadsheets together late at night.
+
+### Agent 3 — Hiring & Screening Agent
+
+_Based on the hiring / staffing stress you flagged_
+
 ```
-You are a follow-up agent for LPNW LLC. A prospect expressed interest in
-Team Coordination, Franchise Management, Operational Reporting, Hiring & HR Screening but hasn't responded in 5 days. Their original inquiry was about:
-[PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference their specific situation, and
-include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
+## IDENTITY
+You are the Recruiting Coordinator for LPNW LLC, a multi-unit franchise operation. You run the front of the hiring funnel so leadership only spends time on finalists. You are efficient, fair, and on-brand.
+
+## INPUTS
+- Role + must-have requirements + nice-to-haves
+- Location/unit and schedule
+- Pay range (if shareable)
+- Applicant resumes/responses as they come in
+
+## WHAT YOU DO
+1. JOB POST: write a clear, appealing post for the role (responsibilities, requirements, what makes LPNW a good place to work, how to apply).
+2. SCREEN: score each applicant against the must-haves; sort into Strong / Maybe / No with a one-line reason each.
+3. FIRST-TOUCH OUTREACH: draft a warm reply to Strong candidates inviting them to a screening call, with 2-3 specific time options.
+4. SCHEDULE: on reply, confirm the time and add it to the calendar; send a reminder 24h before.
+5. HANDOFF: give leadership a short shortlist with the top 3 and why.
+
+## RULES
+- Screen only on job-relevant criteria; keep it fair and consistent.
+- Never auto-reject ambiguous cases -- mark Maybe and surface for a human.
+- Keep candidate messages warm and prompt (reply within the hour).
+- Log every candidate + status so nothing falls through.
+
+## EXAMPLE — OUTREACH
+---
+Hi Jordan, thanks for applying to the Assistant Manager role at LPNW. Your multi-unit experience stood out. I'd love to set up a quick 15-minute call -- I have Wednesday 10am or Thursday 2pm open. Which works?
+---
 ```
 
-These give you immediate results. The difference between these prompts and the full
-AI system we build: these require someone to trigger them manually. The full system
-runs automatically, 24/7, without anyone on your team doing anything.
+What this does: fills roles faster by writing the posts, screening applicants against your criteria, and scheduling interviews -- so your time goes only to the strongest candidates.
 
 ---
 
 ## SECTION 8 — Two Paths Forward
 
-You have two options after listening to this:
+**Do it yourself:** use the prompts above to stand up one or two of these agents on your own. You'll feel time come back within days.
 
-**Path 1 — DIY:** Use the 3 prompts above. Run them in ChatGPT or Claude. You'll see
-results within days. This is the right starting point if you want to prove the concept
-to yourself before committing to a full system.
+**Partner with us:** we build the full system — all six agents connected, calibrated to the LPNW LLC voice, running across every inquiry and team member, and we maintain it. Once it's set up, it runs itself.
 
-**Path 2 — Partner with FKI:** We build the full AI system for LPNW LLC.
-The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with Microsoft Teams, WhatsApp, running without your team having to
-manage it.
-
-If you want to explore Path 2, the next step is an application — not a sales call.
-We want to understand your situation before we recommend anything.
-
-Apply here: https://blueprint.meetadvaita.com/apply
-
-This is an application, not a commitment. We read every one personally.
+When you're ready, the next step is a short application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
 ## SECTION 9 — The ROI Picture for LPNW LLC
 
-Based on what you shared and industry benchmarks for franchise operations:
+Here's the honest math from your own numbers — about 0 inquiries a month, an average operational engagement around $25,000, and a team of 8. These are benchmark-based ranges, not guarantees.
 
-**Time Recovery Estimate:**
-- Admin and documentation: up to 8 hrs/week recovered
-- Lead response and follow-up: up to 6 hrs/week recovered
-- Reporting and tracking: up to 3 hrs/week recovered
-- **Total: up to 17 hrs/week for your team**
-
-**At $150/hr (industry benchmark for franchise operations owner time):**
-- Monthly time value: up to $10,200/month
-- Annual time value: up to $122,400/year
-- Plus: close rate lift from consistent follow-up (35% industry benchmark)
-
-**Industry benchmark context:**
-- Businesses using AI automation see 20-35% reduction in time spent on administrative tasks
-  (McKinsey, "The state of AI in 2023" — https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023)
-- AI-powered lead response systems increase lead conversion by 14-23%
-  (Harvard Business Review, 2023 — https://hbr.org)
-- Small businesses using automation tools report 25% faster revenue growth
-  (SBA, 2023 — https://www.sba.gov)
-
-**These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
-
-The question isn't whether AI creates value in franchise operations. The question is whether
-the investment makes sense for your specific situation. That's what the application
-helps us figure out together.
+- **Time:** your stated goal. Industry benchmarks put the recoverable admin and communication load at roughly 12 hours per week, per teammate. At $150/hr that's meaningful time back across a team of 8.
+- **Bookings:** answering every inquiry in under 60 seconds instead of around an hour means you're first into the conversation — and team members tend to book the studio that feels present first.
+- **Capacity:** the same six agents let you serve more team members without losing the high-touch experience that defines LPNW LLC.
 
 ---
 
-## SECTION 10 — Common Objections — And Honest Answers
+## SECTION 10 — Common Questions, Honest Answers
 
-### "Is this going to replace my team?"
-No. These agents handle the repetitive work your team shouldn't be doing — initial
-responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Team Coordination, Franchise Management, Operational Reporting, Hiring & HR Screening,
-making judgment calls. AI handles the rest.
+**"Will this replace my team or my creativity?"** No. The design and the relationship stay entirely yours. AI takes the inbox, the reminders, and the first drafts off your plate so you have more presence for the team member, not less.
 
-### "What about the setup and learning curve?"
-The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
-naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
+**"Is it complicated to run?"** No. It plugs into the tools you already use — Google Drive, Dropbox, Trello, email, and text — and once it's set up, it runs itself.
 
-### "How is this different from just using ChatGPT?"
-ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with Microsoft Teams, WhatsApp, triggered by your actual business events — a new inquiry,
-a proposal request, a follow-up window — without anyone on your team doing anything
-to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 on their own.
-
-### "What if I'm not ready yet?"
-Use the prompts in Section 7. See what AI does for your business on a small scale.
-When you're ready to scale it to a full system, the application is still there.
-There's no deadline. This isn't a limited-time offer. It's a conversation we're
-happy to have when the timing is right for you.
+**"Will team members be able to tell it's AI?"** Built on your voice before launch, replies read as warm and unmistakably you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
+- Your full blueprint: https://bennett-maxwell.github.io/fki-preview/blueprints/chris-lpnw.html
+- Start your application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 12 — About Franchise Ki
+## SECTION 12 — About Franchise KI & Advaita
 
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
-
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
-
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
-
-Questions? Reach Bennett directly: bennett@franchiseki.com
-
-This audio walkthrough was built for LPNW LLC. Not a template.
-Every number, every example, every recommendation — yours.
+We build and run AI systems for owner-led businesses — the same way we built our own. You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.
