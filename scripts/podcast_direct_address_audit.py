@@ -95,6 +95,26 @@ def transcribe_with_speech_recognition(audio_path: Path, seconds: int) -> str:
     return " ".join(chunks)
 
 
+def transcribe(audio_path: Path, seconds: int) -> str:
+    """Prefer faster-whisper — it transcribes proper names ('Britt', 'Kamoto')
+    accurately, where free Google Web Speech mishears them ('Brett'/'hybrid'/'Komodo')
+    and caused false D3-02 fails on correctly-steered podcasts. Falls back to Google."""
+    try:
+        from faster_whisper import WhisperModel
+        clip = Path("/tmp") / f"pda-{audio_path.stem}-{seconds}.wav"
+        ff = run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(audio_path),
+                  "-t", str(seconds), "-ac", "1", "-ar", "16000", str(clip)], timeout=180)
+        if ff.returncode == 0:
+            model = WhisperModel("base.en", device="cpu", compute_type="int8")
+            segments, _ = model.transcribe(str(clip), beam_size=1)
+            text = " ".join(s.text for s in segments).strip()
+            if text:
+                return text
+    except Exception:
+        pass
+    return transcribe_with_speech_recognition(audio_path, seconds)
+
+
 def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip().lower()
 
@@ -244,7 +264,7 @@ def main() -> int:
             if args.transcript_file:
                 transcript = Path(args.transcript_file).read_text(encoding="utf-8", errors="replace")
             else:
-                transcript = transcribe_with_speech_recognition(audio_path, args.seconds)
+                transcript = transcribe(audio_path, args.seconds)
             result = audit_transcript(transcript, args.first_name, args.lead_name, args.business_name)
             result.update({
                 "lead": args.lead,
