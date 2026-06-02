@@ -15,18 +15,19 @@
         "/Users/temp/fki-preview/audit-receipts/claude-code",
         "--lead",
         "claude-code",
-        "--json-output"
+        "--json-output",
+        "--require-production"
       ],
       "name": "completion_gate",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
         "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": null,",
-        "      \"severity\": \"info\",",
-        "      \"detail\": \"Skipped (use --require-production to enforce)\"",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
         "    },",
         "    \"49\": {",
         "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
@@ -52,14 +53,14 @@
         "claude-code"
       ],
       "name": "blueprint_audit",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] claude-code: 12/14 (86%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D4-09_podcast_source_funnel_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[PASS] claude-code: 14/14 (100%)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=FAIL"
+        "VERDICT=PASS"
       ]
     },
     {
@@ -82,25 +83,64 @@
       ]
     },
     {
-      "name": "d9_render_integrity",
-      "pass": false,
-      "returncode": 127,
-      "stderr_tail": [
-        "missing /Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/claude-code.html"
       ],
-      "stdout_tail": []
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK (/Users/temp/fki-preview/blueprints/claude-code.html)"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-closeout.json"
+    },
+    {
+      "detail": "claude-code.mp3 10122373 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
-    "run-audit.py failed",
-    "D9 render-integrity audit failed or missing"
+    "completion_gate failed"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/claude-code.html",
   "lead": "claude-code",
-  "mode": "local",
+  "mode": "production",
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/claude-code",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-02T15:34:49.862803+00:00"
+  "ts": "2026-06-02T15:57:16.838271+00:00"
 }
