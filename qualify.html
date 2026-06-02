@@ -193,6 +193,22 @@
 .chip:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
 .cta-btn.calculating { background: var(--brand-dark); cursor: wait; animation: cta-shimmer 1.2s ease-in-out infinite; }
 @keyframes cta-shimmer { 0%,100% { opacity:1; } 50% { opacity:0.65; } }
+@media (prefers-reduced-motion: reduce) { .cta-btn.calculating { animation: none; } }
+
+/* Mobile sticky CTA bar — appears when all 8 questions answered on narrow screen */
+#mobile-sticky-bar { display: none; }
+@media (max-width: 860px) {
+  #mobile-sticky-bar {
+    display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: var(--brand-dark); border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0.75rem 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+    transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  #mobile-sticky-bar.visible { transform: translateY(0); }
+  #mobile-sticky-bar-btn { width: 100%; background: var(--brand); color: #fff; border: 0; border-radius: 9px; padding: 0.9rem; font-size: 1rem; font-weight: 700; cursor: pointer; }
+  #mobile-sticky-bar-btn:disabled { opacity: 0.45; pointer-events: none; }
+  body.modal-open #mobile-sticky-bar { display: none !important; }
+}
 .result-block, .verdict-block { transition: background 0.3s ease, border-color 0.3s ease; }
 .progress-bar-fill { transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
 .result-block-value { transition: color 0.3s ease; }
@@ -248,7 +264,12 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 -->
 </head>
 <body>
+<!-- qualify.html | FKI AI Qualifier | build: 2026-06-02-extra-push -->
 <noscript><div style="background:#ef4444;color:#fff;text-align:center;padding:1rem;font-weight:700;">This qualifier requires JavaScript. Please enable it in your browser settings.</div></noscript>
+<!-- Mobile sticky CTA — mirrors #cta-apply; appears after all 8 questions answered on narrow screens -->
+<div id="mobile-sticky-bar" aria-hidden="true">
+  <button id="mobile-sticky-bar-btn" type="button" disabled>Submit Qualification First</button>
+</div>
 
 <nav>
   <a class="nav-logo" href="https://franchiseki.com">Franchise<span>KI</span> · AI Qualifier</a>
@@ -1117,6 +1138,7 @@ function update() {
   } else {
     savingsBlock.style.display = 'none';
   }
+  syncMobileStickyBar();
 }
 
 function buildQualifierNote(payload) {
@@ -1284,6 +1306,7 @@ function openBookingModal(contactId) {
   if (frame && frame.src !== url) frame.src = url;
   document.getElementById('booking-modal').classList.add('open');
   document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
   // Move focus to close button for keyboard/screen-reader users
   setTimeout(function() {
     const closeBtn = document.getElementById('booking-close');
@@ -1379,6 +1402,31 @@ document.querySelectorAll('#identity-section input').forEach(el => {
   });
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+
+// Mobile sticky CTA — mirrors #cta-apply state; synced on every update()
+const mobileStickyBar = document.getElementById('mobile-sticky-bar');
+const mobileStickyBtn = document.getElementById('mobile-sticky-bar-btn');
+function syncMobileStickyBar() {
+  const cta = document.getElementById('cta-apply');
+  if (!mobileStickyBar || !mobileStickyBtn) return;
+  // Show bar only on narrow screens when form is completeable
+  const isNarrow = window.matchMedia('(max-width: 860px)').matches;
+  if (isNarrow && allAnswered && !document.getElementById('booking-modal').classList.contains('open')) {
+    mobileStickyBar.classList.add('visible');
+    mobileStickyBar.setAttribute('aria-hidden', 'false');
+    mobileStickyBtn.disabled = cta.disabled;
+    mobileStickyBtn.textContent = cta.textContent;
+  } else {
+    mobileStickyBar.classList.remove('visible');
+    mobileStickyBar.setAttribute('aria-hidden', 'true');
+  }
+}
+mobileStickyBtn.addEventListener('click', function() {
+  // Scroll main CTA into view briefly then fire it
+  const cta = document.getElementById('cta-apply');
+  cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(handleCtaClick, 100);
+});
 const consentEl = document.getElementById('consent-check');
 if (consentEl) consentEl.addEventListener('change', update);
 document.getElementById('booking-close').addEventListener('click', function() {
@@ -1386,6 +1434,7 @@ document.getElementById('booking-close').addEventListener('click', function() {
   const modal = document.getElementById('booking-modal');
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
   // Reset iframe so it doesn't linger in background
   const frame = document.getElementById('booking-calendar-frame');
   if (frame) frame.src = 'about:blank';
