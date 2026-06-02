@@ -24,7 +24,7 @@ if [ "${1:-}" = "--help" ]; then
     echo "  - Rate limits to 10 leads/minute"
     echo "  - Optional webhook secret verification (set GHL_WEBHOOK_SECRET env var)"
     echo "  - Auto-scores leads into hot/warm/cold tiers"
-    echo "  - Triggers full pipeline in background"
+    echo "  - Triggers token-gated Blueprint pipeline in background"
     echo ""
     echo "Environment:"
     echo "  GHL_WEBHOOK_SECRET  Optional shared secret for webhook verification"
@@ -216,15 +216,35 @@ SCORE_PY
 
 echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"scored\",\"tier\":\"$LEAD_TIER\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
 
-# Stage 2-7: Run full pipeline via blueprint-batch.sh (single lead)
-# Run in background so webhook responds immediately
-nohup "$SCRIPT_DIR/blueprint-batch.sh" "$LEADS_DIR" --send-previews > "$LOG_DIR/blueprint-batch-${SLUG}-$(date +%Y%m%d%H%M).log" 2>&1 &
-BATCH_PID=$!
+# Stage 2-7: Run full pipeline via the token-gated orchestrator (single exact profile)
+# Run in background so webhook responds immediately.
+# Test controls:
+#   BLUEPRINT_WEBHOOK_DRY_RUN=true      -> build/gate only, no Bennett preview send
+#   BLUEPRINT_WEBHOOK_FOREGROUND=true   -> run synchronously for smoke tests
+ORCH_LOG="$LOG_DIR/blueprint-orchestrator-${SLUG}-$(date +%Y%m%d%H%M).log"
+ORCH_CMD=(python3 "$SCRIPT_DIR/blueprint-pipeline-orchestrator.py" --profile "$PROFILE" --workers 1 --batch-size 1)
+if [ "${BLUEPRINT_WEBHOOK_DRY_RUN:-false}" = "true" ]; then
+    ORCH_CMD+=(--dry-run)
+fi
+
+if [ "${BLUEPRINT_WEBHOOK_FOREGROUND:-false}" = "true" ]; then
+    if "${ORCH_CMD[@]}" > "$ORCH_LOG" 2>&1; then
+        PIPELINE_STATUS="processed"
+        BATCH_PID=0
+    else
+        PIPELINE_STATUS="pipeline_failed"
+        BATCH_PID=0
+    fi
+else
+    nohup "${ORCH_CMD[@]}" > "$ORCH_LOG" 2>&1 &
+    BATCH_PID=$!
+    PIPELINE_STATUS="accepted"
+fi
 
 # Respond to GHL
 echo "HTTP/1.1 200 OK"
 echo "Content-Type: application/json"
 echo ""
-echo "{\"status\":\"accepted\",\"slug\":\"$SLUG\",\"profile\":\"$PROFILE\",\"batch_pid\":$BATCH_PID}"
+echo "{\"status\":\"$PIPELINE_STATUS\",\"slug\":\"$SLUG\",\"profile\":\"$PROFILE\",\"orchestrator_pid\":$BATCH_PID,\"orchestrator_log\":\"$ORCH_LOG\"}"
 
-echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"pipeline_started\",\"pid\":$BATCH_PID}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+echo "{\"ts\":\"$TIMESTAMP\",\"slug\":\"$SLUG\",\"action\":\"pipeline_started\",\"pid\":$BATCH_PID,\"status\":\"$PIPELINE_STATUS\",\"orchestrator\":\"blueprint-pipeline-orchestrator.py\",\"log\":\"$ORCH_LOG\"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"

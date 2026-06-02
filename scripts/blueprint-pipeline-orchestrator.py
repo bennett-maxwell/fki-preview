@@ -426,42 +426,57 @@ async def stage_prompts(profile_path: str, profile: dict, status: LeadStatus) ->
 
 
 async def stage_precheck(profile_path: str, profile: dict, status: LeadStatus) -> bool:
-    """Stage 6: Pre-Delivery Check — 14-point + red-line audit per audit-skill v1.4."""
+    """Stage 6: Current Blueprint completion gate + red-line audit."""
     if status.is_stage_complete("precheck"):
         log.info(f"  [{profile['slug']}] Stage 6 SKIP (already complete)")
         return True
 
-    log.info(f"  [{profile['slug']}] Stage 6: Pre-Delivery Check + Red-Line Audit")
+    log.info(f"  [{profile['slug']}] Stage 6: Completion Gate + Red-Line Audit")
 
     blueprint_html = BLUEPRINTS_DIR / f"{profile['slug']}.html"
     if not blueprint_html.exists():
         status.mark_stage("precheck", "failed", "Blueprint HTML not found")
         return False
 
-    # Build cross-contamination leads list from all known lead JSON files
-    other_leads = []
-    for lf in LEADS_DIR.glob("*.json"):
-        lead_name = lf.stem.replace("-", " ").title()
-        slug_name = lf.stem
-        if slug_name != profile["slug"]:
-            other_leads.append(lead_name)
-    leads_arg = ",".join(other_leads) if other_leads else ""
+    # The legacy pre-delivery-check.sh still counts old CTA copy and can fail
+    # valid format-3 Blueprints. The current source of truth is the
+    # blueprint-ai-skill v3.23 completion gate + Gatekeeper 100 stack.
+    receipt_dir = REPO_DIR / "audit-receipts" / profile["slug"]
+    receipt_dir.mkdir(parents=True, exist_ok=True)
 
-    args = [str(blueprint_html)]
-    if leads_arg:
-        args.extend(["--leads", leads_arg])
+    format_gate = SCRIPTS_DIR / "format-conformance-check.py"
+    if format_gate.exists():
+        fmt_proc = subprocess.run(
+            [sys.executable, str(format_gate), str(blueprint_html)],
+            cwd=str(REPO_DIR),
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        if fmt_proc.returncode != 0:
+            detail = (fmt_proc.stdout + fmt_proc.stderr)[-500:]
+            status.mark_stage("precheck", "failed", f"Format conformance FAIL: {detail}")
+            log.error(f"  [{profile['slug']}] Format conformance FAIL: {detail[:200]}")
+            return False
 
-    ok, out, err = await run_script("pre-delivery-check.sh", args, timeout=120)
-
-    if not ok:
-        status.mark_stage("precheck", "failed", err[:200])
-        log.error(f"  [{profile['slug']}] Stage 6 FAILED (script error): {err[:100]}")
-        return False
-
-    # Strict: FAIL means FAIL — no "passed with warnings" escape hatch
-    if '"overall": "PASS"' not in out:
-        status.mark_stage("precheck", "failed", f"Pre-delivery check FAIL: {out[:200]}")
-        log.error(f"  [{profile['slug']}] Stage 6 FAIL: {out[:200]}")
+    completion_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPTS_DIR / "blueprint_completion_gate.py"),
+            "--html", str(blueprint_html),
+            "--receipt-dir", str(receipt_dir),
+            "--lead", profile["slug"],
+            "--json-output",
+        ],
+        cwd=str(REPO_DIR),
+        capture_output=True,
+        text=True,
+        timeout=240,
+    )
+    if completion_proc.returncode != 0:
+        detail = (completion_proc.stdout + completion_proc.stderr)[-500:]
+        status.mark_stage("precheck", "failed", f"Completion gate FAIL: {detail}")
+        log.error(f"  [{profile['slug']}] Completion gate FAIL: {detail[:200]}")
         return False
 
     # Additional red-line checks from blueprint-ai-audit-skill v1.4
@@ -848,6 +863,7 @@ async def main():
 
     parser = argparse.ArgumentParser(description="Blueprint AI Pipeline Orchestrator")
     parser.add_argument("--leads-dir", type=str, help="Directory containing lead-profile.json files")
+    parser.add_argument("--profile", type=str, help="Single lead-profile JSON file to process")
     parser.add_argument("--lead", type=str, help="Single lead name to process")
     parser.add_argument("--url", type=str, help="Business URL for single lead")
     parser.add_argument("--dry-run", action="store_true", help="No git push, no emails")
@@ -869,7 +885,15 @@ async def main():
     # Collect lead profiles to process
     profiles = []
 
-    if args.lead:
+    if args.profile:
+        profile_path = Path(args.profile)
+        if not profile_path.exists():
+            log.error(f"Profile not found: {profile_path}")
+            conn.close()
+            return
+        profiles.append(str(profile_path))
+
+    elif args.lead:
         # Single lead mode — create minimal profile
         slug = args.lead.lower().replace(" ", "-")
         profile_path = LEADS_DIR / f"{slug}.json"
