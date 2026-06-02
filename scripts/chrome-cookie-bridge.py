@@ -21,7 +21,10 @@ from pathlib import Path
 
 from Crypto.Cipher import AES
 
-CHROME_COOKIES = Path.home() / "Library/Application Support/Google/Chrome/Profile 4/Cookies"
+# Profile 29 = madison@franchiseki.com — the Google account that owns the NotebookLM
+# notebooks. (Was Profile 4 / madison@pulsarhalo.com, whose cookies went stale in Jul 2025
+# and caused "Authentication expired" failures.)
+CHROME_COOKIES = Path.home() / "Library/Application Support/Google/Chrome/Profile 29/Cookies"
 NLM_STORAGE    = Path.home() / ".notebooklm/profiles/default/storage_state.json"
 TMP_DB         = Path("/tmp/chrome_nlm_cookies.db")
 LOG            = Path.home() / ".openclaw/logs/chrome-cookie-bridge.log"
@@ -90,6 +93,9 @@ def extract_cookies(key: bytes) -> list[dict]:
     shutil.copy2(CHROME_COOKIES, TMP_DB)
     conn = sqlite3.connect(TMP_DB)
     conn.row_factory = sqlite3.Row
+    # Return every column as raw bytes so a non-UTF-8 text cell can't crash fetchall();
+    # we decode the genuinely-text columns ourselves and leave encrypted_value as bytes.
+    conn.text_factory = bytes
     rows = conn.execute(
         "SELECT host_key, name, encrypted_value, value, path, expires_utc, "
         "is_secure, is_httponly, samesite FROM cookies "
@@ -98,17 +104,20 @@ def extract_cookies(key: bytes) -> list[dict]:
     conn.close()
     TMP_DB.unlink(missing_ok=True)
 
+    def s(b):  # decode a text column that text_factory handed back as bytes
+        return b.decode("utf-8", "replace") if isinstance(b, (bytes, bytearray)) else b
+
     cookies = []
     for r in rows:
         enc = r["encrypted_value"]
-        val = decrypt_value(enc, key) if enc else r["value"]
+        val = decrypt_value(enc, key) if enc else s(r["value"])
         expires = chrome_epoch_to_unix(r["expires_utc"])
         same_site_map = {-1: "None", 0: "None", 1: "Lax", 2: "Strict"}
         cookies.append({
-            "name": r["name"],
+            "name": s(r["name"]),
             "value": val,
-            "domain": r["host_key"],
-            "path": r["path"],
+            "domain": s(r["host_key"]),
+            "path": s(r["path"]),
             "expires": expires if expires > 0 else -1,
             "httpOnly": bool(r["is_httponly"]),
             "secure": bool(r["is_secure"]),
@@ -160,8 +169,8 @@ def main():
 
     # Quick sanity: try notebooklm list
     log("Testing notebooklm auth...")
-    nlm = Path.home() / "fki-preview/.venv/bin/notebooklm"
-    result = subprocess.run([str(nlm), "list", "--json"], capture_output=True, text=True, timeout=30)
+    nlm = shutil.which("notebooklm") or str(Path.home() / ".pyenv/versions/3.11.9/bin/notebooklm")
+    result = subprocess.run([nlm, "list", "--json"], capture_output=True, text=True, timeout=30)
     if result.returncode == 0 and "error" not in result.stdout.lower():
         log("✅ notebooklm auth VALID — CLI authenticated from Chrome cookies")
     else:
