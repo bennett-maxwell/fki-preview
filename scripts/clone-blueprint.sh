@@ -420,6 +420,14 @@ if [[ -f "$HOME_SERVICES_PATCH" ]]; then
   python3 "$HOME_SERVICES_PATCH" "$OUTPUT_FILE" "$PROFILE_JSON"
 fi
 
+# Convert legacy SaaS/home-services prompt copy into a restaurant/QSR page before
+# any audit can pass. This preserves the canonical frame while removing stale
+# cross-industry language and enforcing qualifier-only CTAs for food brands.
+RESTAURANT_PATCH="$SCRIPT_DIR/blueprint_restaurant_patch.py"
+if [[ -f "$RESTAURANT_PATCH" ]]; then
+  python3 "$RESTAURANT_PATCH" "$OUTPUT_FILE" "$PROFILE_JSON"
+fi
+
 # Stamp blueprint build timestamp into profile
 python3 -c "
 import json, sys, datetime

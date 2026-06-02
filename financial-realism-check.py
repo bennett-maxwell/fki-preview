@@ -31,6 +31,8 @@ INDUSTRY_BANDS = {
     "retail_firearms":    (300, 6000,   "ticket"),
     "design_agency":      (1500,40000,  "project"),
     "consulting":         (3000,150000, "engagement"),
+    "professional_services": (1000,50000, "contract/project"),
+    "ai_consulting":      (3000,25000,  "contract"),
     "crm_software":       (1200,75000,  "contract/ARR"),
     "medical_devices":    (5000,500000, "contract"),
     "property_mgmt":      (1000,50000,  "annual mgmt fee"),
@@ -62,6 +64,7 @@ LEAD_INDUSTRY = {
     "jason-martinez":   "home_services",      # Peak Comfort HVAC
     "mike-johnson":     "home_services",      # Johnson Plumbing LLC
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
+    "claude-code":      "ai_consulting",       # Claude Code Agency — AI agent development, $5K contracts
 }
 
 def _load_slug_industry():

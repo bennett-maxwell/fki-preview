@@ -1,0 +1,156 @@
+{
+  "checks": [
+    {
+      "failures": [
+        "ambiguous CTA copy: Apply"
+      ],
+      "name": "visible_html_surface",
+      "pass": false
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/dave-wood.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/dave-wood",
+        "--lead",
+        "dave-wood",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "dave-wood"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[FAIL] dave-wood: 9/14 (64%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D10-23_restaurant_copy_clean_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/dave-wood.html"
+      ],
+      "name": "financial_realism",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "dave-wood            food_franchise       15000        0  FAIL (2)",
+        "      \u2717 D7-01 [RL] contract default $15,000 outside food_franchise band $8-$60",
+        "      \u2717 D7-03 slider range $1,000-$50,000 does not overlap food_franchise band $8-$60",
+        "      \u26a0 D7-04 hardcoded large $ figures in copy: ['15,000'] \u2014 must trace to intake/source",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "name": "d9_render_integrity",
+      "pass": false,
+      "returncode": 127,
+      "stderr_tail": [
+        "missing /Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
+      ],
+      "stdout_tail": []
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-closeout.json"
+    },
+    {
+      "detail": "dave-wood.mp3 20587970 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "visible_html_surface: ambiguous CTA copy: Apply",
+    "completion_gate failed",
+    "run-audit.py failed",
+    "financial-realism-check.py failed",
+    "D9 render-integrity audit failed or missing",
+    "proof receipt missing or failing: dave-wood-email-click-test.json",
+    "proof receipt missing or failing: dave-wood-desktop-render.json",
+    "proof receipt missing or failing: dave-wood-mobile-render.json",
+    "proof receipt missing or failing: dave-wood-audit.json",
+    "proof receipt missing or failing: dave-wood-closeout.json",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/dave-wood.html",
+  "lead": "dave-wood",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/dave-wood",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-02T15:26:10.704986+00:00"
+}
