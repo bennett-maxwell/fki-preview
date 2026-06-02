@@ -174,6 +174,9 @@
   .results-card { padding: 1.5rem; }
   .result-block { padding: 1.1rem; }
   .result-block-value { font-size: 1.6rem; }
+  /* R3: larger mobile CTA for thumb tap */
+  .cta-btn { padding: 1.1rem; font-size: 1.05rem; min-height: 52px; }
+  .booking-cta-btn { padding: 1rem 1.5rem; font-size: 1rem; }
 }
 @media (max-width: 360px) {
   .main-wrap { padding: 1rem 0.75rem 2.5rem; }
@@ -195,6 +198,25 @@
 .identity-field input.invalid + .field-hint,
 .identity-field .field-hint.show { display: block; }
 </style>
+<!-- R3: Structured data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AI Fit Assessment for Business Owners — FranchiseKI",
+  "description": "Answer 8 questions to find out if AI is a fit for your business. FranchiseKI runs the numbers on your leads, deal size, and team time.",
+  "url": "https://bennett-maxwell.github.io/fki-preview/qualify.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "FranchiseKI",
+    "url": "https://franchiseki.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+  }
+}
+</script>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -219,9 +241,9 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 </nav>
 
 <div class="hero">
-  <div class="hero-badge">Free 60-Second Assessment</div>
-  <h1>See if <span>AI is a fit</span><br>for your business</h1>
-  <p class="hero-sub">Answer 8 questions. We'll tell you if your business is a fit for AI — and where it could help most. We only work with businesses where it makes sense. Takes under 60 seconds.</p>
+  <div class="hero-badge">Free Assessment — Takes About 4 Minutes</div>
+  <h1>Find out if AI can make<br>your business <span>more money</span></h1>
+  <p class="hero-sub">Answer 8 questions. We run the numbers on your leads, deal size, and team time — and tell you exactly where AI fits and what it's worth. We only take on businesses where the math works.</p>
 </div>
 
 <div class="main-wrap">
@@ -262,8 +284,8 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
     <!-- Q1: Monthly Leads -->
     <div class="q-section">
       <div class="q-label">Question 1 of 8</div>
-      <div class="q-title">How many new leads or inquiries does your business receive each month?</div>
-      <div class="q-sub">Include all channels — phone, web, referral, walk-in.</div>
+      <div class="q-title">How many new leads or inquiries come into your business each month?</div>
+      <div class="q-sub">Count every channel — phone calls, web forms, referrals, walk-ins, DMs. If it's someone who could become a customer, count it.</div>
       <div class="slider-row">
         <span class="slider-name">Monthly Leads</span>
         <span class="slider-val needs-input" id="lbl-leads">← slide to set yours</span>
@@ -277,11 +299,11 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
     <!-- Q2: Deal Value — text only -->
     <div class="q-section">
       <div class="q-label">Question 2 of 8</div>
-      <div class="q-title">What is your average contract or transaction value?</div>
-      <div class="q-sub">The typical dollar amount when you close a deal.</div>
+      <div class="q-title">What is your average sale or contract value?</div>
+      <div class="q-sub">The dollar amount when you close a typical deal. If it varies a lot, use the most common amount.</div>
       <div class="exp-input-row">
         <label for="inp-deal">Your avg deal:</label>
-        <input type="number" id="inp-deal" value="" placeholder="e.g. 5000" min="1" max="9999999" oninput="dealUpdate()">
+        <input type="number" id="inp-deal" value="" placeholder="e.g. 3500" min="1" max="9999999" oninput="dealUpdate()">
         <span class="exp-unit">$</span>
       </div>
       <div class="slider-row">
@@ -403,7 +425,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
   <!-- RESULTS PANEL -->
   <div class="results-col">
     <div class="results-card">
-      <div class="results-title">Live Qualification Score</div>
+      <div class="results-title">Your AI Fit Score — Updates Live</div>
 
       <div class="progress-bar-wrap">
         <div class="progress-bar-label">
@@ -416,8 +438,8 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <!-- Qualification Verdict -->
       <div class="verdict-block neutral" id="verdict-block">
         <div class="verdict-icon" id="verdict-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
-        <div class="verdict-label" id="verdict-label">Your qualification appears here</div>
-        <div class="verdict-sub" id="verdict-sub">Answer questions 1–4 to calculate</div>
+        <div class="verdict-label" id="verdict-label">Your AI fit result shows here</div>
+        <div class="verdict-sub" id="verdict-sub">Answer the first 4 questions and we run the numbers</div>
       </div>
 
       <!-- Time Savings Block — shows when Q5 answered -->
@@ -429,6 +451,8 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 
       <div class="results-breakdown" id="breakdown-text"></div>
 
+      <!-- R3: Social proof -->
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:1rem;line-height:1.5;">Reviewed by businesses across HVAC, medspas, roofing, dental, and franchise. Most qualify in under 4 minutes.</div>
       <!-- R2: Consent checkbox -->
       <label id="consent-wrap" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:1rem;cursor:pointer;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.4;">
         <input type="checkbox" id="consent-check" style="margin-top:2px;flex-shrink:0;accent-color:var(--brand-light);">
@@ -1009,6 +1033,12 @@ function update() {
     cta.disabled            = true;
     cta.textContent         = 'Submit Qualification First';
     ctaNote.textContent     = 'Complete the contact fields and all 8 questions.';
+  }
+
+  // ── R3: PAGE TITLE UPDATE ON SCORE CHANGE ────────────────────────────────
+  if (canQualify && qualifies10x) {
+    const titleMap = { strong: 'Strong AI Fit — FKI Qualifier', possible: 'Possible AI Fit — FKI Qualifier', no: 'Review Needed — FKI Qualifier' };
+    document.title = titleMap[qualifies10x] || document.title;
   }
 
   // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
