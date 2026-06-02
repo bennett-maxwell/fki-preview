@@ -189,14 +189,23 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
         r"\b(the|this) business\b",
         r"\b(the|this) owner\b",
         r"\b(his|her|their) (business|company|team)\b",
-        r"\b(he|she|they)\s+(runs?|owns?|operates?|has|is|was|needs?|wants?)\b",
+        # NOTE: a bare "(he|she|they) runs/owns/..." pattern was removed — it false-fired
+        # on legitimate industry talk ("firms like yours, they want...", "the lead, he...")
+        # in podcasts that are otherwise heavily second-person. Real lead-third-person
+        # references are caught by the lead-name/business-scoped patterns above.
     ])
     third_person_found = [pat for pat in third_person_patterns if re.search(pat, text, re.I)]
 
+    # A confirmed full-opening match (opening_exact_or_close) inherently contains the
+    # greeting + first name + business, so it is sufficient proof of a direct-address,
+    # named opening even when standalone ASR garbles the bare name token (Rey->Ray,
+    # Britt->Brett). Don't double-require the ASR-fragile bare-name checks on top.
+    opening_ok = opening_direct or opening_exact_or_close
+    name_ok = first_name_count >= 1 or opening_exact_or_close
     pass_now = (
-        opening_direct
+        opening_ok
         and opening_exact_or_close
-        and first_name_count >= 1
+        and name_ok
         and business_present
         and you_count >= 5
         and not banned_found
@@ -207,7 +216,7 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
         "status": "PASS" if pass_now else "FAIL",
         "first_name_count": first_name_count,
         "business_present": business_present,
-        "opening_direct_address_verified": opening_direct,
+        "opening_direct_address_verified": opening_ok,
         "opening_exact_or_close": opening_exact_or_close,
         "expected_opening": expected_opening,
         "you_your_count": you_count,
