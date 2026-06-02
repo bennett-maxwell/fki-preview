@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>See If AI Is a Fit for Your Business — FKI Qualifier</title>
 <meta name="description" content="Answer 8 questions to see if AI is a fit for your business. Takes under 60 seconds.">
+<link rel="canonical" href="https://bennett-maxwell.github.io/fki-preview/qualify.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/qualify.html">
+<meta property="og:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta property="og:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
+<meta property="og:image" content="https://bennett-maxwell.github.io/fki-preview/assets/og-qualifier.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta name="twitter:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
 <style>
   :root {
     --brand:       #1D6FDB;
@@ -238,6 +247,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 -->
 </head>
 <body>
+<noscript><div style="background:#ef4444;color:#fff;text-align:center;padding:1rem;font-weight:700;">This qualifier requires JavaScript. Please enable it in your browser settings.</div></noscript>
 
 <nav>
   <a class="nav-logo" href="https://franchiseki.com">Franchise<span>KI</span> · AI Qualifier</a>
@@ -1162,6 +1172,7 @@ function buildQualifierPayload() {
     contact_id: id.contactId,
     lead_session_id: id.leadSessionId,
     qualification_band: band,
+    band_label: band === 'strong' ? 'STRONG FIT' : band === 'possible' ? 'POSSIBLE FIT' : 'NOT A FIT',
     ai_qualified: band === 'strong' || band === 'possible',
     monthly_leads: leadsVal || 0,
     average_deal_value: dealVal || 0,
@@ -1374,6 +1385,32 @@ document.getElementById('booking-close').addEventListener('click', function() {
 document.getElementById('booking-modal').addEventListener('click', function(e) {
   if (e.target === this) document.getElementById('booking-close').click();
 });
+
+// Escape key closes modal
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('booking-modal');
+    if (modal && modal.classList.contains('open')) {
+      document.getElementById('booking-close').click();
+    }
+  }
+});
+
+// Focus trap inside booking modal — Tab cycles only within focusable elements in the dialog
+document.getElementById('booking-modal').addEventListener('keydown', function(e) {
+  if (e.key !== 'Tab') return;
+  const dialog = this.querySelector('.booking-dialog');
+  if (!dialog) return;
+  const focusable = Array.from(dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+  } else {
+    if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
 updateIdentityStatus();
 update();
 </script>
