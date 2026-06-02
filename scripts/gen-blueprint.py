@@ -231,15 +231,19 @@ def build(profile):
     # min="0" and no max, and dropped lbl-contract — exact-string replaces silently no-op'd).
     c = p["calc"]
 
-    def set_slider(html, sid, val):
+    def set_slider(html, sid, val, floor_max=0):
         # Set value AND widen the slider's min/max to encompass it, so high-volume
         # leads (e.g. Rey's 1,000 monthly leads) aren't clamped to the template's
-        # default max of 100. Works for both range sliders and number inputs.
+        # default max. `floor_max` forces a minimum ceiling regardless of the lead's
+        # value — used to fix the leads slider at 1,000 max so a lead like Court (260)
+        # lands ~1/4 of the way along a 0-1,000 bar instead of pinned to the far right.
+        # Works for both range sliders and number inputs.
         def fix(m):
             tag = re.sub(r'\bvalue="[^"]*"', f'value="{val}"', m.group(0))
             mx = re.search(r'\bmax="(-?\d+)"', tag)
-            if mx and int(val) > int(mx.group(1)):
-                tag = re.sub(r'\bmax="-?\d+"', f'max="{val}"', tag)
+            if mx:
+                target_max = max(int(mx.group(1)), int(val), int(floor_max))
+                tag = re.sub(r'\bmax="-?\d+"', f'max="{target_max}"', tag)
             mn = re.search(r'\bmin="(-?\d+)"', tag)
             if mn and int(val) < int(mn.group(1)):
                 tag = re.sub(r'\bmin="-?\d+"', f'min="{val}"', tag)
@@ -250,9 +254,12 @@ def build(profile):
         return re.sub(r'(<span class="calc-slider-val" id="' + re.escape(lid) + r'">)[^<]*(</span>)',
                       lambda m: m.group(1) + label + m.group(2), html, count=1)
 
+    # leads slider: fixed 1,000 max for every page (many leads exceed it; the dial then
+    # lands at the lead's actual volume — e.g. Court 260 — instead of pinned to the right).
+    LEADS_FLOOR_MAX = 1000
     for sid, val in (("sl-contract", c["contract"]), ("sl-leads", c["leads"]),
                      ("sl-rate", c["rate"]), ("sl-hours", c["hours"])):
-        html = set_slider(html, sid, val)
+        html = set_slider(html, sid, val, floor_max=(LEADS_FLOOR_MAX if sid == "sl-leads" else 0))
     for lid, lab in (("lbl-contract", c["contract_label"]), ("lbl-leads", c["leads_label"]),
                      ("lbl-rate", c["rate_label"]), ("lbl-hours", c["hours_label"])):
         html = set_label(html, lid, lab)
