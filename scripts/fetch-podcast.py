@@ -40,7 +40,10 @@ def steering(first, business):
         f'third person, NEVER say "this business," "the owner," or "they." {f} is listening; speak TO {f}, not ABOUT {f}. '
         f'Tone: warm, personal, genuinely excited about what AI unlocks. The business is THRIVING — frame every '
         f'opportunity as an AI amplification, NEVER as a flaw, problem, chaos, or something broken. Do NOT open with a '
-        f'negative hook. Cover all 12 sections. 15-20 minutes. Close with the application CTA — never mention scheduling a call.'
+        f'negative hook. LENGTH IS REQUIRED: cover ALL 12 sections in real depth — aim for 18 to 20 minutes of '
+        f'conversation. Do NOT wrap up early, do NOT rush or summarize; give each of the 12 sections its own '
+        f'substantive back-and-forth. Stay under 20 minutes but get close to it. '
+        f'Close with the application CTA — never mention scheduling a call.'
     )
 
 

@@ -29,6 +29,30 @@ def file_sha256(path):
 def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
+def podcast_duration_gate(slug):
+    """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
+    NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
+    10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
+    cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
+    MIN_SEC, MAX_SEC = 16 * 60, 20 * 60
+    path = os.path.join(REPO, "podcasts", podcast_filename(slug))
+    if not os.path.exists(path):
+        return False, "podcast file missing"
+    try:
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "csv=p=0", path],
+            capture_output=True, text=True, timeout=30).stdout.strip()
+        secs = int(float(out))
+    except Exception as e:
+        return False, f"ffprobe failed: {e}"
+    mmss = f"{secs//60}:{secs%60:02d}"
+    if secs < MIN_SEC:
+        return False, f"too short {mmss} (min 16:00) — re-cut deeper"
+    if secs > MAX_SEC:
+        return False, f"too long {mmss} (max 20:00) — re-cut tighter"
+    return True, f"{mmss} OK"
+
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
     tokens = re.findall(r'[A-Z_]*PLACEHOLDER[A-Z_]*|\{\{[A-Za-z_]+\}\}|\[[A-Z_]{3,}\]', stripped)
@@ -349,6 +373,9 @@ def audit_lead(slug):
     podcast_audio_ok, podcast_audio_detail = podcast_audio_gate(slug, lead)
     results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
+    duration_ok, duration_detail = podcast_duration_gate(slug)
+    results["D3-03_podcast_duration_16to20min_RL"] = duration_ok
+    redlines["D3-03_podcast_duration_16to20min_RL"] = duration_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)
