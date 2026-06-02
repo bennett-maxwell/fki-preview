@@ -175,8 +175,8 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
     third_person_patterns = []
     if lead:
         third_person_patterns.extend([
-            rf"\b{re.escape(lead)}\b.*\b(owner|client)\b",
-            rf"\b(owner|client)\b.*\b{re.escape(lead)}\b",
+            rf"\b{re.escape(lead)}\b.{{0,40}}\b(owner|client)\b",
+            rf"\b(owner|client)\b.{{0,40}}\b{re.escape(lead)}\b",
             rf"\b{re.escape(lead)}\b\s+(runs?|owns?|operates?|has|is|was|needs?|wants?)\b",
         ])
     if business:
