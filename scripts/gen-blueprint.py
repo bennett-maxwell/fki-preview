@@ -44,7 +44,11 @@ AGENT_SVGS = [SVG["bolt"], SVG["users"], SVG["doc"], SVG["grid"], SVG["chart"], 
 
 
 def esc(s):
-    return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    # Idempotent: never double-escape an existing entity (&amp;, &mdash;, &#39; ...).
+    # Profile label fields are authored with &amp;/&mdash; already, so a naive
+    # &->&amp; replace produced "&amp;amp;" → literal "&amp;" on the page.
+    s = re.sub(r'&(?!#?\w+;)', '&amp;', str(s))
+    return s.replace("<", "&lt;").replace(">", "&gt;")
 
 
 def replace_section(html, sec_id, inner):
