@@ -603,6 +603,12 @@ function logFunnelEvent(event, data) {
     existing.push(entry);
     localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
   } catch(e) {}
+  // GA4: fires when gtag() is loaded on the page (no-op otherwise)
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', event, Object.assign({ event_category: 'qualifier_funnel' }, data || {}));
+    }
+  } catch(e) {}
 }
 const STORAGE_KEY = 'advaitaLeadIdentity';
 const SESSION_KEY = 'advaitaLeadSessionId';
