@@ -135,18 +135,11 @@
   .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
   .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
   .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
-  .booking-body { position: relative; display: flex; align-items: center; justify-content: center; padding: 2.5rem 2rem; background: var(--white); }
-  .booking-confirm { max-width: 420px; width: 100%; text-align: center; }
-  .booking-confirm-check { width: 56px; height: 56px; border-radius: 50%; background: #d1fae5; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
-  .booking-confirm-check svg { width: 28px; height: 28px; stroke: #16a34a; stroke-width: 2.5; fill: none; }
-  .booking-confirm-title { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.5rem; }
-  .booking-confirm-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.5; }
-  .booking-confirm-steps { text-align: left; background: var(--neutral-bg); border-radius: 10px; padding: 1.1rem 1.25rem; margin-bottom: 1.75rem; }
-  .booking-confirm-step { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--text); padding: 0.4rem 0; }
-  .booking-confirm-step-num { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-  .booking-cta-btn { display: inline-block; background: var(--brand); color: var(--white); border-radius: 10px; padding: 0.9rem 2rem; font-weight: 800; font-size: 1rem; text-decoration: none; width: 100%; box-sizing: border-box; transition: background 0.2s; }
-  .booking-cta-btn:hover { background: var(--brand-dark); }
-  .booking-cta-note { font-size: 0.78rem; color: var(--text-light); margin-top: 0.75rem; }
+  .booking-body { position: relative; display: flex; flex-direction: column; align-items: stretch; padding: 0; background: var(--white); min-height: 540px; }
+  .booking-confirm-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem; background: #d1fae5; border-bottom: 1px solid #a7f3d0; }
+  .booking-confirm-bar svg { width: 22px; height: 22px; stroke: #16a34a; stroke-width: 2.5; fill: none; flex-shrink: 0; }
+  .booking-confirm-bar-text { font-size: 0.92rem; font-weight: 700; color: #14532d; }
+  .booking-calendar-frame { flex: 1; width: 100%; border: 0; min-height: 500px; display: block; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
   .disclaimer a { color: var(--brand); }
@@ -486,20 +479,11 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
     </div>
     <div class="booking-body">
-      <div class="booking-confirm">
-        <div class="booking-confirm-check">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="booking-confirm-title">You're qualified. Let's talk.</div>
-        <div class="booking-confirm-sub">Your results have been saved. Book your Advaita AI strategy call with Bennett below — it takes about 2 minutes.</div>
-        <div class="booking-confirm-steps">
-          <div class="booking-confirm-step"><span class="booking-confirm-step-num">1</span><span>Pick a date and time that works for you</span></div>
-          <div class="booking-confirm-step"><span class="booking-confirm-step-num">2</span><span>Confirm your contact details</span></div>
-          <div class="booking-confirm-step"><span class="booking-confirm-step-num">3</span><span>Check your email for the calendar invite</span></div>
-        </div>
-        <a class="booking-cta-btn" id="booking-cta-link" href="#" target="_blank" rel="noopener noreferrer">Book a Call with Bennett</a>
-        <div class="booking-cta-note">Opens in a new tab. No spam, just your strategy call.</div>
+      <div class="booking-confirm-bar">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="booking-confirm-bar-text">You're qualified — pick a time below.</span>
       </div>
+      <iframe class="booking-calendar-frame" id="booking-calendar-frame" src="about:blank" title="Book your Advaita AI strategy call" loading="lazy" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -1263,8 +1247,9 @@ let bookingFallbackTimer = null;
 function openBookingModal(contactId) {
   const url = buildBookingUrl(contactId);
   logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!contactId });
-  const ctaLink = document.getElementById('booking-cta-link');
-  if (ctaLink) ctaLink.href = url;
+  // Embed calendar iframe — no new tab, no popup blocker risk
+  const frame = document.getElementById('booking-calendar-frame');
+  if (frame && frame.src !== url) frame.src = url;
   document.getElementById('booking-modal').classList.add('open');
   document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
 }
@@ -1367,8 +1352,12 @@ const consentEl = document.getElementById('consent-check');
 if (consentEl) consentEl.addEventListener('change', update);
 document.getElementById('booking-close').addEventListener('click', function() {
   clearTimeout(bookingFallbackTimer);
-  document.getElementById('booking-modal').classList.remove('open');
-  document.getElementById('booking-modal').setAttribute('aria-hidden', 'true');
+  const modal = document.getElementById('booking-modal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  // Reset iframe so it doesn't linger in background
+  const frame = document.getElementById('booking-calendar-frame');
+  if (frame) frame.src = 'about:blank';
 });
 document.getElementById('booking-modal').addEventListener('click', function(e) {
   if (e.target === this) document.getElementById('booking-close').click();
