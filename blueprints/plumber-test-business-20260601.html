@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-01T19:17:23Z | Lead: Chad Plumber | Industry: plumbing and home services -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-02T13:53:57Z | Lead: Chad Plumber | Industry: plumbing and home services -->
 <!-- Blueprint AI Pipeline v3.0 | Built: 2026-05-27T19:13:29Z | Lead: Chad Plumber | Industry: plumbing and home services -->
 <!DOCTYPE html>
 <html lang="en">
@@ -942,15 +942,7 @@
     .social-proof { grid-template-columns: repeat(2, 1fr); }
     .hero h1 { font-size: 28px; }
     .roi-hero .roi-number { font-size: 36px; }
-    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
-    .tab-btn {
-      flex: 0 0 auto;
-      min-width: 118px;
-      font-size: 10px;
-      padding: 12px 10px;
-      letter-spacing: 0.5px;
-      scroll-snap-align: start;
-    }
+    .tab-btn { min-width: 90px; font-size: 10px; padding: 12px 6px; }
     .opp-table, .bench-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .mobile-sticky-cta { display: block !important; }
     body { padding-bottom: 70px; }
@@ -995,6 +987,19 @@
   /* uniform boilerplate supplement — D9 convergence */
   .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; }
   .snapshot-grid, .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+
+  /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
+  @media (max-width: 640px) {
+    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .tab-btn {
+      flex: 0 0 auto;
+      min-width: 118px;
+      font-size: 10px;
+      padding: 12px 10px;
+      letter-spacing: 0.5px;
+      scroll-snap-align: start;
+    }
+  }
 </style>
 <style id="podv3-css">
 .chapter-pip { position:absolute; top:50%; width:4px; height:16px; background:rgba(255,255,255,0.62); border-radius:2px; transform:translate(-50%,-50%); }

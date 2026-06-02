@@ -1,0 +1,58 @@
+# blueprint-idempotency.patch — wire blueprint_idempotency into the poller.
+# Apply:  cd /Users/temp/fki-preview && git apply scripts/blueprint-idempotency.patch
+# Revert: cd /Users/temp/fki-preview && git apply -R scripts/blueprint-idempotency.patch
+#
+# 3 call sites:
+#   (A) import the module
+#   (B) ensure_schema(conn) right after init_db() in main()
+#   (C) should_skip() guard at the top of process_lead(); record_completion()
+#       after a successful run.
+# This makes a 15-min re-run on an UNCHANGED lead a true no-op: no regeneration,
+# no git churn. A lead whose semantic input changed still regenerates (hash busts).
+
+--- a/scripts/blueprint-pipeline-orchestrator.py
++++ b/scripts/blueprint-pipeline-orchestrator.py
+@@ -49,6 +49,11 @@ import urllib.request
+ from datetime import datetime, timezone, timedelta
+ from pathlib import Path
+ from typing import Optional
++
++# Idempotency key — makes a 15-min re-run on an unchanged lead a no-op.
++# See blueprint_idempotency.py. Additive; reversible via -R of this patch.
++import sys as _sys
++_sys.path.insert(0, str(Path(__file__).resolve().parent))
++from blueprint_idempotency import ensure_schema, should_skip, record_completion
+
+@@ async def process_lead(
+     async with sem:
+         profile = json.loads(Path(profile_path).read_text())
+         slug = profile.get("slug", "unknown")
+         status = LeadStatus(slug)
+         result = {"slug": slug, "lead_name": profile.get("lead_name", "Unknown"), "passed": True, "stages": {}}
++
++        # ── IDEMPOTENCY GUARD ────────────────────────────────────────────
++        # If this exact input already completed, skip the whole pipeline.
++        if should_skip(conn, profile):
++            log.info(f"  [{slug}] IDEMPOTENT SKIP (input unchanged since last complete)")
++            result["passed"] = True
++            result["stages"]["idempotent_skip"] = "SKIP"
++            result["skipped"] = True
++            return result
+
+@@ async def process_lead (end of function, after final DB UPDATE)
+         conn.execute(
+             "UPDATE leads SET status = ?, last_stage = ?, completed_at = ? WHERE slug = ?",
+             (final_status, last_stage, datetime.now(timezone.utc).isoformat(), slug),
+         )
+         conn.commit()
++
++        # Stamp the completed input_hash so the next poller cycle no-ops an
++        # unchanged lead. Only on a real PASS.
++        if result["passed"]:
++            record_completion(conn, profile, batch_id="")
+
+         return result
+
+@@ async def main() (right after `conn = init_db()`)
+     conn = init_db()
++    ensure_schema(conn)  # add idempotency columns if absent (idempotent)

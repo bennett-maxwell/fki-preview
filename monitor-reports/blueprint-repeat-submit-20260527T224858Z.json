@@ -1,0 +1,62 @@
+{
+  "timestamp": "20260527T224858Z",
+  "status": "fail",
+  "test_identity": {
+    "email": "blueprint-repeat-20260527T224858Z@franchiseki.com",
+    "phone": "+1555000224858",
+    "contactId": "pLWgvtEEq1hAwScQwAwj"
+  },
+  "submissions": [
+    {
+      "http_status": "200",
+      "contactId": "pLWgvtEEq1hAwScQwAwj",
+      "body": {
+        "ok": true,
+        "mode": "created",
+        "contactId": "pLWgvtEEq1hAwScQwAwj"
+      }
+    },
+    {
+      "http_status": "400",
+      "contactId": "",
+      "body": {
+        "ok": false,
+        "error": "ghl_400",
+        "detail": "This location does not allow duplicated contacts."
+      }
+    },
+    {
+      "http_status": "400",
+      "contactId": "",
+      "body": {
+        "ok": false,
+        "error": "ghl_400",
+        "detail": "This location does not allow duplicated contacts."
+      }
+    },
+    {
+      "http_status": "200",
+      "contactId": "pLWgvtEEq1hAwScQwAwj",
+      "body": {
+        "ok": true,
+        "mode": "updated",
+        "contactId": "pLWgvtEEq1hAwScQwAwj"
+      }
+    },
+    {
+      "http_status": "200",
+      "contactId": "pLWgvtEEq1hAwScQwAwj",
+      "body": {
+        "ok": true,
+        "mode": "updated",
+        "contactId": "pLWgvtEEq1hAwScQwAwj"
+      }
+    }
+  ],
+  "exact_contact_count": 0,
+  "failures": [
+    "relay_submit_2_http_400",
+    "relay_submit_3_http_400",
+    "repeat_submit_exact_contact_count_0"
+  ]
+}

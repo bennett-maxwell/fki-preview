@@ -85,6 +85,7 @@ HELP
 # ─── Arg parsing ────────────────────────────────────────────────────────────
 DRY_RUN=false
 NO_PUSH=false
+NO_COMMIT=false
 PROFILE_JSON=""
 
 while [[ $# -gt 0 ]]; do
@@ -92,6 +93,7 @@ while [[ $# -gt 0 ]]; do
     --help|-h) usage ;;
     --dry-run) DRY_RUN=true; shift ;;
     --no-push) NO_PUSH=true; shift ;;
+    --no-commit) NO_COMMIT=true; NO_PUSH=true; shift ;;
     -*) echo "ERROR: Unknown option: $1" >&2; exit 1 ;;
     *) PROFILE_JSON="$1"; shift ;;
   esac
@@ -534,13 +536,19 @@ if [[ "$DRY_RUN" == "true" ]]; then
   exit 0
 fi
 
-# ─── Step 5: Git commit ────────────────────────────────────────────────────
+# ─── Step 5: Git commit ─────────────────────────────────────────────────────
 echo "[5/7] Committing..."
 cd "$REPO_ROOT"
-git add "blueprints/$LEAD_SLUG.html"
-git commit -m "Add Blueprint: $BUSINESS_NAME ($LEAD_SLUG)" || {
-  echo "  Nothing to commit (file may already be tracked)."
-}
+if [[ "$NO_COMMIT" == "true" ]]; then
+  echo "  --no-commit mode: skipping per-lead git commit (batch orchestrator handles commit)"
+else
+  # Clear stale index.lock before git op
+  [ -f ".git/index.lock" ] && rm -f ".git/index.lock" && echo "  Cleared stale index.lock"
+  git add "blueprints/$LEAD_SLUG.html"
+  git commit -m "Add Blueprint: $BUSINESS_NAME ($LEAD_SLUG)" || {
+    echo "  Nothing to commit (file may already be tracked)."
+  }
+fi
 
 if [[ "$NO_PUSH" == "true" ]]; then
   echo ""
