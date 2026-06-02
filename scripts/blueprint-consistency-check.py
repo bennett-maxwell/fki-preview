@@ -35,7 +35,7 @@ TEMPLATE = BP / "TEMPLATE.html"
 
 CANON = [
     "alex-ramos", "austin-iron-horse", "branson-maxwell", "brent-attaway",
-    "brittney-warnick", "chris-lpnw", "court-lundberg", "dave-wood",
+    "brittney-warnick", "chris-lpnw", "court-lundberg",
     "jaden-mecham", "melissa-tash-srp", "paul-muus", "rey-31-consulting",
     "rush-evans", "watson", "zachary-oldham",
 ]

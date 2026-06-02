@@ -356,12 +356,35 @@ def podcast_audio_gate(slug, lead):
         failures.append(f"third_person={data.get('third_person_patterns_found')}")
     return not failures, failures
 
+def resolve_html_path(slug):
+    """Resolve a lead slug to its blueprint HTML. Live clones carry a date suffix
+    (e.g. avery-martinez-costa-vida-20260601.html), but gatekeeper/gk100 calls
+    run-audit.py with the BARE slug. Prefer an exact match; otherwise fall back to
+    the newest date-suffixed <slug>-YYYYMMDD.html. Fixes the fleet-wide 0/0 FAIL
+    where a bare --lead slug never matched the dated filename (2026-06-02)."""
+    exact = os.path.join(BP_DIR, f"{slug}.html")
+    if os.path.exists(exact):
+        return exact
+    import glob
+    matches = glob.glob(os.path.join(BP_DIR, f"{slug}-*.html"))
+    dated = sorted(m for m in matches if re.search(r"-\d{8}\.html$", m))
+    if dated:
+        return dated[-1]
+    if matches:
+        return sorted(matches)[-1]
+    return exact  # non-existent; caller reports not found
+
 def audit_lead(slug):
     results = {}
     redlines = {}  # keys here are HARD red-lines: any False => VERDICT FAIL regardless of score
-    html_path = os.path.join(BP_DIR, f"{slug}.html")
+    html_path = resolve_html_path(slug)
     if not os.path.exists(html_path):
         return {"error": f"{html_path} not found", "score": 0}
+    # Canonical slug = the resolved (possibly date-suffixed) filename. Leads json,
+    # podcast mp3/source, and receipt dirs all carry the SAME date-suffixed slug,
+    # so a bare gk100 --lead slug must be normalized here or every downstream
+    # lookup (lead, podcast, source) silently misses (2026-06-02).
+    slug = os.path.basename(html_path)[:-5]
     with open(html_path) as f:
         html = f.read()
     lead = load_lead(slug)
