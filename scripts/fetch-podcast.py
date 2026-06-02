@@ -34,8 +34,8 @@ def steering(first, business):
     framing — fixes the audit's D3-02 direct-address gate + the 'assume excellence' rule."""
     f = first or (business or "there")
     return (
-        f'OPENING LINE MUST BE EXACTLY: "Hi {f}, welcome. This walkthrough was built specifically for you and '
-        f'{business}, based on everything you told us." Then proceed. '
+        f'OPENING LINE MUST BE EXACTLY: "Hi {f}, welcome. This walkthrough was built for you and '
+        f'{business}, from what you told us." Then proceed. '
         f'THROUGHOUT: speak DIRECTLY to {f} in second person using "you" and "your" — NEVER refer to {f} in the '
         f'third person, NEVER say "this business," "the owner," or "they." {f} is listening; speak TO {f}, not ABOUT {f}. '
         f'Tone: warm, personal, genuinely excited about what AI unlocks. The business is THRIVING — frame every '

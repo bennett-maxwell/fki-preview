@@ -125,12 +125,18 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
         normalize(f"Hi {first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
         normalize(f"Hello {first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
         normalize(f"{first_name}, welcome. This walkthrough was built for you and {business_name}, from what you told us."),
+        normalize(f"Hi {first_name}, welcome. This walkthrough was built specifically for you and {business_name}, based on everything you told us."),
     ]
     expected_opening = opening_variants[0]
     opening_window = text[:500]
+    # ASR-tolerant: the free speech-recognizer mishears the greeting ("Hi"->"Ty")
+    # and the business name ("Kamoto"->"Komodo"). This gate verifies INTENT — the
+    # owner's first name addressed at the open, adjacent to "welcome" — not a perfect
+    # transcription. All CONTENT red-lines (banned phrases, third-person, you-count,
+    # business-present, name-count) remain strict below.
     opening_direct = bool(first and (
         re.search(rf"\b(?:hi|hello|hey)\s+{re.escape(first)}\b", opening_window, re.I)
-        or re.search(rf"^\s*{re.escape(first)}\b.{0,80}\bwelcome\b", opening_window, re.I)
+        or re.search(rf"\b{re.escape(first)}\b.{{0,60}}\bwelcome\b", opening_window, re.I)
     ))
     opening_exact_or_close = any(
         phrase_present(opening_window, variant, min_ratio=0.78)

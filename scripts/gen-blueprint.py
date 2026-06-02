@@ -261,6 +261,12 @@ def build(profile):
     }
     for k, v in tok.items():
         html = html.replace(k, v)
+    # D1-01: guarantee the lead's first name appears in <title> (the audit checks the
+    # slug's first word is in <title>; for slugs like watson-kamoto the business name
+    # alone — "Kamoto Productions" — omits "watson", so append the lead name).
+    m = re.search(r'<title>(.*?)</title>', html, re.S)
+    if m and p["first_name"].lower() not in m.group(1).lower():
+        html = html.replace(m.group(0), f'<title>{m.group(1).strip()} · {esc(p["lead_name"])}</title>', 1)
     return html
 
 
