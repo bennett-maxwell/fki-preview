@@ -31,6 +31,15 @@ SLUG_IND = CFG["slug_industry"]
 
 SLIDER_RE = re.compile(r'(<input type="range" id="slider-contract")[^>]*(>)')
 JSFALL_RE = re.compile(r"(getElementById\('slider-contract'\)\.value\)\s*\|\|\s*)\d+")
+# Current blueprints (post avg-value-fill-in migration) use a number FILL-IN with
+# id="sl-contract" and NO max. financial-realism-check.py D7-02 + the generator both
+# moved to this id; this fixer still only knew the legacy range slider, so it could
+# not repair the (min,value) clone fingerprint on fill-in blueprints (the detector
+# advanced, the fixer didn't — same dead-id drift the v2.10 detector patch fixed).
+# Set the fill-in's min/step to the industry band so the (contract_min, slider_default)
+# triple becomes industry-DISTINCT (clears D7-02). The per-lead value is preserved —
+# it is intentional per-lead data, not a clone axis.
+FILLIN_RE = re.compile(r'<input\b[^>]*\bid="sl-contract"[^>]*>')
 
 
 def slider_tag(mn, mx, st, val):
@@ -39,9 +48,19 @@ def slider_tag(mn, mx, st, val):
             f'oninput="calcTouched=true;updateCalc()">')
 
 
+def _fillin_sub(mn, st):
+    def _do(m):
+        t = m.group(0)
+        t = re.sub(r'\bmin="\d+"', f'min="{mn}"', t, count=1)
+        t = re.sub(r'\bstep="\d+"', f'step="{st}"', t, count=1)
+        return t
+    return _do
+
+
 def patch(path, mn, mx, st, fallback):
     html = path.read_text()
     new = SLIDER_RE.sub(slider_tag(mn, mx, st, mn), html, count=1)
+    new = FILLIN_RE.sub(_fillin_sub(mn, st), new, count=1)
     new = JSFALL_RE.sub(rf"\g<1>{fallback}", new, count=1)
     changed = new != html
     if changed:
