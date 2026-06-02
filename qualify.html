@@ -255,23 +255,27 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <div class="q-sub">This keeps your score and application tied to the same CRM record.</div>
       <div class="identity-grid">
         <div class="identity-field">
-          <label for="lead-first">First name</label>
+          <label for="lead-first">First name <span style="color:#ef4444;">*</span></label>
           <input id="lead-first" name="firstName" type="text" autocomplete="given-name" required>
+          <div class="field-hint" id="first-hint">First name is required.</div>
         </div>
         <div class="identity-field">
-          <label for="lead-last">Last name</label>
+          <label for="lead-last">Last name <span style="color:#ef4444;">*</span></label>
           <input id="lead-last" name="lastName" type="text" autocomplete="family-name" required>
+          <div class="field-hint" id="last-hint">Last name is required.</div>
         </div>
         <div class="identity-field full">
-          <label for="lead-business">Business name</label>
+          <label for="lead-business">Business name <span style="color:#ef4444;">*</span></label>
           <input id="lead-business" name="businessName" type="text" autocomplete="organization" required>
+          <div class="field-hint" id="business-hint">Business name is required.</div>
         </div>
         <div class="identity-field">
-          <label for="lead-email">Email</label>
+          <label for="lead-email">Email <span style="color:#ef4444;">*</span></label>
           <input id="lead-email" name="email" type="email" autocomplete="email" required>
+          <div class="field-hint" id="email-hint">Enter a valid email address.</div>
         </div>
         <div class="identity-field">
-          <label for="lead-phone">Phone</label>
+          <label for="lead-phone">Phone <span style="color:#ef4444;">*</span></label>
           <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
           <div class="field-hint" id="phone-hint">Enter a 10-digit phone number.</div>
         </div>
@@ -1330,6 +1334,26 @@ document.querySelectorAll('#identity-section input').forEach(el => {
     persistIdentity();
     updateIdentityStatus();
     update();
+  });
+  el.addEventListener('blur', function() {
+    const v = this.value.trim();
+    if (this.id === 'lead-first') {
+      const hint = document.getElementById('first-hint');
+      if (!v) { this.classList.add('invalid'); hint && hint.classList.add('show'); }
+      else { this.classList.remove('invalid'); hint && hint.classList.remove('show'); }
+    } else if (this.id === 'lead-last') {
+      const hint = document.getElementById('last-hint');
+      if (!v) { this.classList.add('invalid'); hint && hint.classList.add('show'); }
+      else { this.classList.remove('invalid'); hint && hint.classList.remove('show'); }
+    } else if (this.id === 'lead-business') {
+      const hint = document.getElementById('business-hint');
+      if (!v) { this.classList.add('invalid'); hint && hint.classList.add('show'); }
+      else { this.classList.remove('invalid'); hint && hint.classList.remove('show'); }
+    } else if (this.id === 'lead-email') {
+      const hint = document.getElementById('email-hint');
+      if (!v || !validEmail(v)) { this.classList.add('invalid'); hint && hint.classList.add('show'); }
+      else { this.classList.remove('invalid'); hint && hint.classList.remove('show'); }
+    }
   });
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
