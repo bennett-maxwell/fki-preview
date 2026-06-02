@@ -192,6 +192,52 @@ def check_production_summary_no_send_guard():
         assert token in src, f"production summary guard missing token: {token}"
 
 
+def check_delivery_email_escapes_ampersand_tokens():
+    """14. build-delivery-email.sh injects free-text profile values into the
+    delivery-email template via `sed -i ''`. In a sed replacement RHS the bare
+    `&` is the whole-match operator, so a value like "Photography & Video"
+    (rush-evans) silently expands `&` back into the token itself, leaving the
+    {{INDUSTRY}} placeholder UNRENDERED (D5-20 fail). The fix is a sed_esc()
+    helper that backslash-escapes `&`, applied to EVERY free-text token. This
+    check pins both the helper's presence and its actual runtime behavior."""
+    script = os.path.join(REPO, "scripts", "build-delivery-email.sh")
+    src = _read(script)
+    # (a) helper defined and escapes the whole-match operator
+    assert "sed_esc()" in src and r"sed 's/&/\\&/g'" in src, \
+        "build-delivery-email.sh missing sed_esc() that escapes the sed & operator"
+    # (b) every free-text token substitution pipes through sed_esc (ACCENT_COLOR
+    # is a hex color with no free text, so it is legitimately exempt).
+    free_text_tokens = [
+        "LEAD_FIRST_NAME", "BUSINESS_NAME", "INDUSTRY", "BLUEPRINT_URL",
+        "PODCAST_URL", "WEBSITE_URL", "APPLY_SUBJECT", "APPLY_URL", "QUALIFY_URL",
+    ]
+    for tok in free_text_tokens:
+        line = next((l for l in src.splitlines()
+                     if ("{{%s}}" % tok) in l and "sed -i" in l), None)
+        assert line is not None, f"no sed substitution line for {{{{{tok}}}}}"
+        assert "sed_esc " in line, \
+            f"{tok} substitution does not pass through sed_esc (& would corrupt it): {line.strip()}"
+    # (c) runtime tripwire: replicate the exact mechanism with a &-bearing value
+    # and prove it renders literally with no leftover placeholder.
+    bash = r'''
+set -e
+tmp=$(mktemp)
+printf '%s' 'X {{INDUSTRY}} Y' > "$tmp"
+sed_esc() { printf '%s' "$1" | sed 's/&/\\&/g'; }
+val='Photography & Video'
+sed -i '' "s|{{INDUSTRY}}|$(sed_esc "$val")|g" "$tmp"
+cat "$tmp"
+rm -f "$tmp"
+'''
+    out = subprocess.run(["bash", "-c", bash], capture_output=True, text=True, timeout=30)
+    assert out.returncode == 0, f"ampersand render harness errored: {out.stderr}"
+    rendered = out.stdout.strip()
+    assert rendered == "X Photography & Video Y", \
+        f"&-bearing token did not render literally: got {rendered!r}"
+    assert "{{" not in rendered, \
+        f"placeholder left unrendered after &-bearing substitution: {rendered!r}"
+
+
 CHECKS = [
     ("NO_LINKEDIN_SLIDER_IN_TEMPLATE", check_no_linkedin_slider_in_template),
     ("NO_NONB2B_LINKEDIN_VIOLATION", check_no_nonb2b_linkedin_violation),
@@ -206,6 +252,7 @@ CHECKS = [
     ("PODCAST_DIRECT_ADDRESS_ARTIFACT_GATE", check_podcast_direct_address_artifact_gate),
     ("LOCAL_AUDIO_AUDIT_NOT_PUBLIC_DEPLOY_BLOCKED", check_local_audio_audit_not_public_deploy_blocked),
     ("PRODUCTION_SUMMARY_NO_SEND_GUARD", check_production_summary_no_send_guard),
+    ("DELIVERY_EMAIL_ESCAPES_AMPERSAND_TOKENS", check_delivery_email_escapes_ampersand_tokens),
 ]
 
 
