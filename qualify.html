@@ -178,7 +178,22 @@
 @media (max-width: 360px) {
   .main-wrap { padding: 1rem 0.75rem 2.5rem; }
   .chip { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+  .exp-input-row input[type=number] { width: 80px; font-size: 1rem; }
+  .hero h1 { font-size: clamp(1.35rem, 7vw, 1.8rem); }
+  .results-card { padding: 1.25rem; }
+  .cta-btn { font-size: 0.95rem; padding: 0.85rem; }
 }
+
+/* ── Round-1 additions ─────────────────────────────────────────────────────── */
+.chip:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+.cta-btn.calculating { background: var(--brand-dark); cursor: wait; }
+.result-block, .verdict-block { transition: background 0.3s ease, border-color 0.3s ease; }
+.progress-bar-fill { transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.result-block-value { transition: color 0.3s ease; }
+.identity-field input.invalid { border-color: #ef4444; }
+.identity-field .field-hint { font-size: 0.73rem; color: #ef4444; margin-top: 0.25rem; display: none; }
+.identity-field input.invalid + .field-hint,
+.identity-field .field-hint.show { display: block; }
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -236,6 +251,7 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
         <div class="identity-field">
           <label for="lead-phone">Phone</label>
           <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+          <div class="field-hint" id="phone-hint">Enter a 10-digit phone number.</div>
         </div>
       </div>
       <div class="identity-status" id="identity-status">Name, email, phone, and business are required to submit.</div>
@@ -295,12 +311,12 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <div class="q-title">How fast does your business typically respond to a new lead?</div>
       <div class="q-sub">Speed-to-lead is the single largest driver of close rate improvement with AI. Be honest.</div>
       <div class="chips" id="chips-speed">
-        <div class="chip" data-val="instant"      onclick="selectChip('speed','instant')">Under 5 minutes</div>
-        <div class="chip" data-val="30min"        onclick="selectChip('speed','30min')">Within 30 minutes</div>
-        <div class="chip" data-val="1to4hr"       onclick="selectChip('speed','1to4hr')">1–4 hours</div>
-        <div class="chip" data-val="sameday"      onclick="selectChip('speed','sameday')">Within 24 hours</div>
-        <div class="chip" data-val="nextday"      onclick="selectChip('speed','nextday')">Next day</div>
-        <div class="chip" data-val="inconsistent" onclick="selectChip('speed','inconsistent')">Inconsistent</div>
+        <div class="chip" data-val="instant"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','instant')"      onkeydown="chipKeydown(event,'speed','instant')">Under 5 minutes</div>
+        <div class="chip" data-val="30min"        tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','30min')"        onkeydown="chipKeydown(event,'speed','30min')">Within 30 minutes</div>
+        <div class="chip" data-val="1to4hr"       tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','1to4hr')"       onkeydown="chipKeydown(event,'speed','1to4hr')">1–4 hours</div>
+        <div class="chip" data-val="sameday"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','sameday')"      onkeydown="chipKeydown(event,'speed','sameday')">Within 24 hours</div>
+        <div class="chip" data-val="nextday"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','nextday')"      onkeydown="chipKeydown(event,'speed','nextday')">Next day</div>
+        <div class="chip" data-val="inconsistent" tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','inconsistent')" onkeydown="chipKeydown(event,'speed','inconsistent')">Inconsistent</div>
       </div>
     </div>
 
@@ -359,11 +375,11 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
       <div class="q-sub">This determines how much setup time is required on our end to get you results immediately.</div>
       <div class="chips" id="chips-capability">
-        <div class="chip" data-val="speed-bot"    onclick="selectChip('capability','speed-bot')">AI Speed-to-Lead Bot</div>
-        <div class="chip" data-val="lead-filter"  onclick="selectChip('capability','lead-filter')">Lead Qualification Filter</div>
-        <div class="chip" data-val="follow-up"    onclick="selectChip('capability','follow-up')">Automated Follow-Up Sequences</div>
-        <div class="chip" data-val="crm-auto"     onclick="selectChip('capability','crm-auto')">CRM Automation</div>
-        <div class="chip" data-val="voice-ai"     onclick="selectChip('capability','voice-ai')">Voice AI / Outbound Calling</div>
+        <div class="chip" data-val="speed-bot"    tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','speed-bot')"    onkeydown="chipKeydown(event,'capability','speed-bot')">AI Speed-to-Lead Bot</div>
+        <div class="chip" data-val="lead-filter"  tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','lead-filter')"  onkeydown="chipKeydown(event,'capability','lead-filter')">Lead Qualification Filter</div>
+        <div class="chip" data-val="follow-up"    tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','follow-up')"    onkeydown="chipKeydown(event,'capability','follow-up')">Automated Follow-Up Sequences</div>
+        <div class="chip" data-val="crm-auto"     tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','crm-auto')"     onkeydown="chipKeydown(event,'capability','crm-auto')">CRM Automation</div>
+        <div class="chip" data-val="voice-ai"     tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','voice-ai')"     onkeydown="chipKeydown(event,'capability','voice-ai')">Voice AI / Outbound Calling</div>
       </div>
     </div>
 
@@ -463,6 +479,72 @@ let spendVal   = null;   // Q8 — ad spend
 
 const chips = { speed: null, capability: null };
 let lastQualificationBand = null;
+
+// ── ANSWER PERSISTENCE (R1 improvement) ──────────────────────────────────────
+const ANSWERS_KEY = 'advaitaQualifierAnswers';
+
+function saveAnswers() {
+  try {
+    const answers = {
+      leadsPos:    document.getElementById('sl-leads')   ? document.getElementById('sl-leads').value   : '0',
+      dealVal:     document.getElementById('inp-deal')   ? document.getElementById('inp-deal').value   : '',
+      lpsPos:      document.getElementById('sl-lps')     ? document.getElementById('sl-lps').value     : '0',
+      speedChip:   chips.speed,
+      hoursPos:    document.getElementById('sl-hours')   ? document.getElementById('sl-hours').value   : '0',
+      teamVal:     document.getElementById('inp-team')   ? document.getElementById('inp-team').value   : '',
+      teamHrsVal:  document.getElementById('inp-teamhrs')? document.getElementById('inp-teamhrs').value: '',
+      capChip:     chips.capability,
+      spendPos:    document.getElementById('sl-spend')   ? document.getElementById('sl-spend').value   : '0',
+      savedAt:     Date.now()
+    };
+    localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+  } catch(e) {}
+}
+
+function loadAnswers() {
+  try {
+    const raw = localStorage.getItem(ANSWERS_KEY);
+    if (!raw) return;
+    const a = JSON.parse(raw);
+    // Only restore if saved within last 7 days
+    if (!a.savedAt || (Date.now() - a.savedAt) > 7 * 86400000) return;
+    if (a.leadsPos && a.leadsPos !== '0') {
+      document.getElementById('sl-leads').value = a.leadsPos;
+      leadsUpdate();
+    }
+    if (a.dealVal) {
+      document.getElementById('inp-deal').value = a.dealVal;
+      dealUpdate();
+    }
+    if (a.lpsPos && a.lpsPos !== '0') {
+      document.getElementById('sl-lps').value = a.lpsPos;
+      lpsUpdate();
+    }
+    if (a.speedChip) selectChip('speed', a.speedChip);
+    if (a.hoursPos && a.hoursPos !== '0') {
+      document.getElementById('sl-hours').value = a.hoursPos;
+      hoursUpdate();
+    }
+    if (a.teamVal) {
+      document.getElementById('inp-team').value = a.teamVal;
+      teamUpdate();
+    }
+    if (a.teamHrsVal) {
+      document.getElementById('inp-teamhrs').value = a.teamHrsVal;
+      teamHrsUpdate();
+    }
+    if (a.capChip) selectChip('capability', a.capChip);
+    if (a.spendPos && a.spendPos !== '0') {
+      document.getElementById('sl-spend').value = a.spendPos;
+      spendUpdate();
+    }
+  } catch(e) {}
+}
+
+// ── KEYBOARD NAV FOR CHIPS (R1 improvement) ───────────────────────────────────
+function chipKeydown(e, group, val) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectChip(group, val); }
+}
 
 const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
@@ -597,6 +679,19 @@ function hydrateAgents() {
 function updateIdentityStatus() {
   const status = document.getElementById('identity-status');
   if (!status) return;
+  // Phone validation UI
+  const phoneEl   = document.getElementById('lead-phone');
+  const phoneHint = document.getElementById('phone-hint');
+  if (phoneEl && phoneHint) {
+    const phoneRaw = phoneEl.value.trim();
+    if (phoneRaw && !validPhone(phoneRaw)) {
+      phoneEl.classList.add('invalid');
+      phoneHint.classList.add('show');
+    } else {
+      phoneEl.classList.remove('invalid');
+      phoneHint.classList.remove('show');
+    }
+  }
   if (isIdentityComplete()) {
     status.textContent = 'Ready. This qualification will be saved against this contact.';
     status.className = 'identity-status ready';
@@ -630,8 +725,10 @@ function leadsUpdate() {
     leadsVal = posToLeads(pos);
     lbl.textContent = fmtLeads(leadsVal) + ' leads/mo';
     lbl.className   = 'slider-val';
+    logFunnelEvent('q1_answered', { leads: leadsVal });
   }
   sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
   update();
 }
 
@@ -647,7 +744,9 @@ function dealUpdate() {
     dealVal = raw;
     lbl.textContent = fmtMoney(raw);
     lbl.className   = 'slider-val';
+    logFunnelEvent('q2_answered', { deal: dealVal });
   }
+  saveAnswers();
   update();
 }
 
@@ -675,8 +774,10 @@ function lpsUpdate() {
     const impliedPct = Math.round(100 / lpsVal);
     lbl.textContent = lpsVal + (lpsVal === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + impliedPct + '% close)';
     lbl.className   = 'slider-val';
+    logFunnelEvent('q3_answered', { lps: lpsVal });
   }
   sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
   update();
 }
 
@@ -695,7 +796,9 @@ function hoursUpdate() {
     lbl.className   = 'slider-val';
     const pct = h / 42 * 100;
     sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+    logFunnelEvent('q5_answered', { hours: hoursVal });
   }
+  saveAnswers();
   update();
 }
 
@@ -704,13 +807,16 @@ function teamUpdate() {
   const raw = parseFloat(document.getElementById('inp-team').value);
   teamVal = (!isNaN(raw) && raw >= 0) ? raw : null;
   refreshTeamLabel();
+  saveAnswers();
   update();
 }
 
 function teamHrsUpdate() {
   const raw = parseFloat(document.getElementById('inp-teamhrs').value);
   teamHrsVal = (raw && raw > 0) ? raw : null;
+  if (teamVal !== null && teamHrsVal !== null) logFunnelEvent('q6_answered', { team: teamVal, teamHrs: teamHrsVal });
   refreshTeamLabel();
+  saveAnswers();
   update();
 }
 
@@ -748,16 +854,23 @@ function spendUpdate() {
     spendVal = posToSpend(pos);
     lbl.textContent = fmtMoney(spendVal) + '/mo';
     lbl.className   = 'slider-val';
+    logFunnelEvent('q8_answered', { spend: spendVal });
   }
   sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
   update();
 }
 
 // ── CHIP SELECTION ───────────────────────────────────────────────────────────
 function selectChip(group, val) {
-  document.getElementById('chips-' + group).querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  document.getElementById('chips-' + group).querySelector('[data-val="' + val + '"]').classList.add('selected');
+  const box = document.getElementById('chips-' + group);
+  box.querySelectorAll('.chip').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  const selected = box.querySelector('[data-val="' + val + '"]');
+  if (selected) { selected.classList.add('selected'); selected.setAttribute('aria-pressed','true'); }
   chips[group] = val;
+  const qNum = group === 'speed' ? 4 : 7;
+  logFunnelEvent('q' + qNum + '_answered', { group, val });
+  saveAnswers();
   update();
 }
 
@@ -1021,6 +1134,12 @@ function buildBookingUrl(contactId) {
     lead_session_id: id.leadSessionId,
     blueprint_slug: id.blueprintSlug
   };
+  // UTM passthrough — carry any UTM params from the current page URL into the booking URL
+  const params = getParams();
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k) {
+    const v = params.get(k);
+    if (v) parts[k] = v;
+  });
   Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
   return url.toString();
 }
@@ -1039,14 +1158,19 @@ async function handleCtaClick() {
   const cta = document.getElementById('cta-apply');
   if (cta.disabled) return;
   cta.disabled = true;
-  cta.textContent = 'Saving...';
+  cta.classList.add('calculating');
+  cta.textContent = 'Calculating your score...';
+  // Brief pause so user sees the calculating state before the network call
+  await new Promise(r => setTimeout(r, 600));
+  cta.textContent = 'Saving your answers...';
   const result = await submitQualification();
+  cta.classList.remove('calculating');
   const ctaNote = document.getElementById('cta-note');
   if (!result.saved) {
     logFunnelEvent('crm_save_failed', { error: result.error || 'unknown' });
-    cta.textContent = 'Try Saving Again';
+    cta.textContent = 'Try Again';
     cta.disabled = false;
-    ctaNote.textContent = 'We could not confirm the CRM save yet. Please retry so the call is tied to the correct contact.';
+    ctaNote.textContent = 'Something went wrong on our end — your answers are saved locally. Click again to retry.';
     return;
   }
   if (result.payload.ai_qualified) {
@@ -1069,6 +1193,7 @@ async function handleCtaClick() {
 // Init
 hydrateIdentity();
 hydrateAgents();
+loadAnswers(); // R1: restore partial answers from localStorage
 document.querySelectorAll('#identity-section input').forEach(el => {
   el.addEventListener('input', function() {
     persistIdentity();
