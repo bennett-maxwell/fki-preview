@@ -232,8 +232,19 @@ def build(profile):
     c = p["calc"]
 
     def set_slider(html, sid, val):
-        return re.sub(r'(id="' + re.escape(sid) + r'"[^>]*\bvalue=")[^"]*(")',
-                      lambda m: m.group(1) + str(val) + m.group(2), html, count=1)
+        # Set value AND widen the slider's min/max to encompass it, so high-volume
+        # leads (e.g. Rey's 1,000 monthly leads) aren't clamped to the template's
+        # default max of 100. Works for both range sliders and number inputs.
+        def fix(m):
+            tag = re.sub(r'\bvalue="[^"]*"', f'value="{val}"', m.group(0))
+            mx = re.search(r'\bmax="(-?\d+)"', tag)
+            if mx and int(val) > int(mx.group(1)):
+                tag = re.sub(r'\bmax="-?\d+"', f'max="{val}"', tag)
+            mn = re.search(r'\bmin="(-?\d+)"', tag)
+            if mn and int(val) < int(mn.group(1)):
+                tag = re.sub(r'\bmin="-?\d+"', f'min="{val}"', tag)
+            return tag
+        return re.sub(r'<input[^>]*\bid="' + re.escape(sid) + r'"[^>]*>', fix, html, count=1)
 
     def set_label(html, lid, label):  # only fires if the label span still exists
         return re.sub(r'(<span class="calc-slider-val" id="' + re.escape(lid) + r'">)[^<]*(</span>)',

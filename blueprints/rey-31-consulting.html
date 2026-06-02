@@ -382,12 +382,12 @@
           <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="0" step="100" value="12000" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">100</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="100" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">1,000</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="1000" step="1" value="1000" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">10%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="10" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">2%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="2" max="60" step="1" value="2" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">25 hrs</span></div>
@@ -506,9 +506,25 @@ You are the Appointment Setter for 31 Consulting. Once a lead shows interest, yo
 - On reschedule requests, offer new times immediately, no friction
 - Every booking + change logged to Pipedrive
 
-## EXAMPLE
+## WHAT NEVER TO DO
+- Never make the lead pick from an open calendar; always propose specific times.
+- Never double-book; check availability before offering a slot.
+- Never let a no-show or cancellation go unhandled — auto-send a reschedule link and notify the consultant in Slack.
+- Never let a reply sit; respond within the minute, every time.
+
+## EXAMPLE — BOOKING
 ---
 Great — let's get you on the calendar. I have Thursday 10am or Friday 1pm (PT). Which works and I'll send the invite right over?
+---
+
+## EXAMPLE — RESCHEDULE
+---
+No problem at all, Marcus — happy to move it. I have Monday 9am or Tuesday 4pm (PT) open. Want me to switch you to one of those, and I'll update the invite?
+---
+
+## EXAMPLE — REMINDER
+---
+Looking forward to our call tomorrow at 10am PT, Marcus. Here's the link: [call link]. Reply here if anything's changed and I'll sort it.
 ---</pre><button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: turns interested leads into booked calls automatically — proposing times, handling the back-and-forth, confirming, and reminding — with no coordinator time.</div></div></div></div>
     <div class="diy-or-partner"><h3>Two paths forward for Rey:</h3><div class="path-grid"><div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div><div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the 31 Consulting voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting" class="path-cta">Get Your AI Quote</a></div></div></div>
   </div>
@@ -615,9 +631,9 @@ Great — let's get you on the calendar. I have Thursday 10am or Friday 1pm (PT)
 
 <script>
   const PRESETS = {
-    conservative: { contract: 12000, leads: 100, rate: 10, hours: 25, lift: 0.5 },
-    expected:     { contract: 12000, leads: 100, rate: 10, hours: 25, lift: 1.0 },
-    stretch:      { contract: 12000, leads: 100, rate: 10, hours: 25, lift: 1.3 }
+    conservative: { contract: 12000, leads: 1000, rate: 2, hours: 25, lift: 0.5 },
+    expected:     { contract: 12000, leads: 1000, rate: 2, hours: 25, lift: 1.0 },
+    stretch:      { contract: 12000, leads: 1000, rate: 2, hours: 25, lift: 1.3 }
   };
   let currentLift = 1.0;
 
