@@ -427,12 +427,16 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
     <div class="results-card">
       <div class="results-title">Your AI Fit Score — Updates Live</div>
 
+      <!-- EP5: ARIA live region for screen reader progress announcements -->
+      <div aria-live="polite" aria-atomic="true" id="progress-aria" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"></div>
       <div class="progress-bar-wrap">
         <div class="progress-bar-label">
           <span id="progress-label">0 of 8 answered</span>
           <span id="progress-pct">0%</span>
         </div>
-        <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress-bar-el">
+          <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
       </div>
 
       <!-- Qualification Verdict -->
@@ -442,6 +446,12 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
         <div class="verdict-sub" id="verdict-sub">Answer the first 4 questions and we run the numbers</div>
       </div>
 
+      <!-- EP5: Revenue impact block — shows when Q1+Q2+Q3+Q4 answered -->
+      <div class="result-block neutral" id="revenue-block" style="display:none;">
+        <div class="result-block-label">Estimated 90-Day Revenue Lift</div>
+        <div class="result-block-value" id="revenue-value">—</div>
+        <div class="result-block-sub" id="revenue-sub">based on your leads, deal size, and response speed</div>
+      </div>
       <!-- Time Savings Block — shows when Q5 answered -->
       <div class="result-block neutral" id="savings-block" style="display:none;">
         <div class="result-block-label">Potential Weekly Time Savings</div>
@@ -701,10 +711,11 @@ function hydrateAgents() {
   if (!agents.length) return;
   const box = document.getElementById('chips-capability');
   if (!box) return;
+  // EP5: dynamically generated chips get keyboard nav attributes too
   box.innerHTML = agents.map(function(name){
     const val = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     const safe = name.replace(/"/g,'&quot;');
-    return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" onclick="selectChip(\'capability\',\''+val+'\')">'+safe+'</div>';
+    return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" tabindex="0" role="button" aria-pressed="false" onclick="selectChip(\'capability\',\''+val+'\')" onkeydown="chipKeydown(event,\'capability\',\''+val+'\')">'+safe+'</div>';
   }).join('');
 }
 
@@ -950,6 +961,14 @@ function update() {
   document.getElementById('progress-label').textContent = answered + ' of 8 answered';
   document.getElementById('progress-pct').textContent   = pct + '%';
   document.getElementById('progress-fill').style.width  = pct + '%';
+  // EP5: ARIA progress bar attributes
+  const pbEl = document.getElementById('progress-bar-el');
+  if (pbEl) { pbEl.setAttribute('aria-valuenow', answered); pbEl.setAttribute('aria-valuetext', answered + ' of 8 questions answered'); }
+  // EP5: ARIA live announcement at 4-of-8 and 8-of-8 milestones
+  const ariaEl = document.getElementById('progress-aria');
+  if (ariaEl && (answered === 4 || answered === 8)) {
+    ariaEl.textContent = answered === 8 ? 'All 8 questions answered. You can now submit your qualification.' : 'Halfway there. 4 of 8 questions answered.';
+  }
 
   // ── FIT MATH (used for qualification gate only — no dollar or multiplier shown) ─────
   const speedLift  = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
@@ -1035,10 +1054,38 @@ function update() {
     ctaNote.textContent     = 'Complete the contact fields and all 8 questions.';
   }
 
+  // ── EP5: REVENUE IMPACT BLOCK ─────────────────────────────────────────────
+  const revenueBlock = document.getElementById('revenue-block');
+  if (canQualify && qualifies10x && qualifies10x !== 'no') {
+    const speedLiftVal = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || 0;
+    const curRate = 1 / lpsVal;
+    const newRate = Math.min(curRate + speedLiftVal, 0.80);
+    const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
+    const q90     = moGain * 3;
+    if (q90 > 0 && revenueBlock) {
+      revenueBlock.style.display = '';
+      revenueBlock.className = qualifies10x === 'strong' ? 'result-block green' : 'result-block yellow';
+      document.getElementById('revenue-value').textContent = fmtMoney(q90);
+      document.getElementById('revenue-sub').textContent = 'est. 90-day lift from faster lead response alone';
+    }
+  } else if (revenueBlock) {
+    revenueBlock.style.display = 'none';
+  }
+
   // ── R3: PAGE TITLE UPDATE ON SCORE CHANGE ────────────────────────────────
   if (canQualify && qualifies10x) {
     const titleMap = { strong: 'Strong AI Fit — FKI Qualifier', possible: 'Possible AI Fit — FKI Qualifier', no: 'Review Needed — FKI Qualifier' };
     document.title = titleMap[qualifies10x] || document.title;
+    // EP5: update meta description dynamically for social sharing
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      const descMap = {
+        strong: 'Your business shows a strong fit for AI. See your estimated revenue impact and book a strategy call.',
+        possible: 'Your business may be a fit for AI. See your results and book a strategy call to verify.',
+        no: 'Your qualification results from FranchiseKI AI Assessment.'
+      };
+      metaDesc.setAttribute('content', descMap[qualifies10x] || metaDesc.getAttribute('content'));
+    }
   }
 
   // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
