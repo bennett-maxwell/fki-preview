@@ -1,361 +1,334 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Branson Maxwell
-Branson Maxwell Photography | Prepared by Franchise Ki | Generated 2026-05-27
+# Branson Maxwell Photo & Video — Your AI Advantage Walkthrough
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to BRANSON MAXWELL. Use "you" and
-"your business" in every paragraph. NEVER say "Branson Maxwell" in the third person.
-NEVER say "this business," "the owner," "they," or "their team." If you catch
-yourself describing Branson Maxwell from the outside, stop and restart the sentence
-addressed to them.
+RULE 1 (RED LINE): You are speaking DIRECTLY to BRANSON. Use "you" and "your" in every paragraph. NEVER refer to Branson Maxwell in the third person. NEVER say "this business," "the owner," "they," or "their team." If you catch yourself describing Branson Maxwell from the outside, stop and restart the sentence addressed to them.
 
-RULE 2: Open the audio with EXACTLY these words: "Hi Branson, welcome.
-This walkthrough was built for you and Branson Maxwell Photography, from what you told us."
-Then proceed.
+RULE 2: Open the audio with EXACTLY these words: "Hi Branson, welcome. This walkthrough was built for you and Branson Maxwell Photo & Video, from what you told us." Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
-a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
-
-================================================================================
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking.
 
 ---
 
 ## SECTION 1 — Hi Branson, this is your walkthrough
 
-Hi Branson — welcome. This is your AI walkthrough, built for you and
-Branson Maxwell Photography. Every number you're about to hear came from what you told us.
+Hi Branson, welcome. This walkthrough was built for you and Branson Maxwell Photo & Video, from what you told us. Everything you're about to hear came straight from your form and your own studio.
 
-You operate in photography, serving weddings, corporate events, and commercial clients. You run Branson Maxwell Photography at https://bransonmaxwell.com.
-You're already doing the hard work — the clients, the team, the reputation. That's
-yours. What we're going to walk through together isn't about fixing what's broken
-in your business. It's about showing you exactly where AI amplifies everything
-you've already built.
+You run Branson Maxwell Photo & Video, an award-caliber documentary-style wedding photography and videography studio. That work is yours, and nothing here replaces it. What you'll hear is exactly where AI gives you your time back so you can pour more of yourself into the work only you can do.
 
-You told us your current tools are: ShootProof, QuickBooks, Google Workspace. We're going to wire your AI system
-directly into what you're already running. Nothing you use today gets ripped out.
-Everything gets amplified.
-
-Your team is the backbone of Branson Maxwell Photography.
-
-You told us your current AI use is early-stage. That's exactly where most photography businesses are right now — and it's the right starting point.
-
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
-Branson Maxwell Photography. Not adjusted from a template. Built from your answers, for how
-your business actually works. Let's walk through what's possible.
+You told us your single biggest goal is booking more of the couples who reach out, and that the most demanding part of your week is customer communication, admin, scheduling, marketing content, reactivating past clients, and hiring. You're using ChatGPT day to day, which is a strong place to start. Keep those two things in mind — every tool below is aimed right at them.
 
 ---
 
-## SECTION 2 — Your Current Tool Stack: Where Branson Maxwell Photography Is Today
+## SECTION 2 — Your Current Tool Stack: Where Branson Maxwell Photo & Video Is Today
 
-WHERE YOU ARE TODAY — your current operational infrastructure:
+Here is the operational stack you're running today, and where AI plugs in on top of it — nothing gets ripped out:
 
-- **ShootProof**: Core operational tool in your current stack.
-- **QuickBooks**: Core operational tool in your current stack.
-- **Google Workspace**: Core operational tool in your current stack.
+- **Text / SMS** — Client Communication
+- **ChatGPT** — Current AI Tool
+- **bransonmaxwell.com** — Your Booking Front Door
+- **Instagram / Social** — Where Couples Find You
+- **No CRM** — Priority Gap #1 — inquiries live in your texts
+- **No PM Tool** — Gap #2 — no central project/booking system
 
-This tool stack tells us two things: where you're already strong, and where the
-biggest time unlocks are waiting. Your AI system gets built on top of what you have —
-not around it.
-
----
-
-## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
-
-These aren't guesses. These are the gaps that show up consistently for photography
-businesses at your stage — and every one of them has a direct AI solution.
-
-### Gap 1 — Speed to Response
-
-You're competing for the first response every time a lead comes in. Research from
-Harvard Business Review shows that 78% of customers buy from the first business to
-respond (HBR, "The Short Life of Online Sales Leads," 2011 —
-https://hbr.org/2011/03/the-short-life-of-online-sales).
-
-In photography, that window is measured in minutes — sometimes seconds. Every hour your
-team isn't watching for inbound = leads going to whoever responds first.
-
-An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
-your brand voice, your pricing context, your services. You stop competing on response
-time because you're always first.
-
-**Time your team could recover: up to 8 hours/week**
-**ROI at $150/hr: up to $4,800/month back in productive time**
-
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
-
-### Gap 2 — Follow-Up Consistency
-
-McKinsey research shows that 80% of sales require 5+ follow-up touches, but 44% of
-salespeople give up after just one follow-up (McKinsey & Company, "The B2B digital
-inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
-
-For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where they are in the
-decision process, and sends the right message at the right moment — without anyone
-on your team having to remember to do it.
-
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
-
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-### Gap 3 — Admin and Documentation Overhead
-
-SBA data shows small business owners spend an average of 25-40% of their week on
-administrative tasks that don't directly generate revenue
-(SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
-
-In photography, this shows up as: proposal writing, status updates, follow-up emails,
-scheduling coordination, reporting. Your AI system takes these off your team's plate
-entirely — and does them faster and more consistently than any manual process.
-
-**At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
-
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+The biggest signal here: there's no central client system yet, so every inquiry and couple lives in your inbox and texts. That's the first place AI gives you leverage.
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for Branson Maxwell Photography
+## SECTION 3 — Where AI Gives You the Most Time Back
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
-situation — your industry, your tools, your services, your pain points.
+These aren't guesses — they come straight from your answers. None of it is a critique of the studio; it's simply where AI carries the load so your team doesn't have to.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### Opportunity 1 — Inquiry Response Speed
 
-You are a speed-to-lead response agent for a photography business. When someone inquires about booking a session or event, respond within 60 seconds with a personalized message that references their event type, suggests available dates, and includes a link to the portfolio.
+You get ~140 inquiries a month and reply in about 60 minutes. Couples reach out to several studios at once and book the one that feels present first. An AI inquiry agent replies in under 60 seconds, 24/7, in your voice — so you're first into the conversation across all 140 inquiries without watching the inbox.
 
-This runs directly in your existing workflow. No new platform to learn.
-Your team supervises. The AI handles the repetitive execution.
+### Opportunity 2 — Reactivating Past Clients
 
----
+You flagged reactivating old leads as a stress — and with 400+ past couples, it's the biggest untapped revenue you have. An AI reactivation agent works that list automatically: anniversary sessions, referral asks, print and album offers, and your LUTs and workshops — booking revenue from people who already love your work.
 
-### AI Tool 2 — Proposal and Qualification Agent
+### Opportunity 3 — Scheduling
 
-You are a proposal draft agent for a photography business. Given event details (type, date, location, guest count), generate a professional photography proposal with package options, deliverables timeline, and a paragraph about the photographer's style and approach.
+You flagged scheduling as a stress. An AI scheduling agent proposes consult and shoot times, handles the back-and-forth over text, confirms, and reminds — turning interested couples into calendar holds without the manual tetris.
 
-Built around how Branson Maxwell Photography actually works — not a generic industry template.
+### Opportunity 4 — Customer Communication
 
----
+You flagged client communication as a stress. Across every booked couple there are timelines, reminders, prep notes, and gallery delivery. An AI communication concierge runs that in your voice so nothing slips and you're not living in your texts.
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### Opportunity 5 — Marketing Content From Every Wedding
 
-You are an outreach agent for a photography business targeting corporate marketing directors and event planners. Generate 5 LinkedIn messages and 5 email templates referencing their company's recent events and proposing ongoing photography services.
+You flagged marketing content as a stress. Every wedding you shoot is a week of content — but capturing it competes with the next couple. An AI content agent turns each wedding into Instagram, Pinterest, blog, and reel content in your documentary voice, with no marketing hire.
 
-This is the kind of tool that, once it's running, your team will not remember
-how they worked without it.
+### Opportunity 6 — No Central System (CRM + Admin)
 
----
-
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
-without anyone on your team triggering them manually.
+Inquiries and couples live in your texts with no CRM or project tool, and admin and hiring add to the load. A simple client hub gives every inquiry one home with status and next step, and an AI admin agent absorbs the repetitive operations work as you grow the team.
 
 ---
 
-## SECTION 5 — What Your Customers Already Say About Branson Maxwell Photography
+## SECTION 4 — The AI System Built Specifically for Branson Maxwell Photo & Video
 
-Your reputation in weddings, corporate events, and commercial clients is an asset. Customer feedback for photography businesses
-at your stage consistently highlights the same themes:
+These were written for your studio — your inquiries, your couples, your voice. Not adjusted from a template:
 
-- **Responsiveness:** Clients in photography cite "fast, clear communication" as the
-  #1 factor in choosing a provider. Your AI system makes this your permanent standard —
-  not a good week, not a great hire, a permanent operational baseline.
+### Inquiry Response Agent
 
-- **Reliability:** Follow-through on commitments is what drives repeat business and
-  referrals. Your AI system tracks every commitment and ensures nothing falls through
-  the cracks — even at 2am.
+Watches your contact form, Instagram DMs, and texts. The moment a couple reaches out, it replies in under 60 seconds — warm, on-brand, day or night — captures their date, venue, and vision, and offers consult times. Routes serious inquiries to you ready to book.
 
-- **Professionalism:** The quality of your proposals, your follow-up, your
-  documentation — all of this signals expertise before the client ever meets you in person.
-  AI raises that standard across every touchpoint.
+*What you feel:* Replies in under 60 sec to all 140/mo
 
-The businesses that win in photography long-term aren't necessarily the ones doing the
-best technical work. They're the ones that are easiest to work with. AI gives you that
-edge permanently.
+### Reactivation Agent
+
+Works your 400+ past couples automatically — anniversary session offers, referral asks, print and album campaigns, and your LUTs and workshops — turning the client history you've already built into new bookings. Directly relieves the reactivation stress you flagged.
+
+*What you feel:* Past couples become new revenue
+
+### Scheduling Agent
+
+Proposes consult and shoot times, handles the back-and-forth over text, confirms, and sends reminders — filling the calendar without the manual tetris. Relieves the scheduling stress you flagged.
+
+*What you feel:* The calendar fills itself
+
+### Client Communication Concierge
+
+Runs every booked couple's journey in your voice: timelines, reminders, prep notes, payment milestones, and gallery delivery — so nothing slips and you're not living in your texts.
+
+*What you feel:* Every couple, handled end-to-end
+
+### Content Studio Agent
+
+Turns each wedding into ready-to-post Instagram, Pinterest, blog, and reel content — matched to your documentary, timeless style — keeping you visible to the next couple every week without a marketing hire.
+
+*What you feel:* A month of content from every wedding
+
+### Client Hub Organizer
+
+The CRM you do not have yet. Pulls every inquiry and couple into one pipeline with status, next step, and history — so nothing slips through your texts and your bookings stop living only in your head.
+
+*What you feel:* Nothing slips through your texts
+
+---
+
+## SECTION 5 — Your Brand Voice, Built In From Day One
+
+Your AI doesn't learn your voice slowly over months. We build it before launch from bransonmaxwell.com and your own language — “documentary style photography & videography for couples who want upscale, modern, visionary art” — so every reply a couple receives sounds like Branson Maxwell Photo & Video from the very first message — 90% accurate on day one, then fine-tuned with you.
 
 ---
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+**Days 1-3 — AI Is In**
+- Kickoff call — map your inquiry flow and booking process
+- Inquiry Response Agent configured on your form, Instagram, and text
+- Brand voice built from bransonmaxwell.com and your documentary style
+- Live test: submit a test inquiry and watch the 60-second reply fire
+_Result: Your first agent is live. Every couple's inquiry gets a warm 60-second reply while you shoot._
 
-**Days 1-3: Onboarding.** Photography audit. Brand voice profile. Full ops map.
-We listen. Nothing gets built until we understand how you actually work.
+**Days 4-7 — System Is Running**
+- Reactivation Agent deployed across your 400+ past couples
+- Scheduling Agent connected to your calendar
+- Client Communication Concierge running your booked-couple journey
+- Content Studio Agent producing its first slate from a recent wedding
+- Client Hub set up — every inquiry and couple in one pipeline
+- Team walkthrough: 30 minutes, no technical knowledge required
+_Result: All 6 agents deployed and running across real studio workflows. Team trained._
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
-agent skills. You see the first results. Your team gives feedback. The system adjusts.
+**Day 30 — Fully Calibrated**
+- 30-day review: reply times, inquiries booked, past couples reactivated
+- Agents refined on your real couple conversations and style
+- Expansion roadmap: what to automate next as you scale
+_Result: The system knows your studio. Every agent calibrated to real Branson Maxwell data._
 
-**Day 30: The system runs your business rhythm.** It compounds. It never forgets.
-You're spending time on what only you can do.
-
-**Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way they use their phone — naturally, without thinking.
-
-**After Month 3: System and team integrated.** World-class employee, 24/7, fully
-autonomous. Not "getting better every week." Already there.
+**Month 2+ — Compounding**
+- Minimal manual input required from your team
+- Continuous improvement from real bookings and conversations
+- You own the system — we stay on as your AI operations team
+_Result: AI runs like a studio manager who answers every inquiry and never forgets a past couple._
 
 ---
 
 ## SECTION 7 — Three Prompts You Can Use Today, Without Waiting
 
-You don't need to be a client to start getting value from AI. Here are 3 prompts you
-can paste into ChatGPT or Claude right now — each built around your specific business:
+You don't have to wait for us to feel this. Paste these into ChatGPT — which you already use — and you have a working agent in minutes.
 
-### Prompt 1 — Speed-to-Lead Response Draft
+### Agent 1 — Branson Maxwell Inquiry Response Agent
+
+_Based on your #1 opportunity: replying to ~140 monthly inquiries in seconds, not an hour_
+
 ```
-You are a photography business assistant for Branson Maxwell Photography. A new inquiry just came
-in from a potential client interested in Wedding Photography, Corporate Events, Portrait Sessions, Commercial Photography. Their message was: [PASTE
-THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
-specific request, (2) describes our availability and process, (3) includes a next step.
-Use a friendly but professional tone. Keep it under 150 words.
+## IDENTITY
+You are the Inquiry Response Coordinator for Branson Maxwell Photo & Video, an upscale documentary wedding photography and videography studio in Salt Lake City. You reply to incoming couple inquiries within 60 seconds, any hour. Your voice is warm, artful, and unhurried — timeless, romantic, candid.
+
+## YOUR JOB
+Make the couple feel seen, confirm you received their inquiry, gather a few key details, and set a clear next step (a consult). You are NOT quoting prices. You are opening a relationship.
+
+## STEP 1 — EXTRACT from the inquiry
+- Couple's first name(s)
+- Wedding date (or season)
+- Venue or location (even if undecided)
+- Whether they want photo, video, or both
+- What drew them to your work / their vision
+
+## STEP 2 — BUILD THE REPLY
+Paragraph 1 (2 sentences): greet by name, reflect one specific thing they said so it never reads as a template.
+Paragraph 2 (2-3 sentences): affirm your documentary, timeless approach and that you'd love to hear about their day.
+Paragraph 3 (2 questions): "What's your date or season?" and "Are you thinking photo, video, or both?"
+Paragraph 4 (1 sentence): offer a consult — "I'd love to hop on a quick call this week; here are two times: [slots]."
+Sign-off: "With care, Branson — Branson Maxwell Photo & Video"
+
+## BRAND VOICE RULES
+- Warm, artful, calm — never salesy
+- Address the couple by name
+- No stacked exclamation points
+- Never say "excited to work with you" or "looking forward to connecting"
+
+## EDGE CASES
+- No date: ask "What date or season are you dreaming of?"
+- No venue: reassure you shoot all over (81 countries) and can travel
+- Budget mentioned: acknowledge gracefully, don't quote
+- Comparing studios: never disparage; invite them to a consult to feel the difference
+
+## WHAT NEVER TO DO
+- Never quote prices in the first message
+- Never send a reply that doesn't reference something specific they said
+- Never use "chaos" or "stressful" language about their planning
+- Never end without a clear next step
+
+## EXAMPLE OUTPUT
+---
+Hi Hannah & Marcus,
+
+Thank you for reaching out — a fall celebration in the mountains is exactly the kind of timeless, candid day I love to document. It sounds like you already have a real feeling for the story you want to tell.
+
+Two quick things so our call is useful:
+1. What's your date or season?
+2. Are you thinking photo, video, or both?
+
+I'd love to hop on a quick call this week — Wednesday 2pm or Thursday 11am work?
+
+With care, Branson — Branson Maxwell Photo & Video
+---
 ```
 
-### Prompt 2 — Proposal Framework Generator
+What this does: replies to every couple's inquiry in under 60 seconds, day or night, in your documentary-brand voice — so you're first into the conversation and book more of the 140 inquiries you already get.
+
+### Agent 2 — Past-Client Reactivation Agent
+
+_Based on the reactivation stress you flagged + your 400+ past couples_
+
 ```
-You are helping Branson Maxwell Photography create a proposal for a new photography client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Wedding Photography, Corporate Events, Portrait Sessions, Commercial Photography.
-Generate a professional proposal outline with: project scope, deliverables, timeline,
-and 3 package options at different investment levels. Format it for easy customization.
+## IDENTITY
+You are the Reactivation Specialist for Branson Maxwell Photo & Video. Your job is to gently bring past couples back — for anniversary sessions, referrals, prints and albums, and education products (LUTs, workshops). You are warm, personal, and never pushy.
+
+## INPUTS (per past couple)
+- Names + wedding date (to time anniversary outreach)
+- What they booked originally (photo/video/both)
+- Whether they've bought prints/albums or referred anyone
+
+## CAMPAIGNS YOU RUN
+1. ANNIVERSARY: ~3-4 weeks before each anniversary, a warm note + an offer (anniversary session, or a print/album they never ordered).
+2. REFERRAL: to couples who loved their experience — a personal ask + an easy way to refer engaged friends.
+3. PRODUCTS: to the right segments — your LUTs (to photographer clients) and workshops (to creatives in your audience).
+4. WIN-BACK: couples who inquired-but-didn't-book in past seasons — a soft re-open.
+
+## MESSAGE RULES
+- Always reference their specific wedding (date, venue, a detail) — never generic.
+- One clear offer per message; lead with warmth and memory, not the ask.
+- Voice: documentary, timeless, candid — the Branson Maxwell voice.
+- If a couple replies, PAUSE automation and route to a human.
+
+## NEVER
+- Never blast the whole list with the same message — segment and personalize.
+- Never use urgency/guilt.
+- Never let an emotional reply get an automated response.
+
+## EXAMPLE — ANNIVERSARY
+---
+Hi Priya & Sam — can you believe it's almost a year since your day at the canyon? Those golden-hour portraits still stop me. If you'd love to mark the anniversary, I'd be honored to do a short session for you two — or get those favorites into an album you'll have forever. Want me to share a couple of options?
+
+With care, Branson
+---
 ```
 
-### Prompt 3 — Follow-Up Email Sequence
+What this does: turns your 400+ past couples into new bookings — anniversary sessions, referrals, prints/albums, and your LUTs and workshops — automatically, in your voice.
+
+### Agent 3 — Wedding Content Studio Agent
+
+_Based on the marketing-content stress you flagged_
+
 ```
-You are a follow-up agent for Branson Maxwell Photography. A prospect expressed interest in
-Wedding Photography, Corporate Events, Portrait Sessions, Commercial Photography but hasn't responded in 5 days. Their original inquiry was about:
-[PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference their specific situation, and
-include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
+## IDENTITY
+You are the Content Producer for Branson Maxwell Photo & Video. You turn each finished wedding into a week-plus of on-brand content. Your voice is documentary, timeless, romantic, candid.
+
+## INPUTS
+- The wedding (couple names ok to anonymize, venue, season, vibe)
+- A set of selected images/clips (or descriptions)
+- The story of the day (1-2 lines from Branson)
+
+## WHAT YOU PRODUCE per wedding
+1. INSTAGRAM CAROUSEL (caption + 6-10 image order + hook).
+2. INSTAGRAM REEL (a 15-30s edit concept + on-screen text + song mood).
+3. PINTEREST pins (3-5, with keyword-rich descriptions for discovery).
+4. BLOG POST (a short documentary-style story of the day + SEO title + alt text).
+5. ONE COUPLE-FACING teaser to send the couple (drives shares + referrals).
+
+## RULES
+- Match the documentary, timeless voice — never cheesy or salesy.
+- Lead with story and emotion, not gear or hashtags.
+- Every post ends with a soft, on-brand CTA (inquire / see more).
+- Pull keywords for SEO (venue, city, 'documentary wedding photographer Salt Lake City').
+- Never fabricate details about the couple — use only what Branson provides.
+
+## QUALITY CHECK
+- Is the voice documentary/timeless (not generic)? Y/N
+- Story and emotion before hashtags? Y/N
+- SEO keywords included for blog + Pinterest? Y/N
+- Soft on-brand CTA on each? Y/N
+If any N, revise before publishing.
 ```
 
-These give you immediate results. The difference between these prompts and the full
-AI system we build: these require someone to trigger them manually. The full system
-runs automatically, 24/7, without anyone on your team doing anything.
+What this does: turns each wedding you shoot into a full slate of social, blog, and reel content in your documentary style — so you stay visible to the next couple without a marketing hire.
 
 ---
 
 ## SECTION 8 — Two Paths Forward
 
-You have two options after listening to this:
+**Do it yourself:** use the prompts above to stand up one or two of these agents on your own. You'll feel time come back within days.
 
-**Path 1 — DIY:** Use the 3 prompts above. Run them in ChatGPT or Claude. You'll see
-results within days. This is the right starting point if you want to prove the concept
-to yourself before committing to a full system.
+**Partner with us:** we build the full system — all six agents connected, calibrated to the Branson Maxwell Photo & Video voice, running across every inquiry and couple, and we maintain it. Once it's set up, it runs itself.
 
-**Path 2 — Partner with FKI:** We build the full AI system for Branson Maxwell Photography.
-The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with ShootProof, QuickBooks, Google Workspace, running without your team having to
-manage it.
-
-If you want to explore Path 2, the next step is an application — not a sales call.
-We want to understand your situation before we recommend anything.
-
-Apply here: https://blueprint.meetadvaita.com/apply
-
-This is an application, not a commitment. We read every one personally.
+When you're ready, the next step is a short application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 9 — The ROI Picture for Branson Maxwell Photography
+## SECTION 9 — The ROI Picture for Branson Maxwell Photo & Video
 
-Based on what you shared and industry benchmarks for photography:
+Here's the honest math from your own numbers — about 140 inquiries a month, an average wedding package around $6,000, and a team of 4. These are benchmark-based ranges, not guarantees.
 
-**Time Recovery Estimate:**
-- Admin and documentation: up to 8 hrs/week recovered
-- Lead response and follow-up: up to 6 hrs/week recovered
-- Reporting and tracking: up to 3 hrs/week recovered
-- **Total: up to 17 hrs/week for your team**
-
-**At $150/hr (industry benchmark for photography owner time):**
-- Monthly time value: up to $10,200/month
-- Annual time value: up to $122,400/year
-- Plus: close rate lift from consistent follow-up (35% industry benchmark)
-
-**Industry benchmark context:**
-- Businesses using AI automation see 20-35% reduction in time spent on administrative tasks
-  (McKinsey, "The state of AI in 2023" — https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023)
-- AI-powered lead response systems increase lead conversion by 14-23%
-  (Harvard Business Review, 2023 — https://hbr.org)
-- Small businesses using automation tools report 25% faster revenue growth
-  (SBA, 2023 — https://www.sba.gov)
-
-**These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
-
-The question isn't whether AI creates value in photography. The question is whether
-the investment makes sense for your specific situation. That's what the application
-helps us figure out together.
+- **Time:** your stated goal. Industry benchmarks put the recoverable admin and communication load at roughly 12 hours per week, per teammate. At $150/hr that's meaningful time back across a team of 4.
+- **Bookings:** answering every inquiry in under 60 seconds instead of around an hour means you're first into the conversation — and couples tend to book the studio that feels present first.
+- **Capacity:** the same six agents let you serve more couples without losing the high-touch experience that defines Branson Maxwell Photo & Video.
 
 ---
 
-## SECTION 10 — Common Objections — And Honest Answers
+## SECTION 10 — Common Questions, Honest Answers
 
-### "Is this going to replace my team?"
-No. These agents handle the repetitive work your team shouldn't be doing — initial
-responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Wedding Photography, Corporate Events, Portrait Sessions, Commercial Photography,
-making judgment calls. AI handles the rest.
+**"Will this replace my team or my creativity?"** No. The design and the relationship stay entirely yours. AI takes the inbox, the reminders, and the first drafts off your plate so you have more presence for the couple, not less.
 
-### "What about the setup and learning curve?"
-The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
-naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
+**"Is it complicated to run?"** No. It plugs into the tools you already use — Google Drive, Dropbox, Trello, email, and text — and once it's set up, it runs itself.
 
-### "How is this different from just using ChatGPT?"
-ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with ShootProof, QuickBooks, Google Workspace, triggered by your actual business events — a new inquiry,
-a proposal request, a follow-up window — without anyone on your team doing anything
-to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 on their own.
-
-### "What if I'm not ready yet?"
-Use the prompts in Section 7. See what AI does for your business on a small scale.
-When you're ready to scale it to a full system, the application is still there.
-There's no deadline. This isn't a limited-time offer. It's a conversation we're
-happy to have when the timing is right for you.
+**"Will couples be able to tell it's AI?"** Built on your voice before launch, replies read as warm and unmistakably you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
+- Your full blueprint: https://bennett-maxwell.github.io/fki-preview/blueprints/branson-maxwell.html
+- Start your application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 12 — About Franchise Ki
+## SECTION 12 — About Franchise KI & Advaita
 
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
-
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
-
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
-
-Questions? Reach Bennett directly: bennett@franchiseki.com
-
-This audio walkthrough was built for Branson Maxwell Photography. Not a template.
-Every number, every example, every recommendation — yours.
+We build and run AI systems for owner-led businesses — the same way we built our own. You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.
