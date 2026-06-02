@@ -163,6 +163,10 @@
     .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
     .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
+    .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
     @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
     .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
@@ -475,7 +479,7 @@
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Adjust the sliders to match your business. Defaults are pre-loaded from your {{BUSINESS_NAME}} intake: $2,388 annual customer value ($199/mo Pro Edition), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
+    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. Defaults are pre-loaded from your {{BUSINESS_NAME}} intake: $2,388 annual customer value ($199/mo Pro Edition), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
       <div class="calc-presets">
         <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
@@ -484,8 +488,8 @@
       </div>
       <div class="calc-inputs-grid">
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span><span class="calc-slider-val" id="lbl-contract">$2,388</span></div>
-          <input type="range" class="calc-slider" id="sl-contract" min="500" max="10000" step="100" value="2388" oninput="updateLabel('contract'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="0" step="100" value="2388" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
@@ -920,6 +924,7 @@ If any answer is N: revise that section before sending.
   function updateLabel(key) {
     const val = document.getElementById('sl-' + key).value;
     const lbl = document.getElementById('lbl-' + key);
+    if (!lbl) return;
     if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
     else if (key === 'rate') lbl.textContent = val + '%';
     else if (key === 'hours') lbl.textContent = val + ' hrs';
