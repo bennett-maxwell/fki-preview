@@ -307,9 +307,9 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 
     <!-- Q4: Response Speed -->
     <div class="q-section">
-      <div class="q-label">Question 4 of 8 — Biggest AI Lever</div>
-      <div class="q-title">How fast does your business typically respond to a new lead?</div>
-      <div class="q-sub">Speed-to-lead is the single largest driver of close rate improvement with AI. Be honest.</div>
+      <div class="q-label">Question 4 of 8 — This one drives the biggest number</div>
+      <div class="q-title">When a new lead comes in, how fast does someone on your team respond?</div>
+      <div class="q-sub">Pick the option that describes a typical week — not your best day. Studies show speed-to-first-contact is the single biggest driver of close rate. Be honest — it only helps the math.</div>
       <div class="chips" id="chips-speed">
         <div class="chip" data-val="instant"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','instant')"      onkeydown="chipKeydown(event,'speed','instant')">Under 5 minutes</div>
         <div class="chip" data-val="30min"        tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','30min')"        onkeydown="chipKeydown(event,'speed','30min')">Within 30 minutes</div>
@@ -386,10 +386,10 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
     <!-- Q8: Marketing Spend — SIMPLE SLIDER ($500–$50K) -->
     <div class="q-section">
       <div class="q-label">Question 8 of 8</div>
-      <div class="q-title">How much are you currently spending per month on marketing, including ad spend?</div>
-      <div class="q-sub">Include paid ads, agency fees, lead gen services — everything you spend to attract new business.</div>
+      <div class="q-title">How much does your business spend on marketing each month?</div>
+      <div class="q-sub">Add it all up — paid ads, agency fees, lead gen services, directories. This tells us how much budget AI could make work harder for you.</div>
       <div class="slider-row">
-        <span class="slider-name">Monthly Ad Spend</span>
+        <span class="slider-name">Total Monthly Marketing Spend</span>
         <span class="slider-val needs-input" id="lbl-spend">← slide to set yours</span>
       </div>
       <input type="range" id="sl-spend" min="0" max="100" step="1" value="0" oninput="spendUpdate()">
@@ -429,6 +429,11 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
 
       <div class="results-breakdown" id="breakdown-text"></div>
 
+      <!-- R2: Consent checkbox -->
+      <label id="consent-wrap" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:1rem;cursor:pointer;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.4;">
+        <input type="checkbox" id="consent-check" style="margin-top:2px;flex-shrink:0;accent-color:var(--brand-light);">
+        <span>I agree to be contacted by FKI about AI services. No spam — just your results and a possible strategy call.</span>
+      </label>
       <button class="cta-btn" id="cta-apply" type="button" disabled>Submit Qualification First</button>
       <div class="cta-note" id="cta-note">Complete the contact fields and all 8 questions.</div>
     </div>
@@ -574,11 +579,14 @@ function getLeadSessionId() {
   try {
     const existing = localStorage.getItem(SESSION_KEY);
     if (existing) return existing;
-    const created = 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    // R2: improved uniqueness — timestamp (ms) + high-entropy random segment
+    const ts   = Date.now().toString(36);
+    const rand = Math.random().toString(36).slice(2, 12) + Math.random().toString(36).slice(2, 8);
+    const created = 'advaita-' + ts + '-' + rand;
     localStorage.setItem(SESSION_KEY, created);
     return created;
   } catch(e) {
-    return 'advaita-' + Date.now().toString(36);
+    return 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,10);
   }
 }
 
@@ -942,6 +950,7 @@ function update() {
   const ctaNote = document.getElementById('cta-note');
   const allDone = answered >= 8;
   const identityDone = isIdentityComplete();
+  const consentGiven = !!(document.getElementById('consent-check') && document.getElementById('consent-check').checked);
   lastQualificationBand = qualifies10x;
 
   if (canQualify) {
@@ -980,11 +989,16 @@ function update() {
       '<span>Team:</span> ' + teamStr + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + spendStr + '<br>' +
       '<span>First deploy:</span> ' + capLabel;
 
-    cta.disabled = !(allDone && identityDone);
+    const readyToSubmit = allDone && identityDone && consentGiven;
+    cta.disabled = !readyToSubmit;
     cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
-    ctaNote.textContent = allDone && identityDone
-      ? (qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.')
-      : 'Complete the contact fields and all 8 questions.';
+    if (!allDone || !identityDone) {
+      ctaNote.textContent = 'Complete the contact fields and all 8 questions.';
+    } else if (!consentGiven) {
+      ctaNote.textContent = 'Check the consent box above to continue.';
+    } else {
+      ctaNote.textContent = qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.';
+    }
   } else {
     const ICON_NEUTRAL = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>';
     vBlock.className        = 'verdict-block neutral';
@@ -1054,7 +1068,7 @@ function buildQualifierPayload() {
   const band = lastQualificationBand || 'unknown';
   const payload = {
     event_name: 'blueprint_qualifier_submit',
-    form_version: '2026-05-27-identity-webhook-v1',
+    form_version: '2026-06-01-r2-score-band-v2',
     locationId: GHL_LOC,
     firstName: id.firstName,
     lastName: id.lastName,
@@ -1081,6 +1095,7 @@ function buildQualifierPayload() {
     tags: [
       'advaita-ai-qualifier',
       band === 'strong' ? 'advaita-qualified' : band === 'possible' ? 'advaita-review-needed' : 'advaita-not-fit',
+      'advaita-score-' + (band || 'unknown'),   // R2: discrete score band tag for GHL automation
       'blueprint_ai_qualifier'
     ],
     submitted_at: new Date().toISOString()
@@ -1089,15 +1104,26 @@ function buildQualifierPayload() {
   return payload;
 }
 
+async function webhookFetch(payload) {
+  return fetch(GHL_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+}
+
 async function submitQualification() {
   const payload = buildQualifierPayload();
+  let response, result;
   try {
-    const response = await fetch(GHL_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await response.json().catch(() => ({}));
+    // R2: 1-retry on 500/503 with 1.5s delay
+    response = await webhookFetch(payload);
+    if ((response.status === 500 || response.status === 503) && !response.ok) {
+      logFunnelEvent('crm_retry', { status: response.status });
+      await new Promise(r => setTimeout(r, 1500));
+      response = await webhookFetch(payload);
+    }
+    result = await response.json().catch(() => ({}));
     if (response.ok) {
       const returnedContactId = result.contactId || result.contact_id || result.id || payload.contact_id || '';
       persistReturnedContactId(returnedContactId);
@@ -1116,10 +1142,12 @@ async function submitQualification() {
         logFunnelEvent('crm_duplicate_contact', { contact_id: payload.contact_id });
         return { saved: true, payload, contactId: payload.contact_id || '', response: result, duplicate: true };
       }
+      // R2: Save to localStorage pending queue so no lead data is lost when GHL is down
       try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
       return { saved: false, payload, contactId: payload.contact_id || '', error: 'crm_http_' + response.status };
     }
   } catch(e) {
+    // R2: Network error — save to localStorage pending queue
     try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
     return { saved: false, payload, contactId: payload.contact_id || '', error: e && e.message ? e.message : 'crm_network_error' };
   }
@@ -1156,7 +1184,11 @@ function openBookingModal(contactId) {
 
 async function handleCtaClick() {
   const cta = document.getElementById('cta-apply');
-  if (cta.disabled) return;
+  if (cta.disabled) {
+    // R2: scroll to first unanswered question when submit is clicked before complete
+    scrollToFirstUnanswered();
+    return;
+  }
   cta.disabled = true;
   cta.classList.add('calculating');
   cta.textContent = 'Calculating your score...';
@@ -1190,6 +1222,28 @@ async function handleCtaClick() {
   }
 }
 
+// ── SCROLL TO FIRST UNANSWERED (R2 improvement) ───────────────────────────────
+function scrollToFirstUnanswered() {
+  const checks = [
+    { test: () => !leadsVal,                          el: document.getElementById('sl-leads') },
+    { test: () => !dealVal,                           el: document.getElementById('inp-deal') },
+    { test: () => !lpsVal,                            el: document.getElementById('sl-lps') },
+    { test: () => !chips.speed,                       el: document.getElementById('chips-speed') },
+    { test: () => !hoursVal,                          el: document.getElementById('sl-hours') },
+    { test: () => teamVal === null || !teamHrsVal,    el: document.getElementById('inp-team') },
+    { test: () => !chips.capability,                  el: document.getElementById('chips-capability') },
+    { test: () => !spendVal,                          el: document.getElementById('sl-spend') }
+  ];
+  for (const c of checks) {
+    if (c.test() && c.el) {
+      c.el.closest('.q-section') ? c.el.closest('.q-section').scrollIntoView({ behavior: 'smooth', block: 'center' }) : c.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+  // If all Q answered, scroll to identity section if incomplete
+  if (!isIdentityComplete()) document.getElementById('identity-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 // Init
 hydrateIdentity();
 hydrateAgents();
@@ -1202,6 +1256,8 @@ document.querySelectorAll('#identity-section input').forEach(el => {
   });
 });
 document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+const consentEl = document.getElementById('consent-check');
+if (consentEl) consentEl.addEventListener('change', update);
 document.getElementById('booking-close').addEventListener('click', function() {
   clearTimeout(bookingFallbackTimer);
   document.getElementById('booking-modal').classList.remove('open');
