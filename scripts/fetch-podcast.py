@@ -27,7 +27,24 @@ def log(m):
     print(f"[{time.strftime('%H:%M:%S')}] {m}", flush=True)
 
 
-async def main(slug, notebook_id, source_path, business_name, timeout):
+def steering(first, business):
+    """NotebookLM `instructions` steering — the only reliable lever to control the
+    hosts' opening line and tone (the source-doc directive alone is ignored). Forces
+    the exact on-brand opening, strict second-person, and positive (never-negative)
+    framing — fixes the audit's D3-02 direct-address gate + the 'assume excellence' rule."""
+    f = first or (business or "there")
+    return (
+        f'OPENING LINE MUST BE EXACTLY: "Hi {f}, welcome. This walkthrough was built specifically for you and '
+        f'{business}, based on everything you told us." Then proceed. '
+        f'THROUGHOUT: speak DIRECTLY to {f} in second person using "you" and "your" — NEVER refer to {f} in the '
+        f'third person, NEVER say "this business," "the owner," or "they." {f} is listening; speak TO {f}, not ABOUT {f}. '
+        f'Tone: warm, personal, genuinely excited about what AI unlocks. The business is THRIVING — frame every '
+        f'opportunity as an AI amplification, NEVER as a flaw, problem, chaos, or something broken. Do NOT open with a '
+        f'negative hook. Cover all 12 sections. 15-20 minutes. Close with the application CTA — never mention scheduling a call.'
+    )
+
+
+async def main(slug, notebook_id, source_path, business_name, first_name, timeout):
     from notebooklm import NotebookLMClient
     out = os.path.join(PODCASTS, f"{slug}.mp3")
     client = await NotebookLMClient.from_storage()
@@ -39,8 +56,9 @@ async def main(slug, notebook_id, source_path, business_name, timeout):
             log(f"notebook created: {notebook_id}")
             await client.sources.add_text(notebook_id, f"{business_name or slug} AI Blueprint", content, wait=True)
             log("source added")
-            await client.artifacts.generate_audio(notebook_id)
-            log("audio generation requested")
+            steer = steering(first_name, business_name)
+            await client.artifacts.generate_audio(notebook_id, instructions=steer)
+            log(f"audio generation requested (steered, {len(steer)} chars)")
         else:
             log(f"attaching to existing notebook: {notebook_id}")
 
@@ -70,8 +88,9 @@ if __name__ == "__main__":
     ap.add_argument("--notebook", default=None)
     ap.add_argument("--source", default=None)
     ap.add_argument("--business-name", default="")
+    ap.add_argument("--first-name", default="")
     ap.add_argument("--timeout", type=int, default=1800)
     a = ap.parse_args()
     if not a.notebook and not a.source:
         sys.exit("need --notebook (existing) or --source (create new)")
-    asyncio.run(main(a.slug, a.notebook, a.source, a.business_name, a.timeout))
+    asyncio.run(main(a.slug, a.notebook, a.source, a.business_name, a.first_name, a.timeout))
