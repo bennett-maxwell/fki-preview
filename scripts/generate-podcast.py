@@ -372,7 +372,7 @@ happy to have when the timing is right for you.
 
 ## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
+Benchmarks referenced during this walkthrough:
 
 [1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
     Metric: 78% of customers buy from the first business to respond

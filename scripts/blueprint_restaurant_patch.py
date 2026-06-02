@@ -73,11 +73,10 @@ def agent_cards(profile: dict) -> str:
     for i, a in enumerate(profile.get("ai_agents", [])[:6], 1):
         cards.append(f"""
         <div class="agent-card">
-          <h3>Agent #{i}: {esc(a.get('name', f'Restaurant AI Agent {i}'))}</h3>
-          <p class="agent-desc">{esc(a.get('desc', 'Restaurant workflow automation'))}</p>
-          <div class="agent-prompt">{esc(a.get('prompt', ''))}</div>
-          <div class="agent-result">What this does: {esc(a.get('result', 'Automates a key restaurant workflow'))}</div>
-          <div class="agent-time">Setup time: ~{esc(a.get('time', '6 minutes'))}</div>
+          <div class="agent-icon">{i}</div>
+          <div class="agent-name">Agent #{i}: {esc(a.get('name', f'Restaurant AI Agent {i}'))}</div>
+          <div class="agent-desc">{esc(a.get('desc', 'Restaurant workflow automation'))}<br><br><strong>Prompt:</strong> {esc(a.get('prompt', ''))}</div>
+          <div class="agent-outcome">{esc(a.get('result', 'Automates a key restaurant workflow'))} Setup time: ~{esc(a.get('time', '6 minutes'))}</div>
         </div>""")
     return "\n".join(cards)
 
@@ -98,6 +97,9 @@ def patch_restaurant(html: str, profile: dict) -> str:
     locations = profile.get("locations") or []
     locations_str = esc(", ".join(locations) if isinstance(locations, list) else str(locations))
     spend = esc(fmt_money(profile_number(profile, "monthly_marketing_spend", 12500)))
+
+    # Personalization gate: the title must include the owner's first name.
+    html = re.sub(r'<title[^>]*>.*?</title>', f'<title>{lead} AI Blueprint | {business}</title>', html, count=1, flags=re.I | re.S)
 
     # Global CTA + direct-booking boundary corrections.
     html = html.replace(">Apply<", ">Qualify<")
@@ -127,10 +129,10 @@ def patch_restaurant(html: str, profile: dict) -> str:
     <p class="section-label">What Restaurants Are Already Doing</p>
     <h2 class="section-title">Fast-Casual Operators Are Using AI Around the Rush</h2>
     <p class="section-sub">{first}, the strongest opportunity for {business} is not replacing your team. It is giving managers an AI layer that handles response speed, follow-up, and reporting while the stores keep serving guests.</p>
-    <div class="result-grid">
-      <div class="result-card"><span class="result-num">01</span><h3>Catering response</h3><p>AI answers high-value catering inquiries quickly, captures date, headcount, budget, pickup/delivery, and dietary notes, then routes the next action.</p></div>
-      <div class="result-card"><span class="result-num">02</span><h3>Guest recovery</h3><p>AI reviews feedback and drafts owner-approved responses before guest frustration becomes a public reputation problem.</p></div>
-      <div class="result-card"><span class="result-num">03</span><h3>Manager reporting</h3><p>AI turns scattered shift notes into one owner-ready operating brief across every location.</p></div>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Catering response</div><div class="gap-desc">AI answers high-value catering inquiries quickly, captures date, headcount, budget, pickup/delivery, and dietary notes, then routes the next action.</div><span class="gap-tag revenue">Revenue Capture</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Guest recovery</div><div class="gap-desc">AI reviews feedback and drafts owner-approved responses before guest frustration becomes a public reputation problem.</div><span class="gap-tag efficiency">Reputation</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Manager reporting</div><div class="gap-desc">AI turns scattered shift notes into one owner-ready operating brief across every location.</div><span class="gap-tag efficiency">Owner Visibility</span></div></div>
     </div>
   </div>
 </section>
@@ -142,11 +144,11 @@ def patch_restaurant(html: str, profile: dict) -> str:
     <p class="section-label">Where You Are Today</p>
     <h2 class="section-title">Your Current Restaurant Stack</h2>
     <p class="section-sub">This plan keeps {business}'s existing tools in place and adds AI where the handoffs break down.</p>
-    <div class="stack-list">
-      <div class="stack-item"><strong>Current tools:</strong> {tools}</div>
-      <div class="stack-item"><strong>Primary market:</strong> {market}</div>
-      <div class="stack-item"><strong>Locations:</strong> {locations_str}</div>
-      <div class="stack-item"><strong>Services:</strong> {services_str}</div>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon">1</div><div><div class="stack-tool">Current tools</div><div class="stack-role">{tools}</div></div></div>
+      <div class="stack-card"><div class="stack-icon">2</div><div><div class="stack-tool">Primary market</div><div class="stack-role">{market}</div></div></div>
+      <div class="stack-card"><div class="stack-icon">3</div><div><div class="stack-tool">Locations</div><div class="stack-role">{locations_str}</div></div></div>
+      <div class="stack-card"><div class="stack-icon">4</div><div><div class="stack-tool">Services</div><div class="stack-role">{services_str}</div></div></div>
     </div>
   </div>
 </section>
@@ -157,7 +159,7 @@ def patch_restaurant(html: str, profile: dict) -> str:
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
     <h2 class="section-title">Three Places Revenue and Time Leak</h2>
-    <div class="gap-grid">
+    <div class="gap-list">
       <div class="gap-card"><h3>Lunch-rush inquiries</h3><p>Catering and large-party questions arrive while the team is busiest. AI makes the first response fast and complete.</p></div>
       <div class="gap-card"><h3>Guest feedback split across channels</h3><p>Reviews, DMs, and contact forms need a consistent owner-approved response path.</p></div>
       <div class="gap-card"><h3>Owner visibility across stores</h3><p>Three stores create more notes than one owner can chase. AI compiles the operating picture automatically.</p></div>
@@ -173,11 +175,11 @@ def patch_restaurant(html: str, profile: dict) -> str:
     <h2 class="section-title">AI Opportunity Map for {business}</h2>
     <table class="opp-table">
       <tr><th>Priority</th><th>Agent</th><th>What It Does</th><th>Primary Tool</th></tr>
-      <tr><td class="priority-high">P1</td><td>Catering Speed-to-Lead</td><td>Captures event details and replies before the buyer moves on.</td><td>GoHighLevel</td></tr>
-      <tr><td class="priority-high">P2</td><td>Guest Recovery</td><td>Classifies feedback, drafts responses, and escalates sensitive issues.</td><td>Google reviews, DMs, CRM</td></tr>
-      <tr><td class="priority-high">P3</td><td>Manager Shift Summary</td><td>Turns manager notes into one daily owner brief.</td><td>Slack, Drive, POS summaries</td></tr>
-      <tr><td class="priority-med">P4</td><td>Local Store Marketing</td><td>Drafts weekly promos tied to catering, loyalty, and neighborhood events.</td><td>Meta, email, Google Business Profile</td></tr>
-      <tr><td class="priority-med">P5</td><td>Franchise Inquiry Qualification</td><td>Collects buyer fit signals without legal docs or earnings claims.</td><td>Qualifier form and CRM</td></tr>
+      <tr><td>P1</td><td>Catering Speed-to-Lead</td><td>Captures event details and replies before the buyer moves on.</td><td>GoHighLevel</td></tr>
+      <tr><td>P2</td><td>Guest Recovery</td><td>Classifies feedback, drafts responses, and escalates sensitive issues.</td><td>Google reviews, DMs, CRM</td></tr>
+      <tr><td>P3</td><td>Manager Shift Summary</td><td>Turns manager notes into one daily owner brief.</td><td>Slack, Drive, POS summaries</td></tr>
+      <tr><td>P4</td><td>Local Store Marketing</td><td>Drafts weekly promos tied to catering, loyalty, and neighborhood events.</td><td>Meta, email, Google Business Profile</td></tr>
+      <tr><td>P5</td><td>Franchise Inquiry Qualification</td><td>Collects buyer fit signals without legal docs or earnings claims.</td><td>Qualifier form and CRM</td></tr>
     </table>
   </div>
 </section>
@@ -189,7 +191,7 @@ def patch_restaurant(html: str, profile: dict) -> str:
     <p class="section-label">Your AI System</p>
     <h2 class="section-title">6 AI Agents Built for {business}</h2>
     <p class="section-sub">Each agent below is specific to Chad's restaurant operations, not a copied industry template.</p>
-    <div class="agent-grid">
+    <div class="agents-grid">
       {agent_cards(profile)}
     </div>
   </div>
@@ -202,7 +204,7 @@ def patch_restaurant(html: str, profile: dict) -> str:
     <p class="section-label">Try These First</p>
     <h2 class="section-title">Three Prompts Chad Can Use Today</h2>
     <p class="section-sub">These prompts are manual versions of the first automation layer. The full system runs them automatically from live events.</p>
-    <div class="prompt-grid">
+    <div class="prompt-cards">
       <div class="prompt-card"><div class="prompt-header"><h3>{esc(profile.get('prompt_1_label', 'Catering Speed-to-Lead Agent'))}</h3></div><pre class="prompt-pre">{esc(profile.get('prompt_1', ''))}</pre></div>
       <div class="prompt-card"><div class="prompt-header"><h3>{esc(profile.get('prompt_2_label', 'Franchise Inquiry Qualification Agent'))}</h3></div><pre class="prompt-pre">{esc(profile.get('prompt_2', ''))}</pre></div>
       <div class="prompt-card"><div class="prompt-header"><h3>{esc(profile.get('prompt_3_label', 'Guest Recovery Agent'))}</h3></div><pre class="prompt-pre">{esc(profile.get('prompt_3', ''))}</pre></div>
