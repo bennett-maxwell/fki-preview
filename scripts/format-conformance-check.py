@@ -29,6 +29,7 @@ v1.1 — 2026-06-01 — added FC-08 [RL] podcast 6-20MB byte-window gate. FC-06 
        14.1MB Brent deliverable, FAIL on a 66MB un-transcoded export.
 """
 import re, sys, pathlib, argparse, subprocess
+from typing import Optional
 
 # --- The format-3 GOLD signature (captured 2026-06-01 from the live gold ref) ---
 EXPECTED_SECTION_IDS = [
@@ -56,7 +57,7 @@ COMPONENT_DNA = {
 }
 
 
-def check(html_path: pathlib.Path, podcast_path: pathlib.Path | None = None):
+def check(html_path: pathlib.Path, podcast_path: Optional[pathlib.Path] = None):
     if not html_path.exists():
         print(f"ERR: {html_path} not found")
         return 2
