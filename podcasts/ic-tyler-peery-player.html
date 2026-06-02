@@ -21,7 +21,7 @@
     background:#fff;
     border-radius:24px;
     padding:36px 28px 32px;
-    max-width:520px;
+    max-width:600px;
     width:100%;
     text-align:center;
     box-shadow:0 4px 32px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.06);
@@ -101,69 +101,69 @@
     color:#555;
     line-height:1.6;
     text-align:left;
-    margin-bottom:24px;
+    margin-bottom:20px;
   }
+
+  /* Speed tip — always visible, prominent */
+  .speed-tip{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:#fef6ee;
+    border:1.5px solid #EB7A2E;
+    border-radius:12px;
+    padding:12px 16px;
+    font-size:13px;
+    color:#555;
+    line-height:1.55;
+    text-align:left;
+    margin-bottom:16px;
+  }
+  .speed-tip .tip-icon{
+    font-size:20px;
+    flex-shrink:0;
+    margin-top:1px;
+  }
+  .speed-tip strong{
+    color:#EB7A2E;
+  }
+
+  /* Player — fixed height so Drive's bottom toolbar (including gear) is accessible */
   .player-wrap{
-    position:relative;
     width:100%;
-    padding-bottom:56.25%; /* 16:9 */
-    height:0;
+    height:520px;
     border-radius:14px;
     overflow:hidden;
-    margin-bottom:6px;
+    margin-bottom:12px;
     background:#f5e9e4;
     box-shadow:0 2px 16px rgba(235,122,46,.15);
   }
   .player-wrap iframe{
-    position:absolute;
-    top:0;left:0;
-    width:100%;height:100%;
+    width:100%;
+    height:100%;
     border:none;
+    display:block;
   }
-  .resume-note{
-    font-size:11px;
-    color:#bbb;
-    margin:6px 0 20px;
-  }
-  .speed-label{
+
+  .open-drive{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
     font-size:13px;
-    color:#888;
-    font-weight:600;
-    margin-bottom:10px;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-  }
-  .speeds{
-    display:flex;
-    gap:8px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-bottom:28px;
-  }
-  .speeds button{
-    background:#f7f7f7;
-    color:#1a1a1a;
-    border:1.5px solid #e8e8e8;
-    border-radius:12px;
-    padding:11px 18px;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-    min-width:64px;
-    transition:background .15s,border-color .15s,color .15s,transform .1s;
-  }
-  .speeds button:hover{
-    background:#fef0e8;
-    border-color:#EB7A2E;
     color:#EB7A2E;
-    transform:translateY(-1px);
+    font-weight:600;
+    text-decoration:none;
+    margin-bottom:24px;
+    padding:8px 14px;
+    border:1.5px solid #EB7A2E;
+    border-radius:10px;
+    transition:background .15s,color .15s;
   }
-  .speeds button.active{
+  .open-drive:hover{
     background:#EB7A2E;
     color:#fff;
-    border-color:#EB7A2E;
-    box-shadow:0 2px 10px rgba(235,122,46,.3);
   }
+
   .foot{
     font-size:12px;
     color:#bbb;
@@ -172,17 +172,6 @@
   }
   .foot a{color:#EB7A2E;text-decoration:none}
   .foot a:hover{text-decoration:underline}
-  /* Speed note banner */
-  .speed-tip{
-    background:#fdf7f4;
-    border-radius:10px;
-    padding:10px 14px;
-    font-size:12px;
-    color:#888;
-    margin-top:12px;
-    display:none;
-  }
-  .speed-tip.show{display:block}
 </style>
 </head>
 <body>
@@ -209,7 +198,16 @@
     30 minutes you can spend before your next conversation with us.
   </div>
 
-  <!-- Google Drive embedded video player -->
+  <!-- Speed control tip — always visible -->
+  <div class="speed-tip">
+    <span class="tip-icon">⚙️</span>
+    <span>
+      <strong>To adjust playback speed:</strong> click the <strong>gear icon ⚙️</strong> in the bottom-right
+      of the video player below, then choose <strong>Playback speed</strong> (1x, 1.25x, 1.5x, 2x).
+    </span>
+  </div>
+
+  <!-- Google Drive embedded video player — tall enough for native controls -->
   <div class="player-wrap">
     <iframe
       id="gdrivePlayer"
@@ -219,21 +217,15 @@
     ></iframe>
   </div>
 
-  <p class="resume-note" id="resumeNote"></p>
-
-  <!-- Speed control — works with native HTML5 video if browser exposes it; also surfaced as manual tip -->
-  <div class="speed-label">Playback Speed</div>
-  <div class="speeds" id="speedBtns">
-    <button data-r="1">1x</button>
-    <button data-r="1.25">1.25x</button>
-    <button data-r="1.5" class="active">1.5x</button>
-    <button data-r="2">2x</button>
-  </div>
-
-  <div class="speed-tip" id="speedTip">
-    Tip: to change speed in the Google Drive player, click the <strong>&#9881;</strong> (gear) icon
-    inside the video &rarr; <strong>Playback speed</strong>.
-  </div>
+  <!-- Fallback: open directly in Google Drive -->
+  <a
+    class="open-drive"
+    href="https://drive.google.com/file/d/1Jkd2gfZxEEseDxKbm_2f_QCI5Df6KF_b/view"
+    target="_blank"
+    rel="noopener"
+  >
+    &#9654; Open in Google Drive
+  </a>
 
   <div class="foot">
     Presented by <a href="https://franchiseki.com" target="_blank">Franchise KI</a>
@@ -241,122 +233,5 @@
   </div>
 
 </div>
-
-<script>
-(function(){
-  var STORAGE_KEY = 'ic-tyler-peery-pos';
-  var iframe = document.getElementById('gdrivePlayer');
-  var resumeNote = document.getElementById('resumeNote');
-  var speedTip = document.getElementById('speedTip');
-  var btns = document.querySelectorAll('#speedBtns button');
-  var activeRate = 1.5;
-
-  // --- Speed buttons ---
-  // Google Drive iframe is cross-origin so direct video.playbackRate is blocked.
-  // We set the rate and show a tip when user changes from 1x.
-  btns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      btns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeRate = parseFloat(btn.dataset.r);
-
-      // Attempt to reach the inner video (works in some same-origin contexts)
-      try {
-        var vid = iframe.contentDocument && iframe.contentDocument.querySelector('video');
-        if(vid){ vid.playbackRate = activeRate; }
-      } catch(e){}
-
-      // Show gear-icon tip whenever speed != 1
-      if(activeRate !== 1){
-        speedTip.classList.add('show');
-        speedTip.innerHTML = 'Tip: inside the Drive player click <strong>&#9881;</strong> (gear) &rarr; '
-          + '<strong>Playback speed</strong> and select <strong>' + activeRate + 'x</strong>.';
-      } else {
-        speedTip.classList.remove('show');
-      }
-      saveState();
-    });
-  });
-
-  // --- localStorage resume position ---
-  // Drive's iframe fires postMessage events with current time on some browsers.
-  // We also poll via message listener and save on visibility change / unload.
-
-  function saveState(){
-    try{
-      var state = { rate: activeRate, ts: Date.now() };
-      // Try to grab time from inner video
-      try{
-        var vid = iframe.contentDocument && iframe.contentDocument.querySelector('video');
-        if(vid && vid.currentTime > 5){ state.pos = vid.currentTime; }
-      } catch(e){}
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch(e){}
-  }
-
-  function loadState(){
-    try{
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return;
-      var state = JSON.parse(raw);
-      // Only restore if saved within 30 days
-      if(Date.now() - state.ts > 30*24*3600*1000){ localStorage.removeItem(STORAGE_KEY); return; }
-
-      // Restore speed button
-      if(state.rate && state.rate !== 1.5){
-        btns.forEach(function(b){ b.classList.remove('active'); });
-        var matchBtn = document.querySelector('#speedBtns button[data-r="'+state.rate+'"]');
-        if(matchBtn){ matchBtn.classList.add('active'); }
-        activeRate = state.rate;
-      }
-
-      // Resume time — append t param only if we have a position
-      if(state.pos && state.pos > 10){
-        var mins = Math.floor(state.pos/60);
-        var secs = Math.floor(state.pos%60);
-        resumeNote.textContent = 'Last position saved: ' + mins + 'm ' + secs + 's';
-        // Drive preview supports t= param
-        iframe.src = 'https://drive.google.com/file/d/1Jkd2gfZxEEseDxKbm_2f_QCI5Df6KF_b/preview?t=' + Math.floor(state.pos);
-      }
-    } catch(e){}
-  }
-
-  // Listen for postMessage from Drive player (position updates)
-  window.addEventListener('message', function(ev){
-    try{
-      var d = (typeof ev.data === 'string') ? JSON.parse(ev.data) : ev.data;
-      if(d && d.event === 'infoDelivery' && d.info && d.info.currentTime){
-        var ct = parseFloat(d.info.currentTime);
-        if(!isNaN(ct) && ct > 5){
-          try{
-            var raw = localStorage.getItem(STORAGE_KEY);
-            var state = raw ? JSON.parse(raw) : {};
-            state.pos = ct;
-            state.rate = activeRate;
-            state.ts = Date.now();
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          } catch(e){}
-        }
-      }
-    } catch(e){}
-  });
-
-  // Save on page hide
-  document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState === 'hidden'){ saveState(); }
-  });
-  window.addEventListener('pagehide', saveState);
-  window.addEventListener('beforeunload', saveState);
-
-  // Init
-  loadState();
-  // Show speed tip immediately if restored rate != 1
-  if(activeRate !== 1){
-    speedTip.classList.add('show');
-    speedTip.innerHTML = 'Tip: inside the Drive player click <strong>&#9881;</strong> (gear) &rarr; '
-      + '<strong>Playback speed</strong> and select <strong>' + activeRate + 'x</strong>.';
-  }
-})();
-</script>
 </body>
 </html>
