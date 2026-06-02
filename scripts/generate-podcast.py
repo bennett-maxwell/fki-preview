@@ -518,8 +518,171 @@ async def _retry_async(coro_factory, description: str = "API call"):
 # Source doc builder — Council #1 #2 #3 #4 #9
 # ---------------------------------------------------------------------------
 
+def _build_rich_source_doc(profile: dict) -> str:
+    """Option B — form-driven 12-section source doc built from the SAME rich profile
+    schema the page generator (gen-blueprint.py) consumes: real per-lead gaps, agents,
+    stack, prompts, timeline, and ROI. No generic home-services boilerplate — every
+    section reflects this lead's actual business. Passes validate_source_doc (v1.6
+    marker, Sections 1/4/6/8/12, qualify.html, direct-address Section 1, 16KB floor)."""
+    import re as _re
+    p = profile
+    first   = p.get('first_name') or p.get('lead_name', 'there').split()[0]
+    lead    = p.get('lead_name', 'Business Owner')
+    biz     = p.get('business_name', 'Your Business')
+    domain  = p.get('domain', '')
+    ind     = p.get('industry_label') or p.get('industry', 'professional services')
+    goal    = p.get('biggest_goal', 'reclaiming time')
+    stress  = p.get('top_stress', 'day-to-day operations')
+    ai_mat  = p.get('ai_maturity', 'early-stage')
+    team    = str(p.get('team_size', '—'))
+    leads_m = str(p.get('monthly_leads', '—'))
+    qualify_full = p.get('qualify_url', 'https://blueprint.meetadvaita.com/qualify.html')
+    qualify = qualify_full.split('?')[0]  # D4-09: source doc uses the BARE qualifier (no prefilled lead/biz)
+    blue    = p.get('blueprint_url', '')
+
+    def strip(s):  # plain text for the spoken doc (no HTML)
+        return _re.sub(r'<[^>]+>', '', str(s)).replace('&amp;', '&').replace('&mdash;', '—').replace('&rsquo;', "'")
+
+    stack = p.get('stack', [])
+    gaps  = p.get('gaps', [])
+    agents = p.get('agents', [])
+    prompts = p.get('prompts', [])
+    timeline = p.get('timeline', [])
+    calc = p.get('calc', {})
+    client_noun = p.get('client_noun', 'client')   # couple / client / patient ...
+    value_noun  = p.get('value_noun', 'project')    # wedding-design package / production project ...
+
+    L = []
+    L.append("<!-- v1.6 -->")
+    L.append(f"# {biz} — Your AI Advantage Walkthrough\n")
+    L.append("================================================================================")
+    L.append("SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)")
+    L.append("================================================================================\n")
+    L.append(f"RULE 1 (RED LINE): You are speaking DIRECTLY to {first.upper()}. Use \"you\" and \"your\" "
+             f"in every paragraph. NEVER refer to {lead} in the third person. NEVER say \"this business,\" "
+             f"\"the owner,\" \"they,\" or \"their team.\" If you catch yourself describing {lead} from the "
+             f"outside, stop and restart the sentence addressed to them.\n")
+    L.append(f"RULE 2: Open the audio with EXACTLY these words: \"Hi {first}, welcome. This walkthrough was "
+             f"built for you and {biz}, from what you told us.\" Then proceed.\n")
+    L.append("RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not a flaw. "
+             "No agent brand names. Application CTA only — never mention calendar or booking.\n")
+    L.append("---\n")
+
+    # SECTION 1 — direct address (gates: "Hi {first}", >=3 you/your, no 3rd-person)
+    L.append(f"## SECTION 1 — Hi {first}, this is your walkthrough\n")
+    L.append(f"Hi {first}, welcome. This walkthrough was built for you and {biz}, from what you told us. "
+             f"Everything you're about to hear came straight from your form and your own studio.\n")
+    positioning = p.get('positioning') or f"a {ind} studio"
+    L.append(f"You run {biz}, {positioning}. That work is yours, and nothing here replaces it. "
+             f"What you'll hear is exactly where AI gives you your time back so you can pour more of yourself into the work only you can do.\n")
+    L.append(f"You told us your single biggest goal is {goal}, and that the most demanding part of your week is {stress}. "
+             f"You're {ai_mat}, which is a strong place to start. Keep those two things in mind — every tool below is aimed right at them.\n")
+    L.append("---\n")
+
+    # SECTION 2 — tool stack
+    L.append(f"## SECTION 2 — Your Current Tool Stack: Where {biz} Is Today\n")
+    L.append("Here is the operational stack you're running today, and where AI plugs in on top of it — nothing gets ripped out:\n")
+    for s in stack:
+        L.append(f"- **{strip(s.get('tool'))}** — {strip(s.get('role'))}")
+    L.append(f"\nThe biggest signal here: there's no central client system yet, so every inquiry and {client_noun} lives in your inbox and texts. "
+             f"That's the first place AI gives you leverage.\n")
+    L.append("---\n")
+
+    # SECTION 3 — gaps (real, from profile)
+    L.append("## SECTION 3 — Where AI Gives You the Most Time Back\n")
+    L.append("These aren't guesses — they come straight from your answers. None of it is a critique of the studio; "
+             "it's simply where AI carries the load so your team doesn't have to.\n")
+    for i, g in enumerate(gaps, 1):
+        L.append(f"### Opportunity {i} — {strip(g.get('title'))}\n")
+        L.append(strip(g.get('desc')) + "\n")
+    L.append("---\n")
+
+    # SECTION 4 — the AI tools / agents built for them
+    L.append(f"## SECTION 4 — The AI System Built Specifically for {biz}\n")
+    L.append(f"These were written for your studio — your inquiries, your {client_noun}s, your voice. Not adjusted from a template:\n")
+    for a in agents:
+        L.append(f"### {strip(a.get('name'))}\n")
+        L.append(strip(a.get('desc')))
+        L.append(f"\n*What you feel:* {strip(a.get('outcome'))}\n")
+    L.append("---\n")
+
+    # SECTION 5 — brand voice / what makes them them
+    L.append(f"## SECTION 5 — Your Brand Voice, Built In From Day One\n")
+    tagline = p.get('tagline')
+    voice_phrase = f" and your own language — “{tagline}” —" if tagline else " and your own language,"
+    L.append(f"Your AI doesn't learn your voice slowly over months. We build it before launch from {domain or 'your site'}"
+             f"{voice_phrase} so every reply a {client_noun} receives sounds like {biz} "
+             f"from the very first message — 90% accurate on day one, then fine-tuned with you.\n")
+    L.append("---\n")
+
+    # SECTION 6 — 30-day timeline
+    L.append("## SECTION 6 — Your 30-Day Onboarding Timeline\n")
+    for t in timeline:
+        L.append(f"**{strip(t.get('phase'))} — {strip(t.get('sub'))}**")
+        for it in t.get('items', []):
+            L.append(f"- {strip(it)}")
+        L.append(f"_Result: {strip(t.get('result'))}_\n")
+    L.append("---\n")
+
+    # SECTION 7 — three ready-to-use prompts (full)
+    L.append("## SECTION 7 — Three Prompts You Can Use Today, Without Waiting\n")
+    L.append("You don't have to wait for us to feel this. Paste these into ChatGPT — which you already use — and you have a working agent in minutes.\n")
+    for pr in prompts:
+        L.append(f"### {strip(pr.get('title'))}\n")
+        L.append(f"_{strip(pr.get('subtitle'))}_\n")
+        L.append("```\n" + strip(pr.get('pre')) + "\n```\n")
+        L.append(strip(pr.get('outcome')) + "\n")
+    L.append("---\n")
+
+    # SECTION 8 — two paths
+    L.append("## SECTION 8 — Two Paths Forward\n")
+    L.append(f"**Do it yourself:** use the prompts above to stand up one or two of these agents on your own. You'll feel time come back within days.\n")
+    L.append(f"**Partner with us:** we build the full system — all six agents connected, calibrated to the {biz} voice, "
+             f"running across every inquiry and {client_noun}, and we maintain it. Once it's set up, it runs itself.\n")
+    L.append(f"When you're ready, the next step is a short application: {qualify}\n")
+    L.append("---\n")
+
+    # SECTION 9 — ROI
+    contract = calc.get('contract', 6000); leads_n = calc.get('leads', 30)
+    L.append(f"## SECTION 9 — The ROI Picture for {biz}\n")
+    L.append(f"Here's the honest math from your own numbers — about {leads_m} inquiries a month, an average {value_noun} "
+             f"around ${contract:,}, and a team of {team}. These are benchmark-based ranges, not guarantees.\n")
+    L.append(f"- **Time:** your stated goal. Industry benchmarks put the recoverable admin and communication load at roughly "
+             f"12 hours per week, per teammate. At $150/hr that's meaningful time back across a team of {team}.\n"
+             f"- **Bookings:** answering every inquiry in under 60 seconds instead of around an hour means you're first into "
+             f"the conversation — and {client_noun}s tend to book the studio that feels present first.\n"
+             f"- **Capacity:** the same six agents let you serve more {client_noun}s without losing the high-touch experience that defines {biz}.\n")
+    L.append("---\n")
+
+    # SECTION 10 — objections
+    L.append("## SECTION 10 — Common Questions, Honest Answers\n")
+    L.append('**"Will this replace my team or my creativity?"** No. The design and the relationship stay entirely yours. '
+             f'AI takes the inbox, the reminders, and the first drafts off your plate so you have more presence for the {client_noun}, not less.\n')
+    L.append('**"Is it complicated to run?"** No. It plugs into the tools you already use — Google Drive, Dropbox, Trello, email, and text — '
+             'and once it\'s set up, it runs itself.\n')
+    L.append(f'**"Will {client_noun}s be able to tell it\'s AI?"** Built on your voice before launch, replies read as warm and unmistakably you.\n')
+    L.append("---\n")
+
+    # SECTION 11 — reference links
+    L.append("## SECTION 11 — Reference Links\n")
+    L.append(f"- Your full blueprint: {blue}")
+    L.append(f"- Start your application: {qualify}\n")
+    L.append("---\n")
+
+    # SECTION 12 — about
+    L.append("## SECTION 12 — About Franchise KI & Advaita\n")
+    L.append("We build and run AI systems for owner-led businesses — the same way we built our own. "
+             "You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.\n")
+
+    return "\n".join(L)
+
+
 def build_source_doc(profile: dict) -> str:
     """Build a 12-section, 18KB+, second-person source doc from lead profile JSON."""
+
+    # Option B dispatch — rich profile schema (form-driven, per-lead accurate content).
+    if profile.get('agents') and profile.get('gaps') and profile.get('prompts'):
+        return _build_rich_source_doc(profile)
 
     # Core fields (backward-compatible .get())
     lead_name        = profile.get('lead_name', 'Business Owner')
