@@ -114,6 +114,14 @@ for script in clone-blueprint.sh build-website.sh build-delivery-email.sh bluepr
 done
 
 echo ""
+echo "--- 10. ROI Avg-Customer-Value Fill-In Gate (Bennett directive 2026-06-02) ---"
+# Replay-test for the clone-blueprint.sh Step 4a0 hard gate: Avg Customer Value must ALWAYS
+# be a typed fill-in number input, NEVER a type="range" slider (value is still calculated).
+# Wiring it here makes the gate's permanence fleet-wide (versioned), not just one clone's .git/hooks.
+check "ROI fill-in gate replay-test PASS" "bash $SCRIPT_DIR/test-roi-fillin-gate.sh 2>&1 | grep -q 'RESULT: PASS'"
+check "TEMPLATE.html clone-source uses fill-in (type=number id=sl-contract)" "grep -Eq 'type=\"number\"[^>]*id=\"sl-contract\"|id=\"sl-contract\"[^>]*type=\"number\"' $REPO_DIR/blueprints/TEMPLATE.html"
+
+echo ""
 echo "=== RESULTS ==="
 echo "Total: $TOTAL | Pass: $PASS | Fail: $FAIL"
 if [ $FAIL -eq 0 ]; then
