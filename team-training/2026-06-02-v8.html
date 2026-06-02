@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FKI Team AI Training — June 2, 2026 Improved v8</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#0b1020;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Inter',sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 20px 60px}
+  .badge{display:inline-block;background:#0071E3;color:#fff;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:100px}
+  h1{font-size:30px;font-weight:700;letter-spacing:-0.5px;margin:18px 0 6px;line-height:1.2}
+  .sub{color:#9aa3b8;font-size:15px;margin:0 0 28px}
+  .card{background:linear-gradient(160deg,#16203c,#0e1730);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:24px}
+  audio{width:100%;margin-bottom:14px}
+  .speeds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .speeds button{padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.10);color:#fff;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s}
+  .speeds button:hover{background:rgba(255,255,255,0.2)}
+  .speeds button.active{background:#0071E3;border-color:#0071E3}
+  .hint{color:#7e88a0;font-size:12px;margin-top:10px}
+  .what{margin-top:30px}
+  .what h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#9aa3b8;margin:0 0 12px}
+  .what li{color:#cfd6e6;font-size:15px;line-height:1.6;margin-bottom:8px}
+  .dl{display:inline-block;margin-top:8px;color:#4ea1ff;text-decoration:none;font-size:14px}
+  footer{color:#5c6580;font-size:12px;text-align:center;margin-top:36px}
+</style></head>
+<body><div class="wrap">
+  <span class="badge">Franchise KI · Daily AI Training</span>
+  <h1>Improved v8 Team Training</h1>
+  <p class="sub">June 2, 2026 · improved v8 · direct FKI training with freshness, cooldown, and study-skill updates</p>
+
+  <div class="card">
+    <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-02-v8.mp3"></audio>
+    <div class="speeds">
+      <button data-rate="1" onclick="setRate(1,this)">1x</button>
+      <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+      <button data-rate="1.5" onclick="setRate(1.5,this)">1.5x</button>
+      <button data-rate="2" onclick="setRate(2,this)">2x</button>
+    </div>
+    <p class="hint">Tap a speed. It remembers your spot and your speed if you come back.</p>
+  </div>
+
+  <div class="what">
+    <h2>What's inside today</h2>
+    <ul>
+      <li>How FKI stops AI training loops with proof, receipts, and direct owner checks.</li>
+      <li>Why the podcast now avoids repeating the same spotlight skill inside 10 trainings.</li>
+      <li>How study-skill findings feed the 20% fresh AI/tool-learning segment.</li>
+      <li>Agentic AI habits: sub-agents, self-learning loops, and verification before claims.</li>
+      <li>One role-specific action drill so each team member can use the lesson today.</li>
+    </ul>
+    <a class="dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-02-v8.mp3">Download the audio file →</a>
+  </div>
+
+  <footer>Franchise KI internal training · built by your AI team</footer>
+</div>
+<script>
+  var a=document.getElementById('podAudio');
+  var KEY='fki-team-training-2026-06-02-v8';
+  function setRate(r,btn){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(function(b){b.classList.remove('active')});if(btn)btn.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate){a.playbackRate=s.rate;document.querySelectorAll('.speeds button').forEach(function(b){if(parseFloat(b.dataset.rate)===s.rate)b.classList.add('active')});}else{document.querySelector('.speeds button').classList.add('active');}a.addEventListener('loadedmetadata',function(){if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);
+  a.addEventListener('ratechange',save);
+</script>
+</body></html>
