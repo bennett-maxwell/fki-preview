@@ -226,6 +226,16 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
+<!-- GA4 ACTIVATION: replace G-XXXXXXXX with your property ID, then uncomment the two blocks below -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXX');
+</script>
+-->
 </head>
 <body>
 
@@ -1169,6 +1179,14 @@ function buildQualifierPayload() {
       'advaita-score-' + (band || 'unknown'),   // R2: discrete score band tag for GHL automation
       'blueprint_ai_qualifier'
     ],
+    // Pipeline stage routing (Advaita Blueprint pipeline ogv8BRv6YhROdI3vwGJT)
+    // Relay uses these to create/update the opportunity in the correct stage
+    pipeline_id: 'ogv8BRv6YhROdI3vwGJT',
+    pipeline_stage_id: (band === 'strong' || band === 'possible')
+      ? '998beee1-22f5-4f99-80e3-97d121ed298f'   // warm_lead_applied
+      : '4fc67de4-544a-4b37-88b6-6ffda69f64b3',  // cold_lead_dead
+    // Slack alert — relay posts to #leo-coaches (C0AQ4KB1SA0) for strong/possible leads
+    notify_slack: band === 'strong' || band === 'possible',
     submitted_at: new Date().toISOString()
   };
   payload.note = buildQualifierNote(payload);
