@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """run-audit.py — Blueprint AI audit entrypoint (stdlib + curl). v1.1 2026-06-01"""
-import sys, os, subprocess, re, json, urllib.request, hashlib
+import sys, os, subprocess, re, json, urllib.request, hashlib, glob
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 BP_DIR = os.path.join(REPO, "blueprints")
@@ -365,14 +365,17 @@ def resolve_html_path(slug):
     exact = os.path.join(BP_DIR, f"{slug}.html")
     if os.path.exists(exact):
         return exact
-    import glob
     matches = glob.glob(os.path.join(BP_DIR, f"{slug}-*.html"))
     dated = sorted(m for m in matches if re.search(r"-\d{8}\.html$", m))
     if dated:
         return dated[-1]
-    if matches:
-        return sorted(matches)[-1]
-    return exact  # non-existent; caller reports not found
+    # Non-dated fallback: only safe when EXACTLY ONE candidate exists. Multiple
+    # non-dated matches (e.g. slug-draft.html + slug-backup.html) are ambiguous —
+    # silently picking sorted()[-1] could audit the WRONG file and report a false
+    # PASS, so surface not-found and let the caller report it rather than guess.
+    if len(matches) == 1:
+        return matches[0]
+    return exact  # non-existent or ambiguous; caller reports not found
 
 def audit_lead(slug):
     results = {}

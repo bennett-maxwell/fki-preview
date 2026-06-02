@@ -33,6 +33,10 @@ REPO = Path(__file__).resolve().parent.parent
 BP = REPO / "blueprints"
 TEMPLATE = BP / "TEMPLATE.html"
 
+# NOTE: "dave-wood" was REMOVED from CANON (commit 47ba67e4) — the bare blueprint
+# was deleted and replaced by the date-suffixed dave-wood-fresh-20260601.html. Do
+# NOT re-add a bare "dave-wood" entry: it would hard-fail this gate as FILE MISSING
+# (resolve happens by exact slug here, not the dated fallback used by run-audit.py).
 CANON = [
     "alex-ramos", "austin-iron-horse", "branson-maxwell", "brent-attaway",
     "brittney-warnick", "chris-lpnw", "court-lundberg",

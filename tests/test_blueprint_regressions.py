@@ -256,8 +256,47 @@ def check_precommit_ov_skip_path_intact():
         "pre-commit lost the explicit OV SKIP branch for no-blueprint-staged commits"
 
 
+def check_resolve_html_path_prefers_dated_slug():
+    """16. The 0/0-false-PASS killer, pinned BEHAVIORALLY (not by grep).
+    run-audit.py resolve_html_path() must: (a) prefer the NEWEST -YYYYMMDD.html
+    clone when called with a bare slug (gk100 calls bare; live clones are dated);
+    (b) still prefer an exact {slug}.html match over a dated one; and (c) REFUSE
+    to guess when multiple ambiguous non-dated matches exist — returning a
+    non-existent path so the caller reports not-found rather than silently
+    auditing the WRONG file as a false PASS. Without this test a glob/regex
+    regression silently restores the 0/0 fleet-wide false pass this whole cycle
+    was created to kill."""
+    import importlib.util
+    import tempfile
+    spec = importlib.util.spec_from_file_location(
+        "run_audit_mod", os.path.join(REPO, "run-audit.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    with tempfile.TemporaryDirectory() as td:
+        mod.BP_DIR = td
+        # (a) newest dated clone wins
+        for fn in ["acme-20260101.html", "acme-20260601.html", "acme-20260315.html"]:
+            open(os.path.join(td, fn), "w").close()
+        got = mod.resolve_html_path("acme")
+        assert os.path.basename(got) == "acme-20260601.html", \
+            f"resolver did not pick newest dated clone: {got}"
+        # (b) exact match still wins over a dated sibling
+        open(os.path.join(td, "beta.html"), "w").close()
+        open(os.path.join(td, "beta-20260601.html"), "w").close()
+        got = mod.resolve_html_path("beta")
+        assert os.path.basename(got) == "beta.html", \
+            f"resolver did not prefer the exact match: {got}"
+        # (c) ambiguous non-dated matches must NOT be guessed
+        open(os.path.join(td, "gamma-draft.html"), "w").close()
+        open(os.path.join(td, "gamma-backup.html"), "w").close()
+        got = mod.resolve_html_path("gamma")
+        assert not os.path.exists(got), \
+            f"resolver guessed an ambiguous non-dated file instead of not-found: {got}"
+
+
 CHECKS = [
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
+    ("RESOLVE_HTML_PATH_PREFERS_DATED_SLUG", check_resolve_html_path_prefers_dated_slug),
     ("NO_LINKEDIN_SLIDER_IN_TEMPLATE", check_no_linkedin_slider_in_template),
     ("NO_NONB2B_LINKEDIN_VIOLATION", check_no_nonb2b_linkedin_violation),
     ("D7_18_IS_HARD_FAIL", check_d7_18_is_hard_fail),

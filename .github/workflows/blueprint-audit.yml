@@ -1,0 +1,33 @@
+name: blueprint-audit
+
+# Runs the blueprint regression invariants automatically on every push/PR.
+# Before this workflow the 16-check tripwire suite + run-audit only fired in the
+# local pre-commit hook — a direct push (or a file dropped outside git) bypassed
+# every red-line. CI closes that gap: the invariants now gate the remote too.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "blueprints/**"
+      - "run-audit.py"
+      - "scripts/**"
+      - "tests/**"
+      - ".github/workflows/blueprint-audit.yml"
+  pull_request:
+    paths:
+      - "blueprints/**"
+      - "run-audit.py"
+      - "scripts/**"
+      - "tests/**"
+
+jobs:
+  regression-invariants:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run blueprint regression tripwire suite (stdlib-only)
+        run: python3 tests/test_blueprint_regressions.py
