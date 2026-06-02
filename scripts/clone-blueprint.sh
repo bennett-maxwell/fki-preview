@@ -61,6 +61,7 @@ ARGUMENTS:
 OPTIONS:
   --help              Show this help message and exit.
   --dry-run           Generate the HTML but skip git commit/push and HTTP verify.
+  --no-commit         Generate the HTML but skip git commit/push and HTTP verify.
   --no-push           Generate and commit but skip push and HTTP verify.
 
 WHAT IT DOES:
@@ -84,6 +85,7 @@ HELP
 
 # ─── Arg parsing ────────────────────────────────────────────────────────────
 DRY_RUN=false
+NO_COMMIT=false
 NO_PUSH=false
 NO_COMMIT=false
 PROFILE_JSON=""
@@ -92,6 +94,7 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --help|-h) usage ;;
     --dry-run) DRY_RUN=true; shift ;;
+    --no-commit) NO_COMMIT=true; shift ;;
     --no-push) NO_PUSH=true; shift ;;
     --no-commit) NO_COMMIT=true; NO_PUSH=true; shift ;;
     -*) echo "ERROR: Unknown option: $1" >&2; exit 1 ;;
@@ -469,8 +472,8 @@ else
   echo "WARNING: 3/7/30 timeline markers not all found."
 fi
 
-# Verify interactive calculator exists
-if grep -q "slider-contract" "$OUTPUT_FILE"; then
+# Verify interactive calculator exists (Avg Customer Value = fill-in input, 3 sliders)
+if grep -Eq 'id="sl-(leads|rate|hours)"' "$OUTPUT_FILE"; then
   echo "  ROI Calculator verified: Interactive sliders present."
 else
   echo "WARNING: Interactive ROI calculator not found."
@@ -485,6 +488,22 @@ echo "  Validation complete."
 echo "[4/7] Running HARD gates (auto-heal -> D9 -> pre-delivery)..."
 PRE_DELIVERY="$SCRIPT_DIR/pre-delivery-check.sh"
 GATE_FAIL=0
+
+# 4a0. ROI AVG-CUSTOMER-VALUE FILL-IN GATE (HARD — Bennett directive 2026-06-02).
+#      The Avg Customer Value field MUST be a typed fill-in <input type="number"
+#      id="sl-contract">, NEVER a type="range" slider. This is the GUARANTEE that
+#      the slider can never ship again: any regression to a range slider for this
+#      field, or a missing fill-in input, hard-fails the build (exit 1) below.
+#      Bennett asked for this repeatedly; the gate makes the rule un-skippable.
+if grep -Eq 'type="range"[^>]*id="sl-contract"|id="sl-contract"[^>]*type="range"' "$OUTPUT_FILE"; then
+  echo "  ROI fill-in gate: FAIL -- Avg Customer Value is a type=\"range\" SLIDER (must be a fill-in number input)."
+  GATE_FAIL=1
+elif grep -Eq 'type="number"[^>]*id="sl-contract"|id="sl-contract"[^>]*type="number"' "$OUTPUT_FILE"; then
+  echo "  ROI fill-in gate: PASS -- Avg Customer Value is a typed fill-in number input."
+else
+  echo "  ROI fill-in gate: FAIL -- no <input type=\"number\" id=\"sl-contract\"> fill-in found for Avg Customer Value."
+  GATE_FAIL=1
+fi
 
 # 4a. Auto-heal generator reverts before gating
 AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"
@@ -528,9 +547,9 @@ if [[ "$GATE_FAIL" == "1" ]]; then
 fi
 echo "  Validation complete -- all HARD gates PASS."
 
-if [[ "$DRY_RUN" == "true" ]]; then
+if [[ "$DRY_RUN" == "true" || "$NO_COMMIT" == "true" ]]; then
   echo ""
-  echo "=== DRY RUN COMPLETE ==="
+  echo "=== NO-COMMIT COMPLETE ==="
   echo "Output: $OUTPUT_FILE"
   echo "Skipping git commit, push, and HTTP verify."
   exit 0

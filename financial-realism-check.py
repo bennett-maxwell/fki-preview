@@ -110,12 +110,21 @@ def check_file(path, clone_registry):
     industry = LEAD_INDUSTRY.get(slug, "unknown")
     lo, hi, unit = INDUSTRY_BANDS[industry]
 
-    # --- D7-01/D7-17 contract-value slider default + JS fallback within band ---
-    sl = grab(r'id="slider-contract"[^>]*min="(\d+)"[^>]*max="(\d+)"[^>]*value="(\d+)"', html)
-    js = grab(r"slider-contract'\)\.value\)\s*\|\|\s*(\d+)", html)
-    slider_default = int(sl[2]) if sl else None
+    # --- D7-01/D7-17 contract-value default within band (fill-in OR legacy slider) ---
+    # Template now uses a typed fill-in <input type="number" id="sl-contract" min=".." value="..">
+    # with NO max (owner types any value); older blueprints used a slider id="slider-contract"
+    # with min/max/value. Match either id, then parse attrs individually so a missing max is OK.
+    contract_tag = grab(r'(<input[^>]*id="s(?:l|lider)-contract"[^>]*>)', html)
+    contract_min = contract_max = slider_default = None
+    if contract_tag:
+        tag = contract_tag[0]
+        m_mn = re.search(r'min="(\d+)"', tag);   contract_min   = int(m_mn.group(1)) if m_mn else None
+        m_mx = re.search(r'max="(\d+)"', tag);   contract_max   = int(m_mx.group(1)) if m_mx else None
+        m_vv = re.search(r'value="(\d+)"', tag); slider_default = int(m_vv.group(1)) if m_vv else None
+    js = grab(r"s(?:l|lider)-contract'\)\.value\)\s*\|\|\s*(\d+)", html)
     js_fallback = int(js[0]) if js else None
-    slider_triple = tuple(int(x) for x in sl) if sl else None
+    # clone-dedup fingerprint: the numbers actually present on the contract field
+    slider_triple = tuple(x for x in (contract_min, contract_max, slider_default) if x is not None) or None
 
     if industry == "unknown":
         # D10-05 [RL]: an unclassified lead means we CANNOT verify its money math fits
@@ -124,14 +133,15 @@ def check_file(path, clone_registry):
         # We never guess an industry (guessed numbers = the original defect); add the lead to
         # LEAD_INDUSTRY from real intake before it can pass.
         fails.append(f"D10-05 [RL] industry unclassified — cannot verify financials (add '{slug}' to LEAD_INDUSTRY from intake)")
-    if lo is not None and js_fallback is not None and not (lo <= js_fallback <= hi):
+    # JS fallback band check — the fill-in's empty-sentinel "|| 0" is intentional (empty = $0
+    # contribution), not a seeded default, so it is exempt from the band check.
+    if lo is not None and js_fallback is not None and js_fallback != 0 and not (lo <= js_fallback <= hi):
         fails.append(f"D7-17 [RL] JS fallback ${js_fallback:,} outside {industry} band ${lo:,}-${hi:,}")
     if lo is not None and slider_default is not None and not (lo <= slider_default <= hi):
-        fails.append(f"D7-01 [RL] slider default ${slider_default:,} outside {industry} band ${lo:,}-${hi:,}")
-    if sl:
-        smin, smax = int(sl[0]), int(sl[1])
-        if lo is not None and (smax < lo or smin > hi):
-            fails.append(f"D7-03 slider range ${smin:,}-${smax:,} does not overlap {industry} band ${lo:,}-${hi:,}")
+        fails.append(f"D7-01 [RL] contract default ${slider_default:,} outside {industry} band ${lo:,}-${hi:,}")
+    # D7-03 range overlap applies only to a bounded slider (has max); a fill-in has no max.
+    if lo is not None and contract_min is not None and contract_max is not None and (contract_max < lo or contract_min > hi):
+        fails.append(f"D7-03 slider range ${contract_min:,}-${contract_max:,} does not overlap {industry} band ${lo:,}-${hi:,}")
 
     # --- D7-10 label uses the right transaction noun for the industry ---
     if re.search(r'[Aa]verage [Cc]ontract [Vv]alue', html) and unit not in ("contract", "contract/ARR", "annual mgmt fee"):

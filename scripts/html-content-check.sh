@@ -39,8 +39,11 @@ check_one() {
     fi
   fi
 
-  # 3) No unresolved template tokens
-  if grep -qoE '\{\{[A-Z_]+\}\}' "$f"; then
+  # 3) No unresolved template tokens.
+  # TEMPLATE.html is the token SCAFFOLD the generator clones — {{TOKENS}} are
+  # required there by design (mirrors the pre-commit hook's `grep -v TEMPLATE`
+  # exclusion). Only deliverable blueprints must be token-free.
+  if [ "$slug" != "TEMPLATE" ] && grep -qoE '\{\{[A-Z_]+\}\}' "$f"; then
     echo "  ❌ $slug: unresolved {{TOKEN}} present"; fail=1
   fi
 

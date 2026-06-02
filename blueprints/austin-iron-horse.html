@@ -1341,7 +1341,7 @@
     <div class="calc-card">
       <div class="slider-group">
         <div class="slider-label">
-          <span>Average Contract Value</span>
+          <span>Average Ticket Value</span>
           <span class="slider-val" id="val-contract">(enter yours)</span>
         </div>
         <input type="range" id="slider-contract" min="300" max="6000" step="50" value="300" data-no-default="true" oninput="calcTouched=true;updateCalc()">
@@ -1925,7 +1925,7 @@ function updateCalc() {
   document.getElementById('q-q3').textContent = '$' + (q3 / 1000).toFixed(1) + 'K';
   document.getElementById('q-q4').textContent = '$' + (q4 / 1000).toFixed(1) + 'K';
 
-  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + higher close rate';
+  document.getElementById('pillar-rev').textContent = '+$' + Math.round(quarterlyGain).toLocaleString() + '/quarter from faster response + SEO capture + higher close rate';
 
   // Time saved + cost savings (RULE-13: understated 15%)
   const timeSaved = (6.5 * (1 + seoLift * 0.3)).toFixed(1);

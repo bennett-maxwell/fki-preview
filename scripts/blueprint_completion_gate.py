@@ -22,6 +22,14 @@ from typing import Optional, Tuple
 from urllib.parse import unquote, urlparse
 
 
+# Production audio is a WINDOW, not a one-sided floor. A delivery walkthrough
+# must be substantial but not an overlong lecture: roughly 6-20 minutes at
+# 128kbps.
+MIN_PRODUCTION_AUDIO_BYTES = 6 * 1024 * 1024
+MAX_PRODUCTION_AUDIO_BYTES = 20 * 1024 * 1024
+MAX_PRODUCTION_AUDIO_MINUTES = 20
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # CATEGORY DEFINITIONS (from SKILL.md v3.14 §Category Gates)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -90,8 +98,148 @@ def receipt_pass(path: Path) -> bool:
     return status in {"PASS", "PASSED", "OK", "SUCCESS", "GREEN", "DIAMOND_PASS"}
 
 
-def audio_size_check(html: str, html_path: Optional[Path], min_bytes: int = 29 * 1024 * 1024) -> Tuple[bool, str]:
-    """Verify the referenced local MP3 exists and meets the production-size floor."""
+def load_receipt(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def receipt_audio_hash_matches(data: dict, html_path: Optional[Path]) -> bool:
+    expected = data.get("audio_sha256")
+    audio = data.get("audio")
+    if not expected or not audio:
+        return False
+    audio_path = Path(audio)
+    candidates = []
+    if audio_path.is_absolute():
+        candidates.append(audio_path)
+    else:
+        candidates.append((Path.cwd() / audio_path).resolve())
+        if html_path is not None:
+            candidates.extend([
+                (html_path.parent / audio_path).resolve(),
+                (html_path.parent.parent / audio_path).resolve(),
+            ])
+    return any(candidate.exists() and file_sha256(candidate) == expected for candidate in candidates)
+
+
+def production_receipt_result(num: int, path: Path, html: str,
+                              html_path: Optional[Path]) -> Tuple[bool, str]:
+    """Schema-specific production proof validators.
+
+    Generic "status: PASS" is not enough for production checks because preview
+    receipts can be honest but narrower than customer-send approval.
+    """
+    data = load_receipt(path)
+    if not data:
+        return False, f"PRODUCTION REQUIRED: Missing or invalid receipt for check {num}"
+
+    base_pass = data.get("pass") is True or str(data.get("status") or "").upper() == "PASS"
+
+    if num == 42:
+        ok = base_pass and int(data.get("http_code") or 0) == 200 and bool(data.get("url"))
+        return ok, "Public page HTTP 200 verified" if ok else "Public page receipt must include pass=true, http_code=200, and url"
+
+    if num == 43:
+        ok = base_pass and bool(data.get("registry_file")) and data.get("verified") is True
+        return ok, "Drive artifact registry verified" if ok else "Drive receipt must include registry_file and verified=true"
+
+    if num == 44:
+        ok = base_pass and bool(data.get("notion_page_id")) and data.get("row_current") is True
+        return ok, "Notion Sprint row current" if ok else "Notion receipt must include notion_page_id and row_current=true"
+
+    if num == 45:
+        contact = data.get("contact") if isinstance(data.get("contact"), dict) else {}
+        conversation = data.get("conversation") if isinstance(data.get("conversation"), dict) else {}
+        ok = (
+            base_pass
+            and int(data.get("exact_contact_count") or 0) == 1
+            and bool(contact.get("id"))
+            and data.get("instant_response_verified") is True
+            and bool(conversation.get("id"))
+        )
+        detail = "GHL exact contact readback and instant response verified" if ok else (
+            "GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true"
+        )
+        return ok, detail
+
+    if num == 46:
+        ok = (
+            base_pass
+            and int(data.get("relay_http_status") or 0) == 200
+            and data.get("relay_mode") in {"updated", "matched"}
+            and bool(data.get("returned_contact_id"))
+            and data.get("returned_contact_id") == data.get("expected_contact_id")
+            and int(data.get("exact_contact_count_after_repeat") or 0) == 1
+        )
+        detail = "Repeat submit updated same GHL contact" if ok else (
+            "Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
+        )
+        return ok, detail
+
+    if num == 47:
+        local_audio_ok, local_audio_detail = audio_size_check(html, html_path)
+        remote_size = int(data.get("size_download") or 0)
+        remote_ok = (
+            base_pass
+            and int(data.get("http_code") or 0) == 200
+            and MIN_PRODUCTION_AUDIO_BYTES <= remote_size <= MAX_PRODUCTION_AUDIO_BYTES
+        )
+        direct_ok = (
+            data.get("direct_address_audio_verified") is True
+            and data.get("opening_direct_address_verified") is True
+            and data.get("opening_exact_or_close") is True
+            and data.get("banned_audio_phrases_found") in ([], None)
+            and data.get("third_person_patterns_found") in ([], None)
+            and int(data.get("you_your_count") or 0) >= 5
+        )
+        hash_ok = receipt_audio_hash_matches(data, html_path)
+        ok = remote_ok and local_audio_ok and direct_ok and hash_ok
+        if ok:
+            return True, f"Public/local podcast and direct-address audio verified ({remote_size} bytes)"
+        if not remote_ok:
+            return False, (
+                "Public podcast receipt must include pass=true, http_code=200, and size_download within "
+                f"[{MIN_PRODUCTION_AUDIO_BYTES}, {MAX_PRODUCTION_AUDIO_BYTES}] bytes "
+                f"(~6-{MAX_PRODUCTION_AUDIO_MINUTES} min @128kbps)"
+            )
+        if not direct_ok:
+            return False, "Podcast receipt must prove direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, and >=5 you/your references"
+        if not hash_ok:
+            return False, "Podcast receipt audio_sha256 must match the current local MP3"
+        return False, local_audio_detail
+
+    if num == 48:
+        external = data.get("external_customer_send_approved") is True or data.get("bennett_approved") is True
+        preview = data.get("bennett_preview_requested") is True or data.get("approval_scope") == "bennett_preview_only"
+        if base_pass and external:
+            return True, "Approval scope: external customer send approved"
+        if base_pass and preview:
+            return True, "Approval scope: Bennett preview only; customer send remains blocked"
+        return False, "Approval receipt must record Bennett preview scope or external customer-send approval"
+
+    return receipt_pass(path), "OK" if receipt_pass(path) else f"Missing or failing receipt for check {num}"
+
+
+def audio_size_check(
+    html: str,
+    html_path: Optional[Path],
+    min_bytes: int = MIN_PRODUCTION_AUDIO_BYTES,
+    max_bytes: int = MAX_PRODUCTION_AUDIO_BYTES,
+) -> Tuple[bool, str]:
+    """Verify the referenced local MP3 exists inside the production-size window."""
     refs = re.findall(r'(?:src|href)=["\']([^"\']*podcasts/[^"\']+\.mp3[^"\']*)["\']', html, re.I)
     if not refs:
         return False, "No podcast MP3 reference found"
@@ -118,9 +266,14 @@ def audio_size_check(html: str, html_path: Optional[Path], min_bytes: int = 29 *
             inspected.append(candidate)
             if candidate.exists():
                 size = candidate.stat().st_size
-                if size >= min_bytes:
-                    return True, f"{rel} size {size:,} bytes"
-                return False, f"{rel} too small: {size:,} bytes < {min_bytes:,}"
+                if size < min_bytes:
+                    return False, f"{rel} too small: {size:,} bytes < {min_bytes:,} (floor)"
+                if size > max_bytes:
+                    return False, (
+                        f"{rel} too large: {size:,} bytes > {max_bytes:,} "
+                        f"(ceiling ~{MAX_PRODUCTION_AUDIO_MINUTES} min)"
+                    )
+                return True, f"{rel} size {size:,} bytes (within window)"
 
     return False, "Referenced MP3 not found locally"
 
@@ -615,25 +768,22 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
         44: "Notion Sprint row present",
         45: "Current GHL readback (contact tagged)",
         46: "Repeat-submit same-contact proof",
-        47: "NotebookLM-size audio (≥29MB)",
-        48: "Bennett approval obtained",
+        47: "Walkthrough-size audio (6-20MB / direct-address verified)",
+        48: "Bennett approval scope recorded",
     }
     for num, desc in prod_checks.items():
         if require_production:
-            # Check for production receipt files
-            prod_receipt = receipt_pass(receipt_dir / f"{lead_slug}-production-{num}.json")
-            audio_ok, audio_detail = (True, "OK")
-            if num == 47:
-                audio_ok, audio_detail = audio_size_check(html, html_path)
+            prod_receipt, prod_detail = production_receipt_result(
+                num,
+                receipt_dir / f"{lead_slug}-production-{num}.json",
+                html,
+                html_path,
+            )
             results[num] = {
                 "desc": desc,
-                "pass": prod_receipt and audio_ok,
+                "pass": prod_receipt,
                 "severity": "critical",
-                "detail": (
-                    f"PRODUCTION REQUIRED: Missing or failing receipt for check {num}" if not prod_receipt
-                    else audio_detail if num == 47 and not audio_ok
-                    else "OK"
-                )
+                "detail": prod_detail,
             }
         else:
             results[num] = {

@@ -54,7 +54,7 @@ from datetime import datetime
 
 SOURCE_DOC_TEMPLATE = """\
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for {lead_name}
+PRIVATE AUDIO BRIEFING — Personal AI Walkthrough for {lead_name}
 {business_name} | Prepared by Franchise Ki | Generated {generated_date}
 
 ================================================================================
@@ -137,7 +137,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at {roi_rate}/hr: up to {gap1_roi}/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -153,7 +153,7 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -167,7 +167,7 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At {team_size_admin} people × {roi_rate}/hr × 5 hrs/week recovered = up to {gap3_roi}/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
@@ -233,7 +233,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
 **Days 1-3: Onboarding.** {industry_cap} audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -305,7 +305,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 This is an application, not a commitment. We read every one personally.
 
@@ -370,7 +370,7 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
 All statistics and benchmarks referenced in this document:
 
@@ -406,7 +406,7 @@ Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
 If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
@@ -430,6 +430,59 @@ def _ts():
 
 def _log(msg: str):
     print(f"[{_ts()}] {msg}", file=sys.stderr)
+
+
+def _probe_container(path: str) -> str:
+    """Return ffprobe format_name for a media file ('mp3', 'mov,mp4,m4a,...', etc.). '' on error."""
+    import subprocess
+    try:
+        return subprocess.run(
+            ["ffprobe", "-v", "quiet", "-show_entries", "format=format_name",
+             "-of", "csv=p=0", path],
+            capture_output=True, text=True, timeout=30).stdout.strip()
+    except Exception as e:
+        _log(f"ffprobe error on {path}: {e}")
+        return ""
+
+
+def _ensure_real_mp3(path: str) -> str:
+    """
+    Task #8 (2026-06-01) — Podcast transcode hardening.
+    NotebookLM frequently hands back AAC-in-MP4 (m4a) even when the file is named .mp3.
+    iOS/Safari refuse AAC-in-MP4 served as audio/mpeg, so the listen button silently fails.
+    This forces the on-disk file to be a REAL libmp3lame MP3 so FC-06 passes at the source,
+    not just in the audit. Idempotent: a true mp3 is left untouched.
+    Returns the path to the verified-real mp3.
+    """
+    import subprocess
+    fmt = _probe_container(path)
+    if fmt == "mp3":
+        _log(f"Container already real mp3: {path}")
+        return path
+    if not fmt:
+        _log(f"WARNING: could not probe {path}; leaving as-is (FC-06 will catch it)")
+        return path
+
+    _log(f"Container is '{fmt}', not mp3 — transcoding to real MP3 via libmp3lame")
+    tmp_out = path + ".transcode.mp3"
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", path, "-vn", "-c:a", "libmp3lame",
+             "-b:a", "128k", "-ar", "44100", tmp_out],
+            capture_output=True, text=True, timeout=600, check=True)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(
+            f"ffmpeg transcode to MP3 failed for {path}: {e.stderr[-400:] if e.stderr else e}")
+    except Exception as e:
+        raise RuntimeError(f"ffmpeg transcode error for {path}: {e}")
+
+    new_fmt = _probe_container(tmp_out)
+    if new_fmt != "mp3":
+        raise RuntimeError(
+            f"Transcode produced non-mp3 container '{new_fmt}' for {tmp_out}; refusing to ship")
+    os.replace(tmp_out, path)
+    _log(f"✓ Transcoded to real MP3 (was '{fmt}'): {path}")
+    return path
 
 
 def _is_rate_limit_error(exc: Exception) -> bool:
@@ -578,7 +631,7 @@ def validate_source_doc(content: str, lead_name: str = '', lead_first: str = '')
         )
 
     required = ['<!-- v1.6 -->', 'SECTION 1', 'SECTION 4', 'SECTION 6',
-                'SECTION 8', 'SECTION 12', 'blueprint.meetadvaita.com/apply']
+                'SECTION 8', 'SECTION 12', 'qualify.html']
     missing = [r for r in required if r not in content]
     if missing:
         raise ValueError(f"Source doc missing required sections/stamp: {missing}")
@@ -704,6 +757,11 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
                             raise RuntimeError(
                                 f"Download reported success but file not found: {output_path}"
                             )
+
+                        # Task #8 — transcode hardening: force a REAL mp3 before the
+                        # size/ship gates so FC-06 passes at the source (iOS listen button).
+                        output_path = _ensure_real_mp3(output_path)
+
                         size_bytes = os.path.getsize(output_path)
                         size_mb = size_bytes / (1024 * 1024)
                         if size_mb < MIN_MP3_SIZE_MB:

@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Blueprint AI package for Avery Martinez and Costa Vida.">
+  <meta property="og:title" content="Avery Martinez - Costa Vida Blueprint AI">
+  <meta property="og:description" content="A food-franchise AI operating blueprint for Costa Vida.">
+  <title>Avery Martinez - Costa Vida Blueprint AI</title>
+  <style>
+    :root { --brand:#0071E3; --brand-dark:#0B3D73; --ink:#1D1D1F; --muted:#5F6B7A; --surface:#F5F5F7; --panel:#FFFFFF; --line:#D9E2EC; --soft:#EAF3FF; --success:#0F766E; --warn:#B45309; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; overflow-x:hidden; font-family: Inter, Arial, sans-serif; color:var(--ink); background:var(--surface); line-height:1.55; }
+    a { color:var(--brand-dark); }
+    .skip-link { position:absolute; left:-999px; top:auto; }
+    .nav { position:sticky; top:0; z-index:20; background:rgba(255,255,255,.94); border-bottom:1px solid var(--line); backdrop-filter:blur(10px); }
+    .nav-inner { max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:12px 24px; gap:16px; }
+    .brand-mark { display:flex; gap:8px; align-items:center; font-weight:800; color:var(--brand-dark); }
+    .logo-dot { width:10px; height:10px; border-radius:50%; background:var(--brand); display:inline-block; }
+    .nav-links { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .nav-link { text-decoration:none; color:var(--ink); font-size:14px; font-weight:700; padding:8px 10px; border-radius:6px; }
+    .nav-link:hover { background:var(--soft); }
+    .section { max-width:1180px; margin:18px auto; padding:28px 24px; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .hero { max-width:none; margin:0; border:0; border-radius:0; padding:68px 24px 54px; background:linear-gradient(135deg, #0B3D73, #0071E3); color:#fff; }
+    .hero-inner { max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.35fr .75fr; gap:32px; align-items:center; }
+    .hero-copy p { max-width:780px; color:#EDF6FF; font-size:18px; }
+    .hero-badge { display:inline-flex; align-items:center; min-height:30px; padding:5px 10px; border-radius:6px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28); color:#fff; font-size:12px; font-weight:800; text-transform:uppercase; }
+    h1 { margin:14px 0 14px; font-size:48px; line-height:1.05; letter-spacing:0; }
+    h2 { margin:0 0 14px; font-size:29px; line-height:1.15; letter-spacing:0; color:var(--brand-dark); }
+    h3 { margin:0 0 8px; font-size:18px; line-height:1.25; letter-spacing:0; color:var(--ink); }
+    p { margin:0 0 12px; }
+    .hero-actions, .apply-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+    .cta-btn, .btn { display:inline-flex; justify-content:center; align-items:center; min-height:44px; padding:12px 18px; border-radius:6px; font-weight:800; text-decoration:none; border:1px solid transparent; }
+    .cta-btn { background:var(--brand); color:#fff; }
+    .hero .cta-btn { background:#fff; color:var(--brand-dark); }
+    .btn { border-color:rgba(255,255,255,.62); color:#fff; }
+    .hero-proof { background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.25); border-radius:8px; padding:18px; }
+    .proof-item { display:grid; gap:4px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.22); }
+    .proof-item:last-child { border-bottom:0; }
+    .proof-item span { color:#DCEEFF; font-size:13px; }
+    .proof-item strong { color:#fff; }
+    .profile-grid, .results-grid, .pillar-grid, .stack-grid, .gap-grid, .opp-grid, .agent-grid, .timeline-grid, .calc-grid, .prompt-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; }
+    .profile-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; }
+    .profile-card, .result-card, .pillar-card, .stack-card, .gap-card, .opp-card, .agent-card, .milestone, .prompt-card { border:1px solid var(--line); border-radius:8px; padding:18px; background:#FBFCFE; min-width:0; }
+    .stack-grid { grid-template-columns:repeat(4, minmax(0,1fr)); }
+    .gap-grid, .agent-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .pillar-tag, .agent-chip, .badge { display:inline-flex; align-items:center; min-height:26px; padding:4px 8px; border-radius:6px; background:var(--soft); color:var(--brand-dark); font-size:12px; font-weight:800; text-transform:uppercase; margin-bottom:10px; }
+    .ignore-list { margin:0; padding-left:20px; color:var(--muted); }
+    .ignore-list li { margin:8px 0; }
+    .calc-field { display:grid; gap:8px; font-weight:800; color:var(--brand-dark); }
+    .calc-field input { width:100%; accent-color:var(--brand); }
+    .calc-output, .calc-field output { color:var(--ink); font-weight:800; }
+    .roi-result { margin-top:18px; padding:18px; border:1px solid var(--line); border-radius:8px; background:var(--soft); }
+    .roi-result span { display:block; color:var(--muted); font-size:13px; }
+    .roi-result strong { display:block; font-size:32px; color:var(--brand-dark); margin:4px 0; }
+    .prompt-grid { grid-template-columns:1fr; }
+    .prompt-block { margin:0; white-space:pre-wrap; overflow-x:auto; border:1px solid var(--line); background:#F8FAFC; border-radius:8px; padding:14px; font-size:13px; color:var(--ink); }
+    .demo-panel, .apply-panel, .player-shell { border:1px solid var(--line); border-radius:8px; background:#FBFCFE; padding:18px; }
+    .demo-row { display:grid; grid-template-columns:.7fr 1.3fr; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+    .demo-row:last-child { border-bottom:0; }
+    .demo-row span { color:var(--muted); font-weight:800; }
+    .player-top, .player-controls, .time-row { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
+    .player-copy p { color:var(--muted); margin:0; }
+    .track { position:relative; width:100%; height:10px; background:#D8E5F7; border-radius:999px; margin:18px 0 8px; }
+    .fill { position:absolute; left:0; top:0; height:10px; width:0; background:var(--brand); border-radius:999px; }
+    .thumb { position:absolute; left:0; top:50%; width:18px; height:18px; transform:translate(-2px,-50%); border-radius:50%; background:#fff; border:3px solid var(--brand); }
+    .chapter-row { display:flex; gap:8px; align-items:center; margin:10px 0 12px; }
+    .chapter-pip { width:10px; height:10px; border-radius:50%; background:var(--brand); opacity:.58; display:inline-block; }
+    .icon-btn, .speed-select { min-height:38px; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--brand-dark); font-weight:800; padding:8px 12px; cursor:pointer; }
+    .eq { display:inline-flex; gap:3px; align-items:end; height:22px; }
+    .eq-bar { display:block; width:4px; height:10px; background:var(--brand); border-radius:3px; }
+    .chapter-name { font-weight:800; color:var(--brand-dark); }
+    .error-text { color:#B91C1C; font-weight:800; }
+    .mini-player { margin-top:12px; display:flex; gap:10px; align-items:center; }
+    .source-list { display:grid; gap:10px; margin:0; padding-left:20px; }
+    .source-item span { display:block; color:var(--muted); }
+    .footnote, .muted { color:var(--muted); font-size:14px; }
+    .text-link { display:inline-flex; margin-top:12px; font-weight:800; }
+    @media (max-width:860px) { .hero-inner, .profile-grid, .results-grid, .pillar-grid, .stack-grid, .gap-grid, .opp-grid, .agent-grid, .timeline-grid, .calc-grid { grid-template-columns:1fr; } .nav-inner { align-items:flex-start; flex-direction:column; } h1 { font-size:36px; } .demo-row { grid-template-columns:1fr; } }
+    @media (max-width:480px) { .section { margin:14px auto; padding:22px 16px; } .hero { padding:48px 16px 42px; } h1 { font-size:31px; } h2 { font-size:24px; } .cta-btn, .btn { width:100%; } .nav-links { justify-content:flex-start; } .nav-link { padding:7px 8px; } }
+    </style>
+</head>
+<body>
+  <a class="skip-link" href="#profile">Skip to Blueprint</a>
+  <nav class="nav" aria-label="Blueprint navigation">
+    <div class="nav-inner">
+      <div class="brand-mark"><span class="logo-dot"></span>Costa Vida Blueprint</div>
+      <div class="nav-links">
+        <a class="nav-link" href="#profile">Your Profile</a>
+        <a class="nav-link" href="#agents">AI Agents</a>
+        <a class="nav-link" href="#calculator">ROI Calculator</a>
+        <a class="nav-link" href="#listen">Listen</a>
+        <a class="nav-link" href="#apply">Qualify</a>
+      </div>
+    </div>
+  </nav>
+
+    <section id="hero" class="section hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="hero-badge">Costa Vida AI operating plan</span>
+          <h1>Avery, here is the AI operating blueprint for Costa Vida.</h1>
+          <p>This plan maps practical AI workflows around catering follow-up, guest recovery, rewards engagement, local demand, and manager handoffs for a Utah food franchise operation.</p>
+          <div class="hero-actions">
+            <a class="cta-btn" href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&amp;biz=Costa+Vida&amp;src=avery-martinez-costa-vida-20260601&amp;utm_source=blueprint&amp;utm_medium=blueprint&amp;utm_campaign=synthetic_costa_vida">See If You Qualify</a>
+            <a class="btn" href="#listen">Listen to the Walkthrough</a>
+          </div>
+        </div>
+        <aside class="hero-proof" aria-label="Audit proof">
+          <div class="proof-item"><span>Prospect</span><strong>Avery Martinez</strong></div>
+          <div class="proof-item"><span>Business</span><strong>Costa Vida</strong></div>
+          <div class="proof-item"><span>Model</span><strong>Food franchise ticket economics</strong></div>
+          <div class="proof-item"><span>Data basis</span><strong>Public context plus editable assumptions</strong></div>
+        </aside>
+      </div>
+    </section>
+    <section id="profile" class="section">
+      <h2>Your Profile</h2>
+      <div class="profile-grid">
+        <article class="profile-card"><h3>Business type</h3><p>Utah-based fast casual food chain with restaurant, pickup, delivery, rewards, and catering demand.</p></article>
+        <article class="profile-card"><h3>Public context</h3><p>Costa Vida opened its first restaurant in Layton, Utah in 2003 and publicly lists 94 locations on its about page.</p></article>
+        <article class="profile-card"><h3>Test assumption</h3><p>The numbers in this run are synthetic. They exist to test the intake, page, audio, email, qualifier, and CRM path.</p></article>
+      </div>
+      <p class="muted">Avery, this page speaks to you as the operator receiving the walkthrough. It does not analyze you as a third-person case study.</p>
+      <p>Avery, the first test should stay close to the store floor. The agent output should name the restaurant, the guest or event type, the order path, the owner, and the next action. If the note does not help a manager decide what to do next, it does not belong in the pilot.</p>
+<p>The catering workflow should be measured by response speed, complete event details, clean handoff, and follow-up completion. A useful result is not a long message. A useful result is the right question asked quickly, the right owner tagged, and the buyer kept on a direct path.</p>
+<p>The guest recovery workflow should separate guest tone from store action. A response draft helps the guest feel heard, while the manager action helps the restaurant improve the next shift. Both are needed, and both should be short enough for a busy operator to use.</p>
+<p>The rewards workflow should reinforce direct ordering without making a claim the guest did not earn. A good message can point to app ordering, pickup, delivery, dine-in scan, or rewards status while staying aligned with the public Costa Club experience.</p>
+<p>The local demand workflow should be weekly and specific. Nearby offices, schools, sports teams, gyms, clinics, and event planners are better targets than broad advertising ideas. The output should give a contact reason, message draft, and follow-up date.</p>
+<p>The crew handoff workflow should not become a second management system. It should summarize guest issues, catering reminders, order friction, pickup timing, delivery notes, crew observations, and owner assignments in a format that can be read before the next shift.</p>
+<p>The scale decision should use proof from the pilot store. If catering response gets faster, guest recovery gets cleaner, rewards touches become easier, and managers accept the handoff format, then the second store or second workflow becomes reasonable.</p>
+<p>The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.</p>
+<p>The qualifier path protects the sales motion. The Blueprint page can invite Avery to qualify, but the booking path belongs after fit is captured. That keeps the CRM clean and prevents a calendar link from bypassing the qualification rules.</p>
+<p>Every public fact stays tied to an official Costa Vida page. Every operational number in the test stays labeled as synthetic. That separation matters because the goal is to verify the system, not invent performance claims for Costa Vida.</p>
+    </section>
+    <section id="results" class="section">
+      <h2>What This Should Produce</h2>
+      <div class="results-grid">
+        <article class="result-card"><h3>Faster catering follow-up</h3><p>Every event inquiry gets headcount, date, location, pickup or delivery, and owner captured before the opportunity cools.</p></article>
+        <article class="result-card"><h3>Clearer guest recovery</h3><p>Guest comments become response drafts and one store action, not a loose pile of review text.</p></article>
+        <article class="result-card"><h3>Better rewards motion</h3><p>Direct ordering, in-app ordering, and in-store scan behavior are reinforced without adding crew confusion.</p></article>
+      </div>
+      <p>Avery, the first test should stay close to the store floor. The agent output should name the restaurant, the guest or event type, the order path, the owner, and the next action. If the note does not help a manager decide what to do next, it does not belong in the pilot.</p>
+<p>The catering workflow should be measured by response speed, complete event details, clean handoff, and follow-up completion. A useful result is not a long message. A useful result is the right question asked quickly, the right owner tagged, and the buyer kept on a direct path.</p>
+<p>The guest recovery workflow should separate guest tone from store action. A response draft helps the guest feel heard, while the manager action helps the restaurant improve the next shift. Both are needed, and both should be short enough for a busy operator to use.</p>
+<p>The rewards workflow should reinforce direct ordering without making a claim the guest did not earn. A good message can point to app ordering, pickup, delivery, dine-in scan, or rewards status while staying aligned with the public Costa Club experience.</p>
+<p>The local demand workflow should be weekly and specific. Nearby offices, schools, sports teams, gyms, clinics, and event planners are better targets than broad advertising ideas. The output should give a contact reason, message draft, and follow-up date.</p>
+<p>The crew handoff workflow should not become a second management system. It should summarize guest issues, catering reminders, order friction, pickup timing, delivery notes, crew observations, and owner assignments in a format that can be read before the next shift.</p>
+<p>The scale decision should use proof from the pilot store. If catering response gets faster, guest recovery gets cleaner, rewards touches become easier, and managers accept the handoff format, then the second store or second workflow becomes reasonable.</p>
+<p>The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.</p>
+<p>The qualifier path protects the sales motion. The Blueprint page can invite Avery to qualify, but the booking path belongs after fit is captured. That keeps the CRM clean and prevents a calendar link from bypassing the qualification rules.</p>
+<p>Every public fact stays tied to an official Costa Vida page. Every operational number in the test stays labeled as synthetic. That separation matters because the goal is to verify the system, not invent performance claims for Costa Vida.</p>
+    </section>
+    <section id="pillars" class="section">
+      <h2>Three Operating Pillars</h2>
+      <div class="pillar-grid"><article class="pillar-card"><span class="pillar-tag">Pillar</span><h3>Capture</h3><p>Get every catering, guest, rewards, and local-demand signal into one follow-up path.</p></article>
+<article class="pillar-card"><span class="pillar-tag">Pillar</span><h3>Convert</h3><p>Turn those signals into useful replies, store actions, and direct-order nudges.</p></article>
+<article class="pillar-card"><span class="pillar-tag">Pillar</span><h3>Compound</h3><p>Use weekly store proof to improve repeat visits, catering response, and crew execution.</p></article></div>
+    </section>
+    <section id="stack" class="section">
+      <h2>Automation Stack</h2>
+      <div class="stack-grid"><article class="stack-card"><h3>Lead capture</h3><p>qualify.html intake, GoHighLevel contact, synthetic test tags, and same-contact update proof.</p></article>
+<article class="stack-card"><h3>Restaurant inputs</h3><p>catering inquiries, rewards behavior, guest reviews, pickup notes, delivery notes, and manager observations.</p></article>
+<article class="stack-card"><h3>Agent layer</h3><p>six narrow agents with specific owner, output, time saved, and escalation rule.</p></article>
+<article class="stack-card"><h3>Proof layer</h3><p>public sources, editable financial assumptions, click-through checks, audio walkthrough, and qualification path.</p></article></div>
+    </section>
+    <section id="gaps" class="section">
+      <h2>Opportunity Gaps</h2>
+      <div class="gap-grid"><article class="gap-card"><h3>Catering speed</h3><p>Large orders need fast qualification, event details, and a clear owner before the buyer finds another food option.</p></article>
+<article class="gap-card"><h3>Direct-order reinforcement</h3><p>Rewards guests should be nudged toward pickup, delivery, or in-store scan paths that keep the relationship direct.</p></article>
+<article class="gap-card"><h3>Guest feedback loop</h3><p>Review themes should become store actions before they repeat across pickup, delivery, and dine-in guests.</p></article>
+<article class="gap-card"><h3>Local demand cadence</h3><p>Each restaurant needs a weekly list of nearby offices, teams, gyms, schools, and event buyers.</p></article>
+<article class="gap-card"><h3>Crew handoff clarity</h3><p>Managers need a short next-shift summary with owner, timing, and issue type.</p></article>
+<article class="gap-card"><h3>Pilot proof</h3><p>The first store needs measurable proof before a second workflow or second location is added.</p></article></div>
+      <p>Avery, the first test should stay close to the store floor. The agent output should name the restaurant, the guest or event type, the order path, the owner, and the next action. If the note does not help a manager decide what to do next, it does not belong in the pilot.</p>
+<p>The catering workflow should be measured by response speed, complete event details, clean handoff, and follow-up completion. A useful result is not a long message. A useful result is the right question asked quickly, the right owner tagged, and the buyer kept on a direct path.</p>
+<p>The guest recovery workflow should separate guest tone from store action. A response draft helps the guest feel heard, while the manager action helps the restaurant improve the next shift. Both are needed, and both should be short enough for a busy operator to use.</p>
+<p>The rewards workflow should reinforce direct ordering without making a claim the guest did not earn. A good message can point to app ordering, pickup, delivery, dine-in scan, or rewards status while staying aligned with the public Costa Club experience.</p>
+<p>The local demand workflow should be weekly and specific. Nearby offices, schools, sports teams, gyms, clinics, and event planners are better targets than broad advertising ideas. The output should give a contact reason, message draft, and follow-up date.</p>
+<p>The crew handoff workflow should not become a second management system. It should summarize guest issues, catering reminders, order friction, pickup timing, delivery notes, crew observations, and owner assignments in a format that can be read before the next shift.</p>
+<p>The scale decision should use proof from the pilot store. If catering response gets faster, guest recovery gets cleaner, rewards touches become easier, and managers accept the handoff format, then the second store or second workflow becomes reasonable.</p>
+<p>The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.</p>
+<p>The qualifier path protects the sales motion. The Blueprint page can invite Avery to qualify, but the booking path belongs after fit is captured. That keeps the CRM clean and prevents a calendar link from bypassing the qualification rules.</p>
+<p>Every public fact stays tied to an official Costa Vida page. Every operational number in the test stays labeled as synthetic. That separation matters because the goal is to verify the system, not invent performance claims for Costa Vida.</p>
+    </section>
+    <section id="oppmap" class="section">
+      <h2>Opportunity Map</h2>
+      <div class="opp-grid">
+        <article class="opp-card"><h3>First store pilot</h3><p>Pick one Utah restaurant and run catering response plus review intelligence for two weeks.</p></article>
+        <article class="opp-card"><h3>Second workflow</h3><p>Add loyalty reactivation only after the first store can show response speed and task completion.</p></article>
+        <article class="opp-card"><h3>Scale rule</h3><p>Expand when the store team says the agent output saves time and produces useful actions.</p></article>
+      </div>
+    </section>
+    <section id="ignore" class="section">
+      <h2>What We Ignore For Now</h2>
+      <ul class="ignore-list">
+        <li>No calendar booking embedded in the Blueprint.</li>
+        <li>No hardcoded revenue promise or public claim about Costa Vida financial performance.</li>
+        <li>No generic SaaS onboarding, support-ticket, or product-launch workflow.</li>
+        <li>No plumber, home-services, or contractor language.</li>
+        <li>No hardcoded revenue promise or public claim about Costa Vida financial performance.</li>
+      </ul>
+    </section>
+    <section id="agents" class="section">
+      <h2>AI Agents</h2>
+      <div class="agent-grid"><article class="agent-card">
+          <span class="agent-chip">Capture</span>
+          <h3>Catering Response Agent</h3>
+          <p>Replies to catering inquiries with headcount, event timing, pickup or delivery preference, and next action.</p>
+          <p><strong>Output:</strong> More catering conversations get a fast useful first reply and a clean owner.</p>
+        </article>
+<article class="agent-card">
+          <span class="agent-chip">Recover</span>
+          <h3>Guest Recovery Agent</h3>
+          <p>Turns review themes and order issues into calm, store-ready response drafts and manager actions.</p>
+          <p><strong>Output:</strong> Guest issues become visible actions instead of scattered notes.</p>
+        </article>
+<article class="agent-card">
+          <span class="agent-chip">Loyalty</span>
+          <h3>Loyalty Reactivation Agent</h3>
+          <p>Builds direct-order and rewards nudges for guests who should return through the app, website, or in-store scan.</p>
+          <p><strong>Output:</strong> Rewards members receive clearer reasons to come back directly.</p>
+        </article>
+<article class="agent-card">
+          <span class="agent-chip">Local</span>
+          <h3>Local Store Demand Agent</h3>
+          <p>Creates weekly local actions for offices, schools, teams, gyms, and event buyers near each restaurant.</p>
+          <p><strong>Output:</strong> Each store gets a focused demand list that can be used the same week.</p>
+        </article>
+<article class="agent-card">
+          <span class="agent-chip">Handoff</span>
+          <h3>Crew Handoff Agent</h3>
+          <p>Summarizes daily guest, catering, pickup, delivery, and crew notes into a short manager handoff.</p>
+          <p><strong>Output:</strong> Managers start the next shift with fewer surprises.</p>
+        </article>
+<article class="agent-card">
+          <span class="agent-chip">Insights</span>
+          <h3>Review Intelligence Agent</h3>
+          <p>Finds patterns across guest comments so the team can improve speed, accuracy, cleanliness, and repeat ordering.</p>
+          <p><strong>Output:</strong> Feedback turns into a weekly operating scorecard.</p>
+        </article></div>
+      <p>Avery, the first test should stay close to the store floor. The agent output should name the restaurant, the guest or event type, the order path, the owner, and the next action. If the note does not help a manager decide what to do next, it does not belong in the pilot.</p>
+<p>The catering workflow should be measured by response speed, complete event details, clean handoff, and follow-up completion. A useful result is not a long message. A useful result is the right question asked quickly, the right owner tagged, and the buyer kept on a direct path.</p>
+<p>The guest recovery workflow should separate guest tone from store action. A response draft helps the guest feel heard, while the manager action helps the restaurant improve the next shift. Both are needed, and both should be short enough for a busy operator to use.</p>
+<p>The rewards workflow should reinforce direct ordering without making a claim the guest did not earn. A good message can point to app ordering, pickup, delivery, dine-in scan, or rewards status while staying aligned with the public Costa Club experience.</p>
+<p>The local demand workflow should be weekly and specific. Nearby offices, schools, sports teams, gyms, clinics, and event planners are better targets than broad advertising ideas. The output should give a contact reason, message draft, and follow-up date.</p>
+<p>The crew handoff workflow should not become a second management system. It should summarize guest issues, catering reminders, order friction, pickup timing, delivery notes, crew observations, and owner assignments in a format that can be read before the next shift.</p>
+<p>The scale decision should use proof from the pilot store. If catering response gets faster, guest recovery gets cleaner, rewards touches become easier, and managers accept the handoff format, then the second store or second workflow becomes reasonable.</p>
+<p>The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.</p>
+<p>The qualifier path protects the sales motion. The Blueprint page can invite Avery to qualify, but the booking path belongs after fit is captured. That keeps the CRM clean and prevents a calendar link from bypassing the qualification rules.</p>
+<p>Every public fact stays tied to an official Costa Vida page. Every operational number in the test stays labeled as synthetic. That separation matters because the goal is to verify the system, not invent performance claims for Costa Vida.</p>
+    </section>
+    <section id="timeline" class="section">
+      <h2>3 / 7 / 30 Day Rollout</h2>
+      <div class="timeline-grid">
+        <article class="milestone"><h3>Days 1-3</h3><p>Connect the test profile, confirm the intake fields, and run one restaurant through catering response and guest recovery.</p></article>
+        <article class="milestone"><h3>Days 4-7</h3><p>Review output with the store lead, remove low-value messages, and keep only actions a manager would use.</p></article>
+        <article class="milestone"><h3>Days 8-30</h3><p>Track orders, catering follow-up, rewards touches, guest recovery, and crew handoffs before expanding.</p></article>
+      </div>
+      <p>Avery, the first test should stay close to the store floor. The agent output should name the restaurant, the guest or event type, the order path, the owner, and the next action. If the note does not help a manager decide what to do next, it does not belong in the pilot.</p>
+<p>The catering workflow should be measured by response speed, complete event details, clean handoff, and follow-up completion. A useful result is not a long message. A useful result is the right question asked quickly, the right owner tagged, and the buyer kept on a direct path.</p>
+<p>The guest recovery workflow should separate guest tone from store action. A response draft helps the guest feel heard, while the manager action helps the restaurant improve the next shift. Both are needed, and both should be short enough for a busy operator to use.</p>
+<p>The rewards workflow should reinforce direct ordering without making a claim the guest did not earn. A good message can point to app ordering, pickup, delivery, dine-in scan, or rewards status while staying aligned with the public Costa Club experience.</p>
+<p>The local demand workflow should be weekly and specific. Nearby offices, schools, sports teams, gyms, clinics, and event planners are better targets than broad advertising ideas. The output should give a contact reason, message draft, and follow-up date.</p>
+<p>The crew handoff workflow should not become a second management system. It should summarize guest issues, catering reminders, order friction, pickup timing, delivery notes, crew observations, and owner assignments in a format that can be read before the next shift.</p>
+<p>The scale decision should use proof from the pilot store. If catering response gets faster, guest recovery gets cleaner, rewards touches become easier, and managers accept the handoff format, then the second store or second workflow becomes reasonable.</p>
+<p>The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.</p>
+<p>The qualifier path protects the sales motion. The Blueprint page can invite Avery to qualify, but the booking path belongs after fit is captured. That keeps the CRM clean and prevents a calendar link from bypassing the qualification rules.</p>
+<p>Every public fact stays tied to an official Costa Vida page. Every operational number in the test stays labeled as synthetic. That separation matters because the goal is to verify the system, not invent performance claims for Costa Vida.</p>
+    </section>
+    <section id="calculator" class="section">
+      <h2>ROI Calculator</h2>
+      <p>The calculator uses restaurant ticket economics. It does not use a generic contract value.</p>
+      <div class="calc-grid">
+        <label class="calc-field">Monthly Order Opportunities
+          <input id="slider-leads" type="range" min="100" max="3000" value="2200" step="25">
+          <output id="leadsOut">2200</output>
+        </label>
+        <label class="calc-field">Average Ticket Value
+          <input id="slider-contract" type="range" min="8" max="60" value="18" step="1">
+          <output id="contractOut">$18</output>
+        </label>
+        <label class="calc-field">Incremental Capture
+          <input id="slider-capture" type="range" min="1" max="20" value="4" step="1">
+          <output id="captureOut">4%</output>
+        </label>
+      </div>
+      <div class="roi-result">
+        <span>Modeled monthly lift from better follow-up</span>
+        <strong id="roiOut">$1,584</strong>
+        <p>This is a synthetic planning model for the test. Drag the sliders before using any result in a real conversation.</p>
+      </div>
+    </section>
+    <section id="prompts" class="section">
+      <h2>Prompts</h2>
+      <div class="prompt-grid"><article class="prompt-card">
+          <h3>Catering Response Prompt</h3>
+          <pre class="prompt-block">You are the catering response agent for Costa Vida. When a catering inquiry arrives, answer Avery&#x27;s guest within 60 seconds. Confirm event date, headcount, pickup or delivery, location, dietary notes, and best phone number. Route urgent or large orders to the store lead and tag the record as catering-response.</pre>
+        </article>
+<article class="prompt-card">
+          <h3>Guest Recovery Prompt</h3>
+          <pre class="prompt-block">You are the guest recovery agent for Costa Vida. Read guest feedback, classify the issue, draft a short response, and recommend one store action. Keep every reply respectful, specific, and focused on making the next visit better.</pre>
+        </article>
+<article class="prompt-card">
+          <h3>Loyalty Reactivation Prompt</h3>
+          <pre class="prompt-block">You are the loyalty reactivation agent for Costa Vida. Segment guests by recent order behavior, rewards activity, and location. Draft a direct-order reminder that respects the Costa Club value proposition and routes the guest to pickup, delivery, or dine-in scan.</pre>
+        </article></div>
+    </section>
+    <section id="demo" class="section">
+      <h2>Operations Preview</h2>
+      <div class="demo-panel">
+        <div class="demo-row"><span>New catering inquiry</span><strong>Capture headcount, date, location, pickup or delivery, and phone.</strong></div>
+        <div class="demo-row"><span>Guest review theme</span><strong>Draft response, classify issue, assign one store action.</strong></div>
+        <div class="demo-row"><span>Rewards reactivation</span><strong>Route guests to direct ordering, in-app pickup, delivery, or in-store scan.</strong></div>
+        <div class="demo-row"><span>Manager handoff</span><strong>Summarize crew, guest, order, and catering notes into next-shift actions.</strong></div>
+      </div>
+    </section>
+    <section id="listen" class="section">
+      <h2>Listen</h2>
+      <div id="podcast" class="player-shell">
+        <audio id="podAudio" preload="metadata" src="../podcasts/avery-martinez-costa-vida-20260601.mp3"></audio>
+        <div class="player-top">
+          <div class="player-copy">
+            <h3>Avery Martinez - Costa Vida Walkthrough</h3>
+            <p>Direct-address audio for this synthetic Costa Vida run.</p>
+          </div>
+          <span id="podBadge" class="badge">Food franchise</span>
+        </div>
+        <div id="podTrack" class="track"><div id="podFill" class="fill"></div><div id="podThumb" class="thumb"></div></div>
+        <div class="time-row"><span id="podElapsed">0:00</span><span id="podDuration">0:00</span></div>
+        <div class="chapter-row" aria-label="Audio chapters">
+          <span class="chapter-pip" data-chapter="0"></span>
+          <span class="chapter-pip" data-chapter="1"></span>
+          <span class="chapter-pip" data-chapter="2"></span>
+        </div>
+        <div class="player-controls">
+          <button id="podBack" class="icon-btn" type="button" aria-label="Back 15 seconds">-15</button>
+          <button id="podPlay" class="icon-btn" type="button" aria-label="Play walkthrough"><span id="podPlayIcon">Play</span></button>
+          <button id="podFwd" class="icon-btn" type="button" aria-label="Forward 15 seconds">+15</button>
+          <span id="podEq" class="eq" aria-hidden="true"><i class="eq-bar"></i><i class="eq-bar"></i><i class="eq-bar"></i></span>
+          <span id="podChapterName" class="chapter-name">Opening</span>
+          <select id="podSpeed" class="speed-select" aria-label="Playback speed"><option value="1">1x</option><option value="1.25">1.25x</option></select>
+          <button id="podMute" class="icon-btn" type="button" aria-label="Mute"><span id="podVolIcon">Vol</span></button>
+        </div>
+        <p id="podError" class="error-text" hidden>Audio could not load. Use the direct file link below.</p>
+        <a class="text-link" href="../podcasts/avery-martinez-costa-vida-20260601.mp3">Download MP3</a>
+      </div>
+      <div id="podMini" class="mini-player">
+        <button id="podMiniPlay" class="icon-btn" type="button" aria-label="Mini player"><span id="podMiniIcon">Play</span></button>
+        <span id="podMiniTime">0:00</span>
+      </div>
+    </section>
+    <section id="sources" class="section">
+      <h2>Sources</h2>
+      <ul class="source-list"><li class="source-item"><a href="https://www.costavida.com/about/">Official Costa Vida about page</a><span>company history, Layton origin, leadership, location count, and food philosophy</span></li>
+<li class="source-item"><a href="https://www.costavida.com/rewards/">Official Costa Vida rewards page</a><span>Costa Club, direct ordering, app scan, pickup, delivery, and rewards behavior</span></li>
+<li class="source-item"><a href="https://www.costavida.com/catering/">Official Costa Vida catering page</a><span>catering options, event fit, delivery note, setup note, and rewards eligibility</span></li>
+<li class="source-item"><a href="https://www.costavida.com/locations/us/ut/">Official Costa Vida Utah locations page</a><span>Utah location context for this synthetic pilot</span></li></ul>
+      <p class="footnote">Public Costa Vida facts are separated from synthetic test assumptions. No public financial claim is made about Costa Vida.</p>
+    </section>
+    <section id="apply" class="section">
+      <h2>Qualify</h2>
+      <div class="apply-panel">
+        <p>Avery, the next step is the qualifier. It captures fit, keeps the follow-up in GoHighLevel when the connector is authenticated, and prevents a calendar link from appearing before qualification.</p>
+        <div class="apply-actions"><a class="cta-btn" href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&amp;biz=Costa+Vida&amp;src=avery-martinez-costa-vida-20260601&amp;utm_source=blueprint&amp;utm_medium=blueprint&amp;utm_campaign=synthetic_costa_vida">See If You Qualify</a></div>
+      </div>
+    </section>
+
+  <script>
+    const CHAPTERS = [
+      { name: 'Opening', t: 0 },
+      { name: 'Agents', t: 120 },
+      { name: 'Qualifier', t: 360 }
+    ];
+    const STORE_KEY = 'bpod_avery_martinez_costa_vida_20260601';
+    const audio = document.getElementById('podAudio');
+    const play = document.getElementById('podPlay');
+    const playIcon = document.getElementById('podPlayIcon');
+    const miniPlay = document.getElementById('podMiniPlay');
+    const miniIcon = document.getElementById('podMiniIcon');
+    const fill = document.getElementById('podFill');
+    const thumb = document.getElementById('podThumb');
+    const elapsed = document.getElementById('podElapsed');
+    const duration = document.getElementById('podDuration');
+    const miniTime = document.getElementById('podMiniTime');
+    const speed = document.getElementById('podSpeed');
+    const mute = document.getElementById('podMute');
+    const volIcon = document.getElementById('podVolIcon');
+    const error = document.getElementById('podError');
+    function fmt(sec) {
+      const safe = Number.isFinite(sec) ? Math.max(0, Math.floor(sec)) : 0;
+      return Math.floor(safe / 60) + ':' + String(safe % 60).padStart(2, '0');
+    }
+    function render() {
+      const dur = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0;
+      const pct = dur ? Math.min(100, Math.max(0, (audio.currentTime / dur) * 100)) : 0;
+      fill.style.width = pct + '%';
+      thumb.style.left = pct + '%';
+      elapsed.textContent = fmt(audio.currentTime);
+      miniTime.textContent = fmt(audio.currentTime);
+      duration.textContent = fmt(dur);
+      try { localStorage.setItem(STORE_KEY, String(Math.floor(audio.currentTime))); } catch (err) {}
+    }
+    function syncIcon() {
+      const label = audio.paused ? 'Play' : 'Pause';
+      playIcon.textContent = label;
+      miniIcon.textContent = label;
+    }
+    function togglePlay() {
+      if (audio.readyState === 0) { audio.load(); }
+      if (audio.paused) { const p = audio.play(); if (p && p.catch) { p.catch(() => { error.hidden = false; }); } }
+      else { audio.pause(); }
+    }
+    play.addEventListener('click', togglePlay);
+    miniPlay.addEventListener('click', togglePlay);
+    document.getElementById('podBack').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+    document.getElementById('podFwd').addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || audio.currentTime + 15, audio.currentTime + 15); });
+    speed.addEventListener('change', () => { audio.playbackRate = Number(speed.value); });
+    mute.addEventListener('click', () => { audio.muted = !audio.muted; volIcon.textContent = audio.muted ? 'Muted' : 'Vol'; });
+    audio.addEventListener('timeupdate', render);
+    audio.addEventListener('loadedmetadata', render);
+    audio.addEventListener('play', syncIcon);
+    audio.addEventListener('pause', syncIcon);
+    audio.addEventListener('error', () => { error.hidden = false; });
+    const leads = document.getElementById('slider-leads');
+    const contract = document.getElementById('slider-contract');
+    const capture = document.getElementById('slider-capture');
+    function calc() {
+      const leadCount = Number(leads.value);
+      const ticket = Number(contract.value);
+      const captureRate = Number(capture.value) / 100;
+      const lift = Math.round(leadCount * ticket * captureRate);
+      document.getElementById('leadsOut').textContent = String(leadCount);
+      document.getElementById('contractOut').textContent = '$' + ticket.toLocaleString();
+      document.getElementById('captureOut').textContent = capture.value + '%';
+      document.getElementById('roiOut').textContent = '$' + lift.toLocaleString();
+    }
+    leads.addEventListener('input', calc);
+    contract.addEventListener('input', calc);
+    capture.addEventListener('input', calc);
+    calc();
+    </script>
+</body>
+</html>

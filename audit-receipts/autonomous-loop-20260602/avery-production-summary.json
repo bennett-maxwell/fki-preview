@@ -1,0 +1,185 @@
+{
+  "blocker_count": 7,
+  "blockers": [
+    {
+      "detail": "#43: Drive artifact registry row present; #45: Current GHL readback (contact tagged); #46: Repeat-submit same-contact proof",
+      "key": "completion_gate",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-completion-gate.json"
+    },
+    {
+      "detail": "completion_gate failed; proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json; proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json",
+      "key": "gatekeeper_production",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-gatekeeper-production-output.json"
+    },
+    {
+      "detail": "Mobile screenshot was not captured. In-app Browser verified desktop render; local Playwright is not installed and the browser wrapper did not expose a mobile viewport setter.",
+      "key": "mobile_render",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json"
+    },
+    {
+      "detail": "Production closeout cannot pass until Drive registry, HighLevel readback, repeat-submit proof, and mobile render are verified.",
+      "key": "closeout",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
+    },
+    {
+      "detail": "Drive artifact registry receipt is not PASS; registry_file is missing; verified=true is missing",
+      "key": "production_43_drive_registry",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-43.json"
+    },
+    {
+      "detail": "HighLevel readback receipt is not PASS; exact_contact_count=1 is missing; contact.id is missing; conversation.id is missing; instant_response_verified=true is missing",
+      "key": "production_45_ghl_readback",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-45.json"
+    },
+    {
+      "detail": "repeat-submit receipt is not PASS; relay_http_status=200 is missing; relay_mode must be updated or matched; returned_contact_id is missing; exact_contact_count_after_repeat=1 is missing",
+      "key": "production_46_repeat_submit",
+      "receipt": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-46.json"
+    }
+  ],
+  "external_send_allowed": false,
+  "lead": "avery-martinez-costa-vida-20260601",
+  "local_public_preview_ready": true,
+  "next_physical_actions": [
+    "Update/read back Drive artifact registry with registry_file and verified=true.",
+    "Reauthenticate HighLevel and rerun exact contact plus instant-response readback.",
+    "Rerun repeat-submit proof and confirm one same GHL contact after repeat.",
+    "Capture mobile render proof with a real mobile viewport or approved browser receipt.",
+    "Regenerate closeout and production Gatekeeper token only after every blocker is PASS."
+  ],
+  "no_send": true,
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
+  "receipts": {
+    "audit": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-audit.json",
+      "status": "PASS"
+    },
+    "closeout": {
+      "detail": "Production closeout cannot pass until Drive registry, HighLevel readback, repeat-submit proof, and mobile render are verified.",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json",
+      "status": "BLOCKED"
+    },
+    "completion_gate": {
+      "detail": "#43: Drive artifact registry row present; #45: Current GHL readback (contact tagged); #46: Repeat-submit same-contact proof",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-completion-gate.json",
+      "production_failures": [
+        "#43: Drive artifact registry row present",
+        "#43: Drive artifact registry row present \u2014 Drive receipt must include registry_file and verified=true",
+        "#45: Current GHL readback (contact tagged)",
+        "#45: Current GHL readback (contact tagged) \u2014 GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true",
+        "#46: Repeat-submit same-contact proof",
+        "#46: Repeat-submit same-contact proof \u2014 Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
+      ],
+      "require_production": true,
+      "status": "FAIL",
+      "summary": {
+        "failed": 3,
+        "overall_pass": false,
+        "passed": 40,
+        "skipped": 7,
+        "total_applicable": 43
+      }
+    },
+    "desktop_render": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-desktop-render.json",
+      "status": "PASS"
+    },
+    "email_click_test": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-email-click-test.json",
+      "status": "PASS"
+    },
+    "gatekeeper_production": {
+      "detail": "completion_gate failed; proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json; proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json",
+      "diamond": "FAIL",
+      "exists": true,
+      "failures": [
+        "completion_gate failed",
+        "proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json",
+        "proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json"
+      ],
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-gatekeeper-production-output.json",
+      "score": 0,
+      "status": "FAIL"
+    },
+    "mobile_render": {
+      "detail": "Mobile screenshot was not captured. In-app Browser verified desktop render; local Playwright is not installed and the browser wrapper did not expose a mobile viewport setter.",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json",
+      "status": "BLOCKED"
+    },
+    "production_43_drive_registry": {
+      "detail": "Drive artifact registry receipt is not PASS; registry_file is missing; verified=true is missing",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-43.json",
+      "status": "BLOCKED"
+    },
+    "production_45_ghl_readback": {
+      "detail": "HighLevel readback receipt is not PASS; exact_contact_count=1 is missing; contact.id is missing; conversation.id is missing; instant_response_verified=true is missing",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-45.json",
+      "status": "BLOCKED"
+    },
+    "production_46_repeat_submit": {
+      "detail": "repeat-submit receipt is not PASS; relay_http_status=200 is missing; relay_mode must be updated or matched; returned_contact_id is missing; exact_contact_count_after_repeat=1 is missing",
+      "exists": true,
+      "pass": false,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-46.json",
+      "status": "BLOCKED"
+    },
+    "production_47_podcast": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-47.json",
+      "status": "PASS"
+    },
+    "production_48_approval_scope": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-production-48.json",
+      "status": "PASS"
+    },
+    "public_http": {
+      "detail": "PASS",
+      "exists": true,
+      "pass": true,
+      "path": "audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-public-http.json",
+      "status": "PASS"
+    }
+  },
+  "schema_failures": [
+    "production_43_drive_registry: Drive artifact registry receipt is not PASS",
+    "production_43_drive_registry: registry_file is missing",
+    "production_43_drive_registry: verified=true is missing",
+    "production_45_ghl_readback: HighLevel readback receipt is not PASS",
+    "production_45_ghl_readback: exact_contact_count=1 is missing",
+    "production_45_ghl_readback: contact.id is missing",
+    "production_45_ghl_readback: conversation.id is missing",
+    "production_45_ghl_readback: instant_response_verified=true is missing",
+    "production_46_repeat_submit: repeat-submit receipt is not PASS",
+    "production_46_repeat_submit: relay_http_status=200 is missing",
+    "production_46_repeat_submit: relay_mode must be updated or matched",
+    "production_46_repeat_submit: returned_contact_id is missing",
+    "production_46_repeat_submit: exact_contact_count_after_repeat=1 is missing"
+  ],
+  "strict_production_ready": false,
+  "ts": "2026-06-02T00:29:43.625528+00:00"
+}

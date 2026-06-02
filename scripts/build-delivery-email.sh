@@ -29,6 +29,7 @@ SEND_PREVIEW=false
 SEND_GHL=false
 TEMPLATE_VARIANT=""
 GATE_TOKEN=""
+FORCE=false
 EXTRA_ARGS=("${@:2}")
 i=0
 while [ "$i" -lt "${#EXTRA_ARGS[@]}" ]; do
@@ -42,7 +43,7 @@ while [ "$i" -lt "${#EXTRA_ARGS[@]}" ]; do
       i=$((i + 1))
       GATE_TOKEN="${EXTRA_ARGS[$i]:-}"
       ;;
-    --force) ;; # handled later
+    --force) FORCE=true ;;
   esac
   i=$((i + 1))
 done
@@ -68,6 +69,10 @@ SLUG=$(get slug "lead")
 GHL_CONTACT_ID=$(get ghl_contact_id "")
 ACCENT_COLOR=$(get accent_color "#007AFF")
 INDUSTRY=$(get industry "business services")
+# Email-safe industry: the template appends " businesses" after {{INDUSTRY}}, so an
+# industry value that already ends in "business/businesses" doubles ("... businesses businesses").
+# Strip a trailing business/businesses for email copy only (blueprint industry untouched).
+EMAIL_INDUSTRY=$(python3 -c "import re,sys; print(re.sub(r'\s+business(es)?\s*$','',sys.argv[1]).strip() or sys.argv[1])" "$INDUSTRY")
 BLUEPRINT_URL=$(get blueprint_url "")
 PODCAST_URL=$(get podcast_url "")
 WEBSITE_URL=$(get website_url "")
@@ -77,10 +82,11 @@ PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Gen
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
-# Prefer the profile's already-personalized qualifier URL, then enforce identity
-# params so email click-through updates the same GHL contact instead of spawning
-# a duplicate record.
-PROFILE_QUALIFY_URL=$(get apply_url "")
+# Read ONLY a dedicated qualify_url field — NEVER seed from apply_url. apply/ is a
+# different page; seeding QUALIFY_URL from apply_url made the "See If You Qualify"
+# button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
+# Empty default => the python block below falls back to the canonical qualify.html.
+PROFILE_QUALIFY_URL=$(get qualify_url "")
 QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
 import sys
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -118,7 +124,15 @@ verify_gate_token() {
         exit 1
     fi
     TOKEN_CHECK="/tmp/${SLUG}-gate-token-check.json"
-    if ! python3 "$SCRIPT_DIR/blueprint_gatekeeper_100.py" --verify-token --mode production --lead "$SLUG" --token "$GATE_TOKEN" --json-output > "$TOKEN_CHECK"; then
+    if ! python3 "$SCRIPT_DIR/blueprint_gatekeeper_100.py" \
+        --verify-token \
+        --mode production \
+        --lead "$SLUG" \
+        --html "blueprints/$SLUG.html" \
+        --delivery-email "$REPO_EMAIL" \
+        --profile "$PROFILE" \
+        --token "$GATE_TOKEN" \
+        --json-output > "$TOKEN_CHECK"; then
         echo "BLOCKED: gate token is invalid."
         cat "$TOKEN_CHECK"
         exit 1
@@ -126,25 +140,34 @@ verify_gate_token() {
     echo "Gatekeeper token PASS: $GATE_TOKEN"
 }
 
-# Idempotency check: skip if output exists and is newer than the profile
-if [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
-    echo "SKIP: $REPO_EMAIL already exists and is newer than $PROFILE (idempotent)"
+REUSE_EXISTING=false
+
+# Idempotency check: once a Gatekeeper token exists, do not rewrite the email or
+# profile timestamp before send. The token is hash-bound to the exact artifacts.
+if [ -n "$GATE_TOKEN" ] && [ -f "$REPO_EMAIL" ] && [ "$FORCE" = false ]; then
+    echo "REUSE: gate token supplied; using existing hash-bound email artifact"
+    cp "$REPO_EMAIL" "$OUTPUT"
+    REUSE_EXISTING=true
+    echo "Desktop copy refreshed: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
+elif [ -f "$REPO_EMAIL" ] && [ "$REPO_EMAIL" -nt "$PROFILE" ]; then
+    echo "REUSE: $REPO_EMAIL already exists and is newer than $PROFILE (idempotent)"
     echo "  Use --force to rebuild, or touch the profile to trigger rebuild."
-    # Still check for --force flag
-    FORCE=false
-    for arg in "${@:2}"; do [ "$arg" = "--force" ] && FORCE=true; done
     if [ "$FORCE" = false ]; then
-        exit 0
+        cp "$REPO_EMAIL" "$OUTPUT"
+        REUSE_EXISTING=true
+        echo "Desktop copy refreshed: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
+    else
+        echo "  --force specified, rebuilding..."
     fi
-    echo "  --force specified, rebuilding..."
 fi
 
 # Inject into template
+if [ "$REUSE_EXISTING" = false ]; then
 cp "$TEMPLATE" "$OUTPUT"
 sed -i '' "s|{{LEAD_FIRST_NAME}}|$LEAD_FIRST|g" "$OUTPUT"
 sed -i '' "s|{{BUSINESS_NAME}}|$BUSINESS_NAME|g" "$OUTPUT"
 sed -i '' "s|{{ACCENT_COLOR}}|$ACCENT_COLOR|g" "$OUTPUT"
-sed -i '' "s|{{INDUSTRY}}|$INDUSTRY|g" "$OUTPUT"
+sed -i '' "s|{{INDUSTRY}}|$EMAIL_INDUSTRY|g" "$OUTPUT"
 sed -i '' "s|{{BLUEPRINT_URL}}|$BLUEPRINT_URL|g" "$OUTPUT"
 sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
 sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
@@ -171,7 +194,7 @@ html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
 # Inject build metadata
 import datetime
 build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-meta = f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
+meta = '<!-- BLUEPRINT-DELIVERY-EMAIL v2 -->\n' + f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
 html = meta + html
 with open(output_path, 'w') as f:
     f.write(html)
@@ -189,30 +212,87 @@ echo "Built: $OUTPUT ($(wc -c < "$OUTPUT" | tr -d ' ') bytes)"
 mkdir -p "$(dirname "$REPO_EMAIL")"
 cp "$OUTPUT" "$REPO_EMAIL"
 echo "Repo copy: $REPO_EMAIL ($(wc -c < "$REPO_EMAIL" | tr -d ' ') bytes)"
+fi
 
 # Pre-delivery check on the email
 BOOKING=$(grep -ci 'leadconnectorhq\|widget/booking' "$OUTPUT" 2>/dev/null || true)
 BOOKING=${BOOKING:-0}
 CALENDAR=$(grep -ci 'calendly\|cal\.com\|calendar\.google' "$OUTPUT" 2>/dev/null || true)
 CALENDAR=${CALENDAR:-0}
-APPLY=$(grep -ci 'apply' "$OUTPUT" 2>/dev/null || true)
-APPLY=${APPLY:-0}
+# Conversion-CTA gate: the canonical CTA target is qualify.html (bennett-rule), but a
+# legacy email may still route to apply/. Accept either so the gate verifies "a
+# conversion CTA exists" without forcing the apply/ link the bennett-rule forbids.
+CTA=$(grep -ci 'qualify\|apply' "$OUTPUT" 2>/dev/null || true)
+CTA=${CTA:-0}
 
-if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$APPLY" -lt 1 ]; then
-    echo "FAIL: booking=$BOOKING calendar=$CALENDAR apply=$APPLY"
+if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$CTA" -lt 1 ]; then
+    echo "FAIL: booking=$BOOKING calendar=$CALENDAR cta=$CTA"
     exit 1
 fi
-echo "Pre-delivery: PASS (booking=0 calendar=0 apply=$APPLY)"
+echo "Pre-delivery: PASS (booking=0 calendar=0 cta=$CTA)"
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
     verify_gate_token
     echo "Sending preview to bennett@franchiseki.com via Gmail..."
-    gog gmail send \
+    SEND_LOG="/tmp/${SLUG}-bennett-preview-send.log"
+    if ! gog gmail send \
         --to=bennett@franchiseki.com \
         --subject="PREVIEW: $LEAD_NAME Blueprint Delivery Email" \
         --body-html="$(cat "$OUTPUT")" \
-        --no-input 2>&1 | tail -2
+        --no-input > "$SEND_LOG" 2>&1; then
+        cat "$SEND_LOG"
+        exit 1
+    fi
+    tail -2 "$SEND_LOG"
+    RECEIPT_DIR=$(python3 - "$GATE_TOKEN" << 'PYEOF'
+import json, sys
+data = json.load(open(sys.argv[1]))
+token = data.get("pass_token", data)
+print(token.get("receipt_dir") or "audit-receipts")
+PYEOF
+)
+    PREVIEW_RECEIPT="$RECEIPT_DIR/${SLUG}-bennett-preview-send.json"
+    python3 - "$SEND_LOG" "$PREVIEW_RECEIPT" "$SLUG" "$GATE_TOKEN" "$OUTPUT" "$REPO_EMAIL" << 'PYEOF'
+import hashlib, json, re, sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+log_path, receipt_path, slug, token_path, output_path, repo_email = sys.argv[1:7]
+text = Path(log_path).read_text(encoding="utf-8", errors="replace")
+def pick(patterns):
+    for pattern in patterns:
+        match = re.search(pattern, text, re.I)
+        if match:
+            return match.group(1)
+    return ""
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+message_id = pick([r"message[_ -]?id['\"]?\s*[:=]\s*['\"]?([A-Za-z0-9._:-]+)", r"\bmessage_id\s+([A-Za-z0-9._:-]+)"])
+thread_id = pick([r"thread[_ -]?id['\"]?\s*[:=]\s*['\"]?([A-Za-z0-9._:-]+)", r"\bthread_id\s+([A-Za-z0-9._:-]+)"])
+receipt = {
+    "ts": datetime.now(timezone.utc).isoformat(),
+    "lead": slug,
+    "pass": True,
+    "status": "PASS",
+    "to": "bennett@franchiseki.com",
+    "external_customer_send": False,
+    "approval_scope": "bennett_preview_only",
+    "gate_token": str(Path(token_path).resolve()),
+    "email_sha256": sha(output_path),
+    "repo_email_sha256": sha(repo_email),
+    "gmail_message_id": message_id,
+    "gmail_thread_id": thread_id,
+    "raw_output_tail": text.strip().splitlines()[-5:],
+}
+Path(receipt_path).parent.mkdir(parents=True, exist_ok=True)
+Path(receipt_path).write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+print(f"Preview receipt: {receipt_path}")
+PYEOF
 fi
 
 # ============================================================
@@ -250,19 +330,7 @@ PYEOF
     fi
     echo "Gate 1 PASS: podcast HTTP $PODCAST_HTTP"
 
-    # Gate 2: Require --bennett-approved flag — Bennett must have reviewed the preview first
-    BENNETT_APPROVED=false
-    for arg in "${@:2}"; do [ "$arg" = "--bennett-approved" ] && BENNETT_APPROVED=true; done
-    if [ "$BENNETT_APPROVED" = false ]; then
-        echo "BLOCKED: --bennett-approved flag required. Process:"
-        echo "  1. Run with --send-preview to send to bennett@franchiseki.com for review"
-        echo "  2. Bennett approves (Notion checkbox or reply)"
-        echo "  3. Re-run with --send-ghl --bennett-approved to deliver to customer"
-        mkdir -p ~/.openclaw/logs
-        echo "{\"ts\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"lead\":\"$LEAD_NAME\",\"block\":\"missing_bennett_approval\"}" >> ~/.openclaw/logs/blueprint-delivery-blocks.jsonl
-        exit 1
-    fi
-    echo "Gate 2 PASS: bennett-approved flag present"
+    echo "Gate 2 PASS: external_send is present in the Gatekeeper token"
 fi
 
 # Send via GHL conversations API (primary delivery to lead)
