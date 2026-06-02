@@ -22,6 +22,11 @@ v1.0 — 2026-06-01 — created per Bennett directive: lock the gold format so e
        blueprint-ai-skill run reproduces format-3 structure with new company data.
        Verified to PASS format-3-red-dense-scroll.html and FAIL the 21-section
        Melissa-v2 TEMPLATE.html (proves it discriminates the two structures).
+v1.1 — 2026-06-01 — added FC-08 [RL] podcast 6-20MB byte-window gate. FC-06 proved
+       the container was mp3 but NOT the length; a --length short stub (4.5MB) passed
+       FC-06 yet was too thin, and an un-transcoded export (31MB+) hung the iOS player.
+       FC-08 makes the 6-20MB walkthrough window machine-checked. Verified PASS on the
+       14.1MB Brent deliverable, FAIL on a 66MB un-transcoded export.
 """
 import re, sys, pathlib, argparse, subprocess
 
@@ -132,6 +137,22 @@ def check(html_path: pathlib.Path, podcast_path: pathlib.Path | None = None):
                 checks.append(("FC-06", "[RL] podcast is real MP3", False, f"ffprobe err:{e}"))
     else:
         checks.append(("FC-06", "[RL] podcast real-MP3 (skipped — no --podcast)", True, "SKIP"))
+
+    # FC-08 [RL] podcast byte-size inside the 6-20MB walkthrough WINDOW.
+    # Thread learning 2026-06-01: FC-06 proves the CONTAINER is mp3 but says nothing
+    # about length. A --length short render passes FC-06 yet is a 4.5MB/4.7min stub
+    # (too thin to be a real walkthrough); an un-transcoded NotebookLM export is a
+    # 31MB+ giant that hangs the unbuffered iOS player. The enforced deliverable is a
+    # 6-20MB walkthrough. This gate makes that window machine-checked, not manual.
+    FLOOR, CEIL = 6 * 1024 * 1024, 20 * 1024 * 1024
+    if podcast_path is not None and podcast_path.exists():
+        sz = podcast_path.stat().st_size
+        size_ok = FLOOR <= sz <= CEIL
+        mb = sz / 1048576
+        checks.append(("FC-08", f"[RL] podcast in 6-20MB window (got {mb:.1f}MB)", size_ok,
+                       None if size_ok else f"{mb:.1f}MB outside 6-20MB"))
+    else:
+        checks.append(("FC-08", "[RL] podcast 6-20MB window (skipped — no --podcast)", True, "SKIP"))
 
     passed = sum(1 for c in checks if c[2])
     failed = [c for c in checks if not c[2]]
