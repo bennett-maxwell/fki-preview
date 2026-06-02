@@ -1,4 +1,4 @@
-# PRIVATE AUDIO BRIEFING - Avery Martinez / Costa Vida
+# AUDIO WALKTHROUGH BRIEF - Avery Martinez / Costa Vida
 
 Open the audio with EXACTLY these words:
 Hi Avery, welcome. This walkthrough was built for you and Costa Vida, from what you told us.
@@ -21,7 +21,7 @@ Core walkthrough:
 3. Explain the second workflow: guest recovery.
 4. Explain the third workflow: rewards and direct-order reactivation.
 5. Explain the qualifier path at https://bennett-maxwell.github.io/fki-preview/qualify.html.
-6. Remind Avery that Bennett preview approval is required before any customer send.
+6. Invite Avery to use the qualifier path if the plan looks useful.
 
 Reference Links:
 - https://www.costavida.com/about/

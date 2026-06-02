@@ -41,6 +41,11 @@ BANNED_PATTERNS = [
     r"\bdelete delete\b",
     r"\bi said\b",
     r"\bhigh chad\b",
+    r"\bbennett preview\b",
+    r"\bcustomer send\b",
+    r"\bgatekeeper\b",
+    r"\bproduction gatekeeper\b",
+    r"\binternal audit\b",
 ]
 
 

@@ -148,7 +148,16 @@ def check_restaurant_drift_gate_wired():
 def check_podcast_direct_address_artifact_gate():
     """11. Podcast audit blocks source-material framing and known ASR artifacts."""
     src = _read(os.path.join(REPO, "scripts", "podcast_direct_address_audit.py")).lower()
-    for phrase in ["source materials?", "golden state", "delete delete", "i said", "high chad"]:
+    for phrase in [
+        "source materials?",
+        "golden state",
+        "delete delete",
+        "i said",
+        "high chad",
+        "bennett preview",
+        "customer send",
+        "gatekeeper",
+    ]:
         assert phrase in src, f"podcast direct-address gate missing: {phrase}"
 
 
@@ -159,6 +168,28 @@ def check_local_audio_audit_not_public_deploy_blocked():
         "run-audit.py must gate public audio 200 behind an explicit production env"
     assert '"public_url_200": True if not require_public_audio' in src, \
         "run-audit.py still hard-blocks local first deploy on public podcast URL"
+
+
+def check_production_summary_no_send_guard():
+    """13. Local/public proof must not be interchangeable with external-send
+    approval. The production summary guard keeps no_send=true until strict
+    production receipts prove Drive registry, GHL readback, repeat-submit, and
+    production Gatekeeper readiness."""
+    src = _read(os.path.join(REPO, "scripts", "blueprint_production_summary.py"))
+    for token in [
+        "strict_production_ready",
+        "external_send_allowed",
+        "no_send",
+        "validate_drive_registry",
+        "validate_ghl_readback",
+        "validate_repeat_submit",
+        "require_production",
+        "strict completion gate receipt must have require_production=true",
+        "exact_contact_count=1",
+        "instant_response_verified=true",
+        "exact_contact_count_after_repeat=1",
+    ]:
+        assert token in src, f"production summary guard missing token: {token}"
 
 
 CHECKS = [
@@ -174,6 +205,7 @@ CHECKS = [
     ("RESTAURANT_DRIFT_GATE_WIRED", check_restaurant_drift_gate_wired),
     ("PODCAST_DIRECT_ADDRESS_ARTIFACT_GATE", check_podcast_direct_address_artifact_gate),
     ("LOCAL_AUDIO_AUDIT_NOT_PUBLIC_DEPLOY_BLOCKED", check_local_audio_audit_not_public_deploy_blocked),
+    ("PRODUCTION_SUMMARY_NO_SEND_GUARD", check_production_summary_no_send_guard),
 ]
 
 
