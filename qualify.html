@@ -1411,6 +1411,7 @@ function syncMobileStickyBar() {
   if (!mobileStickyBar || !mobileStickyBtn) return;
   // Show bar only on narrow screens when form is completeable
   const isNarrow = window.matchMedia('(max-width: 860px)').matches;
+  const allAnswered = currentAnswerCount() >= 8;
   if (isNarrow && allAnswered && !document.getElementById('booking-modal').classList.contains('open')) {
     mobileStickyBar.classList.add('visible');
     mobileStickyBar.setAttribute('aria-hidden', 'false');
