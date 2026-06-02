@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Email Design Conformance — blueprint-ai-audit-skill v2.8 D5-16..D5-21 (all RED-LINE).
+Email Design Conformance — blueprint-ai-audit-skill v2.8 D5-16..D5-23 (all RED-LINE).
 
 Verifies a blueprint delivery email matches the approved Advaita design. A hand-rolled
 or drifted email FAILS, so it can never mint the 100% approval token (audit-gate.sh).
@@ -37,7 +37,7 @@ def fail(checks):
     if bad:
         print(f"FAIL: {len(bad)} red-line email-design check(s) failed.")
         sys.exit(1)
-    print("PASS: email design conforms (D5-16..D5-21 all green).")
+    print("PASS: email design conforms (D5-16..D5-23 all green).")
     sys.exit(0)
 
 
@@ -51,8 +51,15 @@ def main():
     # D5-16 build-script provenance marker
     d16 = "<!-- blueprint-delivery-email v2 -->" in low
 
-    # D5-17 Advaita palette present
-    palette = all(t in low for t in ["#0071e3", "#1d1d1f", "#f5f5f7", "-apple-system"])
+    # D5-17 Advaita design. Typography (-apple-system) + dark text (#1d1d1f) are
+    # required. Background may be the legacy grey (#f5f5f7) OR the Madison-blessed
+    # white (#ffffff) canonical that is actually SENT. Accent may be the legacy
+    # hardcoded #0071e3 OR an injected CTA accent (bgcolor="#..."). Reconciled
+    # 2026-06-02 so the gate stops false-failing the real white-bg send template.
+    base = "-apple-system" in low and "#1d1d1f" in low
+    bg_ok = "#f5f5f7" in low or "#ffffff" in low
+    accent_ok = "#0071e3" in low or bool(re.search(r'bgcolor="#[0-9a-f]{3,6}"', low))
+    palette = base and bg_ok and accent_ok
 
     # D5-18 CTA text + href correct, banned absent
     cta_text = "see if you qualify" in low
@@ -73,13 +80,26 @@ def main():
     action = [h for h in anchors if "qualify.html" in h or "/apply" in h or "calendly" in h or "cal.com" in h]
     d21 = len(action) == 1 and "qualify.html" in action[0]
 
+    # D5-22 no flexbox. Outlook (Word engine) silently strips display:flex, which
+    # collapses any flex-laid-out card into an unreadable stack. Tables only.
+    flex_hits = re.findall(r"display\s*:\s*flex", low)
+    d22 = len(flex_hits) == 0
+
+    # D5-23 no <style> block. Gmail/Outlook inconsistently honor <style>; the only
+    # email-safe styling is inline. A <style> tag means the email was hand-rolled
+    # off-template and is at risk of rendering naked.
+    style_hits = re.findall(r"<style\b", low)
+    d23 = len(style_hits) == 0
+
     checks = [
         ("D5-16", d16, "build-script provenance marker present" if d16 else "missing <!-- BLUEPRINT-DELIVERY-EMAIL v2 --> (hand-rolled?)"),
-        ("D5-17", palette, "Advaita palette present" if palette else "missing #0071E3/#1D1D1F/#F5F5F7/-apple-system"),
+        ("D5-17", palette, "Advaita palette present" if palette else "missing #1D1D1F/-apple-system + (#F5F5F7|#FFFFFF) bg + (#0071E3|bgcolor accent)"),
         ("D5-18", d18, "CTA 'See If You Qualify' -> qualify.html, no banned" if d18 else f"cta_text={cta_text} href_qualify={href_qualify} banned_text={banned_text} banned_href={banned_href}"),
         ("D5-19", d19, "zero emoji" if d19 else f"{len(emojis)} emoji found: {emojis[:6]}"),
         ("D5-20", d20, "no unrendered {{tokens}}" if d20 else "unrendered {{ }} placeholders remain"),
         ("D5-21", d21, "exactly one CTA anchor -> qualify.html" if d21 else f"action anchors={action}"),
+        ("D5-22", d22, "no flexbox (Outlook-safe)" if d22 else f"{len(flex_hits)} display:flex found — Outlook will strip; use tables"),
+        ("D5-23", d23, "no <style> block (inline-only)" if d23 else f"{len(style_hits)} <style> block(s) — inline CSS only for email"),
     ]
     fail(checks)
 

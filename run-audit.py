@@ -144,6 +144,13 @@ def calculator_gate(html, lead):
 
 def home_services_content_gate(html, lead):
     industry_blob = " ".join(str(lead.get(k, "")) for k in ("industry", "business_type", "service_type", "market")).lower()
+    # SaaS/software/CRM vendors that merely SELL TO home-services operators are not
+    # themselves home-services businesses. "SaaS CRM for home service businesses"
+    # contains the "home service" substring but is a software vendor — its correct
+    # copy (churn, recurring revenue, plan tiers) must NOT be flagged by the
+    # home-services-operator copy gate. Exclude software vendors first. (2026-06-02)
+    if any(term in industry_blob for term in ("saas", "software", " crm", "crm ", "platform", "b2b", "tech company")):
+        return True, []
     if not any(term in industry_blob for term in ("plumb", "hvac", "electrical", "home service", "restoration")):
         return True, []
     body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)

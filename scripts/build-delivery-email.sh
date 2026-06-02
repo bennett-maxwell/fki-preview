@@ -76,12 +76,6 @@ EMAIL_INDUSTRY=$(python3 -c "import re,sys; print(re.sub(r'\s+business(es)?\s*$'
 BLUEPRINT_URL=$(get blueprint_url "")
 PODCAST_URL=$(get podcast_url "")
 WEBSITE_URL=$(get website_url "")
-# CLEAN LINKS RULE: strip query params (and stray fragments) from every link so none
-# trips Gmail's redirect-notice interstitial. Bare scheme+host+path only.
-_bare() { python3 -c "import sys;from urllib.parse import urlsplit,urlunsplit;p=urlsplit(sys.argv[1] or '');print(urlunsplit((p.scheme,p.netloc,p.path,'','')) if p.scheme else (sys.argv[1] or ''))" "$1"; }
-BLUEPRINT_URL=$(_bare "$BLUEPRINT_URL")
-PODCAST_URL=$(_bare "$PODCAST_URL")
-WEBSITE_URL=$(_bare "$WEBSITE_URL")
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
@@ -93,18 +87,25 @@ APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -
 # button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
 # Empty default => the python block below falls back to the canonical qualify.html.
 PROFILE_QUALIFY_URL=$(get qualify_url "")
-# CLEAN LINKS RULE (2026-06-03): every link in the email must be a bare, parameter-free
-# URL — exactly like the blueprint button. Long query strings (?lead=&biz=&src=&utm_*)
-# trip Gmail's "redirect notice" interstitial (the extra page with another link to click).
-# Bennett's working email uses a clean qualify.html with NO params, so we match that.
-# Strip everything from '?' onward and drop any fragment.
-QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" << 'PYEOF'
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
 import sys
-from urllib.parse import urlsplit, urlunsplit
-url = (sys.argv[1] or "").strip() or "https://bennett-maxwell.github.io/fki-preview/qualify.html"
-p = urlsplit(url if "://" in url else "https://bennett-maxwell.github.io/fki-preview/qualify.html")
-# bare URL: scheme + host + path only — no query, no fragment
-print(urlunsplit((p.scheme, p.netloc, p.path or "/fki-preview/qualify.html", "", "")))
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+
+profile_url, lead_name, business_name, slug, contact_id = sys.argv[1:6]
+url = profile_url or "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+parts = urlsplit(url)
+if not parts.scheme:
+    parts = urlsplit("https://bennett-maxwell.github.io/fki-preview/qualify.html")
+params = dict(parse_qsl(parts.query, keep_blank_values=True))
+params["lead"] = lead_name
+params["biz"] = business_name
+params["src"] = slug
+params["utm_source"] = "blueprint_email"
+params["utm_medium"] = "email"
+params["utm_campaign"] = "blueprint_delivery"
+if contact_id:
+    params["contactId"] = contact_id
+print(urlunsplit((parts.scheme, parts.netloc, parts.path or "/fki-preview/qualify.html", urlencode(params), "")))
 PYEOF
 )
 
@@ -164,19 +165,21 @@ fi
 # Inject into template
 if [ "$REUSE_EXISTING" = false ]; then
 cp "$TEMPLATE" "$OUTPUT"
-# & is the whole-match operator in a sed RHS, and \ / are also special — escape every
-# replacement value so business names ("Heating & Air") and query strings can't corrupt the output.
-sed_rhs() { printf '%s' "$1" | sed -e 's/[\/&]/\\&/g'; }
-sed -i '' "s|{{LEAD_FIRST_NAME}}|$(sed_rhs "$LEAD_FIRST")|g" "$OUTPUT"
-sed -i '' "s|{{BUSINESS_NAME}}|$(sed_rhs "$BUSINESS_NAME")|g" "$OUTPUT"
-sed -i '' "s|{{ACCENT_COLOR}}|$(sed_rhs "$ACCENT_COLOR")|g" "$OUTPUT"
-sed -i '' "s|{{INDUSTRY}}|$(sed_rhs "$EMAIL_INDUSTRY")|g" "$OUTPUT"
-sed -i '' "s|{{BLUEPRINT_URL}}|$(sed_rhs "$BLUEPRINT_URL")|g" "$OUTPUT"
-sed -i '' "s|{{PODCAST_URL}}|$(sed_rhs "$PODCAST_URL")|g" "$OUTPUT"
-sed -i '' "s|{{WEBSITE_URL}}|$(sed_rhs "$WEBSITE_URL")|g" "$OUTPUT"
-sed -i '' "s|{{APPLY_SUBJECT}}|$(sed_rhs "$APPLY_SUBJECT")|g" "$OUTPUT"
-sed -i '' "s|{{APPLY_URL}}|$(sed_rhs "$APPLY_URL")|g" "$OUTPUT"
-sed -i '' "s|{{QUALIFY_URL}}|$(sed_rhs "$QUALIFY_URL")|g" "$OUTPUT"
+# & is the whole-match operator in a sed RHS — any value carrying a literal & (e.g.
+# industry "Photography & Video", or a URL query string) corrupts its own token and
+# leaves it unrendered. Escape & in every free-text/URL replacement value, not just
+# the qualify URL. (2026-06-02 — rush-evans D5-20 regression caught by the HARD gate.)
+sed_esc() { printf '%s' "$1" | sed 's/&/\\&/g'; }
+sed -i '' "s|{{LEAD_FIRST_NAME}}|$(sed_esc "$LEAD_FIRST")|g" "$OUTPUT"
+sed -i '' "s|{{BUSINESS_NAME}}|$(sed_esc "$BUSINESS_NAME")|g" "$OUTPUT"
+sed -i '' "s|{{ACCENT_COLOR}}|$ACCENT_COLOR|g" "$OUTPUT"
+sed -i '' "s|{{INDUSTRY}}|$(sed_esc "$EMAIL_INDUSTRY")|g" "$OUTPUT"
+sed -i '' "s|{{BLUEPRINT_URL}}|$(sed_esc "$BLUEPRINT_URL")|g" "$OUTPUT"
+sed -i '' "s|{{PODCAST_URL}}|$(sed_esc "$PODCAST_URL")|g" "$OUTPUT"
+sed -i '' "s|{{WEBSITE_URL}}|$(sed_esc "$WEBSITE_URL")|g" "$OUTPUT"
+sed -i '' "s|{{APPLY_SUBJECT}}|$(sed_esc "$APPLY_SUBJECT")|g" "$OUTPUT"
+sed -i '' "s|{{APPLY_URL}}|$(sed_esc "$APPLY_URL")|g" "$OUTPUT"
+sed -i '' "s|{{QUALIFY_URL}}|$(sed_esc "$QUALIFY_URL")|g" "$OUTPUT"
 
 # Prompts need python for multi-line safety
 python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
@@ -231,6 +234,27 @@ if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$CTA" -lt 1 ]; then
     exit 1
 fi
 echo "Pre-delivery: PASS (booking=0 calendar=0 cta=$CTA)"
+
+# Conformance gate at generation time (D5-16..D5-23 incl. flexbox/style/white-template).
+# HARD on the fresh-template path: the canonical template passes all 8, so a legit
+# fresh build never blocks — only genuine off-template drift fails and aborts the build
+# before it can reach a customer's Outlook inbox. REUSE path stays a non-fatal WARN
+# because it copies a gate-token-bound / already-approved artifact (incl. the legacy
+# delivery-emails still pending regeneration); blocking those would break idempotent
+# re-sends. Once the legacy folder is regenerated from the template, all paths pass.
+if [ -f "$SCRIPT_DIR/email-design-conformance.py" ]; then
+    if python3 "$SCRIPT_DIR/email-design-conformance.py" "$OUTPUT" >/dev/null 2>&1; then
+        echo "Conformance: PASS (D5-16..D5-23)"
+    elif [ "$REUSE_EXISTING" = true ]; then
+        echo "Conformance: WARN — reused artifact failed D5-16..D5-23 (review before send):"
+        python3 "$SCRIPT_DIR/email-design-conformance.py" "$OUTPUT" 2>&1 | grep '\[FAIL\]' || true
+    else
+        echo "Conformance: FAIL — fresh-template email failed D5-16..D5-23 (build aborted):"
+        python3 "$SCRIPT_DIR/email-design-conformance.py" "$OUTPUT" 2>&1 | grep '\[FAIL\]' || true
+        echo "  This means the template drifted off-spec. Fix templates/delivery-email-template.html before building."
+        exit 1
+    fi
+fi
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
