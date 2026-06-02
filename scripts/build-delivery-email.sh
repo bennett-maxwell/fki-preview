@@ -131,6 +131,7 @@ verify_gate_token() {
         --html "blueprints/$SLUG.html" \
         --delivery-email "$REPO_EMAIL" \
         --profile "$PROFILE" \
+        --receipt-dir "$(dirname "$GATE_TOKEN")" \
         --token "$GATE_TOKEN" \
         --json-output > "$TOKEN_CHECK"; then
         echo "BLOCKED: gate token is invalid."
