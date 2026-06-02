@@ -238,7 +238,26 @@ rm -f "$tmp"
         f"placeholder left unrendered after &-bearing substitution: {rendered!r}"
 
 
+def check_precommit_ov_skip_path_intact():
+    """The pre-commit hook must scope its orchestrator/strict gates to STAGED
+    blueprint HTML only (via `git diff --cached`), and print an explicit
+    'OV SKIP' when none is staged. This guards the pathspec-commit isolation
+    path (commit 47ba67e4): `git commit <non-blueprint-paths>` builds a temp
+    index with no blueprint HTML -> hook skips the blueprint validators ->
+    clean commit without --no-verify and without disturbing a session-mate's
+    staged WIP. If this logic regresses, unrelated script fixes can no longer
+    be committed while blueprint WIP sits staged."""
+    hook = _read(os.path.join(REPO, ".git", "hooks", "pre-commit"))
+    assert "git diff --cached --name-only" in hook, \
+        "pre-commit no longer scopes staged-blueprint detection to the cached index"
+    assert 'grep "^blueprints/.*\\.html$"' in hook, \
+        "pre-commit staged-blueprint grep pattern changed; OV-SKIP scoping may be broken"
+    assert "OV SKIP" in hook, \
+        "pre-commit lost the explicit OV SKIP branch for no-blueprint-staged commits"
+
+
 CHECKS = [
+    ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
     ("NO_LINKEDIN_SLIDER_IN_TEMPLATE", check_no_linkedin_slider_in_template),
     ("NO_NONB2B_LINKEDIN_VIOLATION", check_no_nonb2b_linkedin_violation),
     ("D7_18_IS_HARD_FAIL", check_d7_18_is_hard_fail),
