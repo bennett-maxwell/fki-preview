@@ -1,1 +1,1475 @@
-PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgo8dGl0bGU+U2VlIElmIEFJIElzIGEgRml0IGZvciBZb3VyIEJ1c2luZXNzIOKAlCBGS0kgUXVhbGlmaWVyPC90aXRsZT4KPG1ldGEgbmFtZT0iZGVzY3JpcHRpb24iIGNvbnRlbnQ9IkFuc3dlciA4IHF1ZXN0aW9ucyB0byBzZWUgaWYgQUkgaXMgYSBmaXQgZm9yIHlvdXIgYnVzaW5lc3MuIFRha2VzIHVuZGVyIDYwIHNlY29uZHMuIj4KPHN0eWxlPgogIDpyb290IHsKICAgIC0tYnJhbmQ6ICAgICAgICMxRDZGREI7CiAgICAtLWJyYW5kLWRhcms6ICAjMEEwRTFBOwogICAgLS1icmFuZC1saWdodDogIzRBOTBFMjsKICAgIC0tbmV1dHJhbC1iZzogICNmOGY4Zjg7CiAgICAtLXdoaXRlOiAgICAgICAjZmZmZmZmOwogICAgLS10ZXh0OiAgICAgICAgIzBBMEUxQTsKICAgIC0tdGV4dC1tdXRlZDogICMzYTNhM2E7CiAgICAtLXRleHQtbGlnaHQ6ICAjODg4ODg4OwogICAgLS1ib3JkZXI6ICAgICAgI2UyZTJlMjsKICAgIC0tZm9udC1zYW5zOiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICdTZWdvZSBVSScsICdIZWx2ZXRpY2EgTmV1ZScsIEFyaWFsLCBzYW5zLXNlcmlmOwogICAgLS1yYWRpdXM6IDEycHg7CiAgICAtLXNoYWRvdzogMCA0cHggMjRweCByZ2JhKDI5LDExMSwyMTksMC4wOCk7CiAgICAtLXNoYWRvdy1tZDogMCA4cHggNDBweCByZ2JhKDI5LDExMSwyMTksMC4xMik7CiAgfQogICosICo6OmJlZm9yZSwgKjo6YWZ0ZXIgeyBib3gtc2l6aW5nOiBib3JkZXItYm94OyBtYXJnaW46IDA7IHBhZGRpbmc6IDA7IH0KICBodG1sIHsgc2Nyb2xsLWJlaGF2aW9yOiBzbW9vdGg7IH0KICBib2R5IHsgZm9udC1mYW1pbHk6IHZhcigtLWZvbnQtc2Fucyk7IGNvbG9yOiB2YXIoLS10ZXh0KTsgYmFja2dyb3VuZDogdmFyKC0td2hpdGUpOyBsaW5lLWhlaWdodDogMS42OyAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDsgfQoKICBuYXYgeyBwb3NpdGlvbjogc3RpY2t5OyB0b3A6IDA7IHotaW5kZXg6IDEwMDsgYmFja2dyb3VuZDogdmFyKC0tYnJhbmQtZGFyayk7IHBhZGRpbmc6IDAgMnJlbTsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOyBoZWlnaHQ6IDYwcHg7IGJveC1zaGFkb3c6IDAgMnB4IDEycHggcmdiYSgwLDAsMCwwLjE4KTsgfQogIC5uYXYtbG9nbyB7IGNvbG9yOiB2YXIoLS13aGl0ZSk7IGZvbnQtd2VpZ2h0OiA3MDA7IGZvbnQtc2l6ZTogMXJlbTsgdGV4dC1kZWNvcmF0aW9uOiBub25lOyB9CiAgLm5hdi1sb2dvIHNwYW4geyBjb2xvcjogdmFyKC0tYnJhbmQtbGlnaHQpOyB9CgogIC5oZXJvIHsgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDEzNWRlZywgdmFyKC0tdGV4dCkgMCUsICMxNDI4NTggNTAlLCB2YXIoLS1icmFuZCkgMTAwJSk7IHBhZGRpbmc6IDVyZW0gMnJlbTsgdGV4dC1hbGlnbjogY2VudGVyOyBjb2xvcjogdmFyKC0td2hpdGUpOyB9CiAgLmhlcm8gaDEgeyBmb250LXNpemU6IGNsYW1wKDEuOHJlbSwgNHZ3LCAyLjhyZW0pOyBmb250LXdlaWdodDogODAwOyBtYXJnaW4tYm90dG9tOiAxcmVtOyBsZXR0ZXItc3BhY2luZzogLTAuMDJlbTsgfQogIC5oZXJvIHAgeyBmb250LXNpemU6IDEuMTVyZW07IGNvbG9yOiByZ2JhKDI1NSwyNTUsMjU1LDAuOCk7IG1heC13aWR0aDogNTIwcHg7IG1hcmdpbjogMCBhdXRvIDEuNXJlbTsgfQogIC50cnVzdC1iYWRnZXMgeyBkaXNwbGF5OiBmbGV4OyBnYXA6IDEuNXJlbTsganVzdGlmeS1jb250ZW50OiBjZW50ZXI7IGZsZXgtd3JhcDogd3JhcDsgbWFyZ2luLXRvcDogMXJlbTsgfQogIC50cnVzdC1iYWRnZSB7IGZvbnQtc2l6ZTogMC44NXJlbTsgY29sb3I6IHJnYmEoMjU1LDI1NSwyNTUsMC43KTsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsgZ2FwOiAwLjRyZW07IH0KCiAgLnF1aXotd3JhcHBlciB7IG1heC13aWR0aDogNjgwcHg7IG1hcmdpbjogMCBhdXRvOyBwYWRkaW5nOiAycmVtIDFyZW0gNHJlbTsgfQoKICAucHJvZ3Jlc3MtYmFyLXdyYXAgeyBtYXJnaW46IDEuNXJlbSAwIDIuNXJlbTsgfQogIC5wcm9ncmVzcy1sYWJlbCB7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjsgZm9udC1zaXplOiAwLjgyNXJlbTsgY29sb3I6IHZhcigtLXRleHQtbGlnaHQpOyBtYXJnaW4tYm90dG9tOiAwLjRyZW07IH0KICAucHJvZ3Jlc3MtYmFyIHsgaGVpZ2h0OiA2cHg7IGJhY2tncm91bmQ6IHZhcigtLWJvcmRlcik7IGJvcmRlci1yYWRpdXM6IDNweDsgb3ZlcmZsb3c6IGhpZGRlbjsgfQogIC5wcm9ncmVzcy1maWxsIHsgaGVpZ2h0OiAxMDAlOyBiYWNrZ3JvdW5kOiB2YXIoLS1icmFuZCk7IGJvcmRlci1yYWRpdXM6IDNweDsgdHJhbnNpdGlvbjogd2lkdGggMC40cyBlYXNlOyB9CgogIC5xdWVzdGlvbi1jYXJkIHsgYmFja2dyb3VuZDogdmFyKC0td2hpdGUpOyBib3JkZXItcmFkaXVzOiB2YXIoLS1yYWRpdXMpOyBib3gtc2hhZG93OiB2YXIoLS1zaGFkb3ctbWQpOyBwYWRkaW5nOiAyLjVyZW07IG1hcmdpbi1ib3R0b206IDFyZW07IH0KICAucXVlc3Rpb24tbnVtIHsgZm9udC1zaXplOiAwLjc1cmVtOyBmb250LXdlaWdodDogNjAwOyBjb2xvcjogdmFyKC0tYnJhbmQpOyB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyBsZXR0ZXItc3BhY2luZzogMC4wOGVtOyBtYXJnaW4tYm90dG9tOiAwLjZyZW07IH0KICAucXVlc3Rpb24tdGV4dCB7IGZvbnQtc2l6ZTogMS4xNXJlbTsgZm9udC13ZWlnaHQ6IDcwMDsgY29sb3I6IHZhcigtLXRleHQpOyBtYXJnaW4tYm90dG9tOiAxLjVyZW07IGxpbmUtaGVpZ2h0OiAxLjQ7IH0KCiAgLm9wdGlvbnMtZ3JpZCB7IGRpc3BsYXk6IGdyaWQ7IGdhcDogMC43NXJlbTsgfQogIC5vcHRpb24tYnRuIHsgZGlzcGxheTogZmxleDsgYWxpZ24taXRlbXM6IGNlbnRlcjsgZ2FwOiAxcmVtOyBwYWRkaW5nOiAxcmVtIDEuMjVyZW07IGJvcmRlcjogMnB4IHNvbGlkIHZhcigtLWJvcmRlcik7IGJvcmRlci1yYWRpdXM6IDhweDsgYmFja2dyb3VuZDogdmFyKC0td2hpdGUpOyBjdXJzb3I6IHBvaW50ZXI7IHRleHQtYWxpZ246IGxlZnQ7IHRyYW5zaXRpb246IGFsbCAwLjE4cyBlYXNlOyBmb250LXNpemU6IDAuOTVyZW07IGNvbG9yOiB2YXIoLS10ZXh0KTsgfQogIC5vcHRpb24tYnRuOmhvdmVyIHsgYm9yZGVyLWNvbG9yOiB2YXIoLS1icmFuZCk7IGJhY2tncm91bmQ6ICNmMGY2ZmY7IH0KICAub3B0aW9uLWJ0bi5zZWxlY3RlZCB7IGJvcmRlci1jb2xvcjogdmFyKC0tYnJhbmQpOyBiYWNrZ3JvdW5kOiAjZjBmNmZmOyBjb2xvcjogdmFyKC0tYnJhbmQpOyBmb250LXdlaWdodDogNjAwOyB9CiAgLm9wdGlvbi1pY29uIHsgZm9udC1zaXplOiAxLjNyZW07IH0KCiAgLnF1ZXN0aW9uLWNhcmQucmV2ZWFsIHsgYW5pbWF0aW9uOiBmYWRlVXAgMC4zNXMgZWFzZTsgfQogIEBrZXlmcmFtZXMgZmFkZVVwIHsgZnJvbSB7IG9wYWNpdHk6IDA7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxOHB4KTsgfSB0byB7IG9wYWNpdHk6IDE7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgwKTsgfSB9CgogIC5uYXYtYnRucyB7IGRpc3BsYXk6IGZsZXg7IGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2Vlbjs7IGdhcDogMXJlbTsgbWFyZ2luLXRvcDogMS41cmVtOyB9CiAgLmJ0bi1wcmltYXJ5IHsgYmFja2dyb3VuZDogdmFyKC0tYnJhbmQpOyBjb2xvcjogI2ZmZjsgYm9yZGVyOiBub25lOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDAuOHJlbSAyLjJyZW07IGZvbnQtc2l6ZTogMXJlbTsgZm9udC13ZWlnaHQ6IDcwMDsgY3Vyc29yOiBwb2ludGVyOyB0cmFuc2l0aW9uOiBiYWNrZ3JvdW5kIDAuMTVzOyB9CiAgLmJ0bi1wcmltYXJ5OmhvdmVyIHsgYmFja2dyb3VuZDogdmFyKC0tYnJhbmQtbGlnaHQpOyB9CiAgLmJ0bi1wcmltYXJ5OmRpc2FibGVkIHsgb3BhY2l0eTogMC40OyBjdXJzb3I6IG5vdC1hbGxvd2VkOyB9CiAgLmJ0bi1zZWNvbmRhcnkgeyBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsgY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyBib3JkZXI6IDJweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDAuOHJlbSAxLjVyZW07IGZvbnQtc2l6ZTogMXJlbTsgY3Vyc29yOiBwb2ludGVyOyB0cmFuc2l0aW9uOiBhbGwgMC4xNXM7IH0KICAuYnRuLXNlY29uZGFyeTpob3ZlciB7IGJvcmRlci1jb2xvcjogdmFyKC0tYnJhbmQpOyBjb2xvcjogdmFyKC0tYnJhbmQpOyB9CgogICNpZGVudGl0eS1zdGVwIHsgYW5pbWF0aW9uOiBmYWRlVXAgMC4zcyBlYXNlOyB9CiAgLmlkZW50aXR5LWNhcmQgeyBiYWNrZ3JvdW5kOiB2YXIoLS13aGl0ZSk7IGJvcmRlci1yYWRpdXM6IHZhcigtLXJhZGl1cyk7IGJveC1zaGFkb3c6IHZhcigtLXNoYWRvdy1tZCk7IHBhZGRpbmc6IDIuNXJlbTsgfQogIC5pZGVudGl0eS1jYXJkIGgzIHsgZm9udC1zaXplOiAxLjNyZW07IGZvbnQtd2VpZ2h0OiA3MDA7IG1hcmdpbi1ib3R0b206IDAuNXJlbTsgfQogIC5pZGVudGl0eS1jYXJkIHAgeyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7IG1hcmdpbi1ib3R0b206IDEuNXJlbTsgfQogIC5mb3JtLXJvdyB7IGRpc3BsYXk6IGdyaWQ7IGdyaWQtdGVtcGxhdGUtY29sdW1uczogMWZyIDFmcjsgZ2FwOiAxcmVtOyBtYXJnaW4tYm90dG9tOiAxcmVtOyB9CiAgQG1lZGlhIChtYXgtd2lkdGg6IDQ4MHB4KSB7IC5mb3JtLXJvdyB7IGdyaWQtdGVtcGxhdGUtY29sdW1uczogMWZyOyB9IH0KICAuZm9ybS1ncm91cCB7IGRpc3BsYXk6IGZsZXg7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IH0KICAuZm9ybS1ncm91cCBsYWJlbCB7IGZvbnQtc2l6ZTogMC44NXJlbTsgZm9udC13ZWlnaHQ6IDYwMDsgY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyBtYXJnaW4tYm90dG9tOiAwLjM1cmVtOyB9CiAgLmZvcm0tZ3JvdXAgaW5wdXQgeyBwYWRkaW5nOiAwLjdyZW0gMXJlbTsgYm9yZGVyOiAyc29saWQgdmFyKC0tYm9yZGVyKTsgYm9yZGVyLXJhZGl1czogNnB4OyBmb250LXNpemU6IDAuOTVyZW07IG91dGxpbmU6IG5vbmU7IH0KICAuZm9ybS1ncm91cCBpbnB1dDpmb2N1cyB7IGJvcmRlci1jb2xvcjogdmFyKC0tYnJhbmQpOyB9CgogICNyZXN1bHQtc3RlcCB7IGFuaW1hdGlvbjogZmFkZVVwIDAuNHMgZWFzZTsgfQogIC5yZXN1bHQtY2FyZCB7IGJhY2tncm91bmQ6IHZhcigtLXdoaXRlKTsgYm9yZGVyLXJhZGl1czogdmFyKC0tcmFkaXVzKTsgYm94LXNoYWRvdzogdmFyKC0tc2hhZG93LW1kKTsgcGFkZGluZzogMi41cmVtOyB0ZXh0LWFsaWduOiBjZW50ZXI7IH0KICAucmVzdWx0LWljb24geyBmb250LXNpemU6IDMuNXJlbTsgbWFyZ2luLWJvdHRvbTogMXJlbTsgfQogIC5yZXN1bHQtY2FyZCBoMiB7IGZvbnQtc2l6ZTogMS42cmVtOyBmb250LXdlaWdodDogODAwOyBtYXJnaW4tYm90dG9tOiAwLjc1cmVtOyB9CiAgLnJlc3VsdC1jYXJkIHAgeyBjb2xvcjogdmFyKC0tdGV4dC1tdXRlZCk7IG1hcmdpbi1ib3R0b206IDEuNXJlbTsgbWF4LXdpZHRoOiA0ODBweDsgbWFyZ2luLWxlZnQ6IGF1dG87IG1hcmdpbi1yaWdodDogYXV0bzsgfQoKICAuYm9va2luZy1tb2RhbC1vdmVybGF5IHsgcG9zaXRpb246IGZpeGVkOyBpbnNldDogMDsgYmFja2dyb3VuZDogcmdiYSgwLDAsMCwwLjUpOyB6LWluZGV4OiAxMDAwOyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgcGFkZGluZzogMXJlbTsgfQogIC5ib29raW5nLW1vZGFsIHsgYmFja2dyb3VuZDogdmFyKC0td2hpdGUpOyBib3JkZXItcmFkaXVzOiB2YXIoLS1yYWRpdXMpOyBib3gtc2hhZG93OiB2YXIoLS1zaGFkb3ctbWQpOyB3aWR0aDogMTAwJTsgbWF4LXdpZHRoOiA2NDBweDsgbWF4LWhlaWdodDogOTB2aDsgb3ZlcmZsb3c6IGhpZGRlbjsgcG9zaXRpb246IHJlbGF0aXZlOyB9CiAgLm1vZGFsLWhlYWRlciB7IHBhZGRpbmc6IDEuMjVyZW0gMS41cmVtOyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyB9CiAgLm1vZGFsLWhlYWRlciBoMyB7IGZvbnQtc2l6ZTogMS4xNXJlbTsgZm9udC13ZWlnaHQ6IDcwMDsgfQogIC5tb2RhbC1jbG9zZSB7IGJhY2tncm91bmQ6IG5vbmU7IGJvcmRlcjogbm9uZTsgZm9udC1zaXplOiAxLjVyZW07IGN1cnNvcjogcG9pbnRlcjsgY29sb3I6IHZhcigtLXRleHQtbXV0ZWQpOyBwYWRkaW5nOiAwOyB9CiAgLm1vZGFsLWJvZHkgeyBoZWlnaHQ6IDU2MHB4OyB9CiAgLm1vZGFsLWJvZHkgaWZyYW1lIHsgd2lkdGg6IDEwMCU7IGhlaWdodDogMTAwJTsgYm9yZGVyOiBub25lOyB9CgogIGZvb3RlciB7IGJhY2tncm91bmQ6IHZhcigtLWJyYW5kLWRhcmspOyBjb2xvcjogcmdiYSgyNTUsMjU1LDI1NSwwLjUpOyB0ZXh0LWFsaWduOiBjZW50ZXI7IHBhZGRpbmc6IDIuNXJlbSAxcmVtOyBmb250LXNpemU6IDAuODVyZW07IH0KICBmb290ZXIgYSB7IGNvbG9yOiByZ2JhKDI1NSwyNTUsMjU1LDAuNik7IHRleHQtZGVjb3JhdGlvbjogbm9uZTsgfQo8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgoKPG5hdj4KICA8YSBocmVmPSJodHRwczovL2ZyYW5jaGlzZWtpLmNvbSIgY2xhc3M9Im5hdi1sb2dvIj5GS0k8c3BhbiBzdHlsZT0iZm9udC1zaXplOjAuNzVlbTtmb250LXdlaWdodDo0MDAiPiAmbmJzcDsvJm5ic3A7RnJhbmNoaXNlIEtJPC9zcGFuPjwvYT4KICA8YSBocmVmPSJodHRwczovL2ZyYW5jaGlzZWtpLmNvbS9hcHBseSIgc3R5bGU9ImNvbG9yOnJnYmEoMjU1LDI1NSwyNTUsMC43KTtmb250LXNpemU6MC44NXJlbTt0ZXh0LWRlY29yYXRpb246bm9uZSI+U2NoZWR1bGUgYSBDYWxsPC9hPgo8L25hdj4KCjxzZWN0aW9uIGNsYXNzPSJoZXJvIj4KICA8aDE+U2VlIElmIEFJIElzIGEgRml0IGZvciBZb3VyIEJ1c2luZXNzPC9oMT4KICA8cD5BbnN3ZXIgOCBxdWlja3F1ZXN0aW9ucyAmYW1wOyBnZXQgeW91ciBwZXJzb25hbGl6ZWQgYWlmb3JidXNpbmVzcyBzdWl0YWJpbGl0eSBhc3Nlc3NtZW50LjwvcD4KICA8ZGl2IGNsYXNzPSJ0cnVzdC1iYWRnZXMiPgogICAgPHNwYW4gY2xhc3M9InRydXN0LWJhZGdlIj48c3ZnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik03IDEuNUwxMi41IDUuMjV2My41YzAgMy4wNi0yLjM1IDUuNzktNS41IDYuMjVDMy44NSAxNC41OSAxLjUgMTEuODYgMS41IDguNzV2LTMuNUw3IDEuNXoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjcpIiBzdHJva2Utd2lkdGg9IjEuMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPiA8c3BhbiBzdHlsZT0iY29sb3I6cmdiYSgyNTUsMjU1LDI1NSwwLjcpIj5ObyBDcmVkaXQgQ2FyZDwvc3Bhbj48L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0idHJ1c3QtYmFkZ2UiPjxzdmcgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiB2aWV3Qm94PSIwIDAgMTQgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjUuNSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiIHN0cm9rZS13aWR0aD0iMS4yIi8+PHBhdGggZD0iTTcgNHY0bDIgMiIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNykiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4gPHNwYW4gc3R5bGU9ImNvbG9yOnJnYmEoMjU1LDI1NSwyNTUsMC43KSI+VW5kZXIgNjAgU2Vjb25kczwvc3Bhbj48L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0idHJ1c3QtYmFkZ2UiPjxzdmcgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiB2aWV3Qm94PSIwIDAgMTQgMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgN2wzIDMgNy02IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC43KSIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPiA8c3BhbiBzdHlsZT0iY29sb3I6cmdiYSgyNTUsMjU1LDI1NSwwLjcpIj5JbnN0YW50IFJlc3VsdHM8L3NwYW4+PC9zcGFuPgogIDwvZGl2Pgo8L3NlY3Rpb24+Cgo8ZGl2IGNsYXNzPSJxdWl6LXdyYXBwZXIiPgogIDxkaXYgY2xhc3M9InByb2dyZXNzLWJhci13cmFwIj4KICAgIDxkaXYgY2xhc3M9InByb2dyZXNzLWxhYmVsIj4KICAgICAgPHNwYW4gaWQ9InN0ZXAtbGFiZWwiPlN0ZXAgMSBvZiA4PC9zcGFuPgogICAgICA8c3BhbiBpZD0icGN0LWxhYmVsIj4wJSBDb21wbGV0ZTwvc3Bhbj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0icHJvZ3Jlc3MtYmFyIj4KICAgICAgPGRpdiBjbGFzcz0icHJvZ3Jlc3MtZmlsbCIgaWQ9InByb2dyZXNzLWZpbGwiIHN0eWxlPSJ3aWR0aDowJSI+PC9kaXY+CiAgICA8L2Rpdj4KICA8L2Rpdj4KCiAgPCEtLSBRdWVzdGlvbnMgLS0+CiAgPGRpdiBpZD0icXVpei1zdGVwIj4KICAgIDxkaXYgY2xhc3M9InF1ZXN0aW9uLWNhcmQiIGlkPSJxY2FyZCI+CiAgICAgIDxkaXYgY2xhc3M9InF1ZXN0aW9uLW51bSIgaWQ9InFudW0iPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJxdWVzdGlvbi10ZXh0IiBpZD0icXRleHQiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJvcHRpb25zLWdyaWQiIGlkPSJvcHRpb25zLWdyaWQiPjwvZGl2PgogICAgPC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJuYXYtYnRucyI+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1zZWNvbmRhcnkiIGlkPSJiYWNrLWJ0biIgb25jbGljaz0iZ29CYWNrKCkiPiZsYXJyOyBCYWNrPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0bi1wcmltYXJ5IiBpZD0ibmV4dC1idG4iIG9uY2xpY2s9ImdvTmV4dCgpIiBkaXNhYmxlZD4gTmV4dCAmcmFycjs8L2J1dHRvbj4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8IS0tIElkZW50aXR5IFN0ZXAgLS0+CiAgPGRpdiBpZD0iaWRlbnRpdHktc3RlcCIgc3R5bGU9ImRpc3BsYXk6bm9uZSI+CiAgICA8ZGl2IGNsYXNzPSJpZGVudGl0eS1jYXJkIj4KICAgICAgPGgzPllvdSdyZSBhbG1vc3QgdGhlcmUhPC9oMz4KICAgICAgPHA+RW50ZXIgeW91ciBpbmZvIHRvIHNlZSB5b3VyIHJlc3VsdHMuPC9wPgogICAgICA8Zm9ybSBpZD0iaWRlbnRpdHktZm9ybSIgb25zdWJtaXQ9InJldHVybiBmYWxzZSI+CiAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1yb3ciPgogICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgIDxsYWJlbD5GaXJzdCBOYW1lPC9sYWJlbD4KICAgICAgICAgICAgPGlucHV0IHR5cGU9InRleHQiIGlkPSJmaXJzdE5hbWUiIHBsYWNlaG9sZGVyPSJKb2huIiByZXF1aXJlZD4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0iZm9ybS1ncm91cCI+CiAgICAgICAgICAgIDxsYWJlbD5MYXN0IE5hbWU8L2xhYmVsPgogICAgICAgICAgICA8aW5wdXQgdHlwZT0idGV4dCIgaWQ9Imxhc3ROYW1lIiBwbGFjZWhvbGRlcj0iRG9lIiByZXF1aXJlZD4KICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tcm93Ij4KICAgICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgICAgICA8bGFiZWw+RW1haWwgQWRkcmVzczwvbGFiZWw+CiAgICAgICAgICAgIDxpbnB1dCB0eXBlPSJlbWFpbCIgaWQ9ImVtYWlsIiBwbGFjZWhvbGRlcj0iam9obkBleGFtcGxlLmNvbSIgcmVxdWlyZWQ+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImZvcm0tZ3JvdXAiPgogICAgICAgICAgICA8bGFiZWw+UGhvbmUgTnVtYmVyPC9sYWJlbD4KICAgICAgICAgICAgPGlucHV0IHR5cGU9InRlbCIgaWQ9InBob25lIiBwbGFjZWhvbGRlcj0iKDU1NSkgMTIzLTQ1NjciIHJlcXVpcmVkPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXByaW1hcnkiIHN0eWxlPSJ3aWR0aDoxMDAlO3BhZGRpbmc6MXJlbTsiIG9uY2xpY2s9InN1Ym1pdElkZW50aXR5KCkiPlNlZSBNeSBSZXN1bHRzICZyYXJyOzwvYnV0dG9uPgogICAgICA8L2Zvcm0+CiAgICA8L2Rpdj4KICA8L2Rpdj4KCiAgPCEtLSBSZXN1bHQgU3RlcCAtLT4KICA8ZGl2IGlkPSJyZXN1bHQtc3RlcCIgc3R5bGU9ImRpc3BsYXk6bm9uZSI+CiAgICA8ZGl2IGNsYXNzPSJyZXN1bHQtY2FyZCIgaWQ9InJlc3VsdC1jYXJkIj48L2Rpdj4KICA8L2Rpdj4KPC9kaXY+Cgo8IS0tIEJvb2tpbmcgTW9kYWwgLS0+CjxkaXYgY2xhc3M9ImJvb2tpbmctbW9kYWwtb3ZlcmxheSIgaWQ9ImJvb2tpbmctbW9kYWwiIHN0eWxlPSJkaXNwbGF5Om5vbmUiPgogIDxkaXYgY2xhc3M9ImJvb2tpbmctbW9kYWwiPgogICAgPGRpdiBjbGFzcz0ibW9kYWwtaGVhZGVyIj4KICAgICAgPGgzPlNjaGVkdWxlIFlvdXIgU3RyYXRlZ3kgQ2FsbDwvaDM+CiAgICAgIDxidXR0b24gY2xhc3M9Im1vZGFsLWNsb3NlIiBvbmNsaWNrPSJjbG9zZU1vZGFsKCkiPiZ0aW1lczs8L2J1dHRvbj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0ibW9kYWwtYm9keSI+CiAgICAgIDxpZnJhbWUgc3JjPSJodHRwczovL2xpbmsuZnJhbmNoaXNla2kuY29tL3dpZGdldC9ib29raW5nL3hYRllVSFhHM1FNYzFIVFBubmp1IiBzdHlsZT0id2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTtib3JkZXI6bm9uZTsiPjwvaWZyYW1lPgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPGZvb3Rlcj4KICA8cD4mbmJzcDs8c3BhbiBzdHlsZT0ibWFyZ2luOjAgMC43NXJlbSI+Jm1pZGRvdDs8L3NwYW4+CiAgPGEgaHJlZj0iaHR0cHM6Ly9mcmFuY2hpc2VraS5jb20vcHJpdmFjeS1wb2xpY3kiPlByaXZhY3kgUG9saWN5PC9hPjwvcD4KPC9mb290ZXI+Cgo8c2NyaXB0Pgpjb25zdCBRVUVTVElPTlMgPSBbCiAgeyBpZDogJ3ExX2J1c2luZXNzX3R5cGUnLCBudW06IDEsIHRleHQ6ICdXaGF0IHR5cGUgb2YgYnVzaW5lc3MgZG8geW91IG93biBvciBvcGVyYXRlPycsIG9wdGlvbnM6IFsKICAgIHsgdGV4dDogJ0JyaWNrICYgTW9ydGFyIC8gTG9jYWwgU2VydmljZScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdFLUNvbW1lcmNlIC8gT25saW5lIFN0b3JlJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJ0IyQiBTZXJ2aWNlcyAvIEFnZW5jeScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdDb2FjaGluZyAvIENvbnN1bHRpbmcnLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnSGVhbHRoY2FyZSAvIE1lZFNwYScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdPdGhlcicsIGljb246ICcnIH0KICBdfSwKICB7IGlkOiAncTJfcmV2ZW51ZScsIG51bTogMiwgdGV4dDogJ1doYXQgaXMgeW91ciBhbm51YWwgYnVzaW5lc3MgcmV2ZW51ZT8nLCBvcHRpb25zOiBbCiAgICB7IHRleHQ6ICdQcmUtcmV2ZW51ZSAvIFN0YXJ0dXAnLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnJDAgLSAkMjUwSycsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICckMjUwSyAtICQxTScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICckMU0gLSAkNU0nLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnJDVNKycsIGljb246ICcnIH0KICBdfSwKICB7IGlkOiAncTNfdGVhbV9zaXplJywgbnVtOiAzLCB0ZXh0OiAnSG93IG1hbnkgcGVvcGxlIGFyZSBvbiB5b3VyIHRlYW0/Jywgb3B0aW9uczogWwogICAgeyB0ZXh0OiAnSnVzdCBtZScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICcyIC0gNScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICc2IC0gMjAnLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnMjErJywgaWNvbjogJycgfQogIF19LAogIHsgaWQ6ICdxNF9iaWdnZXN0X2NoYWxsZW5nZScsIG51bTogNCwgdGV4dDogJ1doYXQgaXMgeW91ciBiaWdnZXN0IHByb2JsZW0gdG9kYXk/Jywgb3B0aW9uczogWwogICAgeyB0ZXh0OiAnTm90IGVub3VnaCBsZWFkcycsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdDb252ZXJ0aW5nIGxlYWRzIHRvIGN1c3RvbWVycycsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdPcGVyYXRpb25hbCBpbmVmZmljaWVuY2llcycsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdTY2FsaW5nIHRoZSB0ZWFtJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJ1JldGFpbmluZyBjdXN0b21lcnMnLCBpY29uOiAnJyB9CiAgXX0sCiAgeyBpZDogJ3E1X3RlY2hfc3RhY2snLCBudW06IDUsIHRleHQ6ICdXaGljaCB0b29scyBkbyB5b3UgY3VycmVudGx5IHVzZT8nLCBvcHRpb25zOiBbCiAgICB7IHRleHQ6ICdDUk0gKEh1YlNwb3QsIFNhbGVzZm9yY2UsIEdITCknLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnRW1haWwgTWFya2V0aW5nIChNYWlsY2hpbXAsIEtsYXZpeW8pJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJ1Byb2plY3QgTWdtdCAoQXNhbmEsIE1vbmRheSwgTm90aW9uKScsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdKdXN0IGVtYWlsICYgc3ByZWFkc2hlZXRzJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJ0FscmVhZHkgdXNpbmcgc29tZSBBSSB0b29scycsIGljb246ICcnIH0KICV9LAogIHsgaWQ6ICdxNl9hdXRvbWF0aW9uX3JlYWRpbmVzcycsIG51bTogNiwgdGV4dDogJ0hvdyB3b3VsZCB5b3UgZGVzY3JpYmUgeW91ciBjdXJyZW50IHByb2Nlc3Nlcz8nLCBvcHRpb25zOiBbCiAgICB7IHRleHQ6ICdNb3N0bHkgbWFudWFsIC8gYWQtaG9jJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJ1NvbWUgZG9jdW1lbnRhdGlvbiwgbW9zdGx5IG1hbnVhbCcsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdTdGFuZGFyZCBTT1BzLCBsaW1pdGVkIGF1dG9tYXRpb24nLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnV2VsbC1kb2N1bWVudGVkLCBzb21lIGF1dG9tYXRpb24nLCBpY29uOiAnJyB9CiAgXX0sCiAgeyBpZDogJ3E3X3RpbWVsaW5lJywgbnVtOiA3LCB0ZXh0OiAnV2hlbiBhcmUgeW91IGxvb2tpbmcgdG8gaW1wbGVtZW50IEFJP1xuJywgb3B0aW9uczogWwogICAgeyB0ZXh0OiAnSW1tZWRpYXRlbHkgLyBSSUdIVCBOT1cnLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnV2l0aGluIDMgbW9udGhzJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJzMgLSA2IG1vbnRocycsIGljb246ICcnIH0sCiAgICB7IHRleHQ6ICdKdXN0IHJlc2VhcmNoaW5nIGZvciBub3cnLCBpY29uOiAnJyB9CiAgXX0sCiAgeyBpZDogJ3E4X2J1ZGdldCcsIG51bTogOCwgdGV4dDogJ1doYXQgaXMgeW91ciBtb250aGx5IGJ1ZGdldCBmb3IgQUkgdG9vbHMgJiBpbXBsZW1lbnRhdGlvbj8nLCBvcHRpb25zOiBbCiAgICB7IHRleHQ6ICdVbmRlciAkNTAwL21vJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJyQ1MDAgLSAkMixDMDAvbW8nLCBpY29uOiAnJyB9LAogICAgeyB0ZXh0OiAnJDIsNTAwIC0gJDUsQzAwL21vJywgaWNvbjogJycgfSwKICAgIHsgdGV4dDogJyQ1LDAwMCsvbW8nLCBpY29uOiAnJyB9CiAgXX0KXTsKCmNvbnN0IFNUT1JBR0VfS0VZID0gJ2ZraV9xdWFsaWZpZXJfdjEnOwpjb25zdCBHQTRfSUQgPSAnRy1MUVBZRkpOMlpWJzsKbGV0IGN1cnJlbnRRID0gMDsKbGV0IGFuc3dlcnMgPSB7fTsKbGV0IHNlc3Npb25JZCA9IFN0cmluZyhEYXRlLm5vdygpKTsKCmZ1bmN0aW9uIGd0YWcoKSB7IHdpbmRvdy5kYXRhTGF5ZXIgPSB3aW5kb3cuZGF0YUxheWVyIHx8IFtdOyB3aW5kb3cuZGF0YUxheWVyLnB1c2goYXJndW1lbnRzKTsgfQoKZnVuY3Rpb24gZmlyZUV2ZW50KGV2ZW50TmFtZSwgcGFyYW1zKSB7CiAgaWYgKHR5cGVvZiB3aW5kb3cuZ3RhZyA9PT0gJ2Z1bmN0aW9uJykgewogICAgd2luZG93Lmd0YWcoJ2V2ZW50JywgZXZlbnROYW1lLCBPYmplY3QuYXNzaWduKHsgc2Vzc2lvbl9pZDogc2Vzc2lvbklkIH0sIHBhcmFtcykpOwogIH0KfQoKZnVuY3Rpb24gcmVuZGVyUXVlc3Rpb24oaW5kZXgpIHsKICBjb25zdCBxID0gUVVFU1RJT05TW2luZGV4XTsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncW51bScpLnRleHRDb250ZW50ID0gYFF1ZXN0aW9uICR7cS5udW19IG9mICR7UVVFU1RJT05TLmxlbmd0aH1gOwogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdxdGV4dCcpLnRleHRDb250ZW50ID0gcS50ZXh0OwogIGNvbnN0IGdyaWQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnb3B0aW9ucy1ncmlkJyk7CiAgZ3JpZC5pbm5lckhUTUwgPSAnJzsKICBxLm9wdGlvbnMuZm9yRWFjaCgob3B0LCBpKSA9PiB7CiAgICBjb25zdCBidG4gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdidXR0b24nKTsKICAgIGJ0bi5jbGFzc05hbWUgPSAnb3B0aW9uLWJ0bic7CiAgICBidG4uaW5uZXJIVE1MID0gYDxzcGFuIGNsYXNzPSJvcHRpb24taWNvbiI+JHtvcHQuaWNvbn08L3NwYW4+PHNwYW4+JHtvcHQudGV4dH08L3NwYW4+YDsKICAgIGlmIChhbnN3ZXJzW3EuaWRdID09PSBpKSBidG4uY2xhc3NMaXN0LmFkZCgnc2VsZWN0ZWQnKTsKICAgIGJ0bi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHNlbGVjdE9wdGlvbihpbmRleCwgaSwgb3B0LnRleHQpKTsKICAgIGdyaWQuYXBwZW5kQ2hpbGQoYnRuKTsKICB9KTsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnYmFjay1idG4nKS5zdHlsZS52aXNpYmlsaXR5ID0gaW5kZXggPT09IDAgPyAnaGlkZGVuJyA6ICd2aXNpYmxlJzsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbmV4dC1idG4nKS5kaXNhYmxlZCA9IGFuc3dlcnNbcS5pZF0gPT09IHVuZGVmaW5lZDsKICB1cGRhdGVQcm9ncmVzcyhpbmRleCk7CiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3FjYXJkJykuY2xhc3NMaXN0LnJlbW92ZSgncmV2ZWFsJyk7CiAgdm9pZCBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncWNhcmQnKS5vZmZzZXRXaWR0aDsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncWNhcmQnKS5jbGFzc0xpc3QuYWRkKCdyZXZlYWwnKTsKfQoKZnVuY3Rpb24gc2VsZWN0T3B0aW9uKHFJbmRleCwgb3B0SW5kZXgsIG9wdFRleHQpIHsKICBjb25zdCBxID0gUVVFU1RJT05TW3FJbmRleF07CiAgYW5zd2Vyc1txLmlkXSA9IG9wdEluZGV4OwogIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5vcHRpb24tYnRuJykuZm9yRWFjaCgoYiwgaSkgPT4gewogICAgYi5jbGFzc0xpc3QudG9nZ2xlKCdzZWxlY3RlZCcsIGkgPT09IG9wdEluZGV4KTsKICB9KTsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbmV4dC1idG4nKS5kaXNhYmxlZCA9IGZhbHNlOwogIGZpcmVFdmVudCgncXVlc3Rpb25fYW5zd2VyZWQnLCB7CiAgICBxdWVzdGlvbl9pZDogcS5pZCwKICAgIHF1ZXN0aW9uX251bWJlcjogcS5udW0sCiAgICBhbnN3ZXJfdGV4dDogb3B0VGV4dCwKICAgIGFuc3dlcl9pbmRleDogb3B0SW5kZXgKICB9KTsKICAvLyBQcm9ncmVzcyBtaWxlc3RvbmVzCiAgY29uc3QgYW5zd2VyZWRDb3VudCA9IE9iamVjdC5rZXlzKGFuc3dlcnMpLmxlbmd0aDsKICBpZiAoYW5zd2VyZWRDb3VudCA9PT0gMSkgZmlyZUV2ZW50KCdxdWl6X3N0YXJ0ZWQnLCB7fSk7CiAgaWYgKGFuc3dlcmVkQ291bnQgPT09IDQpIGZpcmVFdmVudCgncXVpel9oYWxmd2F5Jywge30pOwogIGlmIChhbnN3ZXJlZENvdW50ID09PSA4KSBmaXJlRXZlbnQoJ3F1aXpfY29tcGxldGVkJywge30pOwp9CgpmdW5jdGlvbiBnb05leHQoKSB7CiAgaWYgKGN1cnJlbnRRIDwgUVVFU1RJT05TLmxlbmd0aCAtIDEpIHsKICAgIGN1cnJlbnRRKys7CiAgICByZW5kZXJRdWVzdGlvbihjdXJyZW50USk7CiAgfSBlbHNlIHsKICAgIHNob3dJZGVudGl0eVN0ZXAoKTsKICB9Cn0KCmZ1bmN0aW9uIGdvQmFjaygpIHsKICBpZiAoY3VycmVudFEgPiAwKSB7CiAgICBjdXJyZW50US0tOwogICAgcmVuZGVyUXVlc3Rpb24oY3VycmVudFEpOwogIH0KfQoKZnVuY3Rpb24gdXBkYXRlUHJvZ3Jlc3MoaW5kZXgpIHsKICBjb25zdCBwY3QgPSBNYXRoLnJvdW5kKChpbmRleCAvIFFVRVNUSU9OUy5sZW5ndGgpICogMTAwKTsKICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncHJvZ3Jlc3MtZmlsbCcpLnN0eWxlLndpZHRoID0gcGN0ICsgJyUnOwogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdzdGVwLWxhYmVsJykudGV4dENvbnRlbnQgPSBgU3RlcCAke2luZGV4ICsgMX0gb2YgJHtRVUVTVElPTlMubGVuZ3RofWA7CiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3BjdC1sYWJlbCcpLnRleHRDb250ZW50ID0gYCR7cGN0fSUgQ29tcGxldGVgOwp9CgpmdW5jdGlvbiBzaG93SWRlbnRpdHlTdGVwKCkgewogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdxdWl6LXN0ZXAnKS5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdpZGVudGl0eS1zdGVwJykuc3R5bGUuZGlzcGxheSA9ICcnOwogIHVwZGF0ZVByb2dyZXNzKFFVRVNUSU9OUy5sZW5ndGgpOwogIGZpcmVFdmVudCgncXVpel9zdWJtaXQnLCB7CiAgICBhbnN3ZXJzX2pzb246IEpTT04uc3RyaW5naWZ5KGFuc3dlcnMpCiAgfSk7Cn0KCmZ1bmN0aW9uIHN1Ym1pdElkZW50aXR5KCkgewogIGNvbnN0IGZpcnN0TmFtZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdmaXJzdE5hbWUnKS52YWx1ZS50cmltKCk7CiAgY29uc3QgbGFzdE5hbWUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbGFzdE5hbWUnKS52YWx1ZS50cmltKCk7CiAgY29uc3QgZW1haWwgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZW1haWwnKS52YWx1ZS50cmltKCk7CiAgY29uc3QgcGhvbmUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncGhvbmUnKS52YWx1ZS50cmltKCk7CiAgaWYgKCFmaXJzdE5hbWUgfHwgIWxhc3ROYW1lIHx8ICFlbWFpbCB8fCAhcGhvbmUpIHsgYWxlcnQoJ1BsZWFzZSBmaWxsIGluIGFsbCBmaWVsZHMuJyk7IHJldHVybjsgfQogIGZpcmVFdmVudCgnaWRlbnRpdHlfY29tcGxldGUnLCB7CiAgICBmaXJzdF9uYW1lOiBmaXJzdE5hbWUsCiAgICBlbWFpbDogZW1haWwKICB9KTsKICBjb25zdCBzY29yZSA9IGNhbGN1bGF0ZVNjb3JlKCk7CiAgY29uc3QgcXVhbGlmaWVkID0gc2NvcmUgPj0gNjsKICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShTVE9SQUdFX0tFWSwgSlNPTi5zdHJpbmdpZnkoeyBhbnN3ZXJzLCBzY29yZSwgcXVhbGlmaWVkLCBmaXJzdE5hbWUsIGxhc3ROYW1lLCBlbWFpbCwgcGhvbmUgfSkpOwogIHNob3dSZXN1bHQoc2NvcmUsIHF1YWxpZmllZCwgZmlyc3ROYW1lKTsKfQoKZnVuY3Rpb24gY2FsY3VsYXRlU2NvcmUoKSB7CiAgbGV0IHNjb3JlID0gMDsKICAvLyBxMl9yZXZlbnVlOiBoaWdoZXIgcmV2ZW51ZSA9IGhpZ2hlciBzY29yZQogIGNvbnN0IHJldiA9IGFuc3dlcnNbJ3EyX3JldmVudWUnXTsKICBpZiAocmV2ID09PSAxKSBzY29yZSArPSAxOyBlbHNlIGlmIChyZXYgPT09IDIpIHNjb3JlICs9IDI7IGVsc2UgaWYgKHJldiA+PSAzKSBzY29yZSArPSAzOwogIC8vIHE3X3RpbWVsaW5lOiBlYXJsaWVyID0gaGlnaGVyCiAgY29uc3QgdGwgPSBhbnN3ZXJzWydxN190aW1lbGluZSddOwogIGlmICh0bCA9PT0gMCkgc2NvcmUgKz0gMzsgZWxzZSBpZiAodGwgPT09IDEpIHNjb3JlICs9IDI7IGVsc2UgaWYgKHRsID09PSAyKSBzY29yZSArPSAxOwogIC8vIHE4X2J1ZGdldDogaGlnaGVyID0gaGlnaGVyCiAgY29uc3QgYnVkID0gYW5zd2Vyc1sncThfYnVkZ2V0J107CiAgaWYgKGJ1ZCA9PT0gMSkgc2NvcmUgKz0gMTsgZWxzZSBpZiAoYnVkID09PSAyKSBzY29yZSArPSAyOyBlbHNlIGlmIChidWQgPj0gMykgc2NvcmUgKz0gMzsKICByZXR1cm4gc2NvcmU7Cn0KCmZ1bmN0aW9uIHNob3dSZXN1bHQoc2NvcmUsIHF1YWxpZmllZCwgZmlyc3ROYW1lKSB7CiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2lkZW50aXR5LXN0ZXAnKS5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXN1bHQtc3RlcCcpLnN0eWxlLmRpc3BsYXkgPSAnJzsKICBjb25zdCBjYXJkID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC1jYXJkJyk7CiAgaWYgKHF1YWxpZmllZCkgewogICAgZmlyZUV2ZW50KCdxdWFsaWZpZWQnLCB7IHNjb3JlIH0pOwogICAgY2FyZC5pbm5lckhUTUwgPSBgCiAgICAgIDxkaXYgY2xhc3M9InJlc3VsdC1pY29uIj48L2Rpdj4KICAgICAgPGgyPllvdSdyZSBhIEdyZWF0IEZpdCwgJHtmaXJzdE5hbWV9ITwvaDI+CiAgICAgIDxwPkJhc2VkIG9uIHlvdXIgYW5zd2VycywgQUkgY291bGQgc2lnbmlmaWNhbnRseSBpbXBhY3QgeW91ciBidXNpbmVzcyBvcGVyYXRpb25zIGFuZCByZXZlbnVlLiBTY2hlZHVsZSBhIGZyZWUgc3RyYXRlZ3kgY2FsbCB0byBsZWFybiBob3cuPC9wPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4tcHJpbWFyeSIgc3R5bGU9ImZvbnQtc2l6ZToxLjFyZW07cGFkZGluZzoxcmVtIDJyZW07IiBvbmNsaWNrPSJvcGVuQm9va2luZ01vZGFsKCkiPgogICAgICAgIFNjaGVkdWxlIE15IEZyZWUgU3RyYXRlZ3kgQ2FsbCAmcmFycjsKICAgICAgPC9idXR0b24+CiAgICBgOwogIH0gZWxzZSB7CiAgICBmaXJlRXZlbnQoJ2Rpc3F1YWxpZmllZCcsIHsgc2NvcmUgfSk7CiAgICBjYXJkLmlubmVySFRNTCA9IGAKICAgICAgPGRpdiBjbGFzcz0icmVzdWx0LWljb24iPjwvZGl2PgogICAgICA8aDI+Tm90IFF1aXRlIFJlYWR5IFlldDwvaDI+CiAgICAgIDxwPkJhc2VkIG9uIHlvdXIgYW5zd2VycywgeW91IG1heSBuZWVkIHRvIGJ1aWxkIHNvbWUgZm91bmRhdGlvbiBiZWZvcmUgaW1wbGVtZW50aW5nIEFJLiBXZSdkIHN0aWxsIGxvdmUgdG8gc2hhcmUgcmVzb3VyY2VzIHdpdGggeW91LjwvcD4KICAgICAgPGEgaHJlZj0iaHR0cHM6Ly9mcmFuY2hpc2VraS5jb20iIGNsYXNzPSJidG4tc2Vjb25kYXJ5IiBzdHlsZT0iZGlzcGxheTppbmxpbmUtYmxvY2s7dGV4dC1kZWNvcmF0aW9uOm5vbmU7cGFkZGluZzowLjhyZW0gMnJlbTsiPgogICAgICAgIEV4cGxvcmUgUmVzb3VyY2VzCiAgICAgIDwvYT4KICAgIGA7CiAgfQp9CgpmdW5jdGlvbiBvcGVuQm9va2luZ01vZGFsKCkgewogIGZpcmVFdmVudCgnYm9va2luZ19tb2RhbF9vcGVuZWQnLCB7fSk7CiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2Jvb2tpbmctbW9kYWwnKS5zdHlsZS5kaXNwbGF5ID0gJ2ZsZXgnOwp9CgpmdW5jdGlvbiBjbG9zZU1vZGFsKCkgewogIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdib29raW5nLW1vZGFsJykuc3R5bGUuZGlzcGxheSA9ICdub25lJzsKfQoKLy8gSW5pdAorcmVuZGVyUXVlc3Rpb24oMCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4K
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See If AI Is a Fit for Your Business — FKI Qualifier</title>
+<meta name="description" content="Answer 8 questions to see if AI is a fit for your business. Takes under 60 seconds.">
+<link rel="canonical" href="https://bennett-maxwell.github.io/fki-preview/qualify.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/qualify.html">
+<meta property="og:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta property="og:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
+<meta property="og:image" content="https://bennett-maxwell.github.io/fki-preview/assets/og-qualifier.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta name="twitter:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
+<style>
+  :root {
+    --brand:       #1D6FDB;
+    --brand-dark:  #0A0E1A;
+    --brand-light: #4A90E2;
+    --neutral-bg:  #f8f8f8;
+    --white:       #ffffff;
+    --text:        #0A0E1A;
+    --text-muted:  #3a3a3a;
+    --text-light:  #888888;
+    --border:      #e2e2e2;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(29,111,219,0.08);
+    --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; text-decoration: none; }
+  .nav-logo span { color: var(--brand-light); }
+
+  .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 4rem 2rem 3.5rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(29,111,219,0.2); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: var(--brand-light); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto 1rem; }
+
+  .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2.5rem; align-items: start; }
+  @media (max-width: 860px) { .main-wrap { grid-template-columns: 1fr; } }
+
+  .q-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+  .q-section:last-child { margin-bottom: 0; }
+  .q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
+  .q-title { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.4rem; }
+
+  /* TEXT INPUTS */
+  .exp-input-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .exp-input-row label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; min-width: 140px; }
+  .exp-input-row input[type=number] {
+    width: 130px; font-size: 1.1rem; font-weight: 700; padding: 0.45rem 0.7rem;
+    border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit;
+    color: var(--text); background: var(--neutral-bg); outline: none;
+    -moz-appearance: textfield;
+  }
+  .exp-input-row input[type=number]:focus { border-color: var(--brand); background: var(--white); }
+  .exp-input-row input[type=number]::-webkit-outer-spin-button,
+  .exp-input-row input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .exp-input-row .exp-unit { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+
+  /* SLIDER */
+  .slider-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+  .slider-name { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+  .slider-val { font-size: 1.05rem; font-weight: 800; color: var(--brand-dark); }
+  .slider-val.needs-input { color: var(--text-light); font-style: italic; font-size: 0.88rem; font-weight: 500; }
+  input[type=range] {
+    width: 100%; height: 6px; border-radius: 3px; outline: none;
+    appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 0.6rem;
+    background: linear-gradient(to right, var(--brand) 0%, var(--brand) 0%, var(--border) 0%, var(--border) 100%);
+  }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); }
+  .exp-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-bottom: 1.2rem; }
+
+  /* CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
+  .chip { padding: 0.52rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.88rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; user-select: none; line-height: 1.3; }
+  .chip:hover { border-color: var(--brand-light); color: var(--brand); background: #f0f6ff; }
+  .chip.selected { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
+
+  /* SECTION DIVIDER */
+  .section-divider { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light); padding: 0.4rem 0; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* DUAL INPUT (Q6 team) */
+  .dual-input-block { background: var(--neutral-bg); border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 0.5rem; }
+  .dual-input-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.75rem; }
+
+  /* RESULTS PANEL */
+  .results-col { position: sticky; top: 80px; }
+  @media (max-width: 860px) { .results-col { position: static; } }
+  .results-card { background: var(--brand-dark); border-radius: var(--radius); padding: 2rem; color: var(--white); box-shadow: var(--shadow-md); }
+  .results-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; }
+
+  .result-block { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; }
+  .result-block-label { font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem; }
+  .result-block-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem; }
+  .result-block-sub { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+  .result-block.green .result-block-value { color: #4ade80; }
+  .result-block.green .result-block-label { color: rgba(74,222,128,0.6); }
+  .result-block.yellow .result-block-value { color: #fbbf24; }
+  .result-block.neutral .result-block-value { color: rgba(255,255,255,0.3); font-size: 1.1rem; font-weight: 500; font-style: italic; }
+
+  .verdict-block { border-radius: 10px; padding: 1.4rem; margin-bottom: 1rem; text-align: center; }
+  .verdict-block.green  { background: rgba(74,222,128,0.12);  border: 1.5px solid rgba(74,222,128,0.3); }
+  .verdict-block.yellow { background: rgba(251,191,36,0.12);  border: 1.5px solid rgba(251,191,36,0.3); }
+  .verdict-block.red    { background: rgba(248,113,113,0.1);  border: 1.5px solid rgba(248,113,113,0.25); }
+  .verdict-block.neutral{ background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); }
+  .verdict-icon  { font-size: 2rem; margin-bottom: 0.4rem; }
+  .verdict-label { font-size: 1.05rem; font-weight: 800; color: var(--white); line-height: 1.25; }
+  .verdict-sub   { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; }
+
+  .results-breakdown { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; line-height: 1.9; }
+  .results-breakdown span { color: rgba(255,255,255,0.65); font-weight: 600; }
+
+  .progress-bar-wrap { margin-bottom: 1.5rem; }
+  .progress-bar-label { font-size: 0.75rem; color: rgba(255,255,255,0.38); margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand-light), #4ade80); border-radius: 2px; transition: width 0.4s ease; }
+
+  .cta-btn { display: block; width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 9px; padding: 0.95rem; font-size: 1rem; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
+  .cta-btn:hover { background: var(--brand-light); }
+  .cta-btn[disabled] { opacity: 0.5; pointer-events: none; }
+  .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.48); margin-top: 0.75rem; text-align: center; line-height: 1.4; }
+  .identity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+  .identity-grid .full { grid-column: 1 / -1; }
+  .identity-field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.35rem; }
+  .identity-field input { width: 100%; font-size: 0.95rem; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; color: var(--text); background: var(--neutral-bg); outline: none; }
+  .identity-field input:focus { border-color: var(--brand); background: var(--white); }
+  .identity-status { margin-top: 0.85rem; font-size: 0.8rem; color: var(--text-light); }
+  .identity-status.ready { color: #19713a; font-weight: 700; }
+  .booking-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; background: rgba(10,14,26,0.72); }
+  .booking-modal.open { display: flex; }
+  .booking-dialog { width: min(920px, 100%); max-height: 92vh; background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 80px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
+  .booking-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+  .booking-title { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .booking-close { border: 0; background: var(--neutral-bg); color: var(--text); width: 36px; height: 36px; border-radius: 50%; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+  .booking-body { position: relative; display: flex; flex-direction: column; align-items: stretch; padding: 0; background: var(--white); min-height: 540px; }
+  .booking-confirm-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem; background: #d1fae5; border-bottom: 1px solid #a7f3d0; }
+  .booking-confirm-bar svg { width: 22px; height: 22px; stroke: #16a34a; stroke-width: 2.5; fill: none; flex-shrink: 0; }
+  .booking-confirm-bar-text { font-size: 0.92rem; font-weight: 700; color: #14532d; }
+  .booking-calendar-frame { flex: 1; width: 100%; border: 0; min-height: 500px; display: block; }
+
+  .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
+  .disclaimer a { color: var(--brand); }
+
+/* ============================================================ MOBILE (≤480px)
+   Added 2026-05-23 — full mobile optimization
+   ============================================================ */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  nav { padding: 0 1rem; height: 52px; }
+  .nav-logo { font-size: 0.88rem; }
+  .hero { padding: 2.5rem 1.25rem 2rem; }
+  .hero h1 { font-size: clamp(1.5rem, 6.5vw, 2rem); }
+  .hero-badge { font-size: 0.7rem; }
+  .hero-sub { font-size: 0.9rem; }
+  .main-wrap { padding: 1.5rem 1rem 3rem; gap: 1.5rem; }
+  .q-section { padding: 1.4rem; }
+  .q-title { font-size: 1rem; }
+  .chips { gap: 0.45rem; }
+  .chip { padding: 0.45rem 0.85rem; font-size: 0.82rem; }
+  .exp-input-row { flex-wrap: wrap; gap: 0.5rem; }
+  .exp-input-row label { min-width: unset; }
+  .exp-input-row input[type=number] { width: 100px; }
+  .identity-grid { grid-template-columns: 1fr; }
+  .results-card { padding: 1.5rem; }
+  .result-block { padding: 1.1rem; }
+  .result-block-value { font-size: 1.6rem; }
+  /* R3: larger mobile CTA for thumb tap */
+  .cta-btn { padding: 1.1rem; font-size: 1.05rem; min-height: 52px; }
+  .booking-cta-btn { padding: 1rem 1.5rem; font-size: 1rem; }
+}
+@media (max-width: 360px) {
+  .main-wrap { padding: 1rem 0.75rem 2.5rem; }
+  .chip { font-size: 0.78rem; padding: 0.4rem 0.7rem; }
+  .exp-input-row input[type=number] { width: 80px; font-size: 1rem; }
+  .hero h1 { font-size: clamp(1.35rem, 7vw, 1.8rem); }
+  .results-card { padding: 1.25rem; }
+  .cta-btn { font-size: 0.95rem; padding: 0.85rem; }
+}
+
+/* ── Round-1 additions ─────────────────────────────────────────────────────── */
+.chip:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+.cta-btn.calculating { background: var(--brand-dark); cursor: wait; animation: cta-shimmer 1.2s ease-in-out infinite; }
+@keyframes cta-shimmer { 0%,100% { opacity:1; } 50% { opacity:0.65; } }
+@media (prefers-reduced-motion: reduce) { .cta-btn.calculating { animation: none; } }
+
+/* Mobile sticky CTA bar — appears when all 8 questions answered on narrow screen */
+#mobile-sticky-bar { display: none; }
+@media (max-width: 860px) {
+  #mobile-sticky-bar {
+    display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: var(--brand-dark); border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0.75rem 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+    transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  #mobile-sticky-bar.visible { transform: translateY(0); }
+  #mobile-sticky-bar-btn { width: 100%; background: var(--brand); color: #fff; border: 0; border-radius: 9px; padding: 0.9rem; font-size: 1rem; font-weight: 700; cursor: pointer; }
+  #mobile-sticky-bar-btn:disabled { opacity: 0.45; pointer-events: none; }
+  body.modal-open #mobile-sticky-bar { display: none !important; }
+}
+.result-block, .verdict-block { transition: background 0.3s ease, border-color 0.3s ease; }
+.progress-bar-fill { transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+.result-block-value { transition: color 0.3s ease; }
+.identity-field input.invalid { border-color: #ef4444; }
+.identity-field .field-hint { font-size: 0.73rem; color: #ef4444; margin-top: 0.25rem; display: none; }
+.identity-field input.invalid + .field-hint,
+.identity-field .field-hint.show { display: block; }
+</style>
+<!-- R3: Structured data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "AI Fit Assessment for Business Owners — FranchiseKI",
+  "description": "Answer 8 questions to find out if AI is a fit for your business. FranchiseKI runs the numbers on your leads, deal size, and team time.",
+  "url": "https://bennett-maxwell.github.io/fki-preview/qualify.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "FranchiseKI",
+    "url": "https://franchiseki.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+  }
+}
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '731853659590910');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- GA4 ACTIVATION: replace G-XXXXXXXX with your property ID, then uncomment the two blocks below -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXX');
+</script>
+-->
+</head>
+<body>
+<!-- qualify.html | FKI AI Qualifier | build: 2026-06-02-extra-push -->
+<noscript><div style="background:#ef4444;color:#fff;text-align:center;padding:1rem;font-weight:700;">This qualifier requires JavaScript. Please enable it in your browser settings.</div></noscript>
+<!-- Mobile sticky CTA — mirrors #cta-apply; appears after all 8 questions answered on narrow screens -->
+<div id="mobile-sticky-bar" aria-hidden="true">
+  <button id="mobile-sticky-bar-btn" type="button" disabled>Submit Qualification First</button>
+</div>
+
+<nav>
+  <a class="nav-logo" href="https://franchiseki.com">Franchise<span>KI</span> · AI Qualifier</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Free Assessment — Takes About 4 Minutes</div>
+  <h1>Find out if AI can make<br>your business <span>more money</span></h1>
+  <p class="hero-sub">Answer 8 questions. We run the numbers on your leads, deal size, and team time — and tell you exactly where AI fits and what it's worth. We only take on businesses where the math works.</p>
+</div>
+
+<div class="main-wrap">
+  <div class="questions-col">
+
+    <div class="q-section" id="identity-section">
+      <div class="q-label">Contact Tracking</div>
+      <div class="q-title">Confirm where this qualification should be saved.</div>
+      <div class="q-sub">This keeps your score and application tied to the same CRM record.</div>
+      <div class="identity-grid">
+        <div class="identity-field">
+          <label for="lead-first">First name <span style="color:#ef4444;font-size:1rem;line-height:1;">*</span></label>
+          <input id="lead-first" name="firstName" type="text" autocomplete="given-name" required>
+          <div class="field-hint" id="first-hint">First name is required.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-last">Last name <span style="color:#ef4444;font-size:1rem;line-height:1;">*</span></label>
+          <input id="lead-last" name="lastName" type="text" autocomplete="family-name" required>
+          <div class="field-hint" id="last-hint">Last name is required.</div>
+        </div>
+        <div class="identity-field full">
+          <label for="lead-business">Business name <span style="color:#ef4444;font-size:1rem;line-height:1;">*</span></label>
+          <input id="lead-business" name="businessName" type="text" autocomplete="organization" required>
+          <div class="field-hint" id="business-hint">Business name is required.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-email">Email <span style="color:#ef4444;font-size:1rem;line-height:1;">*</span></label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" required>
+          <div class="field-hint" id="email-hint">Enter a valid email address.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-phone">Phone <span style="color:#ef4444;font-size:1rem;line-height:1;">*</span></label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+          <div class="field-hint" id="phone-hint">Enter a 10-digit phone number.</div>
+        </div>
+      </div>
+      <div class="identity-status" id="identity-status">Name, email, phone, and business are required to submit.</div>
+    </div>
+
+    <div class="section-divider">Revenue Potential — Do the Numbers Qualify?</div>
+
+    <!-- Q1: Monthly Leads -->
+    <div class="q-section">
+      <div class="q-label">Question 1 of 8</div>
+      <div class="q-title">How many new leads or inquiries come into your business each month?</div>
+      <div class="q-sub">Count every channel — phone calls, web forms, referrals, walk-ins, DMs. If it's someone who could become a customer, count it.</div>
+      <div class="slider-row">
+        <span class="slider-name">Monthly Leads</span>
+        <span class="slider-val needs-input" id="lbl-leads">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-leads" min="0" max="100" step="1" value="0" oninput="leadsUpdate()">
+      <div class="exp-scale">
+        <span>10</span><span>50</span><span>250</span><span>1,000</span><span>5,000</span>
+      </div>
+    </div>
+
+    <!-- Q2: Deal Value — text only -->
+    <div class="q-section">
+      <div class="q-label">Question 2 of 8</div>
+      <div class="q-title">What is your average sale or contract value?</div>
+      <div class="q-sub">The dollar amount when you close a typical deal. If it varies a lot, use the most common amount.</div>
+      <div class="exp-input-row">
+        <label for="inp-deal">Your avg deal:</label>
+        <input type="number" id="inp-deal" value="" placeholder="e.g. 3500" min="1" max="9999999" oninput="dealUpdate()">
+        <span class="exp-unit">$</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-name">Average Deal Value</span>
+        <span class="slider-val needs-input" id="lbl-deal">← type your number above</span>
+      </div>
+    </div>
+
+    <!-- Q3: Leads Per Sale -->
+    <div class="q-section">
+      <div class="q-label">Question 3 of 8</div>
+      <div class="q-title">How many leads do you typically need to close one sale?</div>
+      <div class="q-sub">If 10 leads come in and you close 2, the answer is 5. Be honest — this drives the math.</div>
+      <div class="slider-row">
+        <span class="slider-name">Leads Needed Per Sale</span>
+        <span class="slider-val needs-input" id="lbl-lps">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-lps" min="0" max="100" step="1" value="0" oninput="lpsUpdate()">
+      <div class="exp-scale">
+        <span>1</span><span>5</span><span>15</span><span>50</span><span>150</span><span>500</span>
+      </div>
+    </div>
+
+    <!-- Q4: Response Speed -->
+    <div class="q-section">
+      <div class="q-label">Question 4 of 8 — This one drives the biggest number</div>
+      <div class="q-title">When a new lead comes in, how fast does someone on your team respond?</div>
+      <div class="q-sub">Pick the option that describes a typical week — not your best day. Studies show speed-to-first-contact is the single biggest driver of close rate. Be honest — it only helps the math.</div>
+      <div class="chips" id="chips-speed">
+        <div class="chip" data-val="instant"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','instant')"      onkeydown="chipKeydown(event,'speed','instant')">Under 5 minutes</div>
+        <div class="chip" data-val="30min"        tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','30min')"        onkeydown="chipKeydown(event,'speed','30min')">Within 30 minutes</div>
+        <div class="chip" data-val="1to4hr"       tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','1to4hr')"       onkeydown="chipKeydown(event,'speed','1to4hr')">1–4 hours</div>
+        <div class="chip" data-val="sameday"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','sameday')"      onkeydown="chipKeydown(event,'speed','sameday')">Within 24 hours</div>
+        <div class="chip" data-val="nextday"      tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','nextday')"      onkeydown="chipKeydown(event,'speed','nextday')">Next day</div>
+        <div class="chip" data-val="inconsistent" tabindex="0" role="button" aria-pressed="false" onclick="selectChip('speed','inconsistent')" onkeydown="chipKeydown(event,'speed','inconsistent')">Inconsistent</div>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2rem;">Your Time & Team — Scope of the AI Opportunity</div>
+
+    <!-- Q5: Your hours/week on computer -->
+    <div class="q-section">
+      <div class="q-label">Question 5 of 8</div>
+      <div class="q-title">How many hours per week do you personally spend on the computer for your business?</div>
+      <div class="q-sub">Include email, CRM updates, follow-ups, scheduling, admin — everything screen-time related.</div>
+      <div class="slider-row">
+        <span class="slider-name">Your Hours per Week</span>
+        <span class="slider-val needs-input" id="lbl-hours">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-hours" min="0" max="42" step="1" value="0" oninput="hoursUpdate()">
+      <div class="exp-scale">
+        <span>1 hr</span><span>10</span><span>20</span><span>30</span><span>40+</span>
+      </div>
+    </div>
+
+    <!-- Q6: Team size + avg computer hours -->
+    <div class="q-section">
+      <div class="q-label">Question 6 of 8</div>
+      <div class="q-title">Tell us about your team's computer time.</div>
+      <div class="q-sub">This helps us calculate the total AI automation opportunity across your entire operation.</div>
+
+      <div class="dual-input-block">
+        <div class="dual-input-label">Number of Team Members (not counting you)</div>
+        <div class="exp-input-row" style="margin-bottom:0;">
+          <label for="inp-team">Team members:</label>
+          <input type="number" id="inp-team" value="" placeholder="e.g. 3" min="0" max="999" oninput="teamUpdate()">
+          <span class="exp-unit">people</span>
+        </div>
+      </div>
+
+      <div class="dual-input-block" style="margin-top:0.75rem;">
+        <div class="dual-input-label">Average Computer Hours per Week — per Team Member</div>
+        <div class="exp-input-row" style="margin-bottom:0;">
+          <label for="inp-teamhrs">Avg hrs/week each:</label>
+          <input type="number" id="inp-teamhrs" value="" placeholder="e.g. 10" min="1" max="80" oninput="teamHrsUpdate()">
+          <span class="exp-unit">hrs/wk</span>
+        </div>
+      </div>
+
+      <div class="slider-row" style="margin-top:1rem;">
+        <span class="slider-name">Total Team Screen Time</span>
+        <span class="slider-val needs-input" id="lbl-team">← fill in both fields above</span>
+      </div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2rem;">Deployment — What Comes First?</div>
+
+    <!-- Q7: Blueprint Capability First -->
+    <div class="q-section">
+      <div class="q-label">Question 7 of 8</div>
+      <div class="q-title">From what we showed you in the blueprint, which recommendation would you want to deploy first?</div>
+      <div class="q-sub">This determines how much setup time is required on our end to get you results immediately.</div>
+      <div class="chips" id="chips-capability">
+        <div class="chip" data-val="speed-bot"    tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','speed-bot')"    onkeydown="chipKeydown(event,'capability','speed-bot')">AI Speed-to-Lead Bot</div>
+        <div class="chip" data-val="lead-filter"  tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','lead-filter')"  onkeydown="chipKeydown(event,'capability','lead-filter')">Lead Qualification Filter</div>
+        <div class="chip" data-val="follow-up"    tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','follow-up')"    onkeydown="chipKeydown(event,'capability','follow-up')">Automated Follow-Up Sequences</div>
+        <div class="chip" data-val="crm-auto"     tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','crm-auto')"     onkeydown="chipKeydown(event,'capability','crm-auto')">CRM Automation</div>
+        <div class="chip" data-val="voice-ai"     tabindex="0" role="button" aria-pressed="false" onclick="selectChip('capability','voice-ai')"     onkeydown="chipKeydown(event,'capability','voice-ai')">Voice AI / Outbound Calling</div>
+      </div>
+    </div>
+
+    <!-- Q8: Marketing Spend — SIMPLE SLIDER ($500–$50K) -->
+    <div class="q-section">
+      <div class="q-label">Question 8 of 8</div>
+      <div class="q-title">How much does your business spend on marketing each month?</div>
+      <div class="q-sub">Add it all up — paid ads, agency fees, lead gen services, directories. This tells us how much budget AI could make work harder for you.</div>
+      <div class="slider-row">
+        <span class="slider-name">Total Monthly Marketing Spend</span>
+        <span class="slider-val needs-input" id="lbl-spend">← slide to set yours</span>
+      </div>
+      <input type="range" id="sl-spend" min="0" max="100" step="1" value="0" oninput="spendUpdate()">
+      <div class="exp-scale">
+        <span>$500</span><span>$2K</span><span>$5K</span><span>$15K</span><span>$50K</span>
+      </div>
+    </div>
+
+  </div><!-- /questions-col -->
+
+  <!-- RESULTS PANEL -->
+  <div class="results-col">
+    <div class="results-card">
+      <div class="results-title">Your AI Fit Score — Updates Live</div>
+
+      <!-- EP5: ARIA live region for screen reader progress announcements -->
+      <div aria-live="polite" aria-atomic="true" id="progress-aria" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label">
+          <span id="progress-label">0 of 8 answered</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="progress-bar-el">
+          <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Qualification Verdict -->
+      <div class="verdict-block neutral" id="verdict-block">
+        <div class="verdict-icon" id="verdict-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="verdict-label" id="verdict-label">Your AI fit result shows here</div>
+        <div class="verdict-sub" id="verdict-sub">Answer the first 4 questions and we run the numbers</div>
+      </div>
+
+      <!-- EP5: Revenue impact block — shows when Q1+Q2+Q3+Q4 answered -->
+      <div class="result-block neutral" id="revenue-block" style="display:none;">
+        <div class="result-block-label">Estimated 90-Day Revenue Lift</div>
+        <div class="result-block-value" id="revenue-value">—</div>
+        <div class="result-block-sub" id="revenue-sub">based on your leads, deal size, and response speed</div>
+      </div>
+      <!-- Time Savings Block — shows when Q5 answered -->
+      <div class="result-block neutral" id="savings-block" style="display:none;">
+        <div class="result-block-label">Potential Weekly Time Savings</div>
+        <div class="result-block-value" id="savings-value">—</div>
+        <div class="result-block-sub" id="savings-sub">hrs/week freed from manual work</div>
+      </div>
+
+      <div class="results-breakdown" id="breakdown-text"></div>
+
+      <!-- R3: Social proof -->
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:1rem;line-height:1.5;">Reviewed by businesses across HVAC, medspas, roofing, dental, and franchise. Most qualify in under 4 minutes.</div>
+      <!-- R2: Consent checkbox -->
+      <label id="consent-wrap" style="display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:1rem;cursor:pointer;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.4;">
+        <input type="checkbox" id="consent-check" style="margin-top:2px;flex-shrink:0;accent-color:var(--brand-light);">
+        <span>I agree to be contacted by FKI about AI services. No spam — just your results and a possible strategy call.</span>
+      </label>
+      <button class="cta-btn" id="cta-apply" type="button" disabled>Submit Qualification First</button>
+      <div class="cta-note" id="cta-note">Complete the contact fields and all 8 questions.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="booking-modal" id="booking-modal" aria-hidden="true">
+  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="booking-head">
+      <div class="booking-title" id="booking-title">Book your Advaita AI strategy call</div>
+      <button class="booking-close" id="booking-close" type="button" aria-label="Close booking calendar">&times;</button>
+    </div>
+    <div class="booking-body">
+      <div class="booking-confirm-bar">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="booking-confirm-bar-text">You're qualified — pick a time below.</span>
+      </div>
+      <iframe class="booking-calendar-frame" id="booking-calendar-frame" src="about:blank" title="Book your Advaita AI strategy call" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<p class="disclaimer">
+  Close rate lift benchmarks from <a href="https://hbr.org/2011/03/the-short-life-of-online-sales-leads" target="_blank">Harvard Business Review speed-to-lead research</a> and <a href="https://www.leadresponsemanagement.org" target="_blank">Lead Response Management Institute</a>. These are industry averages — your results will vary. This tool qualifies fit; it does not guarantee outcomes.
+</p>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let leadsVal   = null;   // Q1
+let dealVal    = null;   // Q2
+let lpsVal     = null;   // Q3
+// chips.speed               Q4
+let hoursVal   = null;   // Q5 — your hours/week
+let teamVal    = null;   // Q6a — number of team members
+let teamHrsVal = null;   // Q6b — avg hrs/week per member
+// chips.capability          Q7
+let spendVal   = null;   // Q8 — ad spend
+
+const chips = { speed: null, capability: null };
+let lastQualificationBand = null;
+const PAGE_LOAD_TIME = Date.now(); // used to compute time_on_page_sec at submit
+
+// ── ANSWER PERSISTENCE (R1 improvement) ──────────────────────────────────────
+const ANSWERS_KEY = 'advaitaQualifierAnswers';
+
+function saveAnswers() {
+  try {
+    const answers = {
+      leadsPos:    document.getElementById('sl-leads')   ? document.getElementById('sl-leads').value   : '0',
+      dealVal:     document.getElementById('inp-deal')   ? document.getElementById('inp-deal').value   : '',
+      lpsPos:      document.getElementById('sl-lps')     ? document.getElementById('sl-lps').value     : '0',
+      speedChip:   chips.speed,
+      hoursPos:    document.getElementById('sl-hours')   ? document.getElementById('sl-hours').value   : '0',
+      teamVal:     document.getElementById('inp-team')   ? document.getElementById('inp-team').value   : '',
+      teamHrsVal:  document.getElementById('inp-teamhrs')? document.getElementById('inp-teamhrs').value: '',
+      capChip:     chips.capability,
+      spendPos:    document.getElementById('sl-spend')   ? document.getElementById('sl-spend').value   : '0',
+      savedAt:     Date.now()
+    };
+    localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+  } catch(e) {}
+}
+
+function loadAnswers() {
+  try {
+    const raw = localStorage.getItem(ANSWERS_KEY);
+    if (!raw) return;
+    const a = JSON.parse(raw);
+    // Only restore if saved within last 7 days
+    if (!a.savedAt || (Date.now() - a.savedAt) > 7 * 86400000) return;
+    if (a.leadsPos && a.leadsPos !== '0') {
+      document.getElementById('sl-leads').value = a.leadsPos;
+      leadsUpdate();
+    }
+    if (a.dealVal) {
+      document.getElementById('inp-deal').value = a.dealVal;
+      dealUpdate();
+    }
+    if (a.lpsPos && a.lpsPos !== '0') {
+      document.getElementById('sl-lps').value = a.lpsPos;
+      lpsUpdate();
+    }
+    if (a.speedChip) selectChip('speed', a.speedChip);
+    if (a.hoursPos && a.hoursPos !== '0') {
+      document.getElementById('sl-hours').value = a.hoursPos;
+      hoursUpdate();
+    }
+    if (a.teamVal) {
+      document.getElementById('inp-team').value = a.teamVal;
+      teamUpdate();
+    }
+    if (a.teamHrsVal) {
+      document.getElementById('inp-teamhrs').value = a.teamHrsVal;
+      teamHrsUpdate();
+    }
+    if (a.capChip) selectChip('capability', a.capChip);
+    if (a.spendPos && a.spendPos !== '0') {
+      document.getElementById('sl-spend').value = a.spendPos;
+      spendUpdate();
+    }
+  } catch(e) {}
+}
+
+// ── KEYBOARD NAV FOR CHIPS (R1 improvement) ───────────────────────────────────
+function chipKeydown(e, group, val) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectChip(group, val); }
+}
+
+const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+// A/B toggle — set false to skip modal and route qualified leads to THANK_YOU_URL
+const BOOKING_MODAL_ENABLED = true;
+
+function logFunnelEvent(event, data) {
+  try {
+    const entry = { ts: Date.now(), event, ...data };
+    const key = 'advaitaFunnelEvents';
+    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+    existing.push(entry);
+    localStorage.setItem(key, JSON.stringify(existing.slice(-100)));
+  } catch(e) {}
+  // GA4: fires when gtag() is loaded on the page (no-op otherwise)
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', event, Object.assign({ event_category: 'qualifier_funnel' }, data || {}));
+    }
+  } catch(e) {}
+}
+const STORAGE_KEY = 'advaitaLeadIdentity';
+const SESSION_KEY = 'advaitaLeadSessionId';
+const THANK_YOU_URL = 'thank-you-apply.html';
+
+function getParams() {
+  try { return new URLSearchParams(window.location.search); }
+  catch(e) { return new URLSearchParams(); }
+}
+
+function getLeadSessionId() {
+  try {
+    const existing = localStorage.getItem(SESSION_KEY);
+    if (existing) return existing;
+    // R2: improved uniqueness — timestamp (ms) + high-entropy random segment
+    const ts   = Date.now().toString(36);
+    const rand = Math.random().toString(36).slice(2, 12) + Math.random().toString(36).slice(2, 8);
+    const created = 'advaita-' + ts + '-' + rand;
+    localStorage.setItem(SESSION_KEY, created);
+    return created;
+  } catch(e) {
+    return 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,10);
+  }
+}
+
+function readStoredIdentity() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {}; }
+  catch(e) { return {}; }
+}
+
+function splitName(fullName) {
+  const clean = String(fullName || '').replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/\s+/);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
+function titleCase(s) {
+  return String(s || '').toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+}
+
+// Parse a URL lead slug (e.g. "court-lundberg") into First/Last.
+// Splits on hyphens AND whitespace, title-cases each part. First token = first
+// name, remaining tokens = last name. Returns {first:'',last:''} when empty.
+function parseLeadSlug(slug) {
+  const clean = decodeURIComponent(String(slug || '')).replace(/\+/g, ' ').trim();
+  if (!clean) return { first: '', last: '' };
+  const parts = clean.split(/[-\s]+/).map(titleCase).filter(Boolean);
+  return { first: parts.shift() || '', last: parts.join(' ') || '' };
+}
+
+function getIdentity() {
+  return {
+    firstName: document.getElementById('lead-first').value.trim(),
+    lastName: document.getElementById('lead-last').value.trim(),
+    businessName: document.getElementById('lead-business').value.trim(),
+    email: document.getElementById('lead-email').value.trim(),
+    phone: document.getElementById('lead-phone').value.trim(),
+    contactId: getParams().get('contactId') || getParams().get('cid') || readStoredIdentity().contactId || '',
+    source: getParams().get('src') || getParams().get('utm_source') || readStoredIdentity().source || 'qualify',
+    blueprintSlug: getParams().get('src') || readStoredIdentity().blueprintSlug || '',
+    leadSessionId: getLeadSessionId()
+  };
+}
+
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function validPhone(phone) {
+  return phone.replace(/\D/g, '').length >= 10;
+}
+
+function isIdentityComplete() {
+  const id = getIdentity();
+  return !!(id.firstName && id.lastName && id.businessName && validEmail(id.email) && validPhone(id.phone));
+}
+
+function persistIdentity() {
+  const id = getIdentity();
+  const stored = Object.assign({}, readStoredIdentity(), id, { updatedAt: new Date().toISOString() });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stored)); } catch(e) {}
+  return stored;
+}
+
+function persistReturnedContactId(contactId) {
+  if (!contactId) return;
+  try {
+    const identity = Object.assign({}, readStoredIdentity(), { contactId, updatedAt: new Date().toISOString() });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(identity));
+  } catch(e) {}
+}
+
+function hydrateIdentity() {
+  // Bennett directive 2026-06-01: the qualifier must NEVER pre-fill any visible
+  // field. No name / business / email / phone from URL params or localStorage —
+  // every lead starts on a blank form and types their own answers. Hidden CRM
+  // attribution (contactId, source, blueprintSlug) is unaffected: getIdentity()
+  // reads those from URL params directly at submit time, not from the form fields.
+  getLeadSessionId();
+}
+
+// Q7 DYNAMIC PER-LEAD (Bennett directive 2026-05-29): render the lead's actual blueprint agents.
+// Reads ?agents=Name1,Name2,... from the blueprint CTA. Falls back to the generic 5 chips when absent.
+function hydrateAgents() {
+  const params = getParams();
+  const raw = params.get('agents');
+  if (!raw) return; // no per-lead agents passed → keep default generic 5 chips
+  const agents = raw.split(',').map(s => decodeURIComponent(s.replace(/\+/g,' ')).trim()).filter(Boolean);
+  if (!agents.length) return;
+  const box = document.getElementById('chips-capability');
+  if (!box) return;
+  // EP5: dynamically generated chips get keyboard nav attributes too
+  box.innerHTML = agents.map(function(name){
+    const val = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const safe = name.replace(/"/g,'&quot;');
+    return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" tabindex="0" role="button" aria-pressed="false" onclick="selectChip(\'capability\',\''+val+'\')" onkeydown="chipKeydown(event,\'capability\',\''+val+'\')">'+safe+'</div>';
+  }).join('');
+}
+
+function updateIdentityStatus() {
+  const status = document.getElementById('identity-status');
+  if (!status) return;
+  // Phone validation UI
+  const phoneEl   = document.getElementById('lead-phone');
+  const phoneHint = document.getElementById('phone-hint');
+  if (phoneEl && phoneHint) {
+    const phoneRaw = phoneEl.value.trim();
+    if (phoneRaw && !validPhone(phoneRaw)) {
+      phoneEl.classList.add('invalid');
+      phoneHint.classList.add('show');
+    } else {
+      phoneEl.classList.remove('invalid');
+      phoneHint.classList.remove('show');
+    }
+  }
+  if (isIdentityComplete()) {
+    status.textContent = 'Ready. This qualification will be saved against this contact.';
+    status.className = 'identity-status ready';
+  } else {
+    status.textContent = 'Name, email, phone, and business are required to submit.';
+    status.className = 'identity-status';
+  }
+}
+
+// ── Q1: MONTHLY LEADS — exponential 10–5,000 ─────────────────────────────────
+function posToLeads(pos) {
+  const raw = Math.round(10 * Math.pow(500, pos / 100));
+  if (raw < 20)   return Math.round(raw);
+  if (raw < 50)   return Math.round(raw / 5)  * 5;
+  if (raw < 200)  return Math.round(raw / 10) * 10;
+  if (raw < 500)  return Math.round(raw / 25) * 25;
+  if (raw < 1000) return Math.round(raw / 50) * 50;
+  if (raw < 2000) return Math.round(raw / 100) * 100;
+  return Math.round(raw / 250) * 250;
+}
+
+function leadsUpdate() {
+  const pos = +document.getElementById('sl-leads').value;
+  const sl  = document.getElementById('sl-leads');
+  const lbl = document.getElementById('lbl-leads');
+  if (pos === 0) {
+    leadsVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    leadsVal = posToLeads(pos);
+    lbl.textContent = fmtLeads(leadsVal) + ' leads/mo';
+    lbl.className   = 'slider-val';
+    logFunnelEvent('q1_answered', { leads: leadsVal });
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
+  update();
+}
+
+// ── Q2: DEAL VALUE — text only ────────────────────────────────────────────────
+function dealUpdate() {
+  const raw = parseFloat(document.getElementById('inp-deal').value);
+  const lbl = document.getElementById('lbl-deal');
+  if (!raw || raw <= 0) {
+    dealVal = null;
+    lbl.textContent = '← type your number above';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    dealVal = raw;
+    lbl.textContent = fmtMoney(raw);
+    lbl.className   = 'slider-val';
+    logFunnelEvent('q2_answered', { deal: dealVal });
+  }
+  saveAnswers();
+  update();
+}
+
+// ── Q3: LEADS PER SALE — 1-15 exact, 16-500 log ──────────────────────────────
+function posToLPS(pos) {
+  if (pos <= 14) return pos + 1;
+  const t = (pos - 15) / 85;
+  const raw = Math.round(16 * Math.pow(500 / 16, t));
+  if (raw <= 30)  return raw;
+  if (raw <= 75)  return Math.round(raw / 5)  * 5;
+  if (raw <= 200) return Math.round(raw / 25) * 25;
+  return Math.round(raw / 50) * 50;
+}
+
+function lpsUpdate() {
+  const pos = +document.getElementById('sl-lps').value;
+  const sl  = document.getElementById('sl-lps');
+  const lbl = document.getElementById('lbl-lps');
+  if (pos === 0) {
+    lpsVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    lpsVal = posToLPS(pos);
+    const impliedPct = Math.round(100 / lpsVal);
+    lbl.textContent = lpsVal + (lpsVal === 1 ? ' lead' : ' leads') + ' = 1 sale  (~' + impliedPct + '% close)';
+    lbl.className   = 'slider-val';
+    logFunnelEvent('q3_answered', { lps: lpsVal });
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
+  update();
+}
+
+// ── Q5: YOUR HOURS/WEEK — 1–40+ ──────────────────────────────────────────────
+function hoursUpdate() {
+  const h   = +document.getElementById('sl-hours').value;
+  const lbl = document.getElementById('lbl-hours');
+  const sl  = document.getElementById('sl-hours');
+  if (h === 0) {
+    hoursVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    hoursVal = h;
+    lbl.textContent = h >= 40 ? '40+ hrs/week' : h + (h === 1 ? ' hr/week' : ' hrs/week');
+    lbl.className   = 'slider-val';
+    const pct = h / 42 * 100;
+    sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+    logFunnelEvent('q5_answered', { hours: hoursVal });
+  }
+  saveAnswers();
+  update();
+}
+
+// ── Q6: TEAM SIZE + AVG HRS ───────────────────────────────────────────────────
+function teamUpdate() {
+  const raw = parseFloat(document.getElementById('inp-team').value);
+  teamVal = (!isNaN(raw) && raw >= 0) ? raw : null;
+  refreshTeamLabel();
+  saveAnswers();
+  update();
+}
+
+function teamHrsUpdate() {
+  const raw = parseFloat(document.getElementById('inp-teamhrs').value);
+  teamHrsVal = (raw && raw > 0) ? raw : null;
+  if (teamVal !== null && teamHrsVal !== null) logFunnelEvent('q6_answered', { team: teamVal, teamHrs: teamHrsVal });
+  refreshTeamLabel();
+  saveAnswers();
+  update();
+}
+
+function refreshTeamLabel() {
+  const lbl = document.getElementById('lbl-team');
+  if (teamVal !== null && teamHrsVal !== null) {
+    const totalHrs = Math.round(teamVal * teamHrsVal);
+    lbl.textContent = teamVal + ' people · ' + teamHrsVal + ' hrs/wk each = ' + totalHrs + ' total hrs/wk';
+    lbl.className   = 'slider-val';
+  } else {
+    lbl.textContent = '← fill in both fields above';
+    lbl.className   = 'slider-val needs-input';
+  }
+}
+
+// ── Q8: AD SPEND — simple exponential $500–$50K ──────────────────────────────
+function posToSpend(pos) {
+  // pos 0 → $500, pos 100 → $50,000
+  const raw = Math.round(500 * Math.pow(100, pos / 100));
+  if (raw < 1000)  return Math.round(raw / 100)  * 100;
+  if (raw < 5000)  return Math.round(raw / 500)  * 500;
+  if (raw < 20000) return Math.round(raw / 1000) * 1000;
+  return Math.round(raw / 2500) * 2500;
+}
+
+function spendUpdate() {
+  const pos = +document.getElementById('sl-spend').value;
+  const sl  = document.getElementById('sl-spend');
+  const lbl = document.getElementById('lbl-spend');
+  if (pos === 0) {
+    spendVal = null;
+    lbl.textContent = '← slide to set yours';
+    lbl.className   = 'slider-val needs-input';
+  } else {
+    spendVal = posToSpend(pos);
+    lbl.textContent = fmtMoney(spendVal) + '/mo';
+    lbl.className   = 'slider-val';
+    logFunnelEvent('q8_answered', { spend: spendVal });
+  }
+  sl.style.background = `linear-gradient(to right, var(--brand) 0%, var(--brand) ${pos}%, var(--border) ${pos}%, var(--border) 100%)`;
+  saveAnswers();
+  update();
+}
+
+// ── CHIP SELECTION ───────────────────────────────────────────────────────────
+function selectChip(group, val) {
+  const box = document.getElementById('chips-' + group);
+  box.querySelectorAll('.chip').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  const selected = box.querySelector('[data-val="' + val + '"]');
+  if (selected) { selected.classList.add('selected'); selected.setAttribute('aria-pressed','true'); }
+  chips[group] = val;
+  const qNum = group === 'speed' ? 4 : 7;
+  logFunnelEvent('q' + qNum + '_answered', { group, val });
+  saveAnswers();
+  update();
+}
+
+// ── FORMAT HELPERS ───────────────────────────────────────────────────────────
+function fmtMoney(n) {
+  if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+function fmtLeads(n) { return n >= 1000 ? n.toLocaleString() : String(n); }
+
+// ── TIME SAVINGS — range formula (estimate ×0.5 low, ×1.3 high) ──────────────
+function calcTimeSavings(yourHrs, teamCount, teamHrs) {
+  // Total addressable hours = your hrs + (team count × avg hrs)
+  const teamTotal = (teamCount !== null && teamHrs !== null) ? teamCount * teamHrs : 0;
+  const totalHrs  = (yourHrs || 0) + teamTotal;
+  if (totalHrs === 0) return null;
+  const estimate = totalHrs * 0.4;       // AI saves ~40% of total screen time (20% more conservative — Bennett directive 2026-05-29)
+  const low  = Math.max(1, Math.round(estimate * 0.5));
+  const high = Math.round(estimate * 1.3);
+  return { low, high };
+}
+
+// ── MAIN CALCULATOR ──────────────────────────────────────────────────────────
+function update() {
+  const leadsOk       = leadsVal   !== null && leadsVal   > 0;
+  const dealEntered   = dealVal    !== null && dealVal    > 0;
+  const lpsEntered    = lpsVal     !== null;
+  const hoursEntered  = hoursVal   !== null;
+  const teamEntered   = teamVal    !== null && teamHrsVal !== null;
+  const spendEntered  = spendVal   !== null;
+
+  // Progress — 8 total
+  let answered = 0;
+  if (leadsOk)           answered++;
+  if (dealEntered)       answered++;
+  if (lpsEntered)        answered++;
+  if (chips.speed)       answered++;
+  if (hoursEntered)      answered++;
+  if (teamEntered)       answered++;
+  if (chips.capability)  answered++;
+  if (spendEntered)      answered++;
+  answered = Math.min(answered, 8);
+  const pct = Math.round(answered / 8 * 100);
+  document.getElementById('progress-label').textContent = answered + ' of 8 answered';
+  document.getElementById('progress-pct').textContent   = pct + '%';
+  document.getElementById('progress-fill').style.width  = pct + '%';
+  // EP5: ARIA progress bar attributes
+  const pbEl = document.getElementById('progress-bar-el');
+  if (pbEl) { pbEl.setAttribute('aria-valuenow', answered); pbEl.setAttribute('aria-valuetext', answered + ' of 8 questions answered'); }
+  // EP5: ARIA live announcement at 4-of-8 and 8-of-8 milestones
+  const ariaEl = document.getElementById('progress-aria');
+  if (ariaEl && (answered === 4 || answered === 8)) {
+    ariaEl.textContent = answered === 8 ? 'All 8 questions answered. You can now submit your qualification.' : 'Halfway there. 4 of 8 questions answered.';
+  }
+
+  // ── FIT MATH (used for qualification gate only — no dollar or multiplier shown) ─────
+  const speedLift  = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || null;
+  const canQualify = leadsOk && dealEntered && lpsEntered && chips.speed;
+
+  let qualifies10x = null;
+  if (canQualify) {
+    const curRate = 1 / lpsVal;
+    const newRate = Math.min(curRate + speedLift, 0.80);
+    const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
+    const q90     = moGain * 3;
+    qualifies10x  = q90 >= 50000 ? 'strong' : q90 >= 20000 ? 'possible' : 'no';
+  }
+
+  // ── VERDICT ───────────────────────────────────────────────────────────────
+  const vBlock  = document.getElementById('verdict-block');
+  const vIcon   = document.getElementById('verdict-icon');
+  const vLabel  = document.getElementById('verdict-label');
+  const vSub    = document.getElementById('verdict-sub');
+  const bdText  = document.getElementById('breakdown-text');
+  const cta     = document.getElementById('cta-apply');
+  const ctaNote = document.getElementById('cta-note');
+  const allDone = answered >= 8;
+  const identityDone = isIdentityComplete();
+  const consentGiven = !!(document.getElementById('consent-check') && document.getElementById('consent-check').checked);
+  lastQualificationBand = qualifies10x;
+
+  if (canQualify) {
+    const ICON_CHECK = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8 12.5 11 15.5 16 9.5"/></svg>';
+    const ICON_INFO  = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg>';
+    const ICON_X     = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>';
+
+    if (qualifies10x === 'strong') {
+      vBlock.className   = 'verdict-block green';
+      vIcon.innerHTML    = ICON_CHECK;
+      vLabel.textContent = 'Strong Fit for AI';
+      vSub.textContent   = 'Your numbers point to a strong fit. Submit your qualification below to continue.';
+    } else if (qualifies10x === 'possible') {
+      vBlock.className   = 'verdict-block yellow';
+      vIcon.innerHTML    = ICON_INFO;
+      vLabel.textContent = 'Possible Fit — Worth a Conversation';
+      vSub.textContent   = 'There\'s real potential here. Let\'s verify the details together.';
+    } else {
+      vBlock.className   = 'verdict-block red';
+      vIcon.innerHTML    = ICON_X;
+      vLabel.textContent = 'May Not Be a Fit Yet';
+      vSub.textContent   = 'Your current lead volume or deal size may not be the right fit for AI yet.';
+    }
+
+    const liftPct  = Math.round(speedLift * 100);
+    const capChipEl = document.querySelector('#chips-capability .chip[data-val="' + chips.capability + '"]');
+    const capLabel = { 'speed-bot': 'Speed Bot', 'lead-filter': 'Lead Filter', 'follow-up': 'Follow-Up', 'crm-auto': 'CRM Auto', 'voice-ai': 'Voice AI' }[chips.capability] || (capChipEl && capChipEl.getAttribute('data-label')) || chips.capability || '—';
+    const spendStr = spendEntered ? fmtMoney(spendVal) + '/mo' : '—';
+    const teamStr  = teamEntered  ? teamVal + ' people · ' + teamHrsVal + ' hrs/wk' : '—';
+    const hrsStr   = hoursEntered ? (hoursVal >= 40 ? '40+' : hoursVal) + ' hrs/wk' : '—';
+    bdText.innerHTML =
+      '<span>Leads:</span> ' + fmtLeads(Math.round(leadsVal)) + '/mo &nbsp;·&nbsp; ' +
+      '<span>Leads/sale:</span> ' + lpsVal + ' &nbsp;·&nbsp; ' +
+      '<span>Deal:</span> ' + fmtMoney(dealVal) + '<br>' +
+      '<span>AI close lift:</span> +' + liftPct + '% &nbsp;·&nbsp; <span>Your hrs:</span> ' + hrsStr + '<br>' +
+      '<span>Team:</span> ' + teamStr + ' &nbsp;·&nbsp; <span>Ad spend:</span> ' + spendStr + '<br>' +
+      '<span>First deploy:</span> ' + capLabel;
+
+    const readyToSubmit = allDone && identityDone && consentGiven;
+    cta.disabled = !readyToSubmit;
+    cta.textContent = qualifies10x === 'no' ? 'Submit for Manual Review' : 'Book a Call with Bennett';
+    if (!allDone || !identityDone) {
+      ctaNote.textContent = 'Complete the contact fields and all 8 questions.';
+    } else if (!consentGiven) {
+      ctaNote.textContent = 'Check the consent box above to continue.';
+    } else {
+      ctaNote.textContent = qualifies10x === 'no' ? 'Your answers will be saved to GHL for review.' : 'Your answers will be saved before the calendar opens.';
+    }
+  } else {
+    const ICON_NEUTRAL = '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>';
+    vBlock.className        = 'verdict-block neutral';
+    vIcon.innerHTML         = ICON_NEUTRAL;
+    vLabel.textContent      = 'Your qualification appears here';
+    vSub.textContent        = 'Answer questions 1–4 to calculate';
+    bdText.innerHTML        = '';
+    cta.disabled            = true;
+    cta.textContent         = 'Submit Qualification First';
+    ctaNote.textContent     = 'Complete the contact fields and all 8 questions.';
+  }
+
+  // ── EP5: REVENUE IMPACT BLOCK ─────────────────────────────────────────────
+  const revenueBlock = document.getElementById('revenue-block');
+  if (canQualify && qualifies10x && qualifies10x !== 'no') {
+    const speedLiftVal = { instant: 0.04, '30min': 0.12, '1to4hr': 0.22, sameday: 0.30, nextday: 0.40, inconsistent: 0.28 }[chips.speed] || 0;
+    const curRate = 1 / lpsVal;
+    const newRate = Math.min(curRate + speedLiftVal, 0.80);
+    const moGain  = Math.max(0, Math.round(leadsVal) * (newRate - curRate) * dealVal);
+    const q90     = moGain * 3;
+    if (q90 > 0 && revenueBlock) {
+      revenueBlock.style.display = '';
+      revenueBlock.className = qualifies10x === 'strong' ? 'result-block green' : 'result-block yellow';
+      document.getElementById('revenue-value').textContent = fmtMoney(q90);
+      document.getElementById('revenue-sub').textContent = 'est. 90-day lift from faster lead response alone';
+    }
+  } else if (revenueBlock) {
+    revenueBlock.style.display = 'none';
+  }
+
+  // ── R3: PAGE TITLE UPDATE ON SCORE CHANGE ────────────────────────────────
+  if (canQualify && qualifies10x) {
+    const titleMap = { strong: 'Strong AI Fit — FKI Qualifier', possible: 'Possible AI Fit — FKI Qualifier', no: 'Review Needed — FKI Qualifier' };
+    document.title = titleMap[qualifies10x] || document.title;
+    // EP5: update meta description dynamically for social sharing
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      const descMap = {
+        strong: 'Your business shows a strong fit for AI. See your estimated revenue impact and book a strategy call.',
+        possible: 'Your business may be a fit for AI. See your results and book a strategy call to verify.',
+        no: 'Your qualification results from FranchiseKI AI Assessment.'
+      };
+      metaDesc.setAttribute('content', descMap[qualifies10x] || metaDesc.getAttribute('content'));
+    }
+  }
+
+  // ── TIME SAVINGS BLOCK ────────────────────────────────────────────────────
+  const savingsBlock = document.getElementById('savings-block');
+  if (hoursEntered || teamEntered) {
+    const s = calcTimeSavings(hoursVal, teamVal, teamHrsVal);
+    if (s) {
+      savingsBlock.style.display = '';
+      savingsBlock.className = 'result-block green';
+      document.getElementById('savings-value').textContent = s.low + '–' + s.high;
+      document.getElementById('savings-sub').textContent   = 'hrs/week freed from manual work (across you + team)';
+    }
+  } else {
+    savingsBlock.style.display = 'none';
+  }
+  syncMobileStickyBar();
+}
+
+function buildQualifierNote(payload) {
+  return [
+    'Advaita AI Qualifier — tracked application event',
+    '---',
+    'Business: ' + (payload.businessName || 'N/A'),
+    'Lead session: ' + payload.lead_session_id,
+    'Source: ' + payload.source,
+    'Blueprint slug: ' + (payload.blueprint_slug || 'N/A'),
+    'Qualification band: ' + payload.qualification_band,
+    'Score progress: ' + payload.questions_answered + '/8',
+    '---',
+    'Monthly leads: ' + payload.monthly_leads,
+    'Average deal: ' + payload.average_deal_value,
+    'Leads per sale: ' + payload.leads_per_sale,
+    'Response speed: ' + payload.response_speed,
+    'Owner computer hours/week: ' + payload.owner_hours_per_week,
+    'Team members: ' + payload.team_members,
+    'Team hours/member/week: ' + payload.team_hours_per_member,
+    'First deploy: ' + payload.first_deploy,
+    'Monthly ad spend: ' + payload.monthly_ad_spend,
+    'Submitted at: ' + payload.submitted_at
+  ].join('\n');
+}
+
+function currentAnswerCount() {
+  let answered = 0;
+  if (leadsVal !== null && leadsVal > 0) answered++;
+  if (dealVal !== null && dealVal > 0) answered++;
+  if (lpsVal !== null) answered++;
+  if (chips.speed) answered++;
+  if (hoursVal !== null) answered++;
+  if (teamVal !== null && teamHrsVal !== null) answered++;
+  if (chips.capability) answered++;
+  if (spendVal !== null) answered++;
+  return Math.min(answered, 8);
+}
+
+function buildQualifierPayload() {
+  const id = persistIdentity();
+  const band = lastQualificationBand || 'unknown';
+  const payload = {
+    event_name: 'blueprint_qualifier_submit',
+    form_version: '2026-06-01-r2-score-band-v2',
+    locationId: GHL_LOC,
+    firstName: id.firstName,
+    lastName: id.lastName,
+    email: id.email,
+    phone: id.phone,
+    businessName: id.businessName,
+    source: 'blueprint_ai_qualifier',
+    original_source: id.source,
+    blueprint_slug: id.blueprintSlug,
+    contact_id: id.contactId,
+    lead_session_id: id.leadSessionId,
+    qualification_band: band,
+    band_label: band === 'strong' ? 'STRONG FIT' : band === 'possible' ? 'POSSIBLE FIT' : 'NOT A FIT',
+    time_on_page_sec: Math.round((Date.now() - PAGE_LOAD_TIME) / 1000),
+    ai_qualified: band === 'strong' || band === 'possible',
+    monthly_leads: leadsVal || 0,
+    average_deal_value: dealVal || 0,
+    leads_per_sale: lpsVal || 0,
+    response_speed: chips.speed || '',
+    owner_hours_per_week: hoursVal || 0,
+    team_members: teamVal || 0,
+    team_hours_per_member: teamHrsVal || 0,
+    first_deploy: chips.capability || '',
+    monthly_ad_spend: spendVal || 0,
+    questions_answered: currentAnswerCount(),
+    tags: [
+      'advaita-ai-qualifier',
+      band === 'strong' ? 'advaita-qualified' : band === 'possible' ? 'advaita-review-needed' : 'advaita-not-fit',
+      'advaita-score-' + (band || 'unknown'),   // R2: discrete score band tag for GHL automation
+      'blueprint_ai_qualifier'
+    ],
+    // Pipeline stage routing (Advaita Blueprint pipeline ogv8BRv6YhROdI3vwGJT)
+    // Relay uses these to create/update the opportunity in the correct stage
+    pipeline_id: 'ogv8BRv6YhROdI3vwGJT',
+    pipeline_stage_id: (band === 'strong' || band === 'possible')
+      ? '998beee1-22f5-4f99-80e3-97d121ed298f'   // warm_lead_applied
+      : '4fc67de4-544a-4b37-88b6-6ffda69f64b3',  // cold_lead_dead
+    // Slack alert — relay posts to #leo-coaches (C0AQ4KB1SA0) for strong/possible leads
+    notify_slack: band === 'strong' || band === 'possible',
+    submitted_at: new Date().toISOString()
+  };
+  payload.note = buildQualifierNote(payload);
+  return payload;
+}
+
+async function webhookFetch(payload) {
+  return fetch(GHL_WEBHOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+}
+
+async function submitQualification() {
+  const payload = buildQualifierPayload();
+  let response, result;
+  try {
+    // R2: 1-retry on 500/503 with 1.5s delay
+    response = await webhookFetch(payload);
+    if ((response.status === 500 || response.status === 503) && !response.ok) {
+      logFunnelEvent('crm_retry', { status: response.status });
+      await new Promise(r => setTimeout(r, 1500));
+      response = await webhookFetch(payload);
+    }
+    result = await response.json().catch(() => ({}));
+    if (response.ok) {
+      const returnedContactId = result.contactId || result.contact_id || result.id || payload.contact_id || '';
+      persistReturnedContactId(returnedContactId);
+      if (returnedContactId) payload.contact_id = returnedContactId;
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+          content_name: 'FKI AI Qualifier',
+          content_category: payload.tags && payload.tags[1] ? payload.tags[1] : 'advaita-ai-qualifier'
+        });
+      }
+      return { saved: true, payload, contactId: returnedContactId, response: result };
+    } else {
+      // Duplicate contact = already in GHL; treat as soft success so modal still opens
+      const detail = String(result.detail || result.message || result.error || '').toLowerCase();
+      if (detail.includes('duplicate') || detail.includes('duplicated')) {
+        logFunnelEvent('crm_duplicate_contact', { contact_id: payload.contact_id });
+        return { saved: true, payload, contactId: payload.contact_id || '', response: result, duplicate: true };
+      }
+      // R2: Save to localStorage pending queue so no lead data is lost when GHL is down
+      try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+      return { saved: false, payload, contactId: payload.contact_id || '', error: 'crm_http_' + response.status };
+    }
+  } catch(e) {
+    // R2: Network error — save to localStorage pending queue
+    try { localStorage.setItem('advaitaQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+    return { saved: false, payload, contactId: payload.contact_id || '', error: e && e.message ? e.message : 'crm_network_error' };
+  }
+}
+
+function buildBookingUrl(contactId) {
+  const id = persistIdentity();
+  const url = new URL(BOOKING_URL, window.location.href);
+  const parts = {
+    contact_id: contactId || id.contactId,
+    source: 'blueprint_ai_qualifier',
+    lead_session_id: id.leadSessionId,
+    blueprint_slug: id.blueprintSlug
+  };
+  // UTM passthrough — carry any UTM params from the current page URL into the booking URL
+  const params = getParams();
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k) {
+    const v = params.get(k);
+    if (v) parts[k] = v;
+  });
+  Object.keys(parts).forEach(key => { if (parts[key]) url.searchParams.set(key, parts[key]); });
+  return url.toString();
+}
+
+let bookingFallbackTimer = null;
+function openBookingModal(contactId) {
+  const url = buildBookingUrl(contactId);
+  logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!contactId });
+  // Embed calendar iframe — no new tab, no popup blocker risk
+  const frame = document.getElementById('booking-calendar-frame');
+  if (frame && frame.src !== url) frame.src = url;
+  document.getElementById('booking-modal').classList.add('open');
+  document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  // Move focus to close button for keyboard/screen-reader users
+  setTimeout(function() {
+    const closeBtn = document.getElementById('booking-close');
+    if (closeBtn) closeBtn.focus();
+  }, 50);
+}
+
+async function handleCtaClick() {
+  const cta = document.getElementById('cta-apply');
+  if (cta.disabled) {
+    // R2: scroll to first unanswered question when submit is clicked before complete
+    scrollToFirstUnanswered();
+    return;
+  }
+  cta.disabled = true;
+  cta.classList.add('calculating');
+  cta.textContent = 'Calculating your score...';
+  // Brief pause so user sees the calculating state before the network call
+  await new Promise(r => setTimeout(r, 600));
+  cta.textContent = 'Saving your answers...';
+  const result = await submitQualification();
+  cta.classList.remove('calculating');
+  const ctaNote = document.getElementById('cta-note');
+  if (!result.saved) {
+    logFunnelEvent('crm_save_failed', { error: result.error || 'unknown' });
+    cta.textContent = 'Try Again';
+    cta.disabled = false;
+    ctaNote.textContent = 'Something went wrong on our end — your answers are saved locally. Click again to retry.';
+    return;
+  }
+  if (result.payload.ai_qualified) {
+    logFunnelEvent('qualified', { modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!result.contactId });
+    if (BOOKING_MODAL_ENABLED) {
+      cta.textContent = 'Book a Call with Bennett';
+      cta.disabled = false;
+      ctaNote.textContent = 'Saved in GHL. Calendar opening now.';
+      openBookingModal(result.contactId);
+    } else {
+      logFunnelEvent('qualified_no_modal_redirect', {});
+      window.location.href = THANK_YOU_URL;
+    }
+  } else {
+    logFunnelEvent('disqualified', { contact_id_present: !!result.contactId });
+    window.location.href = THANK_YOU_URL;
+  }
+}
+
+// ── SCROLL TO FIRST UNANSWERED (R2 improvement) ───────────────────────────────
+function scrollToFirstUnanswered() {
+  const checks = [
+    { test: () => !leadsVal,                          el: document.getElementById('sl-leads') },
+    { test: () => !dealVal,                           el: document.getElementById('inp-deal') },
+    { test: () => !lpsVal,                            el: document.getElementById('sl-lps') },
+    { test: () => !chips.speed,                       el: document.getElementById('chips-speed') },
+    { test: () => !hoursVal,                          el: document.getElementById('sl-hours') },
+    { test: () => teamVal === null || !teamHrsVal,    el: document.getElementById('inp-team') },
+    { test: () => !chips.capability,                  el: document.getElementById('chips-capability') },
+    { test: () => !spendVal,                          el: document.getElementById('sl-spend') }
+  ];
+  for (const c of checks) {
+    if (c.test() && c.el) {
+      c.el.closest('.q-section') ? c.el.closest('.q-section').scrollIntoView({ behavior: 'smooth', block: 'center' }) : c.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+  // If all Q answered, scroll to identity section if incomplete
+  if (!isIdentityComplete()) document.getElementById('identity-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Init
+hydrateIdentity();
+hydrateAgents();
+loadAnswers(); // R1: restore partial answers from localStorage
+document.querySelectorAll('#identity-section input').forEach(el => {
+  el.addEventListener('input', function() {
+    persistIdentity();
+    updateIdentityStatus();
+    update();
+  });
+  el.addEventListener('focusout', function() {
+    const v = this.value.trim();
+    const hintId = {
+      'lead-first': 'first-hint',
+      'lead-last': 'last-hint',
+      'lead-business': 'business-hint',
+      'lead-email': 'email-hint'
+    }[this.id];
+    if (!hintId) return;
+    const hint = document.getElementById(hintId);
+    const isInvalid = !v || (this.id === 'lead-email' && !validEmail(v));
+    this.classList.toggle('invalid', isInvalid);
+    if (hint) hint.classList.toggle('show', isInvalid);
+  });
+});
+document.getElementById('cta-apply').addEventListener('click', handleCtaClick);
+
+// Mobile sticky CTA — mirrors #cta-apply state; synced on every update()
+const mobileStickyBar = document.getElementById('mobile-sticky-bar');
+const mobileStickyBtn = document.getElementById('mobile-sticky-bar-btn');
+function syncMobileStickyBar() {
+  const cta = document.getElementById('cta-apply');
+  if (!mobileStickyBar || !mobileStickyBtn) return;
+  // Show bar only on narrow screens when form is completeable
+  const isNarrow = window.matchMedia('(max-width: 860px)').matches;
+  if (isNarrow && allAnswered && !document.getElementById('booking-modal').classList.contains('open')) {
+    mobileStickyBar.classList.add('visible');
+    mobileStickyBar.setAttribute('aria-hidden', 'false');
+    mobileStickyBtn.disabled = cta.disabled;
+    mobileStickyBtn.textContent = cta.textContent;
+  } else {
+    mobileStickyBar.classList.remove('visible');
+    mobileStickyBar.setAttribute('aria-hidden', 'true');
+  }
+}
+mobileStickyBtn.addEventListener('click', function() {
+  // Scroll main CTA into view briefly then fire it
+  const cta = document.getElementById('cta-apply');
+  cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(handleCtaClick, 100);
+});
+const consentEl = document.getElementById('consent-check');
+if (consentEl) consentEl.addEventListener('change', update);
+document.getElementById('booking-close').addEventListener('click', function() {
+  clearTimeout(bookingFallbackTimer);
+  const modal = document.getElementById('booking-modal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  // Reset iframe so it doesn't linger in background
+  const frame = document.getElementById('booking-calendar-frame');
+  if (frame) frame.src = 'about:blank';
+});
+document.getElementById('booking-modal').addEventListener('click', function(e) {
+  if (e.target === this) document.getElementById('booking-close').click();
+});
+
+// Escape key closes modal
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('booking-modal');
+    if (modal && modal.classList.contains('open')) {
+      document.getElementById('booking-close').click();
+    }
+  }
+});
+
+// Focus trap inside booking modal — Tab cycles only within focusable elements in the dialog
+document.getElementById('booking-modal').addEventListener('keydown', function(e) {
+  if (e.key !== 'Tab') return;
+  const dialog = this.querySelector('.booking-dialog');
+  if (!dialog) return;
+  const focusable = Array.from(dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+  } else {
+    if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+updateIdentityStatus();
+update();
+</script>
+</body>
+</html>
