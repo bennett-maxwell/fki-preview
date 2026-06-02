@@ -182,7 +182,11 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
     if business:
         third_person_patterns.extend([
             rf"\bowner of (a |the )?{re.escape(business)}\b",
-            rf"\b{re.escape(business)}\b\s+(runs?|owns?|operates?|has|is|was|needs?|wants?)\b",
+            # NOTE: a bare "{business} + is/has/runs" pattern was removed — it false-fired
+            # on benign second-person brand mentions, e.g. "the foundation YOU'VE established
+            # at 31 Consulting IS remarkable." Real third-person about the owner is still
+            # caught by the lead-name-scoped patterns + the (the|this) company/business/owner
+            # + (his|her|their) patterns below.
         ])
     third_person_patterns.extend([
         r"\b(the|this) company\b",
