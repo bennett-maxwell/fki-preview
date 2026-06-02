@@ -1,362 +1,306 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Court Lundberg
-Rare Breed Plumbing, Heating And Air | Prepared by Franchise Ki | Generated 2026-05-27
+# Rare Breed Plumbing, Heating & Air — Your AI Advantage Walkthrough
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to COURT LUNDBERG. Use "you" and
-"your business" in every paragraph. NEVER say "Court Lundberg" in the third person.
-NEVER say "this business," "the owner," "they," or "their team." If you catch
-yourself describing Court Lundberg from the outside, stop and restart the sentence
-addressed to them.
+RULE 1 (RED LINE): You are speaking DIRECTLY to COURT. Use "you" and "your" in every paragraph. NEVER refer to Court Lundberg in the third person. NEVER say "this business," "the owner," "they," or "their team." If you catch yourself describing Court Lundberg from the outside, stop and restart the sentence addressed to them.
 
-RULE 2: Open the audio with EXACTLY these words: "Hi Court, welcome.
-This walkthrough was built for you and Rare Breed Plumbing, Heating And Air, from what you told us."
-Then proceed.
+RULE 2: Open the audio with EXACTLY these words: "Hi Court, welcome. This walkthrough was built for you and Rare Breed Plumbing, Heating & Air, from what you told us." Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
-a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
-
-================================================================================
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking.
 
 ---
 
 ## SECTION 1 — Hi Court, this is your walkthrough
 
-Hi Court — welcome. This is your AI walkthrough, built for you and
-Rare Breed Plumbing, Heating And Air. Every number you're about to hear came from what you told us.
+Hi Court, welcome. This walkthrough was built for you and Rare Breed Plumbing, Heating & Air, from what you told us. Everything you're about to hear came straight from your form and your own studio.
 
-You operate in plumbing and HVAC, serving residential homeowners and commercial property managers in Northern Utah. You run Rare Breed Plumbing, Heating And Air at https://callrarebreed.com.
-You're already doing the hard work — the clients, the team, the reputation. That's
-yours. What we're going to walk through together isn't about fixing what's broken
-in your business. It's about showing you exactly where AI amplifies everything
-you've already built.
+You run Rare Breed Plumbing, Heating & Air, a fast-growing home-services company -- plumbing, heating, and air. That work is yours, and nothing here replaces it. What you'll hear is exactly where AI gives you your time back so you can pour more of yourself into the work only you can do.
 
-You told us your current tools are: standard business tools. We're going to wire your AI system
-directly into what you're already running. Nothing you use today gets ripped out.
-Everything gets amplified.
-
-Your team of 30 handles the day-to-day execution.
-
-You told us your current AI use is chatgpt. That's exactly where most plumbing and HVAC businesses are right now — and it's the right starting point.
-
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
-Rare Breed Plumbing, Heating And Air. Not adjusted from a template. Built from your answers, for how
-your business actually works. Let's walk through what's possible.
+You told us your single biggest goal is booking more of the leads and calls you already get, and that the most demanding part of your week is slow lead response, missed calls, follow-up, scheduling, team organization, reactivating old leads, marketing content, and admin. You're using ChatGPT day to day, which is a strong place to start. Keep those two things in mind — every tool below is aimed right at them.
 
 ---
 
-## SECTION 2 — Your Current Tool Stack: Where Rare Breed Plumbing, Heating And Air Is Today
+## SECTION 2 — Your Current Tool Stack: Where Rare Breed Plumbing, Heating & Air Is Today
 
-WHERE YOU ARE TODAY — your current operational infrastructure:
+Here is the operational stack you're running today, and where AI plugs in on top of it — nothing gets ripped out:
 
-- **standard business tools**: Core operational tool in your current stack.
-- **Standard plumbing and HVAC workflow tools**: Core operational tool in your current stack.
-- **Email and calendar**: Core operational tool in your current stack.
-- **Direct team communication**: Core operational tool in your current stack.
+- **ServiceTitan** — CRM + Dispatch (AI wires into this)
+- **Monday.com** — Project / Task Management
+- **Monday CRM** — Additional CRM
+- **Slack** — Team Communication
+- **Google Drive** — File Storage
+- **ChatGPT** — Current AI Tool
 
-This tool stack tells us two things: where you're already strong, and where the
-biggest time unlocks are waiting. Your AI system gets built on top of what you have —
-not around it.
-
----
-
-## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
-
-These aren't guesses. These are the gaps that show up consistently for plumbing and HVAC
-businesses at your stage — and every one of them has a direct AI solution.
-
-### Gap 1 — Speed to Response
-
-You're competing for the first response every time a lead comes in. Research from
-Harvard Business Review shows that 78% of customers buy from the first business to
-respond (HBR, "The Short Life of Online Sales Leads," 2011 —
-https://hbr.org/2011/03/the-short-life-of-online-sales).
-
-In plumbing and HVAC, that window is measured in minutes — sometimes seconds. Every hour your
-team isn't watching for inbound = leads going to whoever responds first.
-
-An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
-your brand voice, your pricing context, your services. You stop competing on response
-time because you're always first.
-
-**Time your team could recover: up to 8 hours/week**
-**ROI at $150/hr: up to $4,800/month back in productive time**
-
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
-
-### Gap 2 — Follow-Up Consistency
-
-McKinsey research shows that 80% of sales require 5+ follow-up touches, but 44% of
-salespeople give up after just one follow-up (McKinsey & Company, "The B2B digital
-inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
-
-For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where they are in the
-decision process, and sends the right message at the right moment — without anyone
-on your team having to remember to do it.
-
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
-
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-### Gap 3 — Admin and Documentation Overhead
-
-SBA data shows small business owners spend an average of 25-40% of their week on
-administrative tasks that don't directly generate revenue
-(SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
-
-In plumbing and HVAC, this shows up as: proposal writing, status updates, follow-up emails,
-scheduling coordination, reporting. Your AI system takes these off your team's plate
-entirely — and does them faster and more consistently than any manual process.
-
-**At 5 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
-
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+The biggest signal here: there's no central client system yet, so every inquiry and customer lives in your inbox and texts. That's the first place AI gives you leverage.
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for Rare Breed Plumbing, Heating And Air
+## SECTION 3 — Where AI Gives You the Most Time Back
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
-situation — your industry, your tools, your services, your pain points.
+These aren't guesses — they come straight from your answers. None of it is a critique of the studio; it's simply where AI carries the load so your team doesn't have to.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### Opportunity 1 — Missed Calls
 
-You are a speed-to-lead response agent for a plumbing and HVAC business called Rare Breed Plumbing, Heating And Air. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.
+You flagged missed calls as a leak -- and in home services it's the most expensive one. Every unanswered call is a customer who dials the next plumber. An AI missed-call text-back replies in seconds to every missed call, 24/7, keeping the job with Rare Breed instead of the competition.
 
-This runs directly in your existing workflow. No new platform to learn.
-Your team supervises. The AI handles the repetitive execution.
+### Opportunity 2 — Lead Response Speed
 
----
+You get ~260 leads a month and reply in about 60 minutes. Research shows the first company to respond wins the clear majority of jobs. An AI speed-to-lead agent answers every web lead and form in under 60 seconds, 24/7, wired into ServiceTitan, and routes hot ones straight to dispatch.
 
-### AI Tool 2 — Proposal and Qualification Agent
+### Opportunity 3 — Reactivating Old Customers
 
-You are a proposal draft agent for Rare Breed Plumbing, Heating And Air in the plumbing and HVAC industry. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose Rare Breed Plumbing, Heating And Air over competitors.
+You flagged reactivating old leads as a stress. Your ServiceTitan history is full of past customers due for maintenance, seasonal HVAC tune-ups, or a win-back. An AI reactivation agent works that list automatically -- the cheapest, highest-trust jobs you can book.
 
-Built around how Rare Breed Plumbing, Heating And Air actually works — not a generic industry template.
+### Opportunity 4 — Scheduling & Follow-Up
 
----
+You flagged scheduling and follow-up as stresses. An AI scheduling agent books appointments, confirms, and reminds to cut no-shows, while a follow-up agent runs the multi-touch sequence every estimate needs -- so quotes don't go cold and the board stays full.
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### Opportunity 5 — Team Organization & Admin
 
-You are an outreach agent for Rare Breed Plumbing, Heating And Air (plumbing and HVAC). Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting ideal customers who need plumbing and HVAC services.
+You flagged team organization and admin across 30 people. AI keeps ServiceTitan and Monday clean, routes tasks, and absorbs the repetitive ops work -- so the shop runs on a system as you scale, not on people remembering.
 
-This is the kind of tool that, once it's running, your team will not remember
-how they worked without it.
+### Opportunity 6 — Marketing Content
 
----
-
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
-without anyone on your team triggering them manually.
+You flagged marketing content as a stress. An AI content agent turns jobs, reviews, and seasonal offers into ready-to-post social and email -- keeping Rare Breed visible in your market without a marketing hire.
 
 ---
 
-## SECTION 5 — What Your Customers Already Say About Rare Breed Plumbing, Heating And Air
+## SECTION 4 — The AI System Built Specifically for Rare Breed Plumbing, Heating & Air
 
-Your reputation in residential homeowners and commercial property managers in Northern Utah is an asset. Customer feedback for plumbing and HVAC businesses
-at your stage consistently highlights the same themes:
+These were written for your studio — your inquiries, your customers, your voice. Not adjusted from a template:
 
-- **Responsiveness:** Clients in plumbing and HVAC cite "fast, clear communication" as the
-  #1 factor in choosing a provider. Your AI system makes this your permanent standard —
-  not a good week, not a great hire, a permanent operational baseline.
+### Missed-Call Text-Back Agent
 
-- **Reliability:** Follow-through on commitments is what drives repeat business and
-  referrals. Your AI system tracks every commitment and ensures nothing falls through
-  the cracks — even at 2am.
+The moment a call goes unanswered, it instantly texts the customer back -- 'Sorry we missed you, this is Rare Breed, how can we help?' -- and books the slot, 24/7. In home services this single agent recovers jobs that otherwise go straight to the next plumber.
 
-- **Professionalism:** The quality of your proposals, your follow-up, your
-  documentation — all of this signals expertise before the client ever meets you in person.
-  AI raises that standard across every touchpoint.
+*What you feel:* Every missed call recovered in seconds
 
-The businesses that win in plumbing and HVAC long-term aren't necessarily the ones doing the
-best technical work. They're the ones that are easiest to work with. AI gives you that
-edge permanently.
+### Speed-to-Lead Responder
+
+Watches every web lead, form, and inbound, and replies in under 60 seconds in the Rare Breed voice -- qualifying the job and routing hot ones to dispatch. Answers all ~260 monthly leads, day, night, and weekend.
+
+*What you feel:* Replies in under 60 sec, 24/7
+
+### Reactivation Agent
+
+Works your ServiceTitan customer history automatically -- maintenance reminders, seasonal HVAC tune-ups, and win-backs on old leads -- turning past customers into booked jobs. Directly relieves the reactivation stress you flagged.
+
+*What you feel:* Past customers become repeat jobs
+
+### Scheduling Agent
+
+Books appointments, sends confirmations, and reminders to cut no-shows -- keeping the board full without manual coordination across your 30-person team.
+
+*What you feel:* Fuller boards, fewer no-shows
+
+### Follow-Up Agent
+
+Runs the multi-touch follow-up every estimate needs across ServiceTitan, so quotes don't go cold and no lead gets dropped at your volume.
+
+*What you feel:* No estimate goes cold
+
+### Review & Admin Agent
+
+After each job, sends review and referral requests to build reputation, and keeps ServiceTitan and Monday clean with automated admin and weekly reporting -- so the shop runs on a system as you scale.
+
+*What you feel:* Reputation up, admin off your plate
+
+---
+
+## SECTION 5 — Your Brand Voice, Built In From Day One
+
+Your AI doesn't learn your voice slowly over months. We build it before launch from callrarebreed.com and your own language, so every reply a customer receives sounds like Rare Breed Plumbing, Heating & Air from the very first message — 90% accurate on day one, then fine-tuned with you.
 
 ---
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+**Days 1-3 — AI Is In**
+- Kickoff call -- map your call flow, lead flow, and ServiceTitan setup
+- Missed-Call Text-Back + Speed-to-Lead agents configured and wired into ServiceTitan
+- Brand voice built from callrarebreed.com and your existing messaging
+- Live test: miss a test call and watch the instant text-back fire
+_Result: Your first agents are live. Every missed call and lead gets an instant response while the crew is on jobs._
 
-**Days 1-3: Onboarding.** Plumbing and hvac audit. Brand voice profile. Full ops map.
-We listen. Nothing gets built until we understand how you actually work.
+**Days 4-7 — System Is Running**
+- Reactivation Agent deployed across your ServiceTitan customer history
+- Scheduling + Follow-Up agents connected to your board
+- Review & Admin agent keeping ServiceTitan and Monday clean
+- Team walkthrough: 30 minutes, no technical knowledge required
+_Result: All 6 agents deployed and running across the real shop. Team trained._
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
-agent skills. You see the first results. Your team gives feedback. The system adjusts.
+**Day 30 — Fully Calibrated**
+- 30-day review: calls recovered, leads booked, customers reactivated, hours saved
+- Agents refined on your real call and job patterns
+- Expansion roadmap: what to automate next as you grow
+_Result: The system knows your shop. Every agent calibrated to real Rare Breed data._
 
-**Day 30: The system runs your business rhythm.** It compounds. It never forgets.
-You're spending time on what only you can do.
-
-**Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way they use their phone — naturally, without thinking.
-
-**After Month 3: System and team integrated.** World-class employee, 24/7, fully
-autonomous. Not "getting better every week." Already there.
+**Month 2+ — Compounding**
+- Minimal manual input -- the system catches every call and lead
+- Continuous improvement from real jobs
+- You own the system -- we stay on as your AI operations team
+_Result: AI runs like a 24/7 front desk that never misses a call and never forgets a follow-up._
 
 ---
 
 ## SECTION 7 — Three Prompts You Can Use Today, Without Waiting
 
-You don't need to be a client to start getting value from AI. Here are 3 prompts you
-can paste into ChatGPT or Claude right now — each built around your specific business:
+You don't have to wait for us to feel this. Paste these into ChatGPT — which you already use — and you have a working agent in minutes.
 
-### Prompt 1 — Speed-to-Lead Response Draft
+### Agent 1 — Rare Breed Missed-Call Text-Back + Speed-to-Lead
+
+_Based on your #1 leak: missed calls + a 60-minute lead response on ~260 leads/mo_
+
 ```
-You are a plumbing and HVAC business assistant for Rare Breed Plumbing, Heating And Air. A new inquiry just came
-in from a potential client interested in Emergency Plumbing (24/7), Water Heater Installation & Repair, Repiping, Water Line Repair, Drain Cleaning, Pipe Lining, Sewer Line Repair, HVAC / Air Conditioning, Water Softeners & Reverse Osmosis, Plumbing & Basement Remodels, Commercial Plumbing, Sump Pumps, Boilers, Garbage Disposals. Their message was: [PASTE
-THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
-specific request, (2) describes our availability and process, (3) includes a next step.
-Use a friendly but professional tone. Keep it under 150 words.
+## IDENTITY
+You are the Front-Desk Response Agent for Rare Breed Plumbing, Heating & Air. You make sure no call or lead ever goes unanswered. You are fast, friendly, and local -- like the best dispatcher who never sleeps.
+
+## TWO TRIGGERS
+1. MISSED CALL: a call goes unanswered.
+2. NEW LEAD: a web form, chat, or message comes in.
+
+## MISSED-CALL TEXT-BACK (within seconds)
+"Hi, this is Rare Breed Plumbing, Heating & Air -- sorry we missed your call! What can we help with? (plumbing, heating, or air?) We can usually get someone out fast."
+Then: capture the issue + address, offer the next available window, and route to dispatch in ServiceTitan.
+
+## NEW-LEAD REPLY (within 60 seconds)
+Paragraph 1: greet by name, acknowledge their specific issue.
+Paragraph 2: reassure Rare Breed handles it + offer the soonest slot.
+Questions (max 2): "What's the address?" and "Is this an emergency or can we schedule?"
+Then book or route to dispatch.
+
+## RULES
+- Respond in seconds (missed call) / under 60s (lead), 24/7.
+- Always get the address + issue; flag emergencies for immediate human handoff.
+- Friendly, local, no corporate stiffness; no price quotes by text.
+- Log every interaction + booking to ServiceTitan.
+
+## EDGE CASES
+- Emergency (no heat, flooding, gas smell): immediate -- 'Call us now at [number], we'll prioritize you,' + alert dispatch.
+- After hours: same instant text; offer first-thing slots; flag emergencies.
+- Existing customer: pull history, greet warmly, skip re-asking known info.
+
+## EXAMPLE — MISSED CALL
+---
+Hi, this is Rare Breed Plumbing, Heating & Air -- sorry we missed you! What can we help with today? If it's urgent (no heat, a leak), reply URGENT and we'll prioritize. Otherwise I can get someone out as soon as tomorrow morning -- what's the address?
+---
 ```
 
-### Prompt 2 — Proposal Framework Generator
+What this does: instantly texts back every missed call and replies to every web lead in under 60 seconds -- so the job stays with Rare Breed instead of going to the next plumber.
+
+### Agent 2 — Customer Reactivation Agent
+
+_Based on the reactivating-old-leads stress + your ServiceTitan history_
+
 ```
-You are helping Rare Breed Plumbing, Heating And Air create a proposal for a new plumbing and HVAC client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Emergency Plumbing (24/7), Water Heater Installation & Repair, Repiping, Water Line Repair, Drain Cleaning, Pipe Lining, Sewer Line Repair, HVAC / Air Conditioning, Water Softeners & Reverse Osmosis, Plumbing & Basement Remodels, Commercial Plumbing, Sump Pumps, Boilers, Garbage Disposals.
-Generate a professional proposal outline with: project scope, deliverables, timeline,
-and 3 package options at different investment levels. Format it for easy customization.
+## IDENTITY
+You are the Reactivation Specialist for Rare Breed Plumbing, Heating & Air. You bring past customers back for maintenance, seasonal service, and overdue work. You are warm, helpful, and local -- never pushy.
+
+## INPUTS (per past customer, from ServiceTitan)
+- Name + last service + date
+- Equipment/system serviced (for seasonal timing)
+- Whether they're on a maintenance plan
+
+## CAMPAIGNS
+1. SEASONAL: before summer (AC tune-up) and winter (heating check) -- timely, helpful reminder + easy booking.
+2. MAINTENANCE-DUE: customers past their service interval -- 'you're due,' with a slot offer.
+3. WIN-BACK: customers not seen in 12+ months -- a warm 'we'd love to help again' + small incentive.
+4. MEMBERSHIP: one-time customers who'd save with a maintenance plan.
+
+## MESSAGE RULES
+- Reference their specific equipment/last service -- never generic.
+- One clear offer per message; lead with helpfulness (avoid a breakdown), not the sale.
+- Local, friendly Rare Breed voice; easy one-tap booking.
+- If they reply, route to dispatch/CSR; log everything to ServiceTitan.
+
+## EXAMPLE — SEASONAL
+---
+Hi James -- it's Rare Breed. With summer heat coming, now's the smart time for an AC tune-up so your system doesn't quit on the hottest day. We tuned up your unit last spring -- want me to grab you a morning slot next week? Keeps the warranty happy too.
+---
 ```
 
-### Prompt 3 — Follow-Up Email Sequence
+What this does: turns past customers into repeat jobs -- maintenance reminders, seasonal HVAC tune-ups, and win-backs -- automatically, in the Rare Breed voice.
+
+### Agent 3 — Estimate Follow-Up Agent
+
+_Based on the follow-up stress -- so quotes don't go cold_
+
 ```
-You are a follow-up agent for Rare Breed Plumbing, Heating And Air. A prospect expressed interest in
-Emergency Plumbing (24/7), Water Heater Installation & Repair, Repiping, Water Line Repair, Drain Cleaning, Pipe Lining, Sewer Line Repair, HVAC / Air Conditioning, Water Softeners & Reverse Osmosis, Plumbing & Basement Remodels, Commercial Plumbing, Sump Pumps, Boilers, Garbage Disposals but hasn't responded in 5 days. Their original inquiry was about:
-[PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference their specific situation, and
-include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
+## IDENTITY
+You are the Follow-Up Manager for Rare Breed Plumbing, Heating & Air. You make sure every estimate and open job gets followed up until the customer decides. You are persistent but helpful -- never nagging.
+
+## WHAT YOU MANAGE (per open estimate, from ServiceTitan)
+- Estimate sent date + amount + scope
+- Whether the customer has responded
+- Any objection or question raised
+
+## SEQUENCE
+- Day 1 (same day): 'Thanks for having us out -- your estimate's attached. Any questions I can answer?'
+- Day 3: a helpful nudge -- address a common concern (timing, financing, warranty).
+- Day 7: offer to schedule + a reason to act (seasonal, avoid a bigger repair).
+- Day 14: soft check-in -- 'should I keep this open or is the timing not right?'
+
+## RULES
+- One clear ask per message; helpful before salesy.
+- Reference the specific job/scope, not 'your estimate' generically.
+- Stop the instant they reply or book -- route to a human/dispatch.
+- Surface financing/membership where it lowers the barrier.
+- Log every touch + outcome to ServiceTitan.
+
+## NEVER
+- Never guilt or pressure; never more than one open ask.
+- Never let an emotional or detailed reply get an automated response -- escalate.
+
+## EXAMPLE (Day 7)
+---
+Hi Maria -- circling back on the water-heater replacement we quoted. With yours at 12 years, replacing on your schedule beats an emergency on a Sunday. I've got an opening Thursday morning -- want me to hold it? We also have financing if that helps.
+---
 ```
 
-These give you immediate results. The difference between these prompts and the full
-AI system we build: these require someone to trigger them manually. The full system
-runs automatically, 24/7, without anyone on your team doing anything.
+What this does: runs the multi-touch follow-up every estimate needs, so the jobs you've already quoted actually close instead of going cold.
 
 ---
 
 ## SECTION 8 — Two Paths Forward
 
-You have two options after listening to this:
+**Do it yourself:** use the prompts above to stand up one or two of these agents on your own. You'll feel time come back within days.
 
-**Path 1 — DIY:** Use the 3 prompts above. Run them in ChatGPT or Claude. You'll see
-results within days. This is the right starting point if you want to prove the concept
-to yourself before committing to a full system.
+**Partner with us:** we build the full system — all six agents connected, calibrated to the Rare Breed Plumbing, Heating & Air voice, running across every inquiry and customer, and we maintain it. Once it's set up, it runs itself.
 
-**Path 2 — Partner with FKI:** We build the full AI system for Rare Breed Plumbing, Heating And Air.
-The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with standard business tools, running without your team having to
-manage it.
-
-If you want to explore Path 2, the next step is an application — not a sales call.
-We want to understand your situation before we recommend anything.
-
-Apply here: https://blueprint.meetadvaita.com/apply
-
-This is an application, not a commitment. We read every one personally.
+When you're ready, the next step is a short application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 9 — The ROI Picture for Rare Breed Plumbing, Heating And Air
+## SECTION 9 — The ROI Picture for Rare Breed Plumbing, Heating & Air
 
-Based on what you shared and industry benchmarks for plumbing and HVAC:
+Here's the honest math from your own numbers — about 260 inquiries a month, an average job around $1,500, and a team of 30. These are benchmark-based ranges, not guarantees.
 
-**Time Recovery Estimate:**
-- Admin and documentation: up to 8 hrs/week recovered
-- Lead response and follow-up: up to 6 hrs/week recovered
-- Reporting and tracking: up to 3 hrs/week recovered
-- **Total: up to 17 hrs/week for your team**
-
-**At $150/hr (industry benchmark for plumbing and HVAC owner time):**
-- Monthly time value: up to $10,200/month
-- Annual time value: up to $122,400/year
-- Plus: close rate lift from consistent follow-up (35% industry benchmark)
-
-**Industry benchmark context:**
-- Businesses using AI automation see 20-35% reduction in time spent on administrative tasks
-  (McKinsey, "The state of AI in 2023" — https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023)
-- AI-powered lead response systems increase lead conversion by 14-23%
-  (Harvard Business Review, 2023 — https://hbr.org)
-- Small businesses using automation tools report 25% faster revenue growth
-  (SBA, 2023 — https://www.sba.gov)
-
-**These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
-
-The question isn't whether AI creates value in plumbing and HVAC. The question is whether
-the investment makes sense for your specific situation. That's what the application
-helps us figure out together.
+- **Time:** your stated goal. Industry benchmarks put the recoverable admin and communication load at roughly 12 hours per week, per teammate. At $150/hr that's meaningful time back across a team of 30.
+- **Bookings:** answering every inquiry in under 60 seconds instead of around an hour means you're first into the conversation — and customers tend to book the studio that feels present first.
+- **Capacity:** the same six agents let you serve more customers without losing the high-touch experience that defines Rare Breed Plumbing, Heating & Air.
 
 ---
 
-## SECTION 10 — Common Objections — And Honest Answers
+## SECTION 10 — Common Questions, Honest Answers
 
-### "Is this going to replace my team?"
-No. These agents handle the repetitive work your team shouldn't be doing — initial
-responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Emergency Plumbing (24/7), Water Heater Installation & Repair, Repiping, Water Line Repair, Drain Cleaning, Pipe Lining, Sewer Line Repair, HVAC / Air Conditioning, Water Softeners & Reverse Osmosis, Plumbing & Basement Remodels, Commercial Plumbing, Sump Pumps, Boilers, Garbage Disposals,
-making judgment calls. AI handles the rest.
+**"Will this replace my team or my creativity?"** No. The design and the relationship stay entirely yours. AI takes the inbox, the reminders, and the first drafts off your plate so you have more presence for the customer, not less.
 
-### "What about the setup and learning curve?"
-The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
-naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
+**"Is it complicated to run?"** No. It plugs into the tools you already use — Google Drive, Dropbox, Trello, email, and text — and once it's set up, it runs itself.
 
-### "How is this different from just using ChatGPT?"
-ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with standard business tools, triggered by your actual business events — a new inquiry,
-a proposal request, a follow-up window — without anyone on your team doing anything
-to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 on their own.
-
-### "What if I'm not ready yet?"
-Use the prompts in Section 7. See what AI does for your business on a small scale.
-When you're ready to scale it to a full system, the application is still there.
-There's no deadline. This isn't a limited-time offer. It's a conversation we're
-happy to have when the timing is right for you.
+**"Will customers be able to tell it's AI?"** Built on your voice before launch, replies read as warm and unmistakably you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
+- Your full blueprint: https://bennett-maxwell.github.io/fki-preview/blueprints/court-lundberg.html
+- Start your application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 12 — About Franchise Ki
+## SECTION 12 — About Franchise KI & Advaita
 
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
-
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
-
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
-
-Questions? Reach Bennett directly: bennett@franchiseki.com
-
-This audio walkthrough was built for Rare Breed Plumbing, Heating And Air. Not a template.
-Every number, every example, every recommendation — yours.
+We build and run AI systems for owner-led businesses — the same way we built our own. You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.
