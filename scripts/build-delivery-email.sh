@@ -165,18 +165,19 @@ fi
 # Inject into template
 if [ "$REUSE_EXISTING" = false ]; then
 cp "$TEMPLATE" "$OUTPUT"
-sed -i '' "s|{{LEAD_FIRST_NAME}}|$LEAD_FIRST|g" "$OUTPUT"
-sed -i '' "s|{{BUSINESS_NAME}}|$BUSINESS_NAME|g" "$OUTPUT"
-sed -i '' "s|{{ACCENT_COLOR}}|$ACCENT_COLOR|g" "$OUTPUT"
-sed -i '' "s|{{INDUSTRY}}|$EMAIL_INDUSTRY|g" "$OUTPUT"
-sed -i '' "s|{{BLUEPRINT_URL}}|$BLUEPRINT_URL|g" "$OUTPUT"
-sed -i '' "s|{{PODCAST_URL}}|$PODCAST_URL|g" "$OUTPUT"
-sed -i '' "s|{{WEBSITE_URL}}|$WEBSITE_URL|g" "$OUTPUT"
-sed -i '' "s|{{APPLY_SUBJECT}}|$APPLY_SUBJECT|g" "$OUTPUT"
-sed -i '' "s|{{APPLY_URL}}|$APPLY_URL|g" "$OUTPUT"
-# & is the whole-match operator in a sed RHS — escape it so the query string isn't corrupted.
-QUALIFY_URL_SED=$(printf '%s' "$QUALIFY_URL" | sed 's/&/\\&/g')
-sed -i '' "s|{{QUALIFY_URL}}|$QUALIFY_URL_SED|g" "$OUTPUT"
+# & is the whole-match operator in a sed RHS, and \ / are also special — escape every
+# replacement value so business names ("Heating & Air") and query strings can't corrupt the output.
+sed_rhs() { printf '%s' "$1" | sed -e 's/[\/&]/\\&/g'; }
+sed -i '' "s|{{LEAD_FIRST_NAME}}|$(sed_rhs "$LEAD_FIRST")|g" "$OUTPUT"
+sed -i '' "s|{{BUSINESS_NAME}}|$(sed_rhs "$BUSINESS_NAME")|g" "$OUTPUT"
+sed -i '' "s|{{ACCENT_COLOR}}|$(sed_rhs "$ACCENT_COLOR")|g" "$OUTPUT"
+sed -i '' "s|{{INDUSTRY}}|$(sed_rhs "$EMAIL_INDUSTRY")|g" "$OUTPUT"
+sed -i '' "s|{{BLUEPRINT_URL}}|$(sed_rhs "$BLUEPRINT_URL")|g" "$OUTPUT"
+sed -i '' "s|{{PODCAST_URL}}|$(sed_rhs "$PODCAST_URL")|g" "$OUTPUT"
+sed -i '' "s|{{WEBSITE_URL}}|$(sed_rhs "$WEBSITE_URL")|g" "$OUTPUT"
+sed -i '' "s|{{APPLY_SUBJECT}}|$(sed_rhs "$APPLY_SUBJECT")|g" "$OUTPUT"
+sed -i '' "s|{{APPLY_URL}}|$(sed_rhs "$APPLY_URL")|g" "$OUTPUT"
+sed -i '' "s|{{QUALIFY_URL}}|$(sed_rhs "$QUALIFY_URL")|g" "$OUTPUT"
 
 # Prompts need python for multi-line safety
 python3 - "$OUTPUT" "$PROFILE" "$INDUSTRY" << 'PYEOF'
