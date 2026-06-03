@@ -319,6 +319,18 @@ def podcast_audio_gate(slug, lead):
             ]
             if require_public_audio:
                 cmd.extend(["--public-url", public_url])
+            # Auto-discover transcript file: try multiple naming conventions
+            podcast_dir = os.path.dirname(audio_path)
+            base = os.path.splitext(os.path.basename(audio_path))[0]  # slug without .mp3
+            transcript_candidates = [
+                os.path.join(podcast_dir, f"{base}-elevenlabs-transcript.txt"),
+                os.path.join(podcast_dir, f"{base}-transcript.txt"),
+                os.path.join(podcast_dir, f"{base}-elevenlabs-raw-elevenlabs-transcript.txt"),
+            ]
+            for tc in transcript_candidates:
+                if os.path.exists(tc):
+                    cmd.extend(["--transcript-file", tc])
+                    break
             proc = subprocess.run(cmd, capture_output=True, text=True, timeout=360)
             try:
                 data = json.loads(proc.stdout)
