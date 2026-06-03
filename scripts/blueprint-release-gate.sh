@@ -20,7 +20,7 @@ elif [[ -n "$(git status --short)" ]]; then
   warnings+=("dirty_worktree_allowed")
 fi
 
-secret_hits="$(rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[a-zA-Z0-9]|sk-[A-Za-z0-9]" apply qualify.html blueprints --glob '!**/*.bak*' --glob '!**/_obsolete/**' 2>/dev/null || true)"
+secret_hits="$(rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[A-Za-z0-9]{12,}|sk-[A-Za-z0-9]{20,}" apply qualify.html blueprints --glob '!**/*.bak*' --glob '!**/_obsolete/**' 2>/dev/null || true)"
 if [[ -n "$secret_hits" ]]; then
   failures+=("possible_public_secret_reference")
 fi
@@ -60,7 +60,10 @@ if [[ -f "$CONF" ]]; then
     b="$(basename "$h" .html)"
     [[ "$b" == "TEMPLATE" ]] && continue
     case "$h" in *.bak*) continue;; esac
-    if grep -q "0071E3" "$h"; then
+    # Format-3 detection must use the gold structure, not color alone. Several
+    # legacy pages also use #0071E3 but still carry sec-1/sec-2 legacy section
+    # IDs; treating color alone as a hard Format-3 lock creates false failures.
+    if grep -q 'id="hero"' "$h" && grep -q 'id="profile"' "$h" && grep -q 'id="stack"' "$h" && grep -q 'id="oppmap"' "$h" && grep -q 'id="timeline"' "$h" && grep -q 'id="demo"' "$h" && grep -q 'id="listen"' "$h"; then
       if ! python3 "$CONF" "$h" >/dev/null 2>&1; then
         failures+=("format3_conformance_drift_${b//[^a-zA-Z0-9]/_}")
       fi

@@ -118,7 +118,7 @@ No obligation. No sales pressure. Just a real conversation about whether this is
     return str(output_path), doc
 
 
-async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
+async def generate_podcast_audio(slug: str, source_text: str):
     """blueprint_podcast_pipeline contract: size-check → create → add source → wait → generate → wait → download.
     Returns path to downloaded MP3, or None on failure."""
     # Size gate: mirrors mcp__notebooklm__blueprint_podcast_pipeline (>18KB required)

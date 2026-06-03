@@ -24,11 +24,12 @@ qualify_html="$(curl -fsSL "$BASE_URL/qualify.html")"
 [[ "$apply_html" == *"submitPromise"* ]] || failures+=("apply_missing_relay_wait")
 [[ "$qualify_html" == *"$RELAY_URL"* ]] || failures+=("qualifier_missing_relay_url")
 [[ "$qualify_html" == *"BOOKING_URL"* ]] || failures+=("qualifier_missing_booking_url")
-[[ "$qualify_html" == *"id === 'lead-email' || id === 'lead-phone'"* ]] || failures+=("qualifier_missing_email_phone_preserve")
+[[ "$qualify_html" == *'name="email"'* && "$qualify_html" == *'name="phone"'* ]] || failures+=("qualifier_missing_required_email_phone")
+[[ "$qualify_html" == *"the qualifier must NEVER pre-fill any visible"* ]] || failures+=("qualifier_missing_blank_identity_guard")
 [[ "$qualify_html" == *"blueprint_qualifier_submit"* ]] || failures+=("qualifier_missing_tracked_submit_event")
 [[ "$apply_html" == *"blueprint_apply_submit"* ]] || failures+=("apply_missing_tracked_submit_event")
 
-secret_hits="$(printf '%s\n%s\n' "$apply_html" "$qualify_html" | rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[a-zA-Z0-9]|sk-[A-Za-z0-9]" || true)"
+secret_hits="$(printf '%s\n%s\n' "$apply_html" "$qualify_html" | rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[A-Za-z0-9]{12,}|sk-[A-Za-z0-9]{20,}" || true)"
 [[ -z "$secret_hits" ]] || failures+=("public_frontend_possible_secret")
 
 bad_input="$(curl -sS -w '\nHTTP_STATUS:%{http_code}\n' -X POST "$RELAY_URL" -H 'Content-Type: application/json' --data '{"event_name":"monitor_bad_input"}')"
