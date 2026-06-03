@@ -43,9 +43,9 @@ def steering(first, business):
         f'negative hook. BANNED ANALYST FRAMING: never say "we are looking at", "we\'re looking at", "we are analyzing", '
         f'"let\'s look at", or otherwise narrate as outside analysts observing the business. Always speak directly to {f} '
         f'about what the system does FOR them — say "this gives you", "you\'ll get", "for you and {business}", not "we\'re looking at". '
-        f'LENGTH IS REQUIRED: cover ALL 12 sections in real depth — aim for 18 to 20 minutes of '
+        f'LENGTH IS REQUIRED: cover ALL 12 sections in real depth — aim for about 18 minutes of '
         f'conversation. Do NOT wrap up early, do NOT rush or summarize; give each of the 12 sections its own '
-        f'substantive back-and-forth. Stay under 20 minutes but get close to it. '
+        f'substantive back-and-forth. ABSOLUTE HARD CEILING: never exceed 20 minutes — if in doubt, err shorter (17-18 min). '
         f'Close with the application CTA — never mention scheduling a call.'
     )
 
