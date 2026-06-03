@@ -30,14 +30,24 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
-    """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
-    NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
-    10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
-    cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
-    MIN_SEC, MAX_SEC = 16 * 60, 20 * 60
+    """Red-line D3-03: current Drive Blueprint AI skill uses the 6-20 MB
+    walkthrough window plus D3-10 duration >5 minutes.
+
+    The prior repo gate required 16:00-20:00. That contradicted Drive
+    blueprint-ai-skill v3.26 and blueprint-ai-audit-skill D3-10, causing a
+    false failure on valid NotebookLM walkthroughs that are within the
+    mandatory size window and over five minutes.
+    """
+    MIN_BYTES, MAX_BYTES = 6 * 1024 * 1024, 20 * 1024 * 1024
+    MIN_SEC, MAX_SEC = 5 * 60, 20 * 60
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
+    size = os.path.getsize(path)
+    if size < MIN_BYTES:
+        return False, f"too small {size} bytes (min 6MB)"
+    if size > MAX_BYTES:
+        return False, f"too large {size} bytes (max 20MB)"
     try:
         out = subprocess.run(
             ["ffprobe", "-v", "error", "-show_entries", "format=duration",
@@ -48,10 +58,10 @@ def podcast_duration_gate(slug):
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < MIN_SEC:
-        return False, f"too short {mmss} (min 16:00) — re-cut deeper"
+        return False, f"too short {mmss} (min 5:00)"
     if secs > MAX_SEC:
         return False, f"too long {mmss} (max 20:00) — re-cut tighter"
-    return True, f"{mmss} OK"
+    return True, f"{mmss}, {size} bytes OK"
 
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
@@ -419,8 +429,8 @@ def audit_lead(slug):
     results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     duration_ok, duration_detail = podcast_duration_gate(slug)
-    results["D3-03_podcast_duration_16to20min_RL"] = duration_ok
-    redlines["D3-03_podcast_duration_16to20min_RL"] = duration_ok
+    results["D3-03_podcast_size_6to20mb_duration_gt5min_RL"] = duration_ok
+    redlines["D3-03_podcast_size_6to20mb_duration_gt5min_RL"] = duration_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)
