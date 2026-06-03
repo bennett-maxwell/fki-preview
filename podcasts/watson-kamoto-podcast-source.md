@@ -4,7 +4,9 @@ Prepared for internal Blueprint AI proof run on 2026-05-27.
 
 ## Host Direction
 
-Speak directly to Watson. Use "you" and "your business." Do not describe Watson in the third person. This is an internal preview audio artifact for Bennett review, not a customer delivery.
+RULE 2: Open the audio with EXACTLY these words: "Hi Watson, welcome. This walkthrough was built for you and Kamoto productions, from what you told us." Then proceed.
+
+Speak directly to Watson. Use "you" and "your business." Do not describe Watson in the third person.
 
 ## Opening
 
@@ -34,4 +36,6 @@ The Blueprint should not promise a specific return, claim a fake testimonial, or
 
 ## Close
 
-Watson, the next step is to review the Blueprint, use the tracked qualifier, and confirm whether these agents match the way Kamoto productions wants to handle lead response, intake, and follow-up.
+Watson, the next step is to review the Blueprint and confirm whether these agents match the way Kamoto productions wants to handle lead response, intake, and follow-up.
+
+When you are ready, the next step is a short application: https://bennett-maxwell.github.io/fki-preview/qualify.html
