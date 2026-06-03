@@ -1,18 +1,20 @@
 {
   "checks": [
     {
-      "failures": [],
+      "failures": [
+        "ambiguous CTA copy: Apply"
+      ],
       "name": "visible_html_surface",
-      "pass": true
+      "pass": false
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
         "--receipt-dir",
-        "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
+        "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
         "--lead",
         "avery-martinez-costa-vida-20260601",
         "--json-output",
@@ -47,8 +49,8 @@
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/run-audit.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "avery-martinez-costa-vida-20260601"
       ],
@@ -57,88 +59,70 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] avery-martinez-costa-vida-20260601: 14/15 (93%)  RED-LINE FAIL: ['D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] avery-martinez-costa-vida-20260601: 11/14 (79%)  RED-LINE FAIL: ['D10-23_restaurant_copy_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
         "",
-        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
       ]
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
+        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "financial_realism",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "avery-martinez-costa-vida-20260601 food_franchise          18     None  PASS",
+        "avery-martinez-costa-vida-20260601 food_franchise        2388        0  FAIL (1)",
+        "      \u2717 D7-01 [RL] contract default $2,388 outside food_franchise band $8-$60",
         "------------------------------------------------------------------------------",
-        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
       ]
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "d9_render_integrity",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [],
-      "stdout_tail": [
-        "  [PASS] D9-03 snapshot/profile is grid/flex",
-        "  [PASS] D9-04 @media query",
-        "  [PASS] D9-05 mobile \u2264480px",
-        "  [PASS] D9-06 viewport meta",
-        "  [PASS] D9-07 no leftover template blue",
-        "  [PASS] D9-08 sections \u2265 8 (found 16)",
-        "  [PASS] D9-09 every section has id",
-        "  [PASS] D9-10 no dead anchors",
-        "  [PASS] D9-11 no empty headings",
-        "  [PASS] D9-12 no double-encoded entities",
-        "  [PASS] D9-13 broken possessive (skipped \u2014 no --business-name)",
-        "  [PASS] D9-14 no undefined/NaN/null",
-        "  [PASS] D9-15 font-family on body (union of all body rules)",
-        "  [PASS] D9-16 hero has background",
-        "  [PASS] D9-17 CTA button styled",
-        "  [PASS] D9-18 tables border-collapse (or N/A)",
-        "  [PASS] D9-19 max-width container",
-        "  [PASS] D9-20 [RL] no off-brand accent leak",
-        "",
-        "FAILED: 0"
-      ]
+      "pass": false,
+      "returncode": 2,
+      "stderr_tail": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+      ],
+      "stdout_tail": []
     },
     {
       "name": "proof_email_click_test",
       "pass": true,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-email-click-test.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
       "pass": true,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-desktop-render.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
       "pass": true,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-audit.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-audit.json"
     },
     {
       "name": "proof_closeout",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
     },
     {
       "detail": "avery-martinez-costa-vida-20260601.mp3 10534182 bytes within window",
@@ -153,16 +137,19 @@
   ],
   "diamond": "FAIL",
   "failures": [
+    "visible_html_surface: ambiguous CTA copy: Apply",
     "completion_gate failed",
     "run-audit.py failed",
+    "financial-realism-check.py failed",
+    "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json",
     "proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json"
   ],
-  "html_path": "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+  "html_path": "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
   "lead": "avery-martinez-costa-vida-20260601",
   "mode": "production",
-  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-03T18:38:36.522548+00:00"
+  "ts": "2026-06-03T18:54:53.994185+00:00"
 }

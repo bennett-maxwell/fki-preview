@@ -1,20 +1,20 @@
 {
   "lead": "avery-martinez-costa-vida-20260601",
-  "ts": "2026-06-03T18:38:29.784647+00:00",
-  "html_path": "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
-  "html_size_bytes": 42800,
+  "ts": "2026-06-03T18:54:53.805738+00:00",
+  "html_path": "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+  "html_size_bytes": 100941,
   "require_production": true,
   "summary": {
-    "passed": 41,
-    "failed": 2,
-    "skipped": 7,
-    "total_applicable": 43,
+    "passed": 40,
+    "failed": 4,
+    "skipped": 6,
+    "total_applicable": 44,
     "overall_pass": false
   },
   "status": "FAIL",
   "category_scores": {
     "Structure": {
-      "score": "9/9 (100%)",
+      "score": "10/10 (100%)",
       "pass": true,
       "failures": []
     },
@@ -24,9 +24,11 @@
       "failures": []
     },
     "Funnel": {
-      "score": "10/10 (100%)",
-      "pass": true,
-      "failures": []
+      "score": "9/10 (90%)",
+      "pass": false,
+      "failures": [
+        "#27: CTA points to qualify.html and avoids banned or ambiguous apply copy \u2014 Ambiguous CTA copy found: Apply"
+      ]
     },
     "Audio": {
       "score": "5/5 (100%)",
@@ -39,9 +41,10 @@
       "failures": []
     },
     "Production": {
-      "score": "5/7 (71%)",
+      "score": "4/7 (57%)",
       "pass": false,
       "failures": [
+        "#43: Drive artifact registry row present \u2014 Drive receipt must include registry_file and verified=true",
         "#45: Current GHL readback (contact tagged) \u2014 GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true",
         "#46: Repeat-submit same-contact proof \u2014 Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
       ]
@@ -58,6 +61,8 @@
     }
   },
   "critical_failures": [
+    "#27: CTA points to qualify.html and avoids banned or ambiguous apply copy",
+    "#43: Drive artifact registry row present",
     "#45: Current GHL readback (contact tagged)",
     "#46: Repeat-submit same-contact proof"
   ],
@@ -65,9 +70,9 @@
   "checks": {
     "1": {
       "desc": "Drive skill version present in generation comment",
-      "pass": null,
+      "pass": true,
       "severity": "info",
-      "detail": "No skill version marker found (legacy blueprint \u2014 add <!-- blueprint-ai-skill v3.X --> to header)"
+      "detail": "OK"
     },
     "2": {
       "desc": "Manual stage interpretation not used (no MANUAL_RECOVERY marker)",
@@ -221,9 +226,9 @@
     },
     "27": {
       "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
-      "pass": true,
+      "pass": false,
       "severity": "critical",
-      "detail": "OK"
+      "detail": "Ambiguous CTA copy found: Apply"
     },
     "28": {
       "desc": "No direct booking/calendar links (outside qualify.html flow)",
@@ -317,9 +322,9 @@
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": true,
+      "pass": false,
       "severity": "critical",
-      "detail": "Drive artifact registry verified"
+      "detail": "Drive receipt must include registry_file and verified=true"
     },
     "44": {
       "desc": "Notion Sprint row present",

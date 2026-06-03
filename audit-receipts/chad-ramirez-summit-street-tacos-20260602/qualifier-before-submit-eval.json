@@ -1,0 +1,9 @@
+### Result
+{
+  "cta": "Submit Qualification First",
+  "disabled": true
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => { document.getElementById(\'cta-apply\').scrollIntoView({block:\'center\'}); return {cta:document.getElementById(\'cta-apply\').textContent,disabled:document.getElementById(\'cta-apply\').disabled}; })())');
+```

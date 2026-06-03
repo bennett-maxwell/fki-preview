@@ -1,0 +1,97 @@
+{
+  "ts": "2026-06-02T16:51:59.194081+00:00",
+  "status": "PASS_WITH_QUALIFIER_WORKFLOW_ID_PARTIAL",
+  "pass": true,
+  "contact_id": "IX7XsHPPPOJ57aWZsOLK",
+  "connector_status": "HighLevel connector 401 reauthentication required",
+  "direct_api_readback": {
+    "contact_appointments": "200",
+    "contact_campaigns": "404",
+    "contact_notes": "200",
+    "contact_tasks": "200",
+    "contact_workflow": "404",
+    "contact_workflows": "404",
+    "workflows_root_slash": "200"
+  },
+  "workflow_list_count": 177,
+  "workflow_matches": [
+    {
+      "id": "b4225b37-7e11-4a46-aba0-53f2ed13cc07",
+      "name": "AI Advantage Blueprint Opt In",
+      "status": "published",
+      "updatedAt": "2026-05-13T22:32:01.388Z"
+    },
+    {
+      "id": "447d307d-3e2b-457b-ba76-c63eb0c4e669",
+      "name": "Dialer Dispo | Not Qualified",
+      "status": "published",
+      "updatedAt": "2026-02-25T22:52:23.577Z"
+    },
+    {
+      "id": "1cf2a708-63a4-4261-85d6-d44237034a48",
+      "name": "Intro Appt: Unqualified",
+      "status": "draft",
+      "updatedAt": "2026-04-16T16:38:41.786Z"
+    },
+    {
+      "id": "1a1f2ca5-09b6-4f81-ae24-3d2d666ceb0b",
+      "name": "Intro Appt: Unqualified",
+      "status": "draft",
+      "updatedAt": "2026-04-16T16:38:41.786Z"
+    }
+  ],
+  "qualifier_note_count": 8,
+  "qualifier_note_examples": [
+    {
+      "id": "6D4J8qBhh4DscvZ5RDAm",
+      "body_start": "Advaita AI Qualifier \u2014 tracked application event\n---\nBusiness: Summit Street Tacos\nLead session: advaita-mpwuo9za-2fijeltgoryua78z\nSource: blueprint_ai_qualifier\nBlueprint slug: chad-ramirez-summit-street-tacos-20260602\n"
+    },
+    {
+      "id": "8FqBfRLHf2mo0tiFLe0r",
+      "body_start": "[2026-06-02] \u2014 Chad controlled repeat qualifier submit 5/5 \u2014 Verify same-contact update, no duplicate \u2014 Chad/Codex\n\n--- Relay payload summary ---\n{\n  \"event_name\": \"blueprint_qualifier_submit\",\n  \"form_version\": \"2026-06"
+    },
+    {
+      "id": "I67XDmrAzzkCmjydxOeF",
+      "body_start": "[2026-06-02] \u2014 Chad controlled repeat qualifier submit 4/5 \u2014 Verify same-contact update, no duplicate \u2014 Chad/Codex\n\n--- Relay payload summary ---\n{\n  \"event_name\": \"blueprint_qualifier_submit\",\n  \"form_version\": \"2026-06"
+    },
+    {
+      "id": "6xQRRuEV1Jyt0X9tMnPD",
+      "body_start": "[2026-06-02] \u2014 Chad controlled repeat qualifier submit 3/5 \u2014 Verify same-contact update, no duplicate \u2014 Chad/Codex\n\n--- Relay payload summary ---\n{\n  \"event_name\": \"blueprint_qualifier_submit\",\n  \"form_version\": \"2026-06"
+    },
+    {
+      "id": "kk50x7TudMmN2xkehATm",
+      "body_start": "[2026-06-02] \u2014 Chad controlled repeat qualifier submit 2/5 \u2014 Verify same-contact update, no duplicate \u2014 Chad/Codex\n\n--- Relay payload summary ---\n{\n  \"event_name\": \"blueprint_qualifier_submit\",\n  \"form_version\": \"2026-06"
+    },
+    {
+      "id": "lZWDerL714iTWlr7ZVAn",
+      "body_start": "[2026-06-02] \u2014 Chad controlled repeat qualifier submit 1/5 \u2014 Verify same-contact update, no duplicate \u2014 Chad/Codex\n\n--- Relay payload summary ---\n{\n  \"event_name\": \"blueprint_qualifier_submit\",\n  \"form_version\": \"2026-06"
+    },
+    {
+      "id": "EDq4ioXn7APj5lLF5j0w",
+      "body_start": "Advaita AI Qualifier \u2014 tracked application event\n---\nBusiness: Summit Street Tacos\nLead session: advaita-mpwtyokb-mdmvxljqsdvtt7pl\nSource: blueprint_ai_qualifier\nBlueprint slug: chad-ramirez-summit-street-tacos-20260602\n"
+    },
+    {
+      "id": "1jOfonoV7gkwpIIYgrqU",
+      "body_start": "Advaita AI Qualifier \u2014 tracked application event\n---\nBusiness: Summit Street Tacos\nLead session: advaita-mpwtxbso-w6c09m55h1j7f7rk\nSource: blueprint_ai_qualifier\nBlueprint slug: chad-ramirez-summit-street-tacos-20260602\n"
+    }
+  ],
+  "contact_tasks_count": 0,
+  "contact_appointments_count": 0,
+  "official_docs_checked": [
+    "https://marketplace.gohighlevel.com/docs/ghl/contacts/workflow/index.html",
+    "https://marketplace.gohighlevel.com/docs/ghl/contacts/add-contact-to-workflow/",
+    "https://marketplace.gohighlevel.com/docs/ghl/workflows/get-workflow/"
+  ],
+  "enrollment_id_readback": "partial: documented API and direct account probes did not expose a GET contact-workflow-enrollment endpoint; contact workflow GET endpoints returned 404 while workflow list and contact notes returned 200",
+  "stronger_proof_now_added": [
+    "curl workflow list 200",
+    "curl contact notes 200 with qualifier notes",
+    "curl contact workflow/campaign GET 404 proof",
+    "official docs show workflow add/delete/list surfaces"
+  ],
+  "raw_receipts": [
+    "ghl-curl-workflow-probe-summary.json",
+    "ghl-curl-workflows_root_slash.raw",
+    "ghl-curl-contact_notes.raw"
+  ]
+}

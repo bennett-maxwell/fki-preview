@@ -1,0 +1,30 @@
+diff --git a/scripts/blueprint-funnel-monitor.sh b/scripts/blueprint-funnel-monitor.sh
+index 3bd031b0..3b92c71e 100755
+--- a/scripts/blueprint-funnel-monitor.sh
++++ b/scripts/blueprint-funnel-monitor.sh
+@@ -24,7 +24,8 @@ qualify_html="$(curl -fsSL "$BASE_URL/qualify.html")"
+ [[ "$apply_html" == *"submitPromise"* ]] || failures+=("apply_missing_relay_wait")
+ [[ "$qualify_html" == *"$RELAY_URL"* ]] || failures+=("qualifier_missing_relay_url")
+ [[ "$qualify_html" == *"BOOKING_URL"* ]] || failures+=("qualifier_missing_booking_url")
+-[[ "$qualify_html" == *"id === 'lead-email' || id === 'lead-phone'"* ]] || failures+=("qualifier_missing_email_phone_preserve")
++[[ "$qualify_html" == *"name="email""* && "$qualify_html" == *"name="phone""* ]] || failures+=("qualifier_missing_required_email_phone")
++[[ "$qualify_html" == *"the qualifier must NEVER pre-fill any visible"* ]] || failures+=("qualifier_missing_blank_identity_guard")
+ [[ "$qualify_html" == *"blueprint_qualifier_submit"* ]] || failures+=("qualifier_missing_tracked_submit_event")
+ [[ "$apply_html" == *"blueprint_apply_submit"* ]] || failures+=("apply_missing_tracked_submit_event")
+ 
+diff --git a/scripts/blueprint-release-gate.sh b/scripts/blueprint-release-gate.sh
+index cc1cee25..5dc0c42b 100755
+--- a/scripts/blueprint-release-gate.sh
++++ b/scripts/blueprint-release-gate.sh
+@@ -60,7 +60,10 @@ if [[ -f "$CONF" ]]; then
+     b="$(basename "$h" .html)"
+     [[ "$b" == "TEMPLATE" ]] && continue
+     case "$h" in *.bak*) continue;; esac
+-    if grep -q "0071E3" "$h"; then
++    # Format-3 detection must use the gold structure, not color alone. Several
++    # legacy pages also use #0071E3 but still carry sec-1/sec-2 legacy section
++    # IDs; treating color alone as a hard Format-3 lock creates false failures.
++    if grep -q 'id="hero"' "$h" && grep -q 'id="listen"' "$h"; then
+       if ! python3 "$CONF" "$h" >/dev/null 2>&1; then
+         failures+=("format3_conformance_drift_${b//[^a-zA-Z0-9]/_}")
+       fi

@@ -1,0 +1,125 @@
+{
+  "ts": "2026-06-02T17:07:12.657391+00:00",
+  "status": "BLOCKED_FOLLOWUP_CAMPAIGN_PROOF",
+  "goal_complete": false,
+  "highlevel_connector": "partial: HighLevel MCP connector 401 reauthentication required; direct curl readback used without printing token",
+  "contact_identity": {
+    "status": "PASS",
+    "contact_id": "IX7XsHPPPOJ57aWZsOLK",
+    "exact_contact_count": 1,
+    "email": "bennett+chad-blueprint-test-20260602@franchiseki.com",
+    "phone": "+15550100199",
+    "dateAdded": "2026-06-02T15:24:17.102Z",
+    "dateUpdated": "2026-06-02T16:26:56.117Z"
+  },
+  "apply_followup_category": {
+    "status": "PARTIAL_WORKFLOW_EXISTS_TAGS_PRESENT_BUT_ENROLLMENT_NOT_EXPOSED_AND_MESSAGE_FAILED",
+    "published_workflow_match": [
+      {
+        "id": "b4225b37-7e11-4a46-aba0-53f2ed13cc07",
+        "name": "AI Advantage Blueprint Opt In",
+        "status": "published",
+        "version": 10,
+        "createdAt": "2026-05-13T19:10:15.854Z",
+        "updatedAt": "2026-05-13T22:32:01.388Z"
+      }
+    ],
+    "required_tags_present": {
+      "blueprint_ai_apply": true,
+      "ai blueprint opt-in": true,
+      "advaita-touch-1-sent": true
+    },
+    "outbound_messages_same_contact": [
+      {
+        "id": "lZ8OOTpfm8iuHQrVg7i2",
+        "messageType": "TYPE_SMS",
+        "direction": "outbound",
+        "status": "failed",
+        "source": "app",
+        "body": "Hi chad \u2014 we just received your AI for Business assessment. You'll get a call from us in the next 60 seconds. Reply STOP to opt out. \u2014 Bennett, Franchise KI\nReply STOP to unsubscribe.",
+        "dateAdded": "2026-06-02T15:24:30.995Z",
+        "contactId": "IX7XsHPPPOJ57aWZsOLK",
+        "conversationId": "CNJ3vMil8FUmoxK7FaGA",
+        "userId": "mutoFuhcvY42FZvLq5Zc"
+      }
+    ],
+    "assessment_message_status": "failed",
+    "assessment_message_source": "app",
+    "notes": "Same-contact follow-up attempt exists, but public API readback shows source=app and status=failed for reserved test phone; no contact workflow enrollment GET endpoint was found."
+  },
+  "qualifier_followup_category": {
+    "status": "BLOCKED_NATIVE_WORKFLOW_OR_CAMPAIGN_NOT_PROVEN",
+    "required_tags_present": {
+      "blueprint_ai_qualifier": true,
+      "advaita-ai-qualifier": true,
+      "advaita-qualified": true,
+      "advaita-score-strong": true
+    },
+    "qualifier_note_count": 8,
+    "workflow_matches_from_177_list": [
+      {
+        "id": "447d307d-3e2b-457b-ba76-c63eb0c4e669",
+        "name": "Dialer Dispo | Not Qualified",
+        "status": "published",
+        "version": 7,
+        "createdAt": "2026-02-13T15:44:59.572Z",
+        "updatedAt": "2026-02-25T22:52:23.577Z"
+      },
+      {
+        "id": "1cf2a708-63a4-4261-85d6-d44237034a48",
+        "name": "Intro Appt: Unqualified",
+        "status": "draft",
+        "version": 1,
+        "createdAt": "2026-01-30T19:16:27.377Z",
+        "updatedAt": "2026-04-16T16:38:41.786Z"
+      },
+      {
+        "id": "1a1f2ca5-09b6-4f81-ae24-3d2d666ceb0b",
+        "name": "Intro Appt: Unqualified",
+        "status": "draft",
+        "version": 1,
+        "createdAt": "2026-01-30T19:22:06.898Z",
+        "updatedAt": "2026-04-16T16:38:41.786Z"
+      }
+    ],
+    "native_campaigns_count": 0,
+    "native_campaign_matches": [],
+    "native_form_submissions_by_email_or_contact": [
+      {
+        "label": "forms_submissions_q_contact_2023",
+        "http": "200",
+        "submission_count": 0,
+        "meta": {
+          "total": 0,
+          "currentPage": 1,
+          "nextPage": null,
+          "prevPage": null
+        }
+      },
+      {
+        "label": "forms_submissions_q_email_2023",
+        "http": "200",
+        "submission_count": 0,
+        "meta": {
+          "total": 0,
+          "currentPage": 1,
+          "nextPage": null,
+          "prevPage": null
+        }
+      }
+    ],
+    "notes": "Qualifier relay writes tags/notes to the same contact, but no published qualifier-specific workflow/campaign enrollment ID is proven by the current API surface."
+  },
+  "safe_readbacks_added": [
+    "ghl-safe-extra-surfaces-summary.json",
+    "ghl-safe-extra2-forms-campaigns-summary.json"
+  ],
+  "official_docs_basis": [
+    "HighLevel Workflows GET /workflows/ lists workflow metadata only",
+    "HighLevel Contacts Workflow docs expose add/delete contact-to-workflow endpoints, not contact enrollment-history GET",
+    "HighLevel Conversations messages docs expose conversation messages and message source/status",
+    "HighLevel Forms docs use q filter for contact/email submissions"
+  ],
+  "next_action": "Create/activate or expose a qualifier follow-up workflow/campaign in GHL, or provide an approved UI/API path that proves contact enrollment history; do not claim follow-up campaigns are going out until this readback passes.",
+  "receipt_sha256": "aaac930baa90e4acebc54736fa9fe9a2e1db4c9e1e0acce92c844138dd98c494"
+}

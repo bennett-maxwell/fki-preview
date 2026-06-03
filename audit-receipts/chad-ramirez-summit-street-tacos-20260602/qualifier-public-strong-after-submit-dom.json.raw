@@ -1,0 +1,6 @@
+### Result
+"{\"href\":\"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK&agents=Catering%20Speed-to-Lead%20Agent,Guest%20Recovery%20Agent,Manager%20Shift%20Summary%20Agent\",\"modalOpen\":true,\"ctaText\":\"Book a Call with Bennett\",\"frameSrc\":\"https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1?contact_id=IX7XsHPPPOJ57aWZsOLK&source=blueprint_ai_qualifier&lead_session_id=advaita-mpwtyokb-mdmvxljqsdvtt7pl&blueprint_slug=chad-ramirez-summit-street-tacos-20260602\",\"localContactId\":\"\",\"session\":\"advaita-mpwtyokb-mdmvxljqsdvtt7pl\"}"
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => JSON.stringify({href: location.href, modalOpen: document.getElementById(\'booking-modal\')?.classList.contains(\'open\') || false, ctaText: document.getElementById(\'cta-apply\')?.textContent || \'\', frameSrc: document.getElementById(\'booking-calendar-frame\')?.src || \'\', localContactId: localStorage.getItem(\'advaitaBlueprintContactId\') || localStorage.getItem(\'advaitaQualifierContactId\') || \'\', session: localStorage.getItem(\'advaitaLeadSessionId\') || \'\'}))())');
+```

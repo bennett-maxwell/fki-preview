@@ -1,0 +1,14 @@
+
+=== Format-3 Conformance: 4/8 — jason-martinez.html ===
+
+  [FAIL] FC-01 [RL] 16 gold sections in exact order — got ['hero', 'snapshot', 'results', 'pillars', 'tools', 'gaps', 'opportunities', 'ignore', 'agents', 'milestones', 'calculator', 'prompts', 'diy-vs-partner', 'command-center', 'listen', 'sources', 'apply']
+  [FAIL] FC-02 [RL] custom player IDs each present exactly once — missing=['podAudio', 'podTrack', 'podFill', 'podThumb', 'podElapsed', 'podDuration', 'podPlay', 'podPlayIcon', 'podBack', 'podFwd', 'podBadge', 'podEq', 'podChapterName', 'podSpeed', 'podMute', 'podVolIcon', 'podError', 'podMini', 'podMiniPlay', 'podMiniIcon', 'podMiniTime'] dup=[]
+  [PASS] FC-03 [RL] exactly one id="listen" (found 1)
+  [FAIL] FC-04 component DNA at gold density — ['gap-card=0(<6)', 'stack-card=0(<4)', 'milestone=1(<2)', 'prompt-card=0(<3)']
+  [PASS] FC-05 player JS wired (togglePlay+click listener, no typo)
+  [FAIL] FC-07 [RL] play-button hardened (play().catch + readyState load guard) — play_catch=True ready_guard=False
+  [PASS] FC-06 [RL] podcast real-MP3 (skipped — no --podcast)
+  [PASS] FC-08 [RL] podcast 6-20MB window (skipped — no --podcast)
+
+FAILED: 4  RED-LINE FAILED: 3
+RESULT: HALT — structural drift from the gold format. Do not ship.

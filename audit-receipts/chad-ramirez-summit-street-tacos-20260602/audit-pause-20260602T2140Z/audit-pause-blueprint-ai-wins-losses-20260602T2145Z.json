@@ -1,0 +1,83 @@
+{
+  "ts": "2026-06-02T21:43:29.196549+00:00",
+  "status": "READY_TO_CLOSE_THREAD_WITH_BLOCKER_NOT_DIAMOND",
+  "decision": "pause_execution_and_preserve_wins_losses_in_notion",
+  "notion_parent_row": "https://www.notion.so/373cf5514fd3812d9067feff11df40aa",
+  "notion_child_audit_page": "https://www.notion.so/373cf5514fd38124a9ced3dd514ce593",
+  "goal_status": "paused/previously blocked; not complete",
+  "blocker": "BLOCKED_FOLLOWUP_CAMPAIGN_PROOF",
+  "root_cause": "Execution loop repeated stable GHL blocker proof instead of switching earlier to audit, Notion record, and handoff mode.",
+  "drive_skills_loaded": {
+    "self-audit-skill": {
+      "file_id": "1xCx0k6lj1y1_ni77ff0j8rrYAw2r8BMM",
+      "folder_id": "1ZBvY1JaG9u-PhZhzRDhlQO1koPVRY33l",
+      "version": "2.7",
+      "modified": "2026-06-01T14:35Z",
+      "sha256": "e0e430588be2a403170d58fa33300ebd2d68fb9199448d4a1724732a79049850"
+    },
+    "business-audit-skill": {
+      "file_id": "1ChehVt8OMh7_L5Y3tZGioS9ynx4IRp7y",
+      "folder_id": "1xlcN-2VIGgRGMLGYdJ4NUFBblCooFlsW",
+      "version": "2.5",
+      "modified": "2026-05-28T16:28Z",
+      "sha256": "1156cdb7880b1ae3796a81f510b92b71207cc86131f3b223a90c9dd1dd7ded55"
+    },
+    "blueprint-ai-audit-skill": {
+      "file_id": "1Wp7zzDlp4uzeEX8vTIQv0_RsJp70ORLM",
+      "folder_id": "1GpSfjTQZmBf8pX0Zp9t9hWf-4g1ooAuy",
+      "version": "2.11",
+      "modified": "2026-06-02T20:34:39.265Z",
+      "sha256": "f738cc381098499d71e368eaa5d3800962bfe07f4665e8070c87bacb667777db"
+    },
+    "lean-startup-skill": {
+      "file_id": "1kFiJLtk2MMekWr8uI0Ftsg_hoPU-0Jfh",
+      "folder_id": "1JuB5-qDdxmcNqS8TMo3KkE4y6_uAGVuV",
+      "version": "2.4",
+      "modified": "2026-05-31T01:58:54.566Z",
+      "sha256": "4f3157b7f505343ccaf3f7d2f0fb12e326bc3603f4522dd0bfbfcada16348e79"
+    },
+    "blueprint-ai-skill": {
+      "file_id": "1IzE-seDDaB1Tciik9mwBVrgQcb7FP7eH",
+      "version": "3.25",
+      "modified": "2026-06-02T17:23:32.589Z",
+      "sha256": "c3cddbd4e1f14eea09653c5f395f82a904366288310c9c7ec8824f690748fd11"
+    },
+    "recap-skill": {
+      "file_id": "1e9nw03yKQ9tjD4k3zEBAhQsEnH0qZWe6",
+      "version": "8.9",
+      "modified": "2026-06-02T19:53:30.313Z",
+      "sha256": "82c461336e85c625ed307d109f627ae4f969ad925656d1d26e50d805d8265399"
+    }
+  },
+  "audit_results": {
+    "self_audit": {
+      "score": "3.4/5",
+      "root_cause": "over-grinding stable GHL blocker",
+      "behavior_delta": "Notion child page + parent row updated with wins/losses/replay instructions"
+    },
+    "business_audit": {
+      "status": "Yellow/Red",
+      "headline": "Business impact strong; next bottleneck is follow-up campaign proof and conversion observability, not more artifact work"
+    },
+    "blueprint_ai_audit": {
+      "artifact_gate": "PASS content/production gate 44/44 and Gatekeeper 100",
+      "full_e2e_gate": "FAIL/BLOCKED until same-contact apply + qualifier follow-up proof passes"
+    },
+    "lean_startup_audit": {
+      "verdict": "PERSEVERE/CONDITIONAL",
+      "blocked_score": "76/100",
+      "potential_score": "92/100",
+      "learning": "conversion proof beats activity proof"
+    }
+  },
+  "proofs": {
+    "handoff_receipt": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/handoff-blueprint-ai-chad-blocked-20260602T2101Z.json",
+    "followup_blocker_receipt": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/ghl-followup-campaign-resumed-blocker3-refresh-20260602T1819Z.json",
+    "latest_lead_receipt": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/ghl-latest-lead-resumed-blocker3-refresh-20260602T1819Z.json"
+  },
+  "future_agent_rule": "When a blocker repeats with the same proof state three times, stop re-proving it. Preserve the evidence, update Notion, route owner/admin proof, and keep completion claims blocked.",
+  "final_response_receipt": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/audit-pause-20260602T2140Z/final-response-recap-audit-pause-closeout-ready-20260602T2145Z.json",
+  "final_response_marker_check": "PASS",
+  "correction_final_verifier": "PASS",
+  "checker_draft_sha256": "328d34334e17af65e2ff86a7f63f47320bad0d1a0ed6aa3dad0f43e1ddd02eed"
+}

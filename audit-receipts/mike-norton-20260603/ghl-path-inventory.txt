@@ -1,0 +1,96 @@
+## relevant scripts
+- scripts/webhook-listener.py
+- scripts/blueprint-delivery-integrity-gate.sh
+- scripts/clone-blueprint.sh.bak-1779581924
+- scripts/clone-blueprint.sh
+- scripts/audit-gate.sh
+- scripts/blueprint-release-gate.sh
+- scripts/podcast_direct_address_audit.py
+- scripts/blueprint_autofix.py
+- scripts/blueprint-validation-window.sh
+- scripts/blueprint-podcast-live-health.sh
+- scripts/blueprint-podcast-worker.py
+- scripts/test-roi-fillin-gate.sh
+- scripts/blueprint-historical-lead-audit.sh
+- scripts/blueprint_home_services_patch.py
+- scripts/blueprint-consistency-check.py
+- scripts/blueprint_completion_gate.py
+- scripts/__pycache__/blueprint-podcast-worker.cpython-314.pyc
+- scripts/__pycache__/blueprint-pipeline-orchestrator.cpython-314.pyc
+- scripts/__pycache__/podcast_direct_address_audit.cpython-314.pyc
+- scripts/blueprint_restaurant_patch.py
+- scripts/blueprint_gatekeeper_100.py
+- scripts/run-full-pipeline-test.sh
+- scripts/com.advaita.blueprint-pipeline.plist
+- scripts/gen-blueprint.py
+- scripts/blueprint-link-audit.sh
+- scripts/blueprint-repeat-submit-check.sh
+- scripts/pipeline-metrics.sh
+- scripts/ghl-webhook-handler.sh
+- scripts/blueprint-run-ledger.sh
+- scripts/blueprint-funnel-monitor.sh
+- scripts/blueprint_production_summary.py
+- scripts/blueprint-data-plausibility.py
+- scripts/blueprint-pipeline-orchestrator.py
+- scripts/clone-blueprint.sh.bak-pre-gitmutex-20260530235219
+- scripts/blueprint_idempotency.py
+- scripts/build-costa-vida-synthetic-blueprint.py
+- scripts/blueprint-idempotency.patch
+- scripts/clone-blueprint.sh.bak2
+- scripts/pipeline-status.sh
+- scripts/blueprint-batch.sh
+- scripts/pipeline-cron-check.sh
+- scripts/pipeline-health-check.sh
+- scripts/clone-blueprint.sh.bak3
+- scripts/validate-blueprints.sh
+- scripts/blueprint-funnel-dashboard.sh
+- scripts/com.advaita.blueprint-podcast-worker.plist
+- scripts/blueprint_collect_public_receipts.py
+- scripts/blueprint-appointment-attach-check.sh
+- scripts/pipeline-cleanup.sh
+- scripts/test_podcast_size_gate.py
+
+## env refs in scripts (filenames only)
+scripts/blueprint-delivery-integrity-gate.sh
+scripts/blueprint-release-gate.sh
+scripts/blueprint-validation-window.sh
+scripts/blueprint-historical-lead-audit.sh
+scripts/blueprint-repeat-submit-check.sh
+scripts/ghl-webhook-handler.sh
+scripts/blueprint-funnel-monitor.sh
+scripts/build-costa-vida-synthetic-blueprint.py
+scripts/build-delivery-email.sh
+scripts/blueprint-appointment-attach-check.sh
+
+## command hints
+scripts/blueprint-delivery-integrity-gate.sh:58:GHL_API="${GHL_API_BASE:-https://services.leadconnectorhq.com}"
+scripts/blueprint-delivery-integrity-gate.sh:90:    t="$(grep -hoE '(GHL_API_KEY|GHL_TOKEN|GHL_PRIVATE_TOKEN)=[^ "'"'"']+' "$f" 2>/dev/null | head -1 | cut -d= -f2-)"
+scripts/blueprint-release-gate.sh:23:secret_hits="$(rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[a-zA-Z0-9]|sk-[A-Za-z0-9]" apply qualify.html blueprints --glob '!**/*.bak*' --glob '!**/_obsolete/**' 2>/dev/null || true)"
+scripts/blueprint-validation-window.sh:27:| Revenue-stage opportunities | 1 | GHL pipeline |
+scripts/blueprint-historical-lead-audit.sh:17:if [[ -z "${GHL_PRIVATE_TOKEN:-}" ]]; then
+scripts/blueprint-historical-lead-audit.sh:18:  failures+=("missing_GHL_PRIVATE_TOKEN")
+scripts/blueprint-historical-lead-audit.sh:20:  contacts_json="$(curl -sS "https://services.leadconnectorhq.com/contacts/?locationId=$LOCATION_ID&query=$(python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$QUERY")&limit=20" \
+scripts/blueprint-historical-lead-audit.sh:21:    -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \
+scripts/blueprint-repeat-submit-check.sh:66:if [[ -z "${GHL_PRIVATE_TOKEN:-}" ]]; then
+scripts/blueprint-repeat-submit-check.sh:67:  failures+=("missing_GHL_PRIVATE_TOKEN")
+scripts/blueprint-repeat-submit-check.sh:69:  contacts_json="$(curl -sS "https://services.leadconnectorhq.com/contacts/?locationId=$LOCATION_ID&query=$EMAIL&limit=20" \
+scripts/blueprint-repeat-submit-check.sh:70:    -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \
+scripts/blueprint-repeat-submit-check.sh:74:    contact_by_id="$(curl -sS "https://services.leadconnectorhq.com/contacts/$contact_id" \
+scripts/blueprint-repeat-submit-check.sh:75:      -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \
+scripts/blueprint-funnel-monitor.sh:31:secret_hits="$(printf '%s\n%s\n' "$apply_html" "$qualify_html" | rg -n "Authorization:\\s*Bearer|GHL_PRIVATE_TOKEN|pit-[a-zA-Z0-9]|sk-[A-Za-z0-9]" || true)"
+scripts/blueprint-funnel-monitor.sh:43:if [[ -n "${GHL_PRIVATE_TOKEN:-}" ]]; then
+scripts/blueprint-funnel-monitor.sh:44:  contact_json="$(curl -sS "https://services.leadconnectorhq.com/contacts/?locationId=$LOCATION_ID&query=$CONTACT_EMAIL&limit=20" \
+scripts/blueprint-funnel-monitor.sh:45:    -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \
+scripts/blueprint-funnel-monitor.sh:55:  appointments_json="$(curl -sS "https://services.leadconnectorhq.com/contacts/$CONTACT_ID/appointments" \
+scripts/blueprint-funnel-monitor.sh:56:    -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \
+scripts/blueprint-funnel-monitor.sh:61:  failures+=("missing_GHL_PRIVATE_TOKEN")
+scripts/build-costa-vida-synthetic-blueprint.py:65:        "Catering opportunities can stall when the first inquiry does not receive a fast, useful response.",
+scripts/build-costa-vida-synthetic-blueprint.py:125:        "prompt": "You are the local store demand agent for Costa Vida. Build a weekly list of nearby catering and repeat-visit opportunities for one Utah store. Include who to contact, why now, the short message, and the follow-up date.",
+scripts/build-costa-vida-synthetic-blueprint.py:241:        "The finance model in this synthetic run uses order opportunities, average ticket value, and incremental capture. That protects the page from the old high-ticket contract mistake and makes the calculator fit restaurant economics.",
+scripts/build-costa-vida-synthetic-blueprint.py:662:        "Avery, the standard here is simple. If this saves store time, captures missed catering opportunities, improves guest recovery, and gives you clearer local actions, it earns the next pilot. If it creates more work for your crew, it gets cut.",
+scripts/build-costa-vida-synthetic-blueprint.py:663:        "The synthetic ROI calculator uses an average ticket value, not a fake high-ticket contract. You can model order opportunities, ticket value, and incremental capture. You should treat the result as a planning model until your real data replaces the test assumptions.",
+scripts/build-delivery-email.sh:360:        GHL_RESULT=$(curl -s -X POST 'https://services.leadconnectorhq.com/conversations/messages' \
+scripts/blueprint-appointment-attach-check.sh:16:if [[ -z "${GHL_PRIVATE_TOKEN:-}" ]]; then
+scripts/blueprint-appointment-attach-check.sh:17:  failures+=("missing_GHL_PRIVATE_TOKEN")
+scripts/blueprint-appointment-attach-check.sh:19:  events_json="$(curl -sS "https://services.leadconnectorhq.com/contacts/$CONTACT_ID/appointments?locationId=$LOCATION_ID" \
+scripts/blueprint-appointment-attach-check.sh:20:    -H "Authorization: Bearer $GHL_PRIVATE_TOKEN" \

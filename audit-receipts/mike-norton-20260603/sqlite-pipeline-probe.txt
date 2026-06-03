@@ -1,0 +1,29 @@
+## sqlite db list
+./pipeline.db
+./leads/pipeline.db
+
+## pipeline.db tables
+leads
+
+## leads/pipeline.db tables
+
+## pipeline schema
+CREATE TABLE leads (
+  slug TEXT PRIMARY KEY,
+  lead_name TEXT,
+  email TEXT,
+  blueprint_url TEXT,
+  website_url TEXT,
+  podcast_url TEXT,
+  has_podcast_audio INTEGER DEFAULT 0,
+  delivery_email_path TEXT,
+  delivery_status TEXT DEFAULT 'pending',
+  created_at TEXT,
+  updated_at TEXT
+);
+
+## leads pipeline schema
+
+## Mike search pipeline db dump snippets
+
+## Mike search leads pipeline db dump snippets

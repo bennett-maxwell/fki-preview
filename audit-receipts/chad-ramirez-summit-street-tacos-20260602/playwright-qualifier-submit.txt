@@ -1,0 +1,37 @@
+### Ran Playwright code
+```js
+await page.setViewportSize({ width: 1440, height: 1100 });
+```
+### Result
+"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK"
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => { const link=document.querySelector(\'a[href*="qualify.html"]\'); link.scrollIntoView({block:\'center\'}); link.click(); return link.href; })())');
+```
+### Page
+- Page URL: https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK
+- Page Title: See If AI Is a Fit for Your Business — FKI Qualifier
+### Error
+Error: Unexpected token "" while parsing css selector "". Did you mean to CSS.escape it?
+### Result
+"{\"href\":\"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK\",\"disabled\":false,\"text\":\"Submit for Manual Review\",\"answered\":8,\"band\":null}"
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => { function setVal(id,val){ const el=document.getElementById(id); el.value=val; el.dispatchEvent(new Event(\'input\',{bubbles:true})); el.dispatchEvent(new Event(\'change\',{bubbles:true})); } setVal(\'lead-first\',\'Chad\'); setVal(\'lead-last\',\'Ramirez\'); setVal(\'lead-business\',\'Summit Street Tacos\'); setVal(\'lead-email\',\'bennett+chad-blueprint-test-20260602@franchiseki.com\'); setVal(\'lead-phone\',\'+15550100199\'); setVal(\'sl-leads\',\'66\'); if (typeof leadsUpdate===\'function\') leadsUpdate(); setVal(\'inp-deal\',\'38\'); if (typeof dealUpdate===\'function\') dealUpdate(); setVal(\'sl-lps\',\'18\'); if (typeof lpsUpdate===\'function\') lpsUpdate(); if (typeof selectChip===\'function\') selectChip(\'speed\',\'instant\'); setVal(\'sl-hours\',\'28\'); if (typeof hoursUpdate===\'function\') hoursUpdate(); setVal(\'inp-team\',\'25\'); if (typeof teamUpdate===\'function\') teamUpdate(); setVal(\'inp-teamhrs\',\'7\'); if (typeof teamHrsUpdate===\'function\') teamHrsUpdate(); if (typeof selectChip===\'function\') selectChip(\'capability\',\'speed-bot\'); setVal(\'sl-spend\',\'56\'); if (typeof spendUpdate===\'function\') spendUpdate(); const cb=document.getElementById(\'consent-check\'); cb.checked=true; cb.dispatchEvent(new Event(\'change\',{bubbles:true})); if (typeof update===\'function\') update(); const cta=document.getElementById(\'cta-apply\'); return JSON.stringify({href:location.href, disabled:cta.disabled, text:cta.textContent, answered: typeof currentAnswerCount===\'function\' ? currentAnswerCount() : null, band: window.lastQualificationBand || null}); })())');
+```
+### Page
+- Page URL: https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK
+- Page Title: Review Needed — FKI Qualifier
+### Error
+Error: Unexpected token "" while parsing css selector "". Did you mean to CSS.escape it?
+### Result
+"clicked"
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => { document.getElementById(\'cta-apply\').click(); return \'clicked\'; })())');
+```
+### Page
+- Page URL: https://bennett-maxwell.github.io/fki-preview/thank-you-apply.html
+- Page Title: Your AI Blueprint Is Being Built — Advaita AI
+### Error
+Error: Unexpected token "" while parsing css selector "". Did you mean to CSS.escape it?

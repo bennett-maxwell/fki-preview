@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+        "--lead",
+        "chad-ramirez-summit-street-tacos-20260602",
+        "--json-output"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": null,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Skipped (use --require-production to enforce)\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "chad-ramirez-summit-street-tacos-20260602"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/temp/fki-preview/run-audit.py:415: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] chad-ramirez-summit-street-tacos-20260602: 14/14 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "chad-ramirez-summit-street-tacos-20260602 food_franchise          38        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK (/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html)"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+  "lead": "chad-ramirez-summit-street-tacos-20260602",
+  "mode": "local",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-02T15:56:35.673929+00:00"
+}

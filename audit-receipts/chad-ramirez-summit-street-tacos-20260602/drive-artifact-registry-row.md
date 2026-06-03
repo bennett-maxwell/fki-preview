@@ -1,0 +1,25 @@
+# Blueprint AI Artifact Registry Row — Chad Ramirez / Summit Street Tacos
+
+Date: 2026-06-02
+Owner: Chad/Codex
+Lead slug: chad-ramirez-summit-street-tacos-20260602
+Controlled email: bennett+chad-blueprint-test-20260602@franchiseki.com
+Controlled phone: +15550100199
+GHL contact ID: IX7XsHPPPOJ57aWZsOLK
+
+## Public artifacts
+- Blueprint: https://bennett-maxwell.github.io/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html
+- Podcast: https://bennett-maxwell.github.io/fki-preview/podcasts/chad-ramirez-summit-street-tacos-20260602.mp3
+- Qualifier CTA: https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK
+
+## Proof receipts
+- Local completion gate: audit-receipts/chad-ramirez-summit-street-tacos-20260602/completion-gate-local.json
+- Gatekeeper local 100: audit-receipts/chad-ramirez-summit-street-tacos-20260602/gatekeeper-100-local-output.json
+- GHL readback: audit-receipts/chad-ramirez-summit-street-tacos-20260602/ghl-chad-after-qualifier-summary.json
+- Repeat-submit proof: audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-production-46.json
+- Podcast direct-address proof: audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-production-47.json
+- Visual proofs: blueprint/qualifier desktop 1440, mobile 390, mobile 360 screenshots in the same receipt folder.
+
+## Current send boundary
+Bennett preview only after the active production gate token path passes.
+External customer/prospect send remains blocked without Bennett approval in the current session.

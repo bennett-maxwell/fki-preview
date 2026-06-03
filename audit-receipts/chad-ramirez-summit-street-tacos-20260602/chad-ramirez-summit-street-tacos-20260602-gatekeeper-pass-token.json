@@ -1,0 +1,214 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+        "--lead",
+        "chad-ramirez-summit-street-tacos-20260602",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "chad-ramirez-summit-street-tacos-20260602"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/temp/fki-preview/run-audit.py:415: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] chad-ramirez-summit-street-tacos-20260602: 14/14 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "chad-ramirez-summit-street-tacos-20260602 food_franchise          38        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK (/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html)"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/chad-ramirez-summit-street-tacos-20260602-closeout.json"
+    },
+    {
+      "detail": "chad-ramirez-summit-street-tacos-20260602.mp3 8263515 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+        "--lead",
+        "chad-ramirez-summit-street-tacos-20260602",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+  "lead": "chad-ramirez-summit-street-tacos-20260602",
+  "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview"
+    ],
+    "approval_state": "bennett_preview_only",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "fbbdc1c034b75849b975422f0762cc17093c98ae34b8c93c8a66de66c46f943d",
+      "delivery_email_sha256": "739161b4b0e5d2e69aa1903eeaa9b6bf9b8d4cb2e1e418643291f77f3c1b54e1",
+      "lead_profile_sha256": "e43892c716af1605ba458c375d2a9e0199ac513ce486ac5a5eeab458722b9a0b",
+      "podcast_production_47_sha256": "e7c6cefb7f45252078b8f8f378e58efe7216831eddf8880962fee73c72f35219"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+      "delivery_email": "/Users/temp/fki-preview/delivery-emails/chad-ramirez-summit-street-tacos-20260602-delivery-email.html",
+      "lead_profile": "/Users/temp/fki-preview/leads/chad-ramirez-summit-street-tacos-20260602.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-02T17:07:26.859833+00:00",
+    "html_path": "/Users/temp/fki-preview/blueprints/chad-ramirez-summit-street-tacos-20260602.html",
+    "lead": "chad-ramirez-summit-street-tacos-20260602",
+    "pass": true,
+    "receipt_dir": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+    "score": 100,
+    "strict_production": true
+  },
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-02T17:07:26.859620+00:00"
+}

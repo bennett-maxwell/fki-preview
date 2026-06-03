@@ -1,0 +1,13 @@
+diff --git a/scripts/blueprint-podcast-worker.py b/scripts/blueprint-podcast-worker.py
+index 3579025f..53c11982 100755
+--- a/scripts/blueprint-podcast-worker.py
++++ b/scripts/blueprint-podcast-worker.py
+@@ -118,7 +118,7 @@ No obligation. No sales pressure. Just a real conversation about whether this is
+     return str(output_path), doc
+ 
+ 
+-async def generate_podcast_audio(slug: str, source_text: str) -> str | None:
++async def generate_podcast_audio(slug: str, source_text: str):
+     """blueprint_podcast_pipeline contract: size-check → create → add source → wait → generate → wait → download.
+     Returns path to downloaded MP3, or None on failure."""
+     # Size gate: mirrors mcp__notebooklm__blueprint_podcast_pipeline (>18KB required)

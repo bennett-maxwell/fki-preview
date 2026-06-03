@@ -1,0 +1,11 @@
+### Result
+{
+  "modalOpen": false,
+  "frameSrc": "about:blank",
+  "ctaText": "Submit Qualification First",
+  "location": "https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Ramirez&biz=Summit%20Street%20Tacos&src=chad-ramirez-summit-street-tacos-20260602&contactId=IX7XsHPPPOJ57aWZsOLK&agents=Catering%20Speed-to-Lead%20Agent,Guest%20Recovery%20Agent,Manager%20Shift%20Summary%20Agent&utm_source=proof_screenshot"
+}
+### Ran Playwright code
+```js
+await page.evaluate('() => ((() => ({modalOpen: document.getElementById(\'booking-modal\').classList.contains(\'open\'), frameSrc: document.getElementById(\'booking-calendar-frame\').src, ctaText: document.getElementById(\'cta-apply\').textContent, location: location.href}))())');
+```

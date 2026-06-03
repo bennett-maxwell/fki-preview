@@ -1,0 +1,29 @@
+{
+  "ts": "2026-06-02T16:51:59.102148+00:00",
+  "status": "PASS",
+  "pass": true,
+  "scope": "automatic_trigger_code_route_repaired_and_no_send_dry_run_proven",
+  "repo_head": "b7fc01f624bd3b7e16adb301eb59743a6b4c76da",
+  "checks": {
+    "webhook_bash_n": true,
+    "orchestrator_py_compile": true,
+    "handler_uses_token_gated_orchestrator": true,
+    "handler_no_active_deprecated_batch_call": true,
+    "handler_exact_profile_arg": true,
+    "handler_supports_dry_run_no_send": true,
+    "orchestrator_supports_profile_arg": true,
+    "profile_dry_run_passed": true,
+    "dry_run_no_preview_send": true
+  },
+  "proof_log": "/Users/temp/fki-preview/audit-receipts/chad-ramirez-summit-street-tacos-20260602/orchestrator-profile-dry-run-after-precheck-fix.log",
+  "patched_files": [
+    "scripts/ghl-webhook-handler.sh",
+    "scripts/blueprint-pipeline-orchestrator.py"
+  ],
+  "note": "This proves the webhook code now routes to the token-gated single-profile orchestrator and that Chad profile dry-run passes without sending preview. It does not claim an external GHL webhook fired live in this receipt.",
+  "repo_head_after_commit": "f6740456eba599f136a7b43a214e454b36cc7220",
+  "remote_main_after_commit": "f6740456eba599f136a7b43a214e454b36cc7220",
+  "commit": "f674045",
+  "pushed": true,
+  "ts_after_commit": "2026-06-02T16:54:13.288414+00:00"
+}

@@ -9,12 +9,12 @@
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/openclaw/fki-preview/blueprints/dave-wood.html",
+        "/Users/temp/fki-preview/blueprints/dave-wood.html",
         "--receipt-dir",
-        "/Users/openclaw/fki-preview/audit-receipts/dave-wood",
+        "/Users/temp/fki-preview/audit-receipts/dave-wood",
         "--lead",
         "dave-wood",
         "--json-output",
@@ -49,8 +49,8 @@
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/run-audit.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "dave-wood"
       ],
@@ -59,18 +59,18 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] dave-wood: 9/15 (60%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D10-23_restaurant_copy_clean_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "[FAIL] dave-wood: 9/14 (64%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D10-23_restaurant_copy_clean_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
         "",
-        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
       ]
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/openclaw/fki-preview/blueprints/dave-wood.html"
+        "/Users/temp/fki-preview/blueprints/dave-wood.html"
       ],
       "name": "financial_realism",
       "pass": false,
@@ -89,61 +89,42 @@
     },
     {
       "cmd": [
-        "/usr/local/opt/python@3.14/bin/python3.14",
-        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/openclaw/fki-preview/blueprints/dave-wood.html"
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/dave-wood.html"
       ],
       "name": "d9_render_integrity",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [],
-      "stdout_tail": [
-        "  [PASS] D9-03 snapshot/profile is grid/flex",
-        "  [PASS] D9-04 @media query",
-        "  [PASS] D9-05 mobile \u2264480px",
-        "  [PASS] D9-06 viewport meta",
-        "  [PASS] D9-07 no leftover template blue",
-        "  [PASS] D9-08 sections \u2265 8 (found 16)",
-        "  [PASS] D9-09 every section has id",
-        "  [PASS] D9-10 no dead anchors",
-        "  [PASS] D9-11 no empty headings",
-        "  [PASS] D9-12 no double-encoded entities",
-        "  [PASS] D9-13 broken possessive (skipped \u2014 no --business-name)",
-        "  [PASS] D9-14 no undefined/NaN/null",
-        "  [PASS] D9-15 font-family on body (union of all body rules)",
-        "  [PASS] D9-16 hero has background",
-        "  [PASS] D9-17 CTA button styled",
-        "  [PASS] D9-18 tables border-collapse (or N/A)",
-        "  [PASS] D9-19 max-width container",
-        "  [PASS] D9-20 [RL] no off-brand accent leak",
-        "",
-        "FAILED: 0"
-      ]
+      "pass": false,
+      "returncode": 2,
+      "stderr_tail": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+      ],
+      "stdout_tail": []
     },
     {
       "name": "proof_email_click_test",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/dave-wood/dave-wood-email-click-test.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/dave-wood/dave-wood-desktop-render.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/dave-wood/dave-wood-mobile-render.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/dave-wood/dave-wood-audit.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-audit.json"
     },
     {
       "name": "proof_closeout",
       "pass": false,
-      "path": "/Users/openclaw/fki-preview/audit-receipts/dave-wood/dave-wood-closeout.json"
+      "path": "/Users/temp/fki-preview/audit-receipts/dave-wood/dave-wood-closeout.json"
     },
     {
       "detail": "dave-wood.mp3 20587970 bytes within window",
@@ -162,6 +143,7 @@
     "completion_gate failed",
     "run-audit.py failed",
     "financial-realism-check.py failed",
+    "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: dave-wood-email-click-test.json",
     "proof receipt missing or failing: dave-wood-desktop-render.json",
     "proof receipt missing or failing: dave-wood-mobile-render.json",
@@ -169,11 +151,11 @@
     "proof receipt missing or failing: dave-wood-closeout.json",
     "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
   ],
-  "html_path": "/Users/openclaw/fki-preview/blueprints/dave-wood.html",
+  "html_path": "/Users/temp/fki-preview/blueprints/dave-wood.html",
   "lead": "dave-wood",
   "mode": "production",
-  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/dave-wood",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/dave-wood",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-03T18:38:47.007702+00:00"
+  "ts": "2026-06-03T18:54:54.726144+00:00"
 }

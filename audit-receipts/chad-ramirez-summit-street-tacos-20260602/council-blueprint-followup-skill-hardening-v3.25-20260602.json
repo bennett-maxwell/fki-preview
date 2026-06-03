@@ -1,0 +1,75 @@
+{
+  "ts": "2026-06-02T17:22:59.656356+00:00",
+  "skill": "council-skill",
+  "mode": "manual artifact; no sub-agent spawn because available tool policy only permits sub-agents when user explicitly asks for sub-agents",
+  "canonical_skill_loaded": {
+    "file_id": "18edfLllHikArUABu7l_feBxFWfiLncAY",
+    "version": "33.0",
+    "modifiedTime": "2026-05-30T22:59:11.951Z"
+  },
+  "duplicate_skill_blocker": {
+    "folder": "council-skill",
+    "duplicate_file_id": "1bGzFZ1eFYai0JKQo4otUL-K5ID1p0fj_",
+    "modifiedTime": "2026-05-30T22:54:53.049Z",
+    "resolution": "use newer folder SKILL.md 18edf... as canonical"
+  },
+  "question": "Should blueprint-ai-skill be patched to hard-block full E2E completion when apply/qualifier follow-up campaign proof is missing or only partially exposed?",
+  "success": "Future agents do not confuse Blueprint Gatekeeper 100 with GHL follow-up proof; they require same-contact campaign/workflow evidence or label follow-up partial/blocker.",
+  "scope": "Patch blueprint-ai-skill text only; no GHL workflow publish, no external send, no contact deletion.",
+  "stakes": "Revenue/Product",
+  "threshold": 4.25,
+  "evidence_inputs": [
+    "ghl-followup-campaign-final-readback-20260602T1706Z.json status BLOCKED_FOLLOWUP_CAMPAIGN_PROOF",
+    "GHL Workflow Registry \u2014 FKI 177 Workflows 2026-06-02: no published Blueprint qualifier workflow listed; Jenn can publish, Cody read-only",
+    "HighLevel connector 401 reauthentication required",
+    "Chrome UI direct workflow/contact routes rendered blank with permission/runtime errors",
+    "Drive blueprint-ai-skill current v3.24 fetched by rclone sha256 527f503f..."
+  ],
+  "advisor_scores": [
+    {
+      "seat": "Contrarian",
+      "score": 4.4,
+      "single_failure_mode": "Patch might make agents stop at partial even when API proof is impossible but real automation exists.",
+      "recommendation": "Patch as a claim boundary, not as proof that automation is absent."
+    },
+    {
+      "seat": "Financial",
+      "score": 4.6,
+      "single_failure_mode": "False-ready follow-up claims risk bad customer experience and lost prospects.",
+      "recommendation": "Hard-block Diamond/full E2E until proof of working follow-up exists."
+    },
+    {
+      "seat": "Expansionist",
+      "score": 4.5,
+      "single_failure_mode": "Too narrow if it only mentions Chad.",
+      "recommendation": "Generalize to apply and qualifier categories with repeatable receipts."
+    },
+    {
+      "seat": "Outside Expert",
+      "score": 4.7,
+      "single_failure_mode": "Custom relay pages can bypass native form submissions, so zero GHL forms may be misread.",
+      "recommendation": "Use tags/notes/contact identity for relay proof, but require workflow/campaign evidence for campaign-going-out claims."
+    },
+    {
+      "seat": "Executor",
+      "score": 4.8,
+      "single_failure_mode": "Future agents may still pass Gatekeeper 100 and call the whole journey complete.",
+      "recommendation": "Add explicit status ceiling and required receipt filename/status."
+    }
+  ],
+  "score_avg": 4.6,
+  "weighted_score_note": "Manual average used; all seats exceed 4.25 threshold.",
+  "verdict": "APPROVE_PATCH",
+  "protected_actions_required": [],
+  "canonical_sources_to_patch": [
+    "Drive blueprint-ai-skill SKILL.md file 1IzE-seDDaB1Tciik9mwBVrgQcb7FP7eH",
+    "local Claude mirror /Users/temp/.claude/skills/blueprint-ai-skill/SKILL.md"
+  ],
+  "proof_required": [
+    "Drive upload by rclone copyto",
+    "Drive fetchback SHA and version 3.25 checks",
+    "Notion Sprint Board update with proof path"
+  ],
+  "rollback_path": "Restore saved current-before-v3.25 SKILL.md to the same Drive path and fetch back.",
+  "receipt_sha256": "7a3a03ae16336f98a1465728293d1607dff1952f44c75dbb2319a149d848479b"
+}
