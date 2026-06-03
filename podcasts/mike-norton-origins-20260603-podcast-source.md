@@ -6,17 +6,18 @@ Origins | Prepared by Franchise Ki | Generated 2026-06-03
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to Mike Norton. Use "you" and
-"your business" in every paragraph. Keep every sentence addressed to Mike as the
-listener. If a sentence starts to describe him from the outside, rewrite it so it
-starts with "you" or "your" and speaks directly to Mike.
+RULE 1 (RED LINE): You are speaking DIRECTLY to MIKE NORTON. Use "you" and
+"your business" in every paragraph. NEVER say "Mike Norton" in the third person.
+NEVER say "this business," "the owner," "they," or "their team." If you catch
+yourself describing Mike Norton from the outside, stop and restart the sentence
+addressed to them.
 
 RULE 2: Open the audio with EXACTLY these words: "Hi Mike, welcome.
 This walkthrough was built for you and Origins, from what you told us."
 Then proceed.
 
-RULE 3: You have built something valuable. Frame every gap as an AI amplification,
-not a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
+RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
 
 ================================================================================
 
@@ -27,7 +28,7 @@ not a flaw. No agent brand names. Application CTA only — never mention calenda
 Hi Mike — welcome. This is your AI walkthrough, built for you and
 Origins. Every number you're about to hear came from what you told us.
 
-You operate in consulting, business transformation, and AI operations, serving consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations. You run Origins at https://theorigins.one.
+You operate in SaaS CRM platforms serving home service businesses, serving home service business owners and operators across HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, tree care, junk removal, and related trades. You run Origins at https://theorigins.one.
 You're already doing the hard work — the clients, the team, the reputation. That's
 yours. What we're going to walk through together isn't about fixing what's broken
 in your business. It's about showing you exactly where AI amplifies everything
@@ -39,7 +40,7 @@ Everything gets amplified.
 
 Your team of 5 handles the day-to-day execution.
 
-You told us your current AI use is automation. That's exactly where most consulting, business transformation, and AI operations businesses are right now — and it's the right starting point.
+You told us your current AI use is automation. That's exactly where most SaaS CRM platforms serving home service businesses businesses are right now — and it's the right starting point.
 
 The 3 AI tools you'll hear about in Section 4 were written specifically for you and
 Origins. Not adjusted from a template. Built from your answers, for how
@@ -64,7 +65,7 @@ not around it.
 
 ## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
 
-These aren't guesses. These are the gaps that show up consistently for consulting, business transformation, and AI operations
+These aren't guesses. These are the gaps that show up consistently for SaaS CRM platforms serving home service businesses
 businesses at your stage — and every one of them has a direct AI solution.
 
 ### Gap 1 — Speed to Response
@@ -74,7 +75,7 @@ Harvard Business Review shows that 78% of customers buy from the first business 
 respond (HBR, "The Short Life of Online Sales Leads," 2011 —
 https://hbr.org/2011/03/the-short-life-of-online-sales).
 
-In consulting, business transformation, and AI operations, that window is measured in minutes — sometimes seconds. Every hour your
+In SaaS CRM platforms serving home service businesses, that window is measured in minutes — sometimes seconds. Every hour your
 team isn't watching for inbound = leads going to whoever responds first.
 
 An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
@@ -93,7 +94,7 @@ salespeople give up after just one follow-up (McKinsey & Company, "The B2B digit
 inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
 
 For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where each lead is in the
+opportunity. Your AI nurture agent tracks every lead, knows where they are in the
 decision process, and sends the right message at the right moment — without anyone
 on your team having to remember to do it.
 
@@ -108,7 +109,7 @@ SBA data shows small business owners spend an average of 25-40% of their week on
 administrative tasks that don't directly generate revenue
 (SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
 
-In consulting, business transformation, and AI operations, this shows up as: proposal writing, status updates, follow-up emails,
+In SaaS CRM platforms serving home service businesses, this shows up as: proposal writing, status updates, follow-up emails,
 scheduling coordination, reporting. Your AI system takes these off your team's plate
 entirely — and does them faster and more consistently than any manual process.
 
@@ -123,29 +124,29 @@ Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 These aren't generic AI chatbots. These are the exact tools we built for your specific
 situation — your industry, your tools, your services, your pain points.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### AI Tool 1 — Home-Service Demo Speed-to-Lead Agent
 
-You are a speed-to-lead response agent for a consulting, business transformation, and AI operations business called Origins. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges the specific request, highlights relevant services, and suggests a next step.
+You are a speed-to-lead response agent for Origins, an all-in-one CRM platform for home service businesses. When a new demo request, missed call, or inquiry comes in, respond within 60 seconds, reference the prospect's trade when known, confirm the next step, and route them toward the right onboarding path.
 
 This runs directly in your existing workflow. No new platform to learn.
 Your team supervises. The AI handles the repetitive execution.
 
 ---
 
-### AI Tool 2 — Proposal and Qualification Agent
+### AI Tool 2 — CRM Rollout and Onboarding Agent
 
-You are a proposal draft agent for Origins in the consulting, business transformation, and AI operations industry. Given the prospect requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons your team is the right fit.
+You are a rollout and onboarding draft agent for Origins. Given a home service company's trade, team size, lead sources, and current workflow, generate a practical CRM rollout plan covering lead capture, follow-up, scheduling, invoicing, reviews, and retention.
 
 Built around how Origins actually works — not a generic industry template.
 
 ---
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### AI Tool 3 — Home-Service Operator Outreach Agent
 
-You are an outreach agent for Origins (consulting, business transformation, and AI operations). Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting ideal customers who need consulting, business transformation, and AI operations services.
+You are an outreach agent for Origins, a CRM platform serving home service businesses. Generate practical LinkedIn and email messages for HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, and related operators who lose jobs to slow follow-up or disconnected systems.
 
 This is the kind of tool that, once it's running, your team will not remember
-how your team worked without it.
+how they worked without it.
 
 ---
 
@@ -157,10 +158,10 @@ without anyone on your team triggering them manually.
 
 ## SECTION 5 — What Your Customers Already Say About Origins
 
-Your reputation in consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations is an asset. Customer feedback for consulting, business transformation, and AI operations businesses
+Your reputation in home service business owners and operators across HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, tree care, junk removal, and related trades is an asset. Customer feedback for SaaS CRM platforms serving home service businesses businesses
 at your stage consistently highlights the same themes:
 
-- **Responsiveness:** Clients in consulting, business transformation, and AI operations cite "fast, clear communication" as the
+- **Responsiveness:** Clients in SaaS CRM platforms serving home service businesses cite "fast, clear communication" as the
   #1 factor in choosing a provider. Your AI system makes this your permanent standard —
   not a good week, not a great hire, a permanent operational baseline.
 
@@ -172,8 +173,8 @@ at your stage consistently highlights the same themes:
   documentation — all of this signals expertise before the client ever meets you in person.
   AI raises that standard across every touchpoint.
 
-The businesses that win in consulting, business transformation, and AI operations long-term aren't necessarily the teams doing the
-best technical work. They're the teams that are easiest to work with. AI gives you that
+The businesses that win in SaaS CRM platforms serving home service businesses long-term aren't necessarily the ones doing the
+best technical work. They're the ones that are easiest to work with. AI gives you that
 edge permanently.
 
 ---
@@ -182,7 +183,7 @@ edge permanently.
 
 Here's exactly what the first 30 days look like if you move forward:
 
-**Days 1-3: Onboarding.** Consulting, business transformation, and ai operations audit. Brand voice profile. Full ops map.
+**Days 1-3: Onboarding.** Saas crm platforms serving home service businesses audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
 
 **Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
@@ -192,7 +193,7 @@ agent skills. You see the first results. Your team gives feedback. The system ad
 You're spending time on what only you can do.
 
 **Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way your team uses a phone — naturally, without thinking.
+patterns. Your team uses it the way they use their phone — naturally, without thinking.
 
 **After Month 3: System and team integrated.** World-class employee, 24/7, fully
 autonomous. Not "getting better every week." Already there.
@@ -206,17 +207,17 @@ can paste into ChatGPT or Claude right now — each built around your specific b
 
 ### Prompt 1 — Speed-to-Lead Response Draft
 ```
-You are a consulting, business transformation, and AI operations business assistant for Origins. A new inquiry just came
-in from a potential client interested in Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations. The inquiry was: [PASTE
-THE INQUIRY HERE]. Write a professional, warm response that: (1) acknowledges the
+You are a SaaS CRM platforms serving home service businesses business assistant for Origins. A new inquiry just came
+in from a potential client interested in Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation. Their message was: [PASTE
+THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
 specific request, (2) describes our availability and process, (3) includes a next step.
 Use a friendly but professional tone. Keep it under 150 words.
 ```
 
 ### Prompt 2 — Proposal Framework Generator
 ```
-You are helping Origins create a proposal for a new consulting, business transformation, and AI operations client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations.
+You are helping Origins create a proposal for a new SaaS CRM platforms serving home service businesses client.
+The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation.
 Generate a professional proposal outline with: project scope, deliverables, timeline,
 and 3 package options at different investment levels. Format it for easy customization.
 ```
@@ -224,9 +225,9 @@ and 3 package options at different investment levels. Format it for easy customi
 ### Prompt 3 — Follow-Up Email Sequence
 ```
 You are a follow-up agent for Origins. A prospect expressed interest in
-Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations but hasn't responded in 5 days. Their original inquiry was about:
+Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation but hasn't responded in 5 days. Their original inquiry was about:
 [PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference the specific situation, and
+Day 20). Each email should: add new value, reference their specific situation, and
 include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
 ```
 
@@ -260,7 +261,7 @@ This is an application, not a commitment. We read every one personally.
 
 ## SECTION 9 — The ROI Picture for Origins
 
-Based on what you shared and industry benchmarks for consulting, business transformation, and AI operations:
+Based on what you shared and industry benchmarks for SaaS CRM platforms serving home service businesses:
 
 **Time Recovery Estimate:**
 - Admin and documentation: up to 8 hrs/week recovered
@@ -268,7 +269,7 @@ Based on what you shared and industry benchmarks for consulting, business transf
 - Reporting and tracking: up to 3 hrs/week recovered
 - **Total: up to 17 hrs/week for your team**
 
-**At $150/hr (industry benchmark for consulting, business transformation, and AI operations owner time):**
+**At $150/hr (industry benchmark for SaaS CRM platforms serving home service businesses owner time):**
 - Monthly time value: up to $10,200/month
 - Annual time value: up to $122,400/year
 - Plus: close rate lift from consistent follow-up (35% industry benchmark)
@@ -283,7 +284,7 @@ Based on what you shared and industry benchmarks for consulting, business transf
 
 **These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
 
-The question isn't whether AI creates value in consulting, business transformation, and AI operations. The question is whether
+The question isn't whether AI creates value in SaaS CRM platforms serving home service businesses. The question is whether
 the investment makes sense for your specific situation. That's what the application
 helps us figure out together.
 
@@ -294,7 +295,7 @@ helps us figure out together.
 ### "Is this going to replace my team?"
 No. These agents handle the repetitive work your team shouldn't be doing — initial
 responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only your people can do: building relationships, delivering great Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations,
+on what only they can do: building relationships, delivering great Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation,
 making judgment calls. AI handles the rest.
 
 ### "What about the setup and learning curve?"
@@ -307,7 +308,7 @@ ChatGPT requires someone to prompt it every time. Your AI system runs automatica
 integrated with Google Drive, Notion, Slack, ClickUp, triggered by your actual business events — a new inquiry,
 a proposal request, a follow-up window — without anyone on your team doing anything
 to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 inside your system.
+what happens when those prompts run 24/7 on their own.
 
 ### "What if I'm not ready yet?"
 Use the prompts in Section 7. See what AI does for your business on a small scale.
@@ -316,14 +317,6 @@ There's no deadline. This isn't a limited-time offer. It's a conversation we're
 happy to have when the timing is right for you.
 
 ---
-
-
-
-### Additional Mike-Specific Walkthrough Notes for the Audio Hosts
-
-Mike, keep tying this back to the promise behind Origins: clients should not miss a connection, and your own operating system should protect you the same way. When you talk about speed-to-lead, explain it as connection protection. When you talk about scheduling, explain it as removing friction between interest and action. When you talk about admin routing, explain it as keeping every commitment visible so your team can act without searching through tools.
-
-Use the existing stack as the advantage: Google Drive, Notion, Slack, and ClickUp already give you the foundation. The AI layer should not replace that foundation. It should make the handoff between those tools automatic, visible, and measurable. The practical win is simple: fewer missed opportunities, cleaner follow-up, faster internal routing, and a calmer operating rhythm for you.
 
 ## SECTION 11 — Reference Links
 
@@ -354,8 +347,8 @@ Benchmarks referenced during this walkthrough:
 ## SECTION 12 — About Franchise Ki
 
 Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with your existing tools, and calibrated to
-your brand voice from day one.
+for their specific industry, integrated with their existing tools, and calibrated to
+their brand voice from day one.
 
 Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
