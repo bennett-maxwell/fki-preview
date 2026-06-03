@@ -1,17 +1,17 @@
 {
   "lead": "rush-evans",
-  "ts": "2026-06-03T20:10:49.008018+00:00",
-  "html_path": "/Users/temp/fki-preview/blueprints/rush-evans.html",
+  "ts": "2026-06-03T20:18:33.017235+00:00",
+  "html_path": "blueprints/rush-evans.html",
   "html_size_bytes": 83642,
   "require_production": true,
   "summary": {
-    "passed": 36,
-    "failed": 7,
+    "passed": 43,
+    "failed": 0,
     "skipped": 7,
     "total_applicable": 43,
-    "overall_pass": false
+    "overall_pass": true
   },
-  "status": "FAIL",
+  "status": "PASS",
   "category_scores": {
     "Structure": {
       "score": "9/9 (100%)",
@@ -39,17 +39,9 @@
       "failures": []
     },
     "Production": {
-      "score": "0/7 (0%)",
-      "pass": false,
-      "failures": [
-        "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
-        "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
-        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
-        "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
-        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
-        "#47: Walkthrough-size audio (6-20MB / direct-address verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)",
-        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
-      ]
+      "score": "7/7 (100%)",
+      "pass": true,
+      "failures": []
     },
     "Delivery": {
       "score": "1/1 (100%)",
@@ -62,15 +54,7 @@
       "failures": []
     }
   },
-  "critical_failures": [
-    "#42: Public GitHub Pages build verified (HTTP 200)",
-    "#43: Drive artifact registry row present",
-    "#44: Notion Sprint row present",
-    "#45: Current GHL readback (contact tagged)",
-    "#46: Repeat-submit same-contact proof",
-    "#47: Walkthrough-size audio (6-20MB / direct-address verified)",
-    "#48: Bennett approval scope recorded"
-  ],
+  "critical_failures": [],
   "major_failures": [],
   "checks": {
     "1": {
@@ -321,45 +305,45 @@
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 42"
+      "detail": "Public page HTTP 200 verified"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
+      "detail": "Drive artifact registry verified"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
+      "detail": "Notion Sprint row current"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
+      "detail": "GHL exact contact readback and instant response verified"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
+      "detail": "Repeat submit updated same GHL contact"
     },
     "47": {
       "desc": "Walkthrough-size audio (6-20MB / direct-address verified)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
+      "detail": "Public/local podcast and direct-address audio verified (17032340 bytes)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      "detail": "Approval scope: external customer send approved"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",
