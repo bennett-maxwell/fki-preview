@@ -112,6 +112,29 @@ PYEOF
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
 
+# v3.26 ZERO-BYPASS AUDIT GATE: blueprint-ai-audit-skill must have run THIS session
+# with score=100/100 before any Stage 7 email action. No session-memory exception.
+check_session_audit_ts() {
+    local TS_FILE="$HOME/.openclaw/state/session-audit-ts-${SLUG}.json"
+    if [ ! -f "$TS_FILE" ]; then
+        echo "BLOCKED (v3.26 zero-bypass): blueprint-ai-audit-skill has NOT run this session for $SLUG."
+        echo "  Run audit: python3 scripts/blueprint_completion_gate.py --html blueprints/$SLUG.html --receipt-dir <dir> --lead $SLUG"
+        echo "  Then: echo '{\"ts\":'$(date +%s)',\"slug\":\"$SLUG\",\"score\":100}' > $TS_FILE"
+        exit 1
+    fi
+    local AGE; AGE=$(python3 -c "import json,time; d=json.load(open('$TS_FILE')); print(int(time.time()-d.get('ts',0)))" 2>/dev/null || echo 99999)
+    if [ "$AGE" -gt 3600 ]; then
+        echo "BLOCKED (v3.26 zero-bypass): audit receipt is ${AGE}s old (>3600s limit). Re-run audit for $SLUG."
+        exit 1
+    fi
+    local SCORE; SCORE=$(python3 -c "import json; d=json.load(open('$TS_FILE')); print(d.get('score',0))" 2>/dev/null || echo 0)
+    if [ "$SCORE" -lt 100 ]; then
+        echo "BLOCKED (v3.26 zero-bypass): audit score was ${SCORE}/100 (must be 100/100) for $SLUG."
+        exit 1
+    fi
+    echo "Session audit gate: PASS (score=${SCORE} ran ${AGE}s ago)"
+}
+
 verify_gate_token() {
     if [ -z "$GATE_TOKEN" ]; then
         echo "BLOCKED: --gate-token is required before any Bennett preview or customer send."
@@ -258,6 +281,7 @@ fi
 
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
+    check_session_audit_ts
     verify_gate_token
     echo "Sending preview to bennett@franchiseki.com via Gmail..."
     SEND_LOG="/tmp/${SLUG}-bennett-preview-send.log"
@@ -327,6 +351,7 @@ fi
 # Bennett directive 2026-05-19 — never send to customer without both.
 # ============================================================
 if [ "$SEND_GHL" = true ]; then
+    check_session_audit_ts
     verify_gate_token
     if ! python3 - "$GATE_TOKEN" << 'PYEOF'
 import json, sys

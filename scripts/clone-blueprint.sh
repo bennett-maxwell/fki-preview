@@ -384,8 +384,10 @@ contamination_phrases = [
     'HoneyBook',                 # Brittney's CRM tool
     'Dallas luxury market',      # Brittney's market
 ]
-# Only check business-name-specific terms if this is NOT Brittney's own blueprint
-if lead_name != 'Brittney Warnick':
+# Only check business-name-specific terms if this is NOT a Warnick lead (Brittney
+# Warnick was the original template lead; Britt Warnick is a real prospect whose
+# business "Britt Warnick Designs" legitimately contains "Warnick Design").
+if 'warnick' not in lead_name.lower():
     contamination_phrases.extend([
         'Brittney Warnick',
         'Warnick Design',
@@ -447,8 +449,11 @@ for PHRASE in "Events Designed" "The Warnick Method" "The Warnick Filter" "Honey
     CONTAMINATION=1
   fi
 done
-# Only check name-specific terms if this is NOT Brittney's own blueprint
-if [ "$LEAD_NAME" != "Brittney Warnick" ]; then
+# Only check name-specific terms if this is NOT a Warnick lead
+# (Brittney Warnick = template origin; Britt Warnick = real prospect whose business
+# "Britt Warnick Designs" legitimately contains "Warnick Design" as a substring)
+LEAD_NAME_LOWER=$(echo "$LEAD_NAME" | tr '[:upper:]' '[:lower:]')
+if [[ "$LEAD_NAME_LOWER" != *"warnick"* ]]; then
   for NAME_PHRASE in "Brittney Warnick" "Warnick Design" "warnickdesign.com"; do
     if grep -qi "$NAME_PHRASE" "$OUTPUT_FILE" 2>/dev/null; then
       echo "FAIL: '$NAME_PHRASE' found in another lead's blueprint!"
