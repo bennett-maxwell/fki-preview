@@ -1,0 +1,45 @@
+{
+  "status": "PASS_WITH_NOTEBOOKLM_PARTIAL",
+  "pass": true,
+  "ts": "2026-06-03T21:36:14.574626+00:00",
+  "lead": "mike-norton-origins-20260603",
+  "what_changed": "Corrected Mike Norton/Origins podcast and source/profile from stale consulting/AI-ops framing to SaaS CRM platform for home service businesses; replaced short 5.35 min podcast with 16.30 min corrected audio.",
+  "audio": {
+    "path": "podcasts/mike-norton-origins-20260603.mp3",
+    "duration_seconds": 977.884376,
+    "duration_minutes": 16.3,
+    "size_bytes": 11735398,
+    "size_mb": 11.74,
+    "sha256": "6f2b0d66860f00d4d4c886ea19c1c15e93bb563c0a80886572491d5e3afa4914",
+    "url": "https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton-origins-20260603.mp3?v=6f2b0d6"
+  },
+  "gates": {
+    "direct_address_asr_status": "PASS",
+    "direct_address_asr_pass": true,
+    "banned_audio_phrases_found": [],
+    "spoken_stale_terms_found": [],
+    "source_stale_terms_found": [],
+    "run_audit_100": true,
+    "gatekeeper_score": 100,
+    "gatekeeper_status": "PASS"
+  },
+  "generation_method": "Gemini native TTS fallback from corrected Blueprint source after NotebookLM CLI corrected regeneration was blocked by expired/invalid Google auth; ElevenLabs fallback was unavailable because ELEVENLABS_API_KEY was missing.",
+  "notebooklm_partial": true,
+  "notebooklm_blocker_receipts": [
+    "long-podcast/auth-profile-tests/list-Default.json",
+    "long-podcast/auth-profile-tests/list-Profile_1.json",
+    "long-podcast/notebooklm-corrected-regeneration-v2/generate-audio-long.json"
+  ],
+  "proof_files": {
+    "final_audio_validation": "audit-receipts/mike-norton-correction-20260603/long-podcast/gemini-tts-render-v2/final-with-verified-opening-validation.json",
+    "direct_address_asr": "audit-receipts/mike-norton-correction-20260603/long-podcast/gemini-tts-render-v2/direct-address-final-with-opening-receipt.json",
+    "spoken_validation": "audit-receipts/mike-norton-correction-20260603/long-podcast/gemini-tts-render/spoken-after-source-word-fix-validation.json",
+    "source_validation": "audit-receipts/mike-norton-correction-20260603/long-podcast/corrected-source-validation.json",
+    "lead_rescan": "audit-receipts/mike-norton-correction-20260603/long-podcast/lead-full-origin-crm-correction-rescan.json",
+    "notebooklm_auth_profiles": "audit-receipts/mike-norton-correction-20260603/long-podcast/auth-profile-tests/list-Profile_1.json",
+    "run_audit": "audit-receipts/mike-norton-correction-20260603/long-podcast/final-gates/run-audit-after-url-cachebust.txt",
+    "gatekeeper": "audit-receipts/mike-norton-correction-20260603/long-podcast/final-gates/gatekeeper-production-after-url-cachebust.json"
+  },
+  "customer_send_approved": false,
+  "bennett_preview_only": true
+}
