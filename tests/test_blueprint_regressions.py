@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 test_blueprint_regressions.py — stdlib-only regression suite that pins the
-12 hard-won Blueprint AI invariants so a future edit can't silently reintroduce
+17 hard-won Blueprint AI invariants so a future edit can't silently reintroduce
 a fixed defect.
 
 Every check below is currently TRUE. Each one corresponds to a real bug that
@@ -294,9 +294,40 @@ def check_resolve_html_path_prefers_dated_slug():
             f"resolver guessed an ambiguous non-dated file instead of not-found: {got}"
 
 
+def check_audit_lead_reports_nonzero_check_count():
+    """17. Belt-and-suspenders on the 0/0-false-PASS class, pinned at the
+    audit_lead() layer (check #16 pins the resolver; this pins the grader).
+    Two invariants:
+      (a) auditing a REAL present blueprint must produce a NON-ZERO check
+          count (total > 0) — a 0/0 result is the exact shape that let a
+          file-resolution miss masquerade as a clean PASS;
+      (b) auditing a guaranteed-absent slug must return an explicit error /
+          score 0, NEVER a passing 0/0. So a future regression that makes
+          audit_lead silently skip all checks fails here instead of shipping
+          a green fleet that was never actually graded."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "run_audit_count_mod", os.path.join(REPO, "run-audit.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    # (a) a real present blueprint yields a real (non-zero) check count.
+    real = next((f[:-5] for f in sorted(os.listdir(mod.BP_DIR))
+                 if f.endswith(".html") and not f.startswith(("_", "TEMPLATE"))),
+                None)
+    assert real is not None, "no real blueprint found to audit"
+    r = mod.audit_lead(real)
+    assert r.get("total", 0) > 0, \
+        f"audit_lead({real}) reported 0 checks — 0/0 false-pass shape: {r}"
+    # (b) an absent slug must NOT come back as a passing 0/0.
+    bad = mod.audit_lead("definitely-not-a-real-blueprint-zzz-20990101")
+    assert bad.get("score", 0) == 0 and "error" in bad, \
+        f"absent slug did not report not-found (0/0 false-pass risk): {bad}"
+
+
 CHECKS = [
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
     ("RESOLVE_HTML_PATH_PREFERS_DATED_SLUG", check_resolve_html_path_prefers_dated_slug),
+    ("AUDIT_LEAD_REPORTS_NONZERO_CHECK_COUNT", check_audit_lead_reports_nonzero_check_count),
     ("NO_LINKEDIN_SLIDER_IN_TEMPLATE", check_no_linkedin_slider_in_template),
     ("NO_NONB2B_LINKEDIN_VIOLATION", check_no_nonb2b_linkedin_violation),
     ("D7_18_IS_HARD_FAIL", check_d7_18_is_hard_fail),
