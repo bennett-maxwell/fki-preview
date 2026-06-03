@@ -1,11 +1,9 @@
 {
   "checks": [
     {
-      "failures": [
-        "ambiguous CTA copy: Apply"
-      ],
+      "failures": [],
       "name": "visible_html_surface",
-      "pass": false
+      "pass": true
     },
     {
       "cmd": [
@@ -59,7 +57,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] avery-martinez-costa-vida-20260601: 11/14 (79%)  RED-LINE FAIL: ['D10-23_restaurant_copy_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "[FAIL] avery-martinez-costa-vida-20260601: 14/15 (93%)  RED-LINE FAIL: ['D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -73,16 +71,15 @@
         "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "financial_realism",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "avery-martinez-costa-vida-20260601 food_franchise        2388        0  FAIL (1)",
-        "      \u2717 D7-01 [RL] contract default $2,388 outside food_franchise band $8-$60",
+        "avery-martinez-costa-vida-20260601 food_franchise          18     None  PASS",
         "------------------------------------------------------------------------------",
-        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
     },
     {
@@ -137,10 +134,8 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "visible_html_surface: ambiguous CTA copy: Apply",
     "completion_gate failed",
     "run-audit.py failed",
-    "financial-realism-check.py failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json",
     "proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json"
@@ -151,5 +146,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-03T18:54:53.994185+00:00"
+  "ts": "2026-06-03T20:10:46.614618+00:00"
 }

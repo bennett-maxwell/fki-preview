@@ -1,0 +1,231 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "mike-norton-origins-20260603"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] mike-norton-origins-20260603: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "mike-norton-origins-20260603 consulting            5000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-19_content_width_capped\": {",
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-20_no_offbrand_accent_leak\": {",
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"failed\": [],",
+        "  \"html\": \"/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html\",",
+        "  \"pass\": true,",
+        "  \"score\": 20,",
+        "  \"status\": \"PASS\",",
+        "  \"total\": 20,",
+        "  \"ts\": \"2026-06-03T19:27:42.691462+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-closeout.json"
+    },
+    {
+      "detail": "mike-norton-origins-20260603.mp3 16985487 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+  "lead": "mike-norton-origins-20260603",
+  "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview"
+    ],
+    "approval_state": "bennett_preview_only",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "f7c404388d295ca20e1a5b98d90fbf020db537173d6d69a329e9511d6bcdd86a",
+      "delivery_email_sha256": "9578097e37f27b44faae17270aaa173d0749562c9514ab634ae4e6972ea8729a",
+      "lead_profile_sha256": "3a69349467eaa3d0495609aa74bfc66272db30cf31b5e8aef8af3361e9acde7f",
+      "podcast_production_47_sha256": "8f401b0c7aa6f8f78f6b7f319eaa9f26b35cc73c5f4e5ca93cbfe0eb73929c8f"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+      "delivery_email": "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+      "lead_profile": "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-03T19:27:42.706249+00:00",
+    "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+    "lead": "mike-norton-origins-20260603",
+    "pass": true,
+    "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+    "score": 100,
+    "strict_production": true
+  },
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+  "score": 100,
+  "status": "PASS",
+  "token_path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-gatekeeper-pass-token.json",
+  "ts": "2026-06-03T19:27:42.705856+00:00"
+}

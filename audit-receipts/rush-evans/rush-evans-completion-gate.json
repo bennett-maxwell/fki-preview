@@ -1,14 +1,14 @@
 {
   "lead": "rush-evans",
-  "ts": "2026-06-03T18:38:26.285681+00:00",
-  "html_path": "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
-  "html_size_bytes": 83632,
-  "require_production": false,
+  "ts": "2026-06-03T20:10:49.008018+00:00",
+  "html_path": "/Users/temp/fki-preview/blueprints/rush-evans.html",
+  "html_size_bytes": 83642,
+  "require_production": true,
   "summary": {
-    "passed": 34,
-    "failed": 2,
-    "skipped": 14,
-    "total_applicable": 36,
+    "passed": 36,
+    "failed": 7,
+    "skipped": 7,
+    "total_applicable": 43,
     "overall_pass": false
   },
   "status": "FAIL",
@@ -19,18 +19,14 @@
       "failures": []
     },
     "Content": {
-      "score": "9/10 (90%)",
-      "pass": false,
-      "failures": [
-        "#20: Positive tone and no corrupted AI Agent labels \u2014 Negative tone language found"
-      ]
+      "score": "10/10 (100%)",
+      "pass": true,
+      "failures": []
     },
     "Funnel": {
-      "score": "9/10 (90%)",
-      "pass": false,
-      "failures": [
-        "#27: CTA points to qualify.html and avoids banned or ambiguous apply copy \u2014 Ambiguous CTA copy found: Apply"
-      ]
+      "score": "10/10 (100%)",
+      "pass": true,
+      "failures": []
     },
     "Audio": {
       "score": "5/5 (100%)",
@@ -43,9 +39,17 @@
       "failures": []
     },
     "Production": {
-      "score": "N/A",
-      "pass": null,
-      "failures": []
+      "score": "0/7 (0%)",
+      "pass": false,
+      "failures": [
+        "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
+        "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
+        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
+        "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
+        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
+        "#47: Walkthrough-size audio (6-20MB / direct-address verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)",
+        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      ]
     },
     "Delivery": {
       "score": "1/1 (100%)",
@@ -59,8 +63,13 @@
     }
   },
   "critical_failures": [
-    "#20: Positive tone and no corrupted AI Agent labels",
-    "#27: CTA points to qualify.html and avoids banned or ambiguous apply copy"
+    "#42: Public GitHub Pages build verified (HTTP 200)",
+    "#43: Drive artifact registry row present",
+    "#44: Notion Sprint row present",
+    "#45: Current GHL readback (contact tagged)",
+    "#46: Repeat-submit same-contact proof",
+    "#47: Walkthrough-size audio (6-20MB / direct-address verified)",
+    "#48: Bennett approval scope recorded"
   ],
   "major_failures": [],
   "checks": {
@@ -180,9 +189,9 @@
     },
     "20": {
       "desc": "Positive tone and no corrupted AI Agent labels",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "Negative tone language found"
+      "detail": "OK"
     },
     "21": {
       "desc": "Lead's industry reflected in content",
@@ -222,9 +231,9 @@
     },
     "27": {
       "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "Ambiguous CTA copy found: Apply"
+      "detail": "OK"
     },
     "28": {
       "desc": "No direct booking/calendar links (outside qualify.html flow)",
@@ -312,45 +321,45 @@
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 42"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
     },
     "47": {
       "desc": "Walkthrough-size audio (6-20MB / direct-address verified)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",

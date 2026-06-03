@@ -1,12 +1,12 @@
 {
   "lead": "mike-norton-origins-20260603",
-  "ts": "2026-06-03T18:54:54.802891+00:00",
+  "ts": "2026-06-03T20:10:48.001949+00:00",
   "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
-  "html_size_bytes": 98640,
+  "html_size_bytes": 98648,
   "require_production": true,
   "summary": {
-    "passed": 43,
-    "failed": 1,
+    "passed": 42,
+    "failed": 2,
     "skipped": 6,
     "total_applicable": 44,
     "overall_pass": false
@@ -39,10 +39,11 @@
       "failures": []
     },
     "Production": {
-      "score": "6/7 (86%)",
+      "score": "5/7 (71%)",
       "pass": false,
       "failures": [
-        "#46: Repeat-submit same-contact proof \u2014 Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
+        "#46: Repeat-submit same-contact proof \u2014 Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1",
+        "#47: Walkthrough-size audio (6-20MB / direct-address verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
       ]
     },
     "Delivery": {
@@ -57,7 +58,8 @@
     }
   },
   "critical_failures": [
-    "#46: Repeat-submit same-contact proof"
+    "#46: Repeat-submit same-contact proof",
+    "#47: Walkthrough-size audio (6-20MB / direct-address verified)"
   ],
   "major_failures": [],
   "checks": {
@@ -339,9 +341,9 @@
     },
     "47": {
       "desc": "Walkthrough-size audio (6-20MB / direct-address verified)",
-      "pass": true,
+      "pass": false,
       "severity": "critical",
-      "detail": "Public/local podcast and direct-address audio verified (6926673 bytes)"
+      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",

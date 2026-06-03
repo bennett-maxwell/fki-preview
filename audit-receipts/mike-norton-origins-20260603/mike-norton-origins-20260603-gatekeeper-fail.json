@@ -53,14 +53,14 @@
         "mike-norton-origins-20260603"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] mike-norton-origins-20260603: 14/14 (100%)",
+        "[FAIL] mike-norton-origins-20260603: 13/15 (87%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -71,15 +71,16 @@
         "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
       ],
       "name": "financial_realism",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "mike-norton-origins-20260603 consulting            5000        0  PASS",
+        "mike-norton-origins-20260603 consulting            2388        0  FAIL (1)",
+        "      \u2717 D7-01 [RL] contract default $2,388 outside consulting band $3,000-$150,000",
         "------------------------------------------------------------------------------",
-        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
       ]
     },
     {
@@ -122,20 +123,23 @@
       "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-closeout.json"
     },
     {
-      "detail": "mike-norton-origins-20260603.mp3 6926673 bytes within window",
+      "detail": "mike-norton-origins-20260603.mp3 16985487 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
     {
-      "detail": "direct-address audio receipt passed",
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
       "name": "production_audio_direct_address",
-      "pass": true
+      "pass": false
     }
   ],
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "D9 render-integrity audit failed or missing"
+    "run-audit.py failed",
+    "financial-realism-check.py failed",
+    "D9 render-integrity audit failed or missing",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
   "lead": "mike-norton-origins-20260603",
@@ -143,5 +147,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-03T18:54:54.947064+00:00"
+  "ts": "2026-06-03T20:10:48.241357+00:00"
 }

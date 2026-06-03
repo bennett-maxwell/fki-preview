@@ -1,0 +1,177 @@
+== use/help ==
+Usage: notebooklm use [OPTIONS] NOTEBOOK_ID
+
+  Set the current notebook context.
+
+  Once set, all commands will use this notebook by default. You can still
+  override by passing --notebook explicitly.
+
+  Supports partial IDs - 'notebooklm use abc' matches 'abc123...'
+
+  By default, the notebook must exist on the server; a typo or unreachable
+  backend results in a non-zero exit and the saved context is left untouched.
+  Pass --force to bypass verification.
+
+  Example:
+    notebooklm use nb123
+    notebooklm ask "what is this about?"   # Uses nb123
+    notebooklm generate video "a fun explainer"  # Uses nb123
+
+Options:
+  --force  Skip the existence check and persist the notebook ID even if
+           verification fails. Use for offline work or debugging.
+  --json   Output as JSON
+  --help   Show this message and exit.
+== sources/help maybe ==
+Usage: notebooklm source [OPTIONS] COMMAND [ARGS]...
+
+  Source management commands.
+
+  Commands:
+    list             List sources in a notebook
+    add              Add a source (url, text, file, youtube)
+    add-drive        Add a Google Drive document
+    add-research     Search web/drive and add sources from results
+    get              Get source details
+    fulltext         Get full indexed text content
+    guide            Get AI-generated source summary and keywords
+    stale            Check if source needs refresh
+    wait             Wait for a source to finish processing
+    clean            Remove duplicate, error, and access-blocked sources
+    delete           Delete a source
+    delete-by-title  Delete a source by exact title
+    rename           Rename a source
+    refresh          Refresh a URL/Drive source
+
+  Partial ID Support: SOURCE_ID arguments support partial-prefix matching
+  (e.g. 'abc' matches 'abc123def456...').
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  add              Add a source to a notebook.
+  add-drive        Add a Google Drive document as a source.
+  add-research     Search web or drive and add sources from results.
+  clean            Automatically remove duplicate, error, and...
+  delete           Delete a source.
+  delete-by-title  Delete a source by exact title.
+  fulltext         Get full content of a source.
+  get              Get source details.
+  guide            Get AI-generated source summary and keywords.
+  list             List all sources in a notebook.
+  refresh          Refresh a URL/Drive source.
+  rename           Rename a source.
+  stale            Check if a URL/Drive source needs refresh.
+  wait             Wait for a source to finish processing.
+== audio/help ==
+Usage: notebooklm [OPTIONS] COMMAND [ARGS]...
+Try 'notebooklm --help' for help.
+
+Error: No such command 'audio'.
+== generate/help ==
+Usage: notebooklm generate [OPTIONS] COMMAND [ARGS]...
+
+  Generate content from notebook.
+
+  LLM-friendly design: Describe what you want in natural language.
+
+  Examples:
+    notebooklm use nb123
+    notebooklm generate video "a funny explainer for kids age 5"
+    notebooklm generate audio "deep dive focusing on chapter 3"
+    notebooklm generate quiz "focus on vocabulary terms"
+
+  Types:
+    audio        Audio overview (podcast)
+    video        Video overview
+    slide-deck   Slide deck
+    quiz         Quiz
+    flashcards   Flashcards
+    infographic  Infographic
+    data-table   Data table
+    mind-map     Mind map
+    report       Report (briefing-doc, study-guide, blog-post, custom)
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  audio            Generate audio overview (podcast).
+  cinematic-video  Generate cinematic video overview (AI-generated...
+  data-table       Generate data table.
+  flashcards       Generate flashcards.
+  infographic      Generate infographic.
+  mind-map         Generate mind map.
+  quiz             Generate quiz.
+  report           Generate a report (briefing doc, study guide, blog...
+  revise-slide     Revise an individual slide in an existing slide deck.
+  slide-deck       Generate slide deck.
+  video            Generate video overview.
+== ask/help ==
+Usage: notebooklm ask [OPTIONS] [QUESTION]
+
+  Ask a notebook a question.
+
+  By default, continues the last conversation. Use --new to start fresh. The
+  answer includes inline citations like [1], [2] that reference sources. Use
+  --json to get structured output with source IDs for each reference.
+
+  Example:
+    notebooklm ask "what are the main themes?"
+    notebooklm ask -c <id> "continue this one"
+    notebooklm ask --new "ignore last conversation, start fresh"
+    notebooklm ask -s src_001 -s src_002 "question about specific sources"
+    notebooklm ask "explain X" --json             # Get answer with source references
+    notebooklm ask "explain X" --save-as-note     # Save response as a note
+
+Options:
+  --prompt-file PROMPT_FILE   Read prompt/query text from a file (or '-' for
+                              stdin) instead of the positional argument
+  -n, --notebook TEXT         Notebook ID (uses current if not set). Supports
+                              partial IDs.  [env var: NOTEBOOKLM_NOTEBOOK]
+  -c, --conversation-id TEXT  Continue a specific conversation
+  --new                       Start a fresh conversation. DESTRUCTIVE: this
+                              deletes the notebook's current server-side
+                              conversation (turns are not recoverable) before
+                              asking. Prompts for confirmation unless
+                              ``--yes`` is passed.
+  -y, --yes                   Skip the ``--new`` destructive-delete
+                              confirmation prompt. ``--json`` implies
+                              ``--yes`` so scripted callers never hang.
+  -s, --source TEXT           Limit to specific source IDs (can be repeated)
+  --json                      Output as JSON (includes references)
+  --save-as-note              Save response as a note. When the answer has
+                              citations, the saved note preserves interactive
+                              [N] hover-anchor links (matching the NotebookLM
+                              web UI's 'Save to note' behavior); otherwise
+                              falls back to a plain-text note.
+  --note-title TEXT           Note title (use with --save-as-note)
+  --timeout INTEGER RANGE     HTTP request timeout in seconds (default: 30,
+                              from the library). Increase for long or complex
+                              prompts.  [x>=1]
+  --help                      Show this message and exit.
+== metadata/help ==
+Usage: notebooklm metadata [OPTIONS]
+
+  Export notebook metadata with sources list.
+
+  Outputs notebook details (id, title, created_at, is_owner) along with a
+  simplified list of sources (type, title, url).
+
+  By default, outputs in human-readable format. Use --json for machine
+  parsing.
+
+  NOTEBOOK_ID supports partial matching (e.g., 'abc' matches 'abc123...').
+
+  Examples:
+    notebooklm metadata              # Human-readable for current notebook
+    notebooklm metadata -n abc       # Human-readable for notebook starting with 'abc'
+    notebooklm metadata --json       # JSON output
+    notebooklm metadata -n abc --json  # JSON for specific notebook
+
+Options:
+  -n, --notebook TEXT  Notebook ID (uses current if not set). Supports partial
+                       IDs.  [env var: NOTEBOOKLM_NOTEBOOK]
+  --json               Output as JSON (default: human-readable)
+  --help               Show this message and exit.
