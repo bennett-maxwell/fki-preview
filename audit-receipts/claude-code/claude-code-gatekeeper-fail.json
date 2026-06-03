@@ -7,27 +7,27 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/claude-code.html",
+        "/Users/openclaw/fki-preview/blueprints/claude-code.html",
         "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/claude-code",
+        "/Users/openclaw/fki-preview/audit-receipts/claude-code",
         "--lead",
         "claude-code",
         "--json-output",
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
         "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": false,",
+        "      \"pass\": true,",
         "      \"severity\": \"critical\",",
-        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
         "    },",
         "    \"49\": {",
         "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
@@ -47,28 +47,28 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/run-audit.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "claude-code"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] claude-code: 14/14 (100%)",
+        "[FAIL] claude-code: 14/15 (93%)  RED-LINE FAIL: ['D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
-        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
       ]
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/financial-realism-check.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/temp/fki-preview/blueprints/claude-code.html"
+        "/Users/openclaw/fki-preview/blueprints/claude-code.html"
       ],
       "name": "financial_realism",
       "pass": true,
@@ -84,42 +84,61 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/claude-code.html"
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/claude-code.html"
       ],
       "name": "d9_render_integrity",
       "pass": true,
       "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "D9 PASS: render integrity OK (/Users/temp/fki-preview/blueprints/claude-code.html)"
+        "  [PASS] D9-03 snapshot/profile is grid/flex",
+        "  [PASS] D9-04 @media query",
+        "  [PASS] D9-05 mobile \u2264480px",
+        "  [PASS] D9-06 viewport meta",
+        "  [PASS] D9-07 no leftover template blue",
+        "  [PASS] D9-08 sections \u2265 8 (found 16)",
+        "  [PASS] D9-09 every section has id",
+        "  [PASS] D9-10 no dead anchors",
+        "  [PASS] D9-11 no empty headings",
+        "  [PASS] D9-12 no double-encoded entities",
+        "  [PASS] D9-13 broken possessive (skipped \u2014 no --business-name)",
+        "  [PASS] D9-14 no undefined/NaN/null",
+        "  [PASS] D9-15 font-family on body (union of all body rules)",
+        "  [PASS] D9-16 hero has background",
+        "  [PASS] D9-17 CTA button styled",
+        "  [PASS] D9-18 tables border-collapse (or N/A)",
+        "  [PASS] D9-19 max-width container",
+        "  [PASS] D9-20 [RL] no off-brand accent leak",
+        "",
+        "FAILED: 0"
       ]
     },
     {
       "name": "proof_email_click_test",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-email-click-test.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/claude-code/claude-code-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-desktop-render.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/claude-code/claude-code-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-mobile-render.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/claude-code/claude-code-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-audit.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/claude-code/claude-code-audit.json"
     },
     {
       "name": "proof_closeout",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/claude-code/claude-code-closeout.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/claude-code/claude-code-closeout.json"
     },
     {
       "detail": "claude-code.mp3 10122373 bytes within window",
@@ -134,13 +153,13 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "completion_gate failed"
+    "run-audit.py failed"
   ],
-  "html_path": "/Users/temp/fki-preview/blueprints/claude-code.html",
+  "html_path": "/Users/openclaw/fki-preview/blueprints/claude-code.html",
   "lead": "claude-code",
   "mode": "production",
-  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/claude-code",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/claude-code",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-02T15:57:16.838271+00:00"
+  "ts": "2026-06-03T18:38:42.888678+00:00"
 }

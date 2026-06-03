@@ -1,0 +1,173 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+        "--lead",
+        "britt-warnick",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "britt-warnick"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[FAIL] britt-warnick: 12/15 (80%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D4-09_podcast_source_funnel_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "britt-warnick        design_agency         2388        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "  [PASS] D9-03 snapshot/profile is grid/flex",
+        "  [PASS] D9-04 @media query",
+        "  [PASS] D9-05 mobile \u2264480px",
+        "  [PASS] D9-06 viewport meta",
+        "  [PASS] D9-07 no leftover template blue",
+        "  [PASS] D9-08 sections \u2265 8 (found 16)",
+        "  [PASS] D9-09 every section has id",
+        "  [PASS] D9-10 no dead anchors",
+        "  [PASS] D9-11 no empty headings",
+        "  [PASS] D9-12 no double-encoded entities",
+        "  [PASS] D9-13 broken possessive (skipped \u2014 no --business-name)",
+        "  [PASS] D9-14 no undefined/NaN/null",
+        "  [PASS] D9-15 font-family on body (union of all body rules)",
+        "  [PASS] D9-16 hero has background",
+        "  [PASS] D9-17 CTA button styled",
+        "  [PASS] D9-18 tables border-collapse (or N/A)",
+        "  [PASS] D9-19 max-width container",
+        "  [PASS] D9-20 [RL] no off-brand accent leak",
+        "",
+        "FAILED: 0"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-closeout.json"
+    },
+    {
+      "detail": "britt-warnick.mp3 21076146 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "proof receipt missing or failing: britt-warnick-email-click-test.json",
+    "proof receipt missing or failing: britt-warnick-desktop-render.json",
+    "proof receipt missing or failing: britt-warnick-mobile-render.json",
+    "proof receipt missing or failing: britt-warnick-audit.json",
+    "proof receipt missing or failing: britt-warnick-closeout.json",
+    "production audio size failed: britt-warnick.mp3 21076146 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+  ],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+  "lead": "britt-warnick",
+  "mode": "production",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-03T18:38:40.033200+00:00"
+}
