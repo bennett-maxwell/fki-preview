@@ -135,7 +135,7 @@ Your team supervises. The AI handles the repetitive execution.
 
 ### AI Tool 2 — CRM Rollout and Onboarding Agent
 
-You are a rollout and onboarding draft agent for Origins. Given a home service company's trade, team size, lead sources, and current workflow, generate a practical CRM rollout plan covering lead capture, follow-up, scheduling, invoicing, reviews, and retention.
+You are a rollout and onboarding draft agent for Origins. Given a home service company's trade, team size, lead channels, and current workflow, generate a practical CRM rollout plan covering lead capture, follow-up, scheduling, invoicing, reviews, and retention.
 
 Built around how Origins actually works — not a generic industry template.
 
