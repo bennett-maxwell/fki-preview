@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="Your AI Advantage Roadmap — Doe's Sporting Goods">
+<meta property="og:description" content="A personalized AI blueprint built for John Doe — 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough specific to Doe's Sporting Goods.">
+<title>AI Advantage Roadmap — Doe's Sporting Goods</title>
+<style>
+:root{--brand:#0071E3;--brand-dark:#005BB5;--brand-light:#EBF4FF;--navy:#1D1D1F;--bg:#F5F5F7;--card:#FFFFFF;--text:#1D1D1F;--text-2:#6E6E73;--border:#E5E5EA;--green:#34C759;--red:#FF3B30}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.hero{background:var(--navy);color:#fff;padding:80px 20px 60px;text-align:center}
+.hero-badge{display:inline-block;background:var(--brand);color:#fff;padding:6px 18px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:20px}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:16px}
+.hero h1 span{color:var(--brand)}
+.hero-sub{font-size:1.1rem;opacity:.85;max-width:600px;margin:0 auto 32px}
+.hero-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.hero-stat{background:rgba(255,255,255,.08);border-radius:12px;padding:16px 24px;text-align:center}
+.hero-stat .num{display:block;font-size:1.8rem;font-weight:800;color:var(--brand)}
+.hero-stat .label{font-size:.8rem;opacity:.7;margin-top:4px}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;overflow-x:auto}
+nav ul{display:flex;list-style:none;padding:0 20px;gap:0}
+nav ul li a{display:block;padding:16px 20px;font-size:.9rem;font-weight:600;color:var(--text-2);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s}
+nav ul li a:hover,nav ul li a.active{color:var(--brand);border-color:var(--brand)}
+.section{padding:64px 20px;max-width:900px;margin:0 auto}
+.section-title{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;color:var(--text);margin-bottom:12px}
+.section-sub{color:var(--text-2);font-size:1rem;margin-bottom:32px;max-width:700px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.gap-card{display:flex;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
+.gap-num{width:36px;height:36px;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0}
+.gap-tag{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.75rem;font-weight:600;margin-top:8px}
+.gap-tag.revenue{background:#e8f4fd;color:var(--brand)}
+.gap-tag.efficiency{background:#e8fdf0;color:#1a7a3c}
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.agent-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px}
+.agent-title{font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:8px}
+.agent-desc{color:var(--text-2);font-size:.9rem}
+.roi-calc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px}
+.slider-row{margin-bottom:24px}
+.slider-label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:8px;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.calc-fill-input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;margin-top:8px}
+.roi-result{background:var(--brand);color:#fff;border-radius:12px;padding:24px;text-align:center;margin-top:24px}
+.roi-result .amount{font-size:2.5rem;font-weight:800}
+.presets{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.preset-btn{padding:8px 18px;border:2px solid var(--brand);border-radius:100px;background:transparent;color:var(--brand);font-size:.85rem;font-weight:600;cursor:pointer}
+.preset-btn:hover{background:var(--brand);color:#fff}
+.podcast-section{background:var(--navy);color:#fff;padding:64px 20px;text-align:center}
+.podcast-player{max-width:600px;margin:0 auto;background:rgba(255,255,255,.08);border-radius:16px;padding:32px}
+.pod-title{font-size:1.4rem;font-weight:700;margin-bottom:8px}
+.pod-subtitle{font-size:.85rem;opacity:.8;margin-bottom:24px}
+audio{width:100%;margin-bottom:16px}
+.speed-controls{display:flex;gap:12px;justify-content:center}
+.speed-btn{padding:8px 18px;border:2px solid rgba(255,255,255,.3);border-radius:100px;background:transparent;color:#fff;font-size:.85rem;font-weight:600;cursor:pointer}
+.speed-btn.active,.speed-btn:hover{background:var(--brand);border-color:var(--brand)}
+.timeline-table{width:100%;border-collapse:collapse;overflow-x:auto;display:block}
+.timeline-table th{background:var(--brand);color:#fff;padding:12px 16px;text-align:left;font-size:.9rem}
+.timeline-table td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:.9rem;vertical-align:top}
+.timeline-table tr:last-child td{border-bottom:none}
+.prompt-block{background:var(--navy);color:#e8e8e8;border-radius:12px;padding:24px;font-family:'SF Mono',Monaco,monospace;font-size:.8rem;line-height:1.6;white-space:pre-wrap;overflow-x:auto;margin-bottom:20px;max-height:300px;overflow-y:auto}
+.cta-section{background:var(--brand);color:#fff;padding:80px 20px;text-align:center}
+.cta-btn{display:inline-block;background:#fff;color:var(--brand);padding:18px 48px;border-radius:100px;font-size:1.1rem;font-weight:800;text-decoration:none;margin-top:24px}
+.sources{background:var(--card);border-top:1px solid var(--border);padding:48px 20px}
+.sources-inner{max-width:900px;margin:0 auto}
+footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:32px 20px;font-size:.85rem}
+@media(max-width:600px){.hero-stats{flex-direction:column;align-items:center}.agents-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- SECTION 1: Hero -->
+<div class="hero" id="profile">
+  <div class="hero-badge">Confidential — Prepared for John Doe</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Doe's Sporting Goods</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for a growing retail sporting goods business — and how to get there in 30 days.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Doe's Sporting Goods Data</span></div>
+    <div class="hero-stat"><span class="num">6</span><span class="label">Custom AI<br>Agents</span></div>
+    <div class="hero-stat"><span class="num">30-Day</span><span class="label">Onboarding<br>Timeline</span></div>
+  </div>
+</div>
+
+<!-- Nav: 5 tabs locked -->
+<nav>
+  <ul>
+    <li><a href="#profile">Your Profile</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#roi">ROI Calculator</a></li>
+    <li><a href="listen" id="listen-nav">Listen</a></li>
+    <li><a href="#apply">Apply</a></li>
+  </ul>
+</nav>
+
+<!-- SECTION 2: Business Snapshot -->
+<div class="section">
+  <h2 class="section-title">Where Doe's Sporting Goods Stands Today</h2>
+  <p class="section-sub">Real numbers, real context — built from what you shared.</p>
+  <div class="card">
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:10px;font-weight:600;width:40%">Annual Revenue</td><td style="padding:10px;color:var(--text-2)">$1.2M</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:10px;font-weight:600">Avg Customer Value</td><td style="padding:10px;color:var(--text-2)">$350</td></tr>
+      <tr><td style="padding:10px;font-weight:600">Monthly Leads / Foot Traffic</td><td style="padding:10px;color:var(--text-2)">120/month</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:10px;font-weight:600">Team Size</td><td style="padding:10px;color:var(--text-2)">8 people</td></tr>
+      <tr><td style="padding:10px;font-weight:600">Current Tools</td><td style="padding:10px;color:var(--text-2)">Shopify, QuickBooks, Gmail, Google Sheets, Square</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:10px;font-weight:600">Top Automation Needs</td><td style="padding:10px;color:var(--text-2)">Abandoned cart recovery, loyalty program, inventory alerts, review requests</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 3: Results from Similar Businesses (FOMO + industry-specific) -->
+<div style="background:var(--card);padding:64px 20px;border-top:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 class="section-title">Retail Businesses Like Yours Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves sporting goods and specialty retail businesses are making right now — live in the market today. The question is not whether AI runs these functions. It is whether Doe's Sporting Goods runs them before the competitor down the street does.</p>
+
+    <div class="gap-card">
+      <div class="gap-num">1</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:6px">They recover 15-25% of abandoned carts automatically — while you sleep</div>
+        <div style="color:var(--text-2);font-size:.9rem"><strong>What they're doing:</strong> Specialty retailers now run AI abandoned-cart agents that trigger personalized SMS + email sequences within 60 minutes of cart abandonment, referencing the exact items left behind. <strong>How it helps them:</strong> The first follow-up wins the majority of recoverable sales — competitors who wait 24 hours lose to whoever reached the customer first. <strong>How I deliver it for Doe's Sporting Goods:</strong> An abandoned-cart AI wired into your Shopify store that fires within 60 minutes, mentions the specific gear left behind, and routes responses directly to your team. <sup><a href="https://www.shopify.com/blog/abandoned-cart-email" target="_blank" rel="noopener">[1]</a></sup></div>
+        <span class="gap-tag revenue">Revenue Impact</span>
+      </div>
+    </div>
+
+    <div class="gap-card">
+      <div class="gap-num">2</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:6px">They run loyalty programs that run themselves — zero staff time</div>
+        <div style="color:var(--text-2);font-size:.9rem"><strong>What they're doing:</strong> Independent sporting goods retailers are using AI loyalty agents that track purchase history, trigger personalized re-engagement at the right moment, and automatically move customers into higher tiers. <strong>How it helps them:</strong> Repeat customers spend 67% more than new customers — automating loyalty means capturing that spend without adding headcount. <strong>How I deliver it for Doe's Sporting Goods:</strong> A loyalty AI connected to your Square/Shopify purchase data that handles tier progression, birthday offers, and win-back sequences automatically. <sup><a href="https://hbr.org/2014/10/the-value-of-keeping-the-right-customers" target="_blank" rel="noopener">[2]</a></sup></div>
+        <span class="gap-tag efficiency">Time Recovery</span>
+      </div>
+    </div>
+
+    <div class="gap-card">
+      <div class="gap-num">3</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:6px">They get 4-5x more Google reviews — with zero manual follow-up</div>
+        <div style="color:var(--text-2);font-size:.9rem"><strong>What they're doing:</strong> Local retail businesses now send AI-triggered review requests 24-48 hours after purchase, personalized by product category and purchase amount. <strong>How it helps them:</strong> Businesses with 50+ Google reviews convert 270% more web visitors than those with fewer — it's the highest-ROI marketing move for local retail. <strong>How I deliver it for Doe's Sporting Goods:</strong> A review agent tied to your Square transactions that sends the right message at the right moment and routes positive reviews to Google, negative ones to your inbox. <sup><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">[3]</a></sup></div>
+        <span class="gap-tag revenue">Revenue Impact</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: 3-Pillar Framework -->
+<div class="section">
+  <h2 class="section-title">The 3-Pillar AI Framework for Doe's Sporting Goods</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+    <div class="card" style="border-top:3px solid var(--brand)">
+      <div style="font-size:1.5rem;margin-bottom:12px">💰</div>
+      <div style="font-weight:700;font-size:1.1rem;margin-bottom:8px">Revenue</div>
+      <div style="color:var(--text-2);font-size:.9rem">Abandoned cart recovery + loyalty reactivation + upsell sequencing — automated to run 24/7 on your existing Shopify + Square data.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-size:1.5rem;margin-bottom:12px">⏰</div>
+      <div style="font-weight:700;font-size:1.1rem;margin-bottom:8px">Time</div>
+      <div style="color:var(--text-2);font-size:.9rem">Inventory alerts, review requests, and customer follow-up handled by AI — your team of 8 focuses on floor sales and experience, not admin.</div>
+    </div>
+    <div class="card" style="border-top:3px solid #FF9500">
+      <div style="font-size:1.5rem;margin-bottom:12px">📊</div>
+      <div style="font-weight:700;font-size:1.1rem;margin-bottom:8px">Money</div>
+      <div style="color:var(--text-2);font-size:.9rem">Better buying decisions from AI-powered inventory analytics connected to your QuickBooks + Google Sheets — stop over-ordering slow movers.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: Tool Stack -->
+<div style="background:var(--card);padding:64px 20px;border-top:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 class="section-title">Your Current Stack → AI-Enhanced</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+      <div class="card" style="text-align:center"><div style="font-weight:700;color:var(--brand)">Shopify</div><div style="font-size:.85rem;color:var(--text-2);margin-top:6px">+ Abandoned cart AI + upsell triggers</div></div>
+      <div class="card" style="text-align:center"><div style="font-weight:700;color:var(--brand)">Square</div><div style="font-size:.85rem;color:var(--text-2);margin-top:6px">+ Loyalty tracking + review trigger</div></div>
+      <div class="card" style="text-align:center"><div style="font-weight:700;color:var(--brand)">QuickBooks</div><div style="font-size:.85rem;color:var(--text-2);margin-top:6px">+ Inventory analytics + reorder alerts</div></div>
+      <div class="card" style="text-align:center"><div style="font-weight:700;color:var(--brand)">Gmail</div><div style="font-size:.85rem;color:var(--text-2);margin-top:6px">+ AI triage + customer sequences</div></div>
+      <div class="card" style="text-align:center"><div style="font-weight:700;color:var(--brand)">Google Sheets</div><div style="font-size:.85rem;color:var(--text-2);margin-top:6px">+ Automated reporting + buying alerts</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: Gap Analysis -->
+<div class="section">
+  <h2 class="section-title">5 Gaps Creating the Biggest Leverage Opportunities</h2>
+</div>
+
+<!-- SECTION 7: AI Opportunity Map -->
+<div style="background:var(--card);padding:64px 20px;border-top:1px solid var(--border)" id="agents">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 class="section-title">AI Agents Built for Doe's Sporting Goods</h2>
+    <p class="section-sub">6 agents, each wired to your existing tools — no rip-and-replace required.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-title">Abandoned Cart Recovery Agent</div><div class="agent-desc">Fires within 60 min of cart abandonment via Shopify webhook. Sends personalized SMS + email referencing exact items. Escalates high-value carts to your team for personal follow-up.</div></div>
+      <div class="agent-card"><div class="agent-title">Loyalty Program Agent</div><div class="agent-desc">Tracks Square purchase history, auto-assigns loyalty tiers, sends win-back sequences at 30/60/90 days of inactivity. Birthday offers and milestone rewards fire automatically.</div></div>
+      <div class="agent-card"><div class="agent-title">Inventory Alert Agent</div><div class="agent-desc">Monitors Shopify + QuickBooks inventory levels. Fires reorder alerts when stock hits minimum thresholds and generates weekly buying report from Google Sheets sales data.</div></div>
+      <div class="agent-card"><div class="agent-title">Review &amp; Referral Agent</div><div class="agent-desc">Triggers 24-48 hours post-purchase via Square. Routes positive sentiment to Google Review request, negative to inbox for quick resolution. Doubles your review velocity in 60 days.</div></div>
+      <div class="agent-card"><div class="agent-title">Customer Win-Back Agent</div><div class="agent-desc">Identifies customers who haven't purchased in 90+ days from Square data. Sends personalized re-engagement sequence tied to their purchase history and category preferences.</div></div>
+      <div class="agent-card"><div class="agent-title">In-Store Upsell Agent</div><div class="agent-desc">Analyzes past purchase patterns to suggest next-best product for each customer. Arms your team with context before high-value customer visits — via Gmail briefing each morning.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: Skip These -->
+<div class="section">
+  <h2 class="section-title">What to Skip for Now — and Why</h2>
+  <p class="section-sub">AI can eventually handle almost anything a person does on a computer given the right access and training. The plan is to replace that work step by step — biggest wins first. These aren't things AI can't do. They're just not where we start.</p>
+  <div class="card"><div style="font-weight:700;margin-bottom:6px">Custom AI Chatbot for Website</div><div style="color:var(--text-2);font-size:.9rem">You could automate this later, but I'd hold off — it requires significant training data and would distract from the abandoned cart + loyalty wins that compound fastest for a store your size.</div></div>
+  <div class="card"><div style="font-weight:700;margin-bottom:6px">AI-Generated Social Media Content</div><div style="color:var(--text-2);font-size:.9rem">Worth doing eventually — but local retail wins more from Google reviews and loyalty reactivation than social posts. We'll get there in Month 2+ once revenue agents are humming.</div></div>
+  <div class="card"><div style="font-weight:700;margin-bottom:6px">Predictive Demand Forecasting</div><div style="color:var(--text-2);font-size:.9rem">Powerful at scale. At $1.2M revenue you don't yet have the data volume to make the predictions meaningful. The inventory alert agent gets you 80% of the value with 10% of the complexity.</div></div>
+  <div class="card"><div style="font-weight:700;margin-bottom:6px">AI-Powered Hiring &amp; HR</div><div style="color:var(--text-2);font-size:.9rem">A natural next step as you scale past $2M. For now, that's a future-state build — not a distraction from the revenue and time-recovery wins available today.</div></div>
+</div>
+
+<!-- SECTION 9: Implementation Timeline -->
+<div style="background:var(--card);padding:64px 20px;border-top:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 class="section-title">30-Day Implementation Roadmap</h2>
+    <div style="overflow-x:auto">
+    <table class="timeline-table">
+      <tr><th>Timeline</th><th>What Happens</th><th>Result</th></tr>
+      <tr><td style="font-weight:700">Days 1-3</td><td>Connect Shopify + Square + QuickBooks APIs. Configure abandoned cart agent. Set loyalty tiers in Square data.</td><td>Abandoned cart agent live. First recoveries within 72 hours.</td></tr>
+      <tr><td style="font-weight:700">Days 4-7</td><td>Activate review agent post-purchase trigger. Wire inventory alert thresholds. Deploy win-back sequences.</td><td>All 6 agents live. Team briefed on escalation flows.</td></tr>
+      <tr><td style="font-weight:700">Day 30</td><td>Calibration review — tune thresholds based on 30 days of data. Optimize sequences showing highest response rates.</td><td>Agents running at 90%+ accuracy. Full autonomy unlocked.</td></tr>
+      <tr><td style="font-weight:700">Month 2+</td><td>In-store upsell briefings automated. Seasonal inventory intelligence. Expand loyalty tier structure.</td><td>Full AI-powered retail operation. Team focused on high-value floor work only.</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 10: ROI Calculator -->
+<div class="section" id="roi">
+  <h2 class="section-title">Your ROI Calculator</h2>
+  <p class="section-sub">Enter your numbers — see what AI recovery and loyalty automation is worth to Doe's Sporting Goods.</p>
+  <div class="roi-calc">
+    <div class="slider-row">
+      <div class="slider-label"><span>Monthly Website/Store Visitors</span><span id="leads-val">120</span></div>
+      <input type="range" id="sl-leads" min="20" max="1000" value="120" oninput="document.getElementById('leads-val').textContent=this.value;calcROI()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-label"><span>Conversion / Close Rate</span><span id="rate-val">35%</span></div>
+      <input type="range" id="sl-rate" min="5" max="80" value="35" oninput="document.getElementById('rate-val').textContent=this.value+'%';calcROI()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-label"><span>Admin Hours Saved / Week</span><span id="hours-val">15 hrs</span></div>
+      <input type="range" id="sl-hours" min="2" max="40" value="15" oninput="document.getElementById('hours-val').textContent=this.value+' hrs';calcROI()">
+    </div>
+    <div class="slider-row">
+      <div class="slider-label"><span>Avg Customer Value ($)</span></div>
+      <input type="number" class="calc-fill-input" id="sl-contract" placeholder="Enter your avg customer value" value="" oninput="calcROI()">
+    </div>
+    <div class="presets">
+      <button class="preset-btn" onclick="setPreset(120,35,15,350)">Conservative</button>
+      <button class="preset-btn" onclick="setPreset(150,40,15,350)">Expected</button>
+      <button class="preset-btn" onclick="setPreset(200,45,20,400)">Stretch</button>
+    </div>
+    <div class="roi-result">
+      <div style="font-size:.9rem;opacity:.85;margin-bottom:4px">Estimated Monthly Revenue Added</div>
+      <div class="amount" id="roi-amount">$0</div>
+      <div style="font-size:.8rem;opacity:.7;margin-top:8px">Based on abandoned cart recovery + loyalty reactivation + admin time saved</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 11: 3 AI Prompts -->
+<div style="background:var(--card);padding:64px 20px;border-top:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto">
+    <h2 class="section-title">3 AI Prompts — Copy-Paste Ready for Doe's Sporting Goods</h2>
+
+    <h3 style="font-weight:700;margin-bottom:12px;color:var(--text)">Prompt 1: Abandoned Cart Recovery Agent</h3>
+    <div class="prompt-block">## IDENTITY
+You are the Abandoned Cart Recovery Agent for Doe's Sporting Goods.
+Your job is to recover revenue from customers who added items to their Shopify cart but did not complete their purchase.
+You communicate via email and SMS. You are helpful, specific about the items they left behind, and never pushy.
+You represent a local sporting goods business that values the customer relationship over the transaction.
+
+## INPUTS YOU NEED
+- Customer first name
+- Items left in cart (names, quantities, prices)
+- Total cart value
+- Time since abandonment (hours)
+- Customer purchase history (new vs returning)
+- Shopify cart URL (if available)
+
+## STRUCTURE
+Hour 1 — SMS: "Hey [First Name], looks like you left [Item Name] in your cart at Doe's Sporting Goods. Still interested? Your cart is saved: [URL]"
+Hour 4 — Email: Subject: "[First Name], your [Item] is still waiting"
+  Body: Personalized note about the specific item, why it's a great fit for their activity level (reference past purchases if returning customer), link back to cart, offer to answer questions.
+Hour 24 — Email: Subject: "A quick note about your order"
+  Body: Brief check-in, mention if stock is limited, offer a $10 gift card for first-time purchasers with cart value over $150.
+Hour 48 — SMS (high-value carts $200+ only): "Last chance — [Item] is running low. Want us to hold one for you? Reply YES and we'll set it aside."
+
+## RULES
+- Never send more than 3 touchpoints per abandoned cart
+- Always include the specific item name — never send generic "you left something behind" messages
+- For carts under $50, send only the Hour 1 SMS — do not escalate
+- For returning customers, reference their last purchase category in the email
+- If customer replies at any point, hand off to human team via Gmail alert — do not continue automated sequence
+- Never mention competitor pricing or make price-match promises
+- Log all sends and responses to Google Sheets: Date | Customer | Cart Value | Touchpoint | Response | Recovered (Y/N)
+
+## ESCALATION
+- Cart value $500+: Alert team immediately via Gmail. Do not run automated sequence alone.
+- Customer replies with complaint: Route to owner inbox within 5 minutes
+- Three consecutive non-responses from same customer: Pause automated outreach for 60 days, add to "manual nurture" list
+
+## SUCCESS METRICS YOU TRACK
+- Recovery rate: target 15-20% of abandoned carts
+- Revenue recovered per month
+- Best-performing message by cart value band
+- Opt-out rate: keep under 2%</div>
+
+    <h3 style="font-weight:700;margin-bottom:12px;color:var(--text)">Prompt 2: Loyalty Program + Customer Win-Back Agent</h3>
+    <div class="prompt-block">## IDENTITY
+You are the Loyalty & Win-Back Agent for Doe's Sporting Goods.
+You manage the automated loyalty program and win-back sequences for customers who haven't purchased in 30, 60, or 90+ days.
+You use Square purchase history as your data source. You communicate via email and SMS.
+Your goal: increase repeat purchase rate and average annual spend per customer.
+
+## INPUTS YOU NEED
+- Customer name and contact info
+- Purchase history: dates, items, categories, total spend
+- Days since last purchase
+- Loyalty tier (Bronze: 0-$499 annual spend / Silver: $500-$999 / Gold: $1000+)
+- Birthday (if captured at point of sale)
+
+## LOYALTY TIER ACTIONS
+Bronze ($0-$499 annual spend):
+  - Welcome email with loyalty program overview after first purchase
+  - 30-day win-back if no return visit
+  - Birthday: 10% off coupon
+
+Silver ($500-$999 annual spend):
+  - Quarterly "insider" email with new arrivals in their preferred category
+  - 60-day win-back if no return visit  
+  - Birthday: 15% off + free water bottle with $75+ purchase
+  - Access to early sale notifications
+
+Gold ($1000+ annual spend):
+  - Monthly personal check-in from owner (AI-drafted, owner sends)
+  - 90-day win-back if no return visit
+  - Birthday: 20% off any single item
+  - VIP event invitations
+  - First access to new inventory drops
+
+## WIN-BACK SEQUENCES
+Day 30 (no purchase): "Hey [First Name], it's been a while since we've seen you at Doe's. We've got new [their preferred category] that just came in — thought you'd want to know."
+Day 60 (no purchase): "[First Name], you're a [tier] member with [X points]. Here's a $15 credit to use any time — no expiration, no strings."
+Day 90 (no purchase): "We miss you. Here's our best offer: [20% off + free item over threshold]. Valid for 2 weeks. No pressure — just want to make sure you're taken care of."
+
+## RULES
+- Never send more than one win-back message per 30-day window
+- Always reference their actual purchase history category — never generic messages
+- Loyalty credits expire in 12 months — remind customers at 90-day and 30-day marks
+- If customer opts out of marketing: remove from all sequences immediately, log in Square notes
+- Owner reviews all Gold tier communications before send
+- Track all sequences in Google Sheets: Customer | Tier | Last Purchase | Sequence Sent | Response | Next Action
+
+## SUCCESS METRICS
+- Repeat purchase rate (target: 40% of customers buy again within 6 months)
+- Win-back success rate (target: 15% of 30-day win-backs result in purchase)
+- Average annual spend per tier (track monthly)
+- Loyalty program enrollment rate (target: 80% of new customers)</div>
+
+    <h3 style="font-weight:700;margin-bottom:12px;color:var(--text)">Prompt 3: Inventory Alert + Operations + Review Agent</h3>
+    <div class="prompt-block">## IDENTITY
+You are the Operations Intelligence Agent for Doe's Sporting Goods.
+You monitor inventory levels, generate buying recommendations, trigger review requests, and produce the weekly operations briefing for the owner.
+You connect to Shopify (inventory), QuickBooks (financials), Square (sales velocity), and Google Sheets (reports).
+
+## INVENTORY ALERT SYSTEM
+Daily check (runs at 6am):
+  - Pull Shopify inventory levels for all SKUs
+  - Flag any SKU below reorder threshold (set per category in config sheet)
+  - For flagged items: check QuickBooks for outstanding POs
+  - If no PO exists and item is below threshold: generate reorder recommendation
+  Alert format: "LOW STOCK: [Item Name] — [X units remaining] — [Avg daily sell rate: Y] — [Days until stockout: Z] — [Last reorder cost: $X] — [Recommended order qty: X]"
+
+Weekly buying report (every Monday 7am):
+  - Top 10 fastest-moving SKUs (last 30 days, by units)
+  - Top 10 by revenue (last 30 days)
+  - Bottom 10 by velocity (flag for markdown consideration)
+  - Seasonal trend alert (compare to same period last year if data available)
+  - Open PO summary from QuickBooks
+  Deliver to owner via Gmail with Google Sheets link for full data
+
+## REVIEW REQUEST SYSTEM
+Trigger: 36 hours after Square transaction completes (all purchases $25+)
+  SMS: "Hi [First Name] — hope you're enjoying your [most recent item] from Doe's! If you have 60 seconds, a Google review means the world to a local shop like ours: [Google Review Link]. Thanks!"
+  
+If no Google review within 5 days: send follow-up email
+  Subject: "Quick favor, [First Name]"
+  Body: "We noticed you haven't had a chance to leave a review yet — totally understand if life is busy. If you had a positive experience, even one sentence on Google helps us more than you know: [Link]"
+
+Routing:
+  - Customer replies with complaint: Forward to owner@doesportinggoods.com within 10 minutes
+  - Customer replies positively: Send Google Review link immediately
+  - Customer replies "no": Add to no-review-request list, never ask again
+
+## WEEKLY OPERATIONS BRIEFING (every Friday 4pm to owner)
+  Subject: "Doe's Sporting Goods — Week in Review [Date Range]"
+  Sections:
+  1. Sales summary: Total revenue, transactions, avg ticket vs last week
+  2. Inventory alerts: Items needing reorder this week
+  3. Customer metrics: New customers, returning customers, loyalty tier distribution
+  4. AI agent performance: Carts recovered, reviews generated, win-backs opened
+  5. This week's actions needed: Bulleted list, ranked by revenue impact
+
+## RULES
+- Never place purchase orders automatically — always present recommendation for owner approval
+- Never send review requests to customers who opted out of marketing
+- Flag any inventory with 0 sales in 60 days for potential markdown — do not markdown automatically
+- All financial data stays internal — never share in customer-facing communications
+- Google Sheets is the single source of truth for all agent performance data
+
+## SUCCESS METRICS
+- Stockout rate (target: under 2% of active SKUs)
+- Review acquisition rate (target: 25% of eligible transactions)
+- Weekly briefing open rate (internal only — track via Gmail)
+- Time saved on operations per week (owner self-reports monthly)</div>
+  </div>
+</div>
+
+<!-- SECTION 12: DIY vs Partner -->
+<div class="section">
+  <h2 class="section-title">DIY vs. Partnership</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div class="card"><div style="font-weight:700;font-size:1.1rem;margin-bottom:12px;color:var(--text-2)">DIY Path</div><ul style="color:var(--text-2);font-size:.9rem;padding-left:16px"><li style="margin-bottom:8px">3-6 months to configure tools</li><li style="margin-bottom:8px">Requires technical staff or contractor</li><li style="margin-bottom:8px">High trial-and-error cost</li><li style="margin-bottom:8px">Works if you have technical bandwidth</li></ul></div>
+    <div class="card" style="border:2px solid var(--brand)"><div style="font-weight:700;font-size:1.1rem;margin-bottom:12px;color:var(--brand)">Partnership Path</div><ul style="color:var(--text-2);font-size:.9rem;padding-left:16px"><li style="margin-bottom:8px">Live in 30 days, not 6 months</li><li style="margin-bottom:8px">Agents calibrated to your data from day 1</li><li style="margin-bottom:8px">Ongoing optimization included</li><li style="margin-bottom:8px">You focus on the business — not the tech</li></ul></div>
+  </div>
+</div>
+
+<!-- SECTION 13: Podcast / Listen -->
+<div class="podcast-section" id="listen">
+  <h2 style="font-size:2rem;font-weight:800;margin-bottom:8px">Your Personalized AI Walkthrough</h2>
+  <p style="opacity:.8;margin-bottom:32px">A podcast built specifically for Doe's Sporting Goods — hear exactly how each agent works and what implementation looks like for your business.</p>
+  <div class="podcast-player">
+    <div class="pod-title">AI Advantage Walkthrough — Doe's Sporting Goods</div>
+    <div class="pod-subtitle">Personalized for John Doe · Doe's Sporting Goods</div>
+    <audio id="blueprint-audio" controls preload="metadata" style="width:100%;margin:16px 0">
+      <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/john-doe-sporting-goods-20260604.mp3" type="audio/mpeg">
+    </audio>
+    <div class="speed-controls">
+      <button class="speed-btn active" onclick="setSpeed(1,this)">1x</button>
+      <button class="speed-btn" onclick="setSpeed(1.25,this)">1.25x</button>
+      <button class="speed-btn" onclick="setSpeed(1.5,this)">1.5x</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 14: Sources -->
+<div class="sources">
+  <div class="sources-inner">
+    <h2 class="section-title" style="font-size:1.3rem">Sources &amp; Citations</h2>
+    <ol style="color:var(--text-2);font-size:.85rem;padding-left:20px;line-height:2">
+      <li><a href="https://www.shopify.com/blog/abandoned-cart-email" target="_blank" rel="noopener">Shopify — Abandoned Cart Email Statistics and Recovery Strategies</a></li>
+      <li><a href="https://hbr.org/2014/10/the-value-of-keeping-the-right-customers" target="_blank" rel="noopener">Harvard Business Review — The Value of Keeping the Right Customers (repeat customer spend)</a></li>
+      <li><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" target="_blank" rel="noopener">BrightLocal — Local Consumer Review Survey (Google review conversion impact)</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- SECTION 15: CTA -->
+<div class="cta-section" id="apply">
+  <h2 style="font-size:2.2rem;font-weight:800;margin-bottom:16px">Ready to See If Doe's Sporting Goods Is a Fit?</h2>
+  <p style="opacity:.85;font-size:1.05rem;max-width:560px;margin:0 auto 8px">This blueprint is the start of the conversation. If what you read resonated, the next step is a quick qualifier — 8 questions, 4 minutes. No pitch, just a fit check.</p>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=John+Doe&biz=Doe%27s+Sporting+Goods&src=john-doe-sporting-goods-20260604&agents=Abandoned+Cart+Recovery+Agent,Loyalty+Program+Agent,Inventory+Alert+Agent,Review+%26+Referral+Agent,Customer+Win-Back+Agent,In-Store+Upsell+Agent" class="cta-btn">See If You Qualify →</a>
+</div>
+
+<!-- SECTION 16: Footer -->
+<footer>
+  <p>Bennett Maxwell | Franchise KI · AI Implementation for Retail Businesses</p>
+  <p style="margin-top:8px;font-size:.75rem">This blueprint was prepared exclusively for John Doe and Doe's Sporting Goods. Confidential.</p>
+</footer>
+
+<script>
+function calcROI(){
+  var leads=parseInt(document.getElementById('sl-leads').value)||0;
+  var rate=parseInt(document.getElementById('sl-rate').value)/100;
+  var hours=parseInt(document.getElementById('sl-hours').value)||0;
+  var contract=parseFloat(document.getElementById('sl-contract').value)||0;
+  if(contract<=0){document.getElementById('roi-amount').textContent='$0';return;}
+  var cartRecovery=leads*0.15*contract*0.25;
+  var loyaltyBoost=leads*rate*contract*0.08;
+  var timeSaved=hours*4*50;
+  var total=cartRecovery+loyaltyBoost+timeSaved;
+  document.getElementById('roi-amount').textContent='$'+Math.round(total).toLocaleString();
+}
+function setPreset(l,r,h,c){
+  document.getElementById('sl-leads').value=l;document.getElementById('leads-val').textContent=l;
+  document.getElementById('sl-rate').value=r;document.getElementById('rate-val').textContent=r+'%';
+  document.getElementById('sl-hours').value=h;document.getElementById('hours-val').textContent=h+' hrs';
+  document.getElementById('sl-contract').value=c;
+  calcROI();
+}
+function setSpeed(s,btn){
+  document.getElementById('blueprint-audio').playbackRate=s;
+  document.querySelectorAll('.speed-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
