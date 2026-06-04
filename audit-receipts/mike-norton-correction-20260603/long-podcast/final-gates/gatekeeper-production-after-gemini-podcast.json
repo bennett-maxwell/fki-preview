@@ -19,8 +19,8 @@
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
@@ -53,17 +53,17 @@
         "mike-norton-origins-20260603"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [
         "/Users/temp/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
-        "[PASS] mike-norton-origins-20260603: 15/15 (100%)",
+        "[FAIL] mike-norton-origins-20260603: 14/15 (93%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -114,7 +114,7 @@
         "  \"score\": 20,",
         "  \"status\": \"PASS\",",
         "  \"total\": 20,",
-        "  \"ts\": \"2026-06-03T21:40:32.522768+00:00\"",
+        "  \"ts\": \"2026-06-03T21:34:11.326478+00:00\"",
         "}"
       ]
     },
@@ -149,85 +149,22 @@
       "pass": true
     },
     {
-      "detail": "direct-address audio receipt passed",
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
       "name": "production_audio_direct_address",
-      "pass": true
-    },
-    {
-      "cmd": [
-        "/opt/homebrew/opt/python@3.14/bin/python3.14",
-        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
-        "--html",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
-        "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
-        "--lead",
-        "mike-norton-origins-20260603",
-        "--json-output",
-        "--require-production",
-        "--already-sent"
-      ],
-      "name": "strict_completion_gate_with_gatekeeper_receipt",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [],
-      "stdout_tail": [
-        "    \"48\": {",
-        "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": true,",
-        "      \"severity\": \"critical\",",
-        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
-        "    },",
-        "    \"49\": {",
-        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
-        "      \"pass\": true,",
-        "      \"severity\": \"info\",",
-        "      \"detail\": \"Not applicable to HTML deliverable\"",
-        "    },",
-        "    \"50\": {",
-        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
-        "      \"pass\": true,",
-        "      \"severity\": \"info\",",
-        "      \"detail\": \"Revenue validation requires human confirmation\"",
-        "    }",
-        "  }",
-        "}"
-      ]
+      "pass": false
     }
   ],
-  "diamond": "PASS",
-  "failures": [],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+  ],
   "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
   "lead": "mike-norton-origins-20260603",
   "mode": "production",
-  "pass_token": {
-    "allowed_actions": [
-      "internal_preview",
-      "bennett_preview"
-    ],
-    "approval_state": "bennett_preview_only",
-    "artifact_hashes": {
-      "blueprint_html_sha256": "2cea5e2383935266564073ecf3e9b2131127836a34cdc49e99103bf0fa09ddfb",
-      "delivery_email_sha256": "fd0479eab29b47da4af992c437020430de602f0e10ca9cfbe33fcef1eca81544",
-      "lead_profile_sha256": "98718625da0d77d1690931ebd38ea42e1b1b741b1699c9960d251a4d62a3bcfa",
-      "podcast_production_47_sha256": "5f8013bced47bbb818ad70197041f9afed09e3833a6baf644fc53be9930bd691"
-    },
-    "artifact_paths": {
-      "blueprint_html": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
-      "delivery_email": "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
-      "lead_profile": "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
-    },
-    "diamond": "PASS",
-    "generated_at": "2026-06-03T21:40:32.532253+00:00",
-    "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
-    "lead": "mike-norton-origins-20260603",
-    "pass": true,
-    "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
-    "score": 100,
-    "strict_production": true
-  },
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
-  "score": 100,
-  "status": "PASS",
-  "ts": "2026-06-03T21:40:32.531967+00:00"
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-03T21:34:11.335577+00:00"
 }

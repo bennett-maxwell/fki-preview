@@ -19,15 +19,15 @@
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
         "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": false,",
+        "      \"pass\": true,",
         "      \"severity\": \"critical\",",
-        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
         "    },",
         "    \"49\": {",
         "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
@@ -127,21 +127,19 @@
       "pass": true
     },
     {
-      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
-      "pass": false
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
-    "completion_gate failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: watson-kamoto-email-click-test.json",
     "proof receipt missing or failing: watson-kamoto-desktop-render.json",
     "proof receipt missing or failing: watson-kamoto-mobile-render.json",
     "proof receipt missing or failing: watson-kamoto-audit.json",
-    "proof receipt missing or failing: watson-kamoto-closeout.json",
-    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+    "proof receipt missing or failing: watson-kamoto-closeout.json"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/watson-kamoto.html",
   "lead": "watson-kamoto",
@@ -149,5 +147,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/watson-kamoto",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-03T20:10:48.920286+00:00"
+  "ts": "2026-06-04T00:23:00.923907+00:00"
 }

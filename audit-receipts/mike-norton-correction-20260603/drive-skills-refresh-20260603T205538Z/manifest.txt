@@ -1,0 +1,204 @@
+--- blueprint-ai-skill ---
+SKILL.md
+blueprint-enforcement-canonical-2026-05-30.md
+blueprint-enforcement-canonical-2026-05-30.md
+fetched blueprint-ai-skill bytes 103502
+---
+name: blueprint-ai-skill
+version: 3.26
+last_updated: 2026-06-02
+patched_v3_26: "2026-06-02 — Madison troubleshoot: (1) ZERO-BYPASS audit gate — before any Stage 7 email action, confirm blueprint-ai-audit-skill has run and score=100/100 in THIS session. If not: HALT, run audit, block email. No session-memory exception. No 'audit already ran yesterday' bypass. (2) EMAIL TEMPLATE FREEZE — Stage 7 delivery email (build-delivery-email.sh output) is READ-ONLY for structure, subject, and CTA. AI populates token values (lead name, URL, etc.) but NEVER redesigns, rewrites, or restructures the email body. If template modification is needed: propose-only, flag to Bennett, do NOT auto-apply. Reason: Madison session skipped Stage 6 audit and regenerated email template from scratch — both permanently blocked by this patch."
+patched_v3_25: "2026-06-02 — Follow-up campaign proof hardening. Gatekeeper 100 is a Blueprint production/content gate only, not proof that GHL apply/qualifier follow-up campaigns are going out. Full E2E/Diamond/goal_complete claims are blocked until ghl-followup-campaign-final-readback PASS proves both categories on the same contact: apply workflow/campaign evidence and qualifier workflow/campaign evidence. Tags/notes/repeat-submit can prove relay/contact identity; failed source=app SMS, zero native campaigns, zero native form submissions, or missing enrollment-history endpoint require BLOCKED/PARTIAL labels and Kay/Jenn workflow proof, not overstatement."
+patched_v3_24: "2026-06-02 — Automation trigger route hardening. GHL webhook handlers must call scripts/blueprint-pipeline-orchestrator.py with --profile for the exact submitted lead profile; never call deprecated scripts/blueprint-batch.sh, which is intentionally blocked. Pipeline Stage 6 must use format-conformance + blueprint_completion_gate.py / Gatekeeper 100, not stale pre-delivery CTA counters. Required proof: bash -n handler, py_compile orchestrator, --profile dry-run passes 1/1 with --dry-run no-send, production completion gate 44/44 and Gatekeeper 100 PASS after route repair."
+patched_v3_23: "2026-06-02 — Chad controlled E2E proof-run runbook. Adds exact latest-lead lookup, public apply/qualifier preflight, same-contact GHL proof, podcast direct-address, desktop/mobile render, email-click, Drive registry, Notion row, Gatekeeper production-token, Bennett-preview-only send boundary, and wrapper receipt-dir verification red-line."
+--- blueprint-ai-audit-skill ---
+SKILL-v1.1.md
+audit-skill-v1.3-additions.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛‛‛／SKILL.md
+blueprint-ai-audit-skill‛／SKILL.md
+blueprint-ai-audit-skill／SKILL.md
+blueprint-ai-skill-v2.4-patch.md
+blueprint-ai-skill-v2.5-patch.md
+d9-audit.py
+path fetch failed for blueprint-ai-audit-skill
+--- council-skill ---
+Council - Audit Memory Skill Permanent Fixes - 2026-05-27.docx
+Council - Audit Memory Skill Permanent Fixes Round 2 - 2026-05-27.docx
+SKILL.md
+_ARCHIVED_2026-05-10-0245-waldorf1-council.md
+_ARCHIVED_CHANGELOG.md
+_ARCHIVED_SKILL_v10.md
+_ARCHIVED_council-skill-v19-STAGING.md
+council-autopilot-mandatory-fix-20260527.md
+council-business-audit-2026-05-17.md
+council-cmp7c5mlc-2026-05-15.md
+council-cycle-batch-overdrive-v13-2026-05-15.md
+council-cycle-claim-lock-2026-05-15.md
+council-cycle-merge-v140-2026-05-16.md
+council-finish-cycle-plus-next-120-2026-05-15.md
+council-fki-buyer-guide-2026-TRIPLE-DIAMOND-120.md
+council-meeting-completion-execution-20260527.md
+council-meta-ads-takeover-2026-05-15.md
+council-organic-outreach-cycle120-next-p1-2026-05-15.md
+council-video-improve-2026-05-16.md
+engagement-council-2026-05-15.md
+fki-social-media-strategy-council-v1.md
+fetched council-skill bytes 45362
+---
+name: council-skill
+drive_file_id: 18edfLllHikArUABu7l_feBxFWfiLncAY
+version: 33.0
+last_updated: 2026-05-30
+council_verified: v32 self-test passed 2026-05-30 (sub-agent advisors + separate-auditor step-enforcement + literal-50/50 hard-on + dual-ID sync, readback verified)
+patched_v33: "2026-05-30 — Bennett-directed v33 rounds: fixed wrong Bennett DM id (U0A70BQBWP6->U08H07DMNTS); added Step 6.6 Token-Effectiveness Gate; wired out-of-band fail-closed ship gate (council-run.sh+council-verify-run.sh); added Step 7.5 calibration-contingent authority; slimmed version-archaeology to CHANGELOG. All pushed permanent to Drive, anchor-guarded."
+patched_v30: "2026-05-29 — Mechanical Integrity Gates (council 4.13/5, rec 4). Converts the two weakest prose 'MANDATORY' steps into executable hard gates: (G1) telemetry write fail-open-with-alert before Step 7; (G2) same-gate-twice question-hash lookup; (G3) NEW anti-rubber-stamp calibration gate — trailing-20 pass-rate >90% forces one advisor to score <=3 with written justification. Root cause: 2026-05-29 audit found 138 council 'ran' markers vs 2 telemetry lines (~2% real execution) and 100% historical pass-rate (rubber-stamp)." 
+--- autopilot-skill ---
+CHANGELOG.md
+SKILL.md
+SKILL_v10.md
+SKILL_v9_FINAL.md
+autopilot-skill-v9.1-STAGING-leo-fallback.md
+autopilot-skill-v9.2-STAGING-identity-rule.md
+wo-3-memory-sync-gate-plan.md
+fetched autopilot-skill bytes 19667
+---
+name: autopilot-skill
+description: "Single-cycle autonomous execution. Each invocation = one complete cycle. External scheduler (Cowork scheduled-tasks, cron */15 * * * *) fires each cycle — no sleep/loop needed inside this skill. NEVER ask Bennett questions. NEVER fabricate data. v12 adds deep-work-mode pre-flight + LEO ALLOCATION FLIPPED enforcement. v13 — gatekeeper-skill wired as mandatory Step 0.3 (Bennett directive 2026-06-03). v13.1 — Diamond T1/T2/T4 fixes: gatekeeper unavailable/unexpected-return handling, #leo-auto→#leo-coaches, EXEMPT trust documented, gatekeeper-skill added to deps."
+drive_file_id: 10KBx34OrzdlX0_RN9x8zqNvQEprLdQow
+version: 13.1
+architecture: scheduled-task
+last_updated: 2026-06-03
+deps:
+--- gatekeeper-skill ---
+SKILL.md
+gatekeeper-skill-v5.md
+fetched gatekeeper-skill bytes 54948
+---
+name: gatekeeper-skill
+description: "Default quality orchestrator for ALL tasks (not just deliverables). Checks 98% registry first; exempt tasks skip. All others: spawn workers, spawn a SEPARATE auditor, loop through council improvement until score ≥ threshold, then ship. v12: ALL-tasks default, 98% registry gate, file-handoff enforcement, 50-failure-mode hardening. v11: model routing (Sonnet spine, Haiku trivial, Opus hard). v6: 10 verified-delivery invariants: hard ship-gate (shipped⇒pass+diamond), Sentinel monitor, Bennett-delivery pass-token gate, auditor independence, mandatory fan-out, two-key external-send, ledger integrity, KPI, repeat-leak self-heal."
+version: 9.2
+status: ACTIVE
+drive_file_id: 17FTNm951jvei-_wphCyL9HrCwVF93Zdw
+patched_v9_2: "2026-06-03 — PERMANENT FIX: batch_pass_threshold raised 0.80→0.90 per Bennett directive '90-95% certainty before shipping'. Output-type tiering added: external-facing=0.90, internal=0.85. Council 3.69/5 CONDITIONAL approved with tiering as council Seat 2 mitigation. Fleet-wide: Mack, Ivan-CC, Leo, Henry, all employee CCs. Staged rollout: council-skill first, recap-skill second, gatekeeper-skill last."
+lss_score: TBD
+--- recap-skill ---
+CHANGELOG.md
+SKILL.md
+SKILL.md
+recap-skill-CHANGELOG.md
+fetched recap-skill bytes 51096
+---
+name: recap-skill
+version: 9.4
+drive_file_id: 1e9nw03yKQ9tjD4k3zEBAhQsEnH0qZWe6
+last_updated: 2026-06-03
+v9_4_codex_memory_canon_fix: "2026-06-03 — Bennett directive: Codex/ChatGPT local ad_hoc memory notes, local workspace recap receipts, and local receipt paths no longer count as saved-memory proof. They may support reconciliation only. Canonical memory proof must point to Drive/Notion canon or a memory-skill receipt tied to that canonical write."
+v9_2_cloud_agent_fix: "2026-06-03 — PERMANENT FIX (council 3.13/5, Skorl audit): Extended identity gate in End-of-Thread Council Loop to include cloud/Hyperagent agents (Skorl). Prior gate only handled temp→mack, openclaw→ivan, else exit 0 — cloud surface had 0% autonomous loops. Cloud agents now use Drive+Notion as state layer. Also documents that council loop uses 5 options × 4 rounds = 20 total (NOT 50+50 — Bennett's '50 ideas expand + 50 fail' description is unimplemented; needs explicit council option to add if desired). Auditor confirmed system at 48% of 3-pillar potential fleet-wide."
+lss_score: 96
