@@ -1,13 +1,15 @@
 <!-- v1.8 -->
-NOTEBOOKLM SOURCE DOCUMENT / AI Roadmap for Mike Norton — Origins / Prepared by Franchise Ki | bennett@franchiseki.com
+PRIVATE AUDIO BRIEFING / AI Roadmap for Mike Norton — Origins / Prepared by Franchise Ki | bennett@franchiseki.com
 Generated: 2026-06-04T17:32:14.131768+00:00
+
+Open the audio with EXACTLY these words: "Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us."
 
 DIRECT ADDRESS RULE: The audio must open with: Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us.
 Audience: Mike Norton, Origins.
 Duration target: approximately 20 minutes.
 CTA: complete the qualifier only; no calendar booking language.
 
-12 SECTION SOURCE PACKAGE
+12 SECTION AUDIO PACKAGE
 
 1. About Mike and Origins
 Mike runs Origins in consulting, business transformation, and AI operations. The roadmap uses Mike's submitted details: Google Drive, Notion, Slack, ClickUp, five-person team, around fifty monthly leads, five thousand dollar average client value, current five-minute response speed, and operational stresses around missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
@@ -44,7 +46,7 @@ Harvard Business Review on fast lead response; McKinsey on digital sales and fol
 
 12. Spoken Script
 
-Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us. Mike, this is your AI roadmap for Origins, and you are going to hear how the system supports you, your team, and your client experience. 
+Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us. Mike, welcome again. This walkthrough was built specifically for you and Origins, based on everything you told us. Mike, you are listening to a direct AI roadmap for you, your team, and your client experience at Origins. This is not a generic overview. It is for you, your workflow, your tools, and your next operating layer. 
 
 You run Origins as a consulting, business transformation, and AI operations company. You told us your current world includes Google Drive, Notion, Slack, and ClickUp. You also told us your team size is five, your monthly lead flow is around fifty, your average client value is about five thousand dollars, your current response speed is around five minutes, and your operating stresses include missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
 
@@ -122,7 +124,7 @@ Another practical example: when your team finishes a call, the system can create
 
 A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
 
-Your current stack is workable, and that is good news. Google Drive can hold client artifacts, intake documents, proposal drafts, and source material for internal knowledge. Notion can hold process, operating notes, reusable frameworks, and the structured knowledge your team returns to. Slack can be the routing layer for alerts, approvals, and quick internal decisions. ClickUp can hold execution, deadlines, ownership, and recurring task structure.
+Your current stack is workable, and that is good news. Google Drive can hold client artifacts, intake documents, proposal drafts, and reference material for internal knowledge. Notion can hold process, operating notes, reusable frameworks, and the structured knowledge your team returns to. Slack can be the routing layer for alerts, approvals, and quick internal decisions. ClickUp can hold execution, deadlines, ownership, and recurring task structure.
 
 The AI layer should respect those roles. It should not dump everything into one place. It should send the right object to the right tool. A lead summary belongs in Slack first, because your team needs to see it. A project task belongs in ClickUp, because someone needs to own it. A reusable framework belongs in Notion, because it becomes knowledge. A proposal draft belongs in Drive, because it becomes an artifact.
 
@@ -155,3 +157,6 @@ By day thirty, the system should run the basic rhythm. New inquiries trigger use
 After month three, the system and team should feel integrated. The goal is not a science project. The goal is a dependable digital employee that works around the clock, remembers the process, drafts the repetitive work, and lets your human team stay focused on strategy, relationships, and delivery.
 
 Mike, the next step is simple. If the speed-to-lead, intake, proposal, content, client health, or admin automation pieces resonate, complete the qualifier so the team can review fit and implementation path. This walkthrough was built for you and Origins, from what you told us.
+
+
+Qualifier CTA URL for final call to action: https://bennett-maxwell.github.io/fki-preview/qualify.html?src=mike-norton-origins-20260603
