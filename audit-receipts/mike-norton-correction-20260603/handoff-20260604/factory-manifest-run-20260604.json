@@ -1,0 +1,152 @@
+{
+  "artifacts": {
+    "blueprint_html": {
+      "exists": true,
+      "path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+      "sha256": "40f602a067939edcef966b3a4724be0d4ea27db4db917fa8014b89eaa215b7f5",
+      "size_bytes": 100614
+    },
+    "delivery_email": {
+      "exists": true,
+      "path": "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+      "sha256": "348c88288a7c1571757cbb638a4c6579486f11f5a2a364dc8a6c85e9f602f29e",
+      "size_bytes": 5186
+    },
+    "gatekeeper_token": {
+      "exists": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-gatekeeper-pass-token.json",
+      "sha256": "956b0366cfdd85d2a6eec357d09b96ea2ba8e10f5d08ddb5d8cadb7ef6d4e490",
+      "size_bytes": 1548
+    },
+    "lead_profile": {
+      "exists": true,
+      "path": "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json",
+      "sha256": "cfaf10345afbefe603c92a0a72219abb18596d5e30d91d18718877847eedc57b",
+      "size_bytes": 7010
+    },
+    "production_47": {
+      "exists": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-production-47.json",
+      "sha256": "4cf54440fbe1f4a3e0cb222e2f53b5e0960602fd144d3ce5a10fd44a67c218fd",
+      "size_bytes": 2627
+    }
+  },
+  "failures": [],
+  "gates": {
+    "completion_gate": {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "scripts/blueprint_completion_gate.py",
+        "--html",
+        "blueprints/mike-norton-origins-20260603.html",
+        "--receipt-dir",
+        "audit-receipts/mike-norton-origins-20260603",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--require-production",
+        "--json-output"
+      ],
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    "gatekeeper_token_verify": {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "scripts/blueprint_gatekeeper_100.py",
+        "--verify-token",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--html",
+        "blueprints/mike-norton-origins-20260603.html",
+        "--receipt-dir",
+        "audit-receipts/mike-norton-origins-20260603",
+        "--delivery-email",
+        "delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--profile",
+        "leads/mike-norton-origins-20260603.json",
+        "--token",
+        "audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-gatekeeper-pass-token.json",
+        "--json-output"
+      ],
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"status\": \"PASS\",",
+        "  \"lead\": \"mike-norton-origins-20260603\",",
+        "  \"failures\": []",
+        "}"
+      ]
+    },
+    "production_47_schema": {
+      "audio_sha256": "cda0fc8f11dc9381e75f1928e73d6d5293f1cec7b23829e7aa3c7944f98f7f3a",
+      "http_code": 200,
+      "pass": true,
+      "public_sha256": "cda0fc8f11dc9381e75f1928e73d6d5293f1cec7b23829e7aa3c7944f98f7f3a",
+      "size_download": 17153810
+    },
+    "public_podcast_readback": {
+      "http_code": 200,
+      "pass": true,
+      "sha256": "cda0fc8f11dc9381e75f1928e73d6d5293f1cec7b23829e7aa3c7944f98f7f3a",
+      "sha_match": true,
+      "size_download": 17153810,
+      "url": "https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton-origins-20260603.mp3?v=cda0fc8f"
+    },
+    "run_audit": {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "run-audit.py",
+        "--lead",
+        "mike-norton-origins-20260603"
+      ],
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] mike-norton-origins-20260603: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    }
+  },
+  "lead": "mike-norton-origins-20260603",
+  "schema": "blueprint_factory_manifest.v1",
+  "send_lock": {
+    "approval_receipt_checked": false,
+    "bennett_preview_allowed": true,
+    "external_send_allowed": false,
+    "external_send_block_reason": "requires current Bennett approval receipt and Gatekeeper token allowed_actions contains external_send",
+    "token_allowed_actions": [
+      "internal_preview",
+      "bennett_preview"
+    ]
+  },
+  "status": "PASS_PREVIEW_ONLY",
+  "ts": "2026-06-04T14:07:01.527443+00:00"
+}
