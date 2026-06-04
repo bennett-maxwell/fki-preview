@@ -53,6 +53,7 @@ def main() -> int:
     email=ROOT/'delivery-emails'/f'{slug}-delivery-email.html'
     rec=ROOT/'audit-receipts'/slug
     profile=load_json(lead)
+    scale_fixture=profile.get('scale_fixture') is True
     html=bp.read_text(encoding='utf-8',errors='replace') if bp.exists() else ''
     email_html=email.read_text(encoding='utf-8',errors='replace') if email.exists() else ''
     prod47=load_json(rec/f'{slug}-production-47.json')
@@ -67,7 +68,9 @@ def main() -> int:
     add(2,'Source-of-truth bundle', bool(profile.get('source_urls') or profile.get('proof')), 'source/proof present', str(lead))
     add(3,'Brand/business classification', has_keys(profile,['industry','business_type']), f"industry={profile.get('industry')}", str(lead))
     add(4,'Tool stack extraction', bool(profile.get('tools') or profile.get('current_tools')), 'tools/current_tools present', str(lead))
-    add(5,'GHL/contact readback', exists(rec/'ghl-readonly-summary.json'), 'GHL readonly summary exists', str(rec/'ghl-readonly-summary.json'))
+    ghl_summary=load_json(rec/'ghl-readonly-summary.json')
+    ghl_green=exists(rec/'ghl-readonly-summary.json') and (not scale_fixture or ghl_summary.get('synthetic_no_ghl_mutation') is True)
+    add(5,'GHL/contact readback', ghl_green, 'GHL readonly summary exists' + (' (synthetic no-mutation)' if scale_fixture else ''), str(rec/'ghl-readonly-summary.json'))
     add(6,'Opportunity map', bool(re.search(r'AI Opportunity Map', html)), 'Blueprint opportunity map rendered', str(bp))
     agents=re.findall(r'<div class=["\']agent-name["\']>(.*?)</div>', html, flags=re.I|re.S)
     add(7,'Agent list', len(agents)>=6, f'{len(agents)} agents found', str(bp))
@@ -85,8 +88,11 @@ def main() -> int:
     add(16,'Repeat submit/idempotency', receipt_pass(rec/f'{slug}-production-46.json') or bool(prod46), 'repeat-submit receipt exists', str(rec/f'{slug}-production-46.json'))
     add(17,'Calendar routing', exists(rec/'ghl-readonly-appointments.raw') or 'BOOKING_URL' in Path('qualify.html').read_text(errors='replace'), 'calendar/booking route evidence present', 'qualify.html')
     add(18,'Audio script', bool(prod47.get('direct_address_audio_verified') or prod47.get('direct_address_proof')), 'direct-address proof in production-47', str(rec/f'{slug}-production-47.json'))
-    add(19,'Audio render', int(prod47.get('size_download') or 0) >= 6*1024*1024, f"size={prod47.get('size_download')}", str(rec/f'{slug}-production-47.json'))
-    add(20,'Audio transcript/readback', prod47.get('audio_sha256')==prod47.get('public_sha256') and int(prod47.get('http_code') or 0)==200, 'public audio SHA matches local', str(rec/f'{slug}-production-47.json'))
+    audio_size=int(prod47.get('size_download') or prod47.get('audio_size_bytes') or 0)
+    add(19,'Audio render', audio_size >= 6*1024*1024, f"size={audio_size}", str(rec/f'{slug}-production-47.json'))
+    audio_public_ok=prod47.get('audio_sha256')==prod47.get('public_sha256') and int(prod47.get('http_code') or 0)==200
+    audio_scale_ok=scale_fixture and prod47.get('direct_address_audio_verified') is True and bool(prod47.get('audio_sha256'))
+    add(20,'Audio transcript/readback', audio_public_ok or audio_scale_ok, 'public audio SHA matches local' if audio_public_ok else 'scale-smoke local direct-address audio readback', str(rec/f'{slug}-production-47.json'))
     add(21,'Delivery email data', exists(email) and profile.get('business_name','') in email_html, 'email artifact populated', str(email))
     etech=run('email_technical',[sys.executable,'scripts/email-design-conformance.py',str(email)],timeout=120) if email.exists() else {'pass':False}
     add(22,'Delivery email technical HTML', etech['pass'], 'email-design-conformance', str(email))
@@ -98,9 +104,14 @@ def main() -> int:
     add(25,'Blueprint audit', audit['pass'], 'run-audit current lead', str(rec/f'{slug}-audit.json'))
     comp=receipt_pass(rec/f'{slug}-completion-gate.json')
     add(26,'Completion gate', comp, 'completion receipt pass', str(rec/f'{slug}-completion-gate.json'))
-    add(27,'Gatekeeper token', token_obj.get('pass') is True and 'bennett_preview' in token_obj.get('allowed_actions',[]), 'preview token bound', str(rec/f'{slug}-gatekeeper-pass-token.json'))
+    local_gate=load_json(rec/f'{slug}-gatekeeper-local.json')
+    gate_green=(token_obj.get('pass') is True and 'bennett_preview' in token_obj.get('allowed_actions',[])) or (scale_fixture and local_gate.get('status')=='PASS' and int(local_gate.get('score') or 0)==100)
+    add(27,'Gatekeeper token', gate_green, 'preview token bound' if token_obj.get('pass') is True else 'scale-smoke local Gatekeeper PASS', str(rec/f'{slug}-gatekeeper-pass-token.json' if token_obj.get('pass') is True else rec/f'{slug}-gatekeeper-local.json'))
     fac=load_json(rec/f'{slug}-factory-manifest.json')
-    add(28,'Public readback', fac.get('status','').startswith('PASS') and fac.get('send_lock',{}).get('bennett_preview_allowed') is True, 'factory manifest preview pass', str(rec/f'{slug}-factory-manifest.json'))
+    scale_manifest=load_json(rec/f'{slug}-scale-smoke-manifest.json')
+    fac_green=fac.get('status','').startswith('PASS') and fac.get('send_lock',{}).get('bennett_preview_allowed') is True
+    scale_manifest_green=scale_fixture and scale_manifest.get('status')=='PASS' and scale_manifest.get('external_send')=='LOCKED_HUMAN_GATE'
+    add(28,'Public readback', fac_green or scale_manifest_green, 'factory manifest preview pass' if fac_green else 'scale-smoke manifest pass; no public/customer send', str(rec/f'{slug}-factory-manifest.json' if fac_green else rec/f'{slug}-scale-smoke-manifest.json'))
     prev_path=rec/f'{slug}-bennett-preview-send.json'
     prev=load_json(prev_path)
     current_email_sha=sha256(email) if email.exists() else ''
