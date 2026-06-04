@@ -1,0 +1,56 @@
+{
+  "created_at": "2026-06-04T00:00:00-06:00",
+  "lead": "mike-norton-origins-20260603",
+  "verdict": "PREVIOUS_PREVIEW_WAS_INVALID",
+  "current_status": "BLOCKED_PENDING_TRUE_NOTEBOOKLM_REGENERATION",
+  "no_customer_send": true,
+  "root_cause": [
+    "NotebookLM Blueprint podcast skill was read but not enforced as a hard origin gate.",
+    "NotebookLM auth/CLI path did not produce notebook_id/source_id/artifact_id/download receipt.",
+    "A local macOS TTS fallback was allowed to satisfy duration/size/hash/direct-address checks.",
+    "The 30-step conveyor Step 19/20 checked audio existence and readback but not NotebookLM origin.",
+    "Gatekeeper and Completion gate scored green without rejecting local_tts_fallback/notebooklm partial status."
+  ],
+  "skipped_or_incomplete_steps": [
+    "NotebookLM MCP/CLI generate_audio with wait_for_audio=True.",
+    "NotebookLM artifact wait/download proof.",
+    "Persist notebook_id/source_id/artifact_id/generation receipt.",
+    "Hard fail on NOTEBOOKLM_PARTIAL_AUTH_EXPIRED.",
+    "Human-quality listen gate before Bennett preview."
+  ],
+  "fix_applied_local_repo": [
+    "scripts/blueprint_conveyor_30.py Step 19/20 now require NotebookLM origin and reject local TTS fallback/auth partial.",
+    "scripts/blueprint_gatekeeper_100.py production mode now includes production_audio_notebooklm_origin hard gate.",
+    "scripts/blueprint_completion_gate.py production check 47 now requires NotebookLM origin proof."
+  ],
+  "post_fix_proof": {
+    "conveyor_after": {
+      "path": "audit-receipts/mike-norton-20min-podcast-20260604/conveyor-after-notebooklm-hard-gate.json",
+      "sha256": "ae69d4eeeb20cce39c974beff47525343db21eeb450aa6dfe47a9098e25d9b04"
+    },
+    "gatekeeper_after": {
+      "path": "audit-receipts/mike-norton-20min-podcast-20260604/gatekeeper-after-notebooklm-hard-gate.json",
+      "sha256": "e51ff901c2b4b0145982d002e96cd51355a4759d6909d04625e6a69b4c91e619"
+    },
+    "completion_after": {
+      "path": "audit-receipts/mike-norton-20min-podcast-20260604/completion-after-notebooklm-hard-gate.json",
+      "sha256": "a5bbbfe5248a2109399407346c3ca1671f4b528203767641b62c65dde181d59c"
+    },
+    "drive_skill_patch": {
+      "path": "audit-receipts/mike-norton-20min-podcast-20260604/drive-skill-patch/drive-canonical-skill-v3.28-replace-fetchback-PASS.json",
+      "sha256": "3d894dc9a701d4b8aa596911d81cd1eae0bde6cbcc5e2596ff6523d55e40b2b3"
+    }
+  },
+  "expected_after_fix": [
+    "Current Mike package must be RED/BLOCKED until a real NotebookLM audio artifact is generated.",
+    "No Bennett preview or customer send can pass with local_tts_fallback present.",
+    "A future green run must show notebook_id/source_id/artifact_id or NotebookLM generation receipt."
+  ],
+  "drive_canonical_skill_patch": {
+    "status": "PASS",
+    "file_id": "1IzE-seDDaB1Tciik9mwBVrgQcb7FP7eH",
+    "version_after": "3.28",
+    "fetchback_sha256": "de3bcdfe0d9a9f8c4614ebcb2ae658a35fa9d6b7062ea18d081532c9ab6847d0",
+    "receipt": "audit-receipts/mike-norton-20min-podcast-20260604/drive-skill-patch/drive-canonical-skill-v3.28-replace-fetchback-PASS.json"
+  }
+}

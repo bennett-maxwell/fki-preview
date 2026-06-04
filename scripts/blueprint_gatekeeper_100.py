@@ -204,6 +204,46 @@ def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
     )
 
 
+def audio_notebooklm_origin_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
+    """Require NotebookLM-origin proof for production Blueprint podcasts.
+
+    A local TTS fallback can pass duration/hash/direct-address checks while still
+    sounding unacceptable and bypassing the Blueprint podcast SOP. Production
+    Gatekeeper must fail closed unless the receipt proves NotebookLM generation
+    or an equivalent NotebookLM artifact/notebook/source id.
+    """
+    path = receipt_dir / f"{lead}-production-47.json"
+    if not path.exists():
+        return False, f"missing podcast production receipt: {path.name}"
+    try:
+        data = load_json(path)
+    except Exception as exc:
+        return False, f"invalid podcast production receipt: {exc}"
+    fallback = str(data.get("local_tts_fallback") or data.get("tts_fallback") or "").strip()
+    if fallback:
+        return False, f"local TTS fallback present ({fallback}); NotebookLM origin required"
+    status = str(data.get("notebooklm_status") or data.get("audio_status") or "").upper()
+    if any(token in status for token in ("PARTIAL", "AUTH", "EXPIRED", "FAIL", "BLOCK", "FALLBACK")):
+        return False, f"NotebookLM status is not acceptable: {status or 'missing'}"
+    origin = str(data.get("generator") or data.get("audio_generator") or data.get("origin") or "").lower()
+    artifact_fields = (
+        data.get("notebooklm_artifact_id"),
+        data.get("artifact_id"),
+        data.get("notebook_id"),
+        data.get("notebooklm_notebook_id"),
+        data.get("source_id"),
+        data.get("notebooklm_source_id"),
+    )
+    if (
+        data.get("notebooklm_generated") is True
+        or data.get("notebooklm_origin_verified") is True
+        or origin in {"notebooklm", "notebooklm-mcp", "notebooklm-cli"}
+        or any(bool(value) for value in artifact_fields)
+    ):
+        return True, "NotebookLM origin verified"
+    return False, "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+
+
 def validate_token(token_path: Path, lead: str, require_production: bool,
                    html_path: Path = None, delivery_email_path: Path = None,
                    lead_profile_path: Path = None, receipt_dir: Path = None) -> Tuple[bool, List[str]]:
@@ -431,6 +471,11 @@ def main() -> int:
         checks.append({"name": "production_audio_direct_address", "pass": audio_direct_ok, "detail": audio_direct_detail})
         if not audio_direct_ok:
             failures.append(f"production audio direct-address failed: {audio_direct_detail}")
+
+        audio_notebooklm_ok, audio_notebooklm_detail = audio_notebooklm_origin_gate(receipt_dir, args.lead)
+        checks.append({"name": "production_audio_notebooklm_origin", "pass": audio_notebooklm_ok, "detail": audio_notebooklm_detail})
+        if not audio_notebooklm_ok:
+            failures.append(f"production audio NotebookLM origin failed: {audio_notebooklm_detail}")
 
     pass_now = not failures
     token_path = receipt_dir / f"{args.lead}-gatekeeper-pass-token.json"
