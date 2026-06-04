@@ -1,0 +1,251 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604",
+        "--lead",
+        "billy-bob-electric-20260604",
+        "--json-output"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": null,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Skipped (use --require-production to enforce)\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+        "--lead",
+        "billy-bob-electric-20260604",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Emergency Dispatch Agent\",",
+        "        \"Quote Follow-Up Agent\",",
+        "        \"Technician Scheduling Agent\",",
+        "        \"Permit & Inspection Prep Agent\",",
+        "        \"Maintenance Plan Agent\",",
+        "        \"Review & Referral Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy+Bob&biz=Billy+Bob+Electric&src=billy-bob-electric-20260604&agents=Emergency+Dispatch+Agent%2CQuote+Follow-Up+Agent%2CTechnician+Scheduling+Agent%2CPermit+%26+Inspection+Prep+Agent%2CMaintenance+Plan+Agent%2CReview+%26+Referral+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"billy-bob-electric-20260604\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "billy-bob-electric-20260604"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] billy-bob-electric-20260604: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "billy-bob-electric-20260604 home_services         1000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-19_content_width_capped\": {",
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-20_no_offbrand_accent_leak\": {",
+        "      \"detail\": \"\",",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"failed\": [],",
+        "  \"html\": \"/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html\",",
+        "  \"pass\": true,",
+        "  \"score\": 20,",
+        "  \"status\": \"PASS\",",
+        "  \"total\": 20,",
+        "  \"ts\": \"2026-06-04T17:21:39.894630+00:00\"",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+  "lead": "billy-bob-electric-20260604",
+  "mode": "local",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-04T17:21:39.897004+00:00"
+}

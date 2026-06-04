@@ -1,0 +1,51 @@
+SLUG                 INDUSTRY           DEFAULT       JS  RESULT
+------------------------------------------------------------------------------
+alex-ramos           medical_devices       5000     5000  PASS
+austin-iron-horse    retail_firearms        900        0  PASS
+avery-martinez-costa-vida-20260601 food_franchise          18     None  PASS
+billy-bob-electric-20260604 home_services         1000        0  FAIL (1)
+      ✗ D10-21 [RL] home-services blueprint contains wrong-industry/template language: Command Center
+branson-maxwell      photography           6000        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 6000) cloned across 2 industries ['photography', 'property_mgmt'] — not personalized
+brent-attaway        crm_software          2388        0  PASS
+britt-warnick        design_agency         2388        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 2388) cloned across 4 industries ['crm_software', 'design_agency', 'professional_services', 'video_production'] — not personalized
+brittney-warnick     design_agency         1500     1500  PASS
+chad-ramirez-summit-street-tacos-20260602 food_franchise          38        0  PASS
+chris-lpnw           consulting           25000        0  PASS
+claude-code          professional_services      2388        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 2388) cloned across 4 industries ['crm_software', 'design_agency', 'professional_services', 'video_production'] — not personalized
+court-lundberg       home_services         1500        0  PASS
+dave-wood-fresh-20260601 food_franchise          18       18  PASS
+dave-wood            food_franchise       15000        0  FAIL (2)
+      ✗ D7-01 [RL] contract default $15,000 outside food_franchise band $8-$60
+      ✗ D7-03 slider range $1,000-$50,000 does not overlap food_franchise band $8-$60
+      ⚠ D7-04 hardcoded large $ figures in copy: ['15,000'] — must trace to intake/source
+jaden-mecham         medspa                 150      150  PASS
+jason-martinez       home_services         None     None  FAIL (1)
+      ✗ D10-21 [RL] home-services blueprint contains wrong-industry/template language: Command Center
+      ⚠ D7-10 label 'Average Contract Value' but home_services sells by 'job/ticket'
+      ⚠ D7-04 hardcoded large $ figures in copy: ['19,500'] — must trace to intake/source
+local-webhookprobe   unknown                500      500  FAIL (1)
+      ✗ D10-05 [RL] industry unclassified — cannot verify financials (add 'local-webhookprobe' to LEAD_INDUSTRY from intake)
+      ⚠ D7-10 label 'Average Contract Value' but unknown sells by 'deal'
+melissa-tash-srp     photography            250      250  PASS
+mike-johnson         home_services         2000        0  FAIL (1)
+      ✗ D10-21 [RL] home-services blueprint contains wrong-industry/template language: Command Center, LinkedIn
+mike-norton-origins-20260603 crm_software          2388        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 2388) cloned across 4 industries ['crm_software', 'design_agency', 'professional_services', 'video_production'] — not personalized
+paul-muus            consulting            3000     3000  PASS
+plumber-test-business-20260601 home_services         1000        0  PASS
+rey-31-consulting    consulting           12000        0  PASS
+rj-kitchenguard      home_services         3000     None  FAIL (2)
+      ✗ D7-18 [RL] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B 'home_services' — inflates ROI projection with an irrelevant channel (remove/replace it for trades)
+      ✗ D10-21 [RL] home-services blueprint contains wrong-industry/template language: Command Center, LinkedIn
+rush-evans           photography           2500        0  PASS
+watson-kamoto        video_production      2388        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 2388) cloned across 4 industries ['crm_software', 'design_agency', 'professional_services', 'video_production'] — not personalized
+watson               video_production       800      800  PASS
+zachary-oldham       property_mgmt         6000        0  FAIL (1)
+      ✗ D7-02 [RL] identical ROI slider (0, 6000) cloned across 2 industries ['photography', 'property_mgmt'] — not personalized
+------------------------------------------------------------------------------
+FINANCIAL-REALISM: 16/28 pass red-line financial checks
+CROSS-INDUSTRY CLONE GROUPS: [((0, 6000), ['photography', 'property_mgmt']), ((0, 2388), ['crm_software', 'design_agency', 'professional_services', 'video_production'])]
