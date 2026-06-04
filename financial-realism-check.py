@@ -31,6 +31,7 @@ INDUSTRY_BANDS = {
     "retail_firearms":    (300, 6000,   "ticket"),
     "design_agency":      (1500,40000,  "project"),
     "consulting":         (3000,150000, "engagement"),
+    "retail":             (50,  2000,   "purchase/transaction"),    # retail sporting goods
     "professional_services": (1000,50000, "contract/project"),
     "ai_consulting":      (3000,25000,  "contract"),
     "crm_software":       (1200,75000,  "contract/ARR"),
@@ -41,6 +42,7 @@ INDUSTRY_BANDS = {
 
 # Per-lead industry classification (from business name / known intake).
 LEAD_INDUSTRY = {
+    "john-doe-sporting-goods-20260604": "retail",
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
     "melissa-tash-srp": "photography",
