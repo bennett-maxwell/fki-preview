@@ -380,6 +380,14 @@ def main() -> int:
         checks.append(approval_email)
         if not approval_email["pass"]:
             failures.append("approval email customer-view gate failed")
+        email_visual = run_cmd(
+            "email_visual_format_gate",
+            [sys.executable, str(REPO / "scripts" / "blueprint_email_visual_gate.py"), "--email", str(delivery_email_for_context), "--subject", f"CUSTOMER VIEW PREVIEW: {args.lead} - Your Custom Blueprint is Ready", "--json-output"],
+            timeout=90,
+        )
+        checks.append(email_visual)
+        if not email_visual["pass"]:
+            failures.append("email visual format gate failed")
 
     audit = run_cmd("blueprint_audit", [sys.executable, str(REPO / "run-audit.py"), "--lead", args.lead])
     checks.append(audit)

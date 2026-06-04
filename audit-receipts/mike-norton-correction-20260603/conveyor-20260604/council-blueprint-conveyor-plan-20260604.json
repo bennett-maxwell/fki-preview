@@ -1,0 +1,17 @@
+{
+  "ts": "2026-06-04T16:05:00Z",
+  "skill": "council-skill",
+  "mode": "permanent_fix_approval",
+  "threshold": 4.25,
+  "problem": "Blueprint AI is too large; defects slip because broad gates prove existence instead of step-specific quality.",
+  "advisors": [
+    {"name":"Operator","score":4.9,"recommendation":"Break into 30 worker/auditor steps. No stage can proceed without a receipt."},
+    {"name":"QA","score":4.8,"recommendation":"Add a manifest checker that reports each step green/red and blocks preview/send on any red."},
+    {"name":"Customer Experience","score":4.7,"recommendation":"Email visual format must be its own hard gate with screenshot/readback proof."},
+    {"name":"Scale","score":4.6,"recommendation":"Make gates runnable by subagents: each step has inputs, outputs, auditor, pass condition."},
+    {"name":"Risk","score":4.8,"recommendation":"Bennett preview and external send are separate protected gates; no send until all prior steps green."}
+  ],
+  "average_score":4.76,
+  "decision":"approved",
+  "recommended_architecture":"Blueprint Conveyor 30 with worker/auditor receipts, final greenlight manifest, and email format as independent step 23."
+}

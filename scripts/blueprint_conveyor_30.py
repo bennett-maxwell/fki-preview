@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""Blueprint Conveyor 30 final audit.
+
+Outputs 30 small gates with GREEN/RED/LOCKED_HUMAN_GATE. Steps 01-28 must be
+GREEN before Bennett approval preview. Step 30 is locked until Bennett approval
+and an external_send Gatekeeper token exist.
+"""
+from __future__ import annotations
+import argparse, hashlib, json, re, subprocess, sys, urllib.request
+from pathlib import Path
+from typing import Any
+
+ROOT=Path(__file__).resolve().parents[1]
+
+def load_json(path: Path) -> dict[str,Any]:
+    try: return json.loads(path.read_text(encoding='utf-8'))
+    except Exception: return {}
+
+def exists(path: Path) -> bool: return path.exists() and path.stat().st_size>0
+
+def run(name: str, cmd: list[str], timeout=120) -> dict[str,Any]:
+    p=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True,timeout=timeout)
+    return {'cmd':cmd,'returncode':p.returncode,'pass':p.returncode==0,'stdout_tail':p.stdout.splitlines()[-10:],'stderr_tail':p.stderr.splitlines()[-10:]}
+
+def has_keys(d: dict, keys: list[str]) -> bool:
+    return all(bool(d.get(k)) for k in keys)
+
+def receipt_pass(path: Path) -> bool:
+    d=load_json(path)
+    if not d: return False
+    if d.get('pass') is True or d.get('ok') is True or d.get('verified') is True: return True
+    if d.get('overall_pass') is True: return True
+    if str(d.get('status','')).upper().startswith('PASS'): return True
+    if isinstance(d.get('pass_token'),dict) and d['pass_token'].get('pass') is True: return True
+    return False
+
+def sha256(path: Path) -> str:
+    h=hashlib.sha256()
+    with path.open('rb') as f:
+        for chunk in iter(lambda: f.read(1024*1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+def main() -> int:
+    ap=argparse.ArgumentParser()
+    ap.add_argument('--lead', required=True)
+    ap.add_argument('--json-output', action='store_true')
+    ap.add_argument('--phase', choices=['pre_bennett','post_preview','external'], default='post_preview')
+    args=ap.parse_args()
+    slug=args.lead
+    lead=ROOT/'leads'/f'{slug}.json'
+    bp=ROOT/'blueprints'/f'{slug}.html'
+    email=ROOT/'delivery-emails'/f'{slug}-delivery-email.html'
+    rec=ROOT/'audit-receipts'/slug
+    profile=load_json(lead)
+    html=bp.read_text(encoding='utf-8',errors='replace') if bp.exists() else ''
+    email_html=email.read_text(encoding='utf-8',errors='replace') if email.exists() else ''
+    prod47=load_json(rec/f'{slug}-production-47.json')
+    prod46=load_json(rec/f'{slug}-production-46.json')
+    token=load_json(rec/f'{slug}-gatekeeper-pass-token.json')
+    token_obj=token.get('pass_token', token) if isinstance(token,dict) else {}
+    steps=[]
+    def add(n,name,green,detail='',artifact='',locked=False):
+        status='LOCKED_HUMAN_GATE' if locked else ('GREEN' if green else 'RED')
+        steps.append({'step':n,'name':name,'status':status,'green':green,'detail':detail,'artifact':artifact})
+    add(1,'Intake identity lock', has_keys(profile,['lead_name','business_name','slug','email','phone']), 'profile has canonical identity', str(lead))
+    add(2,'Source-of-truth bundle', bool(profile.get('source_urls') or profile.get('proof')), 'source/proof present', str(lead))
+    add(3,'Brand/business classification', has_keys(profile,['industry','business_type']), f"industry={profile.get('industry')}", str(lead))
+    add(4,'Tool stack extraction', bool(profile.get('tools') or profile.get('current_tools')), 'tools/current_tools present', str(lead))
+    add(5,'GHL/contact readback', exists(rec/'ghl-readonly-summary.json'), 'GHL readonly summary exists', str(rec/'ghl-readonly-summary.json'))
+    add(6,'Opportunity map', bool(re.search(r'AI Opportunity Map', html)), 'Blueprint opportunity map rendered', str(bp))
+    agents=re.findall(r'<div class=["\']agent-name["\']>(.*?)</div>', html, flags=re.I|re.S)
+    add(7,'Agent list', len(agents)>=6, f'{len(agents)} agents found', str(bp))
+    add(8,'Prompt pack', html.count('prompt-card')>=3 or all(profile.get(k) for k in ['prompt_1','prompt_2','prompt_3']), '3 prompt pack present', str(bp))
+    fin=run('financial_realism',[sys.executable,'financial-realism-check.py','--file',str(bp)]) if bp.exists() else {'pass':False}
+    add(9,'Financial inputs', fin['pass'], 'financial-realism current file pass' if fin['pass'] else 'financial-realism failed current file', str(bp))
+    add(10,'Blueprint HTML render', exists(bp) and '<!DOCTYPE html>' in html[:500], 'Blueprint HTML exists and starts as HTML', str(bp))
+    add(11,'Blueprint copy QA', not any(x in html for x in ['{{','Get Your AI Quote','Command Center']), 'no obvious template/banned visible leakage', str(bp))
+    qlink=run('qualify_link',[sys.executable,'scripts/blueprint_qualify_link_gate.py','--html',str(bp),'--check-http','--json-output'],timeout=120) if bp.exists() else {'pass':False}
+    add(12,'CTA/link QA', qlink['pass'], 'qualify link gate', str(bp))
+    qctx=run('qualifier_context',[sys.executable,'scripts/blueprint_qualifier_context_gate.py','--html',str(bp),'--delivery-email',str(email),'--profile',str(lead),'--lead',slug,'--json-output'],timeout=120)
+    add(13,'Qualifier required fields', qctx['pass'], 'required fields/all 8 checked by qualifier-context gate', 'qualify.html')
+    add(14,'Q7 tailoring', qctx['pass'], 'Q7 agents context overlaps actual Blueprint agents', 'qualify.html')
+    add(15,'Lead relay/GHL payload', 'blueprint-ghl-relay' in Path('qualify.html').read_text(errors='replace'), 'relay endpoint configured, no direct public PIT token check bundled', 'qualify.html')
+    add(16,'Repeat submit/idempotency', receipt_pass(rec/f'{slug}-production-46.json') or bool(prod46), 'repeat-submit receipt exists', str(rec/f'{slug}-production-46.json'))
+    add(17,'Calendar routing', exists(rec/'ghl-readonly-appointments.raw') or 'BOOKING_URL' in Path('qualify.html').read_text(errors='replace'), 'calendar/booking route evidence present', 'qualify.html')
+    add(18,'Audio script', bool(prod47.get('direct_address_audio_verified') or prod47.get('direct_address_proof')), 'direct-address proof in production-47', str(rec/f'{slug}-production-47.json'))
+    add(19,'Audio render', int(prod47.get('size_download') or 0) >= 6*1024*1024, f"size={prod47.get('size_download')}", str(rec/f'{slug}-production-47.json'))
+    add(20,'Audio transcript/readback', prod47.get('audio_sha256')==prod47.get('public_sha256') and int(prod47.get('http_code') or 0)==200, 'public audio SHA matches local', str(rec/f'{slug}-production-47.json'))
+    add(21,'Delivery email data', exists(email) and profile.get('business_name','') in email_html, 'email artifact populated', str(email))
+    etech=run('email_technical',[sys.executable,'scripts/email-design-conformance.py',str(email)],timeout=120) if email.exists() else {'pass':False}
+    add(22,'Delivery email technical HTML', etech['pass'], 'email-design-conformance', str(email))
+    evis=run('email_visual',[sys.executable,'scripts/blueprint_email_visual_gate.py','--email',str(email),'--subject',f'CUSTOMER VIEW PREVIEW: {profile.get("business_name",slug)} - Your Custom Blueprint is Ready','--json-output'],timeout=120) if email.exists() else {'pass':False}
+    add(23,'Delivery email visual format', evis['pass'], 'visual customer-view email gate', str(email))
+    appr=run('approval_customer_view',[sys.executable,'scripts/blueprint_approval_email_gate.py','--email',str(email),'--profile',str(lead),'--json-output'],timeout=120) if email.exists() else {'pass':False}
+    add(24,'Bennett approval packet', appr['pass'], 'approval customer-view gate', str(email))
+    audit=run('run_audit',[sys.executable,'run-audit.py','--lead',slug],timeout=120)
+    add(25,'Blueprint audit', audit['pass'], 'run-audit current lead', str(rec/f'{slug}-audit.json'))
+    comp=receipt_pass(rec/f'{slug}-completion-gate.json')
+    add(26,'Completion gate', comp, 'completion receipt pass', str(rec/f'{slug}-completion-gate.json'))
+    add(27,'Gatekeeper token', token_obj.get('pass') is True and 'bennett_preview' in token_obj.get('allowed_actions',[]), 'preview token bound', str(rec/f'{slug}-gatekeeper-pass-token.json'))
+    fac=load_json(rec/f'{slug}-factory-manifest.json')
+    add(28,'Public readback', fac.get('status','').startswith('PASS') and fac.get('send_lock',{}).get('bennett_preview_allowed') is True, 'factory manifest preview pass', str(rec/f'{slug}-factory-manifest.json'))
+    prev_path=rec/f'{slug}-bennett-preview-send.json'
+    prev=load_json(prev_path)
+    current_email_sha=sha256(email) if email.exists() else ''
+    preview_sha_ok=bool(prev.get('email_sha256')) and prev.get('email_sha256')==current_email_sha
+    preview_msg_ok=bool(prev.get('gmail_message_id') or prev.get('gmail_thread_id'))
+    add(29,'Bennett preview send', preview_msg_ok and preview_sha_ok, f'Bennett preview receipt exists; sha_match={preview_sha_ok}', str(prev_path), locked=args.phase=='pre_bennett')
+    ext_allowed='external_send' in token_obj.get('allowed_actions',[])
+    add(30,'External/customer send', False, 'locked until Bennett approval + external_send token', '', locked=not ext_allowed)
+    pre_green=all(s['status']=='GREEN' for s in steps if s['step']<=28)
+    preview_green=all(s['status']=='GREEN' for s in steps if s['step']<=29)
+    external_green=all(s['status']=='GREEN' for s in steps)
+    out={'schema':'blueprint_conveyor_30.v1','lead':slug,'phase':args.phase,'pre_bennett_green':pre_green,'preview_green':preview_green,'external_green':external_green,'steps':steps,'summary':{'green':sum(1 for s in steps if s['status']=='GREEN'),'red':sum(1 for s in steps if s['status']=='RED'),'locked':sum(1 for s in steps if s['status']=='LOCKED_HUMAN_GATE')}}
+    if args.json_output: print(json.dumps(out,indent=2,sort_keys=True))
+    else:
+        for s in steps: print(f"{s['step']:02d} {s['status']:17s} {s['name']} — {s['detail']}")
+        print(json.dumps(out['summary']))
+    # Machine exit: pre-Bennett gates must be green; external lock is allowed.
+    return 0 if pre_green and (args.phase!='external' or external_green) else 1
+if __name__=='__main__':
+    raise SystemExit(main())

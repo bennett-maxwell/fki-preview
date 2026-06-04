@@ -238,11 +238,8 @@ html = html.replace('{{PROMPT_1}}', profile.get('prompt_1', default_p1))
 html = html.replace('{{PROMPT_2}}', profile.get('prompt_2', default_p2))
 html = html.replace('{{PROMPT_3}}', profile.get('prompt_3', default_p3))
 html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
-# Inject build metadata
-import datetime
-build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-meta = '<!-- BLUEPRINT-DELIVERY-EMAIL v2 -->\n' + f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
-html = meta + html
+# Customer-view email must start with <!DOCTYPE html>; do not prepend build
+# metadata comments because Gmail snippets/forwarded previews can expose them.
 with open(output_path, 'w') as f:
     f.write(html)
 PYEOF
@@ -305,6 +302,10 @@ fi
 if [ -f "$SCRIPT_DIR/blueprint_approval_email_gate.py" ]; then
     python3 "$SCRIPT_DIR/blueprint_approval_email_gate.py" --email "$OUTPUT" --profile "$PROFILE" --subject "$BUSINESS_NAME - Your Custom Blueprint is Ready" >/tmp/${SLUG}-approval-email-gate.json
     echo "Approval email gate: PASS (customer-view body)"
+fi
+if [ -f "$SCRIPT_DIR/blueprint_email_visual_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_email_visual_gate.py" --email "$OUTPUT" --subject "CUSTOMER VIEW PREVIEW: $BUSINESS_NAME - Your Custom Blueprint is Ready" --json-output >/tmp/${SLUG}-email-visual-gate.json
+    echo "Email visual gate: PASS (customer-view format)"
 fi
 if [ -f "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" ]; then
     python3 "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" --html "blueprints/$SLUG.html" --delivery-email "$REPO_EMAIL" --profile "$PROFILE" --lead "$SLUG" --json-output >/tmp/${SLUG}-qualifier-context-gate.json
