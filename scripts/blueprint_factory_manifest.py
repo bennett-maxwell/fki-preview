@@ -114,6 +114,8 @@ def main():
     manifest['gates']['run_audit'] = run([sys.executable, 'run-audit.py', '--lead', lead])
     manifest['gates']['completion_gate'] = run([sys.executable, 'scripts/blueprint_completion_gate.py', '--html', str(html.relative_to(ROOT)), '--receipt-dir', str(receipt_dir.relative_to(ROOT)), '--lead', lead, '--require-production', '--json-output'])
     manifest['gates']['qualify_link_gate'] = run([sys.executable, 'scripts/blueprint_qualify_link_gate.py', '--html', str(html.relative_to(ROOT)), '--check-http', '--json-output'])
+    manifest['gates']['qualifier_context_gate'] = run([sys.executable, 'scripts/blueprint_qualifier_context_gate.py', '--html', str(html.relative_to(ROOT)), '--delivery-email', str(email.relative_to(ROOT)), '--profile', str(profile.relative_to(ROOT)), '--lead', lead, '--json-output'])
+    manifest['gates']['approval_email_customer_view_gate'] = run([sys.executable, 'scripts/blueprint_approval_email_gate.py', '--email', str(email.relative_to(ROOT)), '--profile', str(profile.relative_to(ROOT)), '--json-output'])
     if token.exists() and html.exists() and email.exists() and profile.exists():
         manifest['gates']['gatekeeper_token_verify'] = validate_token(token, lead, html, email, profile, receipt_dir)
     else:

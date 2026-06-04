@@ -62,21 +62,85 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    }",
         "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=oZBJde4VGnUGf2eHVzr8\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"mike-norton-origins-20260603\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
         "  \"status\": \"PASS\"",
         "}"
       ]
@@ -147,7 +211,7 @@
         "  \"score\": 20,",
         "  \"status\": \"PASS\",",
         "  \"total\": 20,",
-        "  \"ts\": \"2026-06-04T15:13:00.455101+00:00\"",
+        "  \"ts\": \"2026-06-04T15:36:35.653527+00:00\"",
         "}"
       ]
     },
@@ -240,9 +304,9 @@
     ],
     "approval_state": "bennett_preview_only",
     "artifact_hashes": {
-      "blueprint_html_sha256": "bb7452bf967b0e8a1420b770d8ce676760d1e4859f50afecbdde2b098a21e532",
-      "delivery_email_sha256": "7586bcf48900c57b6977870ef72dd0311e8fcb9103358e52a16e6050662595e5",
-      "lead_profile_sha256": "df056229c29baf96375f8101a0134c1ef747f0bbb416d3fb135b0a044e0d2d33",
+      "blueprint_html_sha256": "c8b7fb98156e1061d584c8045e21095d6c85b8e683d444d7736b83714160f08a",
+      "delivery_email_sha256": "426272007a61a222f063f95f3d9aba6158cb201a555381dbd5c6f3190181e621",
+      "lead_profile_sha256": "39d8a0cd0b4dbe788c110638d9ddef20c26152e27b93adf43107317524edba71",
       "podcast_production_47_sha256": "4cf54440fbe1f4a3e0cb222e2f53b5e0960602fd144d3ce5a10fd44a67c218fd"
     },
     "artifact_paths": {
@@ -251,7 +315,7 @@
       "lead_profile": "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
     },
     "diamond": "PASS",
-    "generated_at": "2026-06-04T15:13:00.470135+00:00",
+    "generated_at": "2026-06-04T15:36:35.666105+00:00",
     "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
     "lead": "mike-norton-origins-20260603",
     "pass": true,
@@ -262,5 +326,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
   "score": 100,
   "status": "PASS",
-  "ts": "2026-06-04T15:13:00.469667+00:00"
+  "ts": "2026-06-04T15:36:35.665670+00:00"
 }

@@ -235,10 +235,33 @@ def host_scoped_url(profile_key, path):
         return f'{blueprint_base_url}{path}'
     return value or f'{blueprint_base_url}{path}'
 
+def q7_agent_names():
+    names = []
+    for agent in profile.get('ai_agents', []) or []:
+        if isinstance(agent, dict):
+            names.append(agent.get('name') or agent.get('title') or agent.get('usecase') or '')
+        else:
+            names.append(str(agent))
+    ap = profile.get('applicable_prompts')
+    if isinstance(ap, dict):
+        for item in ap.values():
+            if isinstance(item, dict):
+                names.append(item.get('name') or '')
+    cleaned = []
+    seen = set()
+    for name in names:
+        text = re.sub(r'<[^>]+>', '', str(name)).strip()
+        key = re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
+        if text and key not in seen:
+            seen.add(key); cleaned.append(text)
+    return cleaned[:6]
+
 lead_encoded = urllib.parse.quote(lead_name)
 biz_encoded = urllib.parse.quote(business_name)
 slug = profile.get('slug', lead_name.lower().replace(' ', '-'))
-qualify_url = host_scoped_url('qualify_url', f'/qualify.html?lead={lead_encoded}&biz={biz_encoded}&src={slug}')
+q7_agents = q7_agent_names()
+agent_query = '&agents=' + urllib.parse.quote(','.join(q7_agents)) if q7_agents else ''
+qualify_url = host_scoped_url('qualify_url', f'/qualify.html?lead={lead_encoded}&biz={biz_encoded}&src={slug}{agent_query}')
 
 subject_encoded = urllib.parse.quote(f"Application -- {business_name}")
 mailto_body = urllib.parse.quote(

@@ -90,6 +90,7 @@ fi
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
+QUALIFIER_AGENTS=$(python3 "$SCRIPT_DIR/blueprint_q7_agents.py" "$PROFILE" --slug "$SLUG")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
 APPLY_URL="$BLUEPRINT_BASE_URL/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
@@ -98,11 +99,11 @@ APPLY_URL="$BLUEPRINT_BASE_URL/apply/?lead=$(python3 -c 'import urllib.parse,sys
 # button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
 # Empty default => the python block below falls back to the canonical qualify.html.
 PROFILE_QUALIFY_URL=$(get qualify_url "")
-QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" "$BLUEPRINT_BASE_URL" << 'PYEOF'
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" "$BLUEPRINT_BASE_URL" "$QUALIFIER_AGENTS" << 'PYEOF'
 import sys
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-profile_url, lead_name, business_name, slug, contact_id, base_url = sys.argv[1:7]
+profile_url, lead_name, business_name, slug, contact_id, base_url, qualifier_agents = sys.argv[1:8]
 DEFAULT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
 base_url = base_url.rstrip("/") or DEFAULT_BASE_URL
 if base_url != DEFAULT_BASE_URL and (not profile_url or profile_url.startswith(DEFAULT_BASE_URL)):
@@ -121,6 +122,8 @@ params["utm_medium"] = "email"
 params["utm_campaign"] = "blueprint_delivery"
 if contact_id:
     params["contactId"] = contact_id
+if qualifier_agents:
+    params["agents"] = qualifier_agents
 fallback_path = urlsplit(f"{base_url}/qualify.html").path or "/qualify.html"
 print(urlunsplit((parts.scheme, parts.netloc, parts.path or fallback_path, urlencode(params), "")))
 PYEOF
@@ -296,6 +299,18 @@ if [ -f "$SCRIPT_DIR/email-design-conformance.py" ]; then
     fi
 fi
 
+
+# Customer-view approval gate: this artifact may be sent to Bennett for approval,
+# but it must look like the customer email, not an internal proof memo.
+if [ -f "$SCRIPT_DIR/blueprint_approval_email_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_approval_email_gate.py" --email "$OUTPUT" --profile "$PROFILE" --subject "$BUSINESS_NAME - Your Custom Blueprint is Ready" >/tmp/${SLUG}-approval-email-gate.json
+    echo "Approval email gate: PASS (customer-view body)"
+fi
+if [ -f "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" --html "blueprints/$SLUG.html" --delivery-email "$REPO_EMAIL" --profile "$PROFILE" --lead "$SLUG" --json-output >/tmp/${SLUG}-qualifier-context-gate.json
+    echo "Qualifier context gate: PASS (tailored Q7 links)"
+fi
+
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
     check_session_audit_ts
@@ -305,7 +320,7 @@ if [ "$SEND_PREVIEW" = true ]; then
     if ! gog gmail send \
         --to=bennett@franchiseki.com \
         --cc=madison@franchiseki.com \
-        --subject="PREVIEW: $LEAD_NAME Blueprint Delivery Email" \
+        --subject="CUSTOMER VIEW PREVIEW: $BUSINESS_NAME - Your Custom Blueprint is Ready" \
         --body-html="$(cat "$OUTPUT")" \
         --no-input > "$SEND_LOG" 2>&1; then
         cat "$SEND_LOG"

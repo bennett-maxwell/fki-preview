@@ -347,6 +347,40 @@ def main() -> int:
     if not qualify_link["pass"]:
         failures.append("qualify link gate failed")
 
+    qualifier_context_cmd = [
+        sys.executable,
+        str(REPO / "scripts" / "blueprint_qualifier_context_gate.py"),
+        "--html",
+        str(html_path),
+        "--lead",
+        args.lead,
+        "--json-output",
+    ]
+    delivery_email_for_context = Path(args.delivery_email) if args.delivery_email else default_delivery_email_path(args.lead)
+    if not delivery_email_for_context.is_absolute():
+        delivery_email_for_context = REPO / delivery_email_for_context
+    profile_for_context = Path(args.profile) if args.profile else default_lead_profile_path(args.lead)
+    if not profile_for_context.is_absolute():
+        profile_for_context = REPO / profile_for_context
+    if delivery_email_for_context.exists():
+        qualifier_context_cmd.extend(["--delivery-email", str(delivery_email_for_context)])
+    if profile_for_context.exists():
+        qualifier_context_cmd.extend(["--profile", str(profile_for_context)])
+    qualifier_context = run_cmd("qualifier_context_gate", qualifier_context_cmd, timeout=90)
+    checks.append(qualifier_context)
+    if not qualifier_context["pass"]:
+        failures.append("qualifier context gate failed")
+
+    if delivery_email_for_context.exists():
+        approval_email = run_cmd(
+            "approval_email_customer_view_gate",
+            [sys.executable, str(REPO / "scripts" / "blueprint_approval_email_gate.py"), "--email", str(delivery_email_for_context), "--profile", str(profile_for_context), "--json-output"],
+            timeout=90,
+        )
+        checks.append(approval_email)
+        if not approval_email["pass"]:
+            failures.append("approval email customer-view gate failed")
+
     audit = run_cmd("blueprint_audit", [sys.executable, str(REPO / "run-audit.py"), "--lead", args.lead])
     checks.append(audit)
     if not audit["pass"]:

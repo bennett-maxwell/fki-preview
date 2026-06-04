@@ -16,7 +16,7 @@ Usage:
   python3 scripts/gen-blueprint.py leads/<slug>.json
   -> writes blueprints/<slug>.html
 """
-import json, re, sys, os
+import json, re, sys, os, urllib.parse
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
@@ -64,6 +64,41 @@ def replace_section(html, sec_id, inner):
 def build(profile):
     html = open(TEMPLATE, encoding="utf-8").read()
     p = profile
+
+    def host_scoped_url_value(profile_key, path):
+        value = p.get(profile_key) or ""
+        if BLUEPRINT_BASE_URL != DEFAULT_BLUEPRINT_BASE_URL and (not value or value.startswith(DEFAULT_BLUEPRINT_BASE_URL)):
+            return f"{BLUEPRINT_BASE_URL}{path}"
+        return value or f"{BLUEPRINT_BASE_URL}{path}"
+
+    def agent_names_for_q7():
+        names = []
+        for agent in p.get("agents", []) or []:
+            if isinstance(agent, dict):
+                names.append(agent.get("name") or agent.get("title") or agent.get("usecase") or "")
+            else:
+                names.append(str(agent))
+        cleaned = []
+        seen = set()
+        for name in names:
+            text = re.sub(r"<[^>]+>", "", str(name)).strip()
+            key = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+            if text and key not in seen:
+                seen.add(key); cleaned.append(text)
+        return cleaned[:6]
+
+    def append_q7_context(url):
+        parts = urllib.parse.urlsplit(url)
+        params = dict(urllib.parse.parse_qsl(parts.query, keep_blank_values=True))
+        params["lead"] = p.get("lead_name", "")
+        params["biz"] = p.get("business_name", "")
+        params["src"] = p.get("slug", "")
+        agents = agent_names_for_q7()
+        if agents:
+            params["agents"] = ",".join(agents)
+        return urllib.parse.urlunsplit((parts.scheme, parts.netloc, parts.path or "/qualify.html", urllib.parse.urlencode(params), ""))
+
+    p["qualify_url"] = append_q7_context(host_scoped_url_value("qualify_url", f"/qualify.html?src={p['slug']}"))
 
     # ---- hero ----
     stats = "".join(

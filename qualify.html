@@ -738,22 +738,53 @@ function hydrateIdentity() {
   getLeadSessionId();
 }
 
-// Q7 DYNAMIC PER-LEAD (Bennett directive 2026-05-29): render the lead's actual blueprint agents.
-// Reads ?agents=Name1,Name2,... from the blueprint CTA. Falls back to the generic 5 chips when absent.
-function hydrateAgents() {
-  const params = getParams();
-  const raw = params.get('agents');
-  if (!raw) return; // no per-lead agents passed → keep default generic 5 chips
-  const agents = raw.split(',').map(s => decodeURIComponent(s.replace(/\+/g,' ')).trim()).filter(Boolean);
+// Q7 DYNAMIC PER-LEAD (Bennett directive 2026-06-04): render the lead's actual Blueprint recommendations.
+// Priority order: explicit ?agents= from the Blueprint/email CTA, then a source-slug
+// safety map for already-live packages. Generic chips are only the final fallback and
+// must fail the factory qualifier-context gate before Bennett/customer approval.
+const BLUEPRINT_Q7_CONTEXTS = {
+  'mike-norton-origins-20260603': [
+    'Speed-to-Lead Agent',
+    'Client Onboarding Agent',
+    'Proposal Generator',
+    'Content Production Agent',
+    'Client Health Monitor',
+    'Admin Automation Agent'
+  ]
+};
+
+function parseAgentList(raw) {
+  if (!raw) return [];
+  return raw.split(',').map(function(item){
+    return decodeURIComponent(String(item || '').replace(/\+/g,' ')).trim();
+  }).filter(Boolean);
+}
+
+function renderAgentChips(agentNames) {
+  const agents = (agentNames || []).filter(Boolean);
   if (!agents.length) return;
   const box = document.getElementById('chips-capability');
   if (!box) return;
+  chips.capability = null;
   // EP5: dynamically generated chips get keyboard nav attributes too
   box.innerHTML = agents.map(function(name){
     const val = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     const safe = name.replace(/"/g,'&quot;');
     return '<div class="chip" data-val="'+val+'" data-label="'+safe+'" tabindex="0" role="button" aria-pressed="false" onclick="selectChip(\'capability\',\''+val+'\')" onkeydown="chipKeydown(event,\'capability\',\''+val+'\')">'+safe+'</div>';
   }).join('');
+}
+
+function hydrateAgents() {
+  const params = getParams();
+  const src = params.get('src') || '';
+  const agents = parseAgentList(params.get('agents'));
+  if (agents.length) {
+    renderAgentChips(agents);
+    return;
+  }
+  if (BLUEPRINT_Q7_CONTEXTS[src] && BLUEPRINT_Q7_CONTEXTS[src].length) {
+    renderAgentChips(BLUEPRINT_Q7_CONTEXTS[src]);
+  }
 }
 
 function updateIdentityStatus() {
