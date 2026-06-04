@@ -336,7 +336,12 @@ def podcast_audio_gate(slug, lead):
             ]
             if require_public_audio:
                 cmd.extend(["--public-url", public_url])
-            # Auto-discover transcript file: try multiple naming conventions
+            # Auto-discover transcript file only when it is bound to the
+            # current audio SHA. Stale transcripts caused Mike-style false
+            # validation/failure after a podcast MP3 was replaced while
+            # podcasts/<slug>-transcript.txt still described older audio.
+            # If no SHA-bound transcript exists, fall back to live audio
+            # transcription; if that cannot run, fail closed.
             podcast_dir = os.path.dirname(audio_path)
             base = os.path.splitext(os.path.basename(audio_path))[0]  # slug without .mp3
             transcript_candidates = [
@@ -345,7 +350,15 @@ def podcast_audio_gate(slug, lead):
                 os.path.join(podcast_dir, f"{base}-elevenlabs-raw-elevenlabs-transcript.txt"),
             ]
             for tc in transcript_candidates:
-                if os.path.exists(tc):
+                meta_path = f"{tc}.meta.json"
+                transcript_bound_to_current_audio = False
+                if os.path.exists(tc) and os.path.exists(meta_path):
+                    try:
+                        with open(meta_path, encoding="utf-8") as mf:
+                            transcript_bound_to_current_audio = json.load(mf).get("audio_sha256") == current_sha
+                    except Exception:
+                        transcript_bound_to_current_audio = False
+                if os.path.exists(tc) and transcript_bound_to_current_audio:
                     cmd.extend(["--transcript-file", tc])
                     break
             proc = subprocess.run(cmd, capture_output=True, text=True, timeout=360)
