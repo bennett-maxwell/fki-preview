@@ -97,8 +97,21 @@ def main() -> int:
     token_obj=token.get('pass_token', token) if isinstance(token,dict) else {}
     steps=[]
     def add(n,name,green,detail='',artifact='',locked=False):
-        status='LOCKED_HUMAN_GATE' if locked else ('GREEN' if green else 'RED')
-        steps.append({'step':n,'name':name,'status':status,'green':green,'detail':detail,'artifact':artifact})
+        # Sequential fail-closed rule: a later step cannot be called GREEN if any
+        # earlier required step is RED. This turns the conveyor from advisory
+        # scoring into a hard stage-by-stage gate. Human locks are allowed only
+        # after every prior required step is green.
+        prior_red = next((s for s in steps if s.get('status') == 'RED'), None)
+        if prior_red:
+            status = 'RED'
+            base_green = bool(green)
+            green = False
+            detail = f"blocked_by_prior_step_{prior_red['step']:02d}: {prior_red['name']}; base_check={'PASS' if base_green else 'FAIL'}; {detail}"
+            blocked_by_step = prior_red['step']
+        else:
+            status='LOCKED_HUMAN_GATE' if locked else ('GREEN' if green else 'RED')
+            blocked_by_step = None
+        steps.append({'step':n,'name':name,'status':status,'green':green,'detail':detail,'artifact':artifact,'blocked_by_step':blocked_by_step})
     add(1,'Intake identity lock', has_keys(profile,['lead_name','business_name','slug','email','phone']), 'profile has canonical identity', str(lead))
     add(2,'Source-of-truth bundle', bool(profile.get('source_urls') or profile.get('proof')), 'source/proof present', str(lead))
     add(3,'Brand/business classification', has_keys(profile,['industry','business_type']), f"industry={profile.get('industry')}", str(lead))
