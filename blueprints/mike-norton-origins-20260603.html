@@ -34,7 +34,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { overflow-x: hidden; font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
     .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
     .nav-logo span { color: var(--brand); }
@@ -458,22 +458,22 @@
         </thead>
         <tbody>
           <tr>
-            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><div class="m-phase">Phase 1 — Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
             <td><ul class="m-list"><li>Kickoff call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your Google Drive, Notion, Slack, ClickUp forms</li><li>Brand voice built from origins.com and your existing Origins messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
             <td class="m-result">Your first agent is live. Every Origins lead gets a 60-second response while you sleep.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><div class="m-phase">Phase 2 — Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
             <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Origins pricing, features, and verticals</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
             <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><div class="m-phase">Phase 3 — Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
             <td><ul class="m-list"><li>30-day performance review: response rates, time saved, churn prevented</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Origins scales past 1,000 customers</li></ul></td>
             <td class="m-result">System knows your business. Every agent calibrated to real Origins data.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><div class="m-phase">Phase 4 — Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
             <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
             <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
           </tr>
@@ -505,7 +505,7 @@
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" data-no-default="true" oninput="updateLabel('rate'); calcROI();" value="18">
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
@@ -797,7 +797,7 @@ If any answer is N: revise that section before sending.
       <h3>Two paths forward for Mike:</h3>
       <div class="path-grid">
         <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Origins's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="path-cta">Get Your AI Quote</a></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Origins's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/apply/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="path-cta">Get Your AI Quote</a></div>
       </div>
     </div>
   </div>
@@ -892,7 +892,7 @@ If any answer is N: revise that section before sending.
     <h2>Ready to See This<br><span>Working for Origins?</span></h2>
     <p class="cta-personal">"Mike, I built this roadmap specifically for Origins because I believe the platform you have created &mdash; helping 675+ home service businesses run their operations in one place &mdash; deserves systems that are as reliable and scalable as the product itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="cta-btn">Get Your AI Quote</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/apply/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="cta-btn">Get Your AI Quote</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -905,7 +905,7 @@ If any answer is N: revise that section before sending.
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="mobile-cta-btn">Get Your AI Quote</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/apply/qualify.html?lead=Mike%20Norton&biz=Origins&src=mike-norton-origins-20260603" class="mobile-cta-btn">Get Your AI Quote</a>
 </div>
 
 <script>
@@ -1171,5 +1171,7 @@ If any answer is N: revise that section before sending.
   }
 })();
 </script>
+<!-- LEAD-META services="Business consulting | AI automation planning | Lead response systems | Appointment booking workflows | Admin process automation | Marketing content operations" market="consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations" -->
+<div style="display:none" data-services="Business consulting | AI automation planning | Lead response systems | Appointment booking workflows | Admin process automation | Marketing content operations" data-market="consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations">Business consulting | AI automation planning | Lead response systems | Appointment booking workflows | Admin process automation | Marketing content operations — consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations</div>
 </body>
 </html>
