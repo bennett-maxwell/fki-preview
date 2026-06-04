@@ -338,6 +338,15 @@ def main() -> int:
     if not completion["pass"]:
         failures.append("completion_gate failed")
 
+    qualify_link = run_cmd(
+        "qualify_link_gate",
+        [sys.executable, str(REPO / "scripts" / "blueprint_qualify_link_gate.py"), "--html", str(html_path), "--check-http", "--json-output"],
+        timeout=90,
+    )
+    checks.append(qualify_link)
+    if not qualify_link["pass"]:
+        failures.append("qualify link gate failed")
+
     audit = run_cmd("blueprint_audit", [sys.executable, str(REPO / "run-audit.py"), "--lead", args.lead])
     checks.append(audit)
     if not audit["pass"]:

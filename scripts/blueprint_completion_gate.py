@@ -605,7 +605,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     }
 
     # 27. CTA points to qualify.html and does not use the banned Bennett-work phrasing
-    bad_cta = bool(re.search(r'href=["\'][^"\']*(?:(?<!/qualify)\/apply|meetadvaita\.com/apply)["\']', html, re.I))
+    bad_cta = bool(re.search(r'href=["\'][^"\']*(?:/apply(?:/|\?|#|["\'])|meetadvaita\.com/apply)[^"\']*["\']', html, re.I))
     banned_cta_copy = bool(re.search(r'>\s*Apply to work with Bennett\s*<', html, re.I))
     banned_work_with_us = bool(re.search(r'>\s*Apply to Work With Us\s*<', html, re.I))
     ambiguous_apply = bool(re.search(r'>\s*Apply\s*<', html, re.I))

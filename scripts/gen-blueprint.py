@@ -197,7 +197,7 @@ def build(profile):
     diy = (f'<div class="diy-or-partner"><h3>Two paths forward for {esc(p["first_name"])}:</h3><div class="path-grid">'
            f'<div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div>'
            f'<div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the {esc(p["business_name"])} voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p>'
-           f'<a href="{p["qualify_url"]}" class="path-cta">Get Your AI Quote</a></div></div></div>')
+           f'<a href="{p["qualify_url"]}" class="path-cta">See If You Qualify</a></div></div></div>')
     prm = (f'\n  <div class="container">\n    <p class="section-label">Your First AI Agent — Start Here</p>\n'
            f'    <h2 class="section-title">3 Production-Ready AI Agent Prompts for {esc(p["business_name"])}</h2>\n'
            f'    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Built specifically for {esc(p["business_name"])}.</p>\n'
