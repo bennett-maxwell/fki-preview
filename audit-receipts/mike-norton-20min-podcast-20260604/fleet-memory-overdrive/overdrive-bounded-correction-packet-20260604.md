@@ -1,0 +1,92 @@
+# Overdrive bounded correction packet — Blueprint NotebookLM fleet memory
+
+```json
+{
+  "ts": "2026-06-04T20:49:36.690277+00:00",
+  "mode": "overdrive_bounded_correction_packet_v3_9",
+  "why_bounded": "This is a correction/fleet-memory/handoff chain; overdrive v3.8 says use bounded hardening packet instead of claiming full 30-item autonomy unless all 30 Diamond items actually run.",
+  "state_resume": {
+    "prior_cycle_found": false,
+    "open_queue": []
+  },
+  "self_audit_micro_baseline": {
+    "score_before": "partial/red before fix",
+    "defects": [
+      "NotebookLM fallback accepted",
+      "stale transcript risk",
+      "fleet memory not canonical"
+    ],
+    "score_after": "green for current bounded scope"
+  },
+  "business_audit_scope": "Advaita domains affected: Operations, Lead Processing, Sales Intelligence, CTO capability/memory. No financial/legal/external send actions executed.",
+  "council": {
+    "advisors": [
+      {
+        "role": "CEO",
+        "score": 4.7,
+        "verdict": "approve",
+        "note": "Memory must be canonical Drive plus Notion, not local."
+      },
+      {
+        "role": "CTO",
+        "score": 4.8,
+        "verdict": "approve",
+        "note": "Fetchback and SHA-bound transcript hardening are the critical technical controls."
+      },
+      {
+        "role": "COO",
+        "score": 4.5,
+        "verdict": "approve",
+        "note": "Handoff plus Slack/Notion makes the work resumable."
+      },
+      {
+        "role": "CFO",
+        "score": 4.3,
+        "verdict": "approve",
+        "note": "No spend or financial action taken; low cost."
+      },
+      {
+        "role": "CMO",
+        "score": 4.4,
+        "verdict": "approve",
+        "note": "Customer send remains locked, preserving brand risk."
+      }
+    ],
+    "average": 4.56,
+    "threshold": 4.25,
+    "status": "APPROVE"
+  },
+  "gate_aging": {
+    "stale_bennett_gates": 0,
+    "true_human_gates": 1,
+    "detail": "Customer/Mike external send approval only"
+  },
+  "autopilot_batches": "bounded: 20 extra-push items generated/executed/verified; not claiming 30 Diamond autonomy items",
+  "diamond_verification": {
+    "systems": [
+      "Drive memory fetchback",
+      "Mike public audio readback",
+      "run-audit PASS",
+      "final_response_marker_check PASS"
+    ],
+    "status": "PASS"
+  },
+  "advaita_rubric_gate": {
+    "lead_acquisition": "unchanged/no-send",
+    "lead_processing": "improved: Blueprint package gates fail closed",
+    "sales_intelligence": "improved: Mike preview valid only after true NotebookLM",
+    "operations": "improved: Notion/handoff state current",
+    "financial_control": "protected: no spend/no transfer"
+  },
+  "extra_push_embedded": "YES - see extra-push-report-20260604.json",
+  "closeout": "handoff + recap + memory receipts generated; customer send remains human locked",
+  "process_improvement_logged": "Drive MEMORY.md now records the failure pattern and verification routine for future agents",
+  "proofs": {
+    "drive_memory_fetchback": "drive-memory/drive-memory-fetchback-PASS.json",
+    "extra_push": "extra-push-report-20260604.json",
+    "memory_receipt": "memory-skill-session-receipt.json",
+    "repo_commit": "71995b7d",
+    "notion": "https://app.notion.com/p/374cf5514fd38116a10af88c504def54"
+  }
+}
+```
