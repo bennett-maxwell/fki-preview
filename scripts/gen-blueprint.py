@@ -20,6 +20,8 @@ import json, re, sys, os
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
+DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
 
 # Reusable inline SVGs (icon identity is cosmetic; the audit counts classes, not
 # specific paths). One per card-type so every card still renders an icon.
@@ -271,11 +273,19 @@ def build(profile):
     html = re.sub(r"\{\s*conservative:.*?stretch:.*?\}\s*\}", pr_obj, html, count=1, flags=re.S)
 
     # ---- simple global tokens ----
+    def host_scoped_url(profile_key, path):
+        value = p.get(profile_key) or ""
+        if BLUEPRINT_BASE_URL != DEFAULT_BLUEPRINT_BASE_URL and (not value or value.startswith(DEFAULT_BLUEPRINT_BASE_URL)):
+            return f"{BLUEPRINT_BASE_URL}{path}"
+        return value or f"{BLUEPRINT_BASE_URL}{path}"
+
     tok = {
         "{{LEAD_NAME}}": p["lead_name"], "{{FIRST_NAME}}": p["first_name"],
         "{{BUSINESS_NAME}}": p["business_name"], "{{DOMAIN}}": p["domain"],
         "{{SLUG}}": p["slug"], "{{CRM_TOOL}}": p.get("crm_tool_fallback", "your client hub"),
-        "{{PODCAST_URL}}": p["podcast_url"], "{{QUALIFY_URL}}": p["qualify_url"],
+        "{{BLUEPRINT_URL}}": host_scoped_url("blueprint_url", f"/blueprints/{p['slug']}.html"),
+        "{{PODCAST_URL}}": host_scoped_url("podcast_url", f"/podcasts/{p['slug']}.mp3"),
+        "{{QUALIFY_URL}}": host_scoped_url("qualify_url", f"/qualify.html?src={p['slug']}"),
     }
     for k, v in tok.items():
         html = html.replace(k, v)

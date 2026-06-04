@@ -13,6 +13,9 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/gogcli/0.13.0/bin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template.html"
+DEFAULT_BLUEPRINT_BASE_URL="https://bennett-maxwell.github.io/fki-preview"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL:-$DEFAULT_BLUEPRINT_BASE_URL}"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL%/}"
 
 if [ $# -lt 1 ] || [ "$1" = "--help" ]; then
     echo "Usage: $0 <lead-profile.json> [--send-preview]"
@@ -76,26 +79,39 @@ EMAIL_INDUSTRY=$(python3 -c "import re,sys; print(re.sub(r'\s+business(es)?\s*$'
 BLUEPRINT_URL=$(get blueprint_url "")
 PODCAST_URL=$(get podcast_url "")
 WEBSITE_URL=$(get website_url "")
+if [[ "$BLUEPRINT_BASE_URL" != "$DEFAULT_BLUEPRINT_BASE_URL" ]]; then
+  if [[ -z "$BLUEPRINT_URL" || "$BLUEPRINT_URL" == "$DEFAULT_BLUEPRINT_BASE_URL"* ]]; then
+    BLUEPRINT_URL="$BLUEPRINT_BASE_URL/blueprints/$SLUG.html"
+  fi
+  if [[ -z "$PODCAST_URL" || "$PODCAST_URL" == "$DEFAULT_BLUEPRINT_BASE_URL"* ]]; then
+    PODCAST_URL="$BLUEPRINT_BASE_URL/podcasts/$SLUG.mp3"
+  fi
+fi
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
-APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
+APPLY_URL="$BLUEPRINT_BASE_URL/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
 # Read ONLY a dedicated qualify_url field — NEVER seed from apply_url. apply/ is a
 # different page; seeding QUALIFY_URL from apply_url made the "See If You Qualify"
 # button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
 # Empty default => the python block below falls back to the canonical qualify.html.
 PROFILE_QUALIFY_URL=$(get qualify_url "")
-QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" "$BLUEPRINT_BASE_URL" << 'PYEOF'
 import sys
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-profile_url, lead_name, business_name, slug, contact_id = sys.argv[1:6]
-url = profile_url or "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+profile_url, lead_name, business_name, slug, contact_id, base_url = sys.argv[1:7]
+DEFAULT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+base_url = base_url.rstrip("/") or DEFAULT_BASE_URL
+if base_url != DEFAULT_BASE_URL and (not profile_url or profile_url.startswith(DEFAULT_BASE_URL)):
+    url = f"{base_url}/qualify.html"
+else:
+    url = profile_url or f"{base_url}/qualify.html"
 parts = urlsplit(url)
 if not parts.scheme:
-    parts = urlsplit("https://bennett-maxwell.github.io/fki-preview/qualify.html")
+    parts = urlsplit(f"{base_url}/qualify.html")
 params = dict(parse_qsl(parts.query, keep_blank_values=True))
 params["lead"] = lead_name
 params["biz"] = business_name
@@ -105,7 +121,8 @@ params["utm_medium"] = "email"
 params["utm_campaign"] = "blueprint_delivery"
 if contact_id:
     params["contactId"] = contact_id
-print(urlunsplit((parts.scheme, parts.netloc, parts.path or "/fki-preview/qualify.html", urlencode(params), "")))
+fallback_path = urlsplit(f"{base_url}/qualify.html").path or "/qualify.html"
+print(urlunsplit((parts.scheme, parts.netloc, parts.path or fallback_path, urlencode(params), "")))
 PYEOF
 )
 
