@@ -1,362 +1,157 @@
-<!-- v1.6 -->
-PRIVATE AUDIO BRIEFING — Personal AI Walkthrough for Mike Norton
-Origins | Prepared by Franchise Ki | Generated 2026-06-03
+<!-- v1.8 -->
+NOTEBOOKLM SOURCE DOCUMENT / AI Roadmap for Mike Norton — Origins / Prepared by Franchise Ki | bennett@franchiseki.com
+Generated: 2026-06-04T17:32:14.131768+00:00
 
-================================================================================
-SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
-================================================================================
+DIRECT ADDRESS RULE: The audio must open with: Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us.
+Audience: Mike Norton, Origins.
+Duration target: approximately 20 minutes.
+CTA: complete the qualifier only; no calendar booking language.
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to MIKE NORTON. Use "you" and
-"your business" in every paragraph. NEVER say "Mike Norton" in the third person.
-NEVER say "this business," "the owner," "they," or "their team." If you catch
-yourself describing Mike Norton from the outside, stop and restart the sentence
-addressed to them.
+12 SECTION SOURCE PACKAGE
 
-RULE 2: Open the audio with EXACTLY these words: "Hi Mike, welcome.
-This walkthrough was built for you and Origins, from what you told us."
-Then proceed.
+1. About Mike and Origins
+Mike runs Origins in consulting, business transformation, and AI operations. The roadmap uses Mike's submitted details: Google Drive, Notion, Slack, ClickUp, five-person team, around fifty monthly leads, five thousand dollar average client value, current five-minute response speed, and operational stresses around missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
-a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
+2. Current Tool Stack
+Google Drive for artifacts, Notion for process and knowledge, Slack for routing and team awareness, ClickUp for execution ownership.
 
-================================================================================
+3. Industry Context
+Origins sells advisory and transformation work where trust, speed, clarity, and follow-through matter. AI should support those qualities instead of sounding like a generic automation layer.
 
----
+4. Opportunities
+Speed-to-lead, intake summary, scheduling support, proposal drafting, content repurposing, client health, and admin routing.
 
-## SECTION 1 — Hi Mike, this is your walkthrough
+5. Six Recommended Agents
+Speed-to-Lead Agent, Client Onboarding Agent, Proposal Generator, Content Production Agent, Client Health Monitor, Admin Automation Agent.
 
-Hi Mike — welcome. This is your AI walkthrough, built for you and
-Origins. Every number you're about to hear came from what you told us.
+6. ROI Picture
+Use Mike's stated numbers: fifty monthly leads, five thousand dollar average value, twenty percent close rate, five-minute current response speed, and one hundred fifty dollar hourly value for time recovery examples. Use conservative language and avoid guarantees.
 
-You operate in SaaS CRM platforms serving home service businesses, serving home service business owners and operators across HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, tree care, junk removal, and related trades. You run Origins at https://theorigins.one.
-You're already doing the hard work — the clients, the team, the reputation. That's
-yours. What we're going to walk through together isn't about fixing what's broken
-in your business. It's about showing you exactly where AI amplifies everything
-you've already built.
+7. Day-in-the-Life Story
+A lead arrives, a useful response is drafted, Slack gets a summary, ClickUp gets tasks, Drive stores artifacts, Notion captures reusable knowledge, and the team reviews/approves the important pieces.
 
-You told us your current tools are: Google Drive, Notion, Slack, ClickUp. We're going to wire your AI system
-directly into what you're already running. Nothing you use today gets ripped out.
-Everything gets amplified.
+8. Timeline
+Days 1-3 onboarding and mapping. Days 4-10 first automations. Day 30 operating rhythm live. Months 2-3 calibration. After month 3 integrated digital employee.
 
-Your team of 5 handles the day-to-day execution.
+9. Objections
+No new dashboard required. No replacement of Mike's judgment. No unrealistic claims. Start narrow, prove value, expand.
 
-You told us your current AI use is automation. That's exactly where most SaaS CRM platforms serving home service businesses businesses are right now — and it's the right starting point.
+10. Qualifier CTA
+If the roadmap resonates, complete the qualifier so the team can review the workflow and fit.
 
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
-Origins. Not adjusted from a template. Built from your answers, for how
-your business actually works. Let's walk through what's possible.
+11. Citations
+Harvard Business Review on fast lead response; McKinsey on digital sales and follow-up; SBA-style time allocation framing for admin burden; internal intake details from Mike's GHL opt-in record.
 
----
+12. Spoken Script
 
-## SECTION 2 — Your Current Tool Stack: Where Origins Is Today
+Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us. Mike, this is your AI roadmap for Origins, and you are going to hear how the system supports you, your team, and your client experience. 
 
-WHERE YOU ARE TODAY — your current operational infrastructure:
+You run Origins as a consulting, business transformation, and AI operations company. You told us your current world includes Google Drive, Notion, Slack, and ClickUp. You also told us your team size is five, your monthly lead flow is around fifty, your average client value is about five thousand dollars, your current response speed is around five minutes, and your operating stresses include missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
 
-- **Google Drive**: Core operational tool in your current stack.
-- **Notion**: Core operational tool in your current stack.
-- **Slack**: Core operational tool in your current stack.
-- **ClickUp**: Core operational tool in your current stack.
+That matters because your AI roadmap should not sound like a generic technology pitch. It should sound like your operating system. You are not trying to bolt on another dashboard. You are trying to make Origins respond faster, summarize cleaner, follow up more consistently, route work into the right place, and turn your ideas into useful client-facing material without adding more manual coordination.
 
-This tool stack tells us two things: where you're already strong, and where the
-biggest time unlocks are waiting. Your AI system gets built on top of what you have —
-not around it.
+The important thing here is that you already have the core ingredients. You have a defined offer, you have a team, you have tools your team already uses, and you have enough lead flow for small speed improvements to matter. The AI opportunity is not about replacing your judgment. It is about protecting your attention, so your judgment is used on the conversations and client moments where it actually matters.
 
----
+For this walkthrough, think of the system as a layer that sits between inbound demand and team execution. A request comes in. The system understands it. It drafts the first response. It summarizes the intake. It creates the task. It routes the work. It nudges the follow-up. It keeps the client experience consistent without forcing you to personally remember every step.
 
-## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
+What your AI gave us back instantly from your answers was clear: Origins does not need a novelty chatbot. You need an operating rhythm. You need speed-to-lead, intake summarization, proposal support, content repurposing, client health monitoring, and admin routing, all connected to the tools you already use.
 
-These aren't guesses. These are the gaps that show up consistently for SaaS CRM platforms serving home service businesses
-businesses at your stage — and every one of them has a direct AI solution.
+You marked your current AI maturity as automation. That is a strong place to start, because automation means you already understand the value of repeatable systems. The next step is not more disconnected automations. The next step is making those automations context-aware, brand-aware, and connected to the work that happens in Google Drive, Notion, Slack, and ClickUp.
 
-### Gap 1 — Speed to Response
+For a consulting and transformation firm, the first AI use case is speed-to-lead. A new inquiry should receive a thoughtful response within sixty seconds. Not a robotic autoresponder. A useful first message that acknowledges the actual request, explains the next step, and gives the prospect confidence that Origins is organized.
 
-You're competing for the first response every time a lead comes in. Research from
-Harvard Business Review shows that 78% of customers buy from the first business to
-respond (HBR, "The Short Life of Online Sales Leads," 2011 —
-https://hbr.org/2011/03/the-short-life-of-online-sales).
+The second use case is client intake. Every serious conversation creates raw information. The system should turn that raw information into a clean summary, next actions, risks, deadlines, and internal tasks. That is where Slack and ClickUp matter. Your team should not have to copy details between systems by hand.
 
-In SaaS CRM platforms serving home service businesses, that window is measured in minutes — sometimes seconds. Every hour your
-team isn't watching for inbound = leads going to whoever responds first.
+The third use case is proposal and scope support. You do not want AI making promises for you. You want AI turning known requirements into a clear first draft, so you can spend your time improving strategy instead of staring at a blank page.
 
-An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
-your brand voice, your pricing context, your services. You stop competing on response
-time because you're always first.
+The fourth use case is content repurposing. You likely create ideas in calls, notes, voice memos, strategy sessions, and client work. AI can turn those ideas into email follow-up, LinkedIn posts, client education, and internal playbooks while keeping the tone aligned with Origins.
 
-**Time your team could recover: up to 8 hours/week**
-**ROI at $150/hr: up to $4,800/month back in productive time**
+The fifth use case is client health. You can track who has gone quiet, which follow-ups are overdue, what tasks are stuck, and where a client needs attention before the relationship cools down.
 
-Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+The sixth use case is admin task routing. If a request belongs in Slack, send it to Slack. If it belongs in ClickUp, create the task. If it belongs in a client folder, put the summary in Google Drive. If it belongs in a knowledge base, structure it in Notion.
 
-### Gap 2 — Follow-Up Consistency
+The reason these use cases fit you is simple: they are not abstract AI. They are direct answers to what you told us: missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content. The roadmap should start there.
 
-McKinsey research shows that 80% of sales require 5+ follow-up touches, but 44% of
-salespeople give up after just one follow-up (McKinsey & Company, "The B2B digital
-inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
+A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
 
-For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where they are in the
-decision process, and sends the right message at the right moment — without anyone
-on your team having to remember to do it.
+Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
 
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
+A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
 
-Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+The first time recovery opportunity is lead response speed. You already respond quickly, around five minutes, which is better than many firms. But in a high-trust consulting sale, the first useful response still shapes the entire conversation. If a prospect reaches out about business transformation or AI operations, the system can acknowledge the request immediately, identify the likely need, ask one clarifying question, and route the next step.
 
-### Gap 3 — Admin and Documentation Overhead
+At fifty monthly leads and a five thousand dollar average value, even small lift matters. If AI helps recover a few conversations each month that would have gone cold, the leverage is meaningful. The point is not to make unrealistic revenue promises. The point is to show that speed and consistency are worth protecting.
 
-SBA data shows small business owners spend an average of 25-40% of their week on
-administrative tasks that don't directly generate revenue
-(SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
+The second time recovery opportunity is follow-up consistency. Consulting buyers often need multiple touches. They may inquire, pause, ask a question, compare options, revisit the problem, and then come back. A human-only follow-up system depends on memory and discipline. An AI-supported follow-up system depends on rules, context, and timing. You can still approve the important messages, but the system makes sure the opportunity never disappears.
 
-In SaaS CRM platforms serving home service businesses, this shows up as: proposal writing, status updates, follow-up emails,
-scheduling coordination, reporting. Your AI system takes these off your team's plate
-entirely — and does them faster and more consistently than any manual process.
+The third opportunity is appointment booking and scheduling. Scheduling looks small until you multiply it by every lead, client, internal handoff, and follow-up. The system can propose times, draft reminders, update ClickUp tasks, and summarize scheduling context in Slack. That gives your team back attention without changing the client experience.
 
-**At 5 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
+The fourth opportunity is admin work. Admin work is not one big task. It is dozens of tiny interruptions: summarize this call, file this note, remind this person, update this task, write this recap, turn this conversation into next steps, prepare the follow-up, and make sure nothing gets lost. Those are exactly the jobs AI handles well when the workflow is defined.
 
-Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+The fifth opportunity is marketing content. You likely have more insight than the market sees. Your calls, frameworks, client lessons, and transformation ideas can become a content engine. AI can turn one advisory idea into a short post, a client email, a FAQ, a case-study outline, and a follow-up prompt. You still own the point of view. The system handles the packaging.
 
----
+The sixth opportunity is internal visibility. If your work is spread across Drive, Notion, Slack, and ClickUp, the system should help your team see what matters right now. What is waiting on you. What is waiting on a client. What has gone quiet. What needs a decision. What should be escalated. That is not glamorous, but it is the backbone of operational calm.
 
-## SECTION 4 — The 3 AI Tools Built Specifically for Origins
+When these gaps are connected, the picture is clear: Origins can gain leverage without adding another layer of complexity. The right AI setup makes the current tool stack feel more coordinated, not more crowded.
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
-situation — your industry, your tools, your services, your pain points.
+A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
 
-### AI Tool 1 — Home-Service Demo Speed-to-Lead Agent
+Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
 
-You are a speed-to-lead response agent for Origins, an all-in-one CRM platform for home service businesses. When a new demo request, missed call, or inquiry comes in, respond within 60 seconds, reference the prospect's trade when known, confirm the next step, and route them toward the right onboarding path.
+A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
 
-This runs directly in your existing workflow. No new platform to learn.
-Your team supervises. The AI handles the repetitive execution.
+Imagine a normal weekday at Origins after the system is live. A new inquiry comes in from a founder who wants help with AI operations. Within seconds, your speed-to-lead agent drafts a warm response in your voice. It references the request, confirms that Origins helps with transformation and automation design, and asks one useful question that moves the conversation forward.
 
----
+At the same time, the system creates an internal summary. Slack gets a short alert with the lead name, the likely need, the urgency, and the recommended next step. ClickUp gets a task with the right owner and due date. Google Drive has the intake notes saved where your team can find them. Notion can hold the operating record or playbook entry if the pattern should become reusable.
 
-### AI Tool 2 — CRM Rollout and Onboarding Agent
+Then the prospect replies. Instead of starting from zero, your team sees the full context. What they asked. What was already said. What the next best question should be. If the conversation becomes serious, the proposal support agent creates a first draft. It does not make promises for you. It gives you a structured starting point: scope, phases, assumptions, timeline, risks, and questions to clarify.
 
-You are a rollout and onboarding draft agent for Origins. Given a home service company's trade, team size, lead channels, and current workflow, generate a practical CRM rollout plan covering lead capture, follow-up, scheduling, invoicing, reviews, and retention.
+For active clients, the intake summary agent keeps the work clean. After a call, the system turns notes into action items. It separates decisions from tasks. It flags open questions. It drafts the follow-up email. It updates the internal task list. Your team reviews and approves instead of rebuilding the same structure every time.
 
-Built around how Origins actually works — not a generic industry template.
+For marketing, your content repurposing agent watches for usable ideas. A client lesson becomes a LinkedIn post draft. A framework becomes an email. A recurring objection becomes a short FAQ. A call insight becomes a topic for a future advisory note. The system does not replace your thinking. It keeps your thinking from evaporating after the meeting ends.
 
----
+For client health, the system looks for quiet accounts, overdue tasks, stalled follow-ups, and missing next steps. It gives you a simple digest: what needs attention, why it matters, and what message could be sent. That keeps relationships warm without forcing you to manually audit every thread.
 
-### AI Tool 3 — Home-Service Operator Outreach Agent
+This is the difference between having AI tools and having an AI operating layer. A tool waits for you. An operating layer notices, drafts, routes, reminds, and organizes. You stay in control, but you stop carrying every small operational detail in your head.
 
-You are an outreach agent for Origins, a CRM platform serving home service businesses. Generate practical LinkedIn and email messages for HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, and related operators who lose jobs to slow follow-up or disconnected systems.
+The first version does not need to be huge. It should begin with the six agents that match your stated needs: speed-to-lead, client onboarding, proposal generation, content production, client health, and admin automation. Each one should do a narrow job well. Then, as the system proves itself, those narrow jobs connect into a broader operating rhythm.
 
-This is the kind of tool that, once it's running, your team will not remember
-how they worked without it.
+A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
 
----
+Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
 
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
-without anyone on your team triggering them manually.
+A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
 
----
+Your current stack is workable, and that is good news. Google Drive can hold client artifacts, intake documents, proposal drafts, and source material for internal knowledge. Notion can hold process, operating notes, reusable frameworks, and the structured knowledge your team returns to. Slack can be the routing layer for alerts, approvals, and quick internal decisions. ClickUp can hold execution, deadlines, ownership, and recurring task structure.
 
-## SECTION 5 — What Your Customers Already Say About Origins
+The AI layer should respect those roles. It should not dump everything into one place. It should send the right object to the right tool. A lead summary belongs in Slack first, because your team needs to see it. A project task belongs in ClickUp, because someone needs to own it. A reusable framework belongs in Notion, because it becomes knowledge. A proposal draft belongs in Drive, because it becomes an artifact.
 
-Your reputation in home service business owners and operators across HVAC, plumbing, roofing, landscaping, cleaning, solar, pest control, electrical, tree care, junk removal, and related trades is an asset. Customer feedback for SaaS CRM platforms serving home service businesses businesses
-at your stage consistently highlights the same themes:
+This is where many AI implementations get messy. They create a new dashboard, a new inbox, and a new place to check. That would work against your stated need. You need less coordination drag, not more. The right build should make your existing tools feel smarter.
 
-- **Responsiveness:** Clients in SaaS CRM platforms serving home service businesses cite "fast, clear communication" as the
-  #1 factor in choosing a provider. Your AI system makes this your permanent standard —
-  not a good week, not a great hire, a permanent operational baseline.
+For Google Drive, the immediate win is artifact creation and organization. After a discovery call, the system can create a folder, save the call summary, draft the proposal structure, and put the follow-up email in the right place.
 
-- **Reliability:** Follow-through on commitments is what drives repeat business and
-  referrals. Your AI system tracks every commitment and ensures nothing falls through
-  the cracks — even at 2am.
+For Notion, the immediate win is knowledge capture. If a client question reveals a repeatable framework, the system can turn it into a playbook note. If a team process repeats, it can become a standard operating procedure. If an objection comes up again and again, it can become a response pattern.
 
-- **Professionalism:** The quality of your proposals, your follow-up, your
-  documentation — all of this signals expertise before the client ever meets you in person.
-  AI raises that standard across every touchpoint.
+For Slack, the immediate win is routing. The system can tell the team what happened, what matters, who owns the next step, and when it is due. That turns Slack from chatter into an execution surface.
 
-The businesses that win in SaaS CRM platforms serving home service businesses long-term aren't necessarily the ones doing the
-best technical work. They're the ones that are easiest to work with. AI gives you that
-edge permanently.
+For ClickUp, the immediate win is task creation and maintenance. Every follow-up, internal handoff, proposal draft, onboarding step, and scheduling item can land with a clear owner and due date.
 
----
+The practical outcome is simple: once set up, this runs itself in the background. You do not need your team to become AI technicians. You need the system to meet the team where it already works.
 
-## SECTION 6 — Your 30-Day Onboarding Timeline
+A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
 
-Here's exactly what the first 30 days look like if you move forward:
+Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
 
-**Days 1-3: Onboarding.** Saas crm platforms serving home service businesses audit. Brand voice profile. Full ops map.
-We listen. Nothing gets built until we understand how you actually work.
+A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
-agent skills. You see the first results. Your team gives feedback. The system adjusts.
+Here is the timeline I would recommend for Origins.
 
-**Day 30: The system runs your business rhythm.** It compounds. It never forgets.
-You're spending time on what only you can do.
+Days one through three are onboarding. This is where your current workflows get mapped. The team reviews how inquiries arrive, how first responses happen, how appointments are booked, where notes live, how tasks are assigned, how proposals get drafted, and how marketing ideas become content. Your brand voice gets captured. The system listens before it acts.
 
-**Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way they use their phone — naturally, without thinking.
+Days four through ten are the first working automations. The speed-to-lead draft is the first priority because it protects revenue conversations. The intake summary is next because it protects internal clarity. The scheduling and admin routing workflows follow because they reduce interruptions. During this window, the system should be visible but supervised. You should see drafts, alerts, and task creation, and your team should be able to correct the pattern quickly.
 
-**After Month 3: System and team integrated.** World-class employee, 24/7, fully
-autonomous. Not "getting better every week." Already there.
+By day thirty, the system should run the basic rhythm. New inquiries trigger useful drafts. Intake creates summaries. Follow-ups are tracked. Content ideas are captured. Admin tasks route into the right place. Client health signals show up in a digest. You are not done forever, but the core operating loop is live.
 
----
+After month three, the system and team should feel integrated. The goal is not a science project. The goal is a dependable digital employee that works around the clock, remembers the process, drafts the repetitive work, and lets your human team stay focused on strategy, relationships, and delivery.
 
-## SECTION 7 — Three Prompts You Can Use Today, Without Waiting
-
-You don't need to be a client to start getting value from AI. Here are 3 prompts you
-can paste into ChatGPT or Claude right now — each built around your specific business:
-
-### Prompt 1 — Speed-to-Lead Response Draft
-```
-You are a SaaS CRM platforms serving home service businesses business assistant for Origins. A new inquiry just came
-in from a potential client interested in Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation. Their message was: [PASTE
-THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
-specific request, (2) describes our availability and process, (3) includes a next step.
-Use a friendly but professional tone. Keep it under 150 words.
-```
-
-### Prompt 2 — Proposal Framework Generator
-```
-You are helping Origins create a proposal for a new SaaS CRM platforms serving home service businesses client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation.
-Generate a professional proposal outline with: project scope, deliverables, timeline,
-and 3 package options at different investment levels. Format it for easy customization.
-```
-
-### Prompt 3 — Follow-Up Email Sequence
-```
-You are a follow-up agent for Origins. A prospect expressed interest in
-Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation but hasn't responded in 5 days. Their original inquiry was about:
-[PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference their specific situation, and
-include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
-```
-
-These give you immediate results. The difference between these prompts and the full
-AI system we build: these require someone to trigger them manually. The full system
-runs automatically, 24/7, without anyone on your team doing anything.
-
----
-
-## SECTION 8 — Two Paths Forward
-
-You have two options after listening to this:
-
-**Path 1 — DIY:** Use the 3 prompts above. Run them in ChatGPT or Claude. You'll see
-results within days. This is the right starting point if you want to prove the concept
-to yourself before committing to a full system.
-
-**Path 2 — Partner with FKI:** We build the full AI system for Origins.
-The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with Google Drive, Notion, Slack, ClickUp, running without your team having to
-manage it.
-
-If you want to explore Path 2, the next step is an application — not a sales call.
-We want to understand your situation before we recommend anything.
-
-Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html
-
-This is an application, not a commitment. We read every one personally.
-
----
-
-## SECTION 9 — The ROI Picture for Origins
-
-Based on what you shared and industry benchmarks for SaaS CRM platforms serving home service businesses:
-
-**Time Recovery Estimate:**
-- Admin and documentation: up to 8 hrs/week recovered
-- Lead response and follow-up: up to 6 hrs/week recovered
-- Reporting and tracking: up to 3 hrs/week recovered
-- **Total: up to 17 hrs/week for your team**
-
-**At $150/hr (industry benchmark for SaaS CRM platforms serving home service businesses owner time):**
-- Monthly time value: up to $10,200/month
-- Annual time value: up to $122,400/year
-- Plus: close rate lift from consistent follow-up (35% industry benchmark)
-
-**Industry benchmark context:**
-- Businesses using AI automation see 20-35% reduction in time spent on administrative tasks
-  (McKinsey, "The state of AI in 2023" — https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023)
-- AI-powered lead response systems increase lead conversion by 14-23%
-  (Harvard Business Review, 2023 — https://hbr.org)
-- Small businesses using automation tools report 25% faster revenue growth
-  (SBA, 2023 — https://www.sba.gov)
-
-**These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
-
-The question isn't whether AI creates value in SaaS CRM platforms serving home service businesses. The question is whether
-the investment makes sense for your specific situation. That's what the application
-helps us figure out together.
-
----
-
-## SECTION 10 — Common Objections — And Honest Answers
-
-### "Is this going to replace my team?"
-No. These agents handle the repetitive work your team shouldn't be doing — initial
-responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Home service CRM, Lead capture, Automated follow-up, Scheduling workflows, Invoicing workflows, Review generation, Customer retention automation,
-making judgment calls. AI handles the rest.
-
-### "What about the setup and learning curve?"
-The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
-naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
-
-### "How is this different from just using ChatGPT?"
-ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with Google Drive, Notion, Slack, ClickUp, triggered by your actual business events — a new inquiry,
-a proposal request, a follow-up window — without anyone on your team doing anything
-to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 on their own.
-
-### "What if I'm not ready yet?"
-Use the prompts in Section 7. See what AI does for your business on a small scale.
-When you're ready to scale it to a full system, the application is still there.
-There's no deadline. This isn't a limited-time offer. It's a conversation we're
-happy to have when the timing is right for you.
-
----
-
-## SECTION 11 — Reference Links
-
-Benchmarks referenced during this walkthrough:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
-
----
-
-## SECTION 12 — About Franchise Ki
-
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
-
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
-
-If this audio resonated with you, the next step is an application:
-https://bennett-maxwell.github.io/fki-preview/qualify.html
-
-Questions? Reach Bennett directly: bennett@franchiseki.com
-
-This audio walkthrough was built for Origins. Not a template.
-Every number, every example, every recommendation — yours.
+Mike, the next step is simple. If the speed-to-lead, intake, proposal, content, client health, or admin automation pieces resonate, complete the qualifier so the team can review fit and implementation path. This walkthrough was built for you and Origins, from what you told us.
