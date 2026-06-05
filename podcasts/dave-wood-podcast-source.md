@@ -1,5 +1,5 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Dave Wood
+
 Mahana Fresh | Prepared by Franchise Ki | Generated 2026-05-27
 
 ================================================================================
@@ -85,7 +85,6 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at $150/hr: up to $4,800/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -101,7 +100,6 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -115,7 +113,6 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
@@ -181,7 +178,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first quarter look like if you move forward:
 
 **Days 1-3: Onboarding.** Fast-casual restaurant franchise audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -253,7 +250,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Apply here: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 This is an application, not a commitment. We read every one personally.
 
@@ -316,47 +313,3 @@ When you're ready to scale it to a full system, the application is still there.
 There's no deadline. This isn't a limited-time offer. It's a conversation we're
 happy to have when the timing is right for you.
 
----
-
-## SECTION 11 — Sources and Citations
-
-All statistics and benchmarks referenced in this document:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
-
----
-
-## SECTION 12 — About Franchise Ki
-
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
-
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
-
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
-
-Questions? Reach Bennett directly: bennett@franchiseki.com
-
-This audio walkthrough was built for Mahana Fresh. Not a template.
-Every number, every example, every recommendation — yours.
