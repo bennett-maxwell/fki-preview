@@ -1,12 +1,12 @@
 {
   "lead": "plumber-test-business-20260601",
-  "ts": "2026-06-04T15:33:52.333440+00:00",
-  "html_path": "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
-  "html_size_bytes": 99541,
+  "ts": "2026-06-05T04:26:16.120585+00:00",
+  "html_path": "/Users/temp/.openclaw/workspace/fki-preview-plumber-audio/blueprints/plumber-test-business-20260601.html",
+  "html_size_bytes": 99955,
   "require_production": true,
   "summary": {
-    "passed": 37,
-    "failed": 7,
+    "passed": 38,
+    "failed": 6,
     "skipped": 6,
     "total_applicable": 44,
     "overall_pass": false
@@ -39,7 +39,7 @@
       "failures": []
     },
     "Production": {
-      "score": "0/7 (0%)",
+      "score": "1/7 (14%)",
       "pass": false,
       "failures": [
         "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
@@ -47,7 +47,6 @@
         "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
         "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
         "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
-        "#47: Walkthrough-size audio (6-20MB / direct-address verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)",
         "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
       ]
     },
@@ -68,7 +67,6 @@
     "#44: Notion Sprint row present",
     "#45: Current GHL readback (contact tagged)",
     "#46: Repeat-submit same-contact proof",
-    "#47: Walkthrough-size audio (6-20MB / direct-address verified)",
     "#48: Bennett approval scope recorded"
   ],
   "major_failures": [],
@@ -287,25 +285,25 @@
       "desc": "Email click test receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing email click test receipt"
+      "detail": "OK"
     },
     "37": {
       "desc": "Desktop render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing desktop render receipt"
+      "detail": "OK"
     },
     "38": {
       "desc": "Mobile render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing mobile render receipt"
+      "detail": "OK"
     },
     "39": {
       "desc": "Audit JSON receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing audit JSON receipt"
+      "detail": "OK"
     },
     "40": {
       "desc": "Gatekeeper pass receipt exists",
@@ -317,7 +315,7 @@
       "desc": "Closeout receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing closeout receipt"
+      "detail": "OK"
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
@@ -350,10 +348,10 @@
       "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
     },
     "47": {
-      "desc": "Walkthrough-size audio (6-20MB / direct-address verified)",
-      "pass": false,
+      "desc": "Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
+      "pass": true,
       "severity": "critical",
-      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
+      "detail": "Public/local NotebookLM podcast and direct-address audio verified (10370505 bytes)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",

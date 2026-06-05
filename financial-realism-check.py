@@ -1,1 +1,270 @@
-IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwoiIiIKZmluYW5jaWFsLXJlYWxpc20tY2hlY2sucHkgIOKAlCBEb21haW4gNyBlbmZvcmNlbWVudCAoQmx1ZXByaW50IEFJIGF1ZGl0KQpDYXRjaGVzIHRoZSBleGFjdCBkZWZlY3QgQmVubmV0dCBmbGFnZ2VkIDIwMjYtMDUtMjk6IGEgcmVzaWRlbnRpYWwgcGx1bWJpbmcKY29tcGFueSAoQ291cnQgTHVuZGJlcmcgLyBSYXJlIEJyZWVkIFBsdW1iaW5nKSBzaGlwcGVkIHdpdGggYSAkMjVLLSQxMjBLIFJPSQpzbGlkZXIgYW5kIGEgJDQ1LDAwMCAiYXZlcmFnZSBjb250cmFjdCB2YWx1ZSIgZGVmYXVsdCDigJQgZ2VuZXJpYyBmcmFuY2hpc2UtCmNvbnN1bHRpbmcgbnVtYmVycyBjbG9uZWQgb250byBldmVyeSBidXNpbmVzcyByZWdhcmRsZXNzIG9mIGluZHVzdHJ5LgoKVGhpcyBpcyBSRUFMIGVuZm9yY2VtZW50LCBub3QgIm1hbnVhbCByZXZpZXciLiBJdCBydW5zIHRoZSBmaW5hbmNpYWwtY3JlZGliaWxpdHkKY2hlY2tzIChEb21haW4gNykgYWdhaW5zdCBibHVlcHJpbnQgSFRNTCBhbmQgZW1pdHMgYSBwZXItZmlsZSBwYXNzL2ZhaWwgKyByZWFzb24uCgpVc2FnZTogIHB5dGhvbjMgZmluYW5jaWFsLXJlYWxpc20tY2hlY2sucHkgLS1hbGwKICAgICAgICBweXRob24zIGZpbmFuY2lhbC1yZWFsaXNtLWNoZWNrLnB5IC0tZmlsZSBibHVlcHJpbnRzL2NvdXJ0LWx1bmRiZXJnLmh0bWwKRXhpdCAwIG9ubHkgaWYgZXZlcnkgY2hlY2tlZCBmaWxlIHBhc3NlcyBldmVyeSByZWQtbGluZSBmaW5hbmNpYWwgY2hlY2suCiIiIgppbXBvcnQgcmUsIHN5cywganNvbiwgZ2xvYiwgb3MsIGNvbGxlY3Rpb25zCgpCTFVFUFJJTlRTID0gb3MucGF0aC5qb2luKG9zLnBhdGguZGlybmFtZShvcy5wYXRoLmFic3BhdGgoX19maWxlX18pKSwgImJsdWVwcmludHMiKQoKIyBJbmR1c3RyeSAtPiByZWFsaXN0aWMgc2luZ2xlLXRyYW5zYWN0aW9uIGJhbmQgKFVTRCBsb3csIGhpZ2gpIGZvciB0aGUgdmFsdWUgYQojIGN1c3RvbWVyIGFjdHVhbGx5IHBheXMgcGVyIGRlYWwvam9iL3RpY2tldC90cmVhdG1lbnQuIFVzZWQgdG8gc2FuaXR5LWNoZWNrIHRoZQojIFJPSSBjYWxjdWxhdG9yJ3MgImF2ZXJhZ2UgY29udHJhY3QvZGVhbCB2YWx1ZSIgZGVmYXVsdCArIEpTIGZhbGxiYWNrLgojIEJhbmRzIGFyZSBkZWxpYmVyYXRlbHkgd2lkZTsgdGhlIGNoZWNrIG9ubHkgZmFpbHMgb24gY2xlYXJseS13cm9uZyBkZWZhdWx0cwojIChlLmcuIGEgJDQ1SyBkZWZhdWx0IGZvciBhICQzMDAtJDE1SyBob21lLXNlcnZpY2VzIGpvYikuCklORFVTVFJZX0JBTkRTID0gewogICAgImhvbWVfc2VydmljZXMiOiAgICAgICgzMDAsIDIwMDAwLCAgImpvYi90aWNrZXQiKSwgICAgICMgcGx1bWJpbmcsIEhWQUMsIGVsZWN0cmljYWwKICAgICJwaG90b2dyYXBoeSI6ICAgICAgICAoMjUwLCA4MDAwLCAgICJzZXNzaW9uL3BhY2thZ2UiKSwKICAgICJ2aWRlb19wcm9kdWN0aW9uIjogICAoODAwLCA1MDAwMCwgICJwcm9qZWN0IiksCiAgICAibWVkc3BhIjogICAgICAgICAgICAgKDE1MCwgNjAwMCwgICAidHJlYXRtZW50L3BhY2thZ2UiKSwKICAgICJmb29kX2ZyYW5jaGlzZSI6ICAgICAoOCwgICA2MCwgICAgICJ0aWNrZXQiKSwgICAgICAgICAgIyBwZXItY3VzdG9tZXIgY2hlY2sKICAgICJyZXRhaWxfZmlyZWFybXMiOiAgICAoMzAwLCA2MDAwLCAgICJ0aWNrZXQiKSwKICAgICJkZXNpZ25fYWdlbmN5IjogICAgICAoMTUwMCw0MDAwMCwgICJwcm9qZWN0IiksCiAgICAiY29uc3VsdGluZyI6ICAgICAgICAgKDMwMDAsMTUwMDAwLCAiZW5nYWdlbWVudCIpLAogICAgInJldGFpbCI6ICAgICAgICAgICAgICg1MCwgIDIwMDAsICAgInB1cmNoYXNlL3RyYW5zYWN0aW9uIiksICAgICMgcmV0YWlsIHNwb3J0aW5nIGdvb2RzCiAgICAicHJvZmVzc2lvbmFsX3NlcnZpY2VzIjogKDEwMDAsNTAwMDAsICJjb250cmFjdC9wcm9qZWN0IiksCiAgICAiYWlfY29uc3VsdGluZyI6ICAgICAgKDMwMDAsMjUwMDAsICAiY29udHJhY3QiKSwKICAgICJjcm1fc29mdHdhcmUiOiAgICAgICAoMTIwMCw3NTAwMCwgICJjb250cmFjdC9BUlIiKSwKICAgICJtZWRpY2FsX2RldmljZXMiOiAgICAoNTAwMCw1MDAwMDAsICJjb250cmFjdCIpLAogICAgInByb3BlcnR5X21nbXQiOiAgICAgICgxMDAwLDUwMDAwLCAgImFubnVhbCBtZ210IGZlZSIpLAogICAgInVua25vd24iOiAgICAgICAgICAgIChOb25lLCBOb25lLCAgImRlYWwiKSwgICAgICAgICAgICAjIGNhbm5vdCB2ZXJpZnkgLT4gZmxhZ2dlZAp9CgojIFBlci1sZWFkIGluZHVzdHJ5IGNsYXNzaWZpY2F0aW9uIChmcm9tIGJ1c2luZXNzIG5hbWUgLyBrbm93biBpbnRha2UpLgpMRUFEX0lORFVTVFJZID0gewogICAgImpvaG4tZG9lLXNwb3J0aW5nLWdvb2RzLTIwMjYwNjA0IjogInJldGFpbCIsCiAgICAiY291cnQtbHVuZGJlcmciOiAgICJob21lX3NlcnZpY2VzIiwgICAgICAjIFJhcmUgQnJlZWQgUGx1bWJpbmcsIEhlYXRpbmcgJiBBaXIKICAgICJicmFuc29uLW1heHdlbGwiOiAgInBob3RvZ3JhcGh5IiwKICAgICJtZWxpc3NhLXRhc2gtc3JwIjogInBob3RvZ3JhcGh5IiwKICAgICJydXNoLWV2YW5zIjogICAgICAgInBob3RvZ3JhcGh5IiwKICAgICJ3YXRzb24iOiAgICAgICAgICAgInZpZGVvX3Byb2R1Y3Rpb24iLCAgICMgS2Ftb3RvIFByb2R1Y3Rpb25zCiAgICAiamFkZW4tbWVjaGFtIjogICAgICJtZWRzcGEiLCAgICAgICAgICAgICAjIE5QSSBNZWRzcGEKICAgICJkYXZlLXdvb2QiOiAgICAgICAgImZvb2RfZnJhbmNoaXNlIiwgICAgICMgTWFoYW5hIEZyZXNoCiAgICAiYXVzdGluLWlyb24taG9yc2UiOiJyZXRhaWxfZmlyZWFybXMiLCAgICAjIElyb24gSG9yc2UgQXJtb3J5CiAgICAiYnJpdHRuZXktd2FybmljayI6ICJkZXNpZ25fYWdlbmN5IiwgICAgICAjIFdhcm5pY2sgRGVzaWduCiAgICAicGF1bC1tdXVzIjogICAgICAgICJjb25zdWx0aW5nIiwKICAgICJyZXktMzEtY29uc3VsdGluZyI6ImNvbnN1bHRpbmciLAogICAgImNocmlzLWxwbnciOiAgICAgICAiY29uc3VsdGluZyIsICAgICAgICAgIyBMUE5XIExMQyAoYmVzdC1rbm93bjogc2VydmljZXMpCiAgICAiYnJlbnQtYXR0YXdheSI6ICAgICJjcm1fc29mdHdhcmUiLCAgICAgICAjIENSTVgKICAgICJhbGV4LXJhbW9zIjogICAgICAgIm1lZGljYWxfZGV2aWNlcyIsICAgICMgRGVQdXkgU3ludGhlcwogICAgInphY2hhcnktb2xkaGFtIjogICAicHJvcGVydHlfbWdtdCIsICAgICAgIyBSZWQgU2FuZHMgVmFjYXRpb24gUHJvcGVydGllcwogICAgIyBEZW1vL3NhbXBsZSBibHVlcHJpbnRzIChubyBsZWFkcy8qLmpzb24gaW50YWtlKS4gQ2xhc3NpZmllZCBieSB0aGUgc2VsZi1kZWNsYXJlZAogICAgIyBidXNpbmVzcyBpZGVudGl0eSBpbiB0aGUgcGFnZSA8dGl0bGU+IOKAlCB0aGUgU0FNRSBzdGFuZGFyZCB0aGUgY2Fub24gMTUgdXNlIOKAlCBzbyB0aGUKICAgICMgZmluYW5jaWFsIGdhdGUga2VlcHMgVkVSSUZZSU5HIHRoZWlyIGJhbmRzIGluc3RlYWQgb2Ygc2lsZW50bHkgc2tpcHBpbmcgdGhlbS4gQSBkZW1vCiAgICAjIHNob3dpbmcgYSB3cm9uZy1pbmR1c3RyeSBzbGlkZXIgKGUuZy4gYSAkNDVLIHBsdW1iZXIpIGlzIHRoZSBleGFjdCBkZWZlY3Qgd2UgYmFuIGZvcgogICAgIyByZWFsIGNsaWVudHM7IE5PTl9MRUFEIGV4Y2x1c2lvbiB3b3VsZCByZWludHJvZHVjZSB0aGUgc2lsZW50LXNraXAgYnVnIHRoaXMgc2NyaXB0IHdhcm5zIGFib3V0LgogICAgImphc29uLW1hcnRpbmV6IjogICAiaG9tZV9zZXJ2aWNlcyIsICAgICAgIyBQZWFrIENvbWZvcnQgSFZBQwogICAgIm1pa2Utam9obnNvbiI6ICAgICAiaG9tZV9zZXJ2aWNlcyIsICAgICAgIyBKb2huc29uIFBsdW1iaW5nIExMQwogICAgInJqLWtpdGNoZW5ndWFyZCI6ICAiaG9tZV9zZXJ2aWNlcyIsICAgICAgIyBLaXRjaGVuIEd1YXJkIChjb21tZXJjaWFsIGtpdGNoZW4gZmlyZSBzdXBwcmVzc2lvbikKICAgICJjbGF1ZGUtY29kZSI6ICAgICAgImFpX2NvbnN1bHRpbmciLCAgICAgICAjIENsYXVkZSBDb2RlIEFnZW5jeSDigJQgQUkgYWdlbnQgZGV2ZWxvcG1lbnQsICQ1SyBjb250cmFjdHMKfQoKZGVmIF9sb2FkX3NsdWdfaW5kdXN0cnkoKToKICAgIGNmZyA9IG9zLnBhdGguam9pbihvcy5wYXRoLmRpcm5hbWUob3MucGF0aC5hYnNwYXRoKF9fZmlsZV9fKSksCiAgICAgICAgICAgICAgICAgICAgICAgInNjcmlwdHMiLCAicm9pLWluZHVzdHJ5LWNvbmZpZy5qc29uIikKICAgIHRyeToKICAgICAgICB3aXRoIG9wZW4oY2ZnKSBhcyBmOgogICAgICAgICAgICBzbHVnX2luZHVzdHJ5ID0ganNvbi5sb2FkKGYpLmdldCgic2x1Z19pbmR1c3RyeSIsIHt9KQogICAgZXhjZXB0IEV4Y2VwdGlvbjoKICAgICAgICByZXR1cm4KICAgIGlmIGlzaW5zdGFuY2Uoc2x1Z19pbmR1c3RyeSwgZGljdCk6CiAgICAgICAgZm9yIHNsdWcsIGluZHVzdHJ5IGluIHNsdWdfaW5kdXN0cnkuaXRlbXMoKToKICAgICAgICAgICAgaWYgaW5kdXN0cnkgaW4gSU5EVVNUUllfQkFORFM6CiAgICAgICAgICAgICAgICBMRUFEX0lORFVTVFJZW3N0cihzbHVnKV0gPSBzdHIoaW5kdXN0cnkpCgpfbG9hZF9zbHVnX2luZHVzdHJ5KCkKCiMgSW5kdXN0cmllcyB3aG9zZSBidXllcnMgcmVhbGlzdGljYWxseSBydW4gYSBMaW5rZWRJbiBsZWFkLWdlbiAvIHNvY2lhbC1zZWxsaW5nCiMgbW90aW9uLiBTaW5nbGUgc291cmNlIG9mIHRydXRoID0gc2NyaXB0cy9yb2ktaW5kdXN0cnktY29uZmlnLmpzb24KIyAoImIyYl9saW5rZWRpbl9pbmR1c3RyaWVzIik7IGZhbGwgYmFjayB0byB0aGlzIGlubGluZSBkZWZhdWx0IGlmIHRoZSBjb25maWcgaXMKIyBtaXNzaW5nIHNvIHRoZSBnYXRlIG5ldmVyIHNpbGVudGx5IG5vLW9wcy4gVGhlIFJPSSBjYWxjdWxhdG9yJ3MKIyAiTGlua2VkSW4gTGVhZHMgQWRkZWQvTW9udGgiIHNsaWRlciBmZWVkcyB0aGUgaGVhZGxpbmUgcmV2ZW51ZSBsaWZ0LCBzbyBzaG93aW5nCiMgaXQgb24gYSB0cmFkZXMvY29uc3VtZXItbG9jYWwgYnVzaW5lc3MgKGEgcGx1bWJlciwgYSByZXN0YXVyYW50KSBpbmZsYXRlcyB0aGUKIyBwcm9qZWN0aW9uIHdpdGggYW4gaXJyZWxldmFudCBjaGFubmVsIOKAlCB0aGUgc2FtZSBpbmR1c3RyeS1pbmFwcHJvcHJpYXRlbmVzcwojIGNsYXNzIGFzIGEgJDQ1SyBhdmVyYWdlIGNvbnRyYWN0IG9uIGEgcGx1bWJlci4KZGVmIF9sb2FkX2IyYl9saW5rZWRpbigpOgogICAgY2ZnID0gb3MucGF0aC5qb2luKG9zLnBhdGguZGlybmFtZShvcy5wYXRoLmFic3BhdGgoX19maWxlX18pKSwKICAgICAgICAgICAgICAgICAgICAgICAic2NyaXB0cyIsICJyb2ktaW5kdXN0cnktY29uZmlnLmpzb24iKQogICAgdHJ5OgogICAgICAgIHdpdGggb3BlbihjZmcpIGFzIGY6CiAgICAgICAgICAgIHJldHVybiBzZXQoanNvbi5sb2FkKGYpLmdldCgiYjJiX2xpbmtlZGluX2luZHVzdHJpZXMiLCBbXSkpCiAgICBleGNlcHQgRXhjZXB0aW9uOgogICAgICAgIHJldHVybiB7ImNvbnN1bHRpbmciLCAiY3JtX3NvZnR3YXJlIiwgIm1lZGljYWxfZGV2aWNlcyIsCiAgICAgICAgICAgICAgICAiZGVzaWduX2FnZW5jeSIsICJ2aWRlb19wcm9kdWN0aW9uIn0KCkIyQl9MSU5LRURJTiA9IF9sb2FkX2IyYl9saW5rZWRpbigpCgpkZWYgZ3JhYihwYXR0ZXJuLCBodG1sLCBmbGFncz0wKToKICAgIG0gPSByZS5zZWFyY2gocGF0dGVybiwgaHRtbCwgZmxhZ3MpCiAgICByZXR1cm4gbS5ncm91cHMoKSBpZiBtIGVsc2UgTm9uZQoKZGVmIGNoZWNrX2ZpbGUocGF0aCwgY2xvbmVfcmVnaXN0cnkpOgogICAgc2x1ZyA9IG9zLnBhdGguYmFzZW5hbWUocGF0aClbOi01XQogICAgaHRtbCA9IG9wZW4ocGF0aCwgZW5jb2Rpbmc9InV0Zi04IiwgZXJyb3JzPSJpZ25vcmUiKS5yZWFkKCkKICAgIGZhaWxzLCB3YXJucyA9IFtdLCBbXQogICAgaW5kdXN0cnkgPSBMRUFEX0lORFVTVFJZLmdldChzbHVnLCAidW5rbm93biIpCiAgICBsbywgaGksIHVuaXQgPSBJTkRVU1RSWV9CQU5EU1tpbmR1c3RyeV0KCiAgICAjIC0tLSBENy0wMS9ENy0xNyBjb250cmFjdC12YWx1ZSBkZWZhdWx0IHdpdGhpbiBiYW5kIChmaWxsLWluIE9SIGxlZ2FjeSBzbGlkZXIpIC0tLQogICAgIyBUZW1wbGF0ZSBub3cgdXNlcyBhIHR5cGVkIGZpbGwtaW4gPGlucHV0IHR5cGU9Im51bWJlciIgaWQ9InNsLWNvbnRyYWN0IiBtaW49Ii4uIiB2YWx1ZT0iLi4iPgogICAgIyB3aXRoIE5PIG1heCAob3duZXIgdHlwZXMgYW55IHZhbHVlKTsgb2xkZXIgYmx1ZXByaW50cyB1c2VkIGEgc2xpZGVyIGlkPSJzbGlkZXItY29udHJhY3QiCiAgICAjIHdpdGggbWluL21heC92YWx1ZS4gTWF0Y2ggZWl0aGVyIGlkLCB0aGVuIHBhcnNlIGF0dHJzIGluZGl2aWR1YWxseSBzbyBhIG1pc3NpbmcgbWF4IGlzIE9LLgogICAgY29udHJhY3RfdGFnID0gZ3JhYihyJyg8aW5wdXRbXj5dKmlkPSJzKD86bHxsaWRlciktY29udHJhY3QiW14+XSo+KScsIGh0bWwpCiAgICBjb250cmFjdF9taW4gPSBjb250cmFjdF9tYXggPSBzbGlkZXJfZGVmYXVsdCA9IE5vbmUKICAgIGlmIGNvbnRyYWN0X3RhZzoKICAgICAgICB0YWcgPSBjb250cmFjdF90YWdbMF0KICAgICAgICBtX21uID0gcmUuc2VhcmNoKHInbWluPSIoXGQrKSInLCB0YWcpOyAgIGNvbnRyYWN0X21pbiAgID0gaW50KG1fbW4uZ3JvdXAoMSkpIGlmIG1fbW4gZWxzZSBOb25lCiAgICAgICAgbV9teCA9IHJlLnNlYXJjaChyJ21heD0iKFxkKykiJywgdGFnKTsgICBjb250cmFjdF9tYXggICA9IGludChtX214Lmdyb3VwKDEpKSBpZiBtX214IGVsc2UgTm9uZQogICAgICAgIG1fdnYgPSByZS5zZWFyY2gocid2YWx1ZT0iKFxkKykiJywgdGFnKTsgc2xpZGVyX2RlZmF1bHQgPSBpbnQobV92di5ncm91cCgxKSkgaWYgbV92diBlbHNlIE5vbmUKICAgIGpzID0gZ3JhYihyInMoPzpsfGxpZGVyKS1jb250cmFjdCdcKVwudmFsdWVcKVxzKlx8XHxccyooXGQrKSIsIGh0bWwpCiAgICBqc19mYWxsYmFjayA9IGludChqc1swXSkgaWYganMgZWxzZSBOb25lCiAgICAjIGNsb25lLWRlZHVwIGZpbmdlcnByaW50OiB0aGUgbnVtYmVycyBhY3R1YWxseSBwcmVzZW50IG9uIHRoZSBjb250cmFjdCBmaWVsZAogICAgc2xpZGVyX3RyaXBsZSA9IHR1cGxlKHggZm9yIHggaW4gKGNvbnRyYWN0X21pbiwgY29udHJhY3RfbWF4LCBzbGlkZXJfZGVmYXVsdCkgaWYgeCBpcyBub3QgTm9uZSkgb3IgTm9uZQoKICAgIGlmIGluZHVzdHJ5ID09ICJ1bmtub3duIjoKICAgICAgICAjIEQxMC0wNSBbUkxdOiBhbiB1bmNsYXNzaWZpZWQgbGVhZCBtZWFucyB3ZSBDQU5OT1QgdmVyaWZ5IGl0cyBtb25leSBtYXRoIGZpdHMKICAgICAgICAjIHRoZSBpbmR1c3RyeSDigJQgZXhhY3RseSB0aGUgY29uZGl0aW9uIHRoYXQgbGV0IENvdXJ0IEx1bmRiZXJnJ3MgJDQ1ayBjbG9uZSBzaGlwLgogICAgICAgICMgUGVyIHRoZSBhdWRpdCBza2lsbCB0aGlzIGlzIGEgUkVELUxJTkUgRkFJTCAoZG9uJ3Qgc2hpcCB1bnZlcmlmaWVkKSwgbm90IGEgd2FybmluZy4KICAgICAgICAjIFdlIG5ldmVyIGd1ZXNzIGFuIGluZHVzdHJ5IChndWVzc2VkIG51bWJlcnMgPSB0aGUgb3JpZ2luYWwgZGVmZWN0KTsgYWRkIHRoZSBsZWFkIHRvCiAgICAgICAgIyBMRUFEX0lORFVTVFJZIGZyb20gcmVhbCBpbnRha2UgYmVmb3JlIGl0IGNhbiBwYXNzLgogICAgICAgIGZhaWxzLmFwcGVuZChmIkQxMC0wNSBbUkxdIGluZHVzdHJ5IHVuY2xhc3NpZmllZCDigJQgY2Fubm90IHZlcmlmeSBmaW5hbmNpYWxzIChhZGQgJ3tzbHVnfScgdG8gTEVBRF9JTkRVU1RSWSBmcm9tIGludGFrZSkiKQogICAgIyBKUyBmYWxsYmFjayBiYW5kIGNoZWNrIOKAlCB0aGUgZmlsbC1pbidzIGVtcHR5LXNlbnRpbmVsICJ8fCAwIiBpcyBpbnRlbnRpb25hbCAoZW1wdHkgPSAkMAogICAgIyBjb250cmlidXRpb24pLCBub3QgYSBzZWVkZWQgZGVmYXVsdCwgc28gaXQgaXMgZXhlbXB0IGZyb20gdGhlIGJhbmQgY2hlY2suCiAgICBpZiBsbyBpcyBub3QgTm9uZSBhbmQganNfZmFsbGJhY2sgaXMgbm90IE5vbmUgYW5kIGpzX2ZhbGxiYWNrICE9IDAgYW5kIG5vdCAobG8gPD0ganNfZmFsbGJhY2sgPD0gaGkpOgogICAgICAgIGZhaWxzLmFwcGVuZChmIkQ3LTE3IFtSTF0gSlMgZmFsbGJhY2sgJHtqc19mYWxsYmFjazosfSBvdXRzaWRlIHtpbmR1c3RyeX0gYmFuZCAke2xvOix9LSR7aGk6LH0iKQogICAgaWYgbG8gaXMgbm90IE5vbmUgYW5kIHNsaWRlcl9kZWZhdWx0IGlzIG5vdCBOb25lIGFuZCBub3QgKGxvIDw9IHNsaWRlcl9kZWZhdWx0IDw9IGhpKToKICAgICAgICBmYWlscy5hcHBlbmQoZiJENy0wMSBbUkxdIGNvbnRyYWN0IGRlZmF1bHQgJHtzbGlkZXJfZGVmYXVsdDosfSBvdXRzaWRlIHtpbmR1c3RyeX0gYmFuZCAke2xvOix9LSR7aGk6LH0iKQogICAgIyBENy0wMyByYW5nZSBvdmVybGFwIGFwcGxpZXMgb25seSB0byBhIGJvdW5kZWQgc2xpZGVyIChoYXMgbWF4KTsgYSBmaWxsLWluIGhhcyBubyBtYXguCiAgICBpZiBsbyBpcyBub3QgTm9uZSBhbmQgY29udHJhY3RfbWluIGlzIG5vdCBOb25lIGFuZCBjb250cmFjdF9tYXggaXMgbm90IE5vbmUgYW5kIChjb250cmFjdF9tYXggPCBsbyBvciBjb250cmFjdF9taW4gPiBoaSk6CiAgICAgICAgZmFpbHMuYXBwZW5kKGYiRDctMDMgc2xpZGVyIHJhbmdlICR7Y29udHJhY3RfbWluOix9LSR7Y29udHJhY3RfbWF4Oix9IGRvZXMgbm90IG92ZXJsYXAge2luZHVzdHJ5fSBiYW5kICR7bG86LH0tJHtoaTosfSIpCgogICAgIyAtLS0gRDctMTAgbGFiZWwgdXNlcyB0aGUgcmlnaHQgdHJhbnNhY3Rpb24gbm91biBmb3IgdGhlIGluZHVzdHJ5IC0tLQogICAgaWYgcmUuc2VhcmNoKHInW0FhXXZlcmFnZSBbQ2Ndb250cmFjdCBbVnZdYWx1ZScsIGh0bWwpIGFuZCB1bml0IG5vdCBpbiAoImNvbnRyYWN0IiwgImNvbnRyYWN0L0FSUiIsICJhbm51YWwgbWdtdCBmZWUiKToKICAgICAgICB3YXJucy5hcHBlbmQoZiJENy0xMCBsYWJlbCAnQXZlcmFnZSBDb250cmFjdCBWYWx1ZScgYnV0IHtpbmR1c3RyeX0gc2VsbHMgYnkgJ3t1bml0fSciKQoKICAgICMgLS0tIEQ3LTE4IGNhbGN1bGF0b3IvY29udGVudCBGSUVMRCBSRUxFVkFOQ0U6IEIyQi1vbmx5IExpbmtlZEluIG9uIG5vbi1CMkIgLS0tCiAgICAjIFRoZSAiTGlua2VkSW4gTGVhZHMgQWRkZWQvTW9udGgiIHNsaWRlciAoaWQ9InNsaWRlci1saW5rZWRpbiIpIGZlZWRzIHRoZQogICAgIyBoZWFkbGluZSBBSSByZXZlbnVlIGxpZnQgKGFpTGVhZHMgPSBsZWFkcyoxLjE1ICsgbGlua2VkaW5MZWFkcykuIE9uIGEKICAgICMgdHJhZGVzL2NvbnN1bWVyLWxvY2FsIGJ1c2luZXNzIHRoYXQgaGFzIG5vIExpbmtlZEluIHBpcGVsaW5lLCB0aGlzIGluZmxhdGVzCiAgICAjIHRoZSBST0kgcHJvamVjdGlvbiB3aXRoIGFuIGlycmVsZXZhbnQgY2hhbm5lbCwgdGhlIHNhbWUgZGVmZWN0IGNsYXNzIEJlbm5ldHQKICAgICMgZmxhZ2dlZCBmb3IgdGhlICQ0NUstY29udHJhY3Qtb24tYS1wbHVtYmVyLiBUaGlzIGlzIG5vdyBhIHJlZC1saW5lIGZhaWwgZm9yCiAgICAjIHRoZSBjaGVja2VkIGZpbGUsIGJlY2F1c2UgdGhlIGdlbmVyYXRvciBoYXMgYSBob21lLXNlcnZpY2VzIHNhbml0aXplci4KICAgIGlmIGluZHVzdHJ5IG5vdCBpbiAoInVua25vd24iLCkgYW5kIGluZHVzdHJ5IG5vdCBpbiBCMkJfTElOS0VESU4gXAogICAgICAgYW5kIHJlLnNlYXJjaChyJ2lkPSJzbGlkZXItbGlua2VkaW4iJywgaHRtbCk6CiAgICAgICAgZmFpbHMuYXBwZW5kKAogICAgICAgICAgICBmIkQ3LTE4IFtSTF0gQjJCLW9ubHkgJ0xpbmtlZEluIExlYWRzIEFkZGVkL01vbnRoJyBsZXZlciBzaG93biBvbiBub24tQjJCICIKICAgICAgICAgICAgZiIne2luZHVzdHJ5fScg4oCUIGluZmxhdGVzIFJPSSBwcm9qZWN0aW9uIHdpdGggYW4gaXJyZWxldmFudCBjaGFubmVsICIKICAgICAgICAgICAgZiIocmVtb3ZlL3JlcGxhY2UgaXQgZm9yIHRyYWRlcykiKQoKICAgIGlmIGluZHVzdHJ5ID09ICJob21lX3NlcnZpY2VzIjoKICAgICAgICBib2R5ID0gcmUuc3ViKHInPHNjcmlwdFtcc1xTXSo/PC9zY3JpcHQ+JywgJycsIGh0bWwsIGZsYWdzPXJlLkkpCiAgICAgICAgbGVnYWN5X3Rlcm1zID0gWwogICAgICAgICAgICAiTGlua2VkSW4iLAogICAgICAgICAgICAibHV4dXJ5IiwKICAgICAgICAgICAgInZlbnVlIiwKICAgICAgICAgICAgImNvcnBvcmF0ZSBwbGFubmVyIiwKICAgICAgICAgICAgImV2ZW50IHNob290IiwKICAgICAgICAgICAgImdhbGEiLAogICAgICAgICAgICAiUGludGVyZXN0IiwKICAgICAgICAgICAgIkFwcGx5IHRvIFdvcmsgV2l0aCBVcyIsCiAgICAgICAgICAgICMgIkNvbW1hbmQgQ2VudGVyIiByZW1vdmVkIOKAlCBmb3JtYXQtMyBnb2xkIHRlbXBsYXRlIHVzZXMgImNvbW1hbmQgY2VudGVyIiBpbgogICAgICAgICAgICAjIGV4cGxhbmF0b3J5IGNvcHkgKGNvcnJlY3QgYnJhbmQgbGFuZ3VhZ2UpLiBUaGUgT0xEIHZpb2xhdGlvbiB3YXMgdGhlIHRhYi1uYXYKICAgICAgICAgICAgIyBzZWN0aW9uIGlkPSJjb21tYW5kLWNlbnRlciIgcGF0dGVybiwgd2hpY2ggZm9ybWF0LWNvbmZvcm1hbmNlLWNoZWNrLnB5IEZDLTAxCiAgICAgICAgICAgICMgYWxyZWFkeSBibG9ja3MgKG9sZCB0YWIgc2VjdGlvbnMgZmFpbCBQRjAtNSBiZWZvcmUgcmVhY2hpbmcgdGhpcyBjaGVjaykuCiAgICAgICAgXQogICAgICAgIGxlYWtlZCA9IFt0ZXJtIGZvciB0ZXJtIGluIGxlZ2FjeV90ZXJtcyBpZiByZS5zZWFyY2gociJcYiIgKyByZS5lc2NhcGUodGVybSkgKyByIlxiIiwgYm9keSwgcmUuSSldCiAgICAgICAgIyBDaGVjayBmb3IgdGhlIE9MRCBjb21tYW5kLWNlbnRlciBUQUIgU0VDVElPTiAodGhlIHJlYWwgRDEwLTIxIHZpb2xhdGlvbikgc2VwYXJhdGVseQogICAgICAgIGlmIHJlLnNlYXJjaChyJ2lkPVsiXCddY29tbWFuZC1jZW50ZXJbIlwnXScsIGh0bWwsIHJlLkkpOgogICAgICAgICAgICBsZWFrZWQuYXBwZW5kKCJDb21tYW5kIENlbnRlciB0YWItc2VjdGlvbiAoaWQ9Y29tbWFuZC1jZW50ZXIg4oCUIG9sZCBmb3JtYXQsIG11c3QgcmVnZW5lcmF0ZSkiKQogICAgICAgIGlmIGxlYWtlZDoKICAgICAgICAgICAgZmFpbHMuYXBwZW5kKAogICAgICAgICAgICAgICAgIkQxMC0yMSBbUkxdIGhvbWUtc2VydmljZXMgYmx1ZXByaW50IGNvbnRhaW5zIHdyb25nLWluZHVzdHJ5L3RlbXBsYXRlIGxhbmd1YWdlOiAiCiAgICAgICAgICAgICAgICArICIsICIuam9pbihzb3J0ZWQoc2V0KGxlYWtlZCksIGtleT1zdHIubG93ZXIpKQogICAgICAgICAgICApCgogICAgIyAtLS0gRDctMDIgY2xvbmUgZGV0ZWN0aW9uOiByZWNvcmQgdGhlIHNsaWRlciB0cmlwbGUgV0lUSCBpbmR1c3RyeSBmb3IgY29tcGFyZSAtLS0KICAgICMgVGhlIHJlYWwgZGVmZWN0IEJlbm5ldHQgZmxhZ2dlZCBpcyBPTkUgZmluYW5jaWFsIHByb2ZpbGUgY2xvbmVkIGFjcm9zcwogICAgIyBESUZGRVJFTlQgaW5kdXN0cmllcyAoYSBwbHVtYmVyICsgYSBtZWQtZGV2aWNlIGNvICsgYSByZXN0YXVyYW50IGFsbCBvbiB0aGUKICAgICMgc2FtZSAkMjVLLSQxMjBLIHNsaWRlcikuIFR3byBwaG90b2dyYXBoeSBzdHVkaW9zIHNoYXJpbmcgYSBwaG90b2dyYXBoeSByYW5nZQogICAgIyBpcyBjb3JyZWN0LCBub3QgYSBjbG9uZS4gU28gd2Uga2V5IGJ5ICh0cmlwbGUsIGluZHVzdHJ5KSBhbmQgb25seSBmYWlsIHdoZW4gYQogICAgIyBzaW5nbGUgdHJpcGxlIHNwYW5zID49MiBkaXN0aW5jdCBpbmR1c3RyaWVzIChvciBhbGwgYmx1ZXByaW50cyBzaGFyZSBvbmUpLgogICAgaWYgc2xpZGVyX3RyaXBsZToKICAgICAgICBjbG9uZV9yZWdpc3RyeVtzbGlkZXJfdHJpcGxlXS5hcHBlbmQoKHNsdWcsIGluZHVzdHJ5KSkKCiAgICAjIC0tLSBENy0wNCBmYWJyaWNhdGVkIGhhcmRjb2RlZCAkIGZpZ3VyZXMgaW4gY2xpZW50IGNvcHkgKG91dHNpZGUgPHNjcmlwdD4vPGlucHV0PikgLS0tCiAgICBib2R5ID0gcmUuc3ViKHInPHNjcmlwdFtcc1xTXSo/PC9zY3JpcHQ+JywgJycsIGh0bWwpCiAgICBib2R5ID0gcmUuc3ViKHInPGlucHV0W14+XSo+JywgJycsIGJvZHkpCiAgICBoYXJkID0gcmUuZmluZGFsbChyJ1wkXHM/KFxkezEsM30oPzosXGR7M30pK3xcZHs0LH0pXGInLCBib2R5KQogICAgYmlnID0gW2ggZm9yIGggaW4gaGFyZCBpZiBpbnQoaC5yZXBsYWNlKCcsJywgJycpKSA+PSAxMDAwMF0KICAgIGlmIGJpZzoKICAgICAgICB3YXJucy5hcHBlbmQoZiJENy0wNCBoYXJkY29kZWQgbGFyZ2UgJCBmaWd1cmVzIGluIGNvcHk6IHtzb3J0ZWQoc2V0KGJpZykpWzo1XX0g4oCUIG11c3QgdHJhY2UgdG8gaW50YWtlL3NvdXJjZSIpCgogICAgcmV0dXJuIHsic2x1ZyI6IHNsdWcsICJpbmR1c3RyeSI6IGluZHVzdHJ5LCAiYmFuZCI6IFtsbywgaGldLAogICAgICAgICAgICAic2xpZGVyX2RlZmF1bHQiOiBzbGlkZXJfZGVmYXVsdCwgImpzX2ZhbGxiYWNrIjoganNfZmFsbGJhY2ssCiAgICAgICAgICAgICJmYWlscyI6IGZhaWxzLCAid2FybnMiOiB3YXJuc30KCmRlZiBtYWluKCk6CiAgICBhcmdzID0gc3lzLmFyZ3ZbMTpdCiAgICBpZiAiLS1maWxlIiBpbiBhcmdzOgogICAgICAgIGZpbGVzID0gW2FyZ3NbYXJncy5pbmRleCgiLS1maWxlIikgKyAxXV0KICAgIGVsc2U6CiAgICAgICAgIyBOT05fTEVBRCA9IGJ1aWxkIHRlbXBsYXRlICsgaW50ZXJuYWwgZGVtb3MgKyBjYW5vbmljYWwgZHVwbGljYXRlcy4gRXZlcnl0aGluZwogICAgICAgICMgZWxzZSBpcyB0cmVhdGVkIGFzIGEgcmVhbCBwcm9zcGVjdCBibHVlcHJpbnQgYW5kIE1VU1QgYmUgZmluYW5jaWFsbHkgdmVyaWZpYWJsZS4KICAgICAgICAjIFByZXZpb3VzbHkgLS1hbGwgZmlsdGVyZWQgdG8gb25seSBzbHVncyBhbHJlYWR5IGluIExFQURfSU5EVVNUUlksIHdoaWNoIFNJTEVOVExZCiAgICAgICAgIyBza2lwcGVkIGFueSB1bm1hcHBlZCBsZWFkIOKAlCBhIGJyYW5kLW5ldyBibHVlcHJpbnQgd2l0aCBhICQ0NWsgY2xvbmUgc2xpZGVyIHdvdWxkCiAgICAgICAgIyBuZXZlciBiZSBjaGVja2VkLiBOb3cgLS1hbGwgc2NhbnMgZXZlcnkgcmVhbC1sZWFkIGZpbGU7IHVubWFwcGVkID0+IEQxMC0wNSBmYWlsLgogICAgICAgIE5PTl9MRUFEID0geyJURU1QTEFURSIsICJmcmFuY2hpc2Uta2ktY2VvIiwgInJ1c2gtZXZhbnMtY2Fub25pY2FsIiwgImxvY2FsLXdlYmhvb2twcm9iZSJ9CiAgICAgICAgZmlsZXMgPSBzb3J0ZWQoZ2xvYi5nbG9iKG9zLnBhdGguam9pbihCTFVFUFJJTlRTLCAiKi5odG1sIikpKQogICAgICAgIGZpbGVzID0gW2YgZm9yIGYgaW4gZmlsZXMKICAgICAgICAgICAgICAgICBpZiBub3Qgb3MucGF0aC5iYXNlbmFtZShmKS5zdGFydHN3aXRoKCJfIikKICAgICAgICAgICAgICAgICBhbmQgb3MucGF0aC5iYXNlbmFtZShmKVs6LTVdIG5vdCBpbiBOT05fTEVBRF0KICAgIGNsb25lX3JlZ2lzdHJ5ID0gY29sbGVjdGlvbnMuZGVmYXVsdGRpY3QobGlzdCkKICAgIHJlc3VsdHMgPSBbY2hlY2tfZmlsZShmLCBjbG9uZV9yZWdpc3RyeSkgZm9yIGYgaW4gZmlsZXNdCgogICAgIyBENy0wMiBbUkxdIGZsYWcgYSBzbGlkZXIgdHJpcGxlIHRoYXQgc3BhbnMgPj0yIERJU1RJTkNUIGluZHVzdHJpZXMgKHRydWUKICAgICMgY3Jvc3MtaW5kdXN0cnkgY2xvbmUg4oCUIHRoZSBvcmlnaW5hbCAkMjVLLyQ0NUstZXZlcnl3aGVyZSBkZWZlY3QpLiBBIHRyaXBsZQogICAgIyBjb25maW5lZCB0byBhIHNpbmdsZSBpbmR1c3RyeSBpcyBhIGxlZ2l0aW1hdGUgc2hhcmVkIG1vZGVsaW5nIHJhbmdlLgogICAgY2xvbmVzID0ge30KICAgIGZvciB0cmlwLCBlbnRyaWVzIGluIGNsb25lX3JlZ2lzdHJ5Lml0ZW1zKCk6CiAgICAgICAgaW5kdXN0cmllcyA9IHtpbmQgZm9yIF8sIGluZCBpbiBlbnRyaWVzfQogICAgICAgIGlmIGxlbihpbmR1c3RyaWVzKSA+PSAyOgogICAgICAgICAgICBzbHVncyA9IFtzIGZvciBzLCBfIGluIGVudHJpZXNdCiAgICAgICAgICAgIGNsb25lc1t0cmlwXSA9IChzbHVncywgaW5kdXN0cmllcykKICAgICAgICAgICAgZm9yIHIgaW4gcmVzdWx0czoKICAgICAgICAgICAgICAgIGlmIHJbInNsdWciXSBpbiBzbHVnczoKICAgICAgICAgICAgICAgICAgICByWyJmYWlscyJdLmFwcGVuZCgKICAgICAgICAgICAgICAgICAgICAgICAgZiJENy0wMiBbUkxdIGlkZW50aWNhbCBST0kgc2xpZGVyIHt0cmlwfSBjbG9uZWQgYWNyb3NzICIKICAgICAgICAgICAgICAgICAgICAgICAgZiJ7bGVuKGluZHVzdHJpZXMpfSBpbmR1c3RyaWVzIHtzb3J0ZWQoaW5kdXN0cmllcyl9IOKAlCBub3QgcGVyc29uYWxpemVkIikKCiAgICBucGFzcyA9IHN1bSgxIGZvciByIGluIHJlc3VsdHMgaWYgbm90IHJbImZhaWxzIl0pCiAgICBwcmludChmInsnU0xVRyc6PDIwfSB7J0lORFVTVFJZJzo8MTZ9IHsnREVGQVVMVCc6Pjl9IHsnSlMnOj44fSAgUkVTVUxUIikKICAgIHByaW50KCItIiAqIDc4KQogICAgZm9yIHIgaW4gcmVzdWx0czoKICAgICAgICByZXMgPSAiUEFTUyIgaWYgbm90IHJbImZhaWxzIl0gZWxzZSBmIkZBSUwgKHtsZW4oclsnZmFpbHMnXSl9KSIKICAgICAgICBwcmludChmIntyWydzbHVnJ106PDIwfSB7clsnaW5kdXN0cnknXTo8MTZ9IHtzdHIoclsnc2xpZGVyX2RlZmF1bHQnXSk6Pjl9IHtzdHIoclsnanNfZmFsbGJhY2snXSk6Pjh9ICB7cmVzfSIpCiAgICAgICAgZm9yIGYgaW4gclsiZmFpbHMiXToKICAgICAgICAgICAgcHJpbnQoZiIgICAgICDinJcge2Z9IikKICAgICAgICBmb3IgdyBpbiByWyJ3YXJucyJdOgogICAgICAgICAgICBwcmludChmIiAgICAgIOKaoCB7d30iKQogICAgcHJpbnQoIi0iICogNzgpCiAgICBwcmludChmIkZJTkFOQ0lBTC1SRUFMSVNNOiB7bnBhc3N9L3tsZW4ocmVzdWx0cyl9IHBhc3MgcmVkLWxpbmUgZmluYW5jaWFsIGNoZWNrcyIpCiAgICBkN18xOCA9IFtyWyJzbHVnIl0gZm9yIHIgaW4gcmVzdWx0cyBpZiBhbnkoIkQ3LTE4IiBpbiB3IGZvciB3IGluIHJbIndhcm5zIl0pXQogICAgaWYgZDdfMTg6CiAgICAgICAgcHJpbnQoZiJENy0xOCBGSUVMRC1SRUxFVkFOQ0UgV0FSTjoge2xlbihkN18xOCl9IG5vbi1CMkIgYmx1ZXByaW50KHMpIHNob3cgdGhlIExpbmtlZEluIGxldmVyICIKICAgICAgICAgICAgICBmIihzdGFnZWQgZm9yIHRlbXBsYXRlIGdhdGUpOiB7c29ydGVkKGQ3XzE4KX0iKQogICAgaWYgY2xvbmVzOgogICAgICAgIHByaW50KGYiQ1JPU1MtSU5EVVNUUlkgQ0xPTkUgR1JPVVBTOiB7WyAodCwgc29ydGVkKGluZHMpKSBmb3IgdCwocyxpbmRzKSBpbiBjbG9uZXMuaXRlbXMoKSBdfSIpCiAgICBzeXMuZXhpdCgwIGlmIG5wYXNzID09IGxlbihyZXN1bHRzKSBlbHNlIDEpCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgbWFpbigpCg==
+#!/usr/bin/env python3
+"""
+financial-realism-check.py  — Domain 7 enforcement (Blueprint AI audit)
+Catches the exact defect Bennett flagged 2026-05-29: a residential plumbing
+company (Court Lundberg / Rare Breed Plumbing) shipped with a $25K-$120K ROI
+slider and a $45,000 "average contract value" default — generic franchise-
+consulting numbers cloned onto every business regardless of industry.
+
+This is REAL enforcement, not "manual review". It runs the financial-credibility
+checks (Domain 7) against blueprint HTML and emits a per-file pass/fail + reason.
+
+Usage:  python3 financial-realism-check.py --all
+        python3 financial-realism-check.py --file blueprints/court-lundberg.html
+Exit 0 only if every checked file passes every red-line financial check.
+"""
+import re, sys, json, glob, os, collections
+
+BLUEPRINTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "blueprints")
+
+# Industry -> realistic single-transaction band (USD low, high) for the value a
+# customer actually pays per deal/job/ticket/treatment. Used to sanity-check the
+# ROI calculator's "average contract/deal value" default + JS fallback.
+# Bands are deliberately wide; the check only fails on clearly-wrong defaults
+# (e.g. a $45K default for a $300-$15K home-services job).
+INDUSTRY_BANDS = {
+    "home_services":      (300, 20000,  "job/ticket"),     # plumbing, HVAC, electrical
+    "photography":        (250, 8000,   "session/package"),
+    "video_production":   (800, 50000,  "project"),
+    "medspa":             (150, 6000,   "treatment/package"),
+    "food_franchise":     (8,   60,     "ticket"),          # per-customer check
+    "retail_firearms":    (300, 6000,   "ticket"),
+    "design_agency":      (1500,40000,  "project"),
+    "consulting":         (3000,150000, "engagement"),
+    "retail":             (50,  2000,   "purchase/transaction"),    # retail sporting goods
+    "professional_services": (1000,50000, "contract/project"),
+    "ai_consulting":      (3000,25000,  "contract"),
+    "crm_software":       (1200,75000,  "contract/ARR"),
+    "medical_devices":    (5000,500000, "contract"),
+    "property_mgmt":      (1000,50000,  "annual mgmt fee"),
+    "unknown":            (None, None,  "deal"),            # cannot verify -> flagged
+}
+
+# Per-lead industry classification (from business name / known intake).
+LEAD_INDUSTRY = {
+    "john-doe-sporting-goods-20260604": "retail",
+    "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
+    "branson-maxwell":  "photography",
+    "melissa-tash-srp": "photography",
+    "rush-evans":       "photography",
+    "watson":           "video_production",   # Kamoto Productions
+    "jaden-mecham":     "medspa",             # NPI Medspa
+    "dave-wood":        "food_franchise",     # Mahana Fresh
+    "austin-iron-horse":"retail_firearms",    # Iron Horse Armory
+    "brittney-warnick": "design_agency",      # Warnick Design
+    "paul-muus":        "consulting",
+    "rey-31-consulting":"consulting",
+    "chris-lpnw":       "consulting",         # LPNW LLC (best-known: services)
+    "brent-attaway":    "crm_software",       # CRMX
+    "alex-ramos":       "medical_devices",    # DePuy Synthes
+    "zachary-oldham":   "property_mgmt",      # Red Sands Vacation Properties
+    # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
+    # business identity in the page <title> — the SAME standard the canon 15 use — so the
+    # financial gate keeps VERIFYING their bands instead of silently skipping them. A demo
+    # showing a wrong-industry slider (e.g. a $45K plumber) is the exact defect we ban for
+    # real clients; NON_LEAD exclusion would reintroduce the silent-skip bug this script warns about.
+    "jason-martinez":   "home_services",      # Peak Comfort HVAC
+    "mike-johnson":     "home_services",      # Johnson Plumbing LLC
+    "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
+    "claude-code":      "ai_consulting",       # Claude Code Agency — AI agent development, $5K contracts
+}
+
+def _load_slug_industry():
+    cfg = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       "scripts", "roi-industry-config.json")
+    try:
+        with open(cfg) as f:
+            slug_industry = json.load(f).get("slug_industry", {})
+    except Exception:
+        return
+    if isinstance(slug_industry, dict):
+        for slug, industry in slug_industry.items():
+            if industry in INDUSTRY_BANDS:
+                LEAD_INDUSTRY[str(slug)] = str(industry)
+
+_load_slug_industry()
+
+# Industries whose buyers realistically run a LinkedIn lead-gen / social-selling
+# motion. Single source of truth = scripts/roi-industry-config.json
+# ("b2b_linkedin_industries"); fall back to this inline default if the config is
+# missing so the gate never silently no-ops. The ROI calculator's
+# "LinkedIn Leads Added/Month" slider feeds the headline revenue lift, so showing
+# it on a trades/consumer-local business (a plumber, a restaurant) inflates the
+# projection with an irrelevant channel — the same industry-inappropriateness
+# class as a $45K average contract on a plumber.
+def _load_b2b_linkedin():
+    cfg = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                       "scripts", "roi-industry-config.json")
+    try:
+        with open(cfg) as f:
+            return set(json.load(f).get("b2b_linkedin_industries", []))
+    except Exception:
+        return {"consulting", "crm_software", "medical_devices",
+                "design_agency", "video_production"}
+
+B2B_LINKEDIN = _load_b2b_linkedin()
+
+def grab(pattern, html, flags=0):
+    m = re.search(pattern, html, flags)
+    return m.groups() if m else None
+
+def check_file(path, clone_registry):
+    slug = os.path.basename(path)[:-5]
+    html = open(path, encoding="utf-8", errors="ignore").read()
+    fails, warns = [], []
+    industry = LEAD_INDUSTRY.get(slug, "unknown")
+    lo, hi, unit = INDUSTRY_BANDS[industry]
+
+    # --- D7-01/D7-17 contract-value default within band (fill-in OR legacy slider) ---
+    # Template now uses a typed fill-in <input type="number" id="sl-contract" min=".." value="..">
+    # with NO max (owner types any value); older blueprints used a slider id="slider-contract"
+    # with min/max/value. Match either id, then parse attrs individually so a missing max is OK.
+    contract_tag = grab(r'(<input[^>]*id="s(?:l|lider)-contract"[^>]*>)', html)
+    contract_min = contract_max = slider_default = None
+    if contract_tag:
+        tag = contract_tag[0]
+        m_mn = re.search(r'min="(\d+)"', tag);   contract_min   = int(m_mn.group(1)) if m_mn else None
+        m_mx = re.search(r'max="(\d+)"', tag);   contract_max   = int(m_mx.group(1)) if m_mx else None
+        m_vv = re.search(r'value="(\d+)"', tag); slider_default = int(m_vv.group(1)) if m_vv else None
+    js = grab(r"s(?:l|lider)-contract'\)\.value\)\s*\|\|\s*(\d+)", html)
+    js_fallback = int(js[0]) if js else None
+    # clone-dedup fingerprint: the numbers actually present on the contract field
+    slider_triple = tuple(x for x in (contract_min, contract_max, slider_default) if x is not None) or None
+
+    if industry == "unknown":
+        # D10-05 [RL]: an unclassified lead means we CANNOT verify its money math fits
+        # the industry — exactly the condition that let Court Lundberg's $45k clone ship.
+        # Per the audit skill this is a RED-LINE FAIL (don't ship unverified), not a warning.
+        # We never guess an industry (guessed numbers = the original defect); add the lead to
+        # LEAD_INDUSTRY from real intake before it can pass.
+        fails.append(f"D10-05 [RL] industry unclassified — cannot verify financials (add '{slug}' to LEAD_INDUSTRY from intake)")
+    # JS fallback band check — the fill-in's empty-sentinel "|| 0" is intentional (empty = $0
+    # contribution), not a seeded default, so it is exempt from the band check.
+    if lo is not None and js_fallback is not None and js_fallback != 0 and not (lo <= js_fallback <= hi):
+        fails.append(f"D7-17 [RL] JS fallback ${js_fallback:,} outside {industry} band ${lo:,}-${hi:,}")
+    if lo is not None and slider_default is not None and not (lo <= slider_default <= hi):
+        fails.append(f"D7-01 [RL] contract default ${slider_default:,} outside {industry} band ${lo:,}-${hi:,}")
+    # D7-03 range overlap applies only to a bounded slider (has max); a fill-in has no max.
+    if lo is not None and contract_min is not None and contract_max is not None and (contract_max < lo or contract_min > hi):
+        fails.append(f"D7-03 slider range ${contract_min:,}-${contract_max:,} does not overlap {industry} band ${lo:,}-${hi:,}")
+
+    # --- D7-10 label uses the right transaction noun for the industry ---
+    if re.search(r'[Aa]verage [Cc]ontract [Vv]alue', html) and unit not in ("contract", "contract/ARR", "annual mgmt fee"):
+        warns.append(f"D7-10 label 'Average Contract Value' but {industry} sells by '{unit}'")
+
+    # --- D7-18 calculator/content FIELD RELEVANCE: B2B-only LinkedIn on non-B2B ---
+    # The "LinkedIn Leads Added/Month" slider (id="slider-linkedin") feeds the
+    # headline AI revenue lift (aiLeads = leads*1.15 + linkedinLeads). On a
+    # trades/consumer-local business that has no LinkedIn pipeline, this inflates
+    # the ROI projection with an irrelevant channel, the same defect class Bennett
+    # flagged for the $45K-contract-on-a-plumber. This is now a red-line fail for
+    # the checked file, because the generator has a home-services sanitizer.
+    if industry not in ("unknown",) and industry not in B2B_LINKEDIN \
+       and re.search(r'id="slider-linkedin"', html):
+        fails.append(
+            f"D7-18 [RL] B2B-only 'LinkedIn Leads Added/Month' lever shown on non-B2B "
+            f"'{industry}' — inflates ROI projection with an irrelevant channel "
+            f"(remove/replace it for trades)")
+
+    if industry == "home_services":
+        body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)
+        legacy_terms = [
+            "LinkedIn",
+            "luxury",
+            "venue",
+            "corporate planner",
+            "event shoot",
+            "gala",
+            "Pinterest",
+            "Apply to Work With Us",
+            # "Command Center" removed — format-3 gold template uses "command center" in
+            # explanatory copy (correct brand language). The OLD violation was the tab-nav
+            # section id="command-center" pattern, which format-conformance-check.py FC-01
+            # already blocks (old tab sections fail PF0-5 before reaching this check).
+        ]
+        leaked = [term for term in legacy_terms if re.search(r"\b" + re.escape(term) + r"\b", body, re.I)]
+        # Check for the OLD command-center TAB SECTION (the real D10-21 violation) separately
+        if re.search(r'id=["\']command-center["\']', html, re.I):
+            leaked.append("Command Center tab-section (id=command-center — old format, must regenerate)")
+        if leaked:
+            fails.append(
+                "D10-21 [RL] home-services blueprint contains wrong-industry/template language: "
+                + ", ".join(sorted(set(leaked), key=str.lower))
+            )
+
+    # --- D7-02 clone detection: record the slider triple WITH industry for compare ---
+    # The real defect Bennett flagged is ONE financial profile cloned across
+    # DIFFERENT industries (a plumber + a med-device co + a restaurant all on the
+    # same $25K-$120K slider). Two photography studios sharing a photography range
+    # is correct, not a clone. So we key by (triple, industry) and only fail when a
+    # single triple spans >=2 distinct industries (or all blueprints share one).
+    if slider_triple:
+        clone_registry[slider_triple].append((slug, industry))
+
+    # --- D7-04 fabricated hardcoded $ figures in client copy (outside <script>/<input>) ---
+    body = re.sub(r'<script[\s\S]*?</script>', '', html)
+    body = re.sub(r'<input[^>]*>', '', body)
+    hard = re.findall(r'\$\s?(\d{1,3}(?:,\d{3})+|\d{4,})\b', body)
+    big = [h for h in hard if int(h.replace(',', '')) >= 10000]
+    if big:
+        warns.append(f"D7-04 hardcoded large $ figures in copy: {sorted(set(big))[:5]} — must trace to intake/source")
+
+    return {"slug": slug, "industry": industry, "band": [lo, hi],
+            "slider_default": slider_default, "js_fallback": js_fallback,
+            "fails": fails, "warns": warns}
+
+def main():
+    args = sys.argv[1:]
+    if "--file" in args:
+        files = [args[args.index("--file") + 1]]
+    else:
+        # NON_LEAD = build template + internal demos + canonical duplicates. Everything
+        # else is treated as a real prospect blueprint and MUST be financially verifiable.
+        # Previously --all filtered to only slugs already in LEAD_INDUSTRY, which SILENTLY
+        # skipped any unmapped lead — a brand-new blueprint with a $45k clone slider would
+        # never be checked. Now --all scans every real-lead file; unmapped => D10-05 fail.
+        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "bennett-maxwell", "rush-evans-canonical", "local-webhookprobe"}
+        files = sorted(glob.glob(os.path.join(BLUEPRINTS, "*.html")))
+        files = [f for f in files
+                 if not os.path.basename(f).startswith("_")
+                 and os.path.basename(f)[:-5] not in NON_LEAD]
+    clone_registry = collections.defaultdict(list)
+    results = [check_file(f, clone_registry) for f in files]
+
+    # D7-02 [RL] flag a slider triple that spans >=2 DISTINCT industries (true
+    # cross-industry clone — the original $25K/$45K-everywhere defect). A triple
+    # confined to a single industry is a legitimate shared modeling range.
+    clones = {}
+    for trip, entries in clone_registry.items():
+        industries = {ind for _, ind in entries}
+        if len(industries) >= 2:
+            slugs = [s for s, _ in entries]
+            clones[trip] = (slugs, industries)
+            for r in results:
+                if r["slug"] in slugs:
+                    r["fails"].append(
+                        f"D7-02 [RL] identical ROI slider {trip} cloned across "
+                        f"{len(industries)} industries {sorted(industries)} — not personalized")
+
+    npass = sum(1 for r in results if not r["fails"])
+    print(f"{'SLUG':<20} {'INDUSTRY':<16} {'DEFAULT':>9} {'JS':>8}  RESULT")
+    print("-" * 78)
+    for r in results:
+        res = "PASS" if not r["fails"] else f"FAIL ({len(r['fails'])})"
+        print(f"{r['slug']:<20} {r['industry']:<16} {str(r['slider_default']):>9} {str(r['js_fallback']):>8}  {res}")
+        for f in r["fails"]:
+            print(f"      ✗ {f}")
+        for w in r["warns"]:
+            print(f"      ⚠ {w}")
+    print("-" * 78)
+    print(f"FINANCIAL-REALISM: {npass}/{len(results)} pass red-line financial checks")
+    d7_18 = [r["slug"] for r in results if any("D7-18" in w for w in r["warns"])]
+    if d7_18:
+        print(f"D7-18 FIELD-RELEVANCE WARN: {len(d7_18)} non-B2B blueprint(s) show the LinkedIn lever "
+              f"(staged for template gate): {sorted(d7_18)}")
+    if clones:
+        print(f"CROSS-INDUSTRY CLONE GROUPS: {[ (t, sorted(inds)) for t,(s,inds) in clones.items() ]}")
+    sys.exit(0 if npass == len(results) else 1)
+
+if __name__ == "__main__":
+    main()
