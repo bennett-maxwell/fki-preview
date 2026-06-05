@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# CI trigger: financial-realism-check.py b64 blob fixed
 """run-audit.py — Blueprint AI audit entrypoint (stdlib + curl). v1.1 2026-06-01"""
 import sys, os, subprocess, re, json, urllib.request, hashlib, glob
 
@@ -30,6 +31,10 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
+    """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
+    NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
+    10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
+    cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
     MIN_SEC, MAX_SEC = 16 * 60, 20 * 60
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
@@ -55,6 +60,10 @@ def check_placeholder(html):
     return len(tokens) == 0, tokens
 
 def financial_gate(html_path):
+    """Domain 10 red-line: run financial-realism-check.py on this one blueprint.
+    Returns (passed_bool, detail). Wired 2026-05-29 — the documented Domain 10
+    financial red-line was never enforced by this gate, so a $45k-clone slider
+    could ship. exit 0 = in-band/personalized; non-zero = out-of-band/clone/unknown."""
     checker = os.path.join(REPO, "financial-realism-check.py")
     if not os.path.exists(checker):
         return False, "financial-realism-check.py missing"
@@ -84,7 +93,7 @@ def no_orphan_classes(html):
     style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.DOTALL | re.I))
     defined = set(re.findall(r"\.([A-Za-z_][A-Za-z0-9_-]*)", style_blocks))
     used = set()
-    for attr in re.findall(r'class=["\']([^"\']+)["\']', html):
+    for attr in re.findall(r'class=["\'"]([^"\'"]+)["\'"]', html):
         used.update(cls for cls in re.split(r"\s+", attr.strip()) if cls)
     ignored_prefixes = ("is-", "has-", "js-", "active")
     orphan = sorted(
@@ -136,6 +145,11 @@ def calculator_gate(html, lead):
 
 def home_services_content_gate(html, lead):
     industry_blob = " ".join(str(lead.get(k, "")) for k in ("industry", "business_type", "service_type", "market")).lower()
+    # SaaS/software/CRM vendors that merely SELL TO home-services operators are not
+    # themselves home-services businesses. "SaaS CRM for home service businesses"
+    # contains the "home service" substring but is a software vendor — its correct
+    # copy (churn, recurring revenue, plan tiers) must NOT be flagged by the
+    # home-services-operator copy gate. Exclude software vendors first. (2026-06-02)
     if any(term in industry_blob for term in ("saas", "software", " crm", "crm ", "platform", "b2b", "tech company")):
         return True, []
     if not any(term in industry_blob for term in ("plumb", "hvac", "electrical", "home service", "restoration")):
@@ -178,6 +192,7 @@ def home_services_content_gate(html, lead):
     return not found, found
 
 def restaurant_content_gate(html, lead):
+    """Restaurant/QSR/food-franchise red-line: block cross-industry drift."""
     industry_blob = " ".join(str(lead.get(k, "")) for k in (
         "industry", "business_type", "service_type", "market"
     )).lower()
@@ -187,6 +202,7 @@ def restaurant_content_gate(html, lead):
     ))
     if not is_restaurant:
         return True, []
+
     body = re.sub(r'<script[\s\S]*?</script>', '', html, flags=re.I)
     body = re.sub(r'<style[\s\S]*?</style>', '', body, flags=re.I)
     low = body.lower()
@@ -342,6 +358,11 @@ def podcast_audio_gate(slug, lead):
     return not failures, failures
 
 def resolve_html_path(slug):
+    """Resolve a lead slug to its blueprint HTML. Live clones carry a date suffix
+    (e.g. avery-martinez-costa-vida-20260601.html), but gatekeeper/gk100 calls
+    run-audit.py with the BARE slug. Prefer an exact match; otherwise fall back to
+    the newest date-suffixed <slug>-YYYYMMDD.html. Fixes the fleet-wide 0/0 FAIL
+    where a bare --lead slug never matched the dated filename (2026-06-02)."""
     exact = os.path.join(BP_DIR, f"{slug}.html")
     if os.path.exists(exact):
         return exact
@@ -349,16 +370,24 @@ def resolve_html_path(slug):
     dated = sorted(m for m in matches if re.search(r"-\d{8}\.html$", m))
     if dated:
         return dated[-1]
+    # Non-dated fallback: only safe when EXACTLY ONE candidate exists. Multiple
+    # non-dated matches (e.g. slug-draft.html + slug-backup.html) are ambiguous —
+    # silently picking sorted()[-1] could audit the WRONG file and report a false
+    # PASS, so surface not-found and let the caller report it rather than guess.
     if len(matches) == 1:
         return matches[0]
-    return exact
+    return exact  # non-existent or ambiguous; caller reports not found
 
 def audit_lead(slug):
     results = {}
-    redlines = {}
+    redlines = {}  # keys here are HARD red-lines: any False => VERDICT FAIL regardless of score
     html_path = resolve_html_path(slug)
     if not os.path.exists(html_path):
         return {"error": f"{html_path} not found", "score": 0}
+    # Canonical slug = the resolved (possibly date-suffixed) filename. Leads json,
+    # podcast mp3/source, and receipt dirs all carry the SAME date-suffixed slug,
+    # so a bare gk100 --lead slug must be normalized here or every downstream
+    # lookup (lead, podcast, source) silently misses (2026-06-02).
     slug = os.path.basename(html_path)[:-5]
     with open(html_path) as f:
         html = f.read()
@@ -398,7 +427,7 @@ def audit_lead(slug):
     fin_ok, fin_detail = financial_gate(html_path)
     results["D10-01_financial_realism_RL"] = fin_ok
     redlines["D10-01_financial_realism_RL"] = fin_ok
-    results["PF0-4_no_placeholders_RL"] = pass_ph
+    results["PF0-4_no_placeholders_RL"] = pass_ph  # placeholders are also a red-line
     redlines["PF0-4_no_placeholders_RL"] = pass_ph
     passed = sum(1 for v in results.values() if v)
     total = len(results)
@@ -434,11 +463,13 @@ def main():
         r = audit_lead(slug)
         results.append(r)
         rl_fail = r.get("redline_fail", [])
+        # A red-line failure is a hard FAIL even at 100% non-red-line score.
         status = "PASS" if (r.get("score", 0) >= THRESHOLD and not rl_fail) else "FAIL"
         if status == "FAIL":
             any_fail = True
         extra = f"  RED-LINE FAIL: {rl_fail} ({r.get('financial_detail','')})" if rl_fail else ""
         print(f"[{status}] {slug}: {r.get('passed',0)}/{r.get('total',0)} ({r.get('score',0):.0%}){extra}")
+    # Append to history
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
     import datetime
     for r in results:
@@ -446,6 +477,7 @@ def main():
         with open(HISTORY, "a") as f:
             f.write(json.dumps(r) + "\n")
     print(f"\nAudit complete. History: {HISTORY}")
+    # VERDICT line consumed by the pre-commit hook; financial red-line now blocks.
     print("VERDICT=FAIL" if any_fail else "VERDICT=PASS")
     sys.exit(1 if any_fail else 0)
 
