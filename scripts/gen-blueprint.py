@@ -23,6 +23,45 @@ TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
 DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
 BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
 
+
+def roi_slider_config(slug, profile):
+    """Return the ROI input min/max/step for this lead's industry.
+
+    Keep gen-blueprint.py aligned with clone-blueprint.sh so regenerated pages
+    never leave raw {{ROI_*}} tokens behind.
+    """
+    roi_min, roi_max, roi_step = 500, 100000, 500
+    cfg_path = os.path.join(REPO, "scripts", "roi-industry-config.json")
+    try:
+        cfg = json.load(open(cfg_path, encoding="utf-8"))
+        business_type = (profile.get("business_type") or profile.get("industry") or "").lower()
+        industry_map = {
+            "plumbing": "home_services", "hvac": "home_services", "electrical": "home_services",
+            "electrician": "home_services", "home services": "home_services", "home-services": "home_services",
+            "restoration": "home_services", "photography": "photography", "photographer": "photography",
+            "video": "video_production", "videography": "video_production",
+            "medspa": "medspa", "med spa": "medspa", "aesthetics": "medspa",
+            "restaurant": "food_franchise", "food": "food_franchise", "franchise": "food_franchise",
+            "firearms": "retail_firearms", "retail": "retail_firearms",
+            "design": "design_agency", "agency": "design_agency", "marketing": "design_agency",
+            "consulting": "consulting", "consultant": "consulting", "coaching": "consulting",
+            "crm": "crm_software", "software": "crm_software", "saas": "crm_software",
+            "medical device": "medical_devices", "medtech": "medical_devices",
+            "property management": "property_mgmt", "property": "property_mgmt", "vacation rental": "property_mgmt",
+        }
+        industry = cfg.get("slug_industry", {}).get(slug)
+        if not industry:
+            for needle, mapped in industry_map.items():
+                if needle in business_type:
+                    industry = mapped
+                    break
+        slider = cfg.get("industry_slider", {}).get(industry or "")
+        if slider:
+            roi_min, roi_max, roi_step = slider["min"], slider["max"], slider["step"]
+    except Exception:
+        pass
+    return roi_min, roi_max, roi_step
+
 # Reusable inline SVGs (icon identity is cosmetic; the audit counts classes, not
 # specific paths). One per card-type so every card still renders an icon.
 SVG = {
@@ -314,7 +353,9 @@ def build(profile):
             return f"{BLUEPRINT_BASE_URL}{path}"
         return value or f"{BLUEPRINT_BASE_URL}{path}"
 
+    roi_min, roi_max, roi_step = roi_slider_config(p["slug"], p)
     tok = {
+        "{{ROI_MIN}}": str(roi_min), "{{ROI_MAX}}": str(roi_max), "{{ROI_STEP}}": str(roi_step),
         "{{LEAD_NAME}}": p["lead_name"], "{{FIRST_NAME}}": p["first_name"],
         "{{BUSINESS_NAME}}": p["business_name"], "{{DOMAIN}}": p["domain"],
         "{{SLUG}}": p["slug"], "{{CRM_TOOL}}": p.get("crm_tool_fallback", "your client hub"),

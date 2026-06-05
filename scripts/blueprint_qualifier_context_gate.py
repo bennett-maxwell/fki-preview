@@ -50,11 +50,23 @@ def action_links(path: Path) -> list[dict[str, Any]]:
             out.append(link)
     return out
 
-def expected_agents(blueprint: Path|None, profile: Path|None) -> list[str]:
+def visible_agents(blueprint: Path|None) -> list[str]:
     agents=[]
     if blueprint and blueprint.exists():
         html=blueprint.read_text(encoding='utf-8', errors='replace')
         agents.extend(re.findall(r'<div class=["\']agent-name["\']>(.*?)</div>', html, flags=re.I|re.S))
+    return clean_agent_list(agents)
+
+def clean_agent_list(agents: list[str]) -> list[str]:
+    clean=[]; seen=set()
+    for a in agents:
+        txt=re.sub(r'<[^>]+>', '', str(a)).replace('&amp;', '&').replace('&mdash;', '—').strip()
+        if txt and norm(txt) not in seen:
+            seen.add(norm(txt)); clean.append(txt)
+    return clean
+
+def profile_agents(profile: Path|None) -> list[str]:
+    agents=[]
     if profile and profile.exists():
         try: data=json.loads(profile.read_text(encoding='utf-8'))
         except Exception: data={}
@@ -70,12 +82,14 @@ def expected_agents(blueprint: Path|None, profile: Path|None) -> list[str]:
                 if isinstance(item, dict): agents.append(item.get('name') or '')
         if isinstance(data.get('ai_use_cases'), list):
             agents.extend(str(x) for x in data['ai_use_cases'])
-    clean=[]; seen=set()
-    for a in agents:
-        txt=re.sub(r'<[^>]+>', '', str(a)).replace('&amp;', '&').replace('&mdash;', '—').strip()
-        if txt and norm(txt) not in seen:
-            seen.add(norm(txt)); clean.append(txt)
-    return clean
+    return clean_agent_list(agents)
+
+def expected_agents(blueprint: Path|None, profile: Path|None) -> list[str]:
+    # If a lead profile exists, it is the source of truth. Do not union it with
+    # visible page agents; that masked prior cross-lead contamination where the
+    # page showed SaaS agents while the qualifier link carried electrician agents.
+    from_profile=profile_agents(profile)
+    return from_profile if from_profile else visible_agents(blueprint)
 
 def validate_qualifier(path: Path) -> list[dict[str, Any]]:
     failures=[]
@@ -96,6 +110,26 @@ def validate_qualifier(path: Path) -> list[dict[str, Any]]:
     for name, pat in checks:
         if not re.search(pat, html, flags=re.I|re.S):
             failures.append({'type':'qualifier_invariant_missing','name':name})
+    return failures
+
+def validate_visible_vs_profile(blueprint: Path|None, expected: list[str]) -> list[dict[str, Any]]:
+    failures=[]
+    if not blueprint or not blueprint.exists() or not expected:
+        return failures
+    expected_norm={norm(a) for a in expected if norm(a)}
+    visible=visible_agents(blueprint)
+    visible_norm={norm(a) for a in visible if norm(a)}
+    unexpected=[a for a in visible if norm(a) not in expected_norm]
+    missing=[a for a in expected if norm(a) not in visible_norm]
+    if unexpected or len(visible_norm & expected_norm) < min(3, len(expected_norm)):
+        failures.append({
+            'type':'visible_agents_do_not_match_lead_profile',
+            'file':str(blueprint),
+            'expected_sample':expected[:6],
+            'visible_agents':visible,
+            'unexpected_visible_agents':unexpected[:6],
+            'missing_expected_agents':missing[:6],
+        })
     return failures
 
 def validate_links(paths: list[Path], expected: list[str], expected_slug: str|None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -149,6 +183,7 @@ def main() -> int:
     html=res(args.html); email=res(args.delivery_email); profile=res(args.profile); qualifier=res(args.qualifier)
     expected=expected_agents(html, profile)
     failures=validate_qualifier(qualifier)
+    failures.extend(validate_visible_vs_profile(html, expected))
     link_failures, inspected=validate_links([p for p in [html,email] if p], expected, args.lead)
     failures.extend(link_failures)
     out={'status':'PASS' if not failures else 'FAIL','pass':not failures,'qualifier':str(qualifier),'lead':args.lead,'expected_agents':expected[:12],'inspected_links':inspected,'failures':failures}
