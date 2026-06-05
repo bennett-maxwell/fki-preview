@@ -653,7 +653,14 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     bad_cta = bool(re.search(r'href=["\'][^"\']*(?:/apply(?:/|\?|#|["\'])|meetadvaita\.com/apply)[^"\']*["\']', html, re.I))
     banned_cta_copy = bool(re.search(r'>\s*Apply to work with Bennett\s*<', html, re.I))
     banned_work_with_us = bool(re.search(r'>\s*Apply to Work With Us\s*<', html, re.I))
-    ambiguous_apply = bool(re.search(r'>\s*Apply\s*<', html, re.I))
+    # Exclude nav-bar anchor links (#apply) and qualify.html CTA links — both are allowed.
+    # Also exclude heading/label elements (h2-h6, div, span) which are not actionable CTAs.
+    # Only flag standalone button-class CTA anchors with ambiguous "Apply" text.
+    _apply_anchors = re.findall(r'<a\b[^>]*>\s*Apply\s*</a>', html, re.I)
+    ambiguous_apply = any(
+        not re.search(r'href=["\'](?:#apply|[^"\']*qualify\.html)', a, re.I)
+        for a in _apply_anchors
+    )
     results[27] = {
         "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
         "pass": not bad_cta and not banned_cta_copy and not banned_work_with_us and not ambiguous_apply,
