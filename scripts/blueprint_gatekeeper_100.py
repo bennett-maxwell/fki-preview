@@ -185,7 +185,9 @@ def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
     hash_ok = False
     if expected_sha and audio_path:
         path = Path(audio_path)
-        candidates = [path] if path.is_absolute() else [(REPO / path).resolve(), (Path.cwd() / path).resolve()]
+        # Cross-machine path normalization: resolve by filename stem under REPO/podcasts/
+        local_by_name = REPO / "podcasts" / path.name
+        candidates = [path, local_by_name] if path.is_absolute() else [(REPO / path).resolve(), (Path.cwd() / path).resolve(), local_by_name]
         hash_ok = any(candidate.exists() and file_sha256(candidate) == expected_sha for candidate in candidates)
     ok = (
         data.get("direct_address_audio_verified") is True

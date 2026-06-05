@@ -54,7 +54,9 @@ def utc_now() -> str:
 
 
 def run(cmd: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, text=True, capture_output=True, timeout=timeout)
+    import os
+    env = {**os.environ, "PATH": "/opt/homebrew/bin:/usr/local/bin:" + os.environ.get("PATH", "")}
+    return subprocess.run(cmd, text=True, capture_output=True, timeout=timeout, env=env)
 
 
 def file_sha256(path: Path) -> str:
