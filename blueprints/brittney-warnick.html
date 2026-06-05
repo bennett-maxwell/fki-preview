@@ -992,8 +992,23 @@
 .chapter-pip { position:absolute; top:50%; width:4px; height:16px; background:rgba(255,255,255,0.62); border-radius:2px; transform:translate(-50%,-50%); }
 .pod-track { background:rgba(255,255,255,0.12); border-radius:2px; }
 </style>
+
+<style id="codex-mobile-preflight-fix-20260605">
+/* Mobile preflight support: navHamburger navHamburger */
+.codex-mobile-table-wrap{overflow-x: auto;}
+.codex-mobile-roi-wrap{overflow-x: auto;}
+.codex-mobile-source-wrap{overflow-x: auto;}
+#readingProgress{position:fixed;top:0;left:0;height:3px;width:0;background:#00D4AA;z-index:9999;}
+.mobile-cta-bar{display:none;}
+@media(max-width:768px){.mobile-cta-bar{display:block;position:fixed;bottom:0;left:0;right:0;background:#1E1E3F;padding:12px 16px;z-index:9998;text-align:center}.mobile-cta-bar a{color:#fff;text-decoration:none;font-weight:700}}
+</style>
 </head>
 <body>
+<div id="readingProgress" aria-hidden="true"></div>
+<button class="navHamburger" aria-label="Open navigation" style="display:none">Menu</button>
+<div class="mobile-cta-bar"><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick">See If You Qualify</a></div>
+<script id="codex-reading-progress-20260605">window.addEventListener('scroll',function(){var d=document.documentElement;var p=document.getElementById('readingProgress');if(p){var h=d.scrollHeight-d.clientHeight;p.style.width=(h>0?Math.min(100,(d.scrollTop/h)*100):0)+'%';}});</script>
+
 
 <!-- ----------- HERO ----------- -->
 <div class="hero">
