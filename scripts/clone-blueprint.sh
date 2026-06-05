@@ -603,6 +603,18 @@ if [[ "$DRY_RUN" == "true" || "$NO_COMMIT" == "true" ]]; then
   exit 0
 fi
 
+# ─── Step 4.5: Post-generate quality gate ───────────────────────────────────
+echo "[4.5/7] Running post-generate completion gate..."
+GATE_SCRIPT="$REPO_ROOT/scripts/post-generate-gate.sh"
+if [ -f "$GATE_SCRIPT" ]; then
+  bash "$GATE_SCRIPT" "$REPO_ROOT/blueprints/$LEAD_SLUG.html" --lead "$LEAD_SLUG" || {
+    echo "⚠️  Completion gate FAIL — blueprint has quality issues but continuing commit."
+    echo "   Fix issues before delivery. Run: python3 scripts/blueprint_completion_gate.py --html blueprints/$LEAD_SLUG.html --receipt-dir audit-receipts/$LEAD_SLUG --lead $LEAD_SLUG"
+  }
+else
+  echo "  post-generate-gate.sh not found — skipping"
+fi
+
 # ─── Step 5: Git commit ─────────────────────────────────────────────────────
 echo "[5/7] Committing..."
 cd "$REPO_ROOT"
