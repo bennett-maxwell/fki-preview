@@ -1,5 +1,5 @@
-<!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Brent Attaway
+<!-- v1.7 — D4-09 clean -->
+Personal AI Walkthrough for Brent Attaway
 CRMX | Prepared by Franchise Ki | Generated 2026-05-27
 
 ================================================================================
@@ -85,7 +85,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at $150/hr: up to $4,800/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -98,10 +98,9 @@ opportunity. Your AI nurture agent tracks every lead, knows where they are in th
 decision process, and sends the right message at the right moment — without anyone
 on your team having to remember to do it.
 
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
+**Leads that become revenue with consistent follow-up: up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -115,7 +114,7 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
@@ -179,11 +178,11 @@ edge permanently.
 
 ---
 
-## SECTION 6 — Your 30-Day Onboarding Timeline
+## SECTION 6 — Your Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
-**Days 1-3: Onboarding.** Saas crm for home service businesses audit. Brand voice profile. Full ops map.
+**Days 1-3: Onboarding.** CRMX audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
 
 **Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
@@ -253,7 +252,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+See if it's a fit: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 This is an application, not a commitment. We read every one personally.
 
@@ -318,9 +317,9 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — References
 
-All statistics and benchmarks referenced in this document:
+All statistics and benchmarks referenced in this walkthrough:
 
 [1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
     Metric: 78% of customers buy from the first business to respond
@@ -353,8 +352,8 @@ their brand voice from day one.
 Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+If this audio resonated with you, the next step is to see if you qualify:
+https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
