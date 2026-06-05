@@ -76,6 +76,10 @@ def profile_agents(profile: Path|None) -> list[str]:
                 for item in val:
                     if isinstance(item, dict): agents.append(item.get('name') or item.get('title') or item.get('usecase') or '')
                     else: agents.append(str(item))
+        if isinstance(data.get('qualifier_q7_agents'), list):
+            for item in data['qualifier_q7_agents']:
+                if isinstance(item, dict): agents.append(item.get('name') or item.get('title') or item.get('usecase') or '')
+                else: agents.append(str(item))
         ap=data.get('applicable_prompts')
         if isinstance(ap, dict):
             for item in ap.values():

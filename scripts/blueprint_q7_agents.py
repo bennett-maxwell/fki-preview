@@ -28,6 +28,10 @@ def extract(profile_path: Path, slug: str, limit: int = 6):
             for item in val:
                 if isinstance(item, dict): names.append(item.get('name') or item.get('title') or item.get('usecase') or '')
                 else: names.append(str(item))
+    if isinstance(profile.get('qualifier_q7_agents'), list):
+        for item in profile['qualifier_q7_agents']:
+            if isinstance(item, dict): names.append(item.get('name') or item.get('title') or item.get('usecase') or '')
+            else: names.append(str(item))
     ap=profile.get('applicable_prompts')
     if isinstance(ap, dict):
         for item in ap.values():

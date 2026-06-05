@@ -117,6 +117,11 @@ def build(profile):
                 names.append(agent.get("name") or agent.get("title") or agent.get("usecase") or "")
             else:
                 names.append(str(agent))
+        for agent in p.get("qualifier_q7_agents", []) or []:
+            if isinstance(agent, dict):
+                names.append(agent.get("name") or agent.get("title") or agent.get("usecase") or "")
+            else:
+                names.append(str(agent))
         cleaned = []
         seen = set()
         for name in names:
@@ -379,7 +384,10 @@ if __name__ == "__main__":
         sys.exit("usage: gen-blueprint.py leads/<slug>.json")
     profile = json.load(open(sys.argv[1], encoding="utf-8"))
     out = os.path.join(REPO, "blueprints", profile["slug"] + ".html")
-    open(out, "w", encoding="utf-8").write(build(profile))
+    rendered = build(profile)
+    tmp_out = out + ".tmp"
+    open(tmp_out, "w", encoding="utf-8").write(rendered)
+    os.replace(tmp_out, out)
     leftover = re.findall(r"\{\{[A-Z_]+\}\}", open(out, encoding="utf-8").read())
     print(f"wrote {out}")
     if leftover:

@@ -34,8 +34,13 @@ if "|| 45000" in html: failures.append("hardcoded ROI default")
 receipt_path = f"audit-receipts/{slug}/{slug}-audit.json"
 if os.path.exists(receipt_path):
     receipt = json.load(open(receipt_path))
-    if receipt.get("verdict") != "PASS" and receipt.get("pct",0) < 95:
-        failures.append(f"audit receipt not PASS: {receipt.get('verdict')}")
+    receipt_ok = (
+        receipt.get("verdict") == "PASS"
+        or receipt.get("status") == "PASS"
+        or receipt.get("pct", 0) >= 95
+    )
+    if not receipt_ok:
+        failures.append(f"audit receipt not PASS: verdict={receipt.get('verdict')} status={receipt.get('status')} pct={receipt.get('pct')}")
 else:
     failures.append("no audit receipt")
 
