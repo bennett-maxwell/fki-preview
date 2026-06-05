@@ -87,6 +87,18 @@ if [[ "$BLUEPRINT_BASE_URL" != "$DEFAULT_BLUEPRINT_BASE_URL" ]]; then
     PODCAST_URL="$BLUEPRINT_BASE_URL/podcasts/$SLUG.mp3"
   fi
 fi
+# Append GHL view-tracking params to the blueprint URL so the blueprint page can fire
+# blueprint_viewed → relay → GHL pipeline stage advance when the lead opens their email.
+# Params: slug (identifies the blueprint), cid (GHL contact ID for stage lookup).
+# email is NOT appended here because it is only resolved in the --send-ghl block;
+# the relay uses cid to locate the contact when present, slug as fallback.
+if [[ -n "$SLUG" ]]; then
+  _SEP="?"
+  [[ "$BLUEPRINT_URL" == *"?"* ]] && _SEP="&"
+  BLUEPRINT_TRACK_PARAMS="${_SEP}slug=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$SLUG")"
+  [[ -n "$GHL_CONTACT_ID" ]] && BLUEPRINT_TRACK_PARAMS="${BLUEPRINT_TRACK_PARAMS}&cid=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$GHL_CONTACT_ID")"
+  BLUEPRINT_URL="${BLUEPRINT_URL}${BLUEPRINT_TRACK_PARAMS}"
+fi
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")

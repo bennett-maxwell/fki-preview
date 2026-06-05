@@ -258,6 +258,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = 'f3d9c2a1-7b4e-4f11-a8d0-3c5e6f7a8b9c';
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
