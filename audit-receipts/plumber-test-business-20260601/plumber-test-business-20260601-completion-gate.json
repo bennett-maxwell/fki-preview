@@ -1,12 +1,12 @@
 {
   "lead": "plumber-test-business-20260601",
-  "ts": "2026-06-05T04:42:17.173722+00:00",
+  "ts": "2026-06-05T04:45:43.903230+00:00",
   "html_path": "/Users/temp/.openclaw/workspace/fki-preview-plumber-audio/blueprints/plumber-test-business-20260601.html",
   "html_size_bytes": 92302,
   "require_production": true,
   "summary": {
-    "passed": 38,
-    "failed": 6,
+    "passed": 40,
+    "failed": 4,
     "skipped": 6,
     "total_applicable": 44,
     "overall_pass": false
@@ -39,15 +39,13 @@
       "failures": []
     },
     "Production": {
-      "score": "1/7 (14%)",
+      "score": "3/7 (43%)",
       "pass": false,
       "failures": [
         "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
         "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
-        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
         "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
-        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
-        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
       ]
     },
     "Delivery": {
@@ -64,10 +62,8 @@
   "critical_failures": [
     "#42: Public GitHub Pages build verified (HTTP 200)",
     "#43: Drive artifact registry row present",
-    "#44: Notion Sprint row present",
     "#45: Current GHL readback (contact tagged)",
-    "#46: Repeat-submit same-contact proof",
-    "#48: Bennett approval scope recorded"
+    "#46: Repeat-submit same-contact proof"
   ],
   "major_failures": [],
   "checks": {
@@ -331,9 +327,9 @@
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
+      "detail": "Notion Sprint row current"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
@@ -355,9 +351,9 @@
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      "detail": "Approval scope: Bennett preview only; customer send remains blocked"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",
