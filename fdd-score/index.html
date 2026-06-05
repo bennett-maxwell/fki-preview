@@ -357,12 +357,18 @@
 
     // Post to GHL via mapki lead API (non-blocking)
     const s = calcScore();
+    const params = new URLSearchParams(window.location.search);
     const payload = {
       firstName: fname, email, phone,
       brandName: 'FDD Score Tool',
       type: 'fdd-score',
       timeline: s >= 70 ? 'ready' : s >= 45 ? '3-6mo' : '6mo+',
-      source: 'fdd-score-route'
+      source: params.get('utm_source') || 'fdd-score-route',
+      utmSource: params.get('utm_source') || 'direct',
+      utmMedium: params.get('utm_medium') || 'site',
+      utmCampaign: params.get('utm_campaign') || 'fdd_readiness',
+      score: s,
+      pageUrl: window.location.href
     };
     fetch('https://mapki.franchiseki.com/api/lead', {
       method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
