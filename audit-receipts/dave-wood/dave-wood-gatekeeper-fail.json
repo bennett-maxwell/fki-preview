@@ -64,22 +64,110 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent\"",
         "    }",
         "  ],",
         "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/dave-wood.html",
+        "--lead",
+        "dave-wood",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/dave-wood.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Franchise Inquiry Speed-to-Lead Agent\",",
+        "        \"Catering Proposal Generator\",",
+        "        \"Multi-Location Performance Reporter\",",
+        "        \"Customer Review Response Agent\",",
+        "        \"Franchise Development Pipeline Agent\",",
+        "        \"Menu Optimization Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"dave-wood\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/dave-wood.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: dave-wood - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/dave-wood-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: dave-wood - Your Custom Blueprint is Ready\"",
         "}"
       ]
     },
@@ -95,7 +183,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] dave-wood: 9/15 (60%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_size_6to20mb_duration_gt5min_RL', 'D10-23_restaurant_copy_clean_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "[FAIL] dave-wood: 12/15 (80%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D4-09_podcast_source_funnel_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -109,31 +197,24 @@
         "/Users/temp/fki-preview/blueprints/dave-wood.html"
       ],
       "name": "financial_realism",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "dave-wood            food_franchise       15000        0  FAIL (2)",
-        "      \u2717 D7-01 [RL] contract default $15,000 outside food_franchise band $8-$60",
-        "      \u2717 D7-03 slider range $1,000-$50,000 does not overlap food_franchise band $8-$60",
+        "dave-wood            food_franchise           8        0  PASS",
         "      \u26a0 D7-04 hardcoded large $ figures in copy: ['15,000'] \u2014 must trace to intake/source",
         "------------------------------------------------------------------------------",
-        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
     },
     {
-      "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/dave-wood.html"
-      ],
       "name": "d9_render_integrity",
       "pass": false,
-      "returncode": 2,
+      "returncode": 127,
       "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+        "missing /Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
       ],
       "stdout_tail": []
     },
@@ -171,6 +252,11 @@
       "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
       "name": "production_audio_direct_address",
       "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
     }
   ],
   "diamond": "FAIL",
@@ -178,14 +264,14 @@
     "visible_html_surface: ambiguous CTA copy: Apply",
     "completion_gate failed",
     "run-audit.py failed",
-    "financial-realism-check.py failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: dave-wood-email-click-test.json",
     "proof receipt missing or failing: dave-wood-desktop-render.json",
     "proof receipt missing or failing: dave-wood-mobile-render.json",
     "proof receipt missing or failing: dave-wood-audit.json",
     "proof receipt missing or failing: dave-wood-closeout.json",
-    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/dave-wood.html",
   "lead": "dave-wood",
@@ -193,5 +279,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/dave-wood",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T15:33:52.210346+00:00"
+  "ts": "2026-06-05T22:12:29.541952+00:00"
 }

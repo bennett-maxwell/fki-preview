@@ -1,33 +1,35 @@
 {
   "checks": [
     {
-      "failures": [],
+      "failures": [
+        "ambiguous CTA copy: Apply"
+      ],
       "name": "visible_html_surface",
-      "pass": true
+      "pass": false
     },
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "/Users/temp/fki-preview/blueprints/chris-lpnw.html",
         "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+        "/Users/temp/fki-preview/audit-receipts/chris-lpnw",
         "--lead",
-        "mike-norton-origins-20260603",
+        "chris-lpnw",
         "--json-output",
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
         "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": true,",
+        "      \"pass\": false,",
         "      \"severity\": \"critical\",",
-        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
         "    },",
         "    \"49\": {",
         "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
@@ -50,34 +52,34 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "/Users/temp/fki-preview/blueprints/chris-lpnw.html",
         "--check-http",
         "--json-output"
       ],
       "name": "qualify_link_gate",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
         "    }",
         "  ],",
-        "  \"status\": \"PASS\"",
+        "  \"status\": \"FAIL\"",
         "}"
       ]
     },
@@ -86,14 +88,14 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "/Users/temp/fki-preview/blueprints/chris-lpnw.html",
         "--lead",
-        "mike-norton-origins-20260603",
+        "chris-lpnw",
         "--json-output",
         "--delivery-email",
-        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
         "--profile",
-        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
+        "/Users/temp/fki-preview/leads/chris-lpnw.json"
       ],
       "name": "qualifier_context_gate",
       "pass": true,
@@ -103,19 +105,19 @@
         "    },",
         "    {",
         "      \"agents\": [",
-        "        \"Speed-to-Lead Agent\",",
-        "        \"Client Onboarding Agent\",",
-        "        \"Proposal Generator\",",
-        "        \"Content Production Agent\",",
-        "        \"Client Health Monitor\",",
-        "        \"Admin Automation Agent\"",
+        "        \"Operations Command Center\",",
+        "        \"Internal Communication Agent\",",
+        "        \"Team Accountability Agent\",",
+        "        \"Reporting Agent\",",
+        "        \"Hiring & Onboarding Agent\",",
+        "        \"Follow-Up Agent\"",
         "      ],",
-        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
-        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=oZBJde4VGnUGf2eHVzr8\",",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\",",
         "      \"text\": \"See If You Qualify \\u2192\"",
         "    }",
         "  ],",
-        "  \"lead\": \"mike-norton-origins-20260603\",",
+        "  \"lead\": \"chris-lpnw\",",
         "  \"pass\": true,",
         "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
         "  \"status\": \"PASS\"",
@@ -127,9 +129,9 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
         "--email",
-        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
         "--profile",
-        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json",
+        "/Users/temp/fki-preview/leads/chris-lpnw.json",
         "--json-output"
       ],
       "name": "approval_email_customer_view_gate",
@@ -138,7 +140,7 @@
       "stderr_tail": [],
       "stdout_tail": [
         "{",
-        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
         "  \"failures\": [],",
         "  \"pass\": true,",
         "  \"status\": \"PASS\"",
@@ -150,9 +152,9 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
         "--email",
-        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
         "--subject",
-        "CUSTOMER VIEW PREVIEW: mike-norton-origins-20260603 - Your Custom Blueprint is Ready",
+        "CUSTOMER VIEW PREVIEW: chris-lpnw - Your Custom Blueprint is Ready",
         "--json-output"
       ],
       "name": "email_visual_format_gate",
@@ -161,11 +163,11 @@
       "stderr_tail": [],
       "stdout_tail": [
         "{",
-        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
         "  \"failures\": [],",
         "  \"pass\": true,",
         "  \"status\": \"PASS\",",
-        "  \"subject\": \"CUSTOMER VIEW PREVIEW: mike-norton-origins-20260603 - Your Custom Blueprint is Ready\"",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: chris-lpnw - Your Custom Blueprint is Ready\"",
         "}"
       ]
     },
@@ -174,14 +176,14 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
-        "mike-norton-origins-20260603"
+        "chris-lpnw"
       ],
       "name": "blueprint_audit",
       "pass": true,
       "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] mike-norton-origins-20260603: 15/15 (100%)",
+        "[PASS] chris-lpnw: 15/15 (100%)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=PASS"
@@ -192,7 +194,7 @@
         "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
+        "/Users/temp/fki-preview/blueprints/chris-lpnw.html"
       ],
       "name": "financial_realism",
       "pass": true,
@@ -201,7 +203,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "mike-norton-origins-20260603 crm_software          1200        0  PASS",
+        "chris-lpnw           consulting            3000        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -217,31 +219,31 @@
     },
     {
       "name": "proof_email_click_test",
-      "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-email-click-test.json"
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
-      "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-desktop-render.json"
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
-      "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-mobile-render.json"
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
-      "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-audit.json"
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-audit.json"
     },
     {
       "name": "proof_closeout",
-      "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-closeout.json"
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-closeout.json"
     },
     {
-      "detail": "mike-norton-origins-20260603.mp3 9564297 bytes within window",
+      "detail": "chris-lpnw.mp3 17448261 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
@@ -251,20 +253,29 @@
       "pass": true
     },
     {
-      "detail": "NotebookLM origin verified",
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
       "name": "production_audio_notebooklm_origin",
-      "pass": true
+      "pass": false
     }
   ],
   "diamond": "FAIL",
   "failures": [
-    "D9 render-integrity audit failed or missing"
+    "visible_html_surface: ambiguous CTA copy: Apply",
+    "completion_gate failed",
+    "qualify link gate failed",
+    "D9 render-integrity audit failed or missing",
+    "proof receipt missing or failing: chris-lpnw-email-click-test.json",
+    "proof receipt missing or failing: chris-lpnw-desktop-render.json",
+    "proof receipt missing or failing: chris-lpnw-mobile-render.json",
+    "proof receipt missing or failing: chris-lpnw-audit.json",
+    "proof receipt missing or failing: chris-lpnw-closeout.json",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
   ],
-  "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
-  "lead": "mike-norton-origins-20260603",
+  "html_path": "/Users/temp/fki-preview/blueprints/chris-lpnw.html",
+  "lead": "chris-lpnw",
   "mode": "production",
-  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/chris-lpnw",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-05T22:12:33.148922+00:00"
+  "ts": "2026-06-05T22:12:32.193056+00:00"
 }

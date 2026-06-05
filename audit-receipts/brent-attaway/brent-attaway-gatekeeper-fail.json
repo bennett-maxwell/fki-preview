@@ -55,29 +55,117 @@
         "--json-output"
       ],
       "name": "qualify_link_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
         "    }",
         "  ],",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/brent-attaway.html",
+        "--lead",
+        "brent-attaway",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/brent-attaway.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"brent-attaway\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/brent-attaway.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: brent-attaway - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: brent-attaway - Your Custom Blueprint is Ready\"",
         "}"
       ]
     },
@@ -93,7 +181,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] brent-attaway: 11/15 (73%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_size_6to20mb_duration_gt5min_RL', 'D4-09_podcast_source_funnel_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] brent-attaway: 13/15 (87%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -113,22 +201,17 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "brent-attaway        crm_software          2388        0  PASS",
+        "brent-attaway        crm_software          1200        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
     },
     {
-      "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/brent-attaway.html"
-      ],
       "name": "d9_render_integrity",
       "pass": false,
-      "returncode": 2,
+      "returncode": 127,
       "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+        "missing /Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
       ],
       "stdout_tail": []
     },
@@ -158,7 +241,7 @@
       "path": "/Users/temp/fki-preview/audit-receipts/brent-attaway/brent-attaway-closeout.json"
     },
     {
-      "detail": "brent-attaway.mp3 14773949 bytes within window",
+      "detail": "brent-attaway.mp3 16439142 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
@@ -166,12 +249,16 @@
       "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
       "name": "production_audio_direct_address",
       "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
     }
   ],
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "qualify link gate failed",
     "run-audit.py failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: brent-attaway-email-click-test.json",
@@ -179,7 +266,8 @@
     "proof receipt missing or failing: brent-attaway-mobile-render.json",
     "proof receipt missing or failing: brent-attaway-audit.json",
     "proof receipt missing or failing: brent-attaway-closeout.json",
-    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/brent-attaway.html",
   "lead": "brent-attaway",
@@ -187,5 +275,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/brent-attaway",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T15:33:53.934699+00:00"
+  "ts": "2026-06-05T22:12:30.475837+00:00"
 }
