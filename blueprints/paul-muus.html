@@ -998,7 +998,8 @@
 <!-- ----------- HERO ----------- -->
 <div class="hero">
   <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The Paul Muus Consulting AI Playbook</h1>
+  <span class="hero-badge">Featured Franchise</span>
+<h1>The Paul Muus Consulting AI Playbook</h1>
   <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your renewable energy consulting business.</p>
   <p class="prep-for">
     Prepared exclusively for
@@ -1603,7 +1604,7 @@
     <div class="agent-card">
       <h3>Agent #1: Speed-to-Lead Response Agent</h3>
       <p class="agent-desc">This agent responds to every new inquiry with a personalized, on-brand message.</p>
-      <div class="agent-prompt">You are the lead response agent for Paul Muus Consulting, a renewable energy consulting firm.
+      <div class="prompt-card">You are the lead response agent for Paul Muus Consulting, a renewable energy consulting firm.
 
 When a new inquiry comes in — whether from the website, Instagram DM, venue partner referral, or corporate RFP — you respond within 15 minutes with a personalized, elevated message via email.
 
@@ -1629,7 +1630,7 @@ Rules:
     <div class="agent-card">
       <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked Events</h3>
       <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence.</p>
-      <div class="agent-prompt">You are the follow-up agent for Paul Muus Consulting. Your job is to nurture leads who received a proposal but have not yet booked.
+      <div class="prompt-card">You are the follow-up agent for Paul Muus Consulting. Your job is to nurture leads who received a proposal but have not yet booked.
 
 Create a 7-touch follow-up sequence:
 Day 2: Follow up on proposal, offer to answer questions
@@ -1653,7 +1654,7 @@ Rules:
     <div class="agent-card">
       <h3>Agent #3: Past Client Reactivation for Repeat Events &amp; Referrals</h3>
       <p class="agent-desc">Your past corporate clients host annual galas and quarterly events. This agent turns one-time clients into repeat revenue and referral sources.</p>
-      <div class="agent-prompt">You are the reactivation agent for Paul Muus Consulting. Reach out to past clients who have not booked in 6+ months.
+      <div class="prompt-card">You are the reactivation agent for Paul Muus Consulting. Reach out to past clients who have not booked in 6+ months.
 
 Generate a personalized outreach email that includes:
 1. Warm reconnection referencing their specific past event
@@ -1876,6 +1877,7 @@ const presets = {
 function setScenario(s) {
   calcTouched = true;
   calcTouched = true;
+  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1886,7 +1888,9 @@ function setScenario(s) {
 // ROI Calculator
 var calcTouched = false;
 var calcTouched = false;
+var calcTouched = false;
 function updateCalc() {
+  if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   const contract = parseInt(document.getElementById('slider-contract').value) || 3000;
@@ -1987,6 +1991,23 @@ const CHAPTERS = [
     if(pb){ a.addEventListener('play',function(){pb.textContent='Pause';}); a.addEventListener('pause',function(){pb.textContent='Play';}); }
   } catch(e) {}
 })();
+</script>
+<script>
+function togglePlay(btn){
+  var v=btn.previousElementSibling;
+  if(!v) return;
+  if(v.paused){v.play().catch(function(e){console.warn("play blocked",e);});btn.textContent="⏸";}
+  else{v.pause();btn.textContent="▶";}
+}
+</script>
+<script>
+document.querySelectorAll("video,audio").forEach(function(m){
+  m.addEventListener("canplay",function(){
+    if(m.dataset.autoplay==="true"&&m.readyState>=3){
+      m.play().catch(function(e){console.warn("autoplay blocked",e);});
+    }
+  });
+});
 </script>
 </body>
 </html>

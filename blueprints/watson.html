@@ -1876,6 +1876,7 @@ const presets = {
 function setScenario(s) {
   calcTouched = true;
   calcTouched = true;
+  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1886,7 +1887,9 @@ function setScenario(s) {
 // ROI Calculator
 var calcTouched = false;
 var calcTouched = false;
+var calcTouched = false;
 function updateCalc() {
+  if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   const contract = parseInt(document.getElementById('slider-contract').value) || 800;

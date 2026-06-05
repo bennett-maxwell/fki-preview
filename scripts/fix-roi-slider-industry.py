@@ -48,19 +48,37 @@ def slider_tag(mn, mx, st, val):
             f'oninput="calcTouched=true;updateCalc()">')
 
 
-def _fillin_sub(mn, st):
+def _fillin_sub(mn, st, default_val):
     def _do(m):
         t = m.group(0)
         t = re.sub(r'\bmin="\d+"', f'min="{mn}"', t, count=1)
         t = re.sub(r'\bstep="\d+"', f'step="{st}"', t, count=1)
+        # Also fix the value= so it sits inside the industry band (root cause of D7-01 fails)
+        t = re.sub(r'\bvalue="\d+"', f'value="{default_val}"', t, count=1)
         return t
     return _do
 
 
-def patch(path, mn, mx, st, fallback):
+def _get_lead_default(slug, mn, mx):
+    """Read avg_customer_value from lead profile; clamp to industry band."""
+    leads_dir = REPO / "leads"
+    profile = leads_dir / f"{slug}.json"
+    if profile.exists():
+        try:
+            p = json.loads(profile.read_text())
+            v = p.get("avg_customer_value")
+            if v and isinstance(v, (int, float)) and mn <= v <= mx:
+                return int(v)
+        except Exception:
+            pass
+    return mn  # fall back to industry minimum
+
+
+def patch(path, mn, mx, st, fallback, slug=None):
     html = path.read_text()
+    default_val = _get_lead_default(slug, mn, mx) if slug else mn
     new = SLIDER_RE.sub(slider_tag(mn, mx, st, mn), html, count=1)
-    new = FILLIN_RE.sub(_fillin_sub(mn, st), new, count=1)
+    new = FILLIN_RE.sub(_fillin_sub(mn, st, default_val), new, count=1)
     new = JSFALL_RE.sub(rf"\g<1>{fallback}", new, count=1)
     changed = new != html
     if changed:
@@ -75,12 +93,19 @@ def main():
     print(f"  TEMPLATE.html: tokenized={t_changed}")
 
     ok = True
+    patch_slug = None
+    if len(sys.argv) > 1 and sys.argv[1] == "--patch" and len(sys.argv) > 2:
+        patch_slug = sys.argv[2]
     for slug, industry in SLUG_IND.items():
+        if patch_slug and slug != patch_slug:
+            continue
         f = BP / f"{slug}.html"
         if not f.exists():
             print(f"  MISSING: {slug}.html"); ok = False; continue
+        if industry not in ISL:
+            print(f"  {slug}: {industry} — NO INDUSTRY CONFIG (add to roi-industry-config.json)"); ok = False; continue
         cfg = ISL[industry]
-        ch = patch(f, cfg["min"], cfg["max"], cfg["step"], cfg["min"])
+        ch = patch(f, cfg["min"], cfg["max"], cfg["step"], cfg["min"], slug=slug)
         print(f"  {slug}: {industry:<16} {cfg['min']}-{cfg['max']} step {cfg['step']}  patched={ch}")
     return 0 if ok else 1
 

@@ -1,0 +1,58 @@
+{
+  "advisor_scores": [
+    {
+      "recommendation": "Patch artifact plus generator plus Gatekeeper HTTP CTA gate.",
+      "score_0_5": 4.7,
+      "seat": "Operator",
+      "single_failure_mode": "Patching only the live HTML without generator/gate fix would repeat the miss."
+    },
+    {
+      "recommendation": "Require HTTP 200 on every action CTA target before preview/send.",
+      "score_0_5": 4.8,
+      "seat": "QA Auditor",
+      "single_failure_mode": "String-only audits pass 404 links."
+    },
+    {
+      "recommendation": "Label GHL partial, document migration prerequisites, keep GitHub Pages fixed.",
+      "score_0_5": 4.4,
+      "seat": "Systems Architect",
+      "single_failure_mode": "GHL/Cloudflare migration cannot be claimed without auth and canonical target."
+    },
+    {
+      "recommendation": "Do public readback only after Pages build success.",
+      "score_0_5": 4.3,
+      "seat": "Contrarian",
+      "single_failure_mode": "CI/public deploy lag could create false fixed claim."
+    },
+    {
+      "recommendation": "Factory manifest and Gatekeeper must both include qualify_link_gate.",
+      "score_0_5": 4.5,
+      "seat": "Scale Realist",
+      "single_failure_mode": "1000/day claim unsafe if each package can bypass click target validation."
+    }
+  ],
+  "average_score": 4.54,
+  "drive_skill_loaded": {
+    "autopilot-skill": "1gqML7sNTD4fF9e6kdciHcvJPBUTAmw_G",
+    "council-skill": "1-x9USXZtLvwfleZ8kj4y5JCd5rq-KGHc modified 2026-06-04T11:01:29.987Z",
+    "gatekeeper-skill": "1oknnvfpoiLb_sOzWYGyNZBGM03sNaG7Q modified 2026-06-03T19:54:03.140Z",
+    "memory-skill": "11N3WxEHenqDoidLawqfh1m-AfeU0G8Pu",
+    "task-review-skill": "1w7GlLyGXPCfsm2hAKNq3fWjzL_YrIR6R modified 2026-06-04T13:55:54.188Z"
+  },
+  "mode": "correction_permanent_fix_plan",
+  "proofs": [
+    "public-qualify-readback-after-pages-built-20260604.json",
+    "gatekeeper-production-after-qualify-gate-wire-20260604.json",
+    "factory-manifest-after-qualify-fix-20260604.json"
+  ],
+  "protected_boundaries": [
+    "No customer/Mike send",
+    "No GHL mutation due 401 auth",
+    "No claim of GHL/Cloudflare hosting until target/auth exists"
+  ],
+  "question": "Fix broken Mike Norton Qualify button, explain why missed, and assess GHL/Cloudflare hosting path.",
+  "schema": "council_skill_receipt.v33.codex_partial",
+  "threshold": 4.25,
+  "ts": "2026-06-04T14:54:28.480903+00:00",
+  "verdict": "APPROVED_TO_EXECUTE_SAFE_FIXES_WITH_GHL_PARTIAL_LABEL"
+}

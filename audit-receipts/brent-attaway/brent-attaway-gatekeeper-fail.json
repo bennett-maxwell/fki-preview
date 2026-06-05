@@ -48,6 +48,42 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/brent-attaway.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent%20Attaway&biz=CRMX&src=brent-attaway\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"FAIL\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "brent-attaway"
@@ -135,6 +171,7 @@
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
+    "qualify link gate failed",
     "run-audit.py failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: brent-attaway-email-click-test.json",
@@ -150,5 +187,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/brent-attaway",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:22:58.038044+00:00"
+  "ts": "2026-06-04T15:33:53.934699+00:00"
 }

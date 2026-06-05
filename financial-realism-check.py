@@ -177,9 +177,15 @@ def check_file(path, clone_registry):
             "gala",
             "Pinterest",
             "Apply to Work With Us",
-            "Command Center",
+            # "Command Center" removed — format-3 gold template uses "command center" in
+            # explanatory copy (correct brand language). The OLD violation was the tab-nav
+            # section id="command-center" pattern, which format-conformance-check.py FC-01
+            # already blocks (old tab sections fail PF0-5 before reaching this check).
         ]
         leaked = [term for term in legacy_terms if re.search(r"\b" + re.escape(term) + r"\b", body, re.I)]
+        # Check for the OLD command-center TAB SECTION (the real D10-21 violation) separately
+        if re.search(r'id=["\']command-center["\']', html, re.I):
+            leaked.append("Command Center tab-section (id=command-center — old format, must regenerate)")
         if leaked:
             fails.append(
                 "D10-21 [RL] home-services blueprint contains wrong-industry/template language: "

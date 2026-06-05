@@ -1,0 +1,285 @@
+{
+  "external_green": false,
+  "lead": "billy-bob-electric-20260604",
+  "phase": "pre_bennett",
+  "pre_bennett_green": false,
+  "preview_green": false,
+  "schema": "blueprint_conveyor_30.v1",
+  "steps": [
+    {
+      "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+      "blocked_by_step": null,
+      "detail": "profile has canonical identity",
+      "green": true,
+      "name": "Intake identity lock",
+      "status": "GREEN",
+      "step": 1
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+      "blocked_by_step": null,
+      "detail": "source/proof present",
+      "green": true,
+      "name": "Source-of-truth bundle",
+      "status": "GREEN",
+      "step": 2
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+      "blocked_by_step": null,
+      "detail": "industry=electrician and electrical contractor",
+      "green": true,
+      "name": "Brand/business classification",
+      "status": "GREEN",
+      "step": 3
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+      "blocked_by_step": null,
+      "detail": "tools/current_tools present",
+      "green": true,
+      "name": "Tool stack extraction",
+      "status": "GREEN",
+      "step": 4
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/ghl-readonly-summary.json",
+      "blocked_by_step": null,
+      "detail": "GHL readonly summary exists (synthetic no-mutation)",
+      "green": true,
+      "name": "GHL/contact readback",
+      "status": "GREEN",
+      "step": 5
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": null,
+      "detail": "Blueprint opportunity map rendered",
+      "green": true,
+      "name": "Opportunity map",
+      "status": "GREEN",
+      "step": 6
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": null,
+      "detail": "6 agents found",
+      "green": true,
+      "name": "Agent list",
+      "status": "GREEN",
+      "step": 7
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": null,
+      "detail": "3 prompt pack present",
+      "green": true,
+      "name": "Prompt pack",
+      "status": "GREEN",
+      "step": 8
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": null,
+      "detail": "financial-realism failed current file",
+      "green": false,
+      "name": "Financial inputs",
+      "status": "RED",
+      "step": 9
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; Blueprint HTML exists and starts as HTML",
+      "green": false,
+      "name": "Blueprint HTML render",
+      "status": "RED",
+      "step": 10
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; no obvious template/banned visible leakage",
+      "green": false,
+      "name": "Blueprint copy QA",
+      "status": "RED",
+      "step": 11
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; qualify link gate",
+      "green": false,
+      "name": "CTA/link QA",
+      "status": "RED",
+      "step": 12
+    },
+    {
+      "artifact": "qualify.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; required fields/all 8 checked by qualifier-context gate",
+      "green": false,
+      "name": "Qualifier required fields",
+      "status": "RED",
+      "step": 13
+    },
+    {
+      "artifact": "qualify.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; Q7 agents context overlaps actual Blueprint agents",
+      "green": false,
+      "name": "Q7 tailoring",
+      "status": "RED",
+      "step": 14
+    },
+    {
+      "artifact": "qualify.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; relay endpoint configured, no direct public PIT token check bundled",
+      "green": false,
+      "name": "Lead relay/GHL payload",
+      "status": "RED",
+      "step": 15
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-46.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; repeat-submit receipt exists",
+      "green": false,
+      "name": "Repeat submit/idempotency",
+      "status": "RED",
+      "step": 16
+    },
+    {
+      "artifact": "qualify.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; calendar/booking route evidence present",
+      "green": false,
+      "name": "Calendar routing",
+      "status": "RED",
+      "step": 17
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; direct-address proof in production-47",
+      "green": false,
+      "name": "Audio script",
+      "status": "RED",
+      "step": 18
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; size=6721245; missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "green": false,
+      "name": "Audio render",
+      "status": "RED",
+      "step": 19
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; public audio SHA matches local; missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "green": false,
+      "name": "Audio transcript/readback",
+      "status": "RED",
+      "step": 20
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; email artifact populated",
+      "green": false,
+      "name": "Delivery email data",
+      "status": "RED",
+      "step": 21
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; email-design-conformance",
+      "green": false,
+      "name": "Delivery email technical HTML",
+      "status": "RED",
+      "step": 22
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; visual customer-view email gate",
+      "green": false,
+      "name": "Delivery email visual format",
+      "status": "RED",
+      "step": 23
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; approval customer-view gate",
+      "green": false,
+      "name": "Bennett approval packet",
+      "status": "RED",
+      "step": 24
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-audit.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; run-audit current lead",
+      "green": false,
+      "name": "Blueprint audit",
+      "status": "RED",
+      "step": 25
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-completion-gate.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; completion receipt pass",
+      "green": false,
+      "name": "Completion gate",
+      "status": "RED",
+      "step": 26
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-gatekeeper-local.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; scale-smoke local Gatekeeper PASS",
+      "green": false,
+      "name": "Gatekeeper token",
+      "status": "RED",
+      "step": 27
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-scale-smoke-manifest.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; scale-smoke manifest pass; no public/customer send",
+      "green": false,
+      "name": "Public readback",
+      "status": "RED",
+      "step": 28
+    },
+    {
+      "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-bennett-preview-send.json",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; Bennett preview receipt exists; sha_match=False",
+      "green": false,
+      "name": "Bennett preview send",
+      "status": "RED",
+      "step": 29
+    },
+    {
+      "artifact": "",
+      "blocked_by_step": 9,
+      "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; locked until Bennett approval + external_send token",
+      "green": false,
+      "name": "External/customer send",
+      "status": "RED",
+      "step": 30
+    }
+  ],
+  "summary": {
+    "green": 8,
+    "locked": 0,
+    "red": 22
+  }
+}

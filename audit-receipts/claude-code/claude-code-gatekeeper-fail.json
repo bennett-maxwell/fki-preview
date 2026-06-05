@@ -48,6 +48,42 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/claude-code.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Claude%20Code&biz=Claude%20Code%20Agency&src=claude-code&firstName=Claude&agents=Client+Onboarding+Agent%2CLead+Follow-Up+Agent%2CDelivery+Scope+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Claude%20Code&biz=Claude%20Code%20Agency&src=claude-code&firstName=Claude&agents=Client+Onboarding+Agent%2CLead+Follow-Up+Agent%2CDelivery+Scope+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Claude%20Code&biz=Claude%20Code%20Agency&src=claude-code&firstName=Claude&agents=Client+Onboarding+Agent%2CLead+Follow-Up+Agent%2CDelivery+Scope+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "claude-code"
@@ -142,5 +178,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/claude-code",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:22:58.917032+00:00"
+  "ts": "2026-06-04T15:33:50.318290+00:00"
 }

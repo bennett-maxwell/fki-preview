@@ -19,8 +19,8 @@
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
@@ -48,19 +48,140 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
+        "--lead",
+        "mike-norton-origins-20260603",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=oZBJde4VGnUGf2eHVzr8\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"mike-norton-origins-20260603\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: mike-norton-origins-20260603 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/mike-norton-origins-20260603-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: mike-norton-origins-20260603 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "mike-norton-origins-20260603"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] mike-norton-origins-20260603: 15/15 (100%)",
-        "",
-        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "AUDIT FAIL (mike-norton-origins-20260603): audit receipt not PASS: None"
       ]
     },
     {
@@ -122,7 +243,7 @@
       "path": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603/mike-norton-origins-20260603-closeout.json"
     },
     {
-      "detail": "mike-norton-origins-20260603.mp3 17153810 bytes within window",
+      "detail": "mike-norton-origins-20260603.mp3 9564297 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
@@ -130,11 +251,16 @@
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
       "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
-    "completion_gate failed",
+    "run-audit.py failed",
     "D9 render-integrity audit failed or missing"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
@@ -143,5 +269,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:22:59.834118+00:00"
+  "ts": "2026-06-04T23:59:38.728640+00:00"
 }

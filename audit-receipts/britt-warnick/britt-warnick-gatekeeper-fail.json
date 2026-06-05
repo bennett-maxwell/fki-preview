@@ -48,6 +48,42 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/britt-warnick.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"FAIL\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "britt-warnick"
@@ -134,6 +170,7 @@
   ],
   "diamond": "FAIL",
   "failures": [
+    "qualify link gate failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: britt-warnick-email-click-test.json",
     "proof receipt missing or failing: britt-warnick-desktop-render.json",
@@ -147,5 +184,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/britt-warnick",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:22:58.516148+00:00"
+  "ts": "2026-06-04T15:33:51.291279+00:00"
 }

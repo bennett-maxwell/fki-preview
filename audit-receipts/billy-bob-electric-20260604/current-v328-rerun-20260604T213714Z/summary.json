@@ -1,0 +1,1013 @@
+{
+  "receipt_dir": "audit-receipts/billy-bob-electric-20260604/current-v328-rerun-20260604T213714Z",
+  "files": {
+    "audit": {
+      "exit": null,
+      "json": null,
+      "tail": "[FAIL] billy-bob-electric-20260604: 13/15 (87%)  RED-LINE FAIL: ['D10-22_home_services_copy_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)\n\nAudit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl\nVERDICT=FAIL\n"
+    },
+    "completion_prod": {
+      "exit": null,
+      "json": {
+        "lead": "billy-bob-electric-20260604",
+        "ts": "2026-06-04T21:37:14.617219+00:00",
+        "html_path": "blueprints/billy-bob-electric-20260604.html",
+        "html_size_bytes": 100773,
+        "require_production": true,
+        "summary": {
+          "passed": 38,
+          "failed": 6,
+          "skipped": 6,
+          "total_applicable": 44,
+          "overall_pass": false
+        },
+        "status": "FAIL",
+        "category_scores": {
+          "Structure": {
+            "score": "10/10 (100%)",
+            "pass": true,
+            "failures": []
+          },
+          "Content": {
+            "score": "10/10 (100%)",
+            "pass": true,
+            "failures": []
+          },
+          "Funnel": {
+            "score": "10/10 (100%)",
+            "pass": true,
+            "failures": []
+          },
+          "Audio": {
+            "score": "5/5 (100%)",
+            "pass": true,
+            "failures": []
+          },
+          "Proof": {
+            "score": "N/A",
+            "pass": null,
+            "failures": []
+          },
+          "Production": {
+            "score": "1/7 (14%)",
+            "pass": false,
+            "failures": [
+              "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
+              "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
+              "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
+              "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
+              "#47: Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified) \u2014 missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt",
+              "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+            ]
+          },
+          "Delivery": {
+            "score": "1/1 (100%)",
+            "pass": true,
+            "failures": []
+          },
+          "Revenue": {
+            "score": "1/1 (100%)",
+            "pass": true,
+            "failures": []
+          }
+        },
+        "critical_failures": [
+          "#42: Public GitHub Pages build verified (HTTP 200)",
+          "#43: Drive artifact registry row present",
+          "#44: Notion Sprint row present",
+          "#45: Current GHL readback (contact tagged)",
+          "#47: Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
+          "#48: Bennett approval scope recorded"
+        ],
+        "major_failures": [],
+        "checks": {
+          "1": {
+            "desc": "Drive skill version present in generation comment",
+            "pass": true,
+            "severity": "info",
+            "detail": "OK"
+          },
+          "2": {
+            "desc": "Manual stage interpretation not used (no MANUAL_RECOVERY marker)",
+            "pass": true,
+            "severity": "warning",
+            "detail": "OK"
+          },
+          "3": {
+            "desc": "Template shadow check (N/A for HTML)",
+            "pass": true,
+            "severity": "info",
+            "detail": "Not applicable to HTML output"
+          },
+          "4": {
+            "desc": "No contradictory gold-standard (Command Center tab absent from nav)",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "5": {
+            "desc": "Melissa v2 template cloned (Your Profile tab present)",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "6": {
+            "desc": "Section count \u2265 10 (excluding aria-hidden)",
+            "pass": true,
+            "severity": "major",
+            "detail": "Found 15 effective sections (need \u226510)"
+          },
+          "7": {
+            "desc": "Nav: Your Profile | AI Agents | ROI Calculator | Listen | Apply",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "8": {
+            "desc": "Command Center tab NOT in nav",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "9": {
+            "desc": "Demo Site tab NOT in nav",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "10": {
+            "desc": "Website Audit section absent (deprecated Stage 2)",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "11": {
+            "desc": "No countdown timer",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "12": {
+            "desc": "No bare hero % claims without source link",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "13": {
+            "desc": "No hardcoded ROI defaults (12%, 18%, $45k) in calculator JS",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "14": {
+            "desc": "No hardcoded $45,000 contract value",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "15": {
+            "desc": "No hardcoded close rate text",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "16": {
+            "desc": "Revenue ranges are user-driven (calculator) not hardcoded in text",
+            "pass": true,
+            "severity": "warning",
+            "detail": "Manual review recommended for fabricated revenue ranges"
+          },
+          "17": {
+            "desc": "No fabricated testimonials",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "18": {
+            "desc": "All benchmarks in source list have clickable href",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "19": {
+            "desc": "No bare citation text without <a href>",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "20": {
+            "desc": "Positive tone and no corrupted AI Agent labels",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "21": {
+            "desc": "Lead's industry reflected in content",
+            "pass": true,
+            "severity": "warning",
+            "detail": "Manual review: verify industry-specific content present"
+          },
+          "22": {
+            "desc": "No cross-lead contamination (other lead names)",
+            "pass": true,
+            "severity": "warning",
+            "detail": "Run contamination_validator separately for full check"
+          },
+          "23": {
+            "desc": "Lead name present in blueprint",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "24": {
+            "desc": "GHL identity confirmed (external check)",
+            "pass": true,
+            "severity": "info",
+            "detail": "Verify via GHL API separately"
+          },
+          "25": {
+            "desc": "dateUpdated not cited as new-lead proof",
+            "pass": true,
+            "severity": "warning",
+            "detail": "OK"
+          },
+          "26": {
+            "desc": "Query params (lead=, biz=, src=) preserved in qualify.html CTAs",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "27": {
+            "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "28": {
+            "desc": "No direct booking/calendar links (outside qualify.html flow)",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "29": {
+            "desc": "No embedded booking widget (booking must be in qualify.html only)",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "30": {
+            "desc": "No public GHL token or Bearer header in HTML",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "31": {
+            "desc": "No drive.google.com links in HTML",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "32": {
+            "desc": "Podcast href is not empty or placeholder",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "33": {
+            "desc": "Speed controls present (1x and 1.25x)",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "34": {
+            "desc": "Audio player has preload=metadata",
+            "pass": true,
+            "severity": "critical",
+            "detail": "OK"
+          },
+          "35": {
+            "desc": "Audio element or podcast URL present",
+            "pass": true,
+            "severity": "major",
+            "detail": "OK"
+          },
+          "36": {
+            "desc": "Email click test receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing email click test receipt"
+          },
+          "37": {
+            "desc": "Desktop render receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing desktop render receipt"
+          },
+          "38": {
+            "desc": "Mobile render receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing mobile render receipt"
+          },
+          "39": {
+            "desc": "Audit JSON receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing audit JSON receipt"
+          },
+          "40": {
+            "desc": "Gatekeeper pass receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing gatekeeper receipt"
+          },
+          "41": {
+            "desc": "Closeout receipt exists",
+            "pass": null,
+            "severity": "info",
+            "detail": "Missing closeout receipt"
+          },
+          "42": {
+            "desc": "Public GitHub Pages build verified (HTTP 200)",
+            "pass": false,
+            "severity": "critical",
+            "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 42"
+          },
+          "43": {
+            "desc": "Drive artifact registry row present",
+            "pass": false,
+            "severity": "critical",
+            "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
+          },
+          "44": {
+            "desc": "Notion Sprint row present",
+            "pass": false,
+            "severity": "critical",
+            "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
+          },
+          "45": {
+            "desc": "Current GHL readback (contact tagged)",
+            "pass": false,
+            "severity": "critical",
+            "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
+          },
+          "46": {
+            "desc": "Repeat-submit same-contact proof",
+            "pass": true,
+            "severity": "critical",
+            "detail": "Repeat submit updated same GHL contact"
+          },
+          "47": {
+            "desc": "Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
+            "pass": false,
+            "severity": "critical",
+            "detail": "missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt"
+          },
+          "48": {
+            "desc": "Bennett approval scope recorded",
+            "pass": false,
+            "severity": "critical",
+            "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+          },
+          "49": {
+            "desc": "No false completion claim in HTML (N/A for HTML output)",
+            "pass": true,
+            "severity": "info",
+            "detail": "Not applicable to HTML deliverable"
+          },
+          "50": {
+            "desc": "Revenue validation only from real held calls (not synthetic)",
+            "pass": true,
+            "severity": "info",
+            "detail": "Revenue validation requires human confirmation"
+          }
+        }
+      },
+      "tail": "\"pass\": false,\n      \"severity\": \"critical\",\n      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 45\"\n    },\n    \"46\": {\n      \"desc\": \"Repeat-submit same-contact proof\",\n      \"pass\": true,\n      \"severity\": \"critical\",\n      \"detail\": \"Repeat submit updated same GHL contact\"\n    },\n    \"47\": {\n      \"desc\": \"Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)\",\n      \"pass\": false,\n      \"severity\": \"critical\",\n      \"detail\": \"missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt\"\n    },\n    \"48\": {\n      \"desc\": \"Bennett approval scope recorded\",\n      \"pass\": false,\n      \"severity\": \"critical\",\n      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"\n    },\n    \"49\": {\n      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",\n      \"pass\": true,\n      \"severity\": \"info\",\n      \"detail\": \"Not applicable to HTML deliverable\"\n    },\n    \"50\": {\n      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",\n      \"pass\": true,\n      \"severity\": \"info\",\n      \"detail\": \"Revenue validation requires human confirmation\"\n    }\n  }\n}\n"
+    },
+    "conveyor_pre_bennett": {
+      "exit": null,
+      "json": {
+        "external_green": false,
+        "lead": "billy-bob-electric-20260604",
+        "phase": "pre_bennett",
+        "pre_bennett_green": false,
+        "preview_green": false,
+        "schema": "blueprint_conveyor_30.v1",
+        "steps": [
+          {
+            "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+            "blocked_by_step": null,
+            "detail": "profile has canonical identity",
+            "green": true,
+            "name": "Intake identity lock",
+            "status": "GREEN",
+            "step": 1
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+            "blocked_by_step": null,
+            "detail": "source/proof present",
+            "green": true,
+            "name": "Source-of-truth bundle",
+            "status": "GREEN",
+            "step": 2
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+            "blocked_by_step": null,
+            "detail": "industry=electrician and electrical contractor",
+            "green": true,
+            "name": "Brand/business classification",
+            "status": "GREEN",
+            "step": 3
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+            "blocked_by_step": null,
+            "detail": "tools/current_tools present",
+            "green": true,
+            "name": "Tool stack extraction",
+            "status": "GREEN",
+            "step": 4
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/ghl-readonly-summary.json",
+            "blocked_by_step": null,
+            "detail": "GHL readonly summary exists (synthetic no-mutation)",
+            "green": true,
+            "name": "GHL/contact readback",
+            "status": "GREEN",
+            "step": 5
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": null,
+            "detail": "Blueprint opportunity map rendered",
+            "green": true,
+            "name": "Opportunity map",
+            "status": "GREEN",
+            "step": 6
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": null,
+            "detail": "6 agents found",
+            "green": true,
+            "name": "Agent list",
+            "status": "GREEN",
+            "step": 7
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": null,
+            "detail": "3 prompt pack present",
+            "green": true,
+            "name": "Prompt pack",
+            "status": "GREEN",
+            "step": 8
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": null,
+            "detail": "financial-realism failed current file",
+            "green": false,
+            "name": "Financial inputs",
+            "status": "RED",
+            "step": 9
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; Blueprint HTML exists and starts as HTML",
+            "green": false,
+            "name": "Blueprint HTML render",
+            "status": "RED",
+            "step": 10
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; no obvious template/banned visible leakage",
+            "green": false,
+            "name": "Blueprint copy QA",
+            "status": "RED",
+            "step": 11
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; qualify link gate",
+            "green": false,
+            "name": "CTA/link QA",
+            "status": "RED",
+            "step": 12
+          },
+          {
+            "artifact": "qualify.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; required fields/all 8 checked by qualifier-context gate",
+            "green": false,
+            "name": "Qualifier required fields",
+            "status": "RED",
+            "step": 13
+          },
+          {
+            "artifact": "qualify.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; Q7 agents context overlaps actual Blueprint agents",
+            "green": false,
+            "name": "Q7 tailoring",
+            "status": "RED",
+            "step": 14
+          },
+          {
+            "artifact": "qualify.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; relay endpoint configured, no direct public PIT token check bundled",
+            "green": false,
+            "name": "Lead relay/GHL payload",
+            "status": "RED",
+            "step": 15
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-46.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; repeat-submit receipt exists",
+            "green": false,
+            "name": "Repeat submit/idempotency",
+            "status": "RED",
+            "step": 16
+          },
+          {
+            "artifact": "qualify.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; calendar/booking route evidence present",
+            "green": false,
+            "name": "Calendar routing",
+            "status": "RED",
+            "step": 17
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; direct-address proof in production-47",
+            "green": false,
+            "name": "Audio script",
+            "status": "RED",
+            "step": 18
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; size=6721245; missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+            "green": false,
+            "name": "Audio render",
+            "status": "RED",
+            "step": 19
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-production-47.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; public audio SHA matches local; missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+            "green": false,
+            "name": "Audio transcript/readback",
+            "status": "RED",
+            "step": 20
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; email artifact populated",
+            "green": false,
+            "name": "Delivery email data",
+            "status": "RED",
+            "step": 21
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; email-design-conformance",
+            "green": false,
+            "name": "Delivery email technical HTML",
+            "status": "RED",
+            "step": 22
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; visual customer-view email gate",
+            "green": false,
+            "name": "Delivery email visual format",
+            "status": "RED",
+            "step": 23
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; approval customer-view gate",
+            "green": false,
+            "name": "Bennett approval packet",
+            "status": "RED",
+            "step": 24
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-audit.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; run-audit current lead",
+            "green": false,
+            "name": "Blueprint audit",
+            "status": "RED",
+            "step": 25
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-completion-gate.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; completion receipt pass",
+            "green": false,
+            "name": "Completion gate",
+            "status": "RED",
+            "step": 26
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-gatekeeper-local.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; scale-smoke local Gatekeeper PASS",
+            "green": false,
+            "name": "Gatekeeper token",
+            "status": "RED",
+            "step": 27
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-scale-smoke-manifest.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=PASS; scale-smoke manifest pass; no public/customer send",
+            "green": false,
+            "name": "Public readback",
+            "status": "RED",
+            "step": 28
+          },
+          {
+            "artifact": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-bennett-preview-send.json",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; Bennett preview receipt exists; sha_match=False",
+            "green": false,
+            "name": "Bennett preview send",
+            "status": "RED",
+            "step": 29
+          },
+          {
+            "artifact": "",
+            "blocked_by_step": 9,
+            "detail": "blocked_by_prior_step_09: Financial inputs; base_check=FAIL; locked until Bennett approval + external_send token",
+            "green": false,
+            "name": "External/customer send",
+            "status": "RED",
+            "step": 30
+          }
+        ],
+        "summary": {
+          "green": 8,
+          "locked": 0,
+          "red": 22
+        }
+      },
+      "tail": " 27\n    },\n    {\n      \"artifact\": \"/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-scale-smoke-manifest.json\",\n      \"blocked_by_step\": 9,\n      \"detail\": \"blocked_by_prior_step_09: Financial inputs; base_check=PASS; scale-smoke manifest pass; no public/customer send\",\n      \"green\": false,\n      \"name\": \"Public readback\",\n      \"status\": \"RED\",\n      \"step\": 28\n    },\n    {\n      \"artifact\": \"/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-bennett-preview-send.json\",\n      \"blocked_by_step\": 9,\n      \"detail\": \"blocked_by_prior_step_09: Financial inputs; base_check=FAIL; Bennett preview receipt exists; sha_match=False\",\n      \"green\": false,\n      \"name\": \"Bennett preview send\",\n      \"status\": \"RED\",\n      \"step\": 29\n    },\n    {\n      \"artifact\": \"\",\n      \"blocked_by_step\": 9,\n      \"detail\": \"blocked_by_prior_step_09: Financial inputs; base_check=FAIL; locked until Bennett approval + external_send token\",\n      \"green\": false,\n      \"name\": \"External/customer send\",\n      \"status\": \"RED\",\n      \"step\": 30\n    }\n  ],\n  \"summary\": {\n    \"green\": 8,\n    \"locked\": 0,\n    \"red\": 22\n  }\n}\n"
+    },
+    "email_visual": {
+      "exit": null,
+      "json": {
+        "email": "delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "failures": [],
+        "pass": true,
+        "status": "PASS",
+        "subject": "Billy Bob, your Blueprint AI plan is ready"
+      },
+      "tail": "{\n  \"email\": \"delivery-emails/billy-bob-electric-20260604-delivery-email.html\",\n  \"failures\": [],\n  \"pass\": true,\n  \"status\": \"PASS\",\n  \"subject\": \"Billy Bob, your Blueprint AI plan is ready\"\n}\n"
+    },
+    "gatekeeper_prod": {
+      "exit": null,
+      "json": {
+        "checks": [
+          {
+            "failures": [],
+            "name": "visible_html_surface",
+            "pass": true
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+              "--html",
+              "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+              "--receipt-dir",
+              "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604",
+              "--lead",
+              "billy-bob-electric-20260604",
+              "--json-output",
+              "--require-production"
+            ],
+            "name": "completion_gate",
+            "pass": false,
+            "returncode": 1,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "    \"48\": {",
+              "      \"desc\": \"Bennett approval scope recorded\",",
+              "      \"pass\": false,",
+              "      \"severity\": \"critical\",",
+              "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+              "    },",
+              "    \"49\": {",
+              "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+              "      \"pass\": true,",
+              "      \"severity\": \"info\",",
+              "      \"detail\": \"Not applicable to HTML deliverable\"",
+              "    },",
+              "    \"50\": {",
+              "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+              "      \"pass\": true,",
+              "      \"severity\": \"info\",",
+              "      \"detail\": \"Revenue validation requires human confirmation\"",
+              "    }",
+              "  }",
+              "}"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+              "--html",
+              "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+              "--check-http",
+              "--json-output"
+            ],
+            "name": "qualify_link_gate",
+            "pass": true,
+            "returncode": 0,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "      \"http_code\": 200,",
+              "      \"pass\": true,",
+              "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+              "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+              "    },",
+              "    {",
+              "      \"http_code\": 200,",
+              "      \"pass\": true,",
+              "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+              "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+              "    },",
+              "    {",
+              "      \"http_code\": 200,",
+              "      \"pass\": true,",
+              "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+              "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+              "    }",
+              "  ],",
+              "  \"status\": \"PASS\"",
+              "}"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+              "--html",
+              "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+              "--lead",
+              "billy-bob-electric-20260604",
+              "--json-output",
+              "--delivery-email",
+              "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+              "--profile",
+              "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json"
+            ],
+            "name": "qualifier_context_gate",
+            "pass": true,
+            "returncode": 0,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "    },",
+              "    {",
+              "      \"agents\": [",
+              "        \"Emergency Dispatch Agent\",",
+              "        \"Quote Follow-Up Agent\",",
+              "        \"Technician Scheduling Agent\",",
+              "        \"Permit & Inspection Prep Agent\",",
+              "        \"Maintenance Plan Agent\",",
+              "        \"Review & Referral Agent\"",
+              "      ],",
+              "      \"file\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+              "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy+Bob&biz=Billy+Bob+Electric&src=billy-bob-electric-20260604&agents=Emergency+Dispatch+Agent%2CQuote+Follow-Up+Agent%2CTechnician+Scheduling+Agent%2CPermit+%26+Inspection+Prep+Agent%2CMaintenance+Plan+Agent%2CReview+%26+Referral+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery\",",
+              "      \"text\": \"See If You Qualify \\u2192\"",
+              "    }",
+              "  ],",
+              "  \"lead\": \"billy-bob-electric-20260604\",",
+              "  \"pass\": true,",
+              "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+              "  \"status\": \"PASS\"",
+              "}"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+              "--email",
+              "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+              "--profile",
+              "/Users/temp/fki-preview/leads/billy-bob-electric-20260604.json",
+              "--json-output"
+            ],
+            "name": "approval_email_customer_view_gate",
+            "pass": true,
+            "returncode": 0,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "{",
+              "  \"email\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+              "  \"failures\": [],",
+              "  \"pass\": true,",
+              "  \"status\": \"PASS\"",
+              "}"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+              "--email",
+              "/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+              "--subject",
+              "CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready",
+              "--json-output"
+            ],
+            "name": "email_visual_format_gate",
+            "pass": true,
+            "returncode": 0,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "{",
+              "  \"email\": \"/Users/temp/fki-preview/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+              "  \"failures\": [],",
+              "  \"pass\": true,",
+              "  \"status\": \"PASS\",",
+              "  \"subject\": \"CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready\"",
+              "}"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/run-audit.py",
+              "--lead",
+              "billy-bob-electric-20260604"
+            ],
+            "name": "blueprint_audit",
+            "pass": false,
+            "returncode": 1,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "[FAIL] billy-bob-electric-20260604: 13/15 (87%)  RED-LINE FAIL: ['D10-22_home_services_copy_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+              "",
+              "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+              "VERDICT=FAIL"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/fki-preview/financial-realism-check.py",
+              "--file",
+              "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html"
+            ],
+            "name": "financial_realism",
+            "pass": false,
+            "returncode": 1,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+              "------------------------------------------------------------------------------",
+              "billy-bob-electric-20260604 home_services         2388        0  FAIL (1)",
+              "      \u2717 D10-21 [RL] home-services blueprint contains wrong-industry/template language: Command Center",
+              "------------------------------------------------------------------------------",
+              "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+            ]
+          },
+          {
+            "cmd": [
+              "/Library/Developer/CommandLineTools/usr/bin/python3",
+              "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+              "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html"
+            ],
+            "name": "d9_render_integrity",
+            "pass": true,
+            "returncode": 0,
+            "stderr_tail": [],
+            "stdout_tail": [
+              "      \"detail\": \"\",",
+              "      \"pass\": true",
+              "    },",
+              "    \"D9-19_content_width_capped\": {",
+              "      \"detail\": \"\",",
+              "      \"pass\": true",
+              "    },",
+              "    \"D9-20_no_offbrand_accent_leak\": {",
+              "      \"detail\": \"\",",
+              "      \"pass\": true",
+              "    }",
+              "  },",
+              "  \"failed\": [],",
+              "  \"html\": \"/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html\",",
+              "  \"pass\": true,",
+              "  \"score\": 20,",
+              "  \"status\": \"PASS\",",
+              "  \"total\": 20,",
+              "  \"ts\": \"2026-06-04T21:37:15.597912+00:00\"",
+              "}"
+            ]
+          },
+          {
+            "name": "proof_email_click_test",
+            "pass": false,
+            "path": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-email-click-test.json"
+          },
+          {
+            "name": "proof_desktop_render",
+            "pass": false,
+            "path": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-desktop-render.json"
+          },
+          {
+            "name": "proof_mobile_render",
+            "pass": false,
+            "path": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-mobile-render.json"
+          },
+          {
+            "name": "proof_audit_json",
+            "pass": false,
+            "path": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-audit.json"
+          },
+          {
+            "name": "proof_closeout",
+            "pass": false,
+            "path": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-closeout.json"
+          },
+          {
+            "detail": "billy-bob-electric-20260604.mp3 6721245 bytes within window",
+            "name": "production_audio_size",
+            "pass": true
+          },
+          {
+            "detail": "direct-address audio receipt passed",
+            "name": "production_audio_direct_address",
+            "pass": true
+          },
+          {
+            "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+            "name": "production_audio_notebooklm_origin",
+            "pass": false
+          }
+        ],
+        "diamond": "FAIL",
+        "failures": [
+          "completion_gate failed",
+          "run-audit.py failed",
+          "financial-realism-check.py failed",
+          "proof receipt missing or failing: billy-bob-electric-20260604-email-click-test.json",
+          "proof receipt missing or failing: billy-bob-electric-20260604-desktop-render.json",
+          "proof receipt missing or failing: billy-bob-electric-20260604-mobile-render.json",
+          "proof receipt missing or failing: billy-bob-electric-20260604-audit.json",
+          "proof receipt missing or failing: billy-bob-electric-20260604-closeout.json",
+          "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+        ],
+        "html_path": "/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html",
+        "lead": "billy-bob-electric-20260604",
+        "mode": "production",
+        "receipt_dir": "/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604",
+        "score": 0,
+        "status": "FAIL",
+        "ts": "2026-06-04T21:37:15.606389+00:00"
+      },
+      "tail": "gin proof (artifact/notebook/source id or explicit notebooklm_generated=true)\",\n      \"name\": \"production_audio_notebooklm_origin\",\n      \"pass\": false\n    }\n  ],\n  \"diamond\": \"FAIL\",\n  \"failures\": [\n    \"completion_gate failed\",\n    \"run-audit.py failed\",\n    \"financial-realism-check.py failed\",\n    \"proof receipt missing or failing: billy-bob-electric-20260604-email-click-test.json\",\n    \"proof receipt missing or failing: billy-bob-electric-20260604-desktop-render.json\",\n    \"proof receipt missing or failing: billy-bob-electric-20260604-mobile-render.json\",\n    \"proof receipt missing or failing: billy-bob-electric-20260604-audit.json\",\n    \"proof receipt missing or failing: billy-bob-electric-20260604-closeout.json\",\n    \"production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)\"\n  ],\n  \"html_path\": \"/Users/temp/fki-preview/blueprints/billy-bob-electric-20260604.html\",\n  \"lead\": \"billy-bob-electric-20260604\",\n  \"mode\": \"production\",\n  \"receipt_dir\": \"/Users/temp/fki-preview/audit-receipts/billy-bob-electric-20260604\",\n  \"score\": 0,\n  \"status\": \"FAIL\",\n  \"ts\": \"2026-06-04T21:37:15.606389+00:00\"\n}\n"
+    },
+    "qualifier_context": {
+      "exit": null,
+      "json": {
+        "expected_agents": [],
+        "failures": [
+          {
+            "type": "no_qualifier_links_inspected"
+          }
+        ],
+        "inspected_links": [],
+        "lead": "billy-bob-electric-20260604",
+        "pass": false,
+        "qualifier": "/Users/temp/fki-preview/qualify.html",
+        "status": "FAIL"
+      },
+      "tail": "{\n  \"expected_agents\": [],\n  \"failures\": [\n    {\n      \"type\": \"no_qualifier_links_inspected\"\n    }\n  ],\n  \"inspected_links\": [],\n  \"lead\": \"billy-bob-electric-20260604\",\n  \"pass\": false,\n  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",\n  \"status\": \"FAIL\"\n}\n"
+    }
+  }
+}

@@ -48,6 +48,42 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "plumber-test-business-20260601"
@@ -57,7 +93,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] plumber-test-business-20260601: 13/15 (87%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D10-22_home_services_copy_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] plumber-test-business-20260601: 12/15 (80%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_size_6to20mb_duration_gt5min_RL', 'D10-22_home_services_copy_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -122,9 +158,9 @@
       "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-closeout.json"
     },
     {
-      "detail": "plumber-test-business-20260601.mp3 14784931 bytes within window",
+      "detail": "plumber-test-business-20260601.mp3 37062856 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
       "name": "production_audio_size",
-      "pass": true
+      "pass": false
     },
     {
       "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
@@ -142,6 +178,7 @@
     "proof receipt missing or failing: plumber-test-business-20260601-mobile-render.json",
     "proof receipt missing or failing: plumber-test-business-20260601-audit.json",
     "proof receipt missing or failing: plumber-test-business-20260601-closeout.json",
+    "production audio size failed: plumber-test-business-20260601.mp3 37062856 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
     "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
@@ -150,5 +187,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:23:00.213646+00:00"
+  "ts": "2026-06-04T15:33:53.079351+00:00"
 }
