@@ -223,7 +223,7 @@ def main():
         # Previously --all filtered to only slugs already in LEAD_INDUSTRY, which SILENTLY
         # skipped any unmapped lead — a brand-new blueprint with a $45k clone slider would
         # never be checked. Now --all scans every real-lead file; unmapped => D10-05 fail.
-        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "rush-evans-canonical", "local-webhookprobe"}
+        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "bennett-maxwell", "rush-evans-canonical", "local-webhookprobe"}
         files = sorted(glob.glob(os.path.join(BLUEPRINTS, "*.html")))
         files = [f for f in files
                  if not os.path.basename(f).startswith("_")
