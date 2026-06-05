@@ -1502,6 +1502,78 @@ document.getElementById('booking-modal').addEventListener('keydown', function(e)
 
 updateIdentityStatus();
 update();
+
+// Booking confirmation tracking — fires blueprint_call_booked to GHL relay
+// when the GHL widget (ki.franchiseki.com) posts a completion message.
+// Also detects iframe URL change to a confirmation path as a fallback signal.
+(function() {
+  var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+  var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+  var booked = false;
+
+  function fireBookedEvent() {
+    if (booked) return;
+    booked = true;
+    try {
+      var id = persistIdentity ? persistIdentity() : {};
+      var p = new URLSearchParams(window.location.search);
+      var payload = {
+        event_name: 'blueprint_call_booked',
+        locationId: GHL_LOC,
+        email: id.email || p.get('email') || '',
+        firstName: id.firstName || '',
+        lastName: id.lastName || '',
+        contact_id: id.contactId || p.get('cid') || '',
+        blueprint_slug: id.blueprintSlug || p.get('slug') || '',
+        source: 'qualifier_booking_iframe',
+        booked_at: new Date().toISOString()
+      };
+      var body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+      } else {
+        fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+      }
+      logFunnelEvent && logFunnelEvent('blueprint_call_booked', payload);
+    } catch(e) {}
+  }
+
+  // Primary: postMessage from GHL widget on booking confirmation
+  window.addEventListener('message', function(evt) {
+    if (!evt || !evt.data) return;
+    var d = evt.data;
+    // GHL widget fires these message types on booking completion
+    if (d.type === 'booking-confirmed' || d.type === 'appointment.scheduled' ||
+        (typeof d === 'string' && (d.includes('booking-confirmed') || d.includes('appointment.scheduled')))) {
+      fireBookedEvent();
+    }
+  });
+
+  // Fallback: poll iframe src/href for confirmation path patterns (every 2s while modal is open)
+  var _pollInterval = null;
+  var _bookingModal = document.getElementById('booking-modal');
+  if (_bookingModal) {
+    var _observer = new MutationObserver(function(mutations) {
+      var isOpen = _bookingModal.classList.contains('open');
+      if (isOpen && !_pollInterval) {
+        _pollInterval = setInterval(function() {
+          if (!_bookingModal.classList.contains('open')) {
+            clearInterval(_pollInterval); _pollInterval = null; return;
+          }
+          try {
+            var frame = document.getElementById('booking-calendar-frame');
+            var src = (frame && frame.src) || '';
+            if (/confirm|success|thank.?you|booked|appointment/i.test(src)) {
+              clearInterval(_pollInterval); _pollInterval = null;
+              fireBookedEvent();
+            }
+          } catch(e) {}
+        }, 2000);
+      }
+    });
+    _observer.observe(_bookingModal, {attributes: true, attributeFilter: ['class']});
+  }
+})();
 </script>
 </body>
 </html>
