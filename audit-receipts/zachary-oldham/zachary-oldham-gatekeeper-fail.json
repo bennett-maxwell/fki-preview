@@ -1,0 +1,282 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/zachary-oldham.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/zachary-oldham",
+        "--lead",
+        "zachary-oldham",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/zachary-oldham.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Zachary+Oldham&biz=Red+Sands+Vacation+Properties&src=zachary-oldham&agents=Guest+%26+Owner+Communication+Agent%2CFollow-Up+%26+Reactivation+Agent%2CBooking+Agent%2CContent+Agent%2CInternal+Ops+Agent%2CReporting+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Zachary+Oldham&biz=Red+Sands+Vacation+Properties&src=zachary-oldham&agents=Guest+%26+Owner+Communication+Agent%2CFollow-Up+%26+Reactivation+Agent%2CBooking+Agent%2CContent+Agent%2CInternal+Ops+Agent%2CReporting+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Zachary+Oldham&biz=Red+Sands+Vacation+Properties&src=zachary-oldham&agents=Guest+%26+Owner+Communication+Agent%2CFollow-Up+%26+Reactivation+Agent%2CBooking+Agent%2CContent+Agent%2CInternal+Ops+Agent%2CReporting+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/zachary-oldham.html",
+        "--lead",
+        "zachary-oldham",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/zachary-oldham.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Guest & Owner Communication Agent\",",
+        "        \"Follow-Up & Reactivation Agent\",",
+        "        \"Booking Agent\",",
+        "        \"Content Agent\",",
+        "        \"Internal Ops Agent\",",
+        "        \"Reporting Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Zachary+Oldham&biz=Red+Sands+Vacation+Properties&src=zachary-oldham&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Guest+%26+Owner+Communication+Agent%2CFollow-Up+%26+Reactivation+Agent%2CBooking+Agent%2CContent+Agent%2CInternal+Ops+Agent%2CReporting+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"zachary-oldham\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/zachary-oldham.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: zachary-oldham - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/zachary-oldham-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: zachary-oldham - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "zachary-oldham"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "AUDIT FAIL (zachary-oldham): no audit receipt"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/zachary-oldham.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "zachary-oldham       property_mgmt         6000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/zachary-oldham.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": false,
+      "returncode": 2,
+      "stderr_tail": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+      ],
+      "stdout_tail": []
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/zachary-oldham/zachary-oldham-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/zachary-oldham/zachary-oldham-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/zachary-oldham/zachary-oldham-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/zachary-oldham/zachary-oldham-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/zachary-oldham/zachary-oldham-closeout.json"
+    },
+    {
+      "detail": "zachary-oldham.mp3 41698360 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "D9 render-integrity audit failed or missing",
+    "proof receipt missing or failing: zachary-oldham-email-click-test.json",
+    "proof receipt missing or failing: zachary-oldham-desktop-render.json",
+    "proof receipt missing or failing: zachary-oldham-mobile-render.json",
+    "proof receipt missing or failing: zachary-oldham-audit.json",
+    "proof receipt missing or failing: zachary-oldham-closeout.json",
+    "production audio size failed: zachary-oldham.mp3 41698360 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/zachary-oldham.html",
+  "lead": "zachary-oldham",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/zachary-oldham",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-05T04:32:16.402174+00:00"
+}

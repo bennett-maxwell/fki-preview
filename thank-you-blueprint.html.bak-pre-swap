@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Received — Advaita AI Team Review · Franchise KI</title>
+<meta name="description" content="Your Advaita AI application is under review. Our team will be in touch within 48 hours if we see a strong fit.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0E1A">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+:root {
+  --navy:        #0A0E1A;
+  --navy-mid:    #0f1f3d;
+  --brand:       #1D6FDB;
+  --brand-light: #4A90E2;
+  --accent:        #4A90E2;
+  --green:       #4ade80;
+  --white:       #ffffff;
+  --off-white:   #f8f9fc;
+  --text:        #0A0E1A;
+  --muted:       #4a4a5a;
+  --light:       #888899;
+  --border:      #e2e5f0;
+  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius: 14px;
+  --shadow: 0 4px 24px rgba(10,14,26,0.10);
+  --shadow-md: 0 12px 40px rgba(10,14,26,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+.nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-logo { color: var(--white); font-weight: 800; font-size: 15px; }
+.nav-logo span { color: var(--accent); }
+.nav-tag { font-size: 12px; color: rgba(255,255,255,0.38); font-weight: 500; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--navy-mid) 0%, #0a1628 55%, var(--navy) 100%);
+  color: var(--white);
+  padding: 80px 2rem 72px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 45% at 50% 25%, rgba(74,144,226,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+
+.confirm-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 80px; height: 80px;
+  background: rgba(74,144,226,0.12);
+  border: 2px solid rgba(74,144,226,0.3);
+  border-radius: 50%;
+  margin-bottom: 28px;
+}
+.confirm-badge svg { width: 36px; height: 36px; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.hero h1 span { color: var(--accent); }
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: rgba(255,255,255,0.72);
+  max-width: 580px; margin: 0 auto 44px;
+  line-height: 1.65;
+}
+
+.confirm-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(74,144,226,0.1);
+  border: 1px solid rgba(74,144,226,0.25);
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 14px; color: rgba(255,255,255,0.65);
+}
+.confirm-pill strong { color: var(--accent); font-weight: 800; font-size: 15px; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* SECTIONS */
+.section { padding: 80px 2rem; }
+.section.cream { background: var(--off-white); }
+.section.dark { background: var(--navy); color: var(--white); }
+.section-inner { max-width: 860px; margin: 0 auto; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 12px; display: block; }
+.section.dark .eyebrow { color: var(--accent); }
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -1px; line-height: 1.12; margin-bottom: 14px; }
+.section.dark .section-title { color: var(--white); }
+.section-sub { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 620px; }
+.section.dark .section-sub { color: rgba(255,255,255,0.62); }
+
+/* WHAT YOU'RE GETTING — 3-card grid */
+.deliverable-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.deliverable-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.deliverable-card:hover { border-color: var(--brand-light); box-shadow: var(--shadow); }
+.deliverable-icon {
+  width: 48px; height: 48px;
+  background: rgba(29,111,219,0.08);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+.deliverable-icon svg { width: 22px; height: 22px; stroke: var(--brand); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.deliverable-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; display: block; }
+.deliverable-card h3 { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 10px; letter-spacing: -0.3px; }
+.deliverable-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+@media (max-width: 720px) { .deliverable-grid { grid-template-columns: 1fr; } }
+
+/* PROCESS STEPS */
+.steps-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+.step-row { display: grid; grid-template-columns: 64px 1fr; gap: 0; position: relative; }
+.step-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 31px; top: 64px; bottom: -8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  opacity: 0.3;
+}
+.step-num-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+.step-circle {
+  width: 44px; height: 44px;
+  background: var(--navy);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: var(--accent);
+  flex-shrink: 0;
+}
+.step-body { padding: 4px 0 48px 24px; }
+.step-eta {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(74,144,226,0.10);
+  padding: 3px 10px; border-radius: 100px;
+  margin-bottom: 10px;
+}
+.step-body h3 { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.4px; margin-bottom: 8px; }
+.step-body p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* WHAT MAKES THIS DIFFERENT */
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.diff-copy p { font-size: 16px; color: rgba(255,255,255,0.68); line-height: 1.7; margin-top: 14px; }
+.diff-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+}
+.diff-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+.diff-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.diff-row:last-child { border-bottom: none; padding-bottom: 0; }
+.diff-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.diff-row span { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.55; }
+.diff-row strong { color: var(--white); display: block; font-size: 14.5px; font-weight: 700; margin-bottom: 2px; }
+@media (max-width: 720px) { .diff-grid { grid-template-columns: 1fr; } }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 40px 2rem 24px; }
+.footer-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { color: var(--white); font-weight: 800; font-size: 15px; }
+.footer-brand span { color: var(--accent); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color .2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { max-width: 860px; margin: 24px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.22); text-align: center; }
+
+/* MOBILE */
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  .nav { padding: 0 1rem; height: 54px; }
+  .hero { padding: 56px 1.25rem 48px; }
+  .hero h1 { font-size: clamp(1.7rem, 7vw, 2.4rem); letter-spacing: -0.8px; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 28px; }
+  .confirm-badge { width: 64px; height: 64px; margin-bottom: 20px; }
+  .confirm-badge svg { width: 28px; height: 28px; }
+  .confirm-pill { padding: 8px 16px; font-size: 13px; }
+  .section { padding: 56px 1.25rem; }
+  .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .section-sub { font-size: 15px; }
+  .deliverable-grid { gap: 14px; margin-top: 28px; }
+  .deliverable-card { padding: 22px 18px; }
+  .steps-list { margin-top: 32px; }
+  .step-row { grid-template-columns: 48px 1fr; }
+  .step-circle { width: 38px; height: 38px; font-size: 14px; }
+  .step-body { padding: 2px 0 36px 18px; }
+  .step-body h3 { font-size: 16.5px; }
+  .step-row:not(:last-child)::after { left: 23px; top: 58px; }
+  .diff-grid { grid-template-columns: 1fr; gap: 28px; }
+  .diff-card { padding: 22px 18px; }
+  .footer { padding: 32px 1.25rem 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-links { flex-wrap: wrap; gap: 12px; }
+}
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.55rem; }
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '731853659590910');
+fbq('track', 'PageView');
+fbq('track', 'CompleteRegistration', {content_name: 'FKI AI Blueprint Application'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">Advaita <span>AI</span></span>
+  <span class="nav-tag">Application Received</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="confirm-badge">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <h1>Your application is in<br><span>the right hands.</span></h1>
+    <p class="hero-sub">
+      Your Advaita AI application is under review. We're mapping out what implementation would look like for your specific business. If we see a strong fit, you'll hear from us within 48 hours.
+    </p>
+    <div class="confirm-pill">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(74,144,226,0.6);animation:pulse 2s infinite;flex-shrink:0;"></div>
+      <strong>Under review</strong>&nbsp;&mdash;&nbsp;48-hour response window
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS FROM HERE -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">What Happens From Here</span>
+    <h2 class="section-title">Three steps. No pressure.</h2>
+    <p class="section-sub">You've already seen your blueprint. Here's what comes next now that you've applied to have it implemented.</p>
+
+    <div class="steps-list">
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">1</div></div>
+        <div class="step-body">
+          <span class="step-eta">Within 1–2 business days</span>
+          <h3>Our team reviews your qualifier score</h3>
+          <p>We look at your blueprint results, your qualifier score, and your business numbers to confirm the fit makes sense — for you and for us. If anything needs clarification, we'll reach out before moving forward.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">2</div></div>
+        <div class="step-body">
+          <span class="step-eta">We reach out</span>
+          <h3>You'll hear from the Advaita AI team</h3>
+          <p>If the fit looks strong, we'll send you a message with next steps. No cold pitch. We'll reference your specific blueprint and what we'd build first. You'll know exactly what you're signing up for before any decision is made.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">3</div></div>
+        <div class="step-body">
+          <span class="step-eta">Optional — your call</span>
+          <h3>Strategy session with the Advaita AI team</h3>
+          <p>If you want to talk through the implementation plan in detail — timeline, AI stack, team integration — we'll set up a strategy session. No obligation. Most clients get 80% of the value from the blueprint alone.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS IS DIFFERENT -->
+<section class="section dark">
+  <div class="section-inner">
+    <div class="diff-grid">
+      <div class="diff-copy">
+        <span class="eyebrow">Why Advaita AI Is Different</span>
+        <h2 class="section-title">Generic AI advice is everywhere. This isn't that.</h2>
+        <p>Every consultant, agency, and online course will tell you to "use AI to save time." None of them have seen your business, your tools, or your team. Advaita AI builds from your actual answers — so the blueprint you receive reflects what's actually true about your operation, not a hypothetical one.</p>
+        <p>Our team has implemented AI systems in franchise operations, service businesses, and sales organizations. The prompts and roadmap you receive are field-tested — not generated from theory.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-card-title">What makes this different</div>
+        <div class="diff-row">
+          <div class="diff-icon">🤖</div>
+          <span><strong>Built from your answers</strong>Every element of your blueprint is generated from your specific application — not pulled from a library of generic templates.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">⚡</div>
+          <span><strong>Deployable from day one</strong>The three starter prompts work with tools you already have. No new subscriptions, no IT projects, no 6-month rollout required.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">📊</div>
+          <span><strong>ROI calculated for your business</strong>Your blueprint includes time savings and revenue impact projections based on your actual team size and current hours — not industry averages.</span>
+        </div>
+        <div class="diff-row">
+          <div class="diff-icon">$0</div>
+          <span><strong>Free. No catch.</strong>Your blueprint, podcast, and prompts are delivered at no cost. The only ask is that you read it with an open mind.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand">Advaita <span>AI</span></span>
+    <div class="footer-links">
+      <a href="mailto:bennett@franchiseki.com">Questions? Contact Us</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Advaita AI · Powered by Franchise KI · bennett@franchiseki.com · Free, always.
+  </div>
+</footer>
+
+</body>
+</html>

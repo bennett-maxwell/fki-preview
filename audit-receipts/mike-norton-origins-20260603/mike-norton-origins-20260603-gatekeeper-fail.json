@@ -181,7 +181,10 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "AUDIT FAIL (mike-norton-origins-20260603): audit receipt not PASS: None"
+        "[FAIL] mike-norton-origins-20260603: 14/15 (93%)  RED-LINE FAIL: ['D10-01_financial_realism_RL'] (SyntaxError: invalid syntax)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -192,28 +195,22 @@
         "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
       ],
       "name": "financial_realism",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [],
-      "stdout_tail": [
-        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
-        "------------------------------------------------------------------------------",
-        "mike-norton-origins-20260603 crm_software          1200        0  PASS",
-        "------------------------------------------------------------------------------",
-        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
-      ]
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [
+        "File \"/Users/temp/fki-preview/financial-realism-check.py\", line 1",
+        "    e2xlbihkN18xOCl9IG5vbi1CMkIgYmx1ZXByaW50KHMpIHNob3cgdGhlIExpbmtlZEluIGxldmVyICIKICAgICAgICAgICAgICBmIihzdGFnZWQgZm9yIHRlbXBsYXRlIGdhdGUpOiB7c29ydGVkKGQ3XzE4KX0iKQogICAgaWYgY2xvbmVzOgogICAgICAgIHByaW50KGYiQ1JPU1MtSU5EVVNUUlkgQ0xPTkUgR1JPVVBTOiB7WyAodCwgc29ydGVkKGluZHMpKSBmb3IgdCwocyxpbmRzKSBpbiBjbG9uZXMuaXRlbXMoKSBdfSIpCiAgICBzeXMuZXhpdCgwIGlmIG5wYXNzID09IGxlbihyZXN1bHRzKSBlbHNlIDEpCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgbWFpbigpCg==",
+        "                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^",
+        "SyntaxError: invalid syntax"
+      ],
+      "stdout_tail": []
     },
     {
-      "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html"
-      ],
       "name": "d9_render_integrity",
       "pass": false,
-      "returncode": 2,
+      "returncode": 127,
       "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+        "missing /Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
       ],
       "stdout_tail": []
     },
@@ -261,6 +258,7 @@
   "diamond": "FAIL",
   "failures": [
     "run-audit.py failed",
+    "financial-realism-check.py failed",
     "D9 render-integrity audit failed or missing"
   ],
   "html_path": "/Users/temp/fki-preview/blueprints/mike-norton-origins-20260603.html",
@@ -269,5 +267,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/mike-norton-origins-20260603",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-05T00:30:03.164271+00:00"
+  "ts": "2026-06-05T15:21:41.942949+00:00"
 }

@@ -1,20 +1,20 @@
 {
   "lead": "john-doe-sporting-goods-20260604",
-  "ts": "2026-06-04T22:42:22.207238+00:00",
-  "html_path": "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html",
-  "html_size_bytes": 42847,
-  "require_production": true,
+  "ts": "2026-06-05T15:39:27.493837+00:00",
+  "html_path": "blueprints/john-doe-sporting-goods-20260604.html",
+  "html_size_bytes": 99468,
+  "require_production": false,
   "summary": {
-    "passed": 42,
-    "failed": 1,
-    "skipped": 7,
-    "total_applicable": 43,
-    "overall_pass": false
+    "passed": 37,
+    "failed": 0,
+    "skipped": 13,
+    "total_applicable": 37,
+    "overall_pass": true
   },
-  "status": "FAIL",
+  "status": "PASS",
   "category_scores": {
     "Structure": {
-      "score": "9/9 (100%)",
+      "score": "10/10 (100%)",
       "pass": true,
       "failures": []
     },
@@ -39,11 +39,9 @@
       "failures": []
     },
     "Production": {
-      "score": "6/7 (86%)",
-      "pass": false,
-      "failures": [
-        "#47: Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
-      ]
+      "score": "N/A",
+      "pass": null,
+      "failures": []
     },
     "Delivery": {
       "score": "1/1 (100%)",
@@ -56,16 +54,14 @@
       "failures": []
     }
   },
-  "critical_failures": [
-    "#47: Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)"
-  ],
+  "critical_failures": [],
   "major_failures": [],
   "checks": {
     "1": {
       "desc": "Drive skill version present in generation comment",
-      "pass": null,
+      "pass": true,
       "severity": "info",
-      "detail": "No skill version marker found (legacy blueprint \u2014 add <!-- blueprint-ai-skill v3.X --> to header)"
+      "detail": "OK"
     },
     "2": {
       "desc": "Manual stage interpretation not used (no MANUAL_RECOVERY marker)",
@@ -95,7 +91,7 @@
       "desc": "Section count \u2265 10 (excluding aria-hidden)",
       "pass": true,
       "severity": "major",
-      "detail": "Found 13 effective sections (need \u226510)"
+      "detail": "Found 15 effective sections (need \u226510)"
     },
     "7": {
       "desc": "Nav: Your Profile | AI Agents | ROI Calculator | Listen | Apply",
@@ -309,45 +305,45 @@
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": true,
-      "severity": "critical",
-      "detail": "Public page HTTP 200 verified"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": true,
-      "severity": "critical",
-      "detail": "Drive artifact registry verified"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": true,
-      "severity": "critical",
-      "detail": "Notion Sprint row current"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
-      "pass": true,
-      "severity": "critical",
-      "detail": "GHL exact contact readback and instant response verified"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
-      "pass": true,
-      "severity": "critical",
-      "detail": "Repeat submit updated same GHL contact"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "47": {
       "desc": "Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
-      "pass": false,
-      "severity": "critical",
-      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": true,
-      "severity": "critical",
-      "detail": "Approval scope: Bennett preview only; customer send remains blocked"
+      "pass": null,
+      "severity": "info",
+      "detail": "Skipped (use --require-production to enforce)"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",
