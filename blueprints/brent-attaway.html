@@ -486,19 +486,19 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span><span class="calc-slider-val" id="lbl-contract">$2,388</span></div>
-          <input type="range" class="calc-slider" id="sl-contract" min="1200" max="10000" step="300" value="1200" oninput="updateLabel('contract'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-contract" min="1200" max="10000" step="300" value="1200" oninput="calcTouched=true; updateLabel('contract'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="calcTouched=true; updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">10%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="10" oninput="calcTouched=true; updateLabel('rate'); calcROI();">
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="calcTouched=true; updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -899,14 +899,16 @@ If any answer is N: revise that section before sending.
 
 <script>
   const PRESETS = {
-    conservative: { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 0.5 },
-    expected:     { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.0 },
-    stretch:      { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.3 }
+    conservative: { contract: 2388, leads: 10, rate: 10, hours: 15, lift: 0.5 },
+    expected:     { contract: 2388, leads: 10, rate: 10, hours: 15, lift: 1.0 },
+    stretch:      { contract: 2388, leads: 10, rate: 10, hours: 15, lift: 1.3 }
   };
+  let calcTouched = false;
   let currentLift = 1.0;
 
   function setPreset(name, evt) {
     const p = PRESETS[name];
+    calcTouched = true;
     document.getElementById('sl-contract').value = p.contract;
     document.getElementById('sl-leads').value = p.leads;
     document.getElementById('sl-rate').value = p.rate;
@@ -944,7 +946,7 @@ If any answer is N: revise that section before sending.
   }
 
   ['contract','leads','rate','hours'].forEach(updateLabel);
-  calcROI();
+  // Do not auto-populate ROI on load; calculator fills only after user interaction.
 
   function togglePrompt(header) {
     const body = header.nextElementSibling;
