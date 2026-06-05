@@ -297,3 +297,43 @@ Here's the honest math from your own numbers — about 30 inquiries a month, an 
 ## SECTION 12 — About Franchise KI & Advaita
 
 We build and run AI systems for owner-led businesses — the same way we built our own. You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.
+
+---
+
+## SECTION 13 — What Happens in the First 30 Days
+
+If you move forward, here's exactly what the first 30 days look like for Iron Horse Armory:
+
+**Days 1–3 — Onboarding.** We spend this time learning how you work. Your intake flow, your communication style, your most frequent customer questions, the edge cases that come up. Nothing gets built until we understand how Iron Horse Armory actually runs.
+
+**Days 4–10 — First automations live.** The speed-to-lead agent and product inquiry responder go live first. You and your team see the first outputs. Give feedback. The system adjusts to match your voice exactly.
+
+**Day 30 — System running your daily rhythm.** Every inquiry handled. Every follow-up sent. Your team spending time on the work that requires a human — not on inboxes and reminders.
+
+**Months 2–3 — Light calibration, minimal input.** The system knows your patterns. Your team uses it the way they use their phone — naturally, without thinking.
+
+**After Month 3 — Fully integrated.** The system runs Iron Horse Armory's customer communication on autopilot. You're focused on what only you can do.
+
+---
+
+## SECTION 14 — Why Now Is the Right Time
+
+The firearms retail market is competitive. The businesses that win in 2026 and beyond won't be the ones with the most inventory or the lowest prices — they'll be the ones that are fastest, most consistent, and easiest to do business with.
+
+AI gives Iron Horse Armory that edge permanently. Not because the technology is complicated, but because your competitors haven't built it yet. The window to gain ground is now — before consistent AI-powered communication becomes the industry standard.
+
+You're already ahead of most. Your team is strong. Your reputation is solid. What we're adding is the infrastructure that makes sure none of that gets lost to a missed email or a slow follow-up.
+
+---
+
+## SECTION 15 — Two Paths Forward
+
+**Path 1 — Use the prompts from Section 7 right now.** Start with ChatGPT or Claude. See what happens to your response time and customer experience within the first week. This is zero-risk, zero-cost, and available today.
+
+**Path 2 — Partner with Franchise KI.** We build the full system for Iron Horse Armory — the six agents, the 30-day onboarding, the ongoing calibration. Everything integrated with your tools, running without your team managing it.
+
+If Path 2 sounds like the right fit for where you are, the next step is an application:
+
+**Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html**
+
+This is an application, not a sales call. We want to understand your business before we recommend anything. Every application is read personally by Bennett.
