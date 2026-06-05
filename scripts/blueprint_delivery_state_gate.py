@@ -147,10 +147,22 @@ def main() -> int:
         and email_path.exists()
     )
 
+    current_email_sha = file_sha256(email_path)
+    preview_sha_ok = bool(
+        bennett_preview_data.get("sha_match") is True
+        or (
+            current_email_sha
+            and (
+                bennett_preview_data.get("email_sha256") == current_email_sha
+                or bennett_preview_data.get("repo_email_sha256") == current_email_sha
+            )
+        )
+        or (public_sha and bennett_preview_data.get("artifact_sha256") == public_sha)
+    )
     bennett_preview_sent = bool(
         bennett_preview
         and receipt_has_message_id(bennett_preview_data)
-        and (bennett_preview_data.get("sha_match") is True or bennett_preview_data.get("artifact_sha256") == public_sha)
+        and preview_sha_ok
     )
     external_customer_sent = bool(
         external_send
