@@ -332,11 +332,47 @@
   },
   "avg_customer_value": 2500,
   "ai_agents": [
-    "Speed-to-Lead Agent",
-    "Client Onboarding Agent",
-    "Proposal Generator",
-    "Content Production Agent",
-    "Client Health Monitor",
-    "Admin Automation Agent"
+    {
+      "name": "Emergency Dispatch Agent",
+      "desc": "When a homeowner calls with a power outage, tripped breaker, or sparking outlet, this agent captures the inquiry via web form or text, assesses urgency, and immediately dispatches the nearest available technician with a pre-filled job ticket.",
+      "prompt": "You are an emergency dispatch agent for Billy Bob Electric. When an emergency electrical inquiry arrives, assess urgency (sparking, no power, burning smell = P1), look up available technicians, create a dispatch ticket with job details and customer address, and send an ETA text to the customer within 2 minutes.",
+      "result": "Emergency jobs dispatched in under 2 minutes \u2014 before the customer calls a competitor.",
+      "time": "5 minutes"
+    },
+    {
+      "name": "Quote Follow-Up Agent",
+      "desc": "Tracks every open estimate and automatically follows up at 24h, 72h, and 7 days with a personalized message referencing the specific job (panel upgrade, EV charger, etc.) and offering to answer questions or schedule.",
+      "prompt": "You are a quote follow-up agent for Billy Bob Electric. Review open estimates in the CRM, identify which are past 24h/72h/7d milestones, and send personalized follow-up texts/emails referencing the specific job type and estimated cost. Offer to schedule or answer questions. Update CRM on each touchpoint.",
+      "result": "Converts 20-30% more estimates into booked jobs without any staff effort.",
+      "time": "3 minutes"
+    },
+    {
+      "name": "Technician Scheduling Agent",
+      "desc": "Matches new service requests to available technicians based on location, job type, and current workload. Automatically sends appointment confirmations and 1-hour-ahead reminders to customers.",
+      "prompt": "You are a technician scheduling agent for Billy Bob Electric. When a new job is booked, check technician calendars and proximity, assign the best match, send a calendar invite to the tech, and text the customer a confirmation with tech name, arrival window, and a reminder 1 hour before.",
+      "result": "Zero scheduling gaps \u2014 every available slot filled, zero missed appointments.",
+      "time": "4 minutes"
+    },
+    {
+      "name": "Permit & Inspection Prep Agent",
+      "desc": "For panel upgrades, EV charger installs, and new construction work that requires permits, this agent prepares the permit application package and schedules the inspection appointment with the local building department.",
+      "prompt": "You are a permit preparation agent for Billy Bob Electric. For jobs requiring permits (panel upgrades, new circuits, EV chargers), gather job details from the work order, pre-fill the permit application for the relevant jurisdiction, attach required documentation, and queue it for submission. Schedule inspection as soon as permit is issued.",
+      "result": "Permits filed same day \u2014 no more week-long delays waiting for paperwork.",
+      "time": "10 minutes"
+    },
+    {
+      "name": "Maintenance Plan Agent",
+      "desc": "Identifies customers who have not had an electrical safety inspection in 2+ years and sends personalized outreach offering an annual electrical health check \u2014 generating recurring revenue without any new marketing spend.",
+      "prompt": "You are a maintenance plan agent for Billy Bob Electric. Query the CRM for customers with no service in 18+ months, segment by home age and prior job type, and send a personalized safety inspection offer referencing their last service. Log all outreach and responses. Offer scheduling directly in the message.",
+      "result": "Reactivates dormant customers \u2014 15-25% response rate, zero ad spend.",
+      "time": "5 minutes"
+    },
+    {
+      "name": "Review & Referral Agent",
+      "desc": "Sends a review request 2 hours after job completion with a direct Google review link. For customers who leave 5-star reviews, automatically sends a referral discount offer for their next service or for a friend.",
+      "prompt": "You are a review and referral agent for Billy Bob Electric. After a job is marked complete, wait 2 hours and send a personalized thank-you text with a direct Google review link. If the customer posts a 4-5 star review, send a referral offer within 24 hours. Log all interactions and referral conversions in CRM.",
+      "result": "Doubles Google review volume \u2014 referrals generate 2-3 jobs per month.",
+      "time": "3 minutes"
+    }
   ]
 }

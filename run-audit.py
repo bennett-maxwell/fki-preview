@@ -30,6 +30,72 @@ def file_sha256(path):
 def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
+def _get_mp3_duration_secs(path):
+    """Return duration in seconds using ffprobe → mutagen → M4A atom → afinfo fallback chain."""
+    # Try ffprobe with explicit Homebrew path first
+    for ffprobe_bin in ["/opt/homebrew/bin/ffprobe", "/usr/local/bin/ffprobe", "ffprobe"]:
+        try:
+            out = subprocess.run(
+                [ffprobe_bin, "-v", "error", "-show_entries", "format=duration",
+                 "-of", "csv=p=0", path],
+                capture_output=True, text=True, timeout=30).stdout.strip()
+            if out:
+                return int(float(out))
+        except Exception:
+            continue
+    # mutagen fallback (works for real ID3-tagged MP3s)
+    try:
+        from mutagen.mp3 import MP3
+        return int(MP3(path).info.length)
+    except Exception:
+        pass
+    # M4A/MP4 atom parser fallback (for NotebookLM exports wrongly named .mp3)
+    try:
+        import struct as _struct
+        with open(path, 'rb') as fh:
+            data = fh.read(200000)
+        def _find_mvhd(buf, start, end):
+            i = start
+            while i < end - 8 and i < len(buf) - 8:
+                try:
+                    sz = _struct.unpack('>I', buf[i:i+4])[0]
+                except Exception:
+                    break
+                nm = buf[i+4:i+8]
+                if nm == b'mvhd':
+                    return i
+                if nm in (b'moov', b'trak', b'mdia', b'minf', b'stbl'):
+                    r = _find_mvhd(buf, i+8, min(i+sz, end))
+                    if r is not None:
+                        return r
+                if sz == 0 or sz < 8:
+                    break
+                i += sz
+            return None
+        mvhd = _find_mvhd(data, 0, len(data))
+        if mvhd is not None:
+            ver = data[mvhd+8]
+            if ver == 0:
+                ts = _struct.unpack('>I', data[mvhd+20:mvhd+24])[0]
+                dur = _struct.unpack('>I', data[mvhd+24:mvhd+28])[0]
+            else:
+                ts = _struct.unpack('>I', data[mvhd+28:mvhd+32])[0]
+                dur = _struct.unpack('>Q', data[mvhd+32:mvhd+40])[0]
+            if ts:
+                return int(dur / ts)
+    except Exception:
+        pass
+    # afinfo fallback (macOS built-in, works for native audio formats)
+    try:
+        out = subprocess.run(["afinfo", path], capture_output=True, text=True, timeout=30).stdout
+        m = re.search(r"estimated duration:\s*([\d.]+)\s*sec", out)
+        if m:
+            return int(float(m.group(1)))
+    except Exception:
+        pass
+    return None
+
+
 def podcast_duration_gate(slug):
     """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
     NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
@@ -39,14 +105,9 @@ def podcast_duration_gate(slug):
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
-    try:
-        out = subprocess.run(
-            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
-             "-of", "csv=p=0", path],
-            capture_output=True, text=True, timeout=30).stdout.strip()
-        secs = int(float(out))
-    except Exception as e:
-        return False, f"ffprobe failed: {e}"
+    secs = _get_mp3_duration_secs(path)
+    if secs is None:
+        return False, "could not read duration (ffprobe/mutagen/afinfo all failed)"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < MIN_SEC:
         return False, f"too short {mmss} (min 16:00) — re-cut deeper"

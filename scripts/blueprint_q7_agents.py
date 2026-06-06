@@ -10,6 +10,8 @@ def clean_names(names):
     out=[]; seen=set()
     for name in names:
         text = re.sub(r'<[^>]+>', '', str(name or '')).replace('&amp;', '&').replace('&mdash;', '—').strip()
+        # Strip "Agent #N: " prefix added by restaurant patch and clone script
+        text = re.sub(r'^Agent\s*#?\d+:\s*', '', text, flags=re.I)
         key = re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
         if text and key not in seen:
             seen.add(key); out.append(text)
@@ -22,6 +24,9 @@ def extract(profile_path: Path, slug: str, limit: int = 6):
     if html_path.exists():
         html=html_path.read_text(encoding='utf-8', errors='replace')
         names.extend(re.findall(r'<div class=["\']agent-name["\']>(.*?)</div>', html, flags=re.I|re.S))
+        # Fallback for older blueprint format: extract "Agent #N: Name" heading patterns
+        if not names:
+            names.extend(re.findall(r'Agent #\d+:\s*([^<\n&]+)', html))
     for key in ('agents','ai_agents','agent_cards'):
         val=profile.get(key)
         if isinstance(val, list):

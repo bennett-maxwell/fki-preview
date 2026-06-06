@@ -61,6 +61,8 @@ def clean_agent_list(agents: list[str]) -> list[str]:
     clean=[]; seen=set()
     for a in agents:
         txt=re.sub(r'<[^>]+>', '', str(a)).replace('&amp;', '&').replace('&mdash;', '—').strip()
+        # Strip "Agent #N: " prefix added by restaurant patch and clone script
+        txt=re.sub(r'^Agent\s*#?\d+:\s*', '', txt, flags=re.I)
         if txt and norm(txt) not in seen:
             seen.add(norm(txt)); clean.append(txt)
     return clean

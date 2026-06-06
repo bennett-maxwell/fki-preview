@@ -353,7 +353,10 @@ if ai_agents and len(ai_agents) > 0:
     start_idx = html.find(agents_start_marker)
     end_idx = html.find(agents_end_marker)
 
-    if start_idx != -1 and end_idx != -1:
+    # Only inject if agents are dicts (have name/desc/prompt fields)
+    dict_agents = [a for a in ai_agents if isinstance(a, dict)]
+    if start_idx != -1 and end_idx != -1 and dict_agents:
+        ai_agents = dict_agents
         agent_cards_html = ""
         for i, agent in enumerate(ai_agents[:6], 1):
             a_name = agent.get('name', f'AI Agent #{i}')
@@ -365,15 +368,13 @@ if ai_agents and len(ai_agents) > 0:
                 .replace('&', '&amp;').replace('<', '&lt;')
                 .replace('>', '&gt;').replace('"', '&quot;'))
 
-            agent_cards_html += f'''    <!-- Agent {i} -->
-    <div class="agent-card">
-      <h3>Agent #{i}: {a_name}</h3>
-      <p class="agent-desc">{a_desc}</p>
-      <div class="agent-prompt">{a_prompt_escaped}</div>
-      <div class="agent-result">What this does: {a_result}</div>
-      <div class="agent-time">Setup time: ~{a_time}</div>
-    </div>
-
+            agent_cards_html += f'''
+        <div class="agent-card">
+          <div class="agent-icon">{i}</div>
+          <div class="agent-name">Agent #{i}: {a_name}</div>
+          <div class="agent-desc">{a_desc}<br><br><strong>Prompt:</strong> {a_prompt_escaped}</div>
+          <div class="agent-outcome">{a_result} Setup time: ~{a_time}</div>
+        </div>
 '''
         html = html[:start_idx] + agent_cards_html + html[end_idx:]
 
@@ -396,6 +397,34 @@ html = html.replace('<div class="icon">&#128176;</div>', '<div class="icon" styl
 html = html.replace('<div class="icon">&#9201;</div>', '<div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">T</div>')
 html = html.replace('<div class="icon">&#128161;</div>', '<div class="icon" style="font-size:20px;font-weight:800;color:var(--accent);">%</div>')
 html = html.replace('&#8594;', '-->').replace('&#128202;', '#').replace('&#10003;', 'OK')
+
+# ── Replace template prompt2/prompt3 pre content with profile-specific prompts ──
+# The TEMPLATE has generic SaaS copy in prompt2/prompt3 pre blocks. For any lead with
+# profile['prompts'] list, replace those blocks with the lead's actual prompt content.
+profile_prompts = profile.get('prompts', []) or []
+for prompt_idx in range(1, 3):  # Replace prompt2 and prompt3
+    if prompt_idx < len(profile_prompts):
+        pp = profile_prompts[prompt_idx]
+        if isinstance(pp, dict):
+            pre_content = pp.get('pre', '') or pp.get('content', '') or ''
+            title = pp.get('title', f'Agent {prompt_idx + 1}')
+            subtitle = pp.get('subtitle', f'Your AI agent #{prompt_idx + 1}')
+        else:
+            pre_content = str(pp)
+            title = f'Agent {prompt_idx + 1}'
+            subtitle = f'Your AI agent #{prompt_idx + 1}'
+        if pre_content:
+            pre_id = f'prompt{prompt_idx + 1}'
+            # Directly replace just the <pre id="promptN"> content (the card div is too far away)
+            pre_pat = re.compile(
+                rf'(<pre id="{re.escape(pre_id)}"[^>]*>)([\s\S]*?)(</pre>)',
+                re.M
+            )
+            def make_replacer(content):
+                def _rep(m):
+                    return m.group(1) + content + m.group(3)
+                return _rep
+            html = pre_pat.sub(make_replacer(pre_content), html, count=1)
 
 # ── Ensure 3/7/30 cadence markers ──
 if 'Our 3-day, 7-day, 30-day onboarding cadence' not in html:
