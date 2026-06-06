@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-01T23:06:20Z | Lead: Dave Wood | Industry: fast-casual restaurant franchise -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-06T00:11:45Z | Lead: Dave Wood | Industry: fast-casual restaurant franchise -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/dave-wood.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>Dave Wood | AI Advantage Roadmap — Mahana Fresh</title>
+  <title>Dave Wood AI Blueprint | Mahana Fresh</title>
   <style>
     :root {
       /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
@@ -20,7 +20,7 @@
       --steel:        #6E6E73;
       --neutral-bg:   #F5F5F7;
       --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
-      --accent-alias: #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
       --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
       --white:        #ffffff;
       --text:         #1D1D1F;
@@ -164,6 +164,10 @@
     .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
     .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
+    .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
     @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
     .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
@@ -255,6 +259,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -268,14 +307,14 @@
     <li><a href="#agents">AI Agents</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
     <li><a href="#listen">Listen</a></li>
-    <li><a href="#apply">Apply</a></li>
+    <li><a href="#apply">Qualify</a></li>
   </ul>
 </nav>
 
 <section class="hero" id="hero">
   <div class="hero-badge">Confidential — Prepared for Dave Wood</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for Mahana Fresh</h1>
-  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the 100% gluten-free fast-casual franchise with 8 locations open and 12 in development — and how to get there in 30 days.</p>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the CRM platform serving 675+ home service businesses — and how to get there in 30 days.</p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div>
     <div class="hero-divider"></div>
@@ -283,7 +322,7 @@
     <div class="hero-divider"></div>
     <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Mahana Fresh Data</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Manager</span></div>
+    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Teammate</span></div>
   </div>
 </section>
 
@@ -291,33 +330,31 @@
   <div class="container">
     <p class="section-label">Your Business Profile</p>
     <h2 class="section-title">Where Mahana Fresh Stands Today</h2>
-    <p class="section-sub">Built from public franchise data and a structured review of mahanafresh.com. This is the baseline we used to design your AI system.</p>
+    <p class="section-sub">Built from your intake answers and a structured review of mahanafresh.com. This is the baseline we used to design your AI system.</p>
     <div class="snapshot-grid">
-      <div class="snapshot-card"><div class="snapshot-val">8 Open</div><div class="snapshot-key">Franchise Locations</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">12 More</div><div class="snapshot-key">In Development</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Franchise</div><div class="snapshot-key">Business Type</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">2019</div><div class="snapshot-key">Franchising Since</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">100%</div><div class="snapshot-key">Gluten-Free Menu</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">$212K&ndash;759K</div><div class="snapshot-key">Investment Range</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">5 Streams</div><div class="snapshot-key">Revenue Channels</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Bowls + Catering</div><div class="snapshot-key">Core Offering</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$250K&ndash;500K</div><div class="snapshot-key">Annual Revenue</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">SaaS Agency</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Not specified in form (LinkedIn DM lead)</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">675+</div><div class="snapshot-key">Active Customers</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$199/mo</div><div class="snapshot-key">Pro Edition Pricing</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Team of 3</div><div class="snapshot-key">Core Operators</div></div>
     </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">Mahana Fresh is a fast-casual, build-your-own bowl and wrap concept &mdash; 100% gluten-free, with no fryers, microwaves, or freezers in the kitchen. The brand was founded by a former Domino's franchisee who ran roughly 20 units over 30 years, and now counts NBA champion Kyle Kuzma among its franchisees and investors. Revenue flows through five channels: dine-in, takeout, catering, grab-n-go, and third-party delivery. Brand voice is calibrated from mahanafresh.com and your tagline ("We choose to look on the bright side of everything&hellip;helping people eat well and feel better about themselves.") &mdash; 90% accurate on Day 1, built from an intel audit before launch.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active Not specified in form (LinkedIn DM lead) power user with custom integrations — ready to scale with dedicated AI agents. Current time recovery opportunities: Marketing Content and Admin Work across 675+ accounts. Brand voice is calibrated from mahanafresh.com, your tagline ("All-In-One CRM Built for Home Service Hustlers Powered By A.I."), and the language your existing customers use on the site — 90% accurate on Day 1, built from intel audit before launch.</p>
   </div>
 </section>
 
 <section class="section" id="results">
   <div class="container">
-    <p class="section-label">What Your Industry Is Already Doing</p>
-    <h2 class="section-title">Fast-Casual Franchises Like Yours Are Already Running on AI</h2>
-    <p class="section-sub">These are the exact moves multi-unit restaurant and franchise brands are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Mahana Fresh runs them before the next concept opening down the street does.</p>
+    <p class="section-label">What Restaurants Are Already Doing</p>
+    <h2 class="section-title">Fast-Casual Operators Are Using AI Around the Rush</h2>
+    <p class="section-sub">Dave, the strongest opportunity for Mahana Fresh is not replacing your team. It is giving managers an AI layer that handles response speed, follow-up, and reporting while the stores keep serving guests.</p>
     <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every franchise inquiry in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> growing franchise brands now put an AI speed-to-lead agent on every franchise inquiry and catering request, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first brand to respond wins the clear majority of qualified candidates &mdash; they capture prospects your slower competitors never even reach. <strong>How I deliver it for Mahana Fresh:</strong> a speed-to-lead agent that answers every franchise and catering inquiry in under 60 seconds, day or night, shares the $212K&ndash;$759K investment range and territory availability, and routes it to the right next step. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They turn one catering inquiry into a booked event in minutes</div><div class="gap-desc"><strong>What they're doing:</strong> catering-driven concepts hand proposal creation to an AI agent &mdash; menu customization, per-head pricing, dietary accommodations, and delivery logistics. <strong>How it helps them:</strong> proposals go out the same hour the lead comes in, while the prospect is still deciding &mdash; so far more events get booked. <strong>How I deliver it for Mahana Fresh:</strong> a catering proposal agent that builds a branded, fully gluten-free proposal from event details in minutes, not the better part of an hour. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They see every location's numbers in one daily summary</div><div class="gap-desc"><strong>What they're doing:</strong> multi-unit operators run an AI reporting agent that pulls sales, labor, and review data from every store into one executive summary each morning. <strong>How it helps them:</strong> leadership spots a struggling location days earlier &mdash; no waiting on end-of-week spreadsheets. <strong>How I deliver it for Mahana Fresh:</strong> a reporting agent that aggregates daily sales, labor cost, review scores, and catering revenue across all 8 locations into a single morning briefing. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They answer every guest review in one consistent brand voice</div><div class="gap-desc"><strong>What they're doing:</strong> restaurant groups run an AI review-response agent across every location to reply to Google and Yelp reviews quickly and on-brand. <strong>How it helps them:</strong> guests feel heard, ratings climb, and a service issue gets a recovery offer before it spreads. <strong>How I deliver it for Mahana Fresh:</strong> a review-response agent that drafts a warm, on-brand reply to every review across all 8 locations &mdash; reinforcing your gluten-free, feel-good positioning. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Reputation</span></div></div>
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Catering response</div><div class="gap-desc">AI answers high-value catering inquiries quickly, captures date, headcount, budget, pickup/delivery, and dietary notes, then routes the next action.</div><span class="gap-tag revenue">Revenue Capture</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Guest recovery</div><div class="gap-desc">AI reviews feedback and drafts owner-approved responses before guest frustration becomes a public reputation problem.</div><span class="gap-tag efficiency">Reputation</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Manager reporting</div><div class="gap-desc">AI turns scattered shift notes into one owner-ready operating brief across every location.</div><span class="gap-tag efficiency">Owner Visibility</span></div></div>
     </div>
-    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside brands that compete for the same guests and the same franchise candidates you do. The ones who move first do not just save time &mdash; they win the prospects everyone else was too slow to answer. Mahana Fresh can be the brand they are watching, or the one they leave behind.</p>
   </div>
 </section>
 
@@ -325,25 +362,25 @@
   <div class="container">
     <p class="section-label">Where the Value Comes From</p>
     <h2 class="section-title">Three Ways AI Moves the Needle for Mahana Fresh</h2>
-    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or more consistency across every location.</p>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost per customer served.</p>
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <div class="pillar-title">Increase Revenue</div>
-        <div class="pillar-metric">More Bookings</div>
-        <div class="pillar-sub">Faster franchise and catering response captures prospects competitors lose. AI proposals book events in hours instead of days. Higher conversion at every stage of the pipeline.</div>
+        <div class="pillar-metric">More Closes</div>
+        <div class="pillar-sub">Faster lead response captures more Mahana Fresh subscribers at $199/mo. AI proposals close deals in hours instead of days. Higher conversion at every pipeline stage.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="pillar-title">Save Time</div>
         <div class="pillar-metric">12 Hrs / Week</div>
-        <div class="pillar-sub">Catering proposals, multi-location reporting, review responses, and inquiry triage &mdash; automated. Hours reclaimed for owners and managers, every week.</div>
+        <div class="pillar-sub">Admin work, client onboarding, content creation, and support triage &mdash; automated. Hours reclaimed per teammate, every week.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="pillar-title">Scale Consistently</div>
-        <div class="pillar-metric">8 to 20+</div>
-        <div class="pillar-sub">Hold the same standard across every location. Keep the franchise development pipeline moving. Grow from 8 open toward 20+ without losing the brand experience.</div>
+        <div class="pillar-title">Scale Without Hiring</div>
+        <div class="pillar-metric">675 to 1,000+</div>
+        <div class="pillar-sub">Serve more accounts per teammate. Eliminate manual onboarding overhead. Grow the customer base without adding headcount.</div>
       </div>
     </div>
   </div>
@@ -352,15 +389,13 @@
 <section class="section" id="stack">
   <div class="container">
     <p class="section-label">Where You Are Today</p>
-    <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use. (Your exact tools were not specified, so these are the standard channels a multi-unit fast-casual brand runs on.)</p>
+    <h2 class="section-title">Your Current Restaurant Stack</h2>
+    <p class="section-sub">This plan keeps Mahana Fresh's existing tools in place and adds AI where the handoffs break down.</p>
     <div class="stack-grid">
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">POS System</div><div class="stack-role">Sales &amp; Order Data</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><div class="stack-tool">Online Ordering</div><div class="stack-role">Takeout &amp; Grab-n-Go</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><div class="stack-tool">Delivery Platforms</div><div class="stack-role">Third-Party Delivery</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div><div><div class="stack-tool">Social Channels</div><div class="stack-role">Brand &amp; Local Marketing</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Email</div><div class="stack-role">Inquiry &amp; Catering Comms</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><div><div class="stack-tool">Reviews &amp; Listings</div><div class="stack-role">Google &amp; Yelp Per Location</div></div></div>
+      <div class="stack-card"><div class="stack-icon">1</div><div><div class="stack-tool">Current tools</div><div class="stack-role">Not specified in form (LinkedIn DM lead)</div></div></div>
+      <div class="stack-card"><div class="stack-icon">2</div><div><div class="stack-tool">Primary market</div><div class="stack-role">fast-casual healthy dining franchise</div></div></div>
+      <div class="stack-card"><div class="stack-icon">3</div><div><div class="stack-tool">Locations</div><div class="stack-role">Somerset, NJ, Cary, NC, Braselton, GA, Fuquay Varina, NC, Columbia, MD, Toms River, NJ, Atlanta (Sandy Springs), GA, Idaho Falls, ID</div></div></div>
+      <div class="stack-card"><div class="stack-icon">4</div><div><div class="stack-tool">Services</div><div class="stack-role">Customizable Bowls, Wraps, Catering Services, Franchise Development, E-Gift Cards, Online Ordering</div></div></div>
     </div>
   </div>
 </section>
@@ -368,15 +403,11 @@
 <section class="section section-alt" id="gaps">
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
-    <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
-    <p class="section-sub">These are the areas where Mahana Fresh has the most capacity to recover &mdash; based on your operating model and a structured review of mahanafresh.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
+    <h2 class="section-title">Three Places Revenue and Time Leak</h2>
     <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Franchise Inquiry Response Speed</div><div class="gap-desc">With 12 units in development and a $212K&ndash;$759K investment, every franchise inquiry is a high-value opportunity. Published research shows the first responder wins the clear majority of deals &mdash; yet most brands take hours to reply manually. An AI speed-to-lead agent answers in under 60 seconds, 24/7, with your investment range and territory availability, lifting your candidate-to-call rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Catering Proposal Turnaround</div><div class="gap-desc">Catering is one of your five revenue streams, and the brands that win it respond fastest. Building a proposal by hand &mdash; menu, headcount pricing, dietary notes, delivery logistics &mdash; can take 45 minutes per inquiry. An AI catering agent generates a branded, fully gluten-free proposal in about 3 minutes, so quotes go out while the prospect is still deciding. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Multi-Location Performance Reporting</div><div class="gap-desc">Pulling daily sales, labor cost, review scores, and catering revenue from 8 locations into one view is hours of manual work every week. An AI reporting agent aggregates it all into a single executive summary each morning &mdash; flagging top and bottom performers and any store below target &mdash; so leadership acts on real numbers, not week-old spreadsheets. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Guest Review Response at Scale</div><div class="gap-desc">Across 8 locations, Google and Yelp reviews come in faster than any one manager can answer them on-brand. Unanswered reviews cost ratings and walk-in traffic. An AI review-response agent drafts a warm, specific reply to every review &mdash; thanking the guest, addressing concerns with a recovery offer, and reinforcing your gluten-free, feel-good brand. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Reputation</span></div></div>
-      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Franchise Development Pipeline Tracking</div><div class="gap-desc">With 8 open and 12 in development, prospects move through discovery, application, and approval over weeks &mdash; and a stalled candidate is easy to lose track of. An AI pipeline agent tracks each prospect's stage, drafts timely follow-ups, surfaces deals going cold, and preps a weekly digest of who needs attention next, so no qualified candidate slips through. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
-      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Menu &amp; Marketing Decisions From Sales Data</div><div class="gap-desc">Every location generates item-level sales data, but turning it into menu and limited-time-offer decisions is rarely anyone's full-time job. An AI menu-optimization agent reads the sales mix and margins across locations to recommend placement, all-gluten-free bundle ideas, and underperformers to cut &mdash; each with a short rationale you can act on. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><h3>Lunch-rush inquiries</h3><p>Catering and large-party questions arrive while the team is busiest. AI makes the first response fast and complete.</p></div>
+      <div class="gap-card"><h3>Guest feedback split across channels</h3><p>Reviews, DMs, and contact forms need a consistent owner-approved response path.</p></div>
+      <div class="gap-card"><h3>Owner visibility across stores</h3><p>Three stores create more notes than one owner can chase. AI compiles the operating picture automatically.</p></div>
     </div>
   </div>
 </section>
@@ -384,24 +415,15 @@
 <section class="section" id="oppmap">
   <div class="container">
     <p class="section-label">Prioritized Roadmap</p>
-    <h2 class="section-title">AI Opportunity Map &mdash; Mahana Fresh</h2>
-    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down &mdash; do not skip ahead.</p>
-    <div class="opp-table-wrap">
-      <table class="opp-table">
-        <thead>
-          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><div class="pri-badge">1</div></td><td><strong>Franchise Inquiry Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every franchise inquiry answered before competitors reach the candidate</td><td>Email, Online Ordering, Social Channels</td></tr>
-          <tr><td><div class="pri-badge">2</div></td><td><strong>Catering Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded, all-gluten-free proposals out the same hour</td><td>Email, POS System</td></tr>
-          <tr><td><div class="pri-badge">3</div></td><td><strong>Multi-Location Performance Reporter</strong></td><td><span class="impact-tag">Daily exec summary</span> &mdash; all 8 locations in one morning briefing</td><td>POS System, Delivery Platforms, Reviews</td></tr>
-          <tr><td><div class="pri-badge">4</div></td><td><strong>Customer Review Response Agent</strong></td><td><span class="impact-tag">Every review answered</span> &mdash; consistent brand voice across locations</td><td>Reviews &amp; Listings, Social Channels</td></tr>
-          <tr><td><div class="pri-badge">5</div></td><td><strong>Franchise Development Pipeline Agent</strong></td><td><span class="impact-tag">No prospect lost</span> &mdash; every candidate tracked and followed up</td><td>Email, POS System</td></tr>
-          <tr><td><div class="pri-badge">6</div></td><td><strong>Menu Optimization Agent</strong></td><td><span class="impact-tag">Data-driven menu</span> &mdash; placement, bundles, and cuts from real sales</td><td>POS System, Online Ordering</td></tr>
-          <tr><td><div class="pri-badge">7</div></td><td><strong>Local Marketing Content Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; LTOs and openings turned into posts per location</td><td>Social Channels, Email</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h2 class="section-title">AI Opportunity Map for Mahana Fresh</h2>
+    <table class="opp-table">
+      <tr><th>Priority</th><th>Agent</th><th>What It Does</th><th>Primary Tool</th></tr>
+      <tr><td>P1</td><td>Catering Speed-to-Lead</td><td>Captures event details and replies before the buyer moves on.</td><td>GoHighLevel</td></tr>
+      <tr><td>P2</td><td>Guest Recovery</td><td>Classifies feedback, drafts responses, and escalates sensitive issues.</td><td>Google reviews, DMs, CRM</td></tr>
+      <tr><td>P3</td><td>Manager Shift Summary</td><td>Turns manager notes into one daily owner brief.</td><td>Slack, Drive, POS summaries</td></tr>
+      <tr><td>P4</td><td>Local Store Marketing</td><td>Drafts weekly promos tied to catering, loyalty, and neighborhood events.</td><td>Meta, email, Google Business Profile</td></tr>
+      <tr><td>P5</td><td>Franchise Inquiry Qualification</td><td>Collects buyer fit signals without legal docs or earnings claims.</td><td>Qualifier form and CRM</td></tr>
+    </table>
   </div>
 </section>
 
@@ -411,10 +433,10 @@
     <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
     <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
     <div class="ignore-grid">
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Franchise Approvals</div><div class="ignore-reason">Absolutely doable to assist later &mdash; but awarding a franchise is a relationship and a judgment call. Keep the final approval with leadership while AI handles inquiry response, follow-up, and pipeline tracking around it. We come back to this once the core agents are proven.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Menu &amp; Pricing Changes</div><div class="ignore-reason">AI will happily model menu and pricing moves &mdash; and eventually test them on its own. For now, let it surface the sales data and recommendations and keep the final menu and price calls with the team. A later-phase win, not a today distraction.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing In-Store Guest Experience</div><div class="ignore-reason">An agent can handle plenty behind the scenes &mdash; but the tropical-inspired, in-person Mahana Fresh experience is the brand. Start by automating the back office and digital touchpoints, and keep the dining room human. Phase it in, do not force it.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email simply converts more franchise and catering prospects than a website chatbot menu. We would rather put the first dollar where it books the deal.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI will happily model and recommend pricing &mdash; and eventually run tests on its own. For now, let it surface the data and keep the final $199/mo and add-on calls with leadership. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more home-service owners than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
     </div>
   </div>
 </section>
@@ -423,14 +445,50 @@
   <div class="container">
     <p class="section-label">Your AI System</p>
     <h2 class="section-title">6 AI Agents Built for Mahana Fresh</h2>
-    <p class="section-sub">Each agent maps directly to a specific workflow inside your franchise and restaurant operations. Brand voice is built instantly from mahanafresh.com and your existing guest language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
+    <p class="section-sub">Each agent below is specific to Chad's restaurant operations, not a copied industry template.</p>
     <div class="agents-grid">
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Franchise Inquiry Speed-to-Lead Agent</div><div class="agent-desc">Responds to every franchise inquiry in under 60 seconds with investment range, territory availability, and next steps.</div><div class="agent-outcome">Every franchise inquiry answered in under 60 seconds</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Catering Proposal Generator</div><div class="agent-desc">Builds branded, 100% gluten-free catering proposals from event details in minutes.</div><div class="agent-outcome">Branded catering proposals in 3 min, not 45</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Multi-Location Performance Reporter</div><div class="agent-desc">Aggregates sales, reviews, and ops metrics across all 8 locations into one daily exec summary.</div><div class="agent-outcome">One daily exec summary across all 8 locations</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="agent-name">Customer Review Response Agent</div><div class="agent-desc">Drafts on-brand responses to reviews across every location at scale.</div><div class="agent-outcome">Every review answered in a consistent brand voice</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="agent-name">Franchise Development Pipeline Agent</div><div class="agent-desc">Tracks and nurtures franchise-development prospects through every pipeline stage.</div><div class="agent-outcome">No franchise prospect slips through the cracks</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Menu Optimization Agent</div><div class="agent-desc">Turns POS sales data into menu and LTO recommendations.</div><div class="agent-outcome">Menu decisions driven by real sales data</div></div>
+      
+        <div class="agent-card">
+          <div class="agent-icon">1</div>
+          <div class="agent-name">Agent #1: Franchise Inquiry Speed-to-Lead Agent</div>
+          <div class="agent-desc">When a new franchise inquiry lands, this agent drafts a personalized response within 60 seconds — investment range, territory availability, next steps — so Mahana Fresh is first to respond, every time.<br><br><strong>Prompt:</strong> You are a franchise inquiry response agent for Mahana Fresh. When a new inquiry arrives, draft a personalized, warm response within 60 seconds with investment details and next steps.</div>
+          <div class="agent-outcome">Franchise prospects receive a response before competitors even see the lead. Setup time: ~5 minutes</div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">2</div>
+          <div class="agent-name">Agent #2: Catering Proposal Generator</div>
+          <div class="agent-desc">Takes a catering inquiry — event type, guest count, dietary needs — and builds a complete Mahana Fresh catering proposal with gluten-free menu options, pricing, and delivery logistics in under 3 minutes.<br><br><strong>Prompt:</strong> You are a catering proposal agent for Mahana Fresh. Generate professional catering proposals with menu options, guest-count pricing, and gluten-free accommodations.</div>
+          <div class="agent-outcome">Catering proposals in 3 minutes vs. 45 minutes manually. Setup time: ~5 minutes</div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">3</div>
+          <div class="agent-name">Agent #3: Multi-Location Performance Reporter</div>
+          <div class="agent-desc">Aggregates daily sales, guest counts, order velocity, and customer ratings across all Mahana Fresh locations into a single executive dashboard — so Dave sees every unit&#x27;s health in one report.<br><br><strong>Prompt:</strong> You are a multi-location reporting agent for Mahana Fresh. Aggregate daily sales, guest feedback, and store performance metrics across all franchise locations.</div>
+          <div class="agent-outcome">One weekly performance digest covering all franchise locations. Setup time: ~5 minutes</div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">4</div>
+          <div class="agent-name">Agent #4: Customer Review Response Agent</div>
+          <div class="agent-desc">Monitors Google, Yelp, and Doordash reviews across all Mahana Fresh locations. Drafts on-brand responses within an hour — turning guest feedback into loyalty-building conversations at scale.<br><br><strong>Prompt:</strong> You are a customer review response agent for Mahana Fresh restaurants. Monitor and respond to reviews across all locations with on-brand, warm responses.</div>
+          <div class="agent-outcome">Every guest review gets a response within 1 hour — 24/7. Setup time: ~5 minutes</div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">5</div>
+          <div class="agent-name">Agent #5: Franchise Development Pipeline Agent</div>
+          <div class="agent-desc">Tracks every franchise candidate through the pipeline — from first inquiry to FDD delivery to discovery day — and flags candidates who go quiet so the development team can re-engage at exactly the right moment.<br><br><strong>Prompt:</strong> You are a franchise development pipeline agent for Mahana Fresh. Track candidates, flag drop-off, and prompt re-engagement at key pipeline stages.</div>
+          <div class="agent-outcome">Zero franchise candidates fall through the cracks. Setup time: ~5 minutes</div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-icon">6</div>
+          <div class="agent-name">Agent #6: Menu Optimization Agent</div>
+          <div class="agent-desc">Analyzes sales data by location, daypart, and season to surface your top-performing bowls and wraps — and identifies low-velocity items that could be replaced or promoted to drive average ticket higher.<br><br><strong>Prompt:</strong> You are a menu optimization agent for Mahana Fresh. Analyze sales data to identify top performers and underperforming items, and recommend menu adjustments.</div>
+          <div class="agent-outcome">Data-driven menu decisions without a dedicated analyst. Setup time: ~5 minutes</div>
+        </div>
     </div>
   </div>
 </section>
@@ -447,23 +505,23 @@
         </thead>
         <tbody>
           <tr>
-            <td><div class="m-phase">Hours 0-72</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
-            <td><ul class="m-list"><li>Setup session &mdash; map your franchise inquiry flow and catering intake process</li><li>Franchise Inquiry Speed-to-Lead Agent configured with your investment range and territory list</li><li>Brand voice built from mahanafresh.com and your existing Mahana Fresh messaging</li><li>Live test: submit a test franchise inquiry and watch the 60-second response fire</li></ul></td>
-            <td class="m-result">Your first agent is live. Every Mahana Fresh franchise inquiry gets a 60-second response while you sleep.</td>
+            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list"><li>setup call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your Not specified in form (LinkedIn DM lead) forms</li><li>Brand voice built from mahanafresh.com and your existing Mahana Fresh messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
+            <td class="m-result">Your first agent is live. Every Mahana Fresh lead gets a 60-second response while you sleep.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Day 7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
-            <td><ul class="m-list"><li>Catering Proposal Generator calibrated to your gluten-free menu and per-head pricing</li><li>Multi-Location Performance Reporter connected to all 8 locations</li><li>Customer Review Response Agent drafting replies across Google and Yelp</li><li>Franchise Development Pipeline Agent tracking every prospect's stage</li><li>Menu Optimization Agent reading the first sales mix</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Mahana Fresh pricing, features, and verticals</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
             <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Days 7-30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Dialing In</div></td>
-            <td><ul class="m-list"><li>Agents refined on your actual franchise conversations, catering events, and review patterns</li><li>Reporting tuned to the metrics leadership cares about most</li><li>30-day performance review: response times, proposals out, reviews answered</li></ul></td>
-            <td class="m-result">The system knows your business. Every agent is calibrated to real Mahana Fresh data.</td>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list"><li>30-day performance review: response rates, time saved, churn prevented</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Mahana Fresh scales past 1,000 customers</li></ul></td>
+            <td class="m-result">System knows your business. Every agent calibrated to real Mahana Fresh data.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Day 30+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
-            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data as you open new units</li><li>Expansion roadmap: what to automate next as Mahana Fresh grows past 20 locations</li></ul></td>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
             <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
           </tr>
         </tbody>
@@ -476,7 +534,7 @@
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Adjust the sliders to match your business. Defaults are pre-loaded from your Mahana Fresh profile: $15,000 average value per franchise or major catering deal, 20 monthly inquiries, and a 20% close rate. Choose a scenario preset or set your own numbers.</p>
+    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. Defaults are pre-loaded from your Mahana Fresh intake: $2,388 annual customer value ($199/mo Pro Edition), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
       <div class="calc-presets">
         <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
@@ -485,234 +543,48 @@
       </div>
       <div class="calc-inputs-grid">
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Avg Deal Value</span><span class="calc-slider-val" id="lbl-contract">$15,000</span></div>
-          <input type="range" class="calc-slider" id="sl-contract" min="8" max="50000" step="1" value="8" oninput="updateLabel('contract'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="8" step="1" value="38" oninput="updateLabel('contract'); calcROI();" aria-label="Average guest or catering ticket in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Inquiries</span><span class="calc-slider-val" id="lbl-leads">20</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="5" max="200" step="1" value="20" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">20%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Owner/Manager Hours / Week</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
           <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
         <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">&mdash;</div></div>
         <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">&mdash;</div><div class="res-sub" id="resLift">&mdash;</div></div>
-        <div class="calc-result-item"><div class="res-label">Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
         <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
       </div>
-      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for inquiry volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
     </div>
   </div>
 </section>
 
 <section class="section section-alt" id="prompts">
   <div class="container">
-    <p class="section-label">Your First AI Agent &mdash; Start Here</p>
-    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Mahana Fresh</h2>
-    <p class="section-sub">These are fully-built agent instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs. Built specifically for Mahana Fresh.</p>
+    <p class="section-label">Try These First</p>
+    <h2 class="section-title">Three Prompts Chad Can Use Today</h2>
+    <p class="section-sub">These prompts are manual versions of the first automation layer. The full system runs them automatically from live events.</p>
     <div class="prompt-cards">
-      <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Franchise Inquiry Speed-to-Lead Agent</h3><p>Based on your #1 time recovery opportunity: speed-to-response on new Mahana Fresh franchise inquiries</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
-        <div class="prompt-body">
-          <pre id="prompt1" class="prompt-pre">## IDENTITY
-You are the Franchise Speed-to-Lead Agent for Mahana Fresh, a fast-casual franchise with a 100% gluten-free menu and no fryers, freezers, or microwaves. You respond to incoming franchise inquiries within 60 seconds, 24 hours a day, 7 days a week.
-
-## YOUR JOB
-Your ONLY job in this first message is to make the prospect feel heard, confirm you received their inquiry, share the key investment facts, gather two specific pieces of information, and set a clear next step. You are NOT hard-selling. You are opening a relationship with a potential franchisee.
-
-## STEP-BY-STEP RESPONSE LOGIC
-
-STEP 1 - EXTRACT from the inquiry form:
-- Prospect first name
-- Market or city of interest
-- Restaurant or franchise experience (if provided)
-- Liquid capital or investment readiness (if provided)
-- What drew them to Mahana Fresh
-
-STEP 2 - BUILD YOUR RESPONSE using this exact structure:
-
-Paragraph 1 (2 sentences max): Greet by first name. Acknowledge their market of interest. Express genuine interest.
-
-Paragraph 2 (2-3 sentences): Establish Mahana Fresh's relevance. Share the $212K-$759K investment range and note current territory availability for their market. Mention one differentiator (100% gluten-free, no fryers/freezers/microwaves, build-your-own bowls, or a founder who ran ~20 Domino's units for 30 years).
-
-Paragraph 3 (2 questions only):
-  Q1: "Which market are you most interested in, and is there a timeline you are working toward?"
-  Q2: "Do you have prior restaurant or multi-unit ownership experience?"
-
-Paragraph 4 (1 sentence): "I will have territory availability and next steps ready for you - let's grab 15 minutes this week to walk through it."
-
-Sign-off: "[Your Name] | Mahana Fresh Franchise Development"
-
-## BRAND VOICE RULES
-- Warm and upbeat - we "look on the bright side of everything"
-- Direct and confident - founder-to-founder, not corporate
-- Address the prospect by first name throughout
-- No exclamation points - confidence does not need them
-- Active voice: "We built" not "Mahana Fresh was built"
-- Lead with the health-forward, feel-good positioning
-
-## EDGE CASES
-- No market mentioned: open with "Hi [Name]" and ask "Which market are you looking at?" as Q1
-- Experience not provided: add "and do you have prior restaurant experience?" to Q2
-- Already owns other franchises: "That experience translates well - many of our franchisees come from multi-unit backgrounds. Happy to show you the Mahana Fresh model."
-- Impatient tone: lead with "I hear you - let me make this straightforward."
-- Asks about a taken territory: never overpromise. "That market is filling up - let's confirm what's still open on a quick call."
-- Referral: acknowledge the referring person by name if provided
-
-## WHAT NEVER TO DO
-- Never promise a specific territory before it is confirmed available
-- Never quote unit-level revenue or earnings claims (FDD Item 19 governs that)
-- Never send a generic auto-reply that ignores their market of interest
-- Never promise a timeline you cannot keep
-- Never use the word "unfortunately"
-- Never end with an open-ended question
-
-## EXAMPLE OUTPUT
----
-Hi Marcus,
-
-Thanks for reaching out about bringing Mahana Fresh to the Dallas market - it's a great fit for a fast-casual concept that's 100% gluten-free with no fryers, freezers, or microwaves.
-
-Mahana Fresh franchises in the $212K-$759K investment range, and we currently have territory open in the Dallas area. The brand was built by a founder who ran roughly 20 Domino's units over 30 years, so the model is designed for operators who want a clean, repeatable system.
-
-Two quick questions so I can tailor next steps:
-1. Which Dallas-area market are you most interested in, and is there a timeline you are working toward?
-2. Do you have prior restaurant or multi-unit ownership experience?
-
-I will have territory availability and next steps ready for you - let's grab 15 minutes this week to walk through it.
-
-[Your Name] | Mahana Fresh Franchise Development
----</pre>
-          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Ensures every Mahana Fresh franchise inquiry receives a professional, market-specific response in under 60 seconds &mdash; including nights and weekends &mdash; without adding a single staff hour.</div>
-        </div>
-      </div>
-      <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Catering Proposal Generator</h3><p>Based on your #2 time recovery opportunity: manual catering proposals consuming team time</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
-        <div class="prompt-body">
-          <pre id="prompt2" class="prompt-pre">## IDENTITY
-You are the Catering Proposal Agent for Mahana Fresh. When given an event's details, you produce a complete, professional, branded catering proposal in under 3 minutes. Every menu you build is 100% gluten-free, because the entire Mahana Fresh menu is.
-
-## INPUTS YOU NEED
-Required:
-- Contact name and organization
-- Event date and location (which Mahana Fresh location serves it)
-- Headcount
-- Budget or per-person target (if provided)
-Optional:
-- Dietary needs beyond gluten-free (vegan, nut allergies, etc.)
-- Recurring vs. one-time event
-- Delivery vs. pickup
-- How they found Mahana Fresh
-
-## PROPOSAL STRUCTURE
-
-SECTION 1 - PERSONALIZED OPENING (3-4 sentences)
-Reference the organization by name and the event. Note that everything Mahana Fresh caters is 100% gluten-free with no fryers, freezers, or microwaves involved. Set a warm, feel-good tone.
-
-SECTION 2 - RECOMMENDED MENU (all gluten-free)
-Build a bowl-and-wrap spread scaled to headcount:
-- Build-your-own bowl bar OR pre-set signature bowls
-- Wrap option
-- A protein and a plant-forward option
-- Sides and a grab-n-go dessert if budget allows
-Name the items; keep it on-brand and health-forward.
-
-SECTION 3 - PER-PERSON PRICING
-- State a per-person price and multiply by headcount for an estimated subtotal
-- Note delivery/setup logistics for that location
-- Flag a clear recurring-corporate-catering option ("set this up weekly/biweekly and lock in a standing order")
-
-SECTION 4 - DIETARY ACCOMMODATIONS
-- Confirm the whole menu is gluten-free
-- Address any additional dietary needs the contact flagged (vegan, nut-free, etc.)
-- Note how allergens are handled in a no-fryer, no-microwave kitchen
-
-SECTION 5 - NEXT STEP / CONFIRM CTA (1-2 sentences)
-"Reply 'confirm' or let me know any tweaks and I'll lock in your [date] order for [headcount]. Happy to adjust the menu to fit your group."
-
-SECTION 6 - SIGNATURE BLOCK
-[Your Name]
-Mahana Fresh Catering - 100% Gluten-Free Bowls, Wraps &amp; Catering
-[Email] | [Phone]
-mahanafresh.com
-
-## RULES
-- Every item on every proposal is gluten-free - never suggest otherwise
-- Never overstate what a location can produce for a given date/headcount
-- Always include the recurring-catering upsell
-- Always end with a clear confirm CTA, never an open-ended question
-- Keep the total proposal tight and skimmable
-
-## TONE RULES
-- Warm, upbeat, "bright side of everything" brand voice
-- Practical and specific - real menu items, real per-person numbers
-- Mirror catering language: "headcount," "per person," "setup," "standing order"</pre>
-          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Turns a raw catering inquiry into a branded, all-gluten-free proposal in about 3 minutes instead of 45 &mdash; so quotes go out while the prospect is still deciding, across every location.</div>
-        </div>
-      </div>
-      <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Multi-Location Performance Reporter</h3><p>Based on your #3 time recovery opportunity: manual reporting across 8 locations</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
-        <div class="prompt-body">
-          <pre id="prompt3" class="prompt-pre">## IDENTITY
-You are the Reporting Agent for Mahana Fresh's 8 locations. Each day you aggregate sales, labor, reviews, and catering revenue into one clear executive summary leadership can read in under two minutes.
-
-## INPUTS YOU NEED
-For each of the 8 locations (Somerset NJ, Cary NC, Braselton GA, Fuquay Varina NC, Columbia MD, Toms River NJ, Atlanta/Sandy Springs GA, Idaho Falls ID):
-- Daily net sales
-- Labor cost %
-- Customer review scores / new reviews
-- Catering revenue
-- Target AUV or sales goal (if provided)
-
-## REPORT STRUCTURE
-
-SECTION 1 - HEADLINE (1-2 sentences)
-Total system sales for the day and how it compares week-over-week. One sentence on the overall trend.
-
-SECTION 2 - TOP &amp; BOTTOM PERFORMERS
-- Top performer: location, sales, and what stood out
-- Bottom performer: location, sales, and the likely driver
-- Any location below its target AUV - flag it by name
-
-SECTION 3 - WEEK-OVER-WEEK TRENDS
-- Sales trend per region
-- Labor cost % outliers (too high or too low)
-- Catering revenue movement
-- Review score changes worth noting
-
-SECTION 4 - 3 ACTION ITEMS
-End with exactly three concrete action items for operations - specific, location-named, and doable this week.
-
-## RULES
-- Lead with the number, then the context
-- Name locations explicitly - never "Store 4"
-- Flag anything below target AUV every time
-- Keep it skimmable: short lines, clear sections
-- Never invent data - if an input is missing, say "data not reported for [location]"
-
-## TONE RULES
-- Crisp and executive - this is a briefing, not a memo
-- Plain language, no jargon
-- Always close with the three action items so the report drives a decision</pre>
-          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Replaces hours of manual spreadsheet work with one daily executive summary across all 8 Mahana Fresh locations &mdash; so leadership spots a struggling store days earlier and acts on real numbers.</div>
-        </div>
-      </div>
+      <div class="prompt-card"><div class="prompt-header"><h3>Catering Speed-to-Lead Agent</h3></div><pre class="prompt-pre">You are a speed-to-lead response agent for a fast-casual restaurant franchise business called Mahana Fresh. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.</pre></div>
+      <div class="prompt-card"><div class="prompt-header"><h3>Franchise Inquiry Qualification Agent</h3></div><pre class="prompt-pre">You are a proposal draft agent for Mahana Fresh in the fast-casual restaurant franchise industry. Given a prospect&#x27;s requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose Mahana Fresh over competitors.</pre></div>
+      <div class="prompt-card"><div class="prompt-header"><h3>Guest Recovery Agent</h3></div><pre class="prompt-pre">You are an outreach agent for Mahana Fresh (fast-casual restaurant franchise). Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting ideal customers who need fast-casual restaurant franchise services.</pre></div>
     </div>
     <div class="diy-or-partner">
       <h3>Two paths forward for Dave:</h3>
       <div class="path-grid">
-        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most operators can put 1-2 agents to work on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster franchise responses, quicker catering quotes &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Mahana Fresh's brand voice from Day 1, working across franchise inquiries, catering, reviews, and all 8 locations, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent" class="path-cta">See If You Qualify</a></div>
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start improving response speed, guest recovery, and daily reporting.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>FKI builds the automated version, connects it to your tools, and audits it before anything is sent externally.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave%20Wood&amp;biz=Mahana%20Fresh&amp;src=dave-wood&amp;agents=Franchise%20Inquiry%20Speed-to-Lead%20Agent%2CCatering%20Proposal%20Generator%2CMulti-Location%20Performance%20Reporter%2CCustomer%20Review%20Response%20Agent%2CFranchise%20Development%20Pipeline%20Agent%2CMenu%20Optimization%20Agent" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -721,15 +593,15 @@ End with exactly three concrete action items for operations - specific, location
 <section class="section section-alt" id="demo">
   <div class="container">
     <p class="section-label">Live Preview</p>
-    <h2 class="section-title">Mahana Fresh Speed-to-Lead Demo</h2>
-    <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound franchise and catering inquiry, day or night. The same approach runs across all 8 locations for reviews and reporting too.</p>
-    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center plugs into the channels you already run &mdash; POS, online ordering, delivery platforms, social, and email &mdash; not as a standalone tool. It speaks in the Mahana Fresh brand voice you have already built and runs every workflow above end-to-end.</p>
+    <h2 class="section-title">Mahana Fresh Speed-to-Lead Flow</h2>
+    <p class="section-sub">A catering inquiry comes in. The AI captures headcount, date, pickup or delivery, dietary constraints, budget range, and preferred location, then routes the summary to the right manager.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">This is designed for a busy restaurant day: no new platform to babysit, no calendar bypass, and no legal document send.</p>
   </div>
 </section>
 
 <section class="section pod-section" id="listen">
   <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
-  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Mahana Fresh profile. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Mahana Fresh answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
   <div class="pod-card" id="podcast">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
@@ -791,13 +663,13 @@ End with exactly three concrete action items for operations - specific, location
   <div class="container">
     <p class="section-label">Research Sources</p>
     <h2 class="section-title">Citations</h2>
-    <p class="section-sub">Every claim in this Blueprint links to published research or Mahana Fresh's own public information. No fabricated data, no anonymous case studies.</p>
+    <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
     <div class="sources-list">
-      <div class="source-item"><span class="source-num">[1]</span><div>Mahana Fresh &mdash; official brand, menu, locations, and franchise information. <a href="https://www.mahanafresh.com" target="_blank" rel="noopener">mahanafresh.com</a></div></div>
-      <div class="source-item"><span class="source-num">[2]</span><div>1851 Franchise &mdash; Mahana Fresh franchise profile and development coverage. <a href="https://1851franchise.com" target="_blank" rel="noopener">1851franchise.com</a></div></div>
-      <div class="source-item"><span class="source-num">[3]</span><div>Franchise Times &mdash; coverage of Mahana Fresh growth and investment range. <a href="https://www.franchisetimes.com" target="_blank" rel="noopener">franchisetimes.com</a></div></div>
-      <div class="source-item"><span class="source-num">[4]</span><div>LinkedIn &mdash; Dave Wood, Mahana Fresh (lead source, May 2026). <a href="https://www.linkedin.com/in/dave-wood-9975a38/" target="_blank" rel="noopener">linkedin.com</a></div></div>
-      <div class="source-item"><span class="source-num">[5]</span><div>HubSpot &amp; Harvard Business Review &mdash; published benchmarks on lead response time and small-business automation. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com</a></div></div>
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in SaaS and multi-account operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review &mdash; Automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
     </div>
   </div>
 </section>
@@ -805,10 +677,10 @@ End with exactly three concrete action items for operations - specific, location
 <section class="cta-section" id="apply">
   <div class="container">
     <h2>Ready to See This<br><span>Working for Mahana Fresh?</span></h2>
-    <p class="cta-personal">"Dave, I built this roadmap specifically for Mahana Fresh because I believe a 100% gluten-free, feel-good concept with 8 locations open and 12 on the way deserves systems as reliable and scalable as the brand itself. The AI here is not about replacing anything &mdash; it is about making sure no franchise inquiry, no catering request, and no guest review goes unanswered. &mdash; Bennett"</p>
-    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent" class="cta-btn">See If You Qualify</a>
-    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+    <p class="cta-personal">"Dave, I built this roadmap around the parts of Summit Street Tacos where speed and consistency matter most: catering response, guest recovery, manager reporting, and qualified expansion conversations. The goal is not to replace your team. The goal is to give your team a system that never forgets the next step." &mdash; Bennett</p>
+    <p>The next step is the tracked qualifier. It confirms fit, updates the same CRM contact, and only then allows any next-step scheduling path.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave%20Wood&amp;biz=Mahana%20Fresh&amp;src=dave-wood&amp;agents=Franchise%20Inquiry%20Speed-to-Lead%20Agent%2CCatering%20Proposal%20Generator%2CMulti-Location%20Performance%20Reporter%2CCustomer%20Review%20Response%20Agent%2CFranchise%20Development%20Pipeline%20Agent%2CMenu%20Optimization%20Agent" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No calendar bypass, no legal document send, no pressure.</p>
   </div>
 </section>
 
@@ -820,14 +692,14 @@ End with exactly three concrete action items for operations - specific, location
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood&firstName=Dave&agents=Franchise+Inquiry+Speed-to-Lead+Agent%2CCatering+Proposal+Generator%2CMulti-Location+Performance+Reporter%2CCustomer+Review+Response+Agent%2CFranchise+Development+Pipeline+Agent%2CMenu+Optimization+Agent" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave%20Wood&biz=Mahana%20Fresh&src=dave-wood&agents=Franchise%20Inquiry%20Speed-to-Lead%20Agent%2CCatering%20Proposal%20Generator%2CMulti-Location%20Performance%20Reporter%2CCustomer%20Review%20Response%20Agent%2CFranchise%20Development%20Pipeline%20Agent%2CMenu%20Optimization%20Agent" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
   const PRESETS = {
-    conservative: { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 0.5 },
-    expected:     { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 1.0 },
-    stretch:      { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 1.3 }
+    conservative: { contract: 38, leads: 10, rate: 18, hours: 15, lift: 0.5 },
+    expected:     { contract: 38, leads: 10, rate: 18, hours: 15, lift: 1.0 },
+    stretch:      { contract: 38, leads: 10, rate: 18, hours: 15, lift: 1.3 }
   };
   let currentLift = 1.0;
 
@@ -847,6 +719,7 @@ End with exactly three concrete action items for operations - specific, location
   function updateLabel(key) {
     const val = document.getElementById('sl-' + key).value;
     const lbl = document.getElementById('lbl-' + key);
+    if (!lbl) return;
     if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
     else if (key === 'rate') lbl.textContent = val + '%';
     else if (key === 'hours') lbl.textContent = val + ' hrs';
@@ -922,7 +795,7 @@ End with exactly three concrete action items for operations - specific, location
 <script>
 (function () {
   'use strict';
-  var STORAGE_KEY = 'bpod_dave_wood';
+  var STORAGE_KEY = 'bpod_brent_attaway';
   var CHAPTERS = [
     {pct: 0,    label: 'Segment 1 - This Is Your Business'},
     {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},
