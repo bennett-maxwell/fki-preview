@@ -259,10 +259,10 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   
-  /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
+  /* Home-services mobile chapter-nav fix: preserve readable tab labels with horizontal scroll. */
   @media (max-width: 640px) {
-    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
-    .tab-nav::after {
+    .chapter-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .chapter-nav::after {
       content: "";
       position: sticky;
       right: 0;
@@ -270,7 +270,7 @@
       pointer-events: none;
       background: linear-gradient(90deg, rgba(10,14,26,0), var(--primary));
     }
-    .tab-btn {
+    .chapter-btn {
       flex: 0 0 auto;
       min-width: 118px;
       font-size: 10px;
@@ -416,26 +416,36 @@
     <div class="section-label">Gap Analysis</div>
     <h2>Where Plumbing Revenue Slips Away</h2>
     <p>You told us the biggest challenges are <strong>missed after-hours calls, slow estimate follow-up, and past customers not being reactivated</strong>. With an average job around <strong>$1,000</strong>, every missed qualified call has real revenue attached.</p>
-    <div class="pain-grid">
-      <div class="pain-card">
+    <div class="gap-grid">
+      <div class="gap-card">
         <h4>After-Hours Calls Get Missed</h4>
-        <p>Emergency plumbing buyers usually keep calling until someone answers. A slow response lets another local company win the job.</p>
+        <p>Emergency electrical buyers usually keep calling until someone answers. A slow response lets another local company win the job.</p>
         <div class="ai-fix">--&gt; AI Agent: Capture the issue, address, urgency, photos, and callback number in under 60 seconds</div>
       </div>
-      <div class="pain-card">
+      <div class="gap-card">
         <h4>Estimates Need Follow-Up</h4>
         <p>Open estimates often stall because nobody owns the next touch. AI can follow up with useful reminders and booking windows.</p>
         <div class="ai-fix">--&gt; AI Agent: 7-touch estimate follow-up through SMS and email</div>
       </div>
-      <div class="pain-card med">
-        <h4>Maintenance Customers Go Quiet</h4>
-        <p>Past drain, water heater, and leak repair customers are a warm list. They need timely reminders before the next problem becomes urgent.</p>
+      <div class="gap-card">
+        <h4>Past Customers Go Quiet</h4>
+        <p>Homeowners who had panel work, EV charger installs, or repairs are a warm list. They need timely reminders before the next issue becomes urgent.</p>
         <div class="ai-fix">--&gt; AI Agent: Service-history reactivation campaigns by job type</div>
       </div>
-      <div class="pain-card med">
+      <div class="gap-card">
         <h4>Dispatch Context Gets Scattered</h4>
         <p>Photos, urgency, gate codes, and job notes often live in different places. AI can summarize and route the job before the technician rolls.</p>
         <div class="ai-fix">--&gt; AI Agent: Dispatch-ready job brief inside GoHighLevel</div>
+      </div>
+      <div class="gap-card">
+        <h4>Reviews Don't Write Themselves</h4>
+        <p>Happy customers rarely leave reviews without a nudge. Automated follow-up turns completed jobs into 5-star reviews.</p>
+        <div class="ai-fix">--&gt; AI Agent: Post-job review request sequence via SMS</div>
+      </div>
+      <div class="gap-card">
+        <h4>New Leads Sit Unanswered</h4>
+        <p>The first company to respond usually wins the job. A 5-minute response window beats a 2-hour callback every time.</p>
+        <div class="ai-fix">--&gt; AI Agent: Speed-to-lead responder with instant qualification</div>
       </div>
     </div>
   </section>
@@ -478,21 +488,45 @@
   </section>
 
 <section id="agents" class="section section-alt">
-    <div class="section-label">Lever A -- Local Lead Capture</div>
-    <h2>Local Services Capture Engine</h2>
-    <div class="local-lead-hero">
-      <h3>Billy's Local Lead Response System</h3>
-      <p>Instead of adding another cold channel, this system converts the leads you already pay for from calls, forms, Google Ads, and local search.</p>
-      <div class="local-lead-stats">
-        <div class="local-lead-stat"><div class="ls-val">&lt;60s</div><div class="ls-lbl">Target Response</div></div>
-        <div class="local-lead-stat"><div class="ls-val">24/7</div><div class="ls-lbl">Emergency Intake</div></div>
-        <div class="local-lead-stat"><div class="ls-val">1 CRM</div><div class="ls-lbl">GoHighLevel Record</div></div>
+    <div class="section-label">Your AI Agent Stack</div>
+    <h2>The AI Agents Built for Billy Bob Electric</h2>
+    <p>Each agent handles a specific repeatable task — so your team focuses on the work that requires a skilled technician, not admin and follow-up.</p>
+    <div class="agent-grid">
+      <div class="agent-card">
+        <div class="agent-name">Emergency Dispatch Agent</div>
+        <div class="agent-desc">When a homeowner calls with a power outage, tripped breaker, or sparking outlet, this agent captures the inquiry via web form or text, assesses urgency, and immediately dispatches the nearest available technician with a pre-filled job ticket.</div>
+        <div class='agent-result'>Emergency jobs dispatched in under 2 minutes — before the customer calls a competitor.</div>
+        <div class='agent-time'>5 minutes per day</div>
       </div>
-      <div class="local-lead-tiles">
-        <div class="local-lead-tile"><h4>Source Tracking</h4><p>Each call, form, and qualifier submission carries source, session, and contact identity.</p></div>
-        <div class="local-lead-tile"><h4>Urgency Routing</h4><p>Emergency jobs are tagged and surfaced before standard estimates.</p></div>
-        <div class="local-lead-tile"><h4>Estimate Recovery</h4><p>Quoted-but-not-booked jobs get useful, timely follow-up.</p></div>
-        <div class="local-lead-tile"><h4>Review Loop</h4><p>Completed jobs trigger review requests and local proof-building.</p></div>
+      <div class="agent-card">
+        <div class="agent-name">Quote Follow-Up Agent</div>
+        <div class="agent-desc">Tracks every open estimate and automatically follows up at 24h, 72h, and 7 days with a personalized message referencing the specific job (panel upgrade, EV charger, etc.) and offering to answer questions or schedule.</div>
+        <div class='agent-result'>Converts 20-30% more estimates into booked jobs without any staff effort.</div>
+        <div class='agent-time'>3 minutes per day</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Technician Scheduling Agent</div>
+        <div class="agent-desc">Matches new service requests to available technicians based on location, job type, and current workload. Automatically sends appointment confirmations and 1-hour-ahead reminders to customers.</div>
+        <div class='agent-result'>Zero scheduling gaps — every available slot filled, zero missed appointments.</div>
+        <div class='agent-time'>4 minutes per day</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Permit &amp; Inspection Prep Agent</div>
+        <div class="agent-desc">For panel upgrades, EV charger installs, and new construction work that requires permits, this agent prepares the permit application package and schedules the inspection appointment with the local building department.</div>
+        <div class='agent-result'>Permits filed same day — no more week-long delays waiting for paperwork.</div>
+        <div class='agent-time'>10 minutes per day</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Maintenance Plan Agent</div>
+        <div class="agent-desc">Identifies customers who have not had an electrical safety inspection in 2+ years and sends personalized outreach offering an annual electrical health check — generating recurring revenue without any new marketing spend.</div>
+        <div class='agent-result'>Reactivates dormant customers — 15-25% response rate, zero ad spend.</div>
+        <div class='agent-time'>5 minutes per day</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Review &amp; Referral Agent</div>
+        <div class="agent-desc">Sends a review request 2 hours after job completion with a direct Google review link. For customers who leave 5-star reviews, automatically sends a referral discount offer for their next service or for a friend.</div>
+        <div class='agent-result'>Doubles Google review volume — referrals generate 2-3 jobs per month.</div>
+        <div class='agent-time'>3 minutes per day</div>
       </div>
     </div>
   </section>
@@ -630,7 +664,7 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
 [Your Name] | Billy Bob Electric Sales Team
 ---</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Ensures every Billy Bob Electric lead receives a professional, industry-specific response in under 60 seconds &mdash; including nights, weekends, and product launches &mdash; without adding a single staff hour.</div>
+          <div class="prompt-outcome">What this does: Ensures every Billy Bob Electric lead receives a professional, industry-specific response in under 60 seconds &mdash; including nights, weekends, and peak demand periods &mdash; without adding a single staff hour.</div>
         </div>
       </div>
       <div class="prompt-card">
@@ -638,7 +672,7 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
         <div class="prompt-body">
           <pre id="prompt2" class="prompt-pre">You are the Quote Follow-Up Agent for Billy Bob Electric. Write a concise follow-up for an open electrical estimate. Reference the job type, remind the customer of safety/value, and offer two scheduling windows.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Billy Bob Electric customer &mdash; from welcome through month-1 benchmark &mdash; across every vertical and plan tier, simultaneously.</div>
+          <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Billy Bob Electric customer &mdash; from welcome through month-1 benchmark &mdash; across every job type and service stage, simultaneously.</div>
         </div>
       </div>
       <div class="prompt-card">
@@ -653,7 +687,7 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
     <div class="diy-or-partner">
       <h3>Two paths forward for Billy:</h3>
       <div class="path-grid">
-        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most electrical contractors can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
         <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Billy Bob Electric's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>

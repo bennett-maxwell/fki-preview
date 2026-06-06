@@ -108,26 +108,36 @@ def patch_home_services(html: str, profile: dict) -> str:
     <div class="section-label">Gap Analysis</div>
     <h2>Where Plumbing Revenue Slips Away</h2>
     <p>You told us the biggest challenges are <strong>missed after-hours calls, slow estimate follow-up, and past customers not being reactivated</strong>. With an average job around <strong>{avg_job}</strong>, every missed qualified call has real revenue attached.</p>
-    <div class="pain-grid">
-      <div class="pain-card">
+    <div class="gap-grid">
+      <div class="gap-card">
         <h4>After-Hours Calls Get Missed</h4>
-        <p>Emergency plumbing buyers usually keep calling until someone answers. A slow response lets another local company win the job.</p>
+        <p>Emergency buyers usually keep calling until someone answers. A slow response lets another local company win the job.</p>
         <div class="ai-fix">--&gt; AI Agent: Capture the issue, address, urgency, photos, and callback number in under 60 seconds</div>
       </div>
-      <div class="pain-card">
+      <div class="gap-card">
         <h4>Estimates Need Follow-Up</h4>
         <p>Open estimates often stall because nobody owns the next touch. AI can follow up with useful reminders and booking windows.</p>
         <div class="ai-fix">--&gt; AI Agent: 7-touch estimate follow-up through SMS and email</div>
       </div>
-      <div class="pain-card med">
+      <div class="gap-card">
         <h4>Maintenance Customers Go Quiet</h4>
-        <p>Past drain, water heater, and leak repair customers are a warm list. They need timely reminders before the next problem becomes urgent.</p>
+        <p>Past customers are a warm list. They need timely reminders before the next problem becomes urgent.</p>
         <div class="ai-fix">--&gt; AI Agent: Service-history reactivation campaigns by job type</div>
       </div>
-      <div class="pain-card med">
+      <div class="gap-card">
         <h4>Dispatch Context Gets Scattered</h4>
         <p>Photos, urgency, gate codes, and job notes often live in different places. AI can summarize and route the job before the technician rolls.</p>
         <div class="ai-fix">--&gt; AI Agent: Dispatch-ready job brief inside GoHighLevel</div>
+      </div>
+      <div class="gap-card">
+        <h4>Reviews Don't Write Themselves</h4>
+        <p>Happy customers rarely leave reviews without a nudge. Automated follow-up turns completed jobs into 5-star reviews.</p>
+        <div class="ai-fix">--&gt; AI Agent: Post-job review request sequence via SMS</div>
+      </div>
+      <div class="gap-card">
+        <h4>New Leads Sit Unanswered</h4>
+        <p>The first company to respond usually wins the job. A 5-minute response window beats a 2-hour callback every time.</p>
+        <div class="ai-fix">--&gt; AI Agent: Speed-to-lead responder with instant qualification</div>
       </div>
     </div>
   </section>
@@ -227,24 +237,46 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
+    # Build agent cards from lead profile ai_agents list (format3-compliant)
+    raw_agents = profile.get("ai_agents", [])
+    if isinstance(raw_agents, dict):
+        raw_agents = list(raw_agents.values())
+    agent_cards_html = ""
+    default_agents = [
+        {"name": "Speed-to-Lead Responder", "desc": "Responds to new inquiries within 60 seconds, captures issue, address, and urgency, and routes to the right technician.", "result": "Win more jobs by being first to respond.", "time": "3 minutes"},
+        {"name": "Estimate Follow-Up Agent", "desc": "Sends 7-touch follow-up sequences on open quotes — SMS and email — until the customer books or declines.", "result": "20-30% more estimates convert to booked jobs.", "time": "3 minutes"},
+        {"name": "Reactivation Agent", "desc": "Reaches past customers before slow season with service reminders tailored to their job history.", "result": "Recurring revenue from customers who already trust you.", "time": "4 minutes"},
+        {"name": "Dispatch Summary Agent", "desc": "Prepares a concise job brief — urgency, address, issue, gate codes, photos — before the technician rolls.", "result": "Zero missing job details, faster on-site start.", "time": "2 minutes"},
+        {"name": "Review Request Agent", "desc": "Triggers after completed jobs with a personalized SMS review request while the work is still fresh.", "result": "More 5-star Google reviews without manual follow-up.", "time": "2 minutes"},
+        {"name": "Scheduling Agent", "desc": "Matches new service requests to available technicians by location and job type, sends confirmations and reminders.", "result": "Every available slot filled, zero missed appointments.", "time": "4 minutes"},
+    ]
+    agents_to_render = []
+    for item in raw_agents[:6]:
+        if isinstance(item, dict):
+            agents_to_render.append(item)
+        elif isinstance(item, str) and item.strip():
+            agents_to_render.append({"name": item, "desc": "", "result": "", "time": ""})
+    if len(agents_to_render) < 6:
+        agents_to_render = default_agents
+    for i, ag in enumerate(agents_to_render[:6]):
+        name = esc(ag.get("name") or ag.get("title") or f"Agent {i+1}")
+        desc = esc(ag.get("desc") or ag.get("description") or "")
+        result = esc(ag.get("result") or "")
+        time_val = esc(ag.get("time") or "")
+        agent_cards_html += f"""
+      <div class="agent-card">
+        <div class="agent-name">{name}</div>
+        <div class="agent-desc">{desc}</div>
+        {"<div class='agent-result'>" + result + "</div>" if result else ""}
+        {"<div class='agent-time'>" + time_val + " per day</div>" if time_val else ""}
+      </div>"""
+
     html = replace_section(html, "agents", f"""
   <section id="agents" class="section section-alt">
-    <div class="section-label">Lever A -- Local Lead Capture</div>
-    <h2>Local Services Capture Engine</h2>
-    <div class="linkedin-hero">
-      <h3>{first}'s Local Lead Response System</h3>
-      <p>Instead of adding another cold channel, this system converts the leads you already pay for from calls, forms, Google Ads, and local search.</p>
-      <div class="linkedin-stats">
-        <div class="linkedin-stat"><div class="ls-val">&lt;60s</div><div class="ls-lbl">Target Response</div></div>
-        <div class="linkedin-stat"><div class="ls-val">24/7</div><div class="ls-lbl">Emergency Intake</div></div>
-        <div class="linkedin-stat"><div class="ls-val">1 CRM</div><div class="ls-lbl">GoHighLevel Record</div></div>
-      </div>
-      <div class="linkedin-tiles">
-        <div class="linkedin-tile"><h4>Source Tracking</h4><p>Each call, form, and qualifier submission carries source, session, and contact identity.</p></div>
-        <div class="linkedin-tile"><h4>Urgency Routing</h4><p>Emergency jobs are tagged and surfaced before standard estimates.</p></div>
-        <div class="linkedin-tile"><h4>Estimate Recovery</h4><p>Quoted-but-not-booked jobs get useful, timely follow-up.</p></div>
-        <div class="linkedin-tile"><h4>Review Loop</h4><p>Completed jobs trigger review requests and local proof-building.</p></div>
-      </div>
+    <div class="section-label">Your AI Agent Stack</div>
+    <h2>The AI Agents Built for {business}</h2>
+    <p>Each agent handles a specific repeatable task — so your team focuses on the work that requires a skilled technician, not admin and follow-up.</p>
+    <div class="agent-grid">{agent_cards_html}
     </div>
   </section>
 """)
@@ -353,10 +385,10 @@ def patch_home_services(html: str, profile: dict) -> str:
     html = html.replace("command-", "local-system-")
 
     mobile_nav_fix = """
-  /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
+  /* Home-services mobile chapter-nav fix: preserve readable chapter labels with horizontal scroll. */
   @media (max-width: 640px) {
-    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
-    .tab-nav::after {
+    .chapter-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .chapter-nav::after {
       content: "";
       position: sticky;
       right: 0;
@@ -364,7 +396,7 @@ def patch_home_services(html: str, profile: dict) -> str:
       pointer-events: none;
       background: linear-gradient(90deg, rgba(10,14,26,0), var(--primary));
     }
-    .tab-btn {
+    .chapter-btn {
       flex: 0 0 auto;
       min-width: 118px;
       font-size: 10px;
@@ -374,7 +406,7 @@ def patch_home_services(html: str, profile: dict) -> str:
     }
   }
 """
-    if "Home-services mobile tab fix" not in html:
+    if "Home-services mobile chapter-nav fix" not in html:
         html = html.replace("</style>", mobile_nav_fix + "</style>", 1)
 
     if "Apply to Work With Us" in html or "Apply to work with Bennett" in html:

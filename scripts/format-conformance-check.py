@@ -170,7 +170,7 @@ def check(html_path: pathlib.Path, podcast_path: Optional[pathlib.Path] = None):
         print("RESULT: SOFT FAIL — non-red-line drift; review before ship.")
     else:
         print("RESULT: PASS — conforms to the format-3 gold signature.")
-    return 0 if not failed else 1
+    return 0 if not rl_failed else 1
 
 
 if __name__ == "__main__":
