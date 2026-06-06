@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-06T00:48:08Z | Lead: Billy Bob | Industry: electrician and electrical contractor -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-06T00:59:44Z | Lead: Billy Bob | Industry: electrician and electrical contractor -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,7 +258,28 @@
     .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
-  </style>
+  
+  /* Home-services mobile tab fix: preserve readable tab labels with horizontal scroll. */
+  @media (max-width: 640px) {
+    .tab-nav { gap: 2px; scroll-snap-type: x proximity; }
+    .tab-nav::after {
+      content: "";
+      position: sticky;
+      right: 0;
+      flex: 0 0 24px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(10,14,26,0), var(--primary));
+    }
+    .tab-btn {
+      flex: 0 0 auto;
+      min-width: 118px;
+      font-size: 10px;
+      padding: 12px 10px;
+      letter-spacing: 0.5px;
+      scroll-snap-align: start;
+    }
+  }
+</style>
 <script>
 // Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
 // Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
@@ -314,7 +335,7 @@
 <section class="hero" id="hero">
   <div class="hero-badge">Confidential — Prepared for Billy Bob</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for Billy Bob Electric</h1>
-  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for Billy Bob Electric — faster lead response, more booked jobs, and less admin overhead — and how to get there in 30 days.</p>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for Billy Bob Electric — faster lead response, less admin overhead, and more closed jobs — and how to get there in 30 days.</p>
   <div class="hero-stats">
     <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div>
     <div class="hero-divider"></div>
@@ -326,227 +347,168 @@
   </div>
 </section>
 
-<section class="section section-alt" id="profile">
-  <div class="container">
-    <p class="section-label">Your Business Profile</p>
-    <h2 class="section-title">Where Billy Bob Electric Stands Today</h2>
-    <p class="section-sub">Built from your intake answers and a structured review of billybobelectric.com. This is the baseline we used to design your AI system.</p>
-    <div class="snapshot-grid">
-      <div class="snapshot-card"><div class="snapshot-val">$250K&ndash;500K</div><div class="snapshot-key">Annual Revenue</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Electrical Contractor</div><div class="snapshot-key">Business Type</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile</div><div class="snapshot-key">Primary CRM</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">12</div><div class="snapshot-key">Team Size</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">$199/mo</div><div class="snapshot-key">Pro Edition Pricing</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Team of 3</div><div class="snapshot-key">Core Operators</div></div>
-    </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile power user — ready to scale with dedicated AI agents. Current time recovery opportunities: lead follow-up, scheduling, and admin. Brand voice is calibrated from billybobelectric.com and the language your customers use — 90% accurate on Day 1, built from intel audit before launch.</p>
-  </div>
-</section>
+<section id="profile" class="section section-alt">
+    <div class="section-label">Section 01</div>
+    <h2>Your Business Snapshot</h2>
+    <p>Based on the test intake for <strong>Billy Bob Electric</strong>:</p>
+    <table class="opp-table">
+      <tr><th>Metric</th><th>Your Data</th></tr>
+      <tr><td>Monthly Leads</td><td><strong>160</strong></td></tr>
+      <tr><td>Annual Revenue</td><td><strong>$2M</strong></td></tr>
+      <tr><td>Team Size</td><td><strong>12</strong></td></tr>
+      <tr><td>Monthly Marketing Spend</td><td><strong>$8,000/mo</strong></td></tr>
+      <tr><td>Specialties</td><td><strong>Electrical Repair, Panel Upgrades, EV Charger Installation, Lighting Projects, Safety Inspections, Commercial Service Calls</strong></td></tr>
+      <tr><td>Avg Job Value</td><td><strong>$1,000</strong></td></tr>
+      <tr><td>Current Close Rate</td><td><strong>35%</strong></td></tr>
+      <tr><td>Current Tools</td><td><strong>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile</strong></td></tr>
+    </table>
+  </section>
 
-<section class="section" id="results">
-  <div class="container">
-    <p class="section-label">What Your Industry Is Already Doing</p>
-    <h2 class="section-title">SaaS &amp; CRM Companies Like Yours Are Already Running on AI</h2>
-    <p class="section-sub">These are the exact moves software and CRM businesses in your space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Billy Bob Electric runs them before the competitor down the street does.</p>
-    <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every signup in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> SaaS and CRM companies now put an AI speed-to-lead agent on every demo request and trial signup, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first vendor to respond wins the clear majority of deals at this price point &mdash; they capture trials your slower competitors never even see. <strong>How I deliver it for Billy Bob Electric:</strong> a speed-to-lead agent wired into your ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They book and confirm jobs without phone tag</div><div class="gap-desc"><strong>What they're doing:</strong> top electrical contractors are handing job scheduling to an AI scheduling agent &mdash; appointment confirmation, permit reminders, job-day alerts. <strong>How it helps them:</strong> booking friction drops, technicians arrive prepared, and no-shows decrease. <strong>How I deliver it for Billy Bob Electric:</strong> a scheduling agent that handles confirmations and reminders so your dispatch team only handles exceptions. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one completed job into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> top contractors run an AI content agent that turns every completed project into ready-to-post social, review requests, and Google Business Profile updates. <strong>How it helps them:</strong> they stay top-of-mind with their market every single week &mdash; no marketing hire, no content backlog. <strong>How I deliver it for Billy Bob Electric:</strong> a content agent trained on your brand voice from billybobelectric.com that converts each completed job into a week of ready-to-publish content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They reactivate past customers before competitors do</div><div class="gap-desc"><strong>What they're doing:</strong> top service contractors run an AI reactivation agent across their past customer list to flag re-engagement opportunities early. <strong>How it helps them:</strong> they recover jobs that would otherwise quietly go to a competitor. <strong>How I deliver it for Billy Bob Electric:</strong> a reactivation agent tracking past job dates, open estimates, and seasonal patterns to surface callbacks before competitors reach out. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
-    </div>
-    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside companies that sell what you sell. The ones who move first do not just save time &mdash; they take the customers everyone else was too slow to answer. Billy Bob Electric can be the company they are worried about, or the one they leave behind.</p>
-  </div>
-</section>
-
-<section class="section section-alt" id="pillars">
-  <div class="container">
-    <p class="section-label">Where the Value Comes From</p>
-    <h2 class="section-title">Three Ways AI Moves the Needle for Billy Bob Electric</h2>
-    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost per customer served.</p>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="pillar-title">Increase Revenue</div>
-        <div class="pillar-metric">More Closes</div>
-        <div class="pillar-sub">Faster lead response captures more Billy Bob Electric subscribers at $199/mo. AI proposals close deals in hours instead of days. Higher conversion at every pipeline stage.</div>
+<section id="results" class="section">
+    <div class="section-label">What Your Industry Is Already Doing</div>
+    <h2>Plumbing and Home Services Businesses Like Yours Are Already Running on AI</h2>
+    <p>These are the exact moves businesses in your space are making right now. The question is not whether AI runs these functions. It is whether Billy Bob Electric runs them before the competitor down the street does.</p>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> putting an AI speed-to-lead agent on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first business to respond wins the clear majority of urgent repair jobs. <strong>How I deliver it for Billy Bob Electric:</strong> a speed-to-lead agent wired into ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile that answers every inbound in under 60 seconds and routes it to the right stage.</div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="pillar-title">Save Time</div>
-        <div class="pillar-metric">12 Hrs / Week</div>
-        <div class="pillar-sub">Admin work, client onboarding, content creation, and support triage &mdash; automated. Hours reclaimed per teammate, every week.</div>
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> using AI to turn every service request into a dispatch-ready job brief. <strong>How it helps them:</strong> office staff stop chasing missing addresses, issue details, photos, and access notes before a technician can roll. <strong>How I deliver it for Billy Bob Electric:</strong> a dispatch intake agent that captures urgency, location, job type, photos, and next step inside GoHighLevel before the lead cools off.</div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="pillar-title">Scale Without Hiring</div>
-        <div class="pillar-metric">12 to 20 jobs/week</div>
-        <div class="pillar-sub">Serve more customers per technician. Eliminate scheduling friction and manual admin. Grow job volume without adding office staff.</div>
+      <div class="case-card">
+        <div class="desc"><strong>What they're doing:</strong> automating estimate follow-up, maintenance reminders, and review requests after every job. <strong>How it helps them:</strong> more open estimates convert, past customers return, and happy customers leave reviews while the work is still fresh. <strong>How I deliver it for Billy Bob Electric:</strong> follow-up, recall, and review-loop agents trained around Electrical Repair, Panel Upgrades, EV Charger Installation, Lighting Projects, Safety Inspections, Commercial Service Calls.</div>
       </div>
     </div>
-  </div>
-</section>
+    <p style="margin-top:1.4rem;font-weight:600;color:var(--text);">Every one of these is already running inside businesses that do what you do. The ones who move first do not just save time -- they take the customers everyone else was too slow to answer.</p>
+  </section>
 
-<section class="section" id="stack">
-  <div class="container">
-    <p class="section-label">Where You Are Today</p>
-    <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
-    <div class="stack-grid">
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile</div><div class="stack-role">CRM + Automation Engine</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage + Docs</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Billy Bob Electric Platform</div><div class="stack-role">Your SaaS Product</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Email + SMS</div><div class="stack-role">Lead Communication</div></div></div>
+<section id="pillars" class="section section-alt">
+    <div class="section-label">Section 04</div>
+    <h2>Your Tool Stack -- What AI Unlocks</h2>
+    <table class="opp-table">
+      <tr><th>Tool</th><th>Current Use</th><th>What AI Adds</th><th>Difficulty</th></tr>
+      <tr><td>GoHighLevel</td><td>Contacts, pipeline, SMS/email</td><td>AI tags urgency, updates stages, and records every intake and qualifier event</td><td>Medium</td></tr>
+      <tr><td>Phone/SMS</td><td>Inbound calls and customer updates</td><td>AI replies instantly, captures job context, and starts follow-up</td><td>Medium</td></tr>
+      <tr><td>Field Service Software</td><td>Dispatch and job tracking</td><td>AI prepares technician briefs and syncs job notes back to the CRM</td><td>Medium</td></tr>
+      <tr><td>Google Ads</td><td>Paid lead flow</td><td>AI improves conversion speed before increasing spend</td><td>Easy</td></tr>
+      <tr><td>Google Workspace</td><td>Email and documents</td><td>AI drafts estimate follow-ups and service reminders</td><td>Easy</td></tr>
+    </table>
+  </section>
+
+<section id="stack" class="section">
+    <div class="section-label">Section 03</div>
+    <h2>How This Fits Your Current Stack</h2>
+    <p>AI agents layer on top of the plumbing workflow you already run. Nothing gets ripped out.</p>
+    <div class="tech-grid">
+      <div class="tech-chip">GoHighLevel<br><small>Keeps running</small></div>
+      <div class="tech-chip">Phone/SMS<br><small>Keeps running</small></div>
+      <div class="tech-chip">Field Service Software<br><small>Keeps running</small></div>
+      <div class="tech-chip">Google Ads<br><small>Keeps running</small></div>
+      <div class="tech-chip">Google Workspace<br><small>Keeps running</small></div>
+      <div class="tech-chip add">+ Emergency Intake Agent</div>
+      <div class="tech-chip add">+ Estimate Follow-Up Agent</div>
+      <div class="tech-chip add">+ Maintenance Recall Agent</div>
+      <div class="tech-chip add">+ Dispatch Summary Agent</div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-alt" id="gaps">
-  <div class="container">
-    <p class="section-label">Where the Leverage Is</p>
-    <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
-    <p class="section-sub">These are the areas where Billy Bob Electric has the most capacity to recover &mdash; based on your intake answers and a structured review of billybobelectric.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
-    <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Lead Response Speed at Scale</div><div class="gap-desc">Published research shows the first contractor to respond wins the clear majority of service calls &mdash; yet most electrical contractors take 4&ndash;24 hours to reply manually. An AI lead response agent answers in under 60 seconds, 24/7, lifting close rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Marketing Content Production</div><div class="gap-desc">You flagged Marketing Content as a time drain. Seasonal promotions, before-and-after project photos, safety tips, and Google Business Profile posts &mdash; the content needs are constant. An AI content agent transforms each completed job into ready-to-post social, email, and review-request content without a dedicated marketing hire. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Client Onboarding Capacity</div><div class="gap-desc">Booking a new Billy Bob Electric job requires scheduling, permitting coordination, customer confirmations, and job-day briefings. Every manual coordination hour is an hour not spent on high-value electrical work. An AI scheduling agent handles the repeatable steps automatically while your team owns the technical conversations. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Admin Work Across Active Jobs</div><div class="gap-desc">You flagged Admin Work as a top stress. Follow-up calls, estimate reminders, permit status checks, and customer inquiries &mdash; multiplied across dozens of open jobs &mdash; consume hours that could go toward revenue-generating electrical work. An AI admin agent handles the repeatable inquiries automatically and routes the rest to a technician. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Client Retention &amp; Health Monitoring</div><div class="gap-desc">Missed follow-ups are the most expensive problem an electrical contractor faces. An AI reactivation agent tracks past customers &mdash; seasonal maintenance reminders, open estimates, and quiet periods &mdash; to surface re-engagement opportunities before competitors do. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
-      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Pipeline Visibility for a Team of 3</div><div class="gap-desc">Every closeable deal needs to be visible to all three operators simultaneously, scored by likelihood, and routed without a status meeting. An AI sales intelligence agent runs a weekly digest of pipeline movement, lead scores, and recommended actions &mdash; pulled directly from your ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile data. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+<section id="gaps" class="section section-alt">
+    <div class="section-label">Gap Analysis</div>
+    <h2>Where Plumbing Revenue Slips Away</h2>
+    <p>You told us the biggest challenges are <strong>missed after-hours calls, slow estimate follow-up, and past customers not being reactivated</strong>. With an average job around <strong>$1,000</strong>, every missed qualified call has real revenue attached.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <h4>After-Hours Calls Get Missed</h4>
+        <p>Emergency plumbing buyers usually keep calling until someone answers. A slow response lets another local company win the job.</p>
+        <div class="ai-fix">--&gt; AI Agent: Capture the issue, address, urgency, photos, and callback number in under 60 seconds</div>
+      </div>
+      <div class="pain-card">
+        <h4>Estimates Need Follow-Up</h4>
+        <p>Open estimates often stall because nobody owns the next touch. AI can follow up with useful reminders and booking windows.</p>
+        <div class="ai-fix">--&gt; AI Agent: 7-touch estimate follow-up through SMS and email</div>
+      </div>
+      <div class="pain-card med">
+        <h4>Maintenance Customers Go Quiet</h4>
+        <p>Past drain, water heater, and leak repair customers are a warm list. They need timely reminders before the next problem becomes urgent.</p>
+        <div class="ai-fix">--&gt; AI Agent: Service-history reactivation campaigns by job type</div>
+      </div>
+      <div class="pain-card med">
+        <h4>Dispatch Context Gets Scattered</h4>
+        <p>Photos, urgency, gate codes, and job notes often live in different places. AI can summarize and route the job before the technician rolls.</p>
+        <div class="ai-fix">--&gt; AI Agent: Dispatch-ready job brief inside GoHighLevel</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="oppmap">
-  <div class="container">
-    <p class="section-label">Prioritized Roadmap</p>
-    <h2 class="section-title">AI Opportunity Map &mdash; Billy Bob Electric</h2>
-    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down &mdash; do not skip ahead.</p>
-    <div class="opp-table-wrap">
-      <table class="opp-table">
-        <thead>
-          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound Billy Bob Electric inquiry answered before competitors see it</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Email/SMS</td></tr>
-          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer provisioning fully automated</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Notion, Email</td></tr>
-          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Google Drive</td></tr>
-          <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; product updates turned into marketing content</td><td>Social Channels, Email, Blog</td></tr>
-          <tr><td><div class="pri-badge">5</div></td><td><strong>Client Health Monitor</strong></td><td><span class="impact-tag">Churn prediction</span> &mdash; at-risk accounts surfaced before they cancel</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Slack, Notion</td></tr>
-          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Slack</td></tr>
-          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile, Notion</td></tr>
-        </tbody>
-      </table>
+<section id="oppmap" class="section">
+    <div class="section-label">Section 02</div>
+    <h2>AI Opportunity Map</h2>
+    <p>Prioritized by revenue impact, speed of deployment, and fit with your current tools.</p>
+    <table class="opp-table">
+      <tr><th>Priority</th><th>AI Use Case</th><th>Impact</th><th>Integrates With</th></tr>
+      <tr><td class="priority-high">P1</td><td><strong>Emergency Intake Agent</strong><br><small>Instantly captures issue, address, urgency, photos, and callback number</small></td><td>Faster response on urgent jobs</td><td>GoHighLevel, phone/SMS, field-service workflow</td></tr>
+      <tr><td class="priority-high">P2</td><td><strong>Estimate Follow-Up Agent</strong><br><small>Follows up on quoted-but-not-booked plumbing work</small></td><td>More quoted jobs booked</td><td>GoHighLevel, SMS, email</td></tr>
+      <tr><td class="priority-high">P3</td><td><strong>Maintenance Recall Agent</strong><br><small>Reactivates past customers by service history and season</small></td><td>More repeat revenue from warm customers</td><td>GoHighLevel database</td></tr>
+      <tr><td class="priority-med">P4</td><td><strong>Dispatch Summary Agent</strong><br><small>Turns intake details into a clean technician brief</small></td><td>Less back-and-forth before jobs</td><td>Dispatch notes, field-service workflow</td></tr>
+      <tr><td class="priority-med">P5</td><td><strong>Review Request Agent</strong><br><small>Sends review requests after completed jobs</small></td><td>More local proof and search trust</td><td>Google Business Profile, SMS</td></tr>
+    </table>
+  </section>
+
+<section id="ignore" class="section section-alt">
+    <div class="mobile-card">
+      <div class="section-label">Mobile Experience</div>
+      <strong style="font-size:15px;">Emergency and repair leads are mobile-first. The winner is usually the company that responds clearly and quickly.</strong>
+      <div class="mobile-grid">
+        <div class="mobile-col before">
+          <h4>Before AI</h4>
+          <p>Call missed after hours</p>
+          <p>Generic auto-reply</p>
+          <p>No issue or address captured</p>
+          <p>Estimate follow-up dies after one touch</p>
+        </div>
+        <div class="mobile-col after">
+          <h4>After AI</h4>
+          <p>Response in under 60 seconds</p>
+          <p>Issue, urgency, and address captured</p>
+          <p>Dispatch gets a clean job brief</p>
+          <p>Follow-up runs until booked or declined</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-alt" id="ignore">
-  <div class="container">
-    <p class="section-label">Sequencing, Not Limits</p>
-    <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
-    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
-    <div class="ignore-grid">
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI will happily model and recommend pricing &mdash; and eventually run tests on its own. For now, let it surface the data and keep the final $199/mo and add-on calls with leadership. A later-phase win, not a today distraction.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more home-service owners than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
+<section id="agents" class="section section-alt">
+    <div class="section-label">Lever A -- Local Lead Capture</div>
+    <h2>Local Services Capture Engine</h2>
+    <div class="local-lead-hero">
+      <h3>Billy's Local Lead Response System</h3>
+      <p>Instead of adding another cold channel, this system converts the leads you already pay for from calls, forms, Google Ads, and local search.</p>
+      <div class="local-lead-stats">
+        <div class="local-lead-stat"><div class="ls-val">&lt;60s</div><div class="ls-lbl">Target Response</div></div>
+        <div class="local-lead-stat"><div class="ls-val">24/7</div><div class="ls-lbl">Emergency Intake</div></div>
+        <div class="local-lead-stat"><div class="ls-val">1 CRM</div><div class="ls-lbl">GoHighLevel Record</div></div>
+      </div>
+      <div class="local-lead-tiles">
+        <div class="local-lead-tile"><h4>Source Tracking</h4><p>Each call, form, and qualifier submission carries source, session, and contact identity.</p></div>
+        <div class="local-lead-tile"><h4>Urgency Routing</h4><p>Emergency jobs are tagged and surfaced before standard estimates.</p></div>
+        <div class="local-lead-tile"><h4>Estimate Recovery</h4><p>Quoted-but-not-booked jobs get useful, timely follow-up.</p></div>
+        <div class="local-lead-tile"><h4>Review Loop</h4><p>Completed jobs trigger review requests and local proof-building.</p></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section" id="agents">
-  <div class="container">
-    <p class="section-label">Your AI System</p>
-    <h2 class="section-title">6 AI Agents Built for Billy Bob Electric</h2>
-    <p class="section-sub">Each agent maps directly to a specific workflow inside your CRM agency operations. Brand voice is built instantly from billybobelectric.com and your existing customer language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
-    <div class="agents-grid">
-
-        <div class="agent-card">
-          <div class="agent-icon">1</div>
-          <div class="agent-name">Agent #1: Emergency Dispatch Agent</div>
-          <div class="agent-desc">When a homeowner calls with a power outage, tripped breaker, or sparking outlet, this agent captures the inquiry via web form or text, assesses urgency, and immediately dispatches the nearest available technician with a pre-filled job ticket.<br><br><strong>Prompt:</strong> You are an emergency dispatch agent for Billy Bob Electric. When an emergency electrical inquiry arrives, assess urgency (sparking, no power, burning smell = P1), look up available technicians, create a dispatch ticket with job details and customer address, and send an ETA text to the customer within 2 minutes.</div>
-          <div class="agent-outcome">Emergency jobs dispatched in under 2 minutes — before the customer calls a competitor. Setup time: ~5 minutes</div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-icon">2</div>
-          <div class="agent-name">Agent #2: Quote Follow-Up Agent</div>
-          <div class="agent-desc">Tracks every open estimate and automatically follows up at 24h, 72h, and 7 days with a personalized message referencing the specific job (panel upgrade, EV charger, etc.) and offering to answer questions or schedule.<br><br><strong>Prompt:</strong> You are a quote follow-up agent for Billy Bob Electric. Review open estimates in the CRM, identify which are past 24h/72h/7d milestones, and send personalized follow-up texts/emails referencing the specific job type and estimated cost. Offer to schedule or answer questions. Update CRM on each touchpoint.</div>
-          <div class="agent-outcome">Converts 20-30% more estimates into booked jobs without any staff effort. Setup time: ~3 minutes</div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-icon">3</div>
-          <div class="agent-name">Agent #3: Technician Scheduling Agent</div>
-          <div class="agent-desc">Matches new service requests to available technicians based on location, job type, and current workload. Automatically sends appointment confirmations and 1-hour-ahead reminders to customers.<br><br><strong>Prompt:</strong> You are a technician scheduling agent for Billy Bob Electric. When a new job is booked, check technician calendars and proximity, assign the best match, send a calendar invite to the tech, and text the customer a confirmation with tech name, arrival window, and a reminder 1 hour before.</div>
-          <div class="agent-outcome">Zero scheduling gaps — every available slot filled, zero missed appointments. Setup time: ~4 minutes</div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-icon">4</div>
-          <div class="agent-name">Agent #4: Permit & Inspection Prep Agent</div>
-          <div class="agent-desc">For panel upgrades, EV charger installs, and new construction work that requires permits, this agent prepares the permit application package and schedules the inspection appointment with the local building department.<br><br><strong>Prompt:</strong> You are a permit preparation agent for Billy Bob Electric. For jobs requiring permits (panel upgrades, new circuits, EV chargers), gather job details from the work order, pre-fill the permit application for the relevant jurisdiction, attach required documentation, and queue it for submission. Schedule inspection as soon as permit is issued.</div>
-          <div class="agent-outcome">Permits filed same day — no more week-long delays waiting for paperwork. Setup time: ~10 minutes</div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-icon">5</div>
-          <div class="agent-name">Agent #5: Maintenance Plan Agent</div>
-          <div class="agent-desc">Identifies customers who have not had an electrical safety inspection in 2+ years and sends personalized outreach offering an annual electrical health check — generating recurring revenue without any new marketing spend.<br><br><strong>Prompt:</strong> You are a maintenance plan agent for Billy Bob Electric. Query the CRM for customers with no service in 18+ months, segment by home age and prior job type, and send a personalized safety inspection offer referencing their last service. Log all outreach and responses. Offer scheduling directly in the message.</div>
-          <div class="agent-outcome">Reactivates dormant customers — 15-25% response rate, zero ad spend. Setup time: ~5 minutes</div>
-        </div>
-
-        <div class="agent-card">
-          <div class="agent-icon">6</div>
-          <div class="agent-name">Agent #6: Review & Referral Agent</div>
-          <div class="agent-desc">Sends a review request 2 hours after job completion with a direct Google review link. For customers who leave 5-star reviews, automatically sends a referral discount offer for their next service or for a friend.<br><br><strong>Prompt:</strong> You are a review and referral agent for Billy Bob Electric. After a job is marked complete, wait 2 hours and send a personalized thank-you text with a direct Google review link. If the customer posts a 4-5 star review, send a referral offer within 24 hours. Log all interactions and referral conversions in CRM.</div>
-          <div class="agent-outcome">Doubles Google review volume — referrals generate 2-3 jobs per month. Setup time: ~3 minutes</div>
-        </div>
-<!-- DIY vs Partner -->
+<section id="timeline" class="section section-alt">
+    <div class="section-label">Your Operating Method</div>
+    <h2>The Billy Bob Electric Service Method</h2>
+    <p>AI supports the repeatable work around each job while your team keeps control of the actual service.</p>
+    <div class="method-grid">
+      <div class="method-card"><div class="m-num">1</div><h4>Capture</h4><p>AI collects the issue, urgency, address, photos, and callback details.</p></div>
+      <div class="method-card"><div class="m-num">2</div><h4>Route</h4><p>AI tags emergency, estimate, or maintenance work and routes it to the right next step.</p></div>
+      <div class="method-card"><div class="m-num">3</div><h4>Follow Up</h4><p>AI keeps estimates and service reminders moving until the customer books or declines.</p></div>
+      <div class="method-card"><div class="m-num">4</div><h4>Improve</h4><p>AI summarizes outcomes so the owner sees what sources and jobs are actually working.</p></div>
     </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="timeline">
-  <div class="container">
-    <p class="section-label">How It Happens</p>
-    <h2 class="section-title">Your Implementation Roadmap</h2>
-    <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
-    <div class="milestone-table-wrap">
-      <table class="milestone-table">
-        <thead>
-          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
-            <td><ul class="m-list"><li>First job walkthrough &mdash; map your specific lead flow and scheduling process</li><li>Speed-to-Lead Agent configured and connected to your ServiceTitan, QuickBooks, Google Calendar, Gmail, Google Business Profile forms</li><li>Brand voice built from billybobelectric.com and your existing Billy Bob Electric messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
-            <td class="m-result">Your first agent is live. Every Billy Bob Electric lead gets a 60-second response while you sleep.</td>
-          </tr>
-          <tr>
-            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
-            <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Billy Bob Electric pricing, features, and verticals</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
-            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
-          </tr>
-          <tr>
-            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
-            <td><ul class="m-list"><li>30-day performance review: response rates, time saved, churn prevented</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Billy Bob Electric scales past 1,000 customers</li></ul></td>
-            <td class="m-result">System knows your business. Every agent calibrated to real Billy Bob Electric data.</td>
-          </tr>
-          <tr>
-            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
-            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
-            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+    <div class="method-quote">"The first company to respond clearly often wins the plumbing job before anyone else gets organized."</div>
+  </section>
 
 <section class="section" id="calculator">
   <div class="container">
@@ -668,7 +630,7 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
 [Your Name] | Billy Bob Electric Sales Team
 ---</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Ensures every Billy Bob Electric lead receives a professional, industry-specific response in under 60 seconds &mdash; including nights, weekends, and busy seasons &mdash; without adding a single staff hour.</div>
+          <div class="prompt-outcome">What this does: Ensures every Billy Bob Electric lead receives a professional, industry-specific response in under 60 seconds &mdash; including nights, weekends, and product launches &mdash; without adding a single staff hour.</div>
         </div>
       </div>
       <div class="prompt-card">
@@ -676,7 +638,7 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
         <div class="prompt-body">
           <pre id="prompt2" class="prompt-pre">You are the Quote Follow-Up Agent for Billy Bob Electric. Write a concise follow-up for an open electrical estimate. Reference the job type, remind the customer of safety/value, and offer two scheduling windows.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Billy Bob Electric customer &mdash; from welcome through month-1 benchmark &mdash; across every service type and job stage, simultaneously.</div>
+          <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Billy Bob Electric customer &mdash; from welcome through month-1 benchmark &mdash; across every vertical and plan tier, simultaneously.</div>
         </div>
       </div>
       <div class="prompt-card">
@@ -691,8 +653,8 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
     <div class="diy-or-partner">
       <h3>Two paths forward for Billy:</h3>
       <div class="path-grid">
-        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most electrical contractors can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Billy Bob Electric's brand voice from Day 1, monitoring your electrical business across every lead and active job, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent" class="path-cta">See If You Qualify</a></div>
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Billy Bob Electric's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -767,25 +729,24 @@ I will have a personalized Billy Bob Electric walkthrough ready for you within 2
   </div>
 </section>
 
-<section class="section section-alt" id="sources">
-  <div class="container">
-    <p class="section-label">Research Sources</p>
-    <h2 class="section-title">Citations</h2>
-    <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
-    <div class="sources-list">
-      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
-      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
-      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in SaaS and multi-account operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
-      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
-      <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review &mdash; Automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
-    </div>
-  </div>
-</section>
+<section id="sources" class="section section-alt">
+    <div class="section-label">Industry Context</div>
+    <h2>What Top Plumbing Companies Are Doing</h2>
+    <p>Strong local service companies are tightening response time, follow-up, dispatch context, and reviews. Here is where AI closes the gap for Billy Bob Electric.</p>
+    <table class="bench-table">
+      <tr><th style="width:50%">Top Firms Do</th><th style="width:50%">Your AI Advantage</th></tr>
+      <tr><td>Respond to urgent inquiries quickly, even after hours</td><td>AI intake responds in under 60 seconds and tags urgency</td></tr>
+      <tr><td>Follow up on every open estimate</td><td>Estimate Follow-Up Agent sends useful reminders and booking windows</td></tr>
+      <tr><td>Reactivate past customers before slow season</td><td>Maintenance Recall Agent segments by service history</td></tr>
+      <tr><td>Keep job context clean for technicians</td><td>Dispatch Summary Agent prepares concise job notes</td></tr>
+      <tr><td>Build local proof after each job</td><td>Review Request Agent triggers after completed work</td></tr>
+    </table>
+  </section>
 
 <section class="cta-section" id="apply">
   <div class="container">
     <h2>Ready to See This<br><span>Working for Billy Bob Electric?</span></h2>
-    <p class="cta-personal">"Billy, I built this roadmap specifically for Billy Bob Electric because I believe the platform you have created &mdash; running a lean electrical contracting business &mdash; deserves systems that are as reliable and responsive as your technicians. The AI here is not about replacing anything. It is about making sure no call goes unanswered and no estimate goes unfollowed. &mdash; Bennett"</p>
+    <p class="cta-personal">"Billy, I built this roadmap specifically for Billy Bob Electric because I believe the platform you have created &mdash; helping 675+ home service businesses run their operations in one place &mdash; deserves systems that are as reliable and scalable as the product itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
     <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
