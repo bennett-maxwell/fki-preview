@@ -1,3 +1,4 @@
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-06T00:03:16Z | Lead: Britt Warnick | Industry: wedding and event design -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -258,6 +259,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -300,12 +336,12 @@
       <div class="snapshot-card"><div class="snapshot-val">SaaS Agency</div><div class="snapshot-key">Business Type</div></div>
       <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
       <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">your client hub</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">your current tools</div><div class="snapshot-key">Primary CRM</div></div>
       <div class="snapshot-card"><div class="snapshot-val">675+</div><div class="snapshot-key">Active Customers</div></div>
       <div class="snapshot-card"><div class="snapshot-val">$199/mo</div><div class="snapshot-key">Pro Edition Pricing</div></div>
       <div class="snapshot-card"><div class="snapshot-val">Team of 3</div><div class="snapshot-key">Core Operators</div></div>
     </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active your client hub power user with custom integrations — ready to scale with dedicated AI agents. Current time recovery opportunities: Marketing Content and Admin Work across 675+ accounts. Brand voice is calibrated from brittwarnickdesigns.com, your tagline ("All-In-One CRM Built for Home Service Hustlers Powered By A.I."), and the language your existing customers use on the site — 90% accurate on Day 1, built from intel audit before launch.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active your current tools power user with custom integrations — ready to scale with dedicated AI agents. Current time recovery opportunities: Marketing Content and Admin Work across 675+ accounts. Brand voice is calibrated from brittwarnickdesigns.com, your tagline ("All-In-One CRM Built for Home Service Hustlers Powered By A.I."), and the language your existing customers use on the site — 90% accurate on Day 1, built from intel audit before launch.</p>
   </div>
 </section>
 
@@ -315,7 +351,7 @@
     <h2 class="section-title">SaaS &amp; CRM Companies Like Yours Are Already Running on AI</h2>
     <p class="section-sub">These are the exact moves software and CRM businesses in your space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Britt Warnick Designs runs them before the competitor down the street does.</p>
     <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every signup in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> SaaS and CRM companies now put an AI speed-to-lead agent on every demo request and trial signup, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first vendor to respond wins the clear majority of deals at this price point &mdash; they capture trials your slower competitors never even see. <strong>How I deliver it for Britt Warnick Designs:</strong> a speed-to-lead agent wired into your your client hub that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every signup in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> SaaS and CRM companies now put an AI speed-to-lead agent on every demo request and trial signup, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first vendor to respond wins the clear majority of deals at this price point &mdash; they capture trials your slower competitors never even see. <strong>How I deliver it for Britt Warnick Designs:</strong> a speed-to-lead agent wired into your your current tools that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
       <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They onboard 1,000+ accounts with a team of 3</div><div class="gap-desc"><strong>What they're doing:</strong> vertical SaaS companies are handing new-customer setup to an AI onboarding agent &mdash; account provisioning, template deployment, welcome sequences, kickoff scheduling. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a tiny team serves hundreds more accounts without a single new hire. <strong>How I deliver it for Britt Warnick Designs:</strong> an onboarding agent that handles every repeatable setup step so your team of 3 only touches the strategy conversations. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
       <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one product release into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> software companies run an AI content agent that turns every feature ship into ready-to-post social, email, and blog content. <strong>How it helps them:</strong> they stay top-of-mind with their market every single week &mdash; no marketing hire, no content backlog. <strong>How I deliver it for Britt Warnick Designs:</strong> a content agent trained on your brand voice from brittwarnickdesigns.com that converts each Britt Warnick Designs update into a full week of publish-ready content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
       <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They catch churn before the cancel button</div><div class="gap-desc"><strong>What they're doing:</strong> subscription businesses run an AI health-monitoring agent across their whole account base to flag at-risk customers early. <strong>How it helps them:</strong> they save recurring revenue that would otherwise quietly walk out the door &mdash; the cheapest dollar in SaaS is the one you keep. <strong>How I deliver it for Britt Warnick Designs:</strong> a retention agent watching login and usage signals across all 675+ accounts, surfacing churn risk while there is still time to act. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
@@ -358,7 +394,7 @@
     <h2 class="section-title">Your Current Tool Stack</h2>
     <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
     <div class="stack-grid">
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">your client hub</div><div class="stack-role">CRM + Automation Engine</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">your current tools</div><div class="stack-role">CRM + Automation Engine</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage + Docs</div></div></div>
@@ -379,7 +415,7 @@
       <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Client Onboarding Capacity</div><div class="gap-desc">Onboarding a new Britt Warnick Designs customer requires account setup, automation template deployment, welcome sequences, and kickoff scheduling. With a team of 3 supporting 675+ accounts, every manual onboarding hour is an hour not spent on growth. An AI onboarding agent handles the repeatable steps automatically while your team owns the strategy conversations. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
       <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Admin Work Across 675+ Accounts</div><div class="gap-desc">You flagged Admin Work as a top stress. Support tickets, account status checks, billing questions, and feature requests &mdash; multiplied across hundreds of customers &mdash; consume hours that could go toward product development and strategic growth. An AI admin agent handles the repeatable inquiries automatically and routes the rest to a human. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
       <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Client Retention &amp; Health Monitoring</div><div class="gap-desc">At $199/mo per customer, churn is the most expensive problem a SaaS CRM agency faces. An AI health monitor tracks login frequency, automation usage, and support patterns across all 675+ accounts to surface at-risk clients before they cancel &mdash; enabling proactive outreach that keeps recurring revenue locked in. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
-      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Pipeline Visibility for a Team of 3</div><div class="gap-desc">Every closeable deal needs to be visible to all three operators simultaneously, scored by likelihood, and routed without a status meeting. An AI sales intelligence agent runs a weekly digest of pipeline movement, lead scores, and recommended actions &mdash; pulled directly from your your client hub data. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Pipeline Visibility for a Team of 3</div><div class="gap-desc">Every closeable deal needs to be visible to all three operators simultaneously, scored by likelihood, and routed without a status meeting. An AI sales intelligence agent runs a weekly digest of pipeline movement, lead scores, and recommended actions &mdash; pulled directly from your your current tools data. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
     </div>
   </div>
 </section>
@@ -395,13 +431,13 @@
           <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
         </thead>
         <tbody>
-          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound Britt Warnick Designs inquiry answered before competitors see it</td><td>your client hub, Email/SMS</td></tr>
-          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer provisioning fully automated</td><td>your client hub, Notion, Email</td></tr>
-          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>your client hub, Google Drive</td></tr>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound Britt Warnick Designs inquiry answered before competitors see it</td><td>your current tools, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer provisioning fully automated</td><td>your current tools, Notion, Email</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>your current tools, Google Drive</td></tr>
           <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; product updates turned into marketing content</td><td>Social Channels, Email, Blog</td></tr>
-          <tr><td><div class="pri-badge">5</div></td><td><strong>Client Health Monitor</strong></td><td><span class="impact-tag">Churn prediction</span> &mdash; at-risk accounts surfaced before they cancel</td><td>your client hub, Slack, Notion</td></tr>
-          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>your client hub, Slack</td></tr>
-          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>your client hub, Notion</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Client Health Monitor</strong></td><td><span class="impact-tag">Churn prediction</span> &mdash; at-risk accounts surfaced before they cancel</td><td>your current tools, Slack, Notion</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>your current tools, Slack</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>your current tools, Notion</td></tr>
         </tbody>
       </table>
     </div>
@@ -429,7 +465,7 @@
     <p class="section-sub">Each agent maps directly to a specific workflow inside your CRM agency operations. Brand voice is built instantly from brittwarnickdesigns.com and your existing customer language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
     <div class="agents-grid">
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Speed-to-Lead Agent</div><div class="agent-desc">Monitors your inquiry inbox and website forms. The moment a home service business owner submits interest in Britt Warnick Designs, this agent drafts and sends a personalized, professional response within 60 seconds &mdash; day, night, or weekend. Qualifies the lead and routes to the right pipeline stage.</div><div class="agent-outcome">Responds in under 60 sec &mdash; 24/7, no staff required</div></div>
-      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Client Onboarding Agent</div><div class="agent-desc">Automates the full new-customer setup sequence &mdash; welcome email, account provisioning checklist, automation template deployment, kickoff call scheduling, and initial your client hub configuration. Handles every repeatable onboarding step so your team focuses on strategy.</div><div class="agent-outcome">Cuts onboarding from days to hours</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Client Onboarding Agent</div><div class="agent-desc">Automates the full new-customer setup sequence &mdash; welcome email, account provisioning checklist, automation template deployment, kickoff call scheduling, and initial your current tools configuration. Handles every repeatable onboarding step so your team focuses on strategy.</div><div class="agent-outcome">Cuts onboarding from days to hours</div></div>
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Proposal Generator</div><div class="agent-desc">Takes a prospect's business type, team size, and goals &mdash; produces a fully branded Britt Warnick Designs proposal in under 3 minutes. Personalized to their industry vertical with relevant feature highlights and Britt Warnick Designs customer success stories.</div><div class="agent-outcome">Proposal in 3 min vs. 45 min manually</div></div>
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Content Production Agent</div><div class="agent-desc">Transforms Britt Warnick Designs product updates, feature releases, and customer wins into ready-to-post social content, email campaigns, and blog articles &mdash; without a dedicated content hire. Matches your brand voice from day one.</div><div class="agent-outcome">Eliminates the marketing content bottleneck</div></div>
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Client Health Monitor</div><div class="agent-desc">Tracks login frequency, automation usage, and support ticket patterns across your 675+ Britt Warnick Designs accounts. Surfaces at-risk clients before they churn and recommends specific retention actions your team can take this week.</div><div class="agent-outcome">Predict churn before it happens &mdash; weekly digest</div></div>
@@ -451,7 +487,7 @@
         <tbody>
           <tr>
             <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
-            <td><ul class="m-list"><li>Kickoff call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your your client hub forms</li><li>Brand voice built from brittwarnickdesigns.com and your existing Britt Warnick Designs messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
+            <td><ul class="m-list"><li>Kickoff call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your your current tools forms</li><li>Brand voice built from brittwarnickdesigns.com and your existing Britt Warnick Designs messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
             <td class="m-result">Your first agent is live. Every Britt Warnick Designs lead gets a 60-second response while you sleep.</td>
           </tr>
           <tr>
@@ -675,7 +711,7 @@ RULES: Include real data from their account. If metrics are low, do not highligh
 - Never use exclamation points
 - Keep messages under 120 words (Stage 1 up to 150)
 - If a customer replies at any stage: pause automation and route to human review
-- All messages via your client hub: prefer SMS if available, email as fallback
+- All messages via your current tools: prefer SMS if available, email as fallback
 - Brand voice: direct, practical, zero fluff - like a business owner who respects another business owner's time</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Britt Warnick Designs customer &mdash; from welcome through month-1 benchmark &mdash; across every vertical and plan tier, simultaneously.</div>
@@ -747,7 +783,7 @@ CUSTOMIZATION: Add or remove bullets based on what the contact mentioned.
 SECTION 4 - WHY Britt Warnick Designs (3-4 sentences, specific not generic)
 Include:
 - Britt Warnick Designs serves 675+ businesses across home services
-- Built on your client hub - the platform trusted by thousands of agencies
+- Built on your current tools - the platform trusted by thousands of agencies
 - 24/7 live chat support with real humans (not chatbots)
 - FastStart coaching available for accelerated onboarding
 
@@ -789,7 +825,7 @@ If any answer is N: revise that section before sending.
       <h3>Two paths forward for Britt:</h3>
       <div class="path-grid">
         <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Britt Warnick Designs's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick" class="path-cta">Get Your AI Quote</a></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Britt Warnick Designs's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&agents=Speed-to-Lead%20Agent%2CClient%20Onboarding%20Agent%2CProposal%20Generator%2CContent%20Production%20Agent%2CClient%20Health%20Monitor%2CAdmin%20Automation%20Agent" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -800,7 +836,7 @@ If any answer is N: revise that section before sending.
     <p class="section-label">Live Preview</p>
     <h2 class="section-title">Britt Warnick Designs Speed-to-Lead Demo</h2>
     <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound Britt Warnick Designs inquiry, day or night, every vertical. The same flow runs across your 675+ existing accounts for client onboarding too.</p>
-    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center is built on your your client hub account &mdash; not as a standalone tool. It plugs into the Britt Warnick Designs brand voice you have already built and runs every workflow above end-to-end.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center is built on your your current tools account &mdash; not as a standalone tool. It plugs into the Britt Warnick Designs brand voice you have already built and runs every workflow above end-to-end.</p>
   </div>
 </section>
 
@@ -884,7 +920,7 @@ If any answer is N: revise that section before sending.
     <h2>Ready to See This<br><span>Working for Britt Warnick Designs?</span></h2>
     <p class="cta-personal">"Britt, I built this roadmap specifically for Britt Warnick Designs because I believe the platform you have created &mdash; helping 675+ home service businesses run their operations in one place &mdash; deserves systems that are as reliable and scalable as the product itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick" class="cta-btn">Get Your AI Quote</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&agents=Speed-to-Lead%20Agent%2CClient%20Onboarding%20Agent%2CProposal%20Generator%2CContent%20Production%20Agent%2CClient%20Health%20Monitor%2CAdmin%20Automation%20Agent" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -897,7 +933,7 @@ If any answer is N: revise that section before sending.
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick" class="mobile-cta-btn">Get Your AI Quote</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&agents=Speed-to-Lead%20Agent%2CClient%20Onboarding%20Agent%2CProposal%20Generator%2CContent%20Production%20Agent%2CClient%20Health%20Monitor%2CAdmin%20Automation%20Agent" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
