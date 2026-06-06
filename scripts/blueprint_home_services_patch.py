@@ -27,7 +27,7 @@ def esc(value) -> str:
 
 def replace_section(html: str, section_id: str, replacement: str) -> str:
     pattern = re.compile(
-        rf'<section id="{re.escape(section_id)}" class="section">[\s\S]*?</section>',
+        rf'<section[^>]*\bid="{re.escape(section_id)}"[^>]*>[\s\S]*?</section>',
         re.M,
     )
     html, count = pattern.subn(replacement.strip(), html, count=1)
@@ -83,8 +83,8 @@ def patch_home_services(html: str, profile: dict) -> str:
     html = html.replace(", Instagram, and LinkedIn", " and your field-service stack")
     html = html.replace("Google Workspace, Microsoft Teams, ServiceTitan or Housecall Pro-style field service workflow, call tracking, Google Ads Database", "GoHighLevel Database")
 
-    html = replace_section(html, "sec-2", f"""
-  <section id="sec-2" class="section">
+    html = replace_section(html, "results", f"""
+  <section id="results" class="section">
     <div class="section-label">What Your Industry Is Already Doing</div>
     <h2>Plumbing and Home Services Businesses Like Yours Are Already Running on AI</h2>
     <p>These are the exact moves businesses in your space are making right now. The question is not whether AI runs these functions. It is whether {business} runs them before the competitor down the street does.</p>
@@ -103,8 +103,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-3", f"""
-  <section id="sec-3" class="section">
+    html = replace_section(html, "gaps", f"""
+  <section id="gaps" class="section section-alt">
     <div class="section-label">Gap Analysis</div>
     <h2>Where Plumbing Revenue Slips Away</h2>
     <p>You told us the biggest challenges are <strong>missed after-hours calls, slow estimate follow-up, and past customers not being reactivated</strong>. With an average job around <strong>{avg_job}</strong>, every missed qualified call has real revenue attached.</p>
@@ -133,8 +133,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-5", f"""
-  <section id="sec-5" class="section">
+    html = replace_section(html, "ignore", f"""
+  <section id="ignore" class="section section-alt">
     <div class="mobile-card">
       <div class="section-label">Mobile Experience</div>
       <strong style="font-size:15px;">Emergency and repair leads are mobile-first. The winner is usually the company that responds clearly and quickly.</strong>
@@ -158,8 +158,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-6", f"""
-  <section id="sec-6" class="section">
+    html = replace_section(html, "profile", f"""
+  <section id="profile" class="section section-alt">
     <div class="section-label">Section 01</div>
     <h2>Your Business Snapshot</h2>
     <p>Based on the test intake for <strong>{business}</strong>:</p>
@@ -177,8 +177,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-7", f"""
-  <section id="sec-7" class="section">
+    html = replace_section(html, "oppmap", f"""
+  <section id="oppmap" class="section">
     <div class="section-label">Section 02</div>
     <h2>AI Opportunity Map</h2>
     <p>Prioritized by revenue impact, speed of deployment, and fit with your current tools.</p>
@@ -193,8 +193,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-8", f"""
-  <section id="sec-8" class="section">
+    html = replace_section(html, "stack", f"""
+  <section id="stack" class="section">
     <div class="section-label">Section 03</div>
     <h2>How This Fits Your Current Stack</h2>
     <p>AI agents layer on top of the plumbing workflow you already run. Nothing gets ripped out.</p>
@@ -212,8 +212,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-9", f"""
-  <section id="sec-9" class="section">
+    html = replace_section(html, "pillars", f"""
+  <section id="pillars" class="section section-alt">
     <div class="section-label">Section 04</div>
     <h2>Your Tool Stack -- What AI Unlocks</h2>
     <table class="opp-table">
@@ -227,8 +227,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-13", f"""
-  <section id="sec-13" class="section">
+    html = replace_section(html, "agents", f"""
+  <section id="agents" class="section section-alt">
     <div class="section-label">Lever A -- Local Lead Capture</div>
     <h2>Local Services Capture Engine</h2>
     <div class="linkedin-hero">
@@ -249,8 +249,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-15", f"""
-  <section id="sec-15" class="section">
+    html = replace_section(html, "timeline", f"""
+  <section id="timeline" class="section section-alt">
     <div class="section-label">Your Operating Method</div>
     <h2>The {business} Service Method</h2>
     <p>AI supports the repeatable work around each job while your team keeps control of the actual service.</p>
@@ -264,8 +264,8 @@ def patch_home_services(html: str, profile: dict) -> str:
   </section>
 """)
 
-    html = replace_section(html, "sec-16", f"""
-  <section id="sec-16" class="section">
+    html = replace_section(html, "sources", f"""
+  <section id="sources" class="section section-alt">
     <div class="section-label">Industry Context</div>
     <h2>What Top Plumbing Companies Are Doing</h2>
     <p>Strong local service companies are tightening response time, follow-up, dispatch context, and reviews. Here is where AI closes the gap for {business}.</p>

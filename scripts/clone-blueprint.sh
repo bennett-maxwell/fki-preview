@@ -483,7 +483,9 @@ PYTHON_SCRIPT
 # content for plumbing/HVAC/electrical/home-service profiles.
 HOME_SERVICES_PATCH="$SCRIPT_DIR/blueprint_home_services_patch.py"
 if [[ -f "$HOME_SERVICES_PATCH" ]]; then
-  python3 "$HOME_SERVICES_PATCH" "$OUTPUT_FILE" "$PROFILE_JSON"
+  if ! python3 "$HOME_SERVICES_PATCH" "$OUTPUT_FILE" "$PROFILE_JSON" 2>&1; then
+    echo "[WARN] home-services patch exited non-zero — blueprint may retain generic content" >&2
+  fi
 fi
 
 # Convert legacy SaaS/home-services prompt copy into a restaurant/QSR page before
