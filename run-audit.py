@@ -211,7 +211,7 @@ def home_services_content_gate(html, lead):
     # contains the "home service" substring but is a software vendor — its correct
     # copy (churn, recurring revenue, plan tiers) must NOT be flagged by the
     # home-services-operator copy gate. Exclude software vendors first. (2026-06-02)
-    if any(term in industry_blob for term in ("saas", "software", " crm", "crm ", "platform", "b2b", "tech company")):
+    if any(term in industry_blob for term in ("saas", "software", " crm", "crm ", "platform", "b2b", "tech company", "saas agency", "saas crm", "crm agency", "marketing agency", "digital agency")):
         return True, []
     if not any(term in industry_blob for term in ("plumb", "hvac", "electrical", "home service", "restoration")):
         return True, []
