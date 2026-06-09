@@ -1,286 +1,134 @@
-# AI Advantage Roadmap — Brad Maxwell / Enso Rings
 
-## Required host instructions
-This customer-facing audio walkthrough is addressed directly to Brad. Use second person frequently: Brad, you, your team, your customers, your support flow. Do not say document, briefing, according to, materials, we are looking at, or we are planning. Do not make guaranteed ROI claims or explicit promised dollar returns. Keep the tone consultative, practical, and specific to Enso Rings.
+## MANDATORY OPENING (for the hosts)
+Open the audio with EXACTLY these words: "Brad, this one is for you and the team at Enso Rings."
+Throughout the episode: always say "Enso Rings" — NEVER say "the company" or "this company". Always address Brad directly as "you" — never in third person.
+# Podcast research notes — Brad Maxwell, Enso Rings
+**Format:** Two-host conversational AI podcast, 12-18 minutes, addressed directly to Brad Maxwell throughout. Hosts speak TO Brad, never about him in third person. Open with his name in the first sentence. Assumptions must be narrated as assumptions using the labels embedded below.
 
+---
 
-## Direct opening and funnel rule
-Open the audio with EXACTLY these words: "Hi Brad, welcome. This walkthrough was built for you and Enso Rings, from what you told us."
-Target length is 17 to 19 minutes. Do not exceed 19 minutes 30 seconds.
-The only CTA is: review the Blueprint, then click See If You Qualify.
-Use the bare tracked qualifier URL only: https://bennett-maxwell.github.io/fki-preview/qualify.html
+## Segment 1: This Is Your Business
 
-## Verified identity and intake facts
+Brad, this episode is for you — not a generic pitch, not a template, but a working session about Enso Rings, the company where you spend your days as a manufacturing engineer, and what an AI agent layer would actually look like wired into the operation you already know down to the process level.
 
-- lead_name: Brad Maxwell
+Let's start by saying out loud what you already live: Enso Rings is a genuinely world-class story. Late 2015, two childhood friends — Brighton Jones and Aaron Dalley — put a silicone ring concept on Kickstarter and raised $15,324. Not millions. Fifteen thousand dollars and change. They launched the company properly in 2016, and instead of doing what almost every product startup does — offshore everything, become a logistics company that happens to own a brand — they built headquarters and in-house manufacturing in Lehi, Utah. That decision is the spine of everything that came after, and Brad, it's the decision that makes your job exist. You're not managing a contract manufacturer over email at 2 a.m. Pacific. You can walk the floor.
 
-- business_name: Enso Rings
+Then came the moment most people know: Shark Tank, Season 9, 2017. Brighton and Aaron walked out with a handshake deal from Robert Herjavec. The deal fell through in due diligence — which happens to a meaningful share of Shark Tank handshakes, that part is well documented — but the exposure did exactly what exposure is supposed to do. In the eighteen months around that appearance, Enso drove roughly $3.8 million in sales. The Shark didn't close; the market did.
 
-- email: brad.maxwell@ensorings.com
+And the market kept closing. Enso Rings has now sold over four million rings into more than 150 countries. The most commonly cited revenue figure is around $16 million — and hosts, flag this honestly for Brad: that's a 2022 public estimate, so it's possibly dated; the real number today could sit above or below it, and Brad would know better than any database. Headcount is usually listed at around 52 employees — that's a data-vendor estimate, our assumption — confirm or correct this, Brad, since you see the actual building.
 
-- phone: +18013180414
+Now look at the product architecture, because this matters enormously for everything we'll discuss later. Enso isn't one ring. It's the Solid line, Etched, Inked, Stackable, Signet, the Metal Hybrid collection, plus bracelets and Apple Watch bands. Layer onto that one of the most impressive licensed-IP catalogs in the accessories space: Disney, Star Wars, Marvel, DC, Harry Potter, Pokémon, Lord of the Rings. Think about what that licensing list actually signals — Disney and Warner Bros. don't license their crown-jewel properties to operations that can't execute. Every one of those logos on ensorings.com is a third-party audit of Enso's quality, compliance, and reliability that the company passed.
 
-- website_url: https://ensorings.com/
+There's also a soul to this business. Rings For A Reason — the charity line — has pushed more than $1 million to causes. And the lifetime guarantee on the rings isn't marketing copy; it's an operational commitment that the fulfillment and customer experience teams honor every single day, which, as we'll get to, is also where some of the most interesting AI leverage lives.
 
-- industry: direct-to-consumer ecommerce jewelry
+So that's the company. Now let's talk about you, Brad, because this podcast is calibrated to the person actually listening. You're a manufacturing engineer in the Lehi/Orem operation. You hold a BS in Mechanical Engineering. Before Enso, you did process engineering and order fulfillment work at Nu Skin — a company that ships at a scale most consumer brands never touch — plus time at VPI Manufacturing and Northrop Grumman. That résumé tells us exactly who we're talking to: someone who has lived inside both aerospace-grade rigor and high-volume consumer fulfillment. You think in cycle times, yield, changeover cost, takt, and throughput. You've watched a fulfillment line back up because of an upstream information problem, and you know that most "warehouse problems" are actually data problems wearing a hi-vis vest.
 
-- annual_revenue_range: $10M+
+That's why this conversation is different from the usual "AI for e-commerce" chatter. We're not going to talk to you like a marketer. We're going to talk to you like a process engineer who happens to work at one of the most beloved consumer brands to come out of Utah — because that's who you are.
 
-- avg_job_value: $50
+One framing before we move on, and hosts, land this clearly: nothing in this episode implies Enso Rings is struggling. The opposite. Enso is a healthy, demonstrably excellent operation — Kickstarter to four million units to a Disney license wall is not what struggling looks like. The question on the table is narrower and more interesting: when an operation is already this good, where does the next layer of leverage come from? Our answer — and the reason Bennett Maxwell's team at Franchise KI built this blueprint — is that it comes from wiring AI agents into the repetitive information work that currently consumes human hours, so the humans can do the judgment work only they can do. That's a scaling thesis, not a rescue mission.
 
-- monthly_leads: 50
+## Segment 2: Where You Are With AI
 
-- close_rate: 55
+Brad, here's our honest read on Enso's current AI posture, and we'll label it the way we label everything in this episode: this is our assumption — confirm or correct this.
 
-- team_size: 10-50
+When we look at ensorings.com from the outside, we don't detect customer-facing AI. No AI sizing concierge walking a nervous first-time buyer through the printable sizer. No intelligent chat triaging "my ring is too loose after three months" from "where's my order." No automated assistant on the exchange flow. That's an external observation, so treat it as our assumption — confirm or correct this — there may be tooling behind the curtain we can't see.
 
-- tools: Shopify/Oxygen storefront, Google Drive, Slack, Asana, Google Drive, Other
+Internally, our assumption — confirm or correct this — is that the team's AI usage looks like it does at most well-run companies in 2026: individually adopted, casually useful, structurally absent. Someone in marketing drafts ad copy with ChatGPT. Someone in CX pastes a tricky email into an assistant for a softer rewrite. Maybe someone on your side of the building has asked an LLM to explain a forecasting concept or sanity-check a spreadsheet formula. All real value, all completely unwired. Nothing connected to the order data. Nothing reading the reviews at scale. Nothing watching SKU velocity overnight. Nothing producing a brief that lands on your desk before you've had coffee.
 
-- GHL Contact ID: pJI91ZRNUOVyrBRAxxDN
+And Brad, you of all people know what that pattern is, because manufacturing went through it decades ago. Casual AI use is the equivalent of every machinist keeping their own private setup sheet in a personal notebook. The knowledge is real, the results are real, but none of it compounds, none of it survives turnover, and none of it shows up in the system. The whole history of process engineering — your discipline — is the act of taking individually held capability and turning it into institutional capability. That's all an AI agent layer is: taking what your colleagues already do one prompt at a time and making it a documented, monitored, always-on part of the process.
 
-- Intake pain points: Slow Lead Response, Follow-Up, Admin Work, Scheduling, Internal Communication, Reporting.
+The good news in this read: early-stage AI maturity at a company with Enso's operational excellence is not a weakness, it's headroom. Companies with messy operations get very little from AI because the agents inherit the mess. Companies like Enso — clean product data, owned manufacturing, an established review base, a real brand voice — get disproportionate returns because the foundation is already true. You're not behind; you're standing on a launchpad most brands would kill for, and the rocket just hasn't been bolted on yet.
 
-- Intake goal: revenue and automation.
+## Segment 3: The Gaps We Found
 
+Hosts, frame this segment carefully: these are not failures. Every one of these five items exists *because* Enso succeeded. They are the natural exhaust of a business that grew from a $15K Kickstarter to four million rings. We call them gaps only in the sense of "gap between current scale and possible scale." Brad, here's the list, and notice how many of them sit in or next to your lane.
 
-## Public business context
-Enso Rings sells premium silicone jewelry and rings through ensorings.com. The official site positions the products as durable and comfortable for active lifestyles and notes a lifetime warranty. Public company profiles identify Enso Rings as a Lehi, Utah brand founded in 2015, with a mission around being a force for good. Trade coverage notes Enso's premium silicone ring positioning, licensed/character collections, and Zales partnership. Use public context only as general business context; do not overstate private operational facts.
+**Gap one: sizing questions and exchanges are the biggest CX volume driver.** Our assumption — confirm or correct this — but the logic is hard to argue with: silicone rings stretch differently than metal, half the customers are converting from a metal ring size that doesn't map one-to-one, many are gift purchases where the buyer is guessing, and Enso's own generous exchange policy means a wrong size becomes a round-trip through your fulfillment operation. Every sizing question answered manually is human minutes; every avoidable exchange is a pick, a pack, a label, a receive, a restock, and an inspection. Brad, you've done order fulfillment at Nu Skin — you know precisely what a preventable reverse-logistics touch costs in line time, even before the postage. The gap isn't that Enso handles these badly. It's that a huge fraction of them are answerable by a system before they ever become a ticket or a return.
 
+**Gap two: every licensed-IP drop needs fresh creative on a tight calendar.** Disney drop, Star Wars day, a new Marvel film window, Pokémon anniversary — these calendars are set by the licensor's universe, not by Enso's creative team's bandwidth. Each drop wants ad variations, UGC-style content, email creative, landing copy — and it wants them on time, because a licensed window missed is demand left on the table. Our assumption — confirm or correct this — is that creative production for these drops is currently a sprint each time, with the team rebuilding momentum from near-zero for each launch. World-class brands handle this; the gap is that handling it consumes senior creative attention that could be spent on the 20% of creative work that actually requires human taste.
 
-## Current operating picture
-Brad's intake describes a scaled direct-to-consumer ecommerce jewelry business. The company has meaningful traffic and operational complexity, but the AI roadmap should avoid a massive transformation pitch. The first wins are practical: respond faster, route the right inquiry, reduce repetitive support/admin work, and turn customer questions into insight for product and operations.
+**Gap three: thousands of reviews and social messages hold unmined signal.** Four million rings sold means a mountain of reviews, Instagram comments, DMs, and support transcripts. Inside that mountain: which sizes run inconsistent on which styles, which colors people beg for, which licensed property fans are requesting next, what language customers naturally use when they describe why they bought — the exact phrases that make ads convert. Our assumption — confirm or correct this — is that this corpus is read reactively (when a problem flares) rather than mined systematically every week. No human team can read it all; that's not a staffing critique, it's arithmetic. It's also exactly the kind of job machines are now genuinely good at.
 
+**Gap four: the SKU matrix makes demand forecasting a permanent high-stakes puzzle — and Brad, this is your home turf.** Run the multiplication: styles (Solid, Etched, Inked, Stackable, Signet, Metal Hybrid, bracelets, watch bands) × sizes (roughly 4 through 14, plus half sizes on some lines — our assumption on exact size runs — confirm or correct this) × colorways × licensed designs with their own lifecycle windows. You land in the thousands of active SKUs — our assumption on the precise count — confirm or correct this. Every one of those SKUs is a small bet: mold time, silicone, print capacity, warehouse slots. Forecast high and you've parked cash on shelves; forecast low and a Disney drop sells out in size 9 while size 13 gathers dust. You live this puzzle. The gap isn't that Enso forecasts badly — clearly the company manages it, or it wouldn't be here — it's that this class of problem (high-dimensional, pattern-rich, fast-moving) is where machine analysis most clearly outperforms spreadsheet-plus-intuition, and right now, our assumption — confirm or correct this — the machine isn't on the team.
 
-## Six AI systems to discuss
+**Gap five: affiliate, ambassador, and wholesale inquiries deserve DTC-grade first response.** Enso runs an affiliate program (FlexOffers/Ascend ecosystem), an ambassador motion, and a wholesale/store-locator channel. Each inbound inquiry on those channels is a potential distribution partner. Our assumption — confirm or correct this — is that response time and consistency on these B2B-ish inquiries lags the polish of the DTC experience, simply because they arrive in lower volume and don't have a dedicated owner watching the inbox hourly. A wholesale buyer who waits four days for a reply forms an impression that the four-million-ring DTC operation would never tolerate on its own storefront.
 
-### Speed-to-Lead Agent
-What it does: Answers incoming shopper, partner, and product-fit questions with Enso-specific guidance and routes sales-ready inquiries.
-Outcome: Faster response before warm buyers or partners go quiet.
+Five gaps. Zero of them are wounds. All of them are doors.
 
+## Segment 4: Running This
 
-### Order Support Agent
-What it does: Classifies order, sizing, shipping, warranty, and replacement questions, then drafts the next best response.
-Outcome: Less repetitive support work and faster customer updates.
+Alright Brad, here's the part where this stops being a concept and becomes a Tuesday. Six AI agents, and what your week actually feels like with them running. Hosts, make this tactile — times of day, names of artifacts, who reads what.
 
+**Agent one: the Ring Sizing Assistant Agent.** Lives on the website and in the support channel. A customer lands on a Stackable product page at 9:40 p.m. unsure whether her size 6 metal ring means a 6 in silicone. The agent walks her through it conversationally — printable sizer, string method, "how does your current ring fit at the knuckle" — and gives a recommendation with a confidence note, trained on Enso's actual sizing guidance and, over time, on the exchange data showing which conversions actually stick. She orders the right size the first time. Multiply by every evening, weekend, and holiday Enso currently doesn't staff. The downstream effect is the one you'll feel on the floor: fewer wrong-size orders entering the system at all.
 
-### Review & Warranty Agent
-What it does: Finds warranty, replacement, and post-purchase moments that need follow-up or review requests.
-Outcome: Cleaner customer recovery and more reputation signals.
+**Agent two: the Exchange & Lifetime-Warranty Agent.** When a size *is* wrong, or a warranty claim comes in, this agent handles the intake end-to-end: verifies the order, confirms eligibility against the lifetime guarantee terms, issues the exchange instructions or label, and writes a clean structured record — style, size in, size out, reason code. No human touches the routine 80%. The edge cases — odd claims, angry customers, anything ambiguous — route to a human with the full context already assembled. Brad, the part built for you: every exchange becomes a data point with a reason code, which means the exchange stream stops being pure cost and becomes the highest-quality sizing-accuracy sensor the company owns.
 
+**Agent three: the Review Mining & Voice-of-Customer Agent.** Every night it reads what came in — reviews, tagged social mentions, support transcripts — and every Monday it publishes a one-page digest: themes up, themes down, exact customer phrases worth stealing for ad copy, any style/size combination generating fit complaints above baseline, and licensed-property requests ranked by frequency. Marketing reads it for language. Product reads it for the roadmap. You read it because when size 10 Etched in a specific colorway starts generating "runs small" comments, you want to know whether something drifted in the process — and you want to know in week one, not quarter two.
 
-### Wholesale & Retail Partner Agent
-What it does: Qualifies inbound retail, collaboration, or partner interest and prepares a useful handoff for Brad's team.
-Outcome: More partner inquiries get worked without adding admin load.
+**Agent four: the Licensed-Drop Creative Agent.** Eight weeks before the next Star Wars drop, marketing feeds it the product shots and the drop brief. It generates the variation layer: ad copy versions by audience (the fan, the spouse-gift-buyer, the collector), email subject lines, UGC-style script outlines, landing copy — all in Enso's established voice, all within the licensor's brand-safety constraints, all queued for human review. The creative team stops being a production line and becomes an editorial desk: they pick, polish, and approve instead of generating from blank pages. The launch calendar stops being a recurring emergency.
 
+**Agent five: the Demand Forecasting & Inventory Agent — and Brad, this is the one we built the deepest, because it's yours.** Engineer to engineer, here's the spec. Every night it ingests sales by SKU and computes velocity — not just units moved, but velocity *change*, because the derivative is where the early warnings live. It tracks size-curve drift per style: if the size distribution on Metal Hybrid orders is migrating half a size over a quarter — maybe a demographic shift in who's buying, maybe a sizing-guidance artifact — it flags the drift with the data behind it, instead of letting it surface eight months later as a chronic stockout at one end of the curve and dead stock at the other. It runs stockout projection with a 21-day flag: any SKU whose current velocity exhausts on-hand inventory inside 21 days gets surfaced *today*, while there's still production runway, not after the listing goes dark. And every Monday morning it hands you a production-priority brief: here are the SKUs at risk, here's the velocity evidence, here's the suggested run priority — mold by mold, color by color. You don't obey it; you *interrogate* it. You're the engineer; it's the instrument. But you walk into Monday with the whole SKU matrix already analyzed instead of spending your first half-day building the picture by hand. Our assumption — confirm or correct this — is that the current version of that Monday picture takes meaningful manual effort to assemble; if Enso already has this fully instrumented, congratulations, and the agent simply plugs into what exists.
 
-### Inventory Signal Agent
-What it does: Summarizes product demand, style questions, and customer friction by collection or SKU theme.
-Outcome: Better weekly decisions on product and inventory priorities.
+**Agent six: the Weekly Ops Dashboard Agent.** Friday afternoon, one page to leadership and the ops team: exchange rate and top reason codes, sizing-assistant deflection (questions answered without a ticket), review sentiment delta, 21-day stockout flags open and cleared, creative pipeline status for the next drop, affiliate/wholesale inquiry response stats. Not a dashboard nobody opens — a *narrated* page, written in sentences, with the three things that matter on top. It's the closing of the loop: every other agent reports into it, so the whole system stays legible to the humans running it.
 
+The weekly rhythm, then: Monday you get the production-priority brief and the voice-of-customer digest. All week, sizing and exchange agents quietly handle the routine volume and escalate the weird stuff. Mid-cycle, the creative agent keeps the next licensed drop fed. Friday, the ops dashboard tells everyone what the machine saw. Humans make every decision that matters; the machine makes sure no decision is made blind.
 
-### Customer Insights Agent
-What it does: Turns support, reviews, Slack, and Asana notes into a weekly executive brief.
-Outcome: Brad gets cleaner visibility without chasing every system.
+## Segment 5: Your Tech Stack
 
+Brad, here's the part that should lower your blood pressure, because every engineer's first question about a system change is "what does this break?" Answer: nothing, because this layer sits *on top of* what Enso already runs. No rip-and-replace, no migration project, no six-month integration purgatory.
 
-## Three recommended starter prompts
+What we can see from the outside — and label the soft spots: the storefront runs on **Shopify**, which is the best possible news, because Shopify's APIs are the most agent-friendly commerce surface in existence. Orders, inventory, products, customers — all cleanly accessible. The sizing assistant embeds on the storefront; the exchange agent reads orders; the forecasting agent reads sales and inventory levels. Day-one connectivity, no custom plumbing.
 
-### Speed-to-Lead Agent — Answer product-fit questions fast
-Instruction: You are the Speed-to-Lead Agent for Enso Rings. When a shopper or partner inquiry arrives, identify whether it is about sizing, style, warranty, shipping, wholesale, or general product fit. Draft a concise Enso-voice response, ask only for missing details, and route partner or sales-ready inquiries to the right owner.
-Outcome: Every new inquiry gets a useful first response before momentum fades.
+The site runs an **email capture popup**, and our assumption — confirm or correct this — is that the email platform behind it is **Klaviyo**, since that's the dominant choice in Shopify-native DTC at Enso's scale. If it's Klaviyo, the creative agent's email variants drop straight into existing flows. If it's something else, the integration story barely changes — every serious e-commerce email platform has the same basic API surface.
 
+**Instagram @ensorings** is the social home base, and **Meta ads** carry the licensed drops — our assumption on the exact channel mix — confirm or correct this. The review-mining agent reads the social surface; the creative agent feeds the ad account with variant batches for human approval. Note the deliberate boundary: agents *prepare* ad creative; humans *launch* it. Nobody's giving a robot the keys to the Meta budget.
 
-### Order Support Agent — Draft support and warranty responses
-Instruction: You are the Order Support Agent for Enso Rings. Classify each support message by order status, sizing, shipping, warranty, replacement, return, or product education. Draft a customer-friendly response, include next steps, and flag edge cases for a human.
-Outcome: Support gets faster without removing human judgment.
+The **affiliate program rides the FlexOffers/Ascend platform**, and there's a **loyalty/membership program** plus a **store locator and wholesale channel** on the site. These are exactly where Gap Five's first-response agent plugs in: inquiry arrives, agent acknowledges within minutes in brand voice, gathers the qualifying details, and routes a complete package to the human owner. The partner's first impression becomes "this company is fast," which is the truth about Enso wearing better clothes.
 
+And then the asset that changes the whole math: **in-house manufacturing in Lehi**. Most DTC brands that build a forecasting agent hand its output to a contract manufacturer overseas and wait weeks for the signal to become product. At Enso, the Monday production-priority brief lands with someone — you — who can walk onto the floor and re-sequence runs the same day. Sensor-to-actuator latency measured in hours, not months. Brad, you know what that's worth: a control loop is only as good as its slowest element, and Enso's loop is fast everywhere except — our assumption, confirm or correct this — the analysis step. These agents fix the slow step and let the fast factory do what it was built to do.
 
-### Customer Insights Agent — Summarize demand and friction weekly
-Instruction: You are the Customer Insights Agent for Enso Rings. Review support messages, reviews, product questions, Slack notes, and Asana tasks. Summarize the top five customer themes, which products or collections they mention, operational blockers, and the three highest-leverage actions for next week.
-Outcome: Brad gets a weekly operating brief without chasing every system.
+Total new platforms Enso must adopt for any of this: zero. The agents are connective tissue over Shopify, the email platform, Meta, the affiliate stack, and the floor. That's the design constraint we hold as sacred: meet the operation where it lives.
 
+## Segment 6: The Timeline
 
-## Implementation timeline
+Brad, deliberately, this is not a 90-day transformation roadmap, because 90-day roadmaps are where momentum goes to die. This is 3 days, 7 days, 30 days. Engineer pacing: first article fast, then iterate.
 
-### Days 1-3: Foundation
+**Days 1 through 3: connect, and put the first agent live.** Day one is access and wiring — Shopify connection, support channel hookup, the email platform, read access to reviews. Day two, the Ring Sizing Assistant Agent gets loaded with Enso's actual sizing guidance, exchange policy, and tone, then hammered with test traffic — including the adversarial weird questions, because we know how engineers test things. Day three it goes live on the storefront. Seventy-two hours from kickoff, a customer at midnight gets a correct, on-brand sizing answer no human had to wake up for. We start with sizing because it's the highest-volume question (our assumption — confirm or correct this) with the lowest-risk answer, and because the win is visible to the whole company immediately.
 
-- Lock Enso's inquiry categories
+**Days 4 through 7: the exchange/warranty agent plus the review-mining baseline.** The Exchange & Lifetime-Warranty Agent comes online handling routine intake with human review on every action for the first stretch — training wheels by design, removed only when the accuracy data says so. In parallel, the review miner ingests the historical corpus and produces its baseline report: the first systematic read of everything four million rings' worth of customers have been saying. That baseline document alone tends to be worth the week — it's the company meeting its own customers at full resolution, usually for the first time.
 
-- Load product and support knowledge
+**Days 8 through 30: the deep systems and the habits.** The Demand Forecasting & Inventory Agent starts its nightly runs — velocity, size-curve drift, 21-day flags — and the Monday production-priority brief begins landing on your desk. Expect to spend the first two or three Mondays correcting it, Brad; that's not failure, that's calibration, and your corrections are literally how it learns Enso's seasonality and the difference between a real signal and a promo blip. The Licensed-Drop Creative Agent gets pointed at whatever drop is next on the calendar and produces its first full variation package for the team to judge against their own bar. And the Weekly Ops Dashboard Agent starts shipping the Friday page, which is the moment the six agents stop being six tools and become one system the humans can supervise at a glance.
 
-- Draft speed-to-lead and support reply rules
+Day 30 state: two customer-facing agents live and measured, the forecasting brief a Monday habit, one licensed drop's creative produced the new way, and a Friday dashboard everyone actually reads. Not a pilot deck. A running system.
 
-Result: A usable first-response and support draft workflow.
+## Segment 7: What To Do Next
 
+Brad, here's the close, and it's short because the ask is small. There's a blueprint behind this episode — the full written version of everything you just heard, agents, stack mapping, timeline, all of it, built specifically around Enso Rings. Read it. You'll catch things in print that audio glosses over, and you'll catch our mistakes — which brings us to the real favor: this episode flagged every assumption out loud, and there's a register of all of them at the end of the document. Correcting them takes about two minutes, and every correction makes the plan sharper, because you know this operation at a depth no outside analysis can reach. Then, if what you've heard sounds like something worth pressure-testing with the people who built it, hit the "See If You Qualify" link and take the short qualifier. It shows you what working with Bennett Maxwell's team at Franchise KI actually looks like — and it tells both sides quickly whether this is a fit. No pressure, no countdown timer. The blueprint, two minutes of corrections, the qualifier. That's the whole next step. Enso went from a $15K Kickstarter to four million rings by executing better than anyone expected — this is just the next system to execute on.
 
-### Days 4-7: Operations
+---
 
-- Add warranty/review follow-up
+## Assumption Register
 
-- Create partner inquiry routing
+Every non-public figure or inference in these research notes, in one place. Each is labeled in-text as "our assumption — confirm or correct this."
 
-- Build weekly Slack/Asana reporting loop
+1. **~$16M revenue** — 2022 public estimate; possibly dated. Current figure may differ.
+2. **~52 employees** — data-vendor estimate, not company-confirmed.
+3. **No customer-facing AI on ensorings.com** — external observation only; internal tooling may exist.
+4. **Internal AI use is casual/individual, not systematized** — inferred from typical 2026 patterns, not confirmed.
+5. **Sizing questions and exchanges are the largest CX volume driver** — inferred from product category dynamics.
+6. **Licensed-drop creative production is sprint-based each launch** — inferred, not confirmed.
+7. **Review/social corpus is read reactively rather than mined weekly** — inferred.
+8. **Exact size runs per line (incl. half sizes)** — not confirmed.
+9. **Active SKU count in the thousands** — derived estimate from the style × size × color × license matrix.
+10. **Forecasting currently lacks dedicated machine analysis** — inferred.
+11. **Affiliate/ambassador/wholesale first-response lags DTC polish** — inferred from typical channel staffing.
+12. **Monday demand picture currently takes meaningful manual assembly** — inferred.
+13. **Email platform is Klaviyo** — inferred from Shopify-DTC norms; popup observed, platform not confirmed.
+14. **Meta ads carry the licensed drops / exact paid channel mix** — partially observed, mix not confirmed.
+15. **Analysis step is the slowest element of Enso's demand-to-production loop** — inferred from the in-house manufacturing speed advantage.
 
-Result: Less manual follow-up across the team.
+Brad — confirm or correct any of these, and the blueprint updates accordingly.
 
 
-### Days 8-30: Optimization
-
-- Tune product-fit answers
-
-- Measure response and recovery rates
-
-- Add customer-insight summaries by theme
-
-Result: A system that improves from real customer interactions.
-
-
-## Talk track for hosts
-
-### Segment: Hook
-Open with Brad's real workflow: ecommerce shoppers and partners ask questions about sizing, style, warranty, orders, and products. If those questions wait, the sale or customer goodwill can fade. AI gives Enso an always-on first layer.
-
-
-### Segment: Current state
-Enso already has a strong ecommerce brand and product catalogue. The opportunity is not inventing demand. It is protecting the demand already coming in and creating cleaner operating visibility.
-
-
-### Segment: Agent walkthrough
-Spend most time on Speed-to-Lead, Order Support, and Customer Insights. Explain the remaining three agents as extensions once the first workflow is stable.
-
-
-### Segment: ROI without promises
-Use the calculator as an input model, not a promise. Brad can plug in order value, lead volume, close rate, and admin time. Emphasize no guaranteed outcome.
-
-
-### Segment: Objections
-Address brand voice, customer experience, data quality, implementation bandwidth, and support edge cases. Keep humans in control of sensitive issues.
-
-
-### Segment: 3/7/30 plan
-In three days, product knowledge and first-response rules are live. In seven days, support and reporting loops are running. In thirty days, the agents are tuned on real Enso patterns.
-
-
-### Segment: CTA
-Brad should review the Blueprint, listen to this walkthrough, try one prompt, then apply if he wants Bennett's team to build it with him.
-
-
-## Detail note 1: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 2: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 3: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 4: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 5: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 6: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 7: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 8: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 9: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 10: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 11: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 12: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 13: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 14: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 15: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 16: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 17: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 18: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 19: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 20: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 21: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 22: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 23: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 24: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 25: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 26: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 27: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 28: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 29: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
-
-## Detail note 30: Enso-specific application
-
-When discussing Enso Rings, keep examples tied to silicone rings, ecommerce product questions, sizing, warranty/replacement support, licensed collections, reviews, partner inquiries, inventory signals, Slack, Asana, and Google Drive. The first implementation should be narrow enough to prove value without changing the whole business at once. Brad should feel that this was built from his intake, not from a generic ecommerce template.
+---
+Qualifier link for Brad: https://bennett-maxwell.github.io/fki-preview/qualify.html?src=brad-maxwell-enso-rings-20260609&contactId=pJI91ZRNUOVyrBRAxxDN

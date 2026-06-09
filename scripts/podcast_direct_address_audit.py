@@ -76,6 +76,25 @@ def transcribe_with_speech_recognition(audio_path: Path, seconds: int) -> str:
     recognizer = sr.Recognizer()
     chunks = []
     chunk_len = 60
+    # RECALL FIX 2026-06-09: Google's free recognizer drops leading speech on 60s
+    # chunks (proven false-negative on verbatim canonical openings). Prepend a short
+    # 0-20s window so opening words are reliably captured; duplicates are harmless
+    # because phrase checks are presence/fuzzy-based, never count-decremented.
+    lead_starts = [(0, 12), (1, 18)]
+    for start, dur in lead_starts:
+        wav = tmp_root / f"chunk-lead-{start}.wav"
+        ffmpeg = run([
+            "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+            "-i", str(audio_path), "-ss", str(start), "-t", str(dur),
+            "-ac", "1", "-ar", "16000", str(wav),
+        ], timeout=120)
+        if ffmpeg.returncode == 0:
+            with sr.AudioFile(str(wav)) as source:
+                audio = recognizer.record(source)
+            try:
+                chunks.append(recognizer.recognize_google(audio))
+            except Exception:
+                pass
     for start in range(0, seconds, chunk_len):
         wav = tmp_root / f"chunk-{start}.wav"
         ffmpeg = run([

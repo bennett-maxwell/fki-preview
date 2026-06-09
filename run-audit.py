@@ -401,6 +401,19 @@ def audit_lead(slug):
     redlines["PF0-5_format3_dense_scroll_RL"] = format_ok
     results["D1-01_name_in_title"] = name_in_title(html, slug)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
+    # D2-02 [RL] AGENT SUBSTANCE GATE (Bennett directive 2026-06-09): every blueprint
+    # must ship 6 lead-specific agent cards, each with a substantive copy-paste prompt.
+    # Thin/generic teaser cards = instant FAIL; no AI may report Blueprint done without this.
+    _cards = re.findall(r'<div class="agent-card">(.*?)</div>\s*</div>', html, re.S)
+    _prompts = re.findall(r'class="agent-prompt"[^>]*>(.*?)</div>', html, re.S)
+    agent_substance_ok = (
+        len(_cards) >= 6
+        and len(_prompts) >= 6
+        and all(len(re.sub(r'<[^>]+>', '', c)) >= 350 for c in _cards[:6])
+        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 200 for pr in _prompts[:6])
+    )
+    results["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
+    redlines["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
     podcast_exists = os.path.exists(os.path.join(REPO, "podcasts", podcast_filename(slug)))
     results["D3-01_podcast_exists"] = podcast_exists
     redlines["D3-01_podcast_exists_RL"] = podcast_exists

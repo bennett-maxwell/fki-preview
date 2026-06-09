@@ -365,14 +365,9 @@ if ai_agents and len(ai_agents) > 0:
                 .replace('&', '&amp;').replace('<', '&lt;')
                 .replace('>', '&gt;').replace('"', '&quot;'))
 
+            icon_svg = '<div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>'
             agent_cards_html += f'''    <!-- Agent {i} -->
-    <div class="agent-card">
-      <h3>Agent #{i}: {a_name}</h3>
-      <p class="agent-desc">{a_desc}</p>
-      <div class="agent-prompt">{a_prompt_escaped}</div>
-      <div class="agent-result">What this does: {a_result}</div>
-      <div class="agent-time">Setup time: ~{a_time}</div>
-    </div>
+      <div class="agent-card">{icon_svg}<div class="agent-name">{a_name}</div><div class="agent-desc" style="margin-bottom:0.75rem;">{a_desc}</div><div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">Copy-paste prompt:</strong>{a_prompt_escaped}</div><div class="agent-outcome">{a_result}</div><div class="agent-time" style="font-size:0.8rem;color:var(--text-mid, #6E6E73);margin-top:0.5rem;">Setup time: ~{a_time}</div></div>
 
 '''
         html = html[:start_idx] + agent_cards_html + html[end_idx:]
