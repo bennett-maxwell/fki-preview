@@ -10,6 +10,11 @@ was found and fixed; the assert is the tripwire. Run:
     python3 tests/test_blueprint_regressions.py ; echo "exit=$?"
 
 Prints per-check PASS/FAIL + a summary. Exits 0 iff every check passes, else 1.
+
+CI notes (2026-06-05): cross-platform fixes applied — pre-commit hook fallback
+(_find_precommit_hook) resolves scripts/git-hooks in CI; sed uses portable
+sed -i.bak form (e4eb403). financial-realism-check.py local-webhookprobe
+added to NON_LEAD exclusion (a68a3cd). Both fixes are in effect on main.
 """
 import os
 import re
@@ -25,6 +30,16 @@ RUN_AUDIT = os.path.join(REPO, "run-audit.py")
 def _read(path):
     with open(path, encoding="utf-8", errors="ignore") as f:
         return f.read()
+
+def _find_precommit_hook():
+    """Find pre-commit hook, falling back to scripts/git-hooks for CI environments."""
+    path = os.path.join(REPO, ".git", "hooks", "pre-commit")
+    if not os.path.exists(path):
+        fallback = os.path.join(REPO, "scripts", "git-hooks", "pre-commit")
+        if os.path.exists(fallback):
+            path = fallback
+    return path
+
 
 
 def check_no_linkedin_slider_in_template():
@@ -74,7 +89,7 @@ def check_d7_18_is_hard_fail():
 def check_financial_gate_wired_in_precommit():
     """4. The financial red-line gate must be wired into the pre-commit hook so
     a $45k-clone slider can never be committed without the check running."""
-    hook = _read(os.path.join(REPO, ".git", "hooks", "pre-commit"))
+    hook = _read(_find_precommit_hook())
     assert "financial-realism-check.py" in hook, \
         "pre-commit hook does not reference financial-realism-check.py"
 
@@ -225,7 +240,7 @@ tmp=$(mktemp)
 printf '%s' 'X {{INDUSTRY}} Y' > "$tmp"
 sed_esc() { printf '%s' "$1" | sed 's/&/\\&/g'; }
 val='Photography & Video'
-sed -i '' "s|{{INDUSTRY}}|$(sed_esc "$val")|g" "$tmp"
+sed -i.bak "s|{{INDUSTRY}}|$(sed_esc "$val")|g" "$tmp" && rm -f "$tmp.bak"
 cat "$tmp"
 rm -f "$tmp"
 '''
@@ -247,7 +262,7 @@ def check_precommit_ov_skip_path_intact():
     clean commit without --no-verify and without disturbing a session-mate's
     staged WIP. If this logic regresses, unrelated script fixes can no longer
     be committed while blueprint WIP sits staged."""
-    hook = _read(os.path.join(REPO, ".git", "hooks", "pre-commit"))
+    hook = _read(_find_precommit_hook())
     assert "git diff --cached --name-only" in hook, \
         "pre-commit no longer scopes staged-blueprint detection to the cached index"
     assert 'grep "^blueprints/.*\\.html$"' in hook, \

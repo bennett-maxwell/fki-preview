@@ -1,0 +1,66 @@
+{
+  "ts": "2026-06-04T20:28:00Z",
+  "status": "PASS_PREVIEW_ONLY_CUSTOMER_SEND_LOCKED",
+  "task_review_skill": {
+    "drive_folder_id": "1sHZFzSnCU3tJcBSFrOfsEdhENkV0M5He",
+    "skill_file_id": "1w7GlLyGXPCfsm2hAKNq3fWjzL_YrIR6R",
+    "version": "3.8",
+    "mode": "execution review and hardening"
+  },
+  "blueprint_ai_skill": {
+    "drive_folder_id": "1zsn4kfbtVaDZPDAYEZWhguNUDAoB6pMG",
+    "skill_file_id": "1IzE-seDDaB1Tciik9mwBVrgQcb7FP7eH",
+    "version": "3.28",
+    "fetchback_sha256": "de3bcdfe0d9a9f8c4614ebcb2ae658a35fa9d6b7062ea18d081532c9ab6847d0",
+    "operational_steps": "30 Conveyor 30 steps"
+  },
+  "step_count": {
+    "conveyor_steps": 30,
+    "legacy_mechanical_gates": 34,
+    "self_audit_checks": 18,
+    "diamond_tests": 11,
+    "audit_skill_checks": 149,
+    "audit_skill_red_lines": 22
+  },
+  "mike_latest": {
+    "url": "https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton-origins-20260603.mp3?v=4f004a2d",
+    "commit": "4f004a2d",
+    "sha256": "4b73dc0712e2c77507915a64b2fa6ca1d7806406f8e687f3052a860e8467835b",
+    "duration_seconds": 1195.46127,
+    "size_bytes": 9564297,
+    "notebooklm_notebook_id": "518433f6-8f0e-43d6-bcfb-bfcdf891dd69",
+    "notebooklm_source_id": "e373d4f6-eae7-4c1b-b59a-74bf978208d4",
+    "notebooklm_artifact_id": "196c4923-4ef9-48d0-8e0f-b59b415aeaa5"
+  },
+  "final_gates": {
+    "public_readback": "audit-receipts/mike-norton-20min-podcast-20260604/notebooklm-true-regeneration-v2/public-readback-4f004a2d.json",
+    "run_audit": "PASS 15/15",
+    "completion": "PASS 44/44",
+    "gatekeeper": "PASS 100",
+    "conveyor": "29 GREEN / 1 LOCKED_HUMAN_GATE / 0 RED",
+    "external_send": "LOCKED_HUMAN_GATE until Bennett approval + external_send token"
+  },
+  "fleet_hardening": [
+    {
+      "area": "Conveyor 30",
+      "rule": "Every step after the first RED is forced RED with blocked_by_prior_step_XX until the prior step is green; human locks remain locks only after prior required gates pass.",
+      "proof": "scripts/blueprint_conveyor_30.py + final conveyor PASS_PREVIEW_ONLY"
+    },
+    {
+      "area": "NotebookLM origin",
+      "rule": "Step 19/20, Completion, Gatekeeper, and preview fail without notebook_id/source_id/artifact/download/public SHA/direct-address/listening proof.",
+      "proof": "Drive blueprint-ai-skill v3.28 fetchback + final NotebookLM receipts"
+    },
+    {
+      "area": "Transcript binding",
+      "rule": "Podcast transcript reuse requires a .meta.json audio_sha256 match; stale transcript files are ignored and the gate falls back to current-audio transcription/fail-closed.",
+      "proof": "run-audit.py patch"
+    }
+  ],
+  "notion": {
+    "page_id": "374cf551-4fd3-8116-a10a-f88c504def54",
+    "status": "Awaiting Approval",
+    "updated": "2026-06-04T20:28:00Z"
+  },
+  "boundary": "No customer/Mike send happened in this session."
+}

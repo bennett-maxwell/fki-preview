@@ -1,0 +1,338 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+        "--receipt-dir",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604",
+        "--lead",
+        "billy-bob-electric-20260604",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy%20Bob&biz=Billy%20Bob%20Electric&src=billy-bob-electric-20260604&agents=Emergency%20Dispatch%20Agent%2CQuote%20Follow-Up%20Agent%2CTechnician%20Scheduling%20Agent%2CPermit%20%26%20Inspection%20Prep%20Agent%2CMaintenance%20Plan%20Agent%2CReview%20%26%20Referral%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+        "--lead",
+        "billy-bob-electric-20260604",
+        "--json-output",
+        "--delivery-email",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--profile",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/leads/billy-bob-electric-20260604.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Emergency Dispatch Agent\",",
+        "        \"Quote Follow-Up Agent\",",
+        "        \"Technician Scheduling Agent\",",
+        "        \"Permit & Inspection Prep Agent\",",
+        "        \"Maintenance Plan Agent\",",
+        "        \"Review & Referral Agent\"",
+        "      ],",
+        "      \"file\": \"/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Billy+Bob&biz=Billy+Bob+Electric&src=billy-bob-electric-20260604&agents=Emergency+Dispatch+Agent%2CQuote+Follow-Up+Agent%2CTechnician+Scheduling+Agent%2CPermit+%26+Inspection+Prep+Agent%2CMaintenance+Plan+Agent%2CReview+%26+Referral+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"billy-bob-electric-20260604\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/private/tmp/fki-preview-origin-proof-20260605T001205Z/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--profile",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/leads/billy-bob-electric-20260604.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: billy-bob-electric-20260604 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/run-audit.py",
+        "--lead",
+        "billy-bob-electric-20260604"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "AUDIT PASS (billy-bob-electric-20260604): all checks green"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/financial-realism-check.py",
+        "--file",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "billy-bob-electric-20260604 home_services         2388        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-closeout.json"
+    },
+    {
+      "detail": "billy-bob-electric-20260604.mp3 14345031 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+        "--receipt-dir",
+        "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604",
+        "--lead",
+        "billy-bob-electric-20260604",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+  "lead": "billy-bob-electric-20260604",
+  "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview"
+    ],
+    "approval_state": "bennett_preview_only",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "c394788b154a3b19579fe5cfccf1aa40c1e530021ac3c4af79f558d1bbd65c57",
+      "delivery_email_sha256": "ce70d28e1cf1fe1473c6ee0e76baa1de4a50b451569390d34f3039f40dd74e61",
+      "lead_profile_sha256": "d70f5db398ccbe8e7514dc4eb6a18ec01934fe3a8b6ee93ae7e12c32163c2fe6",
+      "podcast_production_47_sha256": "9c1354a86dd9d2c8119a400f925c69ed4f47348d5936526782d95fc16b554d45"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+      "delivery_email": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/delivery-emails/billy-bob-electric-20260604-delivery-email.html",
+      "lead_profile": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/leads/billy-bob-electric-20260604.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-05T00:12:50.827146+00:00",
+    "html_path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/blueprints/billy-bob-electric-20260604.html",
+    "lead": "billy-bob-electric-20260604",
+    "pass": true,
+    "receipt_dir": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604",
+    "score": 100,
+    "strict_production": true
+  },
+  "receipt_dir": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604",
+  "score": 100,
+  "status": "PASS",
+  "token_path": "/private/tmp/fki-preview-origin-proof-20260605T001205Z/audit-receipts/billy-bob-electric-20260604/billy-bob-electric-20260604-gatekeeper-pass-token.json",
+  "ts": "2026-06-05T00:12:50.826854+00:00"
+}

@@ -31,6 +31,7 @@ INDUSTRY_BANDS = {
     "retail_firearms":    (300, 6000,   "ticket"),
     "design_agency":      (1500,40000,  "project"),
     "consulting":         (3000,150000, "engagement"),
+    "retail":             (50,  2000,   "purchase/transaction"),    # retail sporting goods
     "professional_services": (1000,50000, "contract/project"),
     "ai_consulting":      (3000,25000,  "contract"),
     "crm_software":       (1200,75000,  "contract/ARR"),
@@ -41,6 +42,7 @@ INDUSTRY_BANDS = {
 
 # Per-lead industry classification (from business name / known intake).
 LEAD_INDUSTRY = {
+    "john-doe-sporting-goods-20260604": "retail",
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
     "melissa-tash-srp": "photography",
@@ -175,9 +177,15 @@ def check_file(path, clone_registry):
             "gala",
             "Pinterest",
             "Apply to Work With Us",
-            "Command Center",
+            # "Command Center" removed — format-3 gold template uses "command center" in
+            # explanatory copy (correct brand language). The OLD violation was the tab-nav
+            # section id="command-center" pattern, which format-conformance-check.py FC-01
+            # already blocks (old tab sections fail PF0-5 before reaching this check).
         ]
         leaked = [term for term in legacy_terms if re.search(r"\b" + re.escape(term) + r"\b", body, re.I)]
+        # Check for the OLD command-center TAB SECTION (the real D10-21 violation) separately
+        if re.search(r'id=["\']command-center["\']', html, re.I):
+            leaked.append("Command Center tab-section (id=command-center — old format, must regenerate)")
         if leaked:
             fails.append(
                 "D10-21 [RL] home-services blueprint contains wrong-industry/template language: "
@@ -215,7 +223,7 @@ def main():
         # Previously --all filtered to only slugs already in LEAD_INDUSTRY, which SILENTLY
         # skipped any unmapped lead — a brand-new blueprint with a $45k clone slider would
         # never be checked. Now --all scans every real-lead file; unmapped => D10-05 fail.
-        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "rush-evans-canonical"}
+        NON_LEAD = {"TEMPLATE", "franchise-ki-ceo", "rush-evans-canonical", "local-webhookprobe"}
         files = sorted(glob.glob(os.path.join(BLUEPRINTS, "*.html")))
         files = [f for f in files
                  if not os.path.basename(f).startswith("_")

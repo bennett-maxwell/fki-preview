@@ -68,9 +68,10 @@ DB_PATH = STATE_DIR / "blueprint-dedup.db"
 QUEUE_PATH = STATE_DIR / "blueprint-queue.json"
 PODCAST_QUEUE_PATH = STATE_DIR / "blueprint-podcast-queue.json"
 
-# GitHub Pages base URLs
-GITHUB_PAGES_BASE = "https://bennett-maxwell.github.io/fki-preview"
-BLUEPRINTS_URL_BASE = f"{GITHUB_PAGES_BASE}/blueprints"
+# Blueprint host base URLs. Default remains GitHub Pages until GHL/Cloudflare auth/target is available.
+BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", "https://bennett-maxwell.github.io/fki-preview").rstrip("/")
+GITHUB_PAGES_BASE = BLUEPRINT_BASE_URL  # compatibility alias for legacy receipts/status copy
+BLUEPRINTS_URL_BASE = f"{BLUEPRINT_BASE_URL}/blueprints"
 
 # Slack channels
 SLACK_AI_BLUEPRINT = "C0B3QCD9UD7"  # #ai-blueprint-leads

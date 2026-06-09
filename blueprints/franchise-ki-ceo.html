@@ -952,5 +952,22 @@ RULES:
     });
   })();
 </script>
+<script>
+function togglePlay(btn){
+  var v=btn.previousElementSibling;
+  if(!v) return;
+  if(v.paused){v.play().catch(function(e){console.warn("play blocked",e);});btn.textContent="⏸";}
+  else{v.pause();btn.textContent="▶";}
+}
+</script>
+<script>
+document.querySelectorAll("video,audio").forEach(function(m){
+  m.addEventListener("canplay",function(){
+    if(m.dataset.autoplay==="true"&&m.readyState>=3){
+      m.play().catch(function(e){console.warn("autoplay blocked",e);});
+    }
+  });
+});
+</script>
 </body>
 </html>

@@ -16,10 +16,51 @@ Usage:
   python3 scripts/gen-blueprint.py leads/<slug>.json
   -> writes blueprints/<slug>.html
 """
-import json, re, sys, os
+import json, re, sys, os, urllib.parse
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
+DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
+
+
+def roi_slider_config(slug, profile):
+    """Return the ROI input min/max/step for this lead's industry.
+
+    Keep gen-blueprint.py aligned with clone-blueprint.sh so regenerated pages
+    never leave raw {{ROI_*}} tokens behind.
+    """
+    roi_min, roi_max, roi_step = 500, 100000, 500
+    cfg_path = os.path.join(REPO, "scripts", "roi-industry-config.json")
+    try:
+        cfg = json.load(open(cfg_path, encoding="utf-8"))
+        business_type = (profile.get("business_type") or profile.get("industry") or "").lower()
+        industry_map = {
+            "plumbing": "home_services", "hvac": "home_services", "electrical": "home_services",
+            "electrician": "home_services", "home services": "home_services", "home-services": "home_services",
+            "restoration": "home_services", "photography": "photography", "photographer": "photography",
+            "video": "video_production", "videography": "video_production",
+            "medspa": "medspa", "med spa": "medspa", "aesthetics": "medspa",
+            "restaurant": "food_franchise", "food": "food_franchise", "franchise": "food_franchise",
+            "firearms": "retail_firearms", "retail": "retail_firearms",
+            "design": "design_agency", "agency": "design_agency", "marketing": "design_agency",
+            "consulting": "consulting", "consultant": "consulting", "coaching": "consulting",
+            "crm": "crm_software", "software": "crm_software", "saas": "crm_software",
+            "medical device": "medical_devices", "medtech": "medical_devices",
+            "property management": "property_mgmt", "property": "property_mgmt", "vacation rental": "property_mgmt",
+        }
+        industry = cfg.get("slug_industry", {}).get(slug)
+        if not industry:
+            for needle, mapped in industry_map.items():
+                if needle in business_type:
+                    industry = mapped
+                    break
+        slider = cfg.get("industry_slider", {}).get(industry or "")
+        if slider:
+            roi_min, roi_max, roi_step = slider["min"], slider["max"], slider["step"]
+    except Exception:
+        pass
+    return roi_min, roi_max, roi_step
 
 # Reusable inline SVGs (icon identity is cosmetic; the audit counts classes, not
 # specific paths). One per card-type so every card still renders an icon.
@@ -62,6 +103,46 @@ def replace_section(html, sec_id, inner):
 def build(profile):
     html = open(TEMPLATE, encoding="utf-8").read()
     p = profile
+
+    def host_scoped_url_value(profile_key, path):
+        value = p.get(profile_key) or ""
+        if BLUEPRINT_BASE_URL != DEFAULT_BLUEPRINT_BASE_URL and (not value or value.startswith(DEFAULT_BLUEPRINT_BASE_URL)):
+            return f"{BLUEPRINT_BASE_URL}{path}"
+        return value or f"{BLUEPRINT_BASE_URL}{path}"
+
+    def agent_names_for_q7():
+        names = []
+        for agent in p.get("agents", []) or []:
+            if isinstance(agent, dict):
+                names.append(agent.get("name") or agent.get("title") or agent.get("usecase") or "")
+            else:
+                names.append(str(agent))
+        for agent in p.get("qualifier_q7_agents", []) or []:
+            if isinstance(agent, dict):
+                names.append(agent.get("name") or agent.get("title") or agent.get("usecase") or "")
+            else:
+                names.append(str(agent))
+        cleaned = []
+        seen = set()
+        for name in names:
+            text = re.sub(r"<[^>]+>", "", str(name)).strip()
+            key = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+            if text and key not in seen:
+                seen.add(key); cleaned.append(text)
+        return cleaned[:6]
+
+    def append_q7_context(url):
+        parts = urllib.parse.urlsplit(url)
+        params = dict(urllib.parse.parse_qsl(parts.query, keep_blank_values=True))
+        params["lead"] = p.get("lead_name", "")
+        params["biz"] = p.get("business_name", "")
+        params["src"] = p.get("slug", "")
+        agents = agent_names_for_q7()
+        if agents:
+            params["agents"] = ",".join(agents)
+        return urllib.parse.urlunsplit((parts.scheme, parts.netloc, parts.path or "/qualify.html", urllib.parse.urlencode(params), ""))
+
+    p["qualify_url"] = append_q7_context(host_scoped_url_value("qualify_url", f"/qualify.html?src={p['slug']}"))
 
     # ---- hero ----
     stats = "".join(
@@ -197,7 +278,7 @@ def build(profile):
     diy = (f'<div class="diy-or-partner"><h3>Two paths forward for {esc(p["first_name"])}:</h3><div class="path-grid">'
            f'<div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div>'
            f'<div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the {esc(p["business_name"])} voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p>'
-           f'<a href="{p["qualify_url"]}" class="path-cta">Get Your AI Quote</a></div></div></div>')
+           f'<a href="{p["qualify_url"]}" class="path-cta">See If You Qualify</a></div></div></div>')
     prm = (f'\n  <div class="container">\n    <p class="section-label">Your First AI Agent — Start Here</p>\n'
            f'    <h2 class="section-title">3 Production-Ready AI Agent Prompts for {esc(p["business_name"])}</h2>\n'
            f'    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Built specifically for {esc(p["business_name"])}.</p>\n'
@@ -271,11 +352,21 @@ def build(profile):
     html = re.sub(r"\{\s*conservative:.*?stretch:.*?\}\s*\}", pr_obj, html, count=1, flags=re.S)
 
     # ---- simple global tokens ----
+    def host_scoped_url(profile_key, path):
+        value = p.get(profile_key) or ""
+        if BLUEPRINT_BASE_URL != DEFAULT_BLUEPRINT_BASE_URL and (not value or value.startswith(DEFAULT_BLUEPRINT_BASE_URL)):
+            return f"{BLUEPRINT_BASE_URL}{path}"
+        return value or f"{BLUEPRINT_BASE_URL}{path}"
+
+    roi_min, roi_max, roi_step = roi_slider_config(p["slug"], p)
     tok = {
+        "{{ROI_MIN}}": str(roi_min), "{{ROI_MAX}}": str(roi_max), "{{ROI_STEP}}": str(roi_step),
         "{{LEAD_NAME}}": p["lead_name"], "{{FIRST_NAME}}": p["first_name"],
         "{{BUSINESS_NAME}}": p["business_name"], "{{DOMAIN}}": p["domain"],
         "{{SLUG}}": p["slug"], "{{CRM_TOOL}}": p.get("crm_tool_fallback", "your client hub"),
-        "{{PODCAST_URL}}": p["podcast_url"], "{{QUALIFY_URL}}": p["qualify_url"],
+        "{{BLUEPRINT_URL}}": host_scoped_url("blueprint_url", f"/blueprints/{p['slug']}.html"),
+        "{{PODCAST_URL}}": host_scoped_url("podcast_url", f"/podcasts/{p['slug']}.mp3"),
+        "{{QUALIFY_URL}}": host_scoped_url("qualify_url", f"/qualify.html?src={p['slug']}"),
     }
     for k, v in tok.items():
         html = html.replace(k, v)
@@ -293,7 +384,10 @@ if __name__ == "__main__":
         sys.exit("usage: gen-blueprint.py leads/<slug>.json")
     profile = json.load(open(sys.argv[1], encoding="utf-8"))
     out = os.path.join(REPO, "blueprints", profile["slug"] + ".html")
-    open(out, "w", encoding="utf-8").write(build(profile))
+    rendered = build(profile)
+    tmp_out = out + ".tmp"
+    open(tmp_out, "w", encoding="utf-8").write(rendered)
+    os.replace(tmp_out, out)
     leftover = re.findall(r"\{\{[A-Z_]+\}\}", open(out, encoding="utf-8").read())
     print(f"wrote {out}")
     if leftover:

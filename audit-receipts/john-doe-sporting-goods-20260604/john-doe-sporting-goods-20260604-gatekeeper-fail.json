@@ -1,0 +1,274 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604",
+        "--lead",
+        "john-doe-sporting-goods-20260604",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    {",
+        "      \"classes\": [",
+        "        \"cta-btn\"",
+        "      ],",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=John+Doe&biz=Doe%27s+Sporting+Goods&src=john-doe-sporting-goods-20260604&agents=Abandoned+Cart+Recovery+Agent,Loyalty+Program+Agent,Inventory+Alert+Agent,Review+%26+Referral+Agent,Customer+Win-Back+Agent,In-Store+Upsell+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"failures\": [],",
+        "  \"html\": \"/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html\",",
+        "  \"http_checks\": [",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=John+Doe&biz=Doe%27s+Sporting+Goods&src=john-doe-sporting-goods-20260604&agents=Abandoned+Cart+Recovery+Agent,Loyalty+Program+Agent,Inventory+Alert+Agent,Review+%26+Referral+Agent,Customer+Win-Back+Agent,In-Store+Upsell+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html",
+        "--lead",
+        "john-doe-sporting-goods-20260604",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/john-doe-sporting-goods-20260604.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Abandoned Cart Recovery Agent\",",
+        "        \"Loyalty Program Agent\",",
+        "        \"Inventory Alert Agent\",",
+        "        \"Review & Referral Agent\",",
+        "        \"Customer Win-Back Agent\",",
+        "        \"In-Store Upsell Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=John+Doe&biz=Doe%27s+Sporting+Goods&src=john-doe-sporting-goods-20260604&agents=Abandoned+Cart+Recovery+Agent%2CLoyalty+Program+Agent%2CInventory+Alert+Agent%2CReview+%26+Referral+Agent%2CCustomer+Win-Back+Agent%2CIn-Store+Upsell+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"john-doe-sporting-goods-20260604\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/john-doe-sporting-goods-20260604.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: john-doe-sporting-goods-20260604 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/john-doe-sporting-goods-20260604-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: john-doe-sporting-goods-20260604 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "john-doe-sporting-goods-20260604"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "AUDIT PASS (john-doe-sporting-goods-20260604): all checks green"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "john-doe-sporting-goods-20260604 retail                None        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604/john-doe-sporting-goods-20260604-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604/john-doe-sporting-goods-20260604-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604/john-doe-sporting-goods-20260604-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604/john-doe-sporting-goods-20260604-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604/john-doe-sporting-goods-20260604-closeout.json"
+    },
+    {
+      "detail": "john-doe-sporting-goods-20260604.mp3 43456838 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "production audio size failed: john-doe-sporting-goods-20260604.mp3 43456838 bytes exceeds walkthrough ceiling 20971520 (~20 min @128kbps)",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/john-doe-sporting-goods-20260604.html",
+  "lead": "john-doe-sporting-goods-20260604",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/john-doe-sporting-goods-20260604",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-04T22:42:22.593640+00:00"
+}

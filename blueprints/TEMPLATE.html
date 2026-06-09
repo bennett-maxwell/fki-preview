@@ -7,7 +7,7 @@
   <meta property="og:title" content="Your AI Advantage Roadmap — {{BUSINESS_NAME}}" />
   <meta property="og:description" content="A personalized AI blueprint built for {{LEAD_NAME}}. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to {{BUSINESS_NAME}}." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/{{SLUG}}.html" />
+  <meta property="og:url" content="{{BLUEPRINT_URL}}" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>AI Advantage Roadmap — {{BUSINESS_NAME}}</title>
   <style>
@@ -258,6 +258,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -271,7 +306,7 @@
     <li><a href="#agents">AI Agents</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
     <li><a href="#listen">Listen</a></li>
-    <li><a href=\"#apply\">Qualify</a></li>
+    <li><a href="#apply">Qualify</a></li>
   </ul>
 </nav>
 
@@ -489,7 +524,7 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="0" step="100" value="2388" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="{{ROI_MIN}}" step="{{ROI_STEP}}" value="{{ROI_MIN}}" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
@@ -789,7 +824,7 @@ If any answer is N: revise that section before sending.
       <h3>Two paths forward for {{FIRST_NAME}}:</h3>
       <div class="path-grid">
         <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to {{BUSINESS_NAME}}'s brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="{{QUALIFY_URL}}" class="path-cta">Get Your AI Quote</a></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to {{BUSINESS_NAME}}'s brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="{{QUALIFY_URL}}" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -884,7 +919,7 @@ If any answer is N: revise that section before sending.
     <h2>Ready to See This<br><span>Working for {{BUSINESS_NAME}}?</span></h2>
     <p class="cta-personal">"{{FIRST_NAME}}, I built this roadmap specifically for {{BUSINESS_NAME}} because I believe the platform you have created &mdash; helping 675+ home service businesses run their operations in one place &mdash; deserves systems that are as reliable and scalable as the product itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="{{QUALIFY_URL}}" class="cta-btn">Get Your AI Quote</a>
+    <a href="{{QUALIFY_URL}}" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -897,7 +932,7 @@ If any answer is N: revise that section before sending.
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="{{QUALIFY_URL}}" class="mobile-cta-btn">Get Your AI Quote</a>
+  <a href="{{QUALIFY_URL}}" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>

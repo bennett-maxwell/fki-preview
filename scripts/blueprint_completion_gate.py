@@ -135,6 +135,48 @@ def receipt_audio_hash_matches(data: dict, html_path: Optional[Path]) -> bool:
     return any(candidate.exists() and file_sha256(candidate) == expected for candidate in candidates)
 
 
+def production_notebooklm_origin_ok(data: dict) -> Tuple[bool, str]:
+    """Require true NotebookLM generation proof for production podcast audio.
+
+    Duration, size, hash, and public readback prove a file exists. They do not
+    prove the required NotebookLM Blueprint podcast skill generated it. Local
+    TTS fallback must hard-fail before Bennett preview or customer delivery.
+    """
+    def nested(*keys):
+        for key in keys:
+            cur = data
+            found = True
+            for part in key.split('.'):
+                if isinstance(cur, dict) and part in cur:
+                    cur = cur[part]
+                else:
+                    found = False
+                    break
+            if found and cur not in (None, '', False):
+                return cur
+        return None
+
+    fallback = nested('local_tts_fallback', 'tts_fallback', 'fallback_used', 'audio.local_tts_fallback')
+    if fallback:
+        return False, f'production audio used local/non-NotebookLM fallback: {fallback}'
+
+    status = str(nested('notebooklm_status', 'notebooklm.status', 'audio.notebooklm_status') or '').upper()
+    if any(token in status for token in ('PARTIAL', 'AUTH', 'EXPIRED', 'FAIL', 'BLOCK', 'FALLBACK')):
+        return False, f'NotebookLM status is not production-pass: {status}'
+
+    generator = str(nested('generator', 'audio_generator', 'origin', 'audio.origin') or '').lower()
+    explicit_bool = any(bool(nested(k)) for k in ('notebooklm_generated', 'notebooklm_origin_verified', 'audio.notebooklm_generated'))
+    artifact = nested('notebooklm_artifact_id', 'artifact_id', 'notebooklm.artifact_id', 'audio.artifact_id')
+    notebook = nested('notebooklm_notebook_id', 'notebook_id', 'notebooklm.notebook_id', 'audio.notebook_id')
+    source = nested('notebooklm_source_id', 'source_id', 'notebooklm.source_id', 'audio.source_id')
+    generation_receipt = nested('notebooklm_generation_receipt', 'generation_receipt', 'notebooklm.generation_receipt')
+
+    if 'notebooklm' in generator or explicit_bool or (artifact and notebook) or (generation_receipt and (artifact or notebook or source)):
+        return True, 'NotebookLM origin proof present'
+
+    return False, 'missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt'
+
+
 def production_receipt_result(num: int, path: Path, html: str,
                               html_path: Optional[Path]) -> Tuple[bool, str]:
     """Schema-specific production proof validators.
@@ -206,9 +248,10 @@ def production_receipt_result(num: int, path: Path, html: str,
             and int(data.get("you_your_count") or 0) >= 5
         )
         hash_ok = receipt_audio_hash_matches(data, html_path)
-        ok = remote_ok and local_audio_ok and direct_ok and hash_ok
+        notebook_ok, notebook_detail = production_notebooklm_origin_ok(data)
+        ok = remote_ok and local_audio_ok and direct_ok and hash_ok and notebook_ok
         if ok:
-            return True, f"Public/local podcast and direct-address audio verified ({remote_size} bytes)"
+            return True, f"Public/local NotebookLM podcast and direct-address audio verified ({remote_size} bytes)"
         if not remote_ok:
             return False, (
                 "Public podcast receipt must include pass=true, http_code=200, and size_download within "
@@ -219,6 +262,8 @@ def production_receipt_result(num: int, path: Path, html: str,
             return False, "Podcast receipt must prove direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, and >=5 you/your references"
         if not hash_ok:
             return False, "Podcast receipt audio_sha256 must match the current local MP3"
+        if not notebook_ok:
+            return False, notebook_detail
         return False, local_audio_detail
 
     if num == 48:
@@ -605,10 +650,17 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     }
 
     # 27. CTA points to qualify.html and does not use the banned Bennett-work phrasing
-    bad_cta = bool(re.search(r'href=["\'][^"\']*(?:(?<!/qualify)\/apply|meetadvaita\.com/apply)["\']', html, re.I))
+    bad_cta = bool(re.search(r'href=["\'][^"\']*(?:/apply(?:/|\?|#|["\'])|meetadvaita\.com/apply)[^"\']*["\']', html, re.I))
     banned_cta_copy = bool(re.search(r'>\s*Apply to work with Bennett\s*<', html, re.I))
     banned_work_with_us = bool(re.search(r'>\s*Apply to Work With Us\s*<', html, re.I))
-    ambiguous_apply = bool(re.search(r'>\s*Apply\s*<', html, re.I))
+    # Exclude nav-bar anchor links (#apply) and qualify.html CTA links — both are allowed.
+    # Also exclude heading/label elements (h2-h6, div, span) which are not actionable CTAs.
+    # Only flag standalone button-class CTA anchors with ambiguous "Apply" text.
+    _apply_anchors = re.findall(r'<a\b[^>]*>\s*Apply\s*</a>', html, re.I)
+    ambiguous_apply = any(
+        not re.search(r'href=["\'](?:#apply|[^"\']*qualify\.html)', a, re.I)
+        for a in _apply_anchors
+    )
     results[27] = {
         "desc": "CTA points to qualify.html and avoids banned or ambiguous apply copy",
         "pass": not bad_cta and not banned_cta_copy and not banned_work_with_us and not ambiguous_apply,
@@ -768,7 +820,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
         44: "Notion Sprint row present",
         45: "Current GHL readback (contact tagged)",
         46: "Repeat-submit same-contact proof",
-        47: "Walkthrough-size audio (6-20MB / direct-address verified)",
+        47: "Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
         48: "Bennett approval scope recorded",
     }
     for num, desc in prod_checks.items():

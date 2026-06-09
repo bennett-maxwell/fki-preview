@@ -1,0 +1,59 @@
+{
+  "advisor_scores": [
+    {
+      "advisor": "Contrarian",
+      "score": 4.7,
+      "verdict": "Prior delivery language was wrong if read as email/customer delivery. Gatekeeper pass was narrow preview-readiness only."
+    },
+    {
+      "advisor": "Operator",
+      "score": 4.6,
+      "verdict": "Keep package usable, but require an explicit delivery-state receipt before any delivered/100-more scale claim."
+    },
+    {
+      "advisor": "Risk/Gatekeeper",
+      "score": 4.8,
+      "verdict": "No Bennett preview receipt and no external-send receipt means delivery must remain locked. Gatekeeper should not be interpreted as send proof."
+    },
+    {
+      "advisor": "Scale Systems",
+      "score": 4.5,
+      "verdict": "The process can scale only after the final language and gate distinguish public preview, Bennett preview sent, and customer sent."
+    },
+    {
+      "advisor": "Customer View",
+      "score": 4.4,
+      "verdict": "Public page/audio/funnel can be used as a preview, but email delivery and real human journey were not proven."
+    }
+  ],
+  "average_score": 4.6,
+  "decision": "PASS_TO_FIX_PREVIEW_ONLY_LABELING_AND_GATE",
+  "drive_skill_proof": {
+    "blueprint_ai_skill_file_id": "1IzE-seDDaB1Tciik9mwBVrgQcb7FP7eH",
+    "council_skill_file_id": "18edfLllHikArUABu7l_feBxFWfiLncAY",
+    "gatekeeper_skill_file_id": "1oknnvfpoiLb_sOzWYGyNZBGM03sNaG7Q",
+    "modified_time": "2026-06-04T19:13:51.318Z",
+    "self_audit_skill_file_id": "1eL25q60RSbGidFJ0F7tZXiWi1ovCKmyb",
+    "version": "3.28"
+  },
+  "mode": "audit_only_with_safe_repo_fix",
+  "proof_receipts": {
+    "completion": "audit-receipts/billy-bob-electric-20260604/current-production-completion-after-public-fix-20260604T2221Z.json",
+    "conveyor": "audit-receipts/billy-bob-electric-20260604/current-production-conveyor-after-public-fix-20260604T2221Z.json",
+    "delivery_state": "audit-receipts/billy-bob-electric-20260604/delivery-state-gate-origin-main-20260605T001218Z.json",
+    "financial_fix": "audit-receipts/billy-bob-electric-20260604/financial-realism-after-min-fix-20260605T000627Z.txt",
+    "gatekeeper": "audit-receipts/billy-bob-electric-20260604/gatekeeper-origin-main-with-receipts-20260605T001249Z.json",
+    "gatekeeper_fail_before": "audit-receipts/billy-bob-electric-20260604/gatekeeper-rerun-during-correction-20260605T000154Z.json"
+  },
+  "question": "Was Billy Bob actually delivered and fully verified, why did Gatekeeper pass, what claims were overbroad, and what fixes are required?",
+  "ranked_fixes": [
+    "Add and run delivery-state gate that separates public preview from Bennett preview send and external/customer send.",
+    "Fix current Billy Bob HTML regression and rerun Gatekeeper after GitHub Pages build.",
+    "Update Notion row to state PUBLIC_PREVIEW_VERIFIED_NOT_SENT and remove delivered/Diamond wording.",
+    "In final answer, list all overbroad verified claims and block customer/external send."
+  ],
+  "schema": "fki_council_audit_receipt.v1",
+  "skill": "council-skill",
+  "threshold": 4.25,
+  "ts": "2026-06-05T00:14:28.566457+00:00"
+}

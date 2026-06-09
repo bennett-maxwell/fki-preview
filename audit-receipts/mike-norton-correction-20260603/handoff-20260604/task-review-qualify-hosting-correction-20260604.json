@@ -1,0 +1,59 @@
+{
+  "bennett_asks": [
+    {
+      "proof": "public-qualify-readback-after-pages-built-20260604.json",
+      "quote": "Qualify button does not work",
+      "status": "fixed_live_public_pass"
+    },
+    {
+      "proof": "root cause: string-only CTA audit did not HTTP-click action target; old URL contained qualify.html but 404ed",
+      "quote": "why did you not catch that before handoff",
+      "status": "answered"
+    },
+    {
+      "proof": "HighLevel connector 401; no wrangler/config; repo/Drive scripts hardcode GitHub Pages",
+      "quote": "why not hosting on GoHighLevel Cloudflare",
+      "status": "GHL partial"
+    },
+    {
+      "proof": "Drive skills fetched; council receipt, gatekeeper PASS, memory read; autopilot safe execution; task review receipt",
+      "quote": "use council, gatekeeper, autopilot, task-review, memory",
+      "status": "partial_to_full_mixed"
+    }
+  ],
+  "fixes_executed": [
+    {
+      "action": "Changed Mike Blueprint CTAs from /apply/qualify.html 404 to /qualify.html 200 and fixed malformed nav anchor",
+      "diamond": "PASS",
+      "gatekeeper": "PASS",
+      "item": "Broken Qualify CTA",
+      "proof": "public readback PASS"
+    },
+    {
+      "action": "Added blueprint_qualify_link_gate.py and wired into Gatekeeper/factory manifest; completion gate catches /apply paths",
+      "diamond": "PASS",
+      "gatekeeper": "PASS",
+      "item": "Future audit gap",
+      "proof": "Gatekeeper receipt includes qualify_link_gate PASS"
+    },
+    {
+      "action": "Documented GHL/Cloudflare migration prerequisites and blocker",
+      "diamond": "Yellow",
+      "gatekeeper": "N/A protected/tool blocked",
+      "item": "Hosting mismatch",
+      "proof": "HighLevel 401; no Wrangler config"
+    }
+  ],
+  "global_status": "Yellow until GHL/Cloudflare target/auth is available and customer send gate is resolved",
+  "requested_skills_compliance": {
+    "Diamond/Dyamond": "Gatekeeper Diamond PASS for deliverable; overall project not Diamond because GHL/Cloudflare hosting remains partial and customer send blocked",
+    "autopilot-skill": "safe execution path used; protected sends/mutations blocked",
+    "council-skill": "receipt written with 5 advisor scores; sub-agent isolation not available in this surface",
+    "gatekeeper-skill": "Gatekeeper 100 PASS after qualify_link_gate wired",
+    "memory-skill": "Drive memory skill fetched and local memory searched; no canonical memory green claim",
+    "task-review-skill": "reviewed and receipt written; exact broad external source sweep limited by connector/auth availability"
+  },
+  "schema": "task_review_skill_v3_7_receipt.codex",
+  "scope": "Current thread/objective plus active Mike Norton Notion row and repo state",
+  "ts": "2026-06-04T14:54:28.480903+00:00"
+}

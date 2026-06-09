@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-BLUEPRINTS_DIR="/Users/openclaw/fki-preview/blueprints"
+BLUEPRINTS_DIR="${BLUEPRINTS_DIR:-/Users/temp/fki-preview/blueprints}"
 LOG_FILE="$HOME/.openclaw/logs/contamination-check.jsonl"
 SLACK_CHANNEL="C0AKXT2S1T2"
 SLACK_TOKEN="${SLACK_BOT_TOKEN:-}"

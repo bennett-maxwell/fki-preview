@@ -13,6 +13,9 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/gogcli/0.13.0/bin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template.html"
+DEFAULT_BLUEPRINT_BASE_URL="https://bennett-maxwell.github.io/fki-preview"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL:-$DEFAULT_BLUEPRINT_BASE_URL}"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL%/}"
 
 if [ $# -lt 1 ] || [ "$1" = "--help" ]; then
     echo "Usage: $0 <lead-profile.json> [--send-preview]"
@@ -76,26 +79,52 @@ EMAIL_INDUSTRY=$(python3 -c "import re,sys; print(re.sub(r'\s+business(es)?\s*$'
 BLUEPRINT_URL=$(get blueprint_url "")
 PODCAST_URL=$(get podcast_url "")
 WEBSITE_URL=$(get website_url "")
+if [[ "$BLUEPRINT_BASE_URL" != "$DEFAULT_BLUEPRINT_BASE_URL" ]]; then
+  if [[ -z "$BLUEPRINT_URL" || "$BLUEPRINT_URL" == "$DEFAULT_BLUEPRINT_BASE_URL"* ]]; then
+    BLUEPRINT_URL="$BLUEPRINT_BASE_URL/blueprints/$SLUG.html"
+  fi
+  if [[ -z "$PODCAST_URL" || "$PODCAST_URL" == "$DEFAULT_BLUEPRINT_BASE_URL"* ]]; then
+    PODCAST_URL="$BLUEPRINT_BASE_URL/podcasts/$SLUG.mp3"
+  fi
+fi
+# Append GHL view-tracking params to the blueprint URL so the blueprint page can fire
+# blueprint_viewed → relay → GHL pipeline stage advance when the lead opens their email.
+# Params: slug (identifies the blueprint), cid (GHL contact ID for stage lookup).
+# email is NOT appended here because it is only resolved in the --send-ghl block;
+# the relay uses cid to locate the contact when present, slug as fallback.
+if [[ -n "$SLUG" ]]; then
+  _SEP="?"
+  [[ "$BLUEPRINT_URL" == *"?"* ]] && _SEP="&"
+  BLUEPRINT_TRACK_PARAMS="${_SEP}slug=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$SLUG")"
+  [[ -n "$GHL_CONTACT_ID" ]] && BLUEPRINT_TRACK_PARAMS="${BLUEPRINT_TRACK_PARAMS}&cid=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$GHL_CONTACT_ID")"
+  BLUEPRINT_URL="${BLUEPRINT_URL}${BLUEPRINT_TRACK_PARAMS}"
+fi
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
+QUALIFIER_AGENTS=$(python3 "$SCRIPT_DIR/blueprint_q7_agents.py" "$PROFILE" --slug "$SLUG")
 APPLY_SUBJECT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1] + ' - Blueprint Application'))" "$LEAD_NAME")
-APPLY_URL="https://bennett-maxwell.github.io/fki-preview/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
+APPLY_URL="$BLUEPRINT_BASE_URL/apply/?lead=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$LEAD_NAME")&biz=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$BUSINESS_NAME")&src=$SLUG"
 # Canonical CTA target is qualify.html (bennett-rule: "See If You Qualify" -> qualify.html ONLY).
 # Read ONLY a dedicated qualify_url field — NEVER seed from apply_url. apply/ is a
 # different page; seeding QUALIFY_URL from apply_url made the "See If You Qualify"
 # button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
 # Empty default => the python block below falls back to the canonical qualify.html.
 PROFILE_QUALIFY_URL=$(get qualify_url "")
-QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" << 'PYEOF'
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" "$BLUEPRINT_BASE_URL" "$QUALIFIER_AGENTS" << 'PYEOF'
 import sys
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-profile_url, lead_name, business_name, slug, contact_id = sys.argv[1:6]
-url = profile_url or "https://bennett-maxwell.github.io/fki-preview/qualify.html"
+profile_url, lead_name, business_name, slug, contact_id, base_url, qualifier_agents = sys.argv[1:8]
+DEFAULT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+base_url = base_url.rstrip("/") or DEFAULT_BASE_URL
+if base_url != DEFAULT_BASE_URL and (not profile_url or profile_url.startswith(DEFAULT_BASE_URL)):
+    url = f"{base_url}/qualify.html"
+else:
+    url = profile_url or f"{base_url}/qualify.html"
 parts = urlsplit(url)
 if not parts.scheme:
-    parts = urlsplit("https://bennett-maxwell.github.io/fki-preview/qualify.html")
+    parts = urlsplit(f"{base_url}/qualify.html")
 params = dict(parse_qsl(parts.query, keep_blank_values=True))
 params["lead"] = lead_name
 params["biz"] = business_name
@@ -105,7 +134,10 @@ params["utm_medium"] = "email"
 params["utm_campaign"] = "blueprint_delivery"
 if contact_id:
     params["contactId"] = contact_id
-print(urlunsplit((parts.scheme, parts.netloc, parts.path or "/fki-preview/qualify.html", urlencode(params), "")))
+if qualifier_agents:
+    params["agents"] = qualifier_agents
+fallback_path = urlsplit(f"{base_url}/qualify.html").path or "/qualify.html"
+print(urlunsplit((parts.scheme, parts.netloc, parts.path or fallback_path, urlencode(params), "")))
 PYEOF
 )
 
@@ -218,11 +250,8 @@ html = html.replace('{{PROMPT_1}}', profile.get('prompt_1', default_p1))
 html = html.replace('{{PROMPT_2}}', profile.get('prompt_2', default_p2))
 html = html.replace('{{PROMPT_3}}', profile.get('prompt_3', default_p3))
 html = html.replace('{{LEAD_NAME}}', profile.get('lead_name', 'Unknown'))
-# Inject build metadata
-import datetime
-build_ts = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-meta = '<!-- BLUEPRINT-DELIVERY-EMAIL v2 -->\n' + f'<!-- Blueprint AI Pipeline v2.1 | Email Built: {build_ts} | Lead: {profile.get("lead_name","Unknown")} -->\n'
-html = meta + html
+# Customer-view email must start with <!DOCTYPE html>; do not prepend build
+# metadata comments because Gmail snippets/forwarded previews can expose them.
 with open(output_path, 'w') as f:
     f.write(html)
 PYEOF
@@ -279,6 +308,22 @@ if [ -f "$SCRIPT_DIR/email-design-conformance.py" ]; then
     fi
 fi
 
+
+# Customer-view approval gate: this artifact may be sent to Bennett for approval,
+# but it must look like the customer email, not an internal proof memo.
+if [ -f "$SCRIPT_DIR/blueprint_approval_email_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_approval_email_gate.py" --email "$OUTPUT" --profile "$PROFILE" --subject "$BUSINESS_NAME - Your Custom Blueprint is Ready" >/tmp/${SLUG}-approval-email-gate.json
+    echo "Approval email gate: PASS (customer-view body)"
+fi
+if [ -f "$SCRIPT_DIR/blueprint_email_visual_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_email_visual_gate.py" --email "$OUTPUT" --subject "CUSTOMER VIEW PREVIEW: $BUSINESS_NAME - Your Custom Blueprint is Ready" --json-output >/tmp/${SLUG}-email-visual-gate.json
+    echo "Email visual gate: PASS (customer-view format)"
+fi
+if [ -f "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" ]; then
+    python3 "$SCRIPT_DIR/blueprint_qualifier_context_gate.py" --html "blueprints/$SLUG.html" --delivery-email "$REPO_EMAIL" --profile "$PROFILE" --lead "$SLUG" --json-output >/tmp/${SLUG}-qualifier-context-gate.json
+    echo "Qualifier context gate: PASS (tailored Q7 links)"
+fi
+
 # Send preview via Gmail (to Bennett for review)
 if [ "$SEND_PREVIEW" = true ]; then
     check_session_audit_ts
@@ -288,7 +333,7 @@ if [ "$SEND_PREVIEW" = true ]; then
     if ! gog gmail send \
         --to=bennett@franchiseki.com \
         --cc=madison@franchiseki.com \
-        --subject="PREVIEW: $LEAD_NAME Blueprint Delivery Email" \
+        --subject="CUSTOMER VIEW PREVIEW: $BUSINESS_NAME - Your Custom Blueprint is Ready" \
         --body-html="$(cat "$OUTPUT")" \
         --no-input > "$SEND_LOG" 2>&1; then
         cat "$SEND_LOG"
@@ -322,8 +367,8 @@ def sha(path):
         for chunk in iter(lambda: f.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
-message_id = pick([r"message[_ -]?id['\"]?\s*[:=]\s*['\"]?([A-Za-z0-9._:-]+)", r"\bmessage_id\s+([A-Za-z0-9._:-]+)"])
-thread_id = pick([r"thread[_ -]?id['\"]?\s*[:=]\s*['\"]?([A-Za-z0-9._:-]+)", r"\bthread_id\s+([A-Za-z0-9._:-]+)"])
+message_id = pick([r"message[_ -]?id['\"']?\s*[:=]\s*['\"']?([A-Za-z0-9._:-]+)", r"\bmessage_id\s+([A-Za-z0-9._:-]+)"])
+thread_id = pick([r"thread[_ -]?id['\"']?\s*[:=]\s*['\"']?([A-Za-z0-9._:-]+)", r"\bthread_id\s+([A-Za-z0-9._:-]+)"])
 receipt = {
     "ts": datetime.now(timezone.utc).isoformat(),
     "lead": slug,
@@ -400,7 +445,9 @@ payload = {
     'type': 'Email',
     'contactId': sys.argv[2],
     'subject': sys.argv[3] + ' - Your Custom Blueprint is Ready',
-    'html': html
+    'html': html,
+    'cc': ['bennett@franchiseki.com'],
+    'bcc': ['madison@franchiseki.com', 'brent@franchiseki.com']
 }
 if sys.argv[4]: payload['emailTo'] = sys.argv[4]
 print(json.dumps(payload))
@@ -420,6 +467,8 @@ print(json.dumps(payload))
             --to="$LEAD_EMAIL" \
             --subject="$BUSINESS_NAME - Your Custom Blueprint is Ready" \
             --body-html="$(cat "$OUTPUT")" \
+            --cc=bennett@franchiseki.com \
+            --bcc=madison@franchiseki.com,brent@franchiseki.com \
             --no-input 2>&1 | tail -2
     else
         echo "SKIP: No email or GHL contact ID in profile"

@@ -1,0 +1,1089 @@
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-01T23:06:20Z | Lead: Dave Wood | Industry: fast-casual restaurant franchise -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personalized AI blueprint for Dave Wood — exactly where AI creates the biggest leverage for Mahana Fresh and how to get there in 30 days." />
+  <meta property="og:title" content="Your AI Advantage Roadmap — Mahana Fresh" />
+  <meta property="og:description" content="A personalized AI blueprint built for Dave Wood. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to Mahana Fresh." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/dave-wood.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>AI Advantage Roadmap — Mahana Fresh</title>
+  <style>
+    :root {
+      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
+      --accent-alias: #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 660px; margin-bottom: 3rem; }
+
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .results-table a { color: var(--brand); text-decoration: underline; }
+
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand); margin: 0.75rem 0 0.25rem; }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8eb; color: var(--brand); }
+    .gap-tag.efficiency { background: #e8eaf3; color: var(--steel); }
+    .gap-tag.brand { background: #f3e8f0; color: var(--brand-dark); }
+    .gap-desc a { color: var(--brand); }
+
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfafb; }
+    .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #fde8eb; color: var(--brand); }
+
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: var(--brand); font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-muted); }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+    .calc-disclaimer a { color: var(--brand); }
+
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.7); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: var(--brand-dark); }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.92); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand); text-decoration: underline; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 1.45rem; } .hero-sub { font-size: 1rem; } .section { padding: 2.75rem 1rem; } }
+
+    .pod-section { padding: 4rem 2rem; }
+    .pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
+    .pod-header { background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.5rem 2rem; color: #fff; }
+    .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
+    .pod-body { padding: 1.5rem 2rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
+    .pod-eq.playing { display: inline-flex; }
+    .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+    .pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+    .pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+    .pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+    .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+    @keyframes eqBounce { from{height:4px} to{height:18px} }
+    .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
+    .pod-progress-wrap { position: relative; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; cursor: pointer; touch-action: none; }
+    .pod-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
+    .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
+    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+    .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+    .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
+    .pod-btn:hover { background: rgba(0,113,227,.08); }
+    .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
+    @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+    .pod-btn.play-btn:hover { background: var(--brand-dark); }
+    .pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+    .pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+    .pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .pod-mute { margin-left: auto; }
+    .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
+    .pod-dl:hover { text-decoration: underline; }
+    .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
+    .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
+    .pod-mini.visible { display: flex; }
+    .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+    .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Advaita <span>AI for Business</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#profile">Your Profile</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#apply">Apply</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-badge">Confidential — Prepared for Dave Wood</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Mahana Fresh</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the 100% gluten-free fast-casual franchise with 8 locations open and 12 in development — and how to get there in 30 days.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Agents<br>Running</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Mahana Fresh Data</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Manager</span></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="profile">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Mahana Fresh Stands Today</h2>
+    <p class="section-sub">Built from public franchise data and a structured review of mahanafresh.com. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">8 Open</div><div class="snapshot-key">Franchise Locations</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">12 More</div><div class="snapshot-key">In Development</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Franchise</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">2019</div><div class="snapshot-key">Franchising Since</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">100%</div><div class="snapshot-key">Gluten-Free Menu</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$212K&ndash;759K</div><div class="snapshot-key">Investment Range</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">5 Streams</div><div class="snapshot-key">Revenue Channels</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Bowls + Catering</div><div class="snapshot-key">Core Offering</div></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">Mahana Fresh is a fast-casual, build-your-own bowl and wrap concept &mdash; 100% gluten-free, with no fryers, microwaves, or freezers in the kitchen. The brand was founded by a former Domino's franchisee who ran roughly 20 units over 30 years, and now counts NBA champion Kyle Kuzma among its franchisees and investors. Revenue flows through five channels: dine-in, takeout, catering, grab-n-go, and third-party delivery. Brand voice is calibrated from mahanafresh.com and your tagline ("We choose to look on the bright side of everything&hellip;helping people eat well and feel better about themselves.") &mdash; 90% accurate on Day 1, built from an intel audit before launch.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">What Your Industry Is Already Doing</p>
+    <h2 class="section-title">Fast-Casual Franchises Like Yours Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves multi-unit restaurant and franchise brands are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Mahana Fresh runs them before the next concept opening down the street does.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every franchise inquiry in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> growing franchise brands now put an AI speed-to-lead agent on every franchise inquiry and catering request, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first brand to respond wins the clear majority of qualified candidates &mdash; they capture prospects your slower competitors never even reach. <strong>How I deliver it for Mahana Fresh:</strong> a speed-to-lead agent that answers every franchise and catering inquiry in under 60 seconds, day or night, shares the $212K&ndash;$759K investment range and territory availability, and routes it to the right next step. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They turn one catering inquiry into a booked event in minutes</div><div class="gap-desc"><strong>What they're doing:</strong> catering-driven concepts hand proposal creation to an AI agent &mdash; menu customization, per-head pricing, dietary accommodations, and delivery logistics. <strong>How it helps them:</strong> proposals go out the same hour the lead comes in, while the prospect is still deciding &mdash; so far more events get booked. <strong>How I deliver it for Mahana Fresh:</strong> a catering proposal agent that builds a branded, fully gluten-free proposal from event details in minutes, not the better part of an hour. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They see every location's numbers in one daily summary</div><div class="gap-desc"><strong>What they're doing:</strong> multi-unit operators run an AI reporting agent that pulls sales, labor, and review data from every store into one executive summary each morning. <strong>How it helps them:</strong> leadership spots a struggling location days earlier &mdash; no waiting on end-of-week spreadsheets. <strong>How I deliver it for Mahana Fresh:</strong> a reporting agent that aggregates daily sales, labor cost, review scores, and catering revenue across all 8 locations into a single morning briefing. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They answer every guest review in one consistent brand voice</div><div class="gap-desc"><strong>What they're doing:</strong> restaurant groups run an AI review-response agent across every location to reply to Google and Yelp reviews quickly and on-brand. <strong>How it helps them:</strong> guests feel heard, ratings climb, and a service issue gets a recovery offer before it spreads. <strong>How I deliver it for Mahana Fresh:</strong> a review-response agent that drafts a warm, on-brand reply to every review across all 8 locations &mdash; reinforcing your gluten-free, feel-good positioning. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Reputation</span></div></div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside brands that compete for the same guests and the same franchise candidates you do. The ones who move first do not just save time &mdash; they win the prospects everyone else was too slow to answer. Mahana Fresh can be the brand they are watching, or the one they leave behind.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Mahana Fresh</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or more consistency across every location.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">More Bookings</div>
+        <div class="pillar-sub">Faster franchise and catering response captures prospects competitors lose. AI proposals book events in hours instead of days. Higher conversion at every stage of the pipeline.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">12 Hrs / Week</div>
+        <div class="pillar-sub">Catering proposals, multi-location reporting, review responses, and inquiry triage &mdash; automated. Hours reclaimed for owners and managers, every week.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="pillar-title">Scale Consistently</div>
+        <div class="pillar-metric">8 to 20+</div>
+        <div class="pillar-sub">Hold the same standard across every location. Keep the franchise development pipeline moving. Grow from 8 open toward 20+ without losing the brand experience.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Your Current Tool Stack</h2>
+    <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use. (Your exact tools were not specified, so these are the standard channels a multi-unit fast-casual brand runs on.)</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">POS System</div><div class="stack-role">Sales &amp; Order Data</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><div class="stack-tool">Online Ordering</div><div class="stack-role">Takeout &amp; Grab-n-Go</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><div class="stack-tool">Delivery Platforms</div><div class="stack-role">Third-Party Delivery</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div><div><div class="stack-tool">Social Channels</div><div class="stack-role">Brand &amp; Local Marketing</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Email</div><div class="stack-role">Inquiry &amp; Catering Comms</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><div><div class="stack-tool">Reviews &amp; Listings</div><div class="stack-role">Google &amp; Yelp Per Location</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
+    <p class="section-sub">These are the areas where Mahana Fresh has the most capacity to recover &mdash; based on your operating model and a structured review of mahanafresh.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Franchise Inquiry Response Speed</div><div class="gap-desc">With 12 units in development and a $212K&ndash;$759K investment, every franchise inquiry is a high-value opportunity. Published research shows the first responder wins the clear majority of deals &mdash; yet most brands take hours to reply manually. An AI speed-to-lead agent answers in under 60 seconds, 24/7, with your investment range and territory availability, lifting your candidate-to-call rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Catering Proposal Turnaround</div><div class="gap-desc">Catering is one of your five revenue streams, and the brands that win it respond fastest. Building a proposal by hand &mdash; menu, headcount pricing, dietary notes, delivery logistics &mdash; can take 45 minutes per inquiry. An AI catering agent generates a branded, fully gluten-free proposal in about 3 minutes, so quotes go out while the prospect is still deciding. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Multi-Location Performance Reporting</div><div class="gap-desc">Pulling daily sales, labor cost, review scores, and catering revenue from 8 locations into one view is hours of manual work every week. An AI reporting agent aggregates it all into a single executive summary each morning &mdash; flagging top and bottom performers and any store below target &mdash; so leadership acts on real numbers, not week-old spreadsheets. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Guest Review Response at Scale</div><div class="gap-desc">Across 8 locations, Google and Yelp reviews come in faster than any one manager can answer them on-brand. Unanswered reviews cost ratings and walk-in traffic. An AI review-response agent drafts a warm, specific reply to every review &mdash; thanking the guest, addressing concerns with a recovery offer, and reinforcing your gluten-free, feel-good brand. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Reputation</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Franchise Development Pipeline Tracking</div><div class="gap-desc">With 8 open and 12 in development, prospects move through discovery, application, and approval over weeks &mdash; and a stalled candidate is easy to lose track of. An AI pipeline agent tracks each prospect's stage, drafts timely follow-ups, surfaces deals going cold, and preps a weekly digest of who needs attention next, so no qualified candidate slips through. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Menu &amp; Marketing Decisions From Sales Data</div><div class="gap-desc">Every location generates item-level sales data, but turning it into menu and limited-time-offer decisions is rarely anyone's full-time job. An AI menu-optimization agent reads the sales mix and margins across locations to recommend placement, all-gluten-free bundle ideas, and underperformers to cut &mdash; each with a short rationale you can act on. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map &mdash; Mahana Fresh</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down &mdash; do not skip ahead.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Franchise Inquiry Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every franchise inquiry answered before competitors reach the candidate</td><td>Email, Online Ordering, Social Channels</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Catering Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded, all-gluten-free proposals out the same hour</td><td>Email, POS System</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Multi-Location Performance Reporter</strong></td><td><span class="impact-tag">Daily exec summary</span> &mdash; all 8 locations in one morning briefing</td><td>POS System, Delivery Platforms, Reviews</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>Customer Review Response Agent</strong></td><td><span class="impact-tag">Every review answered</span> &mdash; consistent brand voice across locations</td><td>Reviews &amp; Listings, Social Channels</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Franchise Development Pipeline Agent</strong></td><td><span class="impact-tag">No prospect lost</span> &mdash; every candidate tracked and followed up</td><td>Email, POS System</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Menu Optimization Agent</strong></td><td><span class="impact-tag">Data-driven menu</span> &mdash; placement, bundles, and cuts from real sales</td><td>POS System, Online Ordering</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Local Marketing Content Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; LTOs and openings turned into posts per location</td><td>Social Channels, Email</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Sequencing, Not Limits</p>
+    <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Franchise Approvals</div><div class="ignore-reason">Absolutely doable to assist later &mdash; but awarding a franchise is a relationship and a judgment call. Keep the final approval with leadership while AI handles inquiry response, follow-up, and pipeline tracking around it. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Menu &amp; Pricing Changes</div><div class="ignore-reason">AI will happily model menu and pricing moves &mdash; and eventually test them on its own. For now, let it surface the sales data and recommendations and keep the final menu and price calls with the team. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing In-Store Guest Experience</div><div class="ignore-reason">An agent can handle plenty behind the scenes &mdash; but the tropical-inspired, in-person Mahana Fresh experience is the brand. Start by automating the back office and digital touchpoints, and keep the dining room human. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email simply converts more franchise and catering prospects than a website chatbot menu. We would rather put the first dollar where it books the deal.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">6 AI Agents Built for Mahana Fresh</h2>
+    <p class="section-sub">Each agent maps directly to a specific workflow inside your franchise and restaurant operations. Brand voice is built instantly from mahanafresh.com and your existing guest language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Franchise Inquiry Speed-to-Lead Agent</div><div class="agent-desc">Responds to every franchise inquiry in under 60 seconds with investment range, territory availability, and next steps.</div><div class="agent-outcome">Every franchise inquiry answered in under 60 seconds</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Catering Proposal Generator</div><div class="agent-desc">Builds branded, 100% gluten-free catering proposals from event details in minutes.</div><div class="agent-outcome">Branded catering proposals in 3 min, not 45</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Multi-Location Performance Reporter</div><div class="agent-desc">Aggregates sales, reviews, and ops metrics across all 8 locations into one daily exec summary.</div><div class="agent-outcome">One daily exec summary across all 8 locations</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="agent-name">Customer Review Response Agent</div><div class="agent-desc">Drafts on-brand responses to reviews across every location at scale.</div><div class="agent-outcome">Every review answered in a consistent brand voice</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="agent-name">Franchise Development Pipeline Agent</div><div class="agent-desc">Tracks and nurtures franchise-development prospects through every pipeline stage.</div><div class="agent-outcome">No franchise prospect slips through the cracks</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Menu Optimization Agent</div><div class="agent-desc">Turns POS sales data into menu and LTO recommendations.</div><div class="agent-outcome">Menu decisions driven by real sales data</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Your Implementation Roadmap</h2>
+    <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Hours 0-72</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list"><li>Kickoff call &mdash; map your franchise inquiry flow and catering intake process</li><li>Franchise Inquiry Speed-to-Lead Agent configured with your investment range and territory list</li><li>Brand voice built from mahanafresh.com and your existing Mahana Fresh messaging</li><li>Live test: submit a test franchise inquiry and watch the 60-second response fire</li></ul></td>
+            <td class="m-result">Your first agent is live. Every Mahana Fresh franchise inquiry gets a 60-second response while you sleep.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list"><li>Catering Proposal Generator calibrated to your gluten-free menu and per-head pricing</li><li>Multi-Location Performance Reporter connected to all 8 locations</li><li>Customer Review Response Agent drafting replies across Google and Yelp</li><li>Franchise Development Pipeline Agent tracking every prospect's stage</li><li>Menu Optimization Agent reading the first sales mix</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 7-30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Dialing In</div></td>
+            <td><ul class="m-list"><li>Agents refined on your actual franchise conversations, catering events, and review patterns</li><li>Reporting tuned to the metrics leadership cares about most</li><li>30-day performance review: response times, proposals out, reviews answered</li></ul></td>
+            <td class="m-result">The system knows your business. Every agent is calibrated to real Mahana Fresh data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data as you open new units</li><li>Expansion roadmap: what to automate next as Mahana Fresh grows past 20 locations</li></ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Adjust the sliders to match your business. Defaults are pre-loaded from your Mahana Fresh profile: $15,000 average value per franchise or major catering deal, 20 monthly inquiries, and a 20% close rate. Choose a scenario preset or set your own numbers.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Deal Value</span><span class="calc-slider-val" id="lbl-contract">$15,000</span></div>
+          <input type="range" class="calc-slider" id="sl-contract" min="1000" max="50000" step="500" value="15000" oninput="updateLabel('contract'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Inquiries</span><span class="calc-slider-val" id="lbl-leads">20</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="5" max="200" step="1" value="20" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">20%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Owner/Manager Hours / Week</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">&mdash;</div><div class="res-sub" id="resLift">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
+      </div>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for inquiry volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Agent &mdash; Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Mahana Fresh</h2>
+    <p class="section-sub">These are fully-built agent instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs. Built specifically for Mahana Fresh.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Franchise Inquiry Speed-to-Lead Agent</h3><p>Based on your #1 time recovery opportunity: speed-to-response on new Mahana Fresh franchise inquiries</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Franchise Speed-to-Lead Agent for Mahana Fresh, a fast-casual franchise with a 100% gluten-free menu and no fryers, freezers, or microwaves. You respond to incoming franchise inquiries within 60 seconds, 24 hours a day, 7 days a week.
+
+## YOUR JOB
+Your ONLY job in this first message is to make the prospect feel heard, confirm you received their inquiry, share the key investment facts, gather two specific pieces of information, and set a clear next step. You are NOT hard-selling. You are opening a relationship with a potential franchisee.
+
+## STEP-BY-STEP RESPONSE LOGIC
+
+STEP 1 - EXTRACT from the inquiry form:
+- Prospect first name
+- Market or city of interest
+- Restaurant or franchise experience (if provided)
+- Liquid capital or investment readiness (if provided)
+- What drew them to Mahana Fresh
+
+STEP 2 - BUILD YOUR RESPONSE using this exact structure:
+
+Paragraph 1 (2 sentences max): Greet by first name. Acknowledge their market of interest. Express genuine interest.
+
+Paragraph 2 (2-3 sentences): Establish Mahana Fresh's relevance. Share the $212K-$759K investment range and note current territory availability for their market. Mention one differentiator (100% gluten-free, no fryers/freezers/microwaves, build-your-own bowls, or a founder who ran ~20 Domino's units for 30 years).
+
+Paragraph 3 (2 questions only):
+  Q1: "Which market are you most interested in, and is there a timeline you are working toward?"
+  Q2: "Do you have prior restaurant or multi-unit ownership experience?"
+
+Paragraph 4 (1 sentence): "I will have territory availability and next steps ready for you - let's grab 15 minutes this week to walk through it."
+
+Sign-off: "[Your Name] | Mahana Fresh Franchise Development"
+
+## BRAND VOICE RULES
+- Warm and upbeat - we "look on the bright side of everything"
+- Direct and confident - founder-to-founder, not corporate
+- Address the prospect by first name throughout
+- No exclamation points - confidence does not need them
+- Active voice: "We built" not "Mahana Fresh was built"
+- Lead with the health-forward, feel-good positioning
+
+## EDGE CASES
+- No market mentioned: open with "Hi [Name]" and ask "Which market are you looking at?" as Q1
+- Experience not provided: add "and do you have prior restaurant experience?" to Q2
+- Already owns other franchises: "That experience translates well - many of our franchisees come from multi-unit backgrounds. Happy to show you the Mahana Fresh model."
+- Impatient tone: lead with "I hear you - let me make this straightforward."
+- Asks about a taken territory: never overpromise. "That market is filling up - let's confirm what's still open on a quick call."
+- Referral: acknowledge the referring person by name if provided
+
+## WHAT NEVER TO DO
+- Never promise a specific territory before it is confirmed available
+- Never quote unit-level revenue or earnings claims (FDD Item 19 governs that)
+- Never send a generic auto-reply that ignores their market of interest
+- Never promise a timeline you cannot keep
+- Never use the word "unfortunately"
+- Never end with an open-ended question
+
+## EXAMPLE OUTPUT
+---
+Hi Marcus,
+
+Thanks for reaching out about bringing Mahana Fresh to the Dallas market - it's a great fit for a fast-casual concept that's 100% gluten-free with no fryers, freezers, or microwaves.
+
+Mahana Fresh franchises in the $212K-$759K investment range, and we currently have territory open in the Dallas area. The brand was built by a founder who ran roughly 20 Domino's units over 30 years, so the model is designed for operators who want a clean, repeatable system.
+
+Two quick questions so I can tailor next steps:
+1. Which Dallas-area market are you most interested in, and is there a timeline you are working toward?
+2. Do you have prior restaurant or multi-unit ownership experience?
+
+I will have territory availability and next steps ready for you - let's grab 15 minutes this week to walk through it.
+
+[Your Name] | Mahana Fresh Franchise Development
+---</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Ensures every Mahana Fresh franchise inquiry receives a professional, market-specific response in under 60 seconds &mdash; including nights and weekends &mdash; without adding a single staff hour.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Catering Proposal Generator</h3><p>Based on your #2 time recovery opportunity: manual catering proposals consuming team time</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the Catering Proposal Agent for Mahana Fresh. When given an event's details, you produce a complete, professional, branded catering proposal in under 3 minutes. Every menu you build is 100% gluten-free, because the entire Mahana Fresh menu is.
+
+## INPUTS YOU NEED
+Required:
+- Contact name and organization
+- Event date and location (which Mahana Fresh location serves it)
+- Headcount
+- Budget or per-person target (if provided)
+Optional:
+- Dietary needs beyond gluten-free (vegan, nut allergies, etc.)
+- Recurring vs. one-time event
+- Delivery vs. pickup
+- How they found Mahana Fresh
+
+## PROPOSAL STRUCTURE
+
+SECTION 1 - PERSONALIZED OPENING (3-4 sentences)
+Reference the organization by name and the event. Note that everything Mahana Fresh caters is 100% gluten-free with no fryers, freezers, or microwaves involved. Set a warm, feel-good tone.
+
+SECTION 2 - RECOMMENDED MENU (all gluten-free)
+Build a bowl-and-wrap spread scaled to headcount:
+- Build-your-own bowl bar OR pre-set signature bowls
+- Wrap option
+- A protein and a plant-forward option
+- Sides and a grab-n-go dessert if budget allows
+Name the items; keep it on-brand and health-forward.
+
+SECTION 3 - PER-PERSON PRICING
+- State a per-person price and multiply by headcount for an estimated subtotal
+- Note delivery/setup logistics for that location
+- Flag a clear recurring-corporate-catering option ("set this up weekly/biweekly and lock in a standing order")
+
+SECTION 4 - DIETARY ACCOMMODATIONS
+- Confirm the whole menu is gluten-free
+- Address any additional dietary needs the contact flagged (vegan, nut-free, etc.)
+- Note how allergens are handled in a no-fryer, no-microwave kitchen
+
+SECTION 5 - NEXT STEP / CONFIRM CTA (1-2 sentences)
+"Reply 'confirm' or let me know any tweaks and I'll lock in your [date] order for [headcount]. Happy to adjust the menu to fit your group."
+
+SECTION 6 - SIGNATURE BLOCK
+[Your Name]
+Mahana Fresh Catering - 100% Gluten-Free Bowls, Wraps &amp; Catering
+[Email] | [Phone]
+mahanafresh.com
+
+## RULES
+- Every item on every proposal is gluten-free - never suggest otherwise
+- Never overstate what a location can produce for a given date/headcount
+- Always include the recurring-catering upsell
+- Always end with a clear confirm CTA, never an open-ended question
+- Keep the total proposal tight and skimmable
+
+## TONE RULES
+- Warm, upbeat, "bright side of everything" brand voice
+- Practical and specific - real menu items, real per-person numbers
+- Mirror catering language: "headcount," "per person," "setup," "standing order"</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Turns a raw catering inquiry into a branded, all-gluten-free proposal in about 3 minutes instead of 45 &mdash; so quotes go out while the prospect is still deciding, across every location.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Multi-Location Performance Reporter</h3><p>Based on your #3 time recovery opportunity: manual reporting across 8 locations</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Reporting Agent for Mahana Fresh's 8 locations. Each day you aggregate sales, labor, reviews, and catering revenue into one clear executive summary leadership can read in under two minutes.
+
+## INPUTS YOU NEED
+For each of the 8 locations (Somerset NJ, Cary NC, Braselton GA, Fuquay Varina NC, Columbia MD, Toms River NJ, Atlanta/Sandy Springs GA, Idaho Falls ID):
+- Daily net sales
+- Labor cost %
+- Customer review scores / new reviews
+- Catering revenue
+- Target AUV or sales goal (if provided)
+
+## REPORT STRUCTURE
+
+SECTION 1 - HEADLINE (1-2 sentences)
+Total system sales for the day and how it compares week-over-week. One sentence on the overall trend.
+
+SECTION 2 - TOP &amp; BOTTOM PERFORMERS
+- Top performer: location, sales, and what stood out
+- Bottom performer: location, sales, and the likely driver
+- Any location below its target AUV - flag it by name
+
+SECTION 3 - WEEK-OVER-WEEK TRENDS
+- Sales trend per region
+- Labor cost % outliers (too high or too low)
+- Catering revenue movement
+- Review score changes worth noting
+
+SECTION 4 - 3 ACTION ITEMS
+End with exactly three concrete action items for operations - specific, location-named, and doable this week.
+
+## RULES
+- Lead with the number, then the context
+- Name locations explicitly - never "Store 4"
+- Flag anything below target AUV every time
+- Keep it skimmable: short lines, clear sections
+- Never invent data - if an input is missing, say "data not reported for [location]"
+
+## TONE RULES
+- Crisp and executive - this is a briefing, not a memo
+- Plain language, no jargon
+- Always close with the three action items so the report drives a decision</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Replaces hours of manual spreadsheet work with one daily executive summary across all 8 Mahana Fresh locations &mdash; so leadership spots a struggling store days earlier and acts on real numbers.</div>
+        </div>
+      </div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two paths forward for Dave:</h3>
+      <div class="path-grid">
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most operators can put 1-2 agents to work on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster franchise responses, quicker catering quotes &mdash; within days, not months.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Mahana Fresh's brand voice from Day 1, working across franchise inquiries, catering, reviews, and all 8 locations, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood" class="path-cta">See If You Qualify</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="demo">
+  <div class="container">
+    <p class="section-label">Live Preview</p>
+    <h2 class="section-title">Mahana Fresh Speed-to-Lead Demo</h2>
+    <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound franchise and catering inquiry, day or night. The same approach runs across all 8 locations for reviews and reporting too.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center plugs into the channels you already run &mdash; POS, online ordering, delivery platforms, social, and email &mdash; not as a standalone tool. It speaks in the Mahana Fresh brand voice you have already built and runs every workflow above end-to-end.</p>
+  </div>
+</section>
+
+<section class="section pod-section" id="listen">
+  <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Mahana Fresh profile. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
+  <div class="pod-card" id="podcast">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Dave Wood &middot; Mahana Fresh</p>
+    </div>
+    <div class="pod-body">
+      <span class="pod-badge" id="podBadge">
+        Ready to play
+        <span class="pod-eq" id="podEq">
+          <span style="height:4px"></span><span></span><span></span><span></span><span></span>
+        </span>
+      </span>
+      <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+      <div class="pod-progress-wrap" id="podTrack" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Podcast progress" tabindex="0">
+        <div class="pod-fill" id="podFill"></div>
+        <div class="pod-thumb" id="podThumb"></div>
+      </div>
+      <div class="pod-times">
+        <span id="podElapsed">0:00</span>
+        <span id="podDuration">--:--</span>
+      </div>
+      <div class="pod-controls">
+        <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+          <span class="pod-btn-label">15s</span>
+        </button>
+        <button class="pod-btn play-btn" id="podPlay" aria-label="Play">
+          <svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg>
+          <span class="pod-btn-label">30s</span>
+        </button>
+      </div>
+      <div class="pod-meta">
+        <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+        <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
+          <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" target="_blank" download>Download MP3</a>
+      </div>
+      <div class="pod-error" id="podError">
+        Audio temporarily unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" target="_blank">Open MP3 directly</a>
+      </div>
+      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/dave-wood.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research or Mahana Fresh's own public information. No fabricated data, no anonymous case studies.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>Mahana Fresh &mdash; official brand, menu, locations, and franchise information. <a href="https://www.mahanafresh.com" target="_blank" rel="noopener">mahanafresh.com</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>1851 Franchise &mdash; Mahana Fresh franchise profile and development coverage. <a href="https://1851franchise.com" target="_blank" rel="noopener">1851franchise.com</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>Franchise Times &mdash; coverage of Mahana Fresh growth and investment range. <a href="https://www.franchisetimes.com" target="_blank" rel="noopener">franchisetimes.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>LinkedIn &mdash; Dave Wood, Mahana Fresh (lead source, May 2026). <a href="https://www.linkedin.com/in/dave-wood-9975a38/" target="_blank" rel="noopener">linkedin.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>HubSpot &amp; Harvard Business Review &mdash; published benchmarks on lead response time and small-business automation. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Mahana Fresh?</span></h2>
+    <p class="cta-personal">"Dave, I built this roadmap specifically for Mahana Fresh because I believe a 100% gluten-free, feel-good concept with 8 locations open and 12 on the way deserves systems as reliable and scalable as the brand itself. The AI here is not about replacing anything &mdash; it is about making sure no franchise inquiry, no catering request, and no guest review goes unanswered. &mdash; Bennett"</p>
+    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Advaita AI for Business &mdash; Prepared for Dave Wood / Mahana Fresh &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Dave+Wood&biz=Mahana+Fresh&src=dave-wood" class="mobile-cta-btn">See If You Qualify</a>
+</div>
+
+<script>
+  const PRESETS = {
+    conservative: { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 0.5 },
+    expected:     { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 1.0 },
+    stretch:      { contract: 15000, leads: 20, rate: 20, hours: 15, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name, evt) {
+    const p = PRESETS[name];
+    document.getElementById('sl-contract').value = p.contract;
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
+  function calcROI() {
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+    document.getElementById('resQ').textContent         = fmt(gain * 3);
+  }
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
+  calcROI();
+
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? 'collapse' : 'view & copy';
+  }
+
+  function copyPrompt(preId, btn) {
+    navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
+
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+
+  const readingProgress = document.getElementById('readingProgress');
+  const mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (readingProgress && total > 0) readingProgress.style.width = (scrolled / total * 100) + '%';
+    if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
+  }, { passive: true });
+</script>
+
+<div class="pod-mini" id="podMini" aria-live="polite">
+  <span class="pod-mini-name">AI Walkthrough &middot; Dave Wood</span>
+  <span class="pod-mini-time" id="podMiniTime">0:00</span>
+  <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
+    <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'bpod_dave_wood';
+  var CHAPTERS = [
+    {pct: 0,    label: 'Segment 1 - This Is Your Business'},
+    {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},
+    {pct: 20,   label: 'Segment 3 - The Time Recovery Opportunities'},
+    {pct: 40,   label: 'Segment 4 - Running This'},
+    {pct: 60,   label: 'Segment 5 - Your Tech Stack'},
+    {pct: 72.5, label: 'Segment 6 - The Timeline'},
+    {pct: 82.5, label: 'Segment 7 - What To Do Next'}
+  ];
+
+  var audio     = document.getElementById('podAudio');
+  var track     = document.getElementById('podTrack');
+  var fill      = document.getElementById('podFill');
+  var thumb     = document.getElementById('podThumb');
+  var elapsed   = document.getElementById('podElapsed');
+  var duration  = document.getElementById('podDuration');
+  var playBtn   = document.getElementById('podPlay');
+  var playIcon  = document.getElementById('podPlayIcon');
+  var backBtn   = document.getElementById('podBack');
+  var fwdBtn    = document.getElementById('podFwd');
+  var badge     = document.getElementById('podBadge');
+  var eq        = document.getElementById('podEq');
+  var chapterEl = document.getElementById('podChapterName');
+  var speedSel  = document.getElementById('podSpeed');
+  var muteBtn   = document.getElementById('podMute');
+  var volIcon   = document.getElementById('podVolIcon');
+  var podError  = document.getElementById('podError');
+  var mini      = document.getElementById('podMini');
+  var miniPlay  = document.getElementById('podMiniPlay');
+  var miniIcon  = document.getElementById('podMiniIcon');
+  var miniTime  = document.getElementById('podMiniTime');
+
+  var PLAY_SVG  = '<polygon points="5,3 19,12 5,21"/>';
+  var PAUSE_SVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  var VOL_ON    = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  var VOL_OFF   = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+  function pct() { return audio.duration ? (audio.currentTime / audio.duration * 100) : 0; }
+  function currentChapter() {
+    var p = pct(), label = CHAPTERS[0].label;
+    for (var i = 0; i < CHAPTERS.length; i++) { if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label; }
+    return label;
+  }
+  function updateUI() {
+    var p = pct();
+    fill.style.width  = p + '%';
+    thumb.style.left  = p + '%';
+    elapsed.textContent = fmt(audio.currentTime);
+    chapterEl.textContent = audio.duration ? currentChapter() : '';
+    miniTime.textContent  = fmt(audio.currentTime);
+    track.setAttribute('aria-valuenow', Math.round(p));
+    try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
+  }
+  function setPlaying(playing) {
+    playIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    miniIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    miniPlay.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    eq.classList.toggle('playing', playing);
+    badge.childNodes[0].textContent = playing ? 'Now Playing ' : (audio.currentTime > 0 ? 'Paused ' : 'Ready to play ');
+  }
+  function togglePlay() {
+    if (audio.paused) {
+      if (audio.readyState === 0) { audio.load(); }
+      var p = audio.play();
+      if (p && p.catch) { p.catch(function(err){ podError.style.display = 'block'; badge.childNodes[0].textContent = 'Tap again to play '; console.error('audio play failed:', err); }); }
+    } else { audio.pause(); }
+  }
+
+  CHAPTERS.forEach(function(ch) {
+    var pip = document.createElement('div');
+    pip.className = 'pod-pip';
+    pip.style.left = ch.pct + '%';
+    pip.title = ch.label;
+    track.appendChild(pip);
+  });
+
+  audio.addEventListener('loadedmetadata', function () {
+    duration.textContent = fmt(audio.duration);
+    try {
+      var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
+      if (saved > 0 && saved < audio.duration - 5) {
+        audio.currentTime = saved;
+        badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
+      }
+    } catch(e) {}
+    updateUI();
+  });
+  audio.addEventListener('timeupdate', updateUI);
+  audio.addEventListener('play',  function() { setPlaying(true); });
+  audio.addEventListener('pause', function() { setPlaying(false); });
+  audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
+  audio.addEventListener('error', function() { podError.style.display = 'block'; });
+
+  playBtn.addEventListener('click', togglePlay);
+  miniPlay.addEventListener('click', togglePlay);
+  backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+  speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
+  muteBtn.addEventListener('click', function() {
+    audio.muted = !audio.muted;
+    volIcon.innerHTML = audio.muted ? VOL_OFF : VOL_ON;
+  });
+
+  var dragging = false;
+  function seekTo(e) {
+    var rect = track.getBoundingClientRect();
+    var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    updateUI();
+  }
+  track.addEventListener('mousedown', function(e) { dragging = true; seekTo(e); });
+  document.addEventListener('mousemove', function(e) { if (dragging) seekTo(e); });
+  document.addEventListener('mouseup',   function() { dragging = false; });
+
+  function touchSeek(e) {
+    e.preventDefault();
+    var rect = track.getBoundingClientRect();
+    var t = e.touches[0] || e.changedTouches[0];
+    var ratio = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
+    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    updateUI();
+  }
+  track.addEventListener('touchstart', touchSeek, {passive: false});
+  track.addEventListener('touchmove',  touchSeek, {passive: false});
+  track.addEventListener('touchend',   touchSeek, {passive: false});
+
+  track.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5); e.preventDefault(); }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    var tag = document.activeElement ? document.activeElement.tagName : '';
+    if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
+    if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
+    if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
+    if (e.key === 'ArrowRight')  { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); }
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && !audio.paused) audio.pause();
+  });
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      var visible = entries[0].isIntersecting;
+      mini.classList.toggle('visible', !visible && !audio.paused);
+    }, {threshold: 0.1});
+    obs.observe(document.getElementById('listen'));
+    audio.addEventListener('play',  function() {
+      var rect = document.getElementById('listen').getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) mini.classList.add('visible');
+    });
+    audio.addEventListener('pause', function() { mini.classList.remove('visible'); });
+  }
+})();
+</script>
+</body>
+</html>

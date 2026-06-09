@@ -1,7 +1,8 @@
 #!/bin/bash
 # Blueprint AI Pipeline — Batch Send Approved Blueprints
 # Usage: ./send-approved.sh [slug1 slug2 ...] OR ./send-approved.sh --all
-# Requires Bennett to have replied APPROVE (or pass --bennett-approved explicitly)
+# Requires a current Bennett approval receipt AND a Gatekeeper token that allows
+# external_send. A CLI flag alone is never approval proof.
 
 set -uo pipefail
 
@@ -11,6 +12,7 @@ LEADS_DIR="$REPO_DIR/leads"
 
 BENNETT_APPROVED=false
 GATE_TOKEN_DIR=""
+APPROVAL_RECEIPT_DIR=""
 SLUGS=()
 
 while [ "$#" -gt 0 ]; do
@@ -20,6 +22,10 @@ while [ "$#" -gt 0 ]; do
         --gate-token-dir)
             shift
             GATE_TOKEN_DIR="${1:-}"
+            ;;
+        --approval-receipt-dir)
+            shift
+            APPROVAL_RECEIPT_DIR="${1:-}"
             ;;
         --all)
             for f in "$LEADS_DIR"/*.json; do
@@ -31,8 +37,8 @@ while [ "$#" -gt 0 ]; do
 done
 
 if ! $BENNETT_APPROVED; then
-    echo "❌ BLOCKED: Require --bennett-approved flag."
-    echo "Process: Bennett replies APPROVE to preview email → run with --bennett-approved"
+    echo "❌ BLOCKED: Require --bennett-approved flag plus approval receipt."
+    echo "Process: Bennett replies APPROVE to preview email → save approval receipt → rerun Gatekeeper for external_send → run this script."
     exit 1
 fi
 
@@ -47,6 +53,12 @@ if [ -z "$GATE_TOKEN_DIR" ]; then
     exit 1
 fi
 
+if [ -z "$APPROVAL_RECEIPT_DIR" ]; then
+    echo "❌ BLOCKED: Require --approval-receipt-dir <receipts>."
+    echo "Each slug must have <receipts>/<slug>-bennett-approval.json with bennett_approved=true and external_customer_send_approved=true."
+    exit 1
+fi
+
 echo "📦 Sending ${#SLUGS[@]} blueprints with --bennett-approved flag..."
 for slug in "${SLUGS[@]}"; do
     profile="$LEADS_DIR/${slug}.json"
@@ -57,6 +69,28 @@ for slug in "${SLUGS[@]}"; do
     token="$GATE_TOKEN_DIR/${slug}-gatekeeper-pass-token.json"
     if [ ! -f "$token" ]; then
         echo "❌ $slug: production Gatekeeper token not found: $token"
+        continue
+    fi
+    approval="$APPROVAL_RECEIPT_DIR/${slug}-bennett-approval.json"
+    if [ ! -f "$approval" ]; then
+        echo "❌ $slug: Bennett approval receipt not found: $approval"
+        continue
+    fi
+    if ! python3 - "$approval" "$token" <<'PYEOF'
+import json, sys
+approval = json.load(open(sys.argv[1]))
+token_data = json.load(open(sys.argv[2]))
+token = token_data.get("pass_token", token_data)
+approval_ok = approval.get("bennett_approved") is True and approval.get("external_customer_send_approved") is True
+token_ok = token.get("pass") is True and "external_send" in token.get("allowed_actions", [])
+if not approval_ok:
+    print("approval receipt must include bennett_approved=true and external_customer_send_approved=true")
+if not token_ok:
+    print("gatekeeper token must include pass=true and allowed_actions contains external_send")
+sys.exit(0 if approval_ok and token_ok else 1)
+PYEOF
+    then
+        echo "❌ $slug: external-send lock still closed"
         continue
     fi
     echo "→ Sending $slug..."

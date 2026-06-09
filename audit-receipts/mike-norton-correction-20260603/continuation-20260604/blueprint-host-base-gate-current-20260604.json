@@ -1,0 +1,93 @@
+{
+  "gate": "blueprint_host_base_gate",
+  "status": "PASS",
+  "default_base": "https://bennett-maxwell.github.io/fki-preview",
+  "target_base": "https://ghl.example.test/fki-preview",
+  "harness": "/Users/temp/fki-preview/audit-receipts/mike-norton-correction-20260603/continuation-20260604/harness",
+  "generated_file": "/Users/temp/fki-preview/audit-receipts/mike-norton-correction-20260603/continuation-20260604/harness/blueprints/host-base-gate-20260604.html",
+  "source_profile": "/Users/temp/fki-preview/leads/mike-norton-origins-20260603.json",
+  "stdout_tail": "=== Blueprint Clone ===\n  Lead:     Mike Norton\n  Business: Origins\n  Industry: consulting, business transformation, and AI operations\n  Color:    #0071E3\n  Slug:     host-base-gate-20260604\n  Output:   /Users/temp/fki-preview/audit-receipts/mike-norton-correction-20260603/continuation-20260604/harness/blueprints/host-base-gate-20260604.html\n\n[1/7] Copying v7 frame template...\n[2/7] Running replacement engine...\n  Replacements complete. Output: /Users/temp/fki-preview/audit-receipts/mike-norton-correction-20260603/continuation-20260604/harness/blueprints/host-base-gate-20260604.html\nhome-services patch skipped: host-base-gate-20260604\nrestaurant patch skipped: host-base-gate-20260604\n[3/7] Validating output...\n  Contamination check: PASS (zero template leakage)\nWARNING: Direct booking/calendar URL detected. Route through qualify.html instead.\nWARNING: CTA 'See If You Qualify' not found.\n  Timeline verified: 3/7/30 onboarding cadence present.\n  ROI Calculator verified: Interactive sliders present.\n  Validation complete.\n[4/7] Running HARD gates (auto-heal -> D9 -> pre-delivery)...\n  ROI fill-in gate: PASS -- Avg Customer Value is a typed fill-in number input.\n  D9: PASS (20/20)\n  No pre-delivery-check.sh found -- pre-delivery gate skipped\n  Validation complete -- all HARD gates PASS.\n\n=== NO-COMMIT COMPLETE ===\nOutput: /Users/temp/fki-preview/audit-receipts/mike-norton-correction-20260603/continuation-20260604/harness/blueprints/host-base-gate-20260604.html\nSkipping git commit, push, and HTTP verify.\n",
+  "stderr_tail": "",
+  "checks": [
+    {
+      "name": "scripts/clone-blueprint.sh contains BLUEPRINT_BASE_URL",
+      "pass": true
+    },
+    {
+      "name": "scripts/clone-blueprint.sh contains {{BLUEPRINT_URL}}",
+      "pass": true
+    },
+    {
+      "name": "scripts/clone-blueprint.sh contains host_scoped_url",
+      "pass": true
+    },
+    {
+      "name": "scripts/clone-blueprint.sh contains /qualify.html",
+      "pass": true
+    },
+    {
+      "name": "scripts/build-delivery-email.sh contains BLUEPRINT_BASE_URL",
+      "pass": true
+    },
+    {
+      "name": "scripts/build-delivery-email.sh contains DEFAULT_BLUEPRINT_BASE_URL",
+      "pass": true
+    },
+    {
+      "name": "scripts/build-delivery-email.sh contains utm_campaign",
+      "pass": true
+    },
+    {
+      "name": "scripts/build-delivery-email.sh contains /qualify.html",
+      "pass": true
+    },
+    {
+      "name": "scripts/blueprint-pipeline-orchestrator.py contains BLUEPRINT_BASE_URL",
+      "pass": true
+    },
+    {
+      "name": "scripts/blueprint-pipeline-orchestrator.py contains BLUEPRINTS_URL_BASE",
+      "pass": true
+    },
+    {
+      "name": "scripts/gen-blueprint.py contains BLUEPRINT_BASE_URL",
+      "pass": true
+    },
+    {
+      "name": "scripts/gen-blueprint.py contains {{BLUEPRINT_URL}}",
+      "pass": true
+    },
+    {
+      "name": "scripts/gen-blueprint.py contains host_scoped_url",
+      "pass": true
+    },
+    {
+      "name": "blueprints/TEMPLATE.html contains {{BLUEPRINT_URL}}",
+      "pass": true
+    },
+    {
+      "name": "harness clone-blueprint dry-run exits 0",
+      "pass": true
+    },
+    {
+      "name": "generated og:url uses target host",
+      "pass": true
+    },
+    {
+      "name": "generated podcast URL uses target host",
+      "pass": true
+    },
+    {
+      "name": "generated qualify CTA uses target host",
+      "pass": true
+    },
+    {
+      "name": "generated qualify path is root qualifier not /apply/qualify",
+      "pass": true
+    },
+    {
+      "name": "generated output has no remaining BLUEPRINT_URL token",
+      "pass": true
+    }
+  ]
+}

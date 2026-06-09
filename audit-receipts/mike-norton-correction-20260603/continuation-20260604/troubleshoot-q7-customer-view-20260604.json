@@ -1,0 +1,23 @@
+{
+  "boundary": "No external/customer send; awaiting Bennett approval.",
+  "fixes": [
+    "Added qualifier-context gate requiring lead,biz,src,agents context and actual Blueprint agent overlap.",
+    "Added approval-email customer-view gate blocking internal proof/Codex/Gatekeeper language.",
+    "Wired both gates into Gatekeeper and Factory Manifest before preview/send approval.",
+    "Regenerated Mike/Origins package and sent corrected Bennett-only customer-view preview."
+  ],
+  "mode": "recurring_system_failure",
+  "root_causes": [
+    "Process checked that Q7 existed instead of proving Q7 options matched the actual customer Blueprint recommendations.",
+    "Process checked that a Bennett approval email existed instead of proving the email body was customer-view Stage 7 format.",
+    "Gatekeeper previously lacked blocking gates for tailored qualifier context and customer-view approval email format."
+  ],
+  "skill": "troubleshoot-skill",
+  "ts": "2026-06-04T15:39:59.237549+00:00",
+  "verification": [
+    "qualifier-context PASS",
+    "approval-email customer-view PASS",
+    "Gatekeeper PASS 100",
+    "Factory manifest PASS_PREVIEW_ONLY"
+  ]
+}

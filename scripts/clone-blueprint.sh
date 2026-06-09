@@ -43,7 +43,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 TEMPLATE="$REPO_ROOT/blueprints/TEMPLATE.html"
 BLUEPRINTS_DIR="$REPO_ROOT/blueprints"
-GITHUB_PAGES_BASE="https://bennett-maxwell.github.io/fki-preview/blueprints"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL:-https://bennett-maxwell.github.io/fki-preview}"
+BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL%/}"
+GITHUB_PAGES_BASE="$BLUEPRINT_BASE_URL/blueprints"
 
 # ─── Help ───────────────────────────────────────────────────────────────────
 usage() {
@@ -177,9 +179,12 @@ import json
 import re
 import urllib.parse
 import datetime
+import os
 
 output_file = sys.argv[1]
 profile_file = sys.argv[2]
+DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+blueprint_base_url = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
 
 with open(profile_file, 'r') as f:
     profile = json.load(f)
@@ -224,10 +229,39 @@ accent_light = lighten_hex(accent_color)
 accent_mid = lighten_hex(accent_color, 0.2)
 
 # Build tracked qualifier URL and mailto link
+def host_scoped_url(profile_key, path):
+    value = profile.get(profile_key) or ''
+    if blueprint_base_url != DEFAULT_BLUEPRINT_BASE_URL and (not value or value.startswith(DEFAULT_BLUEPRINT_BASE_URL)):
+        return f'{blueprint_base_url}{path}'
+    return value or f'{blueprint_base_url}{path}'
+
+def q7_agent_names():
+    names = []
+    for agent in profile.get('ai_agents', []) or []:
+        if isinstance(agent, dict):
+            names.append(agent.get('name') or agent.get('title') or agent.get('usecase') or '')
+        else:
+            names.append(str(agent))
+    ap = profile.get('applicable_prompts')
+    if isinstance(ap, dict):
+        for item in ap.values():
+            if isinstance(item, dict):
+                names.append(item.get('name') or '')
+    cleaned = []
+    seen = set()
+    for name in names:
+        text = re.sub(r'<[^>]+>', '', str(name)).strip()
+        key = re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
+        if text and key not in seen:
+            seen.add(key); cleaned.append(text)
+    return cleaned[:6]
+
 lead_encoded = urllib.parse.quote(lead_name)
 biz_encoded = urllib.parse.quote(business_name)
 slug = profile.get('slug', lead_name.lower().replace(' ', '-'))
-qualify_url = f'https://bennett-maxwell.github.io/fki-preview/qualify.html?lead={lead_encoded}&biz={biz_encoded}&src={slug}'
+q7_agents = q7_agent_names()
+agent_query = '&agents=' + urllib.parse.quote(','.join(q7_agents)) if q7_agents else ''
+qualify_url = host_scoped_url('qualify_url', f'/qualify.html?lead={lead_encoded}&biz={biz_encoded}&src={slug}{agent_query}')
 
 subject_encoded = urllib.parse.quote(f"Application -- {business_name}")
 mailto_body = urllib.parse.quote(
@@ -284,7 +318,8 @@ replacements = {
     '{{ROI_MAX}}': str(roi_max),
     '{{ROI_STEP}}': str(roi_step),
     '{{SLUG}}': slug,
-    '{{PODCAST_URL}}': profile.get('podcast_url') or f'https://bennett-maxwell.github.io/fki-preview/podcasts/{slug}.mp3',
+    '{{BLUEPRINT_URL}}': host_scoped_url('blueprint_url', f'/blueprints/{slug}.html'),
+    '{{PODCAST_URL}}': host_scoped_url('podcast_url', f'/podcasts/{slug}.mp3'),
     '{{LEAD_NAME}}': lead_name,
     '{{FIRST_NAME}}': first_name,
     '{{BUSINESS_NAME}}': business_name,
@@ -566,6 +601,18 @@ if [[ "$DRY_RUN" == "true" || "$NO_COMMIT" == "true" ]]; then
   echo "Output: $OUTPUT_FILE"
   echo "Skipping git commit, push, and HTTP verify."
   exit 0
+fi
+
+# ─── Step 4.5: Post-generate quality gate ───────────────────────────────────
+echo "[4.5/7] Running post-generate completion gate..."
+GATE_SCRIPT="$REPO_ROOT/scripts/post-generate-gate.sh"
+if [ -f "$GATE_SCRIPT" ]; then
+  bash "$GATE_SCRIPT" "$REPO_ROOT/blueprints/$LEAD_SLUG.html" --lead "$LEAD_SLUG" || {
+    echo "⚠️  Completion gate FAIL — blueprint has quality issues but continuing commit."
+    echo "   Fix issues before delivery. Run: python3 scripts/blueprint_completion_gate.py --html blueprints/$LEAD_SLUG.html --receipt-dir audit-receipts/$LEAD_SLUG --lead $LEAD_SLUG"
+  }
+else
+  echo "  post-generate-gate.sh not found — skipping"
 fi
 
 # ─── Step 5: Git commit ─────────────────────────────────────────────────────

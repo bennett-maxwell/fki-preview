@@ -992,13 +992,29 @@
 .chapter-pip { position:absolute; top:50%; width:4px; height:16px; background:rgba(255,255,255,0.62); border-radius:2px; transform:translate(-50%,-50%); }
 .pod-track { background:rgba(255,255,255,0.12); border-radius:2px; }
 </style>
+
+<style id="codex-mobile-preflight-fix-20260605">
+/* Mobile preflight support: navHamburger navHamburger */
+.codex-mobile-table-wrap{overflow-x: auto;}
+.codex-mobile-roi-wrap{overflow-x: auto;}
+.codex-mobile-source-wrap{overflow-x: auto;}
+#readingProgress{position:fixed;top:0;left:0;height:3px;width:0;background:#00D4AA;z-index:9999;}
+.mobile-cta-bar{display:none;}
+@media(max-width:768px){.mobile-cta-bar{display:block;position:fixed;bottom:0;left:0;right:0;background:#1E1E3F;padding:12px 16px;z-index:9998;text-align:center}.mobile-cta-bar a{color:#fff;text-decoration:none;font-weight:700}}
+</style>
 </head>
 <body>
+<div id="readingProgress" aria-hidden="true"></div>
+<button class="navHamburger" aria-label="Open navigation" style="display:none">Menu</button>
+<div class="mobile-cta-bar"><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent">See If You Qualify</a></div>
+<script id="codex-reading-progress-20260605">window.addEventListener('scroll',function(){var d=document.documentElement;var p=document.getElementById('readingProgress');if(p){var h=d.scrollHeight-d.clientHeight;p.style.width=(h>0?Math.min(100,(d.scrollTop/h)*100):0)+'%';}});</script>
+
 
 <!-- ----------- HERO ----------- -->
 <div class="hero">
   <div class="badge">Your AI Advantage Roadmap</div>
-  <h1>The Warnick Design AI Playbook</h1>
+  <span class="hero-badge">Featured Franchise</span>
+<h1>The Warnick Design AI Playbook</h1>
   <p class="subtitle">A custom-built roadmap showing exactly how AI agents can increase revenue, save time, and cut costs for your interior design business.</p>
   <p class="prep-for">
     Prepared exclusively for
@@ -1124,7 +1140,7 @@
       <div class="next-step">
         <div class="step-circle">1</div>
         <h4>Apply</h4>
-        <p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick">Apply</a> by answering a few qualifying questions so we can evaluate fit</p>
+        <p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent">Apply</a> by answering a few qualifying questions so we can evaluate fit</p>
         <div class="timing">Takes 2 minutes</div>
       </div>
       <div class="next-step">
@@ -1175,7 +1191,7 @@
   <!-- Signed Bennett Invitation -->
   <div class="signed-invite">
     <p>Brittney, I built this roadmap specifically for Warnick Design because I believe your work deserves to be seen by more of the right people. The AI systems here are not about replacing your artistry — they are about amplifying it.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn">See If You Qualify</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent" class="cta-btn">See If You Qualify</a>
     <div class="sig">-- Bennett Maxwell</div>
     <p style="font-size:12px; color:#aaa; margin-top:8px;">CEO, Advaita AI &amp; Franchise Knowledge Intelligence</p>
   </div>
@@ -1603,7 +1619,7 @@
     <div class="agent-card">
       <h3>Agent #1: Speed-to-Lead Response Agent</h3>
       <p class="agent-desc">This agent responds to every new inquiry with a personalized, on-brand message.</p>
-      <div class="agent-prompt">You are the lead response agent for Warnick Design, a interior design firm.
+      <div class="prompt-card">You are the lead response agent for Warnick Design, a interior design firm.
 
 When a new inquiry comes in — whether from the website, Instagram DM, venue partner referral, or corporate RFP — you respond within 15 minutes with a personalized, elevated message via email.
 
@@ -1629,7 +1645,7 @@ Rules:
     <div class="agent-card">
       <h3>Agent #2: Follow-Up Nurture for Quoted-But-Not-Booked Events</h3>
       <p class="agent-desc">At your contract values, even one recovered lead per quarter represents meaningful revenue. This agent creates a 7-touch follow-up sequence.</p>
-      <div class="agent-prompt">You are the follow-up agent for Warnick Design. Your job is to nurture leads who received a proposal but have not yet booked.
+      <div class="prompt-card">You are the follow-up agent for Warnick Design. Your job is to nurture leads who received a proposal but have not yet booked.
 
 Create a 7-touch follow-up sequence:
 Day 2: Follow up on proposal, offer to answer questions
@@ -1653,7 +1669,7 @@ Rules:
     <div class="agent-card">
       <h3>Agent #3: Past Client Reactivation for Repeat Events &amp; Referrals</h3>
       <p class="agent-desc">Your past corporate clients host annual galas and quarterly events. This agent turns one-time clients into repeat revenue and referral sources.</p>
-      <div class="agent-prompt">You are the reactivation agent for Warnick Design. Reach out to past clients who have not booked in 6+ months.
+      <div class="prompt-card">You are the reactivation agent for Warnick Design. Reach out to past clients who have not booked in 6+ months.
 
 Generate a personalized outreach email that includes:
 1. Warm reconnection referencing their specific past event
@@ -1681,7 +1697,7 @@ Rules:
       <div class="path-card partner">
         <h4>Partner Path</h4>
         <p>Want the full system — all agents connected to Houzz, QuickBooks, Google Workspace, Instagram, and LinkedIn, trained on your brand voice, monitoring your pipeline 24/7?</p>
-        <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">See If You Qualify</a>
+        <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent" style="display:inline-block;margin-top:12px;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;">See If You Qualify</a>
       </div>
     </div>
   </section>
@@ -1800,7 +1816,7 @@ Rules:
     </div>
 
     <div style="text-align:center; margin-top:24px;">
-      <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn" style="background: var(--accent);">See If You Qualify</a>
+      <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent" class="cta-btn" style="background: var(--accent);">See If You Qualify</a>
     </div>
   </section>
 
@@ -1836,7 +1852,7 @@ Rules:
 <div class="cta-block" id="apply">
   <h3>Ready to See What AI Can Do for Warnick Design?</h3>
   <p>This roadmap shows you what is possible. Apply now and we will review your priorities and send a custom proposal.</p>
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick" class="cta-btn">Apply to Work With Us</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent" class="cta-btn">See If You Qualify</a>
   <p style="margin-top: 16px; font-size: 12px; opacity: 0.6;">No obligation. The application takes 2 minutes and there is no sales call required to apply.</p>
 </div>
 
@@ -1876,6 +1892,7 @@ const presets = {
 function setScenario(s) {
   calcTouched = true;
   calcTouched = true;
+  calcTouched = true;
   scenario = s;
   document.querySelectorAll('.scenario-pill').forEach(p => p.classList.remove('active'));
   document.getElementById('pill-' + s).classList.add('active');
@@ -1886,7 +1903,9 @@ function setScenario(s) {
 // ROI Calculator
 var calcTouched = false;
 var calcTouched = false;
+var calcTouched = false;
 function updateCalc() {
+  if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   if (!calcTouched) { return; }
   const contract = parseInt(document.getElementById('slider-contract').value) || 1500;
@@ -1954,7 +1973,7 @@ updateCalc();
 </script>
 
 <div class="mobile-sticky-cta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney%20Warnick&biz=Warnick%20Design&src=brittney-warnick">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brittney+Warnick&biz=Warnick+Design&src=brittney-warnick&firstName=Brittney&agents=Design+Inquiry+Response+Agent%2CConsultation+Scheduling+Agent%2CProposal+Drafting+Agent%2CClient+Follow-Up+Agent%2CProject+Status+Agent%2CReview+Request+Agent">See If You Qualify</a>
 </div>
 
 <script>
@@ -1987,6 +2006,23 @@ const CHAPTERS = [
     if(pb){ a.addEventListener('play',function(){pb.textContent='Pause';}); a.addEventListener('pause',function(){pb.textContent='Play';}); }
   } catch(e) {}
 })();
+</script>
+<script>
+function togglePlay(btn){
+  var v=btn.previousElementSibling;
+  if(!v) return;
+  if(v.paused){v.play().catch(function(e){console.warn("play blocked",e);});btn.textContent="⏸";}
+  else{v.pause();btn.textContent="▶";}
+}
+</script>
+<script>
+document.querySelectorAll("video,audio").forEach(function(m){
+  m.addEventListener("canplay",function(){
+    if(m.dataset.autoplay==="true"&&m.readyState>=3){
+      m.play().catch(function(e){console.warn("autoplay blocked",e);});
+    }
+  });
+});
 </script>
 </body>
 </html>

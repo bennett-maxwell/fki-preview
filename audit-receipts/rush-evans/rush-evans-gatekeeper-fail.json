@@ -48,6 +48,42 @@
     {
       "cmd": [
         "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/rush-evans.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"FAIL\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
         "/Users/temp/fki-preview/run-audit.py",
         "--lead",
         "rush-evans"
@@ -134,6 +170,7 @@
   ],
   "diamond": "FAIL",
   "failures": [
+    "qualify link gate failed",
     "D9 render-integrity audit failed or missing",
     "proof receipt missing or failing: rush-evans-email-click-test.json",
     "proof receipt missing or failing: rush-evans-desktop-render.json",
@@ -147,5 +184,5 @@
   "receipt_dir": "/Users/temp/fki-preview/audit-receipts/rush-evans",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:23:00.579934+00:00"
+  "ts": "2026-06-04T15:33:55.516340+00:00"
 }
