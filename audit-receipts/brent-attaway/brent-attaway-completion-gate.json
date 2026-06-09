@@ -1,12 +1,12 @@
 {
   "lead": "brent-attaway",
-  "ts": "2026-06-04T00:22:57.757140+00:00",
-  "html_path": "/Users/temp/fki-preview/blueprints/brent-attaway.html",
+  "ts": "2026-06-09T04:03:20.651061+00:00",
+  "html_path": "/Users/openclaw/fki-preview/blueprints/brent-attaway.html",
   "html_size_bytes": 97540,
   "require_production": true,
   "summary": {
-    "passed": 37,
-    "failed": 7,
+    "passed": 42,
+    "failed": 2,
     "skipped": 6,
     "total_applicable": 44,
     "overall_pass": false
@@ -39,16 +39,11 @@
       "failures": []
     },
     "Production": {
-      "score": "0/7 (0%)",
+      "score": "5/7 (71%)",
       "pass": false,
       "failures": [
-        "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
-        "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
-        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
-        "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
-        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
-        "#47: Walkthrough-size audio (6-20MB / direct-address verified) \u2014 Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)",
-        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+        "#45: Current GHL readback (contact tagged) \u2014 GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true",
+        "#46: Repeat-submit same-contact proof \u2014 Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
       ]
     },
     "Delivery": {
@@ -63,13 +58,8 @@
     }
   },
   "critical_failures": [
-    "#42: Public GitHub Pages build verified (HTTP 200)",
-    "#43: Drive artifact registry row present",
-    "#44: Notion Sprint row present",
     "#45: Current GHL readback (contact tagged)",
-    "#46: Repeat-submit same-contact proof",
-    "#47: Walkthrough-size audio (6-20MB / direct-address verified)",
-    "#48: Bennett approval scope recorded"
+    "#46: Repeat-submit same-contact proof"
   ],
   "major_failures": [],
   "checks": {
@@ -287,25 +277,25 @@
       "desc": "Email click test receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing email click test receipt"
+      "detail": "OK"
     },
     "37": {
       "desc": "Desktop render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing desktop render receipt"
+      "detail": "OK"
     },
     "38": {
       "desc": "Mobile render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing mobile render receipt"
+      "detail": "OK"
     },
     "39": {
       "desc": "Audit JSON receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing audit JSON receipt"
+      "detail": "OK"
     },
     "40": {
       "desc": "Gatekeeper pass receipt exists",
@@ -317,49 +307,49 @@
       "desc": "Closeout receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing closeout receipt"
+      "detail": "OK"
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 42"
+      "detail": "Public page HTTP 200 verified"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
+      "detail": "Drive artifact registry verified"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
+      "detail": "Notion Sprint row current"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
       "pass": false,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
+      "detail": "GHL receipt must prove exact_contact_count=1, contact.id, conversation.id, and instant_response_verified=true"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
       "pass": false,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
+      "detail": "Repeat-submit receipt must prove HTTP 200, updated/matched mode, same contact id, and exact count 1"
     },
     "47": {
       "desc": "Walkthrough-size audio (6-20MB / direct-address verified)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "Public podcast receipt must include pass=true, http_code=200, and size_download within [6291456, 20971520] bytes (~6-20 min @128kbps)"
+      "detail": "Public/local podcast and direct-address audio verified (16439142 bytes)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      "detail": "Approval scope: Bennett preview only; customer send remains blocked"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",

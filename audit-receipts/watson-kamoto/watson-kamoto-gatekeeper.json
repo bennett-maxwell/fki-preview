@@ -1,0 +1,234 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto",
+        "--lead",
+        "watson-kamoto",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "watson-kamoto"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] watson-kamoto: 14/15 (93%)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "watson-kamoto        video_production      2388        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T04:08:44.625468+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto/watson-kamoto-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto/watson-kamoto-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto/watson-kamoto-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto/watson-kamoto-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto/watson-kamoto-closeout.json"
+    },
+    {
+      "detail": "watson-kamoto.mp3 17383895 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto",
+        "--lead",
+        "watson-kamoto",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+  "lead": "watson-kamoto",
+  "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview",
+      "external_send"
+    ],
+    "approval_state": "external_send_approved",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "fa078e10929c2d34e5d150ca82a70423eb1c5521917afb34e827c7a77992c5b7",
+      "delivery_email_sha256": "a98b8797301d33ee9fa745b9a334921f74f916ee2cf30c85f33ad0065a13936c",
+      "lead_profile_sha256": "25b940c3db3f0adf02e7ea2ccc11e654f531db63ffa0d5d3daf4b73c0bcbcd25",
+      "podcast_production_47_sha256": "3dec03672699f23f438b89d0fc87c38ad3755cfc6aaf7abecd1d8e7049d3b518"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+      "delivery_email": "/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html",
+      "lead_profile": "/Users/openclaw/fki-preview/leads/watson-kamoto.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-09T04:08:44.679169+00:00",
+    "html_path": "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+    "lead": "watson-kamoto",
+    "pass": true,
+    "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto",
+    "score": 100,
+    "strict_production": true
+  },
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-09T04:08:44.678212+00:00"
+}

@@ -7,12 +7,12 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/britt-warnick.html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
         "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/britt-warnick",
+        "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
         "--lead",
         "britt-warnick",
         "--json-output",
@@ -47,8 +47,8 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/run-audit.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "britt-warnick"
       ],
@@ -59,16 +59,16 @@
       "stdout_tail": [
         "[PASS] britt-warnick: 15/15 (100%)",
         "",
-        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=PASS"
       ]
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/financial-realism-check.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/temp/fki-preview/blueprints/britt-warnick.html"
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html"
       ],
       "name": "financial_realism",
       "pass": true,
@@ -83,43 +83,38 @@
       ]
     },
     {
-      "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/britt-warnick.html"
-      ],
       "name": "d9_render_integrity",
       "pass": false,
-      "returncode": 2,
+      "returncode": 127,
       "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
+        "missing /Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py"
       ],
       "stdout_tail": []
     },
     {
       "name": "proof_email_click_test",
       "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/britt-warnick/britt-warnick-email-click-test.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
       "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/britt-warnick/britt-warnick-desktop-render.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
       "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/britt-warnick/britt-warnick-mobile-render.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
       "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/britt-warnick/britt-warnick-audit.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-audit.json"
     },
     {
       "name": "proof_closeout",
       "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/britt-warnick/britt-warnick-closeout.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-closeout.json"
     },
     {
       "detail": "britt-warnick.mp3 17077176 bytes within window",
@@ -141,11 +136,11 @@
     "proof receipt missing or failing: britt-warnick-audit.json",
     "proof receipt missing or failing: britt-warnick-closeout.json"
   ],
-  "html_path": "/Users/temp/fki-preview/blueprints/britt-warnick.html",
+  "html_path": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
   "lead": "britt-warnick",
   "mode": "production",
-  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/britt-warnick",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T00:22:58.516148+00:00"
+  "ts": "2026-06-09T03:39:06.427315+00:00"
 }

@@ -1,0 +1,234 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+        "--lead",
+        "britt-warnick",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "britt-warnick"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] britt-warnick: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "britt-warnick        design_agency         2388        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T04:05:52.020680+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick/britt-warnick-closeout.json"
+    },
+    {
+      "detail": "britt-warnick.mp3 17077176 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+        "--lead",
+        "britt-warnick",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: external customer send approved\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+  "lead": "britt-warnick",
+  "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview",
+      "external_send"
+    ],
+    "approval_state": "external_send_approved",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "7501e2900390ef43f315a9b2f7ab6782391cadeb8e21d4e9ac61dd29b937534e",
+      "delivery_email_sha256": "8d282b8612503725031eff2d0179adca8e66099626669effd15b2487ac399d2e",
+      "lead_profile_sha256": "97787e009eb840b5ddcafe79b79efd9719063d0a1c41348232e2e0eb239c529f",
+      "podcast_production_47_sha256": "3f26f953e791e4539aa591297570741cec3ed2d65ddc7e1e53fa000aa403ae13"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+      "delivery_email": "/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html",
+      "lead_profile": "/Users/openclaw/fki-preview/leads/britt-warnick.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-09T04:05:52.075611+00:00",
+    "html_path": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+    "lead": "britt-warnick",
+    "pass": true,
+    "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+    "score": 100,
+    "strict_production": true
+  },
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-09T04:05:52.074817+00:00"
+}
