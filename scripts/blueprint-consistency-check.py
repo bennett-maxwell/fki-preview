@@ -41,7 +41,7 @@ CANON = [
     "alex-ramos", "austin-iron-horse", "branson-maxwell", "brent-attaway",
     "brittney-warnick", "chris-lpnw", "court-lundberg",
     "jaden-mecham", "melissa-tash-srp", "paul-muus", "rey-31-consulting",
-    "rush-evans", "watson", "zachary-oldham",
+    "rush-evans", "watson-kamoto", "zachary-oldham",
 ]
 
 # Section-count tolerance band around the canonical template's count.

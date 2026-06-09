@@ -9,7 +9,7 @@ HISTORY = os.path.expanduser("~/.openclaw/logs/blueprint-audit-history.jsonl")
 THRESHOLD = 0.90  # 90% of non-red-line checks
 PODCAST_ALIAS = {
     "watson": "watson-kamoto.mp3",
-    "zachary-oldham": "zachary-red-sands.mp3",
+    "zachary-oldham": "zachary-oldham.mp3",
 }
 
 def curl_http(url):

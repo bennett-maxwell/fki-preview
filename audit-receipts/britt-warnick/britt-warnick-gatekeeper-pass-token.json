@@ -48,6 +48,130 @@
     {
       "cmd": [
         "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&firstName=Britt&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&firstName=Britt&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&firstName=Britt&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
+        "--lead",
+        "britt-warnick",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/britt-warnick.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Britt+Warnick&biz=Britt+Warnick+Designs&src=britt-warnick&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"britt-warnick\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/britt-warnick.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: britt-warnick - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/britt-warnick-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: britt-warnick - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
         "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "britt-warnick"
@@ -56,7 +180,7 @@
       "pass": true,
       "returncode": 0,
       "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
@@ -80,7 +204,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "britt-warnick        design_agency         2388        0  PASS",
+        "britt-warnick        design_agency         1500        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -114,7 +238,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:05:52.020680+00:00\"",
+        "  \"ts\": \"2026-06-09T05:01:50.492174+00:00\"",
         "}"
       ]
     },
@@ -151,6 +275,11 @@
     {
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
       "pass": true
     },
     {
@@ -208,10 +337,10 @@
     ],
     "approval_state": "external_send_approved",
     "artifact_hashes": {
-      "blueprint_html_sha256": "7501e2900390ef43f315a9b2f7ab6782391cadeb8e21d4e9ac61dd29b937534e",
-      "delivery_email_sha256": "8d282b8612503725031eff2d0179adca8e66099626669effd15b2487ac399d2e",
-      "lead_profile_sha256": "97787e009eb840b5ddcafe79b79efd9719063d0a1c41348232e2e0eb239c529f",
-      "podcast_production_47_sha256": "3f26f953e791e4539aa591297570741cec3ed2d65ddc7e1e53fa000aa403ae13"
+      "blueprint_html_sha256": "04b85d7af0e984789961a42a8e66cb9b123b151d18d93dd15e439914974c28fc",
+      "delivery_email_sha256": "2eda2daef06a8367dba907b1a98705f16c4751a80c0e859a23271b1399bb0956",
+      "lead_profile_sha256": "49679d3090e15e17c5ef9b241ba2da4192809eeb0dad4a806078708ab0135fbb",
+      "podcast_production_47_sha256": "72657deceb10a0c5178d33ff71667d166012c16d543a698cc2235d1b2acdc915"
     },
     "artifact_paths": {
       "blueprint_html": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
@@ -219,7 +348,7 @@
       "lead_profile": "/Users/openclaw/fki-preview/leads/britt-warnick.json"
     },
     "diamond": "PASS",
-    "generated_at": "2026-06-09T04:05:52.075611+00:00",
+    "generated_at": "2026-06-09T05:01:50.542676+00:00",
     "html_path": "/Users/openclaw/fki-preview/blueprints/britt-warnick.html",
     "lead": "britt-warnick",
     "pass": true,
@@ -230,5 +359,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/britt-warnick",
   "score": 100,
   "status": "PASS",
-  "ts": "2026-06-09T04:05:52.074817+00:00"
+  "ts": "2026-06-09T05:01:50.542264+00:00"
 }

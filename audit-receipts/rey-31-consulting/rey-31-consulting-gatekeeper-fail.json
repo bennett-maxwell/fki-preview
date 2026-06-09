@@ -1,0 +1,304 @@
+{
+  "checks": [
+    {
+      "failures": [
+        "ambiguous CTA copy: Apply"
+      ],
+      "name": "visible_html_surface",
+      "pass": false
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting",
+        "--lead",
+        "rey-31-consulting",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting&firstName=Rey&agents=Speed-to-Lead+Responder%2CFollow-Up+Nurture+Agent%2CAI+Appointment+Setter%2CReporting+Agent%2CAdmin+Automation+Agent%2CPipeline+Hygiene+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting&firstName=Rey&agents=Speed-to-Lead+Responder%2CFollow-Up+Nurture+Agent%2CAI+Appointment+Setter%2CReporting+Agent%2CAdmin+Automation+Agent%2CPipeline+Hygiene+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting&firstName=Rey&agents=Speed-to-Lead+Responder%2CFollow-Up+Nurture+Agent%2CAI+Appointment+Setter%2CReporting+Agent%2CAdmin+Automation+Agent%2CPipeline+Hygiene+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"FAIL\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html",
+        "--lead",
+        "rey-31-consulting",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/rey-31consulting.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Responder\",",
+        "        \"Follow-Up Nurture Agent\",",
+        "        \"AI Appointment Setter\",",
+        "        \"Reporting Agent\",",
+        "        \"Admin Automation Agent\",",
+        "        \"Pipeline Hygiene Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Speed-to-Lead+Responder%2CFollow-Up+Nurture+Agent%2CAI+Appointment+Setter%2CReporting+Agent%2CAdmin+Automation+Agent%2CPipeline+Hygiene+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"rey-31-consulting\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/rey-31consulting.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: rey-31-consulting - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rey-31-consulting-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: rey-31-consulting - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "rey-31-consulting"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] rey-31-consulting: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "rey-31-consulting    consulting            3000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T04:59:17.454114+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-closeout.json"
+    },
+    {
+      "detail": "rey-31-consulting.mp3 17873743 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "visible_html_surface: ambiguous CTA copy: Apply",
+    "completion_gate failed",
+    "qualify link gate failed",
+    "proof receipt missing or failing: rey-31-consulting-email-click-test.json",
+    "proof receipt missing or failing: rey-31-consulting-desktop-render.json",
+    "proof receipt missing or failing: rey-31-consulting-mobile-render.json",
+    "proof receipt missing or failing: rey-31-consulting-audit.json",
+    "proof receipt missing or failing: rey-31-consulting-closeout.json",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+  ],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html",
+  "lead": "rey-31-consulting",
+  "mode": "production",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-09T04:59:17.504904+00:00"
+}

@@ -1,0 +1,297 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw",
+        "--lead",
+        "chris-lpnw",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html",
+        "--lead",
+        "chris-lpnw",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/chris-lpnw.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Operations Command Center\",",
+        "        \"Internal Communication Agent\",",
+        "        \"Team Accountability Agent\",",
+        "        \"Reporting Agent\",",
+        "        \"Hiring & Onboarding Agent\",",
+        "        \"Follow-Up Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Operations%20Command%20Center,Internal%20Communication%20Agent,Team%20Accountability%20Agent,Reporting%20Agent,Hiring%20%26%20Onboarding%20Agent,Follow-Up%20Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"chris-lpnw\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/chris-lpnw.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: chris-lpnw - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/chris-lpnw-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: chris-lpnw - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "chris-lpnw"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] chris-lpnw: 15/15 (100%)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "chris-lpnw           consulting            3000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T05:03:37.110578+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw/chris-lpnw-closeout.json"
+    },
+    {
+      "detail": "chris-lpnw.mp3 13176416 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed"
+  ],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html",
+  "lead": "chris-lpnw",
+  "mode": "production",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-09T05:03:37.152208+00:00"
+}

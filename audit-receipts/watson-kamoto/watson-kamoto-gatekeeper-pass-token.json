@@ -48,6 +48,130 @@
     {
       "cmd": [
         "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Watson%20Williams&biz=Kamoto%20Productions&src=watson-kamoto&firstName=Watson&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Watson%20Williams&biz=Kamoto%20Productions&src=watson-kamoto&firstName=Watson&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Watson%20Williams&biz=Kamoto%20Productions&src=watson-kamoto&firstName=Watson&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
+        "--lead",
+        "watson-kamoto",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/watson-kamoto.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Watson+Williams&biz=Kamoto+Productions&src=watson-kamoto&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Speed-to-Lead%20Agent,Client%20Onboarding%20Agent,Proposal%20Generator,Content%20Production%20Agent,Client%20Health%20Monitor,Admin%20Automation%20Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"watson-kamoto\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/watson-kamoto.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: watson-kamoto - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/watson-kamoto-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: watson-kamoto - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
         "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "watson-kamoto"
@@ -56,7 +180,7 @@
       "pass": true,
       "returncode": 0,
       "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
@@ -80,7 +204,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "watson-kamoto        video_production      2388        0  PASS",
+        "watson-kamoto        video_production       800        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -114,7 +238,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:08:44.625468+00:00\"",
+        "  \"ts\": \"2026-06-09T05:01:52.310162+00:00\"",
         "}"
       ]
     },
@@ -151,6 +275,11 @@
     {
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
       "pass": true
     },
     {
@@ -208,10 +337,10 @@
     ],
     "approval_state": "external_send_approved",
     "artifact_hashes": {
-      "blueprint_html_sha256": "fa078e10929c2d34e5d150ca82a70423eb1c5521917afb34e827c7a77992c5b7",
-      "delivery_email_sha256": "a98b8797301d33ee9fa745b9a334921f74f916ee2cf30c85f33ad0065a13936c",
-      "lead_profile_sha256": "25b940c3db3f0adf02e7ea2ccc11e654f531db63ffa0d5d3daf4b73c0bcbcd25",
-      "podcast_production_47_sha256": "3dec03672699f23f438b89d0fc87c38ad3755cfc6aaf7abecd1d8e7049d3b518"
+      "blueprint_html_sha256": "b3d26379265f88bfba5e9fd8e0deb8adff5274cf90a4f9437491c44bc4af9520",
+      "delivery_email_sha256": "41f6264f693e15340709ebab8e5491ec234bfb7822302a98c0433c2e97ee9b96",
+      "lead_profile_sha256": "b1d41e99181a591e8ecfbd5115ee31cf0bc45482f8786120995bf32705d6f20d",
+      "podcast_production_47_sha256": "4ece3f1152197e32f6737b509382bda21de412681174883c17a51e2e3aa88894"
     },
     "artifact_paths": {
       "blueprint_html": "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
@@ -219,7 +348,7 @@
       "lead_profile": "/Users/openclaw/fki-preview/leads/watson-kamoto.json"
     },
     "diamond": "PASS",
-    "generated_at": "2026-06-09T04:08:44.679169+00:00",
+    "generated_at": "2026-06-09T05:01:52.361898+00:00",
     "html_path": "/Users/openclaw/fki-preview/blueprints/watson-kamoto.html",
     "lead": "watson-kamoto",
     "pass": true,
@@ -230,5 +359,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/watson-kamoto",
   "score": 100,
   "status": "PASS",
-  "ts": "2026-06-09T04:08:44.678212+00:00"
+  "ts": "2026-06-09T05:01:52.361502+00:00"
 }

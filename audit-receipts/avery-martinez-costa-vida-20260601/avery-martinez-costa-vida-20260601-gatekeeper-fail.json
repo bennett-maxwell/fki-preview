@@ -7,12 +7,12 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
         "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
+        "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
         "--lead",
         "avery-martinez-costa-vida-20260601",
         "--json-output",
@@ -47,10 +47,10 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
         "--check-http",
         "--json-output"
       ],
@@ -62,7 +62,7 @@
         "    }",
         "  ],",
         "  \"failures\": [],",
-        "  \"html\": \"/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html\",",
+        "  \"html\": \"/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html\",",
         "  \"http_checks\": [",
         "    {",
         "      \"http_code\": 200,",
@@ -83,28 +83,119 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/run-audit.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
         "--lead",
-        "avery-martinez-costa-vida-20260601"
+        "avery-martinez-costa-vida-20260601",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/avery-martinez-costa-vida-20260601.json"
       ],
-      "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "name": "qualifier_context_gate",
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] avery-martinez-costa-vida-20260601: 15/15 (100%)",
-        "",
-        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Catering Response Agent\",",
+        "        \"Guest Recovery Agent\",",
+        "        \"Loyalty Reactivation Agent\",",
+        "        \"Local Store Demand Agent\",",
+        "        \"Crew Handoff Agent\",",
+        "        \"Review Intelligence Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&biz=Costa+Vida&src=avery-martinez-costa-vida-20260601&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Catering+Response+Agent%2CGuest+Recovery+Agent%2CLoyalty+Reactivation+Agent%2CLocal+Store+Demand+Agent%2CCrew+Handoff+Agent%2CReview+Intelligence+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"avery-martinez-costa-vida-20260601\",",
+        "  \"pass\": false,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"FAIL\"",
+        "}"
       ]
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/financial-realism-check.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/avery-martinez-costa-vida-20260601.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: avery-martinez-costa-vida-20260601 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/avery-martinez-costa-vida-20260601-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: avery-martinez-costa-vida-20260601 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "avery-martinez-costa-vida-20260601"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[FAIL] avery-martinez-costa-vida-20260601: 14/15 (93%)  RED-LINE FAIL: ['D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
+        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "financial_realism",
       "pass": true,
@@ -120,42 +211,61 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "d9_render_integrity",
       "pass": false,
-      "returncode": 2,
-      "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
-      ],
-      "stdout_tail": []
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T04:58:05.594612+00:00\"",
+        "}"
+      ]
     },
     {
       "name": "proof_email_click_test",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-email-click-test.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-desktop-render.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
       "pass": true,
-      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-audit.json"
+      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-audit.json"
     },
     {
       "name": "proof_closeout",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
     },
     {
       "detail": "avery-martinez-costa-vida-20260601.mp3 10534182 bytes within window",
@@ -166,20 +276,25 @@
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
       "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "D9 render-integrity audit failed or missing",
-    "proof receipt missing or failing: avery-martinez-costa-vida-20260601-mobile-render.json",
-    "proof receipt missing or failing: avery-martinez-costa-vida-20260601-closeout.json"
+    "qualifier context gate failed",
+    "run-audit.py failed",
+    "D9 render-integrity audit failed or missing"
   ],
-  "html_path": "/Users/temp/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
+  "html_path": "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
   "lead": "avery-martinez-costa-vida-20260601",
   "mode": "production",
-  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-04T15:33:54.664012+00:00"
+  "ts": "2026-06-09T04:58:05.627928+00:00"
 }

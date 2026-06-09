@@ -48,6 +48,130 @@
     {
       "cmd": [
         "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/brent-attaway.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&firstName=Brent&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/brent-attaway.html",
+        "--lead",
+        "brent-attaway",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/brent-attaway.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Speed-to-Lead Agent\",",
+        "        \"Client Onboarding Agent\",",
+        "        \"Proposal Generator\",",
+        "        \"Content Production Agent\",",
+        "        \"Client Health Monitor\",",
+        "        \"Admin Automation Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Brent+Attaway&biz=CRMX&src=brent-attaway&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"brent-attaway\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/brent-attaway.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: brent-attaway - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/brent-attaway-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: brent-attaway - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
         "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "brent-attaway"
@@ -56,7 +180,7 @@
       "pass": true,
       "returncode": 0,
       "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
@@ -80,7 +204,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "brent-attaway        crm_software          2388        0  PASS",
+        "brent-attaway        crm_software          1200        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -114,7 +238,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:03:21.194186+00:00\"",
+        "  \"ts\": \"2026-06-09T05:03:30.543844+00:00\"",
         "}"
       ]
     },
@@ -152,6 +276,11 @@
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
       "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
     }
   ],
   "diamond": "FAIL",
@@ -164,5 +293,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/brent-attaway",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:03:21.244655+00:00"
+  "ts": "2026-06-09T05:03:30.593165+00:00"
 }

@@ -7,12 +7,12 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
+        "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html",
         "--receipt-dir",
-        "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601",
+        "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601",
         "--lead",
         "plumber-test-business-20260601",
         "--json-output",
@@ -25,9 +25,9 @@
       "stdout_tail": [
         "    \"48\": {",
         "      \"desc\": \"Bennett approval scope recorded\",",
-        "      \"pass\": false,",
+        "      \"pass\": true,",
         "      \"severity\": \"critical\",",
-        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
         "    },",
         "    \"49\": {",
         "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
@@ -47,10 +47,10 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
+        "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html",
         "--check-http",
         "--json-output"
       ],
@@ -62,19 +62,19 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CDispatch+Summary+Agent%2CReview+Request+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CDispatch+Summary+Agent%2CReview+Request+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CDispatch+Summary+Agent%2CReview+Request+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
         "    }",
         "  ],",
         "  \"status\": \"PASS\"",
@@ -83,21 +83,21 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
         "--html",
-        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
+        "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html",
         "--lead",
         "plumber-test-business-20260601",
         "--json-output",
         "--delivery-email",
-        "/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
+        "/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
         "--profile",
-        "/Users/temp/fki-preview/leads/plumber-test-business-20260601.json"
+        "/Users/openclaw/fki-preview/leads/plumber-test-business-20260601.json"
       ],
       "name": "qualifier_context_gate",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
         "      \"text\": \"See If You Qualify\"",
@@ -107,29 +107,29 @@
         "        \"Emergency Intake Agent\",",
         "        \"Estimate Follow-Up Agent\",",
         "        \"Maintenance Recall Agent\",",
-        "        \"Dispatch Summary Agent\",",
-        "        \"Review Request Agent\"",
+        "        \"Review Request Agent\",",
+        "        \"Dispatch Summary Agent\"",
         "      ],",
-        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
-        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=GCm48zLvRjrJHEsB1UfN&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CDispatch+Summary+Agent%2CReview+Request+Agent\",",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=GCm48zLvRjrJHEsB1UfN&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CReview+Request+Agent%2CDispatch+Summary+Agent\",",
         "      \"text\": \"See If You Qualify \\u2192\"",
         "    }",
         "  ],",
         "  \"lead\": \"plumber-test-business-20260601\",",
-        "  \"pass\": true,",
-        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
-        "  \"status\": \"PASS\"",
+        "  \"pass\": false,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"FAIL\"",
         "}"
       ]
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
         "--email",
-        "/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
+        "/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
         "--profile",
-        "/Users/temp/fki-preview/leads/plumber-test-business-20260601.json",
+        "/Users/openclaw/fki-preview/leads/plumber-test-business-20260601.json",
         "--json-output"
       ],
       "name": "approval_email_customer_view_gate",
@@ -138,7 +138,7 @@
       "stderr_tail": [],
       "stdout_tail": [
         "{",
-        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
         "  \"failures\": [],",
         "  \"pass\": true,",
         "  \"status\": \"PASS\"",
@@ -147,10 +147,10 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
         "--email",
-        "/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
+        "/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html",
         "--subject",
         "CUSTOMER VIEW PREVIEW: plumber-test-business-20260601 - Your Custom Blueprint is Ready",
         "--json-output"
@@ -161,7 +161,7 @@
       "stderr_tail": [],
       "stdout_tail": [
         "{",
-        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
         "  \"failures\": [],",
         "  \"pass\": true,",
         "  \"status\": \"PASS\",",
@@ -171,25 +171,31 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/run-audit.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "plumber-test-business-20260601"
       ],
       "name": "blueprint_audit",
       "pass": false,
       "returncode": 1,
-      "stderr_tail": [],
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
       "stdout_tail": [
-        "AUDIT FAIL (plumber-test-business-20260601): no audit receipt"
+        "[FAIL] plumber-test-business-20260601: 14/15 (93%)  RED-LINE FAIL: ['D10-22_home_services_copy_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
       ]
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/fki-preview/financial-realism-check.py",
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
         "--file",
-        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html"
+        "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html"
       ],
       "name": "financial_realism",
       "pass": true,
@@ -205,45 +211,64 @@
     },
     {
       "cmd": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3",
-        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
-        "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html"
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html"
       ],
       "name": "d9_render_integrity",
-      "pass": false,
-      "returncode": 2,
-      "stderr_tail": [
-        "/Library/Developer/CommandLineTools/usr/bin/python3: can't open file '/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py': [Errno 1] Operation not permitted"
-      ],
-      "stdout_tail": []
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-09T04:58:07.452290+00:00\"",
+        "}"
+      ]
     },
     {
       "name": "proof_email_click_test",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-email-click-test.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-desktop-render.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-mobile-render.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-audit.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-audit.json"
     },
     {
       "name": "proof_closeout",
-      "pass": false,
-      "path": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-closeout.json"
+      "pass": true,
+      "path": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601/plumber-test-business-20260601-closeout.json"
     },
     {
-      "detail": "plumber-test-business-20260601.mp3 10370505 bytes within window",
+      "detail": "plumber-test-business-20260601.mp3 13890813 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
@@ -261,19 +286,14 @@
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "run-audit.py failed",
-    "D9 render-integrity audit failed or missing",
-    "proof receipt missing or failing: plumber-test-business-20260601-email-click-test.json",
-    "proof receipt missing or failing: plumber-test-business-20260601-desktop-render.json",
-    "proof receipt missing or failing: plumber-test-business-20260601-mobile-render.json",
-    "proof receipt missing or failing: plumber-test-business-20260601-audit.json",
-    "proof receipt missing or failing: plumber-test-business-20260601-closeout.json"
+    "qualifier context gate failed",
+    "run-audit.py failed"
   ],
-  "html_path": "/Users/temp/fki-preview/blueprints/plumber-test-business-20260601.html",
+  "html_path": "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html",
   "lead": "plumber-test-business-20260601",
   "mode": "production",
-  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/plumber-test-business-20260601",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-05T04:32:14.854759+00:00"
+  "ts": "2026-06-09T04:58:07.493610+00:00"
 }

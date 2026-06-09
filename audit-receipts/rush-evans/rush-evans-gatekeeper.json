@@ -48,6 +48,130 @@
     {
       "cmd": [
         "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans&firstName=Rush&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans&firstName=Rush&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans&firstName=Rush&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
+        "--lead",
+        "rush-evans",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/rush-evans.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Inquiry Response Agent\",",
+        "        \"Follow-Up Agent\",",
+        "        \"Scheduling Agent\",",
+        "        \"Content Agent\",",
+        "        \"Review & Referral Agent\",",
+        "        \"Admin Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photography+%2B+Video&src=rush-evans&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=tMpPsY3o7iwJai6w4CpD&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"rush-evans\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/rush-evans.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: rush-evans - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: rush-evans - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
         "/Users/openclaw/fki-preview/run-audit.py",
         "--lead",
         "rush-evans"
@@ -56,7 +180,7 @@
       "pass": true,
       "returncode": 0,
       "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:497: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
@@ -80,7 +204,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "rush-evans           photography           2500        0  PASS",
+        "rush-evans           photography            250        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -114,7 +238,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:08:29.078131+00:00\"",
+        "  \"ts\": \"2026-06-09T05:00:58.696741+00:00\"",
         "}"
       ]
     },
@@ -151,6 +275,11 @@
     {
       "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
       "pass": true
     },
     {
@@ -208,10 +337,10 @@
     ],
     "approval_state": "external_send_approved",
     "artifact_hashes": {
-      "blueprint_html_sha256": "b56cdd2517e8183d53b26a6ee0ea6de0232563ed8f464c3fdd529057e5b0cae4",
-      "delivery_email_sha256": "8fef2a99a58442de51b1e174b7362f5e2db9e03107140c765f1022b7b378e028",
-      "lead_profile_sha256": "87b1b26d6ad302350724e17b883e874b50ddc552e9191f6c995233c4ec238444",
-      "podcast_production_47_sha256": "f3ec3b453ce06184d9a26cabe8093fac83d8c7ad3a1d500f8b86f10ae1a29872"
+      "blueprint_html_sha256": "3e3f83d1613caeda3097ef21896811c47a0523411ba79d9233512b8851573d7e",
+      "delivery_email_sha256": "0bb4bfb669d0620fed84284973dfaffe3171f0817d559e8003464bfec954425f",
+      "lead_profile_sha256": "66397ae042ae506a7cfacc1d83436c0ae7eedb8e2afa164825badba32894779e",
+      "podcast_production_47_sha256": "b5170913b3b3754dd01b3cf282a12a7e4061772c30f45eeaa8189c829597b0b0"
     },
     "artifact_paths": {
       "blueprint_html": "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
@@ -219,7 +348,7 @@
       "lead_profile": "/Users/openclaw/fki-preview/leads/rush-evans.json"
     },
     "diamond": "PASS",
-    "generated_at": "2026-06-09T04:08:29.130413+00:00",
+    "generated_at": "2026-06-09T05:00:58.747411+00:00",
     "html_path": "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
     "lead": "rush-evans",
     "pass": true,
@@ -230,5 +359,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/rush-evans",
   "score": 100,
   "status": "PASS",
-  "ts": "2026-06-09T04:08:29.129412+00:00"
+  "ts": "2026-06-09T05:00:58.747016+00:00"
 }
