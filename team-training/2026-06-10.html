@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKI AI Training — June 10, 2026</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e8eaf0;margin:0;padding:20px;display:flex;justify-content:center;}
+  .card{max-width:640px;width:100%;background:#1a1d27;border-radius:16px;padding:32px;box-shadow:0 8px 32px rgba(0,0,0,.4);}
+  h1{font-size:1.4rem;margin:0 0 4px;color:#fff;}
+  .meta{font-size:.85rem;color:#8892a4;margin:0 0 24px;}
+  audio{width:100%;border-radius:8px;margin-bottom:20px;outline:none;}
+  .speeds{display:flex;gap:8px;margin-bottom:24px;}
+  .speeds button{background:#2a2d3a;border:none;color:#c8cdd8;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .15s;}
+  .speeds button.active{background:#4f6ef7;color:#fff;}
+  .speeds button:hover:not(.active){background:#343848;}
+  .section{margin-top:20px;padding:16px;background:#12151e;border-radius:10px;border-left:3px solid #4f6ef7;}
+  .section h3{margin:0 0 8px;font-size:.9rem;color:#4f6ef7;text-transform:uppercase;letter-spacing:.05em;}
+  .section p,.section li{font-size:.88rem;color:#b0b8c8;line-height:1.6;margin:4px 0;}
+  .section ul{margin:6px 0;padding-left:18px;}
+  .tag{display:inline-block;background:#1e3a5f;color:#60a5fa;font-size:.75rem;padding:2px 8px;border-radius:4px;margin:2px;}
+  table{width:100%;border-collapse:collapse;margin-top:8px;}
+  td{padding:6px 10px;font-size:.82rem;color:#b0b8c8;border-bottom:1px solid #1f2330;}
+  td:first-child{color:#7dd3fc;font-weight:500;}
+  .feedback{margin-top:24px;font-size:.8rem;color:#5a6478;text-align:center;}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>FKI AI Training Podcast</h1>
+  <p class="meta">Tuesday, June 10, 2026 &nbsp;·&nbsp; Delta: June 4–10 &nbsp;·&nbsp; ~12 min</p>
+
+  <audio id="podAudio" controls preload="metadata"
+    src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-10.mp3">
+  </audio>
+
+  <div class="speeds">
+    <button data-rate="1" onclick="setRate(1,this)" class="active">1x</button>
+    <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+    <button data-rate="1.5" onclick="setRate(1.5,this)">1.5x</button>
+    <button data-rate="2" onclick="setRate(2,this)">2x</button>
+  </div>
+
+  <div class="section">
+    <h3>What Changed (June 4–10)</h3>
+    <ul>
+      <li>AI autonomy: <strong>75% → 81%</strong> (6 more tasks now fully automatic)</li>
+      <li>Blueprint AI: contamination fixed on 4 client sites (wrong industry content)</li>
+      <li>GHL → Instantly: lead handoff now automatic when lead hits "qualified"</li>
+      <li>7-domain audit: 19 of 26 problems fixed; memory-Drive-push now required</li>
+      <li>Memory: notes must reach Drive before any session counts as done</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3>Magic Words Cheat Sheet</h3>
+    <table>
+      <tr><td>"Turn this into a skill"</td><td>Saves a repeated task as a reusable tool</td></tr>
+      <tr><td>"Run diamond on this"</td><td>Second-eyes check before marking done</td></tr>
+      <tr><td>"Council this"</td><td>Quality vote before any permanent decision</td></tr>
+      <tr><td>"Show me the gate receipt"</td><td>Did the AI try all 4 steps before asking?</td></tr>
+      <tr><td>"Angie audit this"</td><td>Flag task for weekly quality-control round</td></tr>
+      <tr><td>"Show me the handoff state"</td><td>What the last session left behind</td></tr>
+      <tr><td>"Use ai-task-assist for this"</td><td>Break complex task into tracked steps</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>Top 3 Issues + Fixes</h3>
+    <table>
+      <tr><td>AI marked done without proof</td><td>"Run diamond before marking done"</td></tr>
+      <tr><td>AI skipped the 4-step gate check</td><td>"Show me the gate receipt"</td></tr>
+      <tr><td>Lead not in Instantly after GHL</td><td>"Check the GHL-Instantly bridge status"</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>Today's Action Drill</h3>
+    <p>Pick one task you do every week. Open Claude Code. Do it once out loud. At the end say: <strong>"Turn this into a skill so I can do it again in one sentence."</strong></p>
+    <p><strong>Stop doing:</strong> Manually moving leads from GHL to Instantly. The bridge is live.</p>
+  </div>
+
+  <div class="section">
+    <h3>Stuck? Troubleshoot in 60 Seconds</h3>
+    <ul>
+      <li>Say: <strong>"Troubleshoot this"</strong></li>
+      <li>Still stuck? <strong>"Council this"</strong></li>
+      <li>Still stuck? Post in #leo-coaches</li>
+    </ul>
+  </div>
+
+  <p class="feedback">Reply to the team email with any feedback — we read every reply and apply changes permanently before the next episode.</p>
+</div>
+
+<script>
+var a=document.getElementById('podAudio'),KEY='team-training-2026-06-10';
+function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+(function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate){a.playbackRate=s.rate;document.querySelectorAll('.speeds button').forEach(x=>{if(parseFloat(x.dataset.rate)===s.rate){x.classList.add('active');}else{x.classList.remove('active');}});}a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
+a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
+</body>
+</html>
