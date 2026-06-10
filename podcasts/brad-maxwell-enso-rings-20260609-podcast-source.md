@@ -15,7 +15,7 @@ Let's start by saying out loud what you already live: Enso Rings is a genuinely 
 
 Then came the moment most people know: Shark Tank, Season 9, 2017. Brighton and Aaron walked out with a handshake deal from Robert Herjavec. The deal fell through in due diligence — which happens to a meaningful share of Shark Tank handshakes, that part is well documented — but the exposure did exactly what exposure is supposed to do. In the eighteen months around that appearance, Enso drove roughly $3.8 million in sales. The Shark didn't close; the market did.
 
-And the market kept closing. Enso Rings has now sold over four million rings into more than 150 countries. The most commonly cited revenue figure is around $16 million — and hosts, flag this honestly for Brad: that's a 2022 public estimate, so it's possibly dated; the real number today could sit above or below it, and Brad would know better than any database. Headcount is usually listed at around 52 employees — that's a data-vendor estimate, our assumption — confirm or correct this, Brad, since you see the actual building.
+And the market kept closing. Enso Rings has now sold over four million rings into more than 150 countries. Brad, you reported $10M+ in annual revenue on your Blueprint AI intake — that's the number we're building from, and it's yours to confirm or refine. Team size you gave us: 55 people. That's the Enso we designed this for.
 
 Now look at the product architecture, because this matters enormously for everything we'll discuss later. Enso isn't one ring. It's the Solid line, Etched, Inked, Stackable, Signet, the Metal Hybrid collection, plus bracelets and Apple Watch bands. Layer onto that one of the most impressive licensed-IP catalogs in the accessories space: Disney, Star Wars, Marvel, DC, Harry Potter, Pokémon, Lord of the Rings. Think about what that licensing list actually signals — Disney and Warner Bros. don't license their crown-jewel properties to operations that can't execute. Every one of those logos on ensorings.com is a third-party audit of Enso's quality, compliance, and reliability that the company passed.
 
@@ -111,8 +111,8 @@ Brad, here's the close, and it's short because the ask is small. There's a bluep
 
 Every non-public figure or inference in these research notes, in one place. Each is labeled in-text as "our assumption — confirm or correct this."
 
-1. **~$16M revenue** — 2022 public estimate; possibly dated. Current figure may differ.
-2. **~52 employees** — data-vendor estimate, not company-confirmed.
+1. **$10M+ revenue** — Brad's own Blueprint AI intake form answer (2026-06-09). No public estimate used.
+2. **55 employees** — Brad's own form answer. No data-vendor estimate used.
 3. **No customer-facing AI on ensorings.com** — external observation only; internal tooling may exist.
 4. **Internal AI use is casual/individual, not systematized** — inferred from typical 2026 patterns, not confirmed.
 5. **Sizing questions and exchanges are the largest CX volume driver** — inferred from product category dynamics.
