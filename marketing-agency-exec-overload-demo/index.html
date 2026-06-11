@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Executive Overload Agent Demo</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #171717;
+      --muted: #62625d;
+      --line: #d8d8d2;
+      --panel: #ffffff;
+      --green: #247a52;
+      --amber: #a45f12;
+      --blue: #245f99;
+      --red: #a1392f;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      padding: 20px 28px 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    .sub {
+      color: var(--muted);
+      margin-top: 4px;
+      max-width: 960px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(360px, 520px) minmax(420px, 1fr);
+      gap: 18px;
+      padding: 18px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    h2 {
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 9px;
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 12px;
+    }
+    .form {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      font-weight: 650;
+    }
+    textarea, input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      min-height: 86px;
+      resize: vertical;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    input { min-height: 40px; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    button {
+      border: 1px solid #174f36;
+      background: var(--green);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #fff;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .output {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfbfa;
+    }
+    .metric b { display: block; font-size: 20px; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin: 5px 0; }
+    .risk { border-left: 4px solid var(--red); }
+    .safe { border-left: 4px solid var(--green); }
+    .approval { border-left: 4px solid var(--amber); }
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .draft {
+      background: #f9faf8;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      white-space: pre-wrap;
+    }
+    @media (max-width: 980px) {
+      main { grid-template-columns: 1fr; padding: 12px; }
+      header { padding: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Executive Overload Agent Demo</h1>
+    <div class="sub">Marketing agency owner demo. Paste messy inputs, click once, get a daily command brief with safe drafts and protected approvals.</div>
+  </header>
+  <main>
+    <section>
+      <div class="panel-head">
+        <h2>Inputs</h2>
+        <span class="badge">Level 4 demo</span>
+      </div>
+      <div class="form">
+        <label>
+          Agency name
+          <input id="agency" value="Brightline Growth Studio">
+        </label>
+        <label>
+          Inbox snippets
+          <textarea id="inbox">Client A: Can we get the May ad report and a quick note on why CPL jumped last week?
+Client B: Approved the landing page copy. Can your team launch by Friday?
+Client C: We have not heard back on the creative revisions. Are we still on track?
+Internal AM: Need owner approval on budget shift from Meta to Google for Client D.</textarea>
+        </label>
+        <label>
+          Meeting notes
+          <textarea id="notes">Client A is worried lead quality dropped.
+Client B approved copy, but design still needs final image swap.
+Client C needs creative revisions by Thursday noon.
+Client D wants to move $1,500 from Meta to Google because Meta CPL is up.</textarea>
+        </label>
+        <label>
+          Calendar
+          <textarea id="calendar">10:00 Client A performance call
+1:30 Internal production standup
+3:00 Client C creative review</textarea>
+        </label>
+        <div class="actions">
+          <button id="generate">Generate command brief</button>
+          <button class="secondary" id="reset">Reset sample</button>
+        </div>
+        <p class="note">Protected actions stay in the approval queue. Nothing sends, spends, or changes campaigns from this demo.</p>
+      </div>
+    </section>
+    <section>
+      <div class="panel-head">
+        <h2>Daily Command Brief</h2>
+        <span class="badge" id="status">Ready</span>
+      </div>
+      <div class="output" id="output">
+        <div class="grid">
+          <div class="metric"><b>0</b><span>risks found</span></div>
+          <div class="metric"><b>0</b><span>drafts ready</span></div>
+          <div class="metric"><b>0</b><span>approvals needed</span></div>
+        </div>
+        <div class="card">
+          <h3>Click generate</h3>
+          <p class="note">The brief will appear here.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const sample = {
+      agency: 'Brightline Growth Studio',
+      inbox: `Client A: Can we get the May ad report and a quick note on why CPL jumped last week?
+Client B: Approved the landing page copy. Can your team launch by Friday?
+Client C: We have not heard back on the creative revisions. Are we still on track?
+Internal AM: Need owner approval on budget shift from Meta to Google for Client D.`,
+      notes: `Client A is worried lead quality dropped.
+Client B approved copy, but design still needs final image swap.
+Client C needs creative revisions by Thursday noon.
+Client D wants to move $1,500 from Meta to Google because Meta CPL is up.`,
+      calendar: `10:00 Client A performance call
+1:30 Internal production standup
+3:00 Client C creative review`
+    };
+
+    function getLines(value) {
+      return value.split(/\n+/).map(x => x.trim()).filter(Boolean);
+    }
+
+    function hasAny(text, words) {
+      const low = text.toLowerCase();
+      return words.some(word => low.includes(word));
+    }
+
+    function buildBrief() {
+      const agency = document.getElementById('agency').value.trim() || 'Agency';
+      const inbox = getLines(document.getElementById('inbox').value);
+      const notes = getLines(document.getElementById('notes').value);
+      const calendar = getLines(document.getElementById('calendar').value);
+      const all = [...inbox, ...notes];
+
+      const risks = [];
+      const drafts = [];
+      const approvals = [];
+      const tasks = [];
+
+      if (all.some(x => /Client C/i.test(x))) {
+        risks.push('Client C may churn if creative revisions are not acknowledged today.');
+        drafts.push(['Client C', 'You are right to ask. The revisions are still on track, but we should have acknowledged the update sooner. I will have the revised creative back to you by Thursday noon.']);
+        approvals.push('Owner approval before sending Client C apology/ETA if relationship is sensitive.');
+        tasks.push('Confirm creative owner and Thursday noon delivery path for Client C.');
+      }
+      if (all.some(x => /Client A|CPL|ad report/i.test(x))) {
+        risks.push('Client A needs a clear CPL explanation before the performance call.');
+        drafts.push(['Client A', 'We have the May report ready. CPL rose last week because spend held steady while lead volume dipped. I will walk through the campaign-level drivers on the call and bring one recommended fix.']);
+        tasks.push('Prep Client A report and one CPL fix before the 10:00 call.');
+      }
+      if (all.some(x => /Client B|launch/i.test(x))) {
+        drafts.push(['Client B', 'Copy is approved. We can still target Friday launch if the final image swap is approved today. I will confirm after production standup.']);
+        tasks.push('Verify final image swap before promising Friday launch.');
+        approvals.push('Owner or production lead approval before promising Friday launch.');
+      }
+      if (hasAny(all.join(' '), ['budget', '$1,500', 'meta to google', 'campaign'])) {
+        risks.push('Client D budget move is a protected action.');
+        approvals.push('Approve, reject, or request more data before moving $1,500 from Meta to Google.');
+        tasks.push('Collect Client D spend, CPL, and lead quality data before decision.');
+      }
+
+      const safe = [
+        'Summarize inbox, notes, and calendar.',
+        'Draft replies for owner review.',
+        'Flag risk and build task list.',
+        'Prepare approval queue.'
+      ];
+      const blocked = [
+        'Do not send client messages.',
+        'Do not move ad budget.',
+        'Do not change campaigns.',
+        'Do not promise launch dates without approval.',
+        'Do not access new client tools.'
+      ];
+
+      const output = document.getElementById('output');
+      output.innerHTML = `
+        <div class="grid">
+          <div class="metric"><b>${risks.length}</b><span>risks found</span></div>
+          <div class="metric"><b>${drafts.length}</b><span>drafts ready</span></div>
+          <div class="metric"><b>${approvals.length}</b><span>approvals needed</span></div>
+        </div>
+        <div class="card risk"><h3>Top risks for ${agency}</h3><ul>${risks.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        <div class="card"><h3>Today’s task list</h3><ul>${tasks.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        <div class="card approval"><h3>Owner approval queue</h3><ul>${approvals.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        <div class="card"><h3>Draft replies</h3>${drafts.map(([name, text]) => `<p><b>${name}</b></p><div class="draft">${text}</div>`).join('')}</div>
+        <div class="card safe"><h3>Safe actions</h3><ul>${safe.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        <div class="card approval"><h3>Protected actions</h3><ul>${blocked.map(x => `<li>${x}</li>`).join('')}</ul></div>
+        <div class="card"><h3>Notion project criteria</h3><ul><li>Green: brief, drafts, and approval queue generated.</li><li>Yellow: demo works on fake data only.</li><li>Red: approval gates missing.</li></ul></div>
+      `;
+      document.getElementById('status').textContent = 'Generated';
+    }
+
+    function resetSample() {
+      document.getElementById('agency').value = sample.agency;
+      document.getElementById('inbox').value = sample.inbox;
+      document.getElementById('notes').value = sample.notes;
+      document.getElementById('calendar').value = sample.calendar;
+      document.getElementById('status').textContent = 'Ready';
+      document.getElementById('output').innerHTML = `
+        <div class="grid">
+          <div class="metric"><b>0</b><span>risks found</span></div>
+          <div class="metric"><b>0</b><span>drafts ready</span></div>
+          <div class="metric"><b>0</b><span>approvals needed</span></div>
+        </div>
+        <div class="card"><h3>Click generate</h3><p class="note">The brief will appear here.</p></div>
+      `;
+    }
+
+    document.getElementById('generate').addEventListener('click', buildBrief);
+    document.getElementById('reset').addEventListener('click', resetSample);
+  </script>
+</body>
+</html>
