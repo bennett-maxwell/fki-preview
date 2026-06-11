@@ -225,11 +225,16 @@ def audit_transcript(transcript: str, first_name: str, lead_name: str, business_
     # Britt->Brett). Don't double-require the ASR-fragile bare-name checks on top.
     opening_ok = opening_direct or opening_exact_or_close
     name_ok = first_name_count >= 1 or opening_exact_or_close
+    # Same ASR-fragility exemption for the business token (2026-06-11): Whisper renders
+    # initialisms unpredictably ("BME LLC" -> "BME, LOC"), so a confirmed full-opening
+    # match — which contains the business name by construction — is sufficient proof,
+    # exactly as it already is for the bare first-name token above.
+    business_ok = business_present or opening_exact_or_close
     pass_now = (
         opening_ok
         and opening_exact_or_close
         and name_ok
-        and business_present
+        and business_ok
         and you_count >= 5
         and not banned_found
         and not third_person_found
