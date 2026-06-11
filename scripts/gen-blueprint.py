@@ -232,8 +232,21 @@ def build(profile):
     html = replace_section(html, "ignore", ign)
 
     # ---- agents ----
+    def _agent_prompt(a, i):
+        # D2-02 [RL] (Bennett 2026-06-09): every card ships a copy-paste starter prompt >=200 chars.
+        ai_list = p.get("ai_agents") or []
+        txt = (a.get("agent_prompt")
+               or (ai_list[i].get("agent_prompt") if i < len(ai_list) and isinstance(ai_list[i], dict) else "")
+               or "")
+        if not txt:
+            raise SystemExit(f"agent {i+1} ({a.get('name')}) missing agent_prompt — D2-02 red-line, fix the profile")
+        return ('<div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);'
+                'border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);'
+                'margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">'
+                f'Copy-paste prompt:</strong>{esc(txt)}</div>')
     ac = "".join(f'<div class="agent-card"><div class="agent-icon">{AGENT_SVGS[i % len(AGENT_SVGS)]}</div>'
                  f'<div class="agent-name">{esc(a["name"])}</div><div class="agent-desc">{a["desc"]}</div>'
+                 f'{_agent_prompt(a, i)}'
                  f'<div class="agent-outcome">{a["outcome"]}</div></div>' for i, a in enumerate(p["agents"]))
     agt = (f'\n  <div class="container">\n    <p class="section-label">Your AI System</p>\n'
            f'    <h2 class="section-title">6 AI Agents Built for {esc(p["business_name"])}</h2>\n'

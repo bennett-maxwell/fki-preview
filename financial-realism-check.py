@@ -38,6 +38,7 @@ INDUSTRY_BANDS = {
     "medical_devices":    (5000,500000, "contract"),
     "property_mgmt":      (1000,50000,  "annual mgmt fee"),
     "marketing_agency":   (250, 25000,  "retainer/project"),   # marketing services (Sky/BME form: industry=marketing)
+    "heavy_equipment":    (2000,200000, "equipment/contract"), # road equipment mfg/services (Diamond Road; muni contracts)
     "unknown":            (None, None,  "deal"),            # cannot verify -> flagged
 }
 
@@ -60,6 +61,8 @@ LEAD_INDUSTRY = {
     "alex-ramos":       "medical_devices",    # DePuy Synthes
     "zachary-oldham":   "property_mgmt",      # Red Sands Vacation Properties
     "sky-bme-llc":      "marketing_agency",   # BME LLC (GHL form 2026-06: industry=marketing, GoHighLevel/Asana)
+    "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
+    "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
     # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
     # business identity in the page <title> — the SAME standard the canon 15 use — so the
     # financial gate keeps VERIFYING their bands instead of silently skipping them. A demo
