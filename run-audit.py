@@ -35,7 +35,11 @@ def podcast_duration_gate(slug):
     NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
     10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
     cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
-    MIN_SEC, MAX_SEC = 16 * 60, 20 * 60
+    # Aligned 2026-06-10 to canonical blueprint-ai-skill v3.26 (Drive 1IzE-seD, newer than
+    # this gate's v1.1 2026-06-01 docstring): "Podcast = 6-20 MB walkthrough WINDOW (~6-20 min,
+    # target 12-18). The old >=29 MB floor was BACKWARDS ... permanently removed." The 16:00
+    # floor here was local drift, stricter than canon. Window per canon: 6:00-20:00.
+    MIN_SEC, MAX_SEC = 6 * 60, 20 * 60
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"

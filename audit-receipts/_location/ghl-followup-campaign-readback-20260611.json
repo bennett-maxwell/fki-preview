@@ -1,0 +1,22 @@
+{
+  "receipt": "ghl-followup-campaign-readback",
+  "ts": "2026-06-11T15:05:00Z",
+  "auditor": "Madison CC (claude-fable-5)",
+  "skill_basis": "blueprint-ai-skill v3.32 — v3.25 Follow-Up Campaign Proof Gate, fallback chain item 6",
+  "task": "Verify GHL Blueprint AI campaign active for ~15 contacts with 4h/24h/3d/7d follow-up pings",
+  "location_id": "14RD8KklxR9G4e0Rf7v2",
+  "status": "FAIL_NOT_ACTIVE",
+  "evidence": {
+    "workflows_api": "178 workflows listed; only blueprint-related = 'AI Advantage Blueprint Opt In' (b4225b37-7e11-4a46-aba0-53f2ed13cc07, PUBLISHED, updated 2026-05-13). No workflow named for 4h/24h/3d/7d blueprint follow-up. Workflow detail/steps endpoint = 404 (not in public API).",
+    "campaigns_api": "GET /campaigns = EMPTY list (zero native campaigns).",
+    "tagged_contacts": {
+      "blueprint-delivered": 7, "ai-blueprint-sent": 9, "blueprint-ai-delivered": 8,
+      "unique_real_leads": ["watson","alex ramos","riah evans","jaden mecham","zachary oldham","court lundberg","dave wood","branson","chris","rey alonzo","britt warnick","brent attaway","melissa tash","austin"],
+      "test_contacts": ["claude code test","brent attaway_test 2"]
+    },
+    "message_source_audit": "8 contacts sampled (melissa, rey, britt, court, dave, alex, jaden, zachary): 100% of outbound blueprint messages have source='app' (manual). Zero messages with source=workflow/campaign/automation. Only campaign-sourced traffic = FKI newsletter (May 6/11). Observed blueprint cadence = manual sends 5/19, 5/21, 6/05 — not 4h/24h/3d/7d.",
+    "ui_route": "BLOCKED — GHL web session logged out on this seat; SSO popup unreachable from automation. Login requires Madison."
+  },
+  "verdict": "No native GHL follow-up campaign/workflow is sending 4h/24h/3d/7d pings for the ~15 blueprint contacts. Opt-in workflow is published but no sampled contact shows workflow-sourced outbound.",
+  "routing": "Per skill item 7: workflow-publish/enrollment fix routes to Kay/Jenn/GHL admin (NOT Bennett)."
+}
