@@ -3,107 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FKI AI Training — June 12, 2026</title>
+<title>FKI AI Training — Episode 6 — June 12, 2026</title>
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e8eaf0;margin:0;padding:20px;display:flex;justify-content:center;}
-  .card{max-width:640px;width:100%;background:#1a1d27;border-radius:16px;padding:32px;box-shadow:0 8px 32px rgba(0,0,0,.4);}
-  h1{font-size:1.4rem;margin:0 0 4px;color:#fff;}
-  .meta{font-size:.85rem;color:#8892a4;margin:0 0 24px;}
-  audio{width:100%;border-radius:8px;margin-bottom:20px;outline:none;}
-  .speeds{display:flex;gap:8px;margin-bottom:24px;}
-  .speeds button{background:#2a2d3a;border:none;color:#c8cdd8;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .15s;}
-  .speeds button.active{background:#4f6ef7;color:#fff;}
-  .speeds button:hover:not(.active){background:#343848;}
-  .section{margin-top:20px;padding:16px;background:#12151e;border-radius:10px;border-left:3px solid #4f6ef7;}
-  .section h3{margin:0 0 8px;font-size:.9rem;color:#4f6ef7;text-transform:uppercase;letter-spacing:.05em;}
-  .section p,.section li{font-size:.88rem;color:#b0b8c8;line-height:1.6;margin:4px 0;}
-  .section ul{margin:6px 0;padding-left:18px;}
-  table{width:100%;border-collapse:collapse;margin-top:8px;}
-  td{padding:6px 10px;font-size:.82rem;color:#b0b8c8;border-bottom:1px solid #1f2330;}
-  td:first-child{color:#7dd3fc;font-weight:500;}
-  .brain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
-  .brain-chip{background:#1e2a1a;border:1px solid #2d4a2d;border-radius:8px;padding:10px 12px;}
-  .brain-chip .role{font-size:.78rem;color:#86efac;font-weight:600;text-transform:uppercase;letter-spacing:.04em;}
-  .brain-chip .trigger{font-size:.75rem;color:#6b7280;margin-top:3px;}
-  .feedback{margin-top:24px;font-size:.8rem;color:#5a6478;text-align:center;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #f0f0f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .card { background: #1a1a1a; border-radius: 16px; padding: 32px; max-width: 480px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+  .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 6px; }
+  .ep-badge { display: inline-block; background: #ff6b35; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+  h1 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.3; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .delta-badge { background: #1e3a2e; color: #4ade80; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 20px; }
+  audio { width: 100%; margin-bottom: 16px; border-radius: 8px; }
+  audio::-webkit-media-controls-panel { background: #2a2a2a; }
+  .speeds { display: flex; gap: 8px; margin-bottom: 24px; }
+  .speeds button { flex: 1; background: #2a2a2a; color: #ccc; border: 1px solid #333; border-radius: 8px; padding: 10px 0; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .speeds button:hover { background: #333; color: #fff; }
+  .speeds button.active { background: #ff6b35; color: white; border-color: #ff6b35; }
+  .skip-row { display: flex; gap: 8px; margin-bottom: 24px; }
+  .skip-row button { flex: 1; background: #2a2a2a; color: #aaa; border: 1px solid #333; border-radius: 8px; padding: 8px 0; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+  .skip-row button:hover { background: #333; color: #fff; }
+  .highlights { background: #111; border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+  .highlights h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 12px; }
+  .highlight-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 13px; color: #ccc; line-height: 1.4; }
+  .highlight-item:last-child { margin-bottom: 0; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff6b35; flex-shrink: 0; margin-top: 5px; }
+  .footer { font-size: 11px; color: #555; text-align: center; border-top: 1px solid #222; padding-top: 16px; }
+  .footer a { color: #666; text-decoration: none; }
 </style>
 </head>
 <body>
 <div class="card">
-  <h1>FKI AI Training Podcast</h1>
-  <p class="meta">Friday, June 12, 2026 &nbsp;&middot;&nbsp; delta: June 11 &rarr; June 12 &nbsp;&middot;&nbsp; just what changed since the last training</p>
+  <div class="label">Franchise KI · Daily AI Training</div>
+  <div class="ep-badge">Episode 6</div>
+  <h1>Why AI "done" doesn't mean delivered</h1>
+  <div class="subtitle">Friday, June 12, 2026 · delta: June 11 → June 12 · just what changed since the last training</div>
+  <div class="delta-badge">▶ Play today's training</div>
 
   <audio id="podAudio" controls preload="metadata"
     src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-12.mp3">
   </audio>
 
   <div class="speeds">
-    <button data-rate="1" onclick="setRate(1,this)" class="active">1x</button>
+    <button data-rate="1"    onclick="setRate(1,this)">1x</button>
     <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
-    <button data-rate="1.5" onclick="setRate(1.5,this)">1.5x</button>
-    <button data-rate="2" onclick="setRate(2,this)">2x</button>
+    <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+    <button data-rate="2"    onclick="setRate(2,this)">2x</button>
   </div>
 
-  <div class="section">
-    <h3>What Changed Today</h3>
-    <ul>
-      <li><strong>All 6 C-suite AI brains are now live</strong> &mdash; marketing, revenue, operations, AI strategy, finance, and chief of staff.</li>
-      <li><strong>WO-364 MapKI PE outreach staged</strong> &mdash; 200 private equity contacts, 6-touch email sequence ready in GHL, waiting for one approval.</li>
-      <li><strong>New routing-planning tool added</strong> &mdash; the helper now plans its approach before starting complex tasks.</li>
-      <li><strong>SH Franchisee Q&amp;A auto-captured</strong> &mdash; Gemini recorded yesterday's meeting; transcript + recording in Drive automatically.</li>
-      <li><strong>Stale tool files flagged for cleanup</strong> &mdash; 4 outdated skill files marked. Active versions don't have "STALE" in the name.</li>
-    </ul>
+  <div class="skip-row">
+    <button onclick="skip(-30)">⏮ 30s</button>
+    <button onclick="skip(30)">30s ⏭</button>
   </div>
 
-  <div class="section">
-    <h3>New Brain Skills &mdash; Say These Phrases</h3>
-    <div class="brain-grid">
-      <div class="brain-chip"><div class="role">CMO Brain</div><div class="trigger">"Use the CMO brain for this."</div></div>
-      <div class="brain-chip"><div class="role">CRO Brain</div><div class="trigger">"Use the CRO brain for this."</div></div>
-      <div class="brain-chip"><div class="role">COO Brain</div><div class="trigger">"Use the COO brain for this."</div></div>
-      <div class="brain-chip"><div class="role">CAIO Brain</div><div class="trigger">"Use the CAIO brain for this."</div></div>
-      <div class="brain-chip"><div class="role">CFO Brain</div><div class="trigger">"Use the CFO brain for this."</div></div>
-      <div class="brain-chip"><div class="role">Chief of Staff</div><div class="trigger">"Use the Chief of Staff brain."</div></div>
-    </div>
+  <div class="highlights">
+    <h3>Today's episode</h3>
+    <div class="highlight-item"><div class="dot"></div><span>Drive went down on Ivan — 14 tools stuck, why silent queuing is the danger</span></div>
+    <div class="highlight-item"><div class="dot"></div><span>LinkedIn offline (Composio expired) — Facebook &amp; Instagram recovered automatically</span></div>
+    <div class="highlight-item"><div class="dot"></div><span>Claude Code at 2.1.175 — check your version with /version</span></div>
+    <div class="highlight-item"><div class="dot"></div><span>daily-ai-training-podcast-skill updated to v10 — direct address, episode numbers, 10-min target</span></div>
+    <div class="highlight-item"><div class="dot"></div><span>Action drill: ask for proof, not just "done"</span></div>
   </div>
 
-  <div class="section">
-    <h3>Magic Words Cheat Sheet</h3>
-    <table>
-      <tr><td>"Use the CFO brain for this."</td><td>Financial analysis &mdash; budget, cost, ROI.</td></tr>
-      <tr><td>"Use the CMO brain for this."</td><td>Marketing strategy &mdash; ads, content, brand.</td></tr>
-      <tr><td>"Use the COO brain for this."</td><td>Operations review &mdash; process, efficiency.</td></tr>
-      <tr><td>"Route and plan this task before starting."</td><td>Helper maps the best path first.</td></tr>
-      <tr><td>"After this runs, log the result automatically."</td><td>Forces auto-capture behavior.</td></tr>
-      <tr><td>"Verify the URL before sending."</td><td>Stops broken links from going out.</td></tr>
-      <tr><td>"Run an Angie audit."</td><td>Health check on all AI tools.</td></tr>
-    </table>
+  <div class="footer">
+    FKI AI Operations · <a href="https://bennett-maxwell.github.io/fki-preview/team-training/">All episodes</a> · Reply to your email with feedback
   </div>
-
-  <div class="section">
-    <h3>Today's Action Drill</h3>
-    <p>Set a 10-minute timer. Pick one task you do every week that belongs to a role (finance, marketing, operations). Open Claude Code (the app where you chat with your AI helper) and say: <strong>"Use the [CFO/CMO/COO] brain for this. Here's what I need: [describe your task]."</strong></p>
-    <p><strong>Stop doing:</strong> manually saving Google Meet recordings. Gemini captures them automatically into Drive. After your next meeting, check the Drive folder to confirm it's there.</p>
-  </div>
-
-  <div class="section">
-    <h3>Stuck? Troubleshoot in 60 Seconds</h3>
-    <ul>
-      <li>Say: <strong>"Troubleshoot this"</strong></li>
-      <li>Still stuck? <strong>"Council this"</strong></li>
-      <li>Still stuck? Post in #leo-coaches in Slack (our team chat app)</li>
-    </ul>
-  </div>
-
-  <p class="feedback">Reply to the team email with any feedback &mdash; we read every reply and apply changes permanently before the next episode.</p>
 </div>
 
 <script>
-var a=document.getElementById('podAudio'),KEY='team-training-2026-06-12';
-function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
-(function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate){a.playbackRate=s.rate;document.querySelectorAll('.speeds button').forEach(x=>{if(parseFloat(x.dataset.rate)===s.rate){x.classList.add('active');}else{x.classList.remove('active');}});}a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
-a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+  var a = document.getElementById('podAudio'), KEY = 'team-training-2026-06-12';
+  function setRate(r, b) {
+    a.playbackRate = r;
+    document.querySelectorAll('.speeds button').forEach(x => x.classList.remove('active'));
+    if (b) b.classList.add('active');
+    save();
+  }
+  function skip(s) { a.currentTime = Math.max(0, a.currentTime + s); }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({time: a.currentTime, rate: a.playbackRate})); } catch(e) {}
+  }
+  (function() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || '{}');
+      if (s.rate) { a.playbackRate = s.rate; document.querySelector('.speeds button[data-rate="' + s.rate + '"]')?.classList.add('active'); }
+      a.addEventListener('loadedmetadata', function() { if (s.time && s.time > 5) a.currentTime = s.time; });
+    } catch(e) {}
+    if (!document.querySelector('.speeds .active')) document.querySelector('.speeds button').classList.add('active');
+  })();
+  a.addEventListener('timeupdate', save);
+  a.addEventListener('ratechange', save);
 </script>
 </body>
 </html>
