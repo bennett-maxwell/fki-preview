@@ -1,84 +1,1061 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Redirecting to the live Blueprint application…</title>
-  <meta name="robots" content="noindex,follow" />
-  <meta http-equiv="refresh" content="0; url=https://franchiseki.com/apply" />
-  <link rel="canonical" href="https://franchiseki.com/apply" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Your AI Blueprint — Advaita AI for Business</title>
+  <meta name="description" content="Answer 12 quick questions about your business in about one minute. Get a custom AI blueprint, podcast, and first-agent map built specifically for your business — free, within 24 hours." />
   <style>
     :root {
-      --bg: #0b1220;
-      --card: #121b2d;
-      --text: #f5f7fb;
-      --muted: #a7b2c7;
-      --accent: #4da3ff;
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 24px 80px rgba(0,0,0,0.35);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --brand:       #1D6FDB;
+      --brand-dark:  #0A0E1A;
+      --brand-light: #4A90E2;
+      --neutral-bg:  #f8f8f8;
+      --white:       #ffffff;
+      --text:        #0A0E1A;
+      --text-muted:  #3a3a3a;
+      --text-light:  #888888;
+      --border:      #e2e2e2;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(29,111,219,0.08);
+      --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(circle at top, #16325f 0%, var(--bg) 58%);
-      color: var(--text);
-      padding: 24px;
-    }
-    .card {
-      width: min(680px, 100%);
-      background: rgba(18,27,45,0.96);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 36px;
-      text-align: center;
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 12px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(28px, 5vw, 42px);
-      line-height: 1.08;
-    }
-    p {
-      margin: 0 auto 18px;
-      max-width: 52ch;
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 16px;
-    }
-    a {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #2c7be5, #61b1ff);
-      color: white;
-      font-weight: 700;
-      text-decoration: none;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand-light); }
+    .nav-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(29,111,219,0.18); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand-light); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 560px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--brand-light); display: block; }
+    .hero-stat .label { font-size: 0.78rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .hero-cta { display: inline-block; background: var(--white); color: var(--brand-dark); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    /* SECTIONS */
+    .section { padding: 4rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 840px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 0.75rem; }
+    .section-sub { font-size: 1rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; }
+
+    /* WHAT YOU GET */
+    .what-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    @media (max-width: 860px) { .what-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .what-grid { grid-template-columns: 1fr; } }
+    .what-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.5rem; text-align: center; box-shadow: var(--shadow); }
+    .what-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .what-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .what-title { font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 0.4rem; }
+    .what-sub { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* FORM */
+    .form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow-md); }
+    .form-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .form-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .form-header p { font-size: 0.92rem; color: var(--text-muted); }
+    .form-group { margin-bottom: 1.75rem; }
+    .form-label { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .form-label .q-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-size: 0.72rem; font-weight: 800; flex-shrink: 0; }
+    .form-hint { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.6rem; margin-left: 2rem; }
+
+    /* TEXT / SELECT INPUTS */
+    .form-control { display: block; width: 100%; font-family: var(--font-sans); font-size: 0.95rem; color: var(--text); background: var(--neutral-bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.75rem 1rem; transition: border-color 0.18s, box-shadow 0.18s, background 0.18s; appearance: none; -webkit-appearance: none; outline: none; }
+    .form-control:focus { border-color: var(--brand); background: var(--white); box-shadow: 0 0 0 3px rgba(29,111,219,0.12); }
+    .form-control::placeholder { color: var(--text-light); }
+    select.form-control { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236E6E73' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+    textarea.form-control { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+    /* SLIDERS */
+    .slider-wrap { padding: 0.25rem 0; }
+    .slider-display { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .slider-val { font-size: 1.2rem; font-weight: 800; color: var(--brand-dark); }
+    .slider-sublabel { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+    .slider-track { position: relative; padding: 0.5rem 0; }
+    input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; accent-color: var(--brand-dark); }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); cursor: pointer; box-shadow: 0 2px 8px rgba(29,111,219,0.3); }
+    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: none; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); cursor: pointer; }
+    .slider-range-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-light); margin-top: 0.3rem; }
+
+    /* TOOL DROPDOWNS GRID */
+    .tool-dropdowns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (max-width: 640px) { .tool-dropdowns { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 420px) { .tool-dropdowns { grid-template-columns: 1fr; } }
+    .tool-dropdown-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .tool-dropdown-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    /* MULTI-SELECT CHECKBOXES (Social/Marketing) */
+    .tool-dropdown-group--full { grid-column: 1 / -1; }
+    .multi-check-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+    .multi-check-item { display: flex; align-items: center; gap: 0.4rem; background: var(--neutral-bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 0.45rem 0.85rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: all 0.15s; user-select: none; }
+    .multi-check-item:hover { border-color: var(--brand-light); color: var(--brand-dark); background: rgba(29,111,219,0.04); }
+    .multi-check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; }
+    .multi-check-item:has(input:checked) { border-color: var(--brand); background: rgba(29,111,219,0.08); color: var(--brand-dark); }
+    .check-sub { display: block; font-size: 0.68rem; font-weight: 400; color: var(--text-light); margin-top: 0.1rem; line-height: 1.2; }
+    .multi-check-item--tall { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+    .multi-check-item--tall .check-top { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* ROI REVEAL */
+    .roi-reveal { display: none; margin-bottom: 1.5rem; background: var(--neutral-bg); border: 1.5px solid var(--brand); border-radius: var(--radius); overflow: hidden; }
+    .roi-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; cursor: pointer; user-select: none; }
+    .roi-header-left { display: flex; align-items: center; gap: 0.75rem; }
+    .roi-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); flex-shrink: 0; }
+    .roi-header h4 { font-size: 0.95rem; font-weight: 800; color: var(--brand-dark); margin: 0; }
+    .roi-toggle-txt { font-size: 0.75rem; color: var(--brand); font-weight: 700; }
+    .roi-content { display: none; padding: 0 1.5rem 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+    .roi-item { text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1rem; }
+    .roi-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); }
+    .roi-lbl { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-top: 0.25rem; }
+    .roi-note { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+
+    /* SUBMIT */
+    .form-submit-area { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .submit-btn { display: block; width: 100%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); border: none; border-radius: 100px; padding: 1rem 2rem; font-size: 1rem; font-weight: 800; font-family: var(--font-sans); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.02em; }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .submit-note { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 0.75rem; }
+
+    /* SUCCESS */
+    .form-success { display: none; text-align: center; padding: 3rem 2rem; }
+    .success-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .success-icon svg { width: 32px; height: 32px; stroke: var(--white); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .success-title { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.75rem; }
+    .success-body { font-size: 0.95rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 1.5rem; line-height: 1.6; }
+    .success-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .success-stat .s-val { font-size: 1.4rem; font-weight: 800; color: var(--brand-dark); display: block; }
+    .success-stat .s-lbl { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    /* CTA SECTION */
+    .cta-section { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 60%, var(--brand) 100%); color: var(--white); padding: 4.5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 520px; margin: 0 auto 2rem; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand-dark); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+
+    footer { background: var(--text); color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand-light); text-decoration: none; }
+
+    /* VALIDATION */
+    .form-error { font-size: 0.8rem; color: #c0392b; margin-top: 0.35rem; margin-left: 2rem; display: none; }
+    .form-control.field-invalid { border-color: #c0392b !important; background: #fff8f8; }
+    .form-control.field-valid { border-color: #27ae60; }
+
+    @media (max-width: 640px) {
+      .section { padding: 3rem 1.25rem; }
+      .form-wrap { padding: 1.5rem; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .hero-divider { display: none; }
+      .tool-dropdowns { grid-template-columns: 1fr 1fr; }
     }
   </style>
-  <script>
-    window.location.replace('https://franchiseki.com/apply');
-  </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '731853659590910');
+fbq('track', 'PageView');
+fbq('track', 'InitiateCheckout', {content_name: 'FKI AI Blueprint Application Start'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
-  <main class="card">
-    <div class="eyebrow">Franchise KI</div>
-    <h1>Taking you to the live Blueprint application</h1>
-    <p>This page now lives on the professional website. If you are not redirected automatically, use the button below.</p>
-    <a href="https://franchiseki.com/apply">Open the live application</a>
-  </main>
+
+<nav>
+  <div class="nav-logo">Advaita <span>AI for Business</span></div>
+  <div class="nav-tagline">Free · No sales call · Delivered within 24 hours</div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Free AI Blueprint — Personalized for Your Business</div>
+  <h1>Stop guessing where AI fits.<br><span>Find the first workflow it should take off your plate.</span></h1>
+  <p class="hero-sub">Answer 12 quick questions about your business in about one minute. We'll map the first AI agent worth building, what it should connect to, and what to ignore for now — free, personalized, no sales call.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">12</span><span class="label">Quick<br>Questions</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">1</span><span class="label">Minute<br>To Answer</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">24hr</span><span class="label">Blueprint<br>Delivered</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">20</span><span class="label">Minute AI<br>Podcast</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">100%</span><span class="label">Free — No<br>Sales Call</span></div>
+  </div>
+  <a href="#intake-form" class="hero-cta">Answer 12 Questions →</a>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <p class="section-label">What's Included</p>
+    <h2 class="section-title">Everything in your free blueprint</h2>
+    <p class="section-sub">Built specifically for your business. Not a template — a real AI analysis of your exact workflows, tools, and revenue model.</p>
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+        <div class="what-title">Custom AI Playbook</div>
+        <div class="what-sub">6+ AI agents mapped to your specific workflows and tools</div>
+      </div>
+      <div class="what-card">
+        <div class="what-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <div class="what-title">ROI Breakdown</div>
+        <div class="what-sub">Hours saved and projected revenue impact for your business</div>
+      </div>
+      <div class="what-card">
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4M12 4v3"/></svg></div>
+        <div class="what-title">20-Min AI Podcast</div>
+        <div class="what-sub">Custom audio walkthrough — listen while you drive</div>
+      </div>
+      <div class="what-card">
+        <div class="what-icon"><svg viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        <div class="what-title">3 Ready-to-Use Prompts</div>
+        <div class="what-sub">Copy-paste AI prompts for your top 3 time drains</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES: AI Is The Next Advantage -->
+<section class="section" style="background:#fff;">
+  <div class="container" style="max-width:860px;">
+    <p class="section-label">Why This Matters Now</p>
+    <h2 class="section-title">AI Has Become the Next Business Advantage.</h2>
+    <p class="section-sub" style="max-width:680px;">A few years ago, having a good website made you look ahead of the game. Then online reviews became the advantage. Then speed-to-lead. Now AI is becoming the next major advantage for local service businesses — not because it's trendy, but because it can actually do work.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem;">
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Answer Leads</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Instantly respond to inquiries across all channels — 24/7, no staff required.</p>
+      </div>
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Follow Up</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Never let a lead go cold with automated, personalized nurturing sequences.</p>
+      </div>
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Qualify Prospects</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">AI filters high-intent leads before you or your team ever talk to them.</p>
+      </div>
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Book Appointments</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Self-correcting scheduling that works around the clock without a coordinator.</p>
+      </div>
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Reduce Admin</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Automate data entry, workflow triggers, and repetitive back-office tasks.</p>
+      </div>
+      <div style="background:var(--neutral-bg);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand);margin-bottom:0.4rem;">Scale Operations</div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Handle 10x the volume without 10x the headcount or overhead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES: Most Businesses Are Using AI Wrong -->
+<section class="section section-alt">
+  <div class="container" style="max-width:860px;">
+    <p class="section-label">The Real Opportunity</p>
+    <h2 class="section-title">Most Business Owners Are Using AI Wrong</h2>
+    <p class="section-sub" style="max-width:680px;">Most people think AI means opening ChatGPT and asking it to write a social media post. That's fine — but that is not the real opportunity. The real opportunity is AI agents that support actual business processes.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;max-width:600px;">
+      <div style="background:#fff;border:1.5px solid #e2e5f0;border-radius:12px;padding:1.5rem;">
+        <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:1rem;">ChatGPT</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.9rem;color:var(--text-muted);line-height:2;">
+          <li>&#8226; Waits for you to ask</li>
+          <li>&#8226; Gives answers</li>
+          <li>&#8226; Helps you think</li>
+        </ul>
+      </div>
+      <div style="background:var(--brand-dark);border-radius:12px;padding:1.5rem;">
+        <div style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand-light);margin-bottom:1rem;">AI Agents</div>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.9rem;color:rgba(255,255,255,0.82);line-height:2;">
+          <li>&#8226; Follow rules you set</li>
+          <li>&#8226; Connect to your tools</li>
+          <li>&#8226; Trigger workflows</li>
+          <li>&#8226; Support real processes</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:1rem;color:var(--text-muted);margin-top:2rem;max-width:600px;">The question is not <em>"Should I use AI?"</em> — that question is already old. The better question is: <strong>where should AI go first in your business?</strong> Start in the wrong place and you waste time. Start in the right place and AI can quickly become a real competitive advantage.</p>
+  </div>
+</section>
+
+<!-- SALES: What the Blueprint Identifies -->
+<section class="section" style="background:#fff;">
+  <div class="container" style="max-width:860px;">
+    <p class="section-label">What You Get</p>
+    <h2 class="section-title">What Your AI Blueprint Helps Identify</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.5rem;">
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">Where AI could save your team the most time</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">Where leads may be slipping through the cracks right now</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">Which repetitive tasks could be handled by a digital employee</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">Which AI use cases make the most sense for your business first</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">What to ignore for now so you don't waste time</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:1rem 0;border-bottom:1px solid #f0f4ff;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0;margin-top:6px;"></div>
+        <span style="font-size:0.95rem;color:var(--text);">Your first 90-day AI implementation path, specific to your operation</span>
+      </div>
+    </div>
+    <a href="#intake-form" style="display:inline-block;margin-top:2rem;background:var(--brand);color:#fff;font-size:1rem;font-weight:700;padding:0.9rem 2.2rem;border-radius:100px;text-decoration:none;">Build My AI Blueprint — Free →</a>
+  </div>
+</section>
+
+<section class="section section-alt" id="intake-form">
+  <div class="container">
+    <p class="section-label">Your Free Blueprint</p>
+    <h2 class="section-title">Answer 12 questions about your business →</h2>
+    <p class="section-sub">About one minute · delivered within 24 hours · free</p>
+
+    <div class="form-wrap">
+      <div class="form-header">
+        <h2>Answer 12 quick questions</h2>
+        <p>We'll use your answers to map the first agent, the tools it connects to, and the 90-day path.</p>
+      </div>
+
+      <form id="blueprint-form" novalidate>
+
+        <!-- Q1: Name -->
+        <div class="form-group">
+          <label class="form-label" for="q1_name"><span class="q-badge">1</span>First name</label>
+          <input id="q1_name" name="first_name" type="text" class="form-control" placeholder="Your first name" required autocomplete="given-name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="q1_last"><span class="q-badge">1b</span>Last name</label>
+          <input id="q1_last" name="last_name" type="text" class="form-control" placeholder="Your last name" required autocomplete="family-name" />
+        </div>
+
+        <!-- Q2: Email -->
+        <div class="form-group">
+          <label class="form-label" for="q2_email"><span class="q-badge">2</span>Email address</label>
+          <input id="q2_email" name="email" type="email" class="form-control" placeholder="you@yourcompany.com" required autocomplete="email" />
+          <p class="form-error" id="q2_email_error">Please enter a valid email address (e.g. you@yourcompany.com)</p>
+        </div>
+
+        <!-- Q2b: Phone -->
+        <div class="form-group">
+          <label class="form-label" for="q2b_phone"><span class="q-badge" style="background:linear-gradient(135deg,#0a5a2a,#1a9a4a);">P</span>Phone number</label>
+          <input id="q2b_phone" name="phone" type="tel" class="form-control" placeholder="(555) 867-5309" required autocomplete="tel" />
+          <p class="form-error" id="q2b_phone_error">Please enter a valid US phone number (e.g. 555-867-5309)</p>
+        </div>
+
+        <!-- Q3: Website -->
+        <div class="form-group">
+          <label class="form-label" for="q3_business"><span class="q-badge">B</span>Business name</label>
+          <input id="q3_business" name="business_name" type="text" class="form-control" placeholder="Your business name" required autocomplete="organization" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="q3_website"><span class="q-badge">3</span>Business website</label>
+          <input id="q3_website" name="website" type="text" class="form-control" placeholder="yourcompany.com" required autocomplete="url" />
+          <p class="form-error" id="q3_website_error">Please enter a valid website (e.g. yourcompany.com)</p>
+        </div>
+
+        <!-- Q4: Revenue Slider -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">4</span>Annual revenue</label>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="revenue-display">$500K</span>
+              <span class="slider-sublabel">Annual Revenue</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q4_revenue" name="revenue_range" min="0" max="10" step="1" value="2"
+                oninput="updateRevenue(this.value)" />
+              <div class="slider-range-labels"><span>$100K</span><span>$1M</span><span>$5M</span><span>$10M+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="revenue_hidden" name="revenue_value" value="500000" />
+          <input type="hidden" id="revenue_label_hidden" name="revenue_label" value="$500K" />
+        </div>
+
+        <!-- Q5: Tools -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">5</span>Which tools does your business use?</label>
+          <p class="form-hint">We use this to map how our AI connects with your existing systems on day one</p>
+          <div class="tool-dropdowns">
+
+            <!-- Docs / Storage -->
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Where docs are stored</span>
+              <select name="tool_docs" class="form-control" required>
+                <option value="" disabled selected>— select one —</option>
+                <option value="none">None / not sure</option>
+                <option value="google_drive">Google Drive</option>
+                <option value="notion">Notion</option>
+                <option value="sharepoint">SharePoint / OneDrive</option>
+                <option value="dropbox">Dropbox</option>
+                <option value="box">Box</option>
+                <option value="other_docs">Other</option>
+              </select>
+            </div>
+
+            <!-- Team Comms -->
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Team communication</span>
+              <select name="tool_comms" class="form-control" required>
+                <option value="" disabled selected>— select one —</option>
+                <option value="none">None / just email</option>
+                <option value="slack">Slack</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="teams">Microsoft Teams</option>
+                <option value="google_chat">Google Chat</option>
+                <option value="discord">Discord</option>
+                <option value="telegram">Telegram</option>
+                <option value="other_comms">Other</option>
+              </select>
+            </div>
+
+            <!-- Project Management -->
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">Project management</span>
+              <select name="tool_pm" class="form-control" required>
+                <option value="" disabled selected>— select one —</option>
+                <option value="none">None / spreadsheets</option>
+                <option value="notion">Notion</option>
+                <option value="clickup">ClickUp</option>
+                <option value="asana">Asana</option>
+                <option value="monday">Monday.com</option>
+                <option value="trello">Trello</option>
+                <option value="jira">Jira</option>
+                <option value="basecamp">Basecamp</option>
+                <option value="other_pm">Other</option>
+              </select>
+            </div>
+
+            <!-- CRM -->
+            <div class="tool-dropdown-group">
+              <span class="tool-dropdown-label">CRM</span>
+              <select name="tool_crm" class="form-control" required>
+                <option value="" disabled selected>— select one —</option>
+                <option value="none">None / spreadsheets</option>
+                <option value="gohighlevel">GoHighLevel</option>
+                <option value="hubspot">HubSpot</option>
+                <option value="salesforce">Salesforce</option>
+                <option value="pipedrive">Pipedrive</option>
+                <option value="zoho">Zoho CRM</option>
+                <option value="keap">Keap / Infusionsoft</option>
+                <option value="other_crm">Other CRM</option>
+              </select>
+            </div>
+
+            <!-- Other Tools — 12-option multi-select -->
+            <div class="tool-dropdown-group tool-dropdown-group--full">
+              <span class="tool-dropdown-label">Other tools your business uses <span style="font-size:0.7rem;color:var(--brand);text-transform:none;letter-spacing:0">(select all that apply)</span></span>
+              <div class="multi-check-grid">
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_email_marketing" value="email_marketing"> Email Marketing</span><span class="check-sub">Mailchimp, Klaviyo, ActiveCampaign</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_scheduling" value="scheduling"> Booking / Scheduling</span><span class="check-sub">Calendly, Acuity, Mindbody</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_accounting" value="accounting"> Accounting / Invoicing</span><span class="check-sub">QuickBooks, Xero, FreshBooks</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_payments" value="payments"> Payments Processing</span><span class="check-sub">Stripe, Square, PayPal</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_ecommerce" value="ecommerce"> E-commerce / Online Store</span><span class="check-sub">Shopify, WooCommerce</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_support" value="customer_support"> Customer Support / Help Desk</span><span class="check-sub">Zendesk, Intercom, Freshdesk</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_phone_sms" value="phone_sms"> Business Phone / SMS</span><span class="check-sub">OpenPhone, RingCentral, Twilio</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_social_platforms" value="social_platforms"> Social Platforms</span><span class="check-sub">Facebook, Instagram, TikTok, LinkedIn, YouTube</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_paid_ads" value="paid_ads"> Paid Advertising</span><span class="check-sub">Google Ads, Meta Ads, TikTok Ads</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_social_mgmt" value="social_mgmt"> Social Media Management</span><span class="check-sub">Buffer, Hootsuite, Metricool, Canva</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_field_service" value="field_service"> Field Service / Job Mgmt</span><span class="check-sub">Jobber, ServiceTitan, Housecall Pro</span></label>
+                <label class="multi-check-item multi-check-item--tall"><span class="check-top"><input type="checkbox" name="other_hr_payroll" value="hr_payroll"> HR &amp; Payroll</span><span class="check-sub">Gusto, ADP, BambooHR, Rippling</span></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Q6: Team Size Slider -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">6</span>Team size</label>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="team-display">5 people</span>
+              <span class="slider-sublabel">Team Size</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q6_team" name="team_size_num" min="1" max="51" step="1" value="5"
+                oninput="updateTeam(this.value)" />
+              <div class="slider-range-labels"><span>Just me</span><span>10</span><span>25</span><span>50+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="team_hidden" name="team_size" value="5" />
+        </div>
+
+        <!-- Q7: Time Drain Dropdown -->
+        <div class="form-group">
+          <label class="form-label" for="q7_drain"><span class="q-badge">7</span>Biggest time drain right now</label>
+          <select id="q7_drain" name="time_drains" class="form-control" required>
+            <option value="" disabled selected>Select your biggest drain</option>
+            <option value="lead_followup">Lead follow-up &amp; outreach</option>
+            <option value="admin_reporting">Admin &amp; reporting</option>
+            <option value="scheduling">Scheduling &amp; coordination</option>
+            <option value="customer_onboarding">Customer onboarding</option>
+            <option value="content_creation">Content &amp; marketing creation</option>
+            <option value="all">All of the above — everything takes too long</option>
+          </select>
+        </div>
+
+        <!-- Q8: Perfect World -->
+        <div class="form-group">
+          <label class="form-label" for="q8_vision"><span class="q-badge">8</span>In a perfect world, what does this look like?</label>
+          <p class="form-hint">If AI could handle anything in your business — what would your day look like? What's running without you?</p>
+          <textarea id="q8_vision" name="perfect_world" class="form-control" placeholder="Example: My CRM automatically qualifies leads, my team never has to do manual data entry, and I'm working on strategy — not admin..." required></textarea>
+        </div>
+
+        <!-- Q9: Personal Hours Slider — max 40+ -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">9</span>Hours YOU personally spend on computer work per week</label>
+          <p class="form-hint">Include email, CRM, reporting, content, scheduling — anything on a computer or phone</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="personal-hours-display">20 hrs/wk</span>
+              <span class="slider-sublabel">Your Personal Hours</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q9_personal_hours" name="personal_hours_num" min="1" max="41" step="1" value="20"
+                oninput="updatePersonalHours(this.value)" />
+              <div class="slider-range-labels"><span>1 hr</span><span>15 hrs</span><span>30 hrs</span><span>40+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="personal_hours_hidden" name="personal_hours" value="20" />
+        </div>
+
+        <!-- Q10: Company Hours Slider -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">10</span>Hours your entire company spends on computer work per week</label>
+          <p class="form-hint">Best estimate across your whole team — email, admin, reporting, data entry, coordination, etc.</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="company-hours-display">100 hrs/wk</span>
+              <span class="slider-sublabel">Company Total</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q10_company_hours" name="company_hours_num" min="5" max="505" step="5" value="100"
+                oninput="updateCompanyHours(this.value)" />
+              <div class="slider-range-labels"><span>5 hrs</span><span>100 hrs</span><span>300 hrs</span><span>500+ hrs</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="company_hours_hidden" name="company_hours" value="100" />
+        </div>
+
+        <!-- Q11: Monthly Marketing / Ad Spend -->
+        <div class="form-group">
+          <label class="form-label"><span class="q-badge">11</span>Monthly marketing spend (including ad spend)</label>
+          <p class="form-hint">Estimate total across all paid channels — Meta Ads, Google Ads, influencer, etc.</p>
+          <div class="slider-wrap">
+            <div class="slider-display">
+              <span class="slider-val" id="marketing-display">$5K/mo</span>
+              <span class="slider-sublabel">Monthly Ad Spend</span>
+            </div>
+            <div class="slider-track">
+              <input type="range" id="q11_marketing" name="marketing_spend_num" min="0" max="19" step="1" value="4"
+                oninput="updateMarketingSpend(this.value)" />
+              <div class="slider-range-labels"><span>$1K</span><span>$10K</span><span>$25K</span><span>$50K+</span></div>
+            </div>
+          </div>
+          <input type="hidden" id="marketing_hidden" name="marketing_spend" value="5000" />
+          <input type="hidden" id="marketing_label_hidden" name="marketing_label" value="$5K/mo" />
+        </div>
+
+        <!-- Q12: Pain Points -->
+        <div class="form-group">
+          <label class="form-label" for="q12_pain"><span class="q-badge">12</span>What are your biggest pain points right now?</label>
+          <p class="form-hint">The more specific you are, the more precise your blueprint will be. What keeps you up at night? What do you wish you could just fix?</p>
+          <textarea id="q12_pain" name="pain_points" class="form-control" style="min-height:120px;" placeholder="Example: We lose leads because nobody follows up fast enough. I'm manually copy-pasting data between tools for hours each week. My team doesn't know what to prioritize. Reporting takes a full day every month..." required></textarea>
+        </div>
+
+        <!-- ROI REVEAL -->
+        <div class="roi-reveal" id="roi-reveal">
+          <div class="roi-header" onclick="toggleROI()">
+            <div class="roi-header-left"><div class="roi-dot"></div><h4>Your estimated automation impact</h4></div>
+            <span class="roi-toggle-txt" id="roi-toggle-txt">Show ▼</span>
+          </div>
+          <div class="roi-content" id="roi-content">
+            <div class="roi-grid">
+              <div class="roi-item"><div class="roi-val" id="roi-personal-hours">—</div><div class="roi-lbl">Your Hrs Saved/Wk</div></div>
+              <div class="roi-item"><div class="roi-val" id="roi-company-hours">—</div><div class="roi-lbl">Company Hrs Saved/Wk</div></div>
+              <div class="roi-item"><div class="roi-val" id="roi-pipeline">—</div><div class="roi-lbl">Annual Impact</div></div>
+            </div>
+            <p class="roi-note">Based on 30% automation rate on computer work. Your blueprint will include a detailed ROI model for your exact business.</p>
+          </div>
+        </div>
+
+        <div class="form-submit-area">
+          <button type="submit" class="submit-btn">Build My Free Blueprint →</button>
+          <p class="submit-note">About one minute · Free · No sales call · Delivered within 24 hours</p>
+        </div>
+
+      </form>
+
+      <div class="form-success" id="form-success">
+        <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="success-title">Your blueprint is being built.</div>
+        <div class="success-body">Check your email within 24 hours. We're building a custom AI playbook, first-agent map, and 20-minute podcast walkthrough for your exact business — no sales call, no fluff.</div>
+        <div class="success-stats">
+          <div class="success-stat"><span class="s-val">24hr</span><span class="s-lbl">Delivery</span></div>
+          <div class="success-stat"><span class="s-val">AI</span><span class="s-lbl">Built for You</span></div>
+          <div class="success-stat"><span class="s-val">Free</span><span class="s-lbl">Always</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Your competitors are building<br><span>AI agents right now.</span></h2>
+  <p>The businesses that deploy AI in the right workflow first will compound faster. Answer 12 quick questions and get the first-agent map for your business.</p>
+  <a href="#intake-form" class="cta-btn">Answer 12 Questions →</a>
+  <p class="cta-sub">About one minute · Free · No sales call</p>
+</section>
+
+<footer>
+  <p>© 2026 Advaita AI · Powered by Franchise KI · <a href="mailto:contact@franchiseki.com">contact@franchiseki.com</a></p>
+</footer>
+
+<script>
+// ─── VALIDATION ──────────────────────────────────────────────
+function validateEmail(val) {
+  // Must have exactly one @, something before it, a dot after @, and ≥2 chars after last dot
+  var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  return re.test(val.trim());
+}
+
+function validatePhone(val) {
+  // Accepts: +1 (555) 867-5309, 555-867-5309, 5558675309, (555)8675309, etc.
+  var re = /^\+?1?\s*\(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{4}$/;
+  return re.test(val.trim().replace(/\s+/g,' '));
+}
+
+function validateWebsite(val) {
+  // Strip protocol if typed, then check it has a dot and looks like a real domain
+  var v = val.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+  // Must have at least one dot, at least 2 chars after the last dot, no spaces
+  return /\S+\.\S{2,}/.test(v) && !/\s/.test(v) && v.length > 3;
+}
+
+function showFieldError(inputId, errorId, show) {
+  var inp = document.getElementById(inputId);
+  var err = document.getElementById(errorId);
+  if (show) {
+    inp.classList.add('field-invalid');
+    inp.classList.remove('field-valid');
+    if (err) err.style.display = 'block';
+  } else {
+    inp.classList.remove('field-invalid');
+    inp.classList.add('field-valid');
+    if (err) err.style.display = 'none';
+  }
+}
+
+// ─── SLIDER HELPERS ───────────────────────────────────────────
+var revenueSteps = [100000,250000,500000,750000,1000000,1500000,2000000,3000000,5000000,7500000,10000000];
+var revenueLabels = ['$100K','$250K','$500K','$750K','$1M','$1.5M','$2M','$3M','$5M','$7.5M','$10M+'];
+
+function updateRevenue(val) {
+  val = parseInt(val);
+  var label = revenueLabels[val];
+  document.getElementById('revenue-display').textContent = label;
+  document.getElementById('revenue_hidden').value = revenueSteps[val];
+  document.getElementById('revenue_label_hidden').value = label;
+  checkROITrigger();
+}
+
+function updateTeam(val) {
+  val = parseInt(val);
+  var label = val >= 51 ? '50+ people' : val === 1 ? 'Just me' : val + ' people';
+  document.getElementById('team-display').textContent = label;
+  document.getElementById('team_hidden').value = val >= 51 ? '50+' : String(val);
+  checkROITrigger();
+}
+
+function updatePersonalHours(val) {
+  val = parseInt(val);
+  var label = val >= 41 ? '40+ hrs/wk' : val + ' hrs/wk';
+  document.getElementById('personal-hours-display').textContent = label;
+  document.getElementById('personal_hours_hidden').value = val >= 41 ? '40+' : String(val);
+  checkROITrigger();
+}
+
+function updateCompanyHours(val) {
+  val = parseInt(val);
+  var label = val >= 505 ? '500+ hrs/wk' : val + ' hrs/wk';
+  document.getElementById('company-hours-display').textContent = label;
+  document.getElementById('company_hours_hidden').value = val >= 505 ? '500+' : String(val);
+  checkROITrigger();
+}
+
+// Marketing spend slider — $1K to $50K+
+var marketingSteps  = [1000,2000,3000,4000,5000,7500,10000,12500,15000,20000,25000,30000,35000,40000,45000,50000,50000,50000,50000,50000];
+var marketingLabels = ['$1K/mo','$2K/mo','$3K/mo','$4K/mo','$5K/mo','$7.5K/mo','$10K/mo','$12.5K/mo','$15K/mo','$20K/mo','$25K/mo','$30K/mo','$35K/mo','$40K/mo','$45K/mo','$50K+/mo','$50K+/mo','$50K+/mo','$50K+/mo','$50K+/mo'];
+
+function updateMarketingSpend(val) {
+  val = parseInt(val);
+  var label = marketingLabels[val] || '$50K+/mo';
+  document.getElementById('marketing-display').textContent = label;
+  document.getElementById('marketing_hidden').value = marketingSteps[val] || 50000;
+  document.getElementById('marketing_label_hidden').value = label;
+}
+
+// ─── ROI CALCULATOR ──────────────────────────────────────────
+function calculateROI() {
+  var pHours = parseInt(document.getElementById('personal_hours_hidden').value) || 20;
+  var cHours = parseInt(document.getElementById('company_hours_hidden').value) || 100;
+  var revenue = parseInt(document.getElementById('revenue_hidden').value) || 500000;
+
+  var pSaved = Math.round(pHours * 0.30);
+  var cSaved = Math.round(cHours * 0.30);
+  var annualImpact = Math.round(revenue * 0.12);
+
+  return { pSaved: pSaved, cSaved: cSaved, annualImpact: annualImpact };
+}
+
+function showROI() {
+  var r = calculateROI();
+  document.getElementById('roi-personal-hours').textContent = r.pSaved + ' hrs';
+  document.getElementById('roi-company-hours').textContent = r.cSaved + ' hrs';
+  var a = r.annualImpact;
+  document.getElementById('roi-pipeline').textContent = a >= 1000000 ? '$' + (a/1000000).toFixed(1) + 'M' : '$' + Math.round(a/1000) + 'K';
+
+  var el = document.getElementById('roi-reveal');
+  if (el.style.display !== 'block') {
+    el.style.display = 'block';
+    document.getElementById('roi-content').style.display = 'block';
+    document.getElementById('roi-toggle-txt').textContent = 'Hide ▲';
+    setTimeout(function() { el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 150);
+  } else {
+    document.getElementById('roi-personal-hours').textContent = r.pSaved + ' hrs';
+    document.getElementById('roi-company-hours').textContent = r.cSaved + ' hrs';
+  }
+}
+
+function toggleROI() {
+  var c = document.getElementById('roi-content');
+  var t = document.getElementById('roi-toggle-txt');
+  var open = c.style.display === 'block';
+  c.style.display = open ? 'none' : 'block';
+  t.textContent = open ? 'Show ▼' : 'Hide ▲';
+}
+
+// ─── ROI TRIGGER ─────────────────────────────────────────────
+function checkROITrigger() {
+  var name = document.getElementById('q1_name').value.trim();
+  var email = document.getElementById('q2_email').value.trim();
+  var drain = document.getElementById('q7_drain').value;
+  if (name && email && drain) showROI();
+}
+
+// ─── UTM CAPTURE (Project B — Brand Auto-Attribution) ────────
+(function() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_brand'];
+    utmKeys.forEach(function(k) {
+      var v = params.get(k);
+      if (v) {
+        sessionStorage.setItem(k, v);
+      }
+    });
+    // If no utm_brand explicitly set, infer from utm_source
+    if (!sessionStorage.getItem('utm_brand')) {
+      var src = (sessionStorage.getItem('utm_source') || '').toLowerCase();
+      var cam = (sessionStorage.getItem('utm_campaign') || '').toLowerCase();
+      var brand = 'direct';
+      if (src.indexOf('fki') !== -1 || src.indexOf('franchise') !== -1 || cam.indexOf('fki') !== -1) brand = 'fki';
+      else if (src.indexOf('indyclover') !== -1 || src.indexOf('ic-') !== -1 || cam.indexOf('indyclover') !== -1) brand = 'ic';
+      else if (src.indexOf('saladhouse') !== -1 || cam.indexOf('salad') !== -1) brand = 'sh';
+      else if (src.indexOf('srp') !== -1 || src.indexOf('spoiledrotten') !== -1 || cam.indexOf('srp') !== -1) brand = 'srp';
+      else if (src.indexOf('advaita') !== -1 || cam.indexOf('advaita') !== -1) brand = 'advaita';
+      sessionStorage.setItem('utm_brand', brand);
+    }
+    // Inject hidden fields into form on DOM load
+    var form = document.getElementById('blueprint-form');
+    if (form) {
+      utmKeys.forEach(function(k) {
+        var val = sessionStorage.getItem(k);
+        if (val) {
+          var hid = document.createElement('input');
+          hid.type = 'hidden';
+          hid.name = k;
+          hid.value = val;
+          form.appendChild(hid);
+        }
+      });
+    }
+  } catch(e) {}
+})();
+
+// ─── GHL WEBHOOK SUBMISSION ─────────────────────────────────
+(function() {
+  var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+  var GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+  var STORAGE_KEY = 'advaitaLeadIdentity';
+  var SESSION_KEY = 'advaitaLeadSessionId';
+
+  function buildTags(d) {
+    var tags = ['advaita-ai-blueprint', 'ai blueprint opt-in', 'blueprint_ai_apply'];
+    var drainMap = { lead_followup: 'drain-lead-followup', admin_reporting: 'drain-admin', scheduling: 'drain-scheduling', customer_onboarding: 'drain-onboarding', content_creation: 'drain-content', all: 'drain-everything' };
+    if (drainMap[d.time_drains]) tags.push(drainMap[d.time_drains]);
+    var rev = parseInt(d.revenue_value) || 0;
+    if (rev >= 5000000) tags.push('revenue-5m-plus');
+    else if (rev >= 1000000) tags.push('revenue-1m-5m');
+    else if (rev >= 500000) tags.push('revenue-500k-1m');
+    else tags.push('revenue-under-500k');
+    return tags;
+  }
+
+  function buildOtherTools(d) {
+    var map = {
+      other_email_marketing: 'Email Marketing',
+      other_scheduling: 'Booking/Scheduling',
+      other_accounting: 'Accounting/Invoicing',
+      other_payments: 'Payments Processing',
+      other_ecommerce: 'E-commerce',
+      other_support: 'Customer Support',
+      other_phone_sms: 'Business Phone/SMS',
+      other_social_platforms: 'Social Platforms',
+      other_paid_ads: 'Paid Advertising',
+      other_social_mgmt: 'Social Media Mgmt',
+      other_field_service: 'Field Service/Job Mgmt',
+      other_hr_payroll: 'HR & Payroll'
+    };
+    var selected = [];
+    Object.keys(map).forEach(function(k) { if (d[k]) selected.push(map[k]); });
+    return selected.length ? selected.join(', ') : 'None';
+  }
+
+  function buildNote(d) {
+    var tools = [];
+    if (d.tool_crm && d.tool_crm !== 'none') tools.push('CRM: ' + d.tool_crm);
+    if (d.tool_comms && d.tool_comms !== 'none') tools.push('Team Comms: ' + d.tool_comms);
+    if (d.tool_docs && d.tool_docs !== 'none') tools.push('Docs: ' + d.tool_docs);
+    if (d.tool_pm && d.tool_pm !== 'none') tools.push('PM: ' + d.tool_pm);
+    tools.push('Other tools: ' + buildOtherTools(d));
+    return [
+      'Advaita AI Blueprint — Intake Form v6 (12Q)',
+      '---',
+      'Business name: ' + (d.business_name || 'N/A'),
+      'Website: ' + (d.website || 'N/A'),
+      'Revenue: ' + (d.revenue_label || d.revenue_value || 'N/A'),
+      'Team size: ' + (d.team_size || 'N/A'),
+      'Tools: ' + (tools.length ? tools.join(', ') : 'None selected'),
+      'Time drain: ' + (d.time_drains || 'N/A'),
+      'Personal hrs/wk: ' + (d.personal_hours || 'N/A'),
+      'Company hrs/wk: ' + (d.company_hours || 'N/A'),
+      'Monthly marketing spend: ' + (d.marketing_label || d.marketing_spend || 'N/A'),
+      '---',
+      'Perfect world vision:',
+      d.perfect_world || '(not provided)',
+      '---',
+      'Pain points:',
+      d.pain_points || '(not provided)',
+      '---',
+      'Form version: 2026-05-23-v6'
+    ].join('\n');
+  }
+
+  function getLeadSessionId() {
+    try {
+      var existing = localStorage.getItem(SESSION_KEY);
+      if (existing) return existing;
+      var created = 'advaita-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(SESSION_KEY, created);
+      return created;
+    } catch(e) {
+      return 'advaita-' + Date.now().toString(36);
+    }
+  }
+
+  function getQueryValue(name) {
+    try { return new URLSearchParams(window.location.search).get(name) || ''; }
+    catch(e) { return ''; }
+  }
+
+  function persistLeadIdentity(d) {
+    var identity = {
+      firstName: d.first_name || '',
+      lastName: d.last_name || '',
+      email: d.email || '',
+      phone: d.phone || '',
+      businessName: d.business_name || '',
+      website: d.website || '',
+      source: d.utm_source || d.src || getQueryValue('src') || 'apply',
+      blueprintSlug: d.utm_content || d.blueprint_slug || getQueryValue('src') || '',
+      contactId: d.contact_id || getQueryValue('contactId') || getQueryValue('cid') || '',
+      leadSessionId: getLeadSessionId(),
+      updatedAt: new Date().toISOString()
+    };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(identity)); } catch(e) {}
+    return identity;
+  }
+
+  function persistReturnedContactId(contactId) {
+    if (!contactId) return;
+    try {
+      var identity = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') || {};
+      identity.contactId = contactId;
+      identity.updatedAt = new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(identity));
+    } catch(e) {}
+  }
+
+  async function submitToGHL(d) {
+    var identity = persistLeadIdentity(d);
+    var rev = parseInt(d.revenue_value) || 0;
+    var payload = {
+      event_name: 'blueprint_apply_submit',
+      form_version: '2026-05-27-identity-webhook-v1',
+      locationId: GHL_LOC,
+      firstName: d.first_name,
+      lastName: d.last_name || '',
+      email: d.email,
+      phone: d.phone || '',
+      businessName: d.business_name || '',
+      website: d.website || '',
+      source: 'blueprint_ai_apply',
+      original_source: identity.source,
+      blueprint_slug: identity.blueprintSlug,
+      contact_id: identity.contactId,
+      lead_session_id: identity.leadSessionId,
+      tags: buildTags(d),
+      note: buildNote(d),
+      revenue_value: rev,
+      revenue_label: d.revenue_label || '',
+      time_drains: d.time_drains || '',
+      personal_hours: d.personal_hours || '',
+      company_hours: d.company_hours || '',
+      marketing_spend: d.marketing_spend || '',
+      marketing_label: d.marketing_label || '',
+      submitted_at: new Date().toISOString()
+    };
+    try {
+      var response = await fetch(GHL_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (response.ok) {
+        var result = await response.json().catch(function() { return {}; });
+        persistReturnedContactId(result.contactId || '');
+      } else {
+        try { localStorage.setItem('advaitaApplyPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+      }
+    } catch(e) {
+      try { localStorage.setItem('advaitaApplyPending_' + Date.now(), JSON.stringify(payload)); } catch(err) {}
+    }
+  }
+
+  var form = document.getElementById('blueprint-form');
+  var successEl = document.getElementById('form-success');
+
+  // ─── INLINE VALIDATION — email + website ────────────────────
+  var emailEl = document.getElementById('q2_email');
+  var phoneEl = document.getElementById('q2b_phone');
+  var websiteEl = document.getElementById('q3_website');
+
+  function checkEmailField() {
+    var v = emailEl.value.trim();
+    if (v === '') { showFieldError('q2_email','q2_email_error', false); emailEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validateEmail(v);
+    showFieldError('q2_email','q2_email_error', !ok);
+    return ok;
+  }
+  function checkPhoneField() {
+    var v = phoneEl.value.trim();
+    if (v === '') { showFieldError('q2b_phone','q2b_phone_error', false); phoneEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validatePhone(v);
+    showFieldError('q2b_phone','q2b_phone_error', !ok);
+    return ok;
+  }
+  function checkWebsiteField() {
+    var v = websiteEl.value.trim();
+    if (v === '') { showFieldError('q3_website','q3_website_error', false); websiteEl.classList.remove('field-valid','field-invalid'); return true; }
+    var ok = validateWebsite(v);
+    showFieldError('q3_website','q3_website_error', !ok);
+    return ok;
+  }
+
+  emailEl.addEventListener('blur', checkEmailField);
+  emailEl.addEventListener('input', function() { if (emailEl.classList.contains('field-invalid')) checkEmailField(); checkROITrigger(); });
+  phoneEl.addEventListener('blur', checkPhoneField);
+  phoneEl.addEventListener('input', function() { if (phoneEl.classList.contains('field-invalid')) checkPhoneField(); });
+  websiteEl.addEventListener('blur', checkWebsiteField);
+  websiteEl.addEventListener('input', function() { if (websiteEl.classList.contains('field-invalid')) checkWebsiteField(); });
+
+  form.querySelectorAll('.form-control').forEach(function(el) {
+    el.addEventListener('input', function() { if (!el.id || (el.id !== 'q2_email' && el.id !== 'q3_website')) el.style.borderColor = ''; checkROITrigger(); });
+    el.addEventListener('change', function() { if (!el.id || (el.id !== 'q2_email' && el.id !== 'q3_website')) el.style.borderColor = ''; checkROITrigger(); });
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var required = form.querySelectorAll('[required]');
+    var allValid = true;
+    var firstInvalid = null;
+    required.forEach(function(el) {
+      if (!el.value || !el.value.trim()) {
+        allValid = false;
+        el.style.borderColor = '#c0392b';
+        if (!firstInvalid) firstInvalid = el;
+      } else { el.style.borderColor = ''; }
+    });
+    // Extra: validate email, phone, website format
+    var emailOk = checkEmailField();
+    var phoneOk = checkPhoneField();
+    var websiteOk = checkWebsiteField();
+    if (!emailOk) { allValid = false; if (!firstInvalid) firstInvalid = emailEl; }
+    if (!phoneOk) { allValid = false; if (!firstInvalid) firstInvalid = phoneEl; }
+    if (!websiteOk) { allValid = false; if (!firstInvalid) firstInvalid = websiteEl; }
+    if (!allValid) { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
+    var d = {};
+    new FormData(form).forEach(function(v, k) { d[k] = v; });
+    // Capture all checked checkboxes (platforms + social tools)
+    form.querySelectorAll('input[type="checkbox"]:checked').forEach(function(cb) { d[cb.name] = cb.value; });
+    // Normalize website — add https:// if missing
+    if (d.website && !/^https?:\/\//i.test(d.website)) d.website = 'https://' + d.website;
+    form.style.display = 'none';
+    successEl.style.display = 'block';
+    successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var submitPromise = submitToGHL(d).catch(function() {});
+    var timeoutPromise = new Promise(function(resolve) { setTimeout(resolve, 5000); });
+    await Promise.race([submitPromise, timeoutPromise]);
+    window.location.href = '../thank-you-blueprint.html';
+  });
+})();
+</script>
 </body>
 </html>
