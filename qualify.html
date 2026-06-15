@@ -148,6 +148,9 @@
   .booking-confirm-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1.25rem; background: #d1fae5; border-bottom: 1px solid #a7f3d0; }
   .booking-confirm-bar svg { width: 22px; height: 22px; stroke: #16a34a; stroke-width: 2.5; fill: none; flex-shrink: 0; }
   .booking-confirm-bar-text { font-size: 0.92rem; font-weight: 700; color: #14532d; }
+  .booking-fallback { display: none; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 1.25rem; background: #eff6ff; border-bottom: 1px solid #bfdbfe; color: #1e3a8a; font-size: 0.88rem; line-height: 1.4; }
+  .booking-fallback.show { display: flex; }
+  .booking-fallback a { flex-shrink: 0; color: var(--white); background: var(--brand); border-radius: 8px; padding: 0.55rem 0.8rem; font-weight: 800; text-decoration: none; }
   .booking-calendar-frame { flex: 1; width: 100%; border: 0; min-height: 500px; display: block; }
 
   .disclaimer { font-size: 0.78rem; color: var(--text-light); text-align: center; max-width: 600px; margin: 3rem auto 0; font-style: italic; padding: 0 1rem; }
@@ -524,6 +527,10 @@ src="https://www.facebook.com/tr?id=731853659590910&ev=PageView&noscript=1"/></n
       <div class="booking-confirm-bar">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         <span class="booking-confirm-bar-text">You're qualified — pick a time below.</span>
+      </div>
+      <div class="booking-fallback" id="booking-fallback">
+        <span>If the calendar does not load here, open it directly in a new tab.</span>
+        <a id="booking-direct-link" href="#" target="_blank" rel="noopener">Open calendar</a>
       </div>
       <iframe class="booking-calendar-frame" id="booking-calendar-frame" src="about:blank" title="Book your Advaita AI strategy call" loading="lazy" allowfullscreen></iframe>
     </div>
@@ -1312,8 +1319,15 @@ async function submitQualification() {
 function buildBookingUrl(contactId) {
   const id = persistIdentity();
   const url = new URL(BOOKING_URL, window.location.href);
+  const fullName = [id.firstName, id.lastName].filter(Boolean).join(' ').trim();
   const parts = {
     contact_id: contactId || id.contactId,
+    first_name: id.firstName,
+    last_name: id.lastName,
+    name: fullName,
+    email: id.email,
+    phone: id.phone,
+    business_name: id.businessName,
     source: 'blueprint_ai_qualifier',
     lead_session_id: id.leadSessionId,
     blueprint_slug: id.blueprintSlug
@@ -1332,9 +1346,23 @@ let bookingFallbackTimer = null;
 function openBookingModal(contactId) {
   const url = buildBookingUrl(contactId);
   logFunnelEvent('booking_modal_open', { booking_modal_enabled: BOOKING_MODAL_ENABLED, contact_id_present: !!contactId });
-  // Embed calendar iframe — no new tab, no popup blocker risk
+  const fallback = document.getElementById('booking-fallback');
+  const directLink = document.getElementById('booking-direct-link');
+  if (directLink) directLink.href = url;
+  if (fallback) fallback.classList.remove('show');
+  clearTimeout(bookingFallbackTimer);
+  // Embed calendar iframe first; direct link appears only as a post-submit fallback.
   const frame = document.getElementById('booking-calendar-frame');
-  if (frame && frame.src !== url) frame.src = url;
+  if (frame) {
+    frame.onload = function() {
+      clearTimeout(bookingFallbackTimer);
+    };
+    if (frame.src !== url) frame.src = url;
+    bookingFallbackTimer = setTimeout(function() {
+      if (fallback) fallback.classList.add('show');
+      logFunnelEvent('booking_direct_fallback_shown', { contact_id_present: !!contactId });
+    }, 4500);
+  }
   document.getElementById('booking-modal').classList.add('open');
   document.getElementById('booking-modal').setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
@@ -1470,6 +1498,8 @@ document.getElementById('booking-close').addEventListener('click', function() {
   // Reset iframe so it doesn't linger in background
   const frame = document.getElementById('booking-calendar-frame');
   if (frame) frame.src = 'about:blank';
+  const fallback = document.getElementById('booking-fallback');
+  if (fallback) fallback.classList.remove('show');
 });
 document.getElementById('booking-modal').addEventListener('click', function(e) {
   if (e.target === this) document.getElementById('booking-close').click();

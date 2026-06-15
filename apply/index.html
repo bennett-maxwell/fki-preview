@@ -976,6 +976,37 @@ function checkROITrigger() {
     }
   }
 
+  // Lead-loss guard (added 2026-06-15): replay any leads that failed to reach the
+  // relay on a prior visit. The relay is idempotent (matches on email/locationId),
+  // so re-POSTing a pending lead is safe — it returns the existing contact.
+  async function flushPendingLeads() {
+    var keys = [];
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf('advaitaApplyPending_') === 0) keys.push(k);
+      }
+    } catch (e) { return; }
+    for (var j = 0; j < keys.length; j++) {
+      var raw;
+      try { raw = localStorage.getItem(keys[j]); } catch (e) { continue; }
+      if (!raw) { try { localStorage.removeItem(keys[j]); } catch (e) {} continue; }
+      try {
+        var resp = await fetch(GHL_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: raw
+        });
+        if (resp.ok) { try { localStorage.removeItem(keys[j]); } catch (e) {} }
+        // On non-ok, leave the entry so a future visit retries again.
+      } catch (e) { /* offline — keep entry, retry next load */ }
+    }
+  }
+  // Fire on load without blocking the page.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { flushPendingLeads(); });
+  } else { flushPendingLeads(); }
+
   var form = document.getElementById('blueprint-form');
   var successEl = document.getElementById('form-success');
 
@@ -1048,8 +1079,12 @@ function checkROITrigger() {
     form.style.display = 'none';
     successEl.style.display = 'block';
     successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Wait for the lead to actually reach the relay before redirecting (was a 5s
+    // race that could navigate away mid-POST). submitToGHL queues to localStorage
+    // on failure, and flushPendingLeads() will replay it on the thank-you page and
+    // any future visit — so a slow relay can no longer silently drop a lead.
     var submitPromise = submitToGHL(d).catch(function() {});
-    var timeoutPromise = new Promise(function(resolve) { setTimeout(resolve, 5000); });
+    var timeoutPromise = new Promise(function(resolve) { setTimeout(resolve, 9000); });
     await Promise.race([submitPromise, timeoutPromise]);
     window.location.href = '../thank-you-blueprint.html';
   });
