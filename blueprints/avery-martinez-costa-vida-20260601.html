@@ -61,9 +61,10 @@
     .demo-row span { color:var(--muted); font-weight:800; }
     .player-top, .player-controls, .time-row { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
     .player-copy p { color:var(--muted); margin:0; }
-    .track { position:relative; width:100%; height:10px; background:#D8E5F7; border-radius:999px; margin:18px 0 8px; }
-    .fill { position:absolute; left:0; top:0; height:10px; width:0; background:var(--brand); border-radius:999px; }
-    .thumb { position:absolute; left:0; top:50%; width:18px; height:18px; transform:translate(-2px,-50%); border-radius:50%; background:#fff; border:3px solid var(--brand); }
+    .track { position:relative; width:100%; min-height:44px; height:44px; background:transparent; border-radius:999px; margin:8px 0; cursor:pointer; touch-action:none; user-select:none; }
+    .track::before { content:""; position:absolute; left:0; right:0; top:17px; height:10px; background:#D8E5F7; border-radius:999px; }
+    .fill { position:absolute; left:0; top:17px; height:10px; width:0; background:var(--brand); border-radius:999px; pointer-events:none; }
+    .thumb { position:absolute; left:0; top:22px; width:18px; height:18px; transform:translate(-2px,-50%); border-radius:50%; background:#fff; border:3px solid var(--brand); pointer-events:none; }
     .chapter-row { display:flex; gap:8px; align-items:center; margin:10px 0 12px; }
     .chapter-pip { width:10px; height:10px; border-radius:50%; background:var(--brand); opacity:.58; display:inline-block; }
     .icon-btn, .speed-select { min-height:38px; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--brand-dark); font-weight:800; padding:8px 12px; cursor:pointer; }
@@ -331,7 +332,7 @@
           </div>
           <span id="podBadge" class="badge">Food franchise</span>
         </div>
-        <div id="podTrack" class="track"><div id="podFill" class="fill"></div><div id="podThumb" class="thumb"></div></div>
+        <div id="podTrack" class="track pod-progress-hit" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div id="podFill" class="fill"></div><div id="podThumb" class="thumb"></div></div>
         <div class="time-row"><span id="podElapsed">0:00</span><span id="podDuration">0:00</span></div>
         <div class="chapter-row" aria-label="Audio chapters">
           <span class="chapter-pip" data-chapter="0"></span>
@@ -377,7 +378,7 @@
       { name: 'Agents', t: 120 },
       { name: 'Qualifier', t: 360 }
     ];
-    const STORE_KEY = 'bpod_avery_martinez_costa_vida_20260601';
+    const STORAGE_KEY = 'bpod_avery-martinez-costa-vida-20260601';
     const audio = document.getElementById('podAudio');
     const play = document.getElementById('podPlay');
     const playIcon = document.getElementById('podPlayIcon');
@@ -396,15 +397,27 @@
       const safe = Number.isFinite(sec) ? Math.max(0, Math.floor(sec)) : 0;
       return Math.floor(safe / 60) + ':' + String(safe % 60).padStart(2, '0');
     }
+    function getSeekDuration() {
+      if (Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+      if (audio.seekable && audio.seekable.length) return audio.seekable.end(audio.seekable.length - 1);
+      return 0;
+    }
+    function seekRatio(ratio) {
+      const dur = getSeekDuration();
+      if (!dur) { return false; }
+      audio.currentTime = Math.max(0, Math.min(1, ratio)) * dur;
+      return true;
+    }
     function render() {
-      const dur = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0;
+      const dur = getSeekDuration();
       const pct = dur ? Math.min(100, Math.max(0, (audio.currentTime / dur) * 100)) : 0;
       fill.style.width = pct + '%';
       thumb.style.left = pct + '%';
       elapsed.textContent = fmt(audio.currentTime);
       miniTime.textContent = fmt(audio.currentTime);
       duration.textContent = fmt(dur);
-      try { localStorage.setItem(STORE_KEY, String(Math.floor(audio.currentTime))); } catch (err) {}
+      document.getElementById('podTrack').setAttribute('aria-valuenow', String(Math.round(pct)));
+      try { localStorage.setItem(STORAGE_KEY, String(Math.floor(audio.currentTime))); } catch (err) {}
     }
     function syncIcon() {
       const label = audio.paused ? 'Play' : 'Pause';
@@ -419,14 +432,39 @@
     play.addEventListener('click', togglePlay);
     miniPlay.addEventListener('click', togglePlay);
     document.getElementById('podBack').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-    document.getElementById('podFwd').addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || audio.currentTime + 15, audio.currentTime + 15); });
+    document.getElementById('podFwd').addEventListener('click', () => { const d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 15) : audio.currentTime + 15; });
     speed.addEventListener('change', () => { audio.playbackRate = Number(speed.value); });
     mute.addEventListener('click', () => { audio.muted = !audio.muted; volIcon.textContent = audio.muted ? 'Muted' : 'Vol'; });
+    audio.addEventListener('durationchange', render);
+    audio.addEventListener('canplay', render);
     audio.addEventListener('timeupdate', render);
     audio.addEventListener('loadedmetadata', render);
     audio.addEventListener('play', syncIcon);
     audio.addEventListener('pause', syncIcon);
     audio.addEventListener('error', () => { error.hidden = false; });
+    const track = document.getElementById('podTrack');
+    let dragging = false;
+    function seekToClientX(clientX) {
+      const rect = track.getBoundingClientRect();
+      seekRatio((clientX - rect.left) / rect.width);
+      render();
+    }
+    if (window.PointerEvent) {
+      track.addEventListener('pointerdown', e => { dragging = true; track.setPointerCapture && track.setPointerCapture(e.pointerId); seekToClientX(e.clientX); e.preventDefault(); });
+      track.addEventListener('pointermove', e => { if (dragging) { seekToClientX(e.clientX); e.preventDefault(); } });
+      track.addEventListener('pointerup', e => { dragging = false; if (track.releasePointerCapture) { try { track.releasePointerCapture(e.pointerId); } catch (_) {} } });
+      track.addEventListener('pointercancel', () => { dragging = false; });
+    } else {
+      track.addEventListener('mousedown', e => { dragging = true; seekToClientX(e.clientX); });
+      document.addEventListener('mousemove', e => { if (dragging) seekToClientX(e.clientX); });
+      document.addEventListener('mouseup', () => { dragging = false; });
+      function touchSeek(e) { e.preventDefault(); const t = e.touches[0] || e.changedTouches[0]; seekToClientX(t.clientX); }
+      track.addEventListener('touchstart', touchSeek, {passive:false});
+      track.addEventListener('touchmove', touchSeek, {passive:false});
+      track.addEventListener('touchend', e => { dragging = false; touchSeek(e); }, {passive:false});
+      track.addEventListener('touchcancel', () => { dragging = false; }, {passive:false});
+    }
+
     const leads = document.getElementById('slider-leads');
     const contract = document.getElementById('slider-contract');
     const capture = document.getElementById('slider-capture');

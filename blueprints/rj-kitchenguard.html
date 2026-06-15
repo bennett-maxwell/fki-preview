@@ -234,8 +234,9 @@
     .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
     @keyframes eqBounce { from{height:4px} to{height:18px} }
     .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
-    .pod-progress-wrap { position: relative; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; cursor: pointer; touch-action: none; }
-    .pod-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-progress-wrap { position: relative; height: 44px; display: flex; align-items: center; background: transparent; border-radius: 22px; cursor: pointer; touch-action: none; user-select: none; }
+    .pod-progress-wrap::before { content: ''; position: absolute; left: 0; right: 0; top: 19px; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; }
+    .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
     .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
     .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
     .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
@@ -1001,7 +1002,7 @@ If any answer is N: revise that section before sending.
 <script>
 (function () {
   'use strict';
-  var STORAGE_KEY = 'bpod_brent_attaway';
+  var STORAGE_KEY = 'bpod_rj-kitchenguard';
   var CHAPTERS = [
     {pct: 0,    label: 'Segment 1 - This Is Your Business'},
     {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},
@@ -1043,7 +1044,20 @@ If any answer is N: revise that section before sending.
     s = Math.max(0, Math.floor(s));
     return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
   }
-  function pct() { return audio.duration ? (audio.currentTime / audio.duration * 100) : 0; }
+  function getSeekDuration() {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+    if (audio.seekable && audio.seekable.length) return audio.seekable.end(audio.seekable.length - 1);
+    return 0;
+  }
+  function canSeek() { return getSeekDuration() > 0; }
+  function pct() { var d = getSeekDuration(); return d ? (audio.currentTime / d * 100) : 0; }
+  function seekRatio(ratio) {
+    var d = getSeekDuration();
+    if (!d) { badge.childNodes[0].textContent = 'Loading timeline '; track.setAttribute('aria-disabled', 'true'); return false; }
+    track.setAttribute('aria-disabled', 'false');
+    audio.currentTime = Math.max(0, Math.min(1, ratio)) * d;
+    return true;
+  }
   function currentChapter() {
     var p = pct(), label = CHAPTERS[0].label;
     for (var i = 0; i < CHAPTERS.length; i++) { if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label; }
@@ -1054,7 +1068,7 @@ If any answer is N: revise that section before sending.
     fill.style.width  = p + '%';
     thumb.style.left  = p + '%';
     elapsed.textContent = fmt(audio.currentTime);
-    chapterEl.textContent = audio.duration ? currentChapter() : '';
+    chapterEl.textContent = canSeek() ? currentChapter() : 'Loading timeline';
     miniTime.textContent  = fmt(audio.currentTime);
     track.setAttribute('aria-valuenow', Math.round(p));
     try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
@@ -1084,16 +1098,19 @@ If any answer is N: revise that section before sending.
   });
 
   audio.addEventListener('loadedmetadata', function () {
-    duration.textContent = fmt(audio.duration);
+    duration.textContent = fmt(getSeekDuration());
     try {
       var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
-      if (saved > 0 && saved < audio.duration - 5) {
+      var d = getSeekDuration();
+      if (saved > 0 && d && saved < d - 5) {
         audio.currentTime = saved;
         badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
       }
     } catch(e) {}
     updateUI();
   });
+  audio.addEventListener('durationchange', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
+  audio.addEventListener('canplay', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
   audio.addEventListener('timeupdate', updateUI);
   audio.addEventListener('play',  function() { setPlaying(true); });
   audio.addEventListener('pause', function() { setPlaying(false); });
@@ -1103,7 +1120,7 @@ If any answer is N: revise that section before sending.
   playBtn.addEventListener('click', togglePlay);
   miniPlay.addEventListener('click', togglePlay);
   backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+  fwdBtn.addEventListener('click',  function() { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; });
   speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
   muteBtn.addEventListener('click', function() {
     audio.muted = !audio.muted;
@@ -1111,31 +1128,35 @@ If any answer is N: revise that section before sending.
   });
 
   var dragging = false;
-  function seekTo(e) {
+  function seekToClientX(clientX) {
     var rect = track.getBoundingClientRect();
-    var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    var ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    seekRatio(ratio);
     updateUI();
   }
-  track.addEventListener('mousedown', function(e) { dragging = true; seekTo(e); });
-  document.addEventListener('mousemove', function(e) { if (dragging) seekTo(e); });
-  document.addEventListener('mouseup',   function() { dragging = false; });
-
-  function touchSeek(e) {
-    e.preventDefault();
-    var rect = track.getBoundingClientRect();
-    var t = e.touches[0] || e.changedTouches[0];
-    var ratio = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
-    updateUI();
+  if (window.PointerEvent) {
+    track.addEventListener('pointerdown', function(e) { dragging = true; track.setPointerCapture && track.setPointerCapture(e.pointerId); seekToClientX(e.clientX); e.preventDefault(); });
+    track.addEventListener('pointermove', function(e) { if (dragging) { seekToClientX(e.clientX); e.preventDefault(); } });
+    track.addEventListener('pointerup', function(e) { dragging = false; if (track.releasePointerCapture) { try { track.releasePointerCapture(e.pointerId); } catch (_) {} } });
+    track.addEventListener('pointercancel', function() { dragging = false; });
+  } else {
+    track.addEventListener('mousedown', function(e) { dragging = true; seekToClientX(e.clientX); });
+    document.addEventListener('mousemove', function(e) { if (dragging) seekToClientX(e.clientX); });
+    document.addEventListener('mouseup',   function() { dragging = false; });
+    function touchSeek(e) {
+      e.preventDefault();
+      var t = e.touches[0] || e.changedTouches[0];
+      seekToClientX(t.clientX);
+    }
+    track.addEventListener('touchstart', touchSeek, {passive: false});
+    track.addEventListener('touchmove',  touchSeek, {passive: false});
+    track.addEventListener('touchend',   function(e){ dragging = false; touchSeek(e); }, {passive: false});
+    track.addEventListener('touchcancel', function(){ dragging = false; }, {passive: false});
   }
-  track.addEventListener('touchstart', touchSeek, {passive: false});
-  track.addEventListener('touchmove',  touchSeek, {passive: false});
-  track.addEventListener('touchend',   touchSeek, {passive: false});
 
   track.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 5) : audio.currentTime + 5; e.preventDefault(); }
   });
 
   document.addEventListener('keydown', function(e) {
@@ -1143,7 +1164,7 @@ If any answer is N: revise that section before sending.
     if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
     if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
     if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
-    if (e.key === 'ArrowRight')  { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); }
+    if (e.key === 'ArrowRight')  { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; }
   });
 
   document.addEventListener('visibilitychange', function() {
