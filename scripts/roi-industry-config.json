@@ -1,6 +1,6 @@
 {
  "_comment": "Single source of truth for the ROI calculator's per-industry 'Average Contract Value' slider. Range = realistic single-transaction band for the industry so the client can model THEIR real numbers. Default value sits at min + data-no-default + calcTouched guard, so NOTHING is shown as the client's own figure until they drag it (no fabricated current-state). Read by scripts/fix-roi-slider-industry.py AND scripts/clone-blueprint.sh so direct-patch and regenerate stay identical.",
- "_comment_b2b": "Industries whose buyers realistically have a LinkedIn lead-gen / social-selling motion. The ROI calculator's 'LinkedIn Leads Added/Month' slider (which feeds the headline revenue lift) is ONLY appropriate for these. For trades/retail/consumer-local industries (home_services, food_franchise, retail_firearms, medspa, photography, property_mgmt) a LinkedIn-pipeline lever is industry-inappropriate \u2014 same defect class as a $45K avg-contract on a plumber. financial-realism-check.py reads this list for the D7-18 field-relevance check; the template/generator gate that removes/zeros the field for non-B2B is the staged follow-up.",
+ "_comment_b2b": "Industries whose buyers realistically have a LinkedIn lead-gen / social-selling motion. The ROI calculator's 'LinkedIn Leads Added/Month' slider (which feeds the headline revenue lift) is ONLY appropriate for these. For trades/retail/consumer-local industries (home_services, food_franchise, retail_firearms, medspa, photography, property_mgmt) a LinkedIn-pipeline lever is industry-inappropriate — same defect class as a $45K avg-contract on a plumber. financial-realism-check.py reads this list for the D7-18 field-relevance check; the template/generator gate that removes/zeros the field for non-B2B is the staged follow-up.",
  "b2b_linkedin_industries": [
   "consulting",
   "crm_software",
@@ -86,6 +86,12 @@
    "min": 800,
    "step": 200,
    "unit": "project"
+  },
+  "marketing_agency": {
+   "max": 25000,
+   "min": 250,
+   "step": 100,
+   "unit": "retainer/project"
   }
  },
  "slug_industry": {
@@ -119,6 +125,7 @@
   "mike-johnson": "home_services",
   "rj-kitchenguard": "home_services",
   "bennett-maxwell": "crm_software",
-  "brad-maxwell-enso-rings-20260609": "retail"
+  "brad-maxwell-enso-rings-20260609": "retail",
+  "anthony-castillo": "home_services"
  }
 }
