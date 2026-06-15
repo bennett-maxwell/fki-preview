@@ -37,6 +37,13 @@ if [ -n "$BP_HTML" ] && [ -f "$BP_HTML" ]; then
         echo "audit-gate: format-conformance-check.py missing"
         FAILS=$((FAILS+1))
     fi
+    if [ -f "$SCRIPT_DIR/audio-player-seekability-check.py" ]; then
+        echo "audit-gate: audio-player-seekability-check.py ..."
+        if ! python3 "$SCRIPT_DIR/audio-player-seekability-check.py" "$BP_HTML" --slug "$SLUG"; then FAILS=$((FAILS+1)); fi
+    else
+        echo "audit-gate: audio-player-seekability-check.py missing"
+        FAILS=$((FAILS+1))
+    fi
 
     if [ -f "$REPO_DIR/financial-realism-check.py" ]; then
         echo "audit-gate: financial-realism-check.py ..."
