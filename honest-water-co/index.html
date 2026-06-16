@@ -1041,6 +1041,7 @@ footer{background:var(--navy);padding:56px 24px 32px}
         <p class="form-guarantee">🔒 No spam. No pressure. We call within 2 business hours (M–Sa 8am–6pm).</p>
         <p style="text-align:center;font-size:.82rem;color:var(--slate);margin-top:10px">Prefer to text? <a href="sms:+18585249435&body=Hi%20Anthony%2C%20I%27d%20like%20a%20free%20water%20test" style="color:var(--teal);font-weight:600">Text us at (858) 524-9435</a></p>
       </form>
+      <div id="formError" style="display:none;background:#fff3f3;border:1px solid #e05252;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.9rem;color:#c0392b;text-align:center">Something went wrong. Please try again or call <a href="tel:+18585249435" style="color:#c0392b;font-weight:700">(858) 524-9435</a> directly.</div>
       <div class="form-success" id="formSuccess">
         <div style="width:56px;height:56px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3EA1B9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1168,26 +1169,10 @@ document.querySelectorAll('.quiz-opt').forEach(function(btn){
   });
 });
 
-// Savings calculator
-function calcUpdate(){
-  var bottles=parseInt(document.getElementById('sliderBottles').value);
-  var appliance=parseInt(document.getElementById('sliderAppliance').value);
-  var soap=parseInt(document.getElementById('sliderSoap').value);
-  document.getElementById('valBottles').textContent='$'+bottles+'/month';
-  document.getElementById('valAppliance').textContent='$'+appliance+'/year in efficiency & repairs';
-  document.getElementById('valSoap').textContent='$'+soap+'/month extra';
-  var bAnn=bottles*12,sAnn=soap*12,total=bAnn+appliance+sAnn;
-  var payback=(3200/total).toFixed(1);
-  document.getElementById('calcTotal').textContent='$'+total.toLocaleString();
-  document.getElementById('bBottles').textContent='$'+bAnn.toLocaleString();
-  document.getElementById('bAppliance').textContent='$'+appliance.toLocaleString();
-  document.getElementById('bSoap').textContent='$'+sAnn.toLocaleString();
-  document.getElementById('bPayback').textContent='~'+payback+' yrs';
-}
+// Savings calculator — defined once below with div-by-zero guard; event listeners wired after definition
 ['sliderBottles','sliderAppliance','sliderSoap'].forEach(function(id){
-  document.getElementById(id).addEventListener('input',calcUpdate);
+  document.getElementById(id).addEventListener('input',function(){if(typeof calcUpdate==='function')calcUpdate();});
 });
-calcUpdate();
 
 // Form submit
 var form=document.getElementById('quoteForm'),formSuccess=document.getElementById('formSuccess');
@@ -1197,7 +1182,11 @@ if(form){
     var btn=this.querySelector('.form-submit');
     btn.textContent='Sending...';btn.disabled=true;
     // GA4 event when active: gtag('event','generate_lead',{event_category:'form',event_label:'quote_request'});
-    setTimeout(function(){form.style.display='none';formSuccess.style.display='block';},600);
+    var formData=new FormData(form);
+    var body={};formData.forEach(function(v,k){body[k]=v;});
+    fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){if(r.ok){form.style.display='none';formSuccess.style.display='block';}else{throw new Error('Server error '+r.status);}})
+      .catch(function(){btn.textContent='Try Again';btn.disabled=false;var el=document.getElementById('formError');if(el)el.style.display='block';});
   });
 }
 
@@ -1307,6 +1296,7 @@ function calcUpdate(){
   document.getElementById('b10Net').textContent=net>0?'+$'+net.toLocaleString()+' ahead':'System: $3,200';
   document.getElementById('b10Net').style.color=net>0?'#86efac':'#fca5a5';
 }
+calcUpdate(); // initial render
 </script>
 </body>
 </html>
