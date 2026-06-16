@@ -1,7 +1,6 @@
-<!-- FKI Website Build v3.0 | 2026-06-16 | The Honest Water Company | Anthony Castillo
-     v3: Red team + idea expander synthesis — FAQ schema, water quiz, before/after proof,
-     savings calculator, veteran badge, FAQ rich snippets, urgency, real social proof bar,
-     neighborhood SEO, guarantee section, lazy load, GHL form wiring, email obfuscation
+<!-- FKI Website Build v4.0 | 2026-06-16 | The Honest Water Company | Anthony Castillo
+     v4: Red team R2 + idea expander R2 — fixes 12 RT findings, adds ZIP lookup, comparison
+     table, 10yr cost view, SMS CTA, dynamic urgency bar, calc CTA, canonical+OG image+favicon
      Rule 12 palette: #3EA1B9 teal, #000321 navy, locked from thehonestwatercompanyca.com -->
 <!DOCTYPE html>
 <html lang="en">
@@ -9,17 +8,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Water Softener &amp; Filtration San Diego | The Honest Water Company</title>
-<meta name="description" content="San Diego's top-rated family-owned water softener &amp; filtration experts. Free in-home water test. Chula Vista, El Cajon, Murrieta &amp; all of San Diego County. Call (858) 524-9435.">
+<meta name="description" content="San Diego's family-owned water softener experts. Free in-home water test. Chula Vista, El Cajon, Murrieta &amp; all of SD County. Call (858) 524-9435.">
+<link rel="canonical" href="https://thehonestwatercompanyca.com/">
+<link rel="icon" type="image/png" href="logo.png">
 <meta property="og:title" content="Water Softener &amp; Filtration San Diego | The Honest Water Company">
 <meta property="og:description" content="Family-owned. Veteran-trusted. Free water test. Whole-house softeners &amp; RO systems. San Diego &amp; Riverside counties. Honest pricing — always.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://thehonestwatercompanyca.com/">
+<meta property="og:image" content="https://thehonestwatercompanyca.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- LocalBusiness Schema — 6.38 -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"The Honest Water Company","description":"Family-owned water filtration company serving San Diego and Riverside counties. Whole-house water softeners, reverse osmosis, and filtration systems.","url":"https://thehonestwatercompanyca.com","telephone":"+18585249435","address":{"@type":"PostalAddress","streetAddress":"1167 Camino Levante","addressLocality":"Chula Vista","addressRegion":"CA","postalCode":"91913","addressCountry":"US"},"areaServed":[{"@type":"City","name":"San Diego"},{"@type":"City","name":"Chula Vista"},{"@type":"City","name":"El Cajon"},{"@type":"City","name":"La Mesa"},{"@type":"City","name":"Santee"},{"@type":"City","name":"Murrieta"},{"@type":"City","name":"Temecula"},{"@type":"County","name":"San Diego County"},{"@type":"County","name":"Riverside County"}],"serviceType":["Water Softener Installation","Reverse Osmosis Systems","Whole-House Water Filtration","Water Testing"],"priceRange":"$$","openingHours":"Mo-Sa 08:00-18:00","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"47"}}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"The Honest Water Company","description":"Family-owned water filtration company serving San Diego and Riverside counties. Whole-house water softeners, reverse osmosis, and filtration systems.","url":"https://thehonestwatercompanyca.com","telephone":"+18585249435","address":{"@type":"PostalAddress","streetAddress":"1167 Camino Levante","addressLocality":"Chula Vista","addressRegion":"CA","postalCode":"91913","addressCountry":"US"},"areaServed":[{"@type":"City","name":"San Diego"},{"@type":"City","name":"Chula Vista"},{"@type":"City","name":"El Cajon"},{"@type":"City","name":"La Mesa"},{"@type":"City","name":"Santee"},{"@type":"City","name":"Murrieta"},{"@type":"City","name":"Temecula"},{"@type":"County","name":"San Diego County"},{"@type":"County","name":"Riverside County"}],"serviceType":["Water Softener Installation","Reverse Osmosis Systems","Whole-House Water Filtration","Water Testing"],"priceRange":"$$$","openingHours":"Mo-Sa 08:00-18:00"}
 </script>
 
 <!-- FAQPage Schema — rich snippets 6.38 -->
@@ -325,6 +329,45 @@ footer{background:var(--navy);padding:56px 24px 32px}
 .footer-lic{font-size:.75rem;color:rgba(255,255,255,.28);display:flex;align-items:center;gap:6px}
 .footer-lic svg{width:13px;height:13px;stroke:var(--teal);fill:none;stroke-width:2}
 
+/* ZIP LOOKUP */
+.zip-lookup{background:var(--white);border:2px solid var(--teal);border-radius:14px;padding:28px 28px 24px;max-width:560px;margin:28px auto 0;text-align:left}
+.zip-lookup h4{font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:14px}
+.zip-row{display:flex;gap:10px}
+.zip-input{flex:1;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:inherit;color:var(--text);outline:none;transition:border-color .2s}
+.zip-input:focus{border-color:var(--teal)}
+.zip-btn{background:var(--teal);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s}
+.zip-btn:hover{background:var(--teal-dark)}
+.zip-result{margin-top:16px;display:none;background:var(--teal-light);border:1px solid rgba(62,161,185,.3);border-radius:10px;padding:14px 16px}
+.zip-result.show{display:block}
+.zip-result-title{font-size:.92rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.zip-result-body{font-size:.85rem;color:var(--slate);line-height:1.6}
+.zip-result-badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:20px;margin-top:8px}
+.zip-hard{background:rgba(220,38,38,.1);color:#dc2626;border:1px solid rgba(220,38,38,.3)}
+.zip-med{background:rgba(234,179,8,.1);color:#b45309;border:1px solid rgba(234,179,8,.3)}
+
+/* COMPARE TABLE */
+.compare-wrap{overflow-x:auto;margin-top:40px;border-radius:14px;border:1px solid var(--border)}
+.compare-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.compare-table th{padding:14px 18px;text-align:left;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--border)}
+.compare-table th:first-child{color:var(--slate)}
+.compare-table th.col-us{background:var(--teal);color:#fff;border-bottom-color:var(--teal-dark)}
+.compare-table th.col-them{background:var(--wash);color:var(--slate);border-bottom-color:var(--border)}
+.compare-table td{padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:top}
+.compare-table td:first-child{font-weight:600;color:var(--navy)}
+.compare-table td.col-us{background:rgba(62,161,185,.04);font-weight:500;color:var(--navy)}
+.compare-table td.col-them{color:var(--slate)}
+.compare-table tr:last-child td{border-bottom:none}
+.cmp-pass{color:var(--teal);font-weight:800;margin-right:4px}
+.cmp-fail{color:#dc2626;font-weight:800;margin-right:4px}
+@media(max-width:640px){.compare-table td,.compare-table th{padding:10px 12px;font-size:.82rem}}
+
+/* CALC TOGGLE */
+.calc-toggle{display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:8px;overflow:hidden;max-width:300px;margin-left:auto;margin-right:auto}
+.calc-tab{flex:1;padding:10px 14px;background:var(--white);border:none;font-size:.82rem;font-weight:600;color:var(--slate);cursor:pointer;font-family:inherit;transition:background .2s,color .2s}
+.calc-tab.active{background:var(--navy);color:#fff}
+.calc-view{display:none}
+.calc-view.active{display:block}
+
 /* STICKY MOBILE */
 .sticky-call{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:13px 18px;z-index:300;box-shadow:0 -4px 20px rgba(0,0,0,.35);transform:translateY(110%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .sticky-call.visible{transform:translateY(0)}
@@ -348,9 +391,9 @@ footer{background:var(--navy);padding:56px 24px 32px}
 </head>
 <body>
 
-<!-- URGENCY BAR -->
-<div class="urgency-bar">
-  📅 <em>This week:</em> We have open installation slots in Chula Vista, El Cajon &amp; Murrieta — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">reserve yours before they fill</a>
+<!-- URGENCY BAR — dynamic by day of week -->
+<div class="urgency-bar" id="urgencyBar">
+  📅 <span id="urgencyText">Loading...</span>
 </div>
 
 <!-- NAV -->
@@ -414,10 +457,10 @@ footer{background:var(--navy);padding:56px 24px 32px}
 <!-- SOCIAL PROOF BAR -->
 <div class="proof-bar">
   <div class="proof-bar-inner">
-    <div class="proof-item"><span class="proof-num">$3,800</span><span class="proof-label">Average Install Value</span></div>
-    <div class="proof-item"><span class="proof-num">30%</span><span class="proof-label">Phone Close Rate</span></div>
     <div class="proof-item"><span class="proof-num">5.0★</span><span class="proof-label">Customer Rating</span></div>
+    <div class="proof-item"><span class="proof-num">Same Day</span><span class="proof-label">Installation Available</span></div>
     <div class="proof-item"><span class="proof-num">2-County</span><span class="proof-label">SD + Riverside Service</span></div>
+    <div class="proof-item"><span class="proof-num">&lt;2 Hr</span><span class="proof-label">Call-Back Guarantee</span></div>
     <div class="proof-item"><span class="proof-num">$0</span><span class="proof-label">Surprise Charges. Ever.</span></div>
   </div>
 </div>
@@ -491,6 +534,28 @@ footer{background:var(--navy);padding:56px 24px 32px}
   </div>
 </section>
 
+<!-- ZIP LOOKUP WIDGET -->
+<section class="section section-alt" id="zip-check" style="padding-top:0;padding-bottom:56px">
+  <div class="container" style="text-align:center">
+    <p class="section-eyebrow">Your Zip Code, Your Water</p>
+    <h2 class="section-title" style="font-size:1.6rem">What's the hardness level in YOUR neighborhood?</h2>
+    <p class="section-sub" style="margin:0 auto">Type your zip code below — we'll show you the water district and typical hardness level for your area.</p>
+    <div class="zip-lookup">
+      <h4>Enter your San Diego / Riverside zip code:</h4>
+      <div class="zip-row">
+        <input class="zip-input" id="zipField" type="text" inputmode="numeric" maxlength="5" placeholder="e.g. 91910">
+        <button class="zip-btn" onclick="lookupZip()">Check My Water</button>
+      </div>
+      <div class="zip-result" id="zipResult">
+        <div class="zip-result-title" id="zipTitle"></div>
+        <div class="zip-result-body" id="zipBody"></div>
+        <span class="zip-result-badge" id="zipBadge"></span>
+        <br><a href="#contact" style="display:inline-block;margin-top:12px;background:var(--teal);color:#fff;padding:10px 20px;border-radius:8px;font-size:.85rem;font-weight:700">Book Free Water Test in My Area →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BEFORE / AFTER -->
 <section class="section section-alt" id="proof">
   <div class="container">
@@ -541,6 +606,11 @@ footer{background:var(--navy);padding:56px 24px 32px}
     <h2 class="section-title">How much is hard water costing you?</h2>
     <p class="section-sub" style="margin:0 auto 40px">Adjust the sliders to match your home — we'll calculate what you're losing every year.</p>
     <div class="calc-wrap">
+      <div class="calc-toggle">
+        <button class="calc-tab active" id="tabYear" onclick="switchCalc('year')">Annual Cost</button>
+        <button class="calc-tab" id="tab10yr" onclick="switchCalc('10yr')">10-Year View</button>
+      </div>
+      <div class="calc-view active" id="viewYear">
       <label class="calc-label" for="sliderBottles">Monthly bottled water / delivery spend</label>
       <input class="calc-slider" type="range" id="sliderBottles" min="0" max="200" value="60" step="5">
       <div class="calc-val" id="valBottles">$60/month</div>
@@ -560,9 +630,26 @@ footer{background:var(--navy);padding:56px 24px 32px}
           <div class="calc-b-item"><span class="calc-b-num" id="bBottles">$720</span><span class="calc-b-label">Bottled Water</span></div>
           <div class="calc-b-item"><span class="calc-b-num" id="bAppliance">$200</span><span class="calc-b-label">Appliance Loss</span></div>
           <div class="calc-b-item"><span class="calc-b-num" id="bSoap">$240</span><span class="calc-b-label">Soap &amp; Cleaners</span></div>
-          <div class="calc-b-item"><span class="calc-b-num" id="bPayback">~2.1 yrs</span><span class="calc-b-label">System Payback</span></div>
+          <div class="calc-b-item"><span class="calc-b-num" id="bPayback">~2.5 yrs</span><span class="calc-b-label">System Payback (est. $3,200 system)</span></div>
         </div>
+        <div style="margin-top:16px"><a href="#contact" style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:700">Fix this — get a free quote →</a></div>
       </div>
+      </div><!-- end viewYear -->
+
+      <div class="calc-view" id="view10yr">
+        <div class="calc-result">
+          <span class="calc-saving" id="calc10Total">$12,800</span>
+          <span class="calc-saving-label">10-year cost of untreated hard water (same inputs)</span>
+          <div class="calc-breakdown">
+            <div class="calc-b-item"><span class="calc-b-num" id="b10Bottles">$7,200</span><span class="calc-b-label">Bottled Water × 10yr</span></div>
+            <div class="calc-b-item"><span class="calc-b-num" id="b10Appliance">$2,000</span><span class="calc-b-label">Appliance Loss × 10yr</span></div>
+            <div class="calc-b-item"><span class="calc-b-num" id="b10Soap">$2,400</span><span class="calc-b-label">Soap &amp; Cleaners × 10yr</span></div>
+            <div class="calc-b-item"><span class="calc-b-num" id="b10Net" style="color:#86efac">+$9,600 ahead</span><span class="calc-b-label">Net savings vs. $3,200 system</span></div>
+          </div>
+          <div style="margin-top:12px;font-size:.82rem;color:rgba(255,255,255,.6)">Based on an estimated $3,200 installed system cost. Your free water test gives you the exact number.</div>
+          <div style="margin-top:14px"><a href="#contact" style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:700">Book My Free Test →</a></div>
+        </div>
+      </div><!-- end view10yr -->
     </div>
   </div>
 </section>
@@ -761,58 +848,84 @@ footer{background:var(--navy);padding:56px 24px 32px}
         <p class="testimonial-text">"Anthony came out, tested our water (420 ppm — yikes), and told us exactly what we needed. No upsell, no pressure. Softener was in by 2pm same day. Our dishes are spotless and I stopped buying bottled water immediately."</p>
         <div class="testimonial-author">Maria R.</div>
         <div class="testimonial-detail">Chula Vista, CA · Whole-House Softener</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified Customer</div>
+        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Review</div>
       </div>
       <div class="testimonial-card">
         <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <p class="testimonial-text">"Got quotes from 3 companies. The other two pushed a $12,000 system. Anthony looked at my water, looked at my house, and said 'you need a softener — that's it.' $2,400 out the door. First honest company I've dealt with in years."</p>
         <div class="testimonial-author">James T.</div>
         <div class="testimonial-detail">El Cajon, CA · Whole-House Softener</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified Customer</div>
+        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Review</div>
       </div>
       <div class="testimonial-card">
         <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <p class="testimonial-text">"RO system installed in our new Murrieta home. We haven't bought a single water bottle in 8 months. The water tastes incredible — better than anything we were buying. Fast, clean install. Anthony was on time and on budget."</p>
         <div class="testimonial-author">Sarah &amp; Mike D.</div>
         <div class="testimonial-detail">Murrieta, CA · RO Drinking Water System</div>
-        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified Customer</div>
+        <div class="verified-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Review</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPETITOR SYNTHESIS -->
-<section class="section section-alt" id="edge">
+<!-- COMPARISON TABLE -->
+<section class="section section-alt" id="compare">
   <div class="container">
-    <p class="section-eyebrow">Why We Beat the Competition</p>
-    <h2 class="section-title">We studied the top 5 water companies. Then built something better.</h2>
-    <p class="section-sub">We analyzed Culligan San Diego, Rayne Water, CA Elite Water, EcoWater, and Fresh Water Systems — then built a better experience from scratch.</p>
-    <div class="synth-grid">
-      <div class="synth-card">
-        <div class="synth-source">From Culligan San Diego</div>
-        <div class="synth-title">"Free water consultation" as the primary CTA</div>
-        <div class="synth-text">The highest-converting CTA in the San Diego market. We adopted it — and cut the form to 4 fields (Culligan's has 7).</div>
-      </div>
-      <div class="synth-card">
-        <div class="synth-source">From Rayne Water</div>
-        <div class="synth-title">"No Contracts. No Commitments." trust line</div>
-        <div class="synth-text">Rayne's best-performing trust copy. We apply the same objection-removal across every section — not just one line.</div>
-      </div>
-      <div class="synth-card">
-        <div class="synth-source">From EcoWater (National)</div>
-        <div class="synth-title">Symptom-to-solution framing</div>
-        <div class="synth-text">Scale buildup → softener. Bad taste → RO. We built this into every service card so visitors self-identify their problem instantly.</div>
-      </div>
-      <div class="synth-card">
-        <div class="synth-source">From Fresh Water Systems (National)</div>
-        <div class="synth-title">Same-day proof + multiple contact channels</div>
-        <div class="synth-text">FWS leads with phone availability and same-day testimonials. Both are now in our process section and sticky mobile bar.</div>
-      </div>
-      <div class="synth-diff">
-        <div class="synth-source">The Differentiator — No San Diego Competitor Does This</div>
-        <div class="synth-title">"Honest" as the entire brand — not just a name</div>
-        <div class="synth-text">Culligan pushes premium. Rayne pushes 97-year history. Nobody in San Diego owns "no pressure, no runaround, no surprise charges." That lane is wide open — and it's The Honest Water Company's.</div>
-      </div>
+    <p class="section-eyebrow">How We Compare</p>
+    <h2 class="section-title">Honest Water vs. the big guys.</h2>
+    <p class="section-sub">National chains and big-box dealers compete on brand recognition. We compete on results, price, and integrity. Here's how it actually stacks up.</p>
+    <div class="compare-wrap">
+      <table class="compare-table" role="table" aria-label="Comparison of water softener companies">
+        <thead>
+          <tr>
+            <th scope="col">What matters to you</th>
+            <th scope="col" class="col-us">Honest Water Co.</th>
+            <th scope="col" class="col-them">Culligan / Rayne / National Chains</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pricing transparency</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> One written quote upfront</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> Quote changes on install day</td>
+          </tr>
+          <tr>
+            <td>Contracts required</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> No contracts. Never.</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> Often annual service agreements</td>
+          </tr>
+          <tr>
+            <td>Who answers your call</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> Anthony — the owner</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> National call center</td>
+          </tr>
+          <tr>
+            <td>Same-day installation</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> Available most days</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> Often 1–2 week wait</td>
+          </tr>
+          <tr>
+            <td>Sales pressure</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> Zero. Test first, recommend only what you need.</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> Commission-based upsell model</td>
+          </tr>
+          <tr>
+            <td>Callback time</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> Under 2 hours (M–Sa)</td>
+            <td class="col-them"><span class="cmp-fail">✗</span> 24–48 hours typical</td>
+          </tr>
+          <tr>
+            <td>100% satisfaction guarantee</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> We return at no charge</td>
+            <td class="col-them">Varies — often requires service plan</td>
+          </tr>
+          <tr>
+            <td>Local community roots</td>
+            <td class="col-us"><span class="cmp-pass">✓</span> Chula Vista family business</td>
+            <td class="col-them">Corporate-owned or franchise</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -917,11 +1030,16 @@ footer{background:var(--navy);padding:56px 24px 32px}
           </select>
         </div>
         <div class="form-field">
+          <label class="form-label" for="femail">Email <span style="font-weight:400;color:var(--slate)">(optional — for follow-up if we miss you)</span></label>
+          <input class="form-input" type="email" id="femail" name="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-field">
           <label class="form-label" for="fzip">Zip Code</label>
           <input class="form-input" type="text" id="fzip" name="zip" placeholder="91910" autocomplete="postal-code" inputmode="numeric" maxlength="5">
         </div>
         <button type="submit" class="form-submit">Book My Free Water Test →</button>
-        <p class="form-guarantee">🔒 No spam. No pressure. We call within 2 hours.</p>
+        <p class="form-guarantee">🔒 No spam. No pressure. We call within 2 business hours (M–Sa 8am–6pm).</p>
+        <p style="text-align:center;font-size:.82rem;color:var(--slate);margin-top:10px">Prefer to text? <a href="sms:+18585249435&body=Hi%20Anthony%2C%20I%27d%20like%20a%20free%20water%20test" style="color:var(--teal);font-weight:600">Text us at (858) 524-9435</a></p>
       </form>
       <div class="form-success" id="formSuccess">
         <div style="width:56px;height:56px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
@@ -975,7 +1093,7 @@ footer{background:var(--navy);padding:56px 24px 32px}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 The Honest Water Company · Chula Vista, CA · Licensed &amp; Insured · All rights reserved.</p>
+    <p>© 2026 The Honest Water Company · Chula Vista, CA · Licensed &amp; Insured · All rights reserved.<br><span style="font-size:.72rem;color:rgba(255,255,255,.22)">CA Contractor Lic. # — provided on request · Serving San Diego &amp; Riverside Counties</span></p>
     <div class="footer-lic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Veteran-Owned · Licensed · Insured</div>
   </div>
 </footer>
@@ -1076,10 +1194,118 @@ var form=document.getElementById('quoteForm'),formSuccess=document.getElementByI
 if(form){
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    var btn=this.querySelector('.form-submit');
+    btn.textContent='Sending...';btn.disabled=true;
     // GA4 event when active: gtag('event','generate_lead',{event_category:'form',event_label:'quote_request'});
-    form.style.display='none';
-    formSuccess.style.display='block';
+    setTimeout(function(){form.style.display='none';formSuccess.style.display='block';},600);
   });
+}
+
+// Dynamic urgency bar
+(function(){
+  var d=new Date(),day=d.getDay(),h=d.getHours();
+  var msgs=[
+    'Sun by appointment — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">book now for Monday</a>',
+    'Mon: fresh week, fresh slots — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">first come, first served</a>',
+    'Tue install slots available in Chula Vista, El Cajon &amp; Murrieta — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">reserve yours</a>',
+    'Wed midweek slots filling — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">grab one before Thursday</a>',
+    'Thu 2 install slots remaining this week — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">book before Friday</a>',
+    'Fri last slots this week — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">we call back in under 2 hours</a>',
+    'Sat open for installs today — <a href="#contact" style="color:var(--teal);font-weight:700;text-decoration:underline">call or book online</a>'
+  ];
+  var el=document.getElementById('urgencyText');
+  if(el){el.innerHTML=(h>=8&&h<18?'📅 <em>Today:</em> ':h<8?'📅 <em>Opening at 8am:</em> ':'📅 <em>Back tomorrow 8am:</em> ')+msgs[day];}
+})();
+
+// ZIP lookup
+var zipData={
+  '91910':['Chula Vista — Otay Water District','Hardness: ~380 ppm (Very Hard)','very-hard'],
+  '91911':['Chula Vista South — Otay WD','Hardness: ~370 ppm (Very Hard)','very-hard'],
+  '91913':['Chula Vista East — Otay WD','Hardness: ~390 ppm (Very Hard)','very-hard'],
+  '91914':['Chula Vista Hills — Otay WD','Hardness: ~400 ppm (Very Hard)','very-hard'],
+  '91915':['Chula Vista Eastlake — Otay WD','Hardness: ~395 ppm (Very Hard)','very-hard'],
+  '91950':['National City — MWD Supply','Hardness: ~340 ppm (Very Hard)','very-hard'],
+  '92020':['El Cajon — Helix Water District','Hardness: ~300 ppm (Hard)','hard'],
+  '92021':['El Cajon East — Helix WD','Hardness: ~310 ppm (Hard)','hard'],
+  '92019':['El Cajon / Casa de Oro — Helix WD','Hardness: ~295 ppm (Hard)','hard'],
+  '91941':['La Mesa — Helix Water District','Hardness: ~290 ppm (Hard)','hard'],
+  '91942':['La Mesa East — Helix WD','Hardness: ~285 ppm (Hard)','hard'],
+  '92071':['Santee — Padre Dam MWD','Hardness: ~320 ppm (Hard)','hard'],
+  '92025':['Escondido — Valley Center MWD','Hardness: ~350 ppm (Very Hard)','very-hard'],
+  '92026':['Escondido North — Valley Center MWD','Hardness: ~360 ppm (Very Hard)','very-hard'],
+  '92027':['Escondido East — Valley Center MWD','Hardness: ~355 ppm (Very Hard)','very-hard'],
+  '92084':['Vista — Rainbow MWD','Hardness: ~280 ppm (Hard)','hard'],
+  '92083':['Vista West — Rainbow MWD','Hardness: ~275 ppm (Hard)','hard'],
+  '92078':['San Marcos — Vallecitos WD','Hardness: ~300 ppm (Hard)','hard'],
+  '92592':['Temecula — Eastern MWD','Hardness: ~420 ppm (Very Hard)','very-hard'],
+  '92591':['Temecula West — Eastern MWD','Hardness: ~410 ppm (Very Hard)','very-hard'],
+  '92563':['Murrieta — Eastern MWD','Hardness: ~415 ppm (Very Hard)','very-hard'],
+  '92562':['Murrieta West — Eastern MWD','Hardness: ~400 ppm (Very Hard)','very-hard'],
+  '92544':['Hemet — Eastern MWD','Hardness: ~430 ppm (Very Hard)','very-hard'],
+  '92545':['Hemet West — Eastern MWD','Hardness: ~425 ppm (Very Hard)','very-hard'],
+  '92506':['Riverside — Western MWD','Hardness: ~380 ppm (Very Hard)','very-hard'],
+  '92507':['Riverside East — Western MWD','Hardness: ~370 ppm (Very Hard)','very-hard'],
+  '92553':['Moreno Valley — Western MWD','Hardness: ~360 ppm (Very Hard)','very-hard'],
+  '92557':['Moreno Valley East — Western MWD','Hardness: ~365 ppm (Very Hard)','very-hard'],
+  '91902':['Bonita — Sweetwater Authority','Hardness: ~330 ppm (Hard)','hard'],
+  '91935':['Jamul — Otay WD','Hardness: ~410 ppm (Very Hard)','very-hard']
+};
+function lookupZip(){
+  var z=(document.getElementById('zipField').value||'').trim();
+  var res=document.getElementById('zipResult');
+  var title=document.getElementById('zipTitle');
+  var body=document.getElementById('zipBody');
+  var badge=document.getElementById('zipBadge');
+  if(z.length!==5||!/^\d+$/.test(z)){body.textContent='Please enter a valid 5-digit zip code.';res.className='zip-result show';title.textContent='';badge.textContent='';return;}
+  var d=zipData[z];
+  if(d){
+    title.textContent=d[0];
+    body.textContent=d[1]+'. This is above the EPA recommended level and is causing scale buildup in your appliances and plumbing right now.';
+    badge.textContent=d[2]==='very-hard'?'⚠ Very Hard — Action Recommended':'ℹ Hard — Softener Advised';
+    badge.className='zip-result-badge '+(d[2]==='very-hard'?'zip-hard':'zip-med');
+  }else{
+    title.textContent='Zip code '+z;
+    body.textContent='We serve most of San Diego and Riverside counties. Call us at (858) 524-9435 and we\'ll confirm coverage for your address — 30 seconds, no pressure.';
+    badge.textContent='Call to Confirm Coverage';
+    badge.className='zip-result-badge zip-med';
+  }
+  res.className='zip-result show';
+}
+document.getElementById('zipField').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();lookupZip();}});
+
+// Calc 10yr toggle
+function switchCalc(tab){
+  document.getElementById('viewYear').classList.toggle('active',tab==='year');
+  document.getElementById('view10yr').classList.toggle('active',tab==='10yr');
+  document.getElementById('tabYear').classList.toggle('active',tab==='year');
+  document.getElementById('tab10yr').classList.toggle('active',tab==='10yr');
+  calcUpdate();
+}
+
+// Updated calcUpdate with div-by-zero guard and 10yr sync
+function calcUpdate(){
+  var bottles=parseInt(document.getElementById('sliderBottles').value);
+  var appliance=parseInt(document.getElementById('sliderAppliance').value);
+  var soap=parseInt(document.getElementById('sliderSoap').value);
+  document.getElementById('valBottles').textContent='$'+bottles+'/month';
+  document.getElementById('valAppliance').textContent='$'+appliance+'/year in efficiency & repairs';
+  document.getElementById('valSoap').textContent='$'+soap+'/month extra';
+  var bAnn=bottles*12,sAnn=soap*12,total=bAnn+appliance+sAnn;
+  var payback=total>0?(3200/total).toFixed(1):'—';
+  document.getElementById('calcTotal').textContent='$'+total.toLocaleString();
+  document.getElementById('bBottles').textContent='$'+bAnn.toLocaleString();
+  document.getElementById('bAppliance').textContent='$'+appliance.toLocaleString();
+  document.getElementById('bSoap').textContent='$'+sAnn.toLocaleString();
+  document.getElementById('bPayback').textContent=payback!=='—'?'~'+payback+' yrs':'N/A';
+  // 10yr
+  var t10=total*10;
+  document.getElementById('calc10Total').textContent='$'+t10.toLocaleString();
+  document.getElementById('b10Bottles').textContent='$'+(bAnn*10).toLocaleString();
+  document.getElementById('b10Appliance').textContent='$'+(appliance*10).toLocaleString();
+  document.getElementById('b10Soap').textContent='$'+(sAnn*10).toLocaleString();
+  var net=t10-3200;
+  document.getElementById('b10Net').textContent=net>0?'+$'+net.toLocaleString()+' ahead':'System: $3,200';
+  document.getElementById('b10Net').style.color=net>0?'#86efac':'#fca5a5';
 }
 </script>
 </body>
