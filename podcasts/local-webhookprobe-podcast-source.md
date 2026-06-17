@@ -1,6 +1,6 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Local WebhookProbe
-Local WebhookProbe | Prepared by Franchise Ki | Generated 2026-05-27
+PRIVATE AUDIO BRIEFING — Personal AI Walkthrough for Local WebhookProbe
+Local WebhookProbe | Prepared by Franchise Ki | Generated 2026-06-17
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
@@ -84,7 +84,7 @@ time because you're always first.
 **Time your team could recover: up to 8 hours/week**
 **ROI at $150/hr: up to $4,800/month back in productive time**
 
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
+Reference: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
 
 ### Gap 2 — Follow-Up Consistency
 
@@ -100,7 +100,7 @@ on your team having to remember to do it.
 **Leads that become revenue 60-90 days after first contact, with consistent follow-up:
 up to 35% lift on close rate (industry benchmark)**
 
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
+Reference: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
 
 ### Gap 3 — Admin and Documentation Overhead
 
@@ -114,7 +114,7 @@ entirely — and does them faster and more consistently than any manual process.
 
 **At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
 
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+Reference: SBA, Small Business Time Study — https://www.sba.gov/business-guide
 
 ---
 
@@ -125,7 +125,7 @@ situation — your industry, your tools, your services, your pain points.
 
 ### AI Tool 1 — Speed-to-Lead Response Agent
 
-[No custom prompt provided — describe key AI speed-to-lead opportunity for business services]
+You are a speed-to-lead response agent for a business services business called Local WebhookProbe. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.
 
 This runs directly in your existing workflow. No new platform to learn.
 Your team supervises. The AI handles the repetitive execution.
@@ -134,7 +134,7 @@ Your team supervises. The AI handles the repetitive execution.
 
 ### AI Tool 2 — Proposal and Qualification Agent
 
-[No custom prompt provided — describe key AI proposal or qualification opportunity for business services]
+You are a proposal draft agent for Local WebhookProbe in the business services industry. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose Local WebhookProbe over competitors.
 
 Built around how Local WebhookProbe actually works — not a generic industry template.
 
@@ -142,7 +142,7 @@ Built around how Local WebhookProbe actually works — not a generic industry te
 
 ### AI Tool 3 — Follow-Up and Outreach Agent
 
-[No custom prompt provided — describe key AI follow-up or outreach opportunity for business services]
+You are an outreach agent for Local WebhookProbe (business services). Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting ideal customers who need business services services.
 
 This is the kind of tool that, once it's running, your team will not remember
 how they worked without it.
@@ -180,7 +180,7 @@ edge permanently.
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+Here's exactly what the first 30 days look like if you move forward:
 
 **Days 1-3: Onboarding.** Business services audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
@@ -252,7 +252,7 @@ manage it.
 If you want to explore Path 2, the next step is an application — not a sales call.
 We want to understand your situation before we recommend anything.
 
-Apply here: https://blueprint.meetadvaita.com/apply
+Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 This is an application, not a commitment. We read every one personally.
 
@@ -317,9 +317,9 @@ happy to have when the timing is right for you.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
+Benchmarks referenced during this walkthrough:
 
 [1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
     Metric: 78% of customers buy from the first business to respond
@@ -353,7 +353,7 @@ Every Blueprint AI system is custom-built. Not configured from a template.
 Built from your application answers, your tools, your pain points, your voice.
 
 If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 Questions? Reach Bennett directly: bennett@franchiseki.com
 
