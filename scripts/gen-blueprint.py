@@ -395,6 +395,17 @@ def build(profile):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit("usage: gen-blueprint.py leads/<slug>.json")
+    # PERMANENT GATE (2026-06-16): every Blueprint lead now arrives via the GHL form,
+    # which has shipped THIRD-PERSON customer copy ("his form") + raw GHL values
+    # ("u250k - under $250K"). Halt the build if the profile isn't second-person/clean.
+    # Auto-fix first: `python3 scripts/blueprint-second-person-gate.py leads/<slug>.json --fix`
+    import subprocess as _sp
+    _gate = os.path.join(os.path.dirname(os.path.abspath(__file__)), "blueprint-second-person-gate.py")
+    if os.path.exists(_gate):
+        _r = _sp.run([sys.executable, _gate, sys.argv[1]], capture_output=True, text=True)
+        if _r.returncode != 0:
+            sys.exit("HALT — second-person gate failed (customer-facing third-person / raw GHL value).\n"
+                     + _r.stdout + "\nRun with --fix on the gate, or rewrite the profile in second person.")
     profile = json.load(open(sys.argv[1], encoding="utf-8"))
     out = os.path.join(REPO, "blueprints", profile["slug"] + ".html")
     rendered = build(profile)
