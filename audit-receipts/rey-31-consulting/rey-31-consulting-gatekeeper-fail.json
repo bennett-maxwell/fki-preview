@@ -1,11 +1,9 @@
 {
   "checks": [
     {
-      "failures": [
-        "ambiguous CTA copy: Apply"
-      ],
+      "failures": [],
       "name": "visible_html_surface",
-      "pass": false
+      "pass": true
     },
     {
       "cmd": [
@@ -57,8 +55,8 @@
         "--json-output"
       ],
       "name": "qualify_link_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "      \"http_code\": 200,",
@@ -79,7 +77,7 @@
         "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rey&biz=31+Consulting&src=rey-31-consulting&firstName=Rey&agents=Speed-to-Lead+Responder%2CFollow-Up+Nurture+Agent%2CAI+Appointment+Setter%2CReporting+Agent%2CAdmin+Automation+Agent%2CPipeline+Hygiene+Agent\"",
         "    }",
         "  ],",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -181,9 +179,12 @@
       "name": "blueprint_audit",
       "pass": true,
       "returncode": 0,
-      "stderr_tail": [],
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:489: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
       "stdout_tail": [
-        "[PASS] rey-31-consulting: 15/15 (100%)",
+        "[PASS] rey-31-consulting: 16/16 (100%)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=PASS"
@@ -237,33 +238,33 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:59:17.454114+00:00\"",
+        "  \"ts\": \"2026-06-10T13:37:33.189120+00:00\"",
         "}"
       ]
     },
     {
       "name": "proof_email_click_test",
-      "pass": false,
+      "pass": true,
       "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-email-click-test.json"
     },
     {
       "name": "proof_desktop_render",
-      "pass": false,
+      "pass": true,
       "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-desktop-render.json"
     },
     {
       "name": "proof_mobile_render",
-      "pass": false,
+      "pass": true,
       "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-mobile-render.json"
     },
     {
       "name": "proof_audit_json",
-      "pass": false,
+      "pass": true,
       "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-audit.json"
     },
     {
       "name": "proof_closeout",
-      "pass": false,
+      "pass": true,
       "path": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting/rey-31-consulting-closeout.json"
     },
     {
@@ -284,14 +285,7 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "visible_html_surface: ambiguous CTA copy: Apply",
     "completion_gate failed",
-    "qualify link gate failed",
-    "proof receipt missing or failing: rey-31-consulting-email-click-test.json",
-    "proof receipt missing or failing: rey-31-consulting-desktop-render.json",
-    "proof receipt missing or failing: rey-31-consulting-mobile-render.json",
-    "proof receipt missing or failing: rey-31-consulting-audit.json",
-    "proof receipt missing or failing: rey-31-consulting-closeout.json",
     "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/rey-31-consulting.html",
@@ -300,5 +294,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/rey-31-consulting",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:59:17.504904+00:00"
+  "ts": "2026-06-10T13:37:33.243663+00:00"
 }

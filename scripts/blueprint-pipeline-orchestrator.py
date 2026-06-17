@@ -525,8 +525,9 @@ async def stage_email(profile_path: str, profile: dict, status: LeadStatus, dry_
 
     build_ok, build_out, build_err = await run_script("build-delivery-email.sh", [profile_path], timeout=120)
     if not build_ok:
-        status.mark_stage("email", "failed", build_err[:200])
-        log.error(f"  [{profile['slug']}] Stage 7 build FAILED: {build_err[:100]}")
+        detail = (build_err.strip() or build_out.strip())[-200:]
+        status.mark_stage("email", "failed", detail)
+        log.error(f"  [{profile['slug']}] Stage 7 build FAILED: {detail[:150]}")
         return False
 
     log.info(f"  [{profile['slug']}] Stage 7.0: Gatekeeper production token")

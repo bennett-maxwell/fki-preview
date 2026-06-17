@@ -177,17 +177,14 @@
         "dave-wood"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
-        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
-      ],
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] dave-wood: 15/15 (100%)",
+        "[FAIL] dave-wood: 15/16 (94%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -204,7 +201,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "dave-wood            food_franchise           8        0  PASS",
+        "dave-wood            food_franchise        None        0  PASS",
         "      \u26a0 D7-04 hardcoded large $ figures in copy: ['15,000'] \u2014 must trace to intake/source",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
@@ -239,7 +236,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T05:03:32.181992+00:00\"",
+        "  \"ts\": \"2026-06-10T16:05:41.400925+00:00\"",
         "}"
       ]
     },
@@ -286,7 +283,8 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "completion_gate failed"
+    "completion_gate failed",
+    "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/dave-wood.html",
   "lead": "dave-wood",
@@ -294,5 +292,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/dave-wood",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T05:03:32.228802+00:00"
+  "ts": "2026-06-10T16:05:41.446828+00:00"
 }

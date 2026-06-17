@@ -96,29 +96,29 @@
         "/Users/openclaw/fki-preview/leads/rush-evans.json"
       ],
       "name": "qualifier_context_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Inquiry Response Agent\",",
+        "        \"Follow-Up Agent\",",
+        "        \"Scheduling Agent\",",
         "        \"Content Agent\",",
         "        \"Review & Referral Agent\",",
         "        \"Admin Agent\"",
         "      ],",
-        "      \"file\": \"/Users/openclaw/fki-preview/blueprints/rush-evans.html\",",
-        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photos+%26+Video&src=rush-evans&firstName=Rush&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\",",
-        "      \"text\": \"See If You Qualify\"",
-        "    },",
-        "    {",
-        "      \"agents\": [],",
         "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
-        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photography+%2B+Video&src=rush-evans&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=tMpPsY3o7iwJai6w4CpD\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Rush+Evans&biz=Riah+Evans+Photography+%2B+Video&src=rush-evans&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=tMpPsY3o7iwJai6w4CpD&agents=Inquiry%20Response%20Agent,Follow-Up%20Agent,Scheduling%20Agent,Content%20Agent,Review%20%26%20Referral%20Agent,Admin%20Agent\",",
         "      \"text\": \"See If You Qualify \\u2192\"",
         "    }",
         "  ],",
         "  \"lead\": \"rush-evans\",",
-        "  \"pass\": false,",
+        "  \"pass\": true,",
         "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -133,19 +133,15 @@
         "--json-output"
       ],
       "name": "approval_email_customer_view_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "{",
         "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
-        "  \"failures\": [",
-        "    {",
-        "      \"type\": \"missing_tailored_agents_param_on_qualify_cta\"",
-        "    }",
-        "  ],",
-        "  \"pass\": false,",
-        "  \"status\": \"FAIL\"",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -160,28 +156,15 @@
         "--json-output"
       ],
       "name": "email_visual_format_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "    {",
-        "      \"detail\": \"email clients/snippets can expose metadata; customer view must start with <!DOCTYPE html>\",",
-        "      \"type\": \"raw_comment_before_doctype\"",
-        "    },",
-        "    {",
-        "      \"type\": \"missing_q7_agents_context\"",
-        "    },",
-        "    {",
-        "      \"count\": 0,",
-        "      \"required\": 2,",
-        "      \"type\": \"missing_card_borders\"",
-        "    },",
-        "    {",
-        "      \"type\": \"missing_card_depth\"",
-        "    }",
-        "  ],",
-        "  \"pass\": false,",
-        "  \"status\": \"FAIL\",",
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/rush-evans-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
         "  \"subject\": \"CUSTOMER VIEW PREVIEW: rush-evans - Your Custom Blueprint is Ready\"",
         "}"
       ]
@@ -194,17 +177,17 @@
         "rush-evans"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
+      "pass": false,
+      "returncode": 1,
       "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "/Users/openclaw/fki-preview/run-audit.py:489: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
         "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
       ],
       "stdout_tail": [
-        "[PASS] rush-evans: 14/15 (93%)",
+        "[FAIL] rush-evans: 15/16 (94%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -255,7 +238,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:59:22.526741+00:00\"",
+        "  \"ts\": \"2026-06-10T13:39:42.340151+00:00\"",
         "}"
       ]
     },
@@ -302,9 +285,7 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "qualifier context gate failed",
-    "approval email customer-view gate failed",
-    "email visual format gate failed"
+    "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/rush-evans.html",
   "lead": "rush-evans",
@@ -312,5 +293,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/rush-evans",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:59:22.575943+00:00"
+  "ts": "2026-06-10T13:39:42.391892+00:00"
 }

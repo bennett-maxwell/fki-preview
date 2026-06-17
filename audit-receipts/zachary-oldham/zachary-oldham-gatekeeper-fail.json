@@ -181,7 +181,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] zachary-oldham: 14/15 (93%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] zachary-oldham: 15/16 (94%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -235,7 +235,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:59:19.119642+00:00\"",
+        "  \"ts\": \"2026-06-10T16:41:59.991390+00:00\"",
         "}"
       ]
     },
@@ -270,22 +270,20 @@
       "pass": true
     },
     {
-      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "detail": "direct-address audio receipt passed",
       "name": "production_audio_direct_address",
-      "pass": false
+      "pass": true
     },
     {
-      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "detail": "NotebookLM origin verified",
       "name": "production_audio_notebooklm_origin",
-      "pass": false
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "run-audit.py failed",
-    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
-    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+    "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/zachary-oldham.html",
   "lead": "zachary-oldham",
@@ -293,5 +291,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/zachary-oldham",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:59:19.167056+00:00"
+  "ts": "2026-06-10T16:42:00.037645+00:00"
 }

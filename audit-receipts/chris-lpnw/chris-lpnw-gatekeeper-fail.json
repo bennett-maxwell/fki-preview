@@ -177,17 +177,14 @@
         "chris-lpnw"
       ],
       "name": "blueprint_audit",
-      "pass": true,
-      "returncode": 0,
-      "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
-        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
-      ],
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
       "stdout_tail": [
-        "[PASS] chris-lpnw: 15/15 (100%)",
+        "[FAIL] chris-lpnw: 15/16 (94%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=PASS"
+        "VERDICT=FAIL"
       ]
     },
     {
@@ -238,7 +235,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T05:03:37.110578+00:00\"",
+        "  \"ts\": \"2026-06-10T16:05:32.511694+00:00\"",
         "}"
       ]
     },
@@ -285,7 +282,8 @@
   ],
   "diamond": "FAIL",
   "failures": [
-    "completion_gate failed"
+    "completion_gate failed",
+    "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/chris-lpnw.html",
   "lead": "chris-lpnw",
@@ -293,5 +291,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/chris-lpnw",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T05:03:37.152208+00:00"
+  "ts": "2026-06-10T16:05:32.556218+00:00"
 }

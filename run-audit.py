@@ -43,14 +43,32 @@ def podcast_duration_gate(slug):
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
+    # Cold-cache fix (2026-06-17, Ivan CC): a cold ffprobe read of a 14MB+ MP3
+    # could exceed a 30s timeout on the FIRST call of a fresh session, then pass
+    # on every warm-cache call after. That timeout was being returned as a
+    # D3-03 RED-LINE content FAIL, so each new chat's first audit run falsely
+    # reported the podcast as broken (the "three chats all said FAIL" bug — the
+    # blueprint was fine; the gate flaked on cold I/O). Fix: longer timeout +
+    # up to 3 retries. An ffprobe/IO error is an INFRA error, never a content
+    # red-line — re-raise as a distinguishable infra failure, not "too short".
+    out = None
+    last_err = None
+    for _attempt in range(3):
+        try:
+            out = subprocess.run(
+                ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                 "-of", "csv=p=0", path],
+                capture_output=True, text=True, timeout=120).stdout.strip()
+            if out:
+                break
+        except Exception as e:
+            last_err = e
+    if not out:
+        return False, f"ffprobe infra error (not a content fail): {last_err}"
     try:
-        out = subprocess.run(
-            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
-             "-of", "csv=p=0", path],
-            capture_output=True, text=True, timeout=30).stdout.strip()
         secs = int(float(out))
     except Exception as e:
-        return False, f"ffprobe failed: {e}"
+        return False, f"ffprobe parse error (not a content fail): {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < MIN_SEC:
         return False, f"too short {mmss} (min 16:00) — re-cut deeper"

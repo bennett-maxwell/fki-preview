@@ -62,19 +62,19 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601&agents=Emergency%20Intake%20Agent%2CEstimate%20Follow-Up%20Agent%2CMaintenance%20Recall%20Agent%2CReview%20Request%20Agent%2CScheduling%20Agent%2CCustomer%20Communication%20Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601&agents=Emergency%20Intake%20Agent%2CEstimate%20Follow-Up%20Agent%2CMaintenance%20Recall%20Agent%2CReview%20Request%20Agent%2CScheduling%20Agent%2CCustomer%20Communication%20Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad%20Plumber&biz=Plumber%20Test%20Business&src=plumber-test-business-20260601&agents=Emergency%20Intake%20Agent%2CEstimate%20Follow-Up%20Agent%2CMaintenance%20Recall%20Agent%2CReview%20Request%20Agent%2CScheduling%20Agent%2CCustomer%20Communication%20Agent\"",
         "    }",
         "  ],",
         "  \"status\": \"PASS\"",
@@ -96,11 +96,10 @@
         "/Users/openclaw/fki-preview/leads/plumber-test-business-20260601.json"
       ],
       "name": "qualifier_context_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "      \"text\": \"See If You Qualify\"",
         "    },",
         "    {",
         "      \"agents\": [",
@@ -108,17 +107,18 @@
         "        \"Estimate Follow-Up Agent\",",
         "        \"Maintenance Recall Agent\",",
         "        \"Review Request Agent\",",
-        "        \"Dispatch Summary Agent\"",
+        "        \"Scheduling Agent\",",
+        "        \"Customer Communication Agent\"",
         "      ],",
         "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/plumber-test-business-20260601-delivery-email.html\",",
-        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=GCm48zLvRjrJHEsB1UfN&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CReview+Request+Agent%2CDispatch+Summary+Agent\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Chad+Plumber&biz=Plumber+Test+Business&src=plumber-test-business-20260601&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=GCm48zLvRjrJHEsB1UfN&agents=Emergency+Intake+Agent%2CEstimate+Follow-Up+Agent%2CMaintenance+Recall+Agent%2CReview+Request+Agent%2CScheduling+Agent%2CCustomer+Communication+Agent\",",
         "      \"text\": \"See If You Qualify \\u2192\"",
         "    }",
         "  ],",
         "  \"lead\": \"plumber-test-business-20260601\",",
-        "  \"pass\": false,",
+        "  \"pass\": true,",
         "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -179,12 +179,9 @@
       "name": "blueprint_audit",
       "pass": false,
       "returncode": 1,
-      "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
-        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
-      ],
+      "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] plumber-test-business-20260601: 14/15 (93%)  RED-LINE FAIL: ['D10-22_home_services_copy_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] plumber-test-business-20260601: 15/16 (94%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -238,7 +235,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:58:07.452290+00:00\"",
+        "  \"ts\": \"2026-06-10T16:41:10.989457+00:00\"",
         "}"
       ]
     },
@@ -286,7 +283,6 @@
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "qualifier context gate failed",
     "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/plumber-test-business-20260601.html",
@@ -295,5 +291,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/plumber-test-business-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:58:07.493610+00:00"
+  "ts": "2026-06-10T16:41:11.033474+00:00"
 }

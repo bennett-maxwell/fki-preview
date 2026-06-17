@@ -68,13 +68,13 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&biz=Costa+Vida&src=avery-martinez-costa-vida-20260601&utm_source=blueprint&utm_medium=blueprint&utm_campaign=synthetic_costa_vida\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&biz=Costa+Vida&src=avery-martinez-costa-vida-20260601&utm_source=blueprint&utm_medium=blueprint&utm_campaign=synthetic_costa_vida&agents=Catering%20Response%20Agent%2CGuest%20Recovery%20Agent%2CLoyalty%20Reactivation%20Agent%2CLocal%20Store%20Demand%20Agent%2CCrew%20Handoff%20Agent%2CReview%20Intelligence%20Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&biz=Costa+Vida&src=avery-martinez-costa-vida-20260601&utm_source=blueprint&utm_medium=blueprint&utm_campaign=synthetic_costa_vida\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Avery+Martinez&biz=Costa+Vida&src=avery-martinez-costa-vida-20260601&utm_source=blueprint&utm_medium=blueprint&utm_campaign=synthetic_costa_vida&agents=Catering%20Response%20Agent%2CGuest%20Recovery%20Agent%2CLoyalty%20Reactivation%20Agent%2CLocal%20Store%20Demand%20Agent%2CCrew%20Handoff%20Agent%2CReview%20Intelligence%20Agent\"",
         "    }",
         "  ],",
         "  \"status\": \"PASS\"",
@@ -96,8 +96,8 @@
         "/Users/openclaw/fki-preview/leads/avery-martinez-costa-vida-20260601.json"
       ],
       "name": "qualifier_context_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    },",
@@ -116,9 +116,9 @@
         "    }",
         "  ],",
         "  \"lead\": \"avery-martinez-costa-vida-20260601\",",
-        "  \"pass\": false,",
+        "  \"pass\": true,",
         "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -179,12 +179,9 @@
       "name": "blueprint_audit",
       "pass": false,
       "returncode": 1,
-      "stderr_tail": [
-        "/Users/openclaw/fki-preview/run-audit.py:476: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
-        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
-      ],
+      "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] avery-martinez-costa-vida-20260601: 14/15 (93%)  RED-LINE FAIL: ['D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[FAIL] avery-martinez-costa-vida-20260601: 14/16 (88%)  RED-LINE FAIL: ['D2-02_agent_cards_substantive_RL', 'D3-03_podcast_duration_16to20min_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -216,8 +213,8 @@
         "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html"
       ],
       "name": "d9_render_integrity",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"D9-13\": {",
@@ -238,7 +235,7 @@
         "      \"pass\": true",
         "    }",
         "  },",
-        "  \"ts\": \"2026-06-09T04:58:05.594612+00:00\"",
+        "  \"ts\": \"2026-06-10T17:06:40.948353+00:00\"",
         "}"
       ]
     },
@@ -268,7 +265,7 @@
       "path": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601/avery-martinez-costa-vida-20260601-closeout.json"
     },
     {
-      "detail": "avery-martinez-costa-vida-20260601.mp3 10534182 bytes within window",
+      "detail": "avery-martinez-costa-vida-20260601.mp3 11600919 bytes within window",
       "name": "production_audio_size",
       "pass": true
     },
@@ -286,9 +283,7 @@
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
-    "qualifier context gate failed",
-    "run-audit.py failed",
-    "D9 render-integrity audit failed or missing"
+    "run-audit.py failed"
   ],
   "html_path": "/Users/openclaw/fki-preview/blueprints/avery-martinez-costa-vida-20260601.html",
   "lead": "avery-martinez-costa-vida-20260601",
@@ -296,5 +291,5 @@
   "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/avery-martinez-costa-vida-20260601",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-09T04:58:05.627928+00:00"
+  "ts": "2026-06-10T17:06:40.986204+00:00"
 }
