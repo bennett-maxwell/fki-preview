@@ -1,6 +1,6 @@
 {
-  "_comment": "Single source of truth for the ROI calculator's per-industry 'Average Contract Value' slider. Range = realistic single-transaction band for the industry so the client can model THEIR real numbers. Default value sits at min + data-no-default + calcTouched guard, so NOTHING is shown as the client's own figure until they drag it (no fabricated current-state). Read by scripts/fix-roi-slider-industry.py AND scripts/clone-blueprint.sh so direct-patch and regenerate stay identical.",
-  "_comment_b2b": "Industries whose buyers realistically have a LinkedIn lead-gen / social-selling motion. The ROI calculator's 'LinkedIn Leads Added/Month' slider (which feeds the headline revenue lift) is ONLY appropriate for these. For trades/retail/consumer-local industries (home_services, food_franchise, retail_firearms, medspa, photography, property_mgmt) a LinkedIn-pipeline lever is industry-inappropriate \u2014 same defect class as a $45K avg-contract on a plumber. financial-realism-check.py reads this list for the D7-18 field-relevance check; the template/generator gate that removes/zeros the field for non-B2B is the staged follow-up.",
+  "_comment": "Single source of truth for the ROI calculator's per-industry Average Contract Value slider. Range = realistic single-transaction band for the industry so the client can model THEIR real numbers. Default value sits at min + data-no-default + calcTouched guard, so NOTHING is shown as the client's own figure until they drag it. Read by scripts/fix-roi-slider-industry.py AND scripts/clone-blueprint.sh so direct-patch and regenerate stay identical.",
+  "_comment_b2b": "Industries whose buyers realistically have a LinkedIn lead-gen / social-selling motion. The ROI calculator's LinkedIn Leads Added/Month slider, which feeds the headline revenue lift, is ONLY appropriate for these. For trades/retail/consumer-local industries (home_services, food_franchise, retail_firearms, medspa, photography, property_mgmt), a LinkedIn-pipeline lever is industry-inappropriate. financial-realism-check.py reads this list for the D7-18 field-relevance check; the template/generator gate that removes/zeros the field for non-B2B is the staged follow-up.",
   "b2b_linkedin_industries": [
     "consulting",
     "crm_software",
@@ -33,11 +33,23 @@
       "step": 1,
       "unit": "ticket"
     },
+    "heavy_equipment": {
+      "max": 1500000,
+      "min": 10000,
+      "step": 5000,
+      "unit": "machine/contract"
+    },
     "home_services": {
       "max": 20000,
       "min": 300,
       "step": 50,
       "unit": "job/ticket"
+    },
+    "marketing_agency": {
+      "max": 25000,
+      "min": 250,
+      "step": 100,
+      "unit": "retainer/project"
     },
     "medical_devices": {
       "max": 500000,
@@ -86,18 +98,18 @@
       "min": 800,
       "step": 200,
       "unit": "project"
-    },
-    "marketing_agency": {
-      "max": 25000,
-      "min": 250,
-      "step": 100,
-      "unit": "retainer/project"
     }
   },
   "slug_industry": {
     "alex-ramos": "medical_devices",
+    "anthony-castillo": "home_services",
+    "anthony-castillo-honest-water-20260615": "home_services",
+    "asif-jam-zygfwmak0v": "crm_software",
     "austin-iron-horse": "retail_firearms",
     "avery-martinez-costa-vida-20260601": "food_franchise",
+    "bennett-maxwell": "crm_software",
+    "billy-bob-electric-20260604": "home_services",
+    "brad-maxwell-enso-rings-20260609": "retail",
     "branson-maxwell": "photography",
     "brent-attaway": "crm_software",
     "britt-warnick": "design_agency",
@@ -109,26 +121,28 @@
     "court-lundberg": "home_services",
     "dave-wood": "food_franchise",
     "dave-wood-fresh-20260601": "food_franchise",
+    "garlon-maxwell": "heavy_equipment",
     "jaden-mecham": "medspa",
+    "jake-wagoner-mga0ibe2wm": "professional_services",
+    "jason-martinez": "home_services",
+    "joe-glennon-nextkey-growth-partners-20260617": "consulting",
+    "john-doe-sporting-goods-20260604": "retail",
+    "mark-bustamonte": "consulting",
     "melissa-tash-srp": "photography",
+    "mike-johnson": "home_services",
     "mike-norton-origins-20260603": "crm_software",
     "paul-muus": "consulting",
     "plumber-test-business-20260601": "home_services",
     "rey-31-consulting": "consulting",
+    "rj-kitchenguard": "home_services",
     "rush-evans": "photography",
     "shaheen-mazloom": "consulting",
+    "simon-disruptive-foods-fkijepmxaz": "professional_services",
+    "scott-paul-phi-health": "retail",
+    "sky-bme-llc": "crm_software",
     "watson": "video_production",
     "watson-kamoto": "video_production",
     "zachary-oldham": "property_mgmt",
-    "zachary-red-sands": "property_mgmt",
-    "billy-bob-electric-20260604": "home_services",
-    "john-doe-sporting-goods-20260604": "retail",
-    "jason-martinez": "home_services",
-    "mike-johnson": "home_services",
-    "rj-kitchenguard": "home_services",
-    "bennett-maxwell": "crm_software",
-    "brad-maxwell-enso-rings-20260609": "retail",
-    "anthony-castillo": "home_services",
-    "anthony-castillo-honest-water-20260615": "home_services"
+    "zachary-red-sands": "property_mgmt"
   }
 }
