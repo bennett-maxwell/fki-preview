@@ -1,0 +1,305 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
+        "--receipt-dir",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618",
+        "--lead",
+        "simon-harwood-disruptive-foods-20260618",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Simon%20Harwood&biz=Disruptive%20Foods&src=simon-harwood-disruptive-foods-20260618&firstName=Simon&email=s.harwood%40disruptivefoods.co.uk&agents=Buyer+Enquiry+%26+Sample-Request+Agent,Retail+Marketing+Content+Agent,Hiring+%26+Onboarding+Agent,Admin+%26+Order-Ops+Agent,Team+Organization+%26+Weekly-Ops+Agent,Buyer+Account+Insights+%26+Reporting+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Simon%20Harwood&biz=Disruptive%20Foods&src=simon-harwood-disruptive-foods-20260618&firstName=Simon&email=s.harwood%40disruptivefoods.co.uk&agents=Buyer+Enquiry+%26+Sample-Request+Agent,Retail+Marketing+Content+Agent,Hiring+%26+Onboarding+Agent,Admin+%26+Order-Ops+Agent,Team+Organization+%26+Weekly-Ops+Agent,Buyer+Account+Insights+%26+Reporting+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Simon%20Harwood&biz=Disruptive%20Foods&src=simon-harwood-disruptive-foods-20260618&firstName=Simon&email=s.harwood%40disruptivefoods.co.uk&agents=Buyer+Enquiry+%26+Sample-Request+Agent,Retail+Marketing+Content+Agent,Hiring+%26+Onboarding+Agent,Admin+%26+Order-Ops+Agent,Team+Organization+%26+Weekly-Ops+Agent,Buyer+Account+Insights+%26+Reporting+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
+        "--lead",
+        "simon-harwood-disruptive-foods-20260618",
+        "--json-output",
+        "--delivery-email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/simon-harwood-disruptive-foods-20260618.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Buyer Enquiry & Sample-Request Agent\",",
+        "        \"Retail Marketing Content Agent\",",
+        "        \"Hiring & Onboarding Agent\",",
+        "        \"Admin & Order-Ops Agent\",",
+        "        \"Team Organization & Weekly-Ops Agent\",",
+        "        \"Buyer Account Insights & Reporting Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Simon+Harwood&biz=Disruptive+Foods&src=simon-harwood-disruptive-foods-20260618&firstName=Simon&email=s.harwood%40disruptivefoods.co.uk&agents=Buyer+Enquiry+%26+Sample-Request+Agent%2CRetail+Marketing+Content+Agent%2CHiring+%26+Onboarding+Agent%2CAdmin+%26+Order-Ops+Agent%2CTeam+Organization+%26+Weekly-Ops+Agent%2CBuyer+Account+Insights+%26+Reporting+Agent&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=FKijEpmXaZoY8DfqWiyq\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"simon-harwood-disruptive-foods-20260618\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/madisonlanz/Desktop/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/simon-harwood-disruptive-foods-20260618.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: simon-harwood-disruptive-foods-20260618 - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/simon-harwood-disruptive-foods-20260618-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: simon-harwood-disruptive-foods-20260618 - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/run-audit.py",
+        "--lead",
+        "simon-harwood-disruptive-foods-20260618"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[FAIL] simon-harwood-disruptive-foods-20260618: 10/16 (62%)  RED-LINE FAIL: ['D3-01_podcast_exists_RL', 'D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/madisonlanz/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html"
+      ],
+      "name": "financial_realism",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "simon-harwood-disruptive-foods-20260618 unknown                  8        0  FAIL (1)",
+        "      \u2717 D10-05 [RL] industry unclassified \u2014 cannot verify financials (add 'simon-harwood-disruptive-foods-20260618' to LEAD_INDUSTRY from intake)",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "  [PASS] D9-03 snapshot/profile is grid/flex",
+        "  [PASS] D9-04 @media query",
+        "  [PASS] D9-05 mobile <=480px",
+        "  [PASS] D9-06 viewport meta",
+        "  [PASS] D9-07 no leftover template blue",
+        "  [PASS] D9-08 sections >= 8 (found 16)",
+        "  [PASS] D9-09 every section has id",
+        "  [PASS] D9-10 no dead anchors",
+        "  [PASS] D9-11 no empty headings",
+        "  [PASS] D9-12 no double-encoded entities",
+        "  [PASS] D9-13 broken possessive (skipped - no --business-name)",
+        "  [PASS] D9-14 no undefined/NaN/null",
+        "  [PASS] D9-15 font-family on body (union of all body rules)",
+        "  [PASS] D9-16 hero has background",
+        "  [PASS] D9-17 CTA button styled",
+        "  [PASS] D9-18 tables border-collapse (or N/A)",
+        "  [PASS] D9-19 max-width container",
+        "  [PASS] D9-20 [RL] no off-brand accent leak",
+        "",
+        "FAILED: 0"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-closeout.json"
+    },
+    {
+      "detail": "all referenced MP3 files below production floor or missing: ",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "financial-realism-check.py failed",
+    "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-email-click-test.json",
+    "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-desktop-render.json",
+    "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-mobile-render.json",
+    "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-audit.json",
+    "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-closeout.json",
+    "production audio size failed: all referenced MP3 files below production floor or missing: ",
+    "production audio direct-address failed: missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
+    "production audio NotebookLM origin failed: missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json"
+  ],
+  "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
+  "lead": "simon-harwood-disruptive-foods-20260618",
+  "mode": "production",
+  "receipt_dir": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-18T18:26:44.954018+00:00"
+}
