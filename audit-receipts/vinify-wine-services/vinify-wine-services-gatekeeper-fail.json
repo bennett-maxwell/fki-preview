@@ -1,0 +1,286 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/vinify-wine-services.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/vinify-wine-services",
+        "--lead",
+        "vinify-wine-services",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/vinify-wine-services.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Vinify+Wine+Services&biz=Vinify+Wine+Services&src=vinify-wine-services&agents=Inquiry-Response+Agent%2CClient+Production-Update+Agent%2CHarvest+Coordination+Agent%2CTasting-Room+%26+Tour+Agent%2CReview+%26+Referral+Agent%2CCompliance+%26+Reporting+Assistant\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Vinify+Wine+Services&biz=Vinify+Wine+Services&src=vinify-wine-services&agents=Inquiry-Response+Agent%2CClient+Production-Update+Agent%2CHarvest+Coordination+Agent%2CTasting-Room+%26+Tour+Agent%2CReview+%26+Referral+Agent%2CCompliance+%26+Reporting+Assistant\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Vinify+Wine+Services&biz=Vinify+Wine+Services&src=vinify-wine-services&agents=Inquiry-Response+Agent%2CClient+Production-Update+Agent%2CHarvest+Coordination+Agent%2CTasting-Room+%26+Tour+Agent%2CReview+%26+Referral+Agent%2CCompliance+%26+Reporting+Assistant\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/vinify-wine-services.html",
+        "--lead",
+        "vinify-wine-services",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/vinify-wine-services.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Inquiry-Response Agent\",",
+        "        \"Client Production-Update Agent\",",
+        "        \"Harvest Coordination Agent\",",
+        "        \"Tasting-Room & Tour Agent\",",
+        "        \"Review & Referral Agent\",",
+        "        \"Compliance & Reporting Assistant\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Vinify+Wine+Services&biz=Vinify+Wine+Services&src=vinify-wine-services&agents=Inquiry-Response+Agent%2CClient+Production-Update+Agent%2CHarvest+Coordination+Agent%2CTasting-Room+%26+Tour+Agent%2CReview+%26+Referral+Agent%2CCompliance+%26+Reporting+Assistant&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"vinify-wine-services\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/vinify-wine-services.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: vinify-wine-services - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/vinify-wine-services-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: vinify-wine-services - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "vinify-wine-services"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[FAIL] vinify-wine-services: 12/16 (75%)  RED-LINE FAIL: ['D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/vinify-wine-services.html"
+      ],
+      "name": "financial_realism",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "vinify-wine-services unknown              10000        0  FAIL (1)",
+        "      \u2717 D10-05 [RL] industry unclassified \u2014 cannot verify financials (add 'vinify-wine-services' to LEAD_INDUSTRY from intake)",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 0/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/vinify-wine-services.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services/vinify-wine-services-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services/vinify-wine-services-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services/vinify-wine-services-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services/vinify-wine-services-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services/vinify-wine-services-closeout.json"
+    },
+    {
+      "detail": "all referenced MP3 files below production floor or missing: vinify-wine-services.mp3=5091297",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "financial-realism-check.py failed",
+    "proof receipt missing or failing: vinify-wine-services-email-click-test.json",
+    "proof receipt missing or failing: vinify-wine-services-desktop-render.json",
+    "proof receipt missing or failing: vinify-wine-services-mobile-render.json",
+    "proof receipt missing or failing: vinify-wine-services-audit.json",
+    "proof receipt missing or failing: vinify-wine-services-closeout.json",
+    "production audio size failed: all referenced MP3 files below production floor or missing: vinify-wine-services.mp3=5091297",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/vinify-wine-services.html",
+  "lead": "vinify-wine-services",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/vinify-wine-services",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-18T20:08:52.865825+00:00"
+}
