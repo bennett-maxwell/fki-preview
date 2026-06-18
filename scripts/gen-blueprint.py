@@ -128,6 +128,35 @@ def validate_production_agent_prompt(text, label, min_chars=1200):
     return raw
 
 
+def _hex_to_rgb(hexstr):
+    h = hexstr.lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def apply_accent(html, accent):
+    """Drive the page's accent off the lead's real brand color.
+
+    The base template hard-codes the Advaita blue (#0071E3) into --brand,
+    --brand-red, --crmx-red and --accent-bg. A regenerated lead page must wear
+    the lead's own accent (color-extraction gate), so swap those :root vars.
+    """
+    accent = (accent or "").strip()
+    if not re.match(r"^#[0-9A-Fa-f]{3,6}$", accent):
+        return html
+    r, g, b = _hex_to_rgb(accent)
+    subs = [
+        (r'(--brand:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--brand-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--crmx-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--accent-bg:\s*)rgba\([^)]*\)', rf'\g<1>rgba({r}, {g}, {b}, 0.08)'),
+    ]
+    for pat, repl in subs:
+        html = re.sub(pat, repl, html, count=1)
+    return html
+
+
 def build(profile):
     html = open(TEMPLATE, encoding="utf-8").read()
     p = profile
@@ -417,6 +446,8 @@ def build(profile):
     m = re.search(r'<title>(.*?)</title>', html, re.S)
     if m and p["first_name"].lower() not in m.group(1).lower():
         html = html.replace(m.group(0), f'<title>{m.group(1).strip()} · {esc(p["lead_name"])}</title>', 1)
+    # ---- lead accent (color-extraction gate) ----
+    html = apply_accent(html, p.get("accent_color"))
     return html
 
 

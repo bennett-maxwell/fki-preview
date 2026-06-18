@@ -19,8 +19,8 @@
         "--require-production"
       ],
       "name": "completion_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    \"48\": {",
@@ -58,29 +58,17 @@
         "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618/asif-jam-equities-20260618-ghl-raw.json"
       ],
       "name": "source_fidelity_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "    {",
-        "      \"severity\": \"fail\",",
-        "      \"code\": \"template_phrase_present\",",
-        "      \"phrase\": \"SaaS Agency\",",
-        "      \"message\": \"Template/SaaS phrase present in artifact: SaaS Agency\"",
-        "    },",
-        "    {",
-        "      \"severity\": \"fail\",",
-        "      \"code\": \"template_phrase_present\",",
-        "      \"phrase\": \"675+ accounts\",",
-        "      \"message\": \"Template/SaaS phrase present in artifact: 675+ accounts\"",
-        "    },",
-        "    {",
-        "      \"severity\": \"fail\",",
-        "      \"code\": \"template_phrase_present\",",
-        "      \"phrase\": \"$199/mo\",",
-        "      \"message\": \"Template/SaaS phrase present in artifact: $199/mo\"",
-        "    }",
-        "  ]",
+        "{",
+        "  \"gate\": \"blueprint_source_fidelity_gate\",",
+        "  \"lead_json\": \"/Users/madisonlanz/Desktop/fki-preview/leads/asif-jam-equities-20260618.json\",",
+        "  \"html\": \"/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html\",",
+        "  \"raw_value_count\": 18,",
+        "  \"status\": \"PASS\",",
+        "  \"findings\": []",
         "}"
       ]
     },
@@ -97,17 +85,17 @@
         "/Users/madisonlanz/Desktop/fki-preview/leads/asif-jam-equities-20260618.json"
       ],
       "name": "agent_prompt_quality_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "    \"HTML visible prompt prompt_pre_3: missing output\",",
-        "    \"HTML visible prompt prompt_pre_3: missing rules\",",
-        "    \"HTML visible prompt prompt_pre_3: missing escalation\",",
-        "    \"HTML visible prompt prompt_pre_3: missing first_run_test\"",
+        "      \"label\": \"profile visible prompt 3 (Multi-Unit Scheduling Agent)\",",
+        "      \"source\": \"profile\"",
+        "    }",
         "  ],",
+        "  \"failures\": [],",
         "  \"html\": \"/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html\",",
-        "  \"pass\": false,",
+        "  \"pass\": true,",
         "  \"profile\": \"/Users/madisonlanz/Desktop/fki-preview/leads/asif-jam-equities-20260618.json\",",
         "  \"required_markers\": [",
         "    \"escalation\",",
@@ -118,8 +106,8 @@
         "    \"rules\",",
         "    \"workflow\"",
         "  ],",
-        "  \"status\": \"FAIL\",",
-        "  \"ts\": \"2026-06-18T19:36:15.423848+00:00\"",
+        "  \"status\": \"PASS\",",
+        "  \"ts\": \"2026-06-18T19:48:09.786058+00:00\"",
         "}"
       ]
     },
@@ -140,19 +128,19 @@
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif%20Poonja&biz=JAM%20Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent,Booking+%26+Follow-Up+Agent,Multi-Unit+Scheduling+Agent,Hiring+%26+Onboarding+Agent,Multi-Unit+Ops+Dashboard+Agent,Customer+Communication+%26+Reviews+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif+Poonja&biz=JAM+Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent%2CBooking+%26+Follow-Up+Agent%2CMulti-Unit+Scheduling+Agent%2CHiring+%26+Onboarding+Agent%2CMulti-Unit+Ops+Dashboard+Agent%2CCustomer+Communication+%26+Reviews+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif%20Poonja&biz=JAM%20Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent,Booking+%26+Follow-Up+Agent,Multi-Unit+Scheduling+Agent,Hiring+%26+Onboarding+Agent,Multi-Unit+Ops+Dashboard+Agent,Customer+Communication+%26+Reviews+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif+Poonja&biz=JAM+Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent%2CBooking+%26+Follow-Up+Agent%2CMulti-Unit+Scheduling+Agent%2CHiring+%26+Onboarding+Agent%2CMulti-Unit+Ops+Dashboard+Agent%2CCustomer+Communication+%26+Reviews+Agent\"",
         "    },",
         "    {",
         "      \"http_code\": 200,",
         "      \"pass\": true,",
         "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
-        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif%20Poonja&biz=JAM%20Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent,Booking+%26+Follow-Up+Agent,Multi-Unit+Scheduling+Agent,Hiring+%26+Onboarding+Agent,Multi-Unit+Ops+Dashboard+Agent,Customer+Communication+%26+Reviews+Agent\"",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Asif+Poonja&biz=JAM+Equities&src=asif-jam-equities-20260618&firstName=Asif&email=asif%40jameg.com&agents=Missed-Call+%26+Catering-Capture+Agent%2CBooking+%26+Follow-Up+Agent%2CMulti-Unit+Scheduling+Agent%2CHiring+%26+Onboarding+Agent%2CMulti-Unit+Ops+Dashboard+Agent%2CCustomer+Communication+%26+Reviews+Agent\"",
         "    }",
         "  ],",
         "  \"status\": \"PASS\"",
@@ -174,8 +162,8 @@
         "/Users/madisonlanz/Desktop/fki-preview/leads/asif-jam-equities-20260618.json"
       ],
       "name": "qualifier_context_gate",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
         "    },",
@@ -194,9 +182,9 @@
         "    }",
         "  ],",
         "  \"lead\": \"asif-jam-equities-20260618\",",
-        "  \"pass\": false,",
+        "  \"pass\": true,",
         "  \"qualifier\": \"/Users/madisonlanz/Desktop/fki-preview/qualify.html\",",
-        "  \"status\": \"FAIL\"",
+        "  \"status\": \"PASS\"",
         "}"
       ]
     },
@@ -255,14 +243,14 @@
         "asif-jam-equities-20260618"
       ],
       "name": "blueprint_audit",
-      "pass": false,
-      "returncode": 1,
+      "pass": true,
+      "returncode": 0,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] asif-jam-equities-20260618: 15/17 (88%)  RED-LINE FAIL: ['PF0-7_source_fidelity_RL', 'D2-02_agent_cards_substantive_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "[PASS] asif-jam-equities-20260618: 17/17 (100%)",
         "",
         "Audit complete. History: /Users/madisonlanz/.openclaw/logs/blueprint-audit-history.jsonl",
-        "VERDICT=FAIL"
+        "VERDICT=PASS"
       ]
     },
     {
@@ -279,7 +267,7 @@
       "stdout_tail": [
         "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
         "------------------------------------------------------------------------------",
-        "asif-jam-equities-20260618 food_franchise          38        0  PASS",
+        "asif-jam-equities-20260618 food_franchise          25        0  PASS",
         "------------------------------------------------------------------------------",
         "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
       ]
@@ -334,12 +322,12 @@
     },
     {
       "name": "proof_audit_json",
-      "pass": false,
+      "pass": true,
       "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618/asif-jam-equities-20260618-audit.json"
     },
     {
       "name": "proof_closeout",
-      "pass": false,
+      "pass": true,
       "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618/asif-jam-equities-20260618-closeout.json"
     },
     {
@@ -356,23 +344,82 @@
       "detail": "NotebookLM origin verified",
       "name": "production_audio_notebooklm_origin",
       "pass": true
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html",
+        "--receipt-dir",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618",
+        "--lead",
+        "asif-jam-equities-20260618",
+        "--json-output",
+        "--require-production",
+        "--already-sent"
+      ],
+      "name": "strict_completion_gate_with_gatekeeper_receipt",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
     }
   ],
-  "diamond": "FAIL",
-  "failures": [
-    "completion_gate failed",
-    "source-fidelity gate failed",
-    "agent prompt quality gate failed",
-    "qualifier context gate failed",
-    "run-audit.py failed",
-    "proof receipt missing or failing: asif-jam-equities-20260618-audit.json",
-    "proof receipt missing or failing: asif-jam-equities-20260618-closeout.json"
-  ],
+  "diamond": "PASS",
+  "failures": [],
   "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html",
   "lead": "asif-jam-equities-20260618",
   "mode": "production",
+  "pass_token": {
+    "allowed_actions": [
+      "internal_preview",
+      "bennett_preview"
+    ],
+    "approval_state": "bennett_preview_only",
+    "artifact_hashes": {
+      "blueprint_html_sha256": "6c46d0c5da665382720031780e1af0318785677326e87cc04c07ea08d56d0c01",
+      "delivery_email_sha256": "9a788c03663e4c8e8b9aecac07b9fe5087a9645c7b87cd0c4ccba8df066f8910",
+      "lead_profile_sha256": "12e89c19a225ae51526b7a87e60d4ccdaa0f65df6d47301cd354793bbb6e2f8d",
+      "podcast_production_47_sha256": "4883b2cd5854be8db90c827c56b099612bbc3736178e94d0bd2967c75c0cba39"
+    },
+    "artifact_paths": {
+      "blueprint_html": "/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html",
+      "delivery_email": "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/asif-jam-equities-20260618-delivery-email.html",
+      "lead_profile": "/Users/madisonlanz/Desktop/fki-preview/leads/asif-jam-equities-20260618.json"
+    },
+    "diamond": "PASS",
+    "generated_at": "2026-06-18T19:48:10.344470+00:00",
+    "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/asif-jam-equities-20260618.html",
+    "lead": "asif-jam-equities-20260618",
+    "pass": true,
+    "receipt_dir": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618",
+    "score": 100,
+    "strict_production": true
+  },
   "receipt_dir": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/asif-jam-equities-20260618",
-  "score": 0,
-  "status": "FAIL",
-  "ts": "2026-06-18T19:36:16.029718+00:00"
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-18T19:48:10.344131+00:00"
 }
