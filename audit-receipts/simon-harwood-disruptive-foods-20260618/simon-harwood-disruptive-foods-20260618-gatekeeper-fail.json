@@ -48,6 +48,45 @@
     {
       "cmd": [
         "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_agent_prompt_quality_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
+        "--receipt",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-agent-prompt-quality.json",
+        "--json-output",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/simon-harwood-disruptive-foods-20260618.json"
+      ],
+      "name": "agent_prompt_quality_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"HTML agent prompt agent_prompt_html_6: missing output\",",
+        "    \"HTML agent prompt agent_prompt_html_6: missing rules\",",
+        "    \"HTML agent prompt agent_prompt_html_6: missing escalation\",",
+        "    \"HTML agent prompt agent_prompt_html_6: missing first_run_test\"",
+        "  ],",
+        "  \"html\": \"/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html\",",
+        "  \"pass\": false,",
+        "  \"profile\": \"/Users/madisonlanz/Desktop/fki-preview/leads/simon-harwood-disruptive-foods-20260618.json\",",
+        "  \"required_markers\": [",
+        "    \"escalation\",",
+        "    \"first_run_test\",",
+        "    \"identity\",",
+        "    \"inputs\",",
+        "    \"output\",",
+        "    \"rules\",",
+        "    \"workflow\"",
+        "  ],",
+        "  \"status\": \"FAIL\",",
+        "  \"ts\": \"2026-06-18T19:11:21.061091+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
         "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_qualify_link_gate.py",
         "--html",
         "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
@@ -181,7 +220,7 @@
       "returncode": 1,
       "stderr_tail": [],
       "stdout_tail": [
-        "[FAIL] simon-harwood-disruptive-foods-20260618: 10/16 (62%)  RED-LINE FAIL: ['D3-01_podcast_exists_RL', 'D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_16to20min_RL', 'D4-09_podcast_source_funnel_clean_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
+        "[FAIL] simon-harwood-disruptive-foods-20260618: 13/16 (81%)  RED-LINE FAIL: ['D3-03_podcast_duration_8to12min_RL', 'D10-01_financial_realism_RL'] (FINANCIAL-REALISM: 0/1 pass red-line financial checks)",
         "",
         "Audit complete. History: /Users/madisonlanz/.openclaw/logs/blueprint-audit-history.jsonl",
         "VERDICT=FAIL"
@@ -266,24 +305,25 @@
       "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618/simon-harwood-disruptive-foods-20260618-closeout.json"
     },
     {
-      "detail": "all referenced MP3 files below production floor or missing: ",
+      "detail": "simon-harwood-disruptive-foods-20260618.mp3 28432176 bytes exceeds walkthrough ceiling 20971520 (byte sanity ceiling)",
       "name": "production_audio_size",
       "pass": false
     },
     {
-      "detail": "missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, and matching audio_sha256 required",
       "name": "production_audio_direct_address",
       "pass": false
     },
     {
-      "detail": "missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
+      "detail": "NotebookLM origin verified",
       "name": "production_audio_notebooklm_origin",
-      "pass": false
+      "pass": true
     }
   ],
   "diamond": "FAIL",
   "failures": [
     "completion_gate failed",
+    "agent prompt quality gate failed",
     "run-audit.py failed",
     "financial-realism-check.py failed",
     "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-email-click-test.json",
@@ -291,9 +331,8 @@
     "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-mobile-render.json",
     "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-audit.json",
     "proof receipt missing or failing: simon-harwood-disruptive-foods-20260618-closeout.json",
-    "production audio size failed: all referenced MP3 files below production floor or missing: ",
-    "production audio direct-address failed: missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json",
-    "production audio NotebookLM origin failed: missing podcast production receipt: simon-harwood-disruptive-foods-20260618-production-47.json"
+    "production audio size failed: simon-harwood-disruptive-foods-20260618.mp3 28432176 bytes exceeds walkthrough ceiling 20971520 (byte sanity ceiling)",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, and matching audio_sha256 required"
   ],
   "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
   "lead": "simon-harwood-disruptive-foods-20260618",
@@ -301,5 +340,5 @@
   "receipt_dir": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/simon-harwood-disruptive-foods-20260618",
   "score": 0,
   "status": "FAIL",
-  "ts": "2026-06-18T18:26:44.954018+00:00"
+  "ts": "2026-06-18T19:11:21.857954+00:00"
 }
