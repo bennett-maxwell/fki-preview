@@ -64,6 +64,8 @@ LEAD_INDUSTRY = {
     "sky-bme-llc":      "marketing_agency",   # BME LLC (GHL form 2026-06: industry=marketing, GoHighLevel/Asana)
     "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
     "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
+    "simon-harwood-disruptive-foods-20260618": "food_franchise",  # Disruptive Foods — street-food product distribution to retail (GHL form 2026-06-18); per-customer ticket band
+    "asif-jam-equities-20260618":              "food_franchise",  # JAM Equities — multi-unit QSR/restaurant operator (GHL form 2026-06-18); per-guest ticket band
     # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
     # business identity in the page <title> — the SAME standard the canon 15 use — so the
     # financial gate keeps VERIFYING their bands instead of silently skipping them. A demo

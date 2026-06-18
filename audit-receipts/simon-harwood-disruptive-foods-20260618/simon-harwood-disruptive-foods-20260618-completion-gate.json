@@ -1,12 +1,12 @@
 {
   "lead": "simon-harwood-disruptive-foods-20260618",
-  "ts": "2026-06-18T19:11:21.029182+00:00",
+  "ts": "2026-06-18T19:36:14.392427+00:00",
   "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/simon-harwood-disruptive-foods-20260618.html",
   "html_size_bytes": 109761,
   "require_production": true,
   "summary": {
-    "passed": 37,
-    "failed": 7,
+    "passed": 43,
+    "failed": 1,
     "skipped": 6,
     "total_applicable": 44,
     "overall_pass": false
@@ -24,9 +24,11 @@
       "failures": []
     },
     "Funnel": {
-      "score": "10/10 (100%)",
-      "pass": true,
-      "failures": []
+      "score": "9/10 (90%)",
+      "pass": false,
+      "failures": [
+        "#21: Source-fidelity: no unsupported/template industry, numeric, or SaaS claims \u2014 FAIL: template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present"
+      ]
     },
     "Audio": {
       "score": "5/5 (100%)",
@@ -39,17 +41,9 @@
       "failures": []
     },
     "Production": {
-      "score": "0/7 (0%)",
-      "pass": false,
-      "failures": [
-        "#42: Public GitHub Pages build verified (HTTP 200) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 42",
-        "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
-        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
-        "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
-        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
-        "#47: 10-minute NotebookLM audio (8-12 min / direct-address / origin verified) \u2014 Public podcast receipt must include pass=true, http_code=200, duration_seconds within [480, 720], and size_download within [6291456, 20971520] bytes (Blueprint 10-minute standard)",
-        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
-      ]
+      "score": "7/7 (100%)",
+      "pass": true,
+      "failures": []
     },
     "Delivery": {
       "score": "1/1 (100%)",
@@ -63,13 +57,7 @@
     }
   },
   "critical_failures": [
-    "#42: Public GitHub Pages build verified (HTTP 200)",
-    "#43: Drive artifact registry row present",
-    "#44: Notion Sprint row present",
-    "#45: Current GHL readback (contact tagged)",
-    "#46: Repeat-submit same-contact proof",
-    "#47: 10-minute NotebookLM audio (8-12 min / direct-address / origin verified)",
-    "#48: Bennett approval scope recorded"
+    "#21: Source-fidelity: no unsupported/template industry, numeric, or SaaS claims"
   ],
   "major_failures": [],
   "checks": {
@@ -194,10 +182,10 @@
       "detail": "OK"
     },
     "21": {
-      "desc": "Lead's industry reflected in content",
-      "pass": true,
-      "severity": "warning",
-      "detail": "Manual review: verify industry-specific content present"
+      "desc": "Source-fidelity: no unsupported/template industry, numeric, or SaaS claims",
+      "pass": false,
+      "severity": "critical",
+      "detail": "FAIL: template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present; template_phrase_present"
     },
     "22": {
       "desc": "No cross-lead contamination (other lead names)",
@@ -287,19 +275,19 @@
       "desc": "Email click test receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing email click test receipt"
+      "detail": "OK"
     },
     "37": {
       "desc": "Desktop render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing desktop render receipt"
+      "detail": "OK"
     },
     "38": {
       "desc": "Mobile render receipt exists",
       "pass": null,
       "severity": "info",
-      "detail": "Missing mobile render receipt"
+      "detail": "OK"
     },
     "39": {
       "desc": "Audit JSON receipt exists",
@@ -321,45 +309,45 @@
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 42"
+      "detail": "Public page HTTP 200 verified"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
+      "detail": "Drive artifact registry verified"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
+      "detail": "Notion Sprint row current"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
+      "detail": "GHL exact contact readback and instant response verified"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
+      "detail": "Repeat submit updated same GHL contact"
     },
     "47": {
       "desc": "10-minute NotebookLM audio (8-12 min / direct-address / origin verified)",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "Public podcast receipt must include pass=true, http_code=200, duration_seconds within [480, 720], and size_download within [6291456, 20971520] bytes (Blueprint 10-minute standard)"
+      "detail": "Public/local NotebookLM podcast and direct-address audio verified (654s, 10470850 bytes)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": false,
+      "pass": true,
       "severity": "critical",
-      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      "detail": "Approval scope: Bennett preview only; customer send remains blocked"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",
