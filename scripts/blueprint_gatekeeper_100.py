@@ -16,7 +16,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import unquote, urlparse
 
 
@@ -84,6 +84,33 @@ def receipt_pass(path: Path) -> bool:
     status = str(data.get("status") or data.get("verdict") or "").strip().upper()
     return status in {"PASS", "PASSED", "OK", "SUCCESS", "GREEN", "DIAMOND_PASS"}
 
+
+
+def find_ghl_raw_for_source_fidelity(lead: str, receipt_dir: Path) -> Optional[Path]:
+    candidates = []
+    for root in [receipt_dir, REPO / "audit-receipts" / lead]:
+        if root.exists():
+            candidates.extend(root.glob("**/*ghl*raw*.json"))
+            candidates.extend(root.glob("**/ghl-contact-by-id.raw.json"))
+            candidates.extend(root.glob("**/*contact*raw*.json"))
+    unique = sorted({c.resolve() for c in candidates if c.exists()}, key=lambda x: x.stat().st_mtime, reverse=True)
+    return unique[0] if unique else None
+
+
+def source_fidelity_cmd(lead: str, html_path: Path, profile_path: Path, receipt_dir: Path) -> List[str]:
+    cmd = [
+        sys.executable,
+        str(REPO / "scripts" / "blueprint_source_fidelity_gate.py"),
+        "--lead-json",
+        str(profile_path),
+        "--html",
+        str(html_path),
+        "--json-output",
+    ]
+    raw = find_ghl_raw_for_source_fidelity(lead, receipt_dir)
+    if raw:
+        cmd.extend(["--ghl-raw", str(raw)])
+    return cmd
 
 def run_cmd(name: str, cmd: List[str], cwd: Path = REPO, timeout: int = 180) -> Dict[str, Any]:
     proc = subprocess.run(cmd, cwd=str(cwd), text=True, capture_output=True, timeout=timeout)
@@ -408,6 +435,11 @@ def main() -> int:
     profile_for_agent_gate = Path(args.profile) if args.profile else default_lead_profile_path(args.lead)
     if not profile_for_agent_gate.is_absolute():
         profile_for_agent_gate = REPO / profile_for_agent_gate
+
+    source_fidelity = run_cmd("source_fidelity_gate", source_fidelity_cmd(args.lead, html_path, profile_for_agent_gate, receipt_dir), timeout=90)
+    checks.append(source_fidelity)
+    if not source_fidelity["pass"]:
+        failures.append("source-fidelity gate failed")
     agent_prompt_cmd = [
         sys.executable,
         str(REPO / "scripts" / "blueprint_agent_prompt_quality_gate.py"),

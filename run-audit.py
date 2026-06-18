@@ -88,6 +88,46 @@ def format_conformance_gate(html_path):
     except Exception as e:
         return False, f"format conformance check error: {e}"
 
+
+def find_ghl_raw_for_source_fidelity(slug):
+    patterns = [
+        os.path.join(REPO, "audit-receipts", slug, "**", "*ghl*raw*.json"),
+        os.path.join(REPO, "audit-receipts", slug, "**", "ghl-contact-by-id.raw.json"),
+        os.path.join(REPO, "audit-receipts", slug, "**", "*contact*raw*.json"),
+    ]
+    matches = []
+    for pattern in patterns:
+        matches.extend(glob.glob(pattern, recursive=True))
+    if not matches:
+        return ""
+    return sorted(set(matches), key=lambda x: os.path.getmtime(x), reverse=True)[0]
+
+
+def source_fidelity_gate(slug, html_path):
+    checker = os.path.join(REPO, "scripts", "blueprint_source_fidelity_gate.py")
+    lead_json = os.path.join(REPO, "leads", f"{slug}.json")
+    if not os.path.exists(checker):
+        return False, "blueprint_source_fidelity_gate.py missing"
+    if not os.path.exists(lead_json):
+        return False, f"lead profile missing: {lead_json}"
+    cmd = [sys.executable, checker, "--lead-json", lead_json, "--html", html_path, "--json-output"]
+    raw = find_ghl_raw_for_source_fidelity(slug)
+    if raw:
+        cmd.extend(["--ghl-raw", raw])
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            findings = data.get("findings") or []
+            detail = data.get("status", "") + (": " + "; ".join(f.get("code", "finding") for f in findings[:8]) if findings else "")
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"source fidelity check error: {e}"
+
 def no_orphan_classes(html):
     style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.DOTALL | re.I))
     defined = set(re.findall(r"\.([A-Za-z_][A-Za-z0-9_-]*)", style_blocks))
@@ -398,6 +438,9 @@ def audit_lead(slug):
     format_ok, format_detail = format_conformance_gate(html_path)
     results["PF0-5_format3_dense_scroll_RL"] = format_ok
     redlines["PF0-5_format3_dense_scroll_RL"] = format_ok
+    source_ok, source_detail = source_fidelity_gate(slug, html_path)
+    results["PF0-6_source_fidelity_RL"] = source_ok
+    redlines["PF0-6_source_fidelity_RL"] = source_ok
     results["D1-01_name_in_title"] = name_in_title(html, slug)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
     # D2-02 [RL] AGENT SUBSTANCE GATE (Bennett directive 2026-06-09): every blueprint
@@ -449,6 +492,7 @@ def audit_lead(slug):
             "checks": results, "size": size,
             "redline_fail": redline_fail, "financial_detail": fin_detail,
             "format_detail": format_detail,
+            "source_fidelity_detail": source_detail,
             "orphan_class_detail": orphan_detail,
             "calculator_detail": calc_detail,
             "home_services_detail": hs_detail,

@@ -179,6 +179,48 @@ def production_notebooklm_origin_ok(data: dict) -> Tuple[bool, str]:
     return False, 'missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt'
 
 
+
+def default_lead_profile_path(lead_slug: str) -> Path:
+    return Path(__file__).resolve().parents[1] / "leads" / f"{lead_slug}.json"
+
+
+def find_ghl_raw_for_source_fidelity(lead_slug: str, receipt_dir: Path) -> Optional[Path]:
+    candidates = []
+    search_roots = [receipt_dir, Path(__file__).resolve().parents[1] / "audit-receipts" / lead_slug]
+    for root in search_roots:
+        if root.exists():
+            candidates.extend(root.glob("**/*ghl*raw*.json"))
+            candidates.extend(root.glob("**/ghl-contact-by-id.raw.json"))
+            candidates.extend(root.glob("**/*contact*raw*.json"))
+    unique = sorted({c.resolve() for c in candidates if c.exists()}, key=lambda x: x.stat().st_mtime, reverse=True)
+    return unique[0] if unique else None
+
+
+def source_fidelity_check(lead_slug: str, html_path: Optional[Path], receipt_dir: Path) -> Tuple[bool, str]:
+    repo = Path(__file__).resolve().parents[1]
+    checker = repo / "scripts" / "blueprint_source_fidelity_gate.py"
+    lead_json = default_lead_profile_path(lead_slug)
+    if not checker.exists():
+        return False, "blueprint_source_fidelity_gate.py missing"
+    if not lead_json.exists():
+        return False, f"lead profile missing: {lead_json}"
+    cmd = [sys.executable, str(checker), "--lead-json", str(lead_json), "--json-output"]
+    if html_path is not None:
+        cmd.extend(["--html", str(html_path)])
+    raw = find_ghl_raw_for_source_fidelity(lead_slug, receipt_dir)
+    if raw:
+        cmd.extend(["--ghl-raw", str(raw)])
+    proc = subprocess.run(cmd, text=True, capture_output=True, timeout=60)
+    try:
+        data = json.loads(proc.stdout)
+        findings = data.get("findings") or []
+        detail = data.get("status", "")
+        if findings:
+            detail += ": " + "; ".join(f.get("code", "finding") for f in findings[:8])
+    except Exception:
+        detail = (proc.stdout or proc.stderr or f"exit {proc.returncode}").strip().splitlines()[-1]
+    return proc.returncode == 0, detail
+
 def production_receipt_result(num: int, path: Path, html: str,
                               html_path: Optional[Path]) -> Tuple[bool, str]:
     """Schema-specific production proof validators.
@@ -617,12 +659,13 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     }
 
     # ── FUNNEL (21-30) ───────────────────────────────────────────────────────
-    # 21. Industry drift — lead's industry terms present
+    # 21. Source-fidelity and industry drift — customer-facing facts must trace to the lead profile/raw form.
+    source_ok, source_detail = source_fidelity_check(lead_slug, html_path, receipt_dir)
     results[21] = {
-        "desc": "Lead's industry reflected in content",
-        "pass": True,  # Requires lead-specific check; warn only
-        "severity": "warning",
-        "detail": "Manual review: verify industry-specific content present"
+        "desc": "Source-fidelity: no unsupported/template industry, numeric, or SaaS claims",
+        "pass": source_ok,
+        "severity": "critical",
+        "detail": source_detail
     }
 
     # 22. Cross-lead contamination — other lead names absent

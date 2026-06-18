@@ -15,8 +15,10 @@ from html import unescape
 CRITICAL_NUMERIC_FIELDS = ["monthly_leads", "avg_monthly_leads"]
 CRITICAL_TEXT_FIELDS = ["business_type", "industry", "service_type"]
 TEMPLATE_PHRASES = [
-    "SaaS Agency", "SaaS & CRM", "675+ accounts", "$199/mo", "Your SaaS Product",
-    "vertical SaaS", "SaaS CRM agency", "subscription businesses run an AI health-monitoring agent",
+    "SaaS Agency", "SaaS & CRM", "675+ accounts", "675 accounts", "$199/mo", "$199 / mo",
+    "Your SaaS Product", "vertical SaaS", "SaaS CRM agency",
+    "subscription businesses run an AI health-monitoring agent",
+    "bmellc.com/home-service", "home-service CRM", "customer health, renewals, and churn",
 ]
 
 
@@ -77,6 +79,19 @@ def main() -> int:
     html = html_text(Path(args.html) if args.html else None)
 
     findings = []
+
+    # 0) A GHL/form-derived lead must preserve and pass a raw source readback.
+    #    Otherwise an agent can launder inferred/template data into leads/<slug>.json
+    #    and the audit cannot prove which facts came from the customer.
+    has_ghl_id = bool(profile.get("ghl_contact_id") or profile.get("contact_id"))
+    source_text = " ".join(str(profile.get(k, "")) for k in ["source_note", "lead_source", "source"])
+    looks_form_derived = has_ghl_id or bool(re.search(r"\b(GHL|GoHighLevel|form|intake|blueprint_ai_apply|AI_Advantage_blueprint)\b", source_text, re.I))
+    if looks_form_derived and not args.ghl_raw:
+        findings.append({
+            "severity": "fail",
+            "code": "raw_ghl_readback_missing",
+            "message": "Lead is GHL/form-derived but no --ghl-raw readback was supplied; source-fidelity cannot prove customer facts.",
+        })
 
     # 1) Never let known template SaaS claims survive in a non-SaaS artifact.
     for phrase in TEMPLATE_PHRASES:
