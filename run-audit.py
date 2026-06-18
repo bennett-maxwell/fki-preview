@@ -439,8 +439,8 @@ def audit_lead(slug):
     results["PF0-5_format3_dense_scroll_RL"] = format_ok
     redlines["PF0-5_format3_dense_scroll_RL"] = format_ok
     source_ok, source_detail = source_fidelity_gate(slug, html_path)
-    results["PF0-6_source_fidelity_RL"] = source_ok
-    redlines["PF0-6_source_fidelity_RL"] = source_ok
+    results["PF0-7_source_fidelity_RL"] = source_ok
+    redlines["PF0-7_source_fidelity_RL"] = source_ok
     results["D1-01_name_in_title"] = name_in_title(html, slug)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
     # D2-02 [RL] AGENT SUBSTANCE GATE (Bennett directive 2026-06-09): every blueprint
