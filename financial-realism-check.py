@@ -32,6 +32,7 @@ INDUSTRY_BANDS = {
     "design_agency":      (1500,40000,  "project"),
     "consulting":         (3000,150000, "engagement"),
     "retail":             (50,  2000,   "purchase/transaction"),    # retail sporting goods
+    "insurance":          (500, 10000,  "policy/annual premium"),
     "professional_services": (1000,50000, "contract/project"),
     "ai_consulting":      (3000,25000,  "contract"),
     "crm_software":       (1200,75000,  "contract/ARR"),
