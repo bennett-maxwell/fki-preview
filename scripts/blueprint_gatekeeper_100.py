@@ -21,12 +21,13 @@ from urllib.parse import unquote, urlparse
 
 
 REPO = Path(__file__).resolve().parents[1]
-# Production audio is a WINDOW, not a one-sided floor. A delivery walkthrough
-# must be substantial but not an overlong lecture: roughly 6-20 minutes at
-# 128kbps.
+# Production audio is duration-first. The Blueprint short-podcast standard is
+# 8-12 minutes, with bytes kept only as a bitrate/corruption sanity check.
 MIN_PRODUCTION_AUDIO_BYTES = 6 * 1024 * 1024
 MAX_PRODUCTION_AUDIO_BYTES = 20 * 1024 * 1024
-MAX_PRODUCTION_AUDIO_MINUTES = 20
+MIN_PRODUCTION_AUDIO_SECONDS = 8 * 60
+MAX_PRODUCTION_AUDIO_SECONDS = 12 * 60
+TARGET_PRODUCTION_AUDIO_MINUTES = 10
 
 
 def utc_now() -> str:
@@ -154,22 +155,45 @@ def audio_size_gate(html: str, html_path: Path) -> Tuple[bool, str]:
     details = []
     in_window = None
     over_ceiling = None
+    bad_duration = None
     for path in paths:
         if path.exists():
             size = path.stat().st_size
-            details.append(f"{path.name}={size}")
-            if MIN_PRODUCTION_AUDIO_BYTES <= size <= MAX_PRODUCTION_AUDIO_BYTES:
-                in_window = (path, size)
+            duration = audio_duration_seconds(path)
+            details.append(f"{path.name}={int(duration)}s/{size}")
+            if (
+                MIN_PRODUCTION_AUDIO_BYTES <= size <= MAX_PRODUCTION_AUDIO_BYTES
+                and MIN_PRODUCTION_AUDIO_SECONDS <= duration <= MAX_PRODUCTION_AUDIO_SECONDS
+            ):
+                in_window = (path, duration, size)
             elif size > MAX_PRODUCTION_AUDIO_BYTES:
                 over_ceiling = (path, size)
+            elif duration and not (MIN_PRODUCTION_AUDIO_SECONDS <= duration <= MAX_PRODUCTION_AUDIO_SECONDS):
+                bad_duration = (path, duration)
     if in_window:
-        return True, f"{in_window[0].name} {in_window[1]} bytes within window"
+        return True, f"{in_window[0].name} {int(in_window[1])}s / {in_window[2]} bytes within Blueprint 10-minute window"
+    if bad_duration:
+        return False, (
+            f"{bad_duration[0].name} duration {bad_duration[1]:.0f}s outside "
+            f"{MIN_PRODUCTION_AUDIO_SECONDS}-{MAX_PRODUCTION_AUDIO_SECONDS}s Blueprint window"
+        )
     if over_ceiling:
         return False, (
             f"{over_ceiling[0].name} {over_ceiling[1]} bytes exceeds walkthrough ceiling "
-            f"{MAX_PRODUCTION_AUDIO_BYTES} (~{MAX_PRODUCTION_AUDIO_MINUTES} min @128kbps)"
+            f"{MAX_PRODUCTION_AUDIO_BYTES} (byte sanity ceiling)"
         )
     return False, "all referenced MP3 files below production floor or missing: " + ", ".join(details)
+
+
+def audio_duration_seconds(path: Path) -> float:
+    try:
+        raw = subprocess.check_output([
+            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1", str(path)
+        ], text=True, timeout=30).strip()
+        return float(raw)
+    except Exception:
+        return 0.0
 
 
 def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
@@ -182,6 +206,7 @@ def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
         return False, f"invalid podcast production receipt: {exc}"
     expected_sha = data.get("audio_sha256")
     audio_path = data.get("audio")
+    duration_seconds = float(data.get("duration_seconds") or data.get("duration") or 0)
     hash_ok = False
     if expected_sha and audio_path:
         path = Path(audio_path)
@@ -194,13 +219,15 @@ def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
         and data.get("banned_audio_phrases_found") in ([], None)
         and data.get("third_person_patterns_found") in ([], None)
         and int(data.get("you_your_count") or 0) >= 5
+        and MIN_PRODUCTION_AUDIO_SECONDS <= duration_seconds <= MAX_PRODUCTION_AUDIO_SECONDS
         and hash_ok
     )
     if ok:
         return True, "direct-address audio receipt passed"
     return False, (
         "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, "
-        "no source-material/third-person phrases, >=5 you/your references, and matching audio_sha256 required"
+        "no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, "
+        "and matching audio_sha256 required"
     )
 
 
@@ -377,6 +404,25 @@ def main() -> int:
     checks.append(completion)
     if not completion["pass"]:
         failures.append("completion_gate failed")
+
+    profile_for_agent_gate = Path(args.profile) if args.profile else default_lead_profile_path(args.lead)
+    if not profile_for_agent_gate.is_absolute():
+        profile_for_agent_gate = REPO / profile_for_agent_gate
+    agent_prompt_cmd = [
+        sys.executable,
+        str(REPO / "scripts" / "blueprint_agent_prompt_quality_gate.py"),
+        "--html",
+        str(html_path),
+        "--receipt",
+        str(receipt_dir / f"{args.lead}-agent-prompt-quality.json"),
+        "--json-output",
+    ]
+    if profile_for_agent_gate.exists():
+        agent_prompt_cmd.extend(["--profile", str(profile_for_agent_gate)])
+    agent_prompt_quality = run_cmd("agent_prompt_quality_gate", agent_prompt_cmd, timeout=90)
+    checks.append(agent_prompt_quality)
+    if not agent_prompt_quality["pass"]:
+        failures.append("agent prompt quality gate failed")
 
     qualify_link = run_cmd(
         "qualify_link_gate",

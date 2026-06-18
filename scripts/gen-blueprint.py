@@ -100,6 +100,34 @@ def replace_section(html, sec_id, inner):
     return pat.sub(lambda m: m.group(1) + inner + m.group(3), html, count=1)
 
 
+def validate_production_agent_prompt(text, label, min_chars=1200):
+    """Block weak "agent" cards that are only short prompt starters.
+
+    A Blueprint claims these are production-ready agents. That means the prompt
+    must be a usable operating runbook: inputs, workflow, output contract,
+    safety/escalation rules, and a first-run test.
+    """
+    raw = str(text or "").strip()
+    low = raw.lower()
+    required = {
+        "identity": ["## identity", "identity"],
+        "inputs": ["## inputs", "inputs you need", "input contract", "required inputs"],
+        "workflow": ["## workflow", "## structure", "step 1", "operating loop"],
+        "output": ["## output", "output schema", "return this", "deliverables"],
+        "rules": ["## rules", "safety rules", "guardrails"],
+        "escalation": ["escalat", "human review", "route to", "do not send"],
+        "test": ["first-run test", "test input", "example input", "acceptance test"],
+    }
+    missing = [name for name, needles in required.items() if not any(n in low for n in needles)]
+    if len(raw) < min_chars or missing:
+        raise SystemExit(
+            f"{label} is not production-ready: {len(raw)} chars, missing {missing}. "
+            "Fix the profile prompt so it includes identity, inputs, workflow, output schema, "
+            "rules, escalation/human-review boundary, and a first-run test."
+        )
+    return raw
+
+
 def build(profile):
     html = open(TEMPLATE, encoding="utf-8").read()
     p = profile
@@ -238,8 +266,7 @@ def build(profile):
         txt = (a.get("agent_prompt")
                or (ai_list[i].get("agent_prompt") if i < len(ai_list) and isinstance(ai_list[i], dict) else "")
                or "")
-        if not txt:
-            raise SystemExit(f"agent {i+1} ({a.get('name')}) missing agent_prompt — D2-02 red-line, fix the profile")
+        txt = validate_production_agent_prompt(txt, f"agent {i+1} ({a.get('name')})", min_chars=900)
         return ('<div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);'
                 'border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);'
                 'margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">'
@@ -280,10 +307,11 @@ def build(profile):
     # ---- prompts (keep pre ids + copy/toggle hooks) ----
     pcards = ""
     for i, pr in enumerate(p["prompts"], start=1):
+        prompt_pre = validate_production_agent_prompt(pr["pre"], f"visible prompt {i} ({pr['title']})")
         pcards += (f'<div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)">'
                    f'<div class="prompt-header-left"><h3>{esc(pr["title"])}</h3><p>{esc(pr["subtitle"])}</p></div>'
                    f'<span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body">'
-                   f'<pre id="prompt{i}" class="prompt-pre">{esc(pr["pre"])}</pre>'
+                   f'<pre id="prompt{i}" class="prompt-pre">{esc(prompt_pre)}</pre>'
                    f'<button class="copy-btn" onclick="copyPrompt(\'prompt{i}\', this)">'
                    f'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>'
                    f'<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>'

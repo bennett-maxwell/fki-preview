@@ -31,15 +31,10 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
-    """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
-    NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
-    10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
-    cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
-    # Aligned 2026-06-10 to canonical blueprint-ai-skill v3.26 (Drive 1IzE-seD, newer than
-    # this gate's v1.1 2026-06-01 docstring): "Podcast = 6-20 MB walkthrough WINDOW (~6-20 min,
-    # target 12-18). The old >=29 MB floor was BACKWARDS ... permanently removed." The 16:00
-    # floor here was local drift, stricter than canon. Window per canon: 6:00-20:00.
-    MIN_SEC, MAX_SEC = 6 * 60, 20 * 60
+    """Red-line D3-03: the podcast must run 8:00-12:00.
+    NotebookLM length is non-deterministic, so a generation can wrap early or drift
+    into a long lecture. Re-cut until the duration lands in the 10-minute standard."""
+    MIN_SEC, MAX_SEC = 8 * 60, 12 * 60
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -53,9 +48,9 @@ def podcast_duration_gate(slug):
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < MIN_SEC:
-        return False, f"too short {mmss} (min 16:00) — re-cut deeper"
+        return False, f"too short {mmss} (min 8:00) — re-cut deeper"
     if secs > MAX_SEC:
-        return False, f"too long {mmss} (max 20:00) — re-cut tighter"
+        return False, f"too long {mmss} (max 12:00) — re-cut tighter"
     return True, f"{mmss} OK"
 
 def check_placeholder(html):
@@ -425,8 +420,8 @@ def audit_lead(slug):
     results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     duration_ok, duration_detail = podcast_duration_gate(slug)
-    results["D3-03_podcast_duration_16to20min_RL"] = duration_ok
-    redlines["D3-03_podcast_duration_16to20min_RL"] = duration_ok
+    results["D3-03_podcast_duration_8to12min_RL"] = duration_ok
+    redlines["D3-03_podcast_duration_8to12min_RL"] = duration_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)

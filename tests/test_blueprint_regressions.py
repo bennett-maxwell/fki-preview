@@ -339,6 +339,52 @@ def check_audit_lead_reports_nonzero_check_count():
         f"absent slug did not report not-found (0/0 false-pass risk): {bad}"
 
 
+def check_podcast_duration_standard_is_8_to_12():
+    """17. Audio duration gate must describe the active Blueprint production
+    standard. A stale 16-20 minute label hid the real no-send blocker."""
+    src = _read(os.path.join(REPO, "run-audit.py"))
+    assert "MIN_SEC, MAX_SEC = 8 * 60, 12 * 60" in src, \
+        "podcast duration gate must use the active 8-12 minute standard"
+    assert "D3-03_podcast_duration_8to12min_RL" in src, \
+        "duration red-line key must name the active 8-12 minute standard"
+    assert "D3-03_podcast_duration_16to20min_RL" not in src, \
+        "stale 16-20 duration red-line key must not remain"
+    assert "(min 8:00)" in src and "(max 12:00)" in src, \
+        "duration failure text must match the active 8-12 minute standard"
+
+
+def check_agent_prompt_quality_gate_wired():
+    """18. Blueprint agent cards must be real operating runbooks, not short
+    starter prompts. The generator blocks weak profile content and the strict
+    gatekeeper runs a dedicated quality gate before production tokening."""
+    generator = _read(os.path.join(REPO, "scripts", "gen-blueprint.py"))
+    gatekeeper = _read(os.path.join(REPO, "scripts", "blueprint_gatekeeper_100.py"))
+    quality_gate_path = os.path.join(REPO, "scripts", "blueprint_agent_prompt_quality_gate.py")
+    quality_gate = _read(quality_gate_path)
+    for token in [
+        "validate_production_agent_prompt",
+        "identity",
+        "inputs",
+        "workflow",
+        "output schema",
+        "escalation",
+        "first-run test",
+    ]:
+        assert token in generator.lower(), f"gen-blueprint.py missing production prompt token: {token}"
+    assert "blueprint_agent_prompt_quality_gate.py" in gatekeeper, \
+        "strict gatekeeper must run the agent prompt quality gate"
+    for token in [
+        "REQUIRED_MARKERS",
+        "extract_pre_prompts",
+        "extract_agent_prompts",
+        "visible prompt cards: found",
+        "HTML agent prompt cards: found",
+        "need at least 3",
+        "need at least 6",
+    ]:
+        assert token in quality_gate, f"agent prompt quality gate missing token: {token}"
+
+
 CHECKS = [
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
     ("RESOLVE_HTML_PATH_PREFERS_DATED_SLUG", check_resolve_html_path_prefers_dated_slug),
@@ -357,6 +403,8 @@ CHECKS = [
     ("LOCAL_AUDIO_AUDIT_NOT_PUBLIC_DEPLOY_BLOCKED", check_local_audio_audit_not_public_deploy_blocked),
     ("PRODUCTION_SUMMARY_NO_SEND_GUARD", check_production_summary_no_send_guard),
     ("DELIVERY_EMAIL_ESCAPES_AMPERSAND_TOKENS", check_delivery_email_escapes_ampersand_tokens),
+    ("PODCAST_DURATION_STANDARD_IS_8_TO_12", check_podcast_duration_standard_is_8_to_12),
+    ("AGENT_PROMPT_QUALITY_GATE_WIRED", check_agent_prompt_quality_gate_wired),
 ]
 
 

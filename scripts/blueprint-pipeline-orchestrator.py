@@ -399,24 +399,82 @@ async def stage_prompts(profile_path: str, profile: dict, status: LeadStatus) ->
     industry = profile.get("industry", "business services")
     name = profile.get("business_name", "the business")
 
+    def production_prompt(agent_name: str, job: str, trigger: str, output: str, rules: str) -> str:
+        return f"""## IDENTITY
+
+You are the {agent_name} for {name}, a {industry} business.
+
+## JOB
+
+{job}
+
+## INPUTS YOU NEED
+
+1. Contact or customer name when available.
+2. Original message, form answers, call note, or CRM record.
+3. Channel/source where the request came from.
+4. Current stage, owner, and last touch when available.
+5. Any business-specific service, product, price, compliance, or approval rules.
+If an input is missing, continue with what you have and flag the gap. Do not invent facts.
+
+## WORKFLOW
+
+Step 1: Read the input and classify the situation.
+Step 2: Identify the next useful business action.
+Step 3: Draft the customer-facing or internal output in {name}'s voice.
+Step 4: Create a CRM/internal note with summary, owner, due date, and confidence.
+Step 5: Escalate anything sensitive, unclear, legal, medical, financial, pricing, or approval-dependent.
+
+## OUTPUT SCHEMA
+
+Return:
+- classification
+- confidence
+- draft message or work product
+- internal CRM note
+- next action
+- missing information
+- human review required: yes/no and why
+
+## RULES
+
+{rules}
+
+## ESCALATION
+
+Do not send externally without approval unless the workflow has been explicitly approved. Route low-confidence, sensitive, legal, medical, financial, pricing, refund, or complaint cases to a human owner.
+
+## FIRST-RUN TEST
+
+Test input: {trigger}
+
+Passing result: {output}
+"""
+
     # Generate default prompts if missing
     if not profile.get("prompt_1"):
-        profile["prompt_1"] = (
-            f"You are a speed-to-lead response agent for a {industry} business called {name}. "
-            f"When a new inquiry comes in, draft a personalized response within 60 seconds "
-            f"that acknowledges their specific request, highlights relevant services, and suggests a next step."
+        profile["prompt_1"] = production_prompt(
+            "Speed-to-Lead Response Agent",
+            "Turn every new inquiry into a fast, useful first response and a clean internal handoff.",
+            "A new website inquiry arrives with name, service interest, phone/email, and a short message.",
+            "A channel-appropriate reply, one clarifying question if needed, a CRM note, a follow-up task, and a human-review flag.",
+            "Reply in plain English. Use one call to action. Never invent pricing, availability, guarantees, outcomes, discounts, or policy details. Quote the customer's own request when possible."
         )
     if not profile.get("prompt_2"):
-        profile["prompt_2"] = (
-            f"You are a proposal draft agent for {name} in the {industry} industry. "
-            f"Given a prospect's requirements, generate a professional proposal including scope, "
-            f"timeline, pricing framework, and 3 reasons to choose {name} over competitors."
+        profile["prompt_2"] = production_prompt(
+            "Qualification and Proposal Prep Agent",
+            "Convert messy prospect context into a clear qualification brief and proposal-prep outline for a human to review.",
+            "A prospect has shared needs, timeline, budget signals, and a few missing details.",
+            "A qualification summary, missing questions, draft scope outline, risks/assumptions, and human approval checklist.",
+            "Do not quote final pricing, promises, legal terms, or delivery timelines unless they are explicitly supplied. Mark assumptions clearly."
         )
     if not profile.get("prompt_3"):
-        profile["prompt_3"] = (
-            f"You are an outreach agent for {name} ({industry}). Generate 5 personalized "
-            f"LinkedIn connection messages and 5 cold email templates targeting ideal customers "
-            f"who need {industry} services."
+        profile["prompt_3"] = production_prompt(
+            "Follow-Up and Nurture Agent",
+            "Keep prospects, customers, or open opportunities from going stale with respectful, context-aware follow-up.",
+            "A CRM record shows last message, current stage, original need, and days since last contact.",
+            "A next-best follow-up message, internal reason, recommended channel, next task date, and stop/escalation checks.",
+            "Never pressure, fake urgency, or ignore opt-outs. Add value in each touch and stop immediately when the contact asks to stop."
         )
 
     # Write updated profile back
