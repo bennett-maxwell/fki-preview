@@ -6,15 +6,28 @@ Spec: docs/crmx-blueprint-delivery-and-automation.md §2.
 Builds a blueprint delivery email from the ONE canonical template
 (templates/delivery-email-template.html — never a fork), injects the real lead
 tokens, runs scripts/email-design-conformance.py on the resolved HTML and REQUIRES
-PASS, then records the email into CRMX as a DRAFT attached to the contact.
+PASS, then creates the email in CRMX as a SENDABLE custom-HTML email
+template/builder (the exact resolved HTML, NOT a rebuilt drag-drop layout).
+
+HOW THE SENDABLE DRAFT IS MADE (verified on location 14RD8KklxR9G4e0Rf7v2):
+  Two-step GHL Emails API:
+    1) POST /emails/builder
+         {locationId, title, type:"html", updatedBy}            -> returns template {id}
+    2) POST /emails/builder/data
+         {locationId, templateId, html, editorType:"html", updatedBy}
+                                                                 -> injects EXACT raw HTML
+  The result is a custom-code email template in CRMX (Marketing > Emails > Templates).
+  Madison opens it, clicks "Send" / uses it in a campaign, and is the one who sends.
+  This is a real sendable object (unlike the old contact-note, which could not send).
 
 SAFETY / NEVER-SEND DESIGN (hard requirement of the pipeline):
-  - This script NEVER calls any send / outbound-message / scheduled endpoint.
-  - The CRMX-side artifact is a CONTACT NOTE (GHL /contacts/{id}/notes), which has
-    ZERO delivery capability — it is reviewable in CRMX but cannot reach the prospect.
-    Madison opens the contact in CRMX, reviews the drafted email + links, and is the
-    one who actually composes/sends the email. Status is therefore "draft" by
-    construction (a recorded note is never an outbound email).
+  - This script NEVER calls any send / outbound-message / campaign-execute /
+    scheduled-send endpoint. It only creates a TEMPLATE. Creating a template does
+    NOT address a recipient and does NOT trigger delivery — a human must open it in
+    CRMX and click Send. Status is therefore "draft/template, unsent" by construction.
+  - HARD never-send guard: the only POST paths allowed are /emails/builder and
+    /emails/builder/data. Any path containing send/outbound/schedule/execute is
+    refused in code (assert_never_send).
   - Default mode is DRY-RUN. Nothing is written to GHL unless --commit is passed.
   - Pre-send gates: (a) session audit 100/100 this session, (b) email conformance PASS.
 
@@ -48,14 +61,32 @@ def load_env():
     return d
 
 
+SEND_TOKENS = ("send", "outbound", "schedule", "execute", "campaign", "message", "/sms")
+
+
+def assert_never_send(path):
+    """Hard guard: refuse any path that could deliver a message to the prospect."""
+    low = path.lower()
+    for tok in SEND_TOKENS:
+        if tok in low:
+            raise SystemExit(
+                f"NEVER-SEND GUARD TRIPPED: refusing API path containing '{tok}': {path}. "
+                f"This script only creates an unsent CRMX email template.")
+
+
 def api(method, path, body=None):
+    if method.upper() in ("POST", "PUT", "PATCH", "DELETE"):
+        assert_never_send(path)
     env = load_env()
     headers = {"Authorization": f"Bearer {env['GHL_API_KEY']}", "Version": "2021-07-28",
                "Accept": "application/json", "Content-Type": "application/json", "User-Agent": UA}
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(BASE + path, data=data, headers=headers, method=method)
-    with urllib.request.urlopen(req, timeout=40) as r:
-        return r.getcode(), json.loads(r.read().decode() or "{}")
+    try:
+        with urllib.request.urlopen(req, timeout=40) as r:
+            return r.getcode(), json.loads(r.read().decode() or "{}")
+    except urllib.error.HTTPError as e:
+        return e.code, {"_error": e.read().decode()[:1500]}
 
 
 def session_audit_ok(slug):
@@ -104,7 +135,8 @@ def resolve(slug):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("slug")
-    ap.add_argument("--commit", action="store_true", help="write the CRMX draft note (else dry-run)")
+    ap.add_argument("--title", help="CRMX email template title (default: 'Blueprint — <name> / <business>')")
+    ap.add_argument("--commit", action="store_true", help="create the sendable CRMX email template (else dry-run)")
     args = ap.parse_args()
     slug = args.slug
 
@@ -129,43 +161,74 @@ def main():
         raise SystemExit(f"BLOCKED: email-design-conformance FAIL\n{r.stderr.strip()}")
     print("[gate] email conformance: PASS")
 
+    env = load_env()
+    loc = env["GHL_LOCATION_ID"]
     cid = prof.get("ghl_contact_id")
     subject = f"Your AI Blueprint is Ready — {vals['BUSINESS_NAME']}"
-    note_body = (
-        f"[BLUEPRINT DELIVERY EMAIL — DRAFT, NOT SENT]\n"
-        f"Channel: CRMX (review + send manually). Status: DRAFT.\n"
-        f"To: {prof.get('email','')}  |  Contact: {cid}\n"
-        f"Subject: {subject}\n\n"
-        f"Blueprint: {vals['BLUEPRINT_URL']}\n"
-        f"Podcast:   {vals['PODCAST_URL']}\n"
-        f"Qualify:   {vals['QUALIFY_URL']}\n\n"
-        f"Resolved, conformance-PASSED email HTML staged at: delivery-emails/{slug}-crmx-email.html\n"
-        f"Paste that HTML into a CRMX Email > Custom HTML/Code element to review, then send.\n"
-        f"(This note is a non-sending draft record; it does not deliver any email.)\n"
-        f"Generated {datetime.datetime.now(datetime.timezone.utc).isoformat()} by create-crmx-email-draft.py"
-    )
+    title = args.title or f"Blueprint — {prof.get('lead_name') or vals['LEAD_FIRST_NAME']} / {vals['BUSINESS_NAME']}"
 
-    result = {"slug": slug, "contact_id": cid, "subject": subject,
+    result = {"slug": slug, "contact_id": cid, "subject": subject, "template_title": title,
               "email_html": f"delivery-emails/{slug}-crmx-email.html",
-              "mode": "commit" if args.commit else "dry-run", "status": "draft", "sent": False}
+              "mode": "commit" if args.commit else "dry-run", "status": "draft/template", "sent": False}
 
     if not args.commit:
-        print("[dry-run] NOT writing to GHL. Re-run with --commit to create the CRMX draft note.")
+        print("[dry-run] NOT writing to GHL. Re-run with --commit to create the sendable CRMX email template.")
         print(json.dumps(result, indent=2))
         return
 
-    # COMMIT: create a non-sending CONTACT NOTE (zero delivery capability)
-    code, resp = api("POST", f"/contacts/{cid}/notes", {"body": note_body})
-    note_id = (resp.get("note") or {}).get("id") or resp.get("id")
-    result["crmx_note_id"] = note_id
-    result["crmx_draft_url"] = f"https://app.gohighlevel.com/v2/location/{load_env()['GHL_LOCATION_ID']}/contacts/detail/{cid}"
-    result["http_code"] = code
-    # Save a receipt
+    # COMMIT — STEP 1: create the email template/builder shell (no recipient, cannot send)
+    code1, r1 = api("POST", "/emails/builder",
+                    {"locationId": loc, "title": title, "type": "html",
+                     "updatedBy": "madison@franchiseki.com"})
+    template_id = r1.get("id") or r1.get("redirect")
+    if code1 != 201 or not template_id:
+        raise SystemExit(f"FAIL creating builder shell [{code1}]: {r1}")
+    print(f"[step1] builder shell created id={template_id} [{code1}]")
+
+    # COMMIT — STEP 2: inject the EXACT resolved HTML as custom code (editorType=html)
+    code2, r2 = api("POST", "/emails/builder/data",
+                    {"locationId": loc, "templateId": template_id, "html": html,
+                     "editorType": "html", "updatedBy": "madison@franchiseki.com"})
+    if code2 not in (200, 201) or not r2.get("ok"):
+        raise SystemExit(f"FAIL injecting HTML into builder [{code2}]: {r2}")
+    preview_url = r2.get("previewUrl")
+    print(f"[step2] HTML injected (versionId={r2.get('versionId')}) [{code2}]")
+
+    # VERIFY — fetch the builder back, confirm it exists as a template and the HTML round-trips
+    cv, rv = api("GET", f"/emails/builder?locationId={loc}&limit=200")
+    builders = rv.get("builders", []) if isinstance(rv, dict) else []
+    mine = next((b for b in builders if b.get("id") == template_id), None)
+    verified = mine is not None
+    html_roundtrip = None
+    if preview_url:
+        try:
+            vreq = urllib.request.Request(preview_url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(vreq, timeout=40) as vr:
+                fetched = vr.read().decode()
+            # sentinel: the business name must appear in the stored HTML
+            html_roundtrip = vals["BUSINESS_NAME"] in fetched
+        except Exception as e:
+            html_roundtrip = f"fetch-error: {e}"
+
+    crmx_url = f"https://app.gohighlevel.com/v2/location/{loc}/emails/templates?templateId={template_id}"
+    result.update({
+        "crmx_template_id": template_id,
+        "crmx_template_url": crmx_url,
+        "preview_url": preview_url,
+        "http_create": code1, "http_inject": code2,
+        "verified_in_list": verified,
+        "verified_template_type": (mine or {}).get("templateType"),
+        "html_roundtrip_ok": html_roundtrip,
+        "is_plain_text": (mine or {}).get("isPlainText"),
+        "sent": False, "status": "draft/template (unsent)",
+    })
+
     rec_dir = os.path.join(REPO, "audit-receipts", slug)
     os.makedirs(rec_dir, exist_ok=True)
     open(os.path.join(rec_dir, f"{slug}-crmx-email-draft.json"), "w").write(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2))
-    print(f"[done] CRMX draft note created (id={note_id}, http {code}) — NOT sent.")
+    print(f"[done] CRMX sendable email TEMPLATE created (id={template_id}) — verified unsent. "
+          f"Open in CRMX: {crmx_url}")
 
 
 if __name__ == "__main__":
