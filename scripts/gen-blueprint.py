@@ -385,7 +385,7 @@ def build(profile):
     for lid, lab in (("lbl-contract", c["contract_label"]), ("lbl-leads", c["leads_label"]),
                      ("lbl-rate", c["rate_label"]), ("lbl-hours", c["hours_label"])):
         html = set_label(html, lid, lab)
-    html = re.sub(r'(<p class="section-sub">)Adjust the (?:sliders|numbers).*?(?:set your own numbers|match your real numbers)\.\s*(</p>)',
+    html = re.sub(r'(<section[^>]*\bid="calculator"[^>]*>.*?<p class="section-sub">).*?(</p>)',
                   lambda m: m.group(1) + c["sub"] + m.group(2), html, count=1, flags=re.S)
     pr_obj = (f"{{\n    conservative: {{ contract: {c['contract']}, leads: {c['leads']}, rate: {c['rate']}, hours: {c['hours']}, lift: 0.5 }},\n"
               f"    expected:     {{ contract: {c['contract']}, leads: {c['leads']}, rate: {c['rate']}, hours: {c['hours']}, lift: 1.0 }},\n"

@@ -278,6 +278,61 @@ async def run_script(script_name: str, args: list, timeout: int = 300) -> tuple:
 
 # ── Pipeline Stages ──────────────────────────────────────────────────────────
 
+def _looks_ghl_or_form_derived(profile: dict) -> bool:
+    source_text = " ".join(str(profile.get(k, "")) for k in ["source_note", "lead_source", "source", "form", "workflow"])
+    return bool(profile.get("ghl_contact_id") or profile.get("contact_id") or re.search(r"\b(GHL|GoHighLevel|form|intake|blueprint_ai_apply|AI_Advantage_blueprint)\b", source_text, re.I))
+
+
+def _raw_readback_candidate(profile: dict) -> Optional[Path]:
+    candidates = []
+    if os.environ.get("BLUEPRINT_GHL_RAW_READBACK"):
+        candidates.append(Path(os.environ["BLUEPRINT_GHL_RAW_READBACK"]))
+    for key in ["raw_ghl_readback_path", "ghl_raw_readback_path", "source_readback_path"]:
+        if profile.get(key):
+            candidates.append(Path(str(profile[key])))
+    slug = profile.get("slug")
+    if slug:
+        candidates.extend((REPO_DIR / "audit-receipts" / slug).glob("**/*ghl*raw*.json"))
+        candidates.extend((REPO_DIR / "audit-receipts" / slug).glob("**/*source*fidelity*.raw.json"))
+    for cand in candidates:
+        path = cand if cand.is_absolute() else REPO_DIR / cand
+        if path.exists():
+            return path
+    return None
+
+
+async def preserve_raw_readback_for_intake(profile_path: str, profile: dict) -> tuple[bool, str]:
+    if not _looks_ghl_or_form_derived(profile):
+        return True, "not GHL/form-derived"
+    raw = _raw_readback_candidate(profile)
+    if not raw:
+        return False, "GHL/form-derived lead is missing preserved raw readback; set BLUEPRINT_GHL_RAW_READBACK or raw_ghl_readback_path before generation"
+    cmd = [
+        sys.executable,
+        str(SCRIPTS_DIR / "blueprint_preserve_raw_readback.py"),
+        "--slug", profile["slug"],
+        "--profile", profile_path,
+        "--raw-json", str(raw),
+        "--kind", "ghl-contact-by-id",
+        "--json-output",
+    ]
+    proc = await asyncio.create_subprocess_exec(
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+        cwd=str(REPO_DIR),
+    )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        return False, (stderr.decode() or stdout.decode())[:400]
+    try:
+        refreshed = json.load(open(profile_path, encoding="utf-8"))
+        profile.update(refreshed)
+    except Exception:
+        pass
+    return True, stdout.decode().strip()[:400]
+
+
 async def stage_intake(profile_path: str, profile: dict, status: LeadStatus) -> bool:
     """Stage 1: Lead Intake + Research. Validates and enriches lead profile."""
     if status.is_stage_complete("intake"):
@@ -292,6 +347,14 @@ async def stage_intake(profile_path: str, profile: dict, status: LeadStatus) -> 
     if missing:
         status.mark_stage("intake", "failed", f"Missing fields: {missing}")
         return False
+
+    # Preserve raw source readback before any enrichment/generation so source-fidelity can prove facts.
+    raw_ok, raw_detail = await preserve_raw_readback_for_intake(profile_path, profile)
+    if not raw_ok:
+        status.mark_stage("intake", "failed", raw_detail)
+        log.error(f"  [{profile['slug']}] Intake raw readback FAILED: {raw_detail}")
+        return False
+    log.info(f"  [{profile['slug']}] Raw readback preservation: {raw_detail}")
 
     # If URL exists, run lead-intake.sh for web scrape enrichment
     url = profile.get("url", "")

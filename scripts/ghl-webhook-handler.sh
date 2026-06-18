@@ -192,6 +192,23 @@ if phone and not p.get('phone'): p['phone'] = phone
 json.dump(p, open(profile_path, 'w'), indent=2)
 INJECT_PY
 
+# Preserve the exact inbound GHL/webhook payload before scoring/generation.
+# This gives PF0-7/source-fidelity a raw readback instead of relying on the
+# generated lead JSON, preventing template facts from laundering into delivery.
+printf '%s' "$BODY" | python3 "$SCRIPT_DIR/blueprint_preserve_raw_readback.py" \
+    --slug "$SLUG" \
+    --profile "$PROFILE" \
+    --raw-stdin \
+    --kind ghl-webhook-payload \
+    --json-output >> "$LOG_DIR/ghl-webhook-intake.jsonl" || {
+    echo "{\"ts\":"$TIMESTAMP",\"slug\":"$SLUG",\"action\":"raw_readback_preservation_failed"}" >> "$LOG_DIR/ghl-webhook-intake.jsonl"
+    echo "HTTP/1.1 422 Unprocessable Entity"
+    echo "Content-Type: application/json"
+    echo ""
+    echo '{"error":"raw_readback_preservation_failed"}'
+    exit 1
+}
+
 # Auto-DQ Scoring — classify lead tier based on profile data
 # Tier: hot (≥$1M rev signal), warm (has website + industry), cold (minimal data)
 LEAD_TIER=$(python3 - "$PROFILE" <<'SCORE_PY'
