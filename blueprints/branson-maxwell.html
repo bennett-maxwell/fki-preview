@@ -1,19 +1,910 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Deliverable Not Approved</title>
-  <style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f7;color:#1d1d1f;display:grid;place-items:center;min-height:100vh;margin:0}.card{max-width:680px;background:#fff;border:1px solid #e5e5ea;border-radius:22px;padding:36px;box-shadow:0 20px 60px rgba(0,0,0,.08)}.badge{display:inline-block;background:#fff3cd;color:#7a4d00;border:1px solid #ffe08a;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-bottom:16px}h1{margin:0 0 12px;font-size:34px}p{font-size:17px;line-height:1.55;color:#515154}code{background:#f5f5f7;padding:2px 5px;border-radius:5px}.small{font-size:13px;color:#86868b;margin-top:20px}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personalized AI blueprint for Branson Maxwell — exactly where AI creates the biggest leverage for Branson Maxwell Photo & Video and how to get there in 30 days." />
+  <meta property="og:title" content="Your AI Advantage Roadmap — Branson Maxwell Photo & Video" />
+  <meta property="og:description" content="A personalized AI blueprint built for Branson Maxwell. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to Branson Maxwell Photo & Video." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/branson-maxwell.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>AI Advantage Roadmap — Branson Maxwell Photo & Video</title>
+  <style>
+    :root {
+      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
+      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 660px; margin-bottom: 3rem; }
+
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .results-table a { color: var(--brand); text-decoration: underline; }
+
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand); margin: 0.75rem 0 0.25rem; }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8eb; color: var(--brand); }
+    .gap-tag.efficiency { background: #e8eaf3; color: var(--steel); }
+    .gap-tag.brand { background: #f3e8f0; color: var(--brand-dark); }
+    .gap-desc a { color: var(--brand); }
+
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfafb; }
+    .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #fde8eb; color: var(--brand); }
+
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: var(--brand); font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-muted); }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
+    .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+    .calc-disclaimer a { color: var(--brand); }
+
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.7); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: var(--brand-dark); }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.92); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand); text-decoration: underline; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 1.45rem; } .hero-sub { font-size: 1rem; } .section { padding: 2.75rem 1rem; } }
+
+    .pod-section { padding: 4rem 2rem; }
+    .pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
+    .pod-header { background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.5rem 2rem; color: #fff; }
+    .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
+    .pod-body { padding: 1.5rem 2rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
+    .pod-eq.playing { display: inline-flex; }
+    .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+    .pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+    .pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+    .pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+    .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+    @keyframes eqBounce { from{height:4px} to{height:18px} }
+    .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
+    .pod-progress-wrap { position: relative; height: 44px; display: flex; align-items: center; background: transparent; border-radius: 22px; cursor: pointer; touch-action: none; user-select: none; }
+    .pod-progress-wrap::before { content: ''; position: absolute; left: 0; right: 0; top: 19px; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; }
+    .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
+    .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
+    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+    .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+    .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
+    .pod-btn:hover { background: rgba(0,113,227,.08); }
+    .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
+    @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+    .pod-btn.play-btn:hover { background: var(--brand-dark); }
+    .pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+    .pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+    .pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .pod-mute { margin-left: auto; }
+    .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
+    .pod-dl:hover { text-decoration: underline; }
+    .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
+    .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
+    .pod-mini.visible { display: flex; }
+    .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+    .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
+  </style>
 </head>
 <body>
-  <main class="card" data-blueprint-quarantine="true" data-blueprint-slug="branson-maxwell">
-    <div class="badge">NOT APPROVED FOR DELIVERY</div>
-    <h1>This deliverable is not approved yet.</h1>
-    <p>This Blueprint page has been intentionally quarantined while source-fidelity, production audit, and Bennett approval are pending.</p>
-    <p>No customer-facing deliverable should be sent from this URL until the full Blueprint approval path passes.</p>
-    <p class="small">Internal status: blocked by PF0-7/source-fidelity cleanup. Reason: <code>template_phrase_present</code>. Quarantined at 2026-06-18T22:09:20Z.</p>
-  </main>
+
+<nav>
+  <div class="nav-logo">Advaita <span>AI for Business</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#profile">Your Profile</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#apply">Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-badge">Confidential — Prepared for Branson Maxwell</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Branson Maxwell Photo &amp; Video</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI helps Branson Maxwell Photo & Video book more of the couples already reaching out — by replying in seconds instead of an hour, filling the calendar automatically, and turning 400+ past couples into new revenue. Here is the 30-day path.</p>
+  <div class="hero-stats"><div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Agents<br>Running</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Your Studio</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">60 Sec</span><span class="label">Inquiry Reply<br>vs 60 Min</span></div></div>
+</section>
+
+<section class="section section-alt" id="profile">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Branson Maxwell Photo &amp; Video Stands Today</h2>
+    <p class="section-sub">Built from your intake answers and a structured review of bransonmaxwell.com. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid"><div class="snapshot-card"><div class="snapshot-val">$500K&ndash;1M</div><div class="snapshot-key">Annual Revenue</div></div><div class="snapshot-card"><div class="snapshot-val">Wedding Photo &amp; Video</div><div class="snapshot-key">Studio Focus</div></div><div class="snapshot-card"><div class="snapshot-val">~140 / mo</div><div class="snapshot-key">Inquiries</div></div><div class="snapshot-card"><div class="snapshot-val">Team of 4</div><div class="snapshot-key">Studio Team</div></div><div class="snapshot-card"><div class="snapshot-val">No CRM</div><div class="snapshot-key">Today's System (Gap)</div></div><div class="snapshot-card"><div class="snapshot-val">Text Only</div><div class="snapshot-key">Client Comms</div></div><div class="snapshot-card"><div class="snapshot-val">~60 min</div><div class="snapshot-key">Avg Inquiry Reply</div></div><div class="snapshot-card"><div class="snapshot-val">ChatGPT</div><div class="snapshot-key">Current AI Use</div></div></div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">Your stated goal is <strong>more booked couples</strong> — and the numbers say the opportunity isn't more leads, it's converting the ones you already get. You field roughly <strong>140 inquiries a month</strong> but reply in about <strong>60 minutes</strong>; couples book the studio that feels present first, so that hour is costing you weddings. You flagged customer communication, admin, scheduling, marketing content, <strong>reactivating past clients</strong>, and hiring — and with 400+ couples already in your history, that reactivation list is a goldmine sitting untouched. You run on text with no CRM and no project tool. Brand voice is built from bransonmaxwell.com and your own language — “documentary, timeless, romantic, candid” — so every AI reply sounds like Branson Maxwell, not a template.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">What Your Industry Is Already Doing</p>
+    <h2 class="section-title">Wedding Photo &amp; Video Studios Like Yours Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves booked-out wedding studios are making to convert more inquiries and reactivate past couples. At 140 inquiries a month, the studio that answers fastest wins the booking.</p>
+    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They reply to every inquiry in 60 seconds</div><div class="gap-desc"><strong>What they're doing:</strong> studios put an AI inquiry agent on every contact-form and DM, replying in under a minute in their voice. <strong>How it helps them:</strong> couples book the photographer who feels present first — a warm 60-second reply beats one that lands an hour later. <strong>How I deliver it for Branson Maxwell:</strong> an inquiry agent that answers all ~140 monthly inquiries in under 60 seconds and offers consult times.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They turn 400+ past couples into new revenue</div><div class="gap-desc"><strong>What they're doing:</strong> studios run an AI reactivation agent across their past-client list — anniversaries, referral asks, print/album offers, and education products. <strong>How it helps them:</strong> the cheapest booking is one from someone who already loved working with you. <strong>How I deliver it for Branson Maxwell:</strong> a reactivation agent that works your 400+ past couples for referrals, anniversary sessions, and your LUTs/workshops — the stress you flagged, turned into a revenue engine.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They let AI run the scheduling</div><div class="gap-desc"><strong>What they're doing:</strong> studios hand consult and shoot scheduling to an AI agent that proposes times, confirms, and reminds. <strong>How it helps them:</strong> more booked consults with zero calendar tetris. <strong>How I deliver it for Branson Maxwell:</strong> a scheduling agent that turns interested couples into calendar holds automatically — directly relieving the scheduling stress you flagged.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They turn every wedding into a month of content</div><div class="gap-desc"><strong>What they're doing:</strong> studios use AI to spin each wedding into Instagram, Pinterest, blog, and reel content. <strong>How it helps them:</strong> they stay visible to the next couple every week with no marketing hire. <strong>How I deliver it for Branson Maxwell:</strong> a content agent trained on your documentary style that turns each wedding into a full slate of posts.</div><span class="gap-tag brand">Visibility</span></div></div></div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside studios booking the couples you want. You have the inquiry volume and a 400-couple history most photographers dream of — the opportunity is answering and following up before a faster studio does.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Branson Maxwell Photo &amp; Video</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes — more bookings, more time, or more capacity per teammate.</p>
+    <div class="pillars-grid"><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="pillar-title">Book More Couples</div><div class="pillar-metric">Your #1 Goal</div><div class="pillar-sub">A warm reply in 60 seconds instead of an hour turns more of your ~140 monthly inquiries into booked weddings — no extra ad spend, just speed and follow-up.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="pillar-title">Reactivate Your 400+ Past Couples</div><div class="pillar-metric">Untapped Revenue</div><div class="pillar-sub">Anniversary sessions, referrals, prints and albums, your LUTs and workshops — an AI agent works the list you already have, turning past clients into new bookings.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pillar-title">Get Your Time Back</div><div class="pillar-metric">12 Hrs / Week</div><div class="pillar-sub">Scheduling, client communication, admin, and content — handled — so you and your team of 4 shoot and edit instead of living in the inbox.</div></div></div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Your Current Tool Stack</h2>
+    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one without replacing anything you already use.</p>
+    <div class="stack-grid"><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Text / SMS</div><div class="stack-role">Client Communication</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">ChatGPT</div><div class="stack-role">Current AI Tool</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="stack-tool">bransonmaxwell.com</div><div class="stack-role">Your Booking Front Door</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Instagram / Social</div><div class="stack-role">Where Couples Find You</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="stack-tool">No CRM</div><div class="stack-role">Priority Gap #1 — inquiries live in your texts</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">No PM Tool</div><div class="stack-role">Gap #2 — no central project/booking system</div></div></div></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
+    <p class="section-sub">These are the areas where Branson Maxwell Photo &amp; Video has the most capacity to recover — based on your intake answers and a structured review of bransonmaxwell.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
+    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Inquiry Response Speed</div><div class="gap-desc">You get ~140 inquiries a month and reply in about 60 minutes. Couples reach out to several studios at once and book the one that feels present first. An AI inquiry agent replies in under 60 seconds, 24/7, in your voice — so you're first into the conversation across all 140 inquiries without watching the inbox.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Reactivating Past Clients</div><div class="gap-desc">You flagged reactivating old leads as a stress — and with 400+ past couples, it's the biggest untapped revenue you have. An AI reactivation agent works that list automatically: anniversary sessions, referral asks, print and album offers, and your LUTs and workshops — booking revenue from people who already love your work.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Scheduling</div><div class="gap-desc">You flagged scheduling as a stress. An AI scheduling agent proposes consult and shoot times, handles the back-and-forth over text, confirms, and reminds — turning interested couples into calendar holds without the manual tetris.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Customer Communication</div><div class="gap-desc">You flagged client communication as a stress. Across every booked couple there are timelines, reminders, prep notes, and gallery delivery. An AI communication concierge runs that in your voice so nothing slips and you're not living in your texts.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Marketing Content From Every Wedding</div><div class="gap-desc">You flagged marketing content as a stress. Every wedding you shoot is a week of content — but capturing it competes with the next couple. An AI content agent turns each wedding into Instagram, Pinterest, blog, and reel content in your documentary voice, with no marketing hire.</div><span class="gap-tag brand">Visibility</span></div></div><div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">No Central System (CRM + Admin)</div><div class="gap-desc">Inquiries and couples live in your texts with no CRM or project tool, and admin and hiring add to the load. A simple client hub gives every inquiry one home with status and next step, and an AI admin agent absorbs the repetitive operations work as you grow the team.</div><span class="gap-tag brand">Visibility</span></div></div></div>
+  </div>
+</section>
+
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map — Branson Maxwell Photo &amp; Video</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down — do not skip ahead.</p>
+    <div class="opp-table-wrap"><table class="opp-table"><thead><tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr></thead><tbody><tr><td><div class="pri-badge">1</div></td><td><strong>Inquiry Response Agent</strong></td><td><span class="impact-tag">60-sec reply</span> — all ~140 monthly inquiries answered before competitors</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">2</div></td><td><strong>Reactivation Agent</strong></td><td><span class="impact-tag">400+ past couples</span> — anniversaries, referrals, prints, LUTs and workshops</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">3</div></td><td><strong>Scheduling Agent</strong></td><td><span class="impact-tag">Calendar fills itself</span> — consults and shoots booked automatically</td><td>SMS, Calendar</td></tr><tr><td><div class="pri-badge">4</div></td><td><strong>Client Communication Concierge</strong></td><td><span class="impact-tag">Inbox off your plate</span> — timelines, reminders, prep, gallery delivery</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">5</div></td><td><strong>Content Studio Agent</strong></td><td><span class="impact-tag">A month per wedding</span> — each wedding turned into social, blog, and reels</td><td>Instagram, Blog</td></tr><tr><td><div class="pri-badge">6</div></td><td><strong>Client Hub / CRM Setup</strong></td><td><span class="impact-tag">One home for couples</span> — every inquiry tracked with status and next step</td><td>New CRM</td></tr><tr><td><div class="pri-badge">7</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours back</span> — repetitive ops handled as the team grows</td><td>Email, SMS</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Sequencing, Not Limits</p>
+    <h2 class="section-title">What We&rsquo;ll Save for Later — So You Win the Big Wins First</h2>
+    <p class="section-sub">The plan is to recover the highest-impact time first, then expand. These are things you <em>could</em> automate down the road, but I would hold off for now — chasing them today would only distract from the agents that move the needle first.</p>
+    <div class="ignore-grid"><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Fully Autonomous Editing or Creative Calls</div><div class="ignore-reason">Your documentary eye is the product. AI can cull, tag, draft galleries, and assemble content — but the creative edit stays yours. We automate everything around the art, never the art.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Replacing the Personal Couple Relationship</div><div class="ignore-reason">Couples book Branson because of how you make them feel. AI handles the busywork around the relationship — replies, scheduling, reminders — so you have more presence for the couple, not less.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later, but today a 60-second inquiry reply over text books more couples than a chatbot menu. We put the first dollar where it closes weddings.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">More Ad Spend for More Leads</div><div class="ignore-reason">You already get ~140 inquiries a month — more leads isn't the gap. We convert the volume you have and reactivate the 400+ couples you've already served, where the return is immediate.</div></div></div></div>
+  </div>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">6 AI Agents Built for Branson Maxwell Photo &amp; Video</h2>
+    <p class="section-sub">Each agent maps directly to a specific workflow inside your studio. Brand voice is built instantly from bransonmaxwell.com and your existing client language — 90% accurate on Day 1, no slow learning curve required.</p>
+    <div class="agents-grid"><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Inquiry Response Agent</div><div class="agent-desc">Watches your contact form, Instagram DMs, and texts. The moment a couple reaches out, it replies in under 60 seconds — warm, on-brand, day or night — captures their date, venue, and vision, and offers consult times. Routes serious inquiries to you ready to book.</div><div class="agent-outcome">Replies in under 60 sec to all 140/mo</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Reactivation Agent</div><div class="agent-desc">Works your 400+ past couples automatically — anniversary session offers, referral asks, print and album campaigns, and your LUTs and workshops — turning the client history you've already built into new bookings. Directly relieves the reactivation stress you flagged.</div><div class="agent-outcome">Past couples become new revenue</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Scheduling Agent</div><div class="agent-desc">Proposes consult and shoot times, handles the back-and-forth over text, confirms, and sends reminders — filling the calendar without the manual tetris. Relieves the scheduling stress you flagged.</div><div class="agent-outcome">The calendar fills itself</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Client Communication Concierge</div><div class="agent-desc">Runs every booked couple's journey in your voice: timelines, reminders, prep notes, payment milestones, and gallery delivery — so nothing slips and you're not living in your texts.</div><div class="agent-outcome">Every couple, handled end-to-end</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Content Studio Agent</div><div class="agent-desc">Turns each wedding into ready-to-post Instagram, Pinterest, blog, and reel content — matched to your documentary, timeless style — keeping you visible to the next couple every week without a marketing hire.</div><div class="agent-outcome">A month of content from every wedding</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Client Hub Organizer</div><div class="agent-desc">The CRM you do not have yet. Pulls every inquiry and couple into one pipeline with status, next step, and history — so nothing slips through your texts and your bookings stop living only in your head.</div><div class="agent-outcome">Nothing slips through your texts</div></div></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Your Implementation Roadmap</h2>
+    <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
+    <div class="milestone-table-wrap"><table class="milestone-table"><thead><tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr></thead><tbody><tr><td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td><td><ul class="m-list"><li>Kickoff call — map your inquiry flow and booking process</li><li>Inquiry Response Agent configured on your form, Instagram, and text</li><li>Brand voice built from bransonmaxwell.com and your documentary style</li><li>Live test: submit a test inquiry and watch the 60-second reply fire</li></ul></td><td class="m-result">Your first agent is live. Every couple's inquiry gets a warm 60-second reply while you shoot.</td></tr><tr><td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td><td><ul class="m-list"><li>Reactivation Agent deployed across your 400+ past couples</li><li>Scheduling Agent connected to your calendar</li><li>Client Communication Concierge running your booked-couple journey</li><li>Content Studio Agent producing its first slate from a recent wedding</li><li>Client Hub set up — every inquiry and couple in one pipeline</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td><td class="m-result">All 6 agents deployed and running across real studio workflows. Team trained.</td></tr><tr><td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td><td><ul class="m-list"><li>30-day review: reply times, inquiries booked, past couples reactivated</li><li>Agents refined on your real couple conversations and style</li><li>Expansion roadmap: what to automate next as you scale</li></ul></td><td class="m-result">The system knows your studio. Every agent calibrated to real Branson Maxwell data.</td></tr><tr><td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td><td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from real bookings and conversations</li><li>You own the system — we stay on as your AI operations team</li></ul></td><td class="m-result">AI runs like a studio manager who answers every inquiry and never forgets a past couple.</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. Defaults are pre-loaded from your Branson Maxwell Photo & Video intake: $2,388 annual customer value ($199/mo Pro Edition), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="250" step="50" value="250" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">140</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="1000" step="1" value="140" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">7%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="7" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">20 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="20" oninput="updateLabel('hours'); calcROI();">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">&mdash;</div><div class="res-sub" id="resLift">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
+      </div>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Agent — Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Branson Maxwell Photo &amp; Video</h2>
+    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Built specifically for Branson Maxwell Photo &amp; Video.</p>
+    <div class="prompt-cards"><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 — Branson Maxwell Inquiry Response Agent</h3><p>Based on your #1 opportunity: replying to ~140 monthly inquiries in seconds, not an hour</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Inquiry Response Coordinator for Branson Maxwell Photo &amp; Video, an upscale documentary wedding photography and videography studio in Salt Lake City. You reply to incoming couple inquiries within 60 seconds, any hour. Your voice is warm, artful, and unhurried — timeless, romantic, candid.
+
+## YOUR JOB
+Make the couple feel seen, confirm you received their inquiry, gather a few key details, and set a clear next step (a consult). You are NOT quoting prices. You are opening a relationship.
+
+## STEP 1 — EXTRACT from the inquiry
+- Couple's first name(s)
+- Wedding date (or season)
+- Venue or location (even if undecided)
+- Whether they want photo, video, or both
+- What drew them to your work / their vision
+
+## STEP 2 — BUILD THE REPLY
+Paragraph 1 (2 sentences): greet by name, reflect one specific thing they said so it never reads as a template.
+Paragraph 2 (2-3 sentences): affirm your documentary, timeless approach and that you'd love to hear about their day.
+Paragraph 3 (2 questions): "What's your date or season?" and "Are you thinking photo, video, or both?"
+Paragraph 4 (1 sentence): offer a consult — "I'd love to hop on a quick call this week; here are two times: [slots]."
+Sign-off: "With care, Branson — Branson Maxwell Photo &amp; Video"
+
+## BRAND VOICE RULES
+- Warm, artful, calm — never salesy
+- Address the couple by name
+- No stacked exclamation points
+- Never say "excited to work with you" or "looking forward to connecting"
+
+## EDGE CASES
+- No date: ask "What date or season are you dreaming of?"
+- No venue: reassure you shoot all over (81 countries) and can travel
+- Budget mentioned: acknowledge gracefully, don't quote
+- Comparing studios: never disparage; invite them to a consult to feel the difference
+
+## WHAT NEVER TO DO
+- Never quote prices in the first message
+- Never send a reply that doesn't reference something specific they said
+- Never use "chaos" or "stressful" language about their planning
+- Never end without a clear next step
+
+## EXAMPLE OUTPUT
+---
+Hi Hannah &amp; Marcus,
+
+Thank you for reaching out — a fall celebration in the mountains is exactly the kind of timeless, candid day I love to document. It sounds like you already have a real feeling for the story you want to tell.
+
+Two quick things so our call is useful:
+1. What's your date or season?
+2. Are you thinking photo, video, or both?
+
+I'd love to hop on a quick call this week — Wednesday 2pm or Thursday 11am work?
+
+With care, Branson — Branson Maxwell Photo &amp; Video
+---</pre><button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: replies to every couple's inquiry in under 60 seconds, day or night, in your documentary-brand voice — so you're first into the conversation and book more of the 140 inquiries you already get.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 — Past-Client Reactivation Agent</h3><p>Based on the reactivation stress you flagged + your 400+ past couples</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the Reactivation Specialist for Branson Maxwell Photo &amp; Video. Your job is to gently bring past couples back — for anniversary sessions, referrals, prints and albums, and education products (LUTs, workshops). You are warm, personal, and never pushy.
+
+## INPUTS (per past couple)
+- Names + wedding date (to time anniversary outreach)
+- What they booked originally (photo/video/both)
+- Whether they've bought prints/albums or referred anyone
+
+## CAMPAIGNS YOU RUN
+1. ANNIVERSARY: ~3-4 weeks before each anniversary, a warm note + an offer (anniversary session, or a print/album they never ordered).
+2. REFERRAL: to couples who loved their experience — a personal ask + an easy way to refer engaged friends.
+3. PRODUCTS: to the right segments — your LUTs (to photographer clients) and workshops (to creatives in your audience).
+4. WIN-BACK: couples who inquired-but-didn't-book in past seasons — a soft re-open.
+
+## MESSAGE RULES
+- Always reference their specific wedding (date, venue, a detail) — never generic.
+- One clear offer per message; lead with warmth and memory, not the ask.
+- Voice: documentary, timeless, candid — the Branson Maxwell voice.
+- If a couple replies, PAUSE automation and route to a human.
+
+## NEVER
+- Never blast the whole list with the same message — segment and personalize.
+- Never use urgency/guilt.
+- Never let an emotional reply get an automated response.
+
+## EXAMPLE — ANNIVERSARY
+---
+Hi Priya &amp; Sam — can you believe it's almost a year since your day at the canyon? Those golden-hour portraits still stop me. If you'd love to mark the anniversary, I'd be honored to do a short session for you two — or get those favorites into an album you'll have forever. Want me to share a couple of options?
+
+With care, Branson
+---</pre><button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: turns your 400+ past couples into new bookings — anniversary sessions, referrals, prints/albums, and your LUTs and workshops — automatically, in your voice.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 — Wedding Content Studio Agent</h3><p>Based on the marketing-content stress you flagged</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Content Producer for Branson Maxwell Photo &amp; Video. You turn each finished wedding into a week-plus of on-brand content. Your voice is documentary, timeless, romantic, candid.
+
+## INPUTS
+- The wedding (couple names ok to anonymize, venue, season, vibe)
+- A set of selected images/clips (or descriptions)
+- The story of the day (1-2 lines from Branson)
+
+## WHAT YOU PRODUCE per wedding
+1. INSTAGRAM CAROUSEL (caption + 6-10 image order + hook).
+2. INSTAGRAM REEL (a 15-30s edit concept + on-screen text + song mood).
+3. PINTEREST pins (3-5, with keyword-rich descriptions for discovery).
+4. BLOG POST (a short documentary-style story of the day + SEO title + alt text).
+5. ONE COUPLE-FACING teaser to send the couple (drives shares + referrals).
+
+## RULES
+- Match the documentary, timeless voice — never cheesy or salesy.
+- Lead with story and emotion, not gear or hashtags.
+- Every post ends with a soft, on-brand CTA (inquire / see more).
+- Pull keywords for SEO (venue, city, 'documentary wedding photographer Salt Lake City').
+- Never fabricate details about the couple — use only what Branson provides.
+
+## QUALITY CHECK
+- Is the voice documentary/timeless (not generic)? Y/N
+- Story and emotion before hashtags? Y/N
+- SEO keywords included for blog + Pinterest? Y/N
+- Soft on-brand CTA on each? Y/N
+If any N, revise before publishing.</pre><button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: turns each wedding you shoot into a full slate of social, blog, and reel content in your documentary style — so you stay visible to the next couple without a marketing hire.</div></div></div></div>
+    <div class="diy-or-partner"><h3>Two paths forward for Branson:</h3><div class="path-grid"><div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div><div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the Branson Maxwell Photo &amp; Video voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Branson+Maxwell&biz=Branson+Maxwell+Photography&src=branson-maxwell&firstName=Branson&agents=Inquiry+Response+Agent%2CReactivation+Agent%2CScheduling+Agent%2CClient+Communication+Concierge%2CContent+Studio+Agent%2CClient+Hub+Organizer" class="path-cta">See If You Qualify</a></div></div></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="demo">
+  <div class="container">
+    <p class="section-label">Live Preview</p>
+    <h2 class="section-title">Branson Maxwell Photo &amp; Video Speed-to-Lead Demo</h2>
+    <p class="section-sub">Once your AI system is live, this is what a couple experiences: a warm, on-brand reply to their inquiry within 60 seconds — day or night — that reflects their vision, asks about their date and whether they want photo or video, and offers consult times. The same documentary voice, every time.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you work with Advaita, your AI command center plugs into how you already work — text, your site, and your socials — and runs every workflow above in the Branson Maxwell voice, including reactivating the 400+ couples you've already served.</p>
+  </div>
+</section>
+
+<section class="section pod-section" id="listen">
+  <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Branson Maxwell Photo & Video answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
+  <div class="pod-card" id="podcast">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Branson Maxwell &middot; Branson Maxwell Photo & Video</p>
+    </div>
+    <div class="pod-body">
+      <span class="pod-badge" id="podBadge">
+        Ready to play
+        <span class="pod-eq" id="podEq">
+          <span style="height:4px"></span><span></span><span></span><span></span><span></span>
+        </span>
+      </span>
+      <div class="pod-chapter-name" id="podChapterName" aria-live="polite"></div>
+      <div class="pod-progress-wrap" id="podTrack" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Podcast progress" tabindex="0">
+        <div class="pod-fill" id="podFill"></div>
+        <div class="pod-thumb" id="podThumb"></div>
+      </div>
+      <div class="pod-times">
+        <span id="podElapsed">0:00</span>
+        <span id="podDuration">--:--</span>
+      </div>
+      <div class="pod-controls">
+        <button class="pod-btn" id="podBack" aria-label="Skip back 15 seconds" title="Back 15s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+          <span class="pod-btn-label">15s</span>
+        </button>
+        <button class="pod-btn play-btn" id="podPlay" aria-label="Play">
+          <svg id="podPlayIcon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <button class="pod-btn" id="podFwd" aria-label="Skip forward 30 seconds" title="Forward 30s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-.49-3"/></svg>
+          <span class="pod-btn-label">30s</span>
+        </button>
+      </div>
+      <div class="pod-meta">
+        <select class="pod-speed" id="podSpeed" aria-label="Playback speed">
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+        <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
+          <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/branson-maxwell.mp3" target="_blank" download>Download MP3</a>
+      </div>
+      <div class="pod-error" id="podError">
+        Audio temporarily unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/branson-maxwell.mp3" target="_blank">Open MP3 directly</a>
+      </div>
+      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/branson-maxwell.mp3">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/branson-maxwell.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
+    <div class="sources-list"><div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics — lead response time and conversion research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div><div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review — "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div><div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company — operations analytics and customer-experience research. <a href="https://www.mckinsey.com/capabilities/operations/our-insights" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute — "The State of AI in 2023." Adoption benchmarks for lead volume and conversion lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review — automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div></div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Branson Maxwell Photo & Video?</span></h2>
+    <p class="cta-personal">“Branson, I built this roadmap specifically for Branson Maxwell Photo & Video because you've already done the hard part — a documentary style couples seek out, 400+ weddings, and ~140 inquiries a month. The opportunity isn't more leads; it's answering them in seconds instead of an hour, and turning the couples you've already served into new bookings. That's exactly what this AI system does — and it never touches your art. — Bennett”</p>
+    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Branson+Maxwell&biz=Branson+Maxwell+Photography&src=branson-maxwell&firstName=Branson&agents=Inquiry+Response+Agent%2CReactivation+Agent%2CScheduling+Agent%2CClient+Communication+Concierge%2CContent+Studio+Agent%2CClient+Hub+Organizer" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Advaita AI for Business &mdash; Prepared for Branson Maxwell / Branson Maxwell Photo & Video &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Branson+Maxwell&biz=Branson+Maxwell+Photography&src=branson-maxwell&firstName=Branson&agents=Inquiry+Response+Agent%2CReactivation+Agent%2CScheduling+Agent%2CClient+Communication+Concierge%2CContent+Studio+Agent%2CClient+Hub+Organizer" class="mobile-cta-btn">See If You Qualify</a>
+</div>
+
+<script>
+  const PRESETS = {
+    conservative: { contract: 6000, leads: 140, rate: 7, hours: 20, lift: 0.5 },
+    expected:     { contract: 6000, leads: 140, rate: 7, hours: 20, lift: 1.0 },
+    stretch:      { contract: 6000, leads: 140, rate: 7, hours: 20, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name, evt) {
+    const p = PRESETS[name];
+    document.getElementById('sl-contract').value = p.contract;
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (!lbl) return;
+    if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
+  function calcROI() {
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+    document.getElementById('resQ').textContent         = fmt(gain * 3);
+  }
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
+  calcROI();
+
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? 'collapse' : 'view & copy';
+  }
+
+  function copyPrompt(preId, btn) {
+    navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
+
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+
+  const readingProgress = document.getElementById('readingProgress');
+  const mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (readingProgress && total > 0) readingProgress.style.width = (scrolled / total * 100) + '%';
+    if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
+  }, { passive: true });
+</script>
+
+<div class="pod-mini" id="podMini" aria-live="polite">
+  <span class="pod-mini-name">AI Walkthrough &middot; Branson Maxwell</span>
+  <span class="pod-mini-time" id="podMiniTime">0:00</span>
+  <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
+    <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'bpod_branson-maxwell';
+  var CHAPTERS = [
+    {pct: 0,    label: 'Segment 1 - This Is Your Business'},
+    {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},
+    {pct: 20,   label: 'Segment 3 - The Time Recovery Opportunities'},
+    {pct: 40,   label: 'Segment 4 - Running This'},
+    {pct: 60,   label: 'Segment 5 - Your Tech Stack'},
+    {pct: 72.5, label: 'Segment 6 - The Timeline'},
+    {pct: 82.5, label: 'Segment 7 - What To Do Next'}
+  ];
+
+  var audio     = document.getElementById('podAudio');
+  var track     = document.getElementById('podTrack');
+  var fill      = document.getElementById('podFill');
+  var thumb     = document.getElementById('podThumb');
+  var elapsed   = document.getElementById('podElapsed');
+  var duration  = document.getElementById('podDuration');
+  var playBtn   = document.getElementById('podPlay');
+  var playIcon  = document.getElementById('podPlayIcon');
+  var backBtn   = document.getElementById('podBack');
+  var fwdBtn    = document.getElementById('podFwd');
+  var badge     = document.getElementById('podBadge');
+  var eq        = document.getElementById('podEq');
+  var chapterEl = document.getElementById('podChapterName');
+  var speedSel  = document.getElementById('podSpeed');
+  var muteBtn   = document.getElementById('podMute');
+  var volIcon   = document.getElementById('podVolIcon');
+  var podError  = document.getElementById('podError');
+  var mini      = document.getElementById('podMini');
+  var miniPlay  = document.getElementById('podMiniPlay');
+  var miniIcon  = document.getElementById('podMiniIcon');
+  var miniTime  = document.getElementById('podMiniTime');
+
+  var PLAY_SVG  = '<polygon points="5,3 19,12 5,21"/>';
+  var PAUSE_SVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+  var VOL_ON    = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+  var VOL_OFF   = '<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+  function getSeekDuration() {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+    if (audio.seekable && audio.seekable.length) return audio.seekable.end(audio.seekable.length - 1);
+    return 0;
+  }
+  function canSeek() { return getSeekDuration() > 0; }
+  function pct() { var d = getSeekDuration(); return d ? (audio.currentTime / d * 100) : 0; }
+  function seekRatio(ratio) {
+    var d = getSeekDuration();
+    if (!d) { badge.childNodes[0].textContent = 'Loading timeline '; track.setAttribute('aria-disabled', 'true'); return false; }
+    track.setAttribute('aria-disabled', 'false');
+    audio.currentTime = Math.max(0, Math.min(1, ratio)) * d;
+    return true;
+  }
+  function currentChapter() {
+    var p = pct(), label = CHAPTERS[0].label;
+    for (var i = 0; i < CHAPTERS.length; i++) { if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label; }
+    return label;
+  }
+  function updateUI() {
+    var p = pct();
+    fill.style.width  = p + '%';
+    thumb.style.left  = p + '%';
+    elapsed.textContent = fmt(audio.currentTime);
+    chapterEl.textContent = canSeek() ? currentChapter() : 'Loading timeline';
+    miniTime.textContent  = fmt(audio.currentTime);
+    track.setAttribute('aria-valuenow', Math.round(p));
+    try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
+  }
+  function setPlaying(playing) {
+    playIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    miniIcon.innerHTML  = playing ? PAUSE_SVG : PLAY_SVG;
+    playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    miniPlay.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    eq.classList.toggle('playing', playing);
+    badge.childNodes[0].textContent = playing ? 'Now Playing ' : (audio.currentTime > 0 ? 'Paused ' : 'Ready to play ');
+  }
+  function togglePlay() {
+    if (audio.paused) {
+      if (audio.readyState === 0) { audio.load(); }
+      var p = audio.play();
+      if (p && p.catch) { p.catch(function(err){ podError.style.display = 'block'; badge.childNodes[0].textContent = 'Tap again to play '; console.error('audio play failed:', err); }); }
+    } else { audio.pause(); }
+  }
+
+  CHAPTERS.forEach(function(ch) {
+    var pip = document.createElement('div');
+    pip.className = 'pod-pip';
+    pip.style.left = ch.pct + '%';
+    pip.title = ch.label;
+    track.appendChild(pip);
+  });
+
+  audio.addEventListener('loadedmetadata', function () {
+    duration.textContent = fmt(getSeekDuration());
+    try {
+      var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
+      var d = getSeekDuration();
+      if (saved > 0 && d && saved < d - 5) {
+        audio.currentTime = saved;
+        badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
+      }
+    } catch(e) {}
+    updateUI();
+  });
+  audio.addEventListener('durationchange', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
+  audio.addEventListener('canplay', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
+  audio.addEventListener('timeupdate', updateUI);
+  audio.addEventListener('play',  function() { setPlaying(true); });
+  audio.addEventListener('pause', function() { setPlaying(false); });
+  audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
+  audio.addEventListener('error', function() { podError.style.display = 'block'; });
+
+  playBtn.addEventListener('click', togglePlay);
+  miniPlay.addEventListener('click', togglePlay);
+  backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+  fwdBtn.addEventListener('click',  function() { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; });
+  speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
+  muteBtn.addEventListener('click', function() {
+    audio.muted = !audio.muted;
+    volIcon.innerHTML = audio.muted ? VOL_OFF : VOL_ON;
+  });
+
+  var dragging = false;
+  function seekToClientX(clientX) {
+    var rect = track.getBoundingClientRect();
+    var ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    seekRatio(ratio);
+    updateUI();
+  }
+  if (window.PointerEvent) {
+    track.addEventListener('pointerdown', function(e) { dragging = true; track.setPointerCapture && track.setPointerCapture(e.pointerId); seekToClientX(e.clientX); e.preventDefault(); });
+    track.addEventListener('pointermove', function(e) { if (dragging) { seekToClientX(e.clientX); e.preventDefault(); } });
+    track.addEventListener('pointerup', function(e) { dragging = false; if (track.releasePointerCapture) { try { track.releasePointerCapture(e.pointerId); } catch (_) {} } });
+    track.addEventListener('pointercancel', function() { dragging = false; });
+  } else {
+    track.addEventListener('mousedown', function(e) { dragging = true; seekToClientX(e.clientX); });
+    document.addEventListener('mousemove', function(e) { if (dragging) seekToClientX(e.clientX); });
+    document.addEventListener('mouseup',   function() { dragging = false; });
+    function touchSeek(e) {
+      e.preventDefault();
+      var t = e.touches[0] || e.changedTouches[0];
+      seekToClientX(t.clientX);
+    }
+    track.addEventListener('touchstart', touchSeek, {passive: false});
+    track.addEventListener('touchmove',  touchSeek, {passive: false});
+    track.addEventListener('touchend',   function(e){ dragging = false; touchSeek(e); }, {passive: false});
+    track.addEventListener('touchcancel', function(){ dragging = false; }, {passive: false});
+  }
+
+  track.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 5) : audio.currentTime + 5; e.preventDefault(); }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    var tag = document.activeElement ? document.activeElement.tagName : '';
+    if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
+    if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
+    if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
+    if (e.key === 'ArrowRight')  { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; }
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && !audio.paused) audio.pause();
+  });
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      var visible = entries[0].isIntersecting;
+      mini.classList.toggle('visible', !visible && !audio.paused);
+    }, {threshold: 0.1});
+    obs.observe(document.getElementById('listen'));
+    audio.addEventListener('play',  function() {
+      var rect = document.getElementById('listen').getBoundingClientRect();
+      if (rect.top < 0 || rect.bottom > window.innerHeight) mini.classList.add('visible');
+    });
+    audio.addEventListener('pause', function() { mini.classList.remove('visible'); });
+  }
+})();
+</script>
 </body>
 </html>

@@ -10,31 +10,18 @@ Reads GHL_API_KEY + GHL_LOCATION_ID from ~/.claude/.env.
 """
 import os, sys, json, urllib.request, urllib.parse
 
-ENV_FILES = [
-    os.path.expanduser("~/.openclaw/gateway.env"),
-    os.path.expanduser("~/.openclaw/ghl.env"),
-    os.path.expanduser("~/Agent SDK/.env"),
-    os.path.expanduser("~/.claude/.env"),
-]
+ENV = os.path.expanduser("~/.claude/.env")
 def load_env():
-    d = dict(os.environ)
-    for env_path in ENV_FILES:
-        try:
-            lines = open(env_path).read().splitlines()
-        except FileNotFoundError:
-            continue
-        for line in lines:
-            line = line.strip()
-            if "=" in line and not line.startswith("#"):
-                k, v = line.split("=", 1)
-                d.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+    d = {}
+    for line in open(ENV):
+        line = line.strip()
+        if "=" in line and not line.startswith("#"):
+            k, v = line.split("=", 1)
+            d[k.strip()] = v.strip().strip('"').strip("'")
     return d
 
 env = load_env()
-KEY = env.get("GHL_API_KEY") or env.get("GHL_PRIVATE_TOKEN") or env.get("GHL_TOKEN")
-LOC = env.get("GHL_LOCATION_ID") or env.get("LOCATION_ID") or env.get("HIGHLEVEL_LOCATION_ID")
-if not KEY or not LOC:
-    sys.exit("missing GHL_API_KEY/GHL_PRIVATE_TOKEN or GHL_LOCATION_ID/LOCATION_ID in env chain")
+KEY = env["GHL_API_KEY"]; LOC = env["GHL_LOCATION_ID"]
 BASE = "https://services.leadconnectorhq.com"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
