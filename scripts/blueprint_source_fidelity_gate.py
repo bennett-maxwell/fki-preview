@@ -103,17 +103,23 @@ def main() -> int:
                 "message": f"Template/SaaS phrase present in artifact: {phrase}",
             })
 
-    # 2) Exact numeric/customer volume facts must be present in raw GHL values or sourced.
+    # 2) Exact numeric/customer volume facts must be present in raw GHL values OR explicitly labeled
+    #    as default/adjustable planning assumptions. Bennett directive 2026-06-19: source fidelity
+    #    should block fabricated form facts, not block safe visible defaults that are labeled adjustable.
+    html_low = html.lower()
     for field in CRITICAL_NUMERIC_FIELDS:
         if field in profile:
             val = str(profile.get(field)).strip().lower()
-            if raw_values and val not in raw_values:
+            basis = str(profile.get(f"{field}_basis", "")).lower()
+            visible_default_labeled = (val in html_low and any(word in html_low for word in ["default", "editable", "adjustable", "planning assumption", "type your own"]))
+            basis_labeled = any(word in basis for word in ["default", "editable", "adjustable", "planning assumption"])
+            if raw_values and val not in raw_values and not (basis_labeled and visible_default_labeled):
                 findings.append({
                     "severity": "fail",
                     "code": "critical_number_not_in_raw_source",
                     "field": field,
                     "value": profile.get(field),
-                    "message": f"{field}={profile.get(field)!r} not found in raw GHL values.",
+                    "message": f"{field}={profile.get(field)!r} not found in raw GHL values and is not visibly labeled as a default/adjustable assumption.",
                 })
 
     # 3) If the raw form says 'other' for business type and there are no URLs, a concrete industry

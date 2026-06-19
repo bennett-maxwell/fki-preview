@@ -466,7 +466,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     nav_btn = re.findall(r'<button[^>]*switchtab[^>]*>([^<]+)</button>', html_lower)
     nav_text = [t.strip().lower() for t in nav_ids] + [t.strip() for t in nav_btn]
     has_your_profile = any("your profile" in t or "full profile" in t or ("profile" in t and "full" not in t) for t in nav_text)
-    has_ai_agents = any("ai agent" in t or "agents" in t or "systems" in t for t in nav_text)
+    has_ai_agents = any("ai employee" in t or "employees" in t or "ai agent" in t or "agents" in t or "systems" in t for t in nav_text)
     has_roi = any("roi" in t or "calculator" in t for t in nav_text)
     has_listen = any("listen" in t for t in nav_text)
     # "Apply" can be in nav or as a qualify.html CTA anywhere in the page
@@ -474,7 +474,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
                 bool(re.findall(r'href=["\'][^"\']*qualify\.html[^"\']*["\']', html))
     nav_pass = all([has_your_profile, has_ai_agents, has_roi, has_listen, has_apply])
     results[7] = {
-        "desc": "Nav: Your Profile | AI Agents | ROI Calculator | Listen | Apply",
+        "desc": "Nav: Your Profile | AI Employees | ROI Calculator | Listen | Apply",
         "pass": nav_pass,
         "severity": "major",
         "detail": f"Nav tabs: {[t for t in nav_text if t]} — missing required tabs" if not nav_pass else "OK"

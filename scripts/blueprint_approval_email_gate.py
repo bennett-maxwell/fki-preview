@@ -41,8 +41,10 @@ def main():
         failures.append({'type':'unresolved_template_token'})
     if 'qualify.html' not in low:
         failures.append({'type':'missing_qualify_cta'})
-    if 'agents=' not in low:
-        failures.append({'type':'missing_tailored_agents_param_on_qualify_cta'})
+    # 2026-06-19: customer-facing qualifier context should use employees=;
+    # legacy agents= remains accepted so older live links do not break.
+    if 'employees=' not in low and 'agents=' not in low:
+        failures.append({'type':'missing_tailored_employees_param_on_qualify_cta'})
     if 'leadconnectorhq' in low or 'widget/bookings' in low or 'calendly' in low:
         failures.append({'type':'direct_calendar_or_booking_link_in_delivery_email'})
     if args.subject:
