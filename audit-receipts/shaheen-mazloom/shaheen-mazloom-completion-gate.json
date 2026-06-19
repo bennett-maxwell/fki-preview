@@ -1,17 +1,17 @@
 {
   "lead": "shaheen-mazloom",
-  "ts": "2026-06-19T20:34:17.517075+00:00",
+  "ts": "2026-06-19T20:47:11.625491+00:00",
   "html_path": "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
-  "html_size_bytes": 118925,
-  "require_production": false,
+  "html_size_bytes": 118937,
+  "require_production": true,
   "summary": {
-    "passed": 37,
-    "failed": 0,
-    "skipped": 13,
-    "total_applicable": 37,
-    "overall_pass": true
+    "passed": 38,
+    "failed": 6,
+    "skipped": 6,
+    "total_applicable": 44,
+    "overall_pass": false
   },
-  "status": "PASS",
+  "status": "FAIL",
   "category_scores": {
     "Structure": {
       "score": "10/10 (100%)",
@@ -39,9 +39,16 @@
       "failures": []
     },
     "Production": {
-      "score": "N/A",
-      "pass": null,
-      "failures": []
+      "score": "1/7 (14%)",
+      "pass": false,
+      "failures": [
+        "#43: Drive artifact registry row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 43",
+        "#44: Notion Sprint row present \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 44",
+        "#45: Current GHL readback (contact tagged) \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 45",
+        "#46: Repeat-submit same-contact proof \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 46",
+        "#47: 10-minute NotebookLM audio (8-12 min / direct-address / origin verified) \u2014 Public podcast receipt must include pass=true, http_code=200, duration_seconds within [480, 720], and size_download within [6291456, 20971520] bytes (Blueprint 10-minute standard)",
+        "#48: Bennett approval scope recorded \u2014 PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
+      ]
     },
     "Delivery": {
       "score": "1/1 (100%)",
@@ -54,7 +61,14 @@
       "failures": []
     }
   },
-  "critical_failures": [],
+  "critical_failures": [
+    "#43: Drive artifact registry row present",
+    "#44: Notion Sprint row present",
+    "#45: Current GHL readback (contact tagged)",
+    "#46: Repeat-submit same-contact proof",
+    "#47: 10-minute NotebookLM audio (8-12 min / direct-address / origin verified)",
+    "#48: Bennett approval scope recorded"
+  ],
   "major_failures": [],
   "checks": {
     "1": {
@@ -305,45 +319,45 @@
     },
     "42": {
       "desc": "Public GitHub Pages build verified (HTTP 200)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": true,
+      "severity": "critical",
+      "detail": "Public page HTTP 200 verified"
     },
     "43": {
       "desc": "Drive artifact registry row present",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 43"
     },
     "44": {
       "desc": "Notion Sprint row present",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 44"
     },
     "45": {
       "desc": "Current GHL readback (contact tagged)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 45"
     },
     "46": {
       "desc": "Repeat-submit same-contact proof",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 46"
     },
     "47": {
       "desc": "10-minute NotebookLM audio (8-12 min / direct-address / origin verified)",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "Public podcast receipt must include pass=true, http_code=200, duration_seconds within [480, 720], and size_download within [6291456, 20971520] bytes (Blueprint 10-minute standard)"
     },
     "48": {
       "desc": "Bennett approval scope recorded",
-      "pass": null,
-      "severity": "info",
-      "detail": "Skipped (use --require-production to enforce)"
+      "pass": false,
+      "severity": "critical",
+      "detail": "PRODUCTION REQUIRED: Missing or invalid receipt for check 48"
     },
     "49": {
       "desc": "No false completion claim in HTML (N/A for HTML output)",
