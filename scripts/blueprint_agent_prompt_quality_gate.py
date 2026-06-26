@@ -113,13 +113,17 @@ def main() -> int:
     failures = []
     if len(visible_prompts) < 3:
         failures.append(f"visible prompt cards: found {len(visible_prompts)}; need at least 3")
-    if len(html_agent_prompts) < 6:
-        failures.append(f"HTML agent prompt cards: found {len(html_agent_prompts)}; need at least 6")
+    # OVERRIDE 2026-06-26 (Madison Lanz, "I own it"): D2-02 retired.
+    # The 6 agent squares are now condensed and no longer carry an inline
+    # copy-paste prompt, so we no longer require >=6 inline agent-prompt cards.
+    # Full operating prompts are still required in the 3 visible dropdown cards
+    # (checked above + below). Restore the >=6 inline check if Bennett reinstates D2-02.
 
     checked = []
     for prompt in visible_prompts[:3]:
         checked.append({"source": "html_visible_prompt", "label": prompt["label"], "chars": len(prompt["text"])})
         failures.extend(validate_prompt(prompt["text"], f"HTML visible prompt {prompt['label']}", 1200))
+    # Inline agent-prompt cards are now optional; validate any that still exist, but do not require them.
     for prompt in html_agent_prompts:
         checked.append({"source": "html_agent_prompt", "label": prompt["label"], "chars": len(prompt["text"])})
         failures.extend(validate_prompt(prompt["text"], f"HTML agent prompt {prompt['label']}", 900))

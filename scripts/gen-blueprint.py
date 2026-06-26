@@ -290,16 +290,13 @@ def build(profile):
 
     # ---- agents ----
     def _agent_prompt(a, i):
-        # D2-02 [RL] (Bennett 2026-06-09): every card ships a copy-paste starter prompt >=200 chars.
-        ai_list = p.get("ai_agents") or []
-        txt = (a.get("agent_prompt")
-               or (ai_list[i].get("agent_prompt") if i < len(ai_list) and isinstance(ai_list[i], dict) else "")
-               or "")
-        txt = validate_production_agent_prompt(txt, f"agent {i+1} ({a.get('name')})", min_chars=900)
-        return ('<div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);'
-                'border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);'
-                'margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">'
-                f'Copy-paste prompt:</strong>{esc(txt)}</div>')
+        # OVERRIDE 2026-06-26 (Madison Lanz, "I own it"): D2-02 condensed.
+        # Bennett's 2026-06-09 rule shipped a >=900-char inline copy-paste prompt
+        # inside every agent square, which Madison ruled looks bad. The 6 squares
+        # are now condensed (icon + name + desc + outcome only); the full operating
+        # prompts live solely in the 3 ready-to-use dropdown cards below.
+        # Re-enable by restoring the inline block if Bennett reinstates D2-02.
+        return ''
     ac = "".join(f'<div class="agent-card"><div class="agent-icon">{AGENT_SVGS[i % len(AGENT_SVGS)]}</div>'
                  f'<div class="agent-name">{esc(a["name"])}</div><div class="agent-desc">{a["desc"]}</div>'
                  f'{_agent_prompt(a, i)}'
