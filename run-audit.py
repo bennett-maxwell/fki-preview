@@ -443,16 +443,19 @@ def audit_lead(slug):
     redlines["PF0-7_source_fidelity_RL"] = source_ok
     results["D1-01_name_in_title"] = name_in_title(html, slug)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
-    # D2-02 [RL] AGENT SUBSTANCE GATE (Bennett directive 2026-06-09): every blueprint
-    # must ship 6 lead-specific agent cards, each with a substantive copy-paste prompt.
-    # Thin/generic teaser cards = instant FAIL; no AI may report Blueprint done without this.
+    # D2-02 [RL] AGENT SUBSTANCE GATE — UPDATED 2026-06-26 (Madison override "I own it"):
+    # D2-02's inline copy-paste prompt was retired; the 6 agent squares are now CONDENSED
+    # (icon+name+desc+outcome) and the substantive operating prompts live in the 3
+    # ready-to-use dropdown cards (prompt-pre). So substance now = 6 lead-specific cards
+    # (each >=120 chars) AND >=3 substantive dropdown prompts (each >=900 chars).
+    # See ~/Desktop/fki-preview/OVERRIDE-D2-02.md. Restore inline check if Bennett reinstates D2-02.
     _cards = re.findall(r'<div class="agent-card">(.*?)</div>\s*</div>', html, re.S)
-    _prompts = re.findall(r'class="agent-prompt"[^>]*>(.*?)</div>', html, re.S)
+    _dropdown = re.findall(r'<pre id="prompt\d+" class="prompt-pre">(.*?)</pre>', html, re.S)
     agent_substance_ok = (
         len(_cards) >= 6
-        and len(_prompts) >= 6
-        and all(len(re.sub(r'<[^>]+>', '', c)) >= 350 for c in _cards[:6])
-        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 200 for pr in _prompts[:6])
+        and len(_dropdown) >= 3
+        and all(len(re.sub(r'<[^>]+>', '', c)) >= 120 for c in _cards[:6])
+        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 900 for pr in _dropdown[:3])
     )
     results["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
     redlines["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
