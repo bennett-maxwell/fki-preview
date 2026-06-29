@@ -215,6 +215,7 @@ monthly_leads = profile.get('monthly_leads', '—')
 method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
 domain_slug = business_name.lower().replace(' ', '').replace("'", '')
 services_str = ', '.join(services) if services else f'{industry} services'
+tools_str = ', '.join(tools) if isinstance(tools, list) else tools
 
 # Accent color derivatives
 def lighten_hex(hex_color, factor=0.4):
@@ -338,7 +339,7 @@ replacements = {
     '{{MAILTO_LINK}}': mailto_link,
     '{{SERVICES_LIST}}': services_str,
     '{{DOMAIN}}': f'{domain_slug}.com',
-    '{{CRM_TOOL}}': tools if tools else 'your CRM',
+    '{{CRM_TOOL}}': tools_str if tools_str else 'your CRM',
     '{{METHOD_NAME}}': method_name,
     '{{URGENCY_TEXT}}': urgency_text,
 }
