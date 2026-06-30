@@ -47,6 +47,7 @@ INDUSTRY_BANDS = {
 LEAD_INDUSTRY = {
     "john-doe-sporting-goods-20260604": "retail",
     "adam-webb":        "home_services",      # ION Solar — residential solar install (job/ticket)
+    "jorge-capones-usa":"retail",             # Capones USA — men's fragrance/grooming products (per-purchase)
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
     "melissa-tash-srp": "photography",
