@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKI AI Training — Tuesday, June 30, 2026</title>
+<style>
+  :root{--ink:#1a1a2e;--accent:#4f46e5;--bg:#f7f8fc;--card:#fff;--muted:#6b7280;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+  .wrap{max-width:680px;margin:0 auto;padding:28px 20px 60px;}
+  .badge{display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:700;letter-spacing:.5px;padding:5px 12px;border-radius:20px;text-transform:uppercase;}
+  h1{font-size:26px;line-height:1.25;margin:16px 0 6px;}
+  .date{color:var(--muted);font-size:15px;margin-bottom:22px;}
+  .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:0 2px 14px rgba(20,20,50,.07);margin-bottom:20px;}
+  audio{width:100%;margin:4px 0 14px;}
+  .speeds{display:flex;gap:8px;flex-wrap:wrap;}
+  .speeds button{flex:1;min-width:60px;padding:11px 0;font-size:15px;font-weight:600;border:1.5px solid #e2e4ee;background:#fff;color:var(--ink);border-radius:10px;cursor:pointer;transition:.15s;}
+  .speeds button:hover{border-color:var(--accent);}
+  .speeds button.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .note{font-size:13px;color:var(--muted);margin-top:10px;}
+  h2{font-size:17px;margin:22px 0 10px;}
+  ul{padding-left:20px;margin:8px 0;}
+  li{margin:6px 0;}
+  .pending{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:12px 14px;font-size:14px;margin-top:8px;}
+  .drill{background:#f0f9ff;border-radius:10px;padding:14px;}
+  .foot{color:var(--muted);font-size:13px;text-align:center;margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">Daily Team Training</span>
+  <h1>Hey Franchise KI team — here's today's AI update</h1>
+  <div class="date">Tuesday, June 30, 2026 · ~10 min · covers what changed since Friday</div>
+
+  <div class="card">
+    <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-30.mp3"></audio>
+    <div class="speeds">
+      <button data-rate="1"    onclick="setRate(1,this)">1x</button>
+      <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+      <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+      <button data-rate="2"    onclick="setRate(2,this)">2x</button>
+    </div>
+    <div class="pending" id="pendBox">🎧 If the player is silent, the voice recording is still loading from Google (daily limit). It auto-loads here when ready — refresh in a bit. The written version below is complete now.</div>
+    <div class="note">Your spot saves automatically. Close it, come back, hit play — it picks up where you left off.</div>
+  </div>
+
+  <h2>What changed since Friday</h2>
+  <ul>
+    <li>Your <b>Morning Numbers</b> note landed every morning this window — leads, cost, spend in one short email.</li>
+    <li>The nightly self-check found 8 issues, <b>fixed 4 on its own</b>, flagged 4 for a human.</li>
+    <li>Friday's training reached all 11 of you. The lead-mailer and content poster ran clean and correctly did nothing when there was nothing to do.</li>
+  </ul>
+
+  <h2>Watch out for</h2>
+  <ul>
+    <li><b>"Sent" isn't "landed."</b> Ask the AI to confirm it actually hit the inbox.</li>
+    <li><b>Save to a place that won't disappear</b> — the project page or the drive, never a throwaway folder.</li>
+    <li><b>Don't accept "done" with no link.</b> Say "show me the link."</li>
+  </ul>
+
+  <h2>New in the tools you already use</h2>
+  <ul>
+    <li><b>GoHighLevel:</b> a new plain-English Analytics helper — just ask "where are my leads dropping off?" Plus free AI assistants through Aug 31.</li>
+    <li><b>Claude Code:</b> background helpers now ASK you for permission instead of silently quitting.</li>
+    <li><b>NotebookLM:</b> each notebook can now run code and help gather sources from a loose idea.</li>
+  </ul>
+
+  <h2>Today's drill — pick yours (under 10 min)</h2>
+  <div class="drill">
+    <ul>
+      <li><b>Sales:</b> ask GHL's Analytics helper "where are my leads dropping off?" — screenshot the answer.</li>
+      <li><b>Ops:</b> pick one number you check by hand each morning, ask the AI to email it daily.</li>
+      <li><b>Marketing:</b> say "set up a steady posting cadence for this and skip when there's nothing good."</li>
+      <li><b>Leadership:</b> hand off one whole task, say "self-check this before you call it done," review the final link.</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:22px;font-size:15px;"><b>Pick one task this week and turn it into a skill.</b> That's how your whole job gets automated — one task at a time, right inside the Claude Code app.</p>
+
+  <div class="foot">Reply to the team email with any feedback. We read every reply and apply changes before the next episode.</div>
+</div>
+
+<script>
+  var a=document.getElementById('podAudio'),KEY='team-training-2026-06-30';
+  function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate)a.playbackRate=s.rate;a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
+</body>
+</html>
