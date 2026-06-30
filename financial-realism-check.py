@@ -46,6 +46,7 @@ INDUSTRY_BANDS = {
 # Per-lead industry classification (from business name / known intake).
 LEAD_INDUSTRY = {
     "john-doe-sporting-goods-20260604": "retail",
+    "adam-webb":        "home_services",      # ION Solar — residential solar install (job/ticket)
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
     "melissa-tash-srp": "photography",

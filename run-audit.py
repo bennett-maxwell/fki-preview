@@ -31,10 +31,10 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
-    """Red-line D3-03: the podcast must run 8:00-12:00.
+    """Red-line D3-03: the podcast must run 7:00-16:00 (widened from 8-12 per Madison 2026-06-30).
     NotebookLM length is non-deterministic, so a generation can wrap early or drift
-    into a long lecture. Re-cut until the duration lands in the 10-minute standard."""
-    MIN_SEC, MAX_SEC = 8 * 60, 12 * 60
+    into a long lecture. Re-cut until the duration lands in the 7-16 minute window."""
+    MIN_SEC, MAX_SEC = 7 * 60, 16 * 60
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -48,9 +48,9 @@ def podcast_duration_gate(slug):
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < MIN_SEC:
-        return False, f"too short {mmss} (min 8:00) — re-cut deeper"
+        return False, f"too short {mmss} (min 7:00) — re-cut deeper"
     if secs > MAX_SEC:
-        return False, f"too long {mmss} (max 12:00) — re-cut tighter"
+        return False, f"too long {mmss} (max 16:00) — re-cut tighter"
     return True, f"{mmss} OK"
 
 def check_placeholder(html):
