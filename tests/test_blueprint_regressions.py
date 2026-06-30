@@ -385,7 +385,43 @@ def check_agent_prompt_quality_gate_wired():
         assert token in quality_gate, f"agent prompt quality gate missing token: {token}"
 
 
+def check_clone_engine_coerces_list_tools():
+    """19. A scraped lead whose `tools` field is a JSON array (the common shape —
+    5 of 55 live leads) crashed clone-blueprint.sh's replacement engine with
+    `TypeError: replace() argument 2 must be str, not list`, because the raw list
+    was fed into html.replace() via the {{CRM_TOOL}} token. Two-part pin:
+      (a) the engine derives a tools_str by joining a list (mirroring services_str)
+          AND the replace loop defensively joins ANY list value before .replace(),
+          so the *next* array field can't reintroduce the crash;
+      (b) a runtime tripwire that replicates the exact join+replace mechanism with
+          a list value and proves it renders "A, B, C" with no leftover token and
+          no TypeError."""
+    script = _read(os.path.join(REPO, "scripts", "clone-blueprint.sh"))
+    # (a) the tools_str coercion exists (list -> ', '.join, else passthrough)
+    assert "tools_str = ', '.join(tools) if isinstance(tools, list) else tools" in script, \
+        "clone-blueprint.sh missing tools_str list coercion"
+    assert "'{{CRM_TOOL}}': tools_str if tools_str else 'your CRM'" in script, \
+        "{{CRM_TOOL}} replacement no longer uses the coerced tools_str"
+    # (a) the replace loop defensively joins ANY list value (future array fields)
+    assert "if isinstance(value, list):" in script and \
+        "value = ', '.join(str(v) for v in value)" in script, \
+        "replace loop lost the defensive list-join guard for future array fields"
+    # (b) runtime tripwire: the exact join+replace mechanism must not crash on a list
+    tools = ["CRM / quote pipeline", "Email", "Phone"]
+    tools_str = ', '.join(tools) if isinstance(tools, list) else tools
+    html = "Use {{CRM_TOOL}} every day."
+    value = tools_str if tools_str else 'your CRM'
+    if isinstance(value, list):  # the loop guard, replicated verbatim
+        value = ', '.join(str(v) for v in value)
+    html = html.replace("{{CRM_TOOL}}", value)  # this raised TypeError pre-fix
+    assert html == "Use CRM / quote pipeline, Email, Phone every day.", \
+        f"list-tools did not render as a joined string: {html!r}"
+    assert "{{CRM_TOOL}}" not in html, \
+        f"{{{{CRM_TOOL}}}} token left unrendered after list coercion: {html!r}"
+
+
 CHECKS = [
+    ("CLONE_ENGINE_COERCES_LIST_TOOLS", check_clone_engine_coerces_list_tools),
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
     ("RESOLVE_HTML_PATH_PREFERS_DATED_SLUG", check_resolve_html_path_prefers_dated_slug),
     ("AUDIT_LEAD_REPORTS_NONZERO_CHECK_COUNT", check_audit_lead_reports_nonzero_check_count),

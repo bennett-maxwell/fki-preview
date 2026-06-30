@@ -345,6 +345,10 @@ replacements = {
 }
 
 for placeholder, value in replacements.items():
+    # Defensive: any list value (e.g. a scraped array field) joins to a string
+    # so html.replace() never sees a non-str — same coercion as services_str/tools_str.
+    if isinstance(value, list):
+        value = ', '.join(str(v) for v in value)
     html = html.replace(placeholder, value)
 
 # ── AI Agent Cards: Replace template agents with lead-specific ones ──
