@@ -128,6 +128,35 @@ def source_fidelity_gate(slug, html_path):
     except Exception as e:
         return False, f"source fidelity check error: {e}"
 
+def agent_card_prompt_quality_gate(slug, html_path):
+    """Red-line D2-03 (v3.42, Madison 2026-07-01): agent cards must be condensed
+    outcome squares — NEVER a raw copy-paste 'You are an AI agent…' prompt or a
+    'Copy-paste prompt:' label — and the 3 ready-to-use dropdown prompts must be
+    lead-specific and structurally bulletproof (role/context/steps/guardrails/output),
+    not just long. Delegates to scripts/blueprint_agent_prompt_quality_gate.py.
+
+    Runs for EVERY lead. exit 0 = PASS; non-zero / FAIL = red-line block."""
+    checker = os.path.join(REPO, "scripts", "blueprint_agent_prompt_quality_gate.py")
+    if not os.path.exists(checker):
+        return False, "blueprint_agent_prompt_quality_gate.py missing"
+    cmd = [sys.executable, checker, "--html", html_path, "--json-output"]
+    lead_json = os.path.join(REPO, "leads", f"{slug}.json")
+    if os.path.exists(lead_json):
+        cmd.extend(["--profile", lead_json])
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            fails = data.get("failures") or []
+            detail = data.get("status", "") + ("" if not fails else ": " + "; ".join(fails[:6]))
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"agent card prompt quality check error: {e}"
+
 def no_orphan_classes(html):
     style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.DOTALL | re.I))
     defined = set(re.findall(r"\.([A-Za-z_][A-Za-z0-9_-]*)", style_blocks))
@@ -459,6 +488,13 @@ def audit_lead(slug):
     )
     results["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
     redlines["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
+    # D2-03 [RL] AGENT-CARD + PROMPT QUALITY (v3.42, Madison 2026-07-01):
+    # cards must NOT contain a raw "You are an AI agent…" copy-paste prompt or a
+    # "Copy-paste prompt:" label, and the 3 dropdown prompts must be structurally
+    # bulletproof (role/context/steps/guardrails/output), not merely >=900 chars.
+    acpq_ok, acpq_detail = agent_card_prompt_quality_gate(slug, html_path)
+    results["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
+    redlines["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
     podcast_exists = os.path.exists(os.path.join(REPO, "podcasts", podcast_filename(slug)))
     results["D3-01_podcast_exists"] = podcast_exists
     redlines["D3-01_podcast_exists_RL"] = podcast_exists
@@ -501,7 +537,8 @@ def audit_lead(slug):
             "home_services_detail": hs_detail,
             "restaurant_detail": restaurant_detail,
             "podcast_detail": podcast_detail,
-            "podcast_audio_detail": podcast_audio_detail}
+            "podcast_audio_detail": podcast_audio_detail,
+            "agent_card_prompt_quality_detail": acpq_detail}
 
 def main():
     import argparse

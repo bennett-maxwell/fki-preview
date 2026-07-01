@@ -60,6 +60,45 @@ def extract_agent_prompts(html: str) -> List[Dict[str, str]]:
     return prompts
 
 
+def extract_agent_cards(html: str) -> List[str]:
+    """Return the raw HTML of each visible AI-agent square (.agent-card).
+
+    v3.42 (Madison 2026-07-01): the 6 agent squares must be CONDENSED and
+    outcome-first. They must NEVER carry a raw copy-paste operating prompt —
+    that reads as a lazy paste and Madison ruled it out. We scan the raw card
+    HTML (not stripped) so the check catches the boilerplate wherever it sits.
+    """
+    cards = []
+    for match in re.finditer(
+        r'<div\b[^>]*class=["\'][^"\']*\bagent-card\b[^"\']*["\'][^>]*>(.*?)</div>\s*</div>',
+        html, re.I | re.S,
+    ):
+        cards.append(match.group(1))
+    return cards
+
+
+# Boilerplate that must NEVER appear inside an agent card (case-insensitive).
+CARD_BANNED_SUBSTRINGS = [
+    "you are an ai agent",   # raw copy-paste operating prompt leaked into the card
+    "copy-paste prompt",     # the "Copy-paste prompt:" label
+]
+
+
+def check_agent_cards_no_boilerplate(html: str) -> List[str]:
+    """v3.42 red-line: no agent card may contain a boilerplate copy-paste prompt."""
+    failures = []
+    cards = extract_agent_cards(html)
+    for idx, card in enumerate(cards, start=1):
+        low = card.lower()
+        for banned in CARD_BANNED_SUBSTRINGS:
+            if banned in low:
+                failures.append(
+                    f"agent card {idx}: contains banned boilerplate '{banned}' — "
+                    "agent squares must be condensed outcome cards, never a raw copy-paste prompt"
+                )
+    return failures
+
+
 def validate_prompt(text: str, label: str, min_chars: int) -> List[str]:
     failures = []
     raw = str(text or "").strip()
@@ -71,6 +110,14 @@ def validate_prompt(text: str, label: str, min_chars: int) -> List[str]:
             failures.append(f"{label}: missing {marker}")
     if re.search(r"\b(?:you are an ai agent for|create a response for|draft a message for)\b.{0,120}$", low, re.S):
         failures.append(f"{label}: appears to be a starter prompt, not an operating runbook")
+    # v3.42: length + markers alone are not enough. A prompt that is only a bare
+    # "You are an AI agent…" opener with no real body is a stub even if padded to
+    # length. Require the structure markers (checked above) AND that the prompt is
+    # not dominated by the boilerplate opener.
+    if low.startswith("you are an ai agent") and len(raw) < min_chars * 1.5 and low.count("##") < 3:
+        # short-ish, opener-led, and lacking multiple structured sections → filler risk
+        if "## " not in low:
+            failures.append(f"{label}: reads as a boilerplate starter (no structured sections), not a bulletproof runbook")
     return failures
 
 
@@ -111,6 +158,10 @@ def main() -> int:
     html_agent_prompts = extract_agent_prompts(html)
 
     failures = []
+    # v3.42 (Madison 2026-07-01) HARD RED-LINE: no agent square may contain a raw
+    # copy-paste operating prompt / "You are an AI agent…" boilerplate / "Copy-paste
+    # prompt:" label. Agent cards must be condensed, outcome-first squares.
+    failures.extend(check_agent_cards_no_boilerplate(html))
     if len(visible_prompts) < 3:
         failures.append(f"visible prompt cards: found {len(visible_prompts)}; need at least 3")
     # OVERRIDE 2026-06-26 (Madison Lanz, "I own it"): D2-02 retired.
@@ -120,19 +171,33 @@ def main() -> int:
     # (checked above + below). Restore the >=6 inline check if Bennett reinstates D2-02.
 
     checked = []
+    # The 3 ready-to-use dropdown prompts (prompt-pre) are the ONLY place full
+    # operating runbooks live — each must be lead-specific and structurally
+    # bulletproof (role/context/steps/guardrails/output + first-run test), not
+    # just long. (v3.42)
     for prompt in visible_prompts[:3]:
         checked.append({"source": "html_visible_prompt", "label": prompt["label"], "chars": len(prompt["text"])})
         failures.extend(validate_prompt(prompt["text"], f"HTML visible prompt {prompt['label']}", 1200))
-    # Inline agent-prompt cards are now optional; validate any that still exist, but do not require them.
+    # Inline agent-prompt cards are CONDENSED benefit/outcome teasers under v3.42 —
+    # they are NOT full runbooks, so we do NOT re-validate them for length/markers.
+    # Their only hard requirement is the boilerplate ban, enforced above via
+    # check_agent_cards_no_boilerplate(). Record them for the receipt only.
     for prompt in html_agent_prompts:
         checked.append({"source": "html_agent_prompt", "label": prompt["label"], "chars": len(prompt["text"])})
-        failures.extend(validate_prompt(prompt["text"], f"HTML agent prompt {prompt['label']}", 900))
 
     if args.profile:
         for prompt in profile_prompts(Path(args.profile).resolve()):
             checked.append({"source": "profile", "label": prompt["label"], "chars": len(prompt["text"])})
-            min_chars = 1200 if "visible prompt" in prompt["label"] else 900
-            failures.extend(validate_prompt(prompt["text"], prompt["label"], min_chars))
+            if "visible prompt" in prompt["label"]:
+                # Profile-side ready-to-use dropdown prompt → full runbook required.
+                failures.extend(validate_prompt(prompt["text"], prompt["label"], 1200))
+            else:
+                # Profile-side agent card → condensed teaser; only ban boilerplate,
+                # do not demand a full runbook (empty is fine, HTML renders outcome).
+                low = str(prompt["text"] or "").lower()
+                for banned in CARD_BANNED_SUBSTRINGS:
+                    if banned in low:
+                        failures.append(f"{prompt['label']}: contains banned boilerplate '{banned}' (agent cards must be condensed outcome teasers, not copy-paste prompts)")
 
     receipt = {
         "status": "PASS" if not failures else "FAIL",

@@ -290,13 +290,16 @@ def build(profile):
 
     # ---- agents ----
     def _agent_prompt(a, i):
-        # OVERRIDE 2026-06-26 (Madison Lanz, "I own it"): D2-02 condensed.
-        # Bennett's 2026-06-09 rule shipped a >=900-char inline copy-paste prompt
-        # inside every agent square, which Madison ruled looks bad. The 6 squares
-        # are now condensed (icon + name + desc + outcome only); the full operating
-        # prompts live solely in the 3 ready-to-use dropdown cards below.
-        # Re-enable by restoring the inline block if Bennett reinstates D2-02.
+        # OVERRIDE 2026-06-26 (Madison Lanz, "I own it") + LOCKED v3.42 (2026-07-01):
+        # Agent squares are CONDENSED and OUTCOME-FIRST. They must NEVER carry a raw
+        # copy-paste operating prompt, a "You are an AI agent…" boilerplate, or a
+        # "Copy-paste prompt:" label — that reads as a lazy paste (Madison ruled it out).
+        # The full operating prompts live ONLY in the 3 ready-to-use dropdown cards below.
+        # Enforced by run-audit.py red-line D2-03 + blueprint_agent_prompt_quality_gate.py.
+        # Do NOT restore an inline prompt here — it will hard-fail the audit for every lead.
         return ''
+    # Each card = icon + name + one-line lead-specific desc + a benefit-focused
+    # KEY-HIGHLIGHT/OUTCOME line (agent-outcome). No prompt text. (v3.42)
     ac = "".join(f'<div class="agent-card"><div class="agent-icon">{AGENT_SVGS[i % len(AGENT_SVGS)]}</div>'
                  f'<div class="agent-name">{esc(a["name"])}</div><div class="agent-desc">{a["desc"]}</div>'
                  f'{_agent_prompt(a, i)}'
