@@ -337,10 +337,10 @@ def html_page() -> str:
       {detail_html}
     </section>
     <section id="timeline" class="section">
-      <h2>3 / 7 / 30 Day Rollout</h2>
+      <h2>3-Week Rollout</h2>
       <div class="timeline-grid">
-        <article class="milestone"><h3>Days 1-3</h3><p>Connect the test profile, confirm the intake fields, and run one restaurant through catering response and guest recovery.</p></article>
-        <article class="milestone"><h3>Days 4-7</h3><p>Review output with the store lead, remove low-value messages, and keep only actions a manager would use.</p></article>
+        <article class="milestone"><h3>Week 1 · Days 1–7</h3><p>Connect the test profile, confirm the intake fields, and run one restaurant through catering response and guest recovery.</p></article>
+        <article class="milestone"><h3>Weeks 2–3 · Days 8–21</h3><p>Review output with the store lead, remove low-value messages, and keep only actions a manager would use.</p></article>
         <article class="milestone"><h3>Days 8-30</h3><p>Track orders, catering follow-up, rewards touches, guest recovery, and crew handoffs before expanding.</p></article>
       </div>
       {detail_html}

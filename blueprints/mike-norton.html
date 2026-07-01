@@ -1,15 +1,16 @@
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-01T16:35:39Z | Lead: Mike Norton | Industry: business services -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A personalized AI blueprint for Austin — exactly where AI creates the biggest leverage for Iron Horse Armory and how to get there in 30 days." />
-  <meta property="og:title" content="Your AI Advantage Roadmap — Iron Horse Armory" />
-  <meta property="og:description" content="A personalized AI blueprint built for Austin. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to Iron Horse Armory." />
+  <meta name="description" content="A personalized AI blueprint for Mike Norton — exactly where AI creates the biggest leverage for Mike Norton and how to get there in 30 days." />
+  <meta property="og:title" content="Your AI Advantage Roadmap — Mike Norton" />
+  <meta property="og:description" content="A personalized AI blueprint built for Mike Norton. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to Mike Norton." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/austin-iron-horse.html" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/mike-norton.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>AI Advantage Roadmap — Iron Horse Armory · Austin</title>
+  <title>AI Advantage Roadmap — Mike Norton</title>
   <style>
     :root {
       /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
@@ -26,6 +27,8 @@
       --text-muted:   #6E6E73;
       --text-light:   #A1A1A6;
       --border:       #E5E5EA;
+      --bg:           #F5F5F7; /* alias for --neutral-bg; consumed by .agent-prompt */
+      --text-mid:     #6E6E73; /* alias for --text-muted; consumed by .agent-prompt/.agent-time */
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
       --shadow: 0 4px 24px rgba(10,14,26,0.08);
@@ -139,6 +142,8 @@
     .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
     .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-prompt { background: var(--bg, #F5F5F7); border: 1px solid var(--border, #E5E5EA); border-radius: 10px; padding: 1rem; font-size: 0.85rem; line-height: 1.55; color: var(--text-mid, #6E6E73); margin-bottom: 0.75rem; }
+    .agent-time { font-size: 0.8rem; color: var(--text-mid, #6E6E73); margin-top: 0.5rem; }
     .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
     .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
     .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
@@ -259,6 +264,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -277,38 +317,77 @@
 </nav>
 
 <section class="hero" id="hero">
-  <div class="hero-badge">Confidential — Prepared for Austin</div>
-  <h1>Your <span>AI Advantage</span> Roadmap<br>for Iron Horse Armory</h1>
-  <p class="hero-sub">A personalized blueprint showing exactly where AI helps Iron Horse Armory scale -- by answering every customer question in seconds, following up so no sale slips, and keeping communication consistent as the store grows. Here is the 30-day path.</p>
-  <div class="hero-stats"><div class="hero-stat"><span class="num">Week 1</span><span class="label">Onboarding<br>&amp; Setup</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">Week 2</span><span class="label">First Agent<br>Live</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">Week 3</span><span class="label">All 6 Agents<br>Live</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">60 Sec</span><span class="label">Customer Reply<br>vs 60 Min</span></div></div>
+  <div class="hero-badge">Confidential — Prepared for Mike Norton</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Mike Norton</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for Mike Norton — and how to get there in 30 days.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">Week 1</span><span class="label">Onboarding<br>&amp; Setup</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Week 2</span><span class="label">First Agent<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Week 3</span><span class="label">All 6 Agents<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Teammate</span></div>
+  </div>
 </section>
 
 <section class="section section-alt" id="profile">
   <div class="container">
     <p class="section-label">Your Business Profile</p>
-    <h2 class="section-title">Where Iron Horse Armory Stands Today</h2>
-    <p class="section-sub">Built from your intake answers and a structured review of ironhorsearmory.com. This is the baseline we used to design your AI system.</p>
-    <div class="snapshot-grid"><div class="snapshot-card"><div class="snapshot-val">Firearms Retail</div><div class="snapshot-key">Business Type</div></div><div class="snapshot-card"><div class="snapshot-val">$3M&ndash;10M</div><div class="snapshot-key">Annual Revenue</div></div><div class="snapshot-card"><div class="snapshot-val">~30 / mo</div><div class="snapshot-key">Leads Coming In</div></div><div class="snapshot-card"><div class="snapshot-val">Team of 10</div><div class="snapshot-key">Team Size</div></div><div class="snapshot-card"><div class="snapshot-val">None yet</div><div class="snapshot-key">Current CRM</div></div><div class="snapshot-card"><div class="snapshot-val">~60 min</div><div class="snapshot-key">Customer Response (Gap)</div></div><div class="snapshot-card"><div class="snapshot-val">Customer Comms</div><div class="snapshot-key">Flagged Stress</div></div><div class="snapshot-card"><div class="snapshot-val">ChatGPT</div><div class="snapshot-key">AI Maturity</div></div></div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">Your stated goal is to scale -- and you flagged <strong>customer communication</strong> as the thing that has to keep up as you grow. You field roughly <strong>30 leads a month</strong> and respond in about <strong>60 minutes</strong>. In retail, the store that answers fast wins the sale: a customer asking about availability, a transfer, or hours will buy from whoever replies first. You run a 10-person team with no CRM yet, so AI doesn't replace a system -- it gives you your first one: every call, text, and message answered in seconds, consistent follow-up, and a clean record of every customer conversation, so communication scales with the store instead of bottlenecking on a few people.</p>
+    <h2 class="section-title">Where Mike Norton Stands Today</h2>
+    <p class="section-sub">Built from your intake answers and a structured review of mikenorton.com. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">business services</div><div class="snapshot-key">Industry</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">—</div><div class="snapshot-key">Projects Completed</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">—</div><div class="snapshot-key">Team Size</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">—</div><div class="snapshot-key">Years in Business</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">your CRM</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Ready to Scale</div><div class="snapshot-key">AI Readiness</div></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: ready to scale with dedicated AI agents calibrated to Mike Norton. Your biggest time-recovery opportunities are mapped in the sections below. Brand voice is calibrated from mikenorton.com and the language your customers already use — 90% accurate on Day 1, built from an intel audit before launch.</p>
   </div>
 </section>
 
 <section class="section" id="results">
   <div class="container">
     <p class="section-label">What Your Industry Is Already Doing</p>
-    <h2 class="section-title">Retailers Like Iron Horse Are Already Scaling With AI</h2>
-    <p class="section-sub">These are the exact moves growing retail shops are making to handle more customers without dropping conversations. At 30 leads a month and a 60-minute reply, speed and consistency are the whole game.</p>
-    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every customer in seconds</div><div class="gap-desc"><strong>What they're doing:</strong> shops put an AI front-desk agent on every call, text, and message that replies in under a minute, 24/7. <strong>How it helps them:</strong> the store that answers first wins the sale -- a customer asking about availability or hours buys from whoever replies. <strong>How I deliver it for Iron Horse:</strong> a communication agent in your voice that answers product, availability, transfer, and hours questions instantly and routes anything regulated to your team.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They follow up so no sale slips</div><div class="gap-desc"><strong>What they're doing:</strong> a multi-touch AI follow-up on every customer who asked but didn't buy. <strong>How it helps them:</strong> most retail sales need a nudge; the shop that follows up captures the ones that would walk. <strong>How I deliver it for Iron Horse:</strong> a follow-up agent that checks back on inquiries and special orders automatically so nothing falls through.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They bring past customers back</div><div class="gap-desc"><strong>What they're doing:</strong> shops run an AI agent across their customer base for new arrivals, events, and reasons to return. <strong>How it helps them:</strong> a repeat customer is the cheapest sale you can make. <strong>How I deliver it for Iron Horse:</strong> a reactivation agent that lets past customers know about new inventory, classes, and events -- in a compliant, on-brand way.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They keep communication consistent as they grow</div><div class="gap-desc"><strong>What they're doing:</strong> AI keeps every customer conversation logged, answered, and on-brand no matter who's working. <strong>How it helps them:</strong> communication scales with the store instead of depending on a few people. <strong>How I deliver it for Iron Horse:</strong> agents that handle the front-of-house communication so your 10-person team stays focused on customers in the store.</div><span class="gap-tag brand">Visibility</span></div></div></div>
-    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside retailers competing for the same customers. You have the traffic and the team -- the opportunity is answering and following up on every customer before someone else does, and keeping that consistent as you scale.</p>
+    <h2 class="section-title">Businesses Like Mike Norton Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves businesses in the business services space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Mike Norton runs them before the competitor down the street does.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every inquiry in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> businesses in your space now put an AI speed-to-lead agent on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first business to respond wins the clear majority of deals &mdash; they capture opportunities your slower competitors never even see. <strong>How I deliver it for Mike Norton:</strong> a speed-to-lead agent wired into your your CRM that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They serve more customers without adding headcount</div><div class="gap-desc"><strong>What they're doing:</strong> growing teams hand new-customer setup to an AI onboarding agent &mdash; intake, welcome sequences, document collection, and kickoff scheduling. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a small team serves far more customers without a single new hire. <strong>How I deliver it for Mike Norton:</strong> an onboarding agent that handles every repeatable setup step so your team only touches the conversations that need a human. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one update into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> businesses run an AI content agent that turns every update, offer, or customer win into ready-to-post social, email, and blog content. <strong>How it helps them:</strong> they stay top-of-mind with their market every single week &mdash; no marketing hire, no content backlog. <strong>How I deliver it for Mike Norton:</strong> a content agent trained on your brand voice from mikenorton.com that converts each Mike Norton update into a full week of publish-ready content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They catch at-risk customers before they leave</div><div class="gap-desc"><strong>What they're doing:</strong> businesses run an AI follow-up monitor across their whole customer base to flag at-risk relationships early. <strong>How it helps them:</strong> they protect revenue that would otherwise quietly walk out the door &mdash; the cheapest dollar in any business is the one you keep. <strong>How I deliver it for Mike Norton:</strong> a retention agent watching engagement and follow-up signals across your customer base, surfacing risk while there is still time to act. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside companies that sell what you sell. The ones who move first do not just save time &mdash; they take the customers everyone else was too slow to answer. Mike Norton can be the company they are worried about, or the one they leave behind.</p>
   </div>
 </section>
 
 <section class="section section-alt" id="pillars">
   <div class="container">
     <p class="section-label">Where the Value Comes From</p>
-    <h2 class="section-title">Three Ways AI Moves the Needle for Iron Horse Armory</h2>
-    <p class="section-sub">Every agent in your system maps to one of three outcomes — more bookings, more time, or more capacity per teammate.</p>
-    <div class="pillars-grid"><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="pillar-title">Answer Every Customer Fast</div><div class="pillar-metric">Your #1 Stress</div><div class="pillar-sub">Instant replies to every call, text, and message turn the ~30 leads you already get into more sales -- before a customer buys from whoever answered first.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="pillar-title">Scale Communication, Not Headcount</div><div class="pillar-metric">Your #1 Goal</div><div class="pillar-sub">AI handles the repetitive front-of-house questions consistently and on-brand, so communication grows with the store without adding people to answer the phone.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pillar-title">Never Drop a Conversation</div><div class="pillar-metric">Hours Back</div><div class="pillar-sub">Follow-up, special-order updates, and customer records handled automatically -- so nothing falls through as volume climbs.</div></div></div>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Mike Norton</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost per customer served.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">More Closes</div>
+        <div class="pillar-sub">Faster response captures more qualified opportunities for Mike Norton. AI-assisted follow-up helps the team reply consistently, reduce manual lag, and protect every pipeline stage.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">12 Hrs / Week</div>
+        <div class="pillar-sub">Admin work, client onboarding, content creation, and support triage &mdash; automated. Hours reclaimed per teammate, every week.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="pillar-title">Scale Without Hiring</div>
+        <div class="pillar-metric">Serve More</div>
+        <div class="pillar-sub">Serve more customers per teammate. Eliminate manual onboarding overhead. Grow your customer base without adding headcount.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -316,8 +395,15 @@
   <div class="container">
     <p class="section-label">Where You Are Today</p>
     <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one without replacing anything you already use.</p>
-    <div class="stack-grid"><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Phone + Text</div><div class="stack-role">Where customers reach you (AI plugs in here)</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Email</div><div class="stack-role">Customer communication channel</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">ChatGPT</div><div class="stack-role">Current AI Tool</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="stack-tool">(No CRM yet)</div><div class="stack-role">AI gives you your first customer system</div></div></div></div>
+    <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">your CRM</div><div class="stack-role">CRM + Automation Engine</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage + Docs</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Mike Norton Platform</div><div class="stack-role">Your Business</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Email + SMS</div><div class="stack-role">Lead Communication</div></div></div>
+    </div>
   </div>
 </section>
 
@@ -325,35 +411,71 @@
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
     <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
-    <p class="section-sub">These are the areas where Iron Horse Armory has the most capacity to recover — based on your intake answers and a structured review of ironhorsearmory.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
-    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Customer Communication</div><div class="gap-desc">You flagged customer communication as your main stress -- the thing that has to scale with the store. Calls, texts, and messages pile up and a 60-minute reply lets customers buy elsewhere. An AI communication agent answers every customer in seconds, 24/7, in the Iron Horse voice, and routes anything regulated to your team.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Response Speed</div><div class="gap-desc">You reply in about 60 minutes. In retail the first to respond wins the sale -- a customer asking about availability or a transfer buys from whoever answers first. An AI agent replies in under 60 seconds to every call, text, and form, day, night, and weekend.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Follow-Up</div><div class="gap-desc">When you're scaling, inquiries and special orders get dropped. An AI follow-up agent checks back on every customer who asked but didn't buy and every special order in progress -- so nothing slips through as volume grows.</div><span class="gap-tag revenue">Revenue Impact</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Scaling Without More Headcount</div><div class="gap-desc">Your goal is to scale. AI handles the repetitive front-of-house questions -- hours, availability, transfer process, class schedules -- consistently and on-brand, so communication grows with the store instead of bottlenecking on a few people.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Customer Records</div><div class="gap-desc">With no CRM yet, customer history lives in people's heads. AI keeps a clean record of every conversation, inquiry, and order automatically -- giving a 10-person team its first shared system.</div><span class="gap-tag brand">Visibility</span></div></div></div>
+    <p class="section-sub">These are the areas where Mike Norton has the most capacity to recover &mdash; based on your intake answers and a structured review of mikenorton.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Lead Response Speed at Scale</div><div class="gap-desc">Every new inquiry is a time-sensitive opportunity. Published research shows the first vendor to respond wins the clear majority of deals, yet many teams still reply manually. An AI lead response agent can acknowledge and route inquiries quickly, lifting close rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Marketing Content Production</div><div class="gap-desc">You flagged Marketing Content as a top operational stress. With Mike Norton active across the services you offer, content needs are constant &mdash; updates, announcements, customer success stories, educational pieces. An AI content agent transforms each update into ready-to-publish social, email, and blog content without a dedicated marketing hire. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Client Onboarding Capacity</div><div class="gap-desc">Onboarding a new Mike Norton customer requires intake, welcome sequences, document collection, and kickoff scheduling. With a lean team, every manual onboarding hour is an hour not spent on growth. An AI onboarding agent handles the repeatable steps automatically while your team owns the relationship. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Admin Work Across Active Accounts</div><div class="gap-desc">You flagged Admin Work as a top stress. Support requests, status checks, billing questions, and routine follow-ups &mdash; multiplied across your customer base &mdash; consume hours that could go toward growth. An AI admin agent handles the repeatable inquiries automatically and routes the rest to a human. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Client Retention &amp; Health Monitoring</div><div class="gap-desc">Retention and follow-up are expensive when customer health signals are scattered. An AI monitor can track usage notes, support patterns, and follow-up gaps to surface at-risk relationships early, enabling proactive outreach before revenue is lost. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Pipeline Visibility for Your Whole Team</div><div class="gap-desc">Every closeable deal needs to be visible to your whole team, scored by likelihood, and routed without a status meeting. An AI sales intelligence agent runs a weekly digest of pipeline movement, lead scores, and recommended actions &mdash; pulled directly from your your CRM data. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="oppmap">
   <div class="container">
     <p class="section-label">Prioritized Roadmap</p>
-    <h2 class="section-title">AI Opportunity Map — Iron Horse Armory</h2>
-    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down — do not skip ahead.</p>
-    <div class="opp-table-wrap"><table class="opp-table"><thead><tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr></thead><tbody><tr><td><div class="pri-badge">1</div></td><td><strong>Customer Communication Agent</strong></td><td><span class="impact-tag">60-sec reply</span> — every call, text, and message answered instantly</td><td>Phone, SMS, Email</td></tr><tr><td><div class="pri-badge">2</div></td><td><strong>Follow-Up Agent</strong></td><td><span class="impact-tag">No sale slips</span> — inquiries and special orders followed up automatically</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">3</div></td><td><strong>Reactivation Agent</strong></td><td><span class="impact-tag">Repeat customers</span> — new arrivals, classes, and events shared with past customers</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">4</div></td><td><strong>Scheduling Agent</strong></td><td><span class="impact-tag">Fuller calendar</span> — appointments, transfers, and classes booked and reminded</td><td>Calendar, SMS</td></tr><tr><td><div class="pri-badge">5</div></td><td><strong>Review &amp; Reputation Agent</strong></td><td><span class="impact-tag">Trust engine</span> — post-sale review + referral asks automatic</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">6</div></td><td><strong>Admin &amp; Records Agent</strong></td><td><span class="impact-tag">Clean records</span> — every customer conversation logged and organized</td><td>Email, Drive</td></tr></tbody></table></div>
+    <h2 class="section-title">AI Opportunity Map &mdash; Mike Norton</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down &mdash; do not skip ahead.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound Mike Norton inquiry answered before competitors see it</td><td>your CRM, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer onboarding fully automated</td><td>your CRM, Notion, Email</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>your CRM, Google Drive</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; product updates turned into marketing content</td><td>Social Channels, Email, Blog</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Retention Monitor</strong></td><td><span class="impact-tag">At-risk flagging</span> &mdash; customers surfaced before they lapse</td><td>your CRM, Slack, Notion</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>your CRM, Slack</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>your CRM, Notion</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="ignore">
   <div class="container">
     <p class="section-label">Sequencing, Not Limits</p>
-    <h2 class="section-title">What We&rsquo;ll Save for Later — So You Win the Big Wins First</h2>
-    <p class="section-sub">The plan is to recover the highest-impact time first, then expand. These are things you <em>could</em> automate down the road, but I would hold off for now — chasing them today would only distract from the agents that move the needle first.</p>
-    <div class="ignore-grid"><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Anything Touching Regulated Transactions</div><div class="ignore-reason">AI never handles sales of regulated items, background checks, or transfer paperwork -- those stay 100% with your licensed team. AI only answers questions and routes customers to you for anything regulated.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Replacing Your Counter Staff</div><div class="ignore-reason">Your team and expertise are the business. AI handles the repetitive phone-and-text questions so your people spend time with customers in the store, not on hold.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">A New Ad / Lead-Gen Push</div><div class="ignore-reason">You already get ~30 leads a month -- more leads isn't the gap. We answer and convert the traffic you have first, where the return is immediate.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Ripping Out Your Current Tools</div><div class="ignore-reason">You run lean. AI builds on the phone, text, and email you already use -- nothing gets replaced, communication just gets faster and more consistent.</div></div></div></div>
+    <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI can model revenue options and package changes, but final pricing and offer decisions should stay with leadership. Use AI to surface data first; keep autonomous revenue decisions as a later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more buyers in your market than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="agents">
   <div class="container">
     <p class="section-label">Your AI System</p>
-    <h2 class="section-title">6 AI Agents Built for Iron Horse Armory</h2>
-    <p class="section-sub">Each agent maps directly to a specific workflow inside your studio. Brand voice is built instantly from ironhorsearmory.com and your existing client language — 90% accurate on Day 1, no slow learning curve required.</p>
-    <div class="agents-grid"><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Customer Communication Agent</div><div class="agent-desc">Answers every call, text, and message in under 60 seconds in the Iron Horse voice -- product availability, store hours, the transfer process, class schedules -- and routes anything regulated straight to your licensed team. Handles all ~30 monthly leads plus walk-in questions, day, night, and weekend, so communication scales with the store.</div><div class="agent-outcome">Every customer answered in under 60 sec</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Follow-Up Agent</div><div class="agent-desc">Checks back automatically on every customer who asked but didn't buy and every special order in progress -- so no sale slips and no order is forgotten as volume grows.</div><div class="agent-outcome">No sale or order slips</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Reactivation Agent</div><div class="agent-desc">Lets past customers know about new arrivals, classes, and events in a compliant, on-brand way -- turning your existing customer base into repeat visits and sales.</div><div class="agent-outcome">Past customers come back</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Scheduling Agent</div><div class="agent-desc">Books appointments, transfer pickups, and class registrations, sends confirmations and reminders to cut no-shows, and keeps the store calendar clean -- without manual coordination across your team.</div><div class="agent-outcome">Appointments and classes booked, fewer no-shows</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Review &amp; Reputation Agent</div><div class="agent-desc">After each sale, sends review and referral requests automatically -- building the trust and reputation that win the next customer in a word-of-mouth business.</div><div class="agent-outcome">Reviews and referrals on autopilot</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Admin &amp; Records Agent</div><div class="agent-desc">Keeps every customer conversation, inquiry, and order logged and organized, and surfaces what needs a person -- giving a 10-person team its first shared customer system as you scale.</div><div class="agent-outcome">Clean records, nothing in people's heads</div></div></div>
+    <h2 class="section-title">6 AI Agents Built for Mike Norton</h2>
+    <p class="section-sub">Each agent maps directly to a specific workflow inside Mike Norton's operations. Brand voice is built instantly from mikenorton.com and your existing customer language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
+    <div class="agents-grid">
+<!-- Agent 1: Speed-to-Lead -->
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Speed-to-Lead Agent</div><div class="agent-desc">Monitors your inquiry inbox and website forms. The moment a prospect submits interest in Mike Norton, this agent drafts and sends a personalized, professional response within 60 seconds &mdash; day, night, or weekend. Qualifies the lead and routes to the right pipeline stage.</div><div class="agent-outcome">Responds in under 60 sec &mdash; 24/7, no staff required</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Client Onboarding Agent</div><div class="agent-desc">Automates the full new-customer setup sequence &mdash; welcome email, onboarding checklist, document collection, kickoff call scheduling, and initial your CRM configuration. Handles every repeatable onboarding step so your team focuses on strategy.</div><div class="agent-outcome">Cuts onboarding from days to hours</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Proposal Generator</div><div class="agent-desc">Takes a prospect's business type, team size, and goals &mdash; produces a fully branded Mike Norton proposal in under 3 minutes. Personalized to their situation with relevant highlights and Mike Norton customer success stories.</div><div class="agent-outcome">Proposal in 3 min vs. 45 min manually</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Content Production Agent</div><div class="agent-desc">Transforms Mike Norton product updates, feature releases, and customer wins into ready-to-post social content, email campaigns, and blog articles &mdash; without a dedicated content hire. Matches your brand voice from day one.</div><div class="agent-outcome">Eliminates the marketing content bottleneck</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Retention Monitor</div><div class="agent-desc">Tracks engagement, usage, and follow-up patterns across your Mike Norton customer base. Surfaces at-risk customers before they lapse and recommends specific retention actions your team can take this week.</div><div class="agent-outcome">Spot at-risk customers before they leave &mdash; weekly digest</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Admin Automation Agent</div><div class="agent-desc">Handles the repetitive operations work &mdash; support ticket triage, FAQ responses, account status checks, billing inquiries &mdash; freeing your team to focus on high-value customer relationships and growth.</div><div class="agent-outcome">Reclaims hours of admin time every week</div></div>
+<!-- DIY vs Partner -->
+    </div>
   </div>
 </section>
 
@@ -362,7 +484,35 @@
     <p class="section-label">How It Happens</p>
     <h2 class="section-title">Your Implementation Roadmap</h2>
     <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
-    <div class="milestone-table-wrap"><table class="milestone-table"><thead><tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr></thead><tbody><tr><td><div class="m-phase">Week 1 &middot; Days 1–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Onboarding &amp; Setup</div></td><td><ul class="m-list"><li>Discovery call -- map how customers reach you and the questions you answer most</li><li>Customer Communication + Follow-Up agents configured for phone, text, and email</li><li>Brand voice built from ironhorsearmory.com and how your team talks to customers</li><li>Compliance guardrails set: AI answers and routes, never handles regulated transactions</li><li>Live test: send a test inquiry and watch the instant reply fire</li></ul></td><td class="m-result">Onboarding week &mdash; we map your workflows, calibrate your brand voice, and configure the system internally. Nothing customer-facing goes live yet.</td></tr><tr><td><div class="m-phase">Weeks 2–3 &middot; Days 8–21</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Agents Go Live</div></td><td><ul class="m-list"><li>Reactivation Agent deployed across your past-customer list</li><li>Scheduling + Review agents connected to your calendar and sales flow</li><li>Admin &amp; Records agent keeping every conversation logged</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td><td class="m-result">Your first agent goes live in week 2. By the end of week 3, all 6 agents are deployed and running &mdash; with your team trained.</td></tr><tr><td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td><td><ul class="m-list"><li>30-day review: customers answered, sales captured, past customers reactivated, hours saved</li><li>Agents refined on your real customer questions and conversations</li><li>Expansion roadmap: what to automate next as you scale</li></ul></td><td class="m-result">The system knows your store. Every agent calibrated to real Iron Horse data.</td></tr><tr><td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td><td><ul class="m-list"><li>Minimal manual input -- the system answers and follows up on every customer</li><li>Continuous improvement from real sales and questions</li><li>You own the system -- we stay on as your AI operations team</li></ul></td><td class="m-result">AI runs like a 24/7 front counter that never misses a customer and never forgets a follow-up.</td></tr></tbody></table></div>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Week 1 &middot; Days 1–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Onboarding &amp; Setup</div></td>
+            <td><ul class="m-list"><li>Kickoff call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your your CRM forms</li><li>Brand voice built from mikenorton.com and your existing Mike Norton messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
+            <td class="m-result">Onboarding week &mdash; we map your workflows, calibrate your brand voice, and configure the system internally. Nothing customer-facing goes live yet.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Weeks 2–3 &middot; Days 8–21</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Agents Go Live</div></td>
+            <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Mike Norton pricing and services</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td class="m-result">Your first agent goes live in week 2. By the end of week 3, all 6 agents are deployed and running &mdash; with your team trained.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list"><li>30-day performance review: response rates, time saved, customers retained</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Mike Norton scales</li></ul></td>
+            <td class="m-result">System knows your business. Every agent calibrated to real Mike Norton data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -370,7 +520,7 @@
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. The monthly-leads default (30) comes from your Iron Horse Armory intake; the customer-value and admin-hours figures are editable example defaults, not intake data -- set them to your real numbers. Choose a scenario preset or type your own.</p>
+    <p class="section-sub">Type in your actual customer value and adjust the sliders to match your business. Any missing inputs are adjustable placeholders unless the intake supplied them. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
       <div class="calc-presets">
         <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
@@ -380,19 +530,19 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="300" step="50" value="900" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="500" step="500" value="500" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">30</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="1000" step="1" value="30" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">25%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="25" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">20 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="20" data-no-default="true" oninput="updateLabel('hours'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -408,109 +558,148 @@
 
 <section class="section section-alt" id="prompts">
   <div class="container">
-    <p class="section-label">Your First AI Agent — Start Here</p>
-    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Iron Horse Armory</h2>
-    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Built specifically for Iron Horse Armory.</p>
-    <div class="prompt-cards"><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 — Iron Horse Customer Communication</h3><p>Based on your #1 stress: customer communication + a 60-minute response on ~30 leads/mo</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt1" class="prompt-pre">## IDENTITY
-You are the Front-Counter Agent for Iron Horse Armory. You make sure no customer question ever goes unanswered. You are knowledgeable, friendly, and professional -- like the best counter staff who never clocks out. You NEVER handle regulated transactions; you answer questions and route customers to the licensed team.
+    <p class="section-label">Your First AI Agent &mdash; Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Agent Prompts for Mike Norton</h2>
+    <p class="section-sub">These are fully-built agent instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs. Built specifically for Mike Norton.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Lead Response Agent</h3><p>Based on your #1 time-recovery opportunity: a fast, useful first response on every new Mike Norton inquiry</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Lead Response Agent for Mike Norton, a business services business.
 
-## WHAT YOU HANDLE
-- Product availability and general questions
-- Store hours, location, and directions
-- The transfer / FFL process explained at a high level (then hand off to the team)
-- Class and event schedules and sign-ups
-- General order and pickup status
+## JOB
+Turn every new inquiry into a fast, useful first response and a clean internal handoff.
 
-## INSTANT REPLY (within 60 seconds)
-Greet warmly, answer the question directly, and offer the next step (visit, call, appointment).
-Keep it clear and helpful; reflect the Iron Horse brand voice.
+## INPUTS YOU NEED
+1. Contact or customer name when available.
+2. The original message, form answers, call note, or CRM record.
+3. The channel or source the request came from.
+4. Current stage, owner, and last touch when available.
+5. Any business-specific service, product, price, or approval rules.
+If an input is missing, continue with what you have and flag the gap. Do not invent facts.
 
-## HARD COMPLIANCE RULES
-- NEVER process a sale, take payment, run or discuss the specifics of a background check, or complete transfer paperwork -- always route these to the licensed team.
-- NEVER give legal advice on firearms law; point to the team or official sources.
-- For anything regulated or uncertain: 'Let me get one of our team members to help you with that directly.'
-- Capture name + question + best contact; log every interaction.
-
-## EDGE CASES
-- Regulated/legal question: answer generally, then route to a human immediately.
-- Price/availability on a specific item: confirm what you can, offer to have the team verify and hold it.
-- After hours: reply instantly, answer general questions, and book a callback or visit for anything that needs staff.
-- Upset customer: stay calm and professional, acknowledge, and route to a manager.
-
-## EXAMPLE — INSTANT REPLY
----
-Hi, thanks for reaching out to Iron Horse Armory! We're open today until 7pm. We'd be happy to help you with that -- are you looking to come in today, or would you like one of our team to give you a call? For transfers, I can walk you through how it works and our team will handle the paperwork when you come in.
----</pre><button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: instantly answers every customer call, text, and message in your voice -- availability, hours, transfers, classes -- and routes anything regulated to your team, so the sale stays with Iron Horse.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 — Follow-Up &amp; Reactivation Engine</h3><p>Based on your scale goal + bringing past customers back</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt2" class="prompt-pre">## IDENTITY
-You are the Follow-Up &amp; Reactivation Agent for Iron Horse Armory. You make sure no sale slips and past customers keep coming back. You are friendly, helpful, and on-brand -- never pushy, always compliant.
-
-## FOLLOW-UP JOB
-- Inquiry that didn't buy: check back with a helpful nudge and an offer to answer questions.
-- Special order in progress: proactively update the customer on status and pickup.
-- Always one clear next step; stop if they ask to.
-
-## REACTIVATION CAMPAIGNS
-1. NEW ARRIVALS: let interested past customers know when relevant inventory lands.
-2. CLASSES &amp; EVENTS: invite past customers to training, ranges, and events.
-3. WIN-BACK: customers not seen in a while -- a warm 'we'd love to see you again.'
+## WORKFLOW
+Step 1: Read the input and classify the situation.
+Step 2: Identify the next useful business action.
+Step 3: Draft the customer-facing or internal output in Mike Norton's voice.
+Step 4: Create a CRM/internal note with summary, owner, due date, and confidence.
+Step 5: Escalate anything sensitive, unclear, legal, medical, financial, or approval-dependent.
 
 ## RULES
-- Compliant and on-brand; never reference regulated specifics, just invite them in.
-- One offer per message; reference what they actually looked at or bought.
-- Log every touch; route replies to the team.
+- Reply in plain English with one clear call to action.
+- Never invent pricing, availability, guarantees, outcomes, or policy details.
+- Quote the customer's own request when possible.
 
-## EXAMPLE — SPECIAL-ORDER UPDATE
----
-Hi James -- good news from Iron Horse Armory: the item you ordered just came in. We can have it ready for pickup whenever works for you. Want me to let the team know you're coming by this week?
----
+## FIRST-RUN TEST
+Test input: A new inquiry arrives with a name, an interest, contact details, and a short message.
+Passing result: A channel-appropriate reply, one clarifying question if needed, a CRM note, a follow-up task, and a human-review flag.
+</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Ensures every Mike Norton inquiry receives a professional, relevant response in under 60 seconds &mdash; including nights and weekends &mdash; without adding a single staff hour.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Qualification &amp; Proposal Prep Agent</h3><p>Based on your #2 time recovery opportunity: manual client setup consuming team bandwidth</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the Qualification &amp; Proposal Prep Agent for Mike Norton, a business services business.
 
-## EXAMPLE — NEW ARRIVALS / WIN-BACK
----
-Hey Mike, it's Iron Horse Armory -- we just got some new gear in that I thought you'd want to know about based on what you picked up last time. Swing by this week and the team can show you. We're open till 7. Hope you've been well!
----
+## JOB
+Convert messy prospect context into a clear qualification brief and proposal-prep outline for a human to review.
 
-## EXAMPLE — CLASS INVITE
----
-Hi Sarah! We've got a beginner's safety + handling class coming up next Saturday morning -- a great fit for folks getting started. Want me to save you a seat? Spots fill up fast.
----</pre><button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: follows up on every inquiry and special order so no sale slips, and brings past customers back for new arrivals, classes, and events.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 — Review &amp; Reputation Engine</h3><p>Based on your scale goal in a word-of-mouth business</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt3" class="prompt-pre">## IDENTITY
-You are the Review &amp; Reputation Agent for Iron Horse Armory. You turn happy customers into reviews and referrals. You sound genuine and grateful -- like the owner thanking a customer personally.
+## INPUTS YOU NEED
+1. Contact or customer name when available.
+2. The original message, form answers, call note, or CRM record.
+3. The channel or source the request came from.
+4. Current stage, owner, and last touch when available.
+5. Any business-specific service, product, price, or approval rules.
+If an input is missing, continue with what you have and flag the gap. Do not invent facts.
 
-## TRIGGER
-A sale or service is completed.
-
-## SEQUENCE
-1. Thank-you (same day): warm, brief, on-brand.
-2. Review ask (2-3 days later): one-tap link to Google, with a gentle reason it helps a local shop.
-3. Referral ask (1-2 weeks later): invite them to send a friend, easy to forward.
+## WORKFLOW
+Step 1: Read the input and classify the situation.
+Step 2: Identify the next useful business action.
+Step 3: Draft the customer-facing or internal output in Mike Norton's voice.
+Step 4: Create a CRM/internal note with summary, owner, due date, and confidence.
+Step 5: Escalate anything sensitive, unclear, legal, medical, financial, or approval-dependent.
 
 ## RULES
-- Reference the visit or purchase generally -- never regulated specifics.
-- One ask per message; stop if they decline; keep it warm and low-pressure.
-- Log reviews and referrals so the store sees what's working.
+- Reply in plain English with one clear call to action.
+- Never invent pricing, availability, guarantees, outcomes, or policy details.
+- Quote the customer's own request when possible.
 
-## EXAMPLE — REVIEW ASK
----
-Hi James, thanks again for stopping by Iron Horse Armory -- it was great helping you out. If you have 30 seconds, a quick review here [link] really helps a local shop like ours and helps other folks find us. Appreciate you!
----</pre><button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: after every sale, asks happy customers for a review and a referral -- building the trust and reputation that win your next customer.</div></div></div></div>
-    <div class="diy-or-partner"><h3>Two paths forward for Austin:</h3><div class="path-grid"><div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div><div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the Iron Horse Armory voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron+Horse+Armory&src=austin-iron-horse&firstName=Austin&agents=Customer%20Communication%20Agent,Follow-Up%20Agent,Reactivation%20Agent,Scheduling%20Agent,Review%20%26%20Reputation%20Agent,Admin%20%26%20Records%20Agent" class="path-cta">See If You Qualify</a></div></div></div>
+## FIRST-RUN TEST
+Test input: A prospect has shared needs, timeline, budget signals, and a few missing details.
+Passing result: A qualification summary, the missing questions, a draft scope outline, risks/assumptions, and a human approval checklist.
+</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Turns messy prospect and customer context into clear, reviewed work product for Mike Norton &mdash; consistently, at any volume.</div>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Follow-Up &amp; Nurture Agent</h3><p>Based on your #3 time recovery opportunity: manual proposal creation for each prospect</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Follow-Up &amp; Nurture Agent for Mike Norton, a business services business.
+
+## JOB
+Keep prospects, customers, and open opportunities from going stale with respectful, context-aware follow-up.
+
+## INPUTS YOU NEED
+1. Contact or customer name when available.
+2. The original message, form answers, call note, or CRM record.
+3. The channel or source the request came from.
+4. Current stage, owner, and last touch when available.
+5. Any business-specific service, product, price, or approval rules.
+If an input is missing, continue with what you have and flag the gap. Do not invent facts.
+
+## WORKFLOW
+Step 1: Read the input and classify the situation.
+Step 2: Identify the next useful business action.
+Step 3: Draft the customer-facing or internal output in Mike Norton's voice.
+Step 4: Create a CRM/internal note with summary, owner, due date, and confidence.
+Step 5: Escalate anything sensitive, unclear, legal, medical, financial, or approval-dependent.
+
+## RULES
+- Reply in plain English with one clear call to action.
+- Never invent pricing, availability, guarantees, outcomes, or policy details.
+- Quote the customer's own request when possible.
+
+## FIRST-RUN TEST
+Test input: A CRM record shows the last message, current stage, original need, and days since last contact.
+Passing result: A next-best follow-up message, the internal reason, the recommended channel, a next task date, and stop/escalation checks.
+</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <div class="prompt-outcome">What this does: Keeps every Mike Norton prospect and customer from going stale with respectful, context-aware follow-up &mdash; so no opportunity is forgotten.</div>
+        </div>
+      </div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two paths forward for Mike:</h3>
+      <div class="path-grid">
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Mike Norton's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Mike%20Norton&src=mike-norton" class="path-cta">See If You Qualify</a></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="demo">
   <div class="container">
     <p class="section-label">Live Preview</p>
-    <h2 class="section-title">Iron Horse Armory Speed-to-Lead Demo</h2>
-    <p class="section-sub">This is what a customer communication agent looks like in action -- a customer question answered in seconds, in your voice, with anything regulated routed to your team.</p>
-    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">Below is a real example of an AI front-counter agent built for a retailer -- answering a customer in seconds and routing regulated requests to staff. Yours would be tuned to Iron Horse Armory, your products, and how your team talks to customers.</p>
+    <h2 class="section-title">Mike Norton Speed-to-Lead Demo</h2>
+    <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound Mike Norton inquiry, day or night. The same flow runs across your customer base for onboarding and follow-up too.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center is built on your your CRM account &mdash; not as a standalone tool. It plugs into the Mike Norton brand voice you have already built and runs every workflow above end-to-end.</p>
   </div>
 </section>
 
 <section class="section pod-section" id="listen">
   <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
-  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Iron Horse Armory answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Mike Norton answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
   <div class="pod-card" id="podcast">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
-      <p class="pod-subtitle">Austin &middot; Iron Horse Armory</p>
+      <p class="pod-subtitle">Mike Norton &middot; Mike Norton</p>
     </div>
     <div class="pod-body">
       <span class="pod-badge" id="podBadge">
@@ -552,13 +741,13 @@ Hi James, thanks again for stopping by Iron Horse Armory -- it was great helping
         <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
           <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         </button>
-        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3" target="_blank" download>Download MP3</a>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton.mp3" target="_blank" download>Download MP3</a>
       </div>
       <div class="pod-error" id="podError">
-        Audio temporarily unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3" target="_blank">Open MP3 directly</a>
+        Audio temporarily unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton.mp3" target="_blank">Open MP3 directly</a>
       </div>
-      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3">
-        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/austin-iron-horse.mp3" type="audio/mpeg">
+      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton.mp3">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/mike-norton.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
@@ -569,36 +758,42 @@ Hi James, thanks again for stopping by Iron Horse Armory -- it was great helping
     <p class="section-label">Research Sources</p>
     <h2 class="section-title">Citations</h2>
     <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
-    <div class="sources-list"><div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics — lead response time and conversion research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div><div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review — "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div><div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company — operations analytics and customer-experience research. <a href="https://www.mckinsey.com/capabilities/operations/our-insights" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute — "The State of AI in 2023." Adoption benchmarks for lead volume and conversion lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review — automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div></div>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in business operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review &mdash; Automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+    </div>
   </div>
 </section>
 
 <section class="cta-section" id="apply">
   <div class="container">
-    <h2>Ready to See This<br><span>Working for Iron Horse Armory?</span></h2>
-    <p class="cta-personal">Austin, you've got the traffic and a strong team -- the thing that has to scale with the store is customer communication, and that's exactly what this system handles, starting in 3 days. AI answers and routes; your licensed team stays in control of everything regulated.</p>
+    <h2>Ready to See This<br><span>Working for Mike Norton?</span></h2>
+    <p class="cta-personal">"Mike, I built this roadmap specifically for Mike Norton because I believe the business you have built &mdash; Mike Norton &mdash; deserves systems that are as reliable and scalable as the work itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron+Horse+Armory&src=austin-iron-horse&firstName=Austin&agents=Customer%20Communication%20Agent,Follow-Up%20Agent,Reactivation%20Agent,Scheduling%20Agent,Review%20%26%20Reputation%20Agent,Admin%20%26%20Records%20Agent" class="cta-btn">See If You Qualify</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Mike%20Norton&src=mike-norton" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
 
 <footer>
-  <p>Advaita AI for Business &mdash; Prepared for Austin / Iron Horse Armory &mdash; Confidential</p>
+  <p>Advaita AI for Business &mdash; Prepared for Mike Norton / Mike Norton &mdash; Confidential</p>
   <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
 </footer>
 
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Austin&biz=Iron+Horse+Armory&src=austin-iron-horse&firstName=Austin&agents=Customer%20Communication%20Agent,Follow-Up%20Agent,Reactivation%20Agent,Scheduling%20Agent,Review%20%26%20Reputation%20Agent,Admin%20%26%20Records%20Agent" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike%20Norton&biz=Mike%20Norton&src=mike-norton" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
   const PRESETS = {
-    conservative: { contract: 900, leads: 30, rate: 25, hours: 18, lift: 0.5 },
-    expected:     { contract: 900, leads: 30, rate: 25, hours: 18, lift: 1.0 },
-    stretch:      { contract: 900, leads: 30, rate: 25, hours: 18, lift: 1.3 }
+    conservative: { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 0.5 },
+    expected:     { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.0 },
+    stretch:      { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.3 }
   };
   let currentLift = 1.0;
 
@@ -684,7 +879,7 @@ Hi James, thanks again for stopping by Iron Horse Armory -- it was great helping
 </script>
 
 <div class="pod-mini" id="podMini" aria-live="polite">
-  <span class="pod-mini-name">AI Walkthrough &middot; Austin</span>
+  <span class="pod-mini-name">AI Walkthrough &middot; Mike Norton</span>
   <span class="pod-mini-time" id="podMiniTime">0:00</span>
   <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
     <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
@@ -694,7 +889,7 @@ Hi James, thanks again for stopping by Iron Horse Armory -- it was great helping
 <script>
 (function () {
   'use strict';
-  var STORAGE_KEY = 'bpod_austin-iron-horse';
+  var STORAGE_KEY = 'bpod_mike-norton';
   var CHAPTERS = [
     {pct: 0,    label: 'Segment 1 - This Is Your Business'},
     {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},

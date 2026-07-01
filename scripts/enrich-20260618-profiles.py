@@ -185,12 +185,12 @@ def simon_profile():
             {"title": "Generic content volume", "reason": "The first win is buyer-response speed and content quality, not flooding channels with unreviewed posts."},
         ],
         "timeline": [
-            {"phase": "Days 1-3", "sub": "Map the first workflow", "items": [
+            {"phase": "Week 1 · Days 1-7", "sub": "Onboarding & setup", "items": [
                 "Confirm how buyer enquiries reach Disruptive Foods across WhatsApp, text, and email",
                 "Define response categories, escalation rules, and handoff owners",
                 "Build the first reply, sample-request, and content templates"],
              "result": "The team has a clean intake and response map before automation touches buyer-facing conversations."},
-            {"phase": "Days 4-7", "sub": "Launch the first agents", "items": [
+            {"phase": "Weeks 2-3 · Days 8-21", "sub": "Agents go live", "items": [
                 "Test the buyer-enquiry, content, and admin agents on real examples",
                 "Review language for pricing, listings, and brand-sensitive boundaries",
                 "Create the first measurement view for response speed and content turnaround"],
@@ -358,12 +358,12 @@ def asif_profile():
             {"title": "Generic marketing volume", "reason": "The first win is call capture and follow-up consistency, not unreviewed marketing output."},
         ],
         "timeline": [
-            {"phase": "Days 1-3", "sub": "Map the first workflow", "items": [
+            {"phase": "Week 1 · Days 1-7", "sub": "Onboarding & setup", "items": [
                 "Confirm how calls and messages reach each of the five locations",
                 "Define capture, routing, and escalation rules by unit",
                 "Build the first missed-call, booking, and follow-up templates"],
              "result": "The group has a clean capture-and-route map before automation touches guest-facing calls."},
-            {"phase": "Days 4-7", "sub": "Launch the first agents", "items": [
+            {"phase": "Weeks 2-3 · Days 8-21", "sub": "Agents go live", "items": [
                 "Test the missed-call, booking, and scheduling agents on real examples",
                 "Review language for pricing, comps, and capacity boundaries",
                 "Create the first measurement view for capture rate and coverage"],
