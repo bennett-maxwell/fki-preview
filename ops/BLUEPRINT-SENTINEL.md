@@ -3,7 +3,20 @@
 Always-on watcher that makes a missed Blueprint lead impossible.
 Canonical source: `scripts/blueprint-lead-sentinel.py` (this repo).
 Runtime copy (launchd cannot read ~/Desktop due to macOS TCC): `~/.openclaw/scripts/blueprint-lead-sentinel.py`.
-Scheduler: `~/Library/LaunchAgents/com.madisonfki.blueprint-lead-sentinel.plist` (StartInterval 600s + RunAtLoad).
+Scheduler: `~/Library/LaunchAgents/com.madisonfki.blueprint-lead-sentinel.plist` (StartInterval **120s** + RunAtLoad; plist mirrored to `ops/launchd/`).
+
+## Two-layer architecture (2026-07-01)
+- **Layer 1 (real-time, server-side, primary):** form → Slack the instant a lead is created,
+  no Mac needed. NOT YET LIVE — grant-gated. See `ops/relay-slack-patch.md`. Blocked because
+  (a) the live form bypasses the relay and posts external-tracking directly to Advaita, and
+  (b) the relay routes to MAIN + GHL workflow actions can't be edited via API. Needs a Slack
+  Incoming Webhook + a decision on canonical ingestion path + GHL workflow-edit UI access.
+- **Layer 2 (backstop, this Sentinel):** near-real-time poll (every 120s) of BOTH GHL accounts,
+  multi-signal detection, durable outbox, 60-min delay alarm, daily heartbeat. WORKING.
+  PROVEN end-to-end 2026-07-01: relay test lead (contactId Ymzvi5H8mOviUFWbostJ) submitted
+  21:42:38Z → detected + queued 21:43:22Z (~44s) → posted to #ai-blueprint-leads
+  (https://franchiseki.slack.com/archives/C0B3QCD9UD7/p1782942232167569) → 60-min clock armed
+  → test contact deleted + verified gone (GET 400).
 
 ## Why it exists (Josh Jackson failure, 2026-06-30)
 Josh (josh@exaltlife.co) landed in MAIN GHL with source="Bennett Call" + tag="blueprint ai lead".

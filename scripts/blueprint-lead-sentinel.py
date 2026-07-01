@@ -76,9 +76,13 @@ import urllib.error
 
 HOME = os.path.expanduser("~")
 ENV_FILE = os.path.join(HOME, ".claude", ".env")
-REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATE_DIR = os.path.join(REPO_DIR, "ops", "state")
-LOGS_DIR = os.path.join(REPO_DIR, "ops", "logs")
+REPO_DIR = os.environ.get('FKI_PREVIEW_DIR', '/Users/madisonlanz/Desktop/fki-preview')
+# launchd on macOS cannot read/write ~/Desktop without Full Disk Access (TCC).
+# Primary state lives under ~/.openclaw (launchd-writable, proven by notebooklm job);
+# a durable copy is mirrored into the repo (REPO_DIR/ops) on every save for visibility.
+STATE_DIR = os.path.join(HOME, ".openclaw", "state", "blueprint-sentinel")
+LOGS_DIR = os.path.join(HOME, ".openclaw", "logs")
+REPO_MIRROR_DIR = os.path.join(REPO_DIR, "ops")
 SEEN_FILE = os.path.join(STATE_DIR, "sentinel-seen.json")
 OUTBOX_FILE = os.path.join(STATE_DIR, "sentinel-outbox.json")
 HEARTBEAT_FILE = os.path.join(STATE_DIR, "sentinel-heartbeat.json")
@@ -162,6 +166,20 @@ def _save(path, obj):
     with open(tmp, "w") as f:
         json.dump(obj, f, indent=2)
     os.replace(tmp, path)
+    _mirror_to_repo(path, obj)
+
+
+def _mirror_to_repo(path, obj):
+    """Best-effort durable mirror of a state file into the repo for cross-agent visibility.
+    Silently skipped if the repo path is unwritable (e.g. TCC-blocked under launchd)."""
+    try:
+        base = os.path.basename(path)
+        dest = os.path.join(REPO_MIRROR_DIR, "state", base)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        with open(dest, "w") as f:
+            json.dump(obj, f, indent=2)
+    except Exception:
+        pass
 
 
 def _log_event(kind, payload):
