@@ -1,0 +1,302 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha",
+        "--lead",
+        "join-martha",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/scripts/blueprint_source_fidelity_gate.py",
+        "--lead-json",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/leads/join-martha.json",
+        "--html",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+        "--json-output"
+      ],
+      "name": "source_fidelity_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"gate\": \"blueprint_source_fidelity_gate\",",
+        "  \"lead_json\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/leads/join-martha.json\",",
+        "  \"html\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html\",",
+        "  \"raw_value_count\": 0,",
+        "  \"status\": \"PASS\",",
+        "  \"findings\": []",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/scripts/blueprint_agent_prompt_quality_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+        "--receipt",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-agent-prompt-quality.json",
+        "--json-output",
+        "--profile",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/leads/join-martha.json"
+      ],
+      "name": "agent_prompt_quality_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"label\": \"agent_prompt_html_6\",",
+        "      \"source\": \"html_agent_prompt\"",
+        "    }",
+        "  ],",
+        "  \"failures\": [],",
+        "  \"html\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html\",",
+        "  \"pass\": true,",
+        "  \"profile\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/leads/join-martha.json\",",
+        "  \"required_markers\": [",
+        "    \"escalation\",",
+        "    \"first_run_test\",",
+        "    \"identity\",",
+        "    \"inputs\",",
+        "    \"output\",",
+        "    \"rules\",",
+        "    \"workflow\"",
+        "  ],",
+        "  \"status\": \"PASS\",",
+        "  \"ts\": \"2026-06-30T22:22:42.124558+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Martha&biz=Martha&src=join-martha&agents=Expert-Matchmaker%20Routing%20Agent%2CPaid-Answer%20Operations%20Agent%2CExpert%20Verification%20%26%20Onboarding%20Agent%2CKnowledge-Base%20Builder%20Agent%2CRequest-Quality%20Scoring%20Agent%2CExpert%20Profile%20%26%20Content%20Engine%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Martha&biz=Martha&src=join-martha&agents=Expert-Matchmaker%20Routing%20Agent%2CPaid-Answer%20Operations%20Agent%2CExpert%20Verification%20%26%20Onboarding%20Agent%2CKnowledge-Base%20Builder%20Agent%2CRequest-Quality%20Scoring%20Agent%2CExpert%20Profile%20%26%20Content%20Engine%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Martha&biz=Martha&src=join-martha&agents=Expert-Matchmaker%20Routing%20Agent%2CPaid-Answer%20Operations%20Agent%2CExpert%20Verification%20%26%20Onboarding%20Agent%2CKnowledge-Base%20Builder%20Agent%2CRequest-Quality%20Scoring%20Agent%2CExpert%20Profile%20%26%20Content%20Engine%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+        "--lead",
+        "join-martha",
+        "--json-output",
+        "--profile",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/leads/join-martha.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "        \"Expert Profile & Content Engine Agent\"",
+        "      ],",
+        "      \"employees\": [",
+        "        \"Expert-Matchmaker Routing Agent\",",
+        "        \"Paid-Answer Operations Agent\",",
+        "        \"Expert Verification & Onboarding Agent\",",
+        "        \"Knowledge-Base Builder Agent\",",
+        "        \"Request-Quality Scoring Agent\",",
+        "        \"Expert Profile & Content Engine Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Martha&biz=Martha&src=join-martha&agents=Expert-Matchmaker%20Routing%20Agent%2CPaid-Answer%20Operations%20Agent%2CExpert%20Verification%20%26%20Onboarding%20Agent%2CKnowledge-Base%20Builder%20Agent%2CRequest-Quality%20Scoring%20Agent%2CExpert%20Profile%20%26%20Content%20Engine%20Agent\",",
+        "      \"text\": \"See If You Qualify\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"join-martha\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/run-audit.py",
+        "--lead",
+        "join-martha"
+      ],
+      "name": "blueprint_audit",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/run-audit.py:532: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[FAIL] join-martha: 13/17 (76%)  RED-LINE FAIL: ['D3-01_podcast_exists_RL', 'D3-02_podcast_audio_direct_address_RL', 'D3-03_podcast_duration_8to12min_RL', 'D4-09_podcast_source_funnel_clean_RL'] (FINANCIAL-REALISM: 1/1 pass red-line financial checks)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=FAIL"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "join-martha          consulting            3000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha/join-martha-closeout.json"
+    },
+    {
+      "detail": "all referenced MP3 files below production floor or missing: ",
+      "name": "production_audio_size",
+      "pass": false
+    },
+    {
+      "detail": "missing podcast production receipt: join-martha-production-47.json",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing podcast production receipt: join-martha-production-47.json",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "run-audit.py failed",
+    "proof receipt missing or failing: join-martha-email-click-test.json",
+    "proof receipt missing or failing: join-martha-desktop-render.json",
+    "proof receipt missing or failing: join-martha-mobile-render.json",
+    "proof receipt missing or failing: join-martha-audit.json",
+    "proof receipt missing or failing: join-martha-closeout.json",
+    "production audio size failed: all referenced MP3 files below production floor or missing: ",
+    "production audio direct-address failed: missing podcast production receipt: join-martha-production-47.json",
+    "production audio NotebookLM origin failed: missing podcast production receipt: join-martha-production-47.json"
+  ],
+  "html_path": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/blueprints/join-martha.html",
+  "lead": "join-martha",
+  "mode": "production",
+  "receipt_dir": "/Users/openclaw/fki-preview/.claude/worktrees/blueprint-ai-redo-opus/audit-receipts/join-martha",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-30T22:22:43.782415+00:00"
+}
