@@ -16,8 +16,13 @@ RULE 2: Open the audio with EXACTLY these words: "Hi Dave, welcome.
 This walkthrough was built for you and Mahana Fresh, from what you told us."
 Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
+RULE 3: Your business is THRIVING. Frame every gap as an AI amplification, not
 a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
+BANNED ON THE AUDIO — never narrate from the outside. Do NOT say phrases like
+"the business", "this business", "the owner", "they", or "their team". Do NOT
+describe what the hosts are reviewing or examining, and do NOT reference any
+source or briefing. Always speak in second person: "you", "your business",
+"Mahana Fresh".
 
 ================================================================================
 
