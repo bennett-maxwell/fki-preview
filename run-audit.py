@@ -53,6 +53,39 @@ def podcast_duration_gate(slug):
         return False, f"too long {mmss} (max 16:00) — re-cut tighter"
     return True, f"{mmss} OK"
 
+def podcast_clean_ending_gate(slug, lead):
+    """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
+    CLEANLY with a natural close — NEVER a blind `ffmpeg -t` hard-trim of a longer
+    NotebookLM render (which cuts off mid-sentence).
+
+    WHY: D3-03 only checks LENGTH (7-16 min), so a ~20-min deep-dive trimmed to exactly
+    10:40 (640.000s) passed as a "valid" duration while ending mid-word. This gate proves
+    a proper close via scripts/podcast_clean_ending_gate.py: it FAILS when the final ~25s
+    has no closing/outro cue AND the duration is a round hard-trim boundary (the -t
+    signature). Runs for EVERY lead. exit 0 = PASS; non-zero = hard-cut red-line block."""
+    checker = os.path.join(REPO, "scripts", "podcast_clean_ending_gate.py")
+    audio_path = os.path.join(REPO, "podcasts", podcast_filename(slug))
+    if not os.path.exists(checker):
+        return False, "podcast_clean_ending_gate.py missing"
+    if not os.path.exists(audio_path):
+        return False, "podcast file missing"
+    business_name = (lead or {}).get("business_name") or ""
+    receipt = os.path.join(REPO, "audit-receipts", slug, f"{slug}-clean-ending.json")
+    cmd = [sys.executable, checker, "--audio", audio_path, "--lead", slug,
+           "--business-name", str(business_name), "--receipt", receipt, "--json-output"]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=360)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            detail = (data.get("status", "") + ": " + str(data.get("reason", ""))).strip(": ")
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"clean-ending check error: {e}"
+
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
     tokens = re.findall(r'[A-Z_]*PLACEHOLDER[A-Z_]*|\{\{[A-Za-z_]+\}\}|\[[A-Z_]{3,}\]', stripped)
@@ -504,6 +537,9 @@ def audit_lead(slug):
     duration_ok, duration_detail = podcast_duration_gate(slug)
     results["D3-03_podcast_duration_8to12min_RL"] = duration_ok
     redlines["D3-03_podcast_duration_8to12min_RL"] = duration_ok
+    clean_end_ok, clean_end_detail = podcast_clean_ending_gate(slug, lead)
+    results["D3-05_podcast_clean_ending_RL"] = clean_end_ok
+    redlines["D3-05_podcast_clean_ending_RL"] = clean_end_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)
@@ -538,6 +574,7 @@ def audit_lead(slug):
             "restaurant_detail": restaurant_detail,
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail,
+            "podcast_clean_ending_detail": clean_end_detail,
             "agent_card_prompt_quality_detail": acpq_detail}
 
 def main():
