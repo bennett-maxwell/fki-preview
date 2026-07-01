@@ -420,6 +420,34 @@ def check_clone_engine_coerces_list_tools():
         f"{{{{CRM_TOOL}}}} token left unrendered after list coercion: {html!r}"
 
 
+def check_no_sub7day_golive_promise_in_blueprints():
+    """RULES.md Rule 31 / blueprint-ai-skill v3.41 (2026-07-01, Madison COO):
+    Blueprint pages must NEVER promise a go-live inside the first 7 days.
+    Week 1 = onboarding only, first agent week 2, all 6 agents week 3.
+    Bans the old hero stats ('3 Days In', '7 Days'), the raw 'Days 1-3'/'Days 4-7'
+    roadmap phase labels, and 'first agent(s) is/are live' result cells.
+    Scans top-level blueprints/*.html only (archival _obsolete/ snapshots excluded)."""
+    banned = [
+        '<span class="num">3 Days In</span>',
+        '<span class="num">7 Days</span>',
+        ">Days 1-3<", ">Days 4-7<", ">Days 1–3<", ">Days 4–7<",
+        "<strong>Days 1-3</strong>", "<strong>Days 4-7</strong>",
+        "Your first agent is live", "Your first agents are live",
+    ]
+    offenders = []
+    for fn in sorted(os.listdir(BP_DIR)):
+        if not fn.endswith(".html") or fn.startswith("test-"):
+            continue
+        html = _read(os.path.join(BP_DIR, fn))
+        hit = [b for b in banned if b in html]
+        if hit:
+            offenders.append(f"{fn}: {hit}")
+    assert not offenders, (
+        "sub-7-day go-live promise found (banned by RULES.md Rule 31):\n"
+        + "\n".join(offenders)
+    )
+
+
 CHECKS = [
     ("CLONE_ENGINE_COERCES_LIST_TOOLS", check_clone_engine_coerces_list_tools),
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
@@ -441,6 +469,7 @@ CHECKS = [
     ("DELIVERY_EMAIL_ESCAPES_AMPERSAND_TOKENS", check_delivery_email_escapes_ampersand_tokens),
     ("PODCAST_DURATION_STANDARD_IS_8_TO_12", check_podcast_duration_standard_is_8_to_12),
     ("AGENT_PROMPT_QUALITY_GATE_WIRED", check_agent_prompt_quality_gate_wired),
+    ("NO_SUB7DAY_GOLIVE_PROMISE", check_no_sub7day_golive_promise_in_blueprints),
 ]
 
 
