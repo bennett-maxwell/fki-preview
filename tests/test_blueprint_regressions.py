@@ -340,17 +340,21 @@ def check_audit_lead_reports_nonzero_check_count():
 
 
 def check_podcast_duration_standard_is_8_to_12():
-    """17. Audio duration gate must describe the active Blueprint production
-    standard. A stale 16-20 minute label hid the real no-send blocker."""
+    """17. Audio DURATION-WINDOW gate is observational only (Madison COO 2026-07-02):
+    podcasts are generated at AudioLength.SHORT and accepted at their natural length.
+    The fixed minute-window (was 8-12, then 7-16) is REMOVED — the real podcast gate is
+    now D3-05 clean-ending / no-blind-hard-trim. This tripwire proves the window was
+    removed on purpose (not accidentally re-narrowed) and that the clean-ending red-line
+    is still wired."""
     src = _read(os.path.join(REPO, "run-audit.py"))
-    assert "MIN_SEC, MAX_SEC = 8 * 60, 12 * 60" in src, \
-        "podcast duration gate must use the active 8-12 minute standard"
-    assert "D3-03_podcast_duration_8to12min_RL" in src, \
-        "duration red-line key must name the active 8-12 minute standard"
+    assert "window lifted 2026-07-02" in src, \
+        "duration gate must carry the intentional window-removal marker (Madison 2026-07-02)"
+    assert "MIN_SEC, MAX_SEC" not in src, \
+        "duration gate must NOT reinstate a fixed minute window — SHORT is accepted at natural length"
+    assert "D3-05_podcast_clean_ending_RL" in src, \
+        "the active podcast red-line (clean-ending / no blind hard-trim) must remain wired"
     assert "D3-03_podcast_duration_16to20min_RL" not in src, \
         "stale 16-20 duration red-line key must not remain"
-    assert "(min 8:00)" in src and "(max 12:00)" in src, \
-        "duration failure text must match the active 8-12 minute standard"
 
 
 def check_agent_prompt_quality_gate_wired():
@@ -378,9 +382,8 @@ def check_agent_prompt_quality_gate_wired():
         "extract_pre_prompts",
         "extract_agent_prompts",
         "visible prompt cards: found",
-        "HTML agent prompt cards: found",
+        "check_agent_cards_no_boilerplate",
         "need at least 3",
-        "need at least 6",
     ]:
         assert token in quality_gate, f"agent prompt quality gate missing token: {token}"
 
