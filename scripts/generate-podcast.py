@@ -881,7 +881,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
 
     # NotebookLM upload and generation
     try:
-        from notebooklm import NotebookLMClient
+        from notebooklm import NotebookLMClient, AudioLength
 
         client = await NotebookLMClient.from_storage()
         async with client:
@@ -899,7 +899,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
             _log("Source added")
 
             await _retry_async(
-                lambda: client.artifacts.generate_audio(nb_id),
+                lambda: client.artifacts.generate_audio(nb_id, audio_length=AudioLength.SHORT),
                 description=f"generate audio for {nb_id}",
             )
             _log("Audio generation started...")

@@ -71,7 +71,7 @@ def main():
     time.sleep(15)
 
     log("trigger steered audio gen (deep-dive/default + strong ~10min steering)...")
-    rc, out, err = run([NLM, 'generate', 'audio', '-n', nb, '--format', 'deep-dive', '--length', 'default',
+    rc, out, err = run([NLM, 'generate', 'audio', '-n', nb, '--format', 'deep-dive', '--length', 'short',
                         '--json', '--retry', '2', desc(first, business)])
     if '"task_id"' not in (out + err) and 'task' not in (out+err).lower():
         log(f"FAIL trigger: {(out+err)[:400]}"); sys.exit(1)
