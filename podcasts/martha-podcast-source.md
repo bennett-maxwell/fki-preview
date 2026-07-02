@@ -1,0 +1,44 @@
+# Martha podcast build
+
+Open the audio with EXACTLY these words:
+
+"Hi there, welcome. This walkthrough was built for you and Martha, from what you told us."
+
+Use direct second-person language. Say you and your often. Do not use analyst framing. Do not mention internal gates. Include the bare qualifier link only: https://bennett-maxwell.github.io/fki-preview/qualify.html
+
+Spoken script begins below.
+
+Hi there, welcome. This walkthrough was built for you and Martha, from what you told us.
+
+Martha is already pointed at a clear job: help people who are looking at franchises get useful advice faster. The opportunity is not a giant AI science project. The opportunity is to give your team a few narrow helpers that answer, sort, schedule, follow up, and report every day without dropping details.
+
+The first helper is the advisor match agent. When a new prospect comes in, it gathers the basic goals, budget range, timing, preferred industries, and questions. Then it suggests the right advisor or route for review. It does not decline a prospect on its own. It does not make legal or financial promises. It gives your team a clean match recommendation with the facts it used.
+
+The second helper is the scheduling coordinator. Franchise advice depends on getting the right person into the right conversation. This helper offers times, confirms sessions, sends reminders, and catches reschedule requests. It logs what happened so the team can see which prospects are booked, which ones are stuck, and which advisor needs context before the call.
+
+The third helper is the follow up agent. After a consultation, many people need a few more touches before they decide what to do next. This helper sends approved follow ups, answers simple next-step questions, and alerts an advisor when someone is ready for a deeper conversation. It never invents franchise facts. It uses approved notes and hands anything complex to a human.
+
+The fourth helper is the on demand question and answer agent. Prospects ask many repeat questions about process, timing, categories, expectations, and next steps. This helper can answer from the approved knowledge base and route legal, financial, disclosure, or brand-specific questions to a person. That protects your team while still giving prospects a faster answer.
+
+The fifth helper is the quality consistency agent. It reviews session notes, feedback, and outcomes so your service feels consistent even when different advisors are involved. It can flag missed follow ups, unclear handoffs, or patterns where prospects get confused. It should report evidence, not opinions, so the team can improve the experience every week.
+
+The sixth helper is the intake qualifier. This one makes sure no inquiry gets lost. It captures the prospect, tags the request, asks the next useful question, and creates a clean record. The job is simple: every new inquiry should have an owner, a status, a next step, and a timestamp. That is how you stop good prospects from disappearing in inboxes.
+
+The safest rollout is small. Week one, start with intake and advisor matching. Week two, add scheduling. Week three, add follow up. Week four, add question answering and quality consistency. Each week, check the scoreboard: new inquiries captured, matches recommended, sessions booked, follow ups sent, questions answered, and human escalations.
+
+The fifth-grade version is this: Martha can have six careful helpers. One sorts new people. One matches them to the right advisor. One books the meeting. One follows up after the meeting. One answers easy questions. One checks that the whole process stays clean. People still make the big decisions. The helpers keep the simple work from falling through the cracks.
+
+Every helper needs receipts. A match should show which answers it used. A calendar action should show the time offered and the confirmation sent. A follow up should show the session note it is based on. A question answer should show the approved knowledge-base entry. A quality report should show the exact pattern it found. A qualified inquiry should show owner, status, next step, and timestamp.
+
+This matches the bigger lesson from the AI agents video: the value is not just software access. The value is a repeatable job with a scoreboard. If an agent has a clear job, clear inputs, clear guardrails, and a weekly improvement loop, it becomes more like an AI employee than a random chatbot.
+
+Your best first move is the advisor match and intake pair because those protect the front door. If those two helpers capture every inquiry and route people faster, the rest of the system gets easier. Then scheduling and follow up turn that interest into completed conversations. Then question answering and quality checks make the whole experience feel more consistent.
+
+The important safety rule is simple. AI can draft, sort, remind, summarize, and recommend. Humans approve anything involving legal advice, financial claims, franchise disclosure, final recommendations, declined prospects, refunds, contracts, or brand commitments. That line keeps the system useful without letting it make risky promises.
+
+If this works, Martha should feel more organized. Prospects get faster answers. Advisors get cleaner context. Fewer people wait without a next step. Follow up becomes consistent. The weekly report shows what happened and where prospects get stuck. That is a practical AI workforce: not flashy, just reliable work done every day.
+
+So the plan is answer faster, match smarter, schedule cleaner, follow up every time, answer safe questions, and learn from the pattern each week. Start with one or two helpers, prove they save time and improve response, then add the next. That is how the system improves permanently without waiting on a human for every small task.
+
+
+Keep the first helper narrow, prove it with a weekly scorecard, and only then trust it with more responsibility.
