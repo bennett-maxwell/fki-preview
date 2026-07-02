@@ -31,10 +31,13 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
-    """Red-line D3-03: the podcast must run 7:00-16:00 (widened from 8-12 per Madison 2026-06-30).
-    NotebookLM length is non-deterministic, so a generation can wrap early or drift
-    into a long lecture. Re-cut until the duration lands in the 7-16 minute window."""
-    MIN_SEC, MAX_SEC = 7 * 60, 16 * 60
+    """Red-line D3-03: DURATION-WINDOW RESTRICTION LIFTED per Madison (COO) 2026-07-02.
+    Podcasts are now generated at AudioLength.SHORT (blueprint-podcast-worker.py) and we
+    are OBSERVING the natural short length instead of forcing a fixed minute window. This
+    gate no longer fails on length — it records the duration for observation only. The
+    podcast must still EXIST and be probeable, and the clean-ending gate (D3-05) still hard-
+    blocks blind `ffmpeg -t` hard-trims. (Prior window 7:00-16:00, widened from 8-12 on
+    2026-06-30 — both now superseded; re-add bounds here to reinstate the restriction.)"""
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -47,11 +50,7 @@ def podcast_duration_gate(slug):
     except Exception as e:
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
-    if secs < MIN_SEC:
-        return False, f"too short {mmss} (min 7:00) — re-cut deeper"
-    if secs > MAX_SEC:
-        return False, f"too long {mmss} (max 16:00) — re-cut tighter"
-    return True, f"{mmss} OK"
+    return True, f"{mmss} (SHORT — length window lifted 2026-07-02, observational only)"
 
 def podcast_clean_ending_gate(slug, lead):
     """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
