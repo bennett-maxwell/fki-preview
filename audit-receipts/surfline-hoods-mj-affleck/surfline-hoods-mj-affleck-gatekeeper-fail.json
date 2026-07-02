@@ -1,0 +1,279 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck",
+        "--lead",
+        "surfline-hoods-mj-affleck",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"Approval scope: Bennett preview only; customer send remains blocked\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=MJ%20Affleck&biz=Surfline%20Hoods&src=surfline-hoods-mj-affleck&agents=Kitchen%20Quote%20Intake%20Agent%2CCompliance%20Cadence%20Agent%2CLocal%20SEO%20Content%20Agent%2CBefore/After%20Proof%20Agent%2CRepair%20Opportunity%20Agent%2CRestaurant%20Group%20Outreach%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=MJ%20Affleck&biz=Surfline%20Hoods&src=surfline-hoods-mj-affleck&agents=Kitchen%20Quote%20Intake%20Agent%2CCompliance%20Cadence%20Agent%2CLocal%20SEO%20Content%20Agent%2CBefore/After%20Proof%20Agent%2CRepair%20Opportunity%20Agent%2CRestaurant%20Group%20Outreach%20Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=MJ%20Affleck&biz=Surfline%20Hoods&src=surfline-hoods-mj-affleck&agents=Kitchen%20Quote%20Intake%20Agent%2CCompliance%20Cadence%20Agent%2CLocal%20SEO%20Content%20Agent%2CBefore/After%20Proof%20Agent%2CRepair%20Opportunity%20Agent%2CRestaurant%20Group%20Outreach%20Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html",
+        "--lead",
+        "surfline-hoods-mj-affleck",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/surfline-hoods-mj-affleck.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Kitchen Quote Intake Agent\",",
+        "        \"Compliance Cadence Agent\",",
+        "        \"Local SEO Content Agent\",",
+        "        \"Before/After Proof Agent\",",
+        "        \"Repair Opportunity Agent\",",
+        "        \"Restaurant Group Outreach Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=MJ+Affleck&biz=Surfline+Hoods&src=surfline-hoods-mj-affleck&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Kitchen+Quote+Intake+Agent%2CCompliance+Cadence+Agent%2CLocal+SEO+Content+Agent%2CBefore%2FAfter+Proof+Agent%2CRepair+Opportunity+Agent%2CRestaurant+Group+Outreach+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"surfline-hoods-mj-affleck\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/surfline-hoods-mj-affleck.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: surfline-hoods-mj-affleck - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/surfline-hoods-mj-affleck-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: surfline-hoods-mj-affleck - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "surfline-hoods-mj-affleck"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/temp/fki-preview/run-audit.py:649: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] surfline-hoods-mj-affleck: 18/18 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "surfline-hoods-mj-affleck home_services          300        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck/surfline-hoods-mj-affleck-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck/surfline-hoods-mj-affleck-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck/surfline-hoods-mj-affleck-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": true,
+      "path": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck/surfline-hoods-mj-affleck-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck/surfline-hoods-mj-affleck-closeout.json"
+    },
+    {
+      "detail": "surfline-hoods-mj-affleck.mp3 8295660 bytes within window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "direct-address audio receipt passed",
+      "name": "production_audio_direct_address",
+      "pass": true
+    },
+    {
+      "detail": "NotebookLM origin verified",
+      "name": "production_audio_notebooklm_origin",
+      "pass": true
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "proof receipt missing or failing: surfline-hoods-mj-affleck-closeout.json"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/surfline-hoods-mj-affleck.html",
+  "lead": "surfline-hoods-mj-affleck",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/surfline-hoods-mj-affleck",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-07-02T19:36:07.086194+00:00"
+}
