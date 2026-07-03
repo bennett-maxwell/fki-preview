@@ -1,15 +1,16 @@
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-06-29T21:40:04Z | Lead: TEST Blueprint-IGNORE | Industry: Bakery & specialty pastry retail -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A personalized AI blueprint for Chris — exactly where AI creates the biggest leverage for LPNW LLC and how to get there in 30 days." />
-  <meta property="og:title" content="Your AI Advantage Roadmap — LPNW LLC" />
-  <meta property="og:description" content="A personalized AI blueprint built for Chris. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to LPNW LLC." />
+  <meta name="description" content="A personalized AI blueprint for TEST Blueprint-IGNORE — exactly where AI creates the biggest leverage for Modern Pastry Shop and how to get there in 30 days." />
+  <meta property="og:title" content="Your AI Advantage Roadmap — Modern Pastry Shop" />
+  <meta property="og:description" content="A personalized AI blueprint built for TEST Blueprint-IGNORE. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to Modern Pastry Shop." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://hub.aiblueprintmarketing.com/blueprints/chris-lpnw.html" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/test-blueprint-ignore.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>AI Advantage Roadmap — LPNW LLC · Chris</title>
+  <title>TEST Blueprint-IGNORE AI Blueprint | Modern Pastry Shop</title>
   <style>
     :root {
       /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
@@ -26,6 +27,8 @@
       --text-muted:   #6E6E73;
       --text-light:   #A1A1A6;
       --border:       #E5E5EA;
+      --bg:           #F5F5F7; /* alias for --neutral-bg; consumed by .agent-prompt */
+      --text-mid:     #6E6E73; /* alias for --text-muted; consumed by .agent-prompt/.agent-time */
       --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       --radius: 12px;
       --shadow: 0 4px 24px rgba(10,14,26,0.08);
@@ -139,6 +142,8 @@
     .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
     .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-prompt { background: var(--bg, #F5F5F7); border: 1px solid var(--border, #E5E5EA); border-radius: 10px; padding: 1rem; font-size: 0.85rem; line-height: 1.55; color: var(--text-mid, #6E6E73); margin-bottom: 0.75rem; }
+    .agent-time { font-size: 0.8rem; color: var(--text-mid, #6E6E73); margin-top: 0.5rem; }
     .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
     .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
     .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
@@ -259,6 +264,41 @@
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
   </style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -277,83 +317,143 @@
 </nav>
 
 <section class="hero" id="hero">
-  <div class="hero-badge">Confidential — Prepared for Chris</div>
-  <h1>Your <span>AI Advantage</span> Roadmap<br>for LPNW LLC</h1>
-  <p class="hero-sub">A personalized blueprint showing exactly where AI brings order to LPNW LLC — turning the day-to-day chaos of a $10M+ multi-unit operation into a calm, organized system: aligned communication, clean reporting, reliable follow-up, and faster hiring. Here is the 30-day path.</p>
-  <div class="hero-stats"><div class="hero-stat"><span class="num">Week 1</span><span class="label">Onboarding<br>&amp; Setup</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">Week 2</span><span class="label">First Agent<br>Live</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">Week 3</span><span class="label">All 6 Agents<br>Live</span></div><div class="hero-divider"></div><div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Teammate</span></div></div>
+  <div class="hero-badge">Confidential — Prepared for TEST Blueprint-IGNORE</div>
+  <h1>Your <span>AI Advantage</span> Roadmap<br>for Modern Pastry Shop</h1>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the CRM platform serving 675+ home service businesses — and how to get there in 30 days.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Agents<br>Running</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Modern Pastry Shop Data</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Teammate</span></div>
+  </div>
 </section>
 
 <section class="section section-alt" id="profile">
   <div class="container">
     <p class="section-label">Your Business Profile</p>
-    <h2 class="section-title">Where LPNW LLC Stands Today</h2>
-    <p class="section-sub">Built from your intake answers and a structured review of your operation. This is the baseline we used to design your AI system.</p>
-    <div class="snapshot-grid"><div class="snapshot-card"><div class="snapshot-val">$10M+</div><div class="snapshot-key">Annual Revenue</div></div><div class="snapshot-card"><div class="snapshot-val">Multi-Unit Franchise</div><div class="snapshot-key">Business Type</div></div><div class="snapshot-card"><div class="snapshot-val">Team of 8</div><div class="snapshot-key">Core Team</div></div><div class="snapshot-card"><div class="snapshot-val">No CRM / No PM</div><div class="snapshot-key">Today's System (Gap)</div></div><div class="snapshot-card"><div class="snapshot-val">Text + WhatsApp + Teams</div><div class="snapshot-key">Comms (Scattered)</div></div><div class="snapshot-card"><div class="snapshot-val">~5 min</div><div class="snapshot-key">Response Speed</div></div><div class="snapshot-card"><div class="snapshot-val">ChatGPT</div><div class="snapshot-key">Current AI Use</div></div><div class="snapshot-card"><div class="snapshot-val">10&ndash;50%</div><div class="snapshot-key">Process Documented</div></div></div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">Your stated goal is taming the <strong>chaos</strong> of running a $10M+ multi-unit franchise — and the stresses you flagged tell the whole story: follow-up, team organization, reporting, internal communication, and hiring. None of this is a sales problem; you respond in about 5 minutes and you're clearly winning. It's an <em>operations</em> problem: a large, fast-moving business running on text, WhatsApp, and Microsoft Teams with files split across Google Drive and OneDrive, no central CRM or project system, and processes only 10&ndash;50% documented. That's exactly where AI creates order — it gives a busy operation a single, reliable nervous system so nothing depends on remembering. You already use ChatGPT, so you're ready to put real agents to work.</p>
+    <h2 class="section-title">Where Modern Pastry Shop Stands Today</h2>
+    <p class="section-sub">Built from your intake answers and a structured review of modernpastryshop.com. This is the baseline we used to design your AI system.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">$250K&ndash;500K</div><div class="snapshot-key">Annual Revenue</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Business Operations</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">phone orders, email, and DoorDash / GrubHub</div><div class="snapshot-key">Primary CRM</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">675+</div><div class="snapshot-key">Active Customers</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">adjustable offer value</div><div class="snapshot-key">Offer/Value Model</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Team of 3</div><div class="snapshot-key">Core Operators</div></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active phone orders, email, and DoorDash / GrubHub power user with custom integrations — ready to scale with dedicated AI agents. Current time recovery opportunities: Marketing Content and Admin Work across verified account volume. Brand voice is calibrated from modernpastryshop.com, your tagline ("All-In-One CRM Built for Home Service Hustlers Powered By A.I."), and the language your existing customers use on the site — 90% accurate on Day 1, built from intel audit before launch.</p>
   </div>
 </section>
 
 <section class="section" id="results">
   <div class="container">
-    <p class="section-label">What Your Industry Is Already Doing</p>
-    <h2 class="section-title">Multi-Unit Operators Like LPNW Are Already Running on AI</h2>
-    <p class="section-sub">These are the exact moves growing franchise operations are making to replace chaos with calm — without adding overhead. At $10M+ and a team of 8, the constraint isn't effort, it's organization.</p>
-    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They run the whole operation from one AI command center</div><div class="gap-desc"><strong>What they're doing:</strong> operators put an AI ops agent across their tools so the day's priorities, open items, and who-owns-what live in one place. <strong>How it helps them:</strong> the business stops running out of scattered text threads and starts running on a system. <strong>How I deliver it for LPNW LLC:</strong> an operations command center that pulls your Teams, WhatsApp, and text activity into one daily source of truth.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They get internal communication that actually lands</div><div class="gap-desc"><strong>What they're doing:</strong> an AI agent summarizes threads, routes the right info to the right people, and flags what needs a decision. <strong>How it helps them:</strong> nothing important gets lost across three messaging apps. <strong>How I deliver it for LPNW LLC:</strong> a communication agent that keeps your team aligned across Teams, WhatsApp, and text — directly relieving the internal-communication stress you flagged.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They get their reporting written automatically</div><div class="gap-desc"><strong>What they're doing:</strong> operators hand weekly and unit-level reporting to an AI agent. <strong>How it helps them:</strong> decisions get made on current numbers, not stale spreadsheets pulled together at midnight. <strong>How I deliver it for LPNW LLC:</strong> a reporting agent that compiles your operational numbers into clean weekly reports automatically.</div><span class="gap-tag brand">Visibility</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They fill roles faster with AI hiring</div><div class="gap-desc"><strong>What they're doing:</strong> multi-unit operators use AI to write job posts, screen applicants, and run first-touch outreach. <strong>How it helps them:</strong> staffing keeps pace with the operation instead of holding it back. <strong>How I deliver it for LPNW LLC:</strong> a hiring agent that drafts posts, screens candidates, and schedules interviews — relieving the hiring stress you flagged.</div><span class="gap-tag efficiency">Time Recovery</span></div></div></div>
-    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside operations your size. You've built a $10M+ business on hustle and a 5-minute response time — AI is how you make it run with the same energy but a fraction of the chaos.</p>
+    <p class="section-label">What Restaurants Are Already Doing</p>
+    <h2 class="section-title">Fast-Casual Operators Are Using AI Around the Rush</h2>
+    <p class="section-sub">TEST, the strongest opportunity for Modern Pastry Shop is not replacing your team. It is giving managers an AI layer that handles response speed, follow-up, and reporting while the stores keep serving guests.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Catering response</div><div class="gap-desc">AI answers high-value catering inquiries quickly, captures date, headcount, budget, pickup/delivery, and dietary notes, then routes the next action.</div><span class="gap-tag revenue">Revenue Capture</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Guest recovery</div><div class="gap-desc">AI reviews feedback and drafts owner-approved responses before guest frustration becomes a public reputation problem.</div><span class="gap-tag efficiency">Reputation</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Manager reporting</div><div class="gap-desc">AI turns scattered shift notes into one owner-ready operating brief across every location.</div><span class="gap-tag efficiency">Owner Visibility</span></div></div>
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="pillars">
   <div class="container">
     <p class="section-label">Where the Value Comes From</p>
-    <h2 class="section-title">Three Ways AI Moves the Needle for LPNW LLC</h2>
-    <p class="section-sub">Every agent in your system maps to one of three outcomes — more bookings, more time, or more capacity per teammate.</p>
-    <div class="pillars-grid"><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="pillar-title">Tame the Chaos</div><div class="pillar-metric">Your #1 Goal</div><div class="pillar-sub">One reliable system instead of three messaging apps and a dozen mental notes. AI gives LPNW a single nervous system so the operation runs on process, not memory.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="pillar-title">Get Your Time Back</div><div class="pillar-metric">12 Hrs / Week</div><div class="pillar-sub">Follow-up, reporting, internal comms, and hiring busywork — handled — so you and your team of 8 lead the business instead of chasing it.</div></div><div class="pillar-card"><div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="pillar-title">Scale the Team Cleanly</div><div class="pillar-metric">Grow Without the Mess</div><div class="pillar-sub">Documented, AI-run processes mean new hires ramp fast and growth doesn't multiply the chaos. The bigger you get, the more order the system holds.</div></div></div>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Modern Pastry Shop</h2>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost per customer served.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">More Closes</div>
+        <div class="pillar-sub">Faster response captures more qualified opportunities for Modern Pastry Shop. AI-assisted follow-up helps the team reply consistently, reduce manual lag, and protect every pipeline stage.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">12 Hrs / Week</div>
+        <div class="pillar-sub">Admin work, client onboarding, content creation, and support triage &mdash; automated. Hours reclaimed per teammate, every week.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="pillar-title">Scale Without Hiring</div>
+        <div class="pillar-metric">675 to 1,000+</div>
+        <div class="pillar-sub">Serve more accounts per teammate. Eliminate manual onboarding overhead. Grow the customer base without adding headcount.</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="stack">
   <div class="container">
     <p class="section-label">Where You Are Today</p>
-    <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified — and where AI slots in to multiply each one without replacing anything you already use.</p>
-    <div class="stack-grid"><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Microsoft Teams</div><div class="stack-role">Team Communication</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">WhatsApp</div><div class="stack-role">Team + Field Communication</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div><div class="stack-tool">Text / SMS</div><div class="stack-role">Fast Communication</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Google Drive + OneDrive</div><div class="stack-role">File Storage (split)</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="stack-tool">ChatGPT</div><div class="stack-role">Current AI Tool</div></div></div><div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">No CRM / No PM Tool</div><div class="stack-role">Priority Gap — no central system yet</div></div></div></div>
+    <h2 class="section-title">Your Current Restaurant Stack</h2>
+    <p class="section-sub">This plan keeps Modern Pastry Shop's existing tools in place and adds AI where the handoffs break down.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon">1</div><div><div class="stack-tool">Current tools</div><div class="stack-role">phone orders, email, and DoorDash / GrubHub</div></div></div>
+      <div class="stack-card"><div class="stack-icon">2</div><div><div class="stack-tool">Primary market</div><div class="stack-role">Boston North End + Medford, MA</div></div></div>
+      <div class="stack-card"><div class="stack-icon">3</div><div><div class="stack-tool">Locations</div><div class="stack-role">2 locations (Boston North End, Medford MA)</div></div></div>
+      <div class="stack-card"><div class="stack-icon">4</div><div><div class="stack-tool">Services</div><div class="stack-role">Custom &amp; build-your-own cakes, Cannoli made to order, Cookies, cheesecakes, pies &amp; tarts, Torrone (Italian nougat), Catering &amp; gift orders</div></div></div>
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="gaps">
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
-    <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
-    <p class="section-sub">These are the areas where LPNW LLC has the most capacity to recover — based on your intake answers and a structured review of your operation. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
-    <div class="gap-list"><div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Internal Communication Across Three Apps</div><div class="gap-desc">You flagged internal communication as a top stress, and it's no wonder — the team runs across Microsoft Teams, WhatsApp, and text, with files split between Google Drive and OneDrive. Important things slip between apps. An AI communication agent summarizes threads, routes what matters to the right people, and surfaces what needs a decision — one clear signal instead of three noisy channels.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Team Organization &amp; Accountability</div><div class="gap-desc">You flagged team organization as a stress. With no project or task system and processes only 10&ndash;50% documented, who-owns-what lives in people's heads. An AI accountability agent tracks commitments, follows up on open items, and keeps everyone's next step visible — so the operation runs on a system, not reminders.</div><span class="gap-tag brand">Visibility</span></div></div><div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Reporting</div><div class="gap-desc">You flagged reporting as a stress. Pulling operational and unit-level numbers together by hand is slow and always a little out of date. An AI reporting agent compiles your weekly numbers automatically, so you lead with current data instead of midnight spreadsheets.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Follow-Up</div><div class="gap-desc">You flagged follow-up as a stress. Across a $10M operation, the follow-ups that fall through — with vendors, candidates, team members, partners — quietly cost time and trust. An AI follow-up agent makes sure every loop gets closed.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Hiring &amp; Staffing</div><div class="gap-desc">You flagged hiring as a stress. For a growing multi-unit operation, staffing is a constant load. An AI hiring agent writes the posts, screens applicants, runs first-touch outreach, and schedules interviews — so roles fill faster and you only spend time on the strongest candidates.</div><span class="gap-tag efficiency">Time Recovery</span></div></div><div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">No Central System or Documented Process</div><div class="gap-desc">With no CRM or project tool and processes 10&ndash;50% documented, the business depends on memory and hustle. An AI operations layer documents and runs the repeatable steps — turning a $10M operation that runs on people into one that runs on a system.</div><span class="gap-tag brand">Visibility</span></div></div></div>
+    <h2 class="section-title">Three Places Revenue and Time Leak</h2>
+    <div class="gap-list">
+      <div class="gap-card"><h3>Lunch-rush inquiries</h3><p>Catering and large-party questions arrive while the team is busiest. AI makes the first response fast and complete.</p></div>
+      <div class="gap-card"><h3>Guest feedback split across channels</h3><p>Reviews, DMs, and contact forms need a consistent owner-approved response path.</p></div>
+      <div class="gap-card"><h3>Owner visibility across stores</h3><p>Three stores create more notes than one owner can chase. AI compiles the operating picture automatically.</p></div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="oppmap">
   <div class="container">
     <p class="section-label">Prioritized Roadmap</p>
-    <h2 class="section-title">AI Opportunity Map — LPNW LLC</h2>
-    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down — do not skip ahead.</p>
-    <div class="opp-table-wrap"><table class="opp-table"><thead><tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr></thead><tbody><tr><td><div class="pri-badge">1</div></td><td><strong>Operations Command Center</strong></td><td><span class="impact-tag">One source of truth</span> — the day's priorities and who-owns-what in one place</td><td>Teams, WhatsApp</td></tr><tr><td><div class="pri-badge">2</div></td><td><strong>Internal Communication Agent</strong></td><td><span class="impact-tag">One clear signal</span> — threads summarized and routed across all three apps</td><td>Teams, WhatsApp, SMS</td></tr><tr><td><div class="pri-badge">3</div></td><td><strong>Team Accountability Agent</strong></td><td><span class="impact-tag">Nothing slips</span> — commitments tracked and next steps visible</td><td>Teams, Drive</td></tr><tr><td><div class="pri-badge">4</div></td><td><strong>Reporting Agent</strong></td><td><span class="impact-tag">Weekly reports written</span> — operational numbers compiled automatically</td><td>Drive, OneDrive</td></tr><tr><td><div class="pri-badge">5</div></td><td><strong>Hiring &amp; Onboarding Agent</strong></td><td><span class="impact-tag">Roles filled faster</span> — posts, screening, and interview scheduling handled</td><td>Email, Teams</td></tr><tr><td><div class="pri-badge">6</div></td><td><strong>Follow-Up Agent</strong></td><td><span class="impact-tag">Every loop closed</span> — vendor, candidate, and team follow-ups never dropped</td><td>SMS, Email</td></tr><tr><td><div class="pri-badge">7</div></td><td><strong>Process Documentation Agent</strong></td><td><span class="impact-tag">Runs on a system</span> — repeatable steps captured and standardized</td><td>Drive, OneDrive</td></tr></tbody></table></div>
+    <h2 class="section-title">AI Opportunity Map for Modern Pastry Shop</h2>
+    <table class="opp-table">
+      <tr><th>Priority</th><th>Agent</th><th>What It Does</th><th>Primary Tool</th></tr>
+      <tr><td>P1</td><td>Catering Speed-to-Lead</td><td>Captures event details and replies before the buyer moves on.</td><td>GoHighLevel</td></tr>
+      <tr><td>P2</td><td>Guest Recovery</td><td>Classifies feedback, drafts responses, and escalates sensitive issues.</td><td>Google reviews, DMs, CRM</td></tr>
+      <tr><td>P3</td><td>Manager Shift Summary</td><td>Turns manager notes into one daily owner brief.</td><td>Slack, Drive, POS summaries</td></tr>
+      <tr><td>P4</td><td>Local Store Marketing</td><td>Drafts weekly promos tied to catering, loyalty, and neighborhood events.</td><td>Meta, email, Google Business Profile</td></tr>
+      <tr><td>P5</td><td>Franchise Inquiry Qualification</td><td>Collects buyer fit signals without legal docs or earnings claims.</td><td>Qualifier form and CRM</td></tr>
+    </table>
   </div>
 </section>
 
 <section class="section section-alt" id="ignore">
   <div class="container">
     <p class="section-label">Sequencing, Not Limits</p>
-    <h2 class="section-title">What We&rsquo;ll Save for Later — So You Win the Big Wins First</h2>
-    <p class="section-sub">The plan is to recover the highest-impact time first, then expand. These are things you <em>could</em> automate down the road, but I would hold off for now — chasing them today would only distract from the agents that move the needle first.</p>
-    <div class="ignore-grid"><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">A New Lead-Gen Machine</div><div class="ignore-reason">You reported zero monthly leads and a 5-minute response time — sales speed isn't your problem, and you didn't ask for more leads. We put the first dollar into operational order, where the return is immediate.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Ripping Out Teams, WhatsApp, or Text</div><div class="ignore-reason">Your team already lives in these. AI sits on top and unifies them — nothing gets ripped out, the chaos just gets organized.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">A Massive ERP / System Migration</div><div class="ignore-reason">A heavy platform migration would create more chaos before less. We layer AI onto what you have and document process as we go — order first, big systems later if ever.</div></div></div><div class="ignore-card"><div class="ignore-x"><span>›</span></div><div><div class="ignore-title">Fully Autonomous Hiring Decisions</div><div class="ignore-reason">AI screens, drafts, and schedules — but the actual hire stays a human call. We automate the front of the funnel, not the judgment.</div></div></div></div>
+    <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI can model revenue options and package changes, but final pricing and offer decisions should stay with leadership. Use AI to surface data first; keep autonomous revenue decisions as a later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more home-service owners than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="agents">
   <div class="container">
     <p class="section-label">Your AI System</p>
-    <h2 class="section-title">6 AI Agents Built for LPNW LLC</h2>
-    <p class="section-sub">Each agent maps directly to a specific workflow inside your studio. Brand voice is built instantly from your operation and your existing client language — 90% accurate on Day 1, no slow learning curve required.</p>
-    <div class="agents-grid"><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Operations Command Center</div><div class="agent-desc">Pulls activity from Microsoft Teams, WhatsApp, and text into one daily source of truth — today's priorities, open items, and who owns what. Replaces the scattered-threads chaos with a single place the whole operation runs from.</div><div class="agent-outcome">The whole operation, in one view</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Internal Communication Agent</div><div class="agent-desc">Summarizes long threads across all three messaging apps, routes the right information to the right people, and flags what actually needs a decision — so nothing important gets lost between channels. Directly relieves the internal-communication stress you flagged.</div><div class="agent-outcome">One clear signal, not three noisy apps</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Team Accountability Agent</div><div class="agent-desc">Tracks every commitment and open item, nudges owners before things slip, and keeps each person's next step visible. Turns team organization from a memory exercise into a system.</div><div class="agent-outcome">Nothing slips through the cracks</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Reporting Agent</div><div class="agent-desc">Compiles your weekly and unit-level operational numbers from your files automatically and writes clean reports — directly relieving the reporting stress you flagged, so decisions run on current data.</div><div class="agent-outcome">Weekly reports, written for you</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Hiring &amp; Onboarding Agent</div><div class="agent-desc">Writes job posts, screens applicants against your criteria, runs first-touch outreach, and schedules interviews — so roles fill faster and your time goes only to the strongest candidates. Relieves the hiring stress you flagged.</div><div class="agent-outcome">Roles filled without the scramble</div></div><div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Follow-Up Agent</div><div class="agent-desc">Makes sure every loop gets closed across the operation — vendors, candidates, team members, partners — so the follow-ups that used to fall through simply don't anymore.</div><div class="agent-outcome">Every follow-up, handled</div></div></div>
+    <h2 class="section-title">6 AI Agents Built for Modern Pastry Shop</h2>
+    <p class="section-sub">Each agent below is specific to Chad's restaurant operations, not a copied industry template.</p>
+    <div class="agents-grid">
+      
+    </div>
   </div>
 </section>
 
@@ -362,7 +462,35 @@
     <p class="section-label">How It Happens</p>
     <h2 class="section-title">Your Implementation Roadmap</h2>
     <p class="section-sub">No long multi-month rollouts. No waiting. Here is exactly what happens from day one.</p>
-    <div class="milestone-table-wrap"><table class="milestone-table"><thead><tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr></thead><tbody><tr><td><div class="m-phase">Week 1 &middot; Days 1–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Onboarding &amp; Setup</div></td><td><ul class="m-list"><li>Kickoff call — map how the operation actually runs across Teams, WhatsApp, and text</li><li>Operations Command Center configured as your single daily source of truth</li><li>Brand and operating voice built from your existing communication</li><li>Live test: run a real day's activity through the command center</li></ul></td><td class="m-result">Onboarding week &mdash; we map your workflows, calibrate your brand voice, and configure the system internally. Nothing customer-facing goes live yet.</td></tr><tr><td><div class="m-phase">Weeks 2–3 &middot; Days 8–21</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Agents Go Live</div></td><td><ul class="m-list"><li>Internal Communication Agent unifying Teams, WhatsApp, and text</li><li>Team Accountability Agent tracking commitments and next steps</li><li>Reporting Agent producing your first automated weekly report</li><li>Hiring &amp; Follow-Up agents connected</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td><td class="m-result">Your first agent goes live in week 2. By the end of week 3, all 6 agents are deployed and running &mdash; with your team trained.</td></tr><tr><td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td><td><ul class="m-list"><li>30-day review: hours saved, follow-ups closed, reporting time eliminated</li><li>Agents refined on how your team actually works</li><li>Expansion roadmap: what to systematize next as you grow</li></ul></td><td class="m-result">The system knows your operation. Every agent calibrated to real LPNW data.</td></tr><tr><td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td><td><ul class="m-list"><li>Minimal manual input — the operation runs on the system, not memory</li><li>More process documented every week</li><li>You own the system — we stay on as your AI operations team</li></ul></td><td class="m-result">A $10M+ operation that runs on order instead of chaos — and holds that order as you grow.</td></tr></tbody></table></div>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list"><li>setup call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your phone orders, email, and DoorDash / GrubHub forms</li><li>Brand voice built from modernpastryshop.com and your existing Modern Pastry Shop messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
+            <td class="m-result">Your first agent is live. Every Modern Pastry Shop lead gets a 60-second response while you sleep.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Modern Pastry Shop pricing, features, and verticals</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list"><li>30-day performance review: response rates, time saved, churn prevented</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Modern Pastry Shop scales past 1,000 customers</li></ul></td>
+            <td class="m-result">System knows your business. Every agent calibrated to real Modern Pastry Shop data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -370,7 +498,7 @@
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. Defaults are pre-loaded from your LPNW LLC intake: $2,388 annual customer value (your projected monthly impact), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
+    <p class="section-sub">Type in your actual customer value and adjust the sliders to match your business. Any missing inputs are adjustable placeholders unless the intake supplied them. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
       <div class="calc-presets">
         <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
@@ -380,19 +508,19 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="3000" step="500" value="3000" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="500" step="1" value="60" oninput="updateLabel('contract'); calcROI();" aria-label="Average guest or catering ticket in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">2</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="2" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">20%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">35 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="35" oninput="updateLabel('hours'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -401,189 +529,47 @@
         <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
         <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
       </div>
-      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
+      <p class="calc-disclaimer">Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes.</p>
     </div>
   </div>
 </section>
 
 <section class="section section-alt" id="prompts">
   <div class="container">
-    <p class="section-label">Your First AI Agent — Start Here</p>
-    <h2 class="section-title">3 Production-Ready AI Agent Prompts for LPNW LLC</h2>
-    <p class="section-sub">These are fully-built agent instructions — not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Built specifically for LPNW LLC.</p>
-    <div class="prompt-cards"><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 — LPNW Operations Daily Briefing</h3><p>Based on your internal-communication and team-organization stresses</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt1" class="prompt-pre">## IDENTITY
-You are the Operations Coordinator for LPNW LLC, a $10M+ multi-unit franchise operation with a team of 8. Your job is to turn a chaotic, multi-channel day into one clear, calm picture. You are organized, concise, and proactive.
-
-## INPUTS (paste or connect)
-- Today's key messages/threads from Microsoft Teams, WhatsApp, and text
-- Open commitments from yesterday
-- Any deadlines, escalations, or decisions pending
-
-## YOUR JOB — produce a DAILY BRIEFING with these sections
-1. TOP PRIORITIES (3-5): the things that must move today, each with an owner.
-2. OPEN ITEMS / FOLLOW-UPS: anything waiting on someone, with who and since when.
-3. NEEDS A DECISION: items where you (Chris) or a lead must decide, summarized in one line each.
-4. STALE / AT RISK: commitments older than 2 days with no movement.
-5. FYI: notable updates that don't need action.
-
-## RULES
-- Every priority and open item has a named owner -- never leave it ambiguous.
-- One line per item; link or quote the source thread.
-- Surface only what matters; suppress noise.
-- If something needs a human decision, put it in section 3, never bury it.
-- Keep the whole briefing scannable in under 60 seconds.
-
-## TONE
-- Calm, organized, no drama. You are the steady hand that makes a busy operation feel under control.
-
-## EXAMPLE OUTPUT
----
-**LPNW Daily Briefing — Tuesday**
-TOP PRIORITIES
-1. Unit 3 staffing gap — owner: Maria — interview 2 candidates today
-2. Vendor invoice dispute — owner: Chris — needs your call by noon
-OPEN ITEMS
-- Waiting on James for the weekly numbers (since Friday)
-NEEDS A DECISION
-- Approve overtime for weekend coverage? (Maria)
-AT RISK
-- Onboarding checklist for new hire — untouched 3 days
----
-
-## WORKFLOW
-STEP 1 - Pull today's inputs: key threads from Microsoft Teams, WhatsApp, and text, plus yesterday's open commitments and any pending deadlines or escalations across LPNW's units.
-STEP 2 - Assign a named owner to every priority and open item; nothing stays ambiguous.
-STEP 3 - Sort each item into the five sections (top priorities, open/follow-ups, needs a decision, stale/at risk, FYI).
-STEP 4 - Anything requiring a human decision goes in NEEDS A DECISION for Chris or a lead - never buried.
-
-## OUTPUT
-Return the DAILY BRIEFING with these labeled sections, scannable in under 60 seconds:
-
-TOP PRIORITIES (3-5): [each with a named owner]
-OPEN ITEMS / FOLLOW-UPS: [who it waits on and since when]
-NEEDS A DECISION: [one line each, for Chris or a lead]
-STALE / AT RISK: [commitments older than 2 days with no movement]
-FYI: [notable updates that need no action]
-Each item is one line with a linked or quoted source thread.
-
-Escalation / human review: any item that needs a call goes to NEEDS A DECISION and is routed to Chris or the relevant lead for human review - never buried and never decided by the agent. Do not send an external message or make a commitment on Chris's behalf; surface it for a human first.
-
-## FIRST-RUN TEST
-Example input: a Tuesday's worth of Teams and WhatsApp threads plus yesterday's open items - "Unit 3 short-staffed for the weekend (Maria handling), a disputed vendor invoice awaiting Chris, weekly numbers not yet in from James since Friday, new-hire onboarding checklist untouched for 3 days." Expected behavior: a five-section briefing where every priority and open item has a named owner, the vendor-invoice call is placed in NEEDS A DECISION for Chris, James's overdue numbers appear in OPEN ITEMS with "since Friday," the untouched onboarding checklist appears in STALE / AT RISK, and the whole thing reads in under 60 seconds. If any item lacks an owner, a needed decision is buried outside NEEDS A DECISION, or the agent decides on Chris's behalf, it fails the test.</pre><button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: turns the scattered activity across Teams, WhatsApp, and text into one clear daily briefing -- priorities, open items, and who owns what -- so the operation runs from a system instead of memory.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 — Weekly Reporting Agent</h3><p>Based on the reporting stress you flagged</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt2" class="prompt-pre">## IDENTITY
-You are the Reporting Analyst for LPNW LLC. Each week you turn raw operational data into a clear, consistent report leadership can act on. You are accurate, structured, and plain-spoken -- no jargon.
-
-## INPUTS
-- This week's operational data (sales/units, staffing, key metrics) from your files (Google Drive / OneDrive)
-- Last week's report for comparison
-- Any targets or budgets to measure against
-
-## REPORT STRUCTURE
-1. HEADLINE (2-3 sentences): how the week went, in plain language.
-2. KEY NUMBERS (table): metric | this week | last week | trend.
-3. BY UNIT (if multi-unit): one line each, flag anything off-pace.
-4. WINS: 2-3 specific things that went well.
-5. WATCH ITEMS: 2-3 things trending the wrong way, with the likely cause.
-6. RECOMMENDED ACTIONS: 1-3 concrete next steps, each with an owner.
-
-## RULES
-- Never invent a number; if data is missing, say so and flag it.
-- Always compare to last week and to target where available.
-- Keep it to one page; lead with the headline.
-- Frame watch items as opportunities, not blame.
-
-## WORKFLOW
-STEP 1 - Gather this week's operational data (sales/units, staffing, key metrics) from LPNW's files in Google Drive / OneDrive, plus last week's report and any targets or budgets.
-STEP 2 - Compute each metric against last week and against target; flag any missing data rather than guessing.
-STEP 3 - Draft the six report sections (headline, key numbers table, by unit, wins, watch items, recommended actions).
-STEP 4 - Run the QUALITY CHECK; if any answer is N, fix it before sending.
-
-## OUTPUT
-Return this one-page weekly report:
-
-HEADLINE: [2-3 plain-language sentences on how the week went]
-KEY NUMBERS: [table - metric | this week | last week | trend]
-BY UNIT: [one line per unit, flag anything off-pace]
-WINS: [2-3 specific things that went well]
-WATCH ITEMS: [2-3 trending the wrong way, with likely cause]
-RECOMMENDED ACTIONS: [1-3 concrete next steps, each with a named owner]
-
-Escalation: if a metric is missing, looks wrong, or a unit is materially off-target, flag it by name and route to Chris for human review rather than publishing a number you cannot source. Do not send the report with an invented or unverified figure - escalate the gap to Chris first.
-
-## QUALITY CHECK
-- Every number sourced? Y/N
-- Trends and comparisons included? Y/N
-- Actions have owners? Y/N
-If any N, fix before sending.
-
-## FIRST-RUN TEST
-Example input: this week's LPNW numbers across the units (sales, staffing, key metrics) with last week's report attached and a monthly sales target - but Unit 4's staffing figure is missing. Expected behavior: a one-page report that leads with a plain-language headline, a key-numbers table comparing this week to last week and to target, a by-unit line flagging anything off-pace, 2-3 wins, 2-3 watch items framed as opportunities with likely causes, and 1-3 recommended actions each with a named owner - and it explicitly flags "Unit 4 staffing data missing" rather than guessing. If it invents Unit 4's number, omits the last-week/target comparison, or leaves an action ownerless, it fails the test.</pre><button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: compiles your operational numbers into a clean weekly report automatically -- so you lead with current data instead of pulling spreadsheets together late at night.</div></div></div><div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 — Hiring &amp; Screening Agent</h3><p>Based on the hiring / staffing stress you flagged</p></div><span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body"><pre id="prompt3" class="prompt-pre">## IDENTITY
-You are the Recruiting Coordinator for LPNW LLC, a multi-unit franchise operation. You run the front of the hiring funnel so leadership only spends time on finalists. You are efficient, fair, and on-brand.
-
-## INPUTS
-- Role + must-have requirements + nice-to-haves
-- Location/unit and schedule
-- Pay range (if shareable)
-- Applicant resumes/responses as they come in
-
-## WHAT YOU DO
-1. JOB POST: write a clear, appealing post for the role (responsibilities, requirements, what makes LPNW a good place to work, how to apply).
-2. SCREEN: score each applicant against the must-haves; sort into Strong / Maybe / No with a one-line reason each.
-3. FIRST-TOUCH OUTREACH: draft a warm reply to Strong candidates inviting them to a screening call, with 2-3 specific time options.
-4. SCHEDULE: on reply, confirm the time and add it to the calendar; send a reminder 24h before.
-5. HANDOFF: give leadership a short shortlist with the top 3 and why.
-
-## RULES
-- Screen only on job-relevant criteria; keep it fair and consistent.
-- Never auto-reject ambiguous cases -- mark Maybe and surface for a human.
-- Keep candidate messages warm and prompt (reply within the hour).
-- Log every candidate + status so nothing falls through.
-
-## WORKFLOW
-STEP 1 - Take the role, must-haves, nice-to-haves, location/unit, schedule, and pay range (if shareable), and write the job post.
-STEP 2 - As applicants come in, score each against the must-haves and sort into Strong / Maybe / No with a one-line reason.
-STEP 3 - Draft warm first-touch outreach to Strong candidates with 2-3 specific call times.
-STEP 4 - On reply, confirm the time, add it to the calendar, and send a 24h reminder.
-STEP 5 - Hand leadership a shortlist of the top 3 with why.
-
-## OUTPUT
-Return these deliverables for the hire:
-
-JOB POST: [role, responsibilities, requirements, why LPNW, how to apply]
-SCREEN RESULTS: [each applicant sorted Strong / Maybe / No with a one-line reason]
-OUTREACH DRAFTS: [warm reply to each Strong candidate with 2-3 time options]
-SCHEDULE LOG: [confirmed times added to calendar + 24h reminders]
-SHORTLIST: [top 3 for leadership with why]
-CANDIDATE LOG: [every candidate + current status so nothing falls through]
-
-Escalation / human review: never auto-reject an ambiguous applicant - mark them Maybe and route to a human (Chris or the hiring lead) for review. Do not send a rejection or an offer; the agent runs the front of the funnel only and hands finalists to leadership.
-
-## EXAMPLE — OUTREACH
----
-Hi Jordan, thanks for applying to the Assistant Manager role at LPNW. Your multi-unit experience stood out. I'd love to set up a quick 15-minute call -- I have Wednesday 10am or Thursday 2pm open. Which works?
----
-
-## FIRST-RUN TEST
-Example input: "Role: Assistant Manager at LPNW Unit 2; must-haves: 2+ years multi-unit retail/food ops, open weekends; nice-to-have: bilingual; pay $52-58K; three resumes attached, one clearly strong, one borderline, one off-target." Expected behavior: a clear job post for the Unit 2 Assistant Manager role; the three applicants sorted Strong / Maybe / No with a one-line reason each (the borderline one marked Maybe, not rejected); a warm outreach draft to the Strong candidate offering 2-3 call times; a calendar/reminder plan on reply; and a top-3 shortlist for leadership. If the agent auto-rejects the borderline candidate, screens on non-job-relevant criteria, or sends an offer or rejection itself, it fails the test.</pre><button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button><div class="prompt-outcome">What this does: fills roles faster by writing the posts, screening applicants against your criteria, and scheduling interviews -- so your time goes only to the strongest candidates.</div></div></div></div>
-    <div class="diy-or-partner"><h3>Two paths forward for Chris:</h3><div class="path-grid"><div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. You can stand up 1-2 of these agents yourself with free tools like ChatGPT or Claude — and feel the time come back within days, not months.</p></div><div class="path"><h4>Partner Path</h4><p>Want the full system — all 6 agents connected, calibrated to the LPNW LLC voice from Day 1, running across every inquiry and client? That is what we build. We handle setup, calibration, and ongoing optimization.</p><a href="https://hub.aiblueprintmarketing.com/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent" class="path-cta">See If You Qualify</a></div></div></div>
+    <p class="section-label">Try These First</p>
+    <h2 class="section-title">Three Prompts Chad Can Use Today</h2>
+    <p class="section-sub">These prompts are manual versions of the first automation layer. The full system runs them automatically from live events.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card"><div class="prompt-header"><h3>Catering Speed-to-Lead Agent</h3></div><pre class="prompt-pre"></pre></div>
+      <div class="prompt-card"><div class="prompt-header"><h3>Franchise Inquiry Qualification Agent</h3></div><pre class="prompt-pre"></pre></div>
+      <div class="prompt-card"><div class="prompt-header"><h3>Guest Recovery Agent</h3></div><pre class="prompt-pre"></pre></div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two paths forward for TEST:</h3>
+      <div class="path-grid">
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start improving response speed, guest recovery, and daily reporting.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>FKI builds the automated version, connects it to your tools, and audits it before anything is sent externally.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=TEST%20Blueprint-IGNORE&amp;biz=Modern%20Pastry%20Shop&amp;src=test-blueprint-ignore" class="path-cta">See If You Qualify</a></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="demo">
   <div class="container">
     <p class="section-label">Live Preview</p>
-    <h2 class="section-title">LPNW LLC Speed-to-Lead Demo</h2>
-    <p class="section-sub">Once your AI system is live, this is what a day at LPNW feels like: instead of chasing updates across Teams, WhatsApp, and text, you open one briefing that shows the day's priorities, every open item with an owner, and exactly what needs your decision. The operation runs on a system, not on remembering.</p>
-    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you work with Advaita, your AI command center plugs into the tools you already use -- Microsoft Teams, WhatsApp, text, Google Drive, and OneDrive -- and brings order across all of them. You already use ChatGPT, so your team will be comfortable from day one.</p>
+    <h2 class="section-title">Modern Pastry Shop Speed-to-Lead Flow</h2>
+    <p class="section-sub">A catering inquiry comes in. The AI captures headcount, date, pickup or delivery, dietary constraints, budget range, and preferred location, then routes the summary to the right manager.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">This is designed for a busy restaurant day: no new platform to babysit, no calendar bypass, and no legal document send.</p>
   </div>
 </section>
 
 <section class="section pod-section" id="listen">
   <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
-  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your LPNW LLC answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Listen to your personalized Blueprint &mdash; built from your Modern Pastry Shop answers. Adjust speed with 1x / 1.25x / 1.5x controls.</p>
   <div class="pod-card" id="podcast">
     <div class="pod-header">
       <h3>Your AI Roadmap</h3>
-      <p class="pod-subtitle">Chris &middot; LPNW LLC</p>
+      <p class="pod-subtitle">TEST Blueprint-IGNORE &middot; Modern Pastry Shop</p>
     </div>
     <div class="pod-body">
       <span class="pod-badge" id="podBadge">
@@ -625,13 +611,13 @@ Example input: "Role: Assistant Manager at LPNW Unit 2; must-haves: 2+ years mul
         <button class="pod-btn pod-mute" id="podMute" aria-label="Mute">
           <svg id="podVolIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         </button>
-        <a class="pod-dl" href="https://hub.aiblueprintmarketing.com/podcasts/chris-lpnw.mp3" target="_blank" download>Download MP3</a>
+        <a class="pod-dl" href="https://bennett-maxwell.github.io/fki-preview/podcasts/test-blueprint-ignore.mp3" target="_blank" download>Download MP3</a>
       </div>
       <div class="pod-error" id="podError">
-        Audio temporarily unavailable. <a href="https://hub.aiblueprintmarketing.com/podcasts/chris-lpnw.mp3" target="_blank">Open MP3 directly</a>
+        Audio temporarily unavailable. <a href="https://bennett-maxwell.github.io/fki-preview/podcasts/test-blueprint-ignore.mp3" target="_blank">Open MP3 directly</a>
       </div>
-      <audio id="podAudio" preload="metadata" src="https://hub.aiblueprintmarketing.com/podcasts/chris-lpnw.mp3">
-        <source src="https://hub.aiblueprintmarketing.com/podcasts/chris-lpnw.mp3" type="audio/mpeg">
+      <audio id="podAudio" preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/test-blueprint-ignore.mp3">
+        <source src="https://bennett-maxwell.github.io/fki-preview/podcasts/test-blueprint-ignore.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
@@ -642,36 +628,42 @@ Example input: "Role: Assistant Manager at LPNW Unit 2; must-haves: 2+ years mul
     <p class="section-label">Research Sources</p>
     <h2 class="section-title">Citations</h2>
     <p class="section-sub">Every claim in this Blueprint links to published research. No fabricated data, no anonymous case studies.</p>
-    <div class="sources-list"><div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics — lead response time and conversion research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div><div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review — "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">hbr.org</a></div></div><div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company — operations analytics and customer-experience research. <a href="https://www.mckinsey.com/capabilities/operations/our-insights" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute — "The State of AI in 2023." Adoption benchmarks for lead volume and conversion lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div><div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review — automation research: admin time reduction benchmark. <a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">hbr.org</a></div></div></div>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in SaaS and multi-account operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review &mdash; Automation research: admin time reduction benchmark. <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+    </div>
   </div>
 </section>
 
 <section class="cta-section" id="apply">
   <div class="container">
-    <h2>Ready to See This<br><span>Working for LPNW LLC?</span></h2>
-    <p class="cta-personal">“Chris, I built this roadmap specifically for LPNW because you've done the hard part -- a $10M+ operation, a sharp team, a 5-minute response time. The chaos you're feeling isn't a people problem; it's a systems problem, and that's the most fixable kind. This AI system gives your operation one reliable nervous system -- aligned communication, clean reporting, closed follow-ups, faster hiring -- so the business runs on order instead of memory. — Bennett”</p>
-    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://hub.aiblueprintmarketing.com/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent" class="cta-btn">See If You Qualify</a>
-    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+    <h2>Ready to See This<br><span>Working for Modern Pastry Shop?</span></h2>
+    <p class="cta-personal">"TEST, I built this roadmap around the parts of Summit Street Tacos where speed and consistency matter most: catering response, guest recovery, manager reporting, and qualified expansion conversations. The goal is not to replace your team. The goal is to give your team a system that never forgets the next step." &mdash; Bennett</p>
+    <p>The next step is the tracked qualifier. It confirms fit, updates the same CRM contact, and only then allows any next-step scheduling path.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=TEST%20Blueprint-IGNORE&amp;biz=Modern%20Pastry%20Shop&amp;src=test-blueprint-ignore" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No calendar bypass, no legal document send, no pressure.</p>
   </div>
 </section>
 
 <footer>
-  <p>Advaita AI for Business &mdash; Prepared for Chris / LPNW LLC &mdash; Confidential</p>
+  <p>Advaita AI for Business &mdash; Prepared for TEST Blueprint-IGNORE / Modern Pastry Shop &mdash; Confidential</p>
   <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
 </footer>
 
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://hub.aiblueprintmarketing.com/qualify.html?lead=Chris&biz=LPNW+LLC&src=chris-lpnw&firstName=Chris&agents=Operations+Command+Center%2CInternal+Communication+Agent%2CTeam+Accountability+Agent%2CReporting+Agent%2CHiring+%26+Onboarding+Agent%2CFollow-Up+Agent" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=TEST%20Blueprint-IGNORE&biz=Modern%20Pastry%20Shop&src=test-blueprint-ignore" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
   const PRESETS = {
-    conservative: { contract: 25000, leads: 2, rate: 20, hours: 35, lift: 0.5 },
-    expected:     { contract: 25000, leads: 2, rate: 20, hours: 35, lift: 1.0 },
-    stretch:      { contract: 25000, leads: 2, rate: 20, hours: 35, lift: 1.3 }
+    conservative: { contract: 60, leads: 10, rate: 18, hours: 15, lift: 0.5 },
+    expected:     { contract: 60, leads: 10, rate: 18, hours: 15, lift: 1.0 },
+    stretch:      { contract: 60, leads: 10, rate: 18, hours: 15, lift: 1.3 }
   };
   let currentLift = 1.0;
 
@@ -757,7 +749,7 @@ Example input: "Role: Assistant Manager at LPNW Unit 2; must-haves: 2+ years mul
 </script>
 
 <div class="pod-mini" id="podMini" aria-live="polite">
-  <span class="pod-mini-name">AI Walkthrough &middot; Chris</span>
+  <span class="pod-mini-name">AI Walkthrough &middot; TEST Blueprint-IGNORE</span>
   <span class="pod-mini-time" id="podMiniTime">0:00</span>
   <button class="pod-mini-btn" id="podMiniPlay" aria-label="Play">
     <svg id="podMiniIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
@@ -767,7 +759,7 @@ Example input: "Role: Assistant Manager at LPNW Unit 2; must-haves: 2+ years mul
 <script>
 (function () {
   'use strict';
-  var STORAGE_KEY = 'bpod_chris-lpnw';
+  var STORAGE_KEY = 'bpod_test-blueprint-ignore';
   var CHAPTERS = [
     {pct: 0,    label: 'Segment 1 - This Is Your Business'},
     {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},

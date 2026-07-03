@@ -13,7 +13,7 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/gogcli/0.13.0/bin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template.html"
-DEFAULT_BLUEPRINT_BASE_URL="https://bennett-maxwell.github.io/fki-preview"
+DEFAULT_BLUEPRINT_BASE_URL="https://hub.aiblueprintmarketing.com"
 BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL:-$DEFAULT_BLUEPRINT_BASE_URL}"
 BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL%/}"
 
@@ -118,7 +118,7 @@ import sys
 from urllib.parse import urlsplit, urlunsplit
 
 profile_url, base_url = sys.argv[1:3]
-DEFAULT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+DEFAULT_BASE_URL = "https://hub.aiblueprintmarketing.com"
 base_url = base_url.rstrip("/") or DEFAULT_BASE_URL
 if base_url != DEFAULT_BASE_URL and (not profile_url or profile_url.startswith(DEFAULT_BASE_URL)):
     url = f"{base_url}/qualify.html"

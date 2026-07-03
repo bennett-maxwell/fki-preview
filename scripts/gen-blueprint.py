@@ -20,7 +20,7 @@ import json, re, sys, os, urllib.parse
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
-DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+DEFAULT_BLUEPRINT_BASE_URL = "https://hub.aiblueprintmarketing.com"
 BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
 
 
