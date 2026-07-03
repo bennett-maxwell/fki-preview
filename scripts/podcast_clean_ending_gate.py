@@ -17,18 +17,17 @@ DISCRIMINATOR (calibrated against real files 2026-07-01):
     - a HARD CUT ends mid-sentence with NO closing cue, and its total duration is
       almost always a suspiciously round trim boundary (e.g. exactly 640.000000s).
 
-VERDICT LOGIC:
-  PASS  if a closing cue is present in the final window.
-  FAIL  if NO closing cue AND the duration is a suspiciously round hard-trim
-        boundary (whole second AND a multiple of 10s — the `ffmpeg -t` signature).
-        This is the load-bearing, non-false-positive discriminator: NotebookLM's
-        native renders are never whole-second-round (615.519, 532.967, 300.048),
-        so a round boundary with no wrap-up is a proven blind trim.
-  Full-volume tail dB is REPORTED as color and used only to strengthen the reason
-  string — it is NOT a standalone FAIL trigger, because every NotebookLM episode
-  ends on speech (~-5 dB) so it does not discriminate clean from cut on its own.
-  On a transcription failure the gate is CONSERVATIVE: if it cannot read the tail it
-  FAILS a round-boundary duration (can't prove clean) and PASSES a non-round one.
+VERDICT LOGIC (v2.24 — Madison COO directive 2026-07-03: closing statement MANDATORY):
+  PASS  only if a closing / outro cue is present in the final window. Every podcast
+        MUST wrap up with an explicit closing statement.
+  FAIL  if NO closing cue is found — UNCONDITIONALLY, regardless of duration. A
+        mid-sentence / abrupt end with no wrap-up is a hard fail even at a natural,
+        non-round length (this closes the pre-v2.24 gap where a mid-sentence cut at a
+        non-round duration slipped through). Round hard-trim boundary, full-volume
+        tail dB, and mid-sentence end are still REPORTED as color to strengthen the
+        reason string, but the gating rule is simply: closing statement present or FAIL.
+  On a transcription failure the gate is CONSERVATIVE and FAILS: a closing statement
+  that cannot be verified is treated as absent (re-render or fix transcription).
 
 Usage:
   podcast_clean_ending_gate.py --audio <mp3> [--lead <slug>] [--business-name <biz>]
@@ -190,14 +189,13 @@ def evaluate(audio: Path, tail_seconds: int, business_name: str = "") -> dict:
         # Conservative fallback: can't read the tail. A round-trim boundary can't be
         # proven clean → FAIL; a natural duration → PASS (no hard-cut evidence).
         result["transcription_error"] = str(exc)
-        clean = not round_boundary
+        # v2.24 (Madison COO directive): a closing statement that cannot be verified
+        # is treated as ABSENT — conservative HARD FAIL (re-render or fix transcription).
         result.update({
             "closing_cues_found": None,
-            "clean_ending_verified": clean,
-            "status": "PASS" if clean else "FAIL",
-            "reason": ("transcription unavailable; round-trim boundary duration is "
-                       "unprovable as clean" if not clean
-                       else "transcription unavailable but duration is a natural (non-round) length"),
+            "clean_ending_verified": False,
+            "status": "FAIL",
+            "reason": "transcription unavailable — mandatory closing statement cannot be verified (conservative FAIL)",
         })
         return result
 
@@ -215,12 +213,11 @@ def evaluate(audio: Path, tail_seconds: int, business_name: str = "") -> dict:
         })
         return result
 
-    # No closing cue. Hard-cut ONLY if the duration is a round trim boundary — the
-    # single reliable, false-positive-free signature. full_volume_tail / mid-sentence
-    # are reported to strengthen the reason but never FAIL on their own (they fire on
-    # legitimately-ended NotebookLM episodes too).
-    hardcut = round_boundary
-    reasons = []
+    # No closing cue found. v2.24 (Madison COO directive): a closing statement is
+    # MANDATORY, so this is a HARD FAIL unconditionally — regardless of whether the
+    # duration looks like a round trim boundary. round_boundary / full_volume_tail /
+    # mid-sentence are reported only to strengthen the reason string.
+    reasons = ["no closing/outro statement detected in final window"]
     if round_boundary:
         reasons.append(f"round hard-trim boundary duration {mmss} ({dur:.3f}s)")
     if full_volume_tail:
@@ -228,10 +225,9 @@ def evaluate(audio: Path, tail_seconds: int, business_name: str = "") -> dict:
     if mid:
         reasons.append("final window ends mid-sentence")
     result.update({
-        "clean_ending_verified": not hardcut,
-        "status": "FAIL" if hardcut else "PASS",
-        "reason": ("no closing cue + hard-cut signature: " + "; ".join(reasons)) if hardcut
-                  else "no explicit closing cue, but no hard-cut signature (duration natural, tail resolves)",
+        "clean_ending_verified": False,
+        "status": "FAIL",
+        "reason": "MANDATORY closing statement missing: " + "; ".join(reasons),
     })
     return result
 
