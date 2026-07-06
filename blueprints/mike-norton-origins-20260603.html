@@ -241,8 +241,9 @@
     .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
     @keyframes eqBounce { from{height:4px} to{height:18px} }
     .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
-    .pod-progress-wrap { position: relative; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; cursor: pointer; touch-action: none; }
-    .pod-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-progress-wrap { position: relative; height: 44px; display: flex; align-items: center; background: transparent; border-radius: 22px; cursor: pointer; touch-action: none; user-select: none; }
+    .pod-progress-wrap::before { content: ''; position: absolute; left: 0; right: 0; top: 19px; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; }
+    .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
     .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
     .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
     .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
@@ -265,8 +266,6 @@
     .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
-  
-    .agent-prompt{margin-top:1rem;padding:1rem;border:1px solid var(--border);border-radius:18px;background:#fff;font-size:0.92rem;line-height:1.6;color:var(--text);}
   </style>
 </head>
 <body>
@@ -288,15 +287,15 @@
 <section class="hero" id="hero">
   <div class="hero-badge">Confidential — Prepared for Mike Norton</div>
   <h1>Your <span>AI Advantage</span> Roadmap<br>for Origins</h1>
-  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for the CRM platform serving 675+ home service businesses — and how to get there in 30 days.</p>
+  <p class="hero-sub">A personalized blueprint showing exactly where AI creates the biggest leverage for your consulting practice — built from your own intake answers — and how to get the first piece live in days, not months.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First Agent<br>Live</span></div>
+    <div class="hero-stat"><span class="num">Week 1</span><span class="label">Onboarding<br>&amp; Setup</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Agents<br>Running</span></div>
+    <div class="hero-stat"><span class="num">Week 2</span><span class="label">First Agent<br>Live</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Origins Data</span></div>
+    <div class="hero-stat"><span class="num">Week 3</span><span class="label">All 6 Agents<br>Live</span></div>
     <div class="hero-divider"></div>
-    <div class="hero-stat"><span class="num">12 Hrs</span><span class="label">Saved Per Week<br>Per Teammate</span></div>
+    <div class="hero-stat"><span class="num">Hours</span><span class="label">Back Every<br>Week</span></div>
   </div>
 </section>
 
@@ -304,33 +303,33 @@
   <div class="container">
     <p class="section-label">Your Business Profile</p>
     <h2 class="section-title">Where Origins Stands Today</h2>
-    <p class="section-sub">Built from your intake answers and a structured review of origins.com. This is the baseline we used to design your AI system.</p>
+    <p class="section-sub">Built entirely from the answers you gave in your intake. This is the baseline we used to design your AI system — nothing here is guessed.</p>
     <div class="snapshot-grid">
-      <div class="snapshot-card"><div class="snapshot-val">$250K&ndash;500K</div><div class="snapshot-key">Annual Revenue</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">SaaS Agency</div><div class="snapshot-key">Business Type</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">10 / mo</div><div class="snapshot-key">Avg Monthly Leads</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">50+</div><div class="snapshot-key">SOPs in Place</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Google Drive, Notion, Slack, ClickUp</div><div class="snapshot-key">Primary CRM</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">675+</div><div class="snapshot-key">Active Customers</div></div>
-      <div class="snapshot-card"><div class="snapshot-val"><span id="roi-monthly-impact">—</span></div><div class="snapshot-key">Pro Edition Pricing</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">Team of 3</div><div class="snapshot-key">Core Operators</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Under $250K</div><div class="snapshot-key">Annual Revenue</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Consultant</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">50 / mo</div><div class="snapshot-key">Monthly Leads</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Team of 5</div><div class="snapshot-key">People</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Drive · Notion · Slack · ClickUp</div><div class="snapshot-key">Your Current Tools</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Under 5 min</div><div class="snapshot-key">Target Response Time</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Automation</div><div class="snapshot-key">Where You Are With AI</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Revenue</div><div class="snapshot-key">Your Biggest Goal</div></div>
     </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: active Google Drive, Notion, Slack, ClickUp power user with custom integrations — ready to scale with dedicated AI agents. Current time recovery opportunities: Marketing Content and Admin Work across 675+ accounts. Brand voice is calibrated from origins.com, your tagline ("All-In-One CRM Built for Home Service Hustlers Powered By A.I."), and the language your existing customers use on the site — 90% accurate on Day 1, built from intel audit before launch.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);">You already run on Google Drive, Notion, Slack, and ClickUp — so you are comfortable with tools and ready to layer dedicated AI agents on top of what you have. From your intake, the pressure points you named are missed calls, slow lead response, appointment booking, admin work, and scheduling. This blueprint is built around exactly those five, using the tools you already pay for. Any dollar figure you see below (like an example project value or close rate) is a starting default you can adjust — you did not provide those in your intake, so treat them as editable planning assumptions, not facts about your practice.</p>
   </div>
 </section>
 
 <section class="section" id="results">
   <div class="container">
-    <p class="section-label">What Your Industry Is Already Doing</p>
-    <h2 class="section-title">SaaS &amp; CRM Companies Like Yours Are Already Running on AI</h2>
-    <p class="section-sub">These are the exact moves software and CRM businesses in your space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether Origins runs them before the competitor down the street does.</p>
+    <p class="section-label">What Practices Like Yours Are Already Doing</p>
+    <h2 class="section-title">Consultants Your Size Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves small consulting practices are making right now &mdash; not enterprise budgets, not big teams. The question is not whether AI can do this. It is whether Origins puts it to work before the next advisor competing for the same client does.</p>
     <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every signup in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> SaaS and CRM companies now put an AI speed-to-lead agent on every demo request and trial signup, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first vendor to respond wins the clear majority of deals at this price point &mdash; they capture trials your slower competitors never even see. <strong>How I deliver it for Origins:</strong> a speed-to-lead agent wired into your Google Drive, Notion, Slack, ClickUp that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They onboard 1,000+ accounts with a team of 3</div><div class="gap-desc"><strong>What they're doing:</strong> vertical SaaS companies are handing new-customer setup to an AI onboarding agent &mdash; account provisioning, template deployment, welcome sequences, kickoff scheduling. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a tiny team serves hundreds more accounts without a single new hire. <strong>How I deliver it for Origins:</strong> an onboarding agent that handles every repeatable setup step so your team of 3 only touches the strategy conversations. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one product release into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> software companies run an AI content agent that turns every feature ship into ready-to-post social, email, and blog content. <strong>How it helps them:</strong> they stay top-of-mind with their market every single week &mdash; no marketing hire, no content backlog. <strong>How I deliver it for Origins:</strong> a content agent trained on your brand voice from origins.com that converts each Origins update into a full week of publish-ready content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They catch churn before the cancel button</div><div class="gap-desc"><strong>What they're doing:</strong> subscription businesses run an AI health-monitoring agent across their whole account base to flag at-risk customers early. <strong>How it helps them:</strong> they save recurring revenue that would otherwise quietly walk out the door &mdash; the cheapest dollar in SaaS is the one you keep. <strong>How I deliver it for Origins:</strong> a retention agent watching login and usage signals across all 675+ accounts, surfacing churn risk while there is still time to act. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every new inquiry in minutes &mdash; even after hours</div><div class="gap-desc"><strong>What they're doing:</strong> independent consultants now put an AI response agent on every inbound inquiry and missed call, replying in minutes instead of hours. <strong>How it helps them:</strong> the first advisor to respond usually wins the conversation &mdash; they book calls that slower competitors never even hear about. <strong>How I deliver it for you:</strong> a response agent wired into the way you already work in Slack that answers every inbound fast and hands you a warm, qualified lead. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They stop losing hours to booking and scheduling back-and-forth</div><div class="gap-desc"><strong>What they're doing:</strong> small advisory teams hand appointment booking and scheduling to an AI agent that offers times, confirms, and reminds &mdash; no email ping-pong. <strong>How it helps them:</strong> the calendar fills itself, no-shows drop, and the team stops babysitting a shared inbox. <strong>How I deliver it for you:</strong> a booking agent that handles the scheduling you flagged as a stress and drops a clean confirmation into Slack for your team of five. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one client win into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> consultants run an AI content agent that turns a single insight or client result into ready-to-post LinkedIn, email, and follow-up content. <strong>How it helps them:</strong> they stay visible to the exact people who hire them &mdash; without a marketing hire or a content backlog. <strong>How I deliver it for you:</strong> a content agent that works from your own notes in Notion and Drive and turns each idea into a week of publish-ready pieces. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They get the admin work off the owner's plate</div><div class="gap-desc"><strong>What they're doing:</strong> owner-led practices route recurring admin &mdash; intake summaries, follow-ups, task creation &mdash; to an AI agent instead of doing it by hand. <strong>How it helps them:</strong> the founder gets billable hours back and the whole team stops doing copy-paste work between tools. <strong>How I deliver it for you:</strong> an admin agent that reads a new inquiry, summarizes it into Slack, and opens the right task in ClickUp automatically. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag brand">Time Recovery</span></div></div>
     </div>
-    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside companies that sell what you sell. The ones who move first do not just save time &mdash; they take the customers everyone else was too slow to answer. Origins can be the company they are worried about, or the one they leave behind.</p>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside practices that do what you do. The ones who move first do not just save time &mdash; they win the clients everyone else was too slow to answer. Origins can be the practice they compete against, or the one they get left behind by.</p>
   </div>
 </section>
 
@@ -338,25 +337,25 @@
   <div class="container">
     <p class="section-label">Where the Value Comes From</p>
     <h2 class="section-title">Three Ways AI Moves the Needle for Origins</h2>
-    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time, or lower cost per customer served.</p>
+    <p class="section-sub">Every agent in your system maps to one of three outcomes &mdash; more revenue, more time back, or more capacity without a new hire.</p>
     <div class="pillars-grid">
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="pillar-title">Increase Revenue</div>
-        <div class="pillar-metric">More Closes</div>
-        <div class="pillar-sub">Faster lead response captures more Origins high-value subscribers. AI proposals close deals in hours instead of days. Higher conversion at every pipeline stage.</div>
+        <div class="pillar-title">Win More Work</div>
+        <div class="pillar-metric">More Booked Calls</div>
+        <div class="pillar-sub">Answering every inquiry in minutes instead of hours means fewer leads slip away. When you are first to respond, you get the conversation &mdash; and the client.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="pillar-title">Save Time</div>
-        <div class="pillar-metric">12 Hrs / Week</div>
-        <div class="pillar-sub">Admin work, client onboarding, content creation, and support triage &mdash; automated. Hours reclaimed per teammate, every week.</div>
+        <div class="pillar-metric">Hours / Week</div>
+        <div class="pillar-sub">Admin work, scheduling, intake summaries, and follow-up &mdash; the tasks you flagged &mdash; handled automatically. Hours handed back to you and your team every week.</div>
       </div>
       <div class="pillar-card">
         <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="pillar-title">Scale Without Hiring</div>
-        <div class="pillar-metric">675 to 1,000+</div>
-        <div class="pillar-sub">Serve more accounts per teammate. Eliminate manual onboarding overhead. Grow the customer base without adding headcount.</div>
+        <div class="pillar-title">Grow Without Hiring</div>
+        <div class="pillar-metric">Same 5, More Done</div>
+        <div class="pillar-sub">Take on more clients without adding headcount. The agents cover the repeatable work so your team of five spends its time on the advisory work only people can do.</div>
       </div>
     </div>
   </div>
@@ -366,14 +365,14 @@
   <div class="container">
     <p class="section-label">Where You Are Today</p>
     <h2 class="section-title">Your Current Tool Stack</h2>
-    <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
+    <p class="section-sub">These are the four tools you told us you run on &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
     <div class="stack-grid">
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Google Drive, Notion, Slack, ClickUp</div><div class="stack-role">CRM + Automation Engine</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage + Docs</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Origins Platform</div><div class="stack-role">Your SaaS Product</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Email + SMS</div><div class="stack-role">Lead Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Notes &amp; Knowledge Base</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">ClickUp</div><div class="stack-role">Tasks &amp; Project Management</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Email &amp; Calls</div><div class="stack-role">Where Inquiries Land</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">AI Agents (New)</div><div class="stack-role">The Layer We Add On Top</div></div></div>
     </div>
   </div>
 </section>
@@ -382,14 +381,14 @@
   <div class="container">
     <p class="section-label">Where the Leverage Is</p>
     <h2 class="section-title">Your Biggest Time Recovery Opportunities</h2>
-    <p class="section-sub">These are the areas where Origins has the most capacity to recover &mdash; based on your intake answers and a structured review of origins.com. None of this is critique; it is where AI gives your team the most leverage on what you have already built.</p>
+    <p class="section-sub">These are the areas where you have the most to gain &mdash; drawn straight from the pressure points you named in your intake. None of this is critique; it is where AI gives you and your team the most leverage on the practice you have already built.</p>
     <div class="gap-list">
-      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Lead Response Speed at Scale</div><div class="gap-desc">With 675+ customers and a <span id="roi-monthly-impact">—</span> subscription price, every new inquiry is a high-value opportunity. Published research shows the first vendor to respond wins the clear majority of deals &mdash; yet most CRM agencies take 4&ndash;24 hours to reply manually. An AI lead response agent answers in under 60 seconds, 24/7, lifting close rate without adding staff. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
-      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Marketing Content Production</div><div class="gap-desc">You flagged Marketing Content as a top operational stress. With Origins serving home service verticals across field services, plumbing, solar, landscaping, and more, content needs are constant &mdash; product updates, feature announcements, customer success stories, educational pieces. An AI content agent transforms each product release into ready-to-publish social, email, and blog content without a dedicated marketing hire. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Client Onboarding Capacity</div><div class="gap-desc">Onboarding a new Origins customer requires account setup, automation template deployment, welcome sequences, and kickoff scheduling. With a team of 3 supporting 675+ accounts, every manual onboarding hour is an hour not spent on growth. An AI onboarding agent handles the repeatable steps automatically while your team owns the strategy conversations. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Admin Work Across 675+ Accounts</div><div class="gap-desc">You flagged Admin Work as a top stress. Support tickets, account status checks, billing questions, and feature requests &mdash; multiplied across hundreds of customers &mdash; consume hours that could go toward product development and strategic growth. An AI admin agent handles the repeatable inquiries automatically and routes the rest to a human. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
-      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Client Retention &amp; Health Monitoring</div><div class="gap-desc">At scale per customer, churn is the most expensive problem a SaaS CRM agency faces. An AI health monitor tracks login frequency, automation usage, and support patterns across all 675+ accounts to surface at-risk clients before they cancel &mdash; enabling proactive outreach that keeps recurring revenue locked in. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
-      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Pipeline Visibility for a Team of 3</div><div class="gap-desc">Every closeable deal needs to be visible to all three operators simultaneously, scored by likelihood, and routed without a status meeting. An AI sales intelligence agent runs a weekly digest of pipeline movement, lead scores, and recommended actions &mdash; pulled directly from your Google Drive, Notion, Slack, ClickUp data. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Slow Lead Response &amp; Missed Calls</div><div class="gap-desc">You told us slow lead response and missed calls are two of your biggest stresses, and that your target is a reply in under five minutes. Published research shows the first advisor to respond wins the clear majority of the work &mdash; yet a busy team of five will always miss calls and let inquiries sit. An AI response agent answers every inbound in minutes, day or night, and hands you a warm lead instead of a missed one. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Appointment Booking &amp; Scheduling</div><div class="gap-desc">You flagged appointment booking and scheduling as stresses &mdash; and for a consulting practice, every unbooked hour is unbilled. Instead of trading emails to find a time, an AI booking agent offers slots, confirms, and sends reminders on its own, then posts a clean confirmation into your Slack so the whole team of five can see it. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Admin Work Off the Owner's Plate</div><div class="gap-desc">You named admin work as a top stress. Intake notes, follow-up messages, task creation, and the copy-paste shuffle between Drive, Notion, and ClickUp quietly eat the hours you would rather spend advising clients. An AI admin agent handles the repeatable pieces automatically and routes only the judgment calls back to you. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Marketing Content Production</div><div class="gap-desc">You flagged marketing content as a stress. Staying visible to the people who hire a consultant takes a steady stream of posts, emails, and follow-ups &mdash; and that is the first thing that slips when client work gets busy. An AI content agent works from your own notes in Notion and Drive and turns one idea into a week of publish-ready pieces, no marketing hire required. <sup><a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">[5]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Faster Client Intake &amp; Follow-Up</div><div class="gap-desc">When a new inquiry comes in, the sooner it turns into a clear next step, the more likely it closes. An AI intake agent reads the inquiry, writes a short summary into Slack, and drafts a follow-up so nothing waits on someone finding a spare fifteen minutes. Warm leads stay warm instead of going cold in an inbox. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">One Clear View for a Team of Five</div><div class="gap-desc">With five people working across Slack, Notion, and ClickUp, it is easy for a lead or a follow-up to fall between the cracks. An AI operations agent runs a simple weekly digest &mdash; new leads, open follow-ups, and what needs attention &mdash; pulled from the tools you already use, so nothing depends on a status meeting. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
     </div>
   </div>
 </section>
@@ -398,20 +397,20 @@
   <div class="container">
     <p class="section-label">Prioritized Roadmap</p>
     <h2 class="section-title">AI Opportunity Map &mdash; Origins</h2>
-    <p class="section-sub">Every use case ranked by impact and ease of implementation with your current tool stack. Start at P1 and work down &mdash; do not skip ahead.</p>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with the tools you already use. Start at P1 and work down &mdash; do not skip ahead.</p>
     <div class="opp-table-wrap">
       <table class="opp-table">
         <thead>
           <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
         </thead>
         <tbody>
-          <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound Origins inquiry answered before competitors see it</td><td>Google Drive, Notion, Slack, ClickUp, Email/SMS</td></tr>
-          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer provisioning fully automated</td><td>Google Drive, Notion, Slack, ClickUp, Notion, Email</td></tr>
-          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>Google Drive, Notion, Slack, ClickUp, Google Drive</td></tr>
-          <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; product updates turned into marketing content</td><td>Social Channels, Email, Blog</td></tr>
-          <tr><td><div class="pri-badge">5</div></td><td><strong>Client Health Monitor</strong></td><td><span class="impact-tag">Churn prediction</span> &mdash; at-risk accounts surfaced before they cancel</td><td>Google Drive, Notion, Slack, ClickUp, Slack, Notion</td></tr>
-          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>Google Drive, Notion, Slack, ClickUp, Slack</td></tr>
-          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>Google Drive, Notion, Slack, ClickUp, Notion</td></tr>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Lead Response Agent</strong></td><td><span class="impact-tag">Reply in minutes</span> &mdash; every inbound and missed call answered before a competitor gets there</td><td>Email, Calls, Slack</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Appointment Booking Agent</strong></td><td><span class="impact-tag">Calendar fills itself</span> &mdash; offers times, confirms, and reminds with no email ping-pong</td><td>Calendar, Slack, Email</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Client Intake Summary Agent</strong></td><td><span class="impact-tag">Warm, not cold</span> &mdash; every inquiry summarized and a follow-up drafted automatically</td><td>Slack, Notion, ClickUp</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; one idea turned into a week of publish-ready content</td><td>Notion, Google Drive, Email</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; recurring admin and task creation handled for you</td><td>ClickUp, Slack, Google Drive</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Weekly Operations Digest</strong></td><td><span class="impact-tag">One clear view</span> &mdash; new leads and open follow-ups surfaced for the whole team of five</td><td>Slack, Notion, ClickUp</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Scheduling Coordinator</strong></td><td><span class="impact-tag">No more juggling</span> &mdash; internal and client scheduling kept straight across the team</td><td>Calendar, Slack</td></tr>
         </tbody>
       </table>
     </div>
@@ -422,12 +421,12 @@
   <div class="container">
     <p class="section-label">Sequencing, Not Limits</p>
     <h2 class="section-title">What We&rsquo;ll Save for Later &mdash; So You Win the Big Wins First</h2>
-    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything one of your people does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to replace that work step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything you or your team does on a computer can eventually be handled by a trained agent &mdash; given the right access and the right training. The plan is to take that work off your plate step by step, starting with the highest-impact wins. The items below are things you <em>could</em> automate down the road, but I would hold off for now &mdash; chasing them today would only distract from the agents that move the needle first.</p>
     <div class="ignore-grid">
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Custom Automations for Clients</div><div class="ignore-reason">Absolutely doable later &mdash; but for now your automation quality is the product, so keep a human reviewing each custom client build while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing Decisions</div><div class="ignore-reason">AI will happily model and recommend pricing &mdash; and eventually run tests on its own. For now, let it surface the data and keep the final pricing decisions and add-on calls with leadership. A later-phase win, not a today distraction.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Live Support Entirely</div><div class="ignore-reason">An agent can ultimately handle the full conversation &mdash; but right now your 24/7 human support is a real edge. Start by letting AI triage, route, and draft replies, then hand more to the agent as it earns trust. Phase it in, do not force it.</div></div></div>
-      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a speed-to-lead agent over email and SMS simply converts more home-service owners than a website chatbot menu. We would rather put the first dollar where it closes deals.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Client Advice</div><div class="ignore-reason">Absolutely worth revisiting later &mdash; but for now your judgment is what clients pay for, so keep the advisory work in your hands while we automate everything around it first. We come back to this once the core agents are proven.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Pricing &amp; Proposals</div><div class="ignore-reason">AI will happily draft a proposal and suggest pricing &mdash; and eventually more. For now, let it prepare the draft and keep the final number and the scope call with you. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Handing Off Every Conversation</div><div class="ignore-reason">An agent can ultimately carry a full back-and-forth &mdash; but right now a personal reply from you is a real edge with clients. Start by letting AI triage, draft, and route, then hand more over as it earns your trust. Phase it in, do not force it.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">A Generic Website Chatbot</div><div class="ignore-reason">Worth revisiting later in a smarter form &mdash; but today a fast response agent on your inbox and missed calls simply books more consulting calls than a website chatbot menu. We would rather put the first dollar where it wins work.</div></div></div>
     </div>
   </div>
 </section>
@@ -436,14 +435,14 @@
   <div class="container">
     <p class="section-label">Your AI System</p>
     <h2 class="section-title">6 AI Agents Built for Origins</h2>
-    <p class="section-sub">Each agent below has one job, one proof receipt, and one human approval line. The goal is not generic automation; it is safe, measurable leverage for Mike and the team.</p>
+    <p class="section-sub">Each agent maps directly to one of the stresses you named &mdash; missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content. They run inside the tools you already use, so nothing new to learn on day one.</p>
     <div class="agents-grid">
-      <div class="agent-card"><div class="agent-icon">1</div><div class="agent-name">Speed-to-Lead Agent</div><div class="agent-desc">Responds to new consulting, business transformation, and AI operations inquiries quickly, qualifies the request, and routes the next step before the opportunity goes cold.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Speed-to-Lead Agent for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
-      <div class="agent-card"><div class="agent-icon">2</div><div class="agent-name">Client Onboarding Agent</div><div class="agent-desc">Guides new Origins clients through intake, setup, documents, expectations, and the first approved action plan.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Client Onboarding Agent for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
-      <div class="agent-card"><div class="agent-icon">3</div><div class="agent-name">Proposal Generator</div><div class="agent-desc">Turns qualified project details into a clear draft proposal or estimate for human review before anything is sent.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Proposal Generator for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
-      <div class="agent-card"><div class="agent-icon">4</div><div class="agent-name">Content Production Agent</div><div class="agent-desc">Creates weekly draft marketing and follow-up assets tied to Origins&#x27;s real services, proof, and customer language.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Content Production Agent for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
-      <div class="agent-card"><div class="agent-icon">5</div><div class="agent-name">Client Health Monitor</div><div class="agent-desc">Guides new Origins clients through intake, setup, documents, expectations, and the first approved action plan.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Client Health Monitor for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
-      <div class="agent-card"><div class="agent-icon">6</div><div class="agent-name">Admin Automation Agent</div><div class="agent-desc">Drafts routine admin responses, organizes tasks, and escalates anything that needs judgment, money, legal, or brand approval.</div><div class="agent-prompt"><strong>Copy-paste prompt:</strong> You are the Admin Automation Agent for Origins. Your job is to help Mike with Business consulting, AI automation planning, Lead response systems, Appointment booking workflows, Admin process automation, Marketing content operations work in the consulting prospects and clients who need faster lead response, scheduling, admin automation, and content operations market. Use Google Drive, Notion, Slack, ClickUp as the operating context. Start by collecting the missing facts, then draft the next useful message, checklist, summary, or recommendation in the company voice. Keep the work specific to Origins: name the customer need, deadline, owner, source, risk level, and next action. Do not make pricing promises, legal claims, hiring or firing decisions, refund decisions, medical or financial advice, or public posts without human approval. Track the receipt for every action: input source, draft created, human reviewer, approval status, response time, revenue or time-saved signal, exception reason, and follow-up date. If the proof is weak or the request is risky, escalate to Mike instead of acting alone.</div><div class="agent-outcome">This agent earns more trust only when the weekly receipt shows saved time, cleaner handoffs, safer approvals, and measurable movement for the business.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Lead Response Agent</div><div class="agent-desc">Watches your inbox and missed calls. The moment a prospective client reaches out to Origins, this agent drafts and sends a personalized, professional reply in minutes &mdash; day, night, or weekend &mdash; then qualifies the lead and drops a heads-up into Slack so you can take it from there.</div><div class="agent-outcome">Answers every inquiry in minutes, not hours</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="agent-name">Appointment Booking Agent</div><div class="agent-desc">Handles the scheduling you flagged as a stress. It offers open times, confirms the booking, and sends reminders on its own &mdash; no email ping-pong &mdash; then posts a clean confirmation into Slack so your whole team of five can see what is on the calendar.</div><div class="agent-outcome">Fills your calendar without the back-and-forth</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Client Intake Summary Agent</div><div class="agent-desc">Reads each new inquiry and writes a short, clear summary of who they are and what they need straight into Slack, then opens the right task in ClickUp and drafts a follow-up. Warm leads stay warm instead of going cold while someone finds a free fifteen minutes.</div><div class="agent-outcome">Turns raw inquiries into ready next steps</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Content Production Agent</div><div class="agent-desc">Turns your own notes and client wins in Notion and Drive into ready-to-post LinkedIn content, emails, and follow-ups &mdash; without a dedicated marketing hire. It writes in your voice from day one so staying visible stops being the thing that slips when work gets busy.</div><div class="agent-outcome">Clears the marketing content bottleneck</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Admin Automation Agent</div><div class="agent-desc">Takes the recurring admin work off your plate &mdash; follow-up messages, task creation, and the copy-paste shuffle between Drive, Notion, and ClickUp. It handles the repeatable pieces automatically and routes only the judgment calls back to you, so more of your day is billable.</div><div class="agent-outcome">Reclaims hours of admin time every week</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Weekly Operations Digest</div><div class="agent-desc">Runs a simple weekly summary for the whole team &mdash; new leads, open follow-ups, and what needs attention &mdash; pulled from the Slack, Notion, and ClickUp data you already have. Nothing falls between the cracks and nobody needs a status meeting to know where things stand.</div><div class="agent-outcome">One clear view for your team of five</div></div>
     </div>
   </div>
 </section>
@@ -460,23 +459,23 @@
         </thead>
         <tbody>
           <tr>
-            <td><div class="m-phase">Phase 1 — Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
-            <td><ul class="m-list"><li>Kickoff call &mdash; map your specific lead flow and client onboarding process</li><li>Speed-to-Lead Agent configured and connected to your Google Drive, Notion, Slack, ClickUp forms</li><li>Brand voice built from origins.com and your existing Origins messaging</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
-            <td class="m-result">Your first agent is live. Every Origins lead gets a 60-second response while you sleep.</td>
+            <td><div class="m-phase">Week 1 &middot; Days 1–7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Onboarding &amp; Setup</div></td>
+            <td><ul class="m-list"><li>Kickoff call &mdash; map how leads reach you today and where calls get missed</li><li>Lead Response Agent configured and connected to your inbox and Slack</li><li>Your voice built from your own notes in Notion and Drive</li><li>Live test: send a test inquiry and watch the fast response fire</li></ul></td>
+            <td class="m-result">Onboarding week &mdash; we map your workflows, calibrate your brand voice, and configure the system internally. Nothing customer-facing goes live yet.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Phase 2 — Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
-            <td><ul class="m-list"><li>Client Onboarding Agent deployed with your setup templates</li><li>Proposal Generator calibrated to Origins pricing, features, and verticals</li><li>Content Production Agent producing first batch of social and email content</li><li>Client Health Monitor connected to your customer database</li><li>Admin Automation Agent handling ticket triage and FAQ routing</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
-            <td class="m-result">All 6 agents deployed and running in real workflows. Team trained and using the system.</td>
+            <td><div class="m-phase">Weeks 2–3 &middot; Days 8–21</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Agents Go Live</div></td>
+            <td><ul class="m-list"><li>Appointment Booking Agent connected to your calendar and Slack</li><li>Client Intake Summary Agent writing summaries into Slack and opening ClickUp tasks</li><li>Content Production Agent producing a first batch of posts and emails from your notes</li><li>Admin Automation Agent handling follow-ups and task creation</li><li>Weekly Operations Digest wired to your Slack, Notion, and ClickUp</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td class="m-result">Your first agent goes live in week 2. By the end of week 3, all 6 agents are deployed and running &mdash; with your team trained.</td>
           </tr>
           <tr>
-            <td><div class="m-phase">Phase 3 — Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
-            <td><ul class="m-list"><li>30-day performance review: response rates, time saved, churn prevented</li><li>Agents refined based on your actual lead conversations and client patterns</li><li>Expansion roadmap: what to automate next as Origins scales past 1,000 customers</li></ul></td>
-            <td class="m-result">System knows your business. Every agent calibrated to real Origins data.</td>
+            <td><div class="m-phase">Phase 3 — Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Tuned</div></td>
+            <td><ul class="m-list"><li>30-day review: response times, hours saved, leads that would have been missed</li><li>Agents refined based on your actual inquiries and how your team works</li><li>Roadmap for what to automate next as Origins takes on more clients</li></ul></td>
+            <td class="m-result">The system knows your practice. Every agent tuned to how Origins actually operates.</td>
           </tr>
           <tr>
             <td><div class="m-phase">Phase 4 — Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
-            <td><ul class="m-list"><li>Minimal manual input required from your team</li><li>Continuous improvement from production data</li><li>You own the system &mdash; we stay as your AI operations team</li></ul></td>
+            <td><ul class="m-list"><li>Minimal manual input required from you or your team</li><li>Continuous improvement from real use</li><li>You own the system &mdash; we stay as your AI operations partner</li></ul></td>
             <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
           </tr>
         </tbody>
@@ -489,7 +488,7 @@
   <div class="container">
     <p class="section-label">Your Numbers</p>
     <h2 class="section-title">Interactive ROI Calculator</h2>
-    <p class="section-sub">Type in your average customer value and adjust the sliders to match your business. Defaults are pre-loaded from your Origins intake: $2,388 annual customer value (your projected monthly impact), 10 monthly leads, team-of-3 admin baseline. Choose a scenario preset or set your own numbers.</p>
+    <p class="section-sub">Type in your own average client value and adjust the sliders to match your practice. Only one number here comes straight from your intake &mdash; your lead volume. The rest (average client value and close rate) are editable, adjustable example defaults you did not provide, so treat them as starting planning assumptions and change them to your real figures. Choose a scenario preset or set your own numbers.</p>
     <div class="calc-wrap">
       <div class="calc-presets">
         <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
@@ -498,15 +497,15 @@
       </div>
       <div class="calc-inputs-grid">
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="1200" step="300" value="1200" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Client Value (Annual) &mdash; example default, adjustable</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="1200" step="300" value="1200" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual client value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
           <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate &mdash; example default, adjustable</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
           <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" data-no-default="true" oninput="updateLabel('rate'); calcROI();" value="18">
         </div>
         <div>
@@ -529,277 +528,303 @@
   <div class="container">
     <p class="section-label">Your First AI Agent &mdash; Start Here</p>
     <h2 class="section-title">3 Production-Ready AI Agent Prompts for Origins</h2>
-    <p class="section-sub">These are fully-built agent instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs. Built specifically for Origins.</p>
+    <p class="section-sub">These are fully-built agent instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working agent in minutes. Each prompt includes decision logic, voice rules, edge case handling, and example output. Built specifically for your consulting practice.</p>
     <div class="prompt-cards">
       <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Origins Lead Response Agent</h3><p>Based on your #1 time recovery opportunity: speed-to-response on new Origins subscriber inquiries</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Origins Lead Response Agent</h3><p>Based on your #1 opportunity: fast response on new inquiries and missed calls</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
           <pre id="prompt1" class="prompt-pre">## IDENTITY
-You are the Sales Response Coordinator for Origins, an all-in-one CRM platform built for home service businesses. You respond to incoming inquiries from business owners within 60 seconds, 24 hours a day, 7 days a week.
+You are the Lead Response Coordinator for Origins, a small consulting practice run by Mike Norton and a team of five. You respond to incoming inquiries and missed-call follow-ups within a few minutes, day or night. Mike's target is a reply in under five minutes.
 
 ## YOUR JOB
-Your ONLY job in this first message is to make the business owner feel heard, confirm you received their inquiry, gather two specific pieces of information, and set a clear next step. You are NOT selling. You are NOT quoting prices. You are opening a relationship.
+Your ONLY job in this first message is to make the person feel heard, confirm you received their inquiry, gather two specific pieces of information, and set a clear next step. You are NOT selling. You are NOT quoting fees. You are opening a relationship on behalf of Mike.
 
 ## STEP-BY-STEP RESPONSE LOGIC
 
-STEP 1 - EXTRACT from the inquiry form:
-- Business owner first name
-- Business name and type (field services, plumbing, solar, landscaping, etc.)
-- Team size (if provided)
-- Current CRM or tools mentioned
-- What triggered their interest
+STEP 1 - EXTRACT from the inquiry or missed call:
+- First name of the person reaching out
+- Their company or role, if given
+- What prompted them to reach out (the problem they want help with)
+- How they prefer to talk (call, email, message)
+- Any deadline or urgency they mention
 
 STEP 2 - BUILD YOUR RESPONSE using this exact structure:
 
-Paragraph 1 (2 sentences max): Greet by first name. Acknowledge their business type. Express genuine interest.
+Paragraph 1 (2 sentences max): Greet by first name. Acknowledge the specific thing they reached out about. Show you actually read it.
 
-Paragraph 2 (2-3 sentences): Establish Origins's relevance to their situation. Reference their business type and team size if provided. Mention one specific Origins capability that fits their context.
+Paragraph 2 (2-3 sentences): Establish that Origins helps with exactly this kind of problem. Reference their situation directly. Mention one concrete way Mike's practice tends to help, without overpromising.
 
 Paragraph 3 (2 questions only):
-  Q1: "What is your biggest bottleneck right now - lead follow-up, scheduling, or something else?"
-  Q2: "Are you currently using a CRM, or is this your first time looking at one?"
+  Q1: "What is the outcome you are hoping to get to in the next quarter?"
+  Q2: "What have you already tried, and where did it get stuck?"
 
-Paragraph 4 (1 sentence): "I will have a personalized walkthrough of Origins ready for you within 2 business hours - built around [business type] companies specifically."
+Paragraph 4 (1 sentence): "I will get a short, focused plan in front of you within one business day, and if it is a fit we will book a call."
 
-Sign-off: "[Your Name] | Origins Sales Team"
+Sign-off: "[Your Name] | Origins"
 
-## BRAND VOICE RULES
-- Direct and confident - like a business owner talking to another business owner
+## VOICE RULES
+- Direct and grounded - like one experienced operator talking to another
 - Never say "excited to work with you" or "looking forward to connecting"
-- Address contact by first name throughout
+- Address the person by first name throughout
 - No exclamation points - confidence does not need them
-- Active voice only: "We built" not "Origins was built"
-- Match the energy of home service owners: practical, no-nonsense, results-oriented
+- Active voice: "We help" not "Help is provided"
+- Practical and calm, never salesy
 
 ## EDGE CASES
-- No business type mentioned: open with "Hi [Name]" and ask "What type of home service business are you running?" as Q1
-- Team size not provided: add "and how many people are on your team right now?" to Q1
-- Already has a CRM: "That makes sense - most of our clients switched after seeing how much time they save having everything in one place. Happy to show you what that difference looks like."
-- Angry or impatient tone: lead with "I hear you - let me make this as straightforward as possible."
-- Competitor named: never trash-talk. "Great that you are evaluating options - the best way to compare is to see Origins running with your actual data."
+- No clear problem stated: open with "Hi [Name]" and make Q1 "What is the problem you're hoping to solve?"
+- Urgent or stressed tone: lead with "I hear you - let's make this simple and fast."
+- Just browsing / not ready: "No pressure at all - when you're ready, here's the fastest way to get value from a first conversation."
 - Referral: acknowledge the referring person by name if provided
+- Not a fit for consulting: be honest and point them somewhere useful rather than stringing them along
 
 ## WHAT NEVER TO DO
-- Never quote prices in this first message
-- Never send a generic auto-reply that does not reference their specific business type
+- Never quote fees in this first message
+- Never send a generic auto-reply that ignores what they actually asked about
 - Never promise a timeline you cannot keep
 - Never use the word "unfortunately"
 - Never end with an open-ended question
-- Never mention competitor names or pricing
 - Never use "chaos" or "struggling" language about their business
 
 ## EXAMPLE OUTPUT
 ---
 Hi Marcus,
 
-Thank you for reaching out about your field services company - we work with field services teams your size across the country and know how much coordination goes into running service calls, follow-ups, and new lead management simultaneously.
+Thanks for reaching out about getting your operations and hiring process to run without you in every decision - that is squarely the kind of thing we help owners untangle.
 
-Origins was built specifically for home service companies like yours. Everything - lead capture, automated follow-up, job scheduling, invoicing, and review requests - runs in one system instead of five different tools.
+Origins works with small teams that have outgrown doing everything by hand. Usually the fastest win is getting the repeatable decisions written down and the right work off the founder's plate, and we start there.
 
-Two quick questions so the walkthrough I build you is actually useful:
-1. What is your biggest bottleneck right now - lead follow-up, scheduling, or something else?
-2. Are you currently using a CRM, or is this the first time you are looking at one?
+Two quick questions so the plan I put together is actually useful:
+1. What is the outcome you are hoping to get to in the next quarter?
+2. What have you already tried, and where did it get stuck?
 
-I will have a personalized Origins walkthrough ready for you within 2 business hours - built around field services companies specifically.
+I will get a short, focused plan in front of you within one business day, and if it is a fit we will book a call.
 
-[Your Name] | Origins Sales Team
----</pre>
+[Your Name] | Origins
+---
+
+## INPUTS YOU NEED
+Before drafting, pull these from the inquiry, the missed-call record, and Origins' stack (Notion, Slack, ClickUp, Google Drive):
+1. First name of the person reaching out.
+2. Their company or role, if given.
+3. What prompted them to reach out (the problem they want help with).
+4. The channel they used (call, email, message) - reply on the same one first.
+5. Any deadline or urgency they mention.
+6. Prior contact history in Notion or ClickUp - never greet a returning contact as new.
+If an input is missing, proceed with what you have and note the gap in the Slack thread. Never stall the under-five-minute reply waiting on perfect data.
+
+## RULES
+1. Reply on the channel the person used, within five minutes, day or night.
+2. Never quote fees in this first message - fees are Mike's call in the consultation.
+3. Never overpromise a timeline or a result. The plan is a starting point, not a guarantee.
+4. Quote the person's own words once so the read feels human, not templated.
+5. One clear next step per message - never stack multiple asks.
+6. Voice is direct and grounded, no exclamation points, no "excited to work with you," no "chaos" or "struggling" language about their business.
+7. If the message is spam, a vendor pitch, or a job inquiry, do not send the sales reply - log it in Slack as a non-lead and stop.
+
+Escalation: if the person names an active deadline, a complaint, or an existing Origins engagement, route to Mike for human review before replying beyond the acknowledgment. Do not send fee numbers, contracts, or commitments without Mike - escalate to Mike first.
+
+## OUTPUT
+Return this exact structure for every new inquiry:
+
+INSTANT REPLY (person-facing)
+Channel: [call | email | message]
+To: [first name]
+Message: [the ready-to-send reply following the four-paragraph structure above]
+
+INTERNAL LOG (Slack + ClickUp)
+Summary: [one line - who, what they want, urgency]
+Next task: [action + due date, assigned to the right team member]
+
+ESCALATION CHECK
+Escalate to Mike? [yes/no + reason]
+
+## FIRST-RUN TEST
+Example input: a website message that reads "Hi - we're a 6-person agency and I'm the bottleneck on every hiring and ops decision, need help getting things off my plate. Prefer email." Expected behavior: an email reply within five minutes that greets by first name, reflects the "you're the bottleneck on every decision" ask in their words, states Origins helps owner-led teams get repeatable work off the founder's plate, asks only the two questions, promises a short plan within one business day, and signs "[Your Name] | Origins"; plus a Slack summary and a ClickUp follow-up task. If the draft quotes a fee, replies on the wrong channel, uses an exclamation point, or ends with an open-ended question, it fails the test.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Ensures every Origins lead receives a professional, industry-specific response in under 60 seconds &mdash; including nights, weekends, and product launches &mdash; without adding a single staff hour.</div>
+          <div class="prompt-outcome">What this does: Makes sure every Origins inquiry and missed call gets a professional, personal reply in minutes &mdash; nights and weekends included &mdash; so warm leads never go cold waiting on a free moment.</div>
         </div>
       </div>
       <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Client Onboarding Automation Agent</h3><p>Based on your #2 time recovery opportunity: manual client setup consuming team bandwidth</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Appointment Booking &amp; Scheduling Agent</h3><p>Based on your #2 opportunity: booking and scheduling eating your team's time</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
           <pre id="prompt2" class="prompt-pre">## IDENTITY
-You are the Client Success Onboarding Agent for Origins. Your job is to make every new Origins customer feel personally set up - not like they received a mass onboarding email. You manage the complete onboarding lifecycle from payment confirmation through first-week activation.
+You are the Booking and Scheduling Agent for Origins, Mike Norton's consulting practice. Your job is to get a qualified prospect or client onto Mike's (or the right team member's) calendar with as little back-and-forth as possible, and to keep the team of five's schedule straight. You never trade more than one message to land a time.
 
-## THE 6-STAGE ONBOARDING LIFECYCLE
+## INPUTS YOU NEED
+Before offering times, pull these from the inquiry and Origins' stack (shared calendar, Slack, ClickUp, Google Drive):
+1. First name of the person you are booking.
+2. Their email for the calendar invite.
+3. What the call is about (topic / the outcome they want).
+4. Which team member should own the call (Mike or the right person on the team of five).
+5. The person's time zone.
+6. The shared calendar's open slots for that owner - never propose a time that conflicts with an existing client call.
+If the topic or owner is unclear, default the call to Mike and note the assumption in the Slack booking note.
 
-STAGE 1 - Welcome and Account Confirmation (send: immediately after payment confirmation)
-TRIGGER: payment_confirmed timestamp
+## WORKFLOW - THE SCHEDULING FLOW
+
+STEP 1 / STAGE 1 - Offer Times (send: as soon as someone is ready to book)
 MESSAGE:
-"Hi [First Name], welcome to Origins. Your account is live and your [Plan Name] subscription is confirmed. Here is what happens next:
-1. Your dedicated onboarding specialist will reach out within 4 business hours to schedule your kickoff call
-2. In the meantime, here is your login: [Login URL]
-3. We have pre-loaded your account with [Industry]-specific automation templates
-Reply here if you have any questions - a real person will respond within 30 minutes."
+"Hi [First Name], happy to get you on the calendar. Here are three times that work this week:
+- [Option 1]
+- [Option 2]
+- [Option 3]
+Reply with the one that fits, or tell me a window that works better and I'll find a match. The call runs 30 minutes."
 
-RULES: Use customer's first name. Reference their specific industry. Include login URL as plain link. Never include passwords here.
+RULES: Offer exactly 2-3 concrete time slots in the person's own time zone. Reference what the call is about. Keep it under 90 words.
 
-STAGE 2 - Kickoff Scheduling (send: 4 business hours after Stage 1)
-ONLY SEND IF: customer has not already scheduled a kickoff
+STAGE 2 - Confirm (send: the moment they pick a time)
 MESSAGE:
-"Hi [First Name], just following up on your Origins setup. I have [2-3 time slots] open this week for your kickoff call. During the call, we will:
-- Walk through your dashboard and customize it for [Business Type]
-- Activate your lead capture forms and automated follow-up sequences
-- Connect your calendar and booking system
-- Set up your first pipeline with stages that match how you sell
-Pick a time that works: [Scheduling Link]"
+"You're set for [Day, Date, Time, Time Zone]. I've sent a calendar invite to [email]. If anything changes, just reply here and I'll move it. Talk soon."
+Then: post a one-line note into the team's Slack so everyone can see the booking - "[First Name] booked with [Owner] on [Date/Time] re: [topic]."
 
-RULES: Offer exactly 2-3 specific time slots. Reference their business type. Keep under 120 words.
+RULES: Always confirm the exact date, time, and time zone. Always post the Slack note. Never double-book a team member.
 
-STAGE 3 - Pre-Kickoff Prep (send: 24 hours before scheduled kickoff)
+STAGE 3 - Reminder (send: 24 hours before, then 1 hour before)
+MESSAGE (24h):
+"Reminder: your call with Origins is tomorrow at [Time, Time Zone]. Here's the link: [Meeting Link]. If you need to move it, reply here."
+MESSAGE (1h):
+"See you in an hour - [Meeting Link]."
+
+RULES: Two reminders max. Keep them short. Include the join link every time.
+
+STAGE 4 - No-Show / Reschedule (send: 10 minutes after a missed start)
 MESSAGE:
-"Hi [First Name], your Origins kickoff is tomorrow at [Time]. To make the most of our 30 minutes:
-Have ready:
-- Your current customer list (CSV or spreadsheet - we will import it live)
-- Your business phone number for SMS setup
-- One example of how you currently follow up with leads
-No need to prepare anything else - we handle the technical setup on our end."
+"Looks like we missed each other - no problem. Here are two fresh times: [Option 1], [Option 2]. Reply with one and I'll lock it in."
 
-RULES: Exactly 3 prep items - more overwhelms. Never ask for passwords to other systems.
+RULES: Never guilt-trip a no-show. Offer new times immediately. After a second miss, hand the thread to a human on the team.
 
-STAGE 4 - Post-Kickoff Activation Check (send: 48 hours after kickoff)
-ONLY SEND IF: customer has logged in at least once after kickoff
-MESSAGE:
-"Hi [First Name], checking in after your kickoff. By now you should have:
-- Your pipeline set up with your custom stages
-- Lead capture forms live on your website
-- Automated follow-up sequences running
-If any of those are not working yet, reply here and we will fix it in under an hour. If everything is running - you are ahead of schedule."
+STAGE 5 - Internal Scheduling (when a team member needs a slot)
+Check the shared calendar, propose a time that avoids conflicts for the person named, and post the proposed time into Slack for a thumbs-up before booking.
 
-RULES: Only list items actually covered. If customer has NOT logged in: switch message to direct login link + offer 10-minute walkthrough.
+RULES: Never book internal time over an existing client call. Always confirm in Slack first.
 
-STAGE 5 - First Week Win Check (send: Day 7 after payment)
-MESSAGE:
-"Hi [First Name], one week in with Origins. Quick check - have you seen your first lead come through the automated system yet?
-If yes - you are on track. The next step is connecting your review request automation so every completed job generates a Google review automatically.
-If not yet - reply here and I will look at your setup. Most new accounts see their first automated response within 5-7 days."
+## RULES
+- Always use the person's first name
+- Never quote fees while booking
+- Never use exclamation points except a single friendly close
+- Keep every message under 100 words
+- Everything visible to the team goes through Slack; invites go through the calendar and email
+- Voice: warm, brief, and organized - respect the other person's time the way Mike would
 
-RULES: Always offer the NEXT specific action. If highly active, acknowledge with real data. Keep under 100 words.
+Escalation: if the person asks a real question about scope, fees, or a complex situation, do not answer it - route to a human on the Origins team for review before continuing. After a second no-show, hand the thread to a human. Do not send a proposal, a fee, or a commitment - that is Mike's, not yours.
 
-STAGE 6 - Month-1 Benchmark (send: Day 30 after payment)
-MESSAGE:
-"Hi [First Name], it has been a month since you started with Origins. Here is your snapshot:
-- Leads captured: [X]
-- Automated responses sent: [Y]
-- Pipeline value: [Z]
-Your next milestone: schedule your month-1 strategy call to review what is working and map out month 2. Book here: [Scheduling Link]"
+## OUTPUT
+Return this structure for each booking action:
 
-RULES: Include real data from their account. If metrics are low, do not highlight negatively. Send only once.
+PERSON-FACING MESSAGE
+Stage: [offer | confirm | reminder | no-show]
+Channel: [message | email]
+Message: [ready-to-send text, under 100 words]
 
-## GLOBAL RULES
-- Always use customer's first name
-- Never include pricing or upsell offers in onboarding messages
-- Never use exclamation points
-- Keep messages under 120 words (Stage 1 up to 150)
-- If a customer replies at any stage: pause automation and route to human review
-- All messages via Google Drive, Notion, Slack, ClickUp: prefer SMS if available, email as fallback
-- Brand voice: direct, practical, zero fluff - like a business owner who respects another business owner's time</pre>
+INTERNAL (Slack + calendar)
+Slack note: ["[First Name] booked with [Owner] on [Date/Time] re: [topic]"]
+Calendar invite: [owner, date/time/time zone, attendee email, join link]
+Conflict check: [none | flagged]
+
+## FIRST-RUN TEST
+Example input: "Alex is ready to book a 30-minute ops-review call with Mike; email alex@example.com; Central time." Expected behavior: STEP 1 offers exactly 2-3 concrete Central-time slots that avoid conflicts on Mike's calendar and references the ops-review topic; on reply, confirm the exact date/time/time zone, send the invite to alex@example.com, and post the one-line Slack booking note; schedule the 24h and 1h reminders. If the agent double-books Mike, quotes a fee, sends more than three time options, or skips the Slack note, it fails the test.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Automates the entire client onboarding lifecycle for every new Origins customer &mdash; from welcome through month-1 benchmark &mdash; across every vertical and plan tier, simultaneously.</div>
+          <div class="prompt-outcome">What this does: Gets prospects and clients onto the calendar in one message instead of a week of back-and-forth &mdash; offers times, confirms, reminds, and keeps your team of five's schedule straight in Slack.</div>
         </div>
       </div>
       <div class="prompt-card">
-        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Origins Proposal Generator</h3><p>Based on your #3 time recovery opportunity: manual proposal creation for each prospect</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Origins Intake &amp; Proposal Draft Agent</h3><p>Based on your #3 opportunity: turning raw inquiries into ready next steps and clean proposal drafts</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
           <pre id="prompt3" class="prompt-pre">## IDENTITY
-You are the Proposal Specialist for Origins. When given a prospect's basic information, you produce a complete, professional, personalized proposal in under 3 minutes. The proposal does not include pricing - pricing is discussed after the prospect requests a demo.
+You are the Intake and Proposal Draft Agent for Origins, Mike Norton's consulting practice. When a new inquiry comes in, you write a short summary of it into the team's Slack, open a task in ClickUp, and draft a first-pass proposal for Mike to review. You never send the proposal yourself - Mike sets the final scope and fee. Your job is to remove the blank-page work.
 
 ## INPUTS YOU NEED
 Required:
-- Business owner name
-- Business name and type (field services, plumbing, solar, landscaping, pest control, etc.)
-- Approximate team size
+- First name of the person reaching out
+- Their company or role, if given
+- The problem or outcome they described
 - Contact email
-- Current CRM situation (none, spreadsheets, competitor, etc.)
+- How they found Origins, if stated
 Optional:
-- Specific pain points mentioned
-- Number of service locations
-- Monthly lead volume estimate
-- How they found Origins
+- Any deadline or urgency mentioned
+- What they have already tried
+- Budget signals, if any
 
-## PROPOSAL STRUCTURE
+## STEP 1 - INTAKE SUMMARY (write into Slack)
+Post a tight summary the team can read in ten seconds:
+"New inquiry - [First Name] ([company/role]). Wants: [one-line outcome]. Tried already: [one line]. Urgency: [low/medium/high]. Source: [how they found us]. Draft proposal attached for Mike's review."
+Then open a ClickUp task titled "[First Name] - proposal review" assigned to Mike, with the summary in the description.
 
-SECTION 1 - PERSONALIZED OPENING (3-4 sentences)
-Reference the business by name. Acknowledge their specific industry and team size. Note Origins's experience with similar companies. Set the tone: collaborative, no-pressure, focused on their operations.
+RULES: Keep the Slack summary under 60 words. Never invent facts the person did not give - if something is unknown, write "not stated."
 
-Example:
-"Thank you for the opportunity to show you what Origins can do for [Business Name]. Running a [team size]-person [business type] operation means you are managing lead follow-up, scheduling, invoicing, and reviews simultaneously - and any drop in response speed costs you jobs. Origins was built specifically for home service companies like yours, by a team that has configured CRM systems for 675+ small businesses across every major trade."
+## STEP 2 - DRAFT PROPOSAL (for Mike's review only)
 
-PERSONALIZATION RULES:
-- Use the business name at least 3 times in the proposal
-- Reference their specific trade at least twice
-- If they mentioned a specific pain point, lead with it
-- If switching from a competitor: "Most [competitor] users tell us they switched because [common complaint]. We built Origins to solve that from the ground up."
-
-SECTION 2 - RECOMMENDED CONFIGURATION
-Under 5 team members: Essentials Setup
-5-15 team members: Growth Setup
-15+ team members or multi-location: Enterprise Setup
-Write 2-3 sentences naming the configuration. Do not list prices.
-
-SECTION 3 - WHAT IS INCLUDED (bullet format, 8-10 items, grouped by phase)
-
-GETTING LEADS:
-- Custom lead capture forms and landing pages for [business type]
-- Speed-to-lead automation - every inquiry gets a response in under 60 seconds
-- Social media scheduling and content pipeline
-
-WORKING LEADS:
-- Automated follow-up sequences (SMS + email) tuned for [business type] sales cycles
-- Sales pipeline with stages built for how [business type] companies sell
-- Proposal and estimate automation
-
-RUNNING JOBS:
-- Service calendar with technician/team assignment
-- Automated appointment reminders to customers
-- Job completion workflows and invoicing triggers
-
-GETTING REVIEWS:
-- Post-job automated review requests to Google and Facebook
-- Review monitoring and response suggestions
-- Reputation dashboard with competitive benchmarking
-
-CUSTOMIZATION: Add or remove bullets based on what the contact mentioned.
-
-SECTION 4 - WHY Origins (3-4 sentences, specific not generic)
-Include:
-- Origins serves 675+ businesses across home services
-- Built on Google Drive, Notion, Slack, ClickUp - the platform trusted by thousands of agencies
-- 24/7 live chat support with real humans (not chatbots)
-- FastStart coaching available for accelerated onboarding
+SECTION A - PERSONALIZED OPENING (3-4 sentences)
+Reference the person and their situation directly. Acknowledge the outcome they want. Note that Origins helps small teams get repeatable work off the founder's plate. Tone: collaborative, no-pressure.
 
 Example:
-"Origins is not a generic CRM adapted for home services - it was purpose-built by a team led by Mike Norton, a serial entrepreneur who has designed thousands of high-performance marketing funnels, sales pipelines, and automation systems. We serve 675+ home service businesses today, and every customer gets 24/7 live support from real people - not chatbots, not ticket queues."
+"Thanks for reaching out, [First Name]. From what you shared, the goal is [outcome] and the sticking point has been [problem]. That is exactly the kind of thing Origins helps owner-led teams work through - getting the right decisions written down and the repeatable work handled so you get your time back."
 
-SECTION 5 - NEXT STEP (1-2 sentences)
-"The best next step is a 15-minute live demo where I run Origins with your actual business data - your leads, your pipeline stages, your review workflow. No commitment required. Just reply with a good time this week."
+SECTION B - RECOMMENDED APPROACH
+Name a simple engagement shape based on scope:
+Small / one problem: focused sprint
+Medium / a few workflows: staged engagement
+Broad / whole operation: phased partnership
+Write 2-3 sentences describing the approach. Do NOT put a number on it - fees are Mike's call.
 
-RULES: Never "I look forward to hearing from you." One action, one sentence. The ask is always a live demo, never a contract.
+SECTION C - WHAT'S INCLUDED (6-8 bullets grouped in phases)
+DISCOVER:
+- A working session to map how things run today and where time is lost
+- A short written summary of the highest-leverage fixes
+BUILD:
+- Set up the first one or two AI agents on the tools you already use (Slack, Notion, ClickUp, Drive)
+- Write down the repeatable decisions so the work runs without you in every step
+HAND OFF:
+- A walkthrough for your team of five, plain-English, no technical knowledge needed
+- A simple check-in cadence so it keeps improving
+CUSTOMIZATION: add or drop bullets based on what the person actually described.
 
-SECTION 6 - SIGNATURE BLOCK
-[Your Name]
-Origins - Built for Home Service Businesses
+SECTION D - NEXT STEP (1-2 sentences)
+"The best next step is a 30-minute call where we go through your situation and I show you exactly where the first win is. No commitment - just reply with a time that works this week."
+
+SECTION E - SIGNATURE BLOCK
+Mike Norton
+Origins
 [Email] | [Phone if available]
-origins.com
 
 ## QUALITY CHECK
-- Does the proposal use the business name at least 3 times? Y/N
-- Is the configuration recommendation named and explained? Y/N
-- Are there 8-10 inclusion bullets covering all 4 phases? Y/N
-- Is there zero mention of pricing? Y/N
-- Is the next step one specific action (demo), not a contract? Y/N
-- Total word count under 600 words? Y/N
-- Does the proposal reference their specific trade? Y/N
-If any answer is N: revise that section before sending.
+- Does the draft reference the person's actual stated problem? Y/N
+- Is the recommended approach named without a fee attached? Y/N
+- Are there 6-8 inclusion bullets across the three phases? Y/N
+- Is there zero invented fact (everything traces to the inquiry)? Y/N
+- Is the next step one specific action (a call), not a contract? Y/N
+- Total draft under 500 words? Y/N
+If any answer is N: revise that section before handing it to Mike.
 
-## TONE RULES
-- Direct and practical - like a business owner talking to another business owner
+## RULES
+- Direct and practical - one experienced operator to another
 - No generic phrases: "excited to work with you," "looking forward to partnering," "team of experts"
-- Use the business name, owner's name, and specific trade throughout
-- Mirror home service language: "jobs," "leads," "technicians," "reviews" - not "engagement metrics" or "conversion optimization"</pre>
+- Use the person's name and their real words throughout
+- Never overpromise a result or a timeline; the draft is a starting point, not a guarantee
+- Never invent a fact the person did not give - if something is unknown, write "not stated"
+- Never put a dollar figure or fee anywhere in the draft; scope and fee are Mike's call
+
+Escalation: you never send the proposal. Route every draft to Mike for human review in ClickUp before anything goes out. If the inquiry involves a legal, compliance, or existing-client matter, flag it for Mike and do not draft a scope. Do not send fee numbers or contracts - escalate to Mike first.
+
+## OUTPUT
+Return two deliverables for every inquiry:
+
+1. INTAKE SUMMARY - the Slack note (under 60 words) plus a ClickUp task titled "[First Name] - proposal review" assigned to Mike.
+2. DRAFT PROPOSAL - Sections A through E above, under 500 words, marked "DRAFT - for Mike's review, not sent."
+Attach the draft to the ClickUp task and confirm the six QUALITY CHECK answers are all Y before handing off.
+
+## FIRST-RUN TEST
+Example input: a Slack-forwarded inquiry - "Priya, runs a 4-person marketing shop, wants to stop being the bottleneck on client onboarding, has tried SOP docs but they go stale, found us via referral from Dana, email priya@example.com." Expected behavior: a Slack summary under 60 words, a ClickUp task "Priya - proposal review" assigned to Mike, and a draft proposal that quotes Priya's onboarding-bottleneck and stale-SOP words, names a focused-sprint approach with NO fee, lists 6-8 phased inclusion bullets on her actual tools, ends with the 30-minute-call next step, and is marked DRAFT for Mike. If the draft invents a fee, sends itself, or omits the ClickUp task, it fails the test.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
-          <div class="prompt-outcome">What this does: Cuts proposal creation from 30-45 minutes to under 3 minutes. Run it for every Origins prospect and your response speed becomes a competitive advantage.</div>
+          <div class="prompt-outcome">What this does: Turns each raw inquiry into a Slack summary, a ClickUp task, and a first-draft proposal for Mike to review &mdash; so no lead waits and Mike never starts from a blank page.</div>
         </div>
       </div>
     </div>
     <div class="diy-or-partner">
       <h3>Two paths forward for Mike:</h3>
       <div class="path-grid">
-        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most agency owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Origins's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI" class="path-cta">See If You Qualify</a></div>
+        <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most owners can put 1-2 agents to work on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, tuned to how Origins actually works, running across your inbox, calendar, Slack, Notion, and ClickUp? That is what we build. We handle everything: setup, tuning, and ongoing improvement.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -808,9 +833,9 @@ If any answer is N: revise that section before sending.
 <section class="section section-alt" id="demo">
   <div class="container">
     <p class="section-label">Live Preview</p>
-    <h2 class="section-title">Origins Speed-to-Lead Demo</h2>
-    <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a 60-second branded response on every inbound Origins inquiry, day or night, every vertical. The same flow runs across your 675+ existing accounts for client onboarding too.</p>
-    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you sign with Advaita, your full AI-powered command center is built on your Google Drive, Notion, Slack, ClickUp account &mdash; not as a standalone tool. It plugs into the Origins brand voice you have already built and runs every workflow above end-to-end.</p>
+    <h2 class="section-title">Origins Lead Response Demo</h2>
+    <p class="section-sub">Once your AI system is live, this is exactly what a prospect sees: a fast, personal response on every inbound Origins inquiry and missed call, day or night. The same agents keep your booking, intake, and follow-up moving without waiting on a free fifteen minutes.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When you partner with Advaita, your AI system is built right on the tools you already use &mdash; Google Drive, Notion, Slack, and ClickUp &mdash; not as one more standalone app. It works in your own voice and runs every workflow above end-to-end.</p>
   </div>
 </section>
 
@@ -882,7 +907,7 @@ If any answer is N: revise that section before sending.
     <div class="sources-list">
       <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
       <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">hbr.org</a></div></div>
-      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in SaaS and multi-account operations. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics and operations research for small, owner-led teams. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
       <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
       <div class="source-item"><span class="source-num">[5]</span><div>Harvard Business Review &mdash; Automation research: admin time reduction benchmark. <a href="https://hbr.org/2022/11/the-business-case-for-ai" target="_blank" rel="noopener">hbr.org</a></div></div>
     </div>
@@ -892,7 +917,7 @@ If any answer is N: revise that section before sending.
 <section class="cta-section" id="apply">
   <div class="container">
     <h2>Ready to See This<br><span>Working for Origins?</span></h2>
-    <p class="cta-personal">"Mike, I built this roadmap specifically for Origins because I believe the platform you have created &mdash; helping 675+ home service businesses run their operations in one place &mdash; deserves systems that are as reliable and scalable as the product itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
+    <p class="cta-personal">"Mike, I built this roadmap specifically for Origins because the practice you and your team of five have built deserves systems that give you your time back instead of taking more of it. The AI here is not about replacing anyone. It is about making sure no call gets missed, no inquiry sits, and the admin work stops eating the hours you would rather spend with clients. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
     <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Mike+Norton&biz=Origins&src=mike-norton-origins-20260603&agents=Speed-to-Lead+Agent%2CClient+Onboarding+Agent%2CProposal+Generator%2CContent+Production+Agent%2CClient+Health+Monitor%2CAdmin+Automation+Agent&firstName=Mike&agents=FranchiseKI" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
@@ -1010,7 +1035,7 @@ If any answer is N: revise that section before sending.
 <script>
 (function () {
   'use strict';
-  var STORAGE_KEY = 'bpod_brent_attaway';
+  var STORAGE_KEY = 'bpod_mike-norton-origins-20260603';
   var CHAPTERS = [
     {pct: 0,    label: 'Segment 1 - This Is Your Business'},
     {pct: 7.5,  label: 'Segment 2 - Where You Are With AI'},
@@ -1052,7 +1077,20 @@ If any answer is N: revise that section before sending.
     s = Math.max(0, Math.floor(s));
     return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
   }
-  function pct() { return audio.duration ? (audio.currentTime / audio.duration * 100) : 0; }
+  function getSeekDuration() {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+    if (audio.seekable && audio.seekable.length) return audio.seekable.end(audio.seekable.length - 1);
+    return 0;
+  }
+  function canSeek() { return getSeekDuration() > 0; }
+  function pct() { var d = getSeekDuration(); return d ? (audio.currentTime / d * 100) : 0; }
+  function seekRatio(ratio) {
+    var d = getSeekDuration();
+    if (!d) { badge.childNodes[0].textContent = 'Loading timeline '; track.setAttribute('aria-disabled', 'true'); return false; }
+    track.setAttribute('aria-disabled', 'false');
+    audio.currentTime = Math.max(0, Math.min(1, ratio)) * d;
+    return true;
+  }
   function currentChapter() {
     var p = pct(), label = CHAPTERS[0].label;
     for (var i = 0; i < CHAPTERS.length; i++) { if (p >= CHAPTERS[i].pct) label = CHAPTERS[i].label; }
@@ -1063,7 +1101,7 @@ If any answer is N: revise that section before sending.
     fill.style.width  = p + '%';
     thumb.style.left  = p + '%';
     elapsed.textContent = fmt(audio.currentTime);
-    chapterEl.textContent = audio.duration ? currentChapter() : '';
+    chapterEl.textContent = canSeek() ? currentChapter() : 'Loading timeline';
     miniTime.textContent  = fmt(audio.currentTime);
     track.setAttribute('aria-valuenow', Math.round(p));
     try { localStorage.setItem(STORAGE_KEY, audio.currentTime); } catch(e) {}
@@ -1093,16 +1131,19 @@ If any answer is N: revise that section before sending.
   });
 
   audio.addEventListener('loadedmetadata', function () {
-    duration.textContent = fmt(audio.duration);
+    duration.textContent = fmt(getSeekDuration());
     try {
       var saved = parseFloat(localStorage.getItem(STORAGE_KEY) || '0');
-      if (saved > 0 && saved < audio.duration - 5) {
+      var d = getSeekDuration();
+      if (saved > 0 && d && saved < d - 5) {
         audio.currentTime = saved;
         badge.childNodes[0].textContent = 'Resume from ' + fmt(saved) + ' ';
       }
     } catch(e) {}
     updateUI();
   });
+  audio.addEventListener('durationchange', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
+  audio.addEventListener('canplay', function(){ duration.textContent = fmt(getSeekDuration()); updateUI(); });
   audio.addEventListener('timeupdate', updateUI);
   audio.addEventListener('play',  function() { setPlaying(true); });
   audio.addEventListener('pause', function() { setPlaying(false); });
@@ -1112,7 +1153,7 @@ If any answer is N: revise that section before sending.
   playBtn.addEventListener('click', togglePlay);
   miniPlay.addEventListener('click', togglePlay);
   backBtn.addEventListener('click', function() { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-  fwdBtn.addEventListener('click',  function() { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+  fwdBtn.addEventListener('click',  function() { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; });
   speedSel.addEventListener('change', function() { audio.playbackRate = parseFloat(this.value); });
   muteBtn.addEventListener('click', function() {
     audio.muted = !audio.muted;
@@ -1120,31 +1161,35 @@ If any answer is N: revise that section before sending.
   });
 
   var dragging = false;
-  function seekTo(e) {
+  function seekToClientX(clientX) {
     var rect = track.getBoundingClientRect();
-    var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
+    var ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    seekRatio(ratio);
     updateUI();
   }
-  track.addEventListener('mousedown', function(e) { dragging = true; seekTo(e); });
-  document.addEventListener('mousemove', function(e) { if (dragging) seekTo(e); });
-  document.addEventListener('mouseup',   function() { dragging = false; });
-
-  function touchSeek(e) {
-    e.preventDefault();
-    var rect = track.getBoundingClientRect();
-    var t = e.touches[0] || e.changedTouches[0];
-    var ratio = Math.max(0, Math.min(1, (t.clientX - rect.left) / rect.width));
-    if (audio.duration) audio.currentTime = ratio * audio.duration;
-    updateUI();
+  if (window.PointerEvent) {
+    track.addEventListener('pointerdown', function(e) { dragging = true; track.setPointerCapture && track.setPointerCapture(e.pointerId); seekToClientX(e.clientX); e.preventDefault(); });
+    track.addEventListener('pointermove', function(e) { if (dragging) { seekToClientX(e.clientX); e.preventDefault(); } });
+    track.addEventListener('pointerup', function(e) { dragging = false; if (track.releasePointerCapture) { try { track.releasePointerCapture(e.pointerId); } catch (_) {} } });
+    track.addEventListener('pointercancel', function() { dragging = false; });
+  } else {
+    track.addEventListener('mousedown', function(e) { dragging = true; seekToClientX(e.clientX); });
+    document.addEventListener('mousemove', function(e) { if (dragging) seekToClientX(e.clientX); });
+    document.addEventListener('mouseup',   function() { dragging = false; });
+    function touchSeek(e) {
+      e.preventDefault();
+      var t = e.touches[0] || e.changedTouches[0];
+      seekToClientX(t.clientX);
+    }
+    track.addEventListener('touchstart', touchSeek, {passive: false});
+    track.addEventListener('touchmove',  touchSeek, {passive: false});
+    track.addEventListener('touchend',   function(e){ dragging = false; touchSeek(e); }, {passive: false});
+    track.addEventListener('touchcancel', function(){ dragging = false; }, {passive: false});
   }
-  track.addEventListener('touchstart', touchSeek, {passive: false});
-  track.addEventListener('touchmove',  touchSeek, {passive: false});
-  track.addEventListener('touchend',   touchSeek, {passive: false});
 
   track.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(0, audio.currentTime - 5); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 5) : audio.currentTime + 5; e.preventDefault(); }
   });
 
   document.addEventListener('keydown', function(e) {
@@ -1152,7 +1197,7 @@ If any answer is N: revise that section before sending.
     if (['INPUT','SELECT','TEXTAREA'].indexOf(tag) !== -1) return;
     if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
     if (e.key === 'ArrowLeft')   { audio.currentTime = Math.max(0, audio.currentTime - 15); }
-    if (e.key === 'ArrowRight')  { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); }
+    if (e.key === 'ArrowRight')  { var d = getSeekDuration(); audio.currentTime = d ? Math.min(d, audio.currentTime + 30) : audio.currentTime + 30; }
   });
 
   document.addEventListener('visibilitychange', function() {
