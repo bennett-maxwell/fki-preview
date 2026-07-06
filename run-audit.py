@@ -30,14 +30,17 @@ def file_sha256(path):
 def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
+DURATION_MIN_SEC = 360   # 6:00
+DURATION_MAX_SEC = 960   # 16:00
+
 def podcast_duration_gate(slug):
-    """Red-line D3-03: DURATION-WINDOW RESTRICTION LIFTED per Madison (COO) 2026-07-02.
-    Podcasts are now generated at AudioLength.SHORT (blueprint-podcast-worker.py) and we
-    are OBSERVING the natural short length instead of forcing a fixed minute window. This
-    gate no longer fails on length — it records the duration for observation only. The
-    podcast must still EXIST and be probeable, and the clean-ending gate (D3-05) still hard-
-    blocks blind `ffmpeg -t` hard-trims. (Prior window 7:00-16:00, widened from 8-12 on
-    2026-06-30 — both now superseded; re-add bounds here to reinstate the restriction.)"""
+    """Red-line D3-03: DURATION WINDOW RE-INSTATED per Madison (COO) 2026-07-06 as a HARD
+    gate — the podcast MUST fall between 6:00 and 16:00. This reverses the 2026-07-02 "lift"
+    (which let a ~20-min default deep-dive + glued TTS closing ship as 'valid'). The correct
+    production path is NotebookLM AudioLength.SHORT ("deep dive, short") which natively lands
+    in-window WITH a clean close — so no blind `ffmpeg -t` hard-trim and no TTS-bookend patch
+    is ever needed. Out-of-window = HARD FAIL (regenerate SHORT natively, do not trim/patch).
+    Works together with D3-05 (clean ending). Window: 6:00-16:00 (360-960s)."""
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -50,7 +53,11 @@ def podcast_duration_gate(slug):
     except Exception as e:
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
-    return True, f"{mmss} (SHORT — length window lifted 2026-07-02, observational only)"
+    if secs < DURATION_MIN_SEC:
+        return False, f"{mmss} — TOO SHORT (min 6:00). Regenerate NotebookLM SHORT natively."
+    if secs > DURATION_MAX_SEC:
+        return False, f"{mmss} — TOO LONG (max 16:00). Use NotebookLM SHORT natively; never trim/patch a long deep-dive."
+    return True, f"{mmss} (within 6:00-16:00 window, native SHORT)"
 
 def podcast_clean_ending_gate(slug, lead):
     """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
@@ -534,8 +541,8 @@ def audit_lead(slug):
     results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     duration_ok, duration_detail = podcast_duration_gate(slug)
-    results["D3-03_podcast_duration_8to12min_RL"] = duration_ok
-    redlines["D3-03_podcast_duration_8to12min_RL"] = duration_ok
+    results["D3-03_podcast_duration_6to16min_RL"] = duration_ok
+    redlines["D3-03_podcast_duration_6to16min_RL"] = duration_ok
     clean_end_ok, clean_end_detail = podcast_clean_ending_gate(slug, lead)
     results["D3-05_podcast_clean_ending_RL"] = clean_end_ok
     redlines["D3-05_podcast_clean_ending_RL"] = clean_end_ok
