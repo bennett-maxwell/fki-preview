@@ -32,6 +32,7 @@ INDUSTRY_BANDS = {
     "design_agency":      (1500,40000,  "project"),
     "consulting":         (3000,150000, "engagement"),
     "retail":             (50,  2000,   "purchase/transaction"),    # retail sporting goods
+    "insurance":          (500, 10000,  "policy/annual premium"),
     "professional_services": (1000,50000, "contract/project"),
     "ai_consulting":      (3000,25000,  "contract"),
     "crm_software":       (1200,75000,  "contract/ARR"),
@@ -45,6 +46,8 @@ INDUSTRY_BANDS = {
 # Per-lead industry classification (from business name / known intake).
 LEAD_INDUSTRY = {
     "john-doe-sporting-goods-20260604": "retail",
+    "adam-webb":        "home_services",      # ION Solar — residential solar install (job/ticket)
+    "jorge-capones-usa":"retail",             # Capones USA — men's fragrance/grooming products (per-purchase)
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
     "branson-maxwell":  "photography",
     "melissa-tash-srp": "photography",
@@ -63,6 +66,9 @@ LEAD_INDUSTRY = {
     "sky-bme-llc":      "marketing_agency",   # BME LLC (GHL form 2026-06: industry=marketing, GoHighLevel/Asana)
     "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
     "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
+    "josh-jackson-exalt":"consulting",       # Exalt (exaltlife.co) — business/ops consulting, growth partner; packages $200-$300, engagement default modeled in-band
+    "simon-harwood-disruptive-foods-20260618": "food_franchise",  # Disruptive Foods — street-food product distribution to retail (GHL form 2026-06-18); per-customer ticket band
+    "asif-jam-equities-20260618":              "food_franchise",  # JAM Equities — multi-unit QSR/restaurant operator (GHL form 2026-06-18); per-guest ticket band
     # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
     # business identity in the page <title> — the SAME standard the canon 15 use — so the
     # financial gate keeps VERIFYING their bands instead of silently skipping them. A demo
@@ -115,6 +121,11 @@ def grab(pattern, html, flags=0):
 
 def check_file(path, clone_registry):
     slug = os.path.basename(path)[:-5]
+    # Slugs ending in -ignore are test fixtures — skip financial checks entirely
+    if slug.endswith("-ignore"):
+        return {"slug": slug, "industry": "SKIPPED", "band": [None, None],
+                "slider_default": None, "js_fallback": None,
+                "fails": [], "warns": [], "skipped": True}
     html = open(path, encoding="utf-8", errors="ignore").read()
     fails, warns = [], []
     industry = LEAD_INDUSTRY.get(slug, "unknown")
@@ -245,16 +256,21 @@ def main():
         if len(industries) >= 2:
             slugs = [s for s, _ in entries]
             clones[trip] = (slugs, industries)
-            for r in results:
+            for r in checked:
                 if r["slug"] in slugs:
                     r["fails"].append(
                         f"D7-02 [RL] identical ROI slider {trip} cloned across "
                         f"{len(industries)} industries {sorted(industries)} — not personalized")
 
-    npass = sum(1 for r in results if not r["fails"])
+    checked = [r for r in results if not r.get("skipped")]
+    skipped = [r for r in results if r.get("skipped")]
+    npass = sum(1 for r in checked if not r["fails"])
     print(f"{'SLUG':<20} {'INDUSTRY':<16} {'DEFAULT':>9} {'JS':>8}  RESULT")
     print("-" * 78)
     for r in results:
+        if r.get("skipped"):
+            print(f"{r['slug']:<20} {'SKIPPED (test fixture)':<16}  SKIPPED")
+            continue
         res = "PASS" if not r["fails"] else f"FAIL ({len(r['fails'])})"
         print(f"{r['slug']:<20} {r['industry']:<16} {str(r['slider_default']):>9} {str(r['js_fallback']):>8}  {res}")
         for f in r["fails"]:
@@ -262,14 +278,16 @@ def main():
         for w in r["warns"]:
             print(f"      ⚠ {w}")
     print("-" * 78)
-    print(f"FINANCIAL-REALISM: {npass}/{len(results)} pass red-line financial checks")
-    d7_18 = [r["slug"] for r in results if any("D7-18" in w for w in r["warns"])]
+    if skipped:
+        print(f"SKIPPED (test fixtures): {[r['slug'] for r in skipped]}")
+    print(f"FINANCIAL-REALISM: {npass}/{len(checked)} pass red-line financial checks")
+    d7_18 = [r["slug"] for r in checked if any("D7-18" in w for w in r["warns"])]
     if d7_18:
         print(f"D7-18 FIELD-RELEVANCE WARN: {len(d7_18)} non-B2B blueprint(s) show the LinkedIn lever "
               f"(staged for template gate): {sorted(d7_18)}")
     if clones:
         print(f"CROSS-INDUSTRY CLONE GROUPS: {[ (t, sorted(inds)) for t,(s,inds) in clones.items() ]}")
-    sys.exit(0 if npass == len(results) else 1)
+    sys.exit(0 if npass == len(checked) else 1)
 
 if __name__ == "__main__":
     main()

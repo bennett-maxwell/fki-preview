@@ -31,15 +31,13 @@ def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
 def podcast_duration_gate(slug):
-    """Red-line D3-03: the podcast must run 16:00-20:00 (target ~18-20 min, never over 20).
-    NotebookLM length is non-deterministic, so a generation can wrap early (Branson came out
-    10:18 while every other lead landed 18-22 min). Without this gate a too-short or too-long
-    cut passes every other check and slips to a draft. Re-cut until the duration lands in range."""
-    # Aligned 2026-06-10 to canonical blueprint-ai-skill v3.26 (Drive 1IzE-seD, newer than
-    # this gate's v1.1 2026-06-01 docstring): "Podcast = 6-20 MB walkthrough WINDOW (~6-20 min,
-    # target 12-18). The old >=29 MB floor was BACKWARDS ... permanently removed." The 16:00
-    # floor here was local drift, stricter than canon. Window per canon: 6:00-20:00.
-    MIN_SEC, MAX_SEC = 6 * 60, 20 * 60
+    """Red-line D3-03: DURATION-WINDOW RESTRICTION LIFTED per Madison (COO) 2026-07-02.
+    Podcasts are now generated at AudioLength.SHORT (blueprint-podcast-worker.py) and we
+    are OBSERVING the natural short length instead of forcing a fixed minute window. This
+    gate no longer fails on length — it records the duration for observation only. The
+    podcast must still EXIST and be probeable, and the clean-ending gate (D3-05) still hard-
+    blocks blind `ffmpeg -t` hard-trims. (Prior window 7:00-16:00, widened from 8-12 on
+    2026-06-30 — both now superseded; re-add bounds here to reinstate the restriction.)"""
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -52,11 +50,40 @@ def podcast_duration_gate(slug):
     except Exception as e:
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
-    if secs < MIN_SEC:
-        return False, f"too short {mmss} (min 16:00) — re-cut deeper"
-    if secs > MAX_SEC:
-        return False, f"too long {mmss} (max 20:00) — re-cut tighter"
-    return True, f"{mmss} OK"
+    return True, f"{mmss} (SHORT — length window lifted 2026-07-02, observational only)"
+
+def podcast_clean_ending_gate(slug, lead):
+    """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
+    CLEANLY with a natural close — NEVER a blind `ffmpeg -t` hard-trim of a longer
+    NotebookLM render (which cuts off mid-sentence).
+
+    WHY: D3-03 only checks LENGTH (7-16 min), so a ~20-min deep-dive trimmed to exactly
+    10:40 (640.000s) passed as a "valid" duration while ending mid-word. This gate proves
+    a proper close via scripts/podcast_clean_ending_gate.py: it FAILS when the final ~25s
+    has no closing/outro cue AND the duration is a round hard-trim boundary (the -t
+    signature). Runs for EVERY lead. exit 0 = PASS; non-zero = hard-cut red-line block."""
+    checker = os.path.join(REPO, "scripts", "podcast_clean_ending_gate.py")
+    audio_path = os.path.join(REPO, "podcasts", podcast_filename(slug))
+    if not os.path.exists(checker):
+        return False, "podcast_clean_ending_gate.py missing"
+    if not os.path.exists(audio_path):
+        return False, "podcast file missing"
+    business_name = (lead or {}).get("business_name") or ""
+    receipt = os.path.join(REPO, "audit-receipts", slug, f"{slug}-clean-ending.json")
+    cmd = [sys.executable, checker, "--audio", audio_path, "--lead", slug,
+           "--business-name", str(business_name), "--receipt", receipt, "--json-output"]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=360)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            detail = (data.get("status", "") + ": " + str(data.get("reason", ""))).strip(": ")
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"clean-ending check error: {e}"
 
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
@@ -92,6 +119,75 @@ def format_conformance_gate(html_path):
         return proc.returncode == 0, detail
     except Exception as e:
         return False, f"format conformance check error: {e}"
+
+
+def find_ghl_raw_for_source_fidelity(slug):
+    patterns = [
+        os.path.join(REPO, "audit-receipts", slug, "**", "*ghl*raw*.json"),
+        os.path.join(REPO, "audit-receipts", slug, "**", "ghl-contact-by-id.raw.json"),
+        os.path.join(REPO, "audit-receipts", slug, "**", "*contact*raw*.json"),
+    ]
+    matches = []
+    for pattern in patterns:
+        matches.extend(glob.glob(pattern, recursive=True))
+    if not matches:
+        return ""
+    return sorted(set(matches), key=lambda x: os.path.getmtime(x), reverse=True)[0]
+
+
+def source_fidelity_gate(slug, html_path):
+    checker = os.path.join(REPO, "scripts", "blueprint_source_fidelity_gate.py")
+    lead_json = os.path.join(REPO, "leads", f"{slug}.json")
+    if not os.path.exists(checker):
+        return False, "blueprint_source_fidelity_gate.py missing"
+    if not os.path.exists(lead_json):
+        return False, f"lead profile missing: {lead_json}"
+    cmd = [sys.executable, checker, "--lead-json", lead_json, "--html", html_path, "--json-output"]
+    raw = find_ghl_raw_for_source_fidelity(slug)
+    if raw:
+        cmd.extend(["--ghl-raw", raw])
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            findings = data.get("findings") or []
+            detail = data.get("status", "") + (": " + "; ".join(f.get("code", "finding") for f in findings[:8]) if findings else "")
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"source fidelity check error: {e}"
+
+def agent_card_prompt_quality_gate(slug, html_path):
+    """Red-line D2-03 (v3.42, Madison 2026-07-01): agent cards must be condensed
+    outcome squares — NEVER a raw copy-paste 'You are an AI agent…' prompt or a
+    'Copy-paste prompt:' label — and the 3 ready-to-use dropdown prompts must be
+    lead-specific and structurally bulletproof (role/context/steps/guardrails/output),
+    not just long. Delegates to scripts/blueprint_agent_prompt_quality_gate.py.
+
+    Runs for EVERY lead. exit 0 = PASS; non-zero / FAIL = red-line block."""
+    checker = os.path.join(REPO, "scripts", "blueprint_agent_prompt_quality_gate.py")
+    if not os.path.exists(checker):
+        return False, "blueprint_agent_prompt_quality_gate.py missing"
+    cmd = [sys.executable, checker, "--html", html_path, "--json-output"]
+    lead_json = os.path.join(REPO, "leads", f"{slug}.json")
+    if os.path.exists(lead_json):
+        cmd.extend(["--profile", lead_json])
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            fails = data.get("failures") or []
+            detail = data.get("status", "") + ("" if not fails else ": " + "; ".join(fails[:6]))
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"agent card prompt quality check error: {e}"
 
 def no_orphan_classes(html):
     style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.DOTALL | re.I))
@@ -403,21 +499,34 @@ def audit_lead(slug):
     format_ok, format_detail = format_conformance_gate(html_path)
     results["PF0-5_format3_dense_scroll_RL"] = format_ok
     redlines["PF0-5_format3_dense_scroll_RL"] = format_ok
+    source_ok, source_detail = source_fidelity_gate(slug, html_path)
+    results["PF0-7_source_fidelity_RL"] = source_ok
+    redlines["PF0-7_source_fidelity_RL"] = source_ok
     results["D1-01_name_in_title"] = name_in_title(html, slug)
     results["D2-01_no_emojis"] = not bool(re.search(r'[\U0001F300-\U0001FAFF]', html))
-    # D2-02 [RL] AGENT SUBSTANCE GATE (Bennett directive 2026-06-09): every blueprint
-    # must ship 6 lead-specific agent cards, each with a substantive copy-paste prompt.
-    # Thin/generic teaser cards = instant FAIL; no AI may report Blueprint done without this.
+    # D2-02 [RL] AGENT SUBSTANCE GATE — UPDATED 2026-06-26 (Madison override "I own it"):
+    # D2-02's inline copy-paste prompt was retired; the 6 agent squares are now CONDENSED
+    # (icon+name+desc+outcome) and the substantive operating prompts live in the 3
+    # ready-to-use dropdown cards (prompt-pre). So substance now = 6 lead-specific cards
+    # (each >=120 chars) AND >=3 substantive dropdown prompts (each >=900 chars).
+    # See ~/Desktop/fki-preview/OVERRIDE-D2-02.md. Restore inline check if Bennett reinstates D2-02.
     _cards = re.findall(r'<div class="agent-card">(.*?)</div>\s*</div>', html, re.S)
-    _prompts = re.findall(r'class="agent-prompt"[^>]*>(.*?)</div>', html, re.S)
+    _dropdown = re.findall(r'<pre id="prompt\d+" class="prompt-pre">(.*?)</pre>', html, re.S)
     agent_substance_ok = (
         len(_cards) >= 6
-        and len(_prompts) >= 6
-        and all(len(re.sub(r'<[^>]+>', '', c)) >= 350 for c in _cards[:6])
-        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 200 for pr in _prompts[:6])
+        and len(_dropdown) >= 3
+        and all(len(re.sub(r'<[^>]+>', '', c)) >= 120 for c in _cards[:6])
+        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 900 for pr in _dropdown[:3])
     )
     results["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
     redlines["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
+    # D2-03 [RL] AGENT-CARD + PROMPT QUALITY (v3.42, Madison 2026-07-01):
+    # cards must NOT contain a raw "You are an AI agent…" copy-paste prompt or a
+    # "Copy-paste prompt:" label, and the 3 dropdown prompts must be structurally
+    # bulletproof (role/context/steps/guardrails/output), not merely >=900 chars.
+    acpq_ok, acpq_detail = agent_card_prompt_quality_gate(slug, html_path)
+    results["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
+    redlines["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
     podcast_exists = os.path.exists(os.path.join(REPO, "podcasts", podcast_filename(slug)))
     results["D3-01_podcast_exists"] = podcast_exists
     redlines["D3-01_podcast_exists_RL"] = podcast_exists
@@ -425,8 +534,11 @@ def audit_lead(slug):
     results["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     redlines["D3-02_podcast_audio_direct_address_RL"] = podcast_audio_ok
     duration_ok, duration_detail = podcast_duration_gate(slug)
-    results["D3-03_podcast_duration_16to20min_RL"] = duration_ok
-    redlines["D3-03_podcast_duration_16to20min_RL"] = duration_ok
+    results["D3-03_podcast_duration_8to12min_RL"] = duration_ok
+    redlines["D3-03_podcast_duration_8to12min_RL"] = duration_ok
+    clean_end_ok, clean_end_detail = podcast_clean_ending_gate(slug, lead)
+    results["D3-05_podcast_clean_ending_RL"] = clean_end_ok
+    redlines["D3-05_podcast_clean_ending_RL"] = clean_end_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)
@@ -454,12 +566,15 @@ def audit_lead(slug):
             "checks": results, "size": size,
             "redline_fail": redline_fail, "financial_detail": fin_detail,
             "format_detail": format_detail,
+            "source_fidelity_detail": source_detail,
             "orphan_class_detail": orphan_detail,
             "calculator_detail": calc_detail,
             "home_services_detail": hs_detail,
             "restaurant_detail": restaurant_detail,
             "podcast_detail": podcast_detail,
-            "podcast_audio_detail": podcast_audio_detail}
+            "podcast_audio_detail": podcast_audio_detail,
+            "podcast_clean_ending_detail": clean_end_detail,
+            "agent_card_prompt_quality_detail": acpq_detail}
 
 def main():
     import argparse
