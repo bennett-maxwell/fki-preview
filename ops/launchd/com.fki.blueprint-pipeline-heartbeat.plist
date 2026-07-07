@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.fki.blueprint-pipeline-heartbeat</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>/Users/openclaw/fki-preview/scripts/blueprint-pipeline-heartbeat.py</string>
+        <string>--check</string>
+    </array>
+    <!-- Run every 30 minutes. -->
+    <key>StartInterval</key>
+    <integer>1800</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/openclaw/.openclaw/logs/blueprint-pipeline-heartbeat-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/openclaw/.openclaw/logs/blueprint-pipeline-heartbeat-stderr.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/openclaw</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/openclaw/fki-preview</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <false/>
+    <key>Nice</key>
+    <integer>15</integer>
+</dict>
+</plist>

@@ -7,6 +7,20 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 BP_DIR = os.path.join(REPO, "blueprints")
 HISTORY = os.path.expanduser("~/.openclaw/logs/blueprint-audit-history.jsonl")
 THRESHOLD = 0.90  # 90% of non-red-line checks
+
+# ── DECOUPLE (2026-07-07, Madison COO; council PROCEED 4.6/4.5) ──────────────
+# The customer SEND is gated on the PAGE only. The podcast is a NON-BLOCKING async
+# enrichment that auto-fills the page's audio player once its mp3 is live. These
+# red-line keys belong to PODCAST_VERDICT; everything else belongs to PAGE_VERDICT.
+# The podcast gates still RUN (and must pass before a podcast is considered done) —
+# they just no longer block the page/send decision.
+PODCAST_REDLINE_KEYS = {
+    "D3-01_podcast_exists_RL",
+    "D3-02_podcast_audio_direct_address_RL",
+    "D3-03_podcast_duration_6to16min_RL",
+    "D3-05_podcast_clean_ending_RL",
+    "D4-09_podcast_source_funnel_clean_RL",
+}
 PODCAST_ALIAS = {
     "watson": "watson-kamoto.mp3",
     "zachary-oldham": "zachary-oldham.mp3",
@@ -20,6 +34,17 @@ def curl_http(url):
     except Exception as e:
         return 0
 
+def hub_live_gate(slug):
+    """PAGE red-line component (DECOUPLE 2026-07-07): the public blueprint hub must be
+    LIVE at HTTP 200 for PAGE_VERDICT to PASS. Enforced by default; set
+    BLUEPRINT_SKIP_HUB_LIVE=1 for a pre-publish, content-only audit (a brand-new lead
+    whose page has not been published yet). Customer send remains a separate human step."""
+    if os.environ.get("BLUEPRINT_SKIP_HUB_LIVE") == "1":
+        return True, "skipped (BLUEPRINT_SKIP_HUB_LIVE=1, pre-publish content audit)"
+    url = f"https://bennett-maxwell.github.io/fki-preview/blueprints/{slug}.html"
+    code = curl_http(url)
+    return code == 200, f"{url} -> HTTP {code}"
+
 def file_sha256(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -30,7 +55,9 @@ def file_sha256(path):
 def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
-DURATION_MIN_SEC = 270   # 4:30 (lowered from 6:00 per Madison COO 2026-07-07 — native NotebookLM SHORT lands ~4-6min)
+DURATION_MIN_SEC = 240   # 4:00 (DECOUPLE 2026-07-07 Madison COO: floor 4:30->4:00 so a native
+                         # NotebookLM SHORT render + Mike's clean1 at 254s pass; podcast is now a
+                         # NON-BLOCKING async enrichment, not part of the customer SEND gate)
 DURATION_MAX_SEC = 960   # 16:00
 
 def podcast_duration_gate(slug):
@@ -40,7 +67,8 @@ def podcast_duration_gate(slug):
     production path is NotebookLM AudioLength.SHORT ("deep dive, short") which natively lands
     in-window WITH a clean close — so no blind `ffmpeg -t` hard-trim and no TTS-bookend patch
     is ever needed. Out-of-window = HARD FAIL (regenerate SHORT natively, do not trim/patch).
-    Works together with D3-05 (clean ending). Window: 6:00-16:00 (360-960s)."""
+    Works together with D3-05 (clean ending). Window: 4:00-16:00 (240-960s). This is a PODCAST
+    gate (PODCAST_VERDICT) only — it no longer blocks the customer SEND (PAGE_VERDICT)."""
     path = os.path.join(REPO, "podcasts", podcast_filename(slug))
     if not os.path.exists(path):
         return False, "podcast file missing"
@@ -54,10 +82,10 @@ def podcast_duration_gate(slug):
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < DURATION_MIN_SEC:
-        return False, f"{mmss} — TOO SHORT (min 4:30). Regenerate NotebookLM SHORT natively."
+        return False, f"{mmss} — TOO SHORT (min 4:00). Regenerate NotebookLM SHORT natively."
     if secs > DURATION_MAX_SEC:
         return False, f"{mmss} — TOO LONG (max 16:00). Use NotebookLM SHORT natively; never trim/patch a long deep-dive."
-    return True, f"{mmss} (within 4:30-16:00 window, native SHORT)"
+    return True, f"{mmss} (within 4:00-16:00 window, native SHORT)"
 
 def podcast_clean_ending_gate(slug, lead):
     """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
@@ -490,7 +518,11 @@ def audit_lead(slug):
     redlines = {}  # keys here are HARD red-lines: any False => VERDICT FAIL regardless of score
     html_path = resolve_html_path(slug)
     if not os.path.exists(html_path):
-        return {"error": f"{html_path} not found", "score": 0}
+        return {"error": f"{html_path} not found", "score": 0,
+                "page_verdict": "FAIL", "podcast_verdict": "FAIL",
+                "page_pass": 0, "page_total": 0, "podcast_pass": 0, "podcast_total": 0,
+                "page_redline_fail": ["blueprint_html_not_found"], "podcast_redline_fail": [],
+                "hub_live_detail": "n/a", "redline_fail": ["blueprint_html_not_found"]}
     # Canonical slug = the resolved (possibly date-suffixed) filename. Leads json,
     # podcast mp3/source, and receipt dirs all carry the SAME date-suffixed slug,
     # so a bare gk100 --lead slug must be normalized here or every downstream
@@ -569,8 +601,31 @@ def audit_lead(slug):
     total = len(results)
     score = passed / total
     redline_fail = [k for k, v in redlines.items() if not v]
+
+    # ── DECOUPLE: split the red-lines into PAGE (send gate) vs PODCAST (async) ──
+    hub_ok, hub_detail = hub_live_gate(slug)
+    page_keys = [k for k in redlines if k not in PODCAST_REDLINE_KEYS]
+    podcast_keys = [k for k in redlines if k in PODCAST_REDLINE_KEYS]
+    page_redline_fail = [k for k in page_keys if not redlines[k]]
+    podcast_redline_fail = [k for k in podcast_keys if not redlines[k]]
+    if not hub_ok:
+        page_redline_fail = page_redline_fail + ["HUB_LIVE_200"]
+    # page_total includes the hub-live check as one PAGE gate
+    page_total = len(page_keys) + 1
+    page_pass = sum(1 for k in page_keys if redlines[k]) + (1 if hub_ok else 0)
+    podcast_total = len(podcast_keys)
+    podcast_pass = sum(1 for k in podcast_keys if redlines[k])
+    page_verdict = "PASS" if not page_redline_fail else "FAIL"
+    podcast_verdict = "PASS" if not podcast_redline_fail else "FAIL"
+
     return {"slug": slug, "score": score, "passed": passed, "total": total,
             "checks": results, "size": size,
+            "page_verdict": page_verdict, "podcast_verdict": podcast_verdict,
+            "page_pass": page_pass, "page_total": page_total,
+            "podcast_pass": podcast_pass, "podcast_total": podcast_total,
+            "page_redline_fail": page_redline_fail,
+            "podcast_redline_fail": podcast_redline_fail,
+            "hub_live_detail": hub_detail,
             "redline_fail": redline_fail, "financial_detail": fin_detail,
             "format_detail": format_detail,
             "source_fidelity_detail": source_detail,
@@ -581,6 +636,7 @@ def audit_lead(slug):
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail,
             "podcast_clean_ending_detail": clean_end_detail,
+            "podcast_duration_detail": duration_detail,
             "agent_card_prompt_quality_detail": acpq_detail}
 
 def main():
@@ -597,17 +653,30 @@ def main():
     else:
         print("Usage: run-audit.py --lead <slug> | --all"); sys.exit(1)
     results = []
-    any_fail = False
+    any_page_fail = False
     for slug in slugs:
         r = audit_lead(slug)
         results.append(r)
-        rl_fail = r.get("redline_fail", [])
-        # A red-line failure is a hard FAIL even at 100% non-red-line score.
-        status = "PASS" if (r.get("score", 0) >= THRESHOLD and not rl_fail) else "FAIL"
-        if status == "FAIL":
-            any_fail = True
-        extra = f"  RED-LINE FAIL: {rl_fail} ({r.get('financial_detail','')})" if rl_fail else ""
-        print(f"[{status}] {slug}: {r.get('passed',0)}/{r.get('total',0)} ({r.get('score',0):.0%}){extra}")
+        if r.get("error"):
+            print(f"[FAIL] {slug}: {r['error']}")
+            any_page_fail = True
+            continue
+        pv = r.get("page_verdict", "FAIL")
+        pdv = r.get("podcast_verdict", "FAIL")
+        if pv == "FAIL":
+            any_page_fail = True
+        # DECOUPLE: the SEND decision is PAGE_VERDICT. PODCAST_VERDICT is reported but
+        # never blocks the page/send — the podcast is a non-blocking async enrichment.
+        print(f"[{pv}] {slug}  PAGE_VERDICT={pv} ({r.get('page_pass',0)}/{r.get('page_total',0)})"
+              f"  PODCAST_VERDICT={pdv} ({r.get('podcast_pass',0)}/{r.get('podcast_total',0)})"
+              f"  score={r.get('score',0):.0%}")
+        print(f"       hub-live: {r.get('hub_live_detail','')}")
+        if r.get("page_redline_fail"):
+            print(f"       PAGE red-line FAIL: {r['page_redline_fail']} ({r.get('financial_detail','')})")
+        if r.get("podcast_redline_fail"):
+            print(f"       PODCAST red-line (non-blocking): {r['podcast_redline_fail']}"
+                  f" | dur={r.get('podcast_duration_detail','')}"
+                  f" | clean={r.get('podcast_clean_ending_detail','')}")
     # Append to history
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
     import datetime
@@ -616,9 +685,10 @@ def main():
         with open(HISTORY, "a") as f:
             f.write(json.dumps(r) + "\n")
     print(f"\nAudit complete. History: {HISTORY}")
-    # VERDICT line consumed by the pre-commit hook; financial red-line now blocks.
-    print("VERDICT=FAIL" if any_fail else "VERDICT=PASS")
-    sys.exit(1 if any_fail else 0)
+    # Overall VERDICT (back-compat, consumed by the pre-commit hook) is now driven by
+    # PAGE_VERDICT — the customer SEND gate. A podcast-only failure no longer blocks.
+    print("VERDICT=FAIL" if any_page_fail else "VERDICT=PASS")
+    sys.exit(1 if any_page_fail else 0)
 
 if __name__ == "__main__":
     main()
