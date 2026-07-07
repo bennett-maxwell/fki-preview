@@ -30,7 +30,7 @@ def file_sha256(path):
 def podcast_filename(slug):
     return PODCAST_ALIAS.get(slug, f"{slug}.mp3")
 
-DURATION_MIN_SEC = 360   # 6:00
+DURATION_MIN_SEC = 270   # 4:30 (lowered from 6:00 per Madison COO 2026-07-07 — native NotebookLM SHORT lands ~4-6min)
 DURATION_MAX_SEC = 960   # 16:00
 
 def podcast_duration_gate(slug):
@@ -54,10 +54,10 @@ def podcast_duration_gate(slug):
         return False, f"ffprobe failed: {e}"
     mmss = f"{secs//60}:{secs%60:02d}"
     if secs < DURATION_MIN_SEC:
-        return False, f"{mmss} — TOO SHORT (min 6:00). Regenerate NotebookLM SHORT natively."
+        return False, f"{mmss} — TOO SHORT (min 4:30). Regenerate NotebookLM SHORT natively."
     if secs > DURATION_MAX_SEC:
         return False, f"{mmss} — TOO LONG (max 16:00). Use NotebookLM SHORT natively; never trim/patch a long deep-dive."
-    return True, f"{mmss} (within 6:00-16:00 window, native SHORT)"
+    return True, f"{mmss} (within 4:30-16:00 window, native SHORT)"
 
 def podcast_clean_ending_gate(slug, lead):
     """Red-line D3-05 (2026-07-01): the podcast must be a COMPLETE episode that ENDS
