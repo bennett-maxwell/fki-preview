@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FKI AI Training — Tuesday, July 7, 2026</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 680px; margin: 0 auto; padding: 20px; background: #f9f9f9; color: #222; }
+  h1 { font-size: 1.4em; margin-bottom: 4px; }
+  .date { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+  .player-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  audio { width: 100%; margin-bottom: 12px; }
+  .speeds { display: flex; gap: 8px; margin-bottom: 8px; }
+  .speeds button { padding: 6px 14px; border: 1px solid #ccc; background: #f0f0f0; border-radius: 6px; cursor: pointer; font-size: 0.9em; }
+  .speeds button.active { background: #0070f3; color: #fff; border-color: #0070f3; }
+  .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin-bottom: 16px; }
+  .status-pending { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+  .status-ready { background: #d4edda; color: #155724; border: 1px solid #28a745; }
+  .summary-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  .summary-box h2 { font-size: 1.1em; margin-top: 0; }
+  .magic-words { background: #eef6ff; border-left: 4px solid #0070f3; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .magic-words li { margin: 6px 0; font-family: monospace; font-size: 0.92em; }
+  .issues-box { background: #fff8f0; border-left: 4px solid #ff6b35; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .drill-box { background: #f0fff4; border-left: 4px solid #28a745; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .footer { color: #888; font-size: 0.8em; text-align: center; margin-top: 24px; }
+</style>
+</head>
+<body>
+
+<h1>🎙️ FKI AI Training Podcast</h1>
+<p class="date">Tuesday, July 7, 2026 · Daily Delta Episode · 9–13 min</p>
+
+<div class="player-box">
+  <span id="audioStatusBadge" class="status-badge status-pending">⏳ Audio generating — check back in 15 min</span>
+  <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-07-07.mp3">
+    Your browser does not support audio playback.
+  </audio>
+  <div class="speeds">
+    <button data-rate="1" onclick="setRate(1,this)" class="active">1x</button>
+    <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+    <button data-rate="1.5" onclick="setRate(1.5,this)">1.5x</button>
+    <button data-rate="2" onclick="setRate(2,this)">2x</button>
+  </div>
+  <p style="color:#888;font-size:0.8em;margin:4px 0 0">Speed buttons + auto-resume position</p>
+</div>
+
+<div class="summary-box">
+  <h2>📋 Today's Episode — What You Need to Know</h2>
+
+  <p><strong>Advaita Score this morning: 94.3%</strong> — most areas automated, financial tracking still at 85.7%.</p>
+
+  <p><strong>⚠️ AI Monitor RED — 75 cycles stuck.</strong> The system that watches all AI jobs has flagged 7 red problems and 7 yellow warnings. They have not been closed in over 24 hours. If you sent something through AI recently and never got a confirmation, it may be in the stuck queue (75 tasks waiting).</p>
+
+  <p><strong>Meta (Facebook) ad error on IC campaign.</strong> The ad publisher hit an error: budget set in two places at once. Fix: remove the ad-set budget and keep only the campaign-level budget.</p>
+
+  <p><strong>Blueprint AI form routing still open.</strong> locationId and trackingId need to be updated. Madison is checking 7 stuck leads.</p>
+</div>
+
+<div class="issues-box">
+  <strong>🔴 Top 5 Issues Today</strong>
+  <ol>
+    <li>Meta ad budget conflict on IC campaign (HTTP 400)</li>
+    <li>GHL lead rescore error (connection error 422) — 0 leads rescored</li>
+    <li>75 tasks stuck in work queue — missing send confirmations</li>
+    <li>Advaita financial control at 85.7% — needs human attention</li>
+    <li>Ad creative briefs missing for today — folder empty at 10:43am</li>
+  </ol>
+</div>
+
+<div class="magic-words">
+  <strong>🪄 Magic Words — Say These Today</strong>
+  <ul>
+    <li>"Route and plan this before starting."</li>
+    <li>"Show me the proof."</li>
+    <li>"What is stuck in the work queue right now?"</li>
+    <li>"Show me all stuck tasks with missing send receipts."</li>
+    <li>"Turn this into a tool so I can do it next time with one sentence."</li>
+    <li>"After you send that, show me the receipt. Confirm it was delivered."</li>
+    <li>"Run 4 rounds of the proactive compounding loop. Fix what you find."</li>
+  </ul>
+</div>
+
+<div class="drill-box">
+  <strong>✅ Today's 10-Minute Action Drill</strong><br>
+  Open Claude Code and say:<br>
+  <em>"Show me the work queue. List all tasks that are stuck or missing a receipt."</em><br>
+  Pick one. Say: <em>"What does this task need to complete? Can you requeue it?"</em><br>
+  If yes: <em>"Requeue it."</em>
+</div>
+
+<div class="summary-box">
+  <strong>🛑 One Thing to STOP Doing</strong><br>
+  Stop calling something done when the AI has not shown you a receipt. If it says "sent" but cannot show you a delivery confirmation — it is not done. Ask: <em>"Show me the receipt."</em>
+</div>
+
+<div class="summary-box">
+  <strong>💡 How the Helper Thinks: What Is a Receipt?</strong><br>
+  When the AI sends something, it looks for a confirmation — like a "message delivered" ping. If it does not get one, it keeps the task on the "waiting" list. That is why 75 tasks are stuck right now — they sent something but never got the delivery confirmation back.
+</div>
+
+<div class="summary-box">
+  <strong>🔁 Recurring Close</strong><br>
+  Pick one task this week and turn it into a saved tool. That is how your whole job becomes automated — one task at a time, right inside the Claude Code app (the app where you type to your AI helper and it does the work).
+</div>
+
+<p class="footer">
+  Reply to the team email with any feedback — we read every reply and apply changes permanently before the next episode.<br>
+  Source: <a href="https://bennett-maxwell.github.io/fki-preview/team-training/2026-07-07.html">https://bennett-maxwell.github.io/fki-preview/team-training/2026-07-07.html</a>
+</p>
+
+<script>
+  var a = document.getElementById('podAudio'), KEY = 'team-training-2026-07-07';
+  function setRate(r, b) {
+    a.playbackRate = r;
+    document.querySelectorAll('.speeds button').forEach(x => x.classList.remove('active'));
+    if (b) b.classList.add('active');
+    save();
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({time: a.currentTime, rate: a.playbackRate})); } catch(e) {}
+  }
+  (function() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || '{}');
+      if (s.rate) { a.playbackRate = s.rate; document.querySelectorAll('.speeds button').forEach(b => { if (parseFloat(b.dataset.rate) === s.rate) { b.classList.add('active'); document.querySelectorAll('.speeds button').forEach(x => x !== b && x.classList.remove('active')); }}); }
+      a.addEventListener('loadedmetadata', function() { if (s.time) a.currentTime = s.time; });
+    } catch(e) {}
+  })();
+  a.addEventListener('timeupdate', save);
+  a.addEventListener('ratechange', save);
+
+  // Check if MP3 exists
+  fetch('https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-07-07.mp3', {method:'HEAD'})
+    .then(r => {
+      var badge = document.getElementById('audioStatusBadge');
+      if (r.ok) {
+        badge.className = 'status-badge status-ready';
+        badge.textContent = '✅ Audio ready — press play';
+      }
+    }).catch(function(){});
+</script>
+</body>
+</html>
