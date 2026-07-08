@@ -1,162 +1,145 @@
-<!-- v1.8 -->
-PRIVATE AUDIO BRIEFING / AI Roadmap for Mike Norton — Origins / Prepared by Franchise Ki | bennett@franchiseki.com
-Generated: 2026-06-04T17:32:14.131768+00:00
+<!-- v2.0 substantive-blueprint-walkthrough -->
+================ MANDATORY HOST SCRIPT DIRECTIVE — FOLLOW EXACTLY ================
+This is the non-negotiable spine for the two hosts of this SHORT deep-dive episode.
+Every rule is required; the episode is rejected if any rule is broken.
+
+1) OPEN (first ~15 seconds) — warm, natural, human; NEVER a robotic label read.
+   The very first spoken words must be, essentially verbatim and delivered conversationally:
+   "Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us."
+   Say Mike's first name AND Origins by name in that opening breath, the way a host warmly
+   greets a guest — then ease straight into the conversation.
+
+2) SECOND PERSON, ALWAYS. Speak directly TO Mike as "you" and "your" for the entire
+   episode. Never describe Mike or Origins from the outside. Never say "the company",
+   "this business", "the owner", or "his / her / their business". Never mention where any of
+   this information came from and never refer to any written input behind the episode.
+
+3) LENGTH & PACING — a SHORT deep dive, but UNHURRIED. Aim for a natural 8 to 12 minute
+   conversation (never under 6 minutes, never over 16). Do NOT race. This episode's WHOLE JOB
+   is to walk Mike through his actual blueprint: the six specific AI agents built for Origins,
+   what each one takes off his plate, and what it's worth. Spend real, focused time on EACH of
+   the six agents with one concrete example of it running for Origins. Depth over breadth — if
+   you must trim, trim the framing, never the agent walkthrough.
+
+4) TONE — conversational and grounded, like two knowledgeable people talking WITH Mike.
+   Not salesy. Avoid hype and marketing / funnel buzzwords. Conservative language, no guarantees.
+
+5) CLOSE (final ~20 seconds) — MANDATORY spoken sign-off; never stop mid-thought and never
+   end on a rhetorical question. The final spoken words of the episode must be, essentially
+   verbatim, this sign-off (do NOT replace it with a question or a teaser):
+   "Thanks for joining us, Mike. Your next step is simple: take a look at the qualifier page
+   and see if Origins qualifies to move forward. Take care."
+   This closing MUST be spoken aloud as the final beat of the episode.
+
+6) NEVER treat this as a document, report, roadmap, brief, or "sources" to review or summarize,
+   and never say those words. There is no document — you are simply two people talking WITH
+   Mike. Do not read a title, do not describe what you were given, do not open with a cold
+   metaphor. Open with the greeting in rule 1 and nothing before it.
+
+7) THIS IS A BLUEPRINT WALKTHROUGH, NOT A GENERIC CHAT. By the end, Mike must clearly hear:
+   (a) which specific AI agents were built for Origins, (b) what each one automates and which
+   of his tools it plugs into, (c) the concrete hours and revenue it frees up. If the episode
+   sounds like a friendly generic conversation that never names the agents, it has failed.
+==================================================================================
+
+HOST NOTES (never read aloud, never mention): a warm, spoken one-on-one conversation with Mike
+of Origins that WALKS HIM THROUGH HIS BLUEPRINT. Talk WITH Mike directly — never narrate,
+summarize, review, or describe anything you were given. The substance below is what you actually
+discuss with him: his real bottlenecks, the six agents built for Origins, and the numbers.
 
 Open the audio with EXACTLY these words: "Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us."
 
-DIRECT ADDRESS RULE: The audio must open with: Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us.
-Audience: Mike Norton, Origins.
-Duration target: approximately 20 minutes.
-CTA: complete the qualifier only; no calendar booking language.
-
-12 SECTION AUDIO PACKAGE
-
-1. About Mike and Origins
-Mike runs Origins in consulting, business transformation, and AI operations. The roadmap uses Mike's submitted details: Google Drive, Notion, Slack, ClickUp, five-person team, around fifty monthly leads, five thousand dollar average client value, current five-minute response speed, and operational stresses around missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
-
-2. Current Tool Stack
-Google Drive for artifacts, Notion for process and knowledge, Slack for routing and team awareness, ClickUp for execution ownership.
-
-3. Industry Context
-Origins sells advisory and transformation work where trust, speed, clarity, and follow-through matter. AI should support those qualities instead of sounding like a generic automation layer.
-
-4. Opportunities
-Speed-to-lead, intake summary, scheduling support, proposal drafting, content repurposing, client health, and admin routing.
-
-5. Six Recommended Agents
-Speed-to-Lead Agent, Client Onboarding Agent, Proposal Generator, Content Production Agent, Client Health Monitor, Admin Automation Agent.
-
-6. ROI Picture
-Use Mike's stated numbers: fifty monthly leads, five thousand dollar average value, twenty percent close rate, five-minute current response speed, and one hundred fifty dollar hourly value for time recovery examples. Use conservative language and avoid guarantees.
-
-7. Day-in-the-Life Story
-A lead arrives, a useful response is drafted, Slack gets a summary, ClickUp gets tasks, Drive stores artifacts, Notion captures reusable knowledge, and the team reviews/approves the important pieces.
-
-8. Timeline
-Days 1-3 onboarding and mapping. Days 4-10 first automations. Day 30 operating rhythm live. Months 2-3 calibration. After month 3 integrated digital employee.
-
-9. Objections
-No new dashboard required. No replacement of Mike's judgment. No unrealistic claims. Start narrow, prove value, expand.
-
-10. Qualifier CTA
-If the roadmap resonates, complete the qualifier so the team can review the workflow and fit.
-
-11. Citations
-Harvard Business Review on fast lead response; McKinsey on digital sales and follow-up; SBA-style time allocation framing for admin burden; internal intake details from Mike's GHL opt-in record.
-
-12. Spoken Script
-
-Hi Mike, welcome. This walkthrough was built for you and Origins, from what you told us. Mike, welcome again. This walkthrough was built specifically for you and Origins, based on everything you told us. Mike, you are listening to a direct AI roadmap for you, your team, and your client experience at Origins. This is not a generic overview. It is for you, your workflow, your tools, and your next operating layer. 
-
-You run Origins as a consulting, business transformation, and AI operations company. You told us your current world includes Google Drive, Notion, Slack, and ClickUp. You also told us your team size is five, your monthly lead flow is around fifty, your average client value is about five thousand dollars, your current response speed is around five minutes, and your operating stresses include missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content.
-
-That matters because your AI roadmap should not sound like a generic technology pitch. It should sound like your operating system. You are not trying to bolt on another dashboard. You are trying to make Origins respond faster, summarize cleaner, follow up more consistently, route work into the right place, and turn your ideas into useful client-facing material without adding more manual coordination.
-
-The important thing here is that you already have the core ingredients. You have a defined offer, you have a team, you have tools your team already uses, and you have enough lead flow for small speed improvements to matter. The AI opportunity is not about replacing your judgment. It is about protecting your attention, so your judgment is used on the conversations and client moments where it actually matters.
-
-For this walkthrough, think of the system as a layer that sits between inbound demand and team execution. A request comes in. The system understands it. It drafts the first response. It summarizes the intake. It creates the task. It routes the work. It nudges the follow-up. It keeps the client experience consistent without forcing you to personally remember every step.
-
-What your AI gave us back instantly from your answers was clear: Origins does not need a novelty chatbot. You need an operating rhythm. You need speed-to-lead, intake summarization, proposal support, content repurposing, client health monitoring, and admin routing, all connected to the tools you already use.
-
-You marked your current AI maturity as automation. That is a strong place to start, because automation means you already understand the value of repeatable systems. The next step is not more disconnected automations. The next step is making those automations context-aware, brand-aware, and connected to the work that happens in Google Drive, Notion, Slack, and ClickUp.
-
-For a consulting and transformation firm, the first AI use case is speed-to-lead. A new inquiry should receive a thoughtful response within sixty seconds. Not a robotic autoresponder. A useful first message that acknowledges the actual request, explains the next step, and gives the prospect confidence that Origins is organized.
-
-The second use case is client intake. Every serious conversation creates raw information. The system should turn that raw information into a clean summary, next actions, risks, deadlines, and internal tasks. That is where Slack and ClickUp matter. Your team should not have to copy details between systems by hand.
-
-The third use case is proposal and scope support. You do not want AI making promises for you. You want AI turning known requirements into a clear first draft, so you can spend your time improving strategy instead of staring at a blank page.
-
-The fourth use case is content repurposing. You likely create ideas in calls, notes, voice memos, strategy sessions, and client work. AI can turn those ideas into email follow-up, LinkedIn posts, client education, and internal playbooks while keeping the tone aligned with Origins.
-
-The fifth use case is client health. You can track who has gone quiet, which follow-ups are overdue, what tasks are stuck, and where a client needs attention before the relationship cools down.
-
-The sixth use case is admin task routing. If a request belongs in Slack, send it to Slack. If it belongs in ClickUp, create the task. If it belongs in a client folder, put the summary in Google Drive. If it belongs in a knowledge base, structure it in Notion.
-
-The reason these use cases fit you is simple: they are not abstract AI. They are direct answers to what you told us: missed calls, slow lead response, appointment booking, admin work, scheduling, and marketing content. The roadmap should start there.
-
-A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
-
-Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
-
-A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
-
-The first time recovery opportunity is lead response speed. You already respond quickly, around five minutes, which is better than many firms. But in a high-trust consulting sale, the first useful response still shapes the entire conversation. If a prospect reaches out about business transformation or AI operations, the system can acknowledge the request immediately, identify the likely need, ask one clarifying question, and route the next step.
-
-At fifty monthly leads and a five thousand dollar average value, even small lift matters. If AI helps recover a few conversations each month that would have gone cold, the leverage is meaningful. The point is not to make unrealistic revenue promises. The point is to show that speed and consistency are worth protecting.
-
-The second time recovery opportunity is follow-up consistency. Consulting buyers often need multiple touches. They may inquire, pause, ask a question, compare options, revisit the problem, and then come back. A human-only follow-up system depends on memory and discipline. An AI-supported follow-up system depends on rules, context, and timing. You can still approve the important messages, but the system makes sure the opportunity never disappears.
-
-The third opportunity is appointment booking and scheduling. Scheduling looks small until you multiply it by every lead, client, internal handoff, and follow-up. The system can propose times, draft reminders, update ClickUp tasks, and summarize scheduling context in Slack. That gives your team back attention without changing the client experience.
-
-The fourth opportunity is admin work. Admin work is not one big task. It is dozens of tiny interruptions: summarize this call, file this note, remind this person, update this task, write this recap, turn this conversation into next steps, prepare the follow-up, and make sure nothing gets lost. Those are exactly the jobs AI handles well when the workflow is defined.
-
-The fifth opportunity is marketing content. You likely have more insight than the market sees. Your calls, frameworks, client lessons, and transformation ideas can become a content engine. AI can turn one advisory idea into a short post, a client email, a FAQ, a case-study outline, and a follow-up prompt. You still own the point of view. The system handles the packaging.
-
-The sixth opportunity is internal visibility. If your work is spread across Drive, Notion, Slack, and ClickUp, the system should help your team see what matters right now. What is waiting on you. What is waiting on a client. What has gone quiet. What needs a decision. What should be escalated. That is not glamorous, but it is the backbone of operational calm.
-
-When these gaps are connected, the picture is clear: Origins can gain leverage without adding another layer of complexity. The right AI setup makes the current tool stack feel more coordinated, not more crowded.
-
-A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
-
-Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
-
-A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
-
-Imagine a normal weekday at Origins after the system is live. A new inquiry comes in from a founder who wants help with AI operations. Within seconds, your speed-to-lead agent drafts a warm response in your voice. It references the request, confirms that Origins helps with transformation and automation design, and asks one useful question that moves the conversation forward.
-
-At the same time, the system creates an internal summary. Slack gets a short alert with the lead name, the likely need, the urgency, and the recommended next step. ClickUp gets a task with the right owner and due date. Google Drive has the intake notes saved where your team can find them. Notion can hold the operating record or playbook entry if the pattern should become reusable.
-
-Then the prospect replies. Instead of starting from zero, your team sees the full context. What they asked. What was already said. What the next best question should be. If the conversation becomes serious, the proposal support agent creates a first draft. It does not make promises for you. It gives you a structured starting point: scope, phases, assumptions, timeline, risks, and questions to clarify.
-
-For active clients, the intake summary agent keeps the work clean. After a call, the system turns notes into action items. It separates decisions from tasks. It flags open questions. It drafts the follow-up email. It updates the internal task list. Your team reviews and approves instead of rebuilding the same structure every time.
-
-For marketing, your content repurposing agent watches for usable ideas. A client lesson becomes a LinkedIn post draft. A framework becomes an email. A recurring objection becomes a short FAQ. A call insight becomes a topic for a future advisory note. The system does not replace your thinking. It keeps your thinking from evaporating after the meeting ends.
-
-For client health, the system looks for quiet accounts, overdue tasks, stalled follow-ups, and missing next steps. It gives you a simple digest: what needs attention, why it matters, and what message could be sent. That keeps relationships warm without forcing you to manually audit every thread.
-
-This is the difference between having AI tools and having an AI operating layer. A tool waits for you. An operating layer notices, drafts, routes, reminds, and organizes. You stay in control, but you stop carrying every small operational detail in your head.
-
-The first version does not need to be huge. It should begin with the six agents that match your stated needs: speed-to-lead, client onboarding, proposal generation, content production, client health, and admin automation. Each one should do a narrow job well. Then, as the system proves itself, those narrow jobs connect into a broader operating rhythm.
-
-A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
-
-Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
-
-A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
-
-Your current stack is workable, and that is good news. Google Drive can hold client artifacts, intake documents, proposal drafts, and reference material for internal knowledge. Notion can hold process, operating notes, reusable frameworks, and the structured knowledge your team returns to. Slack can be the routing layer for alerts, approvals, and quick internal decisions. ClickUp can hold execution, deadlines, ownership, and recurring task structure.
-
-The AI layer should respect those roles. It should not dump everything into one place. It should send the right object to the right tool. A lead summary belongs in Slack first, because your team needs to see it. A project task belongs in ClickUp, because someone needs to own it. A reusable framework belongs in Notion, because it becomes knowledge. A proposal draft belongs in Drive, because it becomes an artifact.
-
-This is where many AI implementations get messy. They create a new dashboard, a new inbox, and a new place to check. That would work against your stated need. You need less coordination drag, not more. The right build should make your existing tools feel smarter.
-
-For Google Drive, the immediate win is artifact creation and organization. After a discovery call, the system can create a folder, save the call summary, draft the proposal structure, and put the follow-up email in the right place.
-
-For Notion, the immediate win is knowledge capture. If a client question reveals a repeatable framework, the system can turn it into a playbook note. If a team process repeats, it can become a standard operating procedure. If an objection comes up again and again, it can become a response pattern.
-
-For Slack, the immediate win is routing. The system can tell the team what happened, what matters, who owns the next step, and when it is due. That turns Slack from chatter into an execution surface.
-
-For ClickUp, the immediate win is task creation and maintenance. Every follow-up, internal handoff, proposal draft, onboarding step, and scheduling item can land with a clear owner and due date.
-
-The practical outcome is simple: once set up, this runs itself in the background. You do not need your team to become AI technicians. You need the system to meet the team where it already works.
-
-A practical example: when a prospect asks about AI operations, your system can separate the strategic question from the administrative work. The strategic question stays with you. The administrative work becomes a draft, a task, a summary, or a reminder. That split is the whole point. You keep the high-value judgment. The system handles the repeatable movement around it.
-
-Another practical example: when your team finishes a call, the system can create a recap in plain language. What was decided. What is still open. What needs to happen next. Who owns it. What date matters. What message should go back to the client. That is not glamorous, but it is exactly where consulting operations either feel calm or start to leak attention.
-
-A third practical example: when you have a strong idea during the week, the system can preserve it. It can turn the idea into a short post, a client email, a workshop outline, or an internal note. You do not need to become a full-time content machine. You need your best thinking to stop disappearing after the moment passes.
-
-Here is the timeline I would recommend for Origins.
-
-Days one through three are onboarding. This is where your current workflows get mapped. The team reviews how inquiries arrive, how first responses happen, how appointments are booked, where notes live, how tasks are assigned, how proposals get drafted, and how marketing ideas become content. Your brand voice gets captured. The system listens before it acts.
-
-Days four through ten are the first working automations. The speed-to-lead draft is the first priority because it protects revenue conversations. The intake summary is next because it protects internal clarity. The scheduling and admin routing workflows follow because they reduce interruptions. During this window, the system should be visible but supervised. You should see drafts, alerts, and task creation, and your team should be able to correct the pattern quickly.
-
-By day thirty, the system should run the basic rhythm. New inquiries trigger useful drafts. Intake creates summaries. Follow-ups are tracked. Content ideas are captured. Admin tasks route into the right place. Client health signals show up in a digest. You are not done forever, but the core operating loop is live.
-
-After month three, the system and team should feel integrated. The goal is not a science project. The goal is a dependable digital employee that works around the clock, remembers the process, drafts the repetitive work, and lets your human team stay focused on strategy, relationships, and delivery.
-
-Mike, the next step is simple. If the speed-to-lead, intake, proposal, content, client health, or admin automation pieces resonate, complete the qualifier so the team can review fit and implementation path. This walkthrough was built for you and Origins, from what you told us.
-
-
-Qualifier CTA URL for final call to action: https://bennett-maxwell.github.io/fki-preview/qualify.html?src=mike-norton-origins-20260603
+Audience: Mike Norton, Origins — a small consulting, business-transformation, and AI-operations
+practice, a team of five, working remotely with clients online.
+Speak TO Mike as "you" and "your" for the entire episode.
+Duration target: 8 to 12 minutes (SHORT deep dive). Never under 6 minutes, never over 16.
+CTA at the end: complete the qualifier page only; no calendar-booking language, never spell a URL aloud.
+
+--------------------------------------------------------------------------------
+THE SUBSTANCE TO WALK MIKE THROUGH (this is the heart of the episode)
+--------------------------------------------------------------------------------
+
+WHERE YOUR TIME AND MONEY LEAK TODAY
+You named six things that eat your week at Origins: missed calls, slow lead response, appointment
+booking, admin work, scheduling, and marketing content. Here is why each one quietly costs you.
+When a prospective client reaches out and it takes hours — or a whole day — to reply, that lead
+often cools off or books with whoever answered first; in consulting, the fastest thoughtful reply
+usually wins the call. Every missed call is a warm prospect you never even knew tried to reach you.
+Appointment booking and scheduling turn into email ping-pong that eats a chunk of every day.
+Admin work — follow-ups, task creation, copy-pasting between Google Drive, Notion, Slack, and
+ClickUp — is the invisible tax on a five-person team. And marketing content is the thing that
+always slips first when client work gets busy, so you go quiet exactly when you should be visible.
+The plan takes these off your plate one at a time, highest-impact first, inside the tools you
+already use — Google Drive, Notion, Slack, and ClickUp — so there is nothing new to learn on day one.
+
+THE SIX AI AGENTS BUILT FOR ORIGINS (walk through all six, one at a time, with a concrete example)
+
+1. LEAD RESPONSE AGENT — connects to your email, calls, and Slack.
+   It watches your inbox and your missed calls. The moment a prospective client reaches out to
+   Origins, it drafts and sends a personalized, professional reply in minutes — day, night, or
+   weekend — qualifies the lead, and drops a heads-up into Slack so you can take it from there.
+   Concrete example: a founder fills out your contact form at 9pm on a Saturday. Instead of sitting
+   until Monday, they get a warm, on-brand reply within minutes and a Slack ping is waiting for you
+   Monday saying "qualified lead, wants transformation help, here's the thread." This is your number
+   one priority agent because it directly attacks slow lead response and missed calls.
+
+2. APPOINTMENT BOOKING AGENT — connects to your calendar, Slack, and email.
+   It handles the scheduling you flagged as a stress: offers open times, confirms the booking, and
+   sends reminders on its own — no email ping-pong — then posts a clean confirmation into Slack so
+   your whole team of five can see what's on the calendar.
+   Concrete example: that Saturday lead clicks "book a time," picks a slot, gets an automatic
+   confirmation and reminder, and the call lands on your calendar with a Slack note — you never
+   touched a single scheduling email.
+
+3. CLIENT INTAKE SUMMARY AGENT — connects to Slack, Notion, and ClickUp.
+   It reads each new inquiry and writes a short, clear summary of who they are and what they need
+   straight into Slack, then opens the right task in ClickUp and drafts a follow-up. Warm leads stay
+   warm instead of going cold while someone finds a free fifteen minutes.
+   Concrete example: before your discovery call, you already have a two-line summary in Slack and a
+   ClickUp task with next steps queued — so you walk in prepared instead of scrambling.
+
+4. CONTENT PRODUCTION AGENT — connects to Notion, Google Drive, and email.
+   It turns your own notes and client wins in Notion and Drive into ready-to-post LinkedIn content,
+   emails, and follow-ups — without a dedicated marketing hire. It writes in your voice from day one,
+   so staying visible stops being the thing that slips when work gets busy.
+   Concrete example: a single win you jotted in Notion becomes a week of publish-ready posts and a
+   follow-up email sequence, drafted in your voice, waiting for your quick approval.
+
+5. ADMIN AUTOMATION AGENT — connects to ClickUp, Slack, and Google Drive.
+   It takes the recurring admin off your plate — follow-up messages, task creation, and the
+   copy-paste shuffle between Drive, Notion, and ClickUp. It handles the repeatable pieces
+   automatically and routes only the judgment calls back to you, so more of your day is billable.
+   Concrete example: instead of you rebuilding the same onboarding checklist and follow-up tasks for
+   every new client, it spins them up automatically and only pings you when a real decision is needed.
+
+6. WEEKLY OPERATIONS DIGEST — connects to Slack, Notion, and ClickUp.
+   It runs a simple weekly summary for the whole team — new leads, open follow-ups, and what needs
+   attention — pulled from the data you already have. Nothing falls between the cracks and nobody
+   needs a status meeting to know where things stand.
+   Concrete example: every Monday your team of five opens one clear digest in Slack instead of
+   sitting through a status call — one view, everyone aligned.
+
+HOW IT ROLLS OUT (mention briefly, reassuringly)
+No long multi-month rollout. Week one is onboarding and setup — you map how leads reach you, your
+voice gets built from your own notes, and the Lead Response Agent is configured and tested with a
+live test inquiry. Nothing customer-facing goes live yet. Weeks two and three, the rest go live:
+booking, intake summaries, content, admin automation, and the weekly digest, all wired into the
+tools you already use.
+
+YOUR ROI PICTURE (ground it in real numbers, stay conservative, no guarantees)
+Start from what you actually told us: about 50 new leads a month at Origins. Use a planning example
+of a $5,000 average client value and a 20% close rate — those two are adjustable starting
+assumptions you can change to your real figures, not promises. The lever the Lead Response Agent
+pulls is speed: answering in minutes instead of hours reliably lifts how many of those 50 leads
+turn into booked calls and clients, and even a modest lift on a $5,000 client value adds up fast
+over a quarter. On the admin side, your team is spending on the order of 15 hours a week on
+repeatable work; the Admin Automation and Digest agents are built to claw a chunk of that back —
+hours per week returned to billable client work every year. Keep the framing conservative: these
+are industry-benchmark ranges, your results will vary, and there are no guaranteed outcomes — but
+the direction is clear: faster responses, fuller calendar, less admin, steadier marketing.
+
+CLOSE
+Wrap by inviting Mike to open the qualifier page and see if Origins qualifies to move forward, then
+deliver the mandatory spoken sign-off verbatim. The qualifier lives at
+https://bennett-maxwell.github.io/fki-preview/qualify.html — mention it only as "the qualifier page"
+and never spell the URL aloud. No calendar-booking language.
