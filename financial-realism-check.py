@@ -46,6 +46,7 @@ INDUSTRY_BANDS = {
 # Per-lead industry classification (from business name / known intake).
 LEAD_INDUSTRY = {
     "john-doe-sporting-goods-20260604": "retail",
+    "surfline-hoods-mj-affleck": "home_services",  # Surfline Hoods — restaurant kitchen exhaust/hood cleaning (job/ticket)
     "adam-webb":        "home_services",      # ION Solar — residential solar install (job/ticket)
     "jorge-capones-usa":"retail",             # Capones USA — men's fragrance/grooming products (per-purchase)
     "court-lundberg":   "home_services",      # Rare Breed Plumbing, Heating & Air
@@ -250,6 +251,9 @@ def main():
     # D7-02 [RL] flag a slider triple that spans >=2 DISTINCT industries (true
     # cross-industry clone — the original $25K/$45K-everywhere defect). A triple
     # confined to a single industry is a legitimate shared modeling range.
+    checked = [r for r in results if not r.get("skipped")]
+    skipped = [r for r in results if r.get("skipped")]
+
     clones = {}
     for trip, entries in clone_registry.items():
         industries = {ind for _, ind in entries}
@@ -261,9 +265,6 @@ def main():
                     r["fails"].append(
                         f"D7-02 [RL] identical ROI slider {trip} cloned across "
                         f"{len(industries)} industries {sorted(industries)} — not personalized")
-
-    checked = [r for r in results if not r.get("skipped")]
-    skipped = [r for r in results if r.get("skipped")]
     npass = sum(1 for r in checked if not r["fails"])
     print(f"{'SLUG':<20} {'INDUSTRY':<16} {'DEFAULT':>9} {'JS':>8}  RESULT")
     print("-" * 78)
