@@ -20,6 +20,7 @@ PODCAST_REDLINE_KEYS = {
     "D3-03_podcast_duration_6to16min_RL",
     "D3-05_podcast_clean_ending_RL",
     "D3-06_podcast_live_fresh_RL",
+    "D3-11_podcast_content_substance_RL",
     "D4-09_podcast_source_funnel_clean_RL",
 }
 PODCAST_ALIAS = {
@@ -206,6 +207,43 @@ def podcast_clean_ending_gate(slug, lead):
         return proc.returncode == 0, detail
     except Exception as e:
         return False, f"clean-ending check error: {e}"
+
+def podcast_content_substance_gate(slug, lead):
+    """Red-line D3-11 (2026-07-07, Madison COO): the podcast must SUBSTANTIVELY walk
+    through the blueprint — the lead's ACTUAL AI agents + their use-cases / the value AI
+    delivers — not just a generic intro/outro. The Stage-4 directive (blueprint-ai-skill
+    v3.53) and the D3-05 '7-segment source doc' row already REQUIRE this, but nothing
+    enforced it at the TRANSCRIPT level, so a thin render that opens/closes correctly but
+    never names the agents could PASS. This delegates to
+    scripts/podcast_content_substance_gate.py, which transcribes the FULL episode (same
+    faster-whisper path as D3-02/D3-05) and FAILS unless >=3 of the lead's agents (from
+    leads/<slug>.json agents[].name) OR >=6 of its use-case keywords are spoken. If the
+    lead JSON defines no agents AND no use-cases, it returns N/A (cannot check) and PASSES.
+    PODCAST_VERDICT only (per DECOUPLE) — gates podcast attach/publish, NOT the customer send."""
+    checker = os.path.join(REPO, "scripts", "podcast_content_substance_gate.py")
+    audio_path = os.path.join(REPO, "podcasts", podcast_filename(slug))
+    lead_json = os.path.join(REPO, "leads", f"{slug}.json")
+    if not os.path.exists(checker):
+        return False, "podcast_content_substance_gate.py missing"
+    if not os.path.exists(audio_path):
+        return False, "podcast file missing"
+    if not os.path.exists(lead_json):
+        return False, f"lead profile missing: {lead_json}"
+    receipt = os.path.join(REPO, "audit-receipts", slug, f"{slug}-content-substance.json")
+    cmd = [sys.executable, checker, "--audio", audio_path, "--lead-json", lead_json,
+           "--receipt", receipt, "--json-output"]
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=420)
+        detail = ""
+        try:
+            data = json.loads(proc.stdout)
+            detail = (str(data.get("status", "")) + ": " + str(data.get("reason", ""))).strip(": ")
+        except Exception:
+            lines = (proc.stdout or proc.stderr or "").strip().splitlines()
+            detail = lines[-1] if lines else f"exit {proc.returncode}"
+        return proc.returncode == 0, detail
+    except Exception as e:
+        return False, f"content-substance check error: {e}"
 
 def check_placeholder(html):
     stripped = re.sub(r'<pre>.*?</pre>', '', html, flags=re.DOTALL)
@@ -665,6 +703,9 @@ def audit_lead(slug):
     clean_end_ok, clean_end_detail = podcast_clean_ending_gate(slug, lead)
     results["D3-05_podcast_clean_ending_RL"] = clean_end_ok
     redlines["D3-05_podcast_clean_ending_RL"] = clean_end_ok
+    substance_ok, substance_detail = podcast_content_substance_gate(slug, lead)
+    results["D3-11_podcast_content_substance_RL"] = substance_ok
+    redlines["D3-11_podcast_content_substance_RL"] = substance_ok
     live_fresh_ok, live_fresh_detail = hub_audio_fresh_gate(slug)
     results["D3-06_podcast_live_fresh_RL"] = live_fresh_ok
     redlines["D3-06_podcast_live_fresh_RL"] = live_fresh_ok
@@ -726,6 +767,7 @@ def audit_lead(slug):
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail,
             "podcast_clean_ending_detail": clean_end_detail,
+            "podcast_content_substance_detail": substance_detail,
             "podcast_live_fresh_detail": live_fresh_detail,
             "podcast_duration_detail": duration_detail,
             "agent_card_prompt_quality_detail": acpq_detail}
@@ -768,6 +810,7 @@ def main():
             print(f"       PODCAST red-line (non-blocking): {r['podcast_redline_fail']}"
                   f" | dur={r.get('podcast_duration_detail','')}"
                   f" | clean={r.get('podcast_clean_ending_detail','')}"
+                  f" | substance={r.get('podcast_content_substance_detail','')}"
                   f" | live-fresh={r.get('podcast_live_fresh_detail','')}")
     # Append to history
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
