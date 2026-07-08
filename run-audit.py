@@ -19,6 +19,7 @@ PODCAST_REDLINE_KEYS = {
     "D3-02_podcast_audio_direct_address_RL",
     "D3-03_podcast_duration_6to16min_RL",
     "D3-05_podcast_clean_ending_RL",
+    "D3-06_podcast_live_fresh_RL",
     "D4-09_podcast_source_funnel_clean_RL",
 }
 PODCAST_ALIAS = {
@@ -44,6 +45,92 @@ def hub_live_gate(slug):
     url = f"https://bennett-maxwell.github.io/fki-preview/blueprints/{slug}.html"
     code = curl_http(url)
     return code == 200, f"{url} -> HTTP {code}"
+
+def hub_audio_fresh_gate(slug):
+    """Red-line D3-06 (2026-07-07 — PERMANENT FIX for the stale-live-podcast failure class).
+    HTTP 200 on the page is NOT proof. This gate fetches the LIVE blueprint page, extracts the
+    ACTUAL <audio> src the customer will hear, downloads THOSE bytes from the LIVE URL, ffprobes
+    the downloaded bytes, and FAILS if:
+      (a) the live mp3 duration is outside the 4:00-16:00 window (DURATION_MIN/MAX_SEC), OR
+      (b) the live mp3 duration does not match the repo canonical podcasts/<slug>.mp3 within +-3s.
+    WHY: every prior 'published/200' audit checked the WRONG layer — the page returned 200 and
+    the repo file was the correct short one, but the CDN still served a stale ~20-min mp3. Only
+    ffprobing the bytes actually served by the page's audio URL proves the customer hears the
+    current short render. A stale/oversized live file is a HARD FAIL here.
+    Skippable via BLUEPRINT_SKIP_HUB_LIVE=1 (pre-publish content-only audit; page not live yet)."""
+    if os.environ.get("BLUEPRINT_SKIP_HUB_LIVE") == "1":
+        return True, "skipped (BLUEPRINT_SKIP_HUB_LIVE=1, pre-publish content audit)"
+    import tempfile
+    page_url = f"https://bennett-maxwell.github.io/fki-preview/blueprints/{slug}.html"
+    try:
+        req = urllib.request.Request(page_url, headers={"User-Agent": "FKI-Audit/1.0"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            if r.status != 200:
+                return False, f"live page {page_url} -> HTTP {r.status}"
+            html = r.read().decode("utf-8", "replace")
+    except Exception as e:
+        return False, f"live page fetch failed: {e}"
+    # Extract the audio src the player actually loads (prefer <audio>/<source>, else any .mp3 src=)
+    m = (re.search(r'<audio[^>]*\bsrc="([^"]+\.mp3[^"]*)"', html, re.I)
+         or re.search(r'<source[^>]*\bsrc="([^"]+\.mp3[^"]*)"', html, re.I)
+         or re.search(r'\bsrc="([^"]+\.mp3[^"]*)"', html, re.I))
+    if not m:
+        return False, "no .mp3 audio src found on live page"
+    audio_url = m.group(1)
+    if audio_url.startswith("//"):
+        audio_url = "https:" + audio_url
+    elif audio_url.startswith("/"):
+        audio_url = "https://bennett-maxwell.github.io" + audio_url
+    elif not audio_url.startswith("http"):
+        audio_url = f"https://bennett-maxwell.github.io/fki-preview/blueprints/{audio_url}"
+    # Download the LIVE mp3 bytes (follow through the served URL, incl. any ?v= cache-bust)
+    try:
+        req = urllib.request.Request(audio_url, headers={"User-Agent": "FKI-Audit/1.0"})
+        with urllib.request.urlopen(req, timeout=90) as r:
+            if r.status != 200:
+                return False, f"live mp3 {audio_url} -> HTTP {r.status}"
+            data = r.read()
+    except Exception as e:
+        return False, f"live mp3 fetch failed ({audio_url}): {e}"
+    if len(data) < 1024:
+        return False, f"live mp3 too small ({len(data)} bytes) at {audio_url}"
+    tmp = tempfile.NamedTemporaryFile(suffix=".mp3", delete=False)
+    try:
+        tmp.write(data)
+        tmp.close()
+        try:
+            out = subprocess.run(
+                ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                 "-of", "csv=p=0", tmp.name],
+                capture_output=True, text=True, timeout=30).stdout.strip()
+            live_secs = float(out)
+        except Exception as e:
+            return False, f"ffprobe(live bytes) failed: {e}"
+    finally:
+        try:
+            os.unlink(tmp.name)
+        except OSError:
+            pass
+    live_mmss = f"{int(live_secs)//60}:{int(live_secs)%60:02d}"
+    if live_secs < DURATION_MIN_SEC or live_secs > DURATION_MAX_SEC:
+        return False, (f"LIVE mp3 {live_mmss} at {audio_url} is OUT OF WINDOW (4:00-16:00) — "
+                       f"CDN is serving a stale/oversized file; publish FAILED")
+    repo_path = os.path.join(REPO, "podcasts", podcast_filename(slug))
+    if os.path.exists(repo_path):
+        try:
+            rout = subprocess.run(
+                ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                 "-of", "csv=p=0", repo_path],
+                capture_output=True, text=True, timeout=30).stdout.strip()
+            repo_secs = float(rout)
+        except Exception as e:
+            return False, f"ffprobe(repo) failed: {e}"
+        if abs(live_secs - repo_secs) > 3.0:
+            repo_mmss = f"{int(repo_secs)//60}:{int(repo_secs)%60:02d}"
+            return False, (f"LIVE mp3 {live_mmss} != repo {repo_mmss} (diff "
+                           f"{abs(live_secs - repo_secs):.1f}s > 3s) — live is not the current render")
+        return True, f"LIVE mp3 {live_mmss} in-window & matches repo +-3s ({audio_url})"
+    return True, f"LIVE mp3 {live_mmss} in-window ({audio_url}; no repo file to match)"
 
 def file_sha256(path):
     h = hashlib.sha256()
@@ -578,6 +665,9 @@ def audit_lead(slug):
     clean_end_ok, clean_end_detail = podcast_clean_ending_gate(slug, lead)
     results["D3-05_podcast_clean_ending_RL"] = clean_end_ok
     redlines["D3-05_podcast_clean_ending_RL"] = clean_end_ok
+    live_fresh_ok, live_fresh_detail = hub_audio_fresh_gate(slug)
+    results["D3-06_podcast_live_fresh_RL"] = live_fresh_ok
+    redlines["D3-06_podcast_live_fresh_RL"] = live_fresh_ok
     orphan_ok, orphan_detail = no_orphan_classes(html)
     results["D9-01_no_orphan_classes"] = orphan_ok
     calc_ok, calc_detail = calculator_gate(html, lead)
@@ -636,6 +726,7 @@ def audit_lead(slug):
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail,
             "podcast_clean_ending_detail": clean_end_detail,
+            "podcast_live_fresh_detail": live_fresh_detail,
             "podcast_duration_detail": duration_detail,
             "agent_card_prompt_quality_detail": acpq_detail}
 
@@ -676,7 +767,8 @@ def main():
         if r.get("podcast_redline_fail"):
             print(f"       PODCAST red-line (non-blocking): {r['podcast_redline_fail']}"
                   f" | dur={r.get('podcast_duration_detail','')}"
-                  f" | clean={r.get('podcast_clean_ending_detail','')}")
+                  f" | clean={r.get('podcast_clean_ending_detail','')}"
+                  f" | live-fresh={r.get('podcast_live_fresh_detail','')}")
     # Append to history
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
     import datetime
