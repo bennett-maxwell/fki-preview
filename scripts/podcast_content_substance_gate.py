@@ -102,6 +102,31 @@ def transcribe_full(audio_path: Path) -> str:
     return " ".join(chunks)
 
 
+AGENT_NAME_RE = re.compile(r'class="agent-name"[^>]*>(.*?)</', re.IGNORECASE | re.DOTALL)
+
+
+def agents_from_html(html_path: Path):
+    """Fallback agent source: extract the `<div class="agent-name">NAME</div>` labels
+    from the RENDERED blueprint HTML when the lead JSON defines no agents[]. WHY: many
+    form/GHL leads (e.g. mike-norton-origins) carry no `agents[]` in leads/<slug>.json —
+    the 6 AI agents exist only in the generated blueprint HTML — so without this fallback
+    the substance gate had nothing to check against, returned N/A, and SILENTLY PASSED a
+    thin render. Reading the agent names off the page the customer actually receives makes
+    the gate real for those leads instead of a no-op."""
+    try:
+        html = html_path.read_text(encoding="utf-8", errors="replace")
+    except Exception:
+        return []
+    names = []
+    for raw in AGENT_NAME_RE.findall(html):
+        name = re.sub(r"<[^>]+>", " ", raw)          # strip any nested tags
+        name = re.sub(r"&[#0-9a-zA-Z]+;", " ", name)  # strip HTML entities
+        name = re.sub(r"\s+", " ", name).strip()
+        if name and name not in names:
+            names.append(name)
+    return names
+
+
 def normalize(text: str) -> str:
     return re.sub(r"[^a-z0-9 ]", " ", (text or "").lower())
 
@@ -188,6 +213,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--audio", required=True)
     ap.add_argument("--lead-json", required=True)
+    ap.add_argument("--blueprint-html", help="Rendered blueprint HTML; agent names are read "
+                    "from its <div class=\"agent-name\"> labels when the lead JSON has no agents[]")
     ap.add_argument("--transcript-file", help="Use an existing transcript instead of transcribing")
     ap.add_argument("--agent-min", type=int, default=AGENT_MIN_DEFAULT)
     ap.add_argument("--usecase-min", type=int, default=USECASE_MIN_DEFAULT)
@@ -206,6 +233,17 @@ def main() -> int:
     if not audio_path.exists():
         result.update({"status": "FAIL", "passed": False, "reason": "podcast audio missing"})
         print(json.dumps(result, indent=2)); return 1
+
+    # HTML fallback: if the lead JSON carries no agents, pull the agent names off the
+    # rendered blueprint HTML so the gate can still enforce substance (see agents_from_html).
+    agents_source = "lead_json"
+    existing_agents = lead.get("agents") or lead.get("ai_agents") or []
+    if not existing_agents and args.blueprint_html and Path(args.blueprint_html).exists():
+        html_agents = agents_from_html(Path(args.blueprint_html))
+        if html_agents:
+            lead["agents"] = [{"name": n} for n in html_agents]
+            agents_source = "blueprint_html"
+    result["agents_source"] = agents_source
     try:
         if args.transcript_file and Path(args.transcript_file).exists():
             transcript = Path(args.transcript_file).read_text(encoding="utf-8", errors="replace")

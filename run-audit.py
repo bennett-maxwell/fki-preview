@@ -217,8 +217,10 @@ def podcast_content_substance_gate(slug, lead):
     never names the agents could PASS. This delegates to
     scripts/podcast_content_substance_gate.py, which transcribes the FULL episode (same
     faster-whisper path as D3-02/D3-05) and FAILS unless >=3 of the lead's agents (from
-    leads/<slug>.json agents[].name) OR >=6 of its use-case keywords are spoken. If the
-    lead JSON defines no agents AND no use-cases, it returns N/A (cannot check) and PASSES.
+    leads/<slug>.json agents[].name) OR >=6 of its use-case keywords are spoken. When the
+    lead JSON has no agents[], the agent names are read from the rendered blueprint HTML
+    (blueprints/<slug>.html) so form/GHL leads like mike-norton are still enforced. Only when
+    NEITHER the lead JSON NOR the HTML yields agents (and no use-cases) does it return N/A.
     PODCAST_VERDICT only (per DECOUPLE) — gates podcast attach/publish, NOT the customer send."""
     checker = os.path.join(REPO, "scripts", "podcast_content_substance_gate.py")
     audio_path = os.path.join(REPO, "podcasts", podcast_filename(slug))
@@ -230,8 +232,14 @@ def podcast_content_substance_gate(slug, lead):
     if not os.path.exists(lead_json):
         return False, f"lead profile missing: {lead_json}"
     receipt = os.path.join(REPO, "audit-receipts", slug, f"{slug}-content-substance.json")
+    html_path = os.path.join(REPO, "blueprints", f"{slug}.html")
     cmd = [sys.executable, checker, "--audio", audio_path, "--lead-json", lead_json,
            "--receipt", receipt, "--json-output"]
+    # Fallback agent source: when leads/<slug>.json has no agents[] (common for form/GHL
+    # leads like mike-norton), the gate reads the agent names from the rendered blueprint
+    # HTML so it enforces substance instead of returning a silent N/A pass.
+    if os.path.exists(html_path):
+        cmd += ["--blueprint-html", html_path]
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=420)
         detail = ""
