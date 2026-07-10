@@ -1,12 +1,16 @@
 <title>Preschool &amp; School Photography | Spoiled Rotten Photography</title>
 <meta name="description" content="Boutique preschool and K-12 picture day photography, nationwide. Stress-free for directors, personality-packed portraits parents love. Book your school today.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="https://spoiledrottenphotography.com/">
 <meta property="og:title" content="Preschool &amp; School Photography | Spoiled Rotten Photography">
 <meta property="og:description" content="Boutique preschool and K-12 picture day photography, nationwide. Stress-free for directors, personality-packed portraits parents love.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://spoiledrottenphotography.com/">
 <meta property="og:image" content="https://spoiledrottenphotography.com/wp-content/uploads/2024/09/Hero2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Preschool &amp; School Photography | Spoiled Rotten Photography">
+<meta name="twitter:description" content="Boutique preschool and K-12 picture day photography, nationwide. Stress-free for directors, personality-packed portraits parents love.">
+<meta name="twitter:image" content="https://spoiledrottenphotography.com/wp-content/uploads/2024/09/Hero2.jpg">
 <link rel="shortcut icon" href="https://spoiledrottenphotography.com/wp-content/uploads/2014/06/favicon.png" type="image/x-icon">
 <link rel="icon" href="https://spoiledrottenphotography.com/wp-content/uploads/2024/08/cropped-SRP-logo-square-copy-32x32.jpg" sizes="32x32">
 <link rel="apple-touch-icon" href="https://spoiledrottenphotography.com/wp-content/uploads/2024/08/cropped-SRP-logo-square-copy-180x180.jpg">
@@ -17,7 +21,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Photographer",
+  "@type": "LocalBusiness",
   "name": "Spoiled Rotten Photography",
   "url": "https://spoiledrottenphotography.com/",
   "logo": "https://spoiledrottenphotography.com/wp-content/uploads/2024/11/SPR-Logo-250x86.png",
@@ -182,6 +186,19 @@
   }
   .hamburger-toggle{ display:none; }
   .hamburger-label{ display:none; }
+
+  /* Skip link */
+  .skip-link{
+    position:absolute; left:8px; top:-60px; z-index:1000;
+    background:var(--primary); color:var(--white); padding:12px 20px;
+    border-radius:8px; text-decoration:none; font-weight:600; transition:top .15s ease;
+  }
+  .skip-link:focus{ top:8px; }
+
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
 
   @media (max-width:960px){
     nav.main-nav{
@@ -360,10 +377,13 @@
   .form-field{ display:flex; flex-direction:column; gap:6px; }
   .form-field label{ font-size:0.85rem; font-weight:600; color:var(--ink); }
   .form-field input, .form-field select{
-    padding:14px 16px; border-radius:12px; border:1.5px solid var(--neutral-1); font-family:'Poppins',sans-serif; font-size:0.97rem; background:var(--grey-bg);
+    padding:14px 16px; border-radius:12px; border:1.5px solid var(--neutral-1); font-family:'Poppins',sans-serif; font-size:16px; background:var(--grey-bg);
     min-height:44px;
   }
-  .form-field input:focus, .form-field select:focus{ outline:none; border-color:var(--lilac); background:var(--white); }
+  .form-field input:focus, .form-field select:focus{ outline:none; border-color:var(--lilac); background:var(--white); box-shadow:0 0 0 3px var(--lilac-light); }
+  a:focus-visible, button:focus-visible, .form-field input:focus-visible, .form-field select:focus-visible, summary:focus-visible{
+    outline:3px solid var(--primary); outline-offset:2px;
+  }
   .honeypot{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
   .form-submit{ margin-top:8px; width:100%; }
   .confirm-msg{
@@ -419,7 +439,8 @@
   @media (max-width:960px){
     .mobile-cta-bar{
       display:flex; position:fixed; bottom:0; left:0; right:0; z-index:600;
-      background:var(--white); border-top:1px solid var(--neutral-1); padding:10px 5%;
+      background:var(--white); border-top:1px solid var(--neutral-1);
+      padding:10px 5% calc(10px + env(safe-area-inset-bottom));
       gap:10px; box-shadow:0 -8px 24px rgba(0,0,0,0.08);
     }
     .mobile-cta-bar a{
@@ -428,20 +449,21 @@
     }
     .mobile-cta-bar .book-btn{ background:var(--primary); color:var(--white); }
     .mobile-cta-bar .call-btn{ background:var(--tint); color:var(--primary); border:1.5px solid var(--lilac-light); }
-    body{ padding-bottom:70px; }
+    body{ padding-bottom:calc(70px + env(safe-area-inset-bottom)); }
   }
 </style>
 
+<a class="skip-link" href="#top">Skip to content</a>
 <header>
   <div class="nav-bar">
     <a class="logo" href="#top" aria-label="Spoiled Rotten Photography home">
       <img src="https://spoiledrottenphotography.com/wp-content/uploads/2024/11/SPR-Logo-250x86.png" alt="Spoiled Rotten Photography logo" width="145" height="50">
     </a>
     <input type="checkbox" id="nav-toggle" class="hamburger-toggle">
-    <nav class="main-nav" aria-label="Primary">
+    <nav class="main-nav" aria-label="Primary" id="primary-nav">
       <a href="#preschool">Preschool</a>
       <a href="#k12">K-12</a>
-      <a href="#faq">Parents</a>
+      <a href="#parents">Parents</a>
       <a href="#about">About</a>
       <a href="#faq">FAQs</a>
       <a href="#book">Book Picture Day</a>
@@ -452,7 +474,7 @@
         <span class="cta-desktop">Call Us</span>
       </a>
       <a class="btn btn-primary cta-desktop" href="#book">Book Your Picture Day</a>
-      <label class="hamburger-label" for="nav-toggle" aria-label="Toggle menu">
+      <label class="hamburger-label" for="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0" aria-expanded="false" aria-controls="primary-nav">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </label>
     </div>
@@ -474,7 +496,7 @@
         </div>
       </div>
       <div class="hero-img-wrap">
-        <img src="https://spoiledrottenphotography.com/wp-content/uploads/2024/09/Hero2.jpg" alt="Spoiled Rotten Photography photographer capturing a joyful preschool portrait session" loading="eager">
+        <img src="https://spoiledrottenphotography.com/wp-content/uploads/2024/09/Hero2.jpg" alt="Spoiled Rotten Photography photographer capturing a joyful preschool portrait session" width="800" height="1000" fetchpriority="high">
       </div>
     </div>
   </section>
@@ -547,7 +569,7 @@
           <a class="btn btn-secondary" href="#book">Book K-12 Picture Day</a>
         </div>
       </div>
-      <div class="service-card">
+      <div class="service-card" id="parents">
         <img src="https://spoiledrottenphotography.com/wp-content/uploads/2025/01/0Q2A7103R-scaled-1.jpg" alt="Parent viewing a child's online portrait gallery from Spoiled Rotten Photography" loading="lazy">
         <div class="service-body">
           <h3>Parent Gallery Access</h3>
@@ -564,6 +586,13 @@
       <p class="section-eyebrow">For School &amp; Center Directors</p>
       <h2>Everything Your School Gets When You Book Spoiled Rotten</h2>
       <table class="offer-table">
+        <caption class="sr-only">What your school gets when you book Spoiled Rotten, and why it matters</caption>
+        <thead class="sr-only">
+          <tr>
+            <th scope="col" class="what">What you get</th>
+            <th scope="col" class="why">Why it matters</th>
+          </tr>
+        </thead>
         <tr>
           <td class="what">Photographer + assistant on site</td>
           <td class="why">Someone is always managing the line and calming nerves, so your teachers are never scrambling on picture day.</td>
@@ -823,8 +852,22 @@
       });
     }
     var navToggle = document.getElementById('nav-toggle');
+    var hamburgerLabel = document.querySelector('.hamburger-label');
+    function syncNavExpanded(){
+      if (hamburgerLabel && navToggle) { hamburgerLabel.setAttribute('aria-expanded', navToggle.checked ? 'true' : 'false'); }
+    }
+    if (navToggle) { navToggle.addEventListener('change', syncNavExpanded); }
+    if (hamburgerLabel) {
+      hamburgerLabel.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          navToggle.checked = !navToggle.checked;
+          syncNavExpanded();
+        }
+      });
+    }
     document.querySelectorAll('.main-nav a').forEach(function(a){
-      a.addEventListener('click', function(){ if (navToggle) navToggle.checked = false; });
+      a.addEventListener('click', function(){ if (navToggle) { navToggle.checked = false; syncNavExpanded(); } });
     });
   })();
 </script>
