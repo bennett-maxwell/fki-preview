@@ -43,15 +43,15 @@ def steering(first, business):
         f'negative hook. BANNED ANALYST FRAMING: never say "we are looking at", "we\'re looking at", "we are analyzing", '
         f'"let\'s look at", or otherwise narrate as outside analysts observing the business. Always speak directly to {f} '
         f'about what the system does FOR them — say "this gives you", "you\'ll get", "for you and {business}", not "we\'re looking at". '
-        f'LENGTH IS REQUIRED: cover ALL 12 sections in real depth — aim for about 18 minutes of '
-        f'conversation. Do NOT wrap up early, do NOT rush or summarize; give each of the 12 sections its own '
-        f'substantive back-and-forth. ABSOLUTE HARD CEILING: never exceed 20 minutes — if in doubt, err shorter (17-18 min). '
+        f'LENGTH: this is a SHORT episode (AudioLength.SHORT). Keep it tight and conversational — touch each of the '
+        f'12 sections but stay concise; do NOT pad, lecture, or stretch. Let it land at its natural short length '
+        f'(~9-15 min) and END CLEANLY with a proper close — never a blind hard cut. '
         f'Close with the application CTA — never mention scheduling a call.'
     )
 
 
 async def main(slug, notebook_id, source_path, business_name, first_name, timeout):
-    from notebooklm import NotebookLMClient
+    from notebooklm import NotebookLMClient, AudioLength
     out = os.path.join(PODCASTS, f"{slug}.mp3")
     client = await NotebookLMClient.from_storage()
     async with client:
@@ -63,7 +63,7 @@ async def main(slug, notebook_id, source_path, business_name, first_name, timeou
             await client.sources.add_text(notebook_id, f"{business_name or slug} AI Blueprint", content, wait=True)
             log("source added")
             steer = steering(first_name, business_name)
-            await client.artifacts.generate_audio(notebook_id, instructions=steer)
+            await client.artifacts.generate_audio(notebook_id, instructions=steer, audio_length=AudioLength.SHORT)
             log(f"audio generation requested (steered, {len(steer)} chars)")
         else:
             log(f"attaching to existing notebook: {notebook_id}")

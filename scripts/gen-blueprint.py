@@ -20,7 +20,7 @@ import json, re, sys, os, urllib.parse
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE = os.path.join(REPO, "blueprints", "TEMPLATE.html")
-DEFAULT_BLUEPRINT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+DEFAULT_BLUEPRINT_BASE_URL = "https://hub.aiblueprintmarketing.com"
 BLUEPRINT_BASE_URL = os.environ.get("BLUEPRINT_BASE_URL", DEFAULT_BLUEPRINT_BASE_URL).rstrip("/")
 
 
@@ -98,6 +98,63 @@ def replace_section(html, sec_id, inner):
     if not pat.search(html):
         raise SystemExit(f"FATAL: section id={sec_id} not found in template")
     return pat.sub(lambda m: m.group(1) + inner + m.group(3), html, count=1)
+
+
+def validate_production_agent_prompt(text, label, min_chars=1200):
+    """Block weak "agent" cards that are only short prompt starters.
+
+    A Blueprint claims these are production-ready agents. That means the prompt
+    must be a usable operating runbook: inputs, workflow, output contract,
+    safety/escalation rules, and a first-run test.
+    """
+    raw = str(text or "").strip()
+    low = raw.lower()
+    required = {
+        "identity": ["## identity", "identity"],
+        "inputs": ["## inputs", "inputs you need", "input contract", "required inputs"],
+        "workflow": ["## workflow", "## structure", "step 1", "operating loop"],
+        "output": ["## output", "output schema", "return this", "deliverables"],
+        "rules": ["## rules", "safety rules", "guardrails"],
+        "escalation": ["escalat", "human review", "route to", "do not send"],
+        "test": ["first-run test", "test input", "example input", "acceptance test"],
+    }
+    missing = [name for name, needles in required.items() if not any(n in low for n in needles)]
+    if len(raw) < min_chars or missing:
+        raise SystemExit(
+            f"{label} is not production-ready: {len(raw)} chars, missing {missing}. "
+            "Fix the profile prompt so it includes identity, inputs, workflow, output schema, "
+            "rules, escalation/human-review boundary, and a first-run test."
+        )
+    return raw
+
+
+def _hex_to_rgb(hexstr):
+    h = hexstr.lstrip("#")
+    if len(h) == 3:
+        h = "".join(c * 2 for c in h)
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def apply_accent(html, accent):
+    """Drive the page's accent off the lead's real brand color.
+
+    The base template hard-codes the Advaita blue (#0071E3) into --brand,
+    --brand-red, --crmx-red and --accent-bg. A regenerated lead page must wear
+    the lead's own accent (color-extraction gate), so swap those :root vars.
+    """
+    accent = (accent or "").strip()
+    if not re.match(r"^#[0-9A-Fa-f]{3,6}$", accent):
+        return html
+    r, g, b = _hex_to_rgb(accent)
+    subs = [
+        (r'(--brand:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--brand-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--crmx-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
+        (r'(--accent-bg:\s*)rgba\([^)]*\)', rf'\g<1>rgba({r}, {g}, {b}, 0.08)'),
+    ]
+    for pat, repl in subs:
+        html = re.sub(pat, repl, html, count=1)
+    return html
 
 
 def build(profile):
@@ -233,17 +290,16 @@ def build(profile):
 
     # ---- agents ----
     def _agent_prompt(a, i):
-        # D2-02 [RL] (Bennett 2026-06-09): every card ships a copy-paste starter prompt >=200 chars.
-        ai_list = p.get("ai_agents") or []
-        txt = (a.get("agent_prompt")
-               or (ai_list[i].get("agent_prompt") if i < len(ai_list) and isinstance(ai_list[i], dict) else "")
-               or "")
-        if not txt:
-            raise SystemExit(f"agent {i+1} ({a.get('name')}) missing agent_prompt — D2-02 red-line, fix the profile")
-        return ('<div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);'
-                'border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);'
-                'margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">'
-                f'Copy-paste prompt:</strong>{esc(txt)}</div>')
+        # OVERRIDE 2026-06-26 (Madison Lanz, "I own it") + LOCKED v3.42 (2026-07-01):
+        # Agent squares are CONDENSED and OUTCOME-FIRST. They must NEVER carry a raw
+        # copy-paste operating prompt, a "You are an AI agent…" boilerplate, or a
+        # "Copy-paste prompt:" label — that reads as a lazy paste (Madison ruled it out).
+        # The full operating prompts live ONLY in the 3 ready-to-use dropdown cards below.
+        # Enforced by run-audit.py red-line D2-03 + blueprint_agent_prompt_quality_gate.py.
+        # Do NOT restore an inline prompt here — it will hard-fail the audit for every lead.
+        return ''
+    # Each card = icon + name + one-line lead-specific desc + a benefit-focused
+    # KEY-HIGHLIGHT/OUTCOME line (agent-outcome). No prompt text. (v3.42)
     ac = "".join(f'<div class="agent-card"><div class="agent-icon">{AGENT_SVGS[i % len(AGENT_SVGS)]}</div>'
                  f'<div class="agent-name">{esc(a["name"])}</div><div class="agent-desc">{a["desc"]}</div>'
                  f'{_agent_prompt(a, i)}'
@@ -280,10 +336,11 @@ def build(profile):
     # ---- prompts (keep pre ids + copy/toggle hooks) ----
     pcards = ""
     for i, pr in enumerate(p["prompts"], start=1):
+        prompt_pre = validate_production_agent_prompt(pr["pre"], f"visible prompt {i} ({pr['title']})")
         pcards += (f'<div class="prompt-card"><div class="prompt-header" onclick="togglePrompt(this)">'
                    f'<div class="prompt-header-left"><h3>{esc(pr["title"])}</h3><p>{esc(pr["subtitle"])}</p></div>'
                    f'<span class="prompt-expand-hint">view &amp; copy</span></div><div class="prompt-body">'
-                   f'<pre id="prompt{i}" class="prompt-pre">{esc(pr["pre"])}</pre>'
+                   f'<pre id="prompt{i}" class="prompt-pre">{esc(prompt_pre)}</pre>'
                    f'<button class="copy-btn" onclick="copyPrompt(\'prompt{i}\', this)">'
                    f'<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>'
                    f'<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>'
@@ -357,7 +414,7 @@ def build(profile):
     for lid, lab in (("lbl-contract", c["contract_label"]), ("lbl-leads", c["leads_label"]),
                      ("lbl-rate", c["rate_label"]), ("lbl-hours", c["hours_label"])):
         html = set_label(html, lid, lab)
-    html = re.sub(r'(<p class="section-sub">)Adjust the (?:sliders|numbers).*?(?:set your own numbers|match your real numbers)\.\s*(</p>)',
+    html = re.sub(r'(<section[^>]*\bid="calculator"[^>]*>.*?<p class="section-sub">).*?(</p>)',
                   lambda m: m.group(1) + c["sub"] + m.group(2), html, count=1, flags=re.S)
     pr_obj = (f"{{\n    conservative: {{ contract: {c['contract']}, leads: {c['leads']}, rate: {c['rate']}, hours: {c['hours']}, lift: 0.5 }},\n"
               f"    expected:     {{ contract: {c['contract']}, leads: {c['leads']}, rate: {c['rate']}, hours: {c['hours']}, lift: 1.0 }},\n"
@@ -389,6 +446,8 @@ def build(profile):
     m = re.search(r'<title>(.*?)</title>', html, re.S)
     if m and p["first_name"].lower() not in m.group(1).lower():
         html = html.replace(m.group(0), f'<title>{m.group(1).strip()} · {esc(p["lead_name"])}</title>', 1)
+    # ---- lead accent (color-extraction gate) ----
+    html = apply_accent(html, p.get("accent_color"))
     return html
 
 

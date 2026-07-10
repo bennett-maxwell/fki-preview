@@ -1,0 +1,74 @@
+{
+  "completion_gate_status": "PASS 36/36 local",
+  "direct_address_receipt": "audit-receipts/scott-paul-phi-health/notebooklm/notebooklm-short-final-direct-address-audit.json",
+  "direct_address_status": "PASS",
+  "format_conformance_status": "7/8: real mp3 and sane size pass; duration fails legacy 8-12 gate because Bennett requested short NotebookLM podcast",
+  "lead": "scott-paul-phi-health",
+  "notebook_id": "d75fa5c6-b10a-4365-bb36-ce6b1c4bce2b",
+  "rejected_artifacts": [
+    {
+      "id": "67ddb57b-2cb7-4689-b157-baba36c34a58",
+      "reason": "brief was 1:42 and failed exact/source-framing gate"
+    },
+    {
+      "id": "2ccdf8ca-932e-4d7b-be3c-2e52c70d264f",
+      "reason": "removed invented metrics but failed direct-address opener"
+    },
+    {
+      "id": "3938162c-b6cd-4400-9aaa-e363b4f74d04",
+      "reason": "source-only short failed direct-address opener"
+    },
+    {
+      "id": "499e5b6b-f76e-4ccf-9dbf-6ac05aebf1c5",
+      "reason": "brief was 1:49 and failed direct-address opener"
+    },
+    {
+      "id": "dd3eca9d-8845-49ad-9927-87bfbbc2cf7e",
+      "reason": "9:54 passed duration/size but failed direct-address and reintroduced invented 90 percent claim"
+    },
+    {
+      "id": "d589de2a-2c92-4ce0-8c9c-e6fbf62f5c15",
+      "reason": "hardened default overshot: 18:56 and 27MB"
+    }
+  ],
+  "run_audit_status": "15/16: D3-03 duration red-line only on selected short artifact",
+  "selected_artifact": {
+    "downloaded_original": "audit-receipts/scott-paul-phi-health/notebooklm/scott-paul-phi-health-notebooklm-short-v3.mp3",
+    "format": {
+      "bit_rate": "192050",
+      "duration": "300.048254",
+      "format_name": "mp3",
+      "size": "7203035"
+    },
+    "id": "4b8341c0-2deb-4e36-b0fb-5bc1581507b8",
+    "known_content_caveat": "Transcript excerpt includes a generalized 90% / 48 hours content-decay statement from NotebookLM; it is not a verified Phi metric. Later no-metric artifacts were rejected because they failed direct-address or duration/size gates.",
+    "origin": "NotebookLM generate audio --format deep-dive --length short",
+    "public_file": "podcasts/scott-paul-phi-health.mp3",
+    "public_sha256": "97b5349eeeb720efb3b0339ad3eb99b312ca2006ac7145d1d2ee3c36e96b1c33",
+    "title": "Turning health podcasts into an AI refinery"
+  },
+  "skills_used": [
+    {
+      "drive_file_id": "1_MIDfkQK7vaIUvY0QnSzBIRvuLFgfCxP",
+      "name": "blueprint-podcast-framework-skill",
+      "version": "2.0 frontmatter / v1.9 body"
+    },
+    {
+      "drive_file_id": "1Kq70-3pa-Drp947j4wvu2E2ufAf9DtlE",
+      "name": "notebooklm",
+      "version": "2.1"
+    },
+    {
+      "drive_file_id": "1I13dA9Tcn-N0ETowd6dhZG46F5Wu3krK",
+      "name": "troubleshoot-skill",
+      "version": "5.5"
+    }
+  ],
+  "source": {
+    "hardened_pdf": "audit-receipts/scott-paul-phi-health/notebooklm/scott-paul-phi-health-podcast-source-v3-direct-hardened.pdf",
+    "hardened_source_id": "d161b2d2-68ab-4496-b2cf-7310edb05430",
+    "md": "podcasts/scott-paul-phi-health-podcast-source.md",
+    "md_bytes": 33023
+  },
+  "ts": "2026-06-18T16:59:36.649427+00:00"
+}

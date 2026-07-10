@@ -46,8 +46,10 @@ def main() -> int:
         failures.append({'type':'unresolved_template_token'})
     if html.lower().count('qualify.html') != 1:
         failures.append({'type':'wrong_qualify_cta_count','count':html.lower().count('qualify.html')})
-    if 'agents=' not in html:
-        failures.append({'type':'missing_q7_agents_context'})
+    # 2026-06-19: AI Employees is canonical customer-facing language;
+    # accept legacy agents= while preferring employees=.
+    if 'employees=' not in html and 'agents=' not in html:
+        failures.append({'type':'missing_q7_employees_context'})
     # Visual card requirements: two distinct cards with border/background and button table.
     card_count=len(re.findall(r'border:\s*1px\s+solid\s+#d2d2d7', html, flags=re.I))
     if card_count < 2:

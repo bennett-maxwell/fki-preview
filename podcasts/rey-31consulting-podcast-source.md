@@ -1,362 +1,334 @@
 <!-- v1.6 -->
-NOTEBOOKLM SOURCE DOCUMENT — Personal AI Walkthrough for Rey
-31 Consulting | Prepared by Franchise Ki | Generated 2026-05-27
+# 31 Consulting — Your AI Advantage Walkthrough
 
 ================================================================================
 SPEAKER INSTRUCTIONS — 3 HARD RULES (read this once, then begin)
 ================================================================================
 
-RULE 1 (RED LINE): You are speaking DIRECTLY to REY. Use "you" and
-"your business" in every paragraph. NEVER say "Rey" in the third person.
-NEVER say "this business," "the owner," "they," or "their team." If you catch
-yourself describing Rey from the outside, stop and restart the sentence
-addressed to them.
+RULE 1 (RED LINE): You are speaking DIRECTLY to REY. Use "you" and "your" in every paragraph. NEVER refer to Rey in the third person. NEVER say "this business," "the owner," "they," or "their team." If you catch yourself describing Rey from the outside, stop and restart the sentence addressed to them.
 
-RULE 2: Open the audio with EXACTLY these words: "Hi Rey, welcome.
-This walkthrough was built for you and 31 Consulting, from what you told us."
-Then proceed.
+RULE 2: Open the audio with EXACTLY these words: "Hi Rey, welcome. This walkthrough was built for you and 31 Consulting, from what you told us." Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not
-a flaw. No agent brand names. Application CTA only — never mention calendar/booking.
-
-================================================================================
+RULE 3: Your business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking. BANNED PHRASES — never say any of these on the audio: "the business", "this business", "the owner", "they", "their team", "the company". Always say "you", "your business", "31 Consulting".
 
 ---
 
 ## SECTION 1 — Hi Rey, this is your walkthrough
 
-Hi Rey — welcome. This is your AI walkthrough, built for you and
-31 Consulting. Every number you're about to hear came from what you told us.
+Hi Rey, welcome. This walkthrough was built for you and 31 Consulting, from what you told us. Everything you're about to hear came straight from your form and your own practice.
 
-You operate in business consulting, serving B2B clients seeking business consulting and operational improvement. You run 31 Consulting at https://31consulting.net.
-You're already doing the hard work — the clients, the team, the reputation. That's
-yours. What we're going to walk through together isn't about fixing what's broken
-in your business. It's about showing you exactly where AI amplifies everything
-you've already built.
+You run 31 Consulting, a growing consulting practice. That work is yours, and nothing here replaces it. What you'll hear is exactly where AI gives you your time back so you can pour more of yourself into the client work only you can do.
 
-You told us your current tools are: Slack. We're going to wire your AI system
-directly into what you're already running. Nothing you use today gets ripped out.
-Everything gets amplified.
-
-Your team is the backbone of 31 Consulting.
-
-You told us your current AI use is early-stage. That's exactly where most business consulting businesses are right now — and it's the right starting point.
-
-The 3 AI tools you'll hear about in Section 4 were written specifically for you and
-31 Consulting. Not adjusted from a template. Built from your answers, for how
-your business actually works. Let's walk through what's possible.
+You told us your single biggest goal is generating more leads, and that the parts of your week pulling hardest on you are slow lead response, follow-up, appointment booking, admin work, and reporting. You're already using automation, which is a strong place to start. Keep that goal in mind — every tool below is aimed right at it.
 
 ---
 
 ## SECTION 2 — Your Current Tool Stack: Where 31 Consulting Is Today
 
-WHERE YOU ARE TODAY — your current operational infrastructure:
+Here is the operational stack you're running today, and where AI plugs in on top of it — nothing gets ripped out:
 
-- **Slack**: Core operational tool in your current stack.
-- **Standard business consulting workflow tools**: Core operational tool in your current stack.
-- **Email and calendar**: Core operational tool in your current stack.
-- **Direct team communication**: Core operational tool in your current stack.
+- **Pipedrive** — Your CRM, where your pipeline lives (AI plugs in here)
+- **Slack + Text** — How you communicate with clients and team
+- **Google Drive** — File storage
+- **Automation tools** — You're already automating, which puts you ahead
+- **(No project management tool yet)** — AI gives you a shared system for tracking work
 
-This tool stack tells us two things: where you're already strong, and where the
-biggest time unlocks are waiting. Your AI system gets built on top of what you have —
-not around it.
-
----
-
-## SECTION 3 — The 3 Biggest AI Opportunity Gaps in Your Business
-
-These aren't guesses. These are the gaps that show up consistently for business consulting
-businesses at your stage — and every one of them has a direct AI solution.
-
-### Gap 1 — Speed to Response
-
-You're competing for the first response every time a lead comes in. Research from
-Harvard Business Review shows that 78% of customers buy from the first business to
-respond (HBR, "The Short Life of Online Sales Leads," 2011 —
-https://hbr.org/2011/03/the-short-life-of-online-sales).
-
-In business consulting, that window is measured in minutes — sometimes seconds. Every hour your
-team isn't watching for inbound = leads going to whoever responds first.
-
-An AI speed-to-lead agent handles this 24/7. Every inquiry, within 60 seconds, with
-your brand voice, your pricing context, your services. You stop competing on response
-time because you're always first.
-
-**Time your team could recover: up to 8 hours/week**
-**ROI at $150/hr: up to $4,800/month back in productive time**
-
-Source: HBR, "The Short Life of Online Sales Leads" (2011) — https://hbr.org/2011/03/the-short-life-of-online-sales
-
-### Gap 2 — Follow-Up Consistency
-
-McKinsey research shows that 80% of sales require 5+ follow-up touches, but 44% of
-salespeople give up after just one follow-up (McKinsey & Company, "The B2B digital
-inflection point," 2020 — https://www.mckinsey.com/capabilities/growth-marketing-and-sales).
-
-For your business, every lead that doesn't convert immediately represents a follow-up
-opportunity. Your AI nurture agent tracks every lead, knows where they are in the
-decision process, and sends the right message at the right moment — without anyone
-on your team having to remember to do it.
-
-**Leads that become revenue 60-90 days after first contact, with consistent follow-up:
-up to 35% lift on close rate (industry benchmark)**
-
-Source: McKinsey, "The B2B digital inflection point" (2020) — https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-### Gap 3 — Admin and Documentation Overhead
-
-SBA data shows small business owners spend an average of 25-40% of their week on
-administrative tasks that don't directly generate revenue
-(SBA, "Small Business Time Study," https://www.sba.gov/business-guide).
-
-In business consulting, this shows up as: proposal writing, status updates, follow-up emails,
-scheduling coordination, reporting. Your AI system takes these off your team's plate
-entirely — and does them faster and more consistently than any manual process.
-
-**At 2 people × $150/hr × 5 hrs/week recovered = up to $3,000/month**
-
-Source: SBA, Small Business Time Study — https://www.sba.gov/business-guide
+The biggest signal here: you're already automating and running Pipedrive, so the fastest wins are speeding up lead response, follow-up, and the admin and reporting load that eats your week. That's the first place AI gives you leverage.
 
 ---
 
-## SECTION 4 — The 3 AI Tools Built Specifically for 31 Consulting
+## SECTION 3 — Where AI Gives You the Most Time Back
 
-These aren't generic AI chatbots. These are the exact tools we built for your specific
-situation — your industry, your tools, your services, your pain points.
+These aren't guesses — they come straight from your answers. None of it is a critique of your practice; it's simply where AI carries the load so you don't have to.
 
-### AI Tool 1 — Speed-to-Lead Response Agent
+### Opportunity 1 — Lead Response Speed
 
-You are a lead qualification agent for a B2B consulting firm receiving 1,000 leads per month. Screen each inquiry for challenge clarity, revenue, team size, and consulting readiness. Route hot leads to the owner's Slack immediately with 3 time slot options.
+You flagged slow lead response as a top stress, and your goal is more leads. In consulting, the first to respond usually wins the engagement. An AI agent replies in under 60 seconds to every inquiry — day, night, and weekend — so no lead goes cold while you're with a client.
 
-This runs directly in your existing workflow. No new platform to learn.
-Your team supervises. The AI handles the repetitive execution.
+### Opportunity 2 — Follow-Up
 
----
+Consulting leads rarely convert on the first touch, and follow-up is one of your named stresses. An AI follow-up agent nurtures every prospect who asked but didn't book — with helpful, on-brand touches — so nothing slips through as your pipeline grows.
 
-### AI Tool 2 — Proposal and Qualification Agent
+### Opportunity 3 — Appointment Booking
 
-You are a proposal draft agent for a business consulting firm. Given a prospect's business challenge, team size, and revenue range, generate a professional consulting proposal with scope of work, timeline, and estimated ROI.
+You flagged appointment booking as a drag on your week. An AI scheduling agent handles the back-and-forth, books the call, confirms it, and sends reminders — so discovery calls land on your calendar without the email tag.
 
-Built around how 31 Consulting actually works — not a generic industry template.
+### Opportunity 4 — Admin Work
 
----
+Admin is one of your biggest time sinks. An AI admin agent handles the repetitive back-office work — intake, note capture, CRM updates in Pipedrive, and prep — so you spend your hours on client strategy, not data entry.
 
-### AI Tool 3 — Follow-Up and Outreach Agent
+### Opportunity 5 — Reporting
 
-You are an organic lead discovery agent for a B2B consulting firm. Identify business owners, executives, and decision-makers who match the ideal consulting client profile and generate personalized LinkedIn outreach messages in a direct, knowledgeable, never salesy tone.
-
-This is the kind of tool that, once it's running, your team will not remember
-how they worked without it.
+You flagged reporting as a stress. An AI reporting agent pulls your pipeline and activity data and turns it into clean, ready-to-read updates automatically — so you always know where things stand without building the report by hand.
 
 ---
 
-These 3 tools represent what your AI system looks like in its first 30 days.
-By month 3, the system handles everything these tools do — automatically,
-without anyone on your team triggering them manually.
+## SECTION 4 — The AI System Built Specifically for 31 Consulting
+
+These were written for your practice — your leads, your clients, your voice. Not adjusted from a template:
+
+### Speed-to-Lead Agent
+
+Answers every new inquiry in under 60 seconds in the 31 Consulting voice — acknowledges what they asked about, shares how you help, and offers the next step — day, night, and weekend, so no lead goes cold.
+
+*What you feel:* Every lead answered in under 60 sec
+
+### Follow-Up Agent
+
+Nurtures every prospect who asked but didn't book with helpful, on-brand touches until they're ready — so no opportunity slips as your pipeline grows.
+
+*What you feel:* No lead falls through the cracks
+
+### Scheduling Agent
+
+Handles the booking back-and-forth, books discovery calls, sends confirmations and reminders to cut no-shows, and keeps your calendar clean — without the manual email tag.
+
+*What you feel:* Calls booked, fewer no-shows
+
+### Admin & Intake Agent
+
+Captures intake, logs notes, keeps Pipedrive updated, and preps your client work — so the repetitive back-office load comes off your plate.
+
+*What you feel:* Admin runs itself
+
+### Reporting Agent
+
+Pulls your pipeline and activity data and turns it into clean, ready-to-read updates automatically — so you always know where things stand without building a report by hand.
+
+*What you feel:* Reports on autopilot
+
+### Reactivation Agent
+
+Reaches back out to past prospects and dormant leads with a relevant, on-brand reason to reconnect — turning your existing list into new conversations.
+
+*What you feel:* Old leads turn into new calls
 
 ---
 
-## SECTION 5 — What Your Customers Already Say About 31 Consulting
+## SECTION 5 — Your Brand Voice, Built In From Day One
 
-Your reputation in B2B clients seeking business consulting and operational improvement is an asset. Customer feedback for business consulting businesses
-at your stage consistently highlights the same themes:
-
-- **Responsiveness:** Clients in business consulting cite "fast, clear communication" as the
-  #1 factor in choosing a provider. Your AI system makes this your permanent standard —
-  not a good week, not a great hire, a permanent operational baseline.
-
-- **Reliability:** Follow-through on commitments is what drives repeat business and
-  referrals. Your AI system tracks every commitment and ensures nothing falls through
-  the cracks — even at 2am.
-
-- **Professionalism:** The quality of your proposals, your follow-up, your
-  documentation — all of this signals expertise before the client ever meets you in person.
-  AI raises that standard across every touchpoint.
-
-The businesses that win in business consulting long-term aren't necessarily the ones doing the
-best technical work. They're the ones that are easiest to work with. AI gives you that
-edge permanently.
+Your AI doesn't learn your voice slowly over months. We build it before launch from 31consulting.net and your own language, so every reply a prospect receives sounds like 31 Consulting from the very first message — 90% accurate on day one, then fine-tuned with you.
 
 ---
 
 ## SECTION 6 — Your 30-Day Onboarding Timeline
 
-Here's exactly what the first 90 days look like if you move forward:
+**Days 1-3 — AI Is In**
+- Discovery call — map how leads reach you and the questions you answer most
+- Speed-to-Lead + Follow-Up agents configured and connected to Pipedrive
+- Brand voice built from 31consulting.net and how you talk to clients
+- Live test: send a test inquiry and watch the instant reply fire
+_Result: Your first agents are live. Every lead gets an instant, on-brand answer while you focus on client work._
 
-**Days 1-3: Onboarding.** Business consulting audit. Brand voice profile. Full ops map.
-We listen. Nothing gets built until we understand how you actually work.
+**Days 4-7 — System Is Running**
+- Scheduling + Admin agents connected to your calendar and Pipedrive
+- Reporting agent set up on your pipeline data
+- Reactivation agent deployed across your past-prospect list
+- Team walkthrough: 30 minutes, no technical knowledge required
+_Result: All 6 agents deployed and running across your real pipeline. Team trained._
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
-agent skills. You see the first results. Your team gives feedback. The system adjusts.
+**Day 30 — Fully Calibrated**
+- 30-day review: leads answered, calls booked, follow-ups sent, hours saved
+- Agents refined on your real inquiries and client conversations
+- Expansion roadmap: what to automate next as you scale
+_Result: The system knows your practice. Every agent calibrated to real 31 Consulting data._
 
-**Day 30: The system runs your business rhythm.** It compounds. It never forgets.
-You're spending time on what only you can do.
-
-**Months 2-3: Light calibration, minimal manual input.** The system knows your
-patterns. Your team uses it the way they use their phone — naturally, without thinking.
-
-**After Month 3: System and team integrated.** World-class employee, 24/7, fully
-autonomous. Not "getting better every week." Already there.
+**Month 2+ — Compounding**
+- Minimal manual input — the system answers and follows up on every lead
+- Continuous improvement from real pipeline activity
+- You own the system — we stay on as your AI operations team
+_Result: AI runs like a 24/7 business-development desk that never misses a lead and never forgets a follow-up._
 
 ---
 
 ## SECTION 7 — Three Prompts You Can Use Today, Without Waiting
 
-You don't need to be a client to start getting value from AI. Here are 3 prompts you
-can paste into ChatGPT or Claude right now — each built around your specific business:
+You don't have to wait for us to feel this. Paste these into ChatGPT and you have a working agent in minutes.
 
-### Prompt 1 — Speed-to-Lead Response Draft
+### Agent 1 — 31 Consulting Speed-to-Lead
+
+_Based on your #1 goal — more leads — and your slow-lead-response stress_
+
 ```
-You are a business consulting business assistant for 31 Consulting. A new inquiry just came
-in from a potential client interested in Business Consulting, Strategy, Operational Improvement, Lead Qualification. Their message was: [PASTE
-THEIR MESSAGE HERE]. Write a professional, warm response that: (1) acknowledges their
-specific request, (2) describes our availability and process, (3) includes a next step.
-Use a friendly but professional tone. Keep it under 150 words.
+## IDENTITY
+You are the Speed-to-Lead Agent for 31 Consulting, a consulting practice. You make sure no inquiry ever goes unanswered. You are professional, warm, and on-brand — like the best business-development person who never clocks out.
+
+## WHAT YOU HANDLE
+- New inquiries from the website, email, and referrals
+- Questions about services, engagement approach, and fit
+- Booking a discovery call as the clear next step
+
+## INSTANT REPLY (within 60 seconds)
+Greet warmly, acknowledge exactly what they asked about, share how 31 Consulting helps, and offer to book a short discovery call.
+Keep it clear and helpful; reflect the 31 Consulting brand voice.
+
+## RULES
+- Never over-promise scope or price — offer a discovery call to scope it properly.
+- Capture name + need + best contact; log every lead to the CRM.
+- For anything outside your services: 'Let me connect you with Rey directly.'
+
+## EDGE CASES
+- Vague inquiry: ask one clarifying question, then offer the call.
+- Not a fit: be gracious, point them to a helpful resource.
+- After hours: reply instantly, answer questions, and book the call for later.
+
+## EXAMPLE — INSTANT REPLY
+---
+Hi, thanks for reaching out to 31 Consulting! It sounds like you're looking for help with growth strategy — that's right in our wheelhouse. The best next step is a quick 20-minute discovery call so we can understand your goals. Want me to find a time that works this week?
+---
 ```
 
-### Prompt 2 — Proposal Framework Generator
+What this does: instantly answers every inquiry in your voice, qualifies the need, and books the discovery call — so no lead goes cold and more of them turn into conversations.
+
+### Agent 2 — Follow-Up & Reactivation Engine
+
+_Based on your follow-up stress + turning old leads into calls_
+
 ```
-You are helping 31 Consulting create a proposal for a new business consulting client.
-The client needs: [DESCRIBE THEIR PROJECT HERE]. Our services are: Business Consulting, Strategy, Operational Improvement, Lead Qualification.
-Generate a professional proposal outline with: project scope, deliverables, timeline,
-and 3 package options at different investment levels. Format it for easy customization.
+## IDENTITY
+You are the Follow-Up & Reactivation Agent for 31 Consulting. You make sure no lead slips and past prospects come back. You are helpful and on-brand — never pushy.
+
+## FOLLOW-UP JOB
+- Inquiry that didn't book: check back with a helpful nudge and an offer to answer questions.
+- Prospect in the pipeline: proactively move them toward the discovery call.
+- Always one clear next step; stop if they ask to.
+
+## REACTIVATION CAMPAIGNS
+1. NEW INSIGHT: share a relevant resource or result with dormant prospects.
+2. CHECK-IN: warm re-engagement for leads that went quiet.
+3. WIN-BACK: past prospects — a genuine 'is now a better time?'
+
+## RULES
+- On-brand and low-pressure; one offer per message; reference what they actually asked about.
+- Log every touch to Pipedrive; route replies to Rey.
+
+## EXAMPLE — FOLLOW-UP
+---
+Hi James — following up on your note about scaling your operation. I put together a quick thought on where 31 Consulting could help. Worth a 20-minute call this week to talk it through?
+---
+
+## EXAMPLE — REACTIVATION
+---
+Hey Mike, it's 31 Consulting — we spoke a while back about your growth goals. A lot has changed since then and I think there's a strong fit now. Open to reconnecting for a quick call?
+---
 ```
 
-### Prompt 3 — Follow-Up Email Sequence
+What this does: follows up on every lead so none slips, and reactivates past prospects — turning your existing list into new discovery calls.
+
+### Agent 3 — Admin & Reporting Engine
+
+_Based on your admin-work and reporting stresses_
+
 ```
-You are a follow-up agent for 31 Consulting. A prospect expressed interest in
-Business Consulting, Strategy, Operational Improvement, Lead Qualification but hasn't responded in 5 days. Their original inquiry was about:
-[PASTE THEIR ORIGINAL MESSAGE]. Write a 3-email follow-up sequence (Day 5, Day 10,
-Day 20). Each email should: add new value, reference their specific situation, and
-include a clear but low-pressure next step. Tone: professional, helpful, not pushy.
+## IDENTITY
+You are the Admin & Reporting Agent for 31 Consulting. You take the repetitive back-office work and the reporting off Rey's plate so the hours go to client strategy. You are accurate, organized, and clear.
+
+## ADMIN JOB
+- Capture intake details and meeting notes.
+- Keep Pipedrive updated: stages, next steps, contact info.
+- Prep recurring client and pipeline documents.
+
+## REPORTING JOB
+- Pull pipeline and activity data on a set schedule.
+- Turn it into a clean, plain-language update: new leads, calls booked, deals moved, what needs attention.
+- Flag anything off-track for Rey.
+
+## RULES
+- Never guess a number — pull it from the source and label it.
+- Keep reports short and skimmable; lead with what changed.
+- Escalate anything unclear to Rey.
+
+## EXAMPLE — WEEKLY UPDATE
+---
+31 Consulting — This Week
+- New leads: 12 (up from 9)
+- Discovery calls booked: 5
+- Deals moved to proposal: 3
+- Needs your attention: 2 prospects went quiet — reactivation queued.
+---
 ```
 
-These give you immediate results. The difference between these prompts and the full
-AI system we build: these require someone to trigger them manually. The full system
-runs automatically, 24/7, without anyone on your team doing anything.
+What this does: keeps your CRM clean and your reporting done automatically — so your week goes to client work instead of admin.
 
 ---
 
 ## SECTION 8 — Two Paths Forward
 
-You have two options after listening to this:
+**Do it yourself:** use the prompts above to stand up one or two of these agents on your own. You'll feel time come back within days.
 
-**Path 1 — DIY:** Use the 3 prompts above. Run them in ChatGPT or Claude. You'll see
-results within days. This is the right starting point if you want to prove the concept
-to yourself before committing to a full system.
+**Partner with us:** we build the full system — all six agents connected to Pipedrive, calibrated to the 31 Consulting voice, running across every lead, and we maintain it. Once it's set up, it runs itself.
 
-**Path 2 — Partner with FKI:** We build the full AI system for 31 Consulting.
-The 3 tools in Section 4. The 30-day onboarding timeline. The ongoing calibration.
-Everything automated, integrated with Slack, running without your team having to
-manage it.
-
-If you want to explore Path 2, the next step is an application — not a sales call.
-We want to understand your situation before we recommend anything.
-
-Apply here: https://blueprint.meetadvaita.com/apply
-
-This is an application, not a commitment. We read every one personally.
+When you're ready, the next step is a short application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
 ## SECTION 9 — The ROI Picture for 31 Consulting
 
-Based on what you shared and industry benchmarks for business consulting:
+Here's the honest math from your own numbers — a strong flow of inquiries, a practice in the $250-500k range, and a goal of more leads. These are benchmark-based ranges, not guarantees.
 
-**Time Recovery Estimate:**
-- Admin and documentation: up to 8 hrs/week recovered
-- Lead response and follow-up: up to 6 hrs/week recovered
-- Reporting and tracking: up to 3 hrs/week recovered
-- **Total: up to 17 hrs/week for your team**
-
-**At $150/hr (industry benchmark for business consulting owner time):**
-- Monthly time value: up to $10,200/month
-- Annual time value: up to $122,400/year
-- Plus: close rate lift from consistent follow-up (35% industry benchmark)
-
-**Industry benchmark context:**
-- Businesses using AI automation see 20-35% reduction in time spent on administrative tasks
-  (McKinsey, "The state of AI in 2023" — https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023)
-- AI-powered lead response systems increase lead conversion by 14-23%
-  (Harvard Business Review, 2023 — https://hbr.org)
-- Small businesses using automation tools report 25% faster revenue growth
-  (SBA, 2023 — https://www.sba.gov)
-
-**These are industry benchmarks. Results vary by business. No specific outcomes are guaranteed.**
-
-The question isn't whether AI creates value in business consulting. The question is whether
-the investment makes sense for your specific situation. That's what the application
-helps us figure out together.
+- **Time:** industry benchmarks put the recoverable admin, follow-up, and reporting load at roughly 12 hours per week. That's meaningful time back for client work.
+- **Leads:** answering every inquiry in under 60 seconds instead of hours means you're first into the conversation — and prospects tend to book the practice that feels present first.
+- **Capacity:** the same six agents let you pursue more leads and run more engagements without losing the personal touch that defines 31 Consulting.
 
 ---
 
-## SECTION 10 — Common Objections — And Honest Answers
+## SECTION 10 — Common Questions, Honest Answers
 
-### "Is this going to replace my team?"
-No. These agents handle the repetitive work your team shouldn't be doing — initial
-responses, follow-up sequences, proposal drafts, status updates. Your team focuses
-on what only they can do: building relationships, delivering great Business Consulting, Strategy, Operational Improvement, Lead Qualification,
-making judgment calls. AI handles the rest.
+**"Will this replace me or my expertise?"** No. The strategy and the client relationship stay entirely yours. AI takes the inbox, the follow-ups, the scheduling, and the reporting off your plate so you have more time for the work only you can do.
 
-### "What about the setup and learning curve?"
-The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
-naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
+**"Is it complicated to run?"** No. It plugs into the tools you already use — Pipedrive, Slack, text, and Google Drive — and once it's set up, it runs itself.
 
-### "How is this different from just using ChatGPT?"
-ChatGPT requires someone to prompt it every time. Your AI system runs automatically,
-integrated with Slack, triggered by your actual business events — a new inquiry,
-a proposal request, a follow-up window — without anyone on your team doing anything
-to start it. The prompts in Section 7 show what ChatGPT can do. The full system is
-what happens when those prompts run 24/7 on their own.
-
-### "What if I'm not ready yet?"
-Use the prompts in Section 7. See what AI does for your business on a small scale.
-When you're ready to scale it to a full system, the application is still there.
-There's no deadline. This isn't a limited-time offer. It's a conversation we're
-happy to have when the timing is right for you.
+**"Will prospects be able to tell it's AI?"** Built on your voice before launch, replies read as warm and unmistakably 31 Consulting.
 
 ---
 
-## SECTION 11 — Sources and Citations
+## SECTION 11 — Reference Links
 
-All statistics and benchmarks referenced in this document:
-
-[1] Harvard Business Review — "The Short Life of Online Sales Leads" (2011)
-    Metric: 78% of customers buy from the first business to respond
-    URL: https://hbr.org/2011/03/the-short-life-of-online-sales
-
-[2] McKinsey & Company — "The B2B digital inflection point" (2020)
-    Metric: 80% of sales require 5+ follow-up touches; 44% of salespeople quit after one
-    URL: https://www.mckinsey.com/capabilities/growth-marketing-and-sales
-
-[3] McKinsey & Company — "The state of AI in 2023"
-    Metric: 20-35% reduction in administrative task time for AI-using businesses
-    URL: https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023
-
-[4] U.S. Small Business Administration — Small Business Guide (2023)
-    Metric: Small business owners spend 25-40% of their week on administrative tasks
-    URL: https://www.sba.gov/business-guide
-
-[5] BrightLocal — Local Consumer Review Survey (2023)
-    Metric: 98% of consumers read online reviews for local businesses
-    URL: https://www.brightlocal.com/research/local-consumer-review-survey
+- Your full blueprint: https://bennett-maxwell.github.io/fki-preview/blueprints/rey-31consulting.html
+- Start your application: https://bennett-maxwell.github.io/fki-preview/qualify.html
 
 ---
 
-## SECTION 12 — About Franchise Ki
+## SECTION 12 — About Franchise KI & Advaita
 
-Franchise Ki helps business owners implement AI systems that run themselves — built
-for their specific industry, integrated with their existing tools, and calibrated to
-their brand voice from day one.
+We build and run AI systems for owner-led businesses — the same way we built our own. You own the system; we stay on as your AI operations team. Quality and reliability over speed, always.
 
-Every Blueprint AI system is custom-built. Not configured from a template.
-Built from your application answers, your tools, your pain points, your voice.
+---
 
-If this audio resonated with you, the next step is an application:
-https://blueprint.meetadvaita.com/apply
+## SECTION 13 — What Happens in the First 30 Days
 
-Questions? Reach Bennett directly: bennett@franchiseki.com
+If you move forward, here's exactly what the first 30 days look like for 31 Consulting:
 
-This audio walkthrough was built for 31 Consulting. Not a template.
-Every number, every example, every recommendation — yours.
+**Days 1-3 — Onboarding.** We spend this time learning how you work. Your lead flow, your communication style, your most frequent prospect questions, the edge cases that come up. Nothing gets built until we understand how 31 Consulting actually runs.
+
+**Days 4-10 — First automations live.** The speed-to-lead agent and follow-up engine go live first. You see the first outputs. Give feedback. The system adjusts to match your voice exactly.
+
+**Day 30 — System running your daily rhythm.** Every lead answered. Every follow-up sent. Your hours spending on strategy — not on inboxes, scheduling, and reports.
+
+**Months 2-3 — Light calibration, minimal input.** The system knows your patterns. You use it naturally, without thinking.
+
+**After Month 3 — Fully integrated.** The system runs 31 Consulting's lead response and admin on autopilot. You're focused on what only you can do.
+
+---
+
+## SECTION 14 — Why Now Is the Right Time
+
+Consulting is competitive, and prospects have more options than ever. The practices that win in 2026 and beyond won't be the ones with the flashiest pitch — they'll be the ones that are fastest, most consistent, and easiest to work with.
+
+AI gives 31 Consulting that edge permanently. Not because the technology is complicated, but because most practices your size haven't built it yet. The window to gain ground is now — before consistent AI-powered lead response becomes the standard.
+
+You're already ahead of most — you're automating, and you run a real pipeline. What we're adding is the infrastructure that makes sure none of that gets lost to a slow reply or a missed follow-up.
+
+---
+
+## SECTION 15 — Two Paths Forward
+
+**Path 1 — Use the prompts from Section 7 right now.** Start with ChatGPT or Claude. See what happens to your response time and lead conversion within the first week. This is zero-risk, zero-cost, and available today.
+
+**Path 2 — Partner with Franchise KI.** We build the full system for 31 Consulting — the six agents, the 30-day onboarding, the ongoing calibration. Everything integrated with your tools, running without you managing it.
+
+If Path 2 sounds like the right fit for where you are, the next step is an application:
+
+**Qualify here: https://bennett-maxwell.github.io/fki-preview/qualify.html**
+
+This is an application, not a sales call. We want to understand your business before we recommend anything. Every application is read personally by Bennett.

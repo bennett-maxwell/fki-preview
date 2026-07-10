@@ -60,17 +60,28 @@ def _fillin_sub(mn, st, default_val):
 
 
 def _get_lead_default(slug, mn, mx):
-    """Read avg_customer_value from lead profile; clamp to industry band."""
+    """Read avg_customer_value from lead profile; clamp to industry band.
+
+    Search order:
+      1. leads/<slug>.json  (exact match)
+      2. Newest leads/<slug>-*.json  (dated profile, e.g. mike-norton-origins-20260603.json)
+    Falls back to industry minimum if no profile found or value out of band.
+    """
     leads_dir = REPO / "leads"
-    profile = leads_dir / f"{slug}.json"
-    if profile.exists():
-        try:
-            p = json.loads(profile.read_text())
-            v = p.get("avg_customer_value")
-            if v and isinstance(v, (int, float)) and mn <= v <= mx:
-                return int(v)
-        except Exception:
-            pass
+    # 1. Exact slug match
+    candidates = [leads_dir / f"{slug}.json"]
+    # 2. Dated profile fallback: leads/<slug>-*.json sorted newest first
+    dated = sorted(leads_dir.glob(f"{slug}-*.json"), reverse=True)
+    candidates.extend(dated)
+    for profile in candidates:
+        if profile.exists():
+            try:
+                p = json.loads(profile.read_text())
+                v = p.get("avg_customer_value")
+                if v and isinstance(v, (int, float)) and mn <= v <= mx:
+                    return int(v)
+            except Exception:
+                pass
     return mn  # fall back to industry minimum
 
 

@@ -278,6 +278,61 @@ async def run_script(script_name: str, args: list, timeout: int = 300) -> tuple:
 
 # ── Pipeline Stages ──────────────────────────────────────────────────────────
 
+def _looks_ghl_or_form_derived(profile: dict) -> bool:
+    source_text = " ".join(str(profile.get(k, "")) for k in ["source_note", "lead_source", "source", "form", "workflow"])
+    return bool(profile.get("ghl_contact_id") or profile.get("contact_id") or re.search(r"\b(GHL|GoHighLevel|form|intake|blueprint_ai_apply|AI_Advantage_blueprint)\b", source_text, re.I))
+
+
+def _raw_readback_candidate(profile: dict) -> Optional[Path]:
+    candidates = []
+    if os.environ.get("BLUEPRINT_GHL_RAW_READBACK"):
+        candidates.append(Path(os.environ["BLUEPRINT_GHL_RAW_READBACK"]))
+    for key in ["raw_ghl_readback_path", "ghl_raw_readback_path", "source_readback_path"]:
+        if profile.get(key):
+            candidates.append(Path(str(profile[key])))
+    slug = profile.get("slug")
+    if slug:
+        candidates.extend((REPO_DIR / "audit-receipts" / slug).glob("**/*ghl*raw*.json"))
+        candidates.extend((REPO_DIR / "audit-receipts" / slug).glob("**/*source*fidelity*.raw.json"))
+    for cand in candidates:
+        path = cand if cand.is_absolute() else REPO_DIR / cand
+        if path.exists():
+            return path
+    return None
+
+
+async def preserve_raw_readback_for_intake(profile_path: str, profile: dict) -> tuple[bool, str]:
+    if not _looks_ghl_or_form_derived(profile):
+        return True, "not GHL/form-derived"
+    raw = _raw_readback_candidate(profile)
+    if not raw:
+        return False, "GHL/form-derived lead is missing preserved raw readback; set BLUEPRINT_GHL_RAW_READBACK or raw_ghl_readback_path before generation"
+    cmd = [
+        sys.executable,
+        str(SCRIPTS_DIR / "blueprint_preserve_raw_readback.py"),
+        "--slug", profile["slug"],
+        "--profile", profile_path,
+        "--raw-json", str(raw),
+        "--kind", "ghl-contact-by-id",
+        "--json-output",
+    ]
+    proc = await asyncio.create_subprocess_exec(
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+        cwd=str(REPO_DIR),
+    )
+    stdout, stderr = await proc.communicate()
+    if proc.returncode != 0:
+        return False, (stderr.decode() or stdout.decode())[:400]
+    try:
+        refreshed = json.load(open(profile_path, encoding="utf-8"))
+        profile.update(refreshed)
+    except Exception:
+        pass
+    return True, stdout.decode().strip()[:400]
+
+
 async def stage_intake(profile_path: str, profile: dict, status: LeadStatus) -> bool:
     """Stage 1: Lead Intake + Research. Validates and enriches lead profile."""
     if status.is_stage_complete("intake"):
@@ -292,6 +347,14 @@ async def stage_intake(profile_path: str, profile: dict, status: LeadStatus) -> 
     if missing:
         status.mark_stage("intake", "failed", f"Missing fields: {missing}")
         return False
+
+    # Preserve raw source readback before any enrichment/generation so source-fidelity can prove facts.
+    raw_ok, raw_detail = await preserve_raw_readback_for_intake(profile_path, profile)
+    if not raw_ok:
+        status.mark_stage("intake", "failed", raw_detail)
+        log.error(f"  [{profile['slug']}] Intake raw readback FAILED: {raw_detail}")
+        return False
+    log.info(f"  [{profile['slug']}] Raw readback preservation: {raw_detail}")
 
     # If URL exists, run lead-intake.sh for web scrape enrichment
     url = profile.get("url", "")
@@ -399,24 +462,82 @@ async def stage_prompts(profile_path: str, profile: dict, status: LeadStatus) ->
     industry = profile.get("industry", "business services")
     name = profile.get("business_name", "the business")
 
+    def production_prompt(agent_name: str, job: str, trigger: str, output: str, rules: str) -> str:
+        return f"""## IDENTITY
+
+You are the {agent_name} for {name}, a {industry} business.
+
+## JOB
+
+{job}
+
+## INPUTS YOU NEED
+
+1. Contact or customer name when available.
+2. Original message, form answers, call note, or CRM record.
+3. Channel/source where the request came from.
+4. Current stage, owner, and last touch when available.
+5. Any business-specific service, product, price, compliance, or approval rules.
+If an input is missing, continue with what you have and flag the gap. Do not invent facts.
+
+## WORKFLOW
+
+Step 1: Read the input and classify the situation.
+Step 2: Identify the next useful business action.
+Step 3: Draft the customer-facing or internal output in {name}'s voice.
+Step 4: Create a CRM/internal note with summary, owner, due date, and confidence.
+Step 5: Escalate anything sensitive, unclear, legal, medical, financial, pricing, or approval-dependent.
+
+## OUTPUT SCHEMA
+
+Return:
+- classification
+- confidence
+- draft message or work product
+- internal CRM note
+- next action
+- missing information
+- human review required: yes/no and why
+
+## RULES
+
+{rules}
+
+## ESCALATION
+
+Do not send externally without approval unless the workflow has been explicitly approved. Route low-confidence, sensitive, legal, medical, financial, pricing, refund, or complaint cases to a human owner.
+
+## FIRST-RUN TEST
+
+Test input: {trigger}
+
+Passing result: {output}
+"""
+
     # Generate default prompts if missing
     if not profile.get("prompt_1"):
-        profile["prompt_1"] = (
-            f"You are a speed-to-lead response agent for a {industry} business called {name}. "
-            f"When a new inquiry comes in, draft a personalized response within 60 seconds "
-            f"that acknowledges their specific request, highlights relevant services, and suggests a next step."
+        profile["prompt_1"] = production_prompt(
+            "Speed-to-Lead Response Agent",
+            "Turn every new inquiry into a fast, useful first response and a clean internal handoff.",
+            "A new website inquiry arrives with name, service interest, phone/email, and a short message.",
+            "A channel-appropriate reply, one clarifying question if needed, a CRM note, a follow-up task, and a human-review flag.",
+            "Reply in plain English. Use one call to action. Never invent pricing, availability, guarantees, outcomes, discounts, or policy details. Quote the customer's own request when possible."
         )
     if not profile.get("prompt_2"):
-        profile["prompt_2"] = (
-            f"You are a proposal draft agent for {name} in the {industry} industry. "
-            f"Given a prospect's requirements, generate a professional proposal including scope, "
-            f"timeline, pricing framework, and 3 reasons to choose {name} over competitors."
+        profile["prompt_2"] = production_prompt(
+            "Qualification and Proposal Prep Agent",
+            "Convert messy prospect context into a clear qualification brief and proposal-prep outline for a human to review.",
+            "A prospect has shared needs, timeline, budget signals, and a few missing details.",
+            "A qualification summary, missing questions, draft scope outline, risks/assumptions, and human approval checklist.",
+            "Do not quote final pricing, promises, legal terms, or delivery timelines unless they are explicitly supplied. Mark assumptions clearly."
         )
     if not profile.get("prompt_3"):
-        profile["prompt_3"] = (
-            f"You are an outreach agent for {name} ({industry}). Generate 5 personalized "
-            f"LinkedIn connection messages and 5 cold email templates targeting ideal customers "
-            f"who need {industry} services."
+        profile["prompt_3"] = production_prompt(
+            "Follow-Up and Nurture Agent",
+            "Keep prospects, customers, or open opportunities from going stale with respectful, context-aware follow-up.",
+            "A CRM record shows last message, current stage, original need, and days since last contact.",
+            "A next-best follow-up message, internal reason, recommended channel, next task date, and stop/escalation checks.",
+            "Never pressure, fake urgency, or ignore opt-outs. Add value in each touch and stop immediately when the contact asks to stop."
         )
 
     # Write updated profile back

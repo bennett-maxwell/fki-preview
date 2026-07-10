@@ -1,0 +1,254 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html",
+        "--receipt-dir",
+        "/Users/openclaw/fki-preview/audit-receipts/scott-paul-phi-health",
+        "--lead",
+        "scott-paul-phi-health",
+        "--json-output"
+      ],
+      "name": "completion_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": null,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Skipped (use --require-production to enforce)\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Scott+Paul&biz=Phi+Health+%2F+Frequency&src=scott-paul-phi-health&agents=Guest+Research+and+Interview+Prep+Agent%2CEpisode+Knowledge+Graph+Agent%2CClaims+and+Citation+Review+Agent%2CClip+and+Social+Repurposing+Agent%2CListener+Intake+and+Giveaway+Ops+Agent%2CApp+and+Stack+Learning+Path+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Scott+Paul&biz=Phi+Health+%2F+Frequency&src=scott-paul-phi-health&agents=Guest+Research+and+Interview+Prep+Agent%2CEpisode+Knowledge+Graph+Agent%2CClaims+and+Citation+Review+Agent%2CClip+and+Social+Repurposing+Agent%2CListener+Intake+and+Giveaway+Ops+Agent%2CApp+and+Stack+Learning+Path+Agent\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Scott+Paul&biz=Phi+Health+%2F+Frequency&src=scott-paul-phi-health&agents=Guest+Research+and+Interview+Prep+Agent%2CEpisode+Knowledge+Graph+Agent%2CClaims+and+Citation+Review+Agent%2CClip+and+Social+Repurposing+Agent%2CListener+Intake+and+Giveaway+Ops+Agent%2CApp+and+Stack+Learning+Path+Agent\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html",
+        "--lead",
+        "scott-paul-phi-health",
+        "--json-output",
+        "--delivery-email",
+        "/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/scott-paul-phi-health.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    },",
+        "    {",
+        "      \"agents\": [",
+        "        \"Guest Research and Interview Prep Agent\",",
+        "        \"Transcript-to-Education Agent\",",
+        "        \"Claims and Citation Review Agent\",",
+        "        \"Clip and Social Repurposing Agent\",",
+        "        \"Listener Intake and Giveaway Ops Agent\",",
+        "        \"Product Education and Support Handoff Agent\"",
+        "      ],",
+        "      \"file\": \"/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Scott+Paul&biz=Phi+Health+%2F+Frequency+Podcast&src=scott-paul-phi-health&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&agents=Guest+Research+and+Interview+Prep+Agent%2CTranscript-to-Education+Agent%2CClaims+and+Citation+Review+Agent%2CClip+and+Social+Repurposing+Agent%2CListener+Intake+and+Giveaway+Ops+Agent%2CProduct+Education+and+Support+Handoff+Agent\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"scott-paul-phi-health\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/openclaw/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html",
+        "--profile",
+        "/Users/openclaw/fki-preview/leads/scott-paul-phi-health.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: scott-paul-phi-health - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/openclaw/fki-preview/delivery-emails/scott-paul-phi-health-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: scott-paul-phi-health - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/run-audit.py",
+        "--lead",
+        "scott-paul-phi-health"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [
+        "/Users/openclaw/fki-preview/run-audit.py:488: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).",
+        "  r[\"ts\"] = datetime.datetime.utcnow().isoformat() + \"Z\""
+      ],
+      "stdout_tail": [
+        "[PASS] scott-paul-phi-health: 16/16 (100%)",
+        "",
+        "Audit complete. History: /Users/openclaw/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "scott-paul-phi-health retail                 120        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "/Users/openclaw/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"D9-13\": {",
+        "      \"pass\": true,",
+        "      \"note\": \"skipped - business-specific\"",
+        "    },",
+        "    \"D9-14\": {",
+        "      \"pass\": true,",
+        "      \"found\": []",
+        "    },",
+        "    \"D9-15\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-16\": {",
+        "      \"pass\": true",
+        "    },",
+        "    \"D9-17\": {",
+        "      \"pass\": true",
+        "    }",
+        "  },",
+        "  \"ts\": \"2026-06-18T15:12:51.863653+00:00\"",
+        "}"
+      ]
+    }
+  ],
+  "diamond": "PASS",
+  "failures": [],
+  "html_path": "/Users/openclaw/fki-preview/blueprints/scott-paul-phi-health.html",
+  "lead": "scott-paul-phi-health",
+  "mode": "local",
+  "receipt_dir": "/Users/openclaw/fki-preview/audit-receipts/scott-paul-phi-health",
+  "score": 100,
+  "status": "PASS",
+  "ts": "2026-06-18T15:12:51.869660+00:00"
+}

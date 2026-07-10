@@ -27,6 +27,8 @@ v1.1 — 2026-06-01 — added FC-08 [RL] podcast 6-20MB byte-window gate. FC-06 
        FC-06 yet was too thin, and an un-transcoded export (31MB+) hung the iOS player.
        FC-08 makes the 6-20MB walkthrough window machine-checked. Verified PASS on the
        14.1MB Brent deliverable, FAIL on a 66MB un-transcoded export.
+v1.2 — 2026-06-18 — FC-08 moved to Blueprint short-podcast standard: 8-12 minutes
+       by ffprobe duration, with 6-20MB retained only as a bitrate sanity check.
 """
 import re, sys, pathlib, argparse, subprocess
 from typing import Optional
@@ -139,21 +141,31 @@ def check(html_path: pathlib.Path, podcast_path: Optional[pathlib.Path] = None):
     else:
         checks.append(("FC-06", "[RL] podcast real-MP3 (skipped — no --podcast)", True, "SKIP"))
 
-    # FC-08 [RL] podcast byte-size inside the 6-20MB walkthrough WINDOW.
-    # Thread learning 2026-06-01: FC-06 proves the CONTAINER is mp3 but says nothing
-    # about length. A --length short render passes FC-06 yet is a 4.5MB/4.7min stub
-    # (too thin to be a real walkthrough); an un-transcoded NotebookLM export is a
-    # 31MB+ giant that hangs the unbuffered iOS player. The enforced deliverable is a
-    # 6-20MB walkthrough. This gate makes that window machine-checked, not manual.
+    # FC-08 [RL] podcast duration inside the 8-12 minute Blueprint standard.
+    # Byte size remains a sanity check because bitrate varies; duration is the
+    # source of truth for the 10-minute standard.
     FLOOR, CEIL = 6 * 1024 * 1024, 20 * 1024 * 1024
     if podcast_path is not None and podcast_path.exists():
         sz = podcast_path.stat().st_size
         size_ok = FLOOR <= sz <= CEIL
         mb = sz / 1048576
-        checks.append(("FC-08", f"[RL] podcast in 6-20MB window (got {mb:.1f}MB)", size_ok,
-                       None if size_ok else f"{mb:.1f}MB outside 6-20MB"))
+        dur_ok = False
+        dur_detail = "duration unavailable"
+        try:
+            dur_raw = subprocess.check_output([
+                "ffprobe", "-v", "error", "-show_entries", "format=duration",
+                "-of", "default=noprint_wrappers=1:nokey=1", str(podcast_path)
+            ], text=True, timeout=30).strip()
+            dur = float(dur_raw)
+            dur_ok = 480 <= dur <= 720
+            dur_detail = f"{int(dur//60)}:{int(dur%60):02d}"
+        except Exception as e:
+            dur_detail = f"ffprobe err:{e}"
+        ok = size_ok and dur_ok
+        checks.append(("FC-08", f"[RL] podcast 8-12 min and sane size (got {dur_detail}, {mb:.1f}MB)", ok,
+                       None if ok else f"{dur_detail}; {mb:.1f}MB; need 8-12 min and 6-20MB"))
     else:
-        checks.append(("FC-08", "[RL] podcast 6-20MB window (skipped — no --podcast)", True, "SKIP"))
+        checks.append(("FC-08", "[RL] podcast 8-12 minute window (skipped — no --podcast)", True, "SKIP"))
 
     passed = sum(1 for c in checks if c[2])
     failed = [c for c in checks if not c[2]]

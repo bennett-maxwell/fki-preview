@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FKI AI Training — Friday, July 3, 2026</title>
+<style>
+  body{margin:0;padding:0;background:#F5F5F7;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;color:#1D1D1F;}
+  .wrap{max-width:640px;margin:32px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06);}
+  .head{padding:30px 34px 22px;border-bottom:1px solid #E5E5EA;}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0066CC;}
+  h1{font-size:24px;margin:8px 0 4px;font-weight:800;}
+  .sub{font-size:14px;color:#6E6E73;}
+  .body{padding:24px 34px 30px;}
+  audio{width:100%;margin:4px 0 16px;}
+  .speeds{display:flex;gap:8px;margin-bottom:22px;}
+  .speeds button{flex:1;padding:11px 0;border:1px solid #D2D2D7;background:#fff;border-radius:10px;font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer;}
+  .speeds button.active{background:#0066CC;color:#fff;border-color:#0066CC;}
+  .note{font-size:11px;color:#8E8E93;margin-bottom:20px;}
+  h2{font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#6E6E73;margin:22px 0 10px;}
+  .row{display:flex;padding:8px 0;border-bottom:1px solid #F2F2F7;font-size:14.5px;line-height:1.5;}
+  .row span:first-child{color:#0066CC;margin-right:10px;}
+  .foot{padding:16px 34px;border-top:1px solid #E5E5EA;background:#F5F5F7;font-size:12px;color:#8E8E93;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="kicker">FKI AI Training Podcast</div>
+    <h1>Friday, July 3, 2026 — Daily Delta</h1>
+    <div class="sub">What changed since Tuesday • 9–13 min • hosts talking straight to the team</div>
+  </div>
+  <div class="body">
+    <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-07-03.mp3"></audio>
+    <div class="speeds">
+      <button data-rate="1"    onclick="setRate(1,this)" class="active">1x</button>
+      <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+      <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+      <button data-rate="2"    onclick="setRate(2,this)">2x</button>
+    </div>
+    <div class="note">Pick a speed. Your spot and speed are saved — close it and come back where you left off.</div>
+
+    <h2>Today in one minute</h2>
+    <div class="row"><span>•</span><span>The Blueprint machine ran at full scale Wednesday — batches of finished lead packages, plus a full Surfline Hoods package (website preview + Blueprint page + voice recording).</span></div>
+    <div class="row"><span>•</span><span>Two Blueprints (Martha, Franchise LIVE) passed the checker <b>three times</b> before being called done. Triple-check is the new normal.</span></div>
+    <div class="row"><span>•</span><span>A brand check <b>caught</b> a wrong-brand leak ("Warnick Design") — but it's not fixed yet. Caught is not fixed.</span></div>
+
+    <h2>Spotlight: gatekeeper-skill</h2>
+    <div class="row"><span>•</span><span>The final checker. It asks "is this REALLY done and correct?" before anyone says done. Say: <b>"run the gatekeeper on this — check it against the rules before I send it."</b></span></div>
+
+    <h2>New in our tools</h2>
+    <div class="row"><span>•</span><span><b>Claude Code:</b> background helpers now finish a job and hand you a ready-to-review draft. Say "run this in the background and hand me the finished draft."</span></div>
+    <div class="row"><span>•</span><span><b>Notion 3.6:</b> build a slide deck / Excel sheet / live ROI calculator right from a page.</span></div>
+    <div class="row"><span>•</span><span><b>GoHighLevel:</b> smarter prospecting auto-fills lead info; drop a contact's name straight into ad copy.</span></div>
+
+    <h2>Your one action today</h2>
+    <div class="row"><span>•</span><span><b>SALES:</b> open a new GHL lead, see the extra info auto-filled for you.</span></div>
+    <div class="row"><span>•</span><span><b>OPS:</b> "run the gatekeeper on this" before you send one report.</span></div>
+    <div class="row"><span>•</span><span><b>MARKETING:</b> in Notion say "turn this page into a slide deck."</span></div>
+    <div class="row"><span>•</span><span><b>LEADERSHIP:</b> "have a separate helper check this before you call it done."</span></div>
+    <div class="row"><span>•</span><span><b>STOP doing:</b> treating "caught" as "fixed." Close the loop — fix it and re-run the check until it passes clean.</span></div>
+  </div>
+  <div class="foot">Reply to the email with any feedback. We read every reply and apply changes permanently before the next episode. • Built by your FKI AI team.</div>
+</div>
+<script>
+  var a=document.getElementById('podAudio'),KEY='team-training-2026-07-03';
+  function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate){a.playbackRate=s.rate;document.querySelectorAll('.speeds button').forEach(function(x){x.classList.toggle('active',parseFloat(x.dataset.rate)===s.rate);});}a.addEventListener('loadedmetadata',function(){if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
+</body>
+</html>

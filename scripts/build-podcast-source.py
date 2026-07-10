@@ -59,7 +59,7 @@ in the third person — the words "the/this" + "business/company/owner" and "his
 must not be spoken; say "your business", "your company", or "your operation" instead.
 Never mention where this briefing came from, never reference any written input behind the episode,
 and never narrate like an outside analyst reviewing a case — you are talking directly with {first}.
-Duration target: 12 to 15 minutes. Do not exceed 18 minutes. Concise walkthrough, not a lecture.
+Length: SHORT episode — concise walkthrough, not a lecture. Let it land at its natural short length and end cleanly.
 CTA: complete the qualifier only; no calendar booking language.
 
 12 SECTION AUDIO PACKAGE

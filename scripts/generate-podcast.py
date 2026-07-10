@@ -235,10 +235,10 @@ edge permanently.
 
 Here's exactly what the first 30 days look like if you move forward:
 
-**Days 1-3: Onboarding.** {industry_cap} audit. Brand voice profile. Full ops map.
+**Week 1: Onboarding.** {industry_cap} audit. Brand voice profile. Full ops map.
 We listen. Nothing gets built until we understand how you actually work.
 
-**Days 4-10: Auto-correcting, calibrating, first automations live.** Your SOPs become
+**Weeks 2-3: Calibrating and going live.** Your first agent goes live in week 2; the full system by week 3. Your SOPs become
 agent skills. You see the first results. Your team gives feedback. The system adjusts.
 
 **Day 30: The system runs your business rhythm.** It compounds. It never forgets.
@@ -352,7 +352,7 @@ making judgment calls. AI handles the rest.
 
 ### "What about the setup and learning curve?"
 The 30-day onboarding timeline is designed for zero disruption to your current
-operations. By Day 3, you see the agents working. By Day 10, your team is using them
+operations. By week 2, you see your first agent working. By week 3, your team is using the full system
 naturally. By Day 30, you're wondering why you waited. We do the setup. You review the output.
 
 ### "How is this different from just using ChatGPT?"
@@ -881,7 +881,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
 
     # NotebookLM upload and generation
     try:
-        from notebooklm import NotebookLMClient
+        from notebooklm import NotebookLMClient, AudioLength
 
         client = await NotebookLMClient.from_storage()
         async with client:
@@ -899,7 +899,7 @@ async def generate_podcast(profile_path: str, output_dir: str = None, source_onl
             _log("Source added")
 
             await _retry_async(
-                lambda: client.artifacts.generate_audio(nb_id),
+                lambda: client.artifacts.generate_audio(nb_id, audio_length=AudioLength.SHORT),
                 description=f"generate audio for {nb_id}",
             )
             _log("Audio generation started...")

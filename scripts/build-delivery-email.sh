@@ -13,7 +13,7 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/gogcli/0.13.0/bin:$PATH"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/delivery-email-template.html"
-DEFAULT_BLUEPRINT_BASE_URL="https://bennett-maxwell.github.io/fki-preview"
+DEFAULT_BLUEPRINT_BASE_URL="https://hub.aiblueprintmarketing.com"
 BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL:-$DEFAULT_BLUEPRINT_BASE_URL}"
 BLUEPRINT_BASE_URL="${BLUEPRINT_BASE_URL%/}"
 
@@ -87,18 +87,14 @@ if [[ "$BLUEPRINT_BASE_URL" != "$DEFAULT_BLUEPRINT_BASE_URL" ]]; then
     PODCAST_URL="$BLUEPRINT_BASE_URL/podcasts/$SLUG.mp3"
   fi
 fi
-# Append GHL view-tracking params to the blueprint URL so the blueprint page can fire
-# blueprint_viewed → relay → GHL pipeline stage advance when the lead opens their email.
-# Params: slug (identifies the blueprint), cid (GHL contact ID for stage lookup).
-# email is NOT appended here because it is only resolved in the --send-ghl block;
-# the relay uses cid to locate the contact when present, slug as fallback.
-if [[ -n "$SLUG" ]]; then
-  _SEP="?"
-  [[ "$BLUEPRINT_URL" == *"?"* ]] && _SEP="&"
-  BLUEPRINT_TRACK_PARAMS="${_SEP}slug=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$SLUG")"
-  [[ -n "$GHL_CONTACT_ID" ]] && BLUEPRINT_TRACK_PARAMS="${BLUEPRINT_TRACK_PARAMS}&cid=$(python3 -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$GHL_CONTACT_ID")"
-  BLUEPRINT_URL="${BLUEPRINT_URL}${BLUEPRINT_TRACK_PARAMS}"
-fi
+# BARE-HREF RULE (Madison 2026-07-02): Gmail throws the "Redirect Notice" interstitial
+# on any link carrying a query string / UTM / fragment; a bare canonical URL
+# (scheme+host+path only) opens directly on first click. So NO tracking params are
+# appended to the blueprint URL. (Previously slug=/cid= were appended for a
+# blueprint_viewed relay; that broke first-click open and is retired here.)
+# Strip any pre-existing query string / fragment the profile may carry.
+BLUEPRINT_URL="${BLUEPRINT_URL%%\?*}"
+BLUEPRINT_URL="${BLUEPRINT_URL%%#*}"
 PROMPT_1=$(get prompt_1 "You are a speed-to-lead response agent for a $INDUSTRY business. When a new inquiry comes in, draft a personalized response within 60 seconds that acknowledges their specific request, highlights relevant services, and suggests a next step.")
 PROMPT_2=$(get prompt_2 "You are a proposal draft agent for a $INDUSTRY business. Given a prospect's requirements, generate a professional proposal including scope, timeline, pricing framework, and 3 reasons to choose this business over competitors.")
 PROMPT_3=$(get prompt_3 "You are an outreach agent for a $INDUSTRY business. Generate 5 personalized LinkedIn connection messages and 5 cold email templates targeting property managers and commercial building operators who need $INDUSTRY services.")
@@ -111,12 +107,18 @@ APPLY_URL="$BLUEPRINT_BASE_URL/apply/?lead=$(python3 -c 'import urllib.parse,sys
 # button point to apply/, violating the bennett-rule (brent-attaway defect 2026-06-01).
 # Empty default => the python block below falls back to the canonical qualify.html.
 PROFILE_QUALIFY_URL=$(get qualify_url "")
-QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$LEAD_NAME" "$BUSINESS_NAME" "$SLUG" "$GHL_CONTACT_ID" "$BLUEPRINT_BASE_URL" "$QUALIFIER_AGENTS" << 'PYEOF'
+# BARE-HREF RULE (Madison 2026-07-02): the qualifier CTA must be a BARE canonical URL
+# (scheme+host+path only) so Gmail opens it directly on first click instead of showing
+# the "Redirect Notice" interstitial. The old build appended
+# ?lead=&biz=&src=&utm_*&contactId=&agents= — a big query string that reliably tripped
+# the interstitial. We DROP every query param and fragment here. Identity pre-fill is
+# sacrificed in favor of "opens directly on first click" (Madison's explicit priority).
+QUALIFY_URL=$(python3 - "$PROFILE_QUALIFY_URL" "$BLUEPRINT_BASE_URL" << 'PYEOF'
 import sys
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import urlsplit, urlunsplit
 
-profile_url, lead_name, business_name, slug, contact_id, base_url, qualifier_agents = sys.argv[1:8]
-DEFAULT_BASE_URL = "https://bennett-maxwell.github.io/fki-preview"
+profile_url, base_url = sys.argv[1:3]
+DEFAULT_BASE_URL = "https://hub.aiblueprintmarketing.com"
 base_url = base_url.rstrip("/") or DEFAULT_BASE_URL
 if base_url != DEFAULT_BASE_URL and (not profile_url or profile_url.startswith(DEFAULT_BASE_URL)):
     url = f"{base_url}/qualify.html"
@@ -125,21 +127,14 @@ else:
 parts = urlsplit(url)
 if not parts.scheme:
     parts = urlsplit(f"{base_url}/qualify.html")
-params = dict(parse_qsl(parts.query, keep_blank_values=True))
-params["lead"] = lead_name
-params["biz"] = business_name
-params["src"] = slug
-params["utm_source"] = "blueprint_email"
-params["utm_medium"] = "email"
-params["utm_campaign"] = "blueprint_delivery"
-if contact_id:
-    params["contactId"] = contact_id
-if qualifier_agents:
-    params["agents"] = qualifier_agents
 fallback_path = urlsplit(f"{base_url}/qualify.html").path or "/qualify.html"
-print(urlunsplit((parts.scheme, parts.netloc, parts.path or fallback_path, urlencode(params), "")))
+# scheme+host+path ONLY — no query, no fragment.
+print(urlunsplit((parts.scheme, parts.netloc, parts.path or fallback_path, "", "")))
 PYEOF
 )
+# Belt-and-suspenders: strip any query/fragment off podcast + website URLs too.
+PODCAST_URL="${PODCAST_URL%%\?*}"; PODCAST_URL="${PODCAST_URL%%#*}"
+WEBSITE_URL="${WEBSITE_URL%%\?*}"; WEBSITE_URL="${WEBSITE_URL%%#*}"
 
 OUTPUT="$HOME/Desktop/${SLUG}-delivery-email.html"
 REPO_EMAIL="$(cd "$(dirname "$0")/.." && pwd)/delivery-emails/${SLUG}-delivery-email.html"
@@ -286,6 +281,18 @@ if [ "$BOOKING" -gt 0 ] || [ "$CALENDAR" -gt 0 ] || [ "$CTA" -lt 1 ]; then
     exit 1
 fi
 echo "Pre-delivery: PASS (booking=0 calendar=0 cta=$CTA)"
+
+# BARE-HREF GATE (Madison 2026-07-02): FAIL the build if ANY href carries a query
+# string ("?"), so no generated delivery email can ever ship a link that trips Gmail's
+# "Redirect Notice" interstitial. Bare canonical URLs (scheme+host+path) open directly.
+BAD_HREFS=$(grep -oE 'href="[^"]*\?[^"]*"' "$OUTPUT" 2>/dev/null || true)
+if [ -n "$BAD_HREFS" ]; then
+    echo "FAIL (bare-href gate): delivery email contains href(s) with a query string:"
+    echo "$BAD_HREFS"
+    echo "  Every CTA link must be a bare canonical URL (scheme+host+path only) — no ?query, no #fragment, no UTM."
+    exit 1
+fi
+echo "Bare-href gate: PASS (zero '?' in any href)"
 
 # Conformance gate at generation time (D5-16..D5-23 incl. flexbox/style/white-template).
 # HARD on the fresh-template path: the canonical template passes all 8, so a legit

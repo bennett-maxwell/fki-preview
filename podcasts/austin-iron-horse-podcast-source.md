@@ -9,7 +9,7 @@ RULE 1 (RED LINE): You are speaking DIRECTLY to AUSTIN. Use "you" and "your" in 
 
 RULE 2: Open the audio with EXACTLY these words: "Hi Austin, welcome. This walkthrough was built for you and Iron Horse Armory, from what you told us." Then proceed.
 
-RULE 3: This business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking.
+RULE 3: Your business is THRIVING. Frame every gap as an AI amplification, not a flaw. No agent brand names. Application CTA only — never mention calendar or booking. BANNED PHRASES — never say any of these on the audio: "the business", "this business", "the owner", "they", "their team", "the company". Always say "you", "your business", "Iron Horse Armory".
 
 ---
 

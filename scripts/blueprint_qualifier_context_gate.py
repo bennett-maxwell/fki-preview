@@ -148,10 +148,14 @@ def validate_links(paths: list[Path], expected: list[str], expected_slug: str|No
                 continue
             parts=urllib.parse.urlsplit(href)
             qs=urllib.parse.parse_qs(parts.query, keep_blank_values=True)
-            agents=parse_agents((qs.get('agents') or [''])[0])
-            item={'file':str(path),'text':link.get('text'),'href':href,'agents':agents}
+            # 2026-06-19: customer-facing language is AI Employees. Prefer
+            # employees=, while accepting legacy agents= for backward compatibility.
+            agents=parse_agents((qs.get('employees') or qs.get('agents') or [''])[0])
+            item={'file':str(path),'text':link.get('text'),'href':href,'agents':agents,'employees':agents}
             inspected.append(item)
-            missing=[k for k in ('lead','biz','src','agents') if not qs.get(k)]
+            missing=[k for k in ('lead','biz','src') if not qs.get(k)]
+            if not (qs.get('employees') or qs.get('agents')):
+                missing.append('employees')
             if missing:
                 failures.append({'type':'missing_qualifier_context_param','file':str(path),'href':href,'missing':missing})
             if expected_slug and qs.get('src') and qs['src'][0] != expected_slug:

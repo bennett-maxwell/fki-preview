@@ -1,0 +1,348 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+        "--receipt-dir",
+        "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom",
+        "--lead",
+        "shaheen-mazloom",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_source_fidelity_gate.py",
+        "--lead-json",
+        "/Users/temp/fki-preview/leads/shaheen-mazloom.json",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+        "--json-output",
+        "--ghl-raw",
+        "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/source-readbacks/ghl-contact-by-id.normalized-for-source-fidelity.raw.json"
+      ],
+      "name": "source_fidelity_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"gate\": \"blueprint_source_fidelity_gate\",",
+        "  \"lead_json\": \"/Users/temp/fki-preview/leads/shaheen-mazloom.json\",",
+        "  \"html\": \"/Users/temp/fki-preview/blueprints/shaheen-mazloom.html\",",
+        "  \"raw_value_count\": 7,",
+        "  \"status\": \"PASS\",",
+        "  \"findings\": []",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_agent_prompt_quality_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+        "--receipt",
+        "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-agent-prompt-quality.json",
+        "--json-output",
+        "--profile",
+        "/Users/temp/fki-preview/leads/shaheen-mazloom.json"
+      ],
+      "name": "agent_prompt_quality_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"label\": \"profile visible prompt 3 (Employee 3 \\u2014 Versa Content Engine)\",",
+        "      \"source\": \"profile\"",
+        "    }",
+        "  ],",
+        "  \"failures\": [],",
+        "  \"html\": \"/Users/temp/fki-preview/blueprints/shaheen-mazloom.html\",",
+        "  \"pass\": true,",
+        "  \"profile\": \"/Users/temp/fki-preview/leads/shaheen-mazloom.json\",",
+        "  \"required_markers\": [",
+        "    \"escalation\",",
+        "    \"first_run_test\",",
+        "    \"identity\",",
+        "    \"inputs\",",
+        "    \"output\",",
+        "    \"rules\",",
+        "    \"workflow\"",
+        "  ],",
+        "  \"status\": \"PASS\",",
+        "  \"ts\": \"2026-06-19T20:47:11.726058+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?src=shaheen-mazloom&lead=shaheen-mazloom&biz=Versa+Business+Systems&employees=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee&agents=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?src=shaheen-mazloom&lead=shaheen-mazloom&biz=Versa+Business+Systems&employees=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee&agents=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?src=shaheen-mazloom&lead=shaheen-mazloom&biz=Versa+Business+Systems&employees=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee&agents=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+        "--lead",
+        "shaheen-mazloom",
+        "--json-output",
+        "--delivery-email",
+        "/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/shaheen-mazloom.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      ],",
+        "      \"employees\": [",
+        "        \"Lead Generation & Speed-to-Lead Employee\",",
+        "        \"Follow-Up & Pipeline Nurture Employee\",",
+        "        \"Email Triage & Reply Employee\",",
+        "        \"Content Creation Engine Employee\",",
+        "        \"Offer & Service-Line Routing Employee\",",
+        "        \"Admin\",",
+        "        \"Reporting & Hiring Support Employee\"",
+        "      ],",
+        "      \"file\": \"/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html\",",
+        "      \"href\": \"https://bennett-maxwell.github.io/fki-preview/qualify.html?src=shaheen-mazloom&lead=Shaheen+Mazloom&biz=Versa+Business+Systems&utm_source=blueprint_email&utm_medium=email&utm_campaign=blueprint_delivery&contactId=TPxrYXd1dtQujXukuoey&employees=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee&agents=Lead+Generation+%26+Speed-to-Lead+Employee%2CFollow-Up+%26+Pipeline+Nurture+Employee%2CEmail+Triage+%26+Reply+Employee%2CContent+Creation+Engine+Employee%2COffer+%26+Service-Line+Routing+Employee%2CAdmin%2C+Reporting+%26+Hiring+Support+Employee\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"shaheen-mazloom\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/temp/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html",
+        "--profile",
+        "/Users/temp/fki-preview/leads/shaheen-mazloom.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: shaheen-mazloom - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/temp/fki-preview/delivery-emails/shaheen-mazloom-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: shaheen-mazloom - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/run-audit.py",
+        "--lead",
+        "shaheen-mazloom"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] shaheen-mazloom: 17/17 (100%)",
+        "",
+        "Audit complete. History: /Users/temp/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "shaheen-mazloom      consulting            3000        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/temp/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "D9 PASS: render integrity OK"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom/shaheen-mazloom-closeout.json"
+    },
+    {
+      "detail": "shaheen-mazloom-v2.mp3 719s / 8634965 bytes within Blueprint 10-minute window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "proof receipt missing or failing: shaheen-mazloom-email-click-test.json",
+    "proof receipt missing or failing: shaheen-mazloom-desktop-render.json",
+    "proof receipt missing or failing: shaheen-mazloom-mobile-render.json",
+    "proof receipt missing or failing: shaheen-mazloom-audit.json",
+    "proof receipt missing or failing: shaheen-mazloom-closeout.json",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+  ],
+  "html_path": "/Users/temp/fki-preview/blueprints/shaheen-mazloom.html",
+  "lead": "shaheen-mazloom",
+  "mode": "production",
+  "receipt_dir": "/Users/temp/fki-preview/audit-receipts/shaheen-mazloom",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-06-19T20:47:12.726218+00:00"
+}

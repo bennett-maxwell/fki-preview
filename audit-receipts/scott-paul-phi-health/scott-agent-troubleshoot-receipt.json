@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "ts": "2026-06-18T17:16:36Z",
+  "lead": "scott-paul-phi-health",
+  "troubleshooting_skill": {
+    "version": "v5.5",
+    "drive_file_id": "1I13dA9Tcn-N0ETowd6dhZG46F5Wu3krK",
+    "mode": "Diagnose -> Heal -> Verify -> Prevent"
+  },
+  "task": "Redo Scott Paul's Phi Health / Frequency Blueprint agents because the visible 3 production-ready agents were weak starter prompts, not usable agents.",
+  "failure_point": "The Blueprint rendered short visible prompt starters while claiming production-ready AI agents. The generator only checked that prompt text existed, and the pipeline fallback generated short generic prompts when profile prompt_1/prompt_2/prompt_3 were missing.",
+  "root_cause": [
+    "scripts/gen-blueprint.py accepted non-empty prompt strings without requiring operating-runbook structure.",
+    "scripts/blueprint-pipeline-orchestrator.py Stage 5 fallback prompts were useful outlines but not complete agent runbooks.",
+    "scripts/blueprint_gatekeeper_100.py had no dedicated agent-prompt quality gate, so weak prompt cards could pass non-production checks."
+  ],
+  "action_log": [
+    "Expanded Scott's six profile agents into operational runbooks with identity, inputs, workflow, output schema, rules, escalation/human-review boundary, and first-run test.",
+    "Updated the three visible copy-paste prompt cards to use the full Guest Research, Episode Knowledge Graph, and Claims/Citation Review runbooks.",
+    "Added validate_production_agent_prompt() to scripts/gen-blueprint.py so weak profile prompt content hard-fails at render time.",
+    "Strengthened scripts/blueprint-pipeline-orchestrator.py Stage 5 fallback prompts into full production-style runbooks.",
+    "Added scripts/blueprint_agent_prompt_quality_gate.py and wired it into scripts/blueprint_gatekeeper_100.py.",
+    "Added a regression test in tests/test_blueprint_regressions.py to pin the generator and gatekeeper wiring."
+  ],
+  "verification": {
+    "agent_quality_gate": {
+      "command": "python3 scripts/blueprint_agent_prompt_quality_gate.py --html blueprints/scott-paul-phi-health.html --profile leads/scott-paul-phi-health.json --receipt audit-receipts/scott-paul-phi-health/scott-agent-quality-gate.json --json-output",
+      "status": "PASS",
+      "checked_surfaces": 18,
+      "failures": 0
+    },
+    "completion_gate": {
+      "command": "python3 scripts/blueprint_completion_gate.py --lead scott-paul-phi-health --html blueprints/scott-paul-phi-health.html --receipt-dir audit-receipts/scott-paul-phi-health --json-output",
+      "status": "PASS",
+      "result": "36/36 applicable checks"
+    },
+    "regression_suite": {
+      "command": "python3 tests/test_blueprint_regressions.py",
+      "status": "PASS",
+      "result": "19/19 checks passed"
+    },
+    "py_compile": {
+      "command": "python3 -m py_compile scripts/gen-blueprint.py scripts/blueprint-pipeline-orchestrator.py scripts/blueprint_gatekeeper_100.py scripts/blueprint_agent_prompt_quality_gate.py",
+      "status": "PASS"
+    },
+    "troubleshooting_loops": [
+      {
+        "name": "T1 adversarial weak-prompt fail",
+        "status": "PASS",
+        "expected_result": "weak starter prompts are rejected"
+      },
+      {
+        "name": "T2 repaired Scott pass",
+        "status": "PASS",
+        "expected_result": "Scott's repaired agent prompts pass"
+      },
+      {
+        "name": "T3 boundary first-run-test removal",
+        "status": "PASS",
+        "expected_result": "missing first-run-test markers are rejected"
+      }
+    ],
+    "known_remaining_non_agent_blocker": {
+      "format_conformance": "7/8 because the existing NotebookLM short podcast is 5:00; gate expects 8-12 minutes.",
+      "run_audit": "15/16 because D3-03_podcast_duration_8to12min_RL fails on the same 5:00 podcast."
+    }
+  },
+  "artifact_hashes": {
+    "blueprint_html_sha256": "e3075d0fff7871311e65685136141e6113e493584d3f6ecd77735c7e037e2928",
+    "lead_profile_sha256": "bfae632179e7968a2b461e67da208bc4ed66d1fd13ead6879a70017751731896",
+    "agent_quality_gate_sha256": "897cba2c2eeb6e5ceecd7bc2338fa2a1ee8cc8d555144f3c293606c00b25ae09"
+  },
+  "hypothesis": "A future weak-agent regression will now fail either at blueprint generation, at the dedicated gatekeeper check, or in the regression suite.",
+  "next_move": "Publish scoped changes to GitHub Pages and verify public HTML contains the production runbook markers."
+}

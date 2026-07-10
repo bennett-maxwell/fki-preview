@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,12 +23,13 @@ from typing import Optional, Tuple
 from urllib.parse import unquote, urlparse
 
 
-# Production audio is a WINDOW, not a one-sided floor. A delivery walkthrough
-# must be substantial but not an overlong lecture: roughly 6-20 minutes at
-# 128kbps.
+# Production audio is duration-first. The Blueprint short-podcast standard is
+# 8-12 minutes, with bytes kept only as a bitrate/corruption sanity check.
 MIN_PRODUCTION_AUDIO_BYTES = 6 * 1024 * 1024
 MAX_PRODUCTION_AUDIO_BYTES = 20 * 1024 * 1024
-MAX_PRODUCTION_AUDIO_MINUTES = 20
+MIN_PRODUCTION_AUDIO_SECONDS = 8 * 60
+MAX_PRODUCTION_AUDIO_SECONDS = 12 * 60
+TARGET_PRODUCTION_AUDIO_MINUTES = 10
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -177,6 +179,48 @@ def production_notebooklm_origin_ok(data: dict) -> Tuple[bool, str]:
     return False, 'missing NotebookLM origin proof: requires generator/notebook_id/source_id/artifact_id or generation receipt'
 
 
+
+def default_lead_profile_path(lead_slug: str) -> Path:
+    return Path(__file__).resolve().parents[1] / "leads" / f"{lead_slug}.json"
+
+
+def find_ghl_raw_for_source_fidelity(lead_slug: str, receipt_dir: Path) -> Optional[Path]:
+    candidates = []
+    search_roots = [receipt_dir, Path(__file__).resolve().parents[1] / "audit-receipts" / lead_slug]
+    for root in search_roots:
+        if root.exists():
+            candidates.extend(root.glob("**/*ghl*raw*.json"))
+            candidates.extend(root.glob("**/ghl-contact-by-id.raw.json"))
+            candidates.extend(root.glob("**/*contact*raw*.json"))
+    unique = sorted({c.resolve() for c in candidates if c.exists()}, key=lambda x: x.stat().st_mtime, reverse=True)
+    return unique[0] if unique else None
+
+
+def source_fidelity_check(lead_slug: str, html_path: Optional[Path], receipt_dir: Path) -> Tuple[bool, str]:
+    repo = Path(__file__).resolve().parents[1]
+    checker = repo / "scripts" / "blueprint_source_fidelity_gate.py"
+    lead_json = default_lead_profile_path(lead_slug)
+    if not checker.exists():
+        return False, "blueprint_source_fidelity_gate.py missing"
+    if not lead_json.exists():
+        return False, f"lead profile missing: {lead_json}"
+    cmd = [sys.executable, str(checker), "--lead-json", str(lead_json), "--json-output"]
+    if html_path is not None:
+        cmd.extend(["--html", str(html_path)])
+    raw = find_ghl_raw_for_source_fidelity(lead_slug, receipt_dir)
+    if raw:
+        cmd.extend(["--ghl-raw", str(raw)])
+    proc = subprocess.run(cmd, text=True, capture_output=True, timeout=60)
+    try:
+        data = json.loads(proc.stdout)
+        findings = data.get("findings") or []
+        detail = data.get("status", "")
+        if findings:
+            detail += ": " + "; ".join(f.get("code", "finding") for f in findings[:8])
+    except Exception:
+        detail = (proc.stdout or proc.stderr or f"exit {proc.returncode}").strip().splitlines()[-1]
+    return proc.returncode == 0, detail
+
 def production_receipt_result(num: int, path: Path, html: str,
                               html_path: Optional[Path]) -> Tuple[bool, str]:
     """Schema-specific production proof validators.
@@ -234,10 +278,12 @@ def production_receipt_result(num: int, path: Path, html: str,
     if num == 47:
         local_audio_ok, local_audio_detail = audio_size_check(html, html_path)
         remote_size = int(data.get("size_download") or 0)
+        duration_seconds = float(data.get("duration_seconds") or data.get("duration") or 0)
         remote_ok = (
             base_pass
             and int(data.get("http_code") or 0) == 200
             and MIN_PRODUCTION_AUDIO_BYTES <= remote_size <= MAX_PRODUCTION_AUDIO_BYTES
+            and MIN_PRODUCTION_AUDIO_SECONDS <= duration_seconds <= MAX_PRODUCTION_AUDIO_SECONDS
         )
         direct_ok = (
             data.get("direct_address_audio_verified") is True
@@ -251,12 +297,13 @@ def production_receipt_result(num: int, path: Path, html: str,
         notebook_ok, notebook_detail = production_notebooklm_origin_ok(data)
         ok = remote_ok and local_audio_ok and direct_ok and hash_ok and notebook_ok
         if ok:
-            return True, f"Public/local NotebookLM podcast and direct-address audio verified ({remote_size} bytes)"
+            return True, f"Public/local NotebookLM podcast and direct-address audio verified ({duration_seconds:.0f}s, {remote_size} bytes)"
         if not remote_ok:
             return False, (
-                "Public podcast receipt must include pass=true, http_code=200, and size_download within "
+                "Public podcast receipt must include pass=true, http_code=200, duration_seconds within "
+                f"[{MIN_PRODUCTION_AUDIO_SECONDS}, {MAX_PRODUCTION_AUDIO_SECONDS}], and size_download within "
                 f"[{MIN_PRODUCTION_AUDIO_BYTES}, {MAX_PRODUCTION_AUDIO_BYTES}] bytes "
-                f"(~6-{MAX_PRODUCTION_AUDIO_MINUTES} min @128kbps)"
+                f"(Blueprint {TARGET_PRODUCTION_AUDIO_MINUTES}-minute standard)"
             )
         if not direct_ok:
             return False, "Podcast receipt must prove direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, and >=5 you/your references"
@@ -284,7 +331,7 @@ def audio_size_check(
     min_bytes: int = MIN_PRODUCTION_AUDIO_BYTES,
     max_bytes: int = MAX_PRODUCTION_AUDIO_BYTES,
 ) -> Tuple[bool, str]:
-    """Verify the referenced local MP3 exists inside the production-size window."""
+    """Verify the referenced local MP3 exists inside the 8-12 minute production window."""
     refs = re.findall(r'(?:src|href)=["\']([^"\']*podcasts/[^"\']+\.mp3[^"\']*)["\']', html, re.I)
     if not refs:
         return False, "No podcast MP3 reference found"
@@ -311,16 +358,33 @@ def audio_size_check(
             inspected.append(candidate)
             if candidate.exists():
                 size = candidate.stat().st_size
+                duration = audio_duration_seconds(candidate)
                 if size < min_bytes:
                     return False, f"{rel} too small: {size:,} bytes < {min_bytes:,} (floor)"
                 if size > max_bytes:
                     return False, (
                         f"{rel} too large: {size:,} bytes > {max_bytes:,} "
-                        f"(ceiling ~{MAX_PRODUCTION_AUDIO_MINUTES} min)"
+                        f"(byte sanity ceiling)"
                     )
-                return True, f"{rel} size {size:,} bytes (within window)"
+                if not (MIN_PRODUCTION_AUDIO_SECONDS <= duration <= MAX_PRODUCTION_AUDIO_SECONDS):
+                    return False, (
+                        f"{rel} duration {duration:.0f}s outside "
+                        f"[{MIN_PRODUCTION_AUDIO_SECONDS}, {MAX_PRODUCTION_AUDIO_SECONDS}]"
+                    )
+                return True, f"{rel} duration {duration:.0f}s and size {size:,} bytes (Blueprint 10-minute window)"
 
     return False, "Referenced MP3 not found locally"
+
+
+def audio_duration_seconds(path: Path) -> float:
+    try:
+        raw = subprocess.check_output([
+            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1", str(path)
+        ], text=True, timeout=30).strip()
+        return float(raw)
+    except Exception:
+        return 0.0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 50 BREAKPOINT CHECK FUNCTIONS
@@ -402,7 +466,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     nav_btn = re.findall(r'<button[^>]*switchtab[^>]*>([^<]+)</button>', html_lower)
     nav_text = [t.strip().lower() for t in nav_ids] + [t.strip() for t in nav_btn]
     has_your_profile = any("your profile" in t or "full profile" in t or ("profile" in t and "full" not in t) for t in nav_text)
-    has_ai_agents = any("ai agent" in t or "agents" in t or "systems" in t for t in nav_text)
+    has_ai_agents = any("ai employee" in t or "employees" in t or "ai agent" in t or "agents" in t or "systems" in t for t in nav_text)
     has_roi = any("roi" in t or "calculator" in t for t in nav_text)
     has_listen = any("listen" in t for t in nav_text)
     # "Apply" can be in nav or as a qualify.html CTA anywhere in the page
@@ -410,7 +474,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
                 bool(re.findall(r'href=["\'][^"\']*qualify\.html[^"\']*["\']', html))
     nav_pass = all([has_your_profile, has_ai_agents, has_roi, has_listen, has_apply])
     results[7] = {
-        "desc": "Nav: Your Profile | AI Agents | ROI Calculator | Listen | Apply",
+        "desc": "Nav: Your Profile | AI Employees | ROI Calculator | Listen | Apply",
         "pass": nav_pass,
         "severity": "major",
         "detail": f"Nav tabs: {[t for t in nav_text if t]} — missing required tabs" if not nav_pass else "OK"
@@ -595,12 +659,13 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
     }
 
     # ── FUNNEL (21-30) ───────────────────────────────────────────────────────
-    # 21. Industry drift — lead's industry terms present
+    # 21. Source-fidelity and industry drift — customer-facing facts must trace to the lead profile/raw form.
+    source_ok, source_detail = source_fidelity_check(lead_slug, html_path, receipt_dir)
     results[21] = {
-        "desc": "Lead's industry reflected in content",
-        "pass": True,  # Requires lead-specific check; warn only
-        "severity": "warning",
-        "detail": "Manual review: verify industry-specific content present"
+        "desc": "Source-fidelity: no unsupported/template industry, numeric, or SaaS claims",
+        "pass": source_ok,
+        "severity": "critical",
+        "detail": source_detail
     }
 
     # 22. Cross-lead contamination — other lead names absent
@@ -820,7 +885,7 @@ def run_checks(html: str, lead_slug: str, receipt_dir: Path, require_production:
         44: "Notion Sprint row present",
         45: "Current GHL readback (contact tagged)",
         46: "Repeat-submit same-contact proof",
-        47: "Walkthrough-size NotebookLM audio (6-20MB / direct-address / origin verified)",
+        47: "10-minute NotebookLM audio (8-12 min / direct-address / origin verified)",
         48: "Bennett approval scope recorded",
     }
     for num, desc in prod_checks.items():
