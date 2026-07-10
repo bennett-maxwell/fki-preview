@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blueprint AI Implementation Plan — Indy Clover Franchisees. Store-level rollout of the AI Employee system for booth-rental operations." />
+  <title>Blueprint AI Implementation Plan — Indy Clover Franchisees</title>
+  <style>
+    :root {
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --success:      #34C759;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 4rem 2rem 3.5rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.82); max-width: 640px; margin: 0 auto; }
+    .section { padding: 4rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1rem; color: var(--text-muted); max-width: 700px; margin-bottom: 2.5rem; }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; }
+    .agent-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .agent-icon svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1rem; color: var(--text); margin-bottom: 0.4rem; }
+    .agent-source { font-size: 0.75rem; color: var(--text-light); margin-bottom: 0.6rem; font-style: italic; }
+    .agent-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem; }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+    .list-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); }
+    .list-card h3 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 1rem; }
+    .list-card ul { padding-left: 1.2rem; }
+    .list-card li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+
+    .checklist { display: flex; flex-direction: column; gap: 0.75rem; }
+    .check-item { display: flex; gap: 0.85rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+    .check-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--brand); flex-shrink: 0; margin-top: 0.1rem; }
+    .check-text { font-size: 0.92rem; color: var(--text); }
+    .check-text strong { color: var(--brand-dark); }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+    .metric-title { font-weight: 800; font-size: 0.95rem; color: var(--brand-dark); margin-bottom: 0.5rem; }
+    .metric-desc { font-size: 0.85rem; color: var(--text-muted); }
+
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    footer .disclaimer { margin-top: 0.75rem; color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+    .fine { font-size: 0.78rem; color: var(--text-light); margin-top: 1.5rem; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <ul class="nav-links">
+    <li><a href="#agents">AI Employees</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#roles">Roles &amp; Access</a></li>
+    <li><a href="#calibration">Calibration</a></li>
+    <li><a href="#metrics">Metrics</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Store-Level Rollout Plan</div>
+  <h1>Blueprint AI Implementation Plan &mdash; <span>Indy Clover Franchisees</span></h1>
+  <p class="hero-sub">This plan takes the AI Employee system built for Indy Clover's franchise development operation and applies it to your store: filling booths, keeping sellers engaged, and bringing buyers back &mdash; the same 3-day / 7-day / 30-day standard, translated into concrete store actions.</p>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System, Applied to Your Store</p>
+    <h2 class="section-title">Overview of the AI Employees</h2>
+    <p class="section-sub">Your Blueprint defines six AI Employees for Indy Clover's franchise development operation. At the store level, each one does the equivalent job for booth-rental operations &mdash; the same underlying employee, pointed at your store's seller and buyer workflows instead of the franchise-candidate pipeline.</p>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="agent-name">Franchise-Candidate Speed-to-Lead Employee</div>
+        <div class="agent-source">Blueprint role: answers every franchise-candidate inquiry in under 60 seconds, 24/7, qualifies liquid capital and eligibility.</div>
+        <div class="agent-desc">Store application: the same speed-to-lead logic applied to every inbound seller and buyer inquiry about your booths &mdash; a fast, on-brand first response the moment someone asks about renting a booth or visiting your store, day or night.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="agent-name">Discovery-Day Prep &amp; Follow-Up Employee</div>
+        <div class="agent-source">Blueprint role: builds a candidate brief before every Discovery Day and drafts the same-day follow-up.</div>
+        <div class="agent-desc">Store application: builds a seller-prospect brief before a booth walkthrough or tour &mdash; what they asked about, what they sell, what booth size fits &mdash; and drafts the same-day follow-up so no interested seller goes quiet.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div class="agent-name">Franchisee Onboarding Employee</div>
+        <div class="agent-source">Blueprint role: tracks the ramp from signing to Grand Opening &mdash; site selection, construction, training, loan processing.</div>
+        <div class="agent-desc">Store application: tracks a new seller's ramp from first inquiry to booth set up &mdash; agreement signed, booth assigned, Saturday setup completed, first listings live &mdash; so no step falls through the cracks.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="agent-name">Franchisee Support &amp; Content Employee</div>
+        <div class="agent-source">Blueprint role: turns real franchisee and seller stories into a week of candidate-facing content in Indy Clover's brand voice.</div>
+        <div class="agent-desc">Store application: turns your store's real booth highlights, Discount Day promos, and community events into a week of buyer-facing social and email content &mdash; the exact same content engine, aimed at shoppers instead of franchise candidates.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="agent-name">Pipeline Intelligence Employee</div>
+        <div class="agent-source">Blueprint role: reads the candidate pipeline daily, flags stalls, drafts re-engagement for approval.</div>
+        <div class="agent-desc">Store application: reads your seller waitlist and open-booth inquiries daily, flags any seller conversation that's gone quiet, and drafts the re-engagement touch for your approval &mdash; so an interested seller never gets lost.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="agent-name">Franchise Development Reporting Employee</div>
+        <div class="agent-source">Blueprint role: delivers a leadership snapshot &mdash; candidate pipeline, Discovery Days booked, royalty status, location count.</div>
+        <div class="agent-desc">Store application: delivers a scheduled snapshot for your store &mdash; booths occupied vs. capacity, seller waitlist size, upcoming booth renewals, and buyer traffic trend &mdash; so you run the store from current numbers, not a memory of last week.</div>
+      </div>
+    </div>
+    <p class="fine">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Store Rollout Timeline</h2>
+    <p class="section-sub">Expanded from the Blueprint's 3-day / 7-day / 30-day / Month 2+ standard into concrete actions for a booth-rental store: booth-seller recruitment, seller onboarding comms, listing and merchandising cadence, and buyer traffic loops.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>Concrete Store Actions</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1&ndash;3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list">
+              <li>Kickoff &mdash; map your store's seller inquiry channels, booth check-in process, and who approves external sends</li>
+              <li>Speed-to-Lead Employee connected to your store's inquiry channels (phone, DM, email, walk-in intake form)</li>
+              <li>Brand voice built from Indy Clover's documented voice guidelines &mdash; friendly, playful, upbeat &mdash; before launch, not after</li>
+              <li>Live test: submit a test seller inquiry and watch the fast response fire</li>
+              <li>Booth-seller recruitment pipeline stood up: every "do you have booths open?" question gets routed and logged, not lost in a text thread</li>
+            </ul></td>
+            <td class="m-result">First AI Employee live. Every seller and buyer inquiry gets a fast response while your team is on the floor.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4&ndash;7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list">
+              <li>Booth-prep Employee producing pre-walkthrough briefs for interested sellers before they tour the store</li>
+              <li>Seller onboarding Employee tracking the ramp from agreement signed to first booth listing live</li>
+              <li>Seller onboarding comms sequence running: welcome message, Saturday setup reminder, Discount Days explainer, first-week check-in</li>
+              <li>Content Employee publishing from real booth highlights and community events on a listing/merchandising cadence</li>
+              <li>Pipeline Intelligence Employee reading your seller waitlist daily</li>
+              <li>Reporting Employee on its scheduled snapshot</li>
+              <li>Team walkthrough: 30 minutes, no technical knowledge required</li>
+            </ul></td>
+            <td class="m-result">All six AI Employees deployed in real store workflows. Your team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list">
+              <li>30-day performance review: response rates, hours recovered, booth occupancy movement</li>
+              <li>Employees refined on your store's actual seller and buyer conversations</li>
+              <li>Buyer traffic loops reviewed: which content angles brought shoppers back, which Discount Day promos moved the needle</li>
+              <li>Expansion roadmap: what to hand over next as your store's booth count and seller waitlist grow</li>
+            </ul></td>
+            <td class="m-result">The system knows your store. Every employee calibrated on real operating data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list">
+              <li>Minimal manual input required from your team</li>
+              <li>Continuous improvement from real store data &mdash; booth turnover, seller retention, buyer repeat visits</li>
+              <li>Your store owns the system &mdash; FKI stays as the AI operations team</li>
+            </ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">No long multi-month rollouts. This is the same 3-day / 7-day / 30-day standard FKI commits to every client, applied to your store.</p>
+  </div>
+</section>
+
+<section class="section" id="roles">
+  <div class="container">
+    <p class="section-label">Getting Set Up</p>
+    <h2 class="section-title">Roles &amp; Access Needed</h2>
+    <p class="section-sub">What your store needs to have ready before kickoff so the rollout stays on the 3-day / 7-day timeline.</p>
+    <div class="two-col">
+      <div class="list-card">
+        <h3>From You (the Franchisee)</h3>
+        <ul>
+          <li>Owner or store manager sign-off on the approval gate for external sends</li>
+          <li>Access to your store's inquiry channels (phone line, DM accounts, email, walk-in intake if used)</li>
+          <li>Access to your team messaging tool so staff can see AI Employee outputs</li>
+          <li>Current booth roster: occupied vs. open, capacity, upcoming renewals</li>
+          <li>Any existing seller agreement templates or onboarding materials</li>
+        </ul>
+      </div>
+      <div class="list-card">
+        <h3>From FKI</h3>
+        <ul>
+          <li>AI Employee build, brand-voice calibration, and connection to your store's tools</li>
+          <li>Human-approval gate configured for every external send by default</li>
+          <li>30-day performance review and refinement based on your store's real data</li>
+          <li>Ongoing AI operations support after Day 30</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="calibration">
+  <div class="container">
+    <p class="section-label">Before You Go Live</p>
+    <h2 class="section-title">Calibration Checklist</h2>
+    <p class="section-sub">Confirm each of these before your first AI Employee goes live, so Day 1 output already sounds like your store.</p>
+    <div class="checklist">
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Brand voice confirmed</strong> &mdash; friendly, playful, upbeat, inclusive, clear, authentic, per Indy Clover's documented voice guide; no "thrift store" or "bargain-bin" language.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Approval gate set</strong> &mdash; every AI-drafted external send (to sellers or buyers) routes to a named human before it goes out.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>State-block and compliance rules loaded</strong> &mdash; any earnings reference carries the FDD Item 19 qualifier; no guaranteed-outcome language.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Booth roster and capacity current</strong> &mdash; occupied vs. open booths, pricing, and Discount Days schedule (Thursday &amp; Friday) reflected accurately.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Seller onboarding sequence reviewed</strong> &mdash; welcome message, Saturday setup instructions, first-week check-in match your store's actual process.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Content sourcing agreed</strong> &mdash; who submits real booth stories and community events for the Content Employee to turn into posts.</div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Live test completed</strong> &mdash; a test seller inquiry sent and the fast response verified before go-live.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="metrics">
+  <div class="container">
+    <p class="section-label">What Success Looks Like</p>
+    <h2 class="section-title">Success Metrics &mdash; What to Measure</h2>
+    <p class="section-sub">Framed as what to track at your store, not a promise of a specific outcome. Individual results vary.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Inquiry Response Time</div>
+        <div class="metric-desc">How fast a seller or buyer inquiry gets a first response, before and after go-live.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Booth Occupancy Rate</div>
+        <div class="metric-desc">Booths occupied vs. total capacity, tracked weekly.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Seller Waitlist &amp; Churn</div>
+        <div class="metric-desc">Size of your seller waitlist and rate of booth non-renewal, tracked over time.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Admin Hours Recovered</div>
+        <div class="metric-desc">Hours your team spends on booth admin and seller comms, before and after the system is running.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Content Output &amp; Buyer Traffic Loops</div>
+        <div class="metric-desc">Number of on-brand posts published per real event, and whether buyer visits track with publish cadence.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">30-Day Calibration Review</div>
+        <div class="metric-desc">Whether each AI Employee's output matched your store's real seller and buyer patterns by Day 30.</div>
+      </div>
+    </div>
+    <p class="fine">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Indy Clover Franchisee Blueprint</p>
+  <p class="disclaimer">Franchise offerings made by prospectus only. See FDD for complete information.</p>
+</footer>
+
+</body>
+</html>

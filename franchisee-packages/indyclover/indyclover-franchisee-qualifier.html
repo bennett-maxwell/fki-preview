@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="See if your Indy Clover store qualifies for the full AI Employee system." />
+  <title>See If You Qualify — Indy Clover Franchisees</title>
+  <style>
+    :root {
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --success:      #34C759;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--neutral-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    .page-head { text-align: center; margin-bottom: 2.5rem; }
+    .page-head .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .page-head h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; color: var(--text); margin-bottom: 0.75rem; }
+    .page-head p { font-size: 1rem; color: var(--text-muted); max-width: 560px; margin: 0 auto; }
+    form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    fieldset { border: none; margin-bottom: 2rem; }
+    fieldset legend { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 1rem; padding: 0; }
+    .field { margin-bottom: 1.25rem; }
+    .field label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field select, .field textarea {
+      width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.95rem;
+      font-family: var(--font-sans); color: var(--text); background: var(--white); outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brand); }
+    .field textarea { resize: vertical; min-height: 70px; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+    .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .radio-group label, .checkbox-group label { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; font-weight: 500; color: var(--text); cursor: pointer; }
+    .radio-group input, .checkbox-group input { width: 18px; height: 18px; accent-color: var(--brand); cursor: pointer; }
+    .slider-field .slider-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .slider-field .slider-val { font-weight: 800; color: var(--brand); font-size: 0.95rem; }
+    .slider-field input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; accent-color: var(--brand); }
+    .required-mark { color: var(--brand); }
+    .submit-btn { width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 100px; padding: 1rem; font-size: 1rem; font-weight: 800; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, opacity 0.2s; }
+    .submit-btn:disabled { background: var(--text-light); cursor: not-allowed; opacity: 0.6; }
+    .submit-btn:not(:disabled):hover { background: var(--brand-dark); }
+    .form-note { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 1rem; }
+    .form-error { display: none; background: #fde8eb; color: var(--brand); border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    footer .disclaimer { margin-top: 0.75rem; color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+</nav>
+
+<div class="container">
+  <div class="page-head">
+    <p class="section-label">Indy Clover Franchisees</p>
+    <h1>See If Your Store Qualifies</h1>
+    <p>Tell us about your store and we'll review your fit for the full AI Employee system within 48 hours. Every field marked <span class="required-mark">*</span> is required.</p>
+  </div>
+
+  <div class="form-error" id="formError">Something went wrong submitting the form. Please check the required fields and try again.</div>
+
+  <form id="qualifierForm" novalidate>
+    <fieldset>
+      <legend>Your Contact Info</legend>
+      <div class="row2">
+        <div class="field">
+          <label for="firstName">First Name <span class="required-mark">*</span></label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="field">
+          <label for="lastName">Last Name <span class="required-mark">*</span></label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="email">Email <span class="required-mark">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="required-mark">*</span></label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="market">Your Store Market / Location <span class="required-mark">*</span></label>
+        <input type="text" id="market" name="market" placeholder="City, State" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Your Store Operations</legend>
+
+      <div class="field">
+        <label for="firstAgent">Which AI Employee would you want live first, and what problem would it solve for your store? <span class="required-mark">*</span></label>
+        <textarea id="firstAgent" name="firstAgent" required placeholder="e.g. Seller inquiries — I can't respond fast enough to fill open booths"></textarea>
+      </div>
+
+      <div class="field slider-field">
+        <div class="slider-label-row"><label for="adminHours">Hours/week you or your team spend on booth admin &amp; seller comms <span class="required-mark">*</span></label><span class="slider-val" id="adminHoursVal">10 hrs</span></div>
+        <input type="range" id="adminHours" name="adminHours" min="0" max="40" step="1" value="10" oninput="document.getElementById('adminHoursVal').textContent = this.value + ' hrs'; checkFormValid();">
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="boothsOccupied">Booths Currently Occupied <span class="required-mark">*</span></label>
+          <input type="text" id="boothsOccupied" name="boothsOccupied" placeholder="e.g. 45" required>
+        </div>
+        <div class="field">
+          <label for="boothCapacity">Total Booth Capacity <span class="required-mark">*</span></label>
+          <input type="text" id="boothCapacity" name="boothCapacity" placeholder="e.g. 60" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="sellerChurn">How do you currently handle seller churn (booths that don't get renewed)? <span class="required-mark">*</span></label>
+        <textarea id="sellerChurn" name="sellerChurn" required placeholder="Describe your current process"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="bottleneck">What's the biggest bottleneck to filling booths right now? <span class="required-mark">*</span></label>
+        <textarea id="bottleneck" name="bottleneck" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="currentTools">What tools do you currently use to manage sellers, booths, or buyers? <span class="required-mark">*</span></label>
+        <input type="text" id="currentTools" name="currentTools" placeholder="e.g. spreadsheet, CRM, GHL, text threads" required>
+      </div>
+
+      <div class="field slider-field">
+        <div class="slider-label-row"><label for="urgency">How urgent is solving this for your store? (1 = not urgent, 10 = very urgent) <span class="required-mark">*</span></label><span class="slider-val" id="urgencyVal">5</span></div>
+        <input type="range" id="urgency" name="urgency" min="1" max="10" step="1" value="5" oninput="document.getElementById('urgencyVal').textContent = this.value; checkFormValid();">
+      </div>
+    </fieldset>
+
+    <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Application</button>
+    <p class="form-note">We review every application and respond within 48 hours.</p>
+  </form>
+</div>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Indy Clover Franchisee Blueprint</p>
+  <p class="disclaimer">Franchise offerings made by prospectus only. See FDD for complete information.</p>
+</footer>
+
+<script>
+  const RELAY_URL = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+  const form = document.getElementById('qualifierForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formError = document.getElementById('formError');
+
+  const requiredFields = ['firstName','lastName','email','phone','market','firstAgent','boothsOccupied','boothCapacity','sellerChurn','bottleneck','currentTools'];
+
+  function checkFormValid() {
+    let valid = true;
+    requiredFields.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (!el || !el.value || !el.value.trim()) valid = false;
+    });
+    const emailEl = document.getElementById('email');
+    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) valid = false;
+    submitBtn.disabled = !valid;
+    return valid;
+  }
+
+  requiredFields.forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', checkFormValid);
+      el.addEventListener('change', checkFormValid);
+    }
+  });
+
+  checkFormValid();
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    formError.style.display = 'none';
+    if (!checkFormValid()) {
+      formError.style.display = 'block';
+      return;
+    }
+
+    const payload = {
+      src: 'indyclover-franchisee-blueprint',
+      brand: 'IC',
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      market: document.getElementById('market').value.trim(),
+      firstAgent: document.getElementById('firstAgent').value.trim(),
+      adminHoursPerWeek: document.getElementById('adminHours').value,
+      boothsOccupied: document.getElementById('boothsOccupied').value.trim(),
+      boothCapacity: document.getElementById('boothCapacity').value.trim(),
+      sellerChurnHandling: document.getElementById('sellerChurn').value.trim(),
+      biggestBottleneck: document.getElementById('bottleneck').value.trim(),
+      currentTools: document.getElementById('currentTools').value.trim(),
+      urgency: document.getElementById('urgency').value,
+      submitted_at: new Date().toISOString()
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    fetch(RELAY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Relay responded with ' + res.status);
+      window.location.href = 'indyclover-franchisee-thankyou.html';
+    }).catch(function(err) {
+      try {
+        const existing = JSON.parse(localStorage.getItem('ic_franchisee_qualifier_fallback') || '[]');
+        existing.push(payload);
+        localStorage.setItem('ic_franchisee_qualifier_fallback', JSON.stringify(existing));
+      } catch (storageErr) {}
+      window.location.href = 'indyclover-franchisee-thankyou.html';
+    });
+  });
+</script>
+
+</body>
+</html>

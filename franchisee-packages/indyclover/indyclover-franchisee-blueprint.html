@@ -1,0 +1,1097 @@
+<!-- Lead: Indy Clover | Industry: booth-rental recommerce resale franchise -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The AI blueprint Franchise KI Consulting built for Indy Clover — the booth-rental resale franchise. Six AI Employees, an interactive ROI calculator, and the exact system FKI delivers to franchisor clients." />
+  <meta property="og:title" content="The AI Advantage Roadmap — Prepared for Indy Clover" />
+  <meta property="og:description" content="Franchise KI Consulting's AI system, designed for Indy Clover's franchise development operation. 6 AI Employees, interactive ROI calculator, and production-ready prompts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/indy-clover-blueprint-20260709.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Indy Clover — AI Advantage Roadmap — Franchise KI Consulting</title>
+  <style>
+    :root {
+      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
+      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 660px; margin-bottom: 3rem; }
+
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .results-table a { color: var(--brand); text-decoration: underline; }
+
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand); margin: 0.75rem 0 0.25rem; }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8eb; color: var(--brand); }
+    .gap-tag.efficiency { background: #e8eaf3; color: var(--steel); }
+    .gap-tag.brand { background: #f3e8f0; color: var(--brand-dark); }
+    .gap-desc a { color: var(--brand); }
+
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfafb; }
+    .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #fde8eb; color: var(--brand); }
+
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: var(--brand); font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-muted); }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
+    .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+    .calc-disclaimer a { color: var(--brand); }
+
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.7); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: var(--brand-dark); }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.92); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand); text-decoration: underline; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 1.45rem; } .hero-sub { font-size: 1rem; } .section { padding: 2.75rem 1rem; } }
+
+    .pod-section { padding: 4rem 2rem; }
+    .pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
+    .pod-header { background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.5rem 2rem; color: #fff; }
+    .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
+    .pod-body { padding: 1.5rem 2rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
+    .pod-eq.playing { display: inline-flex; }
+    .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+    .pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+    .pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+    .pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+    .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+    @keyframes eqBounce { from{height:4px} to{height:18px} }
+    .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
+    .pod-progress-wrap { position: relative; height: 44px; display: flex; align-items: center; background: transparent; border-radius: 22px; cursor: pointer; touch-action: none; user-select: none; }
+    .pod-progress-wrap::before { content: ''; position: absolute; left: 0; right: 0; top: 19px; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; }
+    .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
+    .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
+    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+    .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+    .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
+    .pod-btn:hover { background: rgba(0,113,227,.08); }
+    .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
+    @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+    .pod-btn.play-btn:hover { background: var(--brand-dark); }
+    .pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+    .pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+    .pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .pod-mute { margin-left: auto; }
+    .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
+    .pod-dl:hover { text-decoration: underline; }
+    .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
+    .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
+    .pod-mini.visible { display: flex; }
+    .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+    .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
+  .agent-prompt{margin-top:0.9rem;padding:0.85rem 1rem;background:rgba(0,113,227,0.06);border-left:3px solid #0071E3;border-radius:6px;font-size:0.85rem;line-height:1.55;color:#4a4a55}.agent-prompt-label{display:block;font-weight:600;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.35rem;color:#0071E3}</style>
+<script>
+// Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
+// Reads slug/cid/email from URL query params appended by build-delivery-email.sh.
+// Fire-and-forget; never blocks page render. Fails silently on any error.
+(function() {
+  try {
+    var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+    var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+    var PIPELINE_ID = 'ogv8BRv6YhROdI3vwGJT';
+    var STAGE_BLUEPRINT_DELIVERED = '998beee1-22f5-4f99-80e3-97d121ed298f'; // Warm Lead — confirmed via GHL API 2026-06-05
+    var p = new URLSearchParams(window.location.search);
+    var slug  = p.get('slug')  || '';
+    var cid   = p.get('cid')   || '';
+    var email = p.get('email') || '';
+    if (!slug && !cid && !email) return;
+    var payload = {
+      event_name: 'blueprint_viewed',
+      locationId: GHL_LOC,
+      blueprint_slug: slug,
+      contact_id: cid,
+      email: email,
+      pipeline_id: PIPELINE_ID,
+      pipeline_stage_id: STAGE_BLUEPRINT_DELIVERED,
+      source: 'blueprint_page',
+      viewed_at: new Date().toISOString()
+    };
+    var body = JSON.stringify(payload);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(RELAY, new Blob([body], {type:'application/json'}));
+    } else {
+      fetch(RELAY, {method:'POST', headers:{'Content-Type':'application/json'}, body:body, keepalive:true});
+    }
+  } catch(e) {}
+})();
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#profile">Your Profile</a></li>
+    <li><a href="#agents">AI Employees</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#apply">Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-badge">Prepared for Indy Clover</div>
+  <h1>The <span>AI Advantage</span> Roadmap<br>Built for a Booth-Rental Resale Franchise</h1>
+  <p class="hero-sub">Indy Clover is a curated booth-rental resale marketplace franchise headquartered in Lindon, Utah &mdash; sellers rent booths, supply their own inventory, and keep two-thirds of every sale, while Indy Clover owns the platform, not the inventory. This is the AI system Franchise KI Consulting designed to run alongside Indy Clover&rsquo;s franchise development operation.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First AI Employee<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Employees<br>Running</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>Indy Clover Data</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">137+</span><span class="label">Indy Clover Units Sold<br>by the FKI Playbook</span></div>
+  </div>
+  <p style="font-size:0.72rem;color:rgba(255,255,255,0.5);max-width:560px;margin:0 auto;">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+</section>
+
+<section class="section section-alt" id="profile">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Indy Clover Stands Today</h2>
+    <p class="section-sub">Built from Indy Clover&rsquo;s documented brand and sales intelligence &mdash; the same intake and research process FKI runs for every client, pointed at Indy Clover&rsquo;s actual franchise development operation. This is the baseline used to design the AI system below.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">Booth-Rental Resale Marketplace</div><div class="snapshot-key">Business Model</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">2022</div><div class="snapshot-key">Founded</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Lindon, Utah</div><div class="snapshot-key">Headquarters</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">22 Open / 0 Closures</div><div class="snapshot-key">Locations</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$164,450&ndash;$215,800</div><div class="snapshot-key">Total Investment Range</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">February 2026</div><div class="snapshot-key">SBA Approved</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">5% of Post-Seller Profit</div><div class="snapshot-key">Royalty Structure</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">10&ndash;20 hrs/week</div><div class="snapshot-key">Semi-Absentee Time Commitment</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">150,000+</div><div class="snapshot-key">Independent Sellers Across the Network</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$50B+</div><div class="snapshot-key">U.S. Recommerce Market Size</div></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">Indy Clover&rsquo;s model: sellers rent booth space, supply their own inventory, and keep two-thirds of every sale &mdash; Indy Clover franchisees own the platform and never carry inventory risk. Item 19 average net profit is $68,000/year per the FDD (Individual results vary. See Item 19 of the applicable FDD for financial performance representations). Indy Clover is sold and developed through Franchise KI Consulting&rsquo;s franchise development operation &mdash; the same playbook Bennett Maxwell used to sell 137+ Indy Clover units himself.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">What Your Industry Is Already Doing</p>
+    <h2 class="section-title">Franchise Brands in Booth-Rental &amp; Resale Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves franchise-development organizations and multi-location retail brands are making right now &mdash; live in the market today. The question for Indy Clover is not whether AI runs these functions for competing franchisors. It is whether Indy Clover&rsquo;s franchise development pipeline runs them first.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every franchise-candidate inquiry in 60 seconds &mdash; while the team sleeps</div><div class="gap-desc"><strong>What they're doing:</strong> high-performing franchise sales organizations put an AI speed-to-lead employee on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> published research shows the first firm to respond wins a disproportionate share of deals &mdash; slow responders never even get the discovery call booked. <strong>How FKI delivers for Indy Clover:</strong> a Franchise-Candidate Speed-to-Lead Employee wired into the CRM answers every prospective franchisee inquiry in under 60 seconds, qualifies liquid capital and fit, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They walk into every discovery day with a full candidate brief</div><div class="gap-desc"><strong>What they're doing:</strong> franchise development teams run AI research employees that assemble candidate dossiers &mdash; liquid capital, background, motivations, objections raised &mdash; before every Discovery Day. <strong>How it helps them:</strong> the closer spends the day closing instead of re-discovering; preparation that took a coordinator hours takes minutes. <strong>How FKI delivers for Indy Clover:</strong> a Discovery-Day Prep Employee builds a brief on every candidate before they arrive &mdash; state-block check, objection history, and the specific questions to ask that day. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn every seller story and franchisee win into a week of content</div><div class="gap-desc"><strong>What they're doing:</strong> franchise brands run AI content employees that convert every real operational event &mdash; a franchisee milestone, a seller testimonial, a community event &mdash; into publish-ready posts and emails. <strong>How it helps them:</strong> they stay in front of the candidate pipeline every week without adding a marketing hire; the community engagement work happens once and the AI distributes it. <strong>How FKI delivers for Indy Clover:</strong> a Franchisee Support &amp; Content Employee turns real booth stories and franchisee community events into candidate-facing content in Indy Clover&rsquo;s friendly, upbeat brand voice. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They never let a franchise-candidate deal go quiet</div><div class="gap-desc"><strong>What they're doing:</strong> franchise-sales-led organizations run AI pipeline employees that watch every open candidate conversation, flag stalls, and draft the re-engagement touch before a human notices the silence. <strong>How it helps them:</strong> candidates who used to go cold after Discovery Day get a timely, personal follow-up &mdash; the cheapest new unit is the deal already in the pipeline. <strong>How FKI delivers for Indy Clover:</strong> a Pipeline Intelligence Employee reads candidate pipeline stages daily, surfaces stalled conversations, and drafts the follow-up for approval. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">Every one of these is already running inside Franchise KI Consulting&rsquo;s own operation. The franchise development teams that move first do not just save time &mdash; they take the qualified candidates everyone else was too slow to answer. This page shows Indy Clover exactly what that system looks like, built for Indy Clover&rsquo;s booth-rental resale model.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for Indy Clover</h2>
+    <p class="section-sub">Every AI Employee in the system maps to one of three outcomes &mdash; more franchise sales, more time back for the team, or more candidate and franchisee capacity without adding headcount.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Increase Revenue</div>
+        <div class="pillar-metric">More Awarded Territories</div>
+        <div class="pillar-sub">Every franchise-candidate inquiry answered in under 60 seconds. Every Discovery Day entered with a full candidate brief. Every stalled candidate re-engaged before going cold. Higher conversion at every stage from inquiry to signed FDD.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">Hours Back Weekly</div>
+        <div class="pillar-sub">Discovery Day prep, franchisee onboarding checklists, content production, pipeline updates, and support admin &mdash; automated. Team hours go to candidate conversations and franchisee coaching, not paperwork.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="pillar-title">Scale Without Hiring</div>
+        <div class="pillar-metric">22 Locations &rarr; Next Phase</div>
+        <div class="pillar-sub">Indy Clover grew to 22 open locations with zero closures. AI Employees let a small team support onboarding, support, and candidate flow for the next phase of growth without proportional headcount increases.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">Indy Clover&rsquo;s Tool Stack</h2>
+    <p class="section-sub">Here is how a booth-rental franchisor&rsquo;s systems typically map &mdash; and where AI Employees slot in to multiply each one without replacing anything already in place. Your Blueprint gets this same mapping applied to Indy Clover&rsquo;s actual stack once we confirm it during onboarding.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">Your CRM</div><div class="stack-role">Franchise Candidate Pipeline</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Your Team Messaging</div><div class="stack-role">Franchisee &amp; Team Comms</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Your Project Workspace</div><div class="stack-role">Franchise Development SOPs</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Your Email &amp; Calendar</div><div class="stack-role">Candidate &amp; Franchisee Scheduling</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Your Content Library</div><div class="stack-role">Candidate &amp; Community Content</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Your Accounting System</div><div class="stack-role">Franchise Fee &amp; Royalty Tracking</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">Six Time-Recovery Opportunities for Indy Clover&rsquo;s Franchise Development Operation</h2>
+    <p class="section-sub">When FKI runs its intake process on a booth-rental resale franchisor like Indy Clover, these are the areas with the most recoverable capacity. None of this is critique &mdash; Indy Clover already reached 22 open locations with zero closures. This is about giving a proven model more leverage as it scales past this first phase.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Franchise-Candidate Lead Response Speed</div><div class="gap-desc">Every inquiry from a prospective franchisee is a high-value opportunity, and published research shows the first responder wins a disproportionate share of deals. Before AI, response time depends on where the team is standing. A Speed-to-Lead Employee answers in under 60 seconds, 24/7, qualifying liquid capital and state eligibility on the first touch. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">Discovery Day Preparation &amp; Follow-Up</div><div class="gap-desc">A strong Discovery Day requires knowing the candidate&rsquo;s liquid capital, motivations, and likely objections before they walk in. Done manually, that is hours per candidate. The Discovery-Day Prep Employee assembles the brief automatically and drafts the same-day follow-up. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Franchisee Onboarding</div><div class="gap-desc">Between signing and Grand Opening, a new franchisee needs site selection support, build-out coordination, and training scheduling. A Franchisee Onboarding Employee keeps each new owner on the documented ramp &mdash; site selection, construction, training, loan processing &mdash; without status falling through the cracks. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">Franchisee Support &amp; Community Content</div><div class="gap-desc">Indy Clover&rsquo;s community-driven brand voice &mdash; friendly, playful, upbeat &mdash; depends on consistent content about booth highlights and community events. Repurposing that into candidate-facing marketing was a bottleneck. The Franchisee Support &amp; Content Employee turns real franchisee and seller stories into on-brand content. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Candidate Pipeline Hygiene &amp; Follow-Up</div><div class="gap-desc">Franchise development cycles run months, and candidates go quiet, not necessarily because they said no. Manually auditing every open candidate conversation for stalls was inconsistent. The Pipeline Intelligence Employee reads the pipeline daily and drafts the re-engagement touch before a candidate goes cold. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Franchise Development Reporting</div><div class="gap-desc">Candidate pipeline movement, royalty collection, and location count live across multiple systems and only surface when someone goes looking. A reporting employee delivers a scheduled snapshot so leadership decisions start from current numbers, not last month&rsquo;s. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag brand">Visibility</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map &mdash; Indy Clover</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with Indy Clover&rsquo;s existing systems. This is the order FKI recommends deploying in &mdash; start at P1 and work down, do not skip ahead.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Franchise-Candidate Speed-to-Lead Employee</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every prospective franchisee inquiry qualified and routed before it goes cold</td><td>CRM, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Discovery-Day Prep &amp; Follow-Up Employee</strong></td><td><span class="impact-tag">Brief in minutes</span> &mdash; full candidate dossier before every Discovery Day</td><td>CRM, Calendar, State Block List</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Franchisee Onboarding Employee</strong></td><td><span class="impact-tag">Signing to Grand Opening on schedule</span> &mdash; site selection, construction, training milestones tracked</td><td>Project Workspace, CRM, Calendar</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>Franchisee Support &amp; Content Employee</strong></td><td><span class="impact-tag">1 event = 1 week</span> &mdash; real booth and community stories turned into candidate-facing content</td><td>Content Library, Social, Email</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Pipeline Intelligence Employee</strong></td><td><span class="impact-tag">Zero silent stalls</span> &mdash; daily candidate pipeline read with drafted re-engagement</td><td>CRM, Team Messaging</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Franchise Development Reporting Employee</strong></td><td><span class="impact-tag">Scheduled snapshot</span> &mdash; candidate pipeline, royalty status, and location count on a cadence</td><td>Accounting System, CRM, Email</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Sequencing, Not Limits</p>
+    <h2 class="section-title">What Gets Saved for Later &mdash; So the Big Wins Land First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything a person does on a computer can eventually be handled by a trained AI Employee &mdash; given the right access and the right training. The plan is to hand that work over step by step, highest-impact first. These are the items held for later phases on a franchisor engagement like Indy Clover&rsquo;s. Not because AI cannot get there &mdash; because chasing them on day one would distract from the employees that move the needle first.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Autonomous External Sending</div><div class="ignore-reason">AI Employees draft every candidate-facing email and message &mdash; but a human approves every external send. Absolutely automatable later; for now the approval gate is a feature, not a limitation. Trust is earned in phases.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Autonomous Pricing &amp; FDD Terms</div><div class="ignore-reason">AI models the investment math and preps the anchor numbers &mdash; and eventually could run more of the negotiation prep too. For now, franchise fee, royalty terms, and FDD language stay with leadership and qualified counsel. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Replacing Franchisee Coaching Calls</div><div class="ignore-reason">AI preps the brief, drafts the follow-up, and tracks onboarding milestones &mdash; but a franchisee running their booth-rental business deserves a real coaching conversation with a human who has done it. The relationship is the product; AI makes sure it is never wasted on admin.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Generic Website Chatbot</div><div class="ignore-reason">A bolt-on chatbot answering generic FAQs is not the same system as a Speed-to-Lead Employee that qualifies liquid capital and state eligibility and routes into the real pipeline. Indy Clover&rsquo;s AI system will eventually front the website too &mdash; but it launches wired into the actual candidate workflow, not as a chat widget bandaid.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">6 AI Employees Designed for Indy Clover</h2>
+    <p class="section-sub">Each employee maps to a specific workflow inside Indy Clover&rsquo;s franchise development and franchisee support operation. Brand voice is calibrated from real transcripts and documented voice guidelines before launch &mdash; 90% accurate on Day 1, calibrated, not slowly learned.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Franchise-Candidate Speed-to-Lead Employee</div><div class="agent-desc">Watches every inbound channel around the clock. The moment a prospective franchisee inquires about Indy Clover, it drafts and sends a personalized response in under 60 seconds, qualifies liquid capital and state eligibility, and routes the candidate to the right CRM pipeline stage. It distinguishes a ready-to-move candidate from an early-stage browser and treats each accordingly.</div><div class="agent-outcome">Responds in under 60 sec &mdash; 24/7, no staff required</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchise-Candidate Speed-to-Lead Employee for Indy Clover. A new inquiry just arrived. Greet the candidate by first name; reference their stated interest specifically; answer their core question in two sentences in Indy Clover&rsquo;s friendly, upbeat brand voice; ask one qualifying question about liquid capital or timeline; and propose a specific next step. Never quote investment numbers as a guarantee of earnings. Never make earnings claims without the FDD Item 19 qualifier.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">Discovery-Day Prep &amp; Follow-Up Employee</div><div class="agent-desc">Before every Discovery Day, assembles a full candidate brief: liquid capital range, state-block eligibility, objections already raised, and the three most likely questions to prepare for. After the day ends, it drafts the same-day follow-up and updates the pipeline record so no candidate goes quiet.</div><div class="agent-outcome">Candidate brief before every Discovery Day &mdash; in minutes</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Discovery-Day Prep &amp; Follow-Up Employee for Indy Clover. Given a candidate&rsquo;s CRM record, produce a one-page pre-visit brief: candidate snapshot, liquid capital range, state-block eligibility check, objections raised so far, and three discovery questions tailored to this candidate. After the visit, draft the follow-up email and a CRM pipeline update. Cite every fact to the CRM record. Mark anything unverified as unknown &mdash; never guess.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Franchisee Onboarding Employee</div><div class="agent-desc">Once a candidate signs, tracks the ramp from signing to Grand Opening: site selection, construction, training, and loan processing milestones. It flags slippage before it becomes a delay and keeps the new franchisee informed at every step, so the documented ramp period stays on schedule.</div><div class="agent-outcome">Signing-to-open ramp tracked automatically &mdash; nothing falls through the cracks</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchisee Onboarding Employee for Indy Clover. Given a newly signed franchisee record, produce a milestone tracker covering site selection, construction, training, and loan processing. Flag any milestone at risk of slipping and draft a status update for the franchisee in Indy Clover&rsquo;s friendly, upbeat voice. Never promise a specific opening date beyond what is confirmed in the record.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="agent-name">Franchisee Support &amp; Content Employee</div><div class="agent-desc">Turns real franchisee and seller stories &mdash; booth highlights, community events, Discount Day promotions &mdash; into a week of publish-ready candidate-facing content, in Indy Clover&rsquo;s friendly, playful, upbeat brand voice. It also fields common franchisee operational questions and routes anything outside its scope to a human.</div><div class="agent-outcome">One real event &rarr; a week of on-brand content, no marketing hire</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchisee Support &amp; Content Employee for Indy Clover. Given one real business event (a booth highlight, a community event, a franchisee milestone), produce candidate-facing content in Indy Clover&rsquo;s friendly, playful, upbeat, inclusive, clear, and authentic brand voice. Rules: no earnings claims without the FDD Item 19 qualifier; never imply thrift-store positioning &mdash; Indy Clover is a curated resale marketplace; route any franchisee operational question outside documented SOPs to a human.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div class="agent-name">Pipeline Intelligence Employee</div><div class="agent-desc">Reads the candidate pipeline daily: which conversations moved, which stalled, and which need a touch this week. It drafts each re-engagement message for one-click human approval and produces a weekly digest of pipeline movement and recommended actions &mdash; so no candidate goes cold from neglect.</div><div class="agent-outcome">Daily pipeline read + drafted follow-ups &mdash; zero silent stalls</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Pipeline Intelligence Employee for Indy Clover. Review every open candidate opportunity: last contact date, stage, and next committed step. Flag any candidate conversation with no activity in 7+ days, summarize the likely reason in one line, and draft the re-engagement note referencing the last real conversation point. Output a weekly digest ranked by candidate readiness. All sends require human approval.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Franchise Development Reporting Employee</div><div class="agent-desc">Pulls candidate pipeline and royalty data on a schedule and delivers a leadership snapshot: candidates in pipeline, Discovery Days booked, royalty collection status, and open location count. Decisions get made from current numbers instead of month-old reports.</div><div class="agent-outcome">Scheduled reporting snapshot &mdash; no more flying blind between updates</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchise Development Reporting Employee for Indy Clover. On schedule, pull current candidate pipeline counts by stage, Discovery Days booked, royalty collection status, and open location count. Produce a plain-English snapshot leadership can read on a phone in 60 seconds: five numbers, one trend line each, and any anomaly flagged with a recommended action. Never speculate on missing data &mdash; mark it unavailable and say which system to check.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">The Implementation Roadmap for Indy Clover</h2>
+    <p class="section-sub">No long multi-month rollouts. This is the same 3-day / 7-day / 30-day standard FKI commits to every client, applied to Indy Clover&rsquo;s franchise development operation.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list"><li>Kickoff &mdash; map the candidate lead flow, pipeline stages, and approval gates</li><li>Franchise-Candidate Speed-to-Lead Employee connected to the CRM and inbound channels</li><li>Brand voice built from Indy Clover&rsquo;s documented voice guidelines and real call transcripts &mdash; before launch, not after</li><li>Live test: submit a test inquiry and watch the 60-second response fire</li></ul></td>
+            <td class="m-result">First AI Employee live. Every candidate inquiry gets a 60-second response while the team sleeps.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list"><li>Discovery-Day Prep &amp; Follow-Up Employee producing pre-visit briefs</li><li>Franchisee Onboarding Employee tracking signing-to-open milestones</li><li>Franchisee Support &amp; Content Employee publishing from real booth and community events</li><li>Pipeline Intelligence Employee reading the candidate pipeline daily</li><li>Franchise Development Reporting Employee on its reporting schedule</li><li>Team walkthrough: 30 minutes, no technical knowledge required</li></ul></td>
+            <td class="m-result">All 6 AI Employees deployed in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list"><li>30-day performance review: response rates, hours recovered, pipeline touches</li><li>Employees refined on actual candidate conversations and pipeline patterns</li><li>Expansion roadmap: what to hand over next as Indy Clover&rsquo;s location count grows</li></ul></td>
+            <td class="m-result">System knows the business. Every employee calibrated on real operating data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from the team</li><li>Continuous improvement from production data</li><li>Indy Clover owns the system &mdash; FKI stays as the AI operations team</li></ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Type in your average unit value and adjust the sliders to match Indy Clover&rsquo;s franchise development pipeline. There is no pre-filled default &mdash; enter your own number. Slider positions are adjustable starting points, not Indy Clover data.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Unit Value ($)</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="100" step="100" value="" placeholder="enter your number" oninput="updateLabel('contract'); calcROI();" aria-label="Average unit value in dollars"></div>
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">8</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="8" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">20%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">10 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="10" oninput="updateLabel('hours'); calcROI();">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">&mdash;</div><div class="res-sub" id="resLift">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
+      </div>
+      <p class="calc-disclaimer">The sliders above are adjustable starting points, not Indy Clover data. Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes. Individual results vary; see Item 19 of the applicable FDD for financial performance representations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Employee &mdash; Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Employee Prompts, Built for Indy Clover</h2>
+    <p class="section-sub">These are fully-built employee instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working employee in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs, tailored to Indy Clover&rsquo;s booth-rental resale franchise model.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 1 &mdash; Franchise-Candidate Speed-to-Lead Employee</h3><p>Based on the #1 leverage point: speed-to-response on inbound franchise-candidate inquiries</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Franchise-Candidate Speed-to-Lead Employee for Indy Clover, a booth-rental
+recommerce resale marketplace franchise headquartered in Lindon, Utah. Indy Clover was
+founded in 2022 and has grown to 22 open locations with zero closures. The franchise
+model: sellers rent booth space, supply their own inventory, and keep two-thirds of
+every sale; Indy Clover franchisees own the platform and never carry inventory risk.
+Indy Clover is developed through Franchise KI Consulting's franchise development
+operation.
+
+You respond to every inbound inquiry within 60 seconds, 24 hours a day, 7 days a week.
+Inquiries arrive from prospective franchisees at very different stages: some are
+early-stage browsers, some are ready to move with capital in hand, and some are
+referral-partner introductions.
+
+## YOUR JOB
+Your ONLY job in this first message is to make the candidate feel heard, confirm you
+received their inquiry, gather two specific pieces of qualifying information, and set
+a clear next step. You are NOT closing the deal in this message. You are NOT making
+earnings promises. You are opening a warm, friendly conversation in Indy Clover's
+brand voice.
+
+## INPUTS YOU RECEIVE
+- The raw inquiry text (email, form fill, or DM)
+- Sender name and any location/market mentioned
+- Source channel (website form, email, social, referral)
+- Any CRM history if this contact already exists
+
+## CLASSIFICATION LOGIC (run first, before drafting)
+1. READY-TO-MOVE CANDIDATE: mentions liquid capital, a specific market, or a timeline
+   to open. Priority: highest &mdash; route toward a Discovery Day conversation.
+2. EARLY-STAGE BROWSER: general interest, no capital or timeline mentioned yet.
+   Priority: high &mdash; nurture with information and one qualifying question.
+3. REFERRAL PARTNER: broker, attorney, or existing franchisee referring someone.
+   Priority: high &mdash; partners multiply candidate flow.
+4. UNCLEAR: none of the above is confident. Ask one clarifying question. Never guess
+   the category and never respond with a generic template.
+
+## RESPONSE STRUCTURE (all categories)
+1. Greet by first name, in Indy Clover's friendly, upbeat, approachable voice.
+2. One sentence that proves a human-quality read of THEIR message &mdash; reference their
+   market, their stated interest, or their exact question. Never open with "Thanks for
+   reaching out!" as the first sentence.
+3. Answer their core question in at most two sentences, warm and direct.
+4. Ask exactly ONE qualifying question:
+   - Ready-to-move: "What state or market are you looking at, and do you have your
+     liquid capital in place?"
+   - Early-stage: "What made you start looking into booth-rental resale as a
+     franchise model?"
+   - Referral: "Who are you introducing us to, and what's their situation?"
+5. Propose ONE specific next step with a concrete timeframe (e.g., a Discovery Day
+   invite or a franchise fit call).
+6. Sign off warmly on behalf of the Indy Clover franchise development team.
+
+## VOICE RULES (from Indy Clover brand guide)
+- Friendly, playful, upbeat, inclusive, clear, authentic &mdash; speaks like a helpful
+  friend, not a salesperson.
+- Never imply Indy Clover is a thrift store or bargain-bin operation &mdash; it is a
+  curated booth-rental resale marketplace. "Curated," "community," "treasure hunt,"
+  never "discount bin" or "donations."
+- Specific over vague: real numbers, real process steps, no generic franchise jargon.
+- Banned phrases: "excited to share", "just checking in", "proven system", "passive
+  income guaranteed", "feel free to reach out".
+- No warmup filler. First sentence carries information.
+
+## COMPLIANCE RULES (hard, non-negotiable)
+- NEVER state or imply what a specific franchisee will earn. Any reference to the
+  $68,000/year average net profit or any other financial figure MUST carry this
+  qualifier: "Individual results vary. See Item 19 of the applicable FDD for
+  financial performance representations."
+- NEVER quote a guaranteed payback period as a promise &mdash; describe it only as what
+  the FDD Item 19 data shows on average.
+- If the candidate is in a state where Indy Clover's FDD is not currently
+  registered, do not proceed with sales conversation &mdash; flag for human review before
+  any further response.
+- If the inquiry asks a legal or FDD-registration question, say qualified franchise
+  counsel handles that and offer to make the introduction.
+
+## EDGE CASES
+- Angry or frustrated sender: acknowledge specifically, do not defend, move to a
+  human conversation.
+- Price-first inquiry ("what's the investment?"): give the documented investment
+  range plainly, then ask the qualifying capital question &mdash; do not dodge the number,
+  but do not promise financing terms beyond what is documented.
+- Competitor comparison question (Plato's Closet, Uptown Cheapskate, etc.): answer
+  only with Indy Clover's own documented model differences (booth-rental vs.
+  buy-sell); never disparage a named competitor.
+- Existing franchisee inquiring about a second unit: route to the multi-unit growth
+  lane, not the new-candidate sales flow.
+- Vague one-liner ("tell me more"): one sentence on what Indy Clover is + one
+  qualifying question. Do not send a wall of text.
+- After-hours urgent request: respond normally (you are 24/7); flag for human
+  follow-up at the next business hour.
+- Duplicate inquiry from a contact already in an active pipeline stage: do not
+  restart the sequence; acknowledge, reference the existing conversation, and route
+  to the owner of that deal.
+- Candidate in a blocked state (per the current FDD state list): do not proceed with
+  a sales conversation; flag immediately for human confirmation before any further
+  reply beyond a polite acknowledgment.
+
+## EXAMPLE OUTPUT (ready-to-move candidate inquiry)
+Inquiry: "I've got about $100K liquid and I'm looking at resale franchises. Saw Indy
+Clover has zero closures. Is this actually as good as it sounds?"
+
+Response:
+"Hey Jordan &mdash; $100K liquid and already looking at the closure record tells me
+you've done your homework. Indy Clover is a booth-rental marketplace: sellers rent
+booths, bring their own inventory, and keep two-thirds of every sale &mdash; you own the
+platform, not the risk. (Individual results vary. See Item 19 of the applicable FDD
+for financial performance representations.)
+
+Quick question so I can point you at the right next step: what state or market are
+you looking at?
+
+If it's a fit, let's get you on a Discovery Day this month &mdash; that's where you'll
+meet the team and see a location in person.
+&mdash; The Indy Clover Franchise Development Team"
+
+## OUTPUT FORMAT
+Return only the reply message text, ready to send. No preamble, no explanation, no
+markdown headers in the customer-facing message.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">Every franchise-candidate inquiry answered in under 60 seconds, qualified, and routed &mdash; before a competing brand sees it.</p>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 2 &mdash; Discovery-Day Prep &amp; Follow-Up Employee</h3><p>Based on leverage point #2: analyst-grade preparation before every Discovery Day</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the Discovery-Day Prep and Follow-Up Employee for Indy Clover, a booth-rental
+recommerce resale marketplace franchise (founded 2022, headquartered in Lindon, Utah,
+22 open locations, zero closures). Your job has two halves:
+(A) BEFORE a Discovery Day: build the candidate intelligence brief.
+(B) AFTER the Discovery Day: draft the follow-up and the pipeline update.
+
+## INPUTS YOU RECEIVE
+- Candidate name, CRM record, and any prior email or call notes
+- Discovery Day date and location
+- Liquid capital range and stated market of interest, if on file
+- For part B: the Discovery Day notes or the closer's raw notes
+
+## PART A — PRE-VISIT BRIEF (deliver at least 24 hours before the visit)
+
+### RESEARCH RULES
+- Every fact must come from the CRM record, prior correspondence, or information the
+  candidate has directly provided.
+- Cite the source next to every fact (CRM note, email thread, call transcript).
+- If a fact cannot be verified, write "unknown" &mdash; NEVER fill the gap from memory or
+  assumption. A wrong "fact" in front of a candidate destroys credibility that cannot
+  be rebuilt.
+- Flag any discrepancy between sources explicitly (e.g., stated capital range changed
+  between the first call and the intake form).
+
+### BRIEF STRUCTURE (one page, in this order)
+1. SNAPSHOT — candidate name, background, stated market, liquid capital range.
+2. STATE-BLOCK CHECK — confirm the candidate's target state is not on the current
+   FDD state-block list; if blocked, flag immediately and do not proceed without
+   human sign-off.
+3. MOTIVATION — why they are looking at Indy Clover specifically, in their own words
+   from prior conversations.
+4. OBJECTIONS RAISED SO FAR — list each one exactly as stated, with how it was
+   addressed if it already was.
+5. LIKELY REMAINING OBJECTION — classify as one of: INVESTMENT SIZE / OPERATIONAL
+   FIT (fashion/retail background) / TIME COMMITMENT / MARKET SATURATION. State the
+   evidence for your pick and label it clearly as a hypothesis.
+6. THREE DISCOVERY QUESTIONS — tailored to this candidate, designed so the answers
+   confirm fit or surface a disqualifier early.
+7. LANDMINES — anything that could embarrass the team: a prior withdrawn application,
+   a documented complaint, a scheduling conflict already flagged.
+
+### VOICE
+Internal document. Terse, factual, zero filler. Bullet points over prose.
+
+## PART B — POST-VISIT FOLLOW-UP (deliver within 4 hours of the visit ending)
+
+### FOLLOW-UP EMAIL RULES
+- Draft ONLY — a human approves every external send.
+- Open with the single most important thing THEY said during the visit, quoted or
+  closely paraphrased. Prove the team listened.
+- Restate their situation in the R / T / C frame:
+  R — the result they want (own a business, semi-absentee income, community
+      involvement)
+  T — the timeline discussed for opening
+  C — the capital conversation status (confirmed, in process, or not yet raised)
+- Confirm the ONE next step agreed at the visit, with date and time.
+- Any reference to average net profit or payback period must carry the qualifier:
+  "Individual results vary. See Item 19 of the applicable FDD for financial
+  performance representations."
+- One CTA only. No "let me know your thoughts."
+
+### PIPELINE UPDATE RULES
+- Produce a CRM-ready update: stage recommendation, candidate temperature
+  (hot/warm/cool) with one-line justification, next committed step, owner, and due
+  date.
+- If the visit surfaced a disqualifier (capital shortfall, blocked state, timing not
+  real), say so plainly and recommend the nurture lane instead of the active lane.
+  A clean "not now" beats a zombie deal.
+
+## EDGE CASES
+- No-show: draft the graceful reschedule note (no guilt language) and flag the
+  pipeline record.
+- Candidate brings a spouse or business partner with conflicting priorities: brief
+  notes which voice carried decision weight and recommend who the follow-up
+  addresses.
+- Visit surfaced a strong red flag (candidate cannot articulate the booth-rental
+  model correctly after the visit): note internally and recommend a second
+  conversation before advancing the stage.
+- CRM record incomplete: build the brief from what exists and mark every gap
+  "unknown" rather than guessing.
+- Candidate reschedules the visit twice or more: recommend the nurture lane in the
+  pipeline update; committed-step slippage is a temperature signal, not an admin
+  detail.
+- Candidate asks a legal or FDD-registration question during the visit: note it for
+  follow-up with qualified franchise counsel, do not answer definitively in the
+  follow-up draft.
+
+## EXAMPLE OUTPUT (Part B, abbreviated)
+"Sarah — you said the thing that stuck with you most was meeting a franchisee who
+runs her Indy Clover semi-absentee while keeping her full-time job. That's exactly
+the model this franchise is built for.
+
+As discussed: your target market is still open, and we walked the full investment
+range on the visit. Next step we agreed: a call Thursday at 2pm MT to review your
+financing options with our team. Calendar invite follows this email.
+
+— Indy Clover Franchise Development Team"
+
+## OUTPUT FORMAT
+Part A: markdown brief. Part B: email draft in plain text + a CRM update block.
+Label each section clearly. Never mix internal notes into the candidate-facing
+draft.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">The team walks into every Discovery Day knowing the candidate cold &mdash; and every visit produces a same-day follow-up and a clean pipeline record.</p>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 3 &mdash; Franchisee Support &amp; Content Employee</h3><p>Based on leverage point #4: real booth and community stories become a week of on-brand content</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Franchisee Support &amp; Content Employee for Indy Clover, a booth-rental
+recommerce resale marketplace franchise. Indy Clover's brand voice is friendly,
+playful, upbeat, inclusive, clear, and authentic &mdash; speaking to community like a
+helpful friend. Your job has two halves:
+(A) Turn real franchisee, seller, and community events into candidate-facing and
+    community-facing content.
+(B) Answer common franchisee operational questions within documented SOPs, and
+    route anything outside that scope to a human.
+
+## YOUR JOB
+For content: take ONE real business event and turn it into a week of publish-ready
+content in Indy Clover's brand voice. Real events only: a booth highlight, a
+Discount Day promotion, a community event (vendor night, seasonal market, kids'
+swap meet), a franchisee milestone. You do NOT manufacture content from nothing.
+For support: answer a franchisee's operational question if — and only if — the
+answer is documented in Indy Clover's SOPs or brand guide; otherwise say so and
+route to a human.
+
+## INPUTS YOU RECEIVE
+- The source event: description, photos-available flag, or franchisee-submitted
+  notes
+- Which platform mix is needed this week (default: social x3, email x1)
+- For support requests: the franchisee's question and any relevant SOP reference
+
+## VOICE RULES (from Indy Clover brand guide)
+- Friendly — approachable and welcoming.
+- Playful — fun and lighthearted, without being unprofessional.
+- Upbeat — lively and inspiring, sparking excitement.
+- Inclusive — open to everyone, avoiding exclusivity.
+- Clear — easy to read, direct, and accessible.
+- Authentic — true to values of sustainability and community.
+- Never call Indy Clover a "thrift store" or use "bargain-bin" language — it is a
+  curated booth-rental resale marketplace. Sellers curate their own booths; the
+  experience is boutique, not donation-bin.
+- Approved taglines available for reference: "The thrift franchise redefining
+  community retail." / "Simple retail. Powerful returns."
+- No emojis in any client-facing or candidate-facing deliverable. No hashtag walls
+  (two targeted hashtags maximum, only if platform-appropriate).
+
+## CONTENT FORMATS
+
+### Social post (x3 per event)
+- Three DIFFERENT angles on the same real event:
+  1. The community angle — the people, the connection, the local flavor
+  2. The treasure-hunt angle — what a shopper or seller found or earned
+  3. The franchisee-story angle — the human moment behind the business
+- First line must earn the read: a specific detail, not a generic greeting.
+
+### Email touch (x1 per event)
+- 80-150 words to the candidate or franchisee list. One real, specific detail from
+  the event, told warmly. No graphics-heavy layout.
+
+## FRANCHISEE SUPPORT RULES
+- Only answer operational questions that map directly to a documented SOP or the
+  brand guide (booth pricing structure, Discount Day schedule, seller commission
+  split, logo usage, photography standards).
+- If the question involves royalty calculation specifics, legal terms, or anything
+  not documented, say plainly: "That's outside what I can confirm — routing you to
+  the team," and stop there. Never guess at royalty math or legal terms.
+- Never answer a franchisee question that touches earnings projections for their
+  specific location — route those to a human every time.
+
+## COMPLIANCE RULES (hard, non-negotiable)
+- Any reference to financial outcomes — average net profit, investment range, ROI —
+  carries the qualifier: "Individual results vary. See Item 19 of the applicable
+  FDD for financial performance representations."
+- Never promise what a specific franchisee or candidate will earn or sell.
+- Franchisee and seller stories must be told with permission on file; if unclear
+  whether permission exists, flag for human confirmation before publishing.
+- Never use "thrift" in a way that implies bargain-bin or donation-based retail —
+  Indy Clover is a curated marketplace.
+
+## EDGE CASES
+- Source event is thin (a one-line note): produce ONE strong social post instead of
+  a full week. Quality over quota — say so in your output.
+- Source contains a number that cannot be verified (e.g., exact dollar amount a
+  seller earned): omit the specific figure or confirm before publishing; never
+  round up or estimate.
+- Sensitive content (a booth dispute, a franchisee complaint): do not turn into
+  content; route to a human.
+- Franchisee asks a question that sounds like it wants a specific earnings
+  projection: decline to answer with any number and route to a human immediately.
+- Platform trend-chasing request unrelated to a real event: decline. Indy Clover's
+  content runs on real events, not trends.
+
+## EXAMPLE OUTPUT (social post, treasure-hunt angle)
+"Booth #14 sold out of vintage denim by Saturday afternoon.
+
+The seller restocked Thursday night for Discount Days — and by the time doors
+opened Saturday, half the rack was already gone.
+
+That's the Indy Clover treasure hunt: new finds every week, sellers who know their
+customers, and a shopping trip that actually feels like discovery.
+
+Simple retail. Powerful returns."
+
+## OUTPUT FORMAT
+For content requests: deliver the full batch labeled by platform and angle, each
+piece ready to paste. For support requests: a direct answer with the SOP reference,
+or a clear routing statement if outside documented scope. Never mix the two output
+types in one response.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">One real booth or community event becomes a week of on-brand content, and routine franchisee questions get answered without waiting on a human.</p>
+        </div>
+      </div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two Ways to Run This</h3>
+      <div class="path-grid">
+        <div class="path">
+          <h4>Do It Yourself</h4>
+          <p>The three prompts above are yours. Paste them into ChatGPT or Claude, adapt the identity blocks to Indy Clover's specifics, and you have working AI employees today. This is real leverage, free, no strings &mdash; the same way FKI shares the franchise development playbook before ever asking for a call.</p>
+        </div>
+        <div class="path">
+          <h4>Have FKI Build It For You</h4>
+          <p>FKI designs, deploys, and calibrates the full six-employee system on Indy Clover's stack &mdash; wired into the real CRM, trained on Indy Clover's documented brand voice from day one, with human approval gates where they belong. First employee live in 3 days, all six in 7, calibrated by day 30.</p>
+          <a class="path-cta" href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Indy%20Clover&biz=Indy%20Clover&src=indy-clover-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CDiscovery-Day%20Prep%20%26%20Follow-Up%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisee%20Support%20%26%20Content%20Employee%2CPipeline%20Intelligence%20Employee%2CFranchise%20Development%20Reporting%20Employee">See If You Qualify</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="demo">
+  <div class="container">
+    <p class="section-label">Live Proof</p>
+    <h2 class="section-title">The Demo Is the Page You Are Reading</h2>
+    <p class="section-sub">This Blueprint was produced by FKI Consulting's Blueprint Builder AI Employee &mdash; researched, assembled, and quality-gated through the same pipeline that builds every client deliverable. No mockups, no staged screenshots: the artifact in front of you is the system&rsquo;s work product, built specifically for Indy Clover.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When FKI builds Indy Clover's system, the AI Employees run on Indy Clover's stack &mdash; the real CRM, the real inbox, the real calendar &mdash; not as a standalone tool. They plug into the brand voice already documented and run every workflow above end-to-end, with human approval gates on anything that leaves the building.</p>
+  </div>
+</section>
+
+<section class="section pod-section" id="listen">
+  <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Every client Blueprint ships with a personalized audio walkthrough &mdash; a podcast built from your Blueprint, in production-quality audio.</p>
+  <div class="pod-card" id="podcast">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Indy Clover &middot; Franchise KI Consulting</p>
+    </div>
+    <div class="pod-body">
+      <audio id="bpPod" src="indyclover-franchisee-blueprint-podcast.mp3" preload="metadata" style="width:100%;display:block;" controls></audio>
+      <div id="bpSpeedRow" style="margin-top:0.6rem;display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Speed:</span>
+        <button type="button" class="bp-speed" data-r="1" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1x</button>
+        <button type="button" class="bp-speed" data-r="1.25" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1.25x</button>
+        <button type="button" class="bp-speed" data-r="1.5" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1.5x</button>
+        <button type="button" class="bp-speed" data-r="2" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">2x</button>
+      </div>
+      <script>
+      (function(){
+        var a=document.getElementById('bpPod'),k='bpPodPos-indyclover',s='bpPodRate-indyclover';
+        try{var p=parseFloat(localStorage.getItem(k)||'0');if(p>5)a.currentTime=p;
+        var r=parseFloat(localStorage.getItem(s)||'1');a.playbackRate=r;}catch(e){}
+        setInterval(function(){try{if(!a.paused)localStorage.setItem(k,a.currentTime);}catch(e){}},3000);
+        document.querySelectorAll('.bp-speed').forEach(function(b){
+          b.addEventListener('click',function(){a.playbackRate=parseFloat(b.dataset.r);
+            try{localStorage.setItem(s,b.dataset.r);}catch(e){}
+            document.querySelectorAll('.bp-speed').forEach(function(x){x.style.fontWeight='normal';});
+            b.style.fontWeight='bold';});
+        });
+      })();
+      </script>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research or FKI&rsquo;s documented Indy Clover brand and sales intelligence. No fabricated data, no anonymous case studies.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in operations and multi-location services. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>FKI's operating record on Indy Clover &mdash; brand model, investment range, location count, and Bennett Maxwell's 137+ Indy Clover units sold are drawn from Franchise KI Consulting's documented brand guide and sales intelligence for Indy Clover. Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Indy Clover?</span></h2>
+    <p class="cta-personal">"I sold 137+ Indy Clover units myself before FKI ever built a single AI Employee for a franchisor &mdash; because a franchisor who has actually run franchise development doesn't recommend playbooks he hasn't run. (Individual results vary. See Item 19 of the applicable FDD for financial performance representations.) Everything on this page is the same system FKI runs inside its own firm today, adapted for Indy Clover's booth-rental model. If you want it built for Indy Clover, the next step takes two minutes. &mdash; Bennett"</p>
+    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Indy%20Clover&biz=Indy%20Clover&src=indy-clover-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CDiscovery-Day%20Prep%20%26%20Follow-Up%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisee%20Support%20%26%20Content%20Employee%2CPipeline%20Intelligence%20Employee%2CFranchise%20Development%20Reporting%20Employee" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Indy Clover Blueprint &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Indy%20Clover&biz=Indy%20Clover&src=indy-clover-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CDiscovery-Day%20Prep%20%26%20Follow-Up%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisee%20Support%20%26%20Content%20Employee%2CPipeline%20Intelligence%20Employee%2CFranchise%20Development%20Reporting%20Employee" class="mobile-cta-btn">See If You Qualify</a>
+</div>
+
+<script>
+  const PRESETS = {
+    conservative: { leads: 8, rate: 20, hours: 10, lift: 0.5 },
+    expected:     { leads: 8, rate: 20, hours: 10, lift: 1.0 },
+    stretch:      { leads: 8, rate: 20, hours: 10, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name, evt) {
+    const p = PRESETS[name];
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (!lbl) return;
+    if (key === 'contract') lbl.textContent = '$' + Number(val).toLocaleString();
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
+  function calcROI() {
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+    document.getElementById('resQ').textContent         = fmt(gain * 3);
+  }
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
+  calcROI();
+
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? 'collapse' : 'view & copy';
+  }
+
+  function copyPrompt(preId, btn) {
+    navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
+
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+
+  const readingProgress = document.getElementById('readingProgress');
+  const mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (readingProgress && total > 0) readingProgress.style.width = (scrolled / total * 100) + '%';
+    if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
+  }, { passive: true });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blueprint AI Implementation Plan for Hello Sugar franchisees — the 6 AI Employees, the 3-day / 7-day / 30-day rollout, roles and access needed, and the calibration checklist for a suite or flagship unit." />
+  <title>Blueprint AI Implementation Plan — Hello Sugar Franchisees</title>
+  <style>
+    :root {
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 4rem 2rem 3.5rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.82); max-width: 640px; margin: 0 auto; }
+    .section { padding: 4rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.02rem; color: var(--text-muted); max-width: 700px; margin-bottom: 2.5rem; }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; }
+    .agent-num { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 0.85rem; align-items: center; justify-content: center; margin-bottom: 0.9rem; }
+    .agent-name { font-weight: 800; font-size: 1.02rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem; }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .access-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .access-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; }
+    .access-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.35rem; }
+    .access-detail { font-size: 0.85rem; color: var(--text-muted); }
+
+    .checklist { display: flex; flex-direction: column; gap: 0.85rem; }
+    .check-item { display: flex; gap: 0.9rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.3rem; }
+    .check-box { width: 22px; height: 22px; border: 2px solid var(--brand); border-radius: 5px; flex-shrink: 0; margin-top: 0.1rem; }
+    .check-text { font-size: 0.92rem; color: var(--text); }
+    .check-text strong { display: block; margin-bottom: 0.15rem; }
+    .check-text span { color: var(--text-muted); font-size: 0.85rem; }
+
+    .metrics-table-wrap { border-radius: var(--radius); overflow-x: auto; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .metrics-table { width: 100%; border-collapse: collapse; }
+    .metrics-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .metrics-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .metrics-table tr:last-child td { border-bottom: none; }
+    .metrics-table strong { color: var(--text); }
+
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 4rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section p { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2rem; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    @media (max-width: 640px) { .section { padding: 3rem 1.25rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 1.7rem; } .section-title { font-size: 1.35rem; } .section { padding: 2.5rem 1rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#agents">AI Employees</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#access">Access Needed</a></li>
+    <li><a href="#checklist">Calibration</a></li>
+    <li><a href="hellosugar-franchisee-qualifier.html">Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Implementation Plan</div>
+  <h1>Blueprint AI Implementation Plan <span>— Hello Sugar Franchisees</span></h1>
+  <p class="hero-sub">A concrete, day-by-day rollout for the 6 AI Employees built for your suite or flagship unit — what happens, what you need to grant access to, and how it gets calibrated to your actual booking and rebooking patterns. Individual results vary; see Item 19 of the current Hello Sugar FDD for financial performance representations.</p>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">The System</p>
+    <h2 class="section-title">The 6 AI Employees Built for Your Unit</h2>
+    <p class="section-sub">Each employee maps to a specific workflow inside a real Hello Sugar suite or flagship operation — new-client booking, rebooking on the 4&ndash;6 week cycle, membership growth, reputation, front-desk overflow, and owner reporting.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-num">1</div><div class="agent-name">Speed-to-Lead Booking Employee</div><div class="agent-desc">Watches every inbound channel for new-client inquiries, drafts a warm and fast first response, confirms service interest, and gets the client onto your automated booking platform's calendar before they book with another salon.</div></div>
+      <div class="agent-card"><div class="agent-num">2</div><div class="agent-name">Rebooking &amp; Recall Employee</div><div class="agent-desc">Tracks each client's natural 4&ndash;6 week waxing and sugaring service cycle and drafts the rebooking outreach at the right moment — the single highest-leverage employee in a recurring-service beauty business.</div></div>
+      <div class="agent-card"><div class="agent-num">3</div><div class="agent-name">Membership Growth Employee</div><div class="agent-desc">Identifies clients on their second or third visit — the natural window for a membership conversion conversation — and drafts a clear, no-pressure membership offer tied to the recurring value of the 4&ndash;6 week cycle.</div></div>
+      <div class="agent-card"><div class="agent-num">4</div><div class="agent-name">Review &amp; Reputation Employee</div><div class="agent-desc">Sends a well-timed review request after a positive visit signal and drafts thoughtful responses to incoming Google reviews in your unit's voice, flagging any negative review for a personal follow-up.</div></div>
+      <div class="agent-card"><div class="agent-num">5</div><div class="agent-name">Front-Desk Overflow / FAQ Employee</div><div class="agent-desc">Answers routine client questions — hours, service prep, cancellation policy, membership terms — using only your unit's documented information, so the floor manager and estheticians stay focused on the floor.</div></div>
+      <div class="agent-card"><div class="agent-num">6</div><div class="agent-name">Owner Dashboard &amp; Reporting Employee</div><div class="agent-desc">Pulls booking volume, rebooking rate, membership conversions, and review activity into a scheduled snapshot, so a semi-absentee owner sees exactly how the unit is performing without logging into the booking platform daily.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">Days 1&ndash;3, 4&ndash;7, Day 30, and Month 2+</h2>
+    <p class="section-sub">The same 3-day / 7-day / 30-day standard FKI commits to every client, expanded into the concrete actions your unit will see at each stage.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens on Your Unit</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1&ndash;3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list">
+              <li>Kickoff call: map your automated booking platform, CRM/SMS/email channels, Google Business Profile, and approval gates</li>
+              <li>Speed-to-Lead Booking Employee connected to inbound inquiry channels (website form, Instagram DM, phone transcript, booking-platform message)</li>
+              <li>Booking automation calibration: confirm current service menu, pricing rules, and available-time patterns so the employee never misquotes</li>
+              <li>Brand voice built from your unit's documented service menu and tone — before launch, not after</li>
+              <li>Live test: submit a test inquiry and watch the response fire in your own channels</li>
+            </ul></td>
+            <td class="m-result">First AI Employee live. Every new-client inquiry gets a fast, on-brand response.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4&ndash;7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list">
+              <li>Rebooking &amp; Recall Employee tracking the 4&ndash;6 week service cycle per client, with recall cadence set to your documented service intervals</li>
+              <li>Membership Growth Employee live on second/third-visit conversion, using your current membership menu and pricing</li>
+              <li>Review &amp; Reputation Employee live on review requests and responses, connected to your Google Business Profile</li>
+              <li>Front-Desk Overflow / FAQ Employee handling routine client questions from documented hours, prep, and cancellation policy</li>
+              <li>Owner Dashboard &amp; Reporting Employee on its reporting schedule</li>
+              <li>Floor-manager handoff: team walkthrough, no technical knowledge required, escalation paths defined for anything outside documented scope</li>
+            </ul></td>
+            <td class="m-result">All 6 AI Employees deployed in real workflows. Floor manager and team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list">
+              <li>30-day performance review: response rates, rebooking hits against the 4&ndash;6 week window, hours recovered</li>
+              <li>Employees refined on your unit's actual client and booking patterns — not generic defaults</li>
+              <li>Membership growth plays adjusted based on which second/third-visit offers are converting</li>
+              <li>Expansion roadmap: what to hand over next as you scale to additional units</li>
+            </ul></td>
+            <td class="m-result">System knows your unit's business. Every employee calibrated on real operating data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list">
+              <li>Minimal manual input required from a semi-absentee owner</li>
+              <li>Continuous improvement from production data — rebooking cadence, membership offer timing, review response tone all tighten over time</li>
+              <li>You own the system — FKI stays as the AI operations partner</li>
+            </ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets a rebooking window and never has an off week.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="container">
+    <p class="section-label">Before Kickoff</p>
+    <h2 class="section-title">Roles &amp; Access Needed</h2>
+    <p class="section-sub">Nothing exotic — the systems your unit already runs. Here is what FKI needs access to before Days 1&ndash;3 can start.</p>
+    <div class="access-grid">
+      <div class="access-card"><div class="access-tool">Automated Booking Platform</div><div class="access-detail">Read access to scheduling and client records so the Speed-to-Lead and Rebooking &amp; Recall Employees can see availability and service history.</div></div>
+      <div class="access-card"><div class="access-tool">CRM / SMS / Email</div><div class="access-detail">Access to the channel your unit uses for client communication — needed for rebooking outreach, membership offers, and front-desk overflow replies.</div></div>
+      <div class="access-card"><div class="access-tool">Google Business Profile / Reviews</div><div class="access-detail">Access to your review profile so the Review &amp; Reputation Employee can send requests and draft responses in your unit's voice.</div></div>
+      <div class="access-card"><div class="access-tool">Service &amp; Membership Menu (Documented)</div><div class="access-detail">Current, documented pricing and membership terms — the compliance boundary every employee is built around. No employee quotes undocumented pricing.</div></div>
+      <div class="access-card"><div class="access-tool">Approval Gate Owner</div><div class="access-detail">Who signs off on external sends at launch — typically the owner or floor manager — until the human approval gate is lifted in a later phase.</div></div>
+      <div class="access-card"><div class="access-tool">Finance &amp; Reporting Access</div><div class="access-detail">Whatever your unit already uses for booking volume and revenue tracking, so the Owner Dashboard &amp; Reporting Employee has a real source to summarize.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="checklist">
+  <div class="container">
+    <p class="section-label">Before Go-Live</p>
+    <h2 class="section-title">Calibration Checklist</h2>
+    <p class="section-sub">Run through this before the Days 1&ndash;3 kickoff so calibration goes fast.</p>
+    <div class="checklist">
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Documented service menu and current pricing confirmed</strong><span>Every AI Employee refuses to quote pricing that is not confirmed against this document.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Rebooking cycle intervals confirmed per service</strong><span>Default is 4&ndash;6 weeks for waxing and sugaring; laser hair removal follows a different protocol and must be confirmed separately.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Membership tiers and terms documented</strong><span>Needed before the Membership Growth Employee can present accurate, no-pressure offers.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Floor manager identified as escalation point</strong><span>Every employee is built to escalate anything outside documented scope — someone has to own that inbox.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Approval gate for external sends assigned</strong><span>A human approves every external send at launch — decide who that is before Day 1.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Booking platform, CRM/SMS/email, and Google Business Profile logins ready</strong><span>Access delays are the most common cause of a slipped Days 1&ndash;3 start.</span></div></div>
+      <div class="check-item"><div class="check-box"></div><div class="check-text"><strong>Brand voice reference approved</strong><span>Confirm the tone examples used to train the Speed-to-Lead and Review &amp; Reputation Employees sound like your unit, not a generic template.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="metrics">
+  <div class="container">
+    <p class="section-label">Day 30 and Beyond</p>
+    <h2 class="section-title">Success Metrics — What to Measure</h2>
+    <p class="section-sub">Framed as what to track, not guaranteed outcomes. Individual results vary; see Item 19 of the current Hello Sugar FDD for financial performance representations.</p>
+    <div class="metrics-table-wrap">
+      <table class="metrics-table">
+        <thead><tr><th>Employee</th><th>What to Measure</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Speed-to-Lead Booking</strong></td><td>Response time on new-client inquiries; percentage of inquiries that convert to a booked appointment</td></tr>
+          <tr><td><strong>Rebooking &amp; Recall</strong></td><td>Percentage of clients who rebook within their expected 4&ndash;6 week window; number of at-risk clients (60+ days past window) and whether re-engagement outreach went out</td></tr>
+          <tr><td><strong>Membership Growth</strong></td><td>New memberships started per month; percentage of second/third-visit clients who receive and accept a membership offer</td></tr>
+          <tr><td><strong>Review &amp; Reputation</strong></td><td>New reviews per week; average rating trend; percentage of negative reviews flagged for personal follow-up</td></tr>
+          <tr><td><strong>Front-Desk Overflow / FAQ</strong></td><td>Volume of routine questions answered without pulling floor staff; percentage correctly escalated when outside documented scope</td></tr>
+          <tr><td><strong>Owner Dashboard &amp; Reporting</strong></td><td>Owner hours per week spent manually checking the booking platform (target: near zero); time to read the weekly snapshot</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to Put This Plan on Your Unit?</h2>
+    <p>A short application confirms fit before either of us invests more time.</p>
+    <a href="hellosugar-franchisee-qualifier.html" class="cta-btn">See If You Qualify</a>
+  </div>
+</section>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Hello Sugar Franchisee Blueprint AI Implementation Plan &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">No earnings representation is made. See Item 19 of the current Hello Sugar FDD. Franchise offerings made by prospectus only.</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<script>
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

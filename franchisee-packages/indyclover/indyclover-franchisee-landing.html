@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The AI Advantage Roadmap for Indy Clover franchisees — the AI system built for your booth-rental store, from seller recruitment to buyer traffic." />
+  <title>The AI Advantage Roadmap for Indy Clover Franchisees</title>
+  <style>
+    :root {
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --accent-bg:    rgba(0, 113, 227, 0.08);
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --success:      #34C759;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 640px; margin: 0 auto 2.5rem; }
+    .cta-btn { display: inline-block; background: var(--brand); color: var(--white); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .hero-sub-fine { font-size: 0.72rem; color: rgba(255,255,255,0.5); max-width: 560px; margin: 1.5rem auto 0; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 660px; margin-bottom: 3rem; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .grid3 { grid-template-columns: 1fr; } }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; }
+    .card-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .card-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .card-title { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .card-desc { font-size: 0.92rem; color: var(--text-muted); }
+    .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+    .step { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .step-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .step-desc { font-size: 0.92rem; color: var(--text-muted); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; text-align: center; box-shadow: var(--shadow); }
+    .stat-val { font-size: 1.6rem; font-weight: 800; color: var(--brand); margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+    .stat-cite { font-size: 0.72rem; color: var(--text-light); margin-top: 0.5rem; }
+    .stat-cite a { color: var(--brand); text-decoration: underline; }
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    footer .disclaimer { margin-top: 0.75rem; color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <ul class="nav-links">
+    <li><a href="#what-you-get">What You Get</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="indyclover-franchisee-qualifier.html">See If You Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Built for Indy Clover Franchisees</div>
+  <h1>The <span>AI Advantage</span> Roadmap<br>for Indy Clover Franchisees</h1>
+  <p class="hero-sub">Indy Clover franchisees own the booth-rental platform, not the inventory — sellers rent booths, supply their own product, and keep two-thirds of every sale. This is the AI system built to run alongside your store: filling booths faster, keeping sellers engaged, and bringing buyers back every week.</p>
+  <a href="indyclover-franchisee-qualifier.html" class="cta-btn">See If You Qualify</a>
+  <p class="hero-sub-fine">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+</section>
+
+<section class="section" id="what-you-get">
+  <div class="container">
+    <p class="section-label">What You Get</p>
+    <h2 class="section-title">An AI System Built Around Your Store, Not a Generic Template</h2>
+    <p class="section-sub">Your store runs on booth occupancy, seller retention, and buyer traffic. The AI Employees in your Blueprint are designed against those exact levers — the same brand voice, the same booth-rental model, and the same milestones FKI commits to every franchisee.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="card-title">Fill Booths Faster</div>
+        <div class="card-desc">AI Employees built to answer seller and buyer inquiries fast, keep booths occupied, and turn real store activity into a steady flow of new sellers.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="card-title">Hours Back Every Week</div>
+        <div class="card-desc">Seller onboarding, booth check-in admin, and content production run in the background so your team's time goes to the floor, not paperwork.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="card-title">Scale Without Adding Headcount</div>
+        <div class="card-desc">The same system that supports Indy Clover's franchise development operation, calibrated to your store — so you grow booth occupancy and buyer traffic without a proportional staff increase.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="how-it-works">
+  <div class="container">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">How This Runs Inside a Booth-Rental Store</h2>
+    <p class="section-sub">Three steps, no long rollout — the same 3-day / 7-day / 30-day standard FKI commits to every client, applied to your store's day-to-day.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Connect Your Store's Systems</div>
+          <div class="step-desc">Your AI Employees connect to the tools you already use — booth/seller inquiries, your team messaging, your calendar — so nothing new to learn and nothing replaced.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">AI Employees Go Live in Your Workflows</div>
+          <div class="step-desc">Seller inquiries get a fast, on-brand response. Booth check-in and listing cadence get tracked. Real booth stories and community events turn into content that brings buyers back.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Calibrate to Your Store's Real Numbers</div>
+          <div class="step-desc">By Day 30, every employee is refined on your store's actual seller and buyer patterns — not generic assumptions. Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stats">
+  <div class="container">
+    <p class="section-label">Why This Matters Now</p>
+    <h2 class="section-title">What the Research Shows</h2>
+    <p class="section-sub">These are the same sourced findings behind Indy Clover's AI Blueprint — the research that shaped the system built for your store.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val">Speed Wins the Deal</div>
+        <div class="stat-label">Published research shows the first responder to an inquiry wins a disproportionate share of it — slow responses lose the conversation before it starts.</div>
+        <div class="stat-cite">Source: <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">HubSpot Marketing Statistics</a></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">Automation Frees Real Hours</div>
+        <div class="stat-label">Research on small business automation shows meaningful admin time recovered when routine workflows move to AI.</div>
+        <div class="stat-cite">Source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">Harvard Business Review, "How Automation Is Transforming Small Business Operations" (2023)</a></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">$50B+ Resale Market</div>
+        <div class="stat-label">Indy Clover operates in a $50B+ U.S. recommerce market — the tailwind behind steady buyer and seller demand for a booth-rental store.</div>
+        <div class="stat-cite">Source: FKI's documented Indy Clover brand and sales intelligence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>See If Your Store Qualifies<br>for the Full AI System</h2>
+    <p>A short application confirms fit before we build anything — so we invest the right time in the right stores.</p>
+    <a href="indyclover-franchisee-qualifier.html" class="cta-btn" style="background:var(--white);color:var(--brand);">See If You Qualify</a>
+  </div>
+</section>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Indy Clover Franchisee Blueprint</p>
+  <p class="disclaimer">Franchise offerings made by prospectus only. See FDD for complete information.</p>
+</footer>
+
+</body>
+</html>

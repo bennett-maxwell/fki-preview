@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="See if the SRP Franchisee Blueprint AI system is a fit for your territory. Takes about four minutes." />
+<title>See If You Qualify — SRP Franchisee Blueprint AI</title>
+<style>
+  :root {
+    --brand:        #0071E3;
+    --brand-dark:   #1D1D1F;
+    --brand-light:  #EBF4FF;
+    --steel:        #6E6E73;
+    --neutral-bg:   #F5F5F7;
+    --white:        #ffffff;
+    --text:         #1D1D1F;
+    --text-muted:   #6E6E73;
+    --text-light:   #A1A1A6;
+    --border:       #E5E5EA;
+    --green:        #34C759;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(10,14,26,0.08);
+    --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; text-decoration: none; }
+  .nav-logo span { color: var(--brand); }
+  .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 3.5rem 2rem 3rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.4rem; }
+  .hero h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.9rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: var(--brand); }
+  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 560px; margin: 0 auto; }
+  .main-wrap { max-width: 760px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+  .q-section { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+  .q-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.5rem; }
+  .q-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .q-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.3rem; }
+  .identity-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+  .identity-grid .full { grid-column: 1 / -1; }
+  .identity-field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.35rem; }
+  .identity-field input { width: 100%; font-size: 0.95rem; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; color: var(--text); background: var(--neutral-bg); outline: none; }
+  .identity-field input:focus { border-color: var(--brand); background: var(--white); }
+  @media (max-width: 600px) { .identity-grid { grid-template-columns: 1fr; } }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.2rem; }
+  .chip { padding: 0.55rem 1.1rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.86rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.15s; user-select: none; }
+  .chip:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
+  .chip.selected { border-color: var(--brand-dark); background: var(--brand-dark); color: var(--white); }
+  .chip:focus { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .slider-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+  .slider-name { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .slider-val { font-size: 1rem; font-weight: 800; color: var(--brand-dark); }
+  .slider-val.needs-input { color: var(--text-light); font-style: italic; font-size: 0.85rem; font-weight: 500; }
+  input[type=range] { width: 100%; height: 6px; border-radius: 3px; outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; margin-bottom: 0.6rem; background: linear-gradient(to right, var(--brand) 0%, var(--brand) 0%, var(--border) 0%, var(--border) 100%); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(0,113,227,0.3); }
+  input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--brand-dark); cursor: pointer; border: 3px solid var(--white); }
+  .exp-input-row { display: flex; align-items: center; gap: 0.75rem; }
+  .exp-input-row label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+  .exp-input-row input[type=number] { width: 130px; font-size: 1.05rem; font-weight: 700; padding: 0.5rem 0.7rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; color: var(--text); background: var(--neutral-bg); outline: none; }
+  .exp-input-row input[type=number]:focus { border-color: var(--brand); background: var(--white); }
+  .exp-unit { font-size: 0.85rem; color: var(--text-light); font-weight: 600; }
+  .progress-bar-wrap { margin-bottom: 1.5rem; }
+  .progress-bar-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
+  .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--brand), var(--green)); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .submit-card { background: var(--brand-dark); border-radius: var(--radius); padding: 2rem; color: var(--white); box-shadow: var(--shadow-md); }
+  .consent-wrap { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 1.2rem; cursor: pointer; font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.4; }
+  .consent-wrap input { margin-top: 2px; flex-shrink: 0; accent-color: var(--brand); }
+  .cta-btn { display: block; width: 100%; background: var(--brand); color: var(--white); border: none; border-radius: 9px; padding: 0.95rem; font-size: 1rem; font-weight: 700; text-align: center; cursor: pointer; transition: background 0.2s; }
+  .cta-btn:hover:not(:disabled) { background: #0060c2; }
+  .cta-btn:disabled { opacity: 0.45; pointer-events: none; }
+  .cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 0.75rem; text-align: center; }
+  .field-hint { font-size: 0.73rem; color: #ef4444; margin-top: 0.25rem; display: none; }
+  .identity-field input.invalid { border-color: #ef4444; }
+  .identity-field input.invalid + .field-hint { display: block; }
+  footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+  .footer-disclaimer { max-width: 700px; margin: 0 auto 0.75rem; color: rgba(255,255,255,0.45); font-size: 0.78rem; line-height: 1.5; }
+  @media (max-width: 480px) { .main-wrap { padding: 1.5rem 1rem 3rem; } .q-section { padding: 1.3rem; } .submit-card { padding: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="srp-franchisee-landing.html">Franchise KI <span>Consulting</span></a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Free Assessment — About 4 Minutes</div>
+  <h1>See if the <span>Blueprint AI</span> system fits your SRP territory</h1>
+  <p class="hero-sub">Answer a few questions about your school partnerships, picture-day season, and admin load. We'll review your answers and follow up.</p>
+</div>
+
+<div class="main-wrap">
+  <form id="qualifier-form">
+
+    <div class="q-section" id="identity-section">
+      <div class="q-label">Contact Info</div>
+      <div class="q-title">Tell us who you are and where you operate.</div>
+      <div class="q-sub">Required to save your qualification.</div>
+      <div class="identity-grid">
+        <div class="identity-field">
+          <label for="lead-first">First name <span style="color:#ef4444;">*</span></label>
+          <input id="lead-first" name="firstName" type="text" autocomplete="given-name" required>
+          <div class="field-hint">First name is required.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-last">Last name <span style="color:#ef4444;">*</span></label>
+          <input id="lead-last" name="lastName" type="text" autocomplete="family-name" required>
+          <div class="field-hint">Last name is required.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-email">Email <span style="color:#ef4444;">*</span></label>
+          <input id="lead-email" name="email" type="email" autocomplete="email" required>
+          <div class="field-hint">Enter a valid email address.</div>
+        </div>
+        <div class="identity-field">
+          <label for="lead-phone">Phone <span style="color:#ef4444;">*</span></label>
+          <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+          <div class="field-hint">Enter a 10-digit phone number.</div>
+        </div>
+        <div class="identity-field full">
+          <label for="lead-territory">Territory / market <span style="color:#ef4444;">*</span></label>
+          <input id="lead-territory" name="territory" type="text" placeholder="e.g. Denver metro" required>
+          <div class="field-hint">Territory or market is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 1 of 7</div>
+      <div class="q-title">Which AI Employee would you want to deploy first, and what problem would it solve?</div>
+      <div class="q-sub">Pick the one that matches your biggest current bottleneck.</div>
+      <div class="chips" id="chips-first-agent">
+        <div class="chip" data-val="speed-to-lead" tabindex="0" role="button" aria-pressed="false">Franchise-Candidate Speed-to-Lead</div>
+        <div class="chip" data-val="school-support" tabindex="0" role="button" aria-pressed="false">School-Account &amp; Franchisee Support</div>
+        <div class="chip" data-val="content-seasonal" tabindex="0" role="button" aria-pressed="false">Content &amp; Seasonal Campaign</div>
+        <div class="chip" data-val="parent-ordering" tabindex="0" role="button" aria-pressed="false">Parent Ordering &amp; Fulfillment</div>
+        <div class="chip" data-val="onboarding" tabindex="0" role="button" aria-pressed="false">Franchisee Onboarding</div>
+        <div class="chip" data-val="admin-reporting" tabindex="0" role="button" aria-pressed="false">Franchisor Admin &amp; Reporting</div>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 2 of 7</div>
+      <div class="q-title">How many hours per week go to admin and school follow-up?</div>
+      <div class="q-sub">Include renewal outreach, scheduling, and routine follow-up emails or calls.</div>
+      <div class="slider-row"><span class="slider-name">Hours per Week</span><span class="slider-val needs-input" id="lbl-admin-hours">← slide to set yours</span></div>
+      <input type="range" id="sl-admin-hours" min="0" max="40" step="1" value="0">
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-light);"><span>0</span><span>10</span><span>20</span><span>30</span><span>40+</span></div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 3 of 7</div>
+      <div class="q-title">How many school partnerships do you have right now?</div>
+      <div class="exp-input-row">
+        <label for="inp-schools">School partnerships:</label>
+        <input type="number" id="inp-schools" min="0" max="999" placeholder="e.g. 6">
+        <span class="exp-unit">schools</span>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 4 of 7</div>
+      <div class="q-title">How many picture days do you run per season?</div>
+      <div class="exp-input-row">
+        <label for="inp-picture-days">Picture days:</label>
+        <input type="number" id="inp-picture-days" min="0" max="999" placeholder="e.g. 12">
+        <span class="exp-unit">per season</span>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 5 of 7</div>
+      <div class="q-title">What's the biggest bottleneck to adding more schools?</div>
+      <div class="chips" id="chips-bottleneck">
+        <div class="chip" data-val="time-prospecting" tabindex="0" role="button" aria-pressed="false">Not enough time to prospect</div>
+        <div class="chip" data-val="follow-up-slips" tabindex="0" role="button" aria-pressed="false">Follow-up slips through the cracks</div>
+        <div class="chip" data-val="renewal-admin" tabindex="0" role="button" aria-pressed="false">Renewal admin eats my week</div>
+        <div class="chip" data-val="content-production" tabindex="0" role="button" aria-pressed="false">Not enough content/marketing time</div>
+        <div class="chip" data-val="team-capacity" tabindex="0" role="button" aria-pressed="false">No team capacity to grow</div>
+        <div class="chip" data-val="other" tabindex="0" role="button" aria-pressed="false">Something else</div>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 6 of 7</div>
+      <div class="q-title">What tools do you currently use to run your territory?</div>
+      <div class="q-sub">Select all that apply.</div>
+      <div class="chips" id="chips-tools" data-multi="true">
+        <div class="chip" data-val="crm" tabindex="0" role="button" aria-pressed="false">CRM / Pipeline</div>
+        <div class="chip" data-val="email-calendar" tabindex="0" role="button" aria-pressed="false">Email &amp; Calendar</div>
+        <div class="chip" data-val="team-messaging" tabindex="0" role="button" aria-pressed="false">Team Messaging</div>
+        <div class="chip" data-val="sop-tools" tabindex="0" role="button" aria-pressed="false">Project &amp; SOP Tools</div>
+        <div class="chip" data-val="ordering-platform" tabindex="0" role="button" aria-pressed="false">Parent Ordering Platform</div>
+        <div class="chip" data-val="spreadsheets" tabindex="0" role="button" aria-pressed="false">Mostly spreadsheets</div>
+        <div class="chip" data-val="none" tabindex="0" role="button" aria-pressed="false">None yet</div>
+      </div>
+    </div>
+
+    <div class="q-section">
+      <div class="q-label">Question 7 of 7</div>
+      <div class="q-title">How urgent is solving this for your territory right now?</div>
+      <div class="slider-row"><span class="slider-name">Urgency</span><span class="slider-val needs-input" id="lbl-urgency">← slide to set yours</span></div>
+      <input type="range" id="sl-urgency" min="1" max="10" step="1" value="0">
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-light);"><span>1 — no rush</span><span>10 — urgent</span></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-label"><span id="progress-label">0 of 7 answered</span><span id="progress-pct">0%</span></div>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div class="submit-card">
+      <label class="consent-wrap">
+        <input type="checkbox" id="consent-check">
+        <span>I agree to be contacted by Franchise KI Consulting about the SRP Franchisee Blueprint AI system.</span>
+      </label>
+      <button class="cta-btn" id="submit-btn" type="submit" disabled>Complete All Fields First</button>
+      <div class="cta-note" id="cta-note">Fill in your contact info and answer all 7 questions.</div>
+    </div>
+
+  </form>
+</div>
+
+<footer>
+  <p class="footer-disclaimer">Individual results vary. See Item 19 of the applicable FDD for financial performance representations. Franchise offerings made by prospectus only. See FDD for complete information.</p>
+  <p>&copy; 2026 Franchise KI Consulting. Prepared for Spoiled Rotten Photography franchisees.</p>
+</footer>
+
+<script>
+// Relay endpoint reused exactly from /Users/openclaw/fki-preview/qualify.html
+const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
+const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+
+const chips = { firstAgent: null, bottleneck: null, tools: [] };
+
+function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email); }
+function validPhone(phone) { return phone.replace(/\D/g, '').length >= 10; }
+
+function initChips(containerId, groupKey, multi) {
+  const box = document.getElementById(containerId);
+  box.querySelectorAll('.chip').forEach(function(chip) {
+    function toggle() {
+      if (multi) {
+        const val = chip.getAttribute('data-val');
+        const idx = chips[groupKey].indexOf(val);
+        if (idx === -1) {
+          chips[groupKey].push(val);
+          chip.classList.add('selected');
+          chip.setAttribute('aria-pressed', 'true');
+        } else {
+          chips[groupKey].splice(idx, 1);
+          chip.classList.remove('selected');
+          chip.setAttribute('aria-pressed', 'false');
+        }
+      } else {
+        box.querySelectorAll('.chip').forEach(function(c) {
+          c.classList.remove('selected');
+          c.setAttribute('aria-pressed', 'false');
+        });
+        chip.classList.add('selected');
+        chip.setAttribute('aria-pressed', 'true');
+        chips[groupKey] = chip.getAttribute('data-val');
+      }
+      updateProgress();
+    }
+    chip.addEventListener('click', toggle);
+    chip.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  });
+}
+
+initChips('chips-first-agent', 'firstAgent', false);
+initChips('chips-bottleneck', 'bottleneck', false);
+initChips('chips-tools', 'tools', true);
+
+const slAdminHours = document.getElementById('sl-admin-hours');
+const lblAdminHours = document.getElementById('lbl-admin-hours');
+let adminHoursTouched = false;
+slAdminHours.addEventListener('input', function() {
+  adminHoursTouched = true;
+  const v = +slAdminHours.value;
+  lblAdminHours.textContent = v + (v === 1 ? ' hr/week' : ' hrs/week');
+  lblAdminHours.className = 'slider-val';
+  const pct = v / 40 * 100;
+  slAdminHours.style.background = 'linear-gradient(to right, var(--brand) 0%, var(--brand) ' + pct + '%, var(--border) ' + pct + '%, var(--border) 100%)';
+  updateProgress();
+});
+
+const slUrgency = document.getElementById('sl-urgency');
+const lblUrgency = document.getElementById('lbl-urgency');
+let urgencyTouched = false;
+slUrgency.addEventListener('input', function() {
+  urgencyTouched = true;
+  const v = +slUrgency.value;
+  lblUrgency.textContent = v + ' / 10';
+  lblUrgency.className = 'slider-val';
+  const pct = (v - 1) / 9 * 100;
+  slUrgency.style.background = 'linear-gradient(to right, var(--brand) 0%, var(--brand) ' + pct + '%, var(--border) ' + pct + '%, var(--border) 100%)';
+  updateProgress();
+});
+
+const inpSchools = document.getElementById('inp-schools');
+const inpPictureDays = document.getElementById('inp-picture-days');
+inpSchools.addEventListener('input', updateProgress);
+inpPictureDays.addEventListener('input', updateProgress);
+
+const identityIds = ['lead-first', 'lead-last', 'lead-email', 'lead-phone', 'lead-territory'];
+identityIds.forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updateProgress);
+});
+document.getElementById('consent-check').addEventListener('change', updateProgress);
+
+function isIdentityComplete() {
+  const first = document.getElementById('lead-first').value.trim();
+  const last = document.getElementById('lead-last').value.trim();
+  const email = document.getElementById('lead-email').value.trim();
+  const phone = document.getElementById('lead-phone').value.trim();
+  const territory = document.getElementById('lead-territory').value.trim();
+  return !!(first && last && validEmail(email) && validPhone(phone) && territory);
+}
+
+function questionsAnswered() {
+  let n = 0;
+  if (chips.firstAgent) n++;
+  if (adminHoursTouched) n++;
+  if (inpSchools.value !== '' && +inpSchools.value >= 0) n++;
+  if (inpPictureDays.value !== '' && +inpPictureDays.value >= 0) n++;
+  if (chips.bottleneck) n++;
+  if (chips.tools.length > 0) n++;
+  if (urgencyTouched) n++;
+  return n;
+}
+
+function updateProgress() {
+  const answered = questionsAnswered();
+  const pct = Math.round(answered / 7 * 100);
+  document.getElementById('progress-label').textContent = answered + ' of 7 answered';
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const identityDone = isIdentityComplete();
+  const allDone = answered >= 7;
+  const consentGiven = document.getElementById('consent-check').checked;
+  const btn = document.getElementById('submit-btn');
+  const note = document.getElementById('cta-note');
+  const ready = identityDone && allDone && consentGiven;
+  btn.disabled = !ready;
+  if (!identityDone || !allDone) {
+    btn.textContent = 'Complete All Fields First';
+    note.textContent = 'Fill in your contact info and answer all 7 questions.';
+  } else if (!consentGiven) {
+    btn.textContent = 'Complete All Fields First';
+    note.textContent = 'Check the consent box above to continue.';
+  } else {
+    btn.textContent = 'Submit Qualification';
+    note.textContent = 'Your answers will be saved for review.';
+  }
+}
+
+function getLeadSessionId() {
+  try {
+    const key = 'srpFranchiseeLeadSessionId';
+    const existing = localStorage.getItem(key);
+    if (existing) return existing;
+    const created = 'srp-fr-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem(key, created);
+    return created;
+  } catch (e) {
+    return 'srp-fr-' + Date.now().toString(36);
+  }
+}
+
+document.getElementById('qualifier-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  if (btn.disabled) return;
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  const payload = {
+    event_name: 'srp_franchisee_qualifier_submit',
+    locationId: GHL_LOC,
+    firstName: document.getElementById('lead-first').value.trim(),
+    lastName: document.getElementById('lead-last').value.trim(),
+    email: document.getElementById('lead-email').value.trim(),
+    phone: document.getElementById('lead-phone').value.trim(),
+    territory: document.getElementById('lead-territory').value.trim(),
+    src: 'srp-franchisee-blueprint',
+    brand: 'SRP',
+    lead_session_id: getLeadSessionId(),
+    first_agent_priority: chips.firstAgent || '',
+    admin_hours_per_week: adminHoursTouched ? +slAdminHours.value : null,
+    school_partnerships_now: inpSchools.value ? +inpSchools.value : null,
+    picture_days_per_season: inpPictureDays.value ? +inpPictureDays.value : null,
+    biggest_bottleneck: chips.bottleneck || '',
+    current_tools: chips.tools,
+    urgency: urgencyTouched ? +slUrgency.value : null,
+    submitted_at: new Date().toISOString()
+  };
+
+  try {
+    const response = await fetch(GHL_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      try { localStorage.setItem('srpFranchiseeQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch (err) {}
+    }
+  } catch (err) {
+    try { localStorage.setItem('srpFranchiseeQualifierPending_' + Date.now(), JSON.stringify(payload)); } catch (e2) {}
+  }
+  try { localStorage.setItem('srpFranchiseeQualifierLast', JSON.stringify(payload)); } catch (e3) {}
+  window.location.href = 'srp-franchisee-thankyou.html';
+});
+
+updateProgress();
+</script>
+
+</body>
+</html>

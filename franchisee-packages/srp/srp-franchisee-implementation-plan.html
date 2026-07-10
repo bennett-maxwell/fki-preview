@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Blueprint AI Implementation Plan for Spoiled Rotten Photography franchisees — how the 6 AI Employees go live in your territory over Days 1-3, Days 4-7, Day 30, and Month 2+." />
+<title>Blueprint AI Implementation Plan — SRP Franchisees</title>
+<style>
+  :root {
+    --brand:        #0071E3;
+    --brand-dark:   #1D1D1F;
+    --brand-light:  #EBF4FF;
+    --steel:        #6E6E73;
+    --neutral-bg:   #F5F5F7;
+    --white:        #ffffff;
+    --text:         #1D1D1F;
+    --text-muted:   #6E6E73;
+    --text-light:   #A1A1A6;
+    --border:       #E5E5EA;
+    --green:        #34C759;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(10,14,26,0.08);
+    --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+  .nav-logo span { color: var(--brand); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--brand); }
+  @media (max-width: 640px) { .nav-links { gap: 0.9rem; } .nav-links a { font-size: 0.78rem; } }
+  .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 4.5rem 2rem 3.5rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+  .hero h1 span { color: var(--brand); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.82); max-width: 640px; margin: 0 auto; }
+  .section { padding: 4rem 2rem; }
+  .section-alt { background: var(--neutral-bg); }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+  .section-title { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+  .section-sub { font-size: 1.02rem; color: var(--text-muted); max-width: 700px; margin-bottom: 2.5rem; }
+  .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
+  .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; }
+  .agent-num { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 0.85rem; align-items: center; justify-content: center; margin-bottom: 0.9rem; }
+  .agent-name { font-weight: 800; font-size: 1.02rem; color: var(--text); margin-bottom: 0.5rem; }
+  .agent-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
+  .milestone { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+  .milestone:last-child { margin-bottom: 0; }
+  .milestone-head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
+  .milestone-phase { font-size: 1.3rem; font-weight: 800; color: var(--brand); }
+  .milestone-tag { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+  .milestone-result { font-weight: 700; font-size: 0.92rem; color: var(--text); margin: 0.75rem 0 1.1rem; padding: 0.75rem 1rem; background: var(--brand-light); border-radius: 8px; }
+  .action-list { list-style: none; }
+  .action-list li { position: relative; padding-left: 1.6rem; margin-bottom: 0.6rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; }
+  .action-list li::before { content: ''; position: absolute; left: 0; top: 0.5em; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+  .action-list strong { color: var(--text); }
+  .subhead { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin: 1.1rem 0 0.6rem; }
+  .subhead:first-child { margin-top: 0; }
+  .table-wrap { border-radius: var(--radius); overflow-x: auto; border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .checklist { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+  .checklist ul { list-style: none; }
+  .checklist li { position: relative; padding-left: 2rem; margin-bottom: 0.85rem; font-size: 0.92rem; color: var(--text-muted); line-height: 1.5; }
+  .checklist li::before { content: ''; position: absolute; left: 0; top: 0.15em; width: 18px; height: 18px; border-radius: 4px; border: 2px solid var(--brand); }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .metric-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; }
+  .metric-name { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.4rem; }
+  .metric-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+  footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+  footer a { color: var(--brand); text-decoration: none; }
+  .footer-disclaimer { max-width: 700px; margin: 0 auto 0.75rem; color: rgba(255,255,255,0.45); font-size: 0.78rem; line-height: 1.5; }
+  @media (max-width: 640px) { .section { padding: 2.75rem 1.25rem; } .milestone { padding: 1.4rem; } .checklist { padding: 1.4rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <ul class="nav-links">
+    <li><a href="srp-franchisee-landing.html">Overview</a></li>
+    <li><a href="srp-franchisee-roi-calculator.html">ROI Calculator</a></li>
+    <li><a href="srp-franchisee-qualifier.html">Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Blueprint AI Implementation Plan</div>
+  <h1>Blueprint AI Implementation Plan <span>— SRP Franchisees</span></h1>
+  <p class="hero-sub">The same 3-day / 7-day / 30-day standard Franchise KI Consulting runs for every SRP territory, translated into the exact actions you take as the local operator — school outreach, picture-day prep, and parent communication.</p>
+</section>
+
+<section class="section" id="overview">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">The 6 AI Employees Behind This Plan</h2>
+    <p class="section-sub">Each AI Employee maps to a specific part of your territory's workflow — school accounts, franchisee support, seasonal content, parent ordering, onboarding, and admin reporting. This plan walks through how each one comes online in your territory.</p>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-num">1</div>
+        <div class="agent-name">Franchise-Candidate Speed-to-Lead Employee</div>
+        <div class="agent-desc">Answers every inbound franchise-candidate inquiry about SRP's home-based, school-partnership model quickly, qualifies liquid capital and background fit, and routes the candidate to the right pipeline stage.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-num">2</div>
+        <div class="agent-name">School-Account &amp; Franchisee Support Employee</div>
+        <div class="agent-desc">Tracks each school partnership's renewal timeline, drafts the outreach that protects your renewal rate, and fields routine franchisee questions so onboarding goes faster.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-num">3</div>
+        <div class="agent-name">Content &amp; Seasonal Campaign Employee</div>
+        <div class="agent-desc">Turns each picture-day cycle into parent ordering reminders, school-outreach materials, and franchise-candidate stories — in SRP's warm, family-first voice.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-num">4</div>
+        <div class="agent-name">Parent Ordering &amp; Fulfillment Employee</div>
+        <div class="agent-desc">Keeps parents informed from picture day through portrait delivery — order confirmations, ordering-window reminders, and delivery updates.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-num">5</div>
+        <div class="agent-name">Franchisee Onboarding Employee</div>
+        <div class="agent-desc">Walks new operators through training milestones ahead of their first picture day, using SRP's documented training materials.</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-num">6</div>
+        <div class="agent-name">Franchisor Admin &amp; Reporting Employee</div>
+        <div class="agent-desc">Pulls school-account status, renewal health, and franchisee activity into a scheduled snapshot for the franchisor's system-wide view.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">Milestones</p>
+    <h2 class="section-title">Days 1-3 through Month 2+</h2>
+    <p class="section-sub">No long multi-month rollouts. Here is exactly what happens in your territory at each milestone, expanded into concrete franchisee actions.</p>
+
+    <div class="milestone">
+      <div class="milestone-head"><span class="milestone-phase">Days 1-3</span><span class="milestone-tag">First AI Employee Live</span></div>
+      <div class="milestone-result">Result: Every candidate inquiry gets a fast, on-brand response — and your school-outreach calendar is mapped.</div>
+      <div class="subhead">What FKI Sets Up</div>
+      <ul class="action-list">
+        <li>Kickoff call mapping your candidate pipeline, school-account calendar, and approval gates</li>
+        <li>Franchise-Candidate Speed-to-Lead Employee connected to your inbound channels</li>
+        <li>Brand voice built from SRP's documented brand guide — warm, family-focused, culture-first — before launch, not after</li>
+        <li>Live test: submit a test inquiry and watch the response fire</li>
+      </ul>
+      <div class="subhead">Franchisee Actions</div>
+      <ul class="action-list">
+        <li><strong>School outreach cadence:</strong> confirm your current list of school contacts (preschools, daycares, childcare centers) so the AI Employee has accurate account data from day one</li>
+        <li><strong>Parent communication flows:</strong> share any parent-facing templates you already use, so early content matches your existing voice</li>
+        <li><strong>Access setup:</strong> connect your CRM/pipeline tool and inbound email so inquiries route correctly</li>
+      </ul>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-head"><span class="milestone-phase">Days 4-7</span><span class="milestone-tag">All 6 Employees Running</span></div>
+      <div class="milestone-result">Result: All 6 AI Employees deployed in real workflows. Team trained and using the system.</div>
+      <div class="subhead">What FKI Sets Up</div>
+      <ul class="action-list">
+        <li>School-Account &amp; Franchisee Support Employee tracking renewal windows</li>
+        <li>Content &amp; Seasonal Campaign Employee producing picture-day content</li>
+        <li>Parent Ordering &amp; Fulfillment Employee live on ordering communications</li>
+        <li>Franchisee Onboarding Employee supporting new operators</li>
+        <li>Franchisor Admin &amp; Reporting Employee on its reporting schedule</li>
+        <li>Team walkthrough: no technical knowledge required</li>
+      </ul>
+      <div class="subhead">Franchisee Actions</div>
+      <ul class="action-list">
+        <li><strong>Picture-day season prep:</strong> load your upcoming picture-day dates so the Content &amp; Seasonal Campaign Employee can build parent reminders and school materials around real dates</li>
+        <li><strong>School outreach cadence:</strong> review the renewal-window flags for your active school accounts and confirm which relationships need a personal call versus automated outreach</li>
+        <li><strong>Parent communication flows:</strong> approve the ordering-window reminder and delivery-update templates before they go live to families</li>
+        <li>Walk through the system with your team so everyone knows what's automated and what still needs a human sign-off</li>
+      </ul>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-head"><span class="milestone-phase">Day 30</span><span class="milestone-tag">Calibrated to SRP Data</span></div>
+      <div class="milestone-result">Result: System knows SRP's business. Every employee calibrated on real operating data.</div>
+      <div class="subhead">What FKI Sets Up</div>
+      <ul class="action-list">
+        <li>30-day performance review: response rates, renewal-outreach hits, hours recovered</li>
+        <li>Employees refined on your actual school-account and candidate patterns</li>
+        <li>Expansion roadmap: what to hand over next as your territory grows</li>
+      </ul>
+      <div class="subhead">Franchisee Actions</div>
+      <ul class="action-list">
+        <li><strong>School outreach cadence:</strong> compare the renewal outreach the AI Employee drafted against what actually kept schools engaged, and flag any tone or timing adjustments</li>
+        <li><strong>Picture-day season prep:</strong> review how the seasonal content performed around your most recent picture day and note what to reuse next cycle</li>
+        <li>Confirm which routine franchisee-support questions the AI Employee handled well, and which still need franchisor input</li>
+      </ul>
+    </div>
+
+    <div class="milestone">
+      <div class="milestone-head"><span class="milestone-phase">Month 2+</span><span class="milestone-tag">Compounding</span></div>
+      <div class="milestone-result">Result: AI runs like a trained team member who never forgets and never has a bad season.</div>
+      <div class="subhead">What FKI Sets Up</div>
+      <ul class="action-list">
+        <li>Minimal manual input required from you or your team</li>
+        <li>Continuous improvement from production data</li>
+        <li>You own the system — FKI stays as the AI operations partner</li>
+      </ul>
+      <div class="subhead">Franchisee Actions</div>
+      <ul class="action-list">
+        <li><strong>School outreach cadence:</strong> shift your personal time toward new school prospecting, since renewal follow-through is running on schedule</li>
+        <li><strong>Picture-day season prep:</strong> plan next season's picture-day calendar earlier, using the prior cycle's content and timing as a starting template</li>
+        <li>Review the Franchisor Admin &amp; Reporting Employee's system-wide snapshot on a regular cadence to stay ahead of any account at renewal risk</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="container">
+    <p class="section-label">What You Need to Provide</p>
+    <h2 class="section-title">Roles &amp; Access</h2>
+    <p class="section-sub">Access setup happens during Days 1-3 so the AI Employees can connect to real accounts from the start.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>System</th><th>Why It's Needed</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CRM / Pipeline</strong></td><td>Franchise-candidate records and school-account history so the Speed-to-Lead and School-Account Employees work from accurate data</td></tr>
+          <tr><td><strong>Email</strong></td><td>Inbound candidate inquiries, school-account renewal outreach, and parent ordering communications</td></tr>
+          <tr><td><strong>Calendar</strong></td><td>Picture-day dates and school renewal windows, so seasonal content and renewal outreach are timed correctly</td></tr>
+          <tr><td><strong>Team Messaging</strong></td><td>Franchisor and franchisee coordination during onboarding and day-to-day support questions</td></tr>
+          <tr><td><strong>Parent Ordering Platform</strong></td><td>Order confirmations, ordering-window reminders, and delivery status updates</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="calibration">
+  <div class="container">
+    <p class="section-label">Day 30 Checklist</p>
+    <h2 class="section-title">Calibration Checklist</h2>
+    <p class="section-sub">Work through this with FKI at your 30-day review so every AI Employee reflects your territory's real operating data.</p>
+    <div class="checklist">
+      <ul>
+        <li>Franchise-Candidate Speed-to-Lead Employee response tone matches how your candidates actually reply back</li>
+        <li>School-Account renewal windows match your real contract dates for every active school partnership</li>
+        <li>Content &amp; Seasonal Campaign Employee output reflects your actual picture-day calendar, not a generic schedule</li>
+        <li>Parent Ordering &amp; Fulfillment Employee templates approved and matched to your ordering platform's actual windows</li>
+        <li>Franchisee Onboarding Employee materials reviewed against your territory's specific training needs</li>
+        <li>Franchisor Admin &amp; Reporting Employee snapshot cadence set to match how often you want the system-wide view</li>
+        <li>All external sends still routed through human approval, per SRP's pre-launch approval gate</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="metrics">
+  <div class="container">
+    <p class="section-label">Track What Matters</p>
+    <h2 class="section-title">Success Metrics — What to Measure</h2>
+    <p class="section-sub">These are the things to watch as the system runs in your territory. Framed as what to measure, not promised results — individual results vary.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-name">Candidate Response Time</div>
+        <div class="metric-desc">How quickly every franchise-candidate inquiry gets a first response, day or night.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">School-Account Renewal Follow-Through</div>
+        <div class="metric-desc">Whether every account entering its renewal window gets timely, documented outreach before the window closes.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Hours Recovered Per Season</div>
+        <div class="metric-desc">Admin and follow-up time freed up across school-account management, parent communication, and content production.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Parent Ordering-Window Completion</div>
+        <div class="metric-desc">How many families receive and act on ordering reminders before each ordering window closes.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">New-Franchisee Ramp Time</div>
+        <div class="metric-desc">How quickly new operators reach readiness for their first picture day using the Onboarding Employee.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-name">Franchisor Reporting Cadence</div>
+        <div class="metric-desc">Whether the system-wide snapshot reliably surfaces accounts at renewal risk before they lapse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-disclaimer">Individual results vary. See Item 19 of the applicable FDD for financial performance representations. Franchise offerings made by prospectus only. See FDD for complete information.</p>
+  <p>&copy; 2026 Franchise KI Consulting. Prepared for Spoiled Rotten Photography franchisees.</p>
+</footer>
+
+</body>
+</html>

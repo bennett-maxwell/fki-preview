@@ -1,0 +1,1098 @@
+<!-- Lead: Spoiled Rotten Photography | Industry: In-school portrait photography franchise -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The AI Blueprint Franchise KI Consulting designed for Spoiled Rotten Photography — an in-school portrait photography franchise. Six AI Employees, an interactive ROI calculator, and production-ready prompts built for SRP's school-partnership model." />
+  <meta property="og:title" content="The AI Advantage Roadmap for Spoiled Rotten Photography" />
+  <meta property="og:description" content="Franchise KI Consulting's AI Blueprint for Spoiled Rotten Photography — 6 AI Employees, an interactive ROI calculator, and production-ready prompts built for SRP's school-partnership model." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/srp-brand-blueprint-20260709.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Spoiled Rotten Photography — AI Blueprint by Franchise KI Consulting</title>
+  <style>
+    :root {
+      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
+      --brand:        #0071E3;
+      --brand-dark:   #1D1D1F;
+      --brand-light:  #EBF4FF;
+      --steel:        #6E6E73;
+      --neutral-bg:   #F5F5F7;
+      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
+      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
+      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
+      --white:        #ffffff;
+      --text:         #1D1D1F;
+      --text-muted:   #6E6E73;
+      --text-light:   #A1A1A6;
+      --border:       #E5E5EA;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(10,14,26,0.08);
+      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--brand-dark); flex-direction: column; padding: 0.5rem 0; gap: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links a { display: block; padding: 0.9rem 2rem; font-size: 0.98rem; min-height: 44px; }
+    }
+    .reading-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand-dark), var(--brand)); z-index: 9999; width: 0%; transition: width 0.12s linear; pointer-events: none; }
+    .mobile-cta-bar { display: none; }
+    @media (max-width: 640px) {
+      .mobile-cta-bar { display: block; position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); padding: 0.85rem 1.5rem; z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.25); transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+      .mobile-cta-bar.visible { transform: translateY(0); }
+      .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
+      .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: var(--brand); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
+    .section { padding: 5rem 2rem; }
+    .section-alt { background: var(--neutral-bg); }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 660px; margin-bottom: 3rem; }
+
+    .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
+
+    .results-table { width: 100%; border-collapse: collapse; }
+    .results-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .results-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--text-muted); background: var(--white); }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .result-num { font-size: 1.3rem; font-weight: 800; color: var(--brand); }
+    .results-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .results-table a { color: var(--brand); text-decoration: underline; }
+
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 640px) { .pillars-grid { grid-template-columns: 1fr; } }
+    .pillar-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center; }
+    .pillar-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
+    .pillar-icon svg { width: 28px; height: 28px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-title { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; }
+    .pillar-sub { font-size: 0.88rem; color: var(--text-muted); }
+    .pillar-metric { font-size: 1.6rem; font-weight: 800; color: var(--brand); margin: 0.75rem 0 0.25rem; }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; align-items: flex-start; gap: 1rem; }
+    .stack-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--neutral-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .stack-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .stack-tool { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+    .stack-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--brand); margin-top: 0.15rem; }
+
+    .gap-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .gap-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; box-shadow: var(--shadow); }
+    .gap-num { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .gap-body { flex: 1; }
+    .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
+    .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
+    .gap-tag.revenue { background: #fde8eb; color: var(--brand); }
+    .gap-tag.efficiency { background: #e8eaf3; color: var(--steel); }
+    .gap-tag.brand { background: #f3e8f0; color: var(--brand-dark); }
+    .gap-desc a { color: var(--brand); }
+
+    .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .opp-table { width: 100%; border-collapse: collapse; }
+    .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
+    .opp-table tr:last-child td { border-bottom: none; }
+    .opp-table tr:nth-child(even) td { background: #fdfafb; }
+    .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #fde8eb; color: var(--brand); }
+
+    .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x span { color: var(--brand); font-weight: 800; font-size: 1rem; }
+    .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
+    .ignore-reason { font-size: 0.82rem; color: var(--text-muted); }
+
+    .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .agent-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
+    .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+    .agent-outcome::before { content: ''; width: 6px; height: 6px; background: var(--brand); border-radius: 50%; flex-shrink: 0; }
+
+    .milestone-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .milestone-table { width: 100%; border-collapse: collapse; }
+    .milestone-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.4rem; text-align: left; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .milestone-table td { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.92rem; background: var(--white); vertical-align: top; }
+    .milestone-table tr:last-child td { border-bottom: none; }
+    .milestone-table .m-phase { font-weight: 800; color: var(--brand); font-size: 1rem; }
+    .milestone-table .m-list { margin-top: 0.5rem; padding-left: 1.2rem; }
+    .milestone-table .m-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+    .milestone-table .m-result { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+
+    .calc-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
+    .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .preset-btn { padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-sans); transition: all 0.2s; background: var(--white); color: var(--text-muted); }
+    .preset-btn.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
+    .calc-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .calc-slider-label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); }
+    .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
+    .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
+    .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
+    @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
+    .calc-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; background: var(--neutral-bg); border-radius: var(--radius); padding: 2rem; }
+    .calc-result-item { text-align: center; }
+    .calc-result-item .res-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.5rem; }
+    .calc-result-item .res-value { font-size: 1.7rem; font-weight: 800; color: var(--brand); }
+    .calc-result-item .res-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 0.2rem; }
+    .calc-disclaimer { font-size: 0.78rem; color: var(--text-light); margin-top: 1rem; font-style: italic; }
+    .calc-disclaimer a { color: var(--brand); }
+
+    .prompt-cards { display: flex; flex-direction: column; gap: 2rem; }
+    .prompt-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .prompt-header { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.2rem 1.5rem; color: var(--white); cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; user-select: none; }
+    .prompt-header h3 { font-weight: 800; font-size: 1rem; }
+    .prompt-header p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 0.2rem; }
+    .prompt-header-left { flex: 1; }
+    .prompt-expand-hint { font-size: 0.8rem; color: rgba(255,255,255,0.7); white-space: nowrap; padding-top: 0.15rem; flex-shrink: 0; }
+    .prompt-body { padding: 1.5rem; display: none; }
+    .prompt-body.open { display: block; }
+    .prompt-pre { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; font-family: 'SFMono-Regular', 'Consolas', monospace; font-size: 0.82rem; color: var(--text-muted); white-space: pre-wrap; word-break: break-word; margin-bottom: 1rem; line-height: 1.6; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--brand); color: var(--white); border: none; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s; }
+    .copy-btn:hover { background: var(--brand-dark); }
+    .copy-btn svg { width: 15px; height: 15px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .prompt-outcome { margin-top: 0.8rem; font-size: 0.85rem; color: var(--brand); font-weight: 600; }
+    .diy-or-partner { background: var(--neutral-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-top: 2.5rem; }
+    .diy-or-partner h3 { font-weight: 800; font-size: 1.1rem; color: var(--text); margin-bottom: 1.5rem; }
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 580px) { .path-grid { grid-template-columns: 1fr; } }
+    .path { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .path h4 { font-weight: 800; font-size: 0.95rem; color: var(--text); margin-bottom: 0.6rem; }
+    .path p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+    .path-cta { display: inline-block; margin-top: 1rem; background: linear-gradient(135deg, var(--brand-dark), var(--brand)); color: var(--white); padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-decoration: none; }
+
+    .cta-section { background: linear-gradient(135deg, var(--brand-dark) 0%, var(--steel) 60%, var(--brand) 100%); color: var(--white); padding: 5rem 2rem; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--brand-light); }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 2.5rem; }
+    .cta-personal { max-width: 640px; margin: 0 auto 2.5rem; font-size: 1.05rem; color: rgba(255,255,255,0.92); line-height: 1.7; font-style: italic; border-left: 3px solid var(--brand); padding-left: 1.25rem; text-align: left; }
+    .cta-btn { display: inline-block; background: var(--white); color: var(--brand); padding: 1rem 2.5rem; border-radius: 100px; font-size: 1rem; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
+    footer a { color: var(--brand); text-decoration: none; }
+    .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
+    .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
+    .source-item a { color: var(--brand); text-decoration: underline; }
+    @media (max-width: 640px) { .section { padding: 3.5rem 1.25rem; } .calc-wrap { padding: 1.5rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 2rem; } .section-title { font-size: 1.45rem; } .hero-sub { font-size: 1rem; } .section { padding: 2.75rem 1rem; } }
+
+    .pod-section { padding: 4rem 2rem; }
+    .pod-card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden; }
+    .pod-header { background: linear-gradient(160deg, var(--brand-dark) 0%, var(--brand) 100%); padding: 1.5rem 2rem; color: #fff; }
+    .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+    .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
+    .pod-body { padding: 1.5rem 2rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
+    .pod-eq.playing { display: inline-flex; }
+    .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
+    .pod-eq span:nth-child(2){animation-delay:.15s;height:10px}
+    .pod-eq span:nth-child(3){animation-delay:.3s;height:16px}
+    .pod-eq span:nth-child(4){animation-delay:.45s;height:8px}
+    .pod-eq span:nth-child(5){animation-delay:.6s;height:14px}
+    @keyframes eqBounce { from{height:4px} to{height:18px} }
+    .pod-chapter-name { font-size: .8rem; font-weight: 600; color: var(--brand); min-height: 1.2em; margin-bottom: .5rem; }
+    .pod-progress-wrap { position: relative; height: 44px; display: flex; align-items: center; background: transparent; border-radius: 22px; cursor: pointer; touch-action: none; user-select: none; }
+    .pod-progress-wrap::before { content: ''; position: absolute; left: 0; right: 0; top: 19px; height: 6px; background: rgba(0,0,0,.1); border-radius: 3px; }
+    .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
+    .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
+    .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
+    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+    .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+    .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
+    .pod-btn:hover { background: rgba(0,113,227,.08); }
+    .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
+    @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
+    .pod-btn.play-btn:hover { background: var(--brand-dark); }
+    .pod-btn-label { font-size: .7rem; font-weight: 600; display: block; }
+    .pod-speed { font-size: .78rem; background: none; border: 1px solid rgba(0,0,0,.15); border-radius: 8px; padding: .3rem .5rem; cursor: pointer; color: inherit; }
+    .pod-meta { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .pod-mute { margin-left: auto; }
+    .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
+    .pod-dl:hover { text-decoration: underline; }
+    .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
+    .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
+    .pod-mini.visible { display: flex; }
+    .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
+    .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
+  .agent-prompt{margin-top:0.9rem;padding:0.85rem 1rem;background:rgba(0,113,227,0.06);border-left:3px solid #0071E3;border-radius:6px;font-size:0.85rem;line-height:1.55;color:#4a4a55}.agent-prompt-label{display:block;font-weight:600;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.35rem;color:#0071E3}</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Franchise KI <span>Consulting</span></div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navMenu">
+    <li><a href="#profile">Your Profile</a></li>
+    <li><a href="#agents">AI Employees</a></li>
+    <li><a href="#calculator">ROI Calculator</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#apply">Qualify</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-badge">Prepared for Spoiled Rotten Photography</div>
+  <h1>The <span>AI Advantage</span> Roadmap<br>for Spoiled Rotten Photography</h1>
+  <p class="hero-sub">Spoiled Rotten Photography is a 23-year-old in-school portrait photography franchise: franchisees build partnerships with preschools, daycares, and childcare centers to run picture day, and photograph the milestone moments families cherish. This Blueprint maps the AI system Franchise KI Consulting designed for SRP&rsquo;s school-partnership, franchisee-support, and seasonal picture-day operations.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">3 Days In</span><span class="label">First AI Employee<br>Live</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">7 Days</span><span class="label">All 6 Employees<br>Running</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">Day 30</span><span class="label">Calibrated to<br>SRP Data</span></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><span class="num">6 / AI Employees Designed</span><span class="label">Built for the<br>School-Partnership Model</span></div>
+  </div>
+  <p style="font-size:0.72rem;color:rgba(255,255,255,0.5);max-width:560px;margin:0 auto;">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+</section>
+
+<section class="section section-alt" id="profile">
+  <div class="container">
+    <p class="section-label">Your Business Profile</p>
+    <h2 class="section-title">Where Spoiled Rotten Photography Stands Today</h2>
+    <p class="section-sub">Built from FKI&rsquo;s brand record for SRP &mdash; the same intake and research process we run for every franchisor client, pointed at SRP&rsquo;s documented model.</p>
+    <div class="snapshot-grid">
+      <div class="snapshot-card"><div class="snapshot-val">In-School Portrait Photography Franchise</div><div class="snapshot-key">Business Type</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">23 Years</div><div class="snapshot-key">Brand Age</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">12+</div><div class="snapshot-key">Units in the System</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">90&ndash;95%</div><div class="snapshot-key">Annual School Renewal Rate</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">$52,695&ndash;$64,350*</div><div class="snapshot-key">Total Investment Range</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">B2B Recurring</div><div class="snapshot-key">Revenue Type &mdash; School Contracts</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Home-Based</div><div class="snapshot-key">No Lease, No Inventory</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">Melissa Tash</div><div class="snapshot-key">Founder &amp; Brand Owner</div></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-muted);">*Individual results vary. See Item 19 of the applicable FDD for financial performance representations. SRP&rsquo;s model is B2B2C: the franchisee builds the school partnership (B2B) that creates access to families for on-location portrait sessions (B2C). The primary decision-makers are school directors; the end purchasers are parents. FKI onboarded SRP in March 2026, and this Blueprint reflects SRP&rsquo;s current pre-launch phase &mdash; FDD finalization in progress ahead of a targeted Q3 2026 launch.</p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <p class="section-label">What Your Industry Is Already Doing</p>
+    <h2 class="section-title">Franchise &amp; Multi-Location Consumer-Services Brands Are Already Running on AI</h2>
+    <p class="section-sub">These are the exact moves multi-location consumer-services brands &mdash; the category SRP competes in for school-district attention and franchisee interest &mdash; are making right now. The question is not whether AI runs these functions. It is whether SRP runs them before another children&rsquo;s-services brand locks in the same schools and the same candidates.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every franchise-candidate inquiry in minutes &mdash; not days</div><div class="gap-desc"><strong>What they're doing:</strong> multi-location consumer-services brands put an AI speed-to-lead employee on every inbound franchise inquiry, replying fast and around the clock. <strong>How it helps them:</strong> published research shows the first brand to respond wins a disproportionate share of qualified candidates &mdash; slow responders lose people to the next brand in their inbox. <strong>How FKI delivers for SRP:</strong> a Franchise-Candidate Speed-to-Lead Employee answers every inquiry about SRP&rsquo;s home-based, school-partnership model quickly, qualifies liquid capital and background fit, and routes the candidate to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They keep every B2B account relationship warm without a full-time admin team</div><div class="gap-desc"><strong>What they're doing:</strong> brands with recurring B2B contracts &mdash; the model SRP runs with schools &mdash; use AI to automate account renewal reminders, scheduling coordination, and routine account questions. <strong>How it helps them:</strong> renewal-critical relationships get consistent, timely contact instead of depending on one franchisee remembering every school&rsquo;s calendar. <strong>How FKI delivers for SRP:</strong> a School-Account &amp; Franchisee Support Employee tracks each school partnership's renewal timeline, drafts the outreach that keeps the 90&ndash;95% renewal rate strong, and fields routine franchisee questions so new operators ramp faster. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">They turn one picture day into a season of content and outreach</div><div class="gap-desc"><strong>What they're doing:</strong> family- and school-facing brands run AI content employees that convert real seasonal events into parent communications, school-facing marketing, and franchise-candidate content. <strong>How it helps them:</strong> they stay in front of schools and parents every season with far less manual production time. <strong>How FKI delivers for SRP:</strong> a Content &amp; Seasonal Campaign Employee turns each picture-day cycle into parent ordering reminders, school-outreach materials, and franchise-candidate stories &mdash; in SRP&rsquo;s warm, family-first voice. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">They give every location leadership team a clear, current operating picture</div><div class="gap-desc"><strong>What they're doing:</strong> multi-location franchisors use analytics tools to roll up per-unit performance so leadership sees the network clearly instead of piecing it together unit by unit. <strong>How it helps them:</strong> faster, better-informed franchisor decisions about where to support, recruit, or invest next. <strong>How FKI delivers for SRP:</strong> as SRP scales past its current 12+ units, an admin and reporting layer gives the franchisor a consistent view of school-account health and franchisee support needs across the system. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+    </div>
+    <p class="section-sub" style="margin-top:1.6rem;font-weight:600;color:var(--text);">SRP is a 23-year-old brand with a 90&ndash;95% school renewal rate already &mdash; the underlying relationships are strong. The opportunity is giving that proven model more leverage: faster candidate response, tighter school-account follow-through, and content that keeps pace with the picture-day calendar.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="pillars">
+  <div class="container">
+    <p class="section-label">Where the Value Comes From</p>
+    <h2 class="section-title">Three Ways AI Moves the Needle for SRP</h2>
+    <p class="section-sub">Every AI Employee in the system maps to one of three outcomes &mdash; more qualified franchisees, more time back for the franchisor and operators, or more capacity without adding headcount.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="pillar-title">Grow the Franchise System</div>
+        <div class="pillar-metric">More Qualified Candidates</div>
+        <div class="pillar-sub">Every franchise-candidate inquiry answered quickly and qualified against SRP&rsquo;s real profile &mdash; people-first, community-connected, comfortable with kids and school staff.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pillar-title">Save Time</div>
+        <div class="pillar-metric">Hours Back Per Season</div>
+        <div class="pillar-sub">School-account follow-up, parent ordering communications, seasonal content, and franchisee support &mdash; automated where routine, so the franchisor and operators spend time on relationships, not admin.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="pillar-title">Scale Without Hiring</div>
+        <div class="pillar-metric">Support Every Unit</div>
+        <div class="pillar-sub">As SRP grows past its current 12+ units, AI Employees let a lean franchisor team keep supporting every new operator without adding headcount at the same pace as unit growth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stack">
+  <div class="container">
+    <p class="section-label">Where You Are Today</p>
+    <h2 class="section-title">SRP&rsquo;s Current Tool Stack</h2>
+    <p class="section-sub">Here is how FKI classifies the systems a growing franchisor like SRP typically runs &mdash; and where AI Employees slot in to multiply each one without replacing anything already in place.</p>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">CRM / Pipeline</div><div class="stack-role">Franchise Candidate &amp; School Records</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Team Messaging</div><div class="stack-role">Franchisor + Franchisee Comms</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Project &amp; SOP Tools</div><div class="stack-role">Picture-Day Operations &amp; Training</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Email &amp; Calendar</div><div class="stack-role">School Scheduling &amp; Parent Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">Parent Ordering Platform</div><div class="stack-role">Portrait Sales &amp; Fulfillment</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Finance &amp; Reporting</div><div class="stack-role">Franchisor &amp; Territory Reporting</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="gaps">
+  <div class="container">
+    <p class="section-label">Where the Leverage Is</p>
+    <h2 class="section-title">The Six Time-Recovery Opportunities in SRP&rsquo;s Model</h2>
+    <p class="section-sub">When FKI mapped SRP&rsquo;s school-partnership, franchisee-recruitment, and picture-day operations, these are the areas with the most recoverable capacity. None of this is critique &mdash; SRP has held a 90&ndash;95% school renewal rate for years. It is about giving that proven relationship model more leverage.</p>
+    <div class="gap-list">
+      <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">Franchise-Candidate Response Speed</div><div class="gap-desc">Every candidate inquiry about SRP&rsquo;s home-based, ~$60K-all-in model (individual results vary; see Item 19 of the applicable FDD for financial performance representations) is a high-value opportunity, and published research shows the first responder wins a disproportionate share of qualified people. The Franchise-Candidate Speed-to-Lead Employee answers quickly and qualifies liquid capital and background fit before a human ever has to. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">School-Account Renewal Follow-Through</div><div class="gap-desc">A 90&ndash;95% annual renewal rate is SRP&rsquo;s strongest asset, and protecting it means every school relationship gets timely, consistent contact ahead of its renewal window. The School-Account &amp; Franchisee Support Employee tracks renewal timelines per account so nothing slips through a busy season. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag brand">Retention</span></div></div>
+      <div class="gap-card"><div class="gap-num">3</div><div class="gap-body"><div class="gap-title">Seasonal Content &amp; Parent Communication</div><div class="gap-desc">Picture day is seasonal and recurring, and every cycle needs parent ordering reminders, school-facing marketing, and franchise-candidate content &mdash; a content bottleneck for a home-based operator. The Content &amp; Seasonal Campaign Employee turns each cycle into a season of ready-to-send material. <sup><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">[4]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">4</div><div class="gap-body"><div class="gap-title">New-Franchisee Onboarding &amp; Support</div><div class="gap-desc">SRP provides photography training to new operators who may not start as photographers, and the ramp-up period is when franchisee questions are most frequent. The School-Account &amp; Franchisee Support Employee fields routine onboarding questions so new operators reach their first picture day ready. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+      <div class="gap-card"><div class="gap-num">5</div><div class="gap-body"><div class="gap-title">Parent Ordering &amp; Fulfillment Communication</div><div class="gap-desc">Parents are the end purchasers of the portraits, and clear, timely ordering communication directly affects how many families complete a purchase after picture day. An ordering-communication layer keeps parents informed from picture day through delivery without manual follow-up per family. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
+      <div class="gap-card"><div class="gap-num">6</div><div class="gap-body"><div class="gap-title">Franchisor Admin &amp; Territory Reporting</div><div class="gap-desc">As SRP grows past its current 12+ units, the franchisor needs a consistent view of school-account health, renewal status, and franchisee performance across the system &mdash; without a proportional increase in administrative headcount. <sup><a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">[3]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="oppmap">
+  <div class="container">
+    <p class="section-label">Prioritized Roadmap</p>
+    <h2 class="section-title">AI Opportunity Map &mdash; Spoiled Rotten Photography</h2>
+    <p class="section-sub">Every use case ranked by impact and ease of implementation with SRP&rsquo;s existing operations. Start at P1 and work down, in the order FKI recommends deploying.</p>
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr><th style="width:50px">Pri</th><th>AI Use Case</th><th>Business Impact</th><th>Tools It Connects</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><div class="pri-badge">1</div></td><td><strong>Franchise-Candidate Speed-to-Lead Employee</strong></td><td><span class="impact-tag">Fast response</span> &mdash; every candidate inquiry answered and qualified before interest cools</td><td>CRM / Pipeline, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>School-Account &amp; Franchisee Support Employee</strong></td><td><span class="impact-tag">Renewal protection</span> &mdash; tracks the 90&ndash;95% renewal window per school account</td><td>CRM, Email &amp; Calendar</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Content &amp; Seasonal Campaign Employee</strong></td><td><span class="impact-tag">1 picture day = 1 season</span> &mdash; parent, school, and candidate content from real seasonal events</td><td>Email, Social, Parent Ordering Platform</td></tr>
+          <tr><td><div class="pri-badge">4</div></td><td><strong>Parent Ordering &amp; Fulfillment Employee</strong></td><td><span class="impact-tag">Fewer missed orders</span> &mdash; timely ordering and delivery communication per family</td><td>Parent Ordering Platform, Email/SMS</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Franchisee Onboarding Employee</strong></td><td><span class="impact-tag">Faster ramp</span> &mdash; new operators ready for their first picture day sooner</td><td>Project &amp; SOP Tools, Team Messaging</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Franchisor Admin &amp; Reporting Employee</strong></td><td><span class="impact-tag">System-wide view</span> &mdash; school-account and franchisee status on a cadence</td><td>Finance &amp; Reporting, CRM</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="ignore">
+  <div class="container">
+    <p class="section-label">Sequencing, Not Limits</p>
+    <h2 class="section-title">What SRP Deliberately Saves for Later &mdash; So the Big Wins Land First</h2>
+    <p class="section-sub">Here is the honest truth: AI has reached the point where almost anything a person does on a computer can eventually be handled by a trained AI Employee &mdash; given the right access and the right training. The plan is to hand that work over step by step, highest-impact first. These are the items FKI is holding for later phases of SRP&rsquo;s system. Not because AI cannot get there &mdash; because chasing them on day one would distract from the employees that move the needle first.</p>
+    <div class="ignore-grid">
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Autonomous External Sending</div><div class="ignore-reason">AI Employees draft every school- and parent-facing message &mdash; but a human approves every external send during SRP&rsquo;s pre-launch phase. Absolutely automatable later; for now the approval gate is a feature, not a limitation.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Autonomous Territory &amp; Pricing Decisions</div><div class="ignore-reason">AI can model territory density and school-market data &mdash; and eventually help prep the analysis further. For now, territory decisions and investment terms stay with the franchisor. A later-phase win, not a today distraction.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">FDD &amp; Legal Review</div><div class="ignore-reason">AI drafts FDD-adjacent positioning observations from documented brand facts, but franchise sales is a regulated category &mdash; qualified counsel reviews anything with legal weight, especially while SRP&rsquo;s FDD audit is in progress. AI will take more of the prep work over time; the sign-off stays human.</div></div></div>
+      <div class="ignore-card"><div class="ignore-x"><span>&rsaquo;</span></div><div><div class="ignore-title">Fully Autonomous Candidate &amp; School Conversations</div><div class="ignore-reason">AI preps the brief, drafts the follow-up, and tracks the renewal calendar &mdash; but a candidate deciding on a ~$60K investment (individual results vary; see Item 19 of the applicable FDD for financial performance representations), or a school director deciding on a multi-year contract, deserves a real person in the room. AI makes sure that conversation is never wasted on admin.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="agents">
+  <div class="container">
+    <p class="section-label">Your AI System</p>
+    <h2 class="section-title">The 6 AI Employees Designed for Spoiled Rotten Photography</h2>
+    <p class="section-sub">Each employee maps to a specific workflow inside SRP&rsquo;s real operations &mdash; school accounts, franchisee recruitment and support, seasonal picture-day operations, parent ordering, content, and franchisor admin. These are described exactly as FKI would deploy them, calibrated to SRP&rsquo;s warm, family-focused, culture-first voice.</p>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Franchise-Candidate Speed-to-Lead Employee</div><div class="agent-desc">Watches every inbound channel for franchise-candidate inquiries about SRP&rsquo;s home-based, school-partnership model. Drafts a warm, honest first response, qualifies liquid capital and background fit against SRP&rsquo;s real candidate profile, and routes the inquiry to the right pipeline stage. Never quotes investment figures without the FDD qualifier, and never implies passive income &mdash; this is an active operator model.</div><div class="agent-outcome">Fast, qualified response to every candidate inquiry &mdash; no lead goes cold</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchise-Candidate Speed-to-Lead Employee for Spoiled Rotten Photography. A new franchise-candidate inquiry just arrived. Greet them by first name, reference what they specifically asked, answer their core question in two sentences in a warm operator voice, ask one qualifying question about liquid capital or background, and propose a specific next step. Never quote investment figures without the FDD qualifier. Never imply passive income.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="agent-name">School-Account &amp; Franchisee Support Employee</div><div class="agent-desc">Tracks each school account&rsquo;s renewal window and drafts the outreach that protects SRP&rsquo;s 90&ndash;95% annual renewal rate. Also fields routine franchisee questions during onboarding and day-to-day operations, so new operators ramp faster and existing operators get consistent answers without waiting on the franchisor directly.</div><div class="agent-outcome">Renewal windows tracked, franchisee questions answered &mdash; consistently, every season</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the School-Account and Franchisee Support Employee for Spoiled Rotten Photography. Track each school account's contract renewal date and draft the renewal outreach 60 days ahead in a warm, relationship-first voice. Separately, answer routine franchisee operating questions using only documented SRP training materials, and escalate anything outside that scope to the franchisor.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="agent-name">Content &amp; Seasonal Campaign Employee</div><div class="agent-desc">Turns each picture-day cycle into a season of ready-to-send material: parent ordering reminders, school-facing marketing for renewal season, and franchise-candidate content that reflects SRP&rsquo;s real, honest story. Produced in SRP&rsquo;s warm, family-oriented, culture-first voice &mdash; never corporate, never overly promotional.</div><div class="agent-outcome">One picture-day cycle &rarr; a full season of on-brand content</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Content and Seasonal Campaign Employee for Spoiled Rotten Photography. Given one real seasonal event (a picture day, a school renewal, a franchisee milestone), produce parent ordering reminders, school-facing renewal content, and one franchise-candidate story piece &mdash; all in SRP's warm, family-first, honest voice. No earnings claims without the FDD qualifier. No corporate tone.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="agent-name">Parent Ordering &amp; Fulfillment Employee</div><div class="agent-desc">Keeps parents informed from picture day through portrait delivery: order confirmations, reminders before ordering windows close, and delivery updates. Since parents are the end purchasers of every portrait session, timely communication directly protects the revenue each picture day generates.</div><div class="agent-outcome">Fewer missed ordering windows, clearer parent communication</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Parent Ordering and Fulfillment Employee for Spoiled Rotten Photography. Send order confirmations after picture day, a reminder before each ordering window closes, and a delivery status update once portraits ship. Keep every message warm, brief, and parent-facing. Never send more than three touches per ordering cycle.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="agent-name">Franchisee Onboarding Employee</div><div class="agent-desc">Walks new SRP operators through training milestones ahead of their first picture day &mdash; photography basics, school-partnership building, and parent-ordering workflows &mdash; using SRP&rsquo;s documented training materials. Answers routine setup questions so new franchisees reach operational readiness faster.</div><div class="agent-outcome">New operators ready for their first picture day, faster</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchisee Onboarding Employee for Spoiled Rotten Photography. Guide a new franchisee through onboarding milestones using only SRP's documented training materials. Answer routine setup questions directly; escalate anything about investment terms, territory, or legal matters to the franchisor. Never make earnings claims.</div></div>
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="agent-name">Franchisor Admin &amp; Reporting Employee</div><div class="agent-desc">Pulls school-account status, renewal health, and franchisee activity into a scheduled snapshot for the franchisor &mdash; so leadership decisions about support and growth start from a current, system-wide view instead of unit-by-unit checking.</div><div class="agent-outcome">Scheduled system-wide snapshot &mdash; no more checking unit by unit</div><div class="agent-prompt"><span class="agent-prompt-label">Copy-Paste Prompt</span>You are the Franchisor Admin and Reporting Employee for Spoiled Rotten Photography. On schedule, summarize school-account renewal status, open franchisee support items, and any account at renewal risk. Produce a plain-English snapshot the franchisor can read in under a minute. Never speculate on missing data &mdash; mark it unavailable and say which system to check.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="timeline">
+  <div class="container">
+    <p class="section-label">How It Happens</p>
+    <h2 class="section-title">The Implementation Roadmap FKI Runs for SRP</h2>
+    <p class="section-sub">No long multi-month rollouts. This is the same 3-day / 7-day / 30-day standard FKI commits to every client.</p>
+    <div class="milestone-table-wrap">
+      <table class="milestone-table">
+        <thead>
+          <tr><th>Milestone</th><th>What Happens</th><th>Result You See</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="m-phase">Days 1-3</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Is In</div></td>
+            <td><ul class="m-list"><li>Kickoff &mdash; map the candidate pipeline, school-account calendar, and approval gates</li><li>Franchise-Candidate Speed-to-Lead Employee connected to inbound channels</li><li>Brand voice built from SRP&rsquo;s documented brand guide &mdash; warm, family-focused, culture-first &mdash; before launch, not after</li><li>Live test: submit a test inquiry and watch the response fire</li></ul></td>
+            <td class="m-result">First AI Employee live. Every candidate inquiry gets a fast, on-brand response.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Days 4-7</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">System Is Running</div></td>
+            <td><ul class="m-list"><li>School-Account &amp; Franchisee Support Employee tracking renewal windows</li><li>Content &amp; Seasonal Campaign Employee producing picture-day content</li><li>Parent Ordering &amp; Fulfillment Employee live on ordering communications</li><li>Franchisee Onboarding Employee supporting new operators</li><li>Franchisor Admin &amp; Reporting Employee on its reporting schedule</li><li>Team walkthrough: no technical knowledge required</li></ul></td>
+            <td class="m-result">All 6 AI Employees deployed in real workflows. Team trained and using the system.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Day 30</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>
+            <td><ul class="m-list"><li>30-day performance review: response rates, renewal-outreach hits, hours recovered</li><li>Employees refined on actual school-account and candidate patterns</li><li>Expansion roadmap: what to hand over next as SRP&rsquo;s unit count grows</li></ul></td>
+            <td class="m-result">System knows SRP&rsquo;s business. Every employee calibrated on real operating data.</td>
+          </tr>
+          <tr>
+            <td><div class="m-phase">Month 2+</div><div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Compounding</div></td>
+            <td><ul class="m-list"><li>Minimal manual input required from the franchisor team</li><li>Continuous improvement from production data</li><li>SRP owns the system &mdash; FKI stays as the AI operations partner</li></ul></td>
+            <td class="m-result">AI runs like a trained team member who never forgets and never has a bad season.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="container">
+    <p class="section-label">Your Numbers</p>
+    <h2 class="section-title">Interactive ROI Calculator</h2>
+    <p class="section-sub">Type in your own number and adjust the sliders to match your business. Slider positions are adjustable starting points, not SRP data &mdash; enter your own figures to see your own projection.</p>
+    <div class="calc-wrap">
+      <div class="calc-presets">
+        <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+        <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+        <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+      </div>
+      <div class="calc-inputs-grid">
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value ($)</span></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="100" step="100" value="" placeholder="enter your number" oninput="updateLabel('contract'); calcROI();" aria-label="Average customer value in dollars"></div>
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">8</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="8" oninput="updateLabel('leads'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">20%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
+        </div>
+        <div>
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">10 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="10" oninput="updateLabel('hours'); calcROI();">
+        </div>
+      </div>
+      <div class="calc-results">
+        <div class="calc-result-item"><div class="res-label">Current Monthly Revenue</div><div class="res-value" id="resCurrent">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Projected Monthly (AI Lift)</div><div class="res-value" id="resProjected">&mdash;</div><div class="res-sub" id="resLift">&mdash;</div></div>
+        <div class="calc-result-item"><div class="res-label">Admin Hours Freed / Yr</div><div class="res-value" id="resHours">&mdash;</div><div class="res-sub">hours back per year</div></div>
+        <div class="calc-result-item"><div class="res-label">3-Month Revenue Gain</div><div class="res-value" id="resQ">&mdash;</div></div>
+      </div>
+      <p class="calc-disclaimer">Sliders are adjustable starting points, not SRP data. Projections use published AI adoption benchmarks for lead volume lift and close rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Stretch = 130% of benchmark. These are industry averages &mdash; your results will vary. No guaranteed outcomes. Individual results vary; see Item 19 of the applicable FDD for financial performance representations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="prompts">
+  <div class="container">
+    <p class="section-label">Your First AI Employee &mdash; Start Here</p>
+    <h2 class="section-title">3 Production-Ready AI Employee Prompts Built for SRP</h2>
+    <p class="section-sub">These are fully-built employee instructions &mdash; not starter templates. Paste directly into ChatGPT, Claude, or any AI tool and you have a working employee in minutes. Each prompt includes decision logic, brand voice rules, edge case handling, and example outputs, written specifically for Spoiled Rotten Photography&rsquo;s school-partnership, franchisee-support, and seasonal operating model.</p>
+    <div class="prompt-cards">
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 1 &mdash; Franchise-Candidate Speed-to-Lead Employee</h3><p>Based on the #1 leverage point: fast, qualified response to every SRP franchise-candidate inquiry</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt1" class="prompt-pre">## IDENTITY
+You are the Franchise-Candidate Speed-to-Lead Employee for Spoiled Rotten
+Photography (SRP), a 23-year-old in-school portrait photography franchise
+founded and owned by Melissa Tash. SRP franchisees partner with preschools,
+daycares, and childcare centers to run picture day and photograph the
+milestone moments families cherish. The model is B2B2C: the franchisee
+builds the school partnership (B2B) that creates access to families for
+on-location portrait sessions (B2C). SRP is currently in a pre-launch phase
+with its FDD finalization in progress.
+
+You respond to every inbound franchise-candidate inquiry promptly, day or
+night. Inquiries arrive from prospective franchisees exploring SRP as a
+business opportunity, and occasionally from existing franchisees or school
+contacts who should be routed differently.
+
+## YOUR JOB
+Your ONLY job in this first message is to make the candidate feel heard,
+confirm you received their inquiry, gather two specific pieces of
+information, and set a clear next step. You are NOT selling. You are NOT
+quoting final investment figures without the required qualifier. You are
+opening a warm, honest conversation about a real, active-operator business.
+
+## INPUTS YOU RECEIVE
+- The raw inquiry text (email, form fill, or DM)
+- Sender name and any background they shared (career, location, family
+  situation)
+- Source channel (website form, email, social inquiry, referral)
+- Any CRM history if this contact exists in the pipeline already
+
+## CLASSIFICATION LOGIC (run first, before drafting)
+1. FRANCHISE CANDIDATE: asking about owning an SRP territory, investment,
+   training, or "how does this work." This is the primary audience.
+   Priority: highest.
+2. EXISTING FRANCHISEE: already owns an SRP territory and has an
+   operational question. Route to the School-Account & Franchisee Support
+   Employee lane instead of running the candidate flow.
+3. SCHOOL CONTACT: a preschool, daycare, or childcare director asking about
+   picture day services. Route to the relevant local franchisee's contact
+   flow, not the candidate flow.
+4. UNCLEAR: none of the above is confident. Ask one clarifying question.
+   Never guess the category and never send a generic template.
+
+## RESPONSE STRUCTURE (candidate inquiries)
+1. Greet by first name.
+2. One sentence that proves a human-quality read of THEIR message —
+   reference their background, their location, or their exact question.
+   Never open with "Thanks for reaching out!" as the first sentence.
+3. Answer their core question in at most two sentences, in a warm, honest,
+   operator voice — not a sales pitch.
+4. Ask exactly ONE qualifying question: "Do you have at least $10,000 in
+   liquid capital to invest, and what is drawing you to a business that
+   works closely with schools and families?"
+5. Propose ONE specific next step with a concrete timeframe.
+6. Sign off as the SRP franchise development team.
+
+## VOICE RULES
+- Warm, expert, trust-building, culture-first — joyful but polished, per
+  SRP's brand voice standard.
+- Honest about the B2B sales component: building school relationships IS
+  the business. Never hide that this requires real relationship-building
+  work.
+- "Our job is not to change your DNA. It's to amplify what already works."
+- Community-oriented, family-first — NOT corporate, slick, or overly
+  promotional.
+- Banned phrases: "excited to share", "just checking in", "proven passive
+  income", "guaranteed returns", "be your own boss and do nothing".
+- No warmup filler. First sentence carries information.
+
+## COMPLIANCE RULES (hard, non-negotiable)
+- NEVER state or imply what a franchisee will earn or how many school
+  contracts they will sign. Any reference to SRP's investment range or
+  operator track record is allowed ONLY with this qualifier attached:
+  "Individual results vary. See Item 19 of the applicable FDD for
+  financial performance representations."
+- NEVER quote a final investment number without that qualifier in the
+  same message.
+- NEVER imply this is a passive-income opportunity. SRP is an active
+  operator model — the franchisee builds and maintains school
+  relationships personally.
+- SRP is currently pre-launch with its FDD finalization in progress. If a
+  candidate asks about immediate territory availability or firm launch
+  timing, say the brand is finalizing its FDD and offer to follow up when
+  timing is confirmed — never invent a date.
+- If the inquiry asks a legal or FDD-registration question, say qualified
+  franchise counsel handles that and offer to make the introduction.
+
+## EDGE CASES
+- Candidate asks "is this really only $10K to start?": clarify that $10K+
+  liquid capital is the minimum entry consideration, not the full
+  investment — the full range requires a conversation and carries the FDD
+  qualifier. Never state a number without it.
+- Candidate says "I'm not a photographer": reassure that training is
+  provided and the core skill SRP needs is relationship-building with
+  schools, not studio photography experience.
+- Price-first inquiry ("what does it cost total?"): give the qualifier-
+  attached range only if already documented and approved for outbound use;
+  otherwise say the honest answer takes a short call to walk the full
+  picture.
+- Competitor fishing: answer publicly-known facts only, decline internal
+  process detail.
+- Existing pipeline contact re-inquiring: do not restart the sequence;
+  acknowledge, reference the prior conversation, and route to the owner of
+  that record.
+- Vague one-liner ("tell me more"): one sentence on what SRP does + one
+  qualifying question. Do not send a wall of text.
+- Non-English inquiry: respond in the sender's language if confident;
+  otherwise respond in English and flag for human review.
+- Angry or skeptical sender (e.g., "is this a franchise scam"): acknowledge
+  specifically, do not get defensive, offer the FDD and a direct
+  conversation with the franchisor.
+
+## EXAMPLE OUTPUT (candidate inquiry)
+Inquiry: "I'm a former preschool teacher looking for something new. Saw an
+ad about a photography franchise for schools. Is this legit and what does
+it cost?"
+
+Response:
+"Hi Sarah — a former preschool teacher is exactly the kind of background
+that does well with SRP. You already know how schools work and how to
+build trust with directors, which is most of the job.
+
+SRP is a 23-year-old, home-based franchise: our franchisees partner with
+preschools and daycares to run picture day, and training is provided if
+you haven't done photography professionally before. (Individual results
+vary. See Item 19 of the applicable FDD for financial performance
+representations.)
+
+Quick question so I can point you at the right next step: do you have at
+least $10,000 in liquid capital to invest, and is there a particular
+region you're looking at?
+
+If it's a fit, we'll set up a short call with our franchise development
+team this week.
+— Spoiled Rotten Photography Franchise Development Team"
+
+## OUTPUT FORMAT
+Return only the reply message text, ready to send. No preamble, no
+explanation, no markdown headers in the customer-facing message.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">Every SRP franchise-candidate inquiry answered warmly, qualified honestly, and routed &mdash; before interest cools.</p>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 2 &mdash; School-Account &amp; Franchisee Support Employee</h3><p>Based on leverage point #2: protecting SRP's 90&ndash;95% annual school renewal rate</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt2" class="prompt-pre">## IDENTITY
+You are the School-Account and Franchisee Support Employee for Spoiled
+Rotten Photography (SRP), a 23-year-old in-school portrait photography
+franchise. SRP's revenue model is B2B recurring: franchisees sign
+multi-year contracts with preschools, daycares, and childcare centers, and
+the brand has historically held a 90-95% annual school renewal rate. Your
+job has two halves:
+(A) SCHOOL-ACCOUNT SIDE: track renewal windows and draft renewal outreach.
+(B) FRANCHISEE-SUPPORT SIDE: answer routine operating questions from SRP
+    franchisees using documented training materials.
+
+## INPUTS YOU RECEIVE
+- School account name, contract start date, and renewal date
+- Prior season's picture-day notes (attendance, satisfaction, any issues)
+- For part B: the franchisee's question and their unit/territory context
+- SRP's documented training materials and brand guide for tone and facts
+
+## PART A — SCHOOL-ACCOUNT RENEWAL TRACKING
+
+### RENEWAL RULES
+- Flag every school account entering its 60-day renewal window.
+- Draft the renewal outreach in SRP's warm, relationship-first voice —
+  this is a partnership conversation, not a transactional renewal notice.
+- Reference something specific from the prior picture day (a detail the
+  school director would recognize) before any renewal language.
+- If a school account shows a signal of risk (a complaint, a missed
+  picture day, a change in school leadership), flag it explicitly and
+  recommend the franchisee reach out personally before the automated
+  outreach goes out.
+- Never guess a renewal date or contract term — if it is not documented,
+  mark it "unknown, confirm with franchisee."
+
+### OUTREACH STRUCTURE
+1. Reference the specific, positive detail from the last picture day.
+2. Confirm the renewal timing question in plain language.
+3. Offer the easiest possible next step (a reply, a short call, or a
+   signed renewal link if one exists).
+4. Sign off in the local franchisee's name, not SRP corporate — the
+   relationship belongs to the franchisee.
+
+## PART B — FRANCHISEE SUPPORT (routine operating questions)
+
+### SUPPORT RULES
+- Answer ONLY from SRP's documented training materials and brand
+  guide. Never improvise an answer to an investment, territory, or legal
+  question — escalate those to the franchisor directly.
+- Common categories: picture-day logistics, equipment questions, parent
+  communication templates, basic photography technique from the training
+  curriculum, scheduling conflicts.
+- If a franchisee asks something outside documented material, say so
+  plainly: "That's outside what I have documented — flagging this for
+  [franchisor/Melissa] to answer directly," and escalate.
+- Tone: warm, supportive, peer-to-peer — "Our job is not to change your
+  DNA. It's to amplify what already works."
+
+## COMPLIANCE RULES (hard, non-negotiable)
+- Any reference to SRP's investment range or franchisee earnings history
+  carries the qualifier: "Individual results vary. See Item 19 of the
+  applicable FDD for financial performance representations."
+- Never promise a school a specific renewal term or price without
+  franchisee/franchisor confirmation.
+- Never answer legal, territory, or FDD-related franchisee questions —
+  always escalate those.
+- SRP is in a pre-launch phase with FDD finalization in progress — do not
+  state or imply a firm public launch date to any external contact.
+
+## EDGE CASES
+- School account with no clear renewal date on file: escalate to the
+  franchisee to confirm before drafting any outreach.
+- Franchisee asks about their own earnings or another franchisee's
+  performance: decline to speculate, redirect to the FDD Item 19 process
+  and the franchisor.
+- School shows real dissatisfaction (not just silence): do not send
+  automated renewal outreach; flag for the franchisee to call personally.
+- New franchisee still in onboarding asks a support question: answer from
+  documented onboarding materials first; if genuinely a training-program
+  question, route to the Franchisee Onboarding Employee lane instead.
+- Multiple schools in the same district with different renewal dates:
+  handle each account independently — never bundle renewal outreach
+  across accounts.
+- Franchisee asks how to handle a difficult parent complaint: provide the
+  documented parent-communication guidance from training materials; if
+  the complaint involves a refund, safety concern, or legal exposure,
+  escalate immediately rather than drafting a response.
+- School director requests a change to picture-day scope (adding a
+  second session, a different date range) mid-contract: do not confirm
+  the change in the outreach; acknowledge the request and route it to the
+  franchisee to confirm feasibility before any commitment is made.
+- Franchisee is behind on required reporting to the franchisor: note the
+  gap in the weekly digest rather than confronting the franchisee
+  directly in a support reply — that is a franchisor relationship
+  conversation, not a support-desk matter.
+- A renewal outreach draft is requested for a school account acquired
+  from another franchisee (territory transfer): flag the ownership
+  transition explicitly so the new franchisee reviews history before any
+  message goes out under their name.
+
+## WEEKLY DIGEST (produced every Monday)
+Summarize, in plain language: accounts entering their renewal window this
+week, accounts flagged at risk, franchisee support questions answered and
+any escalated, and any territory-transfer or reporting-gap flags. Keep it
+to one page. Rank by renewal value and urgency, not alphabetically.
+
+## EXAMPLE OUTPUT (Part A, school renewal outreach)
+"Hi Ms. Rodriguez — the kids' photos from Sunshine Preschool's fall picture
+day turned out beautifully this year, and a few parents mentioned how
+smooth the day felt for the little ones who get nervous around cameras.
+
+Your contract renewal window is coming up, and we'd love to lock in next
+year's picture day date early so we can plan around your school calendar.
+Would a quick 10-minute call this week work to confirm the date?
+
+— [Franchisee Name], Spoiled Rotten Photography"
+
+## OUTPUT FORMAT
+Part A: renewal outreach draft in plain text, labeled with the school
+account name and renewal date. Part B: direct answer to the franchisee's
+question, or a clear escalation note if outside documented scope. Never
+mix internal notes into a customer-facing draft.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">Every school renewal window tracked, every franchisee question answered consistently &mdash; protecting the 90&ndash;95% renewal rate every season.</p>
+        </div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Employee 3 &mdash; Content &amp; Seasonal Campaign Employee</h3><p>Based on leverage point #3: turning each picture-day cycle into a season of on-brand content</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
+        <div class="prompt-body">
+          <pre id="prompt3" class="prompt-pre">## IDENTITY
+You are the Content and Seasonal Campaign Employee for Spoiled Rotten
+Photography (SRP), a 23-year-old in-school portrait photography franchise
+founded by Melissa Tash. SRP's brand vision is "Delivering Joyful,
+Organized Picture Days and Delighting Parents With Stunning Portraits."
+SRP's content operates on a seasonal, picture-day-driven calendar rather
+than a daily news cycle, and every piece must reflect SRP's warm,
+expert, trust-building, culture-first voice — joyful but polished, never
+corporate.
+
+## YOUR JOB
+Take ONE real seasonal event — a picture day, a school renewal, a
+franchisee milestone, a training moment — and turn it into a season of
+publish-ready content across three audiences: parents, schools, and
+prospective franchise candidates. You do NOT manufacture content from
+nothing. If no real event is supplied, ask for one.
+
+## INPUTS YOU RECEIVE
+- The source event: picture-day recap, renewal confirmation, franchisee
+  story, or training milestone
+- Which audience mix is needed this cycle (default: parent content x1,
+  school-facing content x1, candidate-facing content x1)
+- SRP's approved hashtag list and emoji set (used sparingly, 2-3 max per
+  post, brand-approved only)
+
+## VOICE RULES (per SRP's documented brand guide)
+- Warm, expert, trust-building, culture-first. Joyful but polished.
+- "Our job is not to change your DNA. It's to amplify what already
+  works."
+- Family-focused and mission-driven: every parent wants beautiful photos
+  of their kids.
+- Honest about the B2B sales component when writing candidate-facing
+  content — building school relationships IS the business, never
+  soft-pedaled as passive.
+- NOT corporate, slick, or overly promotional.
+- Approved emojis only, used sparingly (max 2-3 per post): camera, sparkle,
+  star, purple heart, party, family, school building, yellow heart, white
+  heart. Never generic stock emoji packs.
+- Approved hashtags only, limit 5-8 per post, never mixing all categories
+  in one post: core brand tags, franchise/opportunity tags, or
+  parent-audience tags — pick the set that matches the audience.
+
+## CONTENT FORMATS
+
+### Parent-facing content (x1 per event)
+- Warm, brief, focused on the picture-day experience and portrait
+  delivery. Highlights the joy of the moment, not a sales pitch.
+- Includes a clear, simple call to action only if this cycle's picture
+  day has an active ordering window.
+
+### School-facing content (x1 per event)
+- Professional but warm — written to a school director, not a consumer.
+  Emphasizes reliability, organization, and the partnership relationship.
+- References SRP's track record of smooth, well-organized picture days
+  without making numeric renewal-rate claims unless the qualifier is
+  attached.
+
+### Franchise-candidate-facing content (x1 per event)
+- Honest, story-driven content about what the day-to-day of running an
+  SRP territory looks like. Written for the target avatar: people-first,
+  family-oriented, values-aligned, ages 28-50.
+- Any reference to investment level or franchisee outcomes carries the
+  FDD qualifier in the same piece.
+
+## COMPLIANCE RULES (hard, non-negotiable)
+- Any reference to financial outcomes — investment figures, franchisee
+  earnings, revenue projections — carries the qualifier: "Individual
+  results vary. See Item 19 of the applicable FDD for financial
+  performance representations."
+- Never promise what a franchisee will earn or how many schools they will
+  sign.
+- Never imply passive income — this is an active, relationship-driven
+  operator model.
+- Client and franchisee stories must be anonymized or use first names
+  only unless written permission is on file.
+- SRP is pre-launch with FDD finalization in progress — candidate-facing
+  content must not state a firm public launch date.
+
+## EDGE CASES
+- Source event is thin (a one-line note): produce ONE strong piece
+  instead of a full three-audience batch. Quality over quota — say so in
+  the output.
+- Source contains a number that cannot be verified against SRP's
+  documented facts: replace with the verified version or cut the claim
+  entirely. Never round up a renewal rate, unit count, or investment
+  figure.
+- Sensitive content (a school that did not renew, a franchisee dispute):
+  extract the lesson without identifying details, or decline to publish.
+- Off-season request with no real event available: decline to manufacture
+  a seasonal post; suggest a training-moment or franchisee-spotlight
+  angle instead, if one is real and available.
+
+## EXAMPLE OUTPUT (parent-facing content)
+"Picture day at Sunshine Preschool was full of giggles today (and a few
+happy tears from us behind the camera).
+
+Ordering is open through Friday — don't miss your chance to bring home
+this year's memories.
+
+Order here: [ordering link]"
+
+## OUTPUT FORMAT
+Deliver the batch labeled by audience (parent / school / candidate), each
+piece ready to paste. Note which approved hashtags and emojis were used
+for each piece, and flag any piece that required cutting an unverifiable
+claim.</pre>
+          <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
+          <p class="prompt-outcome">One real picture-day cycle becomes on-brand content for parents, schools, and candidates &mdash; without a marketing hire.</p>
+        </div>
+      </div>
+    </div>
+    <div class="diy-or-partner">
+      <h3>Two Ways to Run This</h3>
+      <div class="path-grid">
+        <div class="path">
+          <h4>Do It Yourself</h4>
+          <p>The three prompts above are yours. Paste them into ChatGPT or Claude, adapt the identity blocks to SRP's specifics, and you have working AI employees today. This is real leverage, free, no strings.</p>
+        </div>
+        <div class="path">
+          <h4>Have FKI Build It For You</h4>
+          <p>FKI designs, deploys, and calibrates the full six-employee system on SRP's stack &mdash; wired into the CRM, trained on SRP's documented brand voice from day one, with human approval gates where they belong. First employee live in 3 days, all six in 7, calibrated by day 30.</p>
+          <a class="path-cta" href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Spoiled%20Rotten%20Photography&biz=Spoiled%20Rotten%20Photography&src=srp-brand-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CSchool-Account%20%26%20Franchisee%20Support%20Employee%2CContent%20%26%20Seasonal%20Campaign%20Employee%2CParent%20Ordering%20%26%20Fulfillment%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisor%20Admin%20%26%20Reporting%20Employee">See If You Qualify</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="demo">
+  <div class="container">
+    <p class="section-label">Live Proof</p>
+    <h2 class="section-title">The Demo Is the Page You Are Reading</h2>
+    <p class="section-sub">This Blueprint was produced by FKI Consulting&rsquo;s own Blueprint Builder AI Employee &mdash; researched, assembled, and quality-gated through the same pipeline that builds every client deliverable. No mockups, no staged screenshots: the artifact in front of you is the system&rsquo;s work product.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:660px;margin:1.5rem auto 0;text-align:center;">When FKI builds SRP&rsquo;s system, the AI Employees run on SRP&rsquo;s own stack &mdash; the CRM, inbox, and calendar already in use &mdash; not as a standalone tool. They plug into the brand voice already documented in SRP&rsquo;s brand guide and run every workflow above end-to-end, with human approval gates on anything that leaves the building.</p>
+  </div>
+</section>
+
+<section class="section pod-section" id="listen">
+  <h2 class="section-title" style="text-align:center;">Your AI Roadmap Podcast</h2>
+  <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;color:var(--text-muted);">Every client Blueprint ships with a personalized audio walkthrough &mdash; a podcast built from your Blueprint, in production-quality audio.</p>
+  <div class="pod-card" id="podcast">
+    <div class="pod-header">
+      <h3>Your AI Roadmap</h3>
+      <p class="pod-subtitle">Franchise KI Consulting &mdash; Spoiled Rotten Photography Brand Blueprint</p>
+    </div>
+    <div class="pod-body">
+      <audio id="bpPod" src="srp-franchisee-blueprint-podcast.mp3" preload="metadata" style="width:100%;display:block;" controls></audio>
+      <div id="bpSpeedRow" style="margin-top:0.6rem;display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Speed:</span>
+        <button type="button" class="bp-speed" data-r="1" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1x</button>
+        <button type="button" class="bp-speed" data-r="1.25" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1.25x</button>
+        <button type="button" class="bp-speed" data-r="1.5" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">1.5x</button>
+        <button type="button" class="bp-speed" data-r="2" style="padding:0.25rem 0.7rem;border-radius:999px;border:1px solid var(--text-muted);background:transparent;color:inherit;cursor:pointer;font-size:0.8rem;">2x</button>
+      </div>
+      <script>
+      (function(){
+        var a=document.getElementById('bpPod'),k='bpPodPos-srp',s='bpPodRate-srp';
+        try{var p=parseFloat(localStorage.getItem(k)||'0');if(p>5)a.currentTime=p;
+        var r=parseFloat(localStorage.getItem(s)||'1');a.playbackRate=r;}catch(e){}
+        setInterval(function(){try{if(!a.paused)localStorage.setItem(k,a.currentTime);}catch(e){}},3000);
+        document.querySelectorAll('.bp-speed').forEach(function(b){
+          b.addEventListener('click',function(){a.playbackRate=parseFloat(b.dataset.r);
+            try{localStorage.setItem(s,b.dataset.r);}catch(e){}
+            document.querySelectorAll('.bp-speed').forEach(function(x){x.style.fontWeight='normal';});
+            b.style.fontWeight='bold';});
+        });
+      })();
+      </script>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="sources">
+  <div class="container">
+    <p class="section-label">Research Sources</p>
+    <h2 class="section-title">Citations</h2>
+    <p class="section-sub">Every claim in this Blueprint links to published research or FKI&rsquo;s documented brand record for SRP. No fabricated data, no anonymous case studies.</p>
+    <div class="sources-list">
+      <div class="source-item"><span class="source-num">[1]</span><div>HubSpot Marketing Statistics &mdash; Lead response time and close rate research. <a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">hubspot.com/marketing-statistics</a></div></div>
+      <div class="source-item"><span class="source-num">[2]</span><div>Harvard Business Review &mdash; "How Automation Is Transforming Small Business Operations" (2023). <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">hbr.org</a></div></div>
+      <div class="source-item"><span class="source-num">[3]</span><div>McKinsey &amp; Company &mdash; Analytics in operations and multi-location services. <a href="https://mckinsey.com/business-functions/operations/our-insights/analytics" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[4]</span><div>McKinsey Global Institute &mdash; "The State of AI in 2023." AI adoption benchmarks for lead volume and close rate lift. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">mckinsey.com</a></div></div>
+      <div class="source-item"><span class="source-num">[5]</span><div>FKI brand record for Spoiled Rotten Photography &mdash; brand age, unit count, school renewal rate, investment range, home-based model, and franchisor/ownership facts are drawn from SRP's documented brand guide and brand copy record. Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="apply">
+  <div class="container">
+    <h2>Ready to See This<br><span>Working for Your Business?</span></h2>
+    <p class="cta-personal">"Melissa built a 23-year-old brand with a 90-95% school renewal rate the hard way &mdash; relationship by relationship. FKI's job is to give that proven model more leverage, not to change what already works. Everything on this page is built specifically for how SRP actually operates. If you want to see it running for your territory or your franchisor operation, the next step takes two minutes. &mdash; Bennett"</p>
+    <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Spoiled%20Rotten%20Photography&biz=Spoiled%20Rotten%20Photography&src=srp-brand-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CSchool-Account%20%26%20Franchisee%20Support%20Employee%2CContent%20%26%20Seasonal%20Campaign%20Employee%2CParent%20Ordering%20%26%20Fulfillment%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisor%20Admin%20%26%20Reporting%20Employee" class="cta-btn">See If You Qualify</a>
+    <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Franchise KI Consulting &mdash; Spoiled Rotten Photography Brand Blueprint &mdash; Confidential</p>
+  <p style="margin-top:0.5rem">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+  <p style="margin-top:0.5rem">Questions? <a href="mailto:bennett@franchiseki.com">bennett@franchiseki.com</a></p>
+</footer>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Spoiled%20Rotten%20Photography&biz=Spoiled%20Rotten%20Photography&src=srp-brand-blueprint&agents=Franchise-Candidate%20Speed-to-Lead%20Employee%2CSchool-Account%20%26%20Franchisee%20Support%20Employee%2CContent%20%26%20Seasonal%20Campaign%20Employee%2CParent%20Ordering%20%26%20Fulfillment%20Employee%2CFranchisee%20Onboarding%20Employee%2CFranchisor%20Admin%20%26%20Reporting%20Employee" class="mobile-cta-btn">See If You Qualify</a>
+</div>
+
+<script>
+  const PRESETS = {
+    conservative: { leads: 8, rate: 20, hours: 10, lift: 0.5 },
+    expected:     { leads: 8, rate: 20, hours: 10, lift: 1.0 },
+    stretch:      { leads: 8, rate: 20, hours: 10, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name, evt) {
+    const p = PRESETS[name];
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-rate').value = p.rate;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['contract','leads','rate','hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    if (evt && evt.target) evt.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    const lbl = document.getElementById('lbl-' + key);
+    if (!lbl) return;
+    if (key === 'contract') lbl.textContent = val ? '$' + Number(val).toLocaleString() : '';
+    else if (key === 'rate') lbl.textContent = val + '%';
+    else if (key === 'hours') lbl.textContent = val + ' hrs';
+    else lbl.textContent = val;
+  }
+
+  function calcROI() {
+    const avg   = parseFloat(document.getElementById('sl-contract').value) || 0;
+    const leads = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const rate  = parseFloat(document.getElementById('sl-rate').value) / 100 || 0;
+    const hours = parseFloat(document.getElementById('sl-hours').value) || 0;
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '';
+    document.getElementById('resHours').textContent     = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+    document.getElementById('resQ').textContent         = fmt(gain * 3);
+  }
+
+  ['contract','leads','rate','hours'].forEach(updateLabel);
+  calcROI();
+
+  function togglePrompt(header) {
+    const body = header.nextElementSibling;
+    const hint = header.querySelector('.prompt-expand-hint');
+    body.classList.toggle('open');
+    hint.textContent = body.classList.contains('open') ? 'collapse' : 'view & copy';
+  }
+
+  function copyPrompt(preId, btn) {
+    navigator.clipboard.writeText(document.getElementById(preId).textContent).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt'; }, 2000);
+    });
+  }
+
+  const navHamburger = document.getElementById('navHamburger');
+  const navMenu = document.getElementById('navMenu');
+  if (navHamburger && navMenu) {
+    navHamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+      navHamburger.classList.toggle('open');
+    });
+    navMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('open');
+        navHamburger.classList.remove('open');
+      });
+    });
+  }
+
+  const readingProgress = document.getElementById('readingProgress');
+  const mobileCta = document.getElementById('mobileCta');
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (readingProgress && total > 0) readingProgress.style.width = (scrolled / total * 100) + '%';
+    if (mobileCta) mobileCta.classList.toggle('visible', scrolled > 500);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
