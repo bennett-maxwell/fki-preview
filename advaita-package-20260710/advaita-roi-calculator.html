@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Standalone ROI calculator for Advaita AI — model your revenue lift from speed-to-lead response and close-rate improvement, plus admin hours freed by AI Employees." />
+<title>Advaita AI — ROI Calculator</title>
+<style>
+  :root {
+    /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 */
+    --brand:        #0071E3;
+    --brand-dark:   #1D1D1F;
+    --brand-light:  #EBF4FF;
+    --steel:        #6E6E73;
+    --neutral-bg:   #F5F5F7;
+    --white:        #FFFFFF;
+    --text:         #1D1D1F;
+    --text-muted:   #6E6E73;
+    --text-light:   #A1A1A6;
+    --border:       #E5E5EA;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(10,14,26,0.08);
+    --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--neutral-bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background: var(--brand-dark);
+    color: var(--white);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+  .header .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    background: rgba(0,113,227,0.12);
+    border: 1px solid var(--brand);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+  .header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 0.9rem;
+  }
+  .header h1 span { color: var(--brand); }
+  .header p {
+    font-size: 1rem;
+    color: #C7C7CC;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+
+  .calc-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+  }
+  @media (min-width: 640px) {
+    .calc-wrap { padding: 2.5rem; }
+  }
+
+  .calc-intro {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .calc-presets { display: flex; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .preset-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all 0.2s;
+    background: var(--white);
+    color: var(--text-muted);
+    min-height: 40px;
+  }
+  .preset-btn.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+  .preset-btn:hover:not(.active) { border-color: var(--brand); color: var(--brand); }
+
+  .calc-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 0.5rem;
+  }
+  @media (min-width: 640px) {
+    .calc-inputs-grid { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+  }
+
+  .calc-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+  .calc-slider-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+  .calc-slider-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 0.4rem;
+  }
+  .calc-slider-val { font-size: 0.92rem; font-weight: 800; color: var(--brand); white-space: nowrap; }
+
+  .calc-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    margin-bottom: 1.6rem;
+    accent-color: var(--brand);
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--brand);
+    cursor: pointer;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 1.5px var(--brand);
+  }
+  .calc-slider::-moz-range-thumb {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--brand);
+    cursor: pointer;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 1.5px var(--brand);
+  }
+
+  .calc-fill-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--white);
+    border: 2px solid var(--brand);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 1.6rem;
+  }
+  .calc-fill-prefix { font-weight: 700; color: var(--brand); font-size: 1rem; }
+  .calc-fill-input {
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    width: 100%;
+    font-family: var(--font-sans);
+    background: transparent;
+  }
+  .calc-fill-input::placeholder { color: var(--text-light); font-weight: 500; }
+  /* remove native number spinners for a cleaner fill-in look */
+  .calc-fill-input::-webkit-outer-spin-button,
+  .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .calc-fill-input[type=number] { -moz-appearance: textfield; }
+
+  .calc-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+  }
+  .calc-result-item { background: var(--white); padding: 1.1rem 1rem; }
+  .calc-result-item.highlight { background: var(--brand-light); }
+  .res-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .res-value { font-size: 1.3rem; font-weight: 800; color: var(--brand-dark); }
+  .res-value.brand { color: var(--brand); }
+  .res-sub { font-size: 0.76rem; color: var(--text-light); margin-top: 0.2rem; }
+
+  .calc-disclaimer {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+    line-height: 1.6;
+  }
+  .calc-disclaimer a { color: var(--brand); text-decoration: underline; }
+  .calc-note { font-size: 0.76rem; color: var(--text-light); margin-top: 0.5rem; }
+
+  .cta-wrap { text-align: center; margin-top: 2.5rem; }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    background: var(--brand);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.9rem 2.4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .cta-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .cta-wrap p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.85rem; }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1.25rem 3rem;
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+  footer a { color: var(--brand); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="eyebrow">Advaita AI</span>
+  <h1>What is AI Employee deployment worth <span>to your business</span>?</h1>
+  <p>This calculator models revenue lift from faster speed-to-lead response and an improved close rate, plus the admin hours your team gets back. Type in your own average customer value — the sliders are adjustable starting points, not your data.</p>
+</div>
+
+<div class="wrap">
+  <div class="calc-wrap">
+    <p class="calc-intro">Enter your average customer value, then adjust the sliders to match your business.</p>
+
+    <div class="calc-presets">
+      <button class="preset-btn" onclick="setPreset('conservative', event)">Conservative</button>
+      <button class="preset-btn active" onclick="setPreset('expected', event)">Expected</button>
+      <button class="preset-btn" onclick="setPreset('stretch', event)">Stretch</button>
+    </div>
+
+    <div class="calc-inputs-grid">
+      <div>
+        <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value ($)</span></div>
+        <div class="calc-fill-wrap">
+          <span class="calc-fill-prefix">$</span>
+          <input type="number" class="calc-fill-input" id="sl-contract" min="0" step="100" value="" placeholder="(enter your number)" oninput="calcROI();" aria-label="Average customer value in dollars">
+        </div>
+      </div>
+
+      <div>
+        <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads<span class="calc-slider-tag">not your data</span></span><span class="calc-slider-val" id="lbl-leads">10</span></div>
+        <input type="range" class="calc-slider" id="sl-leads" min="2" max="200" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
+      </div>
+
+      <div>
+        <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate<span class="calc-slider-tag">not your data</span></span><span class="calc-slider-val" id="lbl-close">5 leads = 1 sale (~20% close)</span></div>
+        <input type="range" class="calc-slider" id="sl-leadsPerSale" min="2" max="25" step="1" value="5" oninput="updateLabel('leadsPerSale'); calcROI();">
+      </div>
+
+      <div>
+        <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)<span class="calc-slider-tag">not your data</span></span><span class="calc-slider-val" id="lbl-hours">10 hrs</span></div>
+        <input type="range" class="calc-slider" id="sl-hours" min="2" max="60" step="1" value="10" oninput="updateLabel('hours'); calcROI();">
+      </div>
+    </div>
+
+    <div class="calc-results">
+      <div class="calc-result-item">
+        <div class="res-label">Current Monthly Revenue</div>
+        <div class="res-value" id="resCurrent">&mdash;</div>
+      </div>
+      <div class="calc-result-item highlight">
+        <div class="res-label">Projected Monthly (AI Lift)</div>
+        <div class="res-value brand" id="resProjected">&mdash;</div>
+        <div class="res-sub" id="resLift">&mdash;</div>
+      </div>
+      <div class="calc-result-item">
+        <div class="res-label">Admin Hours Freed / Yr</div>
+        <div class="res-value" id="resHours">&mdash;</div>
+        <div class="res-sub">hours back per year</div>
+      </div>
+      <div class="calc-result-item highlight">
+        <div class="res-label">Annual Revenue Gain</div>
+        <div class="res-value brand" id="resAnnual">&mdash;</div>
+      </div>
+    </div>
+
+    <p class="calc-disclaimer">
+      Projections use published AI adoption benchmarks for lead volume lift and close-rate lift (source: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey State of AI 2023</a>) and admin time reduction (source: <a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">HBR Automation Research</a>). Conservative = 50% of benchmark. Expected = 100% of benchmark. Stretch = 130% of benchmark. These are industry averages, not a promise — your results will vary. No revenue is guaranteed.
+    </p>
+    <p class="calc-note">Sliders above are adjustable starting points &mdash; move them to match your own lead volume, close rate, and admin hours. Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="cta-btn" href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Advaita%20AI&biz=Advaita%20AI&src=advaita-roi-calculator">See If You Qualify</a>
+    <p>Free qualification call. Bennett personally reviews every application.</p>
+  </div>
+</div>
+
+<footer>
+  <p>Advaita AI for Business</p>
+  <p style="margin-top:0.4rem">Individual results vary. See Item 19 of the applicable FDD for financial performance representations.</p>
+</footer>
+
+<script>
+  const PRESETS = {
+    conservative: { leads: 10, leadsPerSale: 5, hours: 10, lift: 0.5 },
+    expected:     { leads: 10, leadsPerSale: 5, hours: 10, lift: 1.0 },
+    stretch:      { leads: 10, leadsPerSale: 5, hours: 10, lift: 1.3 }
+  };
+  let currentLift = 1.0;
+
+  function setPreset(name, evt) {
+    const p = PRESETS[name];
+    if (!p) return;
+    document.getElementById('sl-leads').value = p.leads;
+    document.getElementById('sl-leadsPerSale').value = p.leadsPerSale;
+    document.getElementById('sl-hours').value = p.hours;
+    currentLift = p.lift;
+    ['leads', 'leadsPerSale', 'hours'].forEach(updateLabel);
+    document.querySelectorAll('.preset-btn').forEach(function (b) { b.classList.remove('active'); });
+    if (evt && evt.target) evt.target.classList.add('active');
+    calcROI();
+  }
+
+  function updateLabel(key) {
+    const val = document.getElementById('sl-' + key).value;
+    if (key === 'leads') {
+      document.getElementById('lbl-leads').textContent = val;
+    } else if (key === 'leadsPerSale') {
+      const lps = parseFloat(val) || 1;
+      const closePct = Math.round((1 / lps) * 1000) / 10; // one decimal
+      document.getElementById('lbl-close').textContent = lps + ' leads = 1 sale (~' + closePct + '% close)';
+    } else if (key === 'hours') {
+      document.getElementById('lbl-hours').textContent = val + ' hrs';
+    }
+  }
+
+  function calcROI() {
+    const avgRaw   = document.getElementById('sl-contract').value;
+    const avg      = parseFloat(avgRaw);
+    const hasAvg   = avgRaw !== '' && !isNaN(avg) && avg > 0;
+
+    const leads       = parseFloat(document.getElementById('sl-leads').value) || 0;
+    const leadsPerSale = parseFloat(document.getElementById('sl-leadsPerSale').value) || 1;
+    const rate         = leadsPerSale > 0 ? (1 / leadsPerSale) : 0;
+    const hours        = parseFloat(document.getElementById('sl-hours').value) || 0;
+
+    const fmt = function (n) { return '$' + Math.round(n).toLocaleString(); };
+
+    // Admin hours freed does not depend on avg customer value — always computable.
+    document.getElementById('resHours').textContent = Math.round(hours * 0.60 * currentLift * 52).toLocaleString();
+
+    if (!hasAvg) {
+      document.getElementById('resCurrent').textContent   = '—';
+      document.getElementById('resProjected').textContent = '—';
+      document.getElementById('resLift').textContent      = '—';
+      document.getElementById('resAnnual').textContent    = '—';
+      return;
+    }
+
+    const current   = avg * leads * rate;
+    const projected = avg * (leads * (1 + 0.15 * currentLift)) * (rate * (1 + 0.50 * currentLift));
+    const gain      = projected - current;
+    const annualGain = gain * 12;
+
+    document.getElementById('resCurrent').textContent   = fmt(current);
+    document.getElementById('resProjected').textContent = fmt(projected);
+    document.getElementById('resLift').textContent      = gain > 0 ? '+' + fmt(gain) + ' / mo' : '—';
+    document.getElementById('resAnnual').textContent    = fmt(annualGain);
+  }
+
+  ['leads', 'leadsPerSale', 'hours'].forEach(updateLabel);
+  calcROI();
+</script>
+
+</body>
+</html>

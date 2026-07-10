@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advaita AI — Own The Business. Skip The Grind.</title>
+<meta name="description" content="We built a self-running business machine for Franchise KI. Now we deploy it for you. See if AI is a fit for your business — free, in about 60 seconds.">
+<link rel="canonical" href="https://bennett-maxwell.github.io/fki-preview/advaita-package-20260710/advaita-landing-page.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Advaita AI — Own The Business. Skip The Grind.">
+<meta property="og:description" content="We built a self-running business machine for Franchise KI. Now we deploy it for you.">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --brand:       #1D6FDB;
+    --brand-dark:  #0A0E1A;
+    --brand-light: #4A90E2;
+    --green:       #4ade80;
+    --neutral-bg:  #f8f8f8;
+    --white:       #ffffff;
+    --text:        #0A0E1A;
+    --text-muted:  #3a3a3a;
+    --text-light:  #888888;
+    --border:      #e2e2e2;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(29,111,219,0.08);
+    --shadow-md: 0 8px 40px rgba(29,111,219,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .container-narrow { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .nav-logo { color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; }
+  .nav-logo span { color: var(--brand-light); }
+  .nav-cta { background: var(--brand); color: var(--white); font-size: 0.88rem; font-weight: 700; padding: 0.55rem 1.1rem; border-radius: 8px; text-decoration: none; white-space: nowrap; }
+  .nav-cta:hover { background: var(--brand-light); }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--text) 0%, var(--brand-dark) 40%, var(--brand) 100%); color: var(--white); padding: 4.5rem 2rem 4rem; text-align: center; }
+  .hero-badge { display: inline-block; background: rgba(29,111,219,0.2); border: 1px solid var(--brand-light); color: var(--brand-light); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 1.1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin: 0 auto 1.2rem; max-width: 820px; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--brand-light); }
+  .hero-sub { font-size: clamp(1rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.78); max-width: 620px; margin: 0 auto 2rem; }
+  .btn-primary { display: inline-block; background: var(--brand); color: var(--white); font-size: 1.05rem; font-weight: 700; padding: 1rem 2.2rem; border-radius: 10px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: var(--brand-light); transform: translateY(-1px); }
+  .hero-stats { display: flex; justify-content: center; gap: 2.2rem; margin-top: 2rem; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 1.5rem; font-weight: 800; color: var(--white); }
+  .hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+  /* SECTIONS */
+  .section { padding: 5rem 2rem; }
+  .section-gray { background: var(--neutral-bg); }
+  .section h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+  .section-sub { font-size: 1.02rem; color: var(--text-muted); max-width: 640px; margin: 0 auto 2.5rem; }
+  .text-center { text-align: center; }
+
+  /* PROOF ANCHOR */
+  .proof-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.2rem; box-shadow: var(--shadow); max-width: 760px; margin: 0 auto; text-align: center; }
+  .proof-card p { font-size: 1.08rem; color: var(--text-muted); line-height: 1.75; }
+  .proof-card strong { color: var(--text); }
+
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 980px; margin: 0 auto; }
+  .step-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--brand-dark); border: 2px solid var(--brand); color: var(--brand-light); font-weight: 800; margin-bottom: 1rem; }
+  .step-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.92rem; color: var(--text-muted); }
+
+  /* WHAT YOU GET (dark) */
+  .section-dark { background: var(--brand-dark); color: var(--white); }
+  .section-dark h2 { color: var(--white); }
+  .section-dark .section-sub { color: rgba(255,255,255,0.65); }
+  .employees-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 1000px; margin: 0 auto; }
+  .employee-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 1.6rem; }
+  .employee-card .emp-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-light); margin-bottom: 0.5rem; }
+  .employee-card h3 { font-size: 1.02rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+  .employee-card p { font-size: 0.86rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .timeline-row { display: flex; justify-content: center; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .timeline-item { text-align: center; }
+  .timeline-num { font-size: 1.3rem; font-weight: 800; color: var(--brand-light); }
+  .timeline-label { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* WHO ITS FOR */
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 980px; margin: 0 auto 2.5rem; }
+  .who-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow); }
+  .who-card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .who-card p { font-size: 0.9rem; color: var(--text-muted); }
+  .who-cannot { max-width: 780px; margin: 0 auto; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem 1.8rem; }
+  .who-cannot h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .who-cannot p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* SOCIAL PROOF */
+  .proof-stars { color: var(--brand-light); font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .proof-quote { max-width: 700px; margin: 0 auto; text-align: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.2rem; box-shadow: var(--shadow); }
+  .proof-quote blockquote { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; font-style: italic; margin-bottom: 1rem; }
+  .proof-quote cite { font-size: 0.88rem; color: var(--text-light); font-style: normal; font-weight: 600; }
+  .research-note { font-size: 0.82rem; color: var(--text-light); text-align: center; max-width: 700px; margin: 2rem auto 0; line-height: 1.6; }
+  .research-note a { color: var(--brand); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 760px; margin: 0 auto; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.85rem; overflow: hidden; background: var(--white); }
+  .faq-question { padding: 1.1rem 1.4rem; font-size: 0.98rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-question .arrow { transition: transform 0.3s; font-size: 0.75rem; color: var(--text-light); flex-shrink: 0; margin-left: 1rem; }
+  .faq-item.open .faq-question .arrow { transform: rotate(180deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+  .faq-item.open .faq-answer { max-height: 320px; padding: 0 1.4rem 1.1rem; }
+  .faq-answer p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* FINAL CTA */
+  .final-cta { text-align: center; }
+  .final-cta .below-cta { margin-top: 1rem; font-size: 0.88rem; color: rgba(255,255,255,0.55); }
+
+  /* FOOTER */
+  footer { background: var(--brand-dark); padding: 2.2rem 2rem; text-align: center; }
+  footer p { font-size: 0.82rem; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
+  .footer-links { display: flex; justify-content: center; gap: 1.4rem; }
+  .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-links a:hover { color: var(--brand-light); }
+
+  /* MOBILE STICKY BAR */
+  #mobile-sticky-bar { display: none; }
+  @media (max-width: 860px) {
+    #mobile-sticky-bar {
+      display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--brand-dark); border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 0.75rem 1rem; box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+    }
+    #mobile-sticky-bar a { display: block; width: 100%; background: var(--brand); color: #fff; border: 0; border-radius: 9px; padding: 0.9rem; font-size: 1rem; font-weight: 700; text-align: center; text-decoration: none; }
+    body { padding-bottom: 68px; }
+  }
+
+  @media (max-width: 480px) {
+    html, body { overflow-x: hidden; }
+    nav { padding: 0 1rem; height: 54px; }
+    .nav-logo { font-size: 0.9rem; }
+    .nav-cta { padding: 0.45rem 0.8rem; font-size: 0.8rem; }
+    .hero { padding: 2.5rem 1.25rem 2rem; }
+    .hero h1 { font-size: clamp(1.6rem, 6.5vw, 2.1rem); }
+    .hero-sub { font-size: 0.92rem; }
+    .hero-stats { gap: 1.4rem; }
+    .section { padding: 3rem 1.25rem; }
+    .steps, .who-grid, .employees-grid { grid-template-columns: 1fr; }
+    .timeline-row { gap: 1.2rem; }
+    footer { padding: 1.8rem 1.25rem; }
+    .footer-links { flex-direction: column; gap: 0.7rem; }
+    .btn-primary { width: 100%; text-align: center; }
+  }
+  @media (max-width: 360px) {
+    .hero h1 { font-size: clamp(1.4rem, 7vw, 1.9rem); }
+    .section { padding: 2.4rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Advaita <span>AI</span></a>
+  <a class="nav-cta" href="advaita-qualifier-form.html">Get Your AI Blueprint</a>
+</nav>
+
+<div id="mobile-sticky-bar" aria-hidden="true">
+  <a href="advaita-qualifier-form.html">Get Your AI Blueprint</a>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Franchise KI's Own AI Systems Brand</div>
+    <h1>Own the business. <span>Skip the grind.</span></h1>
+    <p class="hero-sub">We built a self-running business machine for Franchise KI. Now we deploy it for you. Answer a few questions and get your Personalized AI Blueprint &mdash; free, in about 60 seconds.</p>
+    <a href="advaita-qualifier-form.html" class="btn-primary">Get Your Personalized AI Blueprint</a>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">60s</div><div class="hero-stat-label">To Start</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">8</div><div class="hero-stat-label">Questions</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">AI Employees</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF ANCHOR -->
+<section class="section">
+  <div class="container-narrow text-center">
+    <div class="proof-card">
+      <p><strong>Bennett Maxwell</strong>, a non-technical founder, built a <strong>20+ agent AI system in 60 days on a 2019 iMac</strong>. That system now runs the daily operations of Franchise KI. Advaita AI packages that exact system so it can run yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-gray">
+  <div class="container text-center">
+    <h2>How It Works</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">Three steps from first answer to a working AI system.</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Answer 8 Questions</h3>
+        <p>Tell us about your leads, deal size, and where your team spends time. Takes about 60 seconds.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Get Your AI Blueprint</h3>
+        <p>We map exactly which AI Employees fit your business first and what the 90-day rollout looks like.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>We Deploy It</h3>
+        <p>If it's a fit, our team builds and installs the AI Employees into your business on a 3/7/30-day timeline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section section-dark">
+  <div class="container text-center">
+    <h2>What You Get: 6 AI Employees</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">The same AI Employees running Franchise KI, installed in your business.</p>
+    <div class="employees-grid">
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 01</div>
+        <h3>Speed-to-Lead Response</h3>
+        <p>Responds to new leads immediately, across channels, before they go cold.</p>
+      </div>
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 02</div>
+        <h3>Client Onboarding &amp; Calibration</h3>
+        <p>Gets new clients set up and configured without manual back-and-forth.</p>
+      </div>
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 03</div>
+        <h3>Blueprint Builder</h3>
+        <p>Builds the custom AI roadmap for every new lead and client automatically.</p>
+      </div>
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 04</div>
+        <h3>Content Engine</h3>
+        <p>Produces marketing content in your brand voice, on a consistent cadence.</p>
+      </div>
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 05</div>
+        <h3>Retention &amp; Reporting</h3>
+        <p>Tracks client health and keeps reporting current without a human chasing it.</p>
+      </div>
+      <div class="employee-card">
+        <div class="emp-eyebrow">AI Employee 06</div>
+        <h3>Finance Pulse</h3>
+        <p>Keeps a live pulse on cash, pipeline, and spend so nothing is a surprise.</p>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-item"><div class="timeline-num">3 Days</div><div class="timeline-label">First AI Employee Live</div></div>
+      <div class="timeline-item"><div class="timeline-num">7 Days</div><div class="timeline-label">Core Systems Connected</div></div>
+      <div class="timeline-item"><div class="timeline-num">30 Days</div><div class="timeline-label">Full Deployment</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO ITS FOR -->
+<section class="section">
+  <div class="container text-center">
+    <h2>Who This Is For</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">Advaita AI is built for owner-operators who are ready to run leaner without losing control.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>Franchise &amp; Multi-Location Owners</h3>
+        <p>Businesses managing the same workflows across multiple locations or territories.</p>
+      </div>
+      <div class="who-card">
+        <h3>Service &amp; Appointment-Driven Businesses</h3>
+        <p>Companies where speed-to-lead and follow-up directly drive revenue.</p>
+      </div>
+      <div class="who-card">
+        <h3>Owner-Operators Ready to Delegate</h3>
+        <p>Founders who are the bottleneck and want the business to run without them chasing every task.</p>
+      </div>
+    </div>
+    <div class="who-cannot">
+      <h4>Who We Cannot Help</h4>
+      <p>If you need results in 48 hours, this isn't it. If your business has no repeatable lead or client process yet, AI has nothing to systemize. This works best once you have a process worth automating.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="section section-gray">
+  <div class="container-narrow text-center">
+    <h2>The Proof Is the System Itself</h2>
+    <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="proof-quote">
+      <blockquote>&ldquo;We didn't build a slide deck about AI. We built a 20+ agent system that runs Franchise KI's daily operations &mdash; speed-to-lead, onboarding, content, reporting, finance &mdash; and it started with one non-technical founder on a 2019 iMac. That's the system we now install for clients.&rdquo;</blockquote>
+      <cite>&mdash; Bennett Maxwell, Founder, Franchise KI &amp; Advaita AI</cite>
+    </div>
+    <p class="research-note">Speed-to-lead response within 5 minutes can produce up to a <a href="https://www.velocify.com" target="_blank" rel="noopener">78% higher qualification rate (Velocify)</a>. AI-assisted workflows have shown <a href="https://www.salesforce.com" target="_blank" rel="noopener">35&ndash;50% productivity gains (Salesforce)</a> in comparable studies. See also <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year" target="_blank" rel="noopener">McKinsey's State of AI 2023</a> and <a href="https://hbr.org" target="_blank" rel="noopener">Harvard Business Review</a> research on automation impact.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container-narrow">
+    <h2 class="text-center" style="margin-bottom:2rem;">Frequently Asked Questions</h2>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>Is this really Franchise KI's own system?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>Yes. Advaita AI is Franchise KI's own sixth brand &mdash; the AI systems and marketing arm led by Bennett Maxwell. The AI Employees we deploy for you are the same category of system running Franchise KI today.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>Do I need to be technical to use this?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>No. Bennett Maxwell, our founder, is non-technical and built the original system himself. This is designed for business owners, not programmers.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>How long does deployment take?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>Our standard timeline is 3 days for your first AI Employee live, 7 days for core systems connected, and 30 days for full deployment.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>Do I have to book a call to get my Blueprint?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>No. You answer the qualifier questions first. Booking only becomes available after you submit and we confirm fit.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>What kind of businesses is this best for?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>Franchise and multi-location operators, service and appointment-driven businesses, and owner-operators with a repeatable lead or client process already in place.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)"><span>Will AI replace my team?</span><span class="arrow">&#9660;</span></div>
+        <div class="faq-answer"><p>That is not the goal. AI Employees remove repetitive, time-consuming work so your team can focus on higher-value work only people can do.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section section-dark">
+  <div class="container-narrow final-cta">
+    <h2>See Where AI Fits in Your Business</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">Answer 8 quick questions and get your Personalized AI Blueprint.</p>
+    <a href="advaita-qualifier-form.html" class="btn-primary">Get Your Personalized AI Blueprint</a>
+    <p class="below-cta">60 seconds &middot; Free &middot; No sales call required</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Advaita AI &middot; Powered by Franchise KI &middot; contact@franchiseki.com &middot; @getadvaita</p>
+  <div class="footer-links">
+    <a href="advaita-qualifier-form.html">AI Qualifier</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+  window.toggleFaq = function(el) {
+    var item = el.parentNode;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(fi) { fi.classList.remove('open'); });
+    if (!wasOpen) { item.classList.add('open'); }
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Received — Advaita AI Team Review</title>
+<meta name="description" content="Your Advaita AI qualification is under review. Our team will be in touch within 48 hours if we see a strong fit.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0E1A">
+<style>
+:root {
+  --navy:        #0A0E1A;
+  --navy-mid:    #0f1f3d;
+  --brand:       #1D6FDB;
+  --brand-light: #4A90E2;
+  --accent:      #4A90E2;
+  --white:       #ffffff;
+  --off-white:   #f8f9fc;
+  --text:        #0A0E1A;
+  --muted:       #4a4a5a;
+  --light:       #888899;
+  --border:      #e2e5f0;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --radius: 14px;
+  --shadow: 0 4px 24px rgba(10,14,26,0.10);
+  --shadow-md: 0 12px 40px rgba(10,14,26,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+.nav { background: var(--navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.nav-logo { color: var(--white); font-weight: 800; font-size: 15px; }
+.nav-logo span { color: var(--accent); }
+.nav-tag { font-size: 12px; color: rgba(255,255,255,0.38); font-weight: 500; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(160deg, var(--navy-mid) 0%, #0a1628 55%, var(--navy) 100%);
+  color: var(--white);
+  padding: 80px 2rem 72px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 45% at 50% 25%, rgba(74,144,226,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+
+.confirm-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 80px; height: 80px;
+  background: rgba(74,144,226,0.12);
+  border: 2px solid rgba(74,144,226,0.3);
+  border-radius: 50%;
+  margin-bottom: 28px;
+}
+.confirm-badge svg { width: 36px; height: 36px; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.hero h1 span { color: var(--accent); }
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: rgba(255,255,255,0.72);
+  max-width: 580px; margin: 0 auto 44px;
+  line-height: 1.65;
+}
+
+.confirm-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(74,144,226,0.1);
+  border: 1px solid rgba(74,144,226,0.25);
+  border-radius: 100px;
+  padding: 10px 22px;
+  font-size: 14px; color: rgba(255,255,255,0.65);
+}
+.confirm-pill strong { color: var(--accent); font-weight: 800; font-size: 15px; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* SECTIONS */
+.section { padding: 80px 2rem; }
+.section.cream { background: var(--off-white); }
+.section.dark { background: var(--navy); color: var(--white); }
+.section-inner { max-width: 860px; margin: 0 auto; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 12px; display: block; }
+.section.dark .eyebrow { color: var(--accent); }
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -1px; line-height: 1.12; margin-bottom: 14px; }
+.section.dark .section-title { color: var(--white); }
+.section-sub { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 620px; }
+.section.dark .section-sub { color: rgba(255,255,255,0.62); }
+
+/* PROCESS STEPS */
+.steps-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+.step-row { display: grid; grid-template-columns: 64px 1fr; gap: 0; position: relative; }
+.step-row:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 31px; top: 64px; bottom: -8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  opacity: 0.3;
+}
+.step-num-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+.step-circle {
+  width: 44px; height: 44px;
+  background: var(--navy);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: var(--accent);
+  flex-shrink: 0;
+}
+.step-body { padding: 4px 0 48px 24px; }
+.step-eta {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(74,144,226,0.10);
+  padding: 3px 10px; border-radius: 100px;
+  margin-bottom: 10px;
+}
+.step-body h3 { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -0.4px; margin-bottom: 8px; }
+.step-body p { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+/* WHAT YOU'VE SET IN MOTION */
+.motion-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.motion-copy p { font-size: 16px; color: rgba(255,255,255,0.68); line-height: 1.7; margin-top: 14px; }
+.motion-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+}
+.motion-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+.motion-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.motion-row:last-child { border-bottom: none; padding-bottom: 0; }
+.out-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex-shrink: 0; margin-top: 6px; }
+.motion-row span { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.55; }
+.motion-row strong { color: var(--white); display: block; font-size: 14.5px; font-weight: 700; margin-bottom: 2px; }
+@media (max-width: 720px) { .motion-inner { grid-template-columns: 1fr; } }
+
+/* WHILE YOU WAIT */
+.resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.resource-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.resource-card h3 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 10px; letter-spacing: -0.3px; }
+.resource-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* SOCIAL PROOF */
+.proof-block { max-width: 700px; margin: 48px auto 0; text-align: center; }
+.proof-stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 14px; }
+.proof-block blockquote { font-size: 16px; color: var(--muted); line-height: 1.7; font-style: italic; margin-bottom: 12px; }
+.proof-block cite { font-size: 13px; color: var(--light); font-style: normal; font-weight: 600; }
+
+/* FOOTER */
+.footer { background: var(--navy); padding: 40px 2rem 24px; }
+.footer-inner { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { color: var(--white); font-weight: 800; font-size: 15px; }
+.footer-brand span { color: var(--accent); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: color .2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { max-width: 860px; margin: 24px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.22); text-align: center; }
+
+/* MOBILE */
+@media (max-width: 720px) { .step-row { grid-template-columns: 52px 1fr; } }
+@media (max-width: 600px) { .step-row { grid-template-columns: 52px 1fr; } }
+@media (max-width: 480px) {
+  html, body { overflow-x: hidden; }
+  .nav { padding: 0 1rem; height: 54px; }
+  .hero { padding: 56px 1.25rem 48px; }
+  .hero h1 { font-size: clamp(1.7rem, 7vw, 2.4rem); letter-spacing: -0.8px; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 28px; }
+  .confirm-badge { width: 64px; height: 64px; margin-bottom: 20px; }
+  .confirm-badge svg { width: 28px; height: 28px; }
+  .confirm-pill { padding: 8px 16px; font-size: 13px; }
+  .section { padding: 56px 1.25rem; }
+  .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+  .section-sub { font-size: 15px; }
+  .steps-list { margin-top: 32px; }
+  .step-row { grid-template-columns: 48px 1fr; }
+  .step-circle { width: 38px; height: 38px; font-size: 14px; }
+  .step-body { padding: 2px 0 36px 18px; }
+  .step-body h3 { font-size: 16.5px; }
+  .step-row:not(:last-child)::after { left: 23px; top: 58px; }
+  .motion-inner { grid-template-columns: 1fr; gap: 28px; }
+  .motion-card { padding: 22px 18px; }
+  .resource-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .resource-card { padding: 20px 18px; }
+  .proof-block { padding: 0 4px; }
+  .footer { padding: 32px 1.25rem 20px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-links { flex-wrap: wrap; gap: 12px; }
+}
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.55rem; }
+  .section { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">Advaita <span>AI</span></span>
+  <span class="nav-tag">Application Received</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="confirm-badge">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <h1>Your numbers are in<br><span>the right hands.</span></h1>
+    <p class="hero-sub">
+      Thanks for completing the qualifier. Our team is reviewing your numbers now. If we see a strong fit, you'll hear from us within 48 hours.
+    </p>
+    <div class="confirm-pill">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(74,144,226,0.6);animation:pulse 2s infinite;flex-shrink:0;"></div>
+      <strong>Under review</strong>&nbsp;&mdash;&nbsp;48-hour response window
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">What Happens Next</span>
+    <h2 class="section-title">Two steps. No pressure.</h2>
+    <p class="section-sub">Here's what happens now that our team has your numbers.</p>
+
+    <div class="steps-list">
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">1</div></div>
+        <div class="step-body">
+          <span class="step-eta">Within 48 hours</span>
+          <h3>Our team reviews your numbers</h3>
+          <p>We look at your leads, deal size, response speed, and team time to confirm the fit makes sense &mdash; for you and for us. If anything needs clarification, we'll reach out before moving forward.</p>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-col"><div class="step-circle">2</div></div>
+        <div class="step-body">
+          <span class="step-eta">If it's a fit</span>
+          <h3>You'll hear from the Advaita AI team</h3>
+          <p>If the numbers point to a strong fit, we'll reach out with next steps. No cold pitch. We'll reference your specific answers and what we'd deploy first.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'VE SET IN MOTION -->
+<section class="section dark">
+  <div class="section-inner">
+    <div class="motion-inner">
+      <div class="motion-copy">
+        <span class="eyebrow">What You've Set in Motion</span>
+        <h2 class="section-title">Your qualification is now with our team.</h2>
+        <p>Every qualification is reviewed against real numbers &mdash; your leads, deal size, response speed, and team time &mdash; not a generic checklist. That's how we decide whether AI Employees make sense for your business first.</p>
+        <p>Our team has deployed AI systems in franchise operations, service businesses, and sales organizations. If we move forward, the plan will be built around your actual answers.</p>
+      </div>
+      <div class="motion-card">
+        <div class="motion-card-title">What we're checking</div>
+        <div class="motion-row">
+          <div class="out-dot"></div>
+          <span><strong>Lead volume and deal size</strong>Whether your numbers support the kind of impact AI Employees are built to deliver.</span>
+        </div>
+        <div class="motion-row">
+          <div class="out-dot"></div>
+          <span><strong>Response speed today</strong>How fast your team currently responds, and how much room there is to improve it.</span>
+        </div>
+        <div class="motion-row">
+          <div class="out-dot"></div>
+          <span><strong>Team time on repetitive work</strong>Where hours are going today and what could be freed up first.</span>
+        </div>
+        <div class="motion-row">
+          <div class="out-dot"></div>
+          <span><strong>Which AI Employee to deploy first</strong>Matching your answers to the right starting point on our 3/7/30-day timeline.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHILE YOU WAIT -->
+<section class="section cream">
+  <div class="section-inner">
+    <span class="eyebrow">While You Wait</span>
+    <h2 class="section-title">Nothing else to do right now.</h2>
+    <p class="section-sub">Your qualification is being reviewed. Here's what to expect while that happens.</p>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <h3>Check your inbox</h3>
+        <p>We'll email you directly once your review is complete &mdash; usually within 48 hours.</p>
+      </div>
+      <div class="resource-card">
+        <h3>No action needed</h3>
+        <p>You don't need to fill out anything else or follow up. We have everything we need from your qualifier.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Honest either way</h3>
+        <p>If it's not the right fit yet, we'll tell you directly instead of leaving you waiting.</p>
+      </div>
+    </div>
+
+    <div class="proof-block">
+      <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote>&ldquo;We didn't build a slide deck about AI. We built a 20+ agent system that runs Franchise KI's daily operations, and it started with one non-technical founder on a 2019 iMac. That's the system we review every qualifier against.&rdquo;</blockquote>
+      <cite>&mdash; Bennett Maxwell, Founder, Franchise KI &amp; Advaita AI</cite>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand">Advaita <span>AI</span></span>
+    <div class="footer-links">
+      <a href="mailto:contact@franchiseki.com">Questions? Contact Us</a>
+      <a href="../privacy.html">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Advaita AI &middot; Powered by Franchise KI &middot; contact@franchiseki.com
+  </div>
+</footer>
+
+</body>
+</html>
