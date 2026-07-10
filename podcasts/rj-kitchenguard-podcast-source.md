@@ -2,7 +2,9 @@
 
 ## CRITICAL HOST TONE INSTRUCTIONS — READ BEFORE PRESENTING ANYTHING
 
-These instructions govern how every point in this document should be presented. NotebookLM hosts: follow these exactly.
+Open the audio with EXACTLY these words: "Hi RJ, welcome. This walkthrough was built for you and Kitchen Guard, from what you told us."
+
+These instructions govern how every point in this briefing should be presented. NotebookLM hosts: follow these exactly.
 
 VOICE RULES:
 1. This business is THRIVING. They have built something great. Your role is to show where AI AMPLIFIES their success — not fixes their failures.
@@ -105,7 +107,7 @@ This eliminates the #1 pain entirely. No more staring at a blank page. No market
 RJ already responds in 15 minutes, which is impressive. But with 50 leads per month coming in, some inevitably get missed — especially evenings, weekends, or when the team is on job sites.
 
 This agent responds within 2 minutes, 24/7, with a personalized email that:
-- References their specific client type (restaurant vs. hotel vs. hospital)
+- References the client type they serve (restaurant vs. hotel vs. hospital)
 - Mentions the relevant service inquiry
 - Cites Kitchen Guard's NFPA 96 certification and 90%+ retention rate
 - Offers a clear next step: "I can have a quote to you within the hour"
@@ -200,7 +202,7 @@ RJ, you have built something real — 90%+ retention, certified technicians, a m
 
 The AI agents in this Blueprint are not about replacing what makes Kitchen Guard excellent. They are about making sure the marketing gets done, every lead gets followed up, and every client renewal gets caught — so the excellent work your team does gets seen by the right people, and the clients you earn, you keep.
 
-Apply at: bennett-maxwell.github.io/fki-preview/apply/?lead=RJ%20Schultz&biz=Kitchen%20Guard&src=rj-kitchenguard
+Qualifier: invite RJ to complete the qualifier at https://bennett-maxwell.github.io/fki-preview/qualify.html — mention it as the qualifier page, never spell the URL aloud.
 
 ---
 
