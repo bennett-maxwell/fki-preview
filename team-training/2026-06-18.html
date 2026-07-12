@@ -3,199 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FKI AI Training — Wednesday, June 18, 2026</title>
+<title>FKI AI Training — Thursday, June 18, 2026</title>
 <style>
-  :root{--ink:#1d1d1f;--muted:#6e6e73;--bg:#f5f5f7;--card:#fff;--accent:#0071e3;--warn:#ff9500;}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
-  .wrap{max-width:640px;margin:0 auto;padding:32px 20px 56px}
-  .kicker{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-  h1{font-size:26px;line-height:1.2;margin:6px 0 4px}
-  .sub{color:var(--muted);font-size:15px;margin-bottom:24px}
-  .card{background:var(--card);border-radius:18px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:18px}
-  .card h2{font-size:17px;margin:0 0 12px}
-  .speeds{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-  .speeds button{flex:1;min-width:64px;padding:11px 0;border:1px solid #d2d2d7;background:#fff;border-radius:12px;font-size:15px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
-  .speeds button:hover{border-color:var(--accent)}
-  .speeds button.active{background:var(--accent);border-color:var(--accent);color:#fff}
-  .note{font-size:13px;color:var(--muted);margin-top:8px}
-  .audio-pending{background:#fff8f0;border:1px solid #ffd5a0;border-radius:14px;padding:18px;margin-bottom:18px;font-size:14px;color:#7a4400}
-  .audio-pending strong{display:block;margin-bottom:6px;font-size:15px}
-  ul{margin:10px 0 0;padding-left:20px}
-  li{margin:6px 0;font-size:15px}
-  .section-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:28px 0 8px}
-  .win{border-left:3px solid #34c759;padding-left:14px;margin:12px 0}
-  .issue{border-left:3px solid #ff3b30;padding-left:14px;margin:12px 0}
-  .skill-tag{display:inline-block;background:#e8f0fe;color:#1a73e8;border-radius:8px;padding:2px 10px;font-size:13px;font-weight:600;margin:2px 4px 2px 0}
-  .magic-words{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;font-size:14px;margin:14px 0}
-  .magic-words h3{margin:0 0 10px;font-size:15px;color:#166534}
-  .mw-item{font-family:monospace;font-size:14px;background:#fff;border-radius:6px;padding:6px 10px;margin:6px 0;display:block}
-  .drill{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:18px;margin:14px 0}
-  .drill h3{margin:0 0 8px;color:#1e40af;font-size:15px}
-  .drill ol{margin:0;padding-left:20px}
-  .drill li{margin:6px 0;font-size:14px}
-  .foot{font-size:13px;color:var(--muted);text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #e5e5ea}
-  a{color:var(--accent);text-decoration:none}
-  .badge-new{display:inline-block;background:#ff3b30;color:#fff;font-size:10px;font-weight:700;letter-spacing:.05em;border-radius:4px;padding:1px 6px;vertical-align:middle;margin-left:6px}
-  .stop{background:#fff1f0;border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin-top:14px;font-size:14px;color:#991b1b}
-  .close-card{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:18px;margin-top:20px}
-  code{font-family:monospace;font-size:13px;background:#f2f2f7;border-radius:5px;padding:1px 7px}
+  *{box-sizing:border-box;} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#F5F5F7;color:#1D1D1F;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;background:#fff;min-height:100vh;}
+  .head{padding:30px 34px 18px;border-bottom:1px solid #E5E5EA;}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0066CC;}
+  h1{font-size:24px;margin:8px 0 4px;font-weight:800;}
+  .sub{font-size:14px;color:#6E6E73;}
+  .body{padding:24px 34px 30px;}
+  audio{width:100%;margin:4px 0 16px;}
+  .speeds{display:flex;gap:8px;margin-bottom:22px;}
+  .speeds button{flex:1;padding:11px 0;border:1px solid #D2D2D7;background:#fff;border-radius:10px;font-size:15px;font-weight:600;color:#1D1D1F;cursor:pointer;}
+  .speeds button.active{background:#0066CC;color:#fff;border-color:#0066CC;}
+  .note{font-size:11px;color:#8E8E93;margin-bottom:20px;}
+  h2{font-size:13px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#6E6E73;margin:22px 0 10px;}
+  .row{display:flex;padding:8px 0;border-bottom:1px solid #F2F2F7;font-size:14.5px;line-height:1.5;}
+  .row span:first-child{color:#0066CC;margin-right:10px;}
+  code{font-family:monospace;font-size:13px;background:#f2f2f7;border-radius:5px;padding:1px 7px;}
+  .foot{padding:16px 34px;border-top:1px solid #E5E5EA;background:#F5F5F7;font-size:12px;color:#8E8E93;}
+  .foot a{color:#0066CC;text-decoration:none;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="kicker">Franchise KI · Daily AI Training</div>
-  <h1>Two new tools. One big check-up. One safety net that expired.</h1>
-  <div class="sub">Wednesday, June 18, 2026 &middot; delta: June 16 &rarr; June 18 &middot; just what changed since the last training</div>
-
-  <div class="audio-pending">
-    <strong>&#127897; Audio version: generating (needs Google reconnection to finish)</strong>
-    The audio recording for this episode is queued in NotebookLM (the tool that makes our training recordings &mdash; it reads the written brief and turns it into a podcast). It needs a quick Google login reconnection before it can export. The written version below covers everything. When the audio is ready, this page updates with the player.
+  <div class="head">
+    <div class="kicker">FKI AI Training Podcast</div>
+    <h1>Thursday, June 18, 2026 — Daily Delta</h1>
+    <div class="sub">What changed since June 16 • 9–13 min • hosts talking straight to the team</div>
   </div>
-
-  <div class="card">
-    <h2>In today's episode</h2>
-    <ul>
-      <li>Two brand-new saved tools landed June 17 &mdash; one for client proposals, one for ring visuals.</li>
-      <li>The AI ran a 36-category business health check on itself and found 3 connectors that need human reconnection.</li>
-      <li>GHL (our customer list tool) and QuickBooks (our finance tool) both need a human to reconnect them.</li>
-      <li>Spotlight tool: <strong>blueprint-ai-enso-rings-proposal-skill</strong> <span class="badge-new">NEW</span> &mdash; a full proposal in one sentence.</li>
-      <li>How AI thinks: the connector key, audit-only mode, and the "done = a link you can click" rule.</li>
-      <li>Today's drill: try audit-only mode on something you've been wondering about.</li>
-    </ul>
-  </div>
-
-  <div class="section-label">What changed since June 16</div>
-  <div class="card">
-    <div class="win">
-      <strong>Two brand-new saved tools added to the FKI toolbox</strong><br>
-      <span class="skill-tag">blueprint-ai-enso-rings-proposal-skill</span><span class="badge-new">NEW</span><br>
-      <span class="skill-tag">brain-ring-render-skill</span><span class="badge-new">NEW</span><br>
-      <span style="font-size:14px;color:var(--muted)">Both went live June 17. Total saved tools: 345. Say the tool name to the AI and it runs the whole job.</span>
+  <div class="body">
+    <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-06-18.mp3"></audio>
+    <div class="speeds">
+      <button data-rate="1"    onclick="setRate(1,this)" class="active">1x</button>
+      <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+      <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+      <button data-rate="2"    onclick="setRate(2,this)">2x</button>
     </div>
-    <div class="win">
-      <strong>AI ran a full 36-category business check-up (June 17)</strong><br>
-      <span style="font-size:14px;color:var(--muted)">AI infrastructure (the core tools and systems): GREEN. Skills: 345 active and running. Finance + sales data: paused because two connectors expired (see below).</span>
-    </div>
-    <div class="issue">
-      <strong>GHL connector expired &mdash; customer list data paused</strong><br>
-      <span style="font-size:14px">GHL is our customer system &mdash; "the app that holds all our leads and customer records." The login key the AI uses to read it expired. Until a human reconnects it, the AI cannot pull live lead or pipeline data.<br>
-      <code>Say: "Reconnect the GHL connector"</code></span>
-    </div>
-    <div class="issue">
-      <strong>QuickBooks connector expired &mdash; finance data paused</strong><br>
-      <span style="font-size:14px">Same pattern. QuickBooks is our finance tool &mdash; "the app that tracks money in and out." Needs human reconnection.<br>
-      <code>Say: "Reconnect QuickBooks"</code></span>
-    </div>
-    <div class="win">
-      <strong>email-send-gate and summary-email-skill both updated (June 17)</strong><br>
-      <span style="font-size:14px;color:var(--muted)">The safety check that prevents the AI from sending unauthorized emails was updated. The summary-email-skill (which writes the Done / Proof / Protected section in task update emails) was also refreshed.</span>
-    </div>
-  </div>
+    <div class="note">Pick a speed. Your spot and speed are saved — close it and come back where you left off.</div>
 
-  <div class="section-label">Top 5 Wins</div>
-  <div class="card">
-    <div class="win"><strong>1. Blueprint AI + Enso Rings proposal tool built in one session.</strong><br><span style="font-size:14px;color:var(--muted)">Sales can now generate a full franchise proposal for Enso Rings with one sentence. No manual drafting.</span></div>
-    <div class="win"><strong>2. 36-dimension business check-up ran with zero unsafe changes.</strong><br><span style="font-size:14px;color:var(--muted)">The AI read and analyzed 36 business categories without touching customers, money, or live systems. Audit-only mode works exactly as designed.</span></div>
-    <div class="win"><strong>3. 345 active saved tools confirmed.</strong><br><span style="font-size:14px;color:var(--muted)">345 jobs that used to be done manually are now one-sentence AI commands. This is the North Star in action.</span></div>
-    <div class="win"><strong>4. All four AI seats share the same updated playbook.</strong><br><span style="font-size:14px;color:var(--muted)">Ivan, Mack, Chad, and Terry all have the same updated fleet-context files as of June 17. Consistent answers across seats.</span></div>
-    <div class="win"><strong>5. Process improvements formally logged.</strong><br><span style="font-size:14px;color:var(--muted)">The AI tracked how to do work better after each session. Improvements that get logged become improvements the system learns.</span></div>
-  </div>
+    <h2>Today in one minute</h2>
+    <div class="row"><span>•</span><span>Two brand-new saved tools (skills) went live June 17: <b>blueprint-ai-enso-rings-proposal-skill</b> writes a full franchise proposal for Enso Rings in one sentence, and <b>brain-ring-render-skill</b> generates ring visuals with no design software needed. Total active skills: 345.</span></div>
+    <div class="row"><span>•</span><span>The AI ran a full 36-category business check-up on itself, audit-only (read and analyze, no changes to real systems). AI infrastructure: GREEN. Finance and sales data paused because two logins (GHL and QuickBooks) expired.</span></div>
+    <div class="row"><span>•</span><span>GHL (our customer/leads system) and QuickBooks (our finance system) both need a human to reconnect them before the AI can read live data again.</span></div>
 
-  <div class="section-label">Top 5 Issues</div>
-  <div class="card">
-    <div class="issue"><strong>1. GHL connector expired.</strong> Say: <code>Reconnect the GHL connector</code></div>
-    <div class="issue"><strong>2. QuickBooks connector expired.</strong> Say: <code>Reconnect QuickBooks</code></div>
-    <div class="issue"><strong>3. NotebookLM audio tool (the recording maker) needs Google reconnection.</strong><br>
-    <span style="font-size:14px;color:var(--muted)">The AI automatically switched to a backup path. Audio generation is queued and will complete once Google is reconnected.</span></div>
-    <div class="issue"><strong>4. "Done" without a proof link still happening.</strong><br>
-    <span style="font-size:14px;color:var(--muted)">Never accept "it's done" without a clickable link. Say: <code>Give me the proof link.</code></span></div>
-    <div class="issue"><strong>5. Skill cooldown not always checked before picking the spotlight tool.</strong><br>
-    <span style="font-size:14px;color:var(--muted)">Rule: no spotlight skill repeated within 10 training runs unless there's a same-day production reason. Log the reason if overriding.</span></div>
-  </div>
+    <h2>Spotlight: blueprint-ai-enso-rings-proposal-skill</h2>
+    <div class="row"><span>•</span><span>Writes a complete franchise proposal for Enso Rings in one command — no manual drafting. Say: <b>"Use blueprint-ai-enso-rings-proposal-skill."</b> Paired this week with <b>brain-ring-render-skill</b> for the visuals.</span></div>
 
-  <div class="section-label">New Tools This Week <span class="badge-new">2 NEW</span></div>
-  <div class="card">
-    <p style="margin-top:0"><strong>blueprint-ai-enso-rings-proposal-skill</strong><br>
-    What it does: Writes a complete franchise proposal for Enso Rings in one command. No manual work.<br>
-    Best for: Sales team, proposal preparation.<br>
-    <code>Say: "Use blueprint-ai-enso-rings-proposal-skill"</code></p>
-    <p style="margin-bottom:0"><strong>brain-ring-render-skill</strong><br>
-    What it does: Generates ring visuals using the AI brain. No design software needed.<br>
-    Best for: Creative team, client presentations.<br>
-    <code>Say: "Use brain-ring-render-skill"</code></p>
-  </div>
+    <h2>New in our tools</h2>
+    <div class="row"><span>•</span><span><b>blueprint-ai-enso-rings-proposal-skill</b> (NEW): full franchise proposal for Enso Rings in one sentence. Best for sales, proposal prep.</span></div>
+    <div class="row"><span>•</span><span><b>brain-ring-render-skill</b> (NEW): generates ring visuals using the AI brain, no design software needed. Best for creative team, client presentations.</span></div>
+    <div class="row"><span>•</span><span><b>email-send-gate</b> and <b>summary-email-skill</b> both updated June 17 — the safety check that stops unauthorized sends, and the tool that writes the Done/Proof/Protected section of update emails.</span></div>
 
-  <div class="section-label">Your first skill in 10 minutes</div>
-  <div class="card">
-    <p style="font-size:15px;margin-top:0">Pick one task you repeat at work. Here's how to turn it into a saved tool (called a "skill") so the AI runs it for you every time:</p>
-    <ol style="font-size:15px;padding-left:20px;margin-bottom:0">
-      <li>Open <strong>Claude Code</strong> &mdash; the app where you chat with your AI helper (you type, it does the work).</li>
-      <li>Do the task once with the AI in plain words.</li>
-      <li>Say: <code>Turn this into a skill so I can do it again with one sentence.</code></li>
-      <li>Next time, just say the skill name. The AI runs the whole thing.</li>
-    </ol>
-  </div>
+    <h2>How AI thinks</h2>
+    <div class="row"><span>•</span><span><b>The connector is the key, not the AI:</b> the AI is only as powerful as the systems it can log into. A dead GHL or QuickBooks connection is a login-key problem, not an AI problem — like a dead key-fob battery, the car still works, just reconnect it. Say: <b>"Reconnect the GHL connector"</b> or <b>"Reconnect QuickBooks."</b></span></div>
+    <div class="row"><span>•</span><span><b>Done means a link you can click:</b> an AI saying "task complete" with no link is like a delivery driver saying "I delivered it" with no tracking number. Say: <b>"Give me the proof link."</b></span></div>
 
-  <div class="section-label">How AI thinks (plain words)</div>
-  <div class="card">
-    <p><strong>The connector is the key &mdash; not the AI</strong><br>
-    <span style="font-size:14px">The AI is only as powerful as the systems it can log in to. When GHL or QuickBooks disconnects, it is not the AI's fault &mdash; it is a login key that expired. Like a car key fob with a dead battery. The car still works. Just reconnect it.</span></p>
-    <p><strong>Audit-only mode is your safe test drive</strong><br>
-    <span style="font-size:14px">Before the AI does anything that touches real customers or money, ask for audit-only mode. It reads and analyzes without changing anything.<br>
-    <code>Say: "Run this in audit-only mode &mdash; no sends, no changes."</code></span></p>
-    <p style="margin-bottom:0"><strong>Done = a link you can click</strong><br>
-    <span style="font-size:14px">An AI that says "task complete" with no link is like a delivery driver who says "I delivered it" with no tracking number. Always ask.<br>
-    <code>Say: "Give me the proof link."</code></span></p>
+    <h2>Do this today (under 10 min)</h2>
+    <div class="row"><span>•</span><span>Pick something you're curious about — a project status, a possibly-outdated skill, a stuck task. Say: <b>"Audit [the thing] in audit-only mode — read it, analyze it, tell me what you find. Do not change anything."</b> If it finds something worth fixing, say <b>"Now fix it."</b> Stop accepting "it's done" without clicking the proof link — no link, not done, every time.</span></div>
   </div>
-
-  <div class="magic-words">
-    <h3>&#9889; Magic Words Cheat Sheet</h3>
-    <span class="mw-item">"Use blueprint-ai-enso-rings-proposal-skill"</span>
-    <span class="mw-item">"Use brain-ring-render-skill"</span>
-    <span class="mw-item">"Run this in audit-only mode &mdash; no sends, no changes."</span>
-    <span class="mw-item">"Give me the proof link."</span>
-    <span class="mw-item">"Reconnect the GHL connector"</span>
-    <span class="mw-item">"Reconnect QuickBooks"</span>
-    <span class="mw-item">"Turn this into a skill so I can do it next time with one sentence."</span>
-    <span class="mw-item">"Use summary-email-skill to write the update"</span>
-  </div>
-
-  <div class="card">
-    <h2>Troubleshoot in 60 seconds</h2>
-    <ol style="font-size:14px;padding-left:20px;margin-bottom:0">
-      <li>Say: <code>Troubleshoot this</code></li>
-      <li>Still stuck? Say: <code>Council this</code> (get a second-opinion from a senior AI advisor)</li>
-      <li>Still stuck? Post in team chat: <strong>#leo-coaches</strong></li>
-    </ol>
-  </div>
-
-  <div class="drill">
-    <h3>Today's Action Drill (under 10 minutes)</h3>
-    <p style="font-size:14px;margin-top:0">Try audit-only mode on something you've been wondering about.</p>
-    <ol>
-      <li>Open the Claude Code app.</li>
-      <li>Pick something you're curious about &mdash; a project status, a skill that might be outdated, a task that keeps getting stuck.</li>
-      <li>Say: <code>"Audit [the thing] in audit-only mode &mdash; read it, analyze it, tell me what you find. Do not change anything."</code></li>
-      <li>Read what comes back.</li>
-      <li>If it finds something worth fixing, say: <code>"Now fix it."</code></li>
-    </ol>
-    <p style="font-size:13px;color:#1e40af;margin-bottom:0">Safe. Fast. Eye-opening.</p>
-  </div>
-
-  <div class="stop">
-    <strong>One thing to STOP doing today:</strong> Accepting "it's done" without clicking the proof link. No link = not done. Every time.
-  </div>
-
-  <div class="close-card">
-    <strong>Pick one task this week and turn it into a skill.</strong><br>
-    <span style="font-size:14px;color:var(--muted)">That is how your whole job gets automated &mdash; one task at a time, right inside the Claude Code app.</span>
-  </div>
-
-  <div class="foot">
-    Reply to this email with any feedback. We read every reply and apply changes permanently before the next episode.<br>
-    <a href="https://bennett-maxwell.github.io/fki-preview/team-training/2026-06-17.html">&larr; Previous episode (Jun 17)</a>
-  </div>
+  <div class="foot">Reply to the team email with any feedback. We read every reply and apply changes permanently before the next episode. • Franchise KI internal training.<br>
+  <a href="https://bennett-maxwell.github.io/fki-preview/team-training/2026-06-17.html">&larr; Previous episode (Jun 17)</a> &middot; <a href="https://bennett-maxwell.github.io/fki-preview/team-training/2026-06-19.html">Next episode (Jun 19) &rarr;</a></div>
 </div>
+<script>
+  var a=document.getElementById('podAudio'),KEY='team-training-2026-06-18';
+  function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate)a.playbackRate=s.rate;a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
 </body>
 </html>
