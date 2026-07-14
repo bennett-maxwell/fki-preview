@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FKI AI Training — Tuesday, July 14, 2026</title>
+<style>
+  :root{--bg:#0f1226;--card:#181c3a;--ink:#f4f6ff;--sub:#aab0d8;--accent:#6c7bff;--accent2:#39d98a;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0f1226,#141a3a);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:var(--card);border:1px solid #262c55;border-radius:20px;max-width:640px;width:100%;padding:30px 26px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .kicker{color:var(--accent2);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  h1{margin:0 0 4px;font-size:26px;line-height:1.2}
+  .date{color:var(--sub);font-size:15px;margin-bottom:22px}
+  audio{width:100%;margin:6px 0 16px;border-radius:12px}
+  .speeds{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .speeds button{flex:1;min-width:64px;background:#20264f;color:var(--ink);border:1px solid #333a6b;border-radius:12px;padding:12px 0;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
+  .speeds button:hover{background:#2a3160}
+  .speeds button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .note{color:var(--sub);font-size:14px;line-height:1.6;background:#141834;border:1px solid #262c55;border-radius:12px;padding:14px 16px;margin-bottom:16px}
+  .note b{color:var(--ink)}
+  .foot{color:var(--sub);font-size:12.5px;line-height:1.6;border-top:1px solid #262c55;padding-top:14px;margin-top:4px}
+  a{color:var(--accent2)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="kicker">Franchise KI · Daily AI Training</div>
+    <h1>Your Daily AI Update</h1>
+    <div class="date">Tuesday, July 14, 2026 · 9–13 min · what changed since Friday</div>
+
+    <audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-07-14.mp3"></audio>
+
+    <div class="speeds">
+      <button data-rate="1"    onclick="setRate(1,this)">1x</button>
+      <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+      <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+      <button data-rate="2"    onclick="setRate(2,this)">2x</button>
+    </div>
+
+    <div class="note">
+      <b>This week's move:</b> when anything looks stuck, say <b>"troubleshoot this"</b> before you ask a person. And never accept "done" — ask <b>"show me it's live, with a link."</b>
+    </div>
+
+    <div class="foot">
+      It picks up right where you left off — the player remembers your spot and speed.<br>
+      Reply to the email with any feedback. We read every reply and apply changes before the next episode.
+    </div>
+  </div>
+
+<script>
+  var a=document.getElementById('podAudio'),KEY='team-training-2026-07-14';
+  function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate){a.playbackRate=s.rate;document.querySelectorAll('.speeds button').forEach(x=>{if(parseFloat(x.dataset.rate)===s.rate)x.classList.add('active');});}a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
+</body>
+</html>
