@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apply — Free fit call · Advaita</title>
+  <meta name="description" content="Apply for a free Advaita fit call. See if the AI-powered client-acquisition system is right for your home-services company.">
+  <link rel="canonical" href="https://meetadvaita.com/apply.html">
+  <link rel="icon" href="assets/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="nav-logo" href="index.html"><img src="assets/logo-primary.svg" alt="Advaita"></a>
+      <button class="nav-toggle" aria-label="Open menu" data-nav-toggle><span></span><span></span><span></span></button>
+      <ul class="nav-links" data-nav>
+        <li><a href="system.html">The System</a></li>
+        <li><a href="industries.html">Industries</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a class="btn btn-primary" href="apply.html">Get a free fit call</a></li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero"><div class="container">
+      <div class="eyebrow">Apply</div>
+      <h1>Free fit call.</h1>
+      <p>Tell us about your company. If you’re a match for water, HVAC, solar, or roofing/exterior growth systems, we’ll schedule next steps. No card required.</p>
+    </div></section>
+    <section class="section"><div class="container">
+      <div class="grid-2">
+        <div class="form-card">
+          <h2 style="font-family:var(--font-display);letter-spacing:-0.02em;color:var(--plum);margin-bottom:0.4rem;">Request your call</h2>
+          <p style="color:rgba(23,17,31,0.7);margin-bottom:0.5rem;">We’ll respond during business hours. Fields marked for CRM capture only — no public API tokens.</p>
+          <form id="advaita-apply" action="https://franchiseki.com/advaita-quiz" method="get">
+            <label for="name">Full name</label>
+            <input id="name" name="name" required autocomplete="name" placeholder="Jane Owner">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
+            <label for="phone">Mobile phone</label>
+            <input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="+1…">
+            <label for="company">Company</label>
+            <input id="company" name="company" required placeholder="Acme Water Co">
+            <label for="industry">Primary industry</label>
+            <select id="industry" name="industry" required>
+              <option value="">Select…</option>
+              <option>Water treatment / filtration</option>
+              <option>HVAC</option>
+              <option>Solar</option>
+              <option>Roofing / exterior remodel</option>
+              <option>Other home services</option>
+            </select>
+            <label for="spend">Approx. monthly ad spend</label>
+            <select id="spend" name="spend">
+              <option value="">Select…</option>
+              <option>Under $3K</option>
+              <option>$3K–$10K</option>
+              <option>$10K–$25K</option>
+              <option>$25K+</option>
+              <option>Not running ads yet</option>
+            </select>
+            <label for="notes">Biggest growth bottleneck (optional)</label>
+            <textarea id="notes" name="notes" placeholder="Speed-to-lead, show rates, creative, CRM…"></textarea>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+            <div style="margin-top:1.2rem;">
+              <button class="btn btn-primary btn-block" type="submit">Continue to fit quiz →</button>
+            </div>
+            <p class="form-note">Primary path routes into the existing GHL Advaita quiz at franchiseki.com for CRM capture. Direct webhook wiring ships after domain cutover to meetadvaita.com.</p>
+            <div class="form-success" id="form-success">Thanks — continue on the next screen to finish qualification.</div>
+          </form>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:1rem;">
+            <h3>What happens next</h3>
+            <p>1) Short fit quiz / form · 2) Team reviews industry + spend · 3) If matched, we book the call and map the system.</p>
+          </div>
+          <div class="card" style="margin-bottom:1rem;">
+            <h3>Risk reversal</h3>
+            <p>Free fit call first. No card. If you’re not in our launch verticals, we’ll say so instead of forcing a package.</p>
+          </div>
+          <div class="card">
+            <h3>Prefer the live quiz now?</h3>
+            <p><a class="btn btn-secondary" href="https://franchiseki.com/advaita-quiz">Open Advaita quiz on GHL</a></p>
+          </div>
+        </div>
+      </div>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-bottom">
+    <span>© 2026 Advaita</span><span>Human strategy. AI speed. Not two.</span>
+  </div></footer>
+  <script>
+    const t=document.querySelector('[data-nav-toggle]'), n=document.querySelector('[data-nav]');
+    if(t&&n) t.addEventListener('click',()=>n.classList.toggle('open'));
+  </script>
+</body>
+</html>
