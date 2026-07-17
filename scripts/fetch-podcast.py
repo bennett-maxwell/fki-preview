@@ -43,9 +43,10 @@ def steering(first, business):
         f'negative hook. BANNED ANALYST FRAMING: never say "we are looking at", "we\'re looking at", "we are analyzing", '
         f'"let\'s look at", or otherwise narrate as outside analysts observing the business. Always speak directly to {f} '
         f'about what the system does FOR them — say "this gives you", "you\'ll get", "for you and {business}", not "we\'re looking at". '
-        f'LENGTH: this is a SHORT episode (AudioLength.SHORT). Keep it tight and conversational — touch each of the '
-        f'12 sections but stay concise; do NOT pad, lecture, or stretch. Let it land at its natural short length '
-        f'(~9-15 min) and END CLEANLY with a proper close — never a blind hard cut. '
+        f'LENGTH: this is a SHORT episode (AudioLength.SHORT). TARGET 9-11 minutes. HARD BOUNDS: do NOT exceed '
+        f'12 minutes and do NOT come in under 8 minutes. Touch each of the 12 sections but keep every one tight — '
+        f'do NOT pad, lecture, stretch, or go deep-dive; if pressed for time, compress evenly, never drop the CTA. '
+        f'END CLEANLY with a proper close — never a blind hard cut. '
         f'Close with the application CTA — never mention scheduling a call.'
     )
 
