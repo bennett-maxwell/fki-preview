@@ -359,3 +359,22 @@ Questions? Reach Bennett directly: bennett@franchiseki.com
 
 This audio walkthrough was built for Upper Crust Designs LLC. Not a template.
 Every number, every example, every recommendation — yours.
+
+---
+
+## SECTION 13 — Your Next Step (CLOSING — read this last, then end the episode)
+
+END THE EPISODE ON THIS EXACT CLOSING. Do not add anything after it. Speak it warmly,
+directly to Barbara, and then stop:
+
+That is your blueprint, Barbara. That is the whole walkthrough for you and Upper Crust
+Designs LLC — where you are today, the three gaps, the three AI tools built for you, and
+the thirty-day path to a system that runs your business rhythm for you.
+
+Your next step is simple. When you are ready to move forward, review the application and
+see if Upper Crust Designs LLC is a match. It is an application, not a sales call, and we
+read every one personally: https://bennett-maxwell.github.io/fki-preview/qualify.html
+
+Thank you so much for listening, Barbara. We really hope this walkthrough gave you a clear
+picture of what is possible. We will leave you with this: the AI is ready when you are.
+That is your blueprint — your next step is yours to take. Take care, and until next time.
