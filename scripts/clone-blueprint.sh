@@ -215,6 +215,9 @@ monthly_leads = profile.get('monthly_leads', '—')
 method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
 domain_slug = business_name.lower().replace(' ', '').replace("'", '')
 services_str = ', '.join(services) if services else f'{industry} services'
+# tools may be a list (normal profile shape, e.g. ["CRM","Email","Phone"]) or a str.
+# Coerce to a string so {{CRM_TOOL}} html.replace() never sees a list (was TypeError,
+# CL#4 2026-07-17 Madison CC — restores main's coercion so this branch matches main).
 tools_str = ', '.join(tools) if isinstance(tools, list) else tools
 
 # Accent color derivatives
@@ -314,7 +317,38 @@ except Exception:
     pass
 
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
+# ── AI Prompt section fill (FIX 2026-07-17 Madison CC): TEMPLATE has {{PROMPT_ONE/TWO/THREE}}
+#    (+ _TITLE) but the engine had NO mapping → every build hard-failed at the unfilled-placeholder
+#    gate (sys.exit(1)). Source from profile['ai_prompts']=[{title,prompt},...]; fall back to
+#    ai_agents' prompts; final generic fallback so this can never silently break a build again. ──
+def _html_esc(s):
+    return (str(s).replace('&', '&amp;').replace('<', '&lt;')
+            .replace('>', '&gt;').replace('"', '&quot;'))
+_ai_prompts = profile.get('ai_prompts') or []
+def _prompt_at(i, field):
+    if i < len(_ai_prompts) and isinstance(_ai_prompts[i], dict):
+        v = _ai_prompts[i].get(field)
+        if v:
+            return v
+    # fall back to ai_agents prompt/name
+    if i < len(ai_agents) and isinstance(ai_agents[i], dict):
+        if field == 'title':
+            return ai_agents[i].get('name') or f'AI Workflow #{i+1}'
+        return ai_agents[i].get('prompt') or ''
+    if field == 'title':
+        return ['Speed-to-Lead', 'Follow-Up & Reactivation', 'Admin & Content Automation'][i] if i < 3 else f'AI Workflow #{i+1}'
+    return f'You are an AI assistant for {business_name}, a {industry} business. Help handle the task described above end to end, asking for any missing detail before acting.'
+p1t, p1 = _prompt_at(0, 'title'), _prompt_at(0, 'prompt')
+p2t, p2 = _prompt_at(1, 'title'), _prompt_at(1, 'prompt')
+p3t, p3 = _prompt_at(2, 'title'), _prompt_at(2, 'prompt')
+
 replacements = {
+    '{{PROMPT_ONE_TITLE}}': p1t,
+    '{{PROMPT_ONE}}': _html_esc(p1),
+    '{{PROMPT_TWO_TITLE}}': p2t,
+    '{{PROMPT_TWO}}': _html_esc(p2),
+    '{{PROMPT_THREE_TITLE}}': p3t,
+    '{{PROMPT_THREE}}': _html_esc(p3),
     '{{ROI_MIN}}': str(roi_min),
     '{{ROI_MAX}}': str(roi_max),
     '{{ROI_STEP}}': str(roi_step),
@@ -363,16 +397,22 @@ if ai_agents and len(ai_agents) > 0:
         for i, agent in enumerate(ai_agents[:6], 1):
             a_name = agent.get('name', f'AI Agent #{i}')
             a_desc = agent.get('desc', f'Custom AI agent for your {industry} business.')
-            a_prompt = agent.get('prompt', f'You are an AI agent for {business_name}.')
-            a_result = agent.get('result', f'Automates key {industry} workflows.')
-            a_time = agent.get('time', '5 minutes')
-            a_prompt_escaped = (a_prompt
-                .replace('&', '&amp;').replace('<', '&lt;')
-                .replace('>', '&gt;').replace('"', '&quot;'))
+            a_result = agent.get('result') or agent.get('outcome') or f'Automates key {industry} workflows.'
+            a_desc_escaped = (str(a_desc)
+                .replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+            a_result_escaped = (str(a_result)
+                .replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
 
+            # v3.42 (Madison 2026-07-01) HARD RED-LINE D2-03: the 6 agent squares are
+            # CONDENSED, outcome-first cards — icon + name + desc + outcome ONLY. They
+            # must NEVER carry a raw "Copy-paste prompt:" block / "You are an AI agent…"
+            # boilerplate (that reads as a lazy paste and hard-fails
+            # blueprint_agent_prompt_quality_gate.check_agent_cards_no_boilerplate).
+            # The full copy-paste operating runbooks live ONLY in the 3 ready-to-use
+            # dropdown prompts (prompt-pre, from ai_prompts / {{PROMPT_ONE..THREE}}).
             icon_svg = '<div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>'
             agent_cards_html += f'''    <!-- Agent {i} -->
-      <div class="agent-card">{icon_svg}<div class="agent-name">{a_name}</div><div class="agent-desc" style="margin-bottom:0.75rem;">{a_desc}</div><div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">Copy-paste prompt:</strong>{a_prompt_escaped}</div><div class="agent-outcome">{a_result}</div><div class="agent-time" style="font-size:0.8rem;color:var(--text-mid, #6E6E73);margin-top:0.5rem;">Setup time: ~{a_time}</div></div>
+      <div class="agent-card">{icon_svg}<div class="agent-name">{a_name}</div><div class="agent-desc">{a_desc_escaped}</div><div class="agent-outcome">{a_result_escaped}</div></div>
 
 '''
         html = html[:start_idx] + agent_cards_html + html[end_idx:]
