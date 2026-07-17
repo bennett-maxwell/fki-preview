@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-17T18:36:59Z | Lead: Diane | Industry: in-home senior care -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-17T19:14:54Z | Lead: Diane | Industry: in-home senior care -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/blueprints/diane-caring-companions.html" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>AI Advantage Roadmap — Caring Companions At Home</title>
+  <title>AI Advantage Roadmap for Diane — Caring Companions At Home</title>
   <style>
     :root {
       /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
@@ -257,7 +257,6 @@
     .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
     .pod-dl:hover { text-decoration: underline; }
     .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
-    .pod-audio-soon { display: none; text-align: center; padding: 2.25rem 1rem; color: var(--text-muted); font-size: 1.02rem; line-height: 1.55; }
     .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
     .pod-mini.visible { display: flex; }
     .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -717,7 +716,6 @@ Example input: an active-client family record is due for its weekly check-in, an
       <p class="pod-subtitle">Diane &middot; Caring Companions At Home</p>
     </div>
     <div class="pod-body">
-      <div class="pod-audio-soon" id="podAudioSoon">&#127911; Your audio walkthrough is being finalized &mdash; it&rsquo;ll appear here shortly.</div>
       <span class="pod-badge" id="podBadge">
         Ready to play
         <span class="pod-eq" id="podEq">
@@ -1018,42 +1016,7 @@ Example input: an active-client family record is due for its weekly check-in, an
   audio.addEventListener('play',  function() { setPlaying(true); });
   audio.addEventListener('pause', function() { setPlaying(false); });
   audio.addEventListener('ended', function() { setPlaying(false); badge.childNodes[0].textContent = 'Ready to play '; });
-  audio.addEventListener('error', function() { if (!pendingMode) podError.style.display = 'block'; });
-
-  // -- DECOUPLE (2026-07-07): audio-pending state ------------------------------
-  // The page ships before the podcast is guaranteed live. If the mp3 isn't yet at
-  // HTTP 200, show a graceful "being finalized" note instead of a broken player, and
-  // auto-swap the real player in once the mp3 goes live at the same URL. No visible
-  // effect when the audio is already present.
-  var podAudioSoon = document.getElementById('podAudioSoon');
-  var POD_URL = (audio.querySelector('source') && audio.querySelector('source').getAttribute('src')) || audio.getAttribute('src') || audio.currentSrc || audio.src;
-  var playerParts = [
-    badge, chapterEl, track,
-    document.querySelector('.pod-section .pod-times'),
-    document.querySelector('.pod-section .pod-controls'),
-    document.querySelector('.pod-section .pod-meta')
-  ];
-  var pendingMode = false;
-  function setAudioSoon(on) {
-    pendingMode = on;
-    if (podAudioSoon) podAudioSoon.style.display = on ? 'block' : 'none';
-    playerParts.forEach(function(el){ if (el) el.style.display = on ? 'none' : ''; });
-    if (on) { podError.style.display = 'none'; if (mini) mini.classList.remove('visible'); }
-  }
-  var soonTimer = null;
-  function probeAudio() {
-    if (!POD_URL) return;
-    fetch(POD_URL, { method: 'HEAD', cache: 'no-store' }).then(function(r){
-      if (r && r.ok) {
-        if (soonTimer) { clearInterval(soonTimer); soonTimer = null; }
-        if (pendingMode) { setAudioSoon(false); audio.load(); }
-      } else {
-        setAudioSoon(true);
-        if (!soonTimer) soonTimer = setInterval(probeAudio, 30000);
-      }
-    }).catch(function(){ /* HEAD blocked/offline — leave the working player untouched */ });
-  }
-  probeAudio();
+  audio.addEventListener('error', function() { podError.style.display = 'block'; });
 
   playBtn.addEventListener('click', togglePlay);
   miniPlay.addEventListener('click', togglePlay);
