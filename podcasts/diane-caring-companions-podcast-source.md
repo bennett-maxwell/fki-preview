@@ -1,6 +1,6 @@
 <!-- v1.8 -->
 PRIVATE AUDIO BRIEFING / AI Roadmap for Diane — Caring Companions At Home / Prepared by Franchise Ki
-Generated: 2026-07-17T19:17:45.377576+00:00
+Generated: 2026-07-17T19:32:41.835578+00:00
 
 Open the audio with EXACTLY these words: "Hi Diane, welcome. This walkthrough was built for you and Caring Companions At Home, from what you told us."
 
@@ -18,7 +18,7 @@ CTA: complete the qualifier only; no calendar booking language.
 12 SECTION AUDIO PACKAGE
 
 1. About Diane and Caring Companions At Home
-Financial figures (average customer value, monthly inquiries, close rate) are industry-typical placeholders, not values Diane supplied; they are adjustable in the interactive ROI calculator. Agents and use-cases are grounded in in-home senior care operations for Caring Companions At Home. A practical AI roadmap for Caring Companions At Home, built to recover coordinator time and answer families faster.
+Grounded in Diane's Advaita quiz: Monthly Leads = 30, Team Size = 10, Revenue 1-3m, AI Maturity = exploring, Biggest Goal = leads, Response Speed = 5min, CRM Tools = None, Project Management Tools = Other, Operational Stress = Hiring/Staffing + Scheduling + Marketing Content. Average customer value and close rate were NOT supplied in the quiz and remain industry-typical placeholders, adjustable in the interactive ROI calculator. Agents and use-cases are grounded in in-home senior care operations for Caring Companions At Home. A practical AI roadmap for Caring Companions At Home, built to recover coordinator time and answer families faster.
 
 2. Current Tool Stack
 Phone — inbound calls from families and caregiver applicants. Email — family inquiries, applicant messages, and updates. Scheduling calendar — consultations, interviews, and shift planning. Website contact form — new family inquiries and caregiver applications.
@@ -51,4 +51,4 @@ After a positive milestone, it invites satisfied families to leave a review on t
 Turns one update, such as a caregiver spotlight or a seasonal safety tip, into a week of publish-ready posts, an email, and a blog piece in your brand voice. It never publishes automatically and never invents client stories; every piece is drafted for your approval. Outcome for Caring Companions At Home: a full week of on-brand content from one update, no marketing hire
 
 12. ROI Picture and Next Step
-Use Diane's stated numbers only: about 25 (industry-typical placeholder, adjustable in the calculator) monthly leads, about $4,000/mo (industry-typical placeholder, adjustable in the calculator) average value, about 30% (industry-typical placeholder, adjustable in the calculator) close rate, about 10 weekly admin hours. Conservative language, no guarantees. Close by inviting Diane to open the written playbook and complete the qualifier. The written playbook qualifier lives at https://bennett-maxwell.github.io/fki-preview/qualify.html — mention it as the qualifier page, never spell the URL aloud. No calendar-booking language.
+Use Diane's stated numbers only: about 30 (from Diane's quiz, adjustable in the calculator) monthly leads, about $4,000/mo (industry-typical placeholder, adjustable in the calculator) average value, about 30% (industry-typical placeholder, adjustable in the calculator) close rate, about 10 weekly admin hours. Conservative language, no guarantees. Close by inviting Diane to open the written playbook and complete the qualifier. The written playbook qualifier lives at https://bennett-maxwell.github.io/fki-preview/qualify.html — mention it as the qualifier page, never spell the URL aloud. No calendar-booking language.
