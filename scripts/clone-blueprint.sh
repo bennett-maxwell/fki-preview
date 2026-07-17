@@ -313,7 +313,38 @@ except Exception:
     pass
 
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
+# ── AI Prompt section fill (FIX 2026-07-17 Madison CC): TEMPLATE has {{PROMPT_ONE/TWO/THREE}}
+#    (+ _TITLE) but the engine had NO mapping → every build hard-failed at the unfilled-placeholder
+#    gate (sys.exit(1)). Source from profile['ai_prompts']=[{title,prompt},...]; fall back to
+#    ai_agents' prompts; final generic fallback so this can never silently break a build again. ──
+def _html_esc(s):
+    return (str(s).replace('&', '&amp;').replace('<', '&lt;')
+            .replace('>', '&gt;').replace('"', '&quot;'))
+_ai_prompts = profile.get('ai_prompts') or []
+def _prompt_at(i, field):
+    if i < len(_ai_prompts) and isinstance(_ai_prompts[i], dict):
+        v = _ai_prompts[i].get(field)
+        if v:
+            return v
+    # fall back to ai_agents prompt/name
+    if i < len(ai_agents) and isinstance(ai_agents[i], dict):
+        if field == 'title':
+            return ai_agents[i].get('name') or f'AI Workflow #{i+1}'
+        return ai_agents[i].get('prompt') or ''
+    if field == 'title':
+        return ['Speed-to-Lead', 'Follow-Up & Reactivation', 'Admin & Content Automation'][i] if i < 3 else f'AI Workflow #{i+1}'
+    return f'You are an AI assistant for {business_name}, a {industry} business. Help handle the task described above end to end, asking for any missing detail before acting.'
+p1t, p1 = _prompt_at(0, 'title'), _prompt_at(0, 'prompt')
+p2t, p2 = _prompt_at(1, 'title'), _prompt_at(1, 'prompt')
+p3t, p3 = _prompt_at(2, 'title'), _prompt_at(2, 'prompt')
+
 replacements = {
+    '{{PROMPT_ONE_TITLE}}': p1t,
+    '{{PROMPT_ONE}}': _html_esc(p1),
+    '{{PROMPT_TWO_TITLE}}': p2t,
+    '{{PROMPT_TWO}}': _html_esc(p2),
+    '{{PROMPT_THREE_TITLE}}': p3t,
+    '{{PROMPT_THREE}}': _html_esc(p3),
     '{{ROI_MIN}}': str(roi_min),
     '{{ROI_MAX}}': str(roi_max),
     '{{ROI_STEP}}': str(roi_step),

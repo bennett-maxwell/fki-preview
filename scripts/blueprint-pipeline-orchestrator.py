@@ -268,6 +268,11 @@ async def run_script(script_name: str, args: list, timeout: int = 300) -> tuple:
         stdout_str = stdout.decode()
         stderr_str = stderr.decode()
 
+        # FIX 2026-07-17 Madison CC: many builders (e.g. clone-blueprint.sh) print their real
+        # error to STDOUT, so a failure logged as err[:100] showed a BLANK reason and hid the
+        # cause for weeks. On non-zero exit, fold the stdout tail into the returned error.
+        if proc.returncode != 0 and not stderr_str.strip():
+            stderr_str = "(stdout tail) " + stdout_str.strip()[-600:]
         return proc.returncode == 0, stdout_str, stderr_str
     except asyncio.TimeoutError:
         proc.kill()
