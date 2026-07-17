@@ -219,6 +219,12 @@ services_str = ', '.join(services) if services else f'{industry} services'
 # Coerce to a string so {{CRM_TOOL}} html.replace() never sees a list (was TypeError,
 # CL#4 2026-07-17 Madison CC — restores main's coercion so this branch matches main).
 tools_str = ', '.join(tools) if isinstance(tools, list) else tools
+# PERMANENT FIX 2026-07-17 (Madison, blueprint-ai project): when the lead's form
+# answer for CRM / project-management tool is "none"/"other"/"n-a"/blank, render the
+# clean literal "None" — NEVER the generic "your CRM". Truthful to the form, cleaner,
+# less confusing. Applies to every future blueprint build (fleet-wide).
+_tv = (tools_str or '').strip()
+crm_display = 'None' if _tv.lower() in ('', 'none', 'n/a', 'na', 'n-a', 'other', 'no', 'not applicable', 'nothing') else _tv
 
 # Accent color derivatives
 def lighten_hex(hex_color, factor=0.4):
@@ -373,7 +379,7 @@ replacements = {
     '{{MAILTO_LINK}}': mailto_link,
     '{{SERVICES_LIST}}': services_str,
     '{{DOMAIN}}': f'{domain_slug}.com',
-    '{{CRM_TOOL}}': tools_str if tools_str else 'your CRM',
+    '{{CRM_TOOL}}': crm_display,
     '{{METHOD_NAME}}': method_name,
     '{{URGENCY_TEXT}}': urgency_text,
 }
