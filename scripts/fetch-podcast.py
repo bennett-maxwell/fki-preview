@@ -47,8 +47,25 @@ def steering(first, business):
         f'12 minutes and do NOT come in under 8 minutes. Touch each of the 12 sections but keep every one tight — '
         f'do NOT pad, lecture, stretch, or go deep-dive; if pressed for time, compress evenly, never drop the CTA. '
         f'END CLEANLY with a proper close — never a blind hard cut. '
+        f'NEVER read or speak any URL, web address, domain name, or link aloud (no "h-t-t-p", no ".com", '
+        f'no "slash", no site addresses). If a citation or source comes up, say only the SOURCE NAME '
+        f'(e.g. "Harvard Business Review") — never its address. The final spoken words must be a warm outro '
+        f'sentence, NEVER a URL or link. '
         f'Close with the application CTA — never mention scheduling a call.'
     )
+
+
+def _strip_urls(text):
+    """Permanent fix (2026-07-17): NotebookLM narrated raw URLs from source docs aloud
+    (Barbara's episode ended by reading a long hbr.org/qualify.html link). Strip every
+    URL/web-address before ingest so the hosts can never speak one. Leave citation text
+    (e.g. 'Harvard Business Review') intact — only the address is removed."""
+    import re
+    text = re.sub(r'\(\s*(?:https?://|www\.)\S+?\s*\)', '', text)          # (http…) parenthetical
+    text = re.sub(r'[-—:]\s*(?:https?://|www\.)\S+', '', text)             # "— http…" trailing citation
+    text = re.sub(r'(?:https?://|www\.)\S+', '', text)                     # any remaining bare URL
+    text = re.sub(r'[ \t]{2,}', ' ', text)
+    return text
 
 
 async def main(slug, notebook_id, source_path, business_name, first_name, timeout):
@@ -57,7 +74,7 @@ async def main(slug, notebook_id, source_path, business_name, first_name, timeou
     client = await NotebookLMClient.from_storage()
     async with client:
         if not notebook_id:
-            content = open(source_path, encoding="utf-8").read()
+            content = _strip_urls(open(source_path, encoding="utf-8").read())
             nb = await client.notebooks.create(title=f"{business_name or slug} AI Blueprint Podcast")
             notebook_id = nb.id
             log(f"notebook created: {notebook_id}")
