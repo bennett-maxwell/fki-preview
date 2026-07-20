@@ -5,50 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bennett Maxwell · Pick a brand variant</title>
 <meta name="robots" content="noindex,follow" />
+<meta name="description" content="Compare three Bennett Maxwell lead-site brands: Light Signal, Founder Night, Soft Paper Advaita." />
 <style>
   :root{--ink:#111;--mute:#5b6475;--line:#e5e8ee;--mist:#f5f6f8}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:system-ui,-apple-system,sans-serif;background:var(--mist);color:var(--ink);line-height:1.5;padding:40px 20px}
-  .wrap{max-width:960px;margin:0 auto}
+  .wrap{max-width:980px;margin:0 auto}
   h1{font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:-.8px;margin-bottom:8px}
-  p{color:var(--mute);margin-bottom:28px}
+  .lead{color:var(--mute);margin-bottom:12px}
+  .note{font-size:.9rem;color:var(--mute);margin-bottom:28px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  a.card{
-    display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;
-    text-decoration:none;color:inherit;min-height:220px;
-    transition:transform .15s ease, box-shadow .15s ease;
-  }
+  a.card{display:block;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:inherit;min-height:240px;transition:transform .15s ease, box-shadow .15s ease}
   a.card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
   .swatch{height:64px;border-radius:12px;margin-bottom:14px}
   .v1 .swatch{background:linear-gradient(90deg,#fff,#2E6BFF)}
   .v2 .swatch{background:linear-gradient(90deg,#0a0a0a,#f97316)}
   .v3 .swatch{background:linear-gradient(90deg,#F7F1E8,#1A2E1F 55%,#C4A35A)}
   h2{font-size:1.15rem;margin-bottom:6px}
-  .meta{font-size:.88rem;color:var(--mute)}
+  .meta{font-size:.88rem;color:var(--mute);margin-bottom:10px}
+  .path{font-size:.78rem;font-weight:700;color:#0B1220}
   @media(max-width:800px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Pick a brand direction</h1>
-    <p>Same lead order (Blueprint → Socials → Franchise). Three drastically different looks.</p>
+    <p class="lead">Same lead order: <strong>Blueprint AI → Socials → Franchise</strong>. Three drastically different looks.</p>
+    <p class="note">If a hub path 404s while Pages deploys, use the raw HTML links at the bottom — they are durable on GitHub main.</p>
     <div class="grid">
       <a class="card v1" href="./v1/">
         <div class="swatch"></div>
         <h2>v1 · Light Signal</h2>
         <p class="meta">Apple-clean · blue #2E6BFF · Inter · white/mist SaaS</p>
+        <p class="path">Open v1 →</p>
       </a>
       <a class="card v2" href="./v2/">
         <div class="swatch"></div>
         <h2>v2 · Founder Night</h2>
         <p class="meta">Moody black · orange #f97316 · Instrument Serif · cinematic</p>
+        <p class="path">Open v2 →</p>
       </a>
       <a class="card v3" href="./v3/">
         <div class="swatch"></div>
         <h2>v3 · Soft Paper Advaita</h2>
         <p class="meta">Warm paper · forest ink · gold · Fraunces · boutique editorial</p>
+        <p class="path">Open v3 →</p>
       </a>
     </div>
+    <p class="lead" style="margin-top:28px">Durable raw fallbacks</p>
+    <ul style="color:var(--mute);font-size:.9rem;padding-left:18px;display:grid;gap:6px">
+      <li><a href="https://raw.githubusercontent.com/bennett-maxwell/fki-preview/main/bennettmaxwell/v1/index.html">v1 raw HTML</a></li>
+      <li><a href="https://raw.githubusercontent.com/bennett-maxwell/fki-preview/main/bennettmaxwell/v2/index.html">v2 raw HTML</a></li>
+      <li><a href="https://raw.githubusercontent.com/bennett-maxwell/fki-preview/main/bennettmaxwell/v3/index.html">v3 raw HTML</a></li>
+    </ul>
   </div>
 </body>
 </html>
