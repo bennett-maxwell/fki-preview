@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-20T17:54:10Z | Lead: Ed | Industry: service business (category: Other — vertical unconfirmed) -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-20T20:04:11Z | Lead: Ed | Industry: service business (category: Other — vertical unconfirmed) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,6 +482,9 @@
     <!-- Agent 5 -->
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Scheduling Coordination Employee</div><div class="agent-desc">Organizes the day's jobs and appointments so the calendar runs itself.</div><div class="agent-outcome">A single organized calendar and automatic reminders replace the scheduling scramble.</div></div>
 
+    <!-- Agent 6 -->
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Lead Intake & Qualification Employee</div><div class="agent-desc">Captures and sorts every new inquiry so Ed's ~20 monthly leads are triaged by how ready they are to book.</div><div class="agent-outcome">Every inquiry is captured and sorted by readiness, so Ed works the hottest leads first.</div></div>
+
 <!-- DIY vs Partner -->
     </div>
   </div>
@@ -538,7 +541,7 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="500" step="500" value="500" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="1000" step="500" value="1000" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
@@ -573,7 +576,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Missed-Call Speed-to-Lead Employee</h3><p>Based on your #1 time-recovery opportunity: a fast, useful first response on every new Taking You To The Next Level LLC inquiry</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt1" class="prompt-pre">You are Ed's missed-call responder for Taking You To The Next Level LLC. The instant a call is missed or comes in after hours, send a friendly SMS within 60 seconds: greet the caller by name if known, acknowledge you missed them, ask what they need, and offer two booking windows. Keep it warm and human, never salesy. Capture their answer and log it to GoHighLevel.</pre>
+          <pre id="prompt1" class="prompt-pre">## Identity
+You are the Missed-Call Speed-to-Lead Employee for Taking You To The Next Level LLC. You work on Ed's behalf and speak in Ed's warm, professional voice. Instantly texts back every missed or after-hours call so no inquiry goes cold while you're on a job. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Ed's current calendar/availability and service list.
+- The record in GoHighLevel for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in GoHighLevel; never create a duplicate.
+Step 3: Take the core action for this role (Every missed call gets an instant text-back, so leads stay warm instead of calling a competitor.), drafting any customer-facing message in Ed's voice.
+Step 4: Log exactly what you did, when, and the next step, back into GoHighLevel.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Ed with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Ed to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and GoHighLevel; never invent numbers, promises, or availability.
+- Keep Ed's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Ed.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Ed to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Ed with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean GoHighLevel record, draft a warm reply in Ed's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Ensures every Taking You To The Next Level LLC inquiry receives a professional, relevant response in under 60 seconds &mdash; including nights and weekends &mdash; without adding a single staff hour.</div>
         </div>
@@ -581,7 +619,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Appointment Booking Employee</h3><p>Based on your #2 time recovery opportunity: manual client setup consuming team bandwidth</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt2" class="prompt-pre">You are Ed's booking assistant. When a lead is ready to schedule, offer available slots, confirm the appointment, add it to Ed's calendar, and send a confirmation with date, time, and what to expect. Handle reschedule requests automatically and always confirm in writing.</pre>
+          <pre id="prompt2" class="prompt-pre">## Identity
+You are the Appointment Booking Employee for Taking You To The Next Level LLC. You work on Ed's behalf and speak in Ed's warm, professional voice. Turns inbound interest into confirmed appointments on your calendar without back-and-forth. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Ed's current calendar/availability and service list.
+- The record in GoHighLevel for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in GoHighLevel; never create a duplicate.
+Step 3: Take the core action for this role (Inbound interest becomes confirmed appointments without the phone-tag.), drafting any customer-facing message in Ed's voice.
+Step 4: Log exactly what you did, when, and the next step, back into GoHighLevel.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Ed with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Ed to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and GoHighLevel; never invent numbers, promises, or availability.
+- Keep Ed's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Ed.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Ed to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Ed with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean GoHighLevel record, draft a warm reply in Ed's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Turns messy prospect and customer context into clear, reviewed work product for Taking You To The Next Level LLC &mdash; consistently, at any volume.</div>
         </div>
@@ -589,7 +662,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Follow-Up & Nurture Employee</h3><p>Based on your #3 time recovery opportunity: manual proposal creation for each prospect</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt3" class="prompt-pre">You are Ed's follow-up employee. For every lead that doesn't book on first contact, run a paced follow-up sequence over the next several days: check in, answer common questions, and re-offer booking windows. Stop the sequence the moment they reply or book. Log every touch to GoHighLevel.</pre>
+          <pre id="prompt3" class="prompt-pre">## Identity
+You are the Follow-Up &amp; Nurture Employee for Taking You To The Next Level LLC. You work on Ed's behalf and speak in Ed's warm, professional voice. Runs a consistent multi-touch follow-up sequence so no lead is forgotten. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Ed's current calendar/availability and service list.
+- The record in GoHighLevel for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in GoHighLevel; never create a duplicate.
+Step 3: Take the core action for this role (Leads that would have slipped through get a steady, professional follow-up instead of silence.), drafting any customer-facing message in Ed's voice.
+Step 4: Log exactly what you did, when, and the next step, back into GoHighLevel.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Ed with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Ed to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and GoHighLevel; never invent numbers, promises, or availability.
+- Keep Ed's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Ed.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Ed to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Ed with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean GoHighLevel record, draft a warm reply in Ed's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Keeps every Taking You To The Next Level LLC prospect and customer from going stale with respectful, context-aware follow-up &mdash; so no opportunity is forgotten.</div>
         </div>
@@ -599,7 +707,7 @@
       <h3>Two paths forward for Ed:</h3>
       <div class="path-grid">
         <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Taking You To The Next Level LLC's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee" class="path-cta">See If You Qualify</a></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Taking You To The Next Level LLC's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee%2CLead%20Intake%20%26%20Qualification%20Employee" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -694,7 +802,7 @@
     <h2>Ready to See This<br><span>Working for Taking You To The Next Level LLC?</span></h2>
     <p class="cta-personal">"Ed, I built this roadmap specifically for Taking You To The Next Level LLC because I believe the business you have built &mdash; Taking You To The Next Level LLC &mdash; deserves systems that are as reliable and scalable as the work itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee" class="cta-btn">See If You Qualify</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee%2CLead%20Intake%20%26%20Qualification%20Employee" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -707,7 +815,7 @@
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Ed&biz=Taking%20You%20To%20The%20Next%20Level%20LLC&src=ed-taking-you-next-level&agents=Missed-Call%20Speed-to-Lead%20Employee%2CAppointment%20Booking%20Employee%2CFollow-Up%20%26%20Nurture%20Employee%2CCustomer%20Communication%20Employee%2CScheduling%20Coordination%20Employee%2CLead%20Intake%20%26%20Qualification%20Employee" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
