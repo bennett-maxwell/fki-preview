@@ -1,0 +1,55 @@
+{
+  "skill": "cross-model-audit-skill",
+  "artifact": "fki-preview/bennettmaxwell/index.html",
+  "sha256": "05ee298b95ccf02755484592e704c5fc8e177d36e304c47729cbc8970831679c",
+  "ts": "2026-07-20T16:18:00Z",
+  "session_id": "grok-bm-web-20260720100322",
+  "seat_a": {
+    "seat": "Grok MacBook (builder)",
+    "passed": 14,
+    "total": 14,
+    "pct": 100.0,
+    "checks": {
+      "blueprint_before_franchise": true,
+      "socials_before_franchise": true,
+      "primary_cta_blueprint": true,
+      "social_links_5": true,
+      "authorized_claim": true,
+      "no_users_paths": true,
+      "viewport": true,
+      "reduced_motion": true,
+      "skip_link": true,
+      "utm_tracking": true,
+      "jsonld": true,
+      "sticky_mobile": true,
+      "lead_form": true,
+      "og_image_nonempty": true
+    },
+    "verdict": "PASS"
+  },
+  "seat_b": {
+    "seat": "Grok independent lens (conversion IA) \u2014 dual-provider UNAVAILABLE this session",
+    "passed": 11,
+    "notes": "Claude/Codex second seat not invoked; labeled PARTIAL per cross-model-audit-skill honest skip",
+    "conversion_ia_pass": true,
+    "verdict": "PARTIAL_DUAL_PROVIDER_SKIP"
+  },
+  "fixtures": {
+    "known_good_pass": true,
+    "known_bad_fail": true
+  },
+  "overall": "PASS_WITH_PARTIAL_CROSS_MODEL",
+  "limitations": [
+    "Second model provider seat not executed; dual-lens fixtures recorded"
+  ],
+  "work_unit_coverage": [
+    "hero",
+    "blueprint",
+    "socials",
+    "franchise",
+    "form",
+    "footer",
+    "sticky",
+    "schema"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "skill": "scaled-self-learning-loop-skill",
+  "alias": "CL",
+  "task": "bennett-maxwell-leads-site",
+  "session_id": "grok-bm-web-20260720100322",
+  "started_at": "2026-07-20T16:10:00Z",
+  "rounds": [
+    {
+      "n": 1,
+      "hypothesis": "Blueprint CTAs lack attribution + page lacks Person schema \u2192 weaker measurement and SEO",
+      "action": "Add JSON-LD Person/sameAs; UTM params on all Blueprint URLs",
+      "before": "no jsonld, plain blueprint URLs",
+      "after": "jsonld present + utm_source=bennettmaxwell_hub",
+      "outcome": "improved",
+      "next_rule": "Always UTM primary revenue CTAs on personal lead sites"
+    },
+    {
+      "n": 2,
+      "hypothesis": "Sticky CTA competes with final CTA and reduces mobile UX",
+      "action": "IntersectionObserver hides sticky when final section visible; email inputmode",
+      "before": "sticky always on mobile",
+      "after": "sticky auto-hides at final CTA",
+      "outcome": "improved",
+      "next_rule": "Mobile sticky must yield to on-page primary CTA"
+    },
+    {
+      "n": 3,
+      "hypothesis": "Hub apply is heavier than qualify; secondary path should be lighter",
+      "action": "Swap secondary hub CTA to qualify.html; add thank-you.html + robots.txt",
+      "before": "apply CTA secondary",
+      "after": "qualify optional + thank-you route",
+      "outcome": "improved_plateau_candidate",
+      "next_rule": "Keep secondary Blueprint path lighter than full apply"
+    }
+  ],
+  "stop_condition": "3 rounds complete; next round would be polish-only without conversion architecture delta",
+  "plateau": true,
+  "site_sha256": "05ee298b95ccf02755484592e704c5fc8e177d36e304c47729cbc8970831679c",
+  "money_artifact": "fki-preview/bennettmaxwell/index.html",
+  "marker": "CSLL-CL-x3-BENNETT-MAXWELL-LEADS-20260720"
+}
