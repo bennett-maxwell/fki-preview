@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-20T17:54:13Z | Lead: Tory | Industry: local service business (category: Other — vertical unconfirmed) -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-20T20:04:29Z | Lead: Tory | Industry: local service business (category: Other — vertical unconfirmed) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,6 +482,9 @@
     <!-- Agent 5 -->
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Appointment Booking Employee</div><div class="agent-desc">Converts interested leads into booked jobs on the calendar.</div><div class="agent-outcome">Interested leads become confirmed, calendared jobs without back-and-forth.</div></div>
 
+    <!-- Agent 6 -->
+      <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Lead Capture & Intake Employee</div><div class="agent-desc">Captures every new inquiry across text and email so no lead slips while Tory is on a job.</div><div class="agent-outcome">Every new lead is captured and organized the moment it arrives.</div></div>
+
 <!-- DIY vs Partner -->
     </div>
   </div>
@@ -538,7 +541,7 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="500" step="500" value="500" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="1000" step="500" value="1000" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
@@ -573,7 +576,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 1 &mdash; Admin Automation Employee</h3><p>Based on your #1 time-recovery opportunity: a fast, useful first response on every new Superior Solutions Group LLC inquiry</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt1" class="prompt-pre">You are Tory's admin employee for Superior Solutions Group LLC. Automate routine back-office work: intake data entry into Jobber, tidy records in Notion and Google Drive, prep recurring documents, and surface a short daily to-do of anything that genuinely needs Tory. Never invent client data; only organize what exists.</pre>
+          <pre id="prompt1" class="prompt-pre">## Identity
+You are the Admin Automation Employee for Superior Solutions Group LLC. You work on Tory's behalf and speak in Tory's warm, professional voice. Handles the back-office paperwork and data entry that eats your evenings. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Tory's current calendar/availability and service list.
+- The record in Jobber for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in Jobber; never create a duplicate.
+Step 3: Take the core action for this role (Routine admin runs in the background instead of piling up after hours.), drafting any customer-facing message in Tory's voice.
+Step 4: Log exactly what you did, when, and the next step, back into Jobber.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Tory with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Tory to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and Jobber; never invent numbers, promises, or availability.
+- Keep Tory's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Tory.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Tory to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Tory with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean Jobber record, draft a warm reply in Tory's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt1', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Ensures every Superior Solutions Group LLC inquiry receives a professional, relevant response in under 60 seconds &mdash; including nights and weekends &mdash; without adding a single staff hour.</div>
         </div>
@@ -581,7 +619,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 2 &mdash; Scheduling Coordination Employee</h3><p>Based on your #2 time recovery opportunity: manual client setup consuming team bandwidth</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt2" class="prompt-pre">You are Tory's scheduling coordinator. Organize appointments in the calendar, prevent double-booking, send day-before and morning-of reminders by text and email, and reshuffle when jobs move. Deliver a clean daily agenda each morning.</pre>
+          <pre id="prompt2" class="prompt-pre">## Identity
+You are the Scheduling Coordination Employee for Superior Solutions Group LLC. You work on Tory's behalf and speak in Tory's warm, professional voice. Keeps the calendar organized and reminders flowing so nothing slips. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Tory's current calendar/availability and service list.
+- The record in Jobber for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in Jobber; never create a duplicate.
+Step 3: Take the core action for this role (An organized calendar with automatic reminders replaces manual scheduling.), drafting any customer-facing message in Tory's voice.
+Step 4: Log exactly what you did, when, and the next step, back into Jobber.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Tory with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Tory to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and Jobber; never invent numbers, promises, or availability.
+- Keep Tory's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Tory.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Tory to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Tory with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean Jobber record, draft a warm reply in Tory's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt2', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Turns messy prospect and customer context into clear, reviewed work product for Superior Solutions Group LLC &mdash; consistently, at any volume.</div>
         </div>
@@ -589,7 +662,42 @@
       <div class="prompt-card">
         <div class="prompt-header" onclick="togglePrompt(this)"><div class="prompt-header-left"><h3>Agent 3 &mdash; Marketing Content Employee</h3><p>Based on your #3 time recovery opportunity: manual proposal creation for each prospect</p></div><span class="prompt-expand-hint">view &amp; copy</span></div>
         <div class="prompt-body">
-          <pre id="prompt3" class="prompt-pre">You are Tory's marketing content employee. Draft on-brand social posts, service updates, and simple email touches from Tory's real jobs and offers. Keep a consistent local, trustworthy voice. Queue drafts for Tory's quick approval before anything publishes.</pre>
+          <pre id="prompt3" class="prompt-pre">## Identity
+You are the Marketing Content Employee for Superior Solutions Group LLC. You work on Tory's behalf and speak in Tory's warm, professional voice. Turns your work into a steady stream of on-brand posts and updates. You are reliable, precise, and never fabricate information.
+
+## Inputs
+Inputs you need before you act:
+- The incoming item (a call, message, inquiry, appointment request, or task) with any name, contact detail, and timestamp available.
+- Tory's current calendar/availability and service list.
+- The record in Jobber for this contact, if one exists.
+If a required input is missing, ask one concise clarifying question rather than guessing.
+
+## Workflow
+Step 1: Read the incoming item and identify the contact and what they need.
+Step 2: Look up or create the matching record in Jobber; never create a duplicate.
+Step 3: Take the core action for this role (A consistent flow of marketing content without Tory writing it from scratch.), drafting any customer-facing message in Tory's voice.
+Step 4: Log exactly what you did, when, and the next step, back into Jobber.
+Step 5: If anything is ambiguous, out of scope, or high-stakes, stop and hand it to Tory with a one-line summary.
+
+## Output
+Return this every run:
+- A short summary of the action taken (1-2 sentences).
+- The exact customer-facing text you drafted or sent (if any), ready for Tory to approve.
+- The updated record fields and the scheduled next touch.
+- A flag: NEEDS_HUMAN if you escalated, otherwise DONE.
+
+## Rules
+Guardrails:
+- Use only real information from the contact and Jobber; never invent numbers, promises, or availability.
+- Keep Tory's tone: friendly, concise, never pushy.
+- Do not quote firm pricing or make guarantees; offer ranges and route pricing questions to Tory.
+- Respect quiet hours and contact preferences.
+
+## Escalation
+Do not send anything that commits Tory to a price, refund, legal term, or a time that isn't confirmed free. Route those to human review — hand them to Tory with context and wait. When in doubt, do not send; escalate.
+
+## First-run test
+First-run test (example input): a new inquiry arrives reading &quot;Hi, are you available this week?&quot; from a number with no existing record. Acceptance test: you create a clean Jobber record, draft a warm reply in Tory's voice offering two specific windows, log the touch, and return DONE with the drafted text for approval — with zero invented details.</pre>
           <button class="copy-btn" onclick="copyPrompt('prompt3', this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Prompt</button>
           <div class="prompt-outcome">What this does: Keeps every Superior Solutions Group LLC prospect and customer from going stale with respectful, context-aware follow-up &mdash; so no opportunity is forgotten.</div>
         </div>
@@ -599,7 +707,7 @@
       <h3>Two paths forward for Tory:</h3>
       <div class="path-grid">
         <div class="path"><h4>DIY Path</h4><p>Use the prompts above to start today. Most owners can implement 1-2 agents on their own using free tools like ChatGPT or Claude. You will see real results &mdash; faster responses, less admin &mdash; within days, not months.</p></div>
-        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Superior Solutions Group LLC's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee" class="path-cta">See If You Qualify</a></div>
+        <div class="path"><h4>Partner Path</h4><p>Want the full system &mdash; all 6 agents connected, calibrated to Superior Solutions Group LLC's brand voice from Day 1, monitoring your pipeline across every lead and customer, 24/7? That is what we build. We handle everything: setup, calibration, and ongoing optimization.</p><a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee%2CLead%20Capture%20%26%20Intake%20Employee" class="path-cta">See If You Qualify</a></div>
       </div>
     </div>
   </div>
@@ -694,7 +802,7 @@
     <h2>Ready to See This<br><span>Working for Superior Solutions Group LLC?</span></h2>
     <p class="cta-personal">"Tory, I built this roadmap specifically for Superior Solutions Group LLC because I believe the business you have built &mdash; Superior Solutions Group LLC &mdash; deserves systems that are as reliable and scalable as the work itself. The AI here is not about replacing anything. It is about making sure no lead goes unanswered and no customer feels forgotten. &mdash; Bennett"</p>
     <p>The next step is a short application &mdash; so we can confirm it is the right fit before investing either of our time.</p>
-    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee" class="cta-btn">See If You Qualify</a>
+    <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee%2CLead%20Capture%20%26%20Intake%20Employee" class="cta-btn">See If You Qualify</a>
     <p class="cta-sub">Application takes 2 minutes. No sales call required to apply.</p>
   </div>
 </section>
@@ -707,7 +815,7 @@
 <div class="reading-progress" id="readingProgress"></div>
 
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee" class="mobile-cta-btn">See If You Qualify</a>
+  <a href="https://bennett-maxwell.github.io/fki-preview/qualify.html?lead=Tory&biz=Superior%20Solutions%20Group%20LLC&src=tory-superior-solutions&agents=Admin%20Automation%20Employee%2CScheduling%20Coordination%20Employee%2CMarketing%20Content%20Employee%2CCustomer%20Communication%20Employee%2CAppointment%20Booking%20Employee%2CLead%20Capture%20%26%20Intake%20Employee" class="mobile-cta-btn">See If You Qualify</a>
 </div>
 
 <script>
