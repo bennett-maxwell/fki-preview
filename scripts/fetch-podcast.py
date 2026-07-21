@@ -36,6 +36,9 @@ def steering(first, business):
     return (
         f'OPENING LINE MUST BE EXACTLY: "Hi {f}, welcome. This walkthrough was built for you and '
         f'{business}, from what you told us." Then proceed. '
+        f'In the FIRST 20 SECONDS you MUST say the name "{f}" out loud at least TWICE and use the words '
+        f'"you" or "your" at least SIX times, speaking straight to {f}. Repeat "{f}" again by name in the '
+        f'first minute. '
         f'THROUGHOUT: speak DIRECTLY to {f} in second person using "you" and "your" — NEVER refer to {f} in the '
         f'third person, NEVER say "this business," "the owner," or "they." {f} is listening; speak TO {f}, not ABOUT {f}. '
         f'Tone: warm, personal, genuinely excited about what AI unlocks. The business is THRIVING — frame every '
