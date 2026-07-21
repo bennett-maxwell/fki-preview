@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FKI AI Training — July 21, 2026 (replaces today's live training)</title>
+<style>
+body{font-family:-apple-system,Segoe UI,sans-serif;max-width:640px;margin:0 auto;padding:24px;background:#0f1420;color:#e8ecf4}
+h1{font-size:1.3rem}h2{font-size:1.05rem;color:#9fb3d9}
+.card{background:#1a2233;border-radius:12px;padding:20px;margin:16px 0}
+audio{width:100%;margin:12px 0}
+.speeds{display:flex;gap:8px}
+.speeds button{flex:1;padding:10px;border:none;border-radius:8px;background:#2a3550;color:#e8ecf4;font-size:1rem}
+.speeds button.active{background:#4a7dff}
+ul{line-height:1.6}
+a{color:#7fa8ff}
+</style></head><body>
+<h1>🎧 FKI AI Training — Tuesday, July 21, 2026</h1>
+<p><strong>No live training call today.</strong> This episode replaces it — about 15 minutes. Listen on your phone, then do the 5-minute drill at the bottom.</p>
+<div class="card">
+<audio id="podAudio" controls preload="metadata" src="https://bennett-maxwell.github.io/fki-preview/podcasts/team-training-2026-07-21.mp3"></audio>
+<div class="speeds">
+  <button data-rate="1"    onclick="setRate(1,this)">1x</button>
+  <button data-rate="1.25" onclick="setRate(1.25,this)">1.25x</button>
+  <button data-rate="1.5"  onclick="setRate(1.5,this)">1.5x</button>
+  <button data-rate="2"    onclick="setRate(2,this)">2x</button>
+</div>
+</div>
+<div class="card">
+<h2>What's inside</h2>
+<ul>
+<li>The two rules every AI helper follows — what's working, what was broken, why, and how YOU verify yours (blocked-then-allowed is the proof)</li>
+<li>The Terry rescue: why the error message is a clue, not the answer</li>
+<li>Top 20 repeat errors from 3 months of history — and the 6 new gates that stop them</li>
+<li>Your 5-minute drill: run the setup prompt, get "SETUP-OK", confirm your row on the board</li>
+</ul>
+</div>
+<div class="card">
+<h2>Your 5-minute drill (today)</h2>
+<p>1. Open Claude Code. 2. Paste the setup prompt from today's email — or grab it from the <a href="https://app.notion.com/p/3a4cf5514fd38171ba05d680b7d25ed1">pinned board page</a>. 3. Say "SETUP-START". 4. Wait for "SETUP-OK — verdict: ...". 5. Done — your row posts to the board automatically. Tomorrow morning's tally goes up on the board.</p>
+</div>
+<script>
+  var a=document.getElementById('podAudio'),KEY='team-training-2026-07-21';
+  function setRate(r,b){a.playbackRate=r;document.querySelectorAll('.speeds button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');save();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify({time:a.currentTime,rate:a.playbackRate}))}catch(e){}}
+  (function(){try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s.rate)a.playbackRate=s.rate;a.addEventListener('loadedmetadata',()=>{if(s.time)a.currentTime=s.time;});}catch(e){}})();
+  a.addEventListener('timeupdate',save);a.addEventListener('ratechange',save);
+</script>
+</body></html>
