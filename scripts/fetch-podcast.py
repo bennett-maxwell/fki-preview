@@ -51,7 +51,12 @@ def steering(first, business):
         f'no "slash", no site addresses). If a citation or source comes up, say only the SOURCE NAME '
         f'(e.g. "Harvard Business Review") — never its address. The final spoken words must be a warm outro '
         f'sentence, NEVER a URL or link. '
-        f'Close with the application CTA — never mention scheduling a call.'
+        f'Close with the application CTA — never mention scheduling a call. '
+        f'Your FINAL two sentences MUST be an explicit spoken sign-off that INCLUDES the cue phrases '
+        f'"to wrap up", "your next step", and "thanks for listening" — for example, end with almost exactly: '
+        f'"So to wrap up, {f}, that\'s the blueprint for {business}. Your next step is simple: open your '
+        f'playbook when you\'re ready — and thanks for listening." NEVER end mid-sentence or mid-thought; '
+        f'the episode MUST audibly conclude with that sign-off.'
     )
 
 
