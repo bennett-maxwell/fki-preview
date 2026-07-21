@@ -210,6 +210,7 @@ key_metric = profile.get('key_metric', '—')
 key_metric_label = profile.get('key_metric_label', 'Projects Completed')
 team_size = profile.get('team_size', '—')
 monthly_leads = profile.get('monthly_leads', '—')
+primary_goal = str(profile.get('primary_goal') or profile.get('quiz', {}).get('biggest_goal') or '—').strip().title()
 
 # Derived values
 method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
@@ -374,6 +375,7 @@ replacements = {
     '{{KEY_METRIC_LABEL}}': key_metric_label,
     '{{TEAM_SIZE}}': str(team_size),
     '{{MONTHLY_LEADS}}': str(monthly_leads),
+    '{{PRIMARY_GOAL}}': primary_goal,
     '{{APPLY_URL}}': qualify_url,
     '{{QUALIFY_URL}}': qualify_url,
     '{{MAILTO_LINK}}': mailto_link,
