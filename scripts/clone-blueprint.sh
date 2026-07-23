@@ -225,7 +225,23 @@ tools_str = ', '.join(tools) if isinstance(tools, list) else tools
 # clean literal "None" — NEVER the generic "your CRM". Truthful to the form, cleaner,
 # less confusing. Applies to every future blueprint build (fleet-wide).
 _tv = (tools_str or '').strip()
-crm_display = 'None' if _tv.lower() in ('', 'none', 'n/a', 'na', 'n-a', 'other', 'no', 'not applicable', 'nothing') else _tv
+_NONE_SET = ('', 'none', 'n/a', 'na', 'n-a', 'other', 'no', 'not applicable', 'nothing')
+crm_display = 'None' if _tv.lower() in _NONE_SET else _tv
+
+# PERMANENT FIX 2026-07-23 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723: the stack cards for
+# Project/SOP (was hardcoded "Notion"), Team Communication (was "Slack"), and
+# File Storage (was "Google Drive") are now driven by the lead's REAL quiz answers,
+# with the same none/other/blank -> literal "None" coercion as CRM. NEVER ship a
+# branded tool the lead did not submit. Root cause: those three cards were hardcoded
+# in TEMPLATE.html and never tokenized, so every lead inherited fake Notion/Slack.
+_quiz = profile.get('quiz', {}) or {}
+def _tool_display(v):
+    s = (', '.join(v) if isinstance(v, list) else (v or '')).strip()
+    return 'None' if s.lower() in _NONE_SET else s
+pm_display = _tool_display(_quiz.get('project_management_tools'))
+team_comms_display = _tool_display(_quiz.get('communication_channels'))
+storage_display = _tool_display(_quiz.get('storage_tools'))
 
 # Accent color derivatives
 def lighten_hex(hex_color, factor=0.4):
@@ -382,6 +398,9 @@ replacements = {
     '{{SERVICES_LIST}}': services_str,
     '{{DOMAIN}}': f'{domain_slug}.com',
     '{{CRM_TOOL}}': crm_display,
+    '{{PM_TOOL}}': pm_display,
+    '{{TEAM_COMMS_TOOL}}': team_comms_display,
+    '{{STORAGE_TOOL}}': storage_display,
     '{{METHOD_NAME}}': method_name,
     '{{URGENCY_TEXT}}': urgency_text,
 }
