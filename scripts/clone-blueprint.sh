@@ -412,6 +412,26 @@ for placeholder, value in replacements.items():
         value = ', '.join(str(v) for v in value)
     html = html.replace(placeholder, value)
 
+# PERMANENT FIX 2026-07-23 (marker BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723):
+# After tokens resolve, the oppmap "Tools It Connects" cells can contain repeats or
+# multiple "None" (e.g. "None, None, Email"). Dedup each plain-text tools cell and drop
+# "None" whenever a real tool is present, so cells stay truthful + tidy. Never invents a tool.
+import re as _re
+def _clean_tools_cell(m):
+    parts = [p.strip() for p in m.group(1).split(',') if p.strip()]
+    seen = []
+    for p in parts:
+        if p.lower() not in [s.lower() for s in seen]:
+            seen.append(p)
+    reals = [p for p in seen if p.lower() != 'none']
+    out = reals if reals else (['None'] if seen else [])
+    return '<td>' + ', '.join(out) + '</td>'
+def _clean_oppmap(h):
+    def _repl(mt):
+        return _re.sub(r'<td>([^<]*)</td>', _clean_tools_cell, mt.group(0))
+    return _re.sub(r'<table class="opp-table">.*?</table>', _repl, h, flags=_re.S)
+html = _clean_oppmap(html)
+
 # ── AI Agent Cards: Replace template agents with lead-specific ones ──
 if ai_agents and len(ai_agents) > 0:
     agents_start_marker = '<!-- Agent 1: Speed-to-Lead -->'
