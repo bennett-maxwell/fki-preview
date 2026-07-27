@@ -365,7 +365,59 @@ p1t, p1 = _prompt_at(0, 'title'), _prompt_at(0, 'prompt')
 p2t, p2 = _prompt_at(1, 'title'), _prompt_at(1, 'prompt')
 p3t, p3 = _prompt_at(2, 'title'), _prompt_at(2, 'prompt')
 
+# ── ROI CALCULATOR PRESETS FROM THE LEAD'S OWN FORM ──────────────────────────
+# PERMANENT FIX 2026-07-27 (marker BLUEPRINT-ROI-PRESET-FROM-FORM-20260727,
+# EC-BLUEPRINT-ROI-TEMPLATE-DEFAULT-LEAK-20260727):
+# The calculator inputs AND the PRESETS object were hardcoded in TEMPLATE.html
+# (contract 2388 / leads 10 / rate 18 / hours 15), so EVERY lead saw the same
+# lead-agnostic numbers no matter what they submitted. Carlos told us 50 monthly
+# leads and the page still showed 10. Same bug-class as the 2026-07-23 stack leak
+# (BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723): content hardcoded in the
+# template and never tokenized.
+# Rule: a value the lead ACTUALLY PROVIDED is preset. A value they did NOT provide
+# is never fabricated — it falls back to a neutral, user-adjustable starting point,
+# and never to a banned constant (18 close rate, 2388/45000 contract — Rules 14/18).
+def _roi_num(*keys, default=None):
+    """First numeric value found across profile top level then profile['quiz']."""
+    quiz = profile.get('quiz') or {}
+    for k in keys:
+        for src in (profile, quiz):
+            v = src.get(k)
+            if v in (None, '', '—'):
+                continue
+            m = re.search(r'\d+(?:\.\d+)?', str(v).replace(',', ''))
+            if m:
+                return float(m.group(0))
+    return default
+
+_leads_val = _roi_num('monthly_leads', 'lead_volume', 'avg_monthly_lead_volume')
+_rate_val = _roi_num('close_rate', 'current_close_rate')
+_hours_val = _roi_num('admin_hours', 'admin_hours_per_week', 'weekly_admin_hours')
+_contract_val = _roi_num('avg_contract_value', 'avg_ticket', 'average_customer_value')
+
+# Clamp to each control's real min/max so a stated number can never render off-slider.
+def _clamp(v, lo, hi):
+    return max(lo, min(hi, v))
+
+ROI_LEADS = int(_clamp(_leads_val, 2, 100)) if _leads_val is not None else 10
+ROI_RATE = int(_clamp(_rate_val, 5, 60)) if _rate_val is not None else 20
+ROI_HOURS = int(_clamp(_hours_val, 2, 40)) if _hours_val is not None else 15
+ROI_CONTRACT = int(_contract_val) if _contract_val is not None else int(roi_min)
+
+roi_preset_provenance = {
+    'leads': 'form' if _leads_val is not None else 'neutral_default_not_provided',
+    'rate': 'form' if _rate_val is not None else 'neutral_default_not_provided',
+    'hours': 'form' if _hours_val is not None else 'neutral_default_not_provided',
+    'contract': 'form' if _contract_val is not None else 'industry_band_min_not_provided',
+}
+print(f"  ROI presets: leads={ROI_LEADS} rate={ROI_RATE} hours={ROI_HOURS} "
+      f"contract={ROI_CONTRACT}  provenance={roi_preset_provenance}")
+
 replacements = {
+    '{{ROI_LEADS}}': str(ROI_LEADS),
+    '{{ROI_RATE}}': str(ROI_RATE),
+    '{{ROI_HOURS}}': str(ROI_HOURS),
+    '{{ROI_CONTRACT}}': str(ROI_CONTRACT),
     '{{PROMPT_ONE_TITLE}}': p1t,
     '{{PROMPT_ONE}}': _html_esc(p1),
     '{{PROMPT_TWO_TITLE}}': p2t,
@@ -639,6 +691,19 @@ else
   echo "  ROI fill-in gate: FAIL -- no <input type=\"number\" id=\"sl-contract\"> fill-in found for Avg Customer Value."
   GATE_FAIL=1
 fi
+
+# 3b. ROI PRESET-FROM-FORM gate (BLUEPRINT-ROI-PRESET-FROM-FORM-20260727, HARD)
+# Blocks the template-default leak: a number the lead actually stated (e.g. Carlos's
+# 50 monthly leads) must render on the page, PRESETS must not carry lead-agnostic
+# literals, and banned ROI constants (18 rate / 2388 / 45000 contract) must not ship.
+if python3 "$SCRIPT_DIR/blueprint_roi_preset_gate.py" --lead "$LEAD_SLUG" --html "$OUTPUT_FILE" --profile "$PROFILE_JSON" >/tmp/roi-preset-gate.$$ 2>&1; then
+  echo "  ROI preset gate: PASS -- calculator matches the lead's stated intake numbers."
+else
+  echo "  ROI preset gate: FAIL -- calculator is showing template defaults, not this lead's numbers:"
+  sed 's/^/    /' /tmp/roi-preset-gate.$$
+  GATE_FAIL=1
+fi
+rm -f /tmp/roi-preset-gate.$$
 
 # 4a. Auto-heal generator reverts before gating
 AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"

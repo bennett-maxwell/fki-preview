@@ -529,19 +529,19 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="{{ROI_MIN}}" step="{{ROI_STEP}}" value="{{ROI_MIN}}" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="{{ROI_MIN}}" step="{{ROI_STEP}}" value="{{ROI_CONTRACT}}" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">{{ROI_LEADS}}</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="{{ROI_LEADS}}" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">{{ROI_RATE}}%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="{{ROI_RATE}}" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">{{ROI_HOURS}} hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="{{ROI_HOURS}}" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -702,10 +702,14 @@
 </div>
 
 <script>
+  // BLUEPRINT-ROI-PRESET-FROM-FORM-20260727: every scenario starts from the LEAD'S OWN
+  // stated intake numbers. Scenarios differ ONLY by `lift`. Never hardcode a lead-agnostic
+  // contract/leads/rate/hours here -- that shipped 2388/10/18/15 to every lead and violated
+  // Rule 14 (no hardcoded ROI defaults) and Rule 18 (avg-ticket honesty).
   const PRESETS = {
-    conservative: { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 0.5 },
-    expected:     { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.0 },
-    stretch:      { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.3 }
+    conservative: { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 0.5 },
+    expected:     { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 1.0 },
+    stretch:      { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 1.3 }
   };
   let currentLift = 1.0;
 
