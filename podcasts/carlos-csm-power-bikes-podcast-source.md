@@ -1,6 +1,6 @@
 <!-- v1.8 -->
 PRIVATE AUDIO BRIEFING / AI Roadmap for Carlos — CSM Power Bikes / Prepared by Franchise Ki
-Generated: 2026-07-27T14:03:36.937659+00:00
+Generated: 2026-07-27T14:19:44.504305+00:00
 
 Open the audio with EXACTLY these words: "Hi Carlos, welcome. This walkthrough was built for you and CSM Power Bikes, from what you told us."
 
@@ -51,4 +51,4 @@ Runs consistent follow-up on every shopper who takes a test ride or asks about a
 Keeps every customer text answered promptly and on-brand across sales and service, so your team of five is not buried in replies. Outcome for CSM Power Bikes: Customers get timely, consistent answers instead of dropped threads.
 
 12. ROI Picture and Next Step
-Use Carlos's stated numbers only:  monthly leads,  average value,  close rate, about  weekly admin hours. Conservative language, no guarantees. Close by inviting Carlos to open the written playbook and complete the qualifier. The written playbook qualifier lives at the qualifier page — mention it as the qualifier page, never spell the URL aloud. No calendar-booking language.
+Use only the numbers Carlos actually gave us: about 50 leads a month, a five-person team, new inquiries answered within five minutes, and revenue under $250k. He did NOT give an average ticket, a close rate, or a weekly admin-hours figure — do NOT state, guess, or imply any of those. No dollar projections, no percentages, no guarantees. Close by inviting Carlos to open the written playbook and complete the qualifier. The written playbook qualifier lives at the qualifier page (qualify.html) — NEVER say, spell, or read aloud any web address, domain, or file name — say only "the qualifier page". No calendar-booking language.
