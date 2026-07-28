@@ -28,24 +28,126 @@ stack = p.get("stack", [])
 gaps = p.get("gaps", [])
 opening = f"Hi {first}, welcome. This walkthrough was built for you and {biz}, from what you told us."
 
+# ── PERMANENT FIX 2026-07-28 (marker BLUEPRINT-PODCAST-SOURCE-SCHEMA-DRIFT-20260728,
+# EC-BLUEPRINT-PODCAST-EMPTY-SECTIONS-20260728) ──────────────────────────────────
+# DEFECT: this script read p["stack"], p["gaps"] and p["calc"], but NO lead JSON in
+# leads/ has ever carried those keys — the gen-blueprint schema emits quiz.* instead.
+# So sections 2 and 4 rendered as BARE HEADERS with no body, and section 12 emitted
+# blank number placeholders ("  monthly leads,  average value"), on EVERY lead.
+# Verified 2026-07-28 across bri-fresh, tom-reliant-bridge, rena-transit-system:
+# stack/gaps/calc absent in all three; tom + rena were DELIVERED with 2 of 12
+# sections empty. Fix: derive the stack and the time-leaks from quiz.* facts the
+# lead actually submitted, and NEVER emit a section header with an empty body.
+quiz = p.get("quiz", {}) or {}
+
+def _has(v):
+    """True only for a real submitted value — 'None'/'none'/'' are non-answers."""
+    s = str(v or "").strip()
+    return bool(s) and s.lower() not in ("none", "n/a", "na", "-", "0 ")
+
+def _build_stack_body():
+    if stack:
+        return " ".join(f"{clean(s['tool'])} — {clean(s['role'])}." for s in stack[:6])
+    have, missing = [], []
+    for label, key in (("storage", "storage_tools"), ("CRM", "crm_tools"),
+                       ("project management", "project_management_tools"),
+                       ("communication", "communication_channels"),
+                       ("AI tool already in hand", "current_ai_tool")):
+        val = quiz.get(key)
+        (have if _has(val) else missing).append(
+            f"{clean(val)} is your {label}" if _has(val) else f"no {label}")
+    bits = []
+    if have:
+        bits.append("Here is exactly what you are running on today, in your own words: "
+                    + "; ".join(have) + ".")
+    if _has(quiz.get("response_speed")):
+        bits.append(f"You answer new inquiries {clean(quiz['response_speed'])}, and that standard is yours, not a tool's.")
+    if missing:
+        bits.append("And the gaps you named: " + ", ".join(missing)
+                    + ". Treat a light stack as an advantage — there is no tangle of "
+                      "half-configured tools to unwind first. Never frame it as criticism.")
+    return " ".join(bits)
+
+def _build_leaks_body():
+    if gaps:
+        return " ".join(f"{clean(g['title'])}: {clean(g['desc'])}" for g in gaps[:4])
+    leaks = []
+    if not _has(quiz.get("crm_tools")):
+        leaks.append("With no CRM, every new inquiry starts life inside a conversation thread, so "
+                     "the record has to be reconstructed by hand later instead of just existing.")
+    if _has(quiz.get("response_speed")):
+        leaks.append(f"Answering new inquiries {clean(quiz['response_speed'])} is a standard held by a person, "
+                     "not a system — so it holds only when someone on the team is free to hold it.")
+    if not _has(quiz.get("project_management_tools")):
+        leaks.append("With no project-management tool, coordination happens ad hoc, so the next step "
+                     "lives in someone's memory instead of somewhere everyone can see it.")
+    if str(quiz.get("automation_maturity", "")).strip().lower() in ("none", "low", ""):
+        leaks.append("With automation maturity at none, every piece of repeat admin is still being "
+                     "done by hand.")
+    for area in (quiz.get("operational_stress_areas") or [])[:2]:
+        if _has(area):
+            leaks.append(f"You named {clean(area)} as a stress area.")
+    if not leaks:
+        return ""
+    return ("Walk these through as capacity you get back, never as criticism. "
+            + " ".join(leaks))
+
 sections = []
 sections.append(f"1. About {first} and {biz}\n{clean(p.get('profile_note',''))} {clean(p.get('hero_sub',''))}")
-sections.append("2. Current Tool Stack\n" + " ".join(f"{clean(s['tool'])} — {clean(s['role'])}." for s in stack[:6]))
-sections.append(f"3. Industry Context\n{biz} operates in {clean(p.get('industry',''))}. {clean(p.get('market',''))}")
-sections.append("4. Where Time Is Leaking\n" + " ".join(f"{clean(g['title'])}: {clean(g['desc'])}" for g in gaps[:4]))
+_stack_body = _build_stack_body()
+if _stack_body.strip():
+    sections.append("2. Current Tool Stack\n" + _stack_body)
+sections.append(f"3. Industry Context\n{biz} operates in {clean(p.get('industry','')).replace('_',' ')}. {clean(p.get('market',''))}")
+_leaks_body = _build_leaks_body()
+if _leaks_body.strip():
+    sections.append("4. Where Time Is Leaking\n" + _leaks_body)
 sections.append("5. Six Recommended Agents\n" + ", ".join(a["name"] for a in agents[:6]) + ".")
 for i, a in enumerate(agents[:6]):
     sections.append(f"{6+i}. Agent {i+1}: {a['name']}\n{clean(a['desc'])} Outcome for {biz}: {clean(a.get('outcome',''))}")
-sections.append(
-    "12. ROI Picture and Next Step\n"
-    f"Use {first}'s stated numbers only: {calc.get('leads_label','')} monthly leads, "
-    f"{calc.get('contract_label','')} average value, {calc.get('rate_label','')} close rate, "
-    f"about {calc.get('hours_label','')} weekly admin hours. Conservative language, no guarantees. "
-    f"Close by inviting {first} to open the written playbook and complete the qualifier. "
-    f"The written playbook qualifier lives at https://bennett-maxwell.github.io/fki-preview/qualify.html — mention it as the qualifier page, never spell the URL aloud. No calendar-booking language."
-)
+# PERMANENT FIX 2026-07-28: only name a number the lead actually submitted, and
+# state the withheld ones as explicit DO-NOT-INVENT bans. The old version emitted
+# blank placeholders ("  monthly leads,  average value") because calc was always {},
+# which reads to the host as an invitation to fill the gap with a plausible figure.
+# Also: the literal qualifier URL/filename is no longer written into the source doc
+# at all (EC-PODCAST-SPOKEN-URL) — a filename in the doc is a filename the host can
+# read aloud, which is exactly how Barbara's episode ended on a spoken URL.
+_num_have, _num_missing = [], []
+for _label, _key, _qkey in (("monthly leads", "leads_label", "monthly_leads"),
+                            ("average value", "contract_label", None),
+                            ("close rate", "rate_label", None),
+                            ("weekly admin hours", "hours_label", None)):
+    _v = calc.get(_key) or (p.get(_qkey) if _qkey else None) or (quiz.get(_qkey) if _qkey else None)
+    if _has(_v) or (str(_v).strip() == "0" and _label == "monthly leads"):
+        _num_have.append(f"{clean(_v)} {_label}")
+    else:
+        _num_missing.append(_label)
 
-doc = f"""<!-- v1.8 -->
+_roi = [f"Ground this ONLY in what {first} actually submitted."]
+if _num_have:
+    _roi.append("On record: " + ", ".join(_num_have) + ".")
+if str(p.get("monthly_leads", quiz.get("monthly_leads", ""))).strip() in ("0", "0.0"):
+    _roi.append("There are ZERO inbound leads a month right now — do NOT imply any lead volume exists.")
+if _num_missing:
+    _roi.append("There is NO " + ", NO ".join(_num_missing)
+                + " on record — do NOT state, guess, or imply any of those.")
+_roi.append("No dollar projections, no percentages, no guarantees. Conservative language throughout.")
+_roi.append(
+    f'Then close the episode properly: say "to wrap up", tell {first} that your next step is to open '
+    'your written playbook and complete the qualifier page, and thank them for listening. '
+    'No calendar-booking language. The final words of the episode must be a genuine spoken '
+    'sign-off, not the call to action alone.')
+# D4-09 requires the tracked qualifier token to be present in the source (it proves the funnel
+# points at the qualifier and NOT the retired blueprint.meetadvaita.com/apply URL). But
+# EC-PODCAST-SPOKEN-URL says a readable filename is a filename a host can read aloud — that is
+# how Barbara's episode ended on a spoken URL. Both rules are satisfied by carrying the token as
+# an explicitly NON-SPOKEN routing annotation with the ban welded to it, never as prose the host
+# could narrate. Keep the bare token: a prefilled ?lead=/?biz= query string fails D4-09.
+_roi.append(
+    'FUNNEL TARGET — internal routing token, NEVER spoken: qualify.html . Speak of it ONLY as '
+    '"the qualifier page". NEVER say, spell, or read aloud any web address, domain, or file name.')
+sections.append("12. ROI Picture and Next Step\n" + " ".join(_roi))
+
+doc = f"""<!-- v1.9 -->
 PRIVATE AUDIO BRIEFING / AI Roadmap for {p['lead_name']} — {biz} / Prepared by Franchise Ki
 Generated: {datetime.datetime.now(datetime.timezone.utc).isoformat()}
 
@@ -56,10 +158,16 @@ Audience: {p['lead_name']}, {biz}.
 Speak TO {first} as "you" and "your" for the entire episode.
 STRICT BANS (the episode fails review if any host breaks these): never refer to {biz} or {first}
 in the third person — the words "the/this" + "business/company/owner" and "his/her/their" + "business/company/team"
-must not be spoken; say "your business", "your company", or "your operation" instead.
+must not be spoken; say "your business", "your company", or "your operation" instead. Never say "she",
+"her", "he", "him", "{first} has", "{first} is", or "{first} runs" — you are speaking TO {first}, never about {first}.
 Never mention where this briefing came from, never reference any written input behind the episode,
 and never narrate like an outside analyst reviewing a case — you are talking directly with {first}.
-Length: SHORT episode — concise walkthrough, not a lecture. Let it land at its natural short length and end cleanly.
+LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Spend roughly
+eighty seconds on EACH of the six AI Employees — do not shortchange the last two. This is a complete
+walkthrough, not a summary.
+MANDATORY CLOSING: the episode must end with an explicit spoken wrap-up and sign-off — say "to wrap up",
+give {first} the next step in the words "your next step is", and close by thanking {first} for listening.
+Never stop immediately after the call to action; the final words must be a real sign-off.
 CTA: complete the qualifier only; no calendar booking language.
 
 12 SECTION AUDIO PACKAGE
@@ -103,7 +211,9 @@ Body: walk through all six by name in order — {_agent_list}. For EACH one lead
 
 Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what the company does operationally — its customers, its equipment, its locations, its coverage — unless that was explicitly provided.
 
-Sell the outcome, not the technology. Do not explain how the tech works. Do not talk about AI in general. Conversational and warm, never salesy, no marketing buzzwords. Close with a clean, complete spoken sign-off — in second person — telling {first} the next step is to open the written playbook and complete the qualifier page. Never speak or spell out any web address, domain, or file name."""
+Sell the outcome, not the technology. Do not explain how the tech works. Do not talk about AI in general. Conversational and warm, never salesy, no marketing buzzwords. Never speak or spell out any web address, domain, or file name — refer to it only as "the qualifier page".
+
+MANDATORY CLOSING — the episode is rejected without it. Do NOT stop talking the moment you give the call to action. End with a real, explicit, spoken wrap-up in second person, in this order: say "to wrap up", then "your next step is to open your written playbook and complete the qualifier page", then thank {first} for listening. The final words of the episode must be that sign-off. An episode that ends immediately after the call to action, or trails off mid-thought, fails review and has to be regenerated."""
 
 steer_out = os.path.join(REPO, "podcasts", f"{slug}-podcast-steer.txt")
 open(steer_out, "w", encoding="utf-8").write(steer)
