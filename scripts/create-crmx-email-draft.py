@@ -125,7 +125,14 @@ def resolve(slug):
     vals = {
         "LEAD_FIRST_NAME": prof.get("lead_first_name") or prof.get("first_name") or "",
         "BUSINESS_NAME": prof.get("business_name", ""),
-        "INDUSTRY": prof.get("industry", ""),
+        # PERMANENT FIX 2026-07-28 (marker BLUEPRINT-EMAIL-RAW-INDUSTRY-TOKEN-20260728):
+        # prof["industry"] is a machine slug like "professional_services", and it was
+        # injected verbatim into TWO customer-facing sentences ("...questions
+        # professional_services businesses ask about AI" and the signature line
+        # "AI Implementation for professional_services businesses"). Raw snake_case in
+        # client copy is the same class of defect as the raw-token leak fixed on
+        # 2026-07-27. Humanise it: underscores/hyphens -> spaces.
+        "INDUSTRY": re.sub(r"[_-]+", " ", str(prof.get("industry", "") or "")).strip(),
         "ACCENT_COLOR": prof.get("accent_color", "#0071E3"),
         "BLUEPRINT_URL": prof.get("blueprint_url", ""),
         "PODCAST_URL": prof.get("podcast_url", ""),
