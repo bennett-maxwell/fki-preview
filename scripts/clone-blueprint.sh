@@ -198,6 +198,27 @@ business_name = profile['business_name']
 first_name = lead_name.split()[0]
 accent_color = profile.get('accent_color', '#007AFF')
 industry = profile.get('industry', 'professional services')
+
+# ── HUMANIZE THE INDUSTRY FOR CUSTOMER-FACING COPY ───────────────────────────
+# PERMANENT FIX 2026-07-28 (marker BLUEPRINT-NO-TEXT-OVERFLOW-20260728,
+# EC-BLUEPRINT-RAW-SLUG-OVERFLOW-20260728):
+# `industry` doubles as the ROI-banding KEY (scripts/roi-industry-config.json), so it is a
+# snake_case slug like `professional_services`. It was rendered VERBATIM into two customer-facing
+# places — the Industry snapshot card and the "businesses in the ___ space" line. A snake_case
+# slug is one unbreakable token, so it blew past its 147px card (254px of text) and read like a
+# database field to the prospect. Same class as the raw-GHL-value leak the second-person gate
+# already guards (`u250k`).
+# The banding key stays raw; only the DISPLAY strings are humanized.
+_industry_raw = str(industry or '').strip()
+_industry_words = _industry_raw.replace('_', ' ').replace('-', ' ').split()
+industry_phrase = ' '.join(w.lower() for w in _industry_words) or 'professional services'
+_SMALL = {'and', 'or', 'of', 'for', 'to', 'in', 'the', 'a', 'an'}
+industry_display = ' '.join(
+    w.capitalize() if (i == 0 or w.lower() not in _SMALL) else w.lower()
+    for i, w in enumerate(industry_phrase.split())
+)
+industry = industry_display  # {{INDUSTRY}} is customer-facing from here on
+print(f"  Industry display: raw='{_industry_raw}' -> card='{industry_display}' prose='{industry_phrase}'")
 phone = profile.get('phone', '')
 email = profile.get('email', '')
 services = profile.get('services', [])
@@ -438,6 +459,7 @@ replacements = {
     '{{ACCENT_LIGHT}}': accent_light,
     '{{ACCENT_MID}}': accent_mid,
     '{{INDUSTRY}}': industry,
+    '{{INDUSTRY_PHRASE}}': industry_phrase,
     '{{YEARS_IN_BUSINESS}}': str(years_in_business),
     '{{KEY_METRIC}}': str(key_metric),
     '{{KEY_METRIC_LABEL}}': key_metric_label,
@@ -704,6 +726,18 @@ else
   GATE_FAIL=1
 fi
 rm -f /tmp/roi-preset-gate.$$
+
+# 3c. TEXT-OVERFLOW / RAW-TOKEN gate (BLUEPRINT-NO-TEXT-OVERFLOW-20260728, HARD)
+# Renders the built page in a real browser at desktop AND mobile widths and fails on any
+# text wider than its own box, or any raw snake_case identifier in customer-facing copy.
+if python3 "$SCRIPT_DIR/blueprint_text_overflow_gate.py" --lead "$LEAD_SLUG" --local >/tmp/overflow-gate.$$ 2>&1; then
+  echo "  text-overflow gate: PASS -- no clipped text, no raw internal tokens."
+else
+  echo "  text-overflow gate: FAIL -- customer-visible text problem:"
+  sed 's/^/    /' /tmp/overflow-gate.$$
+  GATE_FAIL=1
+fi
+rm -f /tmp/overflow-gate.$$
 
 # 4a. Auto-heal generator reverts before gating
 AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"
