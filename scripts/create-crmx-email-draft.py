@@ -50,6 +50,12 @@ TOKENS = ["LEAD_FIRST_NAME", "BUSINESS_NAME", "INDUSTRY", "ACCENT_COLOR",
           "BLUEPRINT_URL", "PODCAST_URL", "QUALIFY_URL"]
 
 
+# Per-run credential override, populated once the lead's own sub-account is resolved.
+# api() re-reads the env file on every call, so without this the Advaita PIT selected
+# below would be silently discarded and every request would fall back to FKI main.
+_ENV_OVERRIDE = {}
+
+
 def load_env():
     d = {}
     p = os.path.expanduser("~/.claude/.env")
@@ -58,6 +64,7 @@ def load_env():
         if "=" in line and not line.startswith("#"):
             k, v = line.split("=", 1)
             d[k.strip()] = v.strip().strip('"').strip("'")
+    d.update(_ENV_OVERRIDE)
     return d
 
 
@@ -162,7 +169,25 @@ def main():
     print("[gate] email conformance: PASS")
 
     env = load_env()
-    loc = env["GHL_LOCATION_ID"]
+    # PERMANENT FIX 2026-07-28 (marker BLUEPRINT-CRMX-DRAFT-WRONG-SUBACCOUNT-20260728):
+    # this used env["GHL_LOCATION_ID"] unconditionally — that is FKI main
+    # (14RD8KklxR9G4e0Rf7v2). Every Advaita blueprint lead lives in the Advaita
+    # sub-account (GPCi3FrWJCyevcGzZgTT) with its own PIT. So the delivery draft was
+    # created in a sub-account where the prospect's contact DOES NOT EXIST — Madison
+    # opens CRMX, cannot send it to the lead, and any send would go from the wrong
+    # brand. Caught on bri-fresh (contact BJp1MNYhfCqJjM3LATeJ in GPCi3) after the
+    # draft landed in 14RD8K. The lead profile is the authority on its own location.
+    loc = prof.get("ghl_location_id") or env["GHL_LOCATION_ID"]
+    if loc == env.get("ADVAITA_GHL_LOCATION_ID") and env.get("ADVAITA_GHL_PIT"):
+        env["GHL_API_KEY"] = env["ADVAITA_GHL_PIT"]
+        print(f"[creds] Advaita sub-account {loc} -> using ADVAITA_GHL_PIT")
+    else:
+        print(f"[creds] location {loc} -> using default GHL_API_KEY")
+    if loc != env.get("GHL_LOCATION_ID") and loc != env.get("ADVAITA_GHL_LOCATION_ID"):
+        raise SystemExit(
+            f"BLOCKED: lead location {loc} matches no known credential set. Refusing to "
+            f"create a draft in an unverified sub-account.")
+    _ENV_OVERRIDE.update(env)
     cid = prof.get("ghl_contact_id")
     subject = f"Your AI Blueprint is Ready — {vals['BUSINESS_NAME']}"
     title = args.title or f"Blueprint — {prof.get('lead_name') or vals['LEAD_FIRST_NAME']} / {vals['BUSINESS_NAME']}"
