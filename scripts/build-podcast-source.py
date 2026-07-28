@@ -69,3 +69,42 @@ CTA: complete the qualifier only; no calendar booking language.
 out = os.path.join(REPO, "podcasts", f"{slug}-podcast-source.md")
 open(out, "w", encoding="utf-8").write(doc)
 print(f"wrote {out} ({len(doc)} bytes)")
+
+# ── CANONICAL GENERATION STEER ───────────────────────────────────────────────
+# PERMANENT FIX 2026-07-27 (marker BLUEPRINT-PODCAST-STEER-CANONICAL-20260727,
+# EC-BLUEPRINT-PODCAST-THIRD-PERSON-SLIP-20260727):
+# D3-02 kept failing on hosts saying "the business" / "this business" even though
+# the SOURCE DOC already banned it — because the *generate-audio instruction* was
+# hand-written fresh by whoever ran the build, and the ban list drifted every time.
+# Cost a full regeneration on two consecutive leads (carlos-csm-power-bikes run3,
+# rena-transit-system run1). The steer is now a generated per-lead artifact so every
+# run passes the SAME text to NotebookLM instead of improvising it.
+# Usage: notebooklm generate audio -n <nb> --length short --format deep-dive \
+#          --json "$(cat podcasts/<slug>-podcast-steer.txt)"
+_agent_names = [a.get("name", "") for a in agents[:6] if a.get("name")]
+_agent_list = ", ".join(_agent_names[:-1]) + (" and " + _agent_names[-1] if len(_agent_names) > 1 else "")
+
+steer = f"""Open with EXACTLY these words, spoken naturally in your own host voice: "{opening}"
+
+THE SINGLE MOST IMPORTANT RULE — SECOND PERSON, ALWAYS. You are talking directly TO {first}, face to face, for the ENTIRE episode. Every reference to the company is "your business", "your company", "your operation", "your team", or "{biz}" by name.
+
+These EXACT phrases are FORBIDDEN and will get the episode thrown out. Do not say any of them, not once, not in passing, not in the closing:
+- "the business" / "this business" / "the company" / "this company"
+- "the team" / "the owner" / "the operation"
+- "her business" / "his business" / "their business" / "her team" / "his team" / "their team"
+- "{first} has" / "{first} is" / "{first} runs" / "{first} needs" / "{first} wants"
+- "source" / "sources" / "source material" / "this document" / "the report" / "the brief" / "we are analyzing"
+Instead ALWAYS say: "your business", "your company", "your team", "you have", "you run", "you need", and "what you told us".
+Read your closing line back to yourself before you say it — the ending is where hosts slip into "the business". Keep it second person all the way to the final word.
+
+LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Roughly eighty seconds on EACH of the six AI Employees — do not shortchange the last two.
+
+Body: walk through all six by name in order — {_agent_list}. For EACH one lead with the business benefit: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
+
+Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what the company does operationally — its customers, its equipment, its locations, its coverage — unless that was explicitly provided.
+
+Sell the outcome, not the technology. Do not explain how the tech works. Do not talk about AI in general. Conversational and warm, never salesy, no marketing buzzwords. Close with a clean, complete spoken sign-off — in second person — telling {first} the next step is to open the written playbook and complete the qualifier page. Never speak or spell out any web address, domain, or file name."""
+
+steer_out = os.path.join(REPO, "podcasts", f"{slug}-podcast-steer.txt")
+open(steer_out, "w", encoding="utf-8").write(steer)
+print(f"wrote {steer_out} ({len(steer)} bytes) — pass this VERBATIM to `notebooklm generate audio`")
