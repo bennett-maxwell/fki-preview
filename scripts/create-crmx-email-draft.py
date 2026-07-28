@@ -3,6 +3,18 @@
 create-crmx-email-draft.py — Stage 7 CRMX/GHL blueprint-delivery email DRAFT creator.
 
 Spec: docs/crmx-blueprint-delivery-and-automation.md §2.
+
+CANONICAL LAYOUT (moved here 2026-07-28, marker BLUEPRINT-EMAIL-INTERNAL-COMMENT-LEAK-20260728):
+Playbook card FIRST, Audio Walkthrough SECOND, NO outcome-bullet callout lines, centered
+cards (no grey box), centered table-buttons, signed "Madison Lanz | Franchise KI".
+This spec used to live as an HTML comment inside templates/delivery-email-template.html and
+therefore SHIPPED INSIDE EVERY CLIENT EMAIL — including the names of two other clients it
+cited as the reference format. HTML comments do not render, but they are plainly readable in
+"view source"/"show original", so it was internal provenance (and other clients' names) sitting
+in a prospect's inbox. Confirmed present in the email sent to bri-fresh
+(GHL conversation message NNcakq9sffqoWspfJm98, 2026-07-28T16:23:42Z) before this fix.
+Keep layout notes HERE, never in the shipped HTML. The only comment left in the template is the
+neutral `blueprint-delivery-email v2` provenance marker that gate D5-16 requires.
 Builds a blueprint delivery email from the ONE canonical template
 (templates/delivery-email-template.html — never a fork), injects the real lead
 tokens, runs scripts/email-design-conformance.py on the resolved HTML and REQUIRES
