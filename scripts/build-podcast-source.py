@@ -174,12 +174,10 @@ must not be spoken; say "your business", "your company", or "your operation" ins
 "her", "he", "him", "{first} has", "{first} is", or "{first} runs" — you are speaking TO {first}, never about {first}.
 Never mention where this briefing came from, never reference any written input behind the episode,
 and never narrate like an outside analyst reviewing a case — you are talking directly with {first}.
-These EXACT words must NEVER be spoken, not once: "source", "sources", "source material",
-"this document", "the document", "the report", "the brief", "the material", "we are analyzing",
-"we're analyzing". There is no document in this conversation — there is only what {first} told us.
-Say "what you told us" instead. (Added 2026-07-28: the steer alone banned these and a host still
-said "sources" on shak-sevaa-lightwork, costing a full regeneration — the ban now lives in the
-ingested source too, not only in the per-run instruction.)
+The word "source" and its plural must NEVER be spoken, not once, in any form or combination —
+and neither may any noun for a written or analysed input behind this episode. Nothing written
+exists in this conversation: there is only what {first} told us, and that is the exact phrase to
+use. Do not narrate as though examining anything.
 LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Spend roughly
 eighty seconds on EACH of the six AI Employees — do not shortchange the last two. This is a complete
 walkthrough, not a summary.
