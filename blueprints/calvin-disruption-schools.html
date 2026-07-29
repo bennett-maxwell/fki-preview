@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-29T14:38:26Z | Lead: Calvin | Industry: Professional Services -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-07-29T14:39:28Z | Lead: Calvin | Industry: Professional Services -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -552,8 +552,8 @@
           <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="20" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">30 hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="30" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -827,9 +827,9 @@ Acceptance test: the output restates the task, lists the four steps in order, ta
   // contract/leads/rate/hours here -- that shipped 2388/10/18/15 to every lead and violated
   // Rule 14 (no hardcoded ROI defaults) and Rule 18 (avg-ticket honesty).
   const PRESETS = {
-    conservative: { contract: 1000, leads: 10, rate: 20, hours: 15, lift: 0.5 },
-    expected:     { contract: 1000, leads: 10, rate: 20, hours: 15, lift: 1.0 },
-    stretch:      { contract: 1000, leads: 10, rate: 20, hours: 15, lift: 1.3 }
+    conservative: { contract: 1000, leads: 10, rate: 20, hours: 30, lift: 0.5 },
+    expected:     { contract: 1000, leads: 10, rate: 20, hours: 30, lift: 1.0 },
+    stretch:      { contract: 1000, leads: 10, rate: 20, hours: 30, lift: 1.3 }
   };
   let currentLift = 1.0;
 
