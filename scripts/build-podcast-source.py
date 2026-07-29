@@ -48,12 +48,24 @@ def _has(v):
 def _build_stack_body():
     if stack:
         return " ".join(f"{clean(s['tool'])} — {clean(s['role'])}." for s in stack[:6])
+    # Key spellings differ between GHL field sets: the live GPCi3 form emits
+    # communication_tools, older profiles used communication_channels. Accept both —
+    # on shak-sevaa-lightwork the single-key lookup reported "no communication" for a
+    # lead who answered "Email Only", which would have had the hosts contradict him.
+    # ALSO: only assert an absence when the lead was actually ASKED and answered a
+    # non-answer ("None"). If the key is absent entirely the question was never put to
+    # them, so say nothing — "no AI tool already in hand" was being asserted about
+    # leads who were never asked about AI tooling.
     have, missing = [], []
-    for label, key in (("storage", "storage_tools"), ("CRM", "crm_tools"),
-                       ("project management", "project_management_tools"),
-                       ("communication", "communication_channels"),
-                       ("AI tool already in hand", "current_ai_tool")):
-        val = quiz.get(key)
+    for label, keys in (("storage", ("storage_tools",)),
+                        ("CRM", ("crm_tools",)),
+                        ("project management", ("project_management_tools",)),
+                        ("communication", ("communication_tools", "communication_channels")),
+                        ("AI tool already in hand", ("current_ai_tool",))):
+        present_key = next((k for k in keys if k in quiz), None)
+        if present_key is None:
+            continue  # never asked — never assert either way
+        val = quiz.get(present_key)
         (have if _has(val) else missing).append(
             f"{clean(val)} is your {label}" if _has(val) else f"no {label}")
     bits = []
@@ -162,6 +174,12 @@ must not be spoken; say "your business", "your company", or "your operation" ins
 "her", "he", "him", "{first} has", "{first} is", or "{first} runs" — you are speaking TO {first}, never about {first}.
 Never mention where this briefing came from, never reference any written input behind the episode,
 and never narrate like an outside analyst reviewing a case — you are talking directly with {first}.
+These EXACT words must NEVER be spoken, not once: "source", "sources", "source material",
+"this document", "the document", "the report", "the brief", "the material", "we are analyzing",
+"we're analyzing". There is no document in this conversation — there is only what {first} told us.
+Say "what you told us" instead. (Added 2026-07-28: the steer alone banned these and a host still
+said "sources" on shak-sevaa-lightwork, costing a full regeneration — the ban now lives in the
+ingested source too, not only in the per-run instruction.)
 LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Spend roughly
 eighty seconds on EACH of the six AI Employees — do not shortchange the last two. This is a complete
 walkthrough, not a summary.
