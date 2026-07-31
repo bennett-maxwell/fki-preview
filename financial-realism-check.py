@@ -40,6 +40,7 @@ INDUSTRY_BANDS = {
     "property_mgmt":      (1000,50000,  "annual mgmt fee"),
     "marketing_agency":   (250, 25000,  "retainer/project"),   # marketing services (Sky/BME form: industry=marketing)
     "heavy_equipment":    (2000,200000, "equipment/contract"), # road equipment mfg/services (Diamond Road; muni contracts)
+    "automotive":         (2000, 100000, "vehicle"),      # vehicle sale / auto concierge deal
     "unknown":            (None, None,  "deal"),            # cannot verify -> flagged
 }
 

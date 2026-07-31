@@ -236,6 +236,29 @@ primary_goal = str(profile.get('primary_goal') or profile.get('quiz', {}).get('b
 # Derived values
 method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
 domain_slug = business_name.lower().replace(' ', '').replace("'", '')
+
+# PERMANENT FIX 2026-07-30 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-DOMAIN-FABRICATED-FROM-BUSINESS-NAME-20260730,
+# EC-BLUEPRINT-INVENTED-DOMAIN-PRESENTED-AS-LEAD-SITE-20260730:
+# {{DOMAIN}} was ALWAYS `business_name.lower().replace(' ','') + '.com'` — a GUESS. It is
+# rendered to the customer 5 times as a statement of fact ("Brand voice built from X",
+# "a structured review of X"). When the guess is wrong we tell the prospect we reviewed a
+# website that is not theirs. Caught on lisa-red-carpet-auto: business name yields
+# `lisasredcarpetautoexperience.com` while her real, live site is `drivewithlisa.com`.
+# It only ever "worked" by luck when the name slug happened to equal the real domain
+# (e.g. william-diggers-catch -> diggerscatch.com). Same bug-class as the ROI/stack
+# template-default leaks: per-lead content that was never sourced from the lead.
+# Rule: use the lead's REAL website when the profile has one; guess only as a last resort.
+_site_raw = str(profile.get('website') or profile.get('domain') or '').strip()
+if _site_raw:
+    _d = re.sub(r'^https?://', '', _site_raw, flags=re.I).strip('/')
+    _d = re.sub(r'^www\.', '', _d, flags=re.I).split('/')[0]
+    domain_display = _d
+    domain_provenance = 'lead_website'
+else:
+    domain_display = f'{domain_slug}.com'
+    domain_provenance = 'derived_from_business_name_GUESS'
+print(f"  Domain: '{domain_display}'  provenance={domain_provenance}")
 services_str = ', '.join(services) if services else f'{industry} services'
 # tools may be a list (normal profile shape, e.g. ["CRM","Email","Phone"]) or a str.
 # Coerce to a string so {{CRM_TOOL}} html.replace() never sees a list (was TypeError,
@@ -470,7 +493,7 @@ replacements = {
     '{{QUALIFY_URL}}': qualify_url,
     '{{MAILTO_LINK}}': mailto_link,
     '{{SERVICES_LIST}}': services_str,
-    '{{DOMAIN}}': f'{domain_slug}.com',
+    '{{DOMAIN}}': domain_display,
     '{{CRM_TOOL}}': crm_display,
     '{{PM_TOOL}}': pm_display,
     '{{TEAM_COMMS_TOOL}}': team_comms_display,
@@ -485,6 +508,43 @@ for placeholder, value in replacements.items():
     if isinstance(value, list):
         value = ', '.join(str(v) for v in value)
     html = html.replace(placeholder, value)
+
+# PERMANENT FIX 2026-07-30 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-NO-CRM-BROKEN-PROSE-20260730, EC-BLUEPRINT-YOUR-NONE-SENTENCES-20260730:
+# The 2026-07-23 stack fix correctly coerces a missing CRM to the literal "None" for the
+# STACK CARD and the oppmap tools cells (a label, where "None" is right). But {{CRM_TOOL}}
+# is ALSO dropped into five running SENTENCES, where "None" is not a label — it is a noun.
+# Those render as broken English to the customer: "wired into your None", "your None data",
+# "initial None configuration", "your None forms", "built on your None account".
+# Verified live 2026-07-30 on the already-DELIVERED william-diggers-catch page, which shows
+# "your None account", "your None data", "your None forms" and "your None that answers".
+# Any lead who answers no-CRM hits this, and no-CRM is common on the Advaita intake form.
+# Fix: when there is no CRM, rewrite those five SENTENCE slots into grammatical copy that
+# promises nothing the lead did not say and invents no tool name. Label slots keep "None".
+if crm_display == 'None':
+    _no_crm_prose = [
+        ('wired into your None that answers every inbound',
+         'wired into your website and text inquiries that answers every inbound'),
+        ('pulled directly from your None data',
+         'pulled directly from the customer records we set up with you'),
+        ('and initial None configuration',
+         'and initial CRM setup'),
+        ('connected to your None forms',
+         'connected to your website and text inquiries'),
+        ('built on your None account',
+         'built on the CRM account we set up for you'),
+    ]
+    _fixed = 0
+    for _bad, _good in _no_crm_prose:
+        if _bad in html:
+            html = html.replace(_bad, _good)
+            _fixed += 1
+    print(f"  no-CRM prose: rewrote {_fixed}/{len(_no_crm_prose)} sentence slots "
+          f"(stack card + tools cells keep the literal 'None')")
+    if 'your None' in html or ' None configuration' in html:
+        import sys as _sys
+        print("ERROR: a 'None' sentence slot survived the no-CRM prose fix.", file=_sys.stderr)
+        _sys.exit(1)
 
 # PERMANENT FIX 2026-07-23 (marker BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723):
 # After tokens resolve, the oppmap "Tools It Connects" cells can contain repeats or
