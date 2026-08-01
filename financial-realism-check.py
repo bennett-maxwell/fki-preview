@@ -69,6 +69,7 @@ LEAD_INDUSTRY = {
     "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
     "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
     "josh-jackson-exalt":"consulting",       # Exalt (exaltlife.co) — business/ops consulting, growth partner; packages $200-$300, engagement default modeled in-band
+    "janet-drawn-logic":"consulting",        # Drawn Logic LLC (GHL form 2026-08-01: business_type=consultant) — technical training + system engineering; The Logic Audit is a scoped diagnostic engagement, so the consulting engagement band applies. Avg engagement value was NOT asked on the intake form, so the slider sits at the band minimum as a neutral, user-adjustable default — never presented as Janet's own figure.
     "simon-harwood-disruptive-foods-20260618": "food_franchise",  # Disruptive Foods — street-food product distribution to retail (GHL form 2026-06-18); per-customer ticket band
     "asif-jam-equities-20260618":              "food_franchise",  # JAM Equities — multi-unit QSR/restaurant operator (GHL form 2026-06-18); per-guest ticket band
     # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
