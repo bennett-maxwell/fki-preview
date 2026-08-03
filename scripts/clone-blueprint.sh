@@ -730,6 +730,22 @@ with open(output_file, 'w') as f:
 print(f"  Replacements complete. Output: {output_file}")
 PYTHON_SCRIPT
 
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-TEMPLATE-SECTIONS-PER-LEAD-20260803, Madison directive):
+# Render gaps/oppmap/results/ignore/timeline FROM THE LEAD PROFILE. TEMPLATE.html hardcoded these
+# five sections as lead-agnostic B2B-agency copy, so every build shipped a different AI-employee
+# roster than the lead's own six, two FABRICATED "You flagged X as a top stress" claims, "Agent"
+# instead of "AI Employee", and plural-team copy on solo operators -- and run-audit.py scored those
+# pages 19/19 anyway. Both janet-drawn-logic and cindy-broken-in-treasures had to be hand-repaired.
+# This makes it structural. BLOCKING: a surviving leak refuses the build.
+RENDER_SECTIONS="$SCRIPT_DIR/blueprint_render_sections.py"
+if [[ -f "$RENDER_SECTIONS" ]]; then
+  python3 "$RENDER_SECTIONS" --lead "$LEAD_SLUG" --html "$OUTPUT_FILE" || {
+    echo "ERROR: per-lead section render failed its own leak check -- refusing to continue" >&2
+    echo "       (BLUEPRINT-TEMPLATE-SECTIONS-PER-LEAD-20260803)" >&2
+    exit 1
+  }
+fi
+
 # Convert legacy event-design/B2B sections into a home-services page before any
 # gate can pass. The frame is still canonical; this patch removes wrong-industry
 # content for plumbing/HVAC/electrical/home-service profiles.

@@ -90,6 +90,9 @@ LEAD_INDUSTRY = {
     "mike-johnson":     "home_services",      # Johnson Plumbing LLC
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
     "claude-code":      "ai_consulting",       # Claude Code Agency — AI agent development, $5K contracts
+    "advaita-ai-blueprint-20260709": "ai_consulting",  # "Advaita AI — The Blueprint We Built for Our Own Firm" (page <title>) — Advaita's own AI-services blueprint
+    "franchise-live":   "ai_consulting",       # "AI Advantage Roadmap — Franchise LIVE" (page <title>) — internal AI-roadmap demo, same class as join-martha
+    "join-martha":      "ai_consulting",       # "AI Advantage Roadmap — Martha" (page <title>) — internal Advaita AI-roadmap demo, same class as claude-code. Classified rather than NON_LEAD-excluded, per the standard stated above: excluding would reintroduce the silent-skip bug.
 }
 
 def _load_slug_industry():
@@ -226,7 +229,23 @@ def check_file(path, clone_registry):
     # same $25K-$120K slider). Two photography studios sharing a photography range
     # is correct, not a clone. So we key by (triple, industry) and only fail when a
     # single triple spans >=2 distinct industries (or all blueprints share one).
-    if slider_triple:
+    # PERMANENT FIX 2026-08-03 (marker BLUEPRINT-D702-BAND-MIN-NOT-A-CLONE-20260803):
+    # EXEMPT the neutral band-minimum default. Per BLUEPRINT-ROI-PRESET-FROM-FORM-20260727, a lead
+    # who did NOT state an average contract value gets `contract = industry_band_min` on purpose --
+    # a documented neutral, user-adjustable starting point. That is the OPPOSITE of "ONE financial
+    # profile cloned across DIFFERENT industries" (this check's own stated target): every such page
+    # is sitting at its OWN industry's floor, independently derived.
+    # Observed harm: $3,000 is simultaneously the `consulting` floor AND the static default baked
+    # into the join-martha demo page, so a single coincidence of floors failed D7-02 for THIRTEEN
+    # already-delivered consulting leads (chris-lpnw, dino-ahc, heather-herae-studios,
+    # josh-jackson-exalt, lisa-christine, paul-muus, rey-31-consulting, shaheen-mazloom,
+    # shivangi-jain, stan-xtreme, tom-reliant-bridge, valerie-lane, janet-drawn-logic) that had
+    # nothing wrong with them. Classifying the demo could not fix it -- any label still leaves two
+    # distinct industries -- so the check's semantics were the defect, not the data.
+    # A page whose default is an INVENTED figure (not its band floor) is still fully clone-checked,
+    # which is the case the red-line was written for.
+    at_band_floor = (lo is not None and slider_default is not None and slider_default == lo)
+    if slider_triple and not at_band_floor:
         clone_registry[slider_triple].append((slug, industry))
 
     # --- D7-04 fabricated hardcoded $ figures in client copy (outside <script>/<input>) ---
