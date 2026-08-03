@@ -91,7 +91,7 @@ LEAD_INDUSTRY = {
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
     "claude-code":      "ai_consulting",       # Claude Code Agency — AI agent development, $5K contracts
     "advaita-ai-blueprint-20260709": "ai_consulting",  # "Advaita AI — The Blueprint We Built for Our Own Firm" (page <title>) — Advaita's own AI-services blueprint
-    "franchise-live":   "ai_consulting",       # "AI Advantage Roadmap — Franchise LIVE" (page <title>) — internal AI-roadmap demo, same class as join-martha
+    "franchise-live":   "general_small_business",  # "AI Advantage Roadmap — Franchise LIVE" (page <title>) — internal demo, NO intake and NO stated business type, and its $500 avg-customer-value fits no trade band coherently (ai_consulting starts at $3,000). general_small_business is the accurate class for exactly that. Its slider is set to the band FLOOR below, per BLUEPRINT-ROI-PRESET-FROM-FORM-20260727: a page with no intake to preset from takes the documented neutral default.
     "join-martha":      "ai_consulting",       # "AI Advantage Roadmap — Martha" (page <title>) — internal Advaita AI-roadmap demo, same class as claude-code. Classified rather than NON_LEAD-excluded, per the standard stated above: excluding would reintroduce the silent-skip bug.
 }
 

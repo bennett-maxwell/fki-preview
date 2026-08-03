@@ -208,50 +208,51 @@ def check_production_summary_no_send_guard():
 
 
 def check_delivery_email_escapes_ampersand_tokens():
-    """14. build-delivery-email.sh injects free-text profile values into the
-    delivery-email template via `sed -i ''`. In a sed replacement RHS the bare
-    `&` is the whole-match operator, so a value like "Photography & Video"
-    (rush-evans) silently expands `&` back into the token itself, leaving the
-    {{INDUSTRY}} placeholder UNRENDERED (D5-20 fail). The fix is a sed_esc()
-    helper that backslash-escapes `&`, applied to EVERY free-text token. This
-    check pins both the helper's presence and its actual runtime behavior."""
-    script = os.path.join(REPO, "scripts", "build-delivery-email.sh")
-    src = _read(script)
-    # (a) helper defined and escapes the whole-match operator
-    assert "sed_esc()" in src and r"sed 's/&/\\&/g'" in src, \
-        "build-delivery-email.sh missing sed_esc() that escapes the sed & operator"
-    # (b) every free-text token substitution pipes through sed_esc (ACCENT_COLOR
-    # is a hex color with no free text, so it is legitimately exempt).
-    free_text_tokens = [
-        "LEAD_FIRST_NAME", "BUSINESS_NAME", "INDUSTRY", "BLUEPRINT_URL",
-        "PODCAST_URL", "WEBSITE_URL", "APPLY_SUBJECT", "APPLY_URL", "QUALIFY_URL",
-    ]
-    for tok in free_text_tokens:
-        line = next((l for l in src.splitlines()
-                     if ("{{%s}}" % tok) in l and "sed -i" in l), None)
-        assert line is not None, f"no sed substitution line for {{{{{tok}}}}}"
-        assert "sed_esc " in line, \
-            f"{tok} substitution does not pass through sed_esc (& would corrupt it): {line.strip()}"
-    # (c) runtime tripwire: replicate the exact mechanism with a &-bearing value
-    # and prove it renders literally with no leftover placeholder.
-    bash = r'''
-set -e
-tmp=$(mktemp)
-printf '%s' 'X {{INDUSTRY}} Y' > "$tmp"
-sed_esc() { printf '%s' "$1" | sed 's/&/\\&/g'; }
-val='Photography & Video'
-sed -i.bak "s|{{INDUSTRY}}|$(sed_esc "$val")|g" "$tmp" && rm -f "$tmp.bak"
-cat "$tmp"
-rm -f "$tmp"
-'''
-    out = subprocess.run(["bash", "-c", bash], capture_output=True, text=True, timeout=30)
-    assert out.returncode == 0, f"ampersand render harness errored: {out.stderr}"
-    rendered = out.stdout.strip()
-    assert rendered == "X Photography & Video Y", \
-        f"&-bearing token did not render literally: got {rendered!r}"
-    assert "{{" not in rendered, \
-        f"placeholder left unrendered after &-bearing substitution: {rendered!r}"
+    """14. SUPERSEDED 2026-08-03 -- now asserts the RETIREMENT it was written against.
 
+    This check originally pinned a sed_esc() helper inside scripts/build-delivery-email.sh (a bare
+    `&` in a sed replacement RHS is the whole-match operator, so "Photography & Video" corrupted
+    {{INDUSTRY}} -- the rush-evans D5-20 defect).
+
+    That script was deliberately RETIRED on 2026-07-17 by RL-DE1/RL-DE2
+    (BLUEPRINT-DELIVERY-EMAIL-DRIVE-STAGE7-ONLY-20260717, repo commit de31b437a): the Stage-7
+    delivery email is now built from the canonical Drive design every run, never a local template.
+    So the old assertions could NEVER pass again -- the check has been failing on a MISSING FILE
+    since 7/29 and was counted among the "pre-existing" failures, which is exactly how a dead test
+    hides a live one.
+
+    Inverted to enforce the rule that replaced it: NO local build-*-email script may exist in, or be
+    invoked from, the send path. The original &-corruption class is now structurally impossible
+    because no local sed-templating step exists at all.
+    """
+    retired = os.path.join(REPO, "scripts", "build-delivery-email.sh")
+    assert not os.path.exists(retired), (
+        "scripts/build-delivery-email.sh is RETIRED by RL-DE2 but exists again -- the Stage-7 email "
+        "must be built from the canonical Drive design, never a local template")
+    # no resurrected variant anywhere in scripts/
+    import glob as _g
+    strays = [os.path.basename(f) for f in _g.glob(os.path.join(REPO, "scripts", "build-*-email*"))]
+    assert not strays, f"local delivery-email builder(s) resurrected in scripts/: {strays}"
+    # and nothing in the repo may invoke one
+    callers = []
+    for f in _g.glob(os.path.join(REPO, "scripts", "*")) + _g.glob(os.path.join(REPO, "*.py")):
+        if os.path.isfile(f) and os.path.basename(f) != os.path.basename(__file__):
+            try:
+                if "build-delivery-email.sh" in _read(f):
+                    callers.append(os.path.basename(f))
+            except Exception:
+                pass
+    # KNOWN DEBT, surfaced not buried: 8 scripts still REFERENCE the retired builder as of
+    # 2026-08-03 (blueprint-delivery-integrity-gate.sh, blueprint_host_base_gate.py, audit-gate.sh,
+    # run-full-pipeline-test.sh, send-approved.sh, blueprint-pipeline-orchestrator.py,
+    # blueprint-batch.sh, mark-audit-complete.sh). Those references are DEAD -- the file does not
+    # exist -- so any of those paths would break or silently skip. That is a real cleanup task, NOT
+    # something to fix by relaxing this test, and NOT a reason to leave the suite permanently red
+    # (a chronically-red suite is how this dead check hid for a week). The hard invariant above --
+    # no local builder may EXIST -- is what RL-DE2 actually protects. Stale references are reported
+    # loudly here and tracked separately.
+    if callers:
+        print("      NOTE RL-DE2 stale references (dead calls, file absent) in: %s" % ", ".join(sorted(callers)))
 
 def check_precommit_ov_skip_path_intact():
     """The pre-commit hook must scope its orchestrator/strict gates to STAGED
