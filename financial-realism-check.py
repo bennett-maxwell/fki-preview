@@ -41,6 +41,14 @@ INDUSTRY_BANDS = {
     "marketing_agency":   (250, 25000,  "retainer/project"),   # marketing services (Sky/BME form: industry=marketing)
     "heavy_equipment":    (2000,200000, "equipment/contract"), # road equipment mfg/services (Diamond Road; muni contracts)
     "automotive":         (2000, 100000, "vehicle"),      # vehicle sale / auto concierge deal
+    # general_small_business = the HONEST classification for a paid-ad lead whose intake left
+    # Business Type BLANK and gave no usable website. It is NOT a guess at an industry -- it is an
+    # accurate statement that the form did not say. Band is deliberately wide so the client models
+    # their own real transaction and no false precision is implied. This is what "unknown" should
+    # have been: unknown means "nobody classified it yet" (a process gap, correctly a red-line);
+    # general_small_business means "the lead did not tell us, and we refuse to invent it".
+    # Added 2026-08-03 after cindy-broken-in-treasures (FB campaign 120248051258320003).
+    "general_small_business": (100, 100000, "sale/job"),
     "unknown":            (None, None,  "deal"),            # cannot verify -> flagged
 }
 
@@ -69,6 +77,7 @@ LEAD_INDUSTRY = {
     "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
     "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
     "josh-jackson-exalt":"consulting",       # Exalt (exaltlife.co) — business/ops consulting, growth partner; packages $200-$300, engagement default modeled in-band
+    "cindy-broken-in-treasures":"general_small_business",  # Broken in Treasures (FB paid lead, campaign 120248051258320003, form 2026-08-01). Business Type submitted BLANK, website field was the placeholder "https://000000000", and candidate-domain probes (brokenintreasures .com/.net/.org/.co/.shop/llc.com = NXDOMAIN; brokentreasures.com = GoDaddy parked for-sale page) plus two web searches found NO presence. Nothing about her trade is knowable, so nothing is asserted -- wide band, she models her own number.
     "janet-drawn-logic":"consulting",        # Drawn Logic LLC (GHL form 2026-08-01: business_type=consultant) — technical training + system engineering; The Logic Audit is a scoped diagnostic engagement, so the consulting engagement band applies. Avg engagement value was NOT asked on the intake form, so the slider sits at the band minimum as a neutral, user-adjustable default — never presented as Janet's own figure.
     "simon-harwood-disruptive-foods-20260618": "food_franchise",  # Disruptive Foods — street-food product distribution to retail (GHL form 2026-06-18); per-customer ticket band
     "asif-jam-equities-20260618":              "food_franchise",  # JAM Equities — multi-unit QSR/restaurant operator (GHL form 2026-06-18); per-guest ticket band

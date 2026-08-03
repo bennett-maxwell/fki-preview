@@ -249,15 +249,40 @@ domain_slug = business_name.lower().replace(' ', '').replace("'", '')
 # (e.g. william-diggers-catch -> diggerscatch.com). Same bug-class as the ROI/stack
 # template-default leaks: per-lead content that was never sourced from the lead.
 # Rule: use the lead's REAL website when the profile has one; guess only as a last resort.
+#
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803,
+# EC-BLUEPRINT-DOMAIN-GUESS-FALLBACK-STILL-LIVE-20260803):
+# The 7/30 fix resolved the domain from profile['website'] but LEFT THE GUESS FALLBACK LIVE, so
+# the defect simply moved: any lead with a missing OR PLACEHOLDER website re-inherited it.
+# Proven on cindy-broken-in-treasures (FB paid lead): her submitted website was the placeholder
+# "https://000000000", and the builder printed `brokenintreasures.com` and stated it to the
+# customer as fact 6 times -- a domain that does not resolve (NXDOMAIN on .com/.net/.org/.co/
+# .shop/llc.com; brokentreasures.com is a GoDaddy parked page). Paid-ad leads routinely leave the
+# website field blank or garbage, so this is the common case, not the edge case.
+# Rule now: a domain is used ONLY if it is structurally a real domain. There is NO guess, ever.
+# When absent, domain_display is empty and the domain-bearing sentences are rewritten to neutral
+# copy below (same approach as the no-CRM prose fix), then hard-asserted.
 _site_raw = str(profile.get('website') or profile.get('domain') or '').strip()
+_d = ''
 if _site_raw:
     _d = re.sub(r'^https?://', '', _site_raw, flags=re.I).strip('/')
-    _d = re.sub(r'^www\.', '', _d, flags=re.I).split('/')[0]
+    _d = re.sub(r'^www\.', '', _d, flags=re.I).split('/')[0].strip().lower()
+# Structural validity: must have a dot, a >=2-char alphabetic TLD, and a label that is not all
+# digits/zeros. Catches "000000000", "0", "n/a", "none", "tbd", bare words, and IP-ish junk.
+_valid_domain = bool(
+    _d
+    and re.match(r'^(?=.{4,253}$)([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$', _d)
+    and not re.match(r'^[0-9.]+$', _d)
+    and _d.split('.')[0] not in ('none', 'na', 'tbd', 'null', 'example', 'test')
+    and not re.match(r'^0+$', _d.split('.')[0])
+)
+if _valid_domain:
     domain_display = _d
     domain_provenance = 'lead_website'
 else:
-    domain_display = f'{domain_slug}.com'
-    domain_provenance = 'derived_from_business_name_GUESS'
+    domain_display = ''
+    domain_provenance = ('absent_no_usable_website' if not _site_raw
+                         else f'absent_rejected_placeholder({_site_raw[:40]})')
 print(f"  Domain: '{domain_display}'  provenance={domain_provenance}")
 services_str = ', '.join(services) if services else f'{industry} services'
 # tools may be a list (normal profile shape, e.g. ["CRM","Email","Phone"]) or a str.
@@ -544,6 +569,41 @@ if crm_display == 'None':
     if 'your None' in html or ' None configuration' in html:
         import sys as _sys
         print("ERROR: a 'None' sentence slot survived the no-CRM prose fix.", file=_sys.stderr)
+        _sys.exit(1)
+
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803):
+# When the lead has NO usable website, the template's domain-bearing sentences must not name a
+# domain at all. Rewrite them to neutral, still-true copy, then hard-fail if any address survives.
+if not domain_display:
+    import re as _re2
+    _domain_prose = [
+        (r'Brand voice is calibrated from\s+and the language your customers already use',
+         'Brand voice is calibrated from your own words and the language your customers already use'),
+        (r'Brand voice is built instantly from\s+and your existing customer language',
+         'Brand voice is built from your own words and your existing customer language'),
+        (r'Brand voice built from\s+and your existing ([^<]{1,80}?) messaging',
+         r'Brand voice built from your own words in the kickoff call'),
+        (r'based on your intake answers and a structured review of\s*\.',
+         'based on your intake answers.'),
+        (r'a structured review of\s+([A-Za-z0-9.-]*)\.', 'a structured review of what you told us.'),
+        (r'trained on your brand voice from\s+that converts', 'trained on your brand voice that converts'),
+        (r'\bfrom\s+and\b', 'from your own words and'),
+        (r'\breview of\s+\.', 'review of what you told us.'),
+    ]
+    _dfix = 0
+    for _pat, _rep in _domain_prose:
+        html, _n = _re2.subn(_pat, _rep, html)
+        _dfix += _n
+    # collapse any doubled spaces the empty token left behind, inside text only
+    html = _re2.sub(r'(?<=[a-z,])  +(?=[a-z])', ' ', html)
+    print(f"  no-domain prose: rewrote {_dfix} sentence slot(s) (no website supplied -> no domain named)")
+    # HARD ASSERT: no fabricated domain may survive. The business-name guess is the exact string
+    # the old fallback would have produced; if it appears anywhere, the build is lying to the customer.
+    _guess = f'{domain_slug}.com'
+    if _guess.lower() in html.lower():
+        import sys as _sys
+        print(f"ERROR: fabricated domain '{_guess}' present although the lead supplied no usable "
+              f"website (BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803).", file=_sys.stderr)
         _sys.exit(1)
 
 # PERMANENT FIX 2026-07-23 (marker BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723):
