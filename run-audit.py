@@ -207,6 +207,74 @@ def agent_card_prompt_quality_gate(slug, html_path):
     except Exception as e:
         return False, f"agent card prompt quality check error: {e}"
 
+# D2-27 [RL] SHARED-TEMPLATE LEAK GATE — added 2026-08-03.
+# Root cause it closes: the B2B-agency source template's roster + stress copy survived
+# into freshly generated lead pages, and the audit scored those pages 19/19 anyway
+# (Janet 2026-08-01, Cindy 2026-08-01, William 2026-07-30). Per-page hand repair does
+# not stop the next lead from inheriting it, so the gate lives here.
+#
+# Every sub-check is CONDITIONAL on the lead's own intake contradicting the page. A lead
+# who really did submit stress areas, or who really does run an agency-style roster, is
+# never failed — that was the whole risk of a naive grep.
+TEMPLATE_ROSTER = [
+    "Client Onboarding", "Proposal Generator", "Content Production",
+    "Retention Monitor", "Client Health Monitor", "Admin Automation",
+    "Sales Intelligence",
+]
+# Every stress-ish key observed across the 76 lead files (2026-08-03 survey).
+STRESS_KEYS = (
+    "operational_stress_areas", "operational_stresses", "top_stress",
+    "top_operational_stress", "stress_points", "pain_points",
+)
+PLURAL_TEAM_COPY = ("your team", "Team walkthrough", "your 24/7 human support")
+
+
+def template_leak_gate(html, lead):
+    """Return (ok, detail). Fails only where intake and page disagree."""
+    findings = []
+    text = re.sub(r"<[^>]+>", " ", html)
+
+    # (a) Fabricated stress claim: page asserts "You flagged …" with no stress fact on file.
+    has_stress = False
+    for k in STRESS_KEYS:
+        v = lead.get(k)
+        if isinstance(v, str) and v.strip():
+            has_stress = True
+        elif isinstance(v, (list, tuple)) and any(str(x).strip() for x in v):
+            has_stress = True
+    if not has_stress:
+        n = len(re.findall(r"You flagged", text, re.I))
+        if n:
+            findings.append(
+                f"{n}x 'You flagged' but intake carries no stress field "
+                f"({'/'.join(STRESS_KEYS)})"
+            )
+
+    # (b) Template roster names in the copy that are NOT this lead's own agents.
+    own = set()
+    for k in ("ai_agents", "agents"):
+        for a in (lead.get(k) or []):
+            nm = a.get("name") if isinstance(a, dict) else a
+            if nm:
+                own.add(str(nm).lower())
+    leaked = [r for r in TEMPLATE_ROSTER
+              if r in text and not any(r.lower() in o for o in own)]
+    if leaked:
+        findings.append("template roster in copy, not this lead's agents: " + ", ".join(leaked))
+
+    # (c) Plural-team copy on a solo operator.
+    try:
+        ts = int(str(lead.get("team_size", "")).strip() or 0)
+    except ValueError:
+        ts = 0
+    if ts == 1:
+        plural = [p for p in PLURAL_TEAM_COPY if re.search(re.escape(p), text, re.I)]
+        if plural:
+            findings.append(f"team_size=1 but plural-team copy present: {plural}")
+
+    return (not findings), "; ".join(findings)
+
+
 def no_orphan_classes(html):
     style_blocks = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, flags=re.DOTALL | re.I))
     defined = set(re.findall(r"\.([A-Za-z_][A-Za-z0-9_-]*)", style_blocks))
@@ -545,6 +613,10 @@ def audit_lead(slug):
     acpq_ok, acpq_detail = agent_card_prompt_quality_gate(slug, html_path)
     results["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
     redlines["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
+    # D2-27 [RL] shared-template leak (fabricated stress claim / foreign roster / solo+plural copy)
+    leak_ok, leak_detail = template_leak_gate(html, lead)
+    results["D2-27_template_leak_RL"] = leak_ok
+    redlines["D2-27_template_leak_RL"] = leak_ok
     podcast_exists = os.path.exists(os.path.join(REPO, "podcasts", podcast_filename(slug)))
     results["D3-01_podcast_exists"] = podcast_exists
     redlines["D3-01_podcast_exists_RL"] = podcast_exists
@@ -592,7 +664,8 @@ def audit_lead(slug):
             "podcast_detail": podcast_detail,
             "podcast_audio_detail": podcast_audio_detail,
             "podcast_clean_ending_detail": clean_end_detail,
-            "agent_card_prompt_quality_detail": acpq_detail}
+            "agent_card_prompt_quality_detail": acpq_detail,
+            "template_leak_detail": leak_detail}
 
 def main():
     import argparse
@@ -617,7 +690,10 @@ def main():
         status = "PASS" if (r.get("score", 0) >= THRESHOLD and not rl_fail) else "FAIL"
         if status == "FAIL":
             any_fail = True
-        extra = f"  RED-LINE FAIL: {rl_fail} ({r.get('financial_detail','')})" if rl_fail else ""
+        rl_detail = r.get("financial_detail", "")
+        if "D2-27_template_leak_RL" in rl_fail and r.get("template_leak_detail"):
+            rl_detail = (rl_detail + " | " if rl_detail else "") + r["template_leak_detail"]
+        extra = f"  RED-LINE FAIL: {rl_fail} ({rl_detail})" if rl_fail else ""
         print(f"[{status}] {slug}: {r.get('passed',0)}/{r.get('total',0)} ({r.get('score',0):.0%}){extra}")
     # Append to history
     os.makedirs(os.path.dirname(HISTORY), exist_ok=True)
