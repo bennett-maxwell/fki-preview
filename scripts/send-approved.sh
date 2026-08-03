@@ -94,8 +94,16 @@ PYEOF
         continue
     fi
     echo "→ Sending $slug..."
-    bash "$SCRIPT_DIR/build-delivery-email.sh" "$profile" --send-ghl --bennett-approved --gate-token "$token" && \
-        echo "  ✅ $slug: sent" || \
-        echo "  ❌ $slug: failed"
+    # RL-DE2 REWIRE 2026-08-03 (marker BLUEPRINT-RLDE2-DEAD-CALLERS-REWIRED-20260803):
+    # build-delivery-email.sh was RETIRED 2026-07-17 by RL-DE1/RL-DE2 (repo commit de31b437a).
+    # This invocation had been dead ever since -- it failed on a missing file and printed a bare
+    # "failed", giving no clue that the SEND PATH itself was decommissioned. It fails CLOSED (no
+    # false "sent"), but opaquely, which is its own hazard on a revenue path.
+    echo "  ⛔ $slug: NOT SENT -- this send path is retired."
+    echo "     build-delivery-email.sh no longer exists: RL-DE2 requires the Stage-7 delivery email"
+    echo "     to be built from the canonical Drive blueprint-ai-skill design every run, never a"
+    echo "     local template. Send via the CRMX conversations/messages API per skill v3.52 after"
+    echo "     a session audit of 100% + explicit approval. See the Drive skill Stage-7 section."
+    exit 2
 done
 echo "Done."

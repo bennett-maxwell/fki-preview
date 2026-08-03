@@ -2,7 +2,9 @@
 # audit-gate.sh — blueprint-ai-audit-skill v2.8 HARD 100% GATE (Bennett directive 2026-06-01).
 #
 # Mints a hash-bound approval token ONLY when every deterministic enforcer passes (100%).
-# build-delivery-email.sh calls this immediately before any send. No token => no send.
+# RETIRED CALLER NOTE (2026-08-03): build-delivery-email.sh (which used to call this immediately
+# before any send) was retired by RL-DE2 on 2026-07-17. This token gate still applies -- no token =>
+# no send -- but it is now the Drive-sourced Stage-7 path that must honour it.
 #
 # Usage: audit-gate.sh <slug> <email_html> [blueprint_html]
 # Exit 0 + token minted = approved for THESE EXACT email bytes.

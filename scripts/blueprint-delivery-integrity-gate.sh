@@ -44,7 +44,7 @@
 #
 # CHOKEPOINT NOTE: status is written to the tracker ONLY by this script's
 # write_tracker_status(), driven by the gate exit code. The send path
-# (build-delivery-email.sh) calls `--write-status` and never sets "delivered"
+# (the retired build-delivery-email.sh, RL-DE2 2026-07-17) called `--write-status` and never set "delivered"
 # itself. This makes the gate mechanical, not advisory (R23 architectural fix).
 # ----------------------------------------------------------------------------
 set -uo pipefail

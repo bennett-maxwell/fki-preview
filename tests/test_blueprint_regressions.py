@@ -242,17 +242,30 @@ def check_delivery_email_escapes_ampersand_tokens():
                     callers.append(os.path.basename(f))
             except Exception:
                 pass
-    # KNOWN DEBT, surfaced not buried: 8 scripts still REFERENCE the retired builder as of
-    # 2026-08-03 (blueprint-delivery-integrity-gate.sh, blueprint_host_base_gate.py, audit-gate.sh,
-    # run-full-pipeline-test.sh, send-approved.sh, blueprint-pipeline-orchestrator.py,
-    # blueprint-batch.sh, mark-audit-complete.sh). Those references are DEAD -- the file does not
-    # exist -- so any of those paths would break or silently skip. That is a real cleanup task, NOT
-    # something to fix by relaxing this test, and NOT a reason to leave the suite permanently red
-    # (a chronically-red suite is how this dead check hid for a week). The hard invariant above --
-    # no local builder may EXIST -- is what RL-DE2 actually protects. Stale references are reported
-    # loudly here and tracked separately.
-    if callers:
-        print("      NOTE RL-DE2 stale references (dead calls, file absent) in: %s" % ", ".join(sorted(callers)))
+    # 2026-08-03: all 8 dead callers were REWIRED (marker BLUEPRINT-RLDE2-DEAD-CALLERS-REWIRED-20260803).
+    # A bare filename mention in a comment is fine and expected -- the rewire deliberately documents
+    # WHY the path is retired. What must never come back is an executable invocation, so distinguish
+    # the two instead of flagging every mention.
+    live = []
+    for f in _g.glob(os.path.join(REPO, "scripts", "*")):
+        if not os.path.isfile(f) or os.path.basename(f) == os.path.basename(__file__):
+            continue
+        try:
+            for i, line in enumerate(_read(f).splitlines(), 1):
+                bare = line.strip()
+                if bare.startswith("#") or "build-delivery-email.sh" not in bare:
+                    continue
+                # an invocation looks like: bash/sh <path>, "$SCRIPT_DIR/...", or run_script("...")
+                if re.search(r'(?:bash|sh|exec)\s+[^\s]*build-delivery-email\.sh'
+                             r'|run_script\(\s*["\']build-delivery-email\.sh'
+                             r'|^\s*"\$SCRIPT_DIR/build-delivery-email\.sh"', bare):
+                    live.append(f"{os.path.basename(f)}:{i}")
+        except Exception:
+            pass
+    # blueprint-batch.sh keeps one invocation inside an `if false;` block purely as a wiring marker.
+    live = [x for x in live if not x.startswith("blueprint-batch.sh")]
+    assert not live, ("RL-DE2 violation: live build-delivery-email.sh invocation(s) resurrected at "
+                      + ", ".join(live))
 
 def check_precommit_ov_skip_path_intact():
     """The pre-commit hook must scope its orchestrator/strict gates to STAGED
@@ -404,8 +417,17 @@ def check_clone_engine_coerces_list_tools():
     # (a) the tools_str coercion exists (list -> ', '.join, else passthrough)
     assert "tools_str = ', '.join(tools) if isinstance(tools, list) else tools" in script, \
         "clone-blueprint.sh missing tools_str list coercion"
-    assert "'{{CRM_TOOL}}': tools_str if tools_str else 'your CRM'" in script, \
-        "{{CRM_TOOL}} replacement no longer uses the coerced tools_str"
+    # SUPERSEDED 2026-08-03: this used to assert the {{CRM_TOOL}} fallback was `'your CRM'`.
+    # RL-DE3 (BLUEPRINT-DELIVERY-EMAIL-DRIVE-STAGE7-ONLY-20260717) BANS exactly that: a none/other/
+    # blank CRM answer must render the literal string `None`, "never invented, never blanked, never a
+    # placeholder/example tool name". The 7/23-7/30 no-CRM work replaced the fallback with
+    # `crm_display`, so this assertion had been pinning behaviour the rules now FORBID -- if it ever
+    # passed again we would be violating RL-DE3. Second dead test found in the same audit as
+    # DELIVERY_EMAIL_ESCAPES_AMPERSAND_TOKENS. Re-pointed at the current contract:
+    assert "'{{CRM_TOOL}}': crm_display" in script, \
+        "{{CRM_TOOL}} must resolve via crm_display (RL-DE3 literal-None handling)"
+    assert "'your CRM'" not in script, \
+        "RL-DE3 violation: the invented placeholder 'your CRM' is back in clone-blueprint.sh"
     # (a) the replace loop defensively joins ANY list value (future array fields)
     assert "if isinstance(value, list):" in script and \
         "value = ', '.join(str(v) for v in value)" in script, \
