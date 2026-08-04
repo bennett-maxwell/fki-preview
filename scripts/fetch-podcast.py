@@ -63,6 +63,30 @@ def steering(first, business):
     )
 
 
+def _load_steer(slug):
+    """PERMANENT FIX (2026-08-04, marker BLUEPRINT-PODCAST-STEER-FILE-ACTUALLY-USED-20260804):
+    honour BLUEPRINT-PODCAST-STEER-CANONICAL-20260727, which requires the steer to be a
+    GENERATED artifact passed VERBATIM — never hand-written inline.
+
+    Defect this closes: `build-podcast-source.py` has been emitting
+    `podcasts/<slug>-podcast-steer.txt` since 2026-07-27, but nothing ever read it. This
+    module kept building its own steer from the inline `steering()` helper, so the canonical
+    steer's full forbidden-phrase family, its explicit 9-12 minute length instruction, and its
+    MANDATORY spoken closing sign-off were all silently discarded on every single lead. That is
+    the exact drift the 7/27 rule was written to prevent, and it is the most likely cause of the
+    recurring D3-02 (third-person slip) and D3-05 (clean ending) re-rolls, because the weaker
+    inline steer omits the phrase list that the passing runs had.
+
+    Behaviour: prefer the generated steer file verbatim; fall back to inline `steering()` only
+    when the file is genuinely absent (older leads built before 7/27).
+    Rollback: delete this function and restore `steer = steering(first_name, business_name)`."""
+    p = os.path.join(PODCASTS, f"{slug}-podcast-steer.txt")
+    if not os.path.exists(p):
+        return None
+    txt = open(p, encoding="utf-8").read().strip()
+    return txt or None
+
+
 def _strip_urls(text):
     """Permanent fix (2026-07-17): NotebookLM narrated raw URLs from source docs aloud
     (Barbara's episode ended by reading a long hbr.org/qualify.html link). Strip every
@@ -171,9 +195,13 @@ async def main(slug, notebook_id, source_path, business_name, first_name, timeou
             log(f"notebook created (attempt {attempt}/{cap}): {last_nb}")
             await client.sources.add_text(last_nb, f"{business_name or slug} AI Blueprint", content, wait=True)
             log("source added")
-            steer = steering(first_name, business_name)
+            steer = _load_steer(slug)
+            steer_src = f"generated file podcasts/{slug}-podcast-steer.txt (verbatim)"
+            if not steer:
+                steer = steering(first_name, business_name)
+                steer_src = "inline steering() fallback — no generated steer file found"
             await client.artifacts.generate_audio(last_nb, instructions=steer, audio_length=AudioLength.SHORT)
-            log(f"audio generation requested (steered, {len(steer)} chars)")
+            log(f"audio generation requested (steered, {len(steer)} chars) via {steer_src}")
             attempt_to = min(timeout, max(300, int(budget_end - time.time())))
             if not await _wait_and_download(client, last_nb, out, attempt_to):
                 log(f"attempt {attempt}: render timed out")
