@@ -424,7 +424,18 @@ def main() -> int:
                      ("AI Agent Prompts for", "AI Employee Prompts for"),
                      ("<h3>Agent 1 &mdash;", "<h3>AI Employee 1 &mdash;"),
                      ("<h3>Agent 2 &mdash;", "<h3>AI Employee 2 &mdash;"),
-                     ("<h3>Agent 3 &mdash;", "<h3>AI Employee 3 &mdash;")):
+                     ("<h3>Agent 3 &mdash;", "<h3>AI Employee 3 &mdash;"),
+                     # 2026-08-04 (marker BLUEPRINT-D226-NAV-AND-AGENTS-HEADING-20260804): this
+                     # D2-26 block already corrected the PROMPTS chrome but missed the two most
+                     # prominent labels on the page — the sticky-nav link and the roster section
+                     # heading. Every delivered blueprint checked (steve, janet, cindy, william,
+                     # lisa) shipped "AI Agents" exactly twice in customer-facing copy while the
+                     # canonical rule is "the customer-facing label is always AI Employee".
+                     # run-audit.py does not implement D2-26, so a 20/20 pass never flagged it.
+                     # TEMPLATE.html is fixed at source; these keep any rebuilt page consistent.
+                     ('<a href="#agents">AI Agents</a>', '<a href="#agents">AI Employees</a>'),
+                     ("AI Agents Built for", "AI Employees Built for"),
+                     ("Each agent maps directly", "Each AI Employee maps directly")):
             html = html.replace(x, y)
         open(html_path, "w", encoding="utf-8").write(html)
         print("  per-lead sections: rendered %s from profile (solo=%s, stress=%s)"

@@ -131,6 +131,53 @@ def session_audit_ok(slug):
     return True, "audit 100/100 this session"
 
 
+def _qualify_url(prof):
+    """Build the tracked qualifier URL, guaranteeing the `employees=` context param.
+
+    PERMANENT FIX 2026-08-04 (marker BLUEPRINT-QUALIFY-EMPLOYEES-PARAM-STRUCTURAL-20260804):
+    `scripts/blueprint_qualifier_context_gate.py` HARD-REQUIRES `employees=` (or legacy
+    `agents=`) on the qualifier link, and fails `too_few_tailored_agents` when fewer than the
+    lead's own employees are listed — but this builder simply passed `prof['qualify_url']`
+    through with no fallback. So the param existed only when whoever hand-wrote the lead JSON
+    happened to remember to encode all six employee names into the URL by hand. A required
+    parameter that depends on human recall is not enforced; it is luck, and it silently drops
+    the personalisation the qualifier uses to pre-fill the prospect's answers.
+
+    Now: take any explicitly supplied qualify_url/apply_url, and if it is missing the
+    employees/agents context, append it from the profile's own roster (ai_agents, else agents).
+    An explicitly supplied URL that ALREADY carries the param is left untouched.
+    Rollback: restore `prof.get("qualify_url") or prof.get("apply_url", "")`."""
+    from urllib.parse import urlsplit, urlunsplit, parse_qs, urlencode, quote_plus
+
+    base = prof.get("qualify_url") or prof.get("apply_url") or ""
+    names = []
+    for k in ("ai_agents", "agents"):
+        for a in (prof.get(k) or []):
+            nm = a.get("name") if isinstance(a, dict) else a
+            if nm and str(nm) not in names:
+                names.append(str(nm))
+        if names:
+            break
+
+    if not base:
+        if not prof.get("slug"):
+            return ""
+        base = ("https://hub.aiblueprintmarketing.com/qualify.html"
+                f"?src={quote_plus(prof['slug'])}"
+                f"&lead={quote_plus(str(prof.get('first_name') or prof.get('lead_name') or ''))}"
+                f"&biz={quote_plus(str(prof.get('business_name') or ''))}")
+
+    parts = urlsplit(base)
+    qs = parse_qs(parts.query, keep_blank_values=True)
+    if not (qs.get("employees") or qs.get("agents")):
+        if not names:
+            return base  # nothing truthful to add; let the gate report it rather than invent
+        qs["employees"] = [",".join(names)]
+        base = urlunsplit((parts.scheme, parts.netloc, parts.path,
+                           urlencode(qs, doseq=True), parts.fragment))
+    return base
+
+
 def resolve(slug):
     prof = json.load(open(os.path.join(REPO, "leads", f"{slug}.json")))
     html = open(TEMPLATE, encoding="utf-8").read()
@@ -148,7 +195,7 @@ def resolve(slug):
         "ACCENT_COLOR": prof.get("accent_color", "#0071E3"),
         "BLUEPRINT_URL": prof.get("blueprint_url", ""),
         "PODCAST_URL": prof.get("podcast_url", ""),
-        "QUALIFY_URL": prof.get("qualify_url") or prof.get("apply_url", ""),
+        "QUALIFY_URL": _qualify_url(prof),
     }
     for t in TOKENS:
         html = html.replace("{{" + t + "}}", str(vals[t]))
