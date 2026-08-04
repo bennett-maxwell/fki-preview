@@ -235,13 +235,31 @@ def template_leak_gate(html, lead):
     text = re.sub(r"<[^>]+>", " ", html)
 
     # (a) Fabricated stress claim: page asserts "You flagged …" with no stress fact on file.
-    has_stress = False
-    for k in STRESS_KEYS:
-        v = lead.get(k)
-        if isinstance(v, str) and v.strip():
-            has_stress = True
-        elif isinstance(v, (list, tuple)) and any(str(x).strip() for x in v):
-            has_stress = True
+    #
+    # FALSE-POSITIVE FIX 2026-08-04 (marker BLUEPRINT-D227-STRESS-KEY-NESTED-IN-QUIZ-20260804):
+    # this sub-check originally read the TOP LEVEL of the lead profile only. But the form/GHL
+    # intake path nests every quiz answer under `quiz`, so 15 of the 76 surveyed lead files --
+    # including the two most recent real builds, calvin-disruption-schools and
+    # cindy-broken-in-treasures -- carry `operational_stress_areas` ONLY inside `quiz`.
+    # Consequence: a lead who genuinely DID select a stress area was reported as having
+    # fabricated it. calvin-disruption-schools (delivered 2026-07-29) states "You flagged" 2x
+    # with a real quiz-nested stress fact and fails this red-line today purely on field
+    # location. Per this gate's own documented hygiene rule -- "a gate that cries wolf gets
+    # disabled, that is its own defect class" -- resolve the stress fact from the top level
+    # OR from `quiz`. This does NOT weaken the check: a page still fails when no stress fact
+    # exists in either place. Rollback: drop the `quiz` fallback below.
+    def _stress_present(container):
+        if not isinstance(container, dict):
+            return False
+        for k in STRESS_KEYS:
+            v = container.get(k)
+            if isinstance(v, str) and v.strip():
+                return True
+            if isinstance(v, (list, tuple)) and any(str(x).strip() for x in v):
+                return True
+        return False
+
+    has_stress = _stress_present(lead) or _stress_present(lead.get("quiz"))
     if not has_stress:
         n = len(re.findall(r"You flagged", text, re.I))
         if n:
