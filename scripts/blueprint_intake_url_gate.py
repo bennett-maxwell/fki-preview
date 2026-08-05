@@ -227,10 +227,60 @@ def scan_dir_fixture(body: str, stale: bool) -> list[str]:
         return scan(d)
 
 
+# ---------------------------------------------------------------- live probe
+#
+# REPO-GREEN IS NOT LIVE-GREEN (added 2026-08-05, marker BLUEPRINT-INTAKE-URL-LIVE-PROBE-20260805).
+# On 2026-08-05 this gate passed, CI was green, and every file on origin/main was a correct redirect
+# stub -- while hub.aiblueprintmarketing.com/apply/ was STILL serving the 67,570-byte stale intake form
+# for ~45 minutes, because the Pages deploy carrying the fix had been cancelled by a later push
+# (pages.yml sets cancel-in-progress: true). Three green signals, one wrong customer surface.
+#
+# --live therefore checks the SERVED BYTES, not the working tree. It is opt-in so offline/CI runs stay
+# deterministic and never fail on a network blip.
+
+LIVE_HOST = "https://hub.aiblueprintmarketing.com"
+LIVE_PATHS = ("/apply/", "/apply.html", "/", "/advaita-lp.html")
+
+
+def probe_live(timeout: int = 25) -> list[str]:
+    """Fetch each retired entry point and prove the CUSTOMER gets the canonical form."""
+    import urllib.request
+    findings: list[str] = []
+    req_hdrs = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                              "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"}
+    for path in LIVE_PATHS:
+        url = LIVE_HOST + path
+        try:
+            req = urllib.request.Request(url, headers=req_hdrs)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                body = r.read().decode("utf-8", "replace")
+        except Exception as exc:
+            findings.append(f"RL-IU4 {url}: unreachable ({exc.__class__.__name__}) -- cannot prove live state")
+            continue
+        fields = sum(1 for f in FORM_FIELDS if f in body)
+        canon = body.count(CANONICAL_HOST)
+        # advaita-lp is a real landing page, not a stub: it only needs its CTA on canonical.
+        if path == "/advaita-lp.html":
+            if canon < 1:
+                findings.append(f"RL-IU4 {url}: landing page does not link {CANONICAL} (canonical refs 0)")
+            if fields >= 2:
+                findings.append(f"RL-IU4 {url}: LIVE page ships {fields} intake fields of its own")
+            continue
+        if fields >= 2:
+            findings.append(f"RL-IU4 {url}: LIVE surface is STILL SERVING an intake form "
+                            f"({fields} fields, {len(body)} bytes) -- a deploy has not landed")
+        if canon < 1:
+            findings.append(f"RL-IU4 {url}: LIVE surface has 0 references to {CANONICAL_HOST} "
+                            f"({len(body)} bytes) -- not redirecting to the canonical form")
+    return findings
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=str(pathlib.Path(__file__).resolve().parent.parent))
     ap.add_argument("--self-test", "--selftest", dest="selftest", action="store_true")
+    ap.add_argument("--live", action="store_true",
+                    help="ALSO probe the served bytes on the live hub (repo-green is not live-green)")
     a = ap.parse_args()
 
     if a.selftest:
@@ -238,6 +288,8 @@ def main() -> int:
 
     root = pathlib.Path(a.root).resolve()
     findings = scan(root)
+    if a.live:
+        findings += probe_live()
     if findings:
         print(f"BLUEPRINT INTAKE URL GATE: FAIL ({len(findings)} finding(s))")
         for f in findings:
