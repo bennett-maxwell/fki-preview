@@ -40,17 +40,36 @@ CANONICAL_HOST = "blueprint.meetadvaita.com"
 # Paths that used to serve an intake form. They must exist ONLY as redirect stubs.
 RETIRED_INTAKE_PATHS = ("apply/index.html", "apply.html", "index.html")
 
-# An href pointing at a retired intake path. Canonical absolute URLs are fine.
+# An href pointing at the retired BLUEPRINT intake path.
+#
+# PRECISION MATTERS MORE THAN REACH HERE. The first cut of this pattern matched any
+# `apply.html` / `apply/` substring and produced 43 false positives on its first full-tree
+# run -- `thank-you-apply.html` (a thank-you page, matched because `-` is a word boundary)
+# and all 40 pages of `advaita-site-20260715/`, a SEPARATE marketing site whose own
+# relative `apply.html` is titled "Book a fit call" and contains zero intake fields.
+# A gate that cries wolf gets switched off, so this now matches only:
+#   * an absolute URL on a retired HOST that ends at /apply
+#   * a root-absolute /apply or /fki-preview/apply
+# A bare relative `apply.html` belongs to whatever site contains it and is NOT our concern.
 RETIRED_HREF = re.compile(
-    r"""href\s*=\s*["'](?![^"']*blueprint\.meetadvaita\.com)"""
-    r"""[^"']*(?:/apply/|/apply\.html|\bapply/|\bapply\.html"""
-    r"""|aiblueprintmarketing\.com/apply)[^"']*["']""",
+    r"""href\s*=\s*["']("""
+    r"""https?://(?:bennett-maxwell\.github\.io|hub\.aiblueprintmarketing\.com)"""
+    r"""(?:/fki-preview)?/apply(?:/|\.html)?"""
+    r"""|/(?:fki-preview/)?apply(?:/|\.html)?"""
+    r""")(?:[?#][^"']*)?["']""",
     re.I,
 )
 
-# Field names unique to the intake questionnaire. Two or more => this file IS a form.
+# Field names unique to the intake questionnaire.
 FORM_FIELDS = ("revenue_range", "team_size", "monthly_leads", "crm_tools",
                "operational_stress", "biggest_goal", "ai_maturity", "process_maturity")
+
+# RL-IU3 must fire on a real FORM, not on a page that merely mentions these names.
+# Blueprint pages legitimately carry `team_size` / `monthly_leads` as ROI-calculator
+# variables -- that is not an intake form. Require an actual form control plus the
+# submit label, and a majority of the field set.
+FORM_MARKERS = ("<form", "<input", "<select")
+SUBMIT_LABEL = "build my"
 
 # Only these extensions are customer-facing surfaces worth gating.
 SCAN_EXT = {".html", ".htm"}
@@ -66,6 +85,16 @@ def _skip(rel: str) -> bool:
     return any(s in rel for s in SKIP_SUFFIX)
 
 
+def ships_intake_form(text: str) -> bool:
+    """True only when this file IS an intake questionnaire, not merely mentions its fields."""
+    low = text.lower()
+    if not any(m in low for m in FORM_MARKERS):
+        return False                      # no form controls at all
+    if SUBMIT_LABEL not in low:
+        return False                      # no intake submit label
+    return sum(1 for f in FORM_FIELDS if f in text) >= 4
+
+
 def is_redirect_stub(text: str) -> bool:
     """A stub must send the browser to the canonical URL and carry no form of its own."""
     points_at_canonical = CANONICAL_HOST in text
@@ -73,8 +102,7 @@ def is_redirect_stub(text: str) -> bool:
         re.search(r"http-equiv\s*=\s*['\"]refresh", text, re.I)
         or re.search(r"location\s*\.\s*(replace|assign|href)", text, re.I)
     )
-    field_hits = sum(1 for f in FORM_FIELDS if f in text)
-    return points_at_canonical and has_redirect and field_hits < 2
+    return points_at_canonical and has_redirect and not ships_intake_form(text)
 
 
 def scan(root: pathlib.Path) -> list[str]:
@@ -104,7 +132,7 @@ def scan(root: pathlib.Path) -> list[str]:
             findings.append(f"RL-IU1 {rel}: links to retired intake path -> {m.group(0)[:90]}")
 
         # RL-IU3 — a live page must not itself be an intake form.
-        if sum(1 for fld in FORM_FIELDS if fld in text) >= 2 and not is_redirect_stub(text):
+        if ships_intake_form(text) and not is_redirect_stub(text):
             findings.append(f"RL-IU3 {rel}: ships intake form fields; only {CANONICAL} may host the form")
 
     return findings
@@ -123,6 +151,21 @@ _STALE_FORM = (
     '<input name="crm_tools"><button>Build My Free Blueprint</button></form></body></html>'
 )
 _LINKS_OLD = '<!DOCTYPE html><html><body><a href="/apply/">Get My Free Blueprint</a></body></html>'
+
+# A REAL intake questionnaire: form controls + the submit label + a majority of the fields.
+_REAL_FORM = (
+    '<!DOCTYPE html><html><body><form>'
+    '<input name="revenue_range"><input name="team_size"><input name="monthly_leads">'
+    '<select name="crm_tools"></select><input name="biggest_goal">'
+    '<button>Build My Free Blueprint</button></form></body></html>'
+)
+# Regression fixtures for the 43 false positives this gate produced on its first full run.
+_THANK_YOU = '<!DOCTYPE html><html><body><a href="thank-you-apply.html">Thanks</a></body></html>'
+_OTHER_SITE = '<!DOCTYPE html><html><body><a href="apply.html">Book a fit call</a></body></html>'
+_ROI_PAGE = (
+    '<!DOCTYPE html><html><body><script>const team_size=3;const monthly_leads=50;'
+    'const revenue_range="u250k";</script></body></html>'
+)
 
 
 def _mk(d: pathlib.Path, rel: str, body: str) -> None:
@@ -185,6 +228,39 @@ def self_test() -> int:
         d = pathlib.Path(td)
         _mk(d, "email.html", '<a href="https://hub.aiblueprintmarketing.com/apply/">form</a>')
         cases.append(("BAD absolute stale host link", scan(d), True))
+
+    # GOOD (regression): a thank-you page whose name merely ENDS in -apply.html.
+    with tempfile.TemporaryDirectory() as td:
+        d = pathlib.Path(td)
+        for rel in RETIRED_INTAKE_PATHS:
+            _mk(d, rel, _STUB)
+        _mk(d, "qualify/index.html", _THANK_YOU)
+        cases.append(("GOOD thank-you-apply.html not flagged", scan(d), False))
+
+    # GOOD (regression): a DIFFERENT site's own relative apply.html ("Book a fit call").
+    with tempfile.TemporaryDirectory() as td:
+        d = pathlib.Path(td)
+        for rel in RETIRED_INTAKE_PATHS:
+            _mk(d, rel, _STUB)
+        _mk(d, "advaita-site/index.html", _OTHER_SITE)
+        _mk(d, "advaita-site/apply.html", _OTHER_SITE)
+        cases.append(("GOOD other site's relative apply.html not flagged", scan(d), False))
+
+    # GOOD (regression): a blueprint page carrying ROI variable names but no form.
+    with tempfile.TemporaryDirectory() as td:
+        d = pathlib.Path(td)
+        for rel in RETIRED_INTAKE_PATHS:
+            _mk(d, rel, _STUB)
+        _mk(d, "partners/x/index.html", _ROI_PAGE)
+        cases.append(("GOOD ROI variable names are not a form", scan(d), False))
+
+    # BAD: a real intake questionnaire served from a non-canonical path.
+    with tempfile.TemporaryDirectory() as td:
+        d = pathlib.Path(td)
+        for rel in RETIRED_INTAKE_PATHS:
+            _mk(d, rel, _STUB)
+        _mk(d, "sites/rogue-intake.html", _REAL_FORM)
+        cases.append(("BAD second intake form elsewhere in repo", scan(d), True))
 
     # BAD: a "stub" that redirects somewhere else entirely.
     with tempfile.TemporaryDirectory() as td:
