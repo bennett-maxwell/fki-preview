@@ -16,9 +16,10 @@ on:
       - "tests/**"
       - ".github/workflows/blueprint-audit.yml"
       - "apply/**"
-      - "apply.html"
-      - "index.html"
-      - "advaita-lp.html"
+      # The intake-URL gate scans EVERY html in the repo, so its trigger must too.
+      # Editing rj-themed-linear/index.html fired no workflow on 5704503 and the gate
+      # could not protect the other 104 html-bearing directories. BLUEPRINT-INTAKE-URL-CANONICAL-20260805
+      - "**.html"
   pull_request:
     paths:
       - "blueprints/**"
@@ -27,9 +28,10 @@ on:
       - "scripts/**"
       - "tests/**"
       - "apply/**"
-      - "apply.html"
-      - "index.html"
-      - "advaita-lp.html"
+      # The intake-URL gate scans EVERY html in the repo, so its trigger must too.
+      # Editing rj-themed-linear/index.html fired no workflow on 5704503 and the gate
+      # could not protect the other 104 html-bearing directories. BLUEPRINT-INTAKE-URL-CANONICAL-20260805
+      - "**.html"
 
 jobs:
   regression-invariants:
