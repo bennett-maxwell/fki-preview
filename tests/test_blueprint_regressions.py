@@ -474,6 +474,31 @@ def check_no_sub7day_golive_promise_in_blueprints():
     )
 
 
+
+def check_intake_url_is_canonical():
+    """22. ONE intake form, ONE URL: https://blueprint.meetadvaita.com/ (Madison, stated twice).
+
+    Delegates to scripts/blueprint_intake_url_gate.py (marker BLUEPRINT-INTAKE-URL-CANONICAL-20260805),
+    which enforces RL-IU1/2/3: no live file links a retired intake path, retired paths exist only as
+    redirect stubs, and no live file ships intake form fields of its own.
+
+    WHY WIRED HERE: the gate landed as a standalone script but was not in this suite, so nothing ran it
+    on every change. That is the same shape as the two DEAD TESTS found on 8/3 -- a rule with no
+    executing check rots. Its own --self-test covers both directions and kills always-allow /
+    always-block mutants; this wiring makes sure it actually runs.
+
+    NOTE the gate checks the REPO. Repo-green is not live-green: on 8/5 the fix commit was pushed and
+    the gate passed while hub.aiblueprintmarketing.com/apply/ was STILL serving the 67KB stale form,
+    because the Pages deploy had not finished. Always verify the live customer URL separately.
+    """
+    gate = os.path.join(REPO, "scripts", "blueprint_intake_url_gate.py")
+    assert os.path.exists(gate), "scripts/blueprint_intake_url_gate.py is missing"
+    import subprocess
+    r = subprocess.run([sys.executable, gate], capture_output=True, text=True)
+    assert r.returncode == 0, "non-canonical intake URL:\n" + (r.stdout or r.stderr)[-900:]
+    st = subprocess.run([sys.executable, gate, "--self-test"], capture_output=True, text=True)
+    assert st.returncode == 0, "intake-url gate self-test FAILED:\n" + (st.stdout or st.stderr)[-600:]
+
 CHECKS = [
     ("CLONE_ENGINE_COERCES_LIST_TOOLS", check_clone_engine_coerces_list_tools),
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
@@ -496,6 +521,7 @@ CHECKS = [
     ("PODCAST_DURATION_STANDARD_IS_8_TO_12", check_podcast_duration_standard_is_8_to_12),
     ("AGENT_PROMPT_QUALITY_GATE_WIRED", check_agent_prompt_quality_gate_wired),
     ("NO_SUB7DAY_GOLIVE_PROMISE", check_no_sub7day_golive_promise_in_blueprints),
+    ("INTAKE_URL_IS_CANONICAL", check_intake_url_is_canonical),
 ]
 
 
