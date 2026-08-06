@@ -89,7 +89,7 @@ def _build_leaks_body():
                      "the record has to be reconstructed by hand later instead of just existing.")
     if _has(quiz.get("response_speed")):
         leaks.append(f"Answering new inquiries {clean(quiz['response_speed'])} is a standard held by a person, "
-                     "not a system — so it holds only when someone on the team is free to hold it.")
+                     "not a system — so it holds only when someone on your team is free to hold it.")
     if not _has(quiz.get("project_management_tools")):
         leaks.append("With no project-management tool, coordination happens ad hoc, so the next step "
                      "lives in someone's memory instead of somewhere everyone can see it.")
@@ -216,7 +216,7 @@ _agent_list = ", ".join(_agent_names[:-1]) + (" and " + _agent_names[-1] if len(
 
 steer = f"""Open with EXACTLY these words, spoken naturally in your own host voice: "{opening}"
 
-THE SINGLE MOST IMPORTANT RULE — SECOND PERSON, ALWAYS. You are talking directly TO {first}, face to face, for the ENTIRE episode. Every reference to the company is "your business", "your company", "your operation", "your team", or "{biz}" by name.
+THE SINGLE MOST IMPORTANT RULE — SECOND PERSON, ALWAYS. You are talking directly TO {first}, face to face, for the ENTIRE episode. Every reference to where {first} works is "your business", "your company", "your operation", "your team", or "{biz}" by name.
 
 These EXACT phrases are FORBIDDEN and will get the episode thrown out. Do not say any of them, not once, not in passing, not in the closing:
 - "the business" / "this business" / "the company" / "this company"
@@ -224,19 +224,51 @@ These EXACT phrases are FORBIDDEN and will get the episode thrown out. Do not sa
 - "her business" / "his business" / "their business" / "her team" / "his team" / "their team"
 - "{first} has" / "{first} is" / "{first} runs" / "{first} needs" / "{first} wants"
 - "source" / "sources" / "source material" / "this document" / "the report" / "the brief" / "we are analyzing"
+- NEVER put the word "owner" or "client" anywhere near {first}'s name. No "the owner, {first}", no "a business owner like {first}", no "our client {first}", no "the client, {first}". {first} is never described to a third party — {first} is the person you are speaking to. Say "you", never a label.
 Instead ALWAYS say: "your business", "your company", "your team", "you have", "you run", "you need", and "what you told us".
 Read your closing line back to yourself before you say it — the ending is where hosts slip into "the business". Keep it second person all the way to the final word.
 
 LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Roughly eighty seconds on EACH of the six AI Employees — do not shortchange the last two.
 
-Body: walk through all six by name in order — {_agent_list}. For EACH one lead with the business benefit: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
+Body: walk through all six by name in order — {_agent_list}. For EACH one lead with the payoff for you: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
 
-Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what the company does operationally — its customers, its equipment, its locations, its coverage — unless that was explicitly provided.
+Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what you do operationally — your customers, your equipment, your locations, your coverage — unless that was explicitly provided.
 
 Sell the outcome, not the technology. Do not explain how the tech works. Do not talk about AI in general. Conversational and warm, never salesy, no marketing buzzwords. Never speak or spell out any web address, domain, or file name — refer to it only as "the qualifier page".
 
 MANDATORY CLOSING — the episode is rejected without it. Do NOT stop talking the moment you give the call to action. End with a real, explicit, spoken wrap-up in second person, in this order: say "to wrap up", then "your next step is to open your written playbook and complete the qualifier page", then thank {first} for listening. The final words of the episode must be that sign-off. An episode that ends immediately after the call to action, or trails off mid-thought, fails review and has to be regenerated."""
 
+# ── SELF-CONTRADICTION GATE (blocking) ──────────────────────────────────────
+# EC-BLUEPRINT-PODCAST-STEER-CONTRADICTS-ITS-OWN-BANLIST-20260806.
+# D3-02 kept failing on `(the|this) business` because the steer's own LIVE
+# INSTRUCTIONS used banned phrases ("lead with the business benefit", "every
+# reference to the company", "what the company does operationally"). Hosts
+# echoed the wording they were handed, so the prompt was failing its own gate.
+# A banned phrase is legal ONLY inside a quoted ban-list entry; anywhere else in
+# the instruction text it is a defect that ships a failing render (~10 min lost).
+_BANNED = [r"\b(the|this) business\b", r"\b(the|this) company\b",
+           r"\bthe team\b", r"\bthe owner\b", r"\bthe operation\b"]
+def _assert_no_self_contradiction(text, label):
+    # A banned phrase inside ANY double-quoted span is a ban-list citation, not an
+    # instruction — e.g. No "the owner, {first}". Matching only exactly-wrapped
+    # quotes made this gate fire on its own ban list; a gate that cries wolf gets
+    # disabled, which is its own defect class.
+    quoted = [(m.start(), m.end()) for m in re.finditer(r'"[^"\n]*"', text)]
+    bad = []
+    for pat in _BANNED:
+        for m in re.finditer(pat, text, re.I):
+            if any(a <= m.start() and m.end() <= b for a, b in quoted):
+                continue
+            ctx = text[max(0, m.start() - 80): m.start() + 60].replace("\n", " ")
+            bad.append(f'{label}: "{m.group(0)}" in live instruction … {ctx.strip()} …')
+    return bad
+_bad = _assert_no_self_contradiction(steer, "steer") + \
+       _assert_no_self_contradiction(doc, "source")
+if _bad:
+    raise SystemExit("BLOCKED — steer/source instruct a phrase its own ban-list forbids:\n  "
+                     + "\n  ".join(_bad))
+
 steer_out = os.path.join(REPO, "podcasts", f"{slug}-podcast-steer.txt")
 open(steer_out, "w", encoding="utf-8").write(steer)
 print(f"wrote {steer_out} ({len(steer)} bytes) — pass this VERBATIM to `notebooklm generate audio`")
+print("  self-contradiction gate: PASS (no banned phrase in live instruction text)")
