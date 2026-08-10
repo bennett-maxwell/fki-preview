@@ -309,7 +309,17 @@ def _tool_display(v):
     s = (', '.join(v) if isinstance(v, list) else (v or '')).strip()
     return 'None' if s.lower() in _NONE_SET else s
 pm_display = _tool_display(_quiz.get('project_management_tools'))
-team_comms_display = _tool_display(_quiz.get('communication_channels'))
+# PERMANENT FIX 2026-08-09 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-STACK-COMMS-KEY-MISMATCH-20260809: this read ONLY
+# 'communication_channels', a key that no lead profile and no GHL custom field has
+# ever used — the field is 'communication_tools'. So the 2026-07-23 de-hardcoding
+# fix swapped a fake "Slack" for a silently wrong "None", and EVERY lead built since
+# has rendered "Team Communication: None" while their own form listed real channels
+# (karen-melting-pot-studio shipped this way with Slack/Text/WhatsApp/Email on file).
+# Read the canonical key first, keep the old one as a fallback so nothing regresses.
+team_comms_display = _tool_display(
+    _quiz.get('communication_tools') or _quiz.get('communication_channels')
+)
 storage_display = _tool_display(_quiz.get('storage_tools'))
 
 # Accent color derivatives
