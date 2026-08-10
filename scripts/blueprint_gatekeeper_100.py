@@ -21,13 +21,23 @@ from urllib.parse import unquote, urlparse
 
 
 REPO = Path(__file__).resolve().parents[1]
-# Production audio is duration-first. The Blueprint short-podcast standard is
-# 8-12 minutes, with bytes kept only as a bitrate/corruption sanity check.
+# Production audio is duration-first, with bytes kept only as a bitrate/corruption sanity check.
+#
+# ALIGNED TO CANON 2026-08-10 (marker GATEKEEPER-DURATION-ALIGN-CANON-20260810).
+# This file enforced 8-12 min (480-720s). That is NOT the enforced standard and has not been
+# since v3.50/v3.51: the canonical blueprint-ai-skill states the HARD window is 4:00-16:00
+# (240-960s) and says in terms that "the 8-12 min target is ASPIRATIONAL on SHORT; the enforced
+# window is 240-960s", because native NotebookLM AudioLength.SHORT plateaus at ~4-6 min no matter
+# how hard length is steered. blueprint-ai-audit-skill v2.29 D3-03 and run-audit.py already use
+# 240-960s, so gatekeeper was the only surface still on the old numbers and would have blocked
+# every compliant native SHORT render (observed 287s / 314s / 366s / 387s, all canon-passing).
+# This ALIGNS enforcement to canon; it does not relax below it. The 8-12 min figure is retained
+# below as a non-blocking aspirational target only.
 MIN_PRODUCTION_AUDIO_BYTES = 6 * 1024 * 1024
 MAX_PRODUCTION_AUDIO_BYTES = 20 * 1024 * 1024
-MIN_PRODUCTION_AUDIO_SECONDS = 8 * 60
-MAX_PRODUCTION_AUDIO_SECONDS = 12 * 60
-TARGET_PRODUCTION_AUDIO_MINUTES = 10
+MIN_PRODUCTION_AUDIO_SECONDS = 240   # 4:00 — canonical hard floor
+MAX_PRODUCTION_AUDIO_SECONDS = 960   # 16:00 — canonical hard ceiling
+TARGET_PRODUCTION_AUDIO_MINUTES = 10  # aspirational only; never a gate
 
 
 def utc_now() -> str:
@@ -253,7 +263,7 @@ def audio_direct_address_gate(receipt_dir: Path, lead: str) -> Tuple[bool, str]:
         return True, "direct-address audio receipt passed"
     return False, (
         "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, "
-        "no source-material/third-person phrases, >=5 you/your references, duration_seconds 480-720, "
+        "no source-material/third-person phrases, >=5 you/your references, duration_seconds 240-960, "
         "and matching audio_sha256 required"
     )
 
