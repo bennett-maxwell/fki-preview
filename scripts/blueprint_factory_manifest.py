@@ -47,7 +47,14 @@ def run(cmd):
 
 
 def validate_token(token_path, lead, html, email, profile, receipt_dir):
-    return run([sys.executable, 'scripts/blueprint_gatekeeper_100.py', '--verify-token', '--lead', lead, '--html', str(html.relative_to(ROOT)), '--receipt-dir', str(receipt_dir.relative_to(ROOT)), '--delivery-email', str(email.relative_to(ROOT)), '--profile', str(profile.relative_to(ROOT)), '--token', str(token_path.relative_to(ROOT)), '--json-output'])
+    # REWIRED 2026-08-11 (BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # was blueprint_gatekeeper_100.py --verify-token (retired as the token authority).
+    # The send token is now audit-gate.sh's hash-bound token, verified via blueprint_send_token.py.
+    # token_path/receipt_dir/profile are accepted for signature compatibility; the token location is
+    # canonical (~/.openclaw/state/blueprint-approvals/<slug>.approved) and the binding is to the
+    # exact delivery-email bytes, so the caller cannot point verification at a different token file.
+    return run([sys.executable, 'scripts/blueprint_send_token.py', '--verify', lead,
+                '--email', str(email.relative_to(ROOT))])
 
 
 def main():

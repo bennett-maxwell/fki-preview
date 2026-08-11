@@ -664,18 +664,19 @@ async def stage_email(profile_path: str, profile: dict, status: LeadStatus, dry_
         log.error(f"  [{profile['slug']}] Stage 7 build FAILED: {detail[:150]}")
         return False
 
-    log.info(f"  [{profile['slug']}] Stage 7.0: Gatekeeper production token")
+    # Stage 7.0 send token. REWIRED 2026-08-11 (BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # was blueprint_gatekeeper_100.py --mode production, which is now RETIRED as the token
+    # authority — it required receipts clone-blueprint.sh never emits, so it could not pass and the
+    # send path had stopped using it. audit-gate.sh (via blueprint_send_token.py) is the token:
+    # hash-bound to the exact delivery-email bytes at 100% conformance.
+    log.info(f"  [{profile['slug']}] Stage 7.0: send token (audit-gate, hash-bound)")
     token_proc = subprocess.run(
         [
             sys.executable,
-            str(SCRIPTS_DIR / "blueprint_gatekeeper_100.py"),
-            "--mode", "production",
-            "--lead", profile["slug"],
-            "--html", str(html_path),
-            "--receipt-dir", str(receipt_dir),
-            "--delivery-email", str(REPO_DIR / "delivery-emails" / f"{profile['slug']}-delivery-email.html"),
-            "--profile", profile_path,
-            "--json-output",
+            str(SCRIPTS_DIR / "blueprint_send_token.py"),
+            "--mint", profile["slug"],
+            "--email", str(REPO_DIR / "delivery-emails" / f"{profile['slug']}-delivery-email.html"),
+            "--blueprint", str(html_path),
         ],
         cwd=str(REPO_DIR),
         capture_output=True,
@@ -684,8 +685,8 @@ async def stage_email(profile_path: str, profile: dict, status: LeadStatus, dry_
     )
     if token_proc.returncode != 0:
         detail = (token_proc.stdout + token_proc.stderr)[-500:]
-        status.mark_stage("email", "failed", f"Gatekeeper token missing/failing: {detail}")
-        log.error(f"  [{profile['slug']}] Gatekeeper token FAIL before email: {detail[:200]}")
+        status.mark_stage("email", "failed", f"Send token missing/failing: {detail}")
+        log.error(f"  [{profile['slug']}] Send token FAIL before email: {detail[:200]}")
         return False
 
     args = [profile_path, "--gate-token", str(token_path)]

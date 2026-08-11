@@ -376,7 +376,11 @@ def check_agent_prompt_quality_gate_wired():
     starter prompts. The generator blocks weak profile content and the strict
     gatekeeper runs a dedicated quality gate before production tokening."""
     generator = _read(os.path.join(REPO, "scripts", "gen-blueprint.py"))
-    gatekeeper = _read(os.path.join(REPO, "scripts", "blueprint_gatekeeper_100.py"))
+    # RETARGETED 2026-08-11 (BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # was blueprint_gatekeeper_100.py, which is now a fail-closed retirement shim. The token
+    # authority — and therefore the surface that must run the D2-03 quality gate — is audit-gate.sh.
+    # This assertion is what proves the retirement transferred coverage instead of dropping it.
+    gatekeeper = _read(os.path.join(REPO, "scripts", "audit-gate.sh"))
     quality_gate_path = os.path.join(REPO, "scripts", "blueprint_agent_prompt_quality_gate.py")
     quality_gate = _read(quality_gate_path)
     for token in [

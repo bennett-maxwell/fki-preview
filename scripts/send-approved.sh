@@ -47,10 +47,17 @@ if [ ${#SLUGS[@]} -eq 0 ]; then
     exit 1
 fi
 
-if [ -z "$GATE_TOKEN_DIR" ]; then
-    echo "❌ BLOCKED: Require --gate-token-dir <receipts>."
-    echo "Each slug must have <receipts>/<slug>-gatekeeper-pass-token.json from scripts/blueprint_gatekeeper_100.py --mode production."
-    exit 1
+# SEND-TOKEN REWIRE 2026-08-11 (marker BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+# --gate-token-dir used to be required and had to hold <slug>-gatekeeper-pass-token.json from
+# blueprint_gatekeeper_100.py --mode production. gatekeeper-100 is RETIRED as the token authority
+# (it required receipts clone-blueprint.sh never emits, so it could not pass — 10 pass tokens vs 33
+# fails repo-wide, and delivered leads carried none). The token now lives in ONE canonical place,
+# ~/.openclaw/state/blueprint-approvals/<slug>.approved, minted by audit-gate.sh and bound to the
+# SHA256 of the exact delivery-email bytes. The flag is accepted for backwards compatibility and
+# ignored; the directory can no longer be pointed somewhere convenient to satisfy the gate.
+if [ -n "$GATE_TOKEN_DIR" ]; then
+    echo "ℹ️  --gate-token-dir is accepted for compatibility and IGNORED; the send token is the"
+    echo "   canonical hash-bound audit-gate token (scripts/blueprint_send_token.py --verify <slug>)."
 fi
 
 if [ -z "$APPROVAL_RECEIPT_DIR" ]; then
@@ -66,9 +73,9 @@ for slug in "${SLUGS[@]}"; do
         echo "❌ $slug: profile not found, skip"
         continue
     fi
-    token="$GATE_TOKEN_DIR/${slug}-gatekeeper-pass-token.json"
-    if [ ! -f "$token" ]; then
-        echo "❌ $slug: production Gatekeeper token not found: $token"
+    # Send token: canonical, hash-bound to the exact email bytes. Fails CLOSED.
+    if ! python3 "$SCRIPT_DIR/blueprint_send_token.py" --verify "$slug"; then
+        echo "❌ $slug: send token invalid/missing/stale — external-send lock closed"
         continue
     fi
     approval="$APPROVAL_RECEIPT_DIR/${slug}-bennett-approval.json"
@@ -76,21 +83,16 @@ for slug in "${SLUGS[@]}"; do
         echo "❌ $slug: Bennett approval receipt not found: $approval"
         continue
     fi
-    if ! python3 - "$approval" "$token" <<'PYEOF'
+    if ! python3 - "$approval" <<'PYEOF'
 import json, sys
 approval = json.load(open(sys.argv[1]))
-token_data = json.load(open(sys.argv[2]))
-token = token_data.get("pass_token", token_data)
 approval_ok = approval.get("bennett_approved") is True and approval.get("external_customer_send_approved") is True
-token_ok = token.get("pass") is True and "external_send" in token.get("allowed_actions", [])
 if not approval_ok:
     print("approval receipt must include bennett_approved=true and external_customer_send_approved=true")
-if not token_ok:
-    print("gatekeeper token must include pass=true and allowed_actions contains external_send")
-sys.exit(0 if approval_ok and token_ok else 1)
+sys.exit(0 if approval_ok else 1)
 PYEOF
     then
-        echo "❌ $slug: external-send lock still closed"
+        echo "❌ $slug: human approval missing — external-send lock still closed"
         continue
     fi
     echo "→ Sending $slug..."

@@ -63,6 +63,22 @@ if [ -n "$BP_HTML" ] && [ -f "$BP_HTML" ]; then
         echo "audit-gate: d9-audit.py missing"
         FAILS=$((FAILS+1))
     fi
+
+    # COVERAGE TRANSFER 2026-08-11 (marker BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # blueprint_gatekeeper_100.py was the only token-path caller of the D2-03 agent-card /
+    # ready-to-use-prompt quality gate. Retiring gatekeeper as the token authority would have
+    # SILENTLY dropped that red-line from the send path, so it moves here. Without this line the
+    # retirement would have been a quiet loss of coverage rather than a swap.
+    APQ="$SCRIPT_DIR/blueprint_agent_prompt_quality_gate.py"
+    if [ -f "$APQ" ]; then
+        echo "audit-gate: blueprint_agent_prompt_quality_gate.py (D2-03) ..."
+        APQ_ARGS=(--html "$BP_HTML")
+        [ -f "$REPO_DIR/leads/$SLUG.json" ] && APQ_ARGS+=(--profile "$REPO_DIR/leads/$SLUG.json")
+        if ! python3 "$APQ" "${APQ_ARGS[@]}"; then FAILS=$((FAILS+1)); fi
+    else
+        echo "audit-gate: blueprint_agent_prompt_quality_gate.py missing"
+        FAILS=$((FAILS+1))
+    fi
 fi
 
 if [ "$FAILS" -gt 0 ]; then
