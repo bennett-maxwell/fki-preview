@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>See If AI Is a Fit for Your Business — FKI Qualifier</title>
+<title>See If AI Is a Fit for Your Business — Advaita AI Qualifier</title>
 <meta name="description" content="Answer 8 questions to see if AI is a fit for your business. Takes under 60 seconds.">
 <link rel="canonical" href="https://bennett-maxwell.github.io/fki-preview/qualify.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bennett-maxwell.github.io/fki-preview/qualify.html">
-<meta property="og:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta property="og:title" content="See If AI Is a Fit for Your Business — Advaita AI Qualifier">
 <meta property="og:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
 <meta property="og:image" content="https://bennett-maxwell.github.io/fki-preview/assets/og-qualifier.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="See If AI Is a Fit for Your Business — FKI Qualifier">
+<meta name="twitter:title" content="See If AI Is a Fit for Your Business — Advaita AI Qualifier">
 <meta name="twitter:description" content="Answer 8 questions to see if AI can save your business 20+ hours a week. Takes under 60 seconds.">
 <style>
   :root {
@@ -623,9 +623,15 @@ function chipKeydown(e, group, val) {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectChip(group, val); }
 }
 
-const GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+// ADVAITA ONLY. Madison 2026-08-13: anything Advaita and anything Blueprint lives
+// SOLELY in the Advaita CRMX sub-account. Never point this at FKI main (14RD8...).
+// NOTE: the relay resolves location as `process.env.GHL_LOCATION_ID || input.locationId`,
+// so the relay's env is the real authority — it is set to this same Advaita id.
+const GHL_LOC = 'GPCi3FrWJCyevcGzZgTT';
 const GHL_WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
-const BOOKING_URL = 'https://ki.franchiseki.com/widget/bookings/ai-strategy-call-wuvot-1';
+// Advaita "Blueprint AI Discovery Call" calendar (GPCi3). Was an FKI-main widget on
+// ki.franchiseki.com, which booked Blueprint leads into the wrong account.
+const BOOKING_URL = 'https://api.leadconnectorhq.com/widget/booking/CWLlHSfE2585XWo3VWpT';
 // A/B toggle — set false to skip modal and route qualified leads to THANK_YOU_URL
 const BOOKING_MODAL_ENABLED = true;
 
@@ -1149,7 +1155,7 @@ function update() {
 
   // ── R3: PAGE TITLE UPDATE ON SCORE CHANGE ────────────────────────────────
   if (canQualify && qualifies10x) {
-    const titleMap = { strong: 'Strong AI Fit — FKI Qualifier', possible: 'Possible AI Fit — FKI Qualifier', no: 'Review Needed — FKI Qualifier' };
+    const titleMap = { strong: 'Strong AI Fit — Advaita AI Qualifier', possible: 'Possible AI Fit — Advaita AI Qualifier', no: 'Review Needed — Advaita AI Qualifier' };
     document.title = titleMap[qualifies10x] || document.title;
     // EP5: update meta description dynamically for social sharing
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -1253,12 +1259,15 @@ function buildQualifierPayload() {
       'advaita-score-' + (band || 'unknown'),   // R2: discrete score band tag for GHL automation
       'blueprint_ai_qualifier'
     ],
-    // Pipeline stage routing (Advaita Blueprint pipeline ogv8BRv6YhROdI3vwGJT)
-    // Relay uses these to create/update the opportunity in the correct stage
-    pipeline_id: 'ogv8BRv6YhROdI3vwGJT',
-    pipeline_stage_id: (band === 'strong' || band === 'possible')
-      ? '998beee1-22f5-4f99-80e3-97d121ed298f'   // warm_lead_applied
-      : '4fc67de4-544a-4b37-88b6-6ffda69f64b3',  // cold_lead_dead
+    // NO pipeline fields. Removed 2026-08-13 — they were DEAD and MISLEADING:
+    // the relay (src/api/blueprint-lead.js) only upserts the contact, applies tags and
+    // writes a note. It contains zero opportunity/pipeline code, so these were never read.
+    // Worse, they named pipeline ogv8BRv6YhROdI3vwGJT, which exists ONLY in FKI main
+    // (14RD8...) — the stale hint that made this page look FKI-bound.
+    // Stage movement for Advaita is driven by GHL workflows off the tags below.
+    // If we ever want the qualifier to set a stage directly, that is a deliberate
+    // decision (which stage in Advaita's "Sales" pipeline u4JlprfRFVltZ4QJRVsl) —
+    // do not re-add a guessed mapping here.
     // Slack alert — relay posts to #leo-coaches (C0AQ4KB1SA0) for strong/possible leads
     notify_slack: band === 'strong' || band === 'possible',
     submitted_at: new Date().toISOString()
@@ -1534,11 +1543,12 @@ updateIdentityStatus();
 update();
 
 // Booking confirmation tracking — fires blueprint_call_booked to GHL relay
-// when the GHL widget (ki.franchiseki.com) posts a completion message.
+// when the GHL booking widget posts a completion message.
 // Also detects iframe URL change to a confirmation path as a fallback signal.
 (function() {
   var RELAY = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
-  var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+  // ADVAITA ONLY — must match GHL_LOC above (Madison 2026-08-13).
+  var GHL_LOC = 'GPCi3FrWJCyevcGzZgTT';
   var booked = false;
 
   function fireBookedEvent() {
