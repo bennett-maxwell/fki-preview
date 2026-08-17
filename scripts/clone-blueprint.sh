@@ -179,6 +179,7 @@ import json
 import re
 import urllib.parse
 import datetime
+import math
 import os
 
 output_file = sys.argv[1]
@@ -478,7 +479,21 @@ _contract_val = _roi_num('avg_contract_value', 'avg_ticket', 'average_customer_v
 def _clamp(v, lo, hi):
     return max(lo, min(hi, v))
 
-ROI_LEADS = int(_clamp(_leads_val, 2, 100)) if _leads_val is not None else 10
+# PERMANENT FIX 2026-08-17 (marker BLUEPRINT-ROI-LEADS-SLIDER-MAX-ADAPTIVE-20260817,
+# EC-BLUEPRINT-ROI-LEADS-CLAMPED-BELOW-STATED-20260817)
+# DEFECT: the Monthly New Leads slider was hardcoded max="100" in TEMPLATE.html, so ANY lead
+# stating more than 100 monthly leads had their own number silently clamped down. Proven on
+# corky-main-street-online-marketing: form said 150, page rendered 100 -- the lead reads a
+# number they contradicted on their own intake. Same class as the Carlos 50-vs-10 defect
+# (BLUEPRINT-ROI-PRESET-FROM-FORM-20260727): per-lead content pinned by a template constant.
+# The 7/27 rule said "clamp to the control's min/max", which quietly LICENSED this; the
+# governing rule is "every ROI control the lead PROVIDED a number for must render that number".
+# FIX: the ceiling is now derived per lead with headroom, so the stated value always renders.
+_leads_ceiling = 100
+if _leads_val is not None and _leads_val > 100:
+    _leads_ceiling = int(math.ceil((_leads_val * 1.5) / 50.0) * 50)
+ROI_LEADS_MAX = _leads_ceiling
+ROI_LEADS = int(_clamp(_leads_val, 2, ROI_LEADS_MAX)) if _leads_val is not None else 10
 ROI_RATE = int(_clamp(_rate_val, 5, 60)) if _rate_val is not None else 20
 ROI_HOURS = int(_clamp(_hours_val, 2, 40)) if _hours_val is not None else 15
 ROI_CONTRACT = int(_contract_val) if _contract_val is not None else int(roi_min)
@@ -491,8 +506,13 @@ roi_preset_provenance = {
 }
 print(f"  ROI presets: leads={ROI_LEADS} rate={ROI_RATE} hours={ROI_HOURS} "
       f"contract={ROI_CONTRACT}  provenance={roi_preset_provenance}")
+print(f"  ROI leads slider ceiling: max={ROI_LEADS_MAX} "
+      f"({'widened for stated value' if ROI_LEADS_MAX != 100 else 'template default'}); "
+      f"stated={_leads_val} renders={ROI_LEADS} "
+      f"{'OK' if (_leads_val is None or int(_leads_val) == ROI_LEADS) else 'CLAMPED — INVESTIGATE'}")
 
 replacements = {
+    '{{ROI_LEADS_MAX}}': str(ROI_LEADS_MAX),
     '{{ROI_LEADS}}': str(ROI_LEADS),
     '{{ROI_RATE}}': str(ROI_RATE),
     '{{ROI_HOURS}}': str(ROI_HOURS),

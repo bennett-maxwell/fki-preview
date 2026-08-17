@@ -67,6 +67,31 @@ def rendered(html, ctrl):
     return num(m.group(1)) if m else None
 
 
+def control_limits(html, ctrl, fallback):
+    """Read the control's ACTUAL min/max off the rendered page.
+
+    PERMANENT FIX 2026-08-17 (marker BLUEPRINT-ROI-LEADS-SLIDER-MAX-ADAPTIVE-20260817,
+    EC-BLUEPRINT-ROI-CLAMP-GUARD-CARRIED-THE-SAME-CEILING-20260817).
+    This gate used to hardcode leads=(2,100) — the SAME constant the template hardcoded.
+    So when the generator was fixed to widen the slider for a lead stating >100 monthly
+    leads, the guard clamped the expected value to 100 itself and reported the CORRECT
+    rendered 150 as a "template default leaked". A guard that hardcodes the very constant
+    it is guarding cannot detect a change in it. The ceiling is a property of the rendered
+    control, so read it from the control.
+    """
+    lo, hi = fallback
+    m = re.search(r'id="sl-%s"[^>]*>' % ctrl, html) or re.search(r'<input[^>]*id="sl-%s"' % ctrl, html)
+    if m:
+        tag = m.group(0)
+        mn = re.search(r'\bmin="([0-9.]+)"', tag)
+        mx = re.search(r'\bmax="([0-9.]+)"', tag)
+        if mn:
+            lo = float(mn.group(1))
+        if mx:
+            hi = float(mx.group(1))
+    return lo, hi
+
+
 def presets(html):
     m = re.search(r"const PRESETS\s*=\s*\{(.*?)\};", html, re.S)
     if not m:
@@ -97,7 +122,12 @@ def check(slug, html_path=None, profile_path=None):
         "hours": profile_num(profile, "admin_hours", "admin_hours_per_week", "weekly_admin_hours"),
         "contract": profile_num(profile, "avg_contract_value", "avg_ticket", "average_customer_value"),
     }
-    limits = {"leads": (2, 100), "rate": (5, 60), "hours": (2, 40), "contract": (None, None)}
+    # Ceilings are read off the rendered controls, never hardcoded here — see control_limits().
+    fallbacks = {"leads": (2, 100), "rate": (5, 60), "hours": (2, 40), "contract": (None, None)}
+    limits = {
+        c: (fallbacks[c] if fallbacks[c][0] is None else control_limits(html, c, fallbacks[c]))
+        for c in fallbacks
+    }
     got = {c: rendered(html, c) for c in ("leads", "rate", "hours", "contract")}
 
     # RL-ROI1 — stated values must actually render
