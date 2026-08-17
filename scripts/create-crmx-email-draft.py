@@ -197,11 +197,35 @@ def resolve(slug):
         "PODCAST_URL": prof.get("podcast_url", ""),
         "QUALIFY_URL": _qualify_url(prof),
     }
+    # PERMANENT FIX 2026-08-17 (marker BLUEPRINT-EMAIL-EMPTY-URL-DEAD-BUTTON-20260817,
+    # EC-BLUEPRINT-EMAIL-SHIPPED-EMPTY-HREF-BUTTONS-20260817).
+    # DEFECT: BLUEPRINT_URL / PODCAST_URL resolved via prof.get(key, "") — a profile
+    # missing those keys produced href="" on the TWO primary buttons ("View Your AI
+    # Playbook", "Listen to Your Walkthrough"), i.e. a delivery email whose only working
+    # link was the qualifier, with no link to the blueprint or podcast AT ALL.
+    # Proven on corky-main-street-online-marketing 2026-08-17: 3 anchors, 2 with href="".
+    # Why every existing gate missed it: D5-20 greps for UNRENDERED "{{TOKEN}}" and these
+    # WERE rendered — to nothing. D5-21 asserts exactly one qualify CTA, which still held.
+    # An empty string is not a missing token, so "no unresolved tokens" was true and
+    # meaningless. Same class as the silent-undercount rule: a blank that renders is worse
+    # than a hard failure, because it ships looking fine.
+    REQUIRED_URL_TOKENS = ("BLUEPRINT_URL", "PODCAST_URL", "QUALIFY_URL")
+    blank = [t for t in REQUIRED_URL_TOKENS if not str(vals.get(t, "")).strip()]
+    if blank:
+        raise SystemExit(
+            "FAIL: required URL token(s) resolved EMPTY: " + ", ".join(sorted(blank)) +
+            " — this would ship a delivery email with dead href=\"\" buttons. "
+            "Populate blueprint_url / podcast_url on the lead profile and re-run."
+        )
     for t in TOKENS:
         html = html.replace("{{" + t + "}}", str(vals[t]))
     left = re.findall(r"\{\{[A-Z_]+\}\}", html)
     if left:
         raise SystemExit(f"FAIL: unresolved tokens remain: {sorted(set(left))}")
+    # Belt-and-braces on the RESOLVED bytes: no anchor may carry an empty href.
+    dead = re.findall(r'<a\s[^>]*href=""[^>]*>', html)
+    if dead:
+        raise SystemExit(f"FAIL: {len(dead)} anchor(s) resolved to href=\"\" — dead button in a customer email.")
     return prof, html, vals
 
 
