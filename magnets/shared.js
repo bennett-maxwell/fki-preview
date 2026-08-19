@@ -344,26 +344,26 @@
     var compRows = (analyst.competitors || []).map(function (c) {
       return '<li>' + esc(c.claim) + ' ' + tag(c.label) + '</li>';
     }).join('');
-    return '<p class="kicker">Industry research report · lite</p>' +
-      '<div class="doc-hero"><h2>' + esc(research.name) + ' — AI Employees for this industry</h2>' +
-      '<p class="who">Prepared for ' + esc(who) + ' · ' + esc(research.host) + ' · ' + date +
-      ' · Preview, not the 149-point Blueprint</p></div>' +
+    return '<p class="kicker">Industry research report</p>' +
+      '<div class="doc-hero"><h2>' + esc(research.name) + ' — who they sell to, and which AI Employees fit</h2>' +
+      '<p class="who">Prepared for ' + esc(who) + ' · ' + esc(research.host) + ' · ' + date + '</p></div>' +
       '<p class="pull">' + esc(research.fact) + '</p>' +
-      '<p class="kicker">SCOUT · what we opened</p>' +
+      '<p class="tiny proof-line">Named proof: Anthony’s hire paid back in under 30 days. $140,000 collected was his baseline before the hire — not Advaita’s win.</p>' +
+      '<p class="kicker">What we opened</p>' +
       '<p class="muted" style="margin:0 0 24px">' + esc(scout.what || research.what) +
       (scout.tech && scout.tech !== 'Not confirmed' ? ' Stack signal: ' + esc(scout.tech) + '.' : '') +
       ' ' + esc(scout.capture || research.capture) + '</p>' +
-      '<p class="kicker">ANALYST · who they sell to</p>' +
+      '<p class="kicker">Who they sell to</p>' +
       '<p class="muted" style="margin:0 0 8px"><strong>Industry.</strong> ' + esc(analyst.industry || 'Not locked') +
       (analyst.labeled ? ' ' + tag('labeled') : '') + '</p>' +
       '<p class="muted" style="margin:0 0 8px"><strong>ICP.</strong> ' + esc(analyst.icp || '') + '</p>' +
       '<ul class="report-list">' + demoRows + '</ul>' +
-      '<p class="kicker">ANALYST · what similar operators do with AI Employees</p>' +
+      '<p class="kicker">What similar operators do with AI Employees</p>' +
       '<ul class="report-list">' + compRows + '</ul>' +
       '<div class="money-hero"><b>' + money(monthlyLeak) + '/mo</b>' +
       '<span>' + (labeled ? 'Labeled unspoken-lead math from homepage signals — not a forecast of your return.' : 'Unspoken-lead math from the numbers you entered — not a forecast of your return.') +
       ' Full formula is on the leak calculator. Process comparison: industry first-touch average 47 hours vs 2-second target.</span></div>' +
-      '<p class="kicker">PROFILER · AI Employees for this industry</p>' +
+      '<p class="kicker">AI Employees for this industry</p>' +
       employeeCardsHtml(employees) +
       '<p class="kicker">How to start in 14 days</p>' +
       calendarHtml() +
@@ -372,8 +372,8 @@
       '<div class="invest"><div><p class="kicker" style="margin:0">Locked offer</p><strong>' + OFFER + '</strong></div>' +
       '<div style="text-align:right"><p class="kicker" style="margin:0">After that</p><strong>Month-to-month</strong></div></div>' +
       '<p class="tiny" style="margin:0 0 16px">Named proof: Anthony’s ad employee + lead employee paid the hire back in under 30 days. $140,000 collected was his baseline before the hire — not Advaita’s win. ' +
-      esc(research.ownerNote) + ' Founder bio is not invented on this magnet. Podcast stays on the full Blueprint after /apply/ or a call.</p>' +
-      '<div class="cta-dark"><p>Ready to run this on live leads. Calendly on file returned 404 today — call or use the blueprint form.</p>' +
+      esc(research.ownerNote) + ' Founder bio is not invented on this magnet.</p>' +
+      '<div class="cta-dark sticky-cta"><p>Ready to run this on live leads. Calendly on file returned 404 today — call or use the blueprint form.</p>' +
       '<div class="actions"><a class="btn btn-light" href="' + PHONE_HREF + '" id="plan-call">Call ' + PHONE + '</a>' +
       '<a class="btn btn-ghost" href="' + APPLY + '" id="plan-apply">Full blueprint</a>' +
       '<button class="btn btn-ghost" id="hear" type="button">Hear the report</button>' +
@@ -399,11 +399,11 @@
 
   function salesBrief(research) {
     var bits = [
-      'I am an Advaita AI Employee. Noun: AI Employees, not agents.',
-      'Locked offer is ' + OFFER + ', month-to-month, 14-day install.',
-      'Anthony’s $140,000 collected was his baseline before the hire. One sale paid the hire back in under 30 days. Not a typical result.',
-      'Calendly on file returned 404. Call ' + PHONE + ' or use the blueprint form at /apply/.',
-      'Instant Form is off. I will not invent a booking link.'
+      'I am an Advaita AI Employee.',
+      'Offer is ' + OFFER + ', month-to-month, 14-day install.',
+      'Anthony’s $140,000 was his baseline before the hire. One sale paid the hire back in under 30 days. Not typical.',
+      'Calendly is 404. Call ' + PHONE + ' or use /apply/.',
+      'I will not invent a booking link.'
     ];
     if (research && research.packet) {
       bits.push('I already opened ' + research.host + '. Industry: ' + research.packet.analyst.industry + '.');
@@ -428,8 +428,8 @@
     if (/agent/.test(m)) {
       return 'Public noun is AI Employees. Not agents. Speed-to-Lead and Booking are the first two; the rest are industry-specific.';
     }
-    if (/podcast/.test(m)) {
-      return 'The podcast is a full Blueprint deliverable after /apply/ or a booked call. This magnet gives you the one-pager research report.';
+    if (/podcast|notebook/.test(m)) {
+      return 'This page is the one-pager research report. Call ' + PHONE + ' or use /apply/ for the full Blueprint.';
     }
     if (research && research.packet && /who|demographic|customer|sell/.test(m)) {
       return research.packet.analyst.icp + ' Demographic rows on the report are labeled if they are thin.';
@@ -505,7 +505,8 @@
       $all('.bubble', el).forEach(function (b, idx) { b.textContent = log[idx].t; });
       el.scrollTop = el.scrollHeight;
     }
-    function bot(t) { log.push({ who: 'bot', t: t }); render(); speak(t); }
+    var spoken = false;
+    function bot(t) { log.push({ who: 'bot', t: t }); render(); if (!spoken) { speak(t); spoken = true; } }
     bot(salesBrief(research));
     fire('chat_start', { via: 'orb' });
     $('#chat-form').onsubmit = function (e) {
@@ -574,7 +575,7 @@
   function renderHub() {
     document.body.innerHTML = navHtml('hub') +
       '<div class="page-intro"><h1>Paste a website.<br>Walk out with a 14-day plan.</h1>' +
-      '<p>Three short doors. Not the 149-point Blueprint. AI Employees, not agents.</p>' +
+      '<p>Three short doors. AI Employees, not agents.</p>' +
       '<p class="offer">' + OFFER + ' · 14-day install · month-to-month</p></div>' +
       '<main class="wrap"><div class="grid-3">' +
       '<a class="door" href="/plan/?demo=1"><div class="card-bar">Wow Plan</div><div class="card-body"><h3>Talk, paste a URL, get the research.</h3><p class="muted">Industry, who they sell to, AI Employees that fit, and how to start in 14 days.</p></div></a>' +
@@ -585,8 +586,8 @@
 
   function renderPlan() {
     document.body.innerHTML = navHtml('plan') +
-      '<div class="page-intro" id="intro"><h1>Talk to an AI Employee.<br>Paste a site. Get the research.</h1>' +
-      '<p>SCOUT locks the homepage. ANALYST names the industry and who they sell to. PROFILER returns 3–6 AI Employees — finding, workflow, loop — and how to start in 14 days. Preview, not the full Blueprint.</p>' +
+      '<div class="page-intro" id="intro"><h1>Talk. Paste a site. Get the research.</h1>' +
+      '<p>Who they sell to. Which AI Employees fit. How to start in 14 days.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
       '<main class="wrap">' +
       '<div class="card" id="intake"><div class="card-bar">Advaita AI · Wow Plan</div><div class="card-body">' +
@@ -700,7 +701,7 @@
 
     async function run(url, demo) {
       fire('cta_click', { via: 'plan' });
-      setBar(12, 'SCOUT opening the homepage…');
+      setBar(12, 'Opening the homepage…');
       var t = setInterval(function () {
         var w = parseFloat(bar.style.width) || 12;
         if (w < 88) bar.style.width = Math.min(88, w + 6) + '%';
@@ -711,7 +712,7 @@
         research = window.AdvaitaResearch.buildLitePacket(research, '');
       }
       window.__research = research;
-      setBar(100, research.labeled ? 'ANALYST lite — estimates labeled.' : 'SCOUT locked a page fact. ANALYST + PROFILER lite ready.');
+      setBar(100, research.labeled ? 'Homepage-only. Estimates are labeled.' : 'Locked a page fact. Research report ready.');
       var answers = {
         person: $('#person').value.trim(),
         leads: $('#leads').value,
@@ -720,10 +721,11 @@
         close: 20
       };
       $('#intro').style.display = 'none';
-      $('#intake').style.display = 'none';
+      if ($('#qbox')) $('#qbox').style.display = 'none';
       $('#doc').style.display = 'block';
       $('#after').style.display = 'block';
       $('#plan-out').innerHTML = reportHtml(research, answers);
+      try { $('#doc').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
       fire('plan_ready', { magnet: 'plan', host: research.host, industry: research.packet && research.packet.analyst.industry_id });
       $('#hear').onclick = function () {
         var emps = (research.packet && research.packet.profiler.employees) || [];
@@ -737,6 +739,7 @@
         $('#after').style.display = 'none';
         $('#intake').style.display = 'block';
         $('#intro').style.display = 'block';
+        if ($('#qbox')) $('#qbox').style.display = 'block';
         $('#chat').style.display = 'none';
       };
       $('#ask-cody').onclick = function () {

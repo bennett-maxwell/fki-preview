@@ -1,6 +1,6 @@
 /**
  * Blueprint research lite — SCOUT → ANALYST → PROFILER mapper for magnets.
- * Magnet preview only. Full packet + NotebookLM stays on blueprint-ai-skill after /apply/.
+ * Magnet preview only. Full packet stays on blueprint-ai-skill after /apply/.
  * Public noun: AI Employees. Soft claims must be labeled.
  */
 (function (root) {
