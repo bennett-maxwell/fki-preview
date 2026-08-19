@@ -284,6 +284,58 @@
       '<div class="t-row"><div class="t-dot"></div><div><strong>Day 14</strong> — install complete. Month-to-month after that.</div></div></div>';
   }
 
+  function calendarHtml() {
+    var html = '<div class="cal">';
+    var d;
+    for (d = 1; d <= 14; d += 1) {
+      var cls = d <= 3 ? 'on' : (d <= 7 ? 'mid' : '');
+      html += '<span class="cal-day ' + cls + '">' + d + '</span>';
+    }
+    return html + '</div><p class="cal-legend"><b>1–3</b> onboard &nbsp; <b>4–7</b> live &nbsp; <b>8–14</b> install complete</p>';
+  }
+
+  function blueprintHtml(research, answers, pts) {
+    answers = answers || {};
+    var leads = Number(answers.leads) || 40;
+    var value = Number(answers.value) || 5000;
+    var conv = Number(answers.conv) || 40;
+    var close = Number(answers.close) || 20;
+    var monthlyLeak = leads * (1 - conv / 100) * value * (close / 100);
+    var labeled = !answers.leads;
+    var who = answers.person || 'the operator of ' + ((research && research.name) || 'this business');
+    var date = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    return '<p class="kicker">14-day AI Employee install</p>' +
+      '<div class="doc-hero"><h2>A plan for ' + research.name + '</h2>' +
+      '<p class="who">Prepared for ' + who + ' · ' + research.host + ' · ' + date + '</p></div>' +
+      '<p class="pull">' + research.fact + '</p>' +
+      '<div class="money-hero"><b>' + money(monthlyLeak) + '/mo</b>' +
+      '<span>' + (labeled ? 'Labeled unspoken-lead math from homepage signals — not a forecast of your return.' : 'Unspoken-lead math from the numbers you entered — not a forecast of your return.') +
+      ' Full formula is on the leak calculator.</span></div>' +
+      '<p class="kicker">The leak we can see</p>' +
+      '<p class="muted" style="margin:0 0 24px">' + research.leak + ' ' + research.capture +
+      (research.tech && research.tech !== 'Not confirmed' ? ' Stack signal: ' + research.tech + '.' : '') + '</p>' +
+      '<p class="kicker">Two AI Employees</p>' +
+      '<div class="emp-grid">' +
+      '<div class="emp"><h3>Speed-to-Lead Employee</h3><p>Texts and qualifies in 2 seconds. Nights and weekends included. Industry first-touch average is 47 hours — that is a process comparison, not a promised lift for ' + research.name + '.</p></div>' +
+      '<div class="emp"><h3>Booking Employee</h3><p>Puts only the fit on the calendar. ' + research.name + ' keeps the close. Noun: AI Employees. Not agents.</p></div>' +
+      '</div>' +
+      '<p class="kicker">Five numbered moves</p>' +
+      stepsHtml(pts) +
+      '<p class="kicker">14 days</p>' +
+      calendarHtml() +
+      timelineHtml() +
+      '<div class="invest"><div><p class="kicker" style="margin:0">Locked offer</p><strong>' + OFFER + '</strong></div>' +
+      '<div style="text-align:right"><p class="kicker" style="margin:0">After that</p><strong>Month-to-month</strong></div></div>' +
+      '<p class="tiny" style="margin:0 0 16px">Named proof: Anthony’s ad employee + lead employee paid the hire back in under 30 days. $140,000 collected was his baseline before the hire — not Advaita’s win. ' + research.ownerNote + '</p>' +
+      '<div class="cta-dark"><p>Ready to run this on live leads. Calendly on file returned 404 today — call or use the blueprint form.</p>' +
+      '<div class="actions"><a class="btn btn-light" href="' + PHONE_HREF + '" id="plan-call">Call ' + PHONE + '</a>' +
+      '<a class="btn btn-ghost" href="' + APPLY + '" id="plan-apply">Full blueprint</a>' +
+      '<button class="btn btn-ghost" id="hear" type="button">Hear the plan</button>' +
+      '<button class="btn btn-ghost" id="ask-cody" type="button">Ask Cody</button>' +
+      '<button class="btn btn-ghost" id="save-plan" type="button">Save this plan</button>' +
+      '<button class="btn btn-ghost" id="another" type="button">Another site</button></div></div>';
+  }
+
   function footerHtml() {
     return '<footer>Locked offer ' + OFFER + ' · Noun: AI Employees · ' +
       '<a href="' + PHONE_HREF + '">' + PHONE + '</a> · <a href="mailto:' + EMAIL + '">' + EMAIL + '</a><br>' +
@@ -376,22 +428,23 @@
 
   function renderHub() {
     document.body.innerHTML = navHtml('hub') +
-      '<div class="page-intro"><h1>Paste a website.<br>Walk out with a 5-point plan.</h1>' +
+      '<div class="page-intro"><h1>Paste a website.<br>Walk out with a 14-day plan.</h1>' +
       '<p>Three short doors. Not the 149-point Blueprint. AI Employees, not agents.</p>' +
       '<p class="offer">' + OFFER + ' · 14-day install · month-to-month</p></div>' +
       '<main class="wrap"><div class="grid-3">' +
-      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Magnet 1</div><div class="card-body"><h3>Wow Plan</h3><p class="muted">Open a real homepage. Get five numbered moves, two named employees, and the 14-day install.</p></div></a>' +
-      '<a class="door" href="/calculator/"><div class="card-bar">Magnet 2</div><div class="card-body"><h3>Leak calculator</h3><p class="muted">Your numbers in. Monthly and yearly unspoken-lead leak out. Formula on the page.</p></div></a>' +
-      '<a class="door" href="/score/"><div class="card-bar">Magnet 3</div><div class="card-body"><h3>60-second audit</h3><p class="muted">Score 0–100 and a mini employee on the worst leak.</p></div></a>' +
+      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Wow Plan</div><div class="card-body"><h3>Open their homepage.</h3><p class="muted">A prepared-for document: leak math, two named employees, and the 14-day install.</p></div></a>' +
+      '<a class="door" href="/calculator/"><div class="card-bar">Leak math</div><div class="card-body"><h3>Unspoken leads, in dollars.</h3><p class="muted">Your numbers in. Monthly and yearly leak out. Formula on the page.</p></div></a>' +
+      '<a class="door" href="/score/"><div class="card-bar">60-sec audit</div><div class="card-body"><h3>Score the follow-up.</h3><p class="muted">0–100 and a mini employee on the worst leak.</p></div></a>' +
       '</div></main>' + footerHtml();
   }
 
   function renderPlan() {
     document.body.innerHTML = navHtml('plan') +
-      '<div class="page-intro"><h1>A Wow Plan for the site you actually run.</h1>' +
-      '<p>Paste a URL. We pull a homepage fact, name the leak, and hand you five numbered moves — the shape of a Blueprint, in about 90 seconds.</p>' +
+      '<div class="page-intro" id="intro"><h1>A Wow Plan for the site you actually run.</h1>' +
+      '<p>Paste a URL. We open the homepage, name the leak, and hand you a 14-day AI Employee document — the shape of a Blueprint, in about 90 seconds.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
-      '<main class="wrap">' + cardOpen('Advaita AI · Wow Plan') +
+      '<main class="wrap">' +
+      '<div class="card" id="intake"><div class="card-bar">Advaita AI · Wow Plan</div><div class="card-body">' +
       '<label>Website</label><input id="url" placeholder="yourcompany.com" value="">' +
       '<div class="actions">' +
       '<button class="btn btn-primary" id="go" type="button">Build my plan</button>' +
@@ -407,13 +460,14 @@
       '<div><label>Leads / month</label><input id="leads" type="number" min="0" placeholder="40"></div>' +
       '<div><label>Value per close ($)</label><input id="value" type="number" min="0" placeholder="5000"></div>' +
       '<div><label>% that get a real conversation</label><input id="conv" type="number" min="0" max="100" placeholder="40"></div>' +
-      '</div></div>' +
-      '<div id="plan-out"></div>' +
-      '<div class="actions"><button class="btn btn-ghost" id="hear" type="button">Hear the plan</button></div>' +
+      '</div></div></div></div>' +
+      '<div class="card" id="doc"><div class="card-bar">Advaita AI · Wow Plan</div><div class="card-body" id="plan-out"></div>' +
+      '<div class="card-body" id="after" style="padding-top:0;display:none">' +
       '<div class="chat" id="chat" style="display:none"><div class="chat-log" id="chat-log"></div>' +
       '<form class="chat-form" id="chat-form"><input id="chat-in" placeholder="Type to Cody"><button class="btn btn-primary" type="submit">Send</button></form></div>' +
       captureHtml() +
-      cardClose() + '</main>' + footerHtml();
+      '</div></div>' +
+      '</main>' + footerHtml();
 
     copyLinkBtn();
     var bar = $('#bar i');
@@ -438,22 +492,33 @@
         close: 20
       };
       var pts = wowPoints(research, answers);
-      $('#plan-out').innerHTML =
-        '<p class="kicker" style="margin-top:1.2rem">Prepared for</p>' +
-        '<h2 style="font-size:1.45rem;letter-spacing:-0.03em;margin-bottom:.4rem">' + research.name + '</h2>' +
-        '<div class="fact">' + research.fact + '</div>' +
-        stepsHtml(pts) +
-        '<div class="tiles">' +
-        '<div class="tile"><b>2s</b><span>Speed-to-lead</span></div>' +
-        '<div class="tile"><b>2</b><span>AI Employees</span></div>' +
-        '<div class="tile"><b>14d</b><span>Install</span></div></div>' +
-        timelineHtml() +
-        '<div class="cta-dark"><p>Ready to run this on your live leads.</p>' +
-        '<a class="btn btn-light" href="' + PHONE_HREF + '">Call ' + PHONE + '</a></div>';
+      $('#intro').style.display = 'none';
+      $('#intake').style.display = 'none';
+      $('#doc').style.display = 'block';
+      $('#after').style.display = 'block';
+      $('#plan-out').innerHTML = blueprintHtml(research, answers, pts);
       fire('plan_ready', { magnet: 'plan', host: research.host });
-      $('#chat').style.display = 'block';
-      codyBox(research.fact);
-      bindCapture(function () { return pts.map(function (p) { return p.t + ': ' + p.d; }).join('\n'); });
+      $('#hear').onclick = function () {
+        var txt = $all('#plan-out .step').map(function (li) { return li.textContent; }).join('. ');
+        if (txt) speak(txt);
+      };
+      $('#another').onclick = function () {
+        $('#doc').style.display = 'none';
+        $('#after').style.display = 'none';
+        $('#intake').style.display = 'block';
+        $('#intro').style.display = 'block';
+        $('#chat').style.display = 'none';
+      };
+      $('#ask-cody').onclick = function () {
+        $('#chat').style.display = 'block';
+        if (!$('#chat-log').children.length) codyBox(research.fact);
+        $('#chat-in').focus();
+      };
+      $('#plan-call').addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      $('#plan-apply').addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
+      $('#save-plan').onclick = function () {
+        bindCapture(function () { return pts.map(function (p) { return p.t + ': ' + p.d; }).join('\n'); });
+      };
       var u = new URL(location.href);
       u.searchParams.set('url', research.url || url);
       history.replaceState({}, '', u);
@@ -461,10 +526,6 @@
 
     $('#go').onclick = function () { run($('#url').value, false); };
     $('#sample').onclick = function () { $('#url').value = SAMPLE; run(SAMPLE, true); };
-    $('#hear').onclick = function () {
-      var txt = $all('#plan-out .step').map(function (li) { return li.textContent; }).join('. ');
-      if (txt) speak(txt);
-    };
     $('#talk').onclick = function () {
       $('#status').textContent = 'Listening… say your website or what the business does.';
       listenOnce(function (t) {
