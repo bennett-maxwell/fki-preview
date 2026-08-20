@@ -65,15 +65,107 @@
     document.body.removeChild(ta);
     return Promise.resolve();
   }
-  function speak(text) {
-    fire('voice_start', { kind: 'tts' });
+  var VOICE_APIS = [
+    'https://advaita-research-lite.vercel.app/api/voice',
+    'https://blueprint-ghl-relay.vercel.app/api/voice'
+  ];
+  var voiceAudio = null;
+  var voiceMuted = false;
+  var voiceCache = {};
+
+  function voiceApis() {
+    var list = VOICE_APIS.slice();
     try {
-      window.speechSynthesis.cancel();
-      var u = new SpeechSynthesisUtterance(text);
-      u.rate = 1.02;
-      u.onend = function () { fire('voice_complete', { kind: 'tts' }); };
-      window.speechSynthesis.speak(u);
+      if (location.origin && !/github\.io$|aiblueprintmarketing\.com$|pages\.dev$/i.test(location.hostname)) {
+        list.unshift(location.origin + '/api/voice');
+      }
     } catch (e) {}
+    return list;
+  }
+  function setSpeaking(on) {
+    $all('.orb').forEach(function (o) { o.classList.toggle('speaking', !!on); });
+  }
+  function stopVoice() {
+    if (voiceAudio) {
+      try { voiceAudio.pause(); voiceAudio.src = ''; } catch (e) {}
+      voiceAudio = null;
+    }
+    setSpeaking(false);
+  }
+  function playUrl(url, kind) {
+    stopVoice();
+    voiceAudio = new Audio(url);
+    voiceAudio.onended = function () { fire('voice_complete', { kind: kind || 'elevenlabs' }); setSpeaking(false); };
+    voiceAudio.onerror = function () { setSpeaking(false); };
+    setSpeaking(true);
+    return voiceAudio.play();
+  }
+  function playBlob(blob) {
+    return playUrl(URL.createObjectURL(blob), 'elevenlabs');
+  }
+  function staticVoiceUrl(text) {
+    var t = String(text || '');
+    var pack = {
+      'Got it. What is the name of the business?': 'ask-biz.mp3',
+      'Do you have a website? Paste it or say it — I will pull the homepage, the industry, and what the top operators in that space are doing with AI Employees.': 'ask-url.mp3',
+      'No site is fine — I will keep estimates labeled. How quickly does someone on your team contact a new lead today — minutes, hours, or next day?': 'no-site.mp3',
+      'Paste the site as yourcompany.com and I will open it. Or say skip.': 'paste-site.mp3',
+      'Still opening the page. One more beat.': 'still-opening.mp3',
+      'How quickly does someone on your team contact a new lead today — minutes, hours, or next day?': 'ask-speed.mp3',
+      'Roughly how many new leads do you get in a typical month from ads plus the website?': 'ask-volume.mp3',
+      'What is a typical closed job or sale worth in dollars?': 'ask-ticket.mp3',
+      'I opened the site. Want to try the first AI Employee live for your business?': 'pitch-plan.mp3',
+      'I have the leak in dollars. Want to try the employee live for your business?': 'pitch-calculator.mp3',
+      'I scored the worst leak. Want to try that employee live?': 'pitch-score.mp3',
+      'You are now a new lead. I am the first AI Employee. This is a demo on this page, not a recording of a live customer call, and I will not invent a calendar link. Go ahead. Say why you are calling.': 'roleplay.mp3',
+      'Thanks for calling. I can get you a qualified conversation with the owner. What are you hoping to get done — a new job, a quote, or a question on something already open?': 'roleplay-1.mp3',
+      'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?': 'roleplay-2.mp3',
+      'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.': 'debrief.mp3'
+    };
+    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820d';
+    if (t.indexOf('What should I call you') >= 0) {
+      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820d';
+      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820d';
+      return '/magnets/audio/opener-plan.mp3?v=20260820d';
+    }
+    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820d';
+    return '';
+  }
+  async function elevenSpeak(text) {
+    var body = JSON.stringify({ text: text });
+    var apis = voiceApis();
+    var i;
+    for (i = 0; i < apis.length; i += 1) {
+      try {
+        var res = await fetch(apis[i], {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        });
+        if (!res.ok) continue;
+        var blob = await res.blob();
+        if (!blob || blob.size < 800) continue;
+        voiceCache[text] = blob;
+        return playBlob(blob);
+      } catch (e) {}
+    }
+    return null;
+  }
+  function speak(text) {
+    var t = String(text || '').replace(/<break\b[^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
+    if (!t || voiceMuted) { fire('voice_skipped', { reason: voiceMuted ? 'muted' : 'empty' }); return; }
+    fire('voice_start', { kind: 'elevenlabs' });
+    if (voiceCache[t]) { playBlob(voiceCache[t]); return; }
+    var packed = staticVoiceUrl(t);
+    if (packed) {
+      playUrl(packed, 'elevenlabs-static').catch(function () { elevenSpeak(t); });
+      return;
+    }
+    elevenSpeak(t).then(function (played) {
+      if (played) return;
+      fire('voice_fallback', { kind: 'silent' });
+      setSpeaking(false);
+    });
   }
   function listenOnce(onText) {
     var Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -275,7 +367,7 @@
       ['/anthony/', 'Anthony', 'anthony'],
       ['/apply/', 'Full blueprint', 'apply']
     ];
-    return '<div class="nav-shell"><nav><a class="nav-logo" href="/magnets/">Advaita <span>AI</span></a><div class="nav-links">' +
+    return '<a class="skip" href="#main">Skip to content</a><div class="nav-shell"><nav><a class="nav-logo" href="/magnets/">Advaita <span>AI</span></a><div class="nav-links">' +
       links.map(function (l) {
         return '<a href="' + l[0] + '"' + (active === l[2] ? ' class="active"' : '') + '>' + l[1] + '</a>';
       }).join('') +
@@ -284,10 +376,41 @@
 
   function jabStripHtml() {
     return '<div class="jab-strip">' +
-      '<div class="jab"><b>Value 1</b><span>Wow Plan — research before any ask</span></div>' +
-      '<div class="jab"><b>Value 2</b><span>Leak math from your numbers</span></div>' +
-      '<div class="jab"><b>Value 3</b><span>60-second follow-up score</span></div>' +
+      '<div class="jab"><b>Door 1</b><span>Site research — 20 expert angles, labeled</span></div>' +
+      '<div class="jab"><b>Door 2</b><span>Leak math from your numbers</span></div>' +
+      '<div class="jab"><b>Door 3</b><span>Follow-up score in 60 seconds</span></div>' +
       '<div class="jab jab-hook"><b>Then the ask</b><span>Call ' + PHONE + ' — Calendly is 404</span></div></div>';
+  }
+
+  function trustRowHtml() {
+    return '<div class="trust-row" aria-label="Proof and locks">' +
+      '<div><b>Named proof</b><span>Anthony’s hire paid back in under 30 days</span></div>' +
+      '<div><b>Locked offer</b><span>' + OFFER + ' · 14 days · month-to-month</span></div>' +
+      '<div><b>Public noun</b><span>AI Employees, not agents</span></div>' +
+      '<div><b>Voice</b><span>ElevenLabs — not the browser robot</span></div></div>';
+  }
+
+  function faqHtml(magnet) {
+    var q = {
+      plan: [
+        ['What do I walk out with?', 'A labeled industry report: who they sell to, 20 expert angles on the site, and which AI Employees fit. Then a live role-play. No invented lift.'],
+        ['Is the voice a real person?', 'ElevenLabs. It is an AI Employee demo, not a recording of a live customer call, and not Cody’s personal clone.'],
+        ['Do you scrape things nobody else can?', 'We open the public homepage and run 20 expert methods (CRO, SEO, stack, capture, tracking, ICP). We label every thin row. Full DEEP website-audit-skill is after /apply/.'],
+        ['What happens if I call?', 'A human. Calendly on file is 404, so we will not invent a link.']
+      ],
+      calculator: [
+        ['Is the leak a forecast?', 'No. It is your numbers × the formula on the page. Hire payback is labeled.'],
+        ['Can I skip the globe?', 'Yes. Type the numbers. The globe is the interview, not a gate.']
+      ],
+      score: [
+        ['Is 0–100 a certified audit?', 'No. It is a 60-second follow-up score from chips you tap plus homepage signals.'],
+        ['What is the one thing?', 'The worst leak chip. That is the employee we role-play.']
+      ]
+    };
+    var rows = q[magnet] || q.plan;
+    return '<section class="faq" id="faq"><h2>Before you call</h2>' + rows.map(function (row) {
+      return '<details><summary>' + row[0] + '</summary><p>' + row[1] + '</p></details>';
+    }).join('') + '</section>';
   }
 
   function hookCtaHtml(prefix, line) {
@@ -386,6 +509,12 @@
     var compRows = (analyst.competitors || []).map(function (c) {
       return '<li>' + esc(c.claim) + ' ' + tag(c.label) + '</li>';
     }).join('');
+    var angleRows = (analyst.angles || []).map(function (a) {
+      return '<li><strong>' + esc(a.method) + '</strong> · ' + esc(a.brain || '') +
+        '<br>' + esc(a.found || a.looked_at || '') +
+        (a.not_invented ? '<br><span class="tiny">' + esc(a.not_invented) + '</span>' : '') +
+        ' ' + tag(a.label || 'labeled') + '</li>';
+    }).join('');
     return '<p class="kicker">Industry research report</p>' +
       '<div class="doc-hero"><h2>' + esc(research.name) + ' — who they sell to, and which AI Employees fit</h2>' +
       '<p class="who">Prepared for ' + esc(who) + ' · ' + esc(research.host) + ' · ' + date + '</p></div>' +
@@ -402,6 +531,7 @@
       '<ul class="report-list">' + demoRows + '</ul>' +
       '<p class="kicker">What similar operators do with AI Employees</p>' +
       '<ul class="report-list">' + compRows + '</ul>' +
+      (angleRows ? '<p class="kicker">20 expert angles — what we actually opened</p><ul class="report-list angle-list">' + angleRows + '</ul>' : '') +
       '<div class="money-hero"><b>' + money(monthlyLeak) + '/mo</b>' +
       '<span>' + (labeled ? 'Labeled unspoken-lead math from homepage signals — not a forecast of your return.' : 'Unspoken-lead math from the numbers you entered — not a forecast of your return.') +
       ' Full formula is on the leak calculator. Process comparison: industry first-touch average 47 hours vs 2-second target.</span></div>' +
@@ -548,6 +678,12 @@
       '. Want to try it live — you be the customer, I will be that employee?';
   }
 
+  function magnetPitchSpoken(s) {
+    if (s && s.magnet === 'calculator') return 'I have the leak in dollars. Want to try the employee live for your business?';
+    if (s && s.magnet === 'score') return 'I scored the worst leak. Want to try that employee live?';
+    return 'I opened the site. Want to try the first AI Employee live for your business?';
+  }
+
   function tapScoreChips(msg) {
     var low = String(msg || '').toLowerCase();
     $all('.chip[data-k]').forEach(function (c) {
@@ -595,11 +731,13 @@
     };
     return '<div class="orb-row">' +
       '<button class="orb" id="orb" type="button" aria-label="Talk to Cody, an Advaita AI Employee">' +
-      '<span class="orb-core"></span><span class="orb-ring"></span></button>' +
-      '<div><p class="kicker" style="margin:0 0 6px">Cody · talking globe</p>' +
-      '<p class="muted" id="orb-status">' + (status[magnet] || status.plan) + '</p></div></div>' +
+      '<span class="orb-core"></span><span class="orb-ring"></span><span class="orb-wave" aria-hidden="true"></span></button>' +
+      '<div><p class="kicker" style="margin:0 0 6px">Cody · ElevenLabs voice</p>' +
+      '<p class="muted" id="orb-status">' + (status[magnet] || status.plan) + '</p>' +
+      '<p class="tiny">Human voice. Not the browser robot. Demo, not a live customer recording.</p>' +
+      '<button class="btn btn-ghost btn-tiny" type="button" id="voice-mute">Mute voice</button></div></div>' +
       '<div class="chat" id="orb-chat" style="margin-top:1rem"><div class="chat-log" id="orb-log"></div>' +
-      '<form class="chat-form" id="orb-form"><input id="orb-in" placeholder="Answer Cody — name, site, or ask about the offer" autocomplete="off">' +
+      '<form class="chat-form" id="orb-form"><input id="orb-in" placeholder="Your name, site, or a question about the offer" autocomplete="name">' +
       '<button class="btn btn-primary" type="submit">Send</button></form></div>';
   }
 
@@ -652,16 +790,16 @@
     function nextAfterResearch() {
       if (!s.speed) {
         s.phase = 'speed';
-        say(youLine(s) + ', how quickly does someone on your team contact a new lead today — minutes, hours, or next day?');
+        say(youLine(s) + ', how quickly does someone on your team contact a new lead today — minutes, hours, or next day?', true, 'How quickly does someone on your team contact a new lead today — minutes, hours, or next day?');
         return;
       }
       if (!s.volume) {
         s.phase = 'volume';
-        say('Roughly how many new leads do you get in a typical month from ads plus the website?');
+        say('Roughly how many new leads do you get in a typical month from ads plus the website?', true, 'Roughly how many new leads do you get in a typical month from ads plus the website?');
         return;
       }
       s.phase = 'roleplay_ask';
-      say(magnetPitch(s));
+      say(magnetPitch(s), true, magnetPitchSpoken(s));
     }
 
     function ingestResearch(research, force) {
@@ -691,7 +829,11 @@
       }
 
       if (s.phase === 'roleplay') {
-        say(roleplayReply(s, v));
+        var line = roleplayReply(s, v);
+        var spoken = 'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.';
+        if (s.phase !== 'close' && s.roleTurns === 1) spoken = 'Thanks for calling. I can get you a qualified conversation with the owner. What are you hoping to get done — a new job, a quote, or a question on something already open?';
+        if (s.phase !== 'close' && s.roleTurns === 2) spoken = 'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?';
+        say(line, true, spoken);
         if (s.phase === 'close') maybeCapture();
         return;
       }
@@ -699,14 +841,14 @@
       if (s.phase === 'roleplay_ask') {
         if (/^(n|no|nope|not now|later|skip)\b/i.test(v) || /don'?t|not interested/.test(v.toLowerCase())) {
           s.phase = 'close';
-          say(roleplayDebrief(s));
+          say(roleplayDebrief(s), true, 'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.');
           maybeCapture();
           return;
         }
         s.phase = 'roleplay';
         s.roleTurns = 0;
         s.worst = s.worst || firstEmployeeName(s.research);
-        say(roleplayOpener(s));
+        say(roleplayOpener(s), true, 'You are now a new lead. I am the first AI Employee. This is a demo on this page, not a recording of a live customer call, and I will not invent a calendar link. Go ahead. Say why you are calling.');
         return;
       }
 
@@ -734,14 +876,14 @@
         if ($('#person') && s.person) $('#person').value = s.person;
         if ($('#c-first') && s.person) $('#c-first').value = s.person;
         s.phase = 'biz';
-        say((s.person ? (s.person + ', got it. ') : '') + 'What is the name of the business?');
+        say((s.person ? (s.person + ', got it. ') : '') + 'What is the name of the business?', true, 'Got it. What is the name of the business?');
         return;
       }
       if (s.phase === 'biz') {
         s.biz = v.replace(/^(it'?s|we are|we'?re)\s+/i, '').trim();
         if ($('#c-biz') && s.biz) $('#c-biz').value = s.biz;
         s.phase = 'url';
-        say('Do you have a website? Paste it or say it — I will pull the homepage, the industry, and what the top operators in that space are doing with AI Employees.');
+        say('Do you have a website? Paste it or say it — I will pull the homepage, the industry, and what the top operators in that space are doing with AI Employees.', true, 'Do you have a website? Paste it or say it — I will pull the homepage, the industry, and what the top operators in that space are doing with AI Employees.');
         return;
       }
       if (s.phase === 'url') {
@@ -765,7 +907,7 @@
         else s.speed = 'hours';
         if ($('#speed')) $('#speed').value = s.speed;
         s.phase = 'volume';
-        say((s.person ? (s.person + ', ') : '') + 'roughly how many new leads do you get in a typical month from ads plus the website?');
+        say((s.person ? (s.person + ', ') : '') + 'roughly how many new leads do you get in a typical month from ads plus the website?', true, 'Roughly how many new leads do you get in a typical month from ads plus the website?');
         return;
       }
       if (s.phase === 'volume') {
@@ -777,11 +919,11 @@
         } else s.volume = v;
         if (s.magnet === 'calculator') {
           s.phase = 'ticket';
-          say((s.person ? (s.person + ', ') : '') + 'what is a typical closed job or sale worth in dollars?');
+          say((s.person ? (s.person + ', ') : '') + 'what is a typical closed job or sale worth in dollars?', true, 'What is a typical closed job or sale worth in dollars?');
           return;
         }
         s.phase = 'roleplay_ask';
-        say(magnetPitch(s));
+        say(magnetPitch(s), true, magnetPitchSpoken(s));
         return;
       }
       if (s.phase === 'ticket') {
@@ -794,7 +936,7 @@
           ingestLeak('Yearly unspoken leak ' + money(leaked.yearly) + ' from your inputs, not a forecast. ');
         }
         s.phase = 'roleplay_ask';
-        say(magnetPitch(s));
+        say(magnetPitch(s), true, magnetPitchSpoken(s));
         return;
       }
       say(salesBrief(s.research || window.__research));
@@ -831,6 +973,15 @@
           fire('orb_click', { where: 'float', magnet: magnet });
           if (s.log[0]) speak(lastSpoken || globeOpenerSpoken(magnet));
           listen();
+        };
+      }
+      var mute = $('#voice-mute');
+      if (mute) {
+        mute.onclick = function () {
+          voiceMuted = !voiceMuted;
+          mute.textContent = voiceMuted ? 'Unmute voice' : 'Mute voice';
+          if (voiceMuted) stopVoice();
+          fire('voice_mute', { muted: voiceMuted });
         };
       }
       var form = $('#orb-form') || $('#chat-form');
@@ -925,14 +1076,16 @@
   function renderHub() {
     document.body.innerHTML = navHtml('hub') +
       '<div class="page-intro"><h1>Paste a website.<br>Walk out with a 14-day plan.</h1>' +
-      '<p>Three free doors first. Then one ask: call. AI Employees, not agents.</p>' +
+      '<p>Three free doors. Research nobody else does on a lead magnet — 20 expert angles on their actual site — then one ask: call.</p>' +
       '<p class="offer">' + OFFER + ' · 14-day install · month-to-month</p></div>' +
+      trustRowHtml() +
       jabStripHtml() +
-      '<main class="wrap"><div class="grid-3">' +
-      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Value 1 · Wow Plan</div><div class="card-body"><h3>Talk to Cody on the globe. Walk out with the research.</h3><p class="muted">Name, site, industry, AI Employees that fit — then a live role-play. Not a homeowner emergency bot.</p><p class="proof">Walk out with the report before anyone asks for a call.</p></div></a>' +
-      '<a class="door" href="/calculator/"><div class="card-bar">Value 2 · Leak math</div><div class="card-body"><h3>Talk to Cody. See unspoken leads in dollars.</h3><p class="muted">Globe interview, then your numbers in. Monthly and yearly leak out. Formula on the page.</p><p class="proof">Labeled math. Not a forecast.</p></div></a>' +
-      '<a class="door" href="/score/"><div class="card-bar">Value 3 · 60-sec audit</div><div class="card-body"><h3>Talk to Cody. Score the follow-up.</h3><p class="muted">Globe interview, 0–100, then role-play the employee on the worst leak.</p><p class="proof">One score. One thing to fix first.</p></div></a>' +
+      '<main class="wrap" id="main"><div class="grid-3">' +
+      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Door 1 · Wow Plan</div><div class="card-body"><h3>Hear the employee. Leave with the research.</h3><p class="muted">Owner interview, public-site forensics, 20 labeled expert angles, then a live role-play. Not a homeowner emergency bot.</p><p class="proof">Walk out with the report before anyone asks for a call.</p></div></a>' +
+      '<a class="door" href="/calculator/"><div class="card-bar">Door 2 · Leak math</div><div class="card-body"><h3>Your numbers. Yearly leak. Formula on the page.</h3><p class="muted">Globe interview optional. Monthly and yearly unspoken leads vs first-month hire — labeled, not a forecast.</p><p class="proof">Labeled math. Not a forecast.</p></div></a>' +
+      '<a class="door" href="/score/"><div class="card-bar">Door 3 · 60-sec audit</div><div class="card-body"><h3>One score. One thing to fix first.</h3><p class="muted">Tap the leaks. Get 0–100. Role-play the employee on the worst one.</p><p class="proof">Teaser, not the full Blueprint.</p></div></a>' +
       '</div>' + hookCtaHtml('hub', 'Those three doors are free. The ask is a call — the online calendar on file is 404.') +
+      faqHtml('plan') +
       '</main>' + footerHtml();
     var hc = $('#hub-call'); if (hc) hc.addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
     var ha = $('#hub-apply'); if (ha) ha.addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
@@ -940,12 +1093,13 @@
 
   function renderPlan() {
     document.body.innerHTML = navHtml('plan') +
-      '<div class="page-intro" id="intro"><h1>Talk to Cody. Walk out with the plan.</h1>' +
-      '<p>Owner interview, site pull, named AI Employees, then a live role-play. Not a homeowner emergency bot.</p>' +
+      '<div class="page-intro" id="intro"><h1>Paste the site. Hear the employee. Leave with the plan.</h1>' +
+      '<p>We open the public homepage and run 20 expert angles on it — CRO, SEO, stack, capture, ICP — then name the AI Employees that fit and role-play the first one. Not a homeowner emergency bot.</p>' +
       '<p class="offer">' + OFFER + '</p>' +
-      '<ul class="preview-list"><li>Name, business, website — then the research</li><li>Which AI Employees fit this industry</li><li>Role-play the first employee before anyone asks for a call</li></ul></div>' +
+      '<ul class="preview-list"><li>ElevenLabs voice — tap the globe, not the Mac robot</li><li>Who they sell to, labeled, from the page that actually loaded</li><li>Role-play the first employee before anyone asks for a call</li></ul></div>' +
+      trustRowHtml() +
       jabStripHtml() +
-      '<main class="wrap">' +
+      '<main class="wrap" id="main">' +
       '<div class="card" id="intake"><div class="card-bar">Advaita AI · Wow Plan</div><div class="card-body">' +
       globeHtml('plan') +
       '<label>Website</label><input id="url" placeholder="yourcompany.com" value="">' +
@@ -969,7 +1123,8 @@
       captureHtml() +
       '</div></div>' +
       '<button class="orb orb-float" id="orb-live" type="button" aria-label="Talk to Cody, an Advaita AI Employee">' +
-      '<span class="orb-core"></span><span class="orb-ring"></span></button>' +
+      '<span class="orb-core"></span><span class="orb-ring"></span><span class="orb-wave" aria-hidden="true"></span></button>' +
+      faqHtml('plan') +
       '</main>' + footerHtml();
 
     copyLinkBtn();
@@ -987,6 +1142,9 @@
       clearInterval(t);
       if (window.AdvaitaResearch && !research.packet) {
         research = window.AdvaitaResearch.buildLitePacket(research, '');
+      }
+      if (research.packet && research.packet.analyst && !research.packet.analyst.angles && window.AdvaitaResearch) {
+        research.packet.analyst.angles = window.AdvaitaResearch.buildExpertAngles(research, '', { id: research.packet.analyst.industry_id, label: research.packet.analyst.industry, icp: research.packet.analyst.icp });
       }
       window.__research = research;
       if (window.__globe && $('#person').value.trim()) window.__globe.person = firstNameOf($('#person').value);
@@ -1039,7 +1197,11 @@
       var u = new URL(location.href);
       u.searchParams.set('url', research.url || url);
       history.replaceState({}, '', u);
-      if (window.__globeCtl) window.__globeCtl.ingestResearch(research, true);
+      if (window.__globeCtl) {
+        var phase = window.__globe && window.__globe.phase;
+        var talking = phase === 'researching' || phase === 'url' || phase === 'speed' || phase === 'volume' || phase === 'ticket';
+        window.__globeCtl.ingestResearch(research, talking);
+      }
     }
 
     var globe = createGlobe({
@@ -1063,11 +1225,12 @@
 
   function renderCalculator() {
     document.body.innerHTML = navHtml('calculator') +
-      '<div class="page-intro"><h1>Talk to Cody. See the unspoken leak.</h1>' +
-      '<p>Owner interview on the globe, then math from your numbers. Hire payback is labeled, not a forecast.</p>' +
+      '<div class="page-intro"><h1>Your numbers. The yearly leak. The formula stays on the page.</h1>' +
+      '<p>Unspoken leads × job value × close rate. Hire payback is labeled, not a forecast. The globe is optional.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
+      trustRowHtml() +
       jabStripHtml() +
-      '<main class="wrap">' + cardOpen('Advaita AI · Leak calculator') +
+      '<main class="wrap" id="main">' + cardOpen('Advaita AI · Leak calculator') +
       globeHtml('calculator') +
       '<div class="presets" id="presets"></div>' +
       '<div class="row" style="grid-template-columns:1fr 1fr">' +
@@ -1086,7 +1249,8 @@
       captureHtml() +
       cardClose() +
       '<button class="orb orb-float" id="orb-live" type="button" aria-label="Talk to Cody, an Advaita AI Employee">' +
-      '<span class="orb-core"></span><span class="orb-ring"></span></button>' +
+      '<span class="orb-core"></span><span class="orb-ring"></span><span class="orb-wave" aria-hidden="true"></span></button>' +
+      faqHtml('calculator') +
       '</main>' + footerHtml();
 
     copyLinkBtn();
@@ -1147,18 +1311,23 @@
         if (window.AdvaitaResearch && research && !research.packet) {
           research = window.AdvaitaResearch.buildLitePacket(research, '');
         }
-        if (window.__globeCtl) window.__globeCtl.ingestResearch(research, true);
+        if (window.__globeCtl) {
+          var phase = window.__globe && window.__globe.phase;
+          var talking = phase === 'researching' || phase === 'url' || phase === 'speed' || phase === 'volume' || phase === 'ticket';
+          window.__globeCtl.ingestResearch(research, talking);
+        }
       }
     }).bind();
   }
 
   function renderScore() {
     document.body.innerHTML = navHtml('score') +
-      '<div class="page-intro"><h1>Talk to Cody. Score the follow-up.</h1>' +
-      '<p>Owner interview on the globe. One score. The worst leak. Then a live role-play of the employee that fixes it first.</p>' +
+      '<div class="page-intro"><h1>One score. The one thing to fix first.</h1>' +
+      '<p>Tap the leaks that are true. Get 0–100 from homepage signals plus your chips. Then role-play the employee on the worst leak. Teaser, not the full Blueprint.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
+      trustRowHtml() +
       jabStripHtml() +
-      '<main class="wrap">' + cardOpen('Advaita AI · 60-second audit') +
+      '<main class="wrap" id="main">' + cardOpen('Advaita AI · 60-second audit') +
       globeHtml('score') +
       '<label>Website (or skip and use chips)</label><input id="url" placeholder="yourcompany.com">' +
       '<p class="muted" style="margin:.7rem 0 .4rem">Tap every leak that is true</p>' +
@@ -1181,7 +1350,8 @@
       captureHtml() +
       cardClose() +
       '<button class="orb orb-float" id="orb-live" type="button" aria-label="Talk to Cody, an Advaita AI Employee">' +
-      '<span class="orb-core"></span><span class="orb-ring"></span></button>' +
+      '<span class="orb-core"></span><span class="orb-ring"></span><span class="orb-wave" aria-hidden="true"></span></button>' +
+      faqHtml('score') +
       '</main>' + footerHtml();
 
     copyLinkBtn();

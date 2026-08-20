@@ -153,6 +153,57 @@ function stripTag(html, re, fallback) {
   return m ? m[1].replace(/\s+/g, ' ').trim() : fallback;
 }
 
+function scrapeForensics(html) {
+  const h = String(html || '');
+  const low = h.toLowerCase();
+  const count = (re) => (h.match(re) || []).length;
+  const title = stripTag(h, /<title[^>]*>([\s\S]*?)<\/title>/i, '');
+  const h1 = stripTag(h, /<h1[^>]*>([\s\S]*?)<\/h1>/i, '');
+  return {
+    title: title.slice(0, 160),
+    h1: h1.slice(0, 160),
+    forms: count(/<form\b/gi),
+    tel: count(/href=["']tel:/gi),
+    buttons: count(/<(button|a)[^>]{0,80}(book|schedule|apply|quote|contact)/gi),
+    schema: /application\/ld\+json/i.test(h),
+    viewport: /name=["']viewport["']/i.test(h),
+    og: /property=["']og:/i.test(h),
+    gtag: /gtag\(|googletagmanager/i.test(h),
+    fbq: /fbq\(|fbevents/i.test(h),
+    chat: /intercom|drift\.js|tidio|tawk|crisp\.chat|voiceflow/i.test(low),
+    reviews: /trustpilot|birdeye|google\.com\/maps|stars?/i.test(low),
+    words: h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length
+  };
+}
+
+function expertAngles(research, html, industry) {
+  const f = scrapeForensics(html);
+  const name = research.name || research.host || 'this site';
+  const label = industry.label || 'this industry';
+  return [
+    { id: 'A01', brain: 'brain-cmo', method: 'Offer-clarity 5-second test', found: (f.h1 || f.title) ? ('Leads with “' + (f.h1 || f.title) + '.”') : 'No H1/title locked.', label: f.h1 || f.title ? 'homepage-inferred' : 'thin' },
+    { id: 'A02', brain: 'brain-cro', method: 'Capture architecture', found: 'Forms: ' + f.forms + '. Click-to-call: ' + f.tel + '. Chat: ' + (f.chat ? 'present' : 'not visible') + '.', label: 'homepage-inferred' },
+    { id: 'A03', brain: 'brain-coo', method: 'Speed-to-lead leak', found: research.leak, label: 'industry pattern' },
+    { id: 'A04', brain: 'brain-cio', method: 'Stack forensics', found: 'Stack signal: ' + research.tech + '.', label: research.tech && research.tech !== 'Not confirmed' ? 'homepage-inferred' : 'thin' },
+    { id: 'A05', brain: 'brain-cro', method: 'Trust inventory', found: f.reviews ? 'Review/maps signal visible.' : 'No review platform signal.', label: f.reviews ? 'homepage-inferred' : 'thin' },
+    { id: 'A06', brain: 'appointment-setter-sop-skill', method: 'Booking presence', found: f.buttons ? ('Conversion verbs x' + f.buttons) : 'No book/schedule/apply control obvious.', label: f.buttons ? 'homepage-inferred' : 'thin' },
+    { id: 'A07', brain: 'brain-website-expert', method: 'Mobile readiness', found: f.viewport ? 'Viewport meta present.' : 'Viewport meta not found.', label: 'homepage-inferred' },
+    { id: 'A08', brain: 'brain-seo-expert', method: 'SEO hygiene', found: 'Title ' + (f.title ? 'present' : 'missing') + ', H1 ' + (f.h1 ? 'present' : 'missing') + '.', label: 'homepage-inferred' },
+    { id: 'A09', brain: 'brain-seo-expert', method: 'Schema.org', found: f.schema ? 'JSON-LD present.' : 'No JSON-LD.', label: 'homepage-inferred' },
+    { id: 'A10', brain: 'brain-cmo', method: 'Tracking footprint', found: 'Google ' + (f.gtag ? 'visible' : 'not visible') + ', Meta ' + (f.fbq ? 'visible' : 'not visible') + '.', label: 'homepage-inferred' },
+    { id: 'A11', brain: 'brain-cmo', method: 'Social-proof specificity', found: 'Named testimonials are not invented from this magnet.', label: 'thin' },
+    { id: 'A12', brain: 'brain-cro', method: 'CTA language', found: f.buttons ? 'Conversion verb present.' : 'Primary CTA not obvious.', label: f.buttons ? 'homepage-inferred' : 'thin' },
+    { id: 'A13', brain: 'brain-cmo', method: 'ICP from copy', found: industry.icp, label: industry.id === 'general' ? 'thin' : 'homepage-inferred' },
+    { id: 'A14', brain: 'research-blueprint-ai-skill', method: 'Competitor AI Employee pattern', found: 'Operators in ' + label + ' put speed-to-lead and booking employees on inbound first.', label: 'industry pattern' },
+    { id: 'A15', brain: 'brain-cfo', method: 'Offer / price visibility', found: /\$|pricing|quote/i.test(html + ' ' + (research.what || '')) ? 'Price/quote language visible.' : 'No public price locked.', label: 'homepage-inferred' },
+    { id: 'A16', brain: 'brain-website-expert', method: 'Content vs conversion', found: 'Word count ~' + f.words + ' with ' + f.forms + ' form(s).', label: 'homepage-inferred' },
+    { id: 'A17', brain: 'website-audit-skill', method: 'Accessibility basics', found: 'Lite pass does not claim WCAG. DEEP audit is post-/apply/.', label: 'thin' },
+    { id: 'A18', brain: 'brain-cro', method: 'NAP / click-to-call', found: f.tel ? (f.tel + ' tel: link(s).') : 'No tel: link on this fetch.', label: f.tel ? 'homepage-inferred' : 'thin' },
+    { id: 'A19', brain: 'anti-ai-slop-skill', method: 'Claims hygiene', found: 'Their homepage adjectives are not our proof. Anthony hire-payback stays ours.', label: 'homepage-inferred' },
+    { id: 'A20', brain: 'blueprint-ai-skill', method: 'First-hire recommendation', found: 'Day 1 for ' + name + ': Speed-to-Lead, then Booking. Offer lock $5,000 + $1,000/mo.', label: 'offer lock' }
+  ];
+}
+
 function buildResearch(rawUrl, html) {
   let host = '';
   try { host = new URL(rawUrl).hostname.replace(/^www\./, ''); } catch (e) { host = rawUrl; }
@@ -212,6 +263,8 @@ function buildResearch(rawUrl, html) {
       demographic: pattern.demographic,
       pain: research.leak,
       competitors: pattern.competitors,
+      angles: expertAngles(research, html, { id: industry.id, label: industry.label, icp: pattern.icp }),
+      forensics: scrapeForensics(html),
       labeled: !title || industry.id === 'general'
     },
     profiler: {
