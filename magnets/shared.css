@@ -324,6 +324,14 @@ footer {
   padding: 0.5rem 1rem; border-radius: 999px; z-index: 80; font-weight: 600; text-decoration: none;
 }
 .skip:focus { left: 12px; }
+button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 3px solid #0071E3; outline-offset: 2px;
+}
+@media print {
+  .orb, .orb-float, .nav-shell, .jab-strip, .skip, .progress, #orb-live { display: none !important; }
+  body { background: #fff; color: #000; }
+  .card, .faq details { break-inside: avoid; border-color: #ccc; }
+}
 .trust-row {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem;
   max-width: var(--max-w-wide); margin: 0 auto; padding: 0.35rem 1.25rem 0.9rem;

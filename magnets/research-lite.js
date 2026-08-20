@@ -278,21 +278,30 @@
     var title = (h.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || '';
     var h1 = (h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1] || '';
     var desc = (h.match(/name=["']description["']\s+content=["']([^"']+)/i) || [])[1] || '';
+    var imgs = count(/<img\b/gi);
+    var alts = count(/<img[^>]*\balt=["'][^"']+["']/gi);
     return {
       title: title.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160),
       h1: h1.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160),
       desc: String(desc).slice(0, 220),
       forms: count(/<form\b/gi),
       tel: count(/href=["']tel:/gi),
+      mailto: count(/href=["']mailto:/gi),
       buttons: count(/<(button|a)[^>]{0,80}(book|schedule|apply|quote|contact)/gi),
       schema: /application\/ld\+json/i.test(h),
       viewport: /name=["']viewport["']/i.test(h),
       og: /property=["']og:/i.test(h),
+      canonical: /rel=["']canonical["']/i.test(h),
+      lang: /<html[^>]*\blang=/i.test(h),
       gtag: /gtag\(|googletagmanager|google-analytics/i.test(h),
       fbq: /fbq\(|facebook\.net\/en_US\/fbevents/i.test(h),
       chat: /intercom|drift\.js|hubspot conversations|tidio|tawk|crisp\.chat|voiceflow/i.test(low),
       reviews: /google\.com\/maps|trustpilot|birdeye|reviews\.io|stars?/i.test(low),
       hours: /hours|mon.?fri|open 24|after hours/i.test(low),
+      privacy: /href=["'][^"']*(privacy|terms)[^"']*["']/i.test(h),
+      cookie: /onetrust|cookiebot|cookie (consent|banner|policy)/i.test(low),
+      imgs: imgs,
+      alts: alts,
       words: h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length
     };
   }
@@ -313,13 +322,13 @@
       { id: 'A08', brain: 'brain-seo-expert', method: 'SEO hygiene', looked_at: 'Title, H1, description', found: 'Title ' + (f.title ? 'present' : 'missing') + '. H1 ' + (f.h1 ? 'present' : 'missing') + '. Description ' + (f.desc ? 'present' : 'missing') + '.', not_invented: 'No keyword ranking claim.', label: 'homepage-inferred' },
       { id: 'A09', brain: 'brain-seo-expert', method: 'Schema.org', looked_at: 'JSON-LD', found: f.schema ? 'JSON-LD is present.' : 'No JSON-LD on this fetch.', not_invented: 'Missing schema is not a Google penalty claim.', label: labeled(f.schema) },
       { id: 'A10', brain: 'brain-cmo', method: 'Tracking footprint', looked_at: 'gtag, GTM, Meta pixel', found: 'Analytics signal: ' + (f.gtag ? 'Google' : 'not visible') + '. Meta pixel: ' + (f.fbq ? 'visible' : 'not visible') + '.', not_invented: 'Hidden server-side pixels are not guessed.', label: 'homepage-inferred' },
-      { id: 'A11', brain: 'brain-cmo', method: 'Social-proof specificity', looked_at: 'Named results vs generic “trusted by”', found: 'Named case studies are not invented from this magnet. Anthony proof stays on our page, not theirs.', not_invented: 'We will not paste fake testimonials onto their brand.', label: 'thin' },
+      { id: 'A11', brain: 'brain-cmo', method: 'Social-proof specificity', looked_at: 'Reviews, maps, named results vs generic “trusted by”', found: f.reviews ? 'A review or maps signal is visible. Named case studies are still not copied onto this magnet.' : 'No review platform signal. Named testimonials are not invented.', not_invented: 'We will not paste fake testimonials onto their brand. Anthony proof stays ours.', label: labeled(f.reviews) },
       { id: 'A12', brain: 'brain-cro', method: 'CTA language', looked_at: 'Button and link verbs', found: f.buttons ? 'At least one conversion verb is on the page.' : 'Primary CTA language was not obvious.', not_invented: 'We do not A/B their buttons from this lite fetch.', label: labeled(f.buttons > 0) },
       { id: 'A13', brain: 'brain-cmo', method: 'ICP from copy', looked_at: 'Who the sentences address', found: (industry && industry.icp) || 'ICP not locked.', not_invented: 'ICP is homepage-inferred or an industry pattern, labeled.', label: (industry && industry.id === 'general') ? 'thin' : 'homepage-inferred' },
       { id: 'A14', brain: 'research-blueprint-ai-skill', method: 'Competitor AI Employee pattern', looked_at: 'How this industry already uses AI Employees', found: 'Operators in ' + ind + ' typically put speed-to-lead and booking employees on inbound before a human calendar opens.', not_invented: 'Named competitors are not guessed from a blank homepage.', label: 'industry pattern' },
       { id: 'A15', brain: 'brain-cfo', method: 'Offer / price visibility', looked_at: 'Pricing, packages, “call for quote”', found: /\$|pricing|investment|quote/i.test(String(html || '') + ' ' + (research.what || '')) ? 'Price or quote language is visible.' : 'No public price was locked from this fetch.', not_invented: 'Missing price is not a luxury-positioning claim.', label: 'homepage-inferred' },
       { id: 'A16', brain: 'brain-website-expert', method: 'Content vs conversion', looked_at: 'Word count vs form count', found: 'Rough word count ' + f.words + ' with ' + f.forms + ' form(s).', not_invented: 'Word count is a fetch slice, not a full crawl.', label: 'homepage-inferred' },
-      { id: 'A17', brain: 'website-audit-skill', method: 'Accessibility basics', looked_at: 'lang, alt density is not fully scored here', found: 'This lite pass does not claim WCAG. Full website-audit-skill is the DEEP lane after /apply/.', not_invented: 'No accessibility score is published from a homepage slice.', label: 'thin' },
+      { id: 'A17', brain: 'website-audit-skill', method: 'Accessibility basics', looked_at: 'html lang, img alt density, cookie banner', found: 'lang ' + (f.lang ? 'present' : 'missing') + '. Images ' + f.imgs + ' with alt text on ' + f.alts + '. Cookie banner signal: ' + (f.cookie ? 'present' : 'not visible') + '. Canonical: ' + (f.canonical ? 'present' : 'not visible') + '. Privacy/terms link: ' + (f.privacy ? 'present' : 'not visible') + '. Mailto: ' + f.mailto + '.', not_invented: 'This is not a WCAG score. Full website-audit-skill is the DEEP lane after /apply/.', label: labeled(f.lang || f.alts > 0) },
       { id: 'A18', brain: 'brain-cro', method: 'NAP / click-to-call', looked_at: 'tel: links', found: f.tel ? (f.tel + ' click-to-call link(s) found.') : 'No tel: link on this fetch — form or chat may be the only door.', not_invented: 'A missing tel: link is not proof they have no phone number.', label: labeled(f.tel > 0) },
       { id: 'A19', brain: 'anti-ai-slop-skill', method: 'Claims hygiene', looked_at: 'Guarantees, invented lift, “#1” language', found: 'This magnet will not inherit their hype as our proof. Our locked proof is Anthony’s hire payback, not their homepage adjectives.', not_invented: 'We do not copy their awards unless they are on the page and cited.', label: 'homepage-inferred' },
       { id: 'A20', brain: 'blueprint-ai-skill', method: 'First-hire recommendation', looked_at: 'Leak + industry extras', found: 'Day 1 hire for ' + name + ' is Speed-to-Lead, then Booking. Remaining employees are industry-specific, not a generic chatbot.', not_invented: 'Install is $5,000 setup + $1,000/mo, 14 days, month-to-month. No invented lift.', label: 'offer lock' }

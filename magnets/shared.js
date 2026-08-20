@@ -122,13 +122,13 @@
       'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?': 'roleplay-2.mp3',
       'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.': 'debrief.mp3'
     };
-    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820d';
+    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820e';
     if (t.indexOf('What should I call you') >= 0) {
-      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820d';
-      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820d';
-      return '/magnets/audio/opener-plan.mp3?v=20260820d';
+      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820e';
+      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820e';
+      return '/magnets/audio/opener-plan.mp3?v=20260820e';
     }
-    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820d';
+    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820e';
     return '';
   }
   async function elevenSpeak(text) {
@@ -1109,7 +1109,7 @@
       '<button class="btn btn-ghost" id="talk" type="button">Talk a URL</button>' +
       '<button class="btn btn-ghost" id="copy-link" type="button">Copy link</button>' +
       '</div>' +
-      '<div class="progress" id="bar"><i></i></div><p class="tiny" id="status">Ready.</p>' +
+      '<div class="progress" id="bar"><i></i></div><p class="tiny" id="status" role="status" aria-live="polite">Ready.</p>' +
       '<div id="qbox" style="margin-top:1rem">' +
       '<p class="muted">Optional — your numbers beat estimates.</p>' +
       '<div class="row" style="grid-template-columns:1fr 1fr;margin-top:.6rem">' +
