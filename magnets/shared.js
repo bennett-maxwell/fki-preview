@@ -278,7 +278,46 @@
     return '<div class="nav-shell"><nav><a class="nav-logo" href="/magnets/">Advaita <span>AI</span></a><div class="nav-links">' +
       links.map(function (l) {
         return '<a href="' + l[0] + '"' + (active === l[2] ? ' class="active"' : '') + '>' + l[1] + '</a>';
-      }).join('') + '</div></nav></div>';
+      }).join('') +
+      '<a class="nav-call" href="' + PHONE_HREF + '">Call ' + PHONE + '</a></div></nav></div>';
+  }
+
+  function jabStripHtml() {
+    return '<div class="jab-strip">' +
+      '<div class="jab"><b>Value 1</b><span>Wow Plan — research before any ask</span></div>' +
+      '<div class="jab"><b>Value 2</b><span>Leak math from your numbers</span></div>' +
+      '<div class="jab"><b>Value 3</b><span>60-second follow-up score</span></div>' +
+      '<div class="jab jab-hook"><b>Then the ask</b><span>Call ' + PHONE + ' — Calendly is 404</span></div></div>';
+  }
+
+  function hookCtaHtml(prefix, line) {
+    return '<div class="cta-dark sticky-cta" id="' + prefix + '-hook"><p>' + (line || 'You already have the value. The ask is a call.') + '</p>' +
+      '<div class="actions"><a class="btn btn-light" href="' + PHONE_HREF + '" id="' + prefix + '-call">Call ' + PHONE + '</a>' +
+      '<a class="btn btn-ghost" href="' + APPLY + '" id="' + prefix + '-apply">Full blueprint</a></div></div>';
+  }
+
+  function shareLineHtml(id) {
+    return '<div class="share-line"><button class="btn btn-ghost" type="button" id="' + id + '">Copy this result</button></div>';
+  }
+
+  function leakBarHtml(yearly) {
+    var hire = HIRE_FIRST_MONTH;
+    var max = Math.max(yearly, hire, 1);
+    var yPct = Math.min(100, Math.round((yearly / max) * 100));
+    var hPct = Math.min(100, Math.round((hire / max) * 100));
+    return '<div class="leak-compare">' +
+      '<div class="leak-row"><span>Yearly unspoken leak (your math)</span><b>' + money(yearly) + '</b></div>' +
+      '<div class="leak-track"><i style="width:' + yPct + '%"></i></div>' +
+      '<div class="leak-row"><span>First-month hire — labeled, not a forecast</span><b>' + money(hire) + '</b></div>' +
+      '<div class="leak-track hire"><i style="width:' + hPct + '%"></i></div></div>';
+  }
+
+  function bindShare(id, textFn) {
+    var b = $('#' + id);
+    if (!b) return;
+    b.onclick = function () {
+      copyText(textFn()).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy this result'; }, 1500); });
+    };
   }
 
   function cardOpen(label) {
@@ -292,9 +331,12 @@
     }).join('');
   }
 
-  function timelineHtml() {
+  function timelineHtml(firstName) {
+    var day1 = firstName
+      ? ('<strong>Day 1</strong> — first employee on the lead flow: ' + esc(firstName) + '.')
+      : '<strong>Day 1</strong> — first AI Employee configured on your lead flow.';
     return '<div class="timeline"><p>What comes after</p>' +
-      '<div class="t-row"><div class="t-dot"></div><div><strong>72 hours</strong> — first two AI Employees configured on your lead flow.</div></div>' +
+      '<div class="t-row"><div class="t-dot"></div><div>' + day1 + '</div></div>' +
       '<div class="t-row"><div class="t-dot"></div><div><strong>Day 7</strong> — they are live: contact, qualify, book.</div></div>' +
       '<div class="t-row"><div class="t-dot"></div><div><strong>Day 14</strong> — install complete. Month-to-month after that.</div></div></div>';
   }
@@ -367,7 +409,9 @@
       employeeCardsHtml(employees) +
       '<p class="kicker">How to start in 14 days</p>' +
       calendarHtml() +
-      timelineHtml() +
+      timelineHtml(employees[0] && employees[0].name) +
+      (employees[0] ? '<div class="one-thing"><h3>Walk out with Day 1 named</h3><p>First employee: <strong>' + esc(employees[0].name) + '</strong>. ' + esc(employees[0].loop || employees[0].workflow || '') + '</p></div>' : '') +
+      shareLineHtml('share-plan') +
       '<p class="muted" style="margin:0 0 16px">' + esc(profiler.start_14_days || (OFFER + ', month-to-month, 14-day install.')) + '</p>' +
       '<div class="invest"><div><p class="kicker" style="margin:0">Locked offer</p><strong>' + OFFER + '</strong></div>' +
       '<div style="text-align:right"><p class="kicker" style="margin:0">After that</p><strong>Month-to-month</strong></div></div>' +
@@ -575,20 +619,26 @@
   function renderHub() {
     document.body.innerHTML = navHtml('hub') +
       '<div class="page-intro"><h1>Paste a website.<br>Walk out with a 14-day plan.</h1>' +
-      '<p>Three short doors. AI Employees, not agents.</p>' +
+      '<p>Three free doors first. Then one ask: call. AI Employees, not agents.</p>' +
       '<p class="offer">' + OFFER + ' · 14-day install · month-to-month</p></div>' +
+      jabStripHtml() +
       '<main class="wrap"><div class="grid-3">' +
-      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Wow Plan</div><div class="card-body"><h3>Talk, paste a URL, get the research.</h3><p class="muted">Industry, who they sell to, AI Employees that fit, and how to start in 14 days.</p></div></a>' +
-      '<a class="door" href="/calculator/"><div class="card-bar">Leak math</div><div class="card-body"><h3>Unspoken leads, in dollars.</h3><p class="muted">Your numbers in. Monthly and yearly leak out. Formula on the page.</p></div></a>' +
-      '<a class="door" href="/score/"><div class="card-bar">60-sec audit</div><div class="card-body"><h3>Score the follow-up.</h3><p class="muted">0–100 and a mini employee on the worst leak.</p></div></a>' +
-      '</div></main>' + footerHtml();
+      '<a class="door" href="/plan/?demo=1"><div class="card-bar">Value 1 · Wow Plan</div><div class="card-body"><h3>Talk, paste a URL, get the research.</h3><p class="muted">Industry, who they sell to, AI Employees that fit, and how to start in 14 days.</p><p class="proof">Walk out with the report before anyone asks for a call.</p></div></a>' +
+      '<a class="door" href="/calculator/"><div class="card-bar">Value 2 · Leak math</div><div class="card-body"><h3>Unspoken leads, in dollars.</h3><p class="muted">Your numbers in. Monthly and yearly leak out. Formula on the page.</p><p class="proof">Labeled math. Not a forecast.</p></div></a>' +
+      '<a class="door" href="/score/"><div class="card-bar">Value 3 · 60-sec audit</div><div class="card-body"><h3>Score the follow-up.</h3><p class="muted">0–100 and a mini employee on the worst leak.</p><p class="proof">One score. One thing to fix first.</p></div></a>' +
+      '</div>' + hookCtaHtml('hub', 'Those three doors are free. The ask is a call — the online calendar on file is 404.') +
+      '</main>' + footerHtml();
+    var hc = $('#hub-call'); if (hc) hc.addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+    var ha = $('#hub-apply'); if (ha) ha.addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
   }
 
   function renderPlan() {
     document.body.innerHTML = navHtml('plan') +
       '<div class="page-intro" id="intro"><h1>Talk. Paste a site. Get the research.</h1>' +
       '<p>Who they sell to. Which AI Employees fit. How to start in 14 days.</p>' +
-      '<p class="offer">' + OFFER + '</p></div>' +
+      '<p class="offer">' + OFFER + '</p>' +
+      '<ul class="preview-list"><li>Who they sell to</li><li>Which AI Employees fit this industry</li><li>Day 1 named, then Day 7 live, Day 14 install done</li></ul></div>' +
+      jabStripHtml() +
       '<main class="wrap">' +
       '<div class="card" id="intake"><div class="card-bar">Advaita AI · Wow Plan</div><div class="card-body">' +
       '<div class="orb-row">' +
@@ -749,6 +799,11 @@
       };
       $('#plan-call').addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
       $('#plan-apply').addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
+      bindShare('share-plan', function () {
+        var emps = (research.packet && research.packet.profiler.employees) || [];
+        var first = emps[0] ? emps[0].name : 'the first AI Employee';
+        return research.name + ' — Day 1 starts with ' + first + '. Offer ' + OFFER + '. Call ' + PHONE + '. ' + location.href;
+      });
       $('#save-plan').onclick = function () {
         bindCapture(function () {
           return JSON.stringify({ host: research.host, packet: research.packet && { analyst: research.packet.analyst.industry, employees: (research.packet.profiler.employees || []).map(function (e) { return e.name; }) } });
@@ -777,6 +832,7 @@
       '<div class="page-intro"><h1>Unspoken-lead leak, in your numbers.</h1>' +
       '<p>Not a forecast. Math from the inputs. Hire payback is labeled.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
+      jabStripHtml() +
       '<main class="wrap">' + cardOpen('Advaita AI · Leak calculator') +
       '<div class="presets" id="presets"></div>' +
       '<div class="row" style="grid-template-columns:1fr 1fr">' +
@@ -819,12 +875,20 @@
         leads: $('#leads').value, value: $('#value').value, conv: $('#conv').value, close: $('#close').value
       });
       $('#metrics').innerHTML =
+        '<div class="metric"><span class="tiny">Yearly unspoken leak</span><b>' + money(m.yearly) + '</b><span class="tiny">From your inputs. Not a forecast.</span></div>' +
         '<div class="metric"><span class="tiny">Unspoken leads / mo</span><b>' + Math.round(m.unspoken) + '</b></div>' +
         '<div class="metric"><span class="tiny">Monthly leak</span><b>' + money(m.monthly) + '</b></div>' +
-        '<div class="metric"><span class="tiny">Yearly leak</span><b>' + money(m.yearly) + '</b></div>' +
         '<div class="metric"><span class="tiny">First-month hire vs that leak</span><b>' + money(HIRE_FIRST_MONTH) + '</b><span class="tiny">Jobs to cover hire: ' + (m.jobs || '—') + ' (not a forecast)</span></div>' +
         '<div class="metric"><span class="tiny">Human stack vs AI Employee</span><b>' + money(HUMAN_STACK) + ' vs ' + money(AI_STACK) + '</b></div>' +
-        '<div class="metric"><span class="tiny">First-touch you selected</span><b>' + $('#speed').value + '</b><span class="tiny">Target comparison is 2 seconds, not a guarantee.</span></div>';
+        '<div class="metric"><span class="tiny">First-touch you selected</span><b>' + $('#speed').value + '</b><span class="tiny">Target comparison is 2 seconds, not a guarantee.</span></div>' +
+        leakBarHtml(m.yearly) +
+        shareLineHtml('share-leak') +
+        hookCtaHtml('calc', 'You already have the leak in dollars. The ask is a call.');
+      bindShare('share-leak', function () {
+        return 'Yearly unspoken leak ' + money(m.yearly) + ' vs first-month hire ' + money(HIRE_FIRST_MONTH) + ' (labeled, not a forecast). Call ' + PHONE + '. ' + location.href;
+      });
+      var cc = $('#calc-call'); if (cc) cc.addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      var ca = $('#calc-apply'); if (ca) ca.addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
       fire('calculator_complete', m);
       var url = $('#url').value;
       var research = url ? await researchUrl(url) : { fact: 'No site pasted — math only.', name: 'your business' };
@@ -838,10 +902,10 @@
   function renderScore() {
     document.body.innerHTML = navHtml('score') +
       '<div class="page-intro"><h1>60-second follow-up audit.</h1>' +
-      '<p>Not the 149-point Blueprint. A teaser score and a mini employee on the worst leak.</p>' +
+      '<p>One score. The worst leak. Then two more free doors — then a call.</p>' +
       '<p class="offer">' + OFFER + '</p></div>' +
+      jabStripHtml() +
       '<main class="wrap">' + cardOpen('Advaita AI · 60-second audit') +
-      '<p class="tiny">The old Franchise KI 8-question quiz remains at /audit. This magnet is /score.</p>' +
       '<label>Website (or skip and use chips)</label><input id="url" placeholder="yourcompany.com">' +
       '<p class="muted" style="margin:.7rem 0 .4rem">Tap every leak that is true</p>' +
       '<div class="presets">' +
@@ -886,9 +950,13 @@
       var circ = 2 * Math.PI * 52;
       $('#arc').style.strokeDashoffset = String(circ * (1 - a.score / 100));
       $('#score-txt').textContent = String(a.score);
-      $('#notes').innerHTML = a.notes.map(function (n, idx) {
+      $('#notes').innerHTML = '<div class="one-thing"><h3>The one thing to fix first: ' + a.worst.k + '</h3>' +
+        '<p>Score ' + a.score + '/100. Next free doors: Wow Plan and leak math. Then call.</p>' +
+        '<div class="actions"><a class="btn btn-primary" href="/plan/">Wow Plan</a>' +
+        '<a class="btn btn-ghost" href="/calculator/">Leak math</a></div></div>' +
+        a.notes.map(function (n, idx) {
         return '<div class="step"><div class="step-num">' + (idx + 1) + '</div><div><h3>' + n.k + '</h3><p>' + n.n + (research.fact ? ' ' + research.fact : '') + '</p></div></div>';
-      }).join('');
+      }).join('') + shareLineHtml('share-score') + hookCtaHtml('score', 'You already have the one thing to fix. The ask is a call.');
       $('#mini').style.display = 'block';
       $('#mini-h').textContent = 'Starting on: ' + a.worst.k;
       $('#mini-p').textContent = 'Hi — I am the ' + a.worst.k + ' AI Employee for ' + research.name +
@@ -896,6 +964,11 @@
       fire('audit_score', { score: a.score, worst: a.worst.k });
       $('#hear-leak').onclick = function () { speak($('#mini-p').textContent); };
       $('#mini-call').addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      bindShare('share-score', function () {
+        return research.name + ' follow-up score ' + a.score + '/100. One thing to fix first: ' + a.worst.k + '. Call ' + PHONE + '. ' + location.href;
+      });
+      var sc = $('#score-call'); if (sc) sc.addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      var sa = $('#score-apply'); if (sa) sa.addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
       $('#chat').style.display = 'block';
       codyBox(research.fact + ' Score ' + a.score + '. Worst leak: ' + a.worst.k + '.');
       bindCapture(function () { return 'score=' + a.score + ' worst=' + a.worst.k; });
