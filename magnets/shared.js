@@ -4,7 +4,10 @@
   var APPLY = '/apply/';
   var EMAIL = 'contact@franchiseki.com';
   var OFFER = '$5,000 setup + $1,000/mo';
-  var GHL_LOC = '14RD8KklxR9G4e0Rf7v2';
+  // ADVAITA ONLY. Same rule as qualify.html (Madison 2026-08-13): never point
+  // Advaita magnets at FKI main 14RD8. Relay CORS for hub origin shipped
+  // 2026-08-21 (blueprint-ghl-relay dpl_7Suz5DmZADdz6XwPhmCVnbQ6PtXd).
+  var GHL_LOC = 'GPCi3FrWJCyevcGzZgTT';
   var WEBHOOK = 'https://blueprint-ghl-relay.vercel.app/api/blueprint-lead';
   var SAMPLE = 'https://recruiting4parents.com';
   var HIRE_FIRST_MONTH = 6000;
@@ -122,13 +125,13 @@
       'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?': 'roleplay-2.mp3',
       'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.': 'debrief.mp3'
     };
-    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820f';
+    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260821a';
     if (t.indexOf('What should I call you') >= 0) {
-      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820f';
-      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820f';
-      return '/magnets/audio/opener-plan.mp3?v=20260820f';
+      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260821a';
+      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260821a';
+      return '/magnets/audio/opener-plan.mp3?v=20260821a';
     }
-    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820f';
+    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260821a';
     return '';
   }
   async function elevenSpeak(text) {
@@ -209,39 +212,7 @@
       ownerNote: 'Owner / LinkedIn lookup is public-only and not invented.',
       labeled: true
     };
-    var pageText = '';
-    var proxies = [
-      'https://r.jina.ai/http://' + host,
-      'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
-    ];
-    for (var i = 0; i < proxies.length; i++) {
-      try {
-        var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
-        var res = await fetch(proxies[i], ctrl ? { signal: ctrl.signal } : {});
-        if (timer) clearTimeout(timer);
-        if (!res.ok) continue;
-        var text = await res.text();
-        pageText = text.slice(0, 8000);
-        var title = (text.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || text.match(/^#\s+(.+)$/m) || [])[1];
-        var desc = (text.match(/name=["']description["']\s+content=["']([^"']+)/i) || text.match(/og:description["']\s+content=["']([^"']+)/i) || [])[1];
-        title = title ? title.replace(/\s+/g, ' ').trim() : '';
-        desc = desc ? desc.replace(/\s+/g, ' ').trim() : '';
-        if (title) {
-          out.name = title.split('|')[0].trim();
-          out.fact = 'Page title: “' + title.slice(0, 140) + '.”';
-          out.what = desc ? desc.slice(0, 220) : ('Public title on ' + host + ': ' + title.slice(0, 140));
-          out.labeled = false;
-          if (/wix/i.test(text)) out.tech = 'Wix';
-          if (/wordpress|wp-content/i.test(text)) out.tech = 'WordPress';
-          if (/shopify/i.test(text)) out.tech = 'Shopify';
-          if (/gohighlevel|leadconnector/i.test(text)) out.tech = 'GoHighLevel';
-          if (/form|contact|schedule|book/i.test(text)) out.capture = 'A form or booking control is visible. The leak is still how fast a human answers it.';
-          break;
-        }
-      } catch (e) {}
-    }
-    if (AR && AR.buildLitePacket) return AR.buildLitePacket(out, pageText);
+    if (AR && AR.buildLitePacket) return AR.buildLitePacket(out, '');
     return out;
   }
 
