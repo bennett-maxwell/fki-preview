@@ -122,13 +122,13 @@
       'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?': 'roleplay-2.mp3',
       'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.': 'debrief.mp3'
     };
-    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820e';
+    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260820f';
     if (t.indexOf('What should I call you') >= 0) {
-      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820e';
-      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820e';
-      return '/magnets/audio/opener-plan.mp3?v=20260820e';
+      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260820f';
+      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260820f';
+      return '/magnets/audio/opener-plan.mp3?v=20260820f';
     }
-    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820e';
+    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260820f';
     return '';
   }
   async function elevenSpeak(text) {
@@ -585,11 +585,16 @@
     s = s.replace(/^(hey|hi|hello|yo)[,!.\s]+/i, '');
     s = s.replace(/^(i('?m| am)|my name is|this is|it'?s|call me)\s+/i, '');
     var tok = (s.split(/[\s,]+/)[0] || '').replace(/[^A-Za-z'-]/g, '');
-    if (tok.length < 2 || /^(yes|yeah|yep|no|nope|ok|okay|sure|hi|hey|please)$/i.test(tok)) return '';
+    if (tok.length < 2 || /^(yes|yeah|yep|no|nope|ok|okay|sure|hi|hey|hello|there|please)$/i.test(tok)) return '';
     return tok.charAt(0).toUpperCase() + tok.slice(1).toLowerCase();
   }
 
-  function youLine(s) { return s && s.person ? s.person : 'there'; }
+  function youLine(s) { return (s && s.person) ? s.person : ''; }
+  // Patch greetPrefix so unnamed visitors are not called there on the globe.
+  function greetPrefix(s) {
+    var n = youLine(s);
+    return n ? (n + ', ') : '';
+  }
 
   function lockReply(msg) {
     var m = String(msg || '').toLowerCase();
@@ -656,7 +661,7 @@
 
   function magnetPitch(s) {
     var r = (s && s.research) || window.__research || null;
-    var name = youLine(s);
+    var nameLead = greetPrefix(s);
     var biz = (s && s.biz) || (r && r.name) || 'your business';
     var industry = (r && r.packet && r.packet.analyst && r.packet.analyst.industry) || 'this industry';
     var fact = (r && r.fact) || '';
@@ -665,15 +670,15 @@
     var opened = host ? ('I just opened ' + host + '. ') : '';
     var siteBit = fact ? (fact + ' ') : '';
     if (s && s.magnet === 'calculator') {
-      return name + ', ' + opened + siteBit + (s.leakLine || '') +
+      return nameLead + opened + siteBit + (s.leakLine || '') +
         ' Owners in ' + industry + ' already use AI Employees to touch new leads in about a minute instead of hours. Want to try it live — you be the customer, I will be that employee for ' + biz + '?';
     }
     if (s && s.magnet === 'score') {
       var worst = (s && s.worst) || 'slow follow-up';
-      return name + ', ' + opened + siteBit + (s.scoreLine || '') +
+      return nameLead + opened + siteBit + (s.scoreLine || '') +
         ' The one thing to fix first is ' + worst + '. Want to try it live — you be the customer, I will be the ' + worst + ' employee for ' + biz + '?';
     }
-    return name + ', ' + opened + siteBit +
+    return nameLead + opened + siteBit +
       'Industry read: ' + industry + '. Top operators in this space already use AI Employees to contact new leads inside a minute and keep follow-up from dying after hours. For ' + biz + ' I would start with ' + first +
       '. Want to try it live — you be the customer, I will be that employee?';
   }
@@ -714,7 +719,7 @@
     if (s.roleTurns === 1) {
       var industry = s.research && s.research.packet && s.research.packet.analyst && s.research.packet.analyst.industry;
       var ind = industry ? ('For a ' + industry + ' lead, ') : '';
-      return 'Thanks for calling ' + biz + ', ' + name + '. ' + ind + 'I can get you a qualified conversation with the owner. What are you hoping to get done — a new job, a quote, or a question on something already open?';
+      return 'Thanks for calling ' + biz + (name ? (', ' + name) : '') + '. ' + ind + 'I can get you a qualified conversation with the owner. What are you hoping to get done — a new job, a quote, or a question on something already open?';
     }
     if (s.roleTurns === 2) {
       return 'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at ' + PHONE + '. Anything else I should pass to them before I wrap this demo?';
@@ -790,7 +795,7 @@
     function nextAfterResearch() {
       if (!s.speed) {
         s.phase = 'speed';
-        say(youLine(s) + ', how quickly does someone on your team contact a new lead today — minutes, hours, or next day?', true, 'How quickly does someone on your team contact a new lead today — minutes, hours, or next day?');
+        say(greetPrefix(s) + 'how quickly does someone on your team contact a new lead today — minutes, hours, or next day?', true, 'How quickly does someone on your team contact a new lead today — minutes, hours, or next day?');
         return;
       }
       if (!s.volume) {
