@@ -9,10 +9,19 @@ const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || 'CwhRBWXzGAHq8TQ4Fs17'; // R
 const MODEL = process.env.ELEVENLABS_MODEL || 'eleven_turbo_v2_5';
 const MAX_CHARS = 420;
 
-function cors(res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+const ALLOW_ORIGINS = {
+  'https://hub.aiblueprintmarketing.com': true,
+  'https://advaita-research-lite.vercel.app': true,
+  'http://127.0.0.1:4173': true,
+  'http://localhost:4173': true
+};
+
+function cors(res, req) {
+  const origin = String((req && req.headers && req.headers.origin) || '');
+  if (ALLOW_ORIGINS[origin]) res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Vary', 'Origin');
 }
 
 function cleanText(raw) {
@@ -65,7 +74,7 @@ function tts(text, apiKey) {
 }
 
 module.exports = async function handler(req, res) {
-  cors(res);
+  cors(res, req);
   if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return; }
   if (req.method !== 'POST') { res.statusCode = 405; res.end('POST only'); return; }
   const apiKey = process.env.ELEVENLABS_API_KEY || '';

@@ -2,6 +2,8 @@
   var PHONE = '(801) 980-0308';
   var PHONE_HREF = 'tel:+18019800308';
   var APPLY = '/apply/';
+  // Existing Advaita GHL calendar (qualify.html Madison 2026-08-13). Not Calendly.
+  var GHL_BOOK = 'https://api.leadconnectorhq.com/widget/booking/CWLlHSfE2585XWo3VWpT';
   var EMAIL = 'contact@franchiseki.com';
   var OFFER = '$5,000 setup + $1,000/mo';
   // ADVAITA ONLY. Same rule as qualify.html (Madison 2026-08-13): never point
@@ -125,13 +127,13 @@
       'Got it. I am holding a callback from the owner, not a fake calendar hold. Live install confirms by phone at 801 980 0308. Anything else I should pass to them before I wrap this demo?': 'roleplay-2.mp3',
       'That was the live demo — you just felt the employee, not a form. Real install is 5,000 dollars setup plus 1,000 a month, month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call 801 980 0308 or use apply.': 'debrief.mp3'
     };
-    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260821a';
+    if (pack[t]) return '/magnets/audio/' + pack[t] + '?v=20260822a';
     if (t.indexOf('What should I call you') >= 0) {
-      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260821a';
-      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260821a';
-      return '/magnets/audio/opener-plan.mp3?v=20260821a';
+      if (t.indexOf('score the leak') >= 0) return '/magnets/audio/opener-score.mp3?v=20260822a';
+      if (t.indexOf('take your numbers') >= 0) return '/magnets/audio/opener-calculator.mp3?v=20260822a';
+      return '/magnets/audio/opener-plan.mp3?v=20260822a';
     }
-    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260821a';
+    if (t.indexOf('Give me about ten seconds') === 0) return '/magnets/audio/researching.mp3?v=20260822a';
     return '';
   }
   async function elevenSpeak(text) {
@@ -350,7 +352,7 @@
       '<div class="jab"><b>Door 1</b><span>Site research — 20 expert angles, labeled</span></div>' +
       '<div class="jab"><b>Door 2</b><span>Leak math from your numbers</span></div>' +
       '<div class="jab"><b>Door 3</b><span>Follow-up score in 60 seconds</span></div>' +
-      '<div class="jab jab-hook"><b>Then the ask</b><span>Call ' + PHONE + ' — Calendly is 404</span></div></div>';
+      '<div class="jab jab-hook"><b>Then the ask</b><span>Call ' + PHONE + ' or book the Advaita calendar — named Calendly is 404</span></div></div>';
   }
 
   function trustRowHtml() {
@@ -367,7 +369,7 @@
         ['What do I walk out with?', 'A labeled industry report: who they sell to, 20 expert angles on the site, and which AI Employees fit. Then a live role-play. No invented lift.'],
         ['Is the voice a real person?', 'ElevenLabs. It is an AI Employee demo, not a recording of a live customer call, and not Cody’s personal clone.'],
         ['Do you scrape things nobody else can?', 'We open the public homepage and run 20 expert methods (CRO, SEO, stack, capture, tracking, ICP). We label every thin row. Full DEEP website-audit-skill is after /apply/.'],
-        ['What happens if I call?', 'A human. Calendly on file is 404, so we will not invent a link.']
+        ['What happens if I call?', 'A human. Named Calendly is 404, so we will not invent that link. Book the live Advaita calendar or call.']
       ],
       calculator: [
         ['Is the leak a forecast?', 'No. It is your numbers × the formula on the page. Hire payback is labeled.'],
@@ -387,6 +389,7 @@
   function hookCtaHtml(prefix, line) {
     return '<div class="cta-dark sticky-cta" id="' + prefix + '-hook"><p>' + (line || 'You already have the value. The ask is a call.') + '</p>' +
       '<div class="actions"><a class="btn btn-light" href="' + PHONE_HREF + '" id="' + prefix + '-call">Call ' + PHONE + '</a>' +
+      '<a class="btn btn-ghost" href="' + GHL_BOOK + '" id="' + prefix + '-book" target="_blank" rel="noopener">Book a time</a>' +
       '<a class="btn btn-ghost" href="' + APPLY + '" id="' + prefix + '-apply">Full blueprint</a></div></div>';
   }
 
@@ -518,8 +521,9 @@
       '<div style="text-align:right"><p class="kicker" style="margin:0">After that</p><strong>Month-to-month</strong></div></div>' +
       '<p class="tiny" style="margin:0 0 16px">Named proof: Anthony’s ad employee + lead employee paid the hire back in under 30 days. $140,000 collected was his baseline before the hire — not Advaita’s win. ' +
       esc(research.ownerNote) + ' Founder bio is not invented on this magnet.</p>' +
-      '<div class="cta-dark sticky-cta"><p>Ready to run this on live leads. Calendly on file returned 404 today — call or use the blueprint form.</p>' +
+      '<div class="cta-dark sticky-cta"><p>Ready to run this on live leads. Named Calendly is 404 — call, book the Advaita calendar, or use the blueprint form.</p>' +
       '<div class="actions"><a class="btn btn-light" href="' + PHONE_HREF + '" id="plan-call">Call ' + PHONE + '</a>' +
+      '<a class="btn btn-ghost" href="' + GHL_BOOK + '" id="plan-book" target="_blank" rel="noopener">Book a time</a>' +
       '<a class="btn btn-ghost" href="' + APPLY + '" id="plan-apply">Full blueprint</a>' +
       '<button class="btn btn-ghost" id="hear" type="button">Hear the report</button>' +
       '<button class="btn btn-ghost" id="one-pager" type="button">Download one-pager</button>' +
@@ -576,7 +580,7 @@
       return '$140,000 collected was Anthony’s baseline before the hire. One sale through the ad employee plus lead employee paid the hire back in under 30 days. Not typical. Not a guarantee. Do not quote him.';
     }
     if (/calendly|booking link|appointment link/.test(m)) {
-      return 'Calendly on file returned 404 today. I will not invent a link. Call ' + PHONE + ' or open /apply/.';
+      return 'Named Calendly returned 404. I will not invent that link. Book the live Advaita calendar, call ' + PHONE + ', or open /apply/.';
     }
     if (/\bagents?\b/.test(m) && !/ai employee/.test(m)) {
       return 'Public noun is AI Employees. Not agents. Speed-to-Lead and Booking are the first two; the rest are industry-specific.';
@@ -680,7 +684,7 @@
 
   function roleplayDebrief(s) {
     var biz = (s && s.biz) || (s && s.research && s.research.name) || 'your business';
-    return (s && s.person ? (s.person + ', ') : '') + 'that was the live demo — you just felt the employee, not a form. This globe is a page demo, not a recorded live customer call. Real install for ' + biz + ' is ' + OFFER + ', month-to-month, 14 days. Calendly on file is 404, so I will not invent a link. Call ' + PHONE + ' or use /apply/. I can also save this conversation if you drop an email.';
+    return (s && s.person ? (s.person + ', ') : '') + 'that was the live demo — you just felt the employee, not a form. This globe is a page demo, not a recorded live customer call. Real install for ' + biz + ' is ' + OFFER + ', month-to-month, 14 days. Named Calendly is 404, so I will not invent that link. Book the live Advaita calendar, call ' + PHONE + ', or use /apply/. I can also save this conversation if you drop an email.';
   }
 
   function roleplayReply(s, msg) {
@@ -990,7 +994,7 @@
   function footerHtml() {
     return '<footer>Locked offer ' + OFFER + ' · Noun: AI Employees · ' +
       '<a href="' + PHONE_HREF + '">' + PHONE + '</a> · <a href="mailto:' + EMAIL + '">' + EMAIL + '</a><br>' +
-      'Calendly link on file returned 404 on 2026-08-19 — call or use the blueprint form. Instant Form off.</footer>';
+      'Named Calendly is 404 — book the live Advaita calendar, call, or use the blueprint form. Instant Form off.</footer>';
   }
 
   function captureHtml() {
@@ -1003,6 +1007,7 @@
       '<div><label>Business</label><input id="c-biz"></div></div>' +
       '<div class="actions"><button class="btn btn-primary" id="c-send" type="button">Save my plan</button>' +
       '<a class="btn btn-ghost" href="' + PHONE_HREF + '" id="c-call">Call ' + PHONE + '</a>' +
+      '<a class="btn btn-ghost" href="' + GHL_BOOK + '" id="c-book" target="_blank" rel="noopener">Book a time</a>' +
       '<a class="btn btn-ghost" href="' + APPLY + '" id="c-apply">Get the full blueprint</a></div>' +
       '<p class="tiny" id="c-status"></p></div>';
   }
@@ -1159,6 +1164,7 @@
         if (window.__globeCtl) window.__globeCtl.listen();
       };
       $('#plan-call').addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      var pb = $('#plan-book'); if (pb) pb.addEventListener('click', function () { fire('booking_attempt', { via: 'ghl' }); });
       $('#plan-apply').addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
       bindShare('share-plan', function () {
         var emps = (research.packet && research.packet.profiler.employees) || [];
@@ -1264,6 +1270,7 @@
         return 'Yearly unspoken leak ' + money(m.yearly) + ' vs first-month hire ' + money(HIRE_FIRST_MONTH) + ' (labeled, not a forecast). Call ' + PHONE + '. ' + location.href;
       });
       var cc = $('#calc-call'); if (cc) cc.addEventListener('click', function () { fire('booking_attempt', { via: 'phone' }); });
+      var cb = $('#calc-book'); if (cb) cb.addEventListener('click', function () { fire('booking_attempt', { via: 'ghl' }); });
       var ca = $('#calc-apply'); if (ca) ca.addEventListener('click', function () { fire('booking_attempt', { via: 'apply' }); });
       fire('calculator_complete', m);
       var url = $('#url').value;
@@ -1322,7 +1329,8 @@
       '<div class="cta-dark" id="mini" style="display:none">' +
       '<p class="kicker" style="color:rgba(255,255,255,0.55)">Mini employee</p><h3 id="mini-h" style="margin:.4rem 0;color:#fff"></h3><p id="mini-p"></p>' +
       '<div class="actions"><button class="btn btn-light" id="hear-leak" type="button">Hear the worst leak</button>' +
-      '<a class="btn btn-light" href="' + PHONE_HREF + '" id="mini-call">Book by phone</a></div></div>' +
+      '<a class="btn btn-light" href="' + PHONE_HREF + '" id="mini-call">Book by phone</a>' +
+      '<a class="btn btn-ghost" href="' + GHL_BOOK + '" id="mini-book" target="_blank" rel="noopener">Book a time</a></div></div>' +
       captureHtml() +
       cardClose() +
       '<button class="orb orb-float" id="orb-live" type="button" aria-label="Talk to Cody, an Advaita AI Employee">' +
