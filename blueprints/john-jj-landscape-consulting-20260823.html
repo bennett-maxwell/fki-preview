@@ -1,4 +1,4 @@
-<!-- Blueprint AI Pipeline v3.0 | Built: 2026-08-23T21:37:39Z | Lead: John | Industry: Landscaping -->
+<!-- Blueprint AI Pipeline v3.0 | Built: 2026-08-24T14:47:52Z | Lead: John | Industry: Landscaping -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -359,6 +359,7 @@
       <div class="snapshot-card"><div class="snapshot-val">Ready to Scale</div><div class="snapshot-key">AI Readiness</div></div>
     </div>
     <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: ready to scale with dedicated AI Employees calibrated to JJ Landscape Consulting. Your biggest time-recovery opportunities are mapped in the sections below. Brand voice is calibrated from your own words and the language your customers already use — 90% accurate on Day 1, built from an intel audit before launch.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border, #d2d2d7);">A quick housekeeping note: we received two intake submissions from JJ Landscape Consulting — one on August 16 and one on August 23 — and the answers differed on a few points, including team size, monthly lead volume and which system you run. This roadmap is built entirely from the August 23 submission and supersedes the earlier version. If anything above does not match how you would describe the business today, tell us and we will correct it.</p>
   </div>
 </section>
 
@@ -554,7 +555,7 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="500" step="500" value="500" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="300" step="50" value="300" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">30</span></div>
@@ -853,9 +854,9 @@ Expected behavior: intake-to-estimate is drafted with times_observed 6 and confi
   // contract/leads/rate/hours here -- that shipped 2388/10/18/15 to every lead and violated
   // Rule 14 (no hardcoded ROI defaults) and Rule 18 (avg-ticket honesty).
   const PRESETS = {
-    conservative: { contract: 500, leads: 30, rate: 20, hours: 15, lift: 0.5 },
-    expected:     { contract: 500, leads: 30, rate: 20, hours: 15, lift: 1.0 },
-    stretch:      { contract: 500, leads: 30, rate: 20, hours: 15, lift: 1.3 }
+    conservative: { contract: 300, leads: 30, rate: 20, hours: 15, lift: 0.5 },
+    expected:     { contract: 300, leads: 30, rate: 20, hours: 15, lift: 1.0 },
+    stretch:      { contract: 300, leads: 30, rate: 20, hours: 15, lift: 1.3 }
   };
   let currentLift = 1.0;
 

@@ -511,6 +511,15 @@ print(f"  ROI leads slider ceiling: max={ROI_LEADS_MAX} "
       f"stated={_leads_val} renders={ROI_LEADS} "
       f"{'OK' if (_leads_val is None or int(_leads_val) == ROI_LEADS) else 'CLAMPED — INVESTIGATE'}")
 
+# Per-lead note slot (BLUEPRINT-LEAD-NOTE-SLOT-20260824). Empty for every lead that does not
+# set `lead_note`, so this is additive and changes no existing page. Content lives in the lead
+# JSON, never in the template -- same contract as blueprint_render_sections.py.
+_lead_note = (profile.get('lead_note') or '').strip()
+lead_note_html = (
+    '<p style="font-size:0.92rem;color:var(--text-muted);margin-top:1rem;'
+    'padding-top:0.85rem;border-top:1px solid var(--border, #d2d2d7);">' + _lead_note.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '</p>'
+) if _lead_note else ''
+
 replacements = {
     '{{ROI_LEADS_MAX}}': str(ROI_LEADS_MAX),
     '{{ROI_LEADS}}': str(ROI_LEADS),
@@ -555,6 +564,7 @@ replacements = {
     '{{STORAGE_TOOL}}': storage_display,
     '{{METHOD_NAME}}': method_name,
     '{{URGENCY_TEXT}}': urgency_text,
+    '{{LEAD_NOTE}}': lead_note_html,
 }
 
 for placeholder, value in replacements.items():
