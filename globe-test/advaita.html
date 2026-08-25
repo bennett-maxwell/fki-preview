@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="./favicon.svg"/>
+<link rel="stylesheet" href="./globe-ux.css"/>
+<meta name="theme-color" content="#0A0E1A"/>
 <meta name="robots" content="noindex,nofollow"/>
 <title>TEST · Advaita AI · Talk or form</title>
 <meta name="description" content="Bennett test page. Form or talk. Not live prospect traffic."/>
@@ -52,6 +56,7 @@ footer{padding:1.5rem;text-align:center;color:var(--muted);font-size:.8rem}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to form or talk</a>
 <div class="banner">TEST PAGE FOR BENNETT · Not a live apply page · SRP is off · No prospect ads pointed here</div>
 <section class="hero">
   <div class="wrap">
@@ -65,12 +70,13 @@ footer{padding:1.5rem;text-align:center;color:var(--muted);font-size:.8rem}
     </div>
   </div>
 </section>
-<section class="section">
+<section class="section" id="main">
   <div class="wrap grid">
     <div class="globe-stage" id="talkPane">
       <canvas id="orb" width="560" height="560" aria-label="Voice globe"></canvas>
       <div class="status" id="gstatus">Idle — tap Talk instead</div>
       <div class="micro">Voice: Bennett V2 clone · model eleven_v3_conversational · Natural 0.55</div>
+<div class="steps" aria-label="How talk works"><span class="step">1. Allow the mic</span><span class="step">2. Say your name and city</span><span class="step">3. It can book the call</span></div><div class="fail" id="elFail" role="status"></div>
       <div class="el-hold" id="elHold" hidden><elevenlabs-convai agent-id="agent_1101m0xd29e0e27vtyyx85nn16kp"></elevenlabs-convai></div>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
     </div>
@@ -78,10 +84,10 @@ footer{padding:1.5rem;text-align:center;color:var(--muted);font-size:.8rem}
       <div class="warn">Same fields the globe collects. TEST only — this submit does not fire the live speed-to-lead texts.</div>
       <h2>Apply by form</h2>
       <form id="leadForm">
-        <label>First name</label><input name="first_name" required/>
-        <label>Last name</label><input name="last_name"/>
-        <label>Email</label><input type="email" name="email" required/>
-        <label>Phone</label><input name="phone" required/>
+        <label for="fn">First name</label><input id="fn" name="first_name" autocomplete="given-name" required/>
+        <label for="ln">Last name</label><input id="ln" name="last_name" autocomplete="family-name"/>
+        <label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email" required/>
+        <label for="ph">Phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" required/>
         <label>City / market</label><input name="market"/>
         <label>State</label><input name="state" maxlength="2" placeholder="UT"/>
         <label>Capital ballpark</label>
@@ -165,4 +171,9 @@ document.getElementById('leadForm').onsubmit = async (e) => {
 };
 
 </script>
+<script src="./globe-ux.js" defer></script>
 </body></html>
+
+<!-- pcl-csll-r7 2026-08-25T23:13:54Z -->
+
+<!-- csll-v2-r7 2026-08-25T23:15:59Z unique -->
