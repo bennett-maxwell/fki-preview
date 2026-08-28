@@ -136,24 +136,30 @@ def _hex_to_rgb(hexstr):
 
 
 def apply_accent(html, accent):
-    """Drive the page's accent off the lead's real brand color.
+    """NO-OP by Rule 22 — the brand palette is locked, not a per-lead variable.
 
-    The base template hard-codes the Advaita blue (#0071E3) into --brand,
-    --brand-red, --crmx-red and --accent-bg. A regenerated lead page must wear
-    the lead's own accent (color-extraction gate), so swap those :root vars.
+    This used to overwrite --brand / --brand-red / --crmx-red / --accent-bg with
+    the lead's extracted brand colour. That is now a Rule 22 violation and it
+    would silently undo the Advaita rebrand on every regeneration:
+
+      Rule 22 (blueprint-ai-skill, palette rebased 2026-08-06): EVERY blueprint
+      wears the SAME locked Advaita palette from brand-guide-advaita-skill v2.0
+      -- Plum #4A1F63, Ink Plum #17111F, Warm Ivory #F7F2E9, Saffron #F5A623,
+      Mauve Mist #EADFF0. "The accent color is NOT a creative variable."
+
+    It is also a live contrast hazard: the palette pairs a dark Plum accent with
+    dark Plum/Ink surfaces, so an arbitrary injected accent can render text at
+    1.0:1. See scripts/contrast-audit.py.
+
+    The older colour-extraction gate (extract the lead's palette, recolour the
+    chrome) is SUPERSEDED. A lead's colour may only ever land in a single
+    dedicated --lead-accent token, never in the locked brand tokens.
+
+    Kept as a no-op rather than deleted so existing call sites and profiles
+    carrying `accent_color` stay valid.
     """
-    accent = (accent or "").strip()
-    if not re.match(r"^#[0-9A-Fa-f]{3,6}$", accent):
-        return html
-    r, g, b = _hex_to_rgb(accent)
-    subs = [
-        (r'(--brand:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
-        (r'(--brand-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
-        (r'(--crmx-red:\s*)#[0-9A-Fa-f]{3,6}', rf'\g<1>{accent}'),
-        (r'(--accent-bg:\s*)rgba\([^)]*\)', rf'\g<1>rgba({r}, {g}, {b}, 0.08)'),
-    ]
-    for pat, repl in subs:
-        html = re.sub(pat, repl, html, count=1)
+    if accent:
+        print(f"  [rule22] ignoring per-lead accent {accent!r} — brand palette is locked")
     return html
 
 

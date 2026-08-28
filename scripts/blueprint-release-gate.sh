@@ -49,21 +49,23 @@ else
 fi
 
 # Format-3 conformance lock (full-chain PF0-5 — 2026-06-01).
-# Any deliverable blueprint that carries the format-3 brand signature (#0071E3) MUST
-# pass scripts/format-conformance-check.py (exit 0) or it is a hard failure — a format-3
-# blueprint can never silently drift. Legacy (pre-format-3) blueprints are migration-pending
-# WARN, not fail, and auto-promote to the hard lock the moment they are regenerated on gold.
+# Any deliverable format-3 blueprint MUST pass scripts/format-conformance-check.py
+# (exit 0) or it is a hard failure — a format-3 blueprint can never silently drift.
+# Legacy (pre-format-3) blueprints are migration-pending WARN, not fail, and
+# auto-promote to the hard lock the moment they are regenerated on gold.
 CONF="scripts/format-conformance-check.py"
+format3_pages=()
 if [[ -f "$CONF" ]]; then
   for h in blueprints/*.html; do
     [[ -e "$h" ]] || continue
     b="$(basename "$h" .html)"
     [[ "$b" == "TEMPLATE" ]] && continue
     case "$h" in *.bak*) continue;; esac
-    # Format-3 detection must use the gold structure, not color alone. Several
-    # legacy pages also use #0071E3 but still carry sec-1/sec-2 legacy section
-    # IDs; treating color alone as a hard Format-3 lock creates false failures.
+    # Format-3 detection uses the gold SECTION IDs, never colour. Colour is not a
+    # valid signature: the brand palette was rebased off #0071E3 on 2026-08-06,
+    # and several legacy pages carried #0071E3 with sec-1/sec-2 legacy IDs.
     if grep -q 'id="hero"' "$h" && grep -q 'id="profile"' "$h" && grep -q 'id="stack"' "$h" && grep -q 'id="oppmap"' "$h" && grep -q 'id="timeline"' "$h" && grep -q 'id="demo"' "$h" && grep -q 'id="listen"' "$h"; then
+      format3_pages+=("$h")
       if ! python3 "$CONF" "$h" >/dev/null 2>&1; then
         failures+=("format3_conformance_drift_${b//[^a-zA-Z0-9]/_}")
       fi
@@ -73,6 +75,31 @@ if [[ -f "$CONF" ]]; then
   done
 else
   warnings+=("format_conformance_check_missing")
+fi
+
+# Advaita palette + WCAG contrast lock (2026-08-06).
+# WHY THIS IS BLOCKING: the Advaita palette uses Plum #4A1F63 as BOTH the primary
+# accent and the hero/nav/CTA/footer background, so `color: var(--brand)` on a dark
+# surface renders 1.0:1 and the text is invisible. That exact defect shipped on every
+# blueprint for months (the hero H1 accent word measured 1.08:1 in the old blue pages)
+# because no grep-level check can see the rendered cascade. Only a real render can.
+# Set SKIP_CONTRAST_GATE=1 to bypass during local iteration — never in a release.
+# Advaita palette + WCAG contrast lock (2026-08-06). Delegated to a standalone,
+# independently testable gate so its bad/good fixtures can be run without this
+# script's network + git preamble. See scripts/advaita-palette-gate.sh for why
+# contrast enforcement has to be a real render rather than a grep.
+PGATE="scripts/advaita-palette-gate.sh"
+if [[ ! -x "$PGATE" && ! -f "$PGATE" ]]; then
+  failures+=("advaita_palette_gate_missing")
+elif (( ${#format3_pages[@]} == 0 )); then
+  warnings+=("advaita_palette_gate_no_format3_pages")
+else
+  while read -r verdict reason; do
+    case "$verdict" in
+      FAIL) failures+=("$reason") ;;
+      WARN) warnings+=("$reason") ;;
+    esac
+  done < <(bash "$PGATE" "${format3_pages[@]}" 2>/dev/null || true)
 fi
 
 status="pass"
