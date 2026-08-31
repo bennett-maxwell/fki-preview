@@ -18,7 +18,7 @@ top to bottom in 3 minutes on a phone.
 - **Booking doors (all three, top AND bottom):**
   1. GHL widget `https://api.leadconnectorhq.com/widget/booking/CWLlHSfE2585XWo3VWpT`
   2. Call/text **(801) 980-0308**
-  3. `https://hub.aiblueprintmarketing.com/apply/`
+  3. Intake form `https://blueprint.meetadvaita.com/` (the ONLY intake URL — marker BLUEPRINT-INTAKE-URL-CANONICAL-20260805)
   - **NEVER** paste `calendly.com/franchiseki/blueprint-ai` — it is HTTP 404.
 - **Proof line (only proof allowed):** Anthony's AI hire paid for itself in under
   30 days — one sale through the ad employee and lead employee covered it.

@@ -42,7 +42,7 @@ LinkedIn/social research only** (no intake form needed):
 - **3 specific findings** from *their* website — quoted, costed with honest math.
 - **1 done-for-you asset** — the actual messages their business should be sending,
   written in their voice, copy-paste usable today, free, no strings.
-- **Booking doors at top and bottom** — GHL widget + phone + /apply. Never Calendly.
+- **Booking doors at top and bottom** — GHL widget + phone + the canonical intake `blueprint.meetadvaita.com`. Never Calendly, never the retired /apply/ path.
 
 See `SKILL.md` for the generation pipeline and QA gates, `TEMPLATE.html` for the page,
 and the two rebuilt examples (`butch-threadgills-roofing.html`, `john-jj-landscape.html`).
