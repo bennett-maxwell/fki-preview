@@ -40,6 +40,15 @@ INDUSTRY_BANDS = {
     "property_mgmt":      (1000,50000,  "annual mgmt fee"),
     "marketing_agency":   (250, 25000,  "retainer/project"),   # marketing services (Sky/BME form: industry=marketing)
     "heavy_equipment":    (2000,200000, "equipment/contract"), # road equipment mfg/services (Diamond Road; muni contracts)
+    "automotive":         (2000, 100000, "vehicle"),      # vehicle sale / auto concierge deal
+    # general_small_business = the HONEST classification for a paid-ad lead whose intake left
+    # Business Type BLANK and gave no usable website. It is NOT a guess at an industry -- it is an
+    # accurate statement that the form did not say. Band is deliberately wide so the client models
+    # their own real transaction and no false precision is implied. This is what "unknown" should
+    # have been: unknown means "nobody classified it yet" (a process gap, correctly a red-line);
+    # general_small_business means "the lead did not tell us, and we refuse to invent it".
+    # Added 2026-08-03 after cindy-broken-in-treasures (FB campaign 120248051258320003).
+    "general_small_business": (100, 100000, "sale/job"),
     "unknown":            (None, None,  "deal"),            # cannot verify -> flagged
 }
 
@@ -68,6 +77,9 @@ LEAD_INDUSTRY = {
     "garlon-maxwell":   "heavy_equipment",   # Diamond Road (GHL form 2026-06: heavy equipment, 500k-1m)
     "mark-bustamonte":  "consulting",        # Upfinity Consulting (GHL form 2026-06: consulting/business services)
     "josh-jackson-exalt":"consulting",       # Exalt (exaltlife.co) — business/ops consulting, growth partner; packages $200-$300, engagement default modeled in-band
+    "cindy-broken-in-treasures":"general_small_business",  # Broken in Treasures (FB paid lead, campaign 120248051258320003, form 2026-08-01). Business Type submitted BLANK, website field was the placeholder "https://000000000", and candidate-domain probes (brokenintreasures .com/.net/.org/.co/.shop/llc.com = NXDOMAIN; brokentreasures.com = GoDaddy parked for-sale page) plus two web searches found NO presence. Nothing about her trade is knowable, so nothing is asserted -- wide band, she models her own number.
+    "bruno-numbers-with-purpose":"consulting",  # Numbers With Purpose Group (GHL form 2026-08-27: business_type=consultant) — Bruno De Jesus, solo fractional CFO practice (nwpgroup.net) selling scoped CFO retainers/advisory to small and mid-size owners, so the consulting engagement band applies. Avg engagement value is NOT a field on the intake form, so the slider sits at the band minimum as a neutral, user-adjustable default — never presented as Bruno's own figure (same treatment as janet-drawn-logic).
+    "janet-drawn-logic":"consulting",        # Drawn Logic LLC (GHL form 2026-08-01: business_type=consultant) — technical training + system engineering; The Logic Audit is a scoped diagnostic engagement, so the consulting engagement band applies. Avg engagement value was NOT asked on the intake form, so the slider sits at the band minimum as a neutral, user-adjustable default — never presented as Janet's own figure.
     "simon-harwood-disruptive-foods-20260618": "food_franchise",  # Disruptive Foods — street-food product distribution to retail (GHL form 2026-06-18); per-customer ticket band
     "asif-jam-equities-20260618":              "food_franchise",  # JAM Equities — multi-unit QSR/restaurant operator (GHL form 2026-06-18); per-guest ticket band
     # Demo/sample blueprints (no leads/*.json intake). Classified by the self-declared
@@ -79,6 +91,9 @@ LEAD_INDUSTRY = {
     "mike-johnson":     "home_services",      # Johnson Plumbing LLC
     "rj-kitchenguard":  "home_services",      # Kitchen Guard (commercial kitchen fire suppression)
     "claude-code":      "ai_consulting",       # Claude Code Agency — AI agent development, $5K contracts
+    "advaita-ai-blueprint-20260709": "ai_consulting",  # "Advaita AI — The Blueprint We Built for Our Own Firm" (page <title>) — Advaita's own AI-services blueprint
+    "franchise-live":   "general_small_business",  # "AI Advantage Roadmap — Franchise LIVE" (page <title>) — internal demo, NO intake and NO stated business type, and its $500 avg-customer-value fits no trade band coherently (ai_consulting starts at $3,000). general_small_business is the accurate class for exactly that. Its slider is set to the band FLOOR below, per BLUEPRINT-ROI-PRESET-FROM-FORM-20260727: a page with no intake to preset from takes the documented neutral default.
+    "join-martha":      "ai_consulting",       # "AI Advantage Roadmap — Martha" (page <title>) — internal Advaita AI-roadmap demo, same class as claude-code. Classified rather than NON_LEAD-excluded, per the standard stated above: excluding would reintroduce the silent-skip bug.
 }
 
 def _load_slug_industry():
@@ -215,7 +230,23 @@ def check_file(path, clone_registry):
     # same $25K-$120K slider). Two photography studios sharing a photography range
     # is correct, not a clone. So we key by (triple, industry) and only fail when a
     # single triple spans >=2 distinct industries (or all blueprints share one).
-    if slider_triple:
+    # PERMANENT FIX 2026-08-03 (marker BLUEPRINT-D702-BAND-MIN-NOT-A-CLONE-20260803):
+    # EXEMPT the neutral band-minimum default. Per BLUEPRINT-ROI-PRESET-FROM-FORM-20260727, a lead
+    # who did NOT state an average contract value gets `contract = industry_band_min` on purpose --
+    # a documented neutral, user-adjustable starting point. That is the OPPOSITE of "ONE financial
+    # profile cloned across DIFFERENT industries" (this check's own stated target): every such page
+    # is sitting at its OWN industry's floor, independently derived.
+    # Observed harm: $3,000 is simultaneously the `consulting` floor AND the static default baked
+    # into the join-martha demo page, so a single coincidence of floors failed D7-02 for THIRTEEN
+    # already-delivered consulting leads (chris-lpnw, dino-ahc, heather-herae-studios,
+    # josh-jackson-exalt, lisa-christine, paul-muus, rey-31-consulting, shaheen-mazloom,
+    # shivangi-jain, stan-xtreme, tom-reliant-bridge, valerie-lane, janet-drawn-logic) that had
+    # nothing wrong with them. Classifying the demo could not fix it -- any label still leaves two
+    # distinct industries -- so the check's semantics were the defect, not the data.
+    # A page whose default is an INVENTED figure (not its band floor) is still fully clone-checked,
+    # which is the case the red-line was written for.
+    at_band_floor = (lo is not None and slider_default is not None and slider_default == lo)
+    if slider_triple and not at_band_floor:
         clone_registry[slider_triple].append((slug, industry))
 
     # --- D7-04 fabricated hardcoded $ figures in client copy (outside <script>/<input>) ---

@@ -169,7 +169,10 @@ for profile in "${LEADS[@]}"; do
 
     # Stage 7: Email Build
     echo "  Stage 7: Email build..." | tee -a "$LOG"
-    if [ -x "$SCRIPT_DIR/build-delivery-email.sh" ]; then
+    # RL-DE2: the builder is RETIRED and must never exist, so this guard can never be true.
+    # Inverted to `false` so no reader mistakes it for a live path. Rewire to the Drive Stage-7
+    # design to restore delivery-email generation in batch mode.
+    if false; then
         SEND_FLAGS=""
         [ "$SEND_PREVIEWS" = true ] && SEND_FLAGS="$SEND_FLAGS --send-preview"
         [ "$SEND_GHL" = true ] && SEND_FLAGS="$SEND_FLAGS --send-ghl"
@@ -177,7 +180,10 @@ for profile in "${LEADS[@]}"; do
             echo "    Email: DONE" | tee -a "$LOG" || \
             echo "    Email: SKIPPED (build error)" | tee -a "$LOG"
     else
-        echo "    Email: SKIPPED (build-delivery-email.sh not found)" | tee -a "$LOG"
+        # RL-DE2 REWIRE 2026-08-03: this read as a benign skip. It is not -- the builder is RETIRED
+        # and this batch produces NO delivery email at all until Stage 7 is rewired to the Drive design.
+        echo "    Email: NOT BUILT -- build-delivery-email.sh is RETIRED by RL-DE2. No delivery email" | tee -a "$LOG"
+        echo "           was produced for this lead. Build from the canonical Drive Stage-7 design." | tee -a "$LOG"
     fi
 
     PASSED=$((PASSED + 1))

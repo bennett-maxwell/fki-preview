@@ -2,7 +2,9 @@
 # audit-gate.sh — blueprint-ai-audit-skill v2.8 HARD 100% GATE (Bennett directive 2026-06-01).
 #
 # Mints a hash-bound approval token ONLY when every deterministic enforcer passes (100%).
-# build-delivery-email.sh calls this immediately before any send. No token => no send.
+# RETIRED CALLER NOTE (2026-08-03): build-delivery-email.sh (which used to call this immediately
+# before any send) was retired by RL-DE2 on 2026-07-17. This token gate still applies -- no token =>
+# no send -- but it is now the Drive-sourced Stage-7 path that must honour it.
 #
 # Usage: audit-gate.sh <slug> <email_html> [blueprint_html]
 # Exit 0 + token minted = approved for THESE EXACT email bytes.
@@ -59,6 +61,22 @@ if [ -n "$BP_HTML" ] && [ -f "$BP_HTML" ]; then
         if ! python3 "$D9_AUDIT" "$BP_HTML"; then FAILS=$((FAILS+1)); fi
     else
         echo "audit-gate: d9-audit.py missing"
+        FAILS=$((FAILS+1))
+    fi
+
+    # COVERAGE TRANSFER 2026-08-11 (marker BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # blueprint_gatekeeper_100.py was the only token-path caller of the D2-03 agent-card /
+    # ready-to-use-prompt quality gate. Retiring gatekeeper as the token authority would have
+    # SILENTLY dropped that red-line from the send path, so it moves here. Without this line the
+    # retirement would have been a quiet loss of coverage rather than a swap.
+    APQ="$SCRIPT_DIR/blueprint_agent_prompt_quality_gate.py"
+    if [ -f "$APQ" ]; then
+        echo "audit-gate: blueprint_agent_prompt_quality_gate.py (D2-03) ..."
+        APQ_ARGS=(--html "$BP_HTML")
+        [ -f "$REPO_DIR/leads/$SLUG.json" ] && APQ_ARGS+=(--profile "$REPO_DIR/leads/$SLUG.json")
+        if ! python3 "$APQ" "${APQ_ARGS[@]}"; then FAILS=$((FAILS+1)); fi
+    else
+        echo "audit-gate: blueprint_agent_prompt_quality_gate.py missing"
         FAILS=$((FAILS+1))
     fi
 fi

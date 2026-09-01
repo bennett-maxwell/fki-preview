@@ -1,0 +1,473 @@
+/**
+ * Blueprint research lite — SCOUT → ANALYST → PROFILER mapper for magnets.
+ * Magnet preview only. Full packet stays on blueprint-ai-skill after /apply/.
+ * Public noun: AI Employees. Soft claims must be labeled.
+ */
+(function (root) {
+  var SAMPLE = 'https://recruiting4parents.com';
+  var RESEARCH_APIS = [
+    'https://advaita-research-lite.vercel.app/api/research-lite',
+    'https://blueprint-ghl-relay.vercel.app/api/research-lite'
+  ];
+  try {
+    if (typeof location !== 'undefined' && location.origin &&
+        !/github\.io$|aiblueprintmarketing\.com$|pages\.dev$/i.test(location.hostname)) {
+      RESEARCH_APIS.unshift(location.origin + '/api/research-lite');
+    }
+  } catch (e) {}
+
+  var INDUSTRIES = {
+    recruiting: {
+      id: 'recruiting',
+      label: 'High-school / youth sports recruiting',
+      keywords: ['recruit', 'athlete', 'ncaa', 'college sports', 'parent', 'high school recruiting', 'scholarship', 'coach'],
+      icp: 'Parents of high-school athletes who will pay for a recruiting process they do not want to learn alone.',
+      demographic: [
+        { claim: 'Primary buyer is a parent, not the athlete.', label: 'homepage-inferred' },
+        { claim: 'Decision window is junior / senior year plus earlier “education” buyers.', label: 'industry pattern' }
+      ],
+      industryAi: [
+        { claim: 'Recruiting consultancies put parent intake on SMS so a night-time web form is not the first touch.', label: 'industry pattern' },
+        { claim: 'Operators split “curious parent” from “ready to buy a process” before a human consult.', label: 'industry pattern' },
+        { claim: 'Athletic programs use after-hours chat so a missed form is not a lost family.', label: 'industry pattern' },
+        { claim: 'Booking sits on a calendar employee so consults are not a spreadsheet.', label: 'industry pattern' }
+      ]
+    },
+    home_services: {
+      id: 'home_services',
+      label: 'Home services',
+      keywords: ['hvac', 'plumber', 'electrician', 'roof', 'garage door', 'pest', 'lawn', 'hvac', 'heating', 'cooling', 'restoration'],
+      icp: 'Homeowners with an urgent or seasonal job who will book the first operator that answers.',
+      demographic: [
+        { claim: 'Buyer is the homeowner or property manager on the job address.', label: 'industry pattern' },
+        { claim: 'After-hours and weekend searches are a large share of inbound.', label: 'industry pattern' }
+      ],
+      industryAi: [
+        { claim: 'Speed-to-lead on missed calls and web forms is the default first AI Employee in this category.', label: 'industry pattern' },
+        { claim: 'Booking employees hold a tech’s calendar and stop unqualified “how much for…” chats from eating the day.', label: 'industry pattern' },
+        { claim: 'Review-request employees fire after a completed job, not from a monthly blast.', label: 'industry pattern' },
+        { claim: 'Estimate follow-up employees chase stale quotes instead of a human remembering to call back.', label: 'industry pattern' }
+      ]
+    },
+    franchise: {
+      id: 'franchise',
+      label: 'Franchise / multi-unit',
+      keywords: ['franchise', 'franchisor', 'territory', 'royalty', 'multi-unit', 'franchisee'],
+      icp: 'Franchise candidates and existing operators who will take a discovery call if someone answers fast.',
+      demographic: [
+        { claim: 'Candidate is often a career-changer with capital, not a walk-in retail shopper.', label: 'industry pattern' },
+        { claim: 'Existing operators care about unit-level lead response more than brand slogans.', label: 'industry pattern' }
+      ],
+      industryAi: [
+        { claim: 'Franchise development desks use a speed-to-lead employee on FDD / apply forms.', label: 'industry pattern' },
+        { claim: 'Booking employees put only funded, timeline-ready candidates on the calendar.', label: 'industry pattern' },
+        { claim: 'Unit-level operators put the same two employees on local lead flow, not just HQ.', label: 'industry pattern' },
+        { claim: 'Nurture employees keep “not this year” candidates without a human spreadsheet.', label: 'industry pattern' }
+      ]
+    },
+    professional_services: {
+      id: 'professional_services',
+      label: 'Professional services',
+      keywords: ['law', 'attorney', 'cpa', 'accountant', 'consultant', 'agency', 'advisor', 'wealth', 'insurance'],
+      icp: 'A qualified buyer who will book a consult if the first reply is fast and not a generic form dump.',
+      demographic: [
+        { claim: 'Buyer is a business owner or household decision-maker shopping a high-consideration service.', label: 'industry pattern' },
+        { claim: 'Intake is usually a form or email that sits until a human is free.', label: 'industry pattern' }
+      ],
+      industryAi: [
+        { claim: 'Intake employees qualify matter-type / budget / timeline before a partner calendar opens.', label: 'industry pattern' },
+        { claim: 'Speed-to-lead on web forms beats the 47-hour industry first-touch average (process comparison).', label: 'industry pattern' },
+        { claim: 'Booking employees put only the fit on the consult calendar.', label: 'industry pattern' },
+        { claim: 'No-show recovery is a separate employee, not a receptionist side task.', label: 'industry pattern' }
+      ]
+    },
+    ecommerce: {
+      id: 'ecommerce',
+      label: 'Ecommerce / retail',
+      keywords: ['shop', 'cart', 'shopify', 'woocommerce', 'store', 'product', 'checkout', 'sku'],
+      icp: 'A shopper or wholesale buyer who abandons when nobody answers a pre-purchase question.',
+      demographic: [
+        { claim: 'Buyer is often mobile, after hours, and one question away from abandoning cart.', label: 'industry pattern' },
+        { claim: 'Wholesale / high-ticket SKUs still need a human close after qualification.', label: 'industry pattern' }
+      ],
+      industryAi: [
+        { claim: 'Cart-recovery employees text the abandoned checkout, not a 3-day email drip only.', label: 'industry pattern' },
+        { claim: 'Pre-purchase chat employees answer size / ship / fit so the cart does not die in silence.', label: 'industry pattern' },
+        { claim: 'VIP / wholesale inboxes get a speed-to-lead employee, not a shared Gmail.', label: 'industry pattern' },
+        { claim: 'Review and refill employees run after delivery, not as a generic newsletter.', label: 'industry pattern' }
+      ]
+    },
+    general: {
+      id: 'general',
+      label: 'Local / service business',
+      keywords: [],
+      icp: 'A buyer who found the site and will talk to whoever answers first.',
+      demographic: [
+        { claim: 'Target demographic was not locked from the homepage. Labeled until the call.', label: 'thin' },
+        { claim: 'Assume inbound web or phone leads that wait on a human.', label: 'labeled estimate' }
+      ],
+      industryAi: [
+        { claim: 'Speed-to-Lead Employee on after-hours forms is the usual first hire.', label: 'industry pattern' },
+        { claim: 'Booking Employee puts only the fit on the calendar.', label: 'industry pattern' },
+        { claim: 'Qualification Employee stops unqualified conversations from burning the owner.', label: 'industry pattern' },
+        { claim: 'No-show recovery is the fourth common employee, not a generic “AI agent.”', label: 'industry pattern' }
+      ]
+    }
+  };
+
+  function classifyIndustry(text) {
+    var blob = String(text || '').toLowerCase();
+    var best = 'general';
+    var score = 0;
+    Object.keys(INDUSTRIES).forEach(function (id) {
+      if (id === 'general') return;
+      var n = 0;
+      INDUSTRIES[id].keywords.forEach(function (k) {
+        if (blob.indexOf(k) >= 0) n += 1;
+      });
+      if (n > score) { score = n; best = id; }
+    });
+    return INDUSTRIES[best];
+  }
+
+  function speedBooking(research) {
+    var name = research.name || 'this business';
+    var leak = research.leak || 'After-hours inquiries can sit until a human logs in.';
+    var capture = research.capture || 'Lead capture method not confirmed.';
+    return [
+      {
+        id: 'EMP-01',
+        name: 'Speed-to-Lead Employee',
+        finding: leak + ' ' + capture,
+        workflow: 'The new lead texts in 2 seconds, nights and weekends included. Qualifies. Hands a human only what is warm.',
+        loop: 'First-touch time: missed-hours → 2 seconds. Industry first-touch average is 47 hours — process comparison, not a promised lift for ' + name + '.',
+        pain_point_ids: ['PAIN-after-hours'],
+        justifying_finding_id: 'F-speed'
+      },
+      {
+        id: 'EMP-02',
+        name: 'Booking Employee',
+        finding: name + ' still has to put the fit on a calendar. Unqualified conversations burn the close.',
+        workflow: 'Only qualified conversations land on the calendar. ' + name + ' keeps the close.',
+        loop: 'Booked qualified conversations / week, with no-show recovery as a later employee if the calendar dies.',
+        pain_point_ids: ['PAIN-unqualified-calendar'],
+        justifying_finding_id: 'F-booking'
+      }
+    ];
+  }
+
+  function extraEmployees(industry, research) {
+    var name = research.name || 'this business';
+    var map = {
+      recruiting: [
+        {
+          id: 'EMP-03',
+          name: 'Parent Qualification Employee',
+          finding: 'Recruiting sites attract curious parents and ready buyers in the same form. A human consult on every click is the leak.',
+          workflow: 'Asks sport, grad year, and whether they want education or a done-for-you process. Routes only the ready parent.',
+          loop: 'Share of inbound parents who reach a consult already qualified on sport / year / intent.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'Recruiting-Timeline Employee',
+          finding: 'Education vs execute vs evaluate is the product. A generic chatbot cannot run that sequence.',
+          workflow: 'Walks the parent through the stage they are in and books the next step instead of dumping a PDF.',
+          loop: 'Parents who move from “education” content to a booked execute consult.'
+        },
+        {
+          id: 'EMP-05',
+          name: 'Consult No-Show Employee',
+          finding: 'Booked parent consults that never happen still cost the calendar.',
+          workflow: 'Confirms the consult, reschedules the miss, and keeps the slot from going quiet.',
+          loop: 'Show rate on booked parent consults.'
+        }
+      ],
+      home_services: [
+        {
+          id: 'EMP-03',
+          name: 'Estimate Follow-Up Employee',
+          finding: 'Quoted jobs that sit in the inbox are the quiet leak after speed-to-lead is fixed.',
+          workflow: 'Follows the estimate until booked or dead. ' + name + ' does not rely on memory.',
+          loop: 'Stale estimates touched within 24 hours.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'Review-Request Employee',
+          finding: 'Completed jobs that never ask for a review leave the next homeowner shopping in silence.',
+          workflow: 'Asks for the review after the job, not in a monthly blast.',
+          loop: 'Reviews requested / completed jobs.'
+        }
+      ],
+      franchise: [
+        {
+          id: 'EMP-03',
+          name: 'Candidate Qualification Employee',
+          finding: 'Franchise apply forms mix tire-kickers with funded candidates.',
+          workflow: 'Locks capital, timeline, and territory interest before a development calendar opens.',
+          loop: 'Qualified candidates booked / apply-form submissions.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'Nurture Employee',
+          finding: '“Not this year” candidates die in a spreadsheet.',
+          workflow: 'Keeps the candidate warm on a month-to-month cadence the brand already uses. No invented drip claims.',
+          loop: 'Re-activated candidates who book a second call.'
+        }
+      ],
+      professional_services: [
+        {
+          id: 'EMP-03',
+          name: 'Intake Qualification Employee',
+          finding: 'Web forms dump every matter onto a partner calendar.',
+          workflow: 'Locks matter type, timeline, and fit before a human consult.',
+          loop: 'Qualified consults / inbound forms.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'Consult No-Show Employee',
+          finding: 'No-shows still cost the calendar after booking is fixed.',
+          workflow: 'Confirms and reschedules. ' + name + ' keeps the close.',
+          loop: 'Show rate on booked consults.'
+        }
+      ],
+      ecommerce: [
+        {
+          id: 'EMP-03',
+          name: 'Pre-Purchase Question Employee',
+          finding: 'Shoppers abandon when a size / ship / wholesale question sits in an inbox.',
+          workflow: 'Answers the pre-purchase question in seconds. Hands a human the wholesale or high-ticket close.',
+          loop: 'Answered pre-purchase questions / abandoned chats.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'Cart Recovery Employee',
+          finding: 'Abandoned checkouts are a different leak than a missed contact form.',
+          workflow: 'Texts the abandoned checkout. Not a three-day email drip only.',
+          loop: 'Recovered checkouts / abandoned carts (labeled until numbers are confirmed).'
+        }
+      ],
+      general: [
+        {
+          id: 'EMP-03',
+          name: 'Qualification Employee',
+          finding: 'Unqualified conversations still reach the owner after a form is answered.',
+          workflow: 'Asks the fit questions this industry actually uses. Labeled until we confirm on the call.',
+          loop: 'Qualified conversations / inbound leads.'
+        },
+        {
+          id: 'EMP-04',
+          name: 'No-Show Recovery Employee',
+          finding: 'Booked conversations that never happen still cost the calendar.',
+          workflow: 'Confirms, reschedules, and keeps the slot from going quiet.',
+          loop: 'Show rate on booked conversations.'
+        }
+      ]
+    };
+    var list = map[industry.id] || map.general;
+    return list.map(function (e) {
+      e.pain_point_ids = e.pain_point_ids || ['PAIN-industry'];
+      e.justifying_finding_id = e.justifying_finding_id || e.id;
+      return e;
+    });
+  }
+
+  function scrapeForensics(html) {
+    var h = String(html || '');
+    var low = h.toLowerCase();
+    function count(re) { return (h.match(re) || []).length; }
+    var title = (h.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1] || '';
+    var h1 = (h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1] || '';
+    var desc = (h.match(/name=["']description["']\s+content=["']([^"']+)/i) || [])[1] || '';
+    var imgs = count(/<img\b/gi);
+    var alts = count(/<img[^>]*\balt=["'][^"']+["']/gi);
+    return {
+      title: title.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160),
+      h1: h1.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160),
+      desc: String(desc).slice(0, 220),
+      forms: count(/<form\b/gi),
+      tel: count(/href=["']tel:/gi),
+      mailto: count(/href=["']mailto:/gi),
+      buttons: count(/<(button|a)[^>]{0,80}(book|schedule|apply|quote|contact)/gi),
+      schema: /application\/ld\+json/i.test(h),
+      viewport: /name=["']viewport["']/i.test(h),
+      og: /property=["']og:/i.test(h),
+      canonical: /rel=["']canonical["']/i.test(h),
+      lang: /<html[^>]*\blang=/i.test(h),
+      gtag: /gtag\(|googletagmanager|google-analytics/i.test(h),
+      fbq: /fbq\(|facebook\.net\/en_US\/fbevents/i.test(h),
+      chat: /intercom|drift\.js|hubspot conversations|tidio|tawk|crisp\.chat|voiceflow/i.test(low),
+      reviews: /google\.com\/maps|trustpilot|birdeye|reviews\.io|stars?/i.test(low),
+      hours: /hours|mon.?fri|open 24|after hours/i.test(low),
+      privacy: /href=["'][^"']*(privacy|terms)[^"']*["']/i.test(h),
+      cookie: /onetrust|cookiebot|cookie (consent|banner|policy)/i.test(low),
+      imgs: imgs,
+      alts: alts,
+      words: h.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length
+    };
+  }
+
+  function buildExpertAngles(research, html, industry) {
+    var f = scrapeForensics(html);
+    var name = research.name || research.host || 'this site';
+    var ind = (industry && industry.label) || 'this industry';
+    var labeled = function (ok) { return ok ? 'homepage-inferred' : 'thin'; };
+    return [
+      { id: 'A01', brain: 'brain-cmo', method: 'Offer-clarity 5-second test', looked_at: 'Title, H1, meta description', found: (f.h1 || f.title) ? ('The page leads with “' + (f.h1 || f.title) + '.”') : 'No H1/title locked from this fetch.', not_invented: 'We do not rewrite their offer. We quote what loaded.', label: labeled(!!(f.h1 || f.title)) },
+      { id: 'A02', brain: 'brain-cro', method: 'Capture architecture', looked_at: 'Forms, tel: links, chat widgets', found: 'Forms: ' + f.forms + '. Click-to-call: ' + f.tel + '. Chat widget signal: ' + (f.chat ? 'present' : 'not visible') + '.', not_invented: 'A missing widget is not proof they have no phone process.', label: 'homepage-inferred' },
+      { id: 'A03', brain: 'brain-coo', method: 'Speed-to-lead leak', looked_at: 'After-hours copy, chat, form-only capture', found: research.leak || 'If the only door is a form, nights sit until a human logs in.', not_invented: '47 hours vs 2 seconds is a process comparison, not their measured SLA.', label: 'industry pattern' },
+      { id: 'A04', brain: 'brain-cio', method: 'Stack forensics', looked_at: 'Generator meta, asset paths, CMS fingerprints', found: 'Stack signal: ' + (research.tech || 'Not confirmed') + '.', not_invented: 'Stack is a fingerprint, not a security audit.', label: labeled(research.tech && research.tech !== 'Not confirmed') },
+      { id: 'A05', brain: 'brain-cro', method: 'Trust inventory', looked_at: 'Reviews, maps, ratings copy', found: f.reviews ? 'A review or maps signal is visible.' : 'No review platform signal on this fetch.', not_invented: 'Absence on the homepage is not a 0-star rating.', label: labeled(f.reviews) },
+      { id: 'A06', brain: 'appointment-setter-sop-skill', method: 'Booking presence', looked_at: 'Book/schedule/apply language, calendar embeds', found: f.buttons ? ('Booking/contact language appeared ' + f.buttons + ' times.') : 'No book/schedule/apply control was obvious.', not_invented: 'We do not invent a Calendly URL.', label: labeled(f.buttons > 0) },
+      { id: 'A07', brain: 'brain-website-expert', method: 'Mobile readiness', looked_at: 'viewport meta', found: f.viewport ? 'Viewport meta is present.' : 'Viewport meta was not found on this fetch.', not_invented: 'This is not a device lab score.', label: labeled(f.viewport) },
+      { id: 'A08', brain: 'brain-seo-expert', method: 'SEO hygiene', looked_at: 'Title, H1, description', found: 'Title ' + (f.title ? 'present' : 'missing') + '. H1 ' + (f.h1 ? 'present' : 'missing') + '. Description ' + (f.desc ? 'present' : 'missing') + '.', not_invented: 'No keyword ranking claim.', label: 'homepage-inferred' },
+      { id: 'A09', brain: 'brain-seo-expert', method: 'Schema.org', looked_at: 'JSON-LD', found: f.schema ? 'JSON-LD is present.' : 'No JSON-LD on this fetch.', not_invented: 'Missing schema is not a Google penalty claim.', label: labeled(f.schema) },
+      { id: 'A10', brain: 'brain-cmo', method: 'Tracking footprint', looked_at: 'gtag, GTM, Meta pixel', found: 'Analytics signal: ' + (f.gtag ? 'Google' : 'not visible') + '. Meta pixel: ' + (f.fbq ? 'visible' : 'not visible') + '.', not_invented: 'Hidden server-side pixels are not guessed.', label: 'homepage-inferred' },
+      { id: 'A11', brain: 'brain-cmo', method: 'Social-proof specificity', looked_at: 'Reviews, maps, named results vs generic “trusted by”', found: f.reviews ? 'A review or maps signal is visible. Named case studies are still not copied onto this magnet.' : 'No review platform signal. Named testimonials are not invented.', not_invented: 'We will not paste fake testimonials onto their brand. Anthony proof stays ours.', label: labeled(f.reviews) },
+      { id: 'A12', brain: 'brain-cro', method: 'CTA language', looked_at: 'Button and link verbs', found: f.buttons ? 'At least one conversion verb is on the page.' : 'Primary CTA language was not obvious.', not_invented: 'We do not A/B their buttons from this lite fetch.', label: labeled(f.buttons > 0) },
+      { id: 'A13', brain: 'brain-cmo', method: 'ICP from copy', looked_at: 'Who the sentences address', found: (industry && industry.icp) || 'ICP not locked.', not_invented: 'ICP is homepage-inferred or an industry pattern, labeled.', label: (industry && industry.id === 'general') ? 'thin' : 'homepage-inferred' },
+      { id: 'A14', brain: 'research-blueprint-ai-skill', method: 'Competitor AI Employee pattern', looked_at: 'How this industry already uses AI Employees', found: 'Operators in ' + ind + ' typically put speed-to-lead and booking employees on inbound before a human calendar opens.', not_invented: 'Named competitors are not guessed from a blank homepage.', label: 'industry pattern' },
+      { id: 'A15', brain: 'brain-cfo', method: 'Offer / price visibility', looked_at: 'Pricing, packages, “call for quote”', found: /\$|pricing|investment|quote/i.test(String(html || '') + ' ' + (research.what || '')) ? 'Price or quote language is visible.' : 'No public price was locked from this fetch.', not_invented: 'Missing price is not a luxury-positioning claim.', label: 'homepage-inferred' },
+      { id: 'A16', brain: 'brain-website-expert', method: 'Content vs conversion', looked_at: 'Word count vs form count', found: 'Rough word count ' + f.words + ' with ' + f.forms + ' form(s).', not_invented: 'Word count is a fetch slice, not a full crawl.', label: 'homepage-inferred' },
+      { id: 'A17', brain: 'website-audit-skill', method: 'Accessibility basics', looked_at: 'html lang, img alt density, cookie banner', found: 'lang ' + (f.lang ? 'present' : 'missing') + '. Images ' + f.imgs + ' with alt text on ' + f.alts + '. Cookie banner signal: ' + (f.cookie ? 'present' : 'not visible') + '. Canonical: ' + (f.canonical ? 'present' : 'not visible') + '. Privacy/terms link: ' + (f.privacy ? 'present' : 'not visible') + '. Mailto: ' + f.mailto + '.', not_invented: 'This is not a WCAG score. Full website-audit-skill is the DEEP lane after /apply/.', label: labeled(f.lang || f.alts > 0) },
+      { id: 'A18', brain: 'brain-cro', method: 'NAP / click-to-call', looked_at: 'tel: links', found: f.tel ? (f.tel + ' click-to-call link(s) found.') : 'No tel: link on this fetch — form or chat may be the only door.', not_invented: 'A missing tel: link is not proof they have no phone number.', label: labeled(f.tel > 0) },
+      { id: 'A19', brain: 'anti-ai-slop-skill', method: 'Claims hygiene', looked_at: 'Guarantees, invented lift, “#1” language', found: 'This magnet will not inherit their hype as our proof. Our locked proof is Anthony’s hire payback, not their homepage adjectives.', not_invented: 'We do not copy their awards unless they are on the page and cited.', label: 'homepage-inferred' },
+      { id: 'A20', brain: 'blueprint-ai-skill', method: 'First-hire recommendation', looked_at: 'Leak + industry extras', found: 'Day 1 hire for ' + name + ' is Speed-to-Lead, then Booking. Remaining employees are industry-specific, not a generic chatbot.', not_invented: 'Install is $5,000 setup + $1,000/mo, 14 days, month-to-month. No invented lift.', label: 'offer lock' }
+    ];
+  }
+
+  function demoPacket() {
+    var research = {
+      url: SAMPLE,
+      host: 'recruiting4parents.com',
+      name: 'Recruiting 4 Parents',
+      what: 'Helps families run the high-school sports recruiting process — education, envision, execute, evaluate — so more athletes can reach the next level.',
+      offer: 'Parent recruiting education and process support, positioned as accessible to every family.',
+      capture: 'Wix site with contact / education capture. No 2-second speed-to-lead employee is visible.',
+      tech: 'Wix',
+      leak: 'After-hours parent inquiries can sit until someone logs into Wix.',
+      fact: 'Homepage headline: “Leveling the Playing Field of High School Recruiting 4 Parents.”',
+      ownerNote: 'Owner lookup is public-only and not guessed. Ask for the decision-maker on the call.',
+      labeled: false,
+      source: 'demo'
+    };
+    var industry = INDUSTRIES.recruiting;
+    var employees = speedBooking(research).concat(extraEmployees(industry, research));
+    research.packet = {
+      route: 'research_only_lite',
+      completeness_gate: 'lite',
+      send_blocked: true,
+      scout: {
+        site: research.url,
+        host: research.host,
+        name: research.name,
+        fact: research.fact,
+        tech: research.tech,
+        capture: research.capture,
+        what: research.what
+      },
+      analyst: {
+        industry: industry.label,
+        industry_id: industry.id,
+        icp: industry.icp,
+        demographic: industry.demographic,
+        pain: research.leak,
+        competitors: industry.industryAi,
+        angles: buildExpertAngles(research, '', industry),
+        labeled: false
+      },
+      profiler: {
+        employees: employees,
+        start_14_days: '$5,000 setup + $1,000/mo, month-to-month, 14-day install. Two employees live in the first week; the rest sequence after the leak is closed.'
+      },
+      unknowns: [
+        'Decision-maker name and LinkedIn are not invented.',
+        'Exact monthly lead volume is labeled until they type it.',
+        'Named competitors on this homepage were not locked — industry patterns are labeled as patterns.'
+      ],
+      evidence_ledger: [
+        { id: 'E-001', claim: research.fact, source_url: SAMPLE, dimension_tag: 'scout', confidence: 'high' },
+        { id: 'E-002', claim: 'Stack signal: Wix.', source_url: SAMPLE, dimension_tag: 'scout', confidence: 'medium' },
+        { id: 'E-003', claim: industry.icp, source_url: SAMPLE, dimension_tag: 'demographic', confidence: 'medium' },
+        { id: 'E-004', claim: research.leak, source_url: SAMPLE, dimension_tag: 'pain', confidence: 'medium' }
+      ]
+    };
+    return research;
+  }
+
+  function buildLitePacket(research, pageText) {
+    var industry = classifyIndustry((pageText || '') + ' ' + (research.what || '') + ' ' + (research.fact || '') + ' ' + (research.host || ''));
+    var employees = speedBooking(research).concat(extraEmployees(industry, research)).slice(0, 6);
+    research.packet = {
+      route: 'research_only_lite',
+      completeness_gate: 'lite',
+      send_blocked: true,
+      scout: {
+        site: research.url,
+        host: research.host,
+        name: research.name,
+        fact: research.fact,
+        tech: research.tech,
+        capture: research.capture,
+        what: research.what
+      },
+      analyst: {
+        industry: industry.label,
+        industry_id: industry.id,
+        icp: industry.icp,
+        demographic: industry.demographic,
+        pain: research.leak,
+        competitors: industry.industryAi,
+        angles: buildExpertAngles(research, pageText, industry),
+        labeled: !!research.labeled || industry.id === 'general'
+      },
+      profiler: {
+        employees: employees,
+        start_14_days: '$5,000 setup + $1,000/mo, month-to-month, 14-day install.'
+      },
+      unknowns: [
+        'Founder bio is not invented on this magnet.',
+        'Demographic rows are homepage-inferred or industry pattern — labeled.',
+        'Competitor names are not guessed; industry AI Employee patterns are labeled.'
+      ],
+      evidence_ledger: [
+        { id: 'E-001', claim: research.fact, source_url: research.url, dimension_tag: 'scout', confidence: research.labeled ? 'low' : 'medium' },
+        { id: 'E-002', claim: 'Industry classified as ' + industry.label, source_url: research.url, dimension_tag: 'industry', confidence: industry.id === 'general' ? 'low' : 'medium' },
+        { id: 'E-003', claim: industry.demographic[0].claim, source_url: research.url, dimension_tag: 'demographic', confidence: 'low' },
+        { id: 'E-004', claim: research.leak, source_url: research.url, dimension_tag: 'pain', confidence: 'medium' }
+      ]
+    };
+    return research;
+  }
+
+  async function fetchServerLite(url) {
+    var body = JSON.stringify({ url: url });
+    for (var i = 0; i < RESEARCH_APIS.length; i++) {
+      try {
+        var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 6000) : null;
+        var res = await fetch(RESEARCH_APIS[i], {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: body,
+          signal: ctrl ? ctrl.signal : undefined
+        });
+        if (timer) clearTimeout(timer);
+        if (!res.ok) continue;
+        var json = await res.json();
+        if (json && json.research) return json.research;
+      } catch (e) {}
+    }
+    return null;
+  }
+
+  root.AdvaitaResearch = {
+    SAMPLE: SAMPLE,
+    INDUSTRIES: INDUSTRIES,
+    classifyIndustry: classifyIndustry,
+    scrapeForensics: scrapeForensics,
+    buildExpertAngles: buildExpertAngles,
+    demoPacket: demoPacket,
+    buildLitePacket: buildLitePacket,
+    fetchServerLite: fetchServerLite
+  };
+})(typeof window !== 'undefined' ? window : this);

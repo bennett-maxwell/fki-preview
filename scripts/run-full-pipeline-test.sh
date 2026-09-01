@@ -50,7 +50,7 @@ echo "--- 1. Script Existence ---"
 check "lead-intake.sh exists" "[ -x $SCRIPT_DIR/lead-intake.sh ]"
 check "build-website.sh exists" "[ -x $SCRIPT_DIR/build-website.sh ]"
 check "pre-delivery-check.sh exists" "[ -x $SCRIPT_DIR/pre-delivery-check.sh ]"
-check "build-delivery-email.sh exists" "[ -x $SCRIPT_DIR/build-delivery-email.sh ]"
+check "build-delivery-email.sh is RETIRED (RL-DE2)" "[ ! -e $SCRIPT_DIR/build-delivery-email.sh ]"
 check "generate-podcast.py exists" "[ -x $SCRIPT_DIR/generate-podcast.py ]"
 check "blueprint-batch.sh exists" "[ -x $SCRIPT_DIR/blueprint-batch.sh ]"
 check "batch-pre-delivery.sh exists" "[ -x $SCRIPT_DIR/batch-pre-delivery.sh ]"
@@ -109,7 +109,7 @@ done
 
 echo ""
 echo "--- 9. Pipeline Scripts Executable ---"
-for script in clone-blueprint.sh build-website.sh build-delivery-email.sh blueprint-batch.sh pre-delivery-check.sh pipeline-health-check.sh pipeline-metrics.sh validate-profile.sh score-leads.sh pipeline-cleanup.sh verify-deployment.sh generate-dashboard.sh; do
+for script in clone-blueprint.sh build-website.sh blueprint-batch.sh pre-delivery-check.sh pipeline-health-check.sh pipeline-metrics.sh validate-profile.sh score-leads.sh pipeline-cleanup.sh verify-deployment.sh generate-dashboard.sh; do
     check "$script executable" "[ -x $SCRIPT_DIR/$script ]"
 done
 

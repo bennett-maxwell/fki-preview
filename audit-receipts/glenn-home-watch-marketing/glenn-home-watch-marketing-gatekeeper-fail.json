@@ -1,0 +1,367 @@
+{
+  "checks": [
+    {
+      "failures": [],
+      "name": "visible_html_surface",
+      "pass": true
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_completion_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+        "--receipt-dir",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing",
+        "--lead",
+        "glenn-home-watch-marketing",
+        "--json-output",
+        "--require-production"
+      ],
+      "name": "completion_gate",
+      "pass": false,
+      "returncode": 1,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "    \"48\": {",
+        "      \"desc\": \"Bennett approval scope recorded\",",
+        "      \"pass\": false,",
+        "      \"severity\": \"critical\",",
+        "      \"detail\": \"PRODUCTION REQUIRED: Missing or invalid receipt for check 48\"",
+        "    },",
+        "    \"49\": {",
+        "      \"desc\": \"No false completion claim in HTML (N/A for HTML output)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Not applicable to HTML deliverable\"",
+        "    },",
+        "    \"50\": {",
+        "      \"desc\": \"Revenue validation only from real held calls (not synthetic)\",",
+        "      \"pass\": true,",
+        "      \"severity\": \"info\",",
+        "      \"detail\": \"Revenue validation requires human confirmation\"",
+        "    }",
+        "  }",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_source_fidelity_gate.py",
+        "--lead-json",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+        "--json-output",
+        "--ghl-raw",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/source-readbacks/ghl-contact-by-id.raw.json"
+      ],
+      "name": "source_fidelity_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"gate\": \"blueprint_source_fidelity_gate\",",
+        "  \"lead_json\": \"/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json\",",
+        "  \"html\": \"/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html\",",
+        "  \"raw_value_count\": 17,",
+        "  \"status\": \"PASS\",",
+        "  \"findings\": []",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_agent_prompt_quality_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+        "--receipt",
+        "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-agent-prompt-quality.json",
+        "--json-output",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json"
+      ],
+      "name": "agent_prompt_quality_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"label\": \"profile agent 6 (Retention & Tier Growth Employee)\",",
+        "      \"source\": \"profile\"",
+        "    }",
+        "  ],",
+        "  \"failures\": [],",
+        "  \"html\": \"/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html\",",
+        "  \"pass\": true,",
+        "  \"profile\": \"/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json\",",
+        "  \"required_markers\": [",
+        "    \"escalation\",",
+        "    \"first_run_test\",",
+        "    \"identity\",",
+        "    \"inputs\",",
+        "    \"output\",",
+        "    \"rules\",",
+        "    \"workflow\"",
+        "  ],",
+        "  \"status\": \"PASS\",",
+        "  \"ts\": \"2026-08-10T17:40:18.559699+00:00\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_qualify_link_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+        "--check-http",
+        "--json-output"
+      ],
+      "name": "qualify_link_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://hub.aiblueprintmarketing.com/qualify.html?src=glenn-home-watch-marketing&lead=Glenn&biz=Home+Watch+Marketing&employees=New+Inquiry+Employee%2CAppointment+Booking+Employee%2CClient+Communication+Employee%2CCompetitor+Analysis+Follow-Through+Employee%2COnboarding+%26+Documentation+Employee%2CRetention+%26+Tier+Growth+Employee\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://hub.aiblueprintmarketing.com/qualify.html?src=glenn-home-watch-marketing&lead=Glenn&biz=Home+Watch+Marketing&employees=New+Inquiry+Employee%2CAppointment+Booking+Employee%2CClient+Communication+Employee%2CCompetitor+Analysis+Follow-Through+Employee%2COnboarding+%26+Documentation+Employee%2CRetention+%26+Tier+Growth+Employee\"",
+        "    },",
+        "    {",
+        "      \"http_code\": 200,",
+        "      \"pass\": true,",
+        "      \"sample\": \"<!DOCTYPE html>\\n<html lang=\\\"en\\\">\\n<head>\\n<meta charset=\\\"UTF-8\\\">\\n<meta name=\\\"viewp\",",
+        "      \"url\": \"https://hub.aiblueprintmarketing.com/qualify.html?src=glenn-home-watch-marketing&lead=Glenn&biz=Home+Watch+Marketing&employees=New+Inquiry+Employee%2CAppointment+Booking+Employee%2CClient+Communication+Employee%2CCompetitor+Analysis+Follow-Through+Employee%2COnboarding+%26+Documentation+Employee%2CRetention+%26+Tier+Growth+Employee\"",
+        "    }",
+        "  ],",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_qualifier_context_gate.py",
+        "--html",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+        "--lead",
+        "glenn-home-watch-marketing",
+        "--json-output",
+        "--delivery-email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json"
+      ],
+      "name": "qualifier_context_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "        \"Retention & Tier Growth Employee\"",
+        "      ],",
+        "      \"employees\": [",
+        "        \"New Inquiry Employee\",",
+        "        \"Appointment Booking Employee\",",
+        "        \"Client Communication Employee\",",
+        "        \"Competitor Analysis Follow-Through Employee\",",
+        "        \"Onboarding & Documentation Employee\",",
+        "        \"Retention & Tier Growth Employee\"",
+        "      ],",
+        "      \"file\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html\",",
+        "      \"href\": \"https://hub.aiblueprintmarketing.com/qualify.html?src=glenn-home-watch-marketing&lead=Glenn&biz=Home+Watch+Marketing&employees=New+Inquiry+Employee%2CAppointment+Booking+Employee%2CClient+Communication+Employee%2CCompetitor+Analysis+Follow-Through+Employee%2COnboarding+%26+Documentation+Employee%2CRetention+%26+Tier+Growth+Employee\",",
+        "      \"text\": \"See If You Qualify \\u2192\"",
+        "    }",
+        "  ],",
+        "  \"lead\": \"glenn-home-watch-marketing\",",
+        "  \"pass\": true,",
+        "  \"qualifier\": \"/Users/madisonlanz/Desktop/fki-preview/qualify.html\",",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_approval_email_gate.py",
+        "--email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html",
+        "--profile",
+        "/Users/madisonlanz/Desktop/fki-preview/leads/glenn-home-watch-marketing.json",
+        "--json-output"
+      ],
+      "name": "approval_email_customer_view_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/scripts/blueprint_email_visual_gate.py",
+        "--email",
+        "/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html",
+        "--subject",
+        "CUSTOMER VIEW PREVIEW: glenn-home-watch-marketing - Your Custom Blueprint is Ready",
+        "--json-output"
+      ],
+      "name": "email_visual_format_gate",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "{",
+        "  \"email\": \"/Users/madisonlanz/Desktop/fki-preview/delivery-emails/glenn-home-watch-marketing-delivery-email.html\",",
+        "  \"failures\": [],",
+        "  \"pass\": true,",
+        "  \"status\": \"PASS\",",
+        "  \"subject\": \"CUSTOMER VIEW PREVIEW: glenn-home-watch-marketing - Your Custom Blueprint is Ready\"",
+        "}"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/run-audit.py",
+        "--lead",
+        "glenn-home-watch-marketing"
+      ],
+      "name": "blueprint_audit",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "[PASS] glenn-home-watch-marketing: 20/20 (100%)",
+        "",
+        "Audit complete. History: /Users/madisonlanz/.openclaw/logs/blueprint-audit-history.jsonl",
+        "VERDICT=PASS"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/Desktop/fki-preview/financial-realism-check.py",
+        "--file",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html"
+      ],
+      "name": "financial_realism",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "SLUG                 INDUSTRY           DEFAULT       JS  RESULT",
+        "------------------------------------------------------------------------------",
+        "glenn-home-watch-marketing marketing_agency       250        0  PASS",
+        "------------------------------------------------------------------------------",
+        "FINANCIAL-REALISM: 1/1 pass red-line financial checks"
+      ]
+    },
+    {
+      "cmd": [
+        "/Users/madisonlanz/.pyenv/versions/3.11.9/bin/python3",
+        "/Users/madisonlanz/.claude/skills/blueprint-ai-audit-skill/d9-audit.py",
+        "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html"
+      ],
+      "name": "d9_render_integrity",
+      "pass": true,
+      "returncode": 0,
+      "stderr_tail": [],
+      "stdout_tail": [
+        "  [PASS] D9-03 snapshot/profile is grid/flex",
+        "  [PASS] D9-04 @media query",
+        "  [PASS] D9-05 mobile <=480px",
+        "  [PASS] D9-06 viewport meta",
+        "  [PASS] D9-07 no leftover template blue",
+        "  [PASS] D9-08 sections >= 8 (found 16)",
+        "  [PASS] D9-09 every section has id",
+        "  [PASS] D9-10 no dead anchors",
+        "  [PASS] D9-11 no empty headings",
+        "  [PASS] D9-12 no double-encoded entities",
+        "  [PASS] D9-13 broken possessive (skipped - no --business-name)",
+        "  [PASS] D9-14 no undefined/NaN/null",
+        "  [PASS] D9-15 font-family on body (union of all body rules)",
+        "  [PASS] D9-16 hero has background",
+        "  [PASS] D9-17 CTA button styled",
+        "  [PASS] D9-18 tables border-collapse (or N/A)",
+        "  [PASS] D9-19 max-width container",
+        "  [PASS] D9-20 [RL] no off-brand accent leak",
+        "",
+        "FAILED: 0"
+      ]
+    },
+    {
+      "name": "proof_email_click_test",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-email-click-test.json"
+    },
+    {
+      "name": "proof_desktop_render",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-desktop-render.json"
+    },
+    {
+      "name": "proof_mobile_render",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-mobile-render.json"
+    },
+    {
+      "name": "proof_audit_json",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-audit.json"
+    },
+    {
+      "name": "proof_closeout",
+      "pass": false,
+      "path": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing/glenn-home-watch-marketing-closeout.json"
+    },
+    {
+      "detail": "glenn-home-watch-marketing.mp3 387s / 12465150 bytes within Blueprint 10-minute window",
+      "name": "production_audio_size",
+      "pass": true
+    },
+    {
+      "detail": "podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 240-960, and matching audio_sha256 required",
+      "name": "production_audio_direct_address",
+      "pass": false
+    },
+    {
+      "detail": "missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)",
+      "name": "production_audio_notebooklm_origin",
+      "pass": false
+    }
+  ],
+  "diamond": "FAIL",
+  "failures": [
+    "completion_gate failed",
+    "proof receipt missing or failing: glenn-home-watch-marketing-email-click-test.json",
+    "proof receipt missing or failing: glenn-home-watch-marketing-desktop-render.json",
+    "proof receipt missing or failing: glenn-home-watch-marketing-mobile-render.json",
+    "proof receipt missing or failing: glenn-home-watch-marketing-audit.json",
+    "proof receipt missing or failing: glenn-home-watch-marketing-closeout.json",
+    "production audio direct-address failed: podcast audio content failed or missing: direct opening, direct_address_audio_verified=true, no source-material/third-person phrases, >=5 you/your references, duration_seconds 240-960, and matching audio_sha256 required",
+    "production audio NotebookLM origin failed: missing NotebookLM origin proof (artifact/notebook/source id or explicit notebooklm_generated=true)"
+  ],
+  "html_path": "/Users/madisonlanz/Desktop/fki-preview/blueprints/glenn-home-watch-marketing.html",
+  "lead": "glenn-home-watch-marketing",
+  "mode": "production",
+  "receipt_dir": "/Users/madisonlanz/Desktop/fki-preview/audit-receipts/glenn-home-watch-marketing",
+  "score": 0,
+  "status": "FAIL",
+  "ts": "2026-08-10T17:40:21.611712+00:00"
+}

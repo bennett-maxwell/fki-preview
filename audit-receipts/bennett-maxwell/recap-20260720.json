@@ -1,0 +1,34 @@
+{
+  "skill": "recap-skill",
+  "version": "11.16",
+  "session_id": "grok-bm-web-20260720100322",
+  "ts": "2026-07-20T16:14:14.592763Z",
+  "task": "bennett-maxwell.com audit + lead-capture rebuild",
+  "result": "PARTIAL",
+  "result_reason": "Artifact shipped to git main + raw GitHub proven; hub/GitHub Pages CDN still serving prior HTML (19595b) \u2014 not claiming live hub green",
+  "money_artifact": "fki-preview/audit-receipts/bennett-maxwell/money-artifact-20260720.md + fki-preview/bennettmaxwell/index.html",
+  "creative_or_expansion": "6 seeds in money-artifact-20260720.md",
+  "project_expansion": "git main d08216de4 bennettmaxwell lead redesign; DNS cutover staged as protected next",
+  "delivery_state": "executed",
+  "approval_packet": "none",
+  "deliverable_scoreboard": "money=1 creative=6 project=1 hygiene=1",
+  "proof_chips": [
+    "commit:d08216de4",
+    "raw:https://raw.githubusercontent.com/bennett-maxwell/fki-preview/main/bennettmaxwell/index.html",
+    "audit:fki-preview/audit-receipts/bennett-maxwell/website-audit-standard-20260720.json",
+    "csll:fki-preview/audit-receipts/bennett-maxwell/csll-cl-x3-20260720.json",
+    "xmodel:fki-preview/audit-receipts/bennett-maxwell/cross-model-audit-20260720.json",
+    "preflight:fki-preview/audit-receipts/bennett-maxwell/website-preflight-20260720.json"
+  ],
+  "blockers": [
+    "hub CDN / GitHub Pages still stale on /bennettmaxwell/ (old 19595 bytes)",
+    "cross-model dual-provider seat B skipped (Claude/Codex not fully run); fixtures recorded",
+    "DEEP 20x5 Feature100 not run \u2014 STANDARD audit only",
+    "bennett-maxwell.com DNS cutover not done (protected)"
+  ],
+  "next": [
+    "Wait/retry hub 200 with Priority 1 copy; if stuck, trigger Pages rebuild or CF purge",
+    "Optional: CRM webhook for lead form (approval)",
+    "Optional: DNS cutover approval packet for bennett-maxwell.com"
+  ]
+}

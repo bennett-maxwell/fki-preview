@@ -3,6 +3,18 @@
 create-crmx-email-draft.py — Stage 7 CRMX/GHL blueprint-delivery email DRAFT creator.
 
 Spec: docs/crmx-blueprint-delivery-and-automation.md §2.
+
+CANONICAL LAYOUT (moved here 2026-07-28, marker BLUEPRINT-EMAIL-INTERNAL-COMMENT-LEAK-20260728):
+Playbook card FIRST, Audio Walkthrough SECOND, NO outcome-bullet callout lines, centered
+cards (no grey box), centered table-buttons, signed "Madison Lanz | Franchise KI".
+This spec used to live as an HTML comment inside templates/delivery-email-template.html and
+therefore SHIPPED INSIDE EVERY CLIENT EMAIL — including the names of two other clients it
+cited as the reference format. HTML comments do not render, but they are plainly readable in
+"view source"/"show original", so it was internal provenance (and other clients' names) sitting
+in a prospect's inbox. Confirmed present in the email sent to bri-fresh
+(GHL conversation message NNcakq9sffqoWspfJm98, 2026-07-28T16:23:42Z) before this fix.
+Keep layout notes HERE, never in the shipped HTML. The only comment left in the template is the
+neutral `blueprint-delivery-email v2` provenance marker that gate D5-16 requires.
 Builds a blueprint delivery email from the ONE canonical template
 (templates/delivery-email-template.html — never a fork), injects the real lead
 tokens, runs scripts/email-design-conformance.py on the resolved HTML and REQUIRES
@@ -50,6 +62,12 @@ TOKENS = ["LEAD_FIRST_NAME", "BUSINESS_NAME", "INDUSTRY", "ACCENT_COLOR",
           "BLUEPRINT_URL", "PODCAST_URL", "QUALIFY_URL"]
 
 
+# Per-run credential override, populated once the lead's own sub-account is resolved.
+# api() re-reads the env file on every call, so without this the Advaita PIT selected
+# below would be silently discarded and every request would fall back to FKI main.
+_ENV_OVERRIDE = {}
+
+
 def load_env():
     d = {}
     p = os.path.expanduser("~/.claude/.env")
@@ -58,6 +76,7 @@ def load_env():
         if "=" in line and not line.startswith("#"):
             k, v = line.split("=", 1)
             d[k.strip()] = v.strip().strip('"').strip("'")
+    d.update(_ENV_OVERRIDE)
     return d
 
 
@@ -112,23 +131,101 @@ def session_audit_ok(slug):
     return True, "audit 100/100 this session"
 
 
+def _qualify_url(prof):
+    """Build the tracked qualifier URL, guaranteeing the `employees=` context param.
+
+    PERMANENT FIX 2026-08-04 (marker BLUEPRINT-QUALIFY-EMPLOYEES-PARAM-STRUCTURAL-20260804):
+    `scripts/blueprint_qualifier_context_gate.py` HARD-REQUIRES `employees=` (or legacy
+    `agents=`) on the qualifier link, and fails `too_few_tailored_agents` when fewer than the
+    lead's own employees are listed — but this builder simply passed `prof['qualify_url']`
+    through with no fallback. So the param existed only when whoever hand-wrote the lead JSON
+    happened to remember to encode all six employee names into the URL by hand. A required
+    parameter that depends on human recall is not enforced; it is luck, and it silently drops
+    the personalisation the qualifier uses to pre-fill the prospect's answers.
+
+    Now: take any explicitly supplied qualify_url/apply_url, and if it is missing the
+    employees/agents context, append it from the profile's own roster (ai_agents, else agents).
+    An explicitly supplied URL that ALREADY carries the param is left untouched.
+    Rollback: restore `prof.get("qualify_url") or prof.get("apply_url", "")`."""
+    from urllib.parse import urlsplit, urlunsplit, parse_qs, urlencode, quote_plus
+
+    base = prof.get("qualify_url") or prof.get("apply_url") or ""
+    names = []
+    for k in ("ai_agents", "agents"):
+        for a in (prof.get(k) or []):
+            nm = a.get("name") if isinstance(a, dict) else a
+            if nm and str(nm) not in names:
+                names.append(str(nm))
+        if names:
+            break
+
+    if not base:
+        if not prof.get("slug"):
+            return ""
+        base = ("https://hub.aiblueprintmarketing.com/qualify.html"
+                f"?src={quote_plus(prof['slug'])}"
+                f"&lead={quote_plus(str(prof.get('first_name') or prof.get('lead_name') or ''))}"
+                f"&biz={quote_plus(str(prof.get('business_name') or ''))}")
+
+    parts = urlsplit(base)
+    qs = parse_qs(parts.query, keep_blank_values=True)
+    if not (qs.get("employees") or qs.get("agents")):
+        if not names:
+            return base  # nothing truthful to add; let the gate report it rather than invent
+        qs["employees"] = [",".join(names)]
+        base = urlunsplit((parts.scheme, parts.netloc, parts.path,
+                           urlencode(qs, doseq=True), parts.fragment))
+    return base
+
+
 def resolve(slug):
     prof = json.load(open(os.path.join(REPO, "leads", f"{slug}.json")))
     html = open(TEMPLATE, encoding="utf-8").read()
     vals = {
         "LEAD_FIRST_NAME": prof.get("lead_first_name") or prof.get("first_name") or "",
         "BUSINESS_NAME": prof.get("business_name", ""),
-        "INDUSTRY": prof.get("industry", ""),
+        # PERMANENT FIX 2026-07-28 (marker BLUEPRINT-EMAIL-RAW-INDUSTRY-TOKEN-20260728):
+        # prof["industry"] is a machine slug like "professional_services", and it was
+        # injected verbatim into TWO customer-facing sentences ("...questions
+        # professional_services businesses ask about AI" and the signature line
+        # "AI Implementation for professional_services businesses"). Raw snake_case in
+        # client copy is the same class of defect as the raw-token leak fixed on
+        # 2026-07-27. Humanise it: underscores/hyphens -> spaces.
+        "INDUSTRY": re.sub(r"[_-]+", " ", str(prof.get("industry", "") or "")).strip(),
         "ACCENT_COLOR": prof.get("accent_color", "#0071E3"),
         "BLUEPRINT_URL": prof.get("blueprint_url", ""),
         "PODCAST_URL": prof.get("podcast_url", ""),
-        "QUALIFY_URL": prof.get("qualify_url") or prof.get("apply_url", ""),
+        "QUALIFY_URL": _qualify_url(prof),
     }
+    # PERMANENT FIX 2026-08-17 (marker BLUEPRINT-EMAIL-EMPTY-URL-DEAD-BUTTON-20260817,
+    # EC-BLUEPRINT-EMAIL-SHIPPED-EMPTY-HREF-BUTTONS-20260817).
+    # DEFECT: BLUEPRINT_URL / PODCAST_URL resolved via prof.get(key, "") — a profile
+    # missing those keys produced href="" on the TWO primary buttons ("View Your AI
+    # Playbook", "Listen to Your Walkthrough"), i.e. a delivery email whose only working
+    # link was the qualifier, with no link to the blueprint or podcast AT ALL.
+    # Proven on corky-main-street-online-marketing 2026-08-17: 3 anchors, 2 with href="".
+    # Why every existing gate missed it: D5-20 greps for UNRENDERED "{{TOKEN}}" and these
+    # WERE rendered — to nothing. D5-21 asserts exactly one qualify CTA, which still held.
+    # An empty string is not a missing token, so "no unresolved tokens" was true and
+    # meaningless. Same class as the silent-undercount rule: a blank that renders is worse
+    # than a hard failure, because it ships looking fine.
+    REQUIRED_URL_TOKENS = ("BLUEPRINT_URL", "PODCAST_URL", "QUALIFY_URL")
+    blank = [t for t in REQUIRED_URL_TOKENS if not str(vals.get(t, "")).strip()]
+    if blank:
+        raise SystemExit(
+            "FAIL: required URL token(s) resolved EMPTY: " + ", ".join(sorted(blank)) +
+            " — this would ship a delivery email with dead href=\"\" buttons. "
+            "Populate blueprint_url / podcast_url on the lead profile and re-run."
+        )
     for t in TOKENS:
         html = html.replace("{{" + t + "}}", str(vals[t]))
     left = re.findall(r"\{\{[A-Z_]+\}\}", html)
     if left:
         raise SystemExit(f"FAIL: unresolved tokens remain: {sorted(set(left))}")
+    # Belt-and-braces on the RESOLVED bytes: no anchor may carry an empty href.
+    dead = re.findall(r'<a\s[^>]*href=""[^>]*>', html)
+    if dead:
+        raise SystemExit(f"FAIL: {len(dead)} anchor(s) resolved to href=\"\" — dead button in a customer email.")
     return prof, html, vals
 
 
@@ -162,7 +259,25 @@ def main():
     print("[gate] email conformance: PASS")
 
     env = load_env()
-    loc = env["GHL_LOCATION_ID"]
+    # PERMANENT FIX 2026-07-28 (marker BLUEPRINT-CRMX-DRAFT-WRONG-SUBACCOUNT-20260728):
+    # this used env["GHL_LOCATION_ID"] unconditionally — that is FKI main
+    # (14RD8KklxR9G4e0Rf7v2). Every Advaita blueprint lead lives in the Advaita
+    # sub-account (GPCi3FrWJCyevcGzZgTT) with its own PIT. So the delivery draft was
+    # created in a sub-account where the prospect's contact DOES NOT EXIST — Madison
+    # opens CRMX, cannot send it to the lead, and any send would go from the wrong
+    # brand. Caught on bri-fresh (contact BJp1MNYhfCqJjM3LATeJ in GPCi3) after the
+    # draft landed in 14RD8K. The lead profile is the authority on its own location.
+    loc = prof.get("ghl_location_id") or env["GHL_LOCATION_ID"]
+    if loc == env.get("ADVAITA_GHL_LOCATION_ID") and env.get("ADVAITA_GHL_PIT"):
+        env["GHL_API_KEY"] = env["ADVAITA_GHL_PIT"]
+        print(f"[creds] Advaita sub-account {loc} -> using ADVAITA_GHL_PIT")
+    else:
+        print(f"[creds] location {loc} -> using default GHL_API_KEY")
+    if loc != env.get("GHL_LOCATION_ID") and loc != env.get("ADVAITA_GHL_LOCATION_ID"):
+        raise SystemExit(
+            f"BLOCKED: lead location {loc} matches no known credential set. Refusing to "
+            f"create a draft in an unverified sub-account.")
+    _ENV_OVERRIDE.update(env)
     cid = prof.get("ghl_contact_id")
     subject = f"Your AI Blueprint is Ready — {vals['BUSINESS_NAME']}"
     title = args.title or f"Blueprint — {prof.get('lead_name') or vals['LEAD_FIRST_NAME']} / {vals['BUSINESS_NAME']}"

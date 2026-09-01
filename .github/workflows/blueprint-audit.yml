@@ -15,6 +15,11 @@ on:
       - "scripts/**"
       - "tests/**"
       - ".github/workflows/blueprint-audit.yml"
+      - "apply/**"
+      # The intake-URL gate scans EVERY html in the repo, so its trigger must too.
+      # Editing rj-themed-linear/index.html fired no workflow on 5704503 and the gate
+      # could not protect the other 104 html-bearing directories. BLUEPRINT-INTAKE-URL-CANONICAL-20260805
+      - "**.html"
   pull_request:
     paths:
       - "blueprints/**"
@@ -22,6 +27,11 @@ on:
       - "financial-realism-check.py"
       - "scripts/**"
       - "tests/**"
+      - "apply/**"
+      # The intake-URL gate scans EVERY html in the repo, so its trigger must too.
+      # Editing rj-themed-linear/index.html fired no workflow on 5704503 and the gate
+      # could not protect the other 104 html-bearing directories. BLUEPRINT-INTAKE-URL-CANONICAL-20260805
+      - "**.html"
 
 jobs:
   regression-invariants:
@@ -33,3 +43,13 @@ jobs:
           python-version: "3.12"
       - name: Run blueprint regression tripwire suite (stdlib-only)
         run: python3 tests/test_blueprint_regressions.py
+
+      # BLUEPRINT-INTAKE-URL-CANONICAL-20260805 — one intake form, one URL, forever.
+      # https://blueprint.meetadvaita.com/ is the ONLY Advaita Blueprint intake form.
+      # The stale form previously served at /apply/ returned HTTP 200, so "the link works"
+      # was true and useless. Self-test runs first so a broken gate can never pass silently.
+      - name: Intake-URL gate self-test (both directions + mutant kill)
+        run: python3 scripts/blueprint_intake_url_gate.py --self-test
+
+      - name: Intake-URL gate (blocking — only blueprint.meetadvaita.com may be the intake form)
+        run: python3 scripts/blueprint_intake_url_gate.py

@@ -53,7 +53,8 @@ def active_source_checks(repo: Path) -> list[dict]:
     checks = []
     required = {
         "scripts/clone-blueprint.sh": ["BLUEPRINT_BASE_URL", "{{BLUEPRINT_URL}}", "host_scoped_url", "/qualify.html"],
-        "scripts/build-delivery-email.sh": ["BLUEPRINT_BASE_URL", "DEFAULT_BLUEPRINT_BASE_URL", "utm_campaign", "/qualify.html"],
+        # scripts/build-delivery-email.sh REMOVED 2026-08-03: retired by RL-DE2 on 2026-07-17,
+        # so its host-base tokens can never be checked. The Stage-7 email is Drive-sourced now.
         "scripts/blueprint-pipeline-orchestrator.py": ["BLUEPRINT_BASE_URL", "BLUEPRINTS_URL_BASE"],
         "scripts/gen-blueprint.py": ["BLUEPRINT_BASE_URL", "{{BLUEPRINT_URL}}", "host_scoped_url"],
         "blueprints/TEMPLATE.html": ["{{BLUEPRINT_URL}}"],

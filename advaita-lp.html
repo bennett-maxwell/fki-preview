@@ -766,12 +766,33 @@
         <h2>See exactly how much time and money your business is leaving on the table.</h2>
         <p class="mt-8 text-muted">Answer 9 questions &rarr; get a custom ROI report. Free. 60 seconds.</p>
       </div>
+
+      <!-- RETIRED-FORM NOTICE — ADVAITA-LP-FORM-RETIRED-REDIRECT-TO-APPLY-20260729
+           This page is kept for its design; the form no longer submits from here. -->
+      <div style="border:1px solid #d2d2d7;border-left:4px solid #1D6FDB;border-radius:12px;padding:18px 20px;margin:0 0 24px;background:#f5f8ff;text-align:left;">
+        <p style="margin:0 0 12px;font-size:15px;font-weight:600;color:#1d1d1f;">We&rsquo;ve moved this form.</p>
+        <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#424245;">
+          To make sure your blueprint actually reaches you, requests now go through our current form.
+          It takes the same 60 seconds. Anything you&rsquo;ve typed here will carry over.
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" style="margin:0"><tbody><tr>
+          <td align="center" bgcolor="#1D6FDB" style="border-radius:8px">
+            <a href="https://blueprint.meetadvaita.com/" style="display:inline-block;padding:13px 30px;font-family:-apple-system,'Segoe UI',sans-serif;font-size:15px;font-weight:700;color:#ffffff;text-decoration:none;border-radius:8px">Get My Free Blueprint &rarr;</a>
+          </td>
+        </tr></tbody></table>
+      </div>
+
       <form id="blueprint-form" novalidate>
         <!-- Contact fields -->
         <div class="form-group">
           <label for="first_name">First Name *</label>
-          <input type="text" id="first_name" name="first_name" required placeholder="Your first name" />
+          <input type="text" id="first_name" name="first_name" required placeholder="Your first name" autocomplete="given-name" />
           <div class="error-msg">Please enter your first name.</div>
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name *</label>
+          <input type="text" id="last_name" name="last_name" required placeholder="Your last name" autocomplete="family-name" />
+          <div class="error-msg">Please enter your last name.</div>
         </div>
         <div class="form-group">
           <label for="email">Email *</label>
@@ -1104,14 +1125,45 @@
   }, { threshold: 0.3 });
   observer.observe(formSection);
 
-  // ── FORM SUBMISSION ──
+  // ── RETIRED 2026-07-29 — THIS FORM NO LONGER SUBMITS ──
+  // marker: ADVAITA-LP-FORM-RETIRED-REDIRECT-TO-APPLY-20260729
+  // WHY: this page's webhook posts to hooks/14RD8KklxR9G4e0Rf7v2 (FKI MAIN). Advaita moved to
+  // its own sub-account GPCi3FrWJCyevcGzZgTT on 2026-06-24 and the Blueprint pipeline only reads
+  // Advaita. So every submission here landed in an account nobody watches: the lead got the
+  // automated "your blueprint is being built" touch and then nothing, because the builder never
+  // saw them. Confirmed on Calvin Barnum II (info@teenentrepreneurship.org, 2026-07-22) — told
+  // twice a blueprint was coming, never received one, still absent from Advaita 7 days later.
+  // The page is KEPT because the design is liked; only the misrouting is removed. Submissions now
+  // go to the canonical form at /apply/ (which delivers to Advaita correctly) with answers carried
+  // over where the field names match. Tech ticket for the webhook repoint is assigned to Jenn.
+  var CANONICAL_FORM_URL = '/apply/';
   var form = document.getElementById('blueprint-form');
   form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    try {
+      var carry = {};
+      ['first_name', 'last_name', 'email', 'website'].forEach(function (fid) {
+        var el = document.getElementById(fid);
+        if (el && el.value.trim()) carry[fid] = el.value.trim();
+      });
+      var qs = Object.keys(carry).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(carry[k]);
+      }).join('&');
+      window.location.href = CANONICAL_FORM_URL + (qs ? '?' + qs : '');
+    } catch (err) {
+      window.location.href = CANONICAL_FORM_URL;
+    }
+    return false;
+  });
+
+  // Legacy handler below is intentionally unreachable — kept only so the page's layout,
+  // ROI math and styling remain byte-identical to what Madison approved. It must never run.
+  form.addEventListener('__never_fires__', function(e) {
     e.preventDefault();
 
     // Validate
     var valid = true;
-    var requiredFields = ['first_name', 'email', 'website'];
+    var requiredFields = ['first_name', 'last_name', 'email', 'website'];
     requiredFields.forEach(function(fid) {
       var input = document.getElementById(fid);
       var errMsg = input.parentNode.querySelector('.error-msg');
@@ -1156,6 +1208,7 @@
     // Submission payload
     var contactData = {
       firstName: document.getElementById('first_name').value.trim(),
+      lastName: document.getElementById('last_name').value.trim(),
       email: document.getElementById('email').value.trim(),
       website: document.getElementById('website').value.trim(),
       locationId: '14RD8KklxR9G4e0Rf7v2',
@@ -1164,7 +1217,7 @@
 
     var noteBody = [
       '=== AI ADVANTAGE BLUEPRINT SUBMISSION ===',
-      'Name: ' + contactData.firstName,
+      'Name: ' + contactData.firstName + ' ' + contactData.lastName,
       'Email: ' + contactData.email,
       'Website: ' + contactData.website,
       '',
@@ -1195,6 +1248,7 @@
     // Submit via webhook — no API key exposed client-side
     var webhookPayload = {
       firstName: contactData.firstName,
+      lastName: contactData.lastName,
       email: contactData.email,
       website: contactData.website,
       tags: contactData.tags,

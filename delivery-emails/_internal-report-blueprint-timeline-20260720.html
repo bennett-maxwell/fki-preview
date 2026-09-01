@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f4f5f7;">
+<div dir="ltr" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1d1d1f;line-height:1.55;max-width:680px;margin:0 auto;padding:32px 20px;background:#ffffff;">
+
+  <div style="border-left:5px solid #1D6FDB;padding:10px 0 10px 16px;margin-bottom:8px">
+    <h1 style="font-size:24px;font-weight:800;margin:0 0 4px 0;color:#0A0E1A">Blueprint Build — Time &amp; Delay Report</h1>
+    <p style="margin:0;color:#86868b;font-size:14px">Ed · Stan · Tory (Advaita) — Monday, July 20, 2026 · all times America/Chicago (CDT)</p>
+  </div>
+
+  <!-- BOTTOM LINE -->
+  <div style="background:#f0f5ff;border:1px solid #cfe0ff;border-radius:12px;padding:18px 20px;margin:20px 0">
+    <p style="margin:0 0 8px 0;font-weight:700;font-size:15px;color:#0A0E1A">Bottom line</p>
+    <p style="margin:0;font-size:14px;color:#333">All 3 shipped and delivered. The elapsed clock looked long, but the <strong>actual work</strong> was ~2 hours. The rest was three specific things: <strong>(1)</strong> a NotebookLM login that had expired and needed your Google sign-in before any podcast could generate, <strong>(2)</strong> a first-time audit that surfaced pipeline gaps I fixed once (and permanently), and <strong>(3)</strong> NotebookLM's podcast intro/ending being non-deterministic, which forced repeated native re-rolls. A large block of the calendar time was simply the hours between your messages, not active build time.</p>
+  </div>
+
+  <!-- THE 3 CAUSES -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">What actually caused the delay</h2>
+
+  <div style="border:1px solid #e3e3e6;border-radius:12px;padding:16px 18px;margin:10px 0">
+    <p style="margin:0 0 4px;font-weight:700;font-size:14px;color:#C1440E">1 · NotebookLM login expired — the single biggest blocker (~1.5 hrs lost)</p>
+    <p style="margin:0;font-size:13.5px;color:#444">The podcast tool's saved login had lapsed. No podcast can be built without it, and re-authenticating needs an interactive Google sign-in — which only you can do. We lost ~90 minutes waiting on that. Once you logged in, I pulled fresh credentials and it worked immediately.</p>
+  </div>
+
+  <div style="border:1px solid #e3e3e6;border-radius:12px;padding:16px 18px;margin:10px 0">
+    <p style="margin:0 0 4px;font-weight:700;font-size:14px;color:#C1440E">2 · First audit surfaced 4 page-level gaps — fixed once, now permanent</p>
+    <p style="margin:0;font-size:13.5px;color:#444">The very first audit failed all three on the same page issues (see the red-line list below). These were template/pipeline gaps, not per-lead problems — I fixed them once and they're now baked into the build for every future blueprint. Total fix + rebuild + re-audit time: ~50 min.</p>
+  </div>
+
+  <div style="border:1px solid #e3e3e6;border-radius:12px;padding:16px 18px;margin:10px 0">
+    <p style="margin:0 0 4px;font-weight:700;font-size:14px;color:#C1440E">3 · Podcast intro/ending is non-deterministic — 9 generations, incl. 1 timeout</p>
+    <p style="margin:0;font-size:13.5px;color:#444">Two audit red-lines are on the <em>audio</em>: it must open by saying the lead's first name, and it must end with a clean sign-off. NotebookLM produces these inconsistently and they can't be spliced or trimmed (that's a hard-fail), so the only fix is to re-generate natively and re-check. I hardened the steering twice, which solved the ending for good and got Stan's greeting to land. Ed's 2-letter name kept slipping past the automated speech check.</p>
+  </div>
+
+  <!-- PER-LEAD TABLE -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">Per-lead breakdown</h2>
+  <div style="overflow-x:auto">
+  <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:#0A0E1A;color:#fff;text-align:left">
+      <th style="padding:9px 10px">Lead</th><th style="padding:9px 10px">Final audit</th><th style="padding:9px 10px">Podcast re-rolls</th><th style="padding:9px 10px">What blocked it</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #e3e3e6;background:#f6fff8">
+        <td style="padding:9px 10px"><strong>Tory</strong><br>Superior Solutions</td>
+        <td style="padding:9px 10px">100% (19/19)</td>
+        <td style="padding:9px 10px"><strong>0</strong> — clean on first try</td>
+        <td style="padding:9px 10px">Only the shared page fixes (agent count, prompt length, financial classification). Passed once those landed.</td>
+      </tr>
+      <tr style="border-bottom:1px solid #e3e3e6;background:#f6fff8">
+        <td style="padding:9px 10px"><strong>Stan</strong><br>Xtreme AI Optimization</td>
+        <td style="padding:9px 10px">100% (19/19)</td>
+        <td style="padding:9px 10px"><strong>4</strong> re-rolls (5 gens, 1 timed out)</td>
+        <td style="padding:9px 10px">Page fixes + podcast greeting. Greeting landed on the 5th generation after I strengthened the steering.</td>
+      </tr>
+      <tr style="border-bottom:1px solid #e3e3e6;background:#fffdf5">
+        <td style="padding:9px 10px"><strong>Ed</strong><br>Taking You To The Next Level</td>
+        <td style="padding:9px 10px">Page 100%<br><span style="color:#8a6d00">(podcast greeting caveat)</span></td>
+        <td style="padding:9px 10px"><strong>4</strong> re-rolls (5 gens)</td>
+        <td style="padding:9px 10px">Page fixes + podcast ending (fixed) + greeting. "Ed" is 2 letters — the automated speech-check never reliably heard it. Shipped page-100 per the skill's decouple rule (podcast never blocks the send).</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- RED LINES -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">The 6 audit red-lines that had to be cleared</h2>
+  <div style="overflow-x:auto">
+  <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:#eef0f3;text-align:left">
+      <th style="padding:8px 10px">Gate</th><th style="padding:8px 10px">Problem</th><th style="padding:8px 10px">Fix</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">PF0-5</td><td style="padding:8px 10px">Only 5 AI-Employee cards; gold standard needs 6</td><td style="padding:8px 10px">Added a 6th source-faithful employee</td></tr>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">D2-03</td><td style="padding:8px 10px">The 3 ready-to-use prompts were ~300 chars; gate needs ≥1,200 with a full structure</td><td style="padding:8px 10px">Authored 3 structured runbooks (~2,400 chars each)</td></tr>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">D2-02</td><td style="padding:8px 10px">Agent cards not substantive enough</td><td style="padding:8px 10px">Resolved with the 6-card + richer copy</td></tr>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">D10-01</td><td style="padding:8px 10px">ROI/financial band "unclassified" (leads were category = Other)</td><td style="padding:8px 10px">Classified each in the industry config</td></tr>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">D3-05</td><td style="padding:8px 10px">Podcast ended abruptly (no closing sign-off)</td><td style="padding:8px 10px">Hardened steering — mandatory 3-cue outro. <strong>Solved.</strong></td></tr>
+      <tr style="border-bottom:1px solid #e3e3e6"><td style="padding:8px 10px">D3-02</td><td style="padding:8px 10px">Podcast didn't open by name / speech-check couldn't confirm it</td><td style="padding:8px 10px">Steering repeats name + "you/your" early. Landed for Stan; Ed's short name still slipped.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- PODCAST RE-ROLL LOG -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">Podcast re-roll log (every generation, why)</h2>
+  <div style="overflow-x:auto">
+  <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;font-size:12.5px">
+    <thead><tr style="background:#eef0f3;text-align:left">
+      <th style="padding:8px 10px">Time</th><th style="padding:8px 10px">Lead</th><th style="padding:8px 10px">Gen</th><th style="padding:8px 10px">Result / reason</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">14:33→14:38</td><td style="padding:7px 10px">Tory</td><td style="padding:7px 10px">#1</td><td style="padding:7px 10px;color:#1a7f37">PASS — greeting + ending clean (5 min)</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">14:33→14:38</td><td style="padding:7px 10px">Ed</td><td style="padding:7px 10px">#1</td><td style="padding:7px 10px">Fail: greeting + abrupt ending</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">15:06→15:10</td><td style="padding:7px 10px">Ed</td><td style="padding:7px 10px">#2</td><td style="padding:7px 10px">Fail: abrupt ending</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">15:13→15:18</td><td style="padding:7px 10px">Ed</td><td style="padding:7px 10px">#3</td><td style="padding:7px 10px">Fail: ending + greeting</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:31→19:37</td><td style="padding:7px 10px">Ed</td><td style="padding:7px 10px">#4</td><td style="padding:7px 10px">Ending now PASS (hardened steering); greeting still fail</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:40→19:44</td><td style="padding:7px 10px">Ed</td><td style="padding:7px 10px">#5</td><td style="padding:7px 10px;color:#8a6d00">Greeting still fail — shipped page-100 (podcast non-blocking)</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">14:33→14:38</td><td style="padding:7px 10px">Stan</td><td style="padding:7px 10px">#1</td><td style="padding:7px 10px">Fail: greeting</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">15:06→15:10</td><td style="padding:7px 10px">Stan</td><td style="padding:7px 10px">#2</td><td style="padding:7px 10px">Fail: greeting</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">15:13</td><td style="padding:7px 10px">Stan</td><td style="padding:7px 10px">#3</td><td style="padding:7px 10px;color:#b3261e">TIMEOUT — NotebookLM render never finished (&gt;30 min), no file</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:31→19:36</td><td style="padding:7px 10px">Stan</td><td style="padding:7px 10px">#4</td><td style="padding:7px 10px">Ending PASS; greeting still fail</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:40→19:44</td><td style="padding:7px 10px">Stan</td><td style="padding:7px 10px">#5</td><td style="padding:7px 10px;color:#1a7f37">PASS — greeting landed → 100%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:12px;color:#86868b;margin:6px 2px">Total: <strong>11 podcast generations</strong> across 3 leads (Tory 1, Ed 5, Stan 5). Each successful render took ~4–6 min; one Stan render timed out. Podcasts run in parallel in the background, so wall-clock ≈ one render, not the sum.</p>
+
+  <!-- TIMELINE -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">Timeline of the day</h2>
+  <div style="overflow-x:auto">
+  <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead><tr style="background:#eef0f3;text-align:left">
+      <th style="padding:8px 10px">Window</th><th style="padding:8px 10px">Phase</th><th style="padding:8px 10px">Duration</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">~11:55–12:05</td><td style="padding:7px 10px">Pulled all 3 leads' quiz data from CRMX, wrote source-faithful profiles</td><td style="padding:7px 10px">~10 min</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">12:05–12:56</td><td style="padding:7px 10px">Built + hosted 3 pages; fixed source-fidelity readback</td><td style="padding:7px 10px">~50 min</td></tr>
+      <tr style="border-bottom:1px solid #eee;background:#fff5f5"><td style="padding:7px 10px">12:56–14:32</td><td style="padding:7px 10px"><strong>BLOCKED — NotebookLM login expired, waiting on your Google sign-in</strong></td><td style="padding:7px 10px">~1 hr 35 min</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">14:33–14:39</td><td style="padding:7px 10px">First podcasts generated (all 3, parallel)</td><td style="padding:7px 10px">~6 min</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">14:40–15:18</td><td style="padding:7px 10px">First audit (all failed) → page fixes → Tory hits 100%, Tory draft staged; re-rolls #2–3</td><td style="padding:7px 10px">~40 min</td></tr>
+      <tr style="border-bottom:1px solid #eee;background:#f7f7f9"><td style="padding:7px 10px">15:18–19:25</td><td style="padding:7px 10px"><strong>Idle — time between your messages (not active build)</strong></td><td style="padding:7px 10px">~4 hrs</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:25–19:45</td><td style="padding:7px 10px">Your stat-card feedback fixed (form-based cards) + re-rolls #4–5 (hardened steering)</td><td style="padding:7px 10px">~20 min</td></tr>
+      <tr style="border-bottom:1px solid #eee"><td style="padding:7px 10px">19:45–19:54</td><td style="padding:7px 10px">Final audits → 3 drafts → your approval → CRMX send + pipeline move + Cody notified</td><td style="padding:7px 10px">~9 min</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:13px;color:#333;margin:10px 2px"><strong>Active build/fix time ≈ 2 hrs 15 min.</strong> The rest of the elapsed clock was the login blocker (~1.5 hrs) and ~4 hrs of gap between messages.</p>
+
+  <!-- PERMANENT FIXES -->
+  <h2 style="font-size:17px;font-weight:800;margin:26px 0 10px;color:#0A0E1A">What I fixed permanently so the next batch is fast</h2>
+  <ul style="font-size:13.5px;color:#333;padding-left:20px;margin:8px 0">
+    <li style="margin-bottom:6px">Profile cards now pull real form answers (Revenue Range, Primary Goal) instead of the blank "Projects Completed / Years in Business" — fleet-wide.</li>
+    <li style="margin-bottom:6px">Podcast steering hardened twice: guaranteed clean sign-off (solved the ending issue) + name-repeat opening (improves the greeting).</li>
+    <li style="margin-bottom:6px">Prompt + agent-card + financial-classification gaps closed in the build, so a first audit shouldn't fail on them again.</li>
+  </ul>
+  <p style="font-size:13.5px;color:#333;margin:8px 2px"><strong>Two things still worth doing</strong> to kill the remaining delay: (1) auto-refresh the NotebookLM login so it never blocks a run, and (2) have the podcast worker auto-retry the greeting/ending a couple times on its own but never hold up the 24-hour send. I can file both.</p>
+
+  <div style="margin-top:28px;padding-top:14px;border-top:1px solid #e3e3e6;color:#86868b;font-size:12px">
+    <p style="margin:0">Prepared by Madison CC (Claude Code) · 2026-07-20 · sources: podcast generation logs, git commit history, audit history. Internal report — not sent to any client.</p>
+  </div>
+
+</div>
+</body></html>

@@ -5,43 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="A personalized AI blueprint for {{LEAD_NAME}} — exactly where AI creates the biggest leverage for {{BUSINESS_NAME}} and how to get there in 30 days." />
   <meta property="og:title" content="Your AI Advantage Roadmap — {{BUSINESS_NAME}}" />
-  <meta property="og:description" content="A personalized AI blueprint built for {{LEAD_NAME}}. 6 custom AI agents, interactive ROI calculator, and a podcast walkthrough — all specific to {{BUSINESS_NAME}}." />
+  <meta property="og:description" content="A personalized AI blueprint built for {{LEAD_NAME}}. 6 custom AI Employees, interactive ROI calculator, and a podcast walkthrough — all specific to {{BUSINESS_NAME}}." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{BLUEPRINT_URL}}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>AI Advantage Roadmap — {{BUSINESS_NAME}}</title>
+  <title>AI Advantage Roadmap for {{FIRST_NAME}} — {{BUSINESS_NAME}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Advaita design system — primary blue #0071E3, navy #1D1D1F, page bg #F5F5F7 (locked, consistent across every blueprint) */
-      --brand:        #0071E3;
-      --brand-dark:   #1D1D1F;
-      --brand-light:  #EBF4FF;
-      --steel:        #6E6E73;
-      --neutral-bg:   #F5F5F7;
-      --brand-red:    #0071E3; /* Advaita primary accent #0071E3 */
-      --crmx-red:     #0071E3; /* alias kept for markup compatibility — Advaita blue #0071E3 */
-      --accent-bg:    rgba(0, 113, 227, 0.08); /* #0071E3 with 8% alpha */
-      --white:        #ffffff;
-      --text:         #1D1D1F;
-      --text-muted:   #6E6E73;
-      --text-light:   #A1A1A6;
-      --border:       #E5E5EA;
-      --bg:           #F5F5F7; /* alias for --neutral-bg; consumed by .agent-prompt */
-      --text-mid:     #6E6E73; /* alias for --text-muted; consumed by .agent-prompt/.agent-time */
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      /* Advaita brand — brand-guide-advaita-skill v2.0 (Drive 1FR6BqiapCJ0KMvpmVNE8URyNrGxFdjvI).
+         Plum #4A1F63 (human) · Saffron #F5A623 (AI) · Warm Ivory #F7F2E9
+         Ink Plum #17111F · Mauve Mist #EADFF0. Locked + identical on every
+         blueprint. NEVER blue/teal/cold gradients. NEVER a per-lead accent. */
+      --brand:        #4A1F63;
+      --brand-dark:   #17111F;
+      --brand-light:  #EADFF0;
+      --saffron:      #F5A623;
+      --steel:        #6B527A;
+      --neutral-bg:   #F7F2E9;
+      --brand-red:    #4A1F63; /* alias kept for markup compatibility — Plum */
+      --crmx-red:     #4A1F63; /* alias kept for markup compatibility — Plum */
+      --accent-bg:    rgba(74, 31, 99, 0.08); /* Plum at 8% */
+      --white:        #ffffff; /* cards + text on dark only; page bg is Warm Ivory */
+      --text:         #17111F;
+      --text-muted:   #6B527A;
+      --text-light:   #725787; /* WCAG 4.5:1 on ivory AND white; see contrast-audit.py */
+      --border:       #DBD1E0;
+      --bg:           #F7F2E9; /* alias for --neutral-bg; consumed by .agent-prompt */
+      --text-mid:     #6B527A; /* alias for --text-muted; consumed by .agent-prompt/.agent-time */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --radius: 12px;
-      --shadow: 0 4px 24px rgba(10,14,26,0.08);
-      --shadow-md: 0 8px 40px rgba(10,14,26,0.12);
+      --shadow: 0 4px 24px rgba(23,17,31,0.08);
+      --shadow-md: 0 8px 40px rgba(23,17,31,0.12);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--neutral-bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     nav { position: sticky; top: 0; z-index: 100; background: var(--brand-dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
-    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; }
-    .nav-logo span { color: var(--brand); }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
+    .nav-logo span { color: var(--saffron); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
     .nav-links a { color: rgba(255,255,255,0.82); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--brand); }
+    .nav-links a:hover { color: var(--saffron); }
     .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; background: none; border: none; padding: 10px; min-width: 44px; min-height: 44px; margin-right: -10px; }
     .nav-hamburger span { width: 22px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 2px; display: block; transition: transform 0.25s, opacity 0.25s; }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -62,18 +70,18 @@
       .mobile-cta-btn { display: block; text-align: center; color: var(--white); font-weight: 800; font-size: 1rem; text-decoration: none; padding: 0.25rem 0; }
       .copy-btn, .path-cta, .preset-btn, .cta-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     }
-    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #1a2138 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
-    .hero-badge { display: inline-block; background: rgba(0,113,227,0.12); border: 1px solid var(--brand); color: var(--brand); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
+    .hero { background: linear-gradient(135deg, var(--brand-dark) 0%, #4A1F63 50%, var(--steel) 100%); color: var(--white); padding: 5rem 2rem 4rem; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(23,17,31,0.45); border: 1px solid var(--saffron); color: var(--saffron); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 1.5rem; }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
-    .hero h1 span { color: var(--brand); }
+    .hero h1 span { color: var(--saffron); }
     .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.82); max-width: 620px; margin: 0 auto 2.5rem; }
     .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
     .hero-stat { text-align: center; }
-    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
-    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.68); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: var(--saffron); display: block; }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.92); text-transform: uppercase; letter-spacing: 0.08em; }
     .hero-divider { width: 1px; height: 50px; background: rgba(255,255,255,0.2); align-self: center; }
     .section { padding: 5rem 2rem; }
-    .section-alt { background: var(--neutral-bg); }
+    .section-alt { background: var(--brand-light); }
     .container { max-width: 1000px; margin: 0 auto; }
     .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 0.6rem; }
     .section-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
@@ -81,7 +89,7 @@
 
     .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
     .snapshot-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; text-align: center; }
-    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; }
+    .snapshot-val { font-size: 1.5rem; font-weight: 800; color: var(--brand-dark); margin-bottom: 0.25rem; min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; hyphens: auto; } /* BLUEPRINT-NO-TEXT-OVERFLOW-20260728: a long or unbreakable value (e.g. a two-word    industry) must WRAP inside its card, never spill past the box or clip. */
     .snapshot-key { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); }
 
     .results-table { width: 100%; border-collapse: collapse; }
@@ -115,9 +123,9 @@
     .gap-title { font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 0.35rem; }
     .gap-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0.6rem; }
     .gap-tag { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 100px; }
-    .gap-tag.revenue { background: #fde8eb; color: var(--brand); }
-    .gap-tag.efficiency { background: #e8eaf3; color: var(--steel); }
-    .gap-tag.brand { background: #f3e8f0; color: var(--brand-dark); }
+    .gap-tag.revenue { background: rgba(74,31,99,0.10); color: var(--brand); }
+    .gap-tag.efficiency { background: rgba(23,17,31,0.07); color: var(--steel); }
+    .gap-tag.brand { background: rgba(245,166,35,0.18); color: var(--brand-dark); }
     .gap-desc a { color: var(--brand); }
 
     .opp-table-wrap { border-radius: var(--radius); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); box-shadow: var(--shadow); }
@@ -125,13 +133,13 @@
     .opp-table th { background: var(--brand-dark); color: var(--white); padding: 0.85rem 1.2rem; text-align: left; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
     .opp-table td { padding: 0.95rem 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--text-muted); background: var(--white); vertical-align: top; }
     .opp-table tr:last-child td { border-bottom: none; }
-    .opp-table tr:nth-child(even) td { background: #fdfafb; }
+    .opp-table tr:nth-child(even) td { background: rgba(74,31,99,0.03); }
     .pri-badge { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; font-weight: 800; font-size: 0.78rem; color: var(--white); background: linear-gradient(135deg, var(--brand-dark), var(--brand)); align-items: center; justify-content: center; }
-    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: #fde8eb; color: var(--brand); }
+    .impact-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 100px; background: rgba(245,166,35,0.18); color: var(--brand); }
 
     .ignore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
     .ignore-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
-    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: #fde8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ignore-x { width: 32px; height: 32px; border-radius: 50%; background: rgba(74,31,99,0.10); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .ignore-x span { color: var(--brand); font-weight: 800; font-size: 1rem; }
     .ignore-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 0.25rem; }
     .ignore-reason { font-size: 0.82rem; color: var(--text-muted); }
@@ -141,8 +149,8 @@
     .agent-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .agent-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
     .agent-icon svg { width: 26px; height: 26px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .agent-prompt { background: var(--bg, #F5F5F7); border: 1px solid var(--border, #E5E5EA); border-radius: 10px; padding: 1rem; font-size: 0.85rem; line-height: 1.55; color: var(--text-mid, #6E6E73); margin-bottom: 0.75rem; }
-    .agent-time { font-size: 0.8rem; color: var(--text-mid, #6E6E73); margin-top: 0.5rem; }
+    .agent-prompt { background: var(--bg, #F7F2E9); border: 1px solid var(--border, #DBD1E0); border-radius: 10px; padding: 1rem; font-size: 0.85rem; line-height: 1.55; color: var(--text-mid, #6B527A); margin-bottom: 0.75rem; }
+    .agent-time { font-size: 0.8rem; color: var(--text-mid, #6B527A); margin-top: 0.5rem; }
     .agent-name { font-weight: 800; font-size: 1.05rem; color: var(--text); margin-bottom: 0.5rem; }
     .agent-desc { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
     .agent-outcome { font-size: 0.82rem; color: var(--brand); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
@@ -169,7 +177,7 @@
     .calc-slider { width: 100%; height: 6px; border-radius: 3px; background: var(--border); outline: none; appearance: none; cursor: pointer; margin-bottom: 1.5rem; accent-color: var(--brand); }
     .calc-fill-wrap { display: flex; align-items: center; gap: 0.4rem; background: var(--white); border: 2px solid var(--brand); border-radius: 10px; padding: 0.55rem 0.85rem; margin-bottom: 1.5rem; }
     .calc-fill-prefix { font-size: 1.1rem; font-weight: 800; color: var(--brand); }
-    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #1D1D1F); -moz-appearance: textfield; }
+    .calc-fill-input { flex: 1; width: 100%; border: none; outline: none; background: transparent; font-size: 1.1rem; font-weight: 800; color: var(--text, #17111F); -moz-appearance: textfield; }
     .calc-fill-input::-webkit-outer-spin-button, .calc-fill-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .calc-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; margin-bottom: 2rem; }
     @media (max-width: 580px) { .calc-inputs-grid { grid-template-columns: 1fr; } }
@@ -213,7 +221,7 @@
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
     .cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
     footer { background: var(--brand-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.82rem; }
-    footer a { color: var(--brand); text-decoration: none; }
+    footer a { color: var(--saffron); text-decoration: none; }
     .sources-list { display: flex; flex-direction: column; gap: 0.5rem; }
     .source-item { font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 0.5rem; align-items: flex-start; }
     .source-num { background: var(--brand); color: var(--white); font-weight: 700; font-size: 0.8rem; padding: 0.1rem 0.45rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.05em; }
@@ -227,7 +235,7 @@
     .pod-header h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
     .pod-subtitle { font-size: .85rem; opacity: .85; margin: 0; }
     .pod-body { padding: 1.5rem 2rem; }
-    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(0,113,227,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
+    .pod-badge { display: inline-block; padding: .3rem .75rem; background: rgba(74,31,99,.1); color: var(--brand); border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 1rem; }
     .pod-eq { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: .5rem; vertical-align: middle; }
     .pod-eq.playing { display: inline-flex; }
     .pod-eq span { width: 3px; background: var(--brand); border-radius: 2px; animation: eqBounce .8s ease-in-out infinite alternate; }
@@ -242,10 +250,10 @@
     .pod-fill { position: absolute; left: 0; top: 19px; height: 6px; background: var(--brand); border-radius: 3px; pointer-events: none; width: 0%; }
     .pod-thumb { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--brand); pointer-events: none; left: 0%; }
     .pod-pip { position: absolute; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: rgba(0,0,0,.25); border-radius: 50%; pointer-events: none; }
-    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(0,0,0,.45); }
+    .pod-times { display: flex; justify-content: space-between; margin: .5rem 0 1rem; font-size: .78rem; color: rgba(23,17,31,0.75); }
     .pod-controls { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
     .pod-btn { background: none; border: none; cursor: pointer; padding: .5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; color: var(--brand); transition: background .15s; }
-    .pod-btn:hover { background: rgba(0,113,227,.08); }
+    .pod-btn:hover { background: rgba(74,31,99,.08); }
     .pod-btn.play-btn { background: var(--brand); color: #fff; min-width: 56px; min-height: 56px; }
     @media (min-width: 641px) { .pod-btn.play-btn { min-width: 64px; min-height: 64px; } }
     .pod-btn.play-btn:hover { background: var(--brand-dark); }
@@ -255,13 +263,19 @@
     .pod-mute { margin-left: auto; }
     .pod-dl { font-size: .78rem; color: var(--brand); text-decoration: none; }
     .pod-dl:hover { text-decoration: underline; }
-    .pod-error { display: none; padding: .75rem; background: #fff3f3; border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
+    .pod-error { display: none; padding: .75rem; background: rgba(74,31,99,0.08); border-radius: 8px; font-size: .82rem; color: var(--brand); margin-top: .75rem; }
     .pod-mini { position: fixed; bottom: 0; left: 0; right: 0; background: var(--brand-dark); color: #fff; padding: .75rem 1.25rem; display: none; align-items: center; gap: .75rem; z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,.25); }
     .pod-mini.visible { display: flex; }
     .pod-mini-name { font-size: .82rem; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pod-mini-time { font-size: .78rem; opacity: .7; min-width: 50px; text-align: right; }
     .pod-mini-btn { background: none; border: none; color: #fff; cursor: pointer; padding: .4rem; min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 640px) { .pod-body { padding: 1.25rem 1rem; } .pod-controls { gap: .5rem; } }
+    /* Advaita typography — Space Grotesk display tier (brand-guide-advaita-skill v2.0) */
+    h1, h2, h3, .nav-logo, .hero h1, .section-title, .cta-section h2,
+    .hero-stat .num, .results-table .result-num, .pillar-title, .gap-title,
+    .gap-num, .prompt-header h3, .diy-or-partner h3, .pod-header h3 {
+      font-family: var(--font-display);
+    }
   </style>
 <script>
 // Blueprint view-tracking beacon — fires blueprint_viewed to GHL relay on page load.
@@ -308,7 +322,7 @@
   </button>
   <ul class="nav-links" id="navMenu">
     <li><a href="#profile">Your Profile</a></li>
-    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#agents">AI Employees</a></li>
     <li><a href="#calculator">ROI Calculator</a></li>
     <li><a href="#listen">Listen</a></li>
     <li><a href="#apply">Qualify</a></li>
@@ -339,11 +353,12 @@
       <div class="snapshot-card"><div class="snapshot-val">{{INDUSTRY}}</div><div class="snapshot-key">Industry</div></div>
       <div class="snapshot-card"><div class="snapshot-val">{{KEY_METRIC}}</div><div class="snapshot-key">{{KEY_METRIC_LABEL}}</div></div>
       <div class="snapshot-card"><div class="snapshot-val">{{TEAM_SIZE}}</div><div class="snapshot-key">Team Size</div></div>
-      <div class="snapshot-card"><div class="snapshot-val">{{YEARS_IN_BUSINESS}}</div><div class="snapshot-key">Years in Business</div></div>
+      <div class="snapshot-card"><div class="snapshot-val">{{PRIMARY_GOAL}}</div><div class="snapshot-key">Primary Goal</div></div>
       <div class="snapshot-card"><div class="snapshot-val">{{CRM_TOOL}}</div><div class="snapshot-key">Primary CRM</div></div>
       <div class="snapshot-card"><div class="snapshot-val">Ready to Scale</div><div class="snapshot-key">AI Readiness</div></div>
     </div>
-    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: ready to scale with dedicated AI agents calibrated to {{BUSINESS_NAME}}. Your biggest time-recovery opportunities are mapped in the sections below. Brand voice is calibrated from {{DOMAIN}} and the language your customers already use — 90% accurate on Day 1, built from an intel audit before launch.</p>
+    <p style="font-size:0.92rem;color:var(--text-muted);">AI maturity: ready to scale with dedicated AI Employees calibrated to {{BUSINESS_NAME}}. Your biggest time-recovery opportunities are mapped in the sections below. Brand voice is calibrated from {{DOMAIN}} and the language your customers already use — 90% accurate on Day 1, built from an intel audit before launch.</p>
+    {{LEAD_NOTE}}
   </div>
 </section>
 
@@ -351,7 +366,7 @@
   <div class="container">
     <p class="section-label">What Your Industry Is Already Doing</p>
     <h2 class="section-title">Businesses Like {{BUSINESS_NAME}} Are Already Running on AI</h2>
-    <p class="section-sub">These are the exact moves businesses in the {{INDUSTRY}} space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether {{BUSINESS_NAME}} runs them before the competitor down the street does.</p>
+    <p class="section-sub">These are the exact moves businesses in the {{INDUSTRY_PHRASE}} space are making right now &mdash; live in the market today. The question is not whether AI runs these functions. It is whether {{BUSINESS_NAME}} runs them before the competitor down the street does.</p>
     <div class="gap-list">
       <div class="gap-card"><div class="gap-num">1</div><div class="gap-body"><div class="gap-title">They answer every inquiry in 60 seconds &mdash; while you sleep</div><div class="gap-desc"><strong>What they're doing:</strong> businesses in your space now put an AI speed-to-lead agent on every inbound inquiry, replying in under a minute, 24/7. <strong>How it helps them:</strong> the first business to respond wins the clear majority of deals &mdash; they capture opportunities your slower competitors never even see. <strong>How I deliver it for {{BUSINESS_NAME}}:</strong> a speed-to-lead agent wired into your {{CRM_TOOL}} that answers every inbound in under 60 seconds, day or night, and routes it to the right pipeline stage. <sup><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">[1]</a></sup></div><span class="gap-tag revenue">Revenue Impact</span></div></div>
       <div class="gap-card"><div class="gap-num">2</div><div class="gap-body"><div class="gap-title">They serve more customers without adding headcount</div><div class="gap-desc"><strong>What they're doing:</strong> growing teams hand new-customer setup to an AI onboarding agent &mdash; intake, welcome sequences, document collection, and kickoff scheduling. <strong>How it helps them:</strong> onboarding drops from days to minutes, so a small team serves far more customers without a single new hire. <strong>How I deliver it for {{BUSINESS_NAME}}:</strong> an onboarding agent that handles every repeatable setup step so your team only touches the conversations that need a human. <sup><a href="https://hbr.org/2023/03/how-automation-is-transforming-small-business" target="_blank" rel="noopener">[2]</a></sup></div><span class="gap-tag efficiency">Time Recovery</span></div></div>
@@ -397,9 +412,9 @@
     <p class="section-sub">Here is how your systems are classified &mdash; and where AI slots in to multiply each one without replacing anything you already use.</p>
     <div class="stack-grid">
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="stack-tool">{{CRM_TOOL}}</div><div class="stack-role">CRM + Automation Engine</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">Notion</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">Slack</div><div class="stack-role">Team Communication</div></div></div>
-      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">Google Drive</div><div class="stack-role">File Storage + Docs</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><div class="stack-tool">{{PM_TOOL}}</div><div class="stack-role">Project &amp; SOP Management</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="stack-tool">{{TEAM_COMMS_TOOL}}</div><div class="stack-role">Team Communication</div></div></div>
+      <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><div class="stack-tool">{{STORAGE_TOOL}}</div><div class="stack-role">File Storage + Docs</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="stack-tool">{{BUSINESS_NAME}} Platform</div><div class="stack-role">Your Business</div></div></div>
       <div class="stack-card"><div class="stack-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="stack-tool">Email + SMS</div><div class="stack-role">Lead Communication</div></div></div>
     </div>
@@ -434,12 +449,12 @@
         </thead>
         <tbody>
           <tr><td><div class="pri-badge">1</div></td><td><strong>Speed-to-Lead Agent</strong></td><td><span class="impact-tag">60-sec response</span> &mdash; every inbound {{BUSINESS_NAME}} inquiry answered before competitors see it</td><td>{{CRM_TOOL}}, Email/SMS</td></tr>
-          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer onboarding fully automated</td><td>{{CRM_TOOL}}, Notion, Email</td></tr>
-          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>{{CRM_TOOL}}, Google Drive</td></tr>
+          <tr><td><div class="pri-badge">2</div></td><td><strong>Client Onboarding Agent</strong></td><td><span class="impact-tag">Setup in hours</span> &mdash; new-customer onboarding fully automated</td><td>{{CRM_TOOL}}, {{PM_TOOL}}, Email</td></tr>
+          <tr><td><div class="pri-badge">3</div></td><td><strong>Proposal Generator</strong></td><td><span class="impact-tag">3 min vs 45 min</span> &mdash; branded proposals for every prospect instantly</td><td>{{CRM_TOOL}}, {{STORAGE_TOOL}}</td></tr>
           <tr><td><div class="pri-badge">4</div></td><td><strong>Content Production Agent</strong></td><td><span class="impact-tag">Hours / week back</span> &mdash; product updates turned into marketing content</td><td>Social Channels, Email, Blog</td></tr>
-          <tr><td><div class="pri-badge">5</div></td><td><strong>Retention Monitor</strong></td><td><span class="impact-tag">At-risk flagging</span> &mdash; customers surfaced before they lapse</td><td>{{CRM_TOOL}}, Slack, Notion</td></tr>
-          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>{{CRM_TOOL}}, Slack</td></tr>
-          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>{{CRM_TOOL}}, Notion</td></tr>
+          <tr><td><div class="pri-badge">5</div></td><td><strong>Retention Monitor</strong></td><td><span class="impact-tag">At-risk flagging</span> &mdash; customers surfaced before they lapse</td><td>{{CRM_TOOL}}, {{TEAM_COMMS_TOOL}}, {{PM_TOOL}}</td></tr>
+          <tr><td><div class="pri-badge">6</div></td><td><strong>Admin Automation Agent</strong></td><td><span class="impact-tag">Hours reclaimed</span> &mdash; ticket triage, FAQ, billing inquiries handled</td><td>{{CRM_TOOL}}, {{TEAM_COMMS_TOOL}}</td></tr>
+          <tr><td><div class="pri-badge">7</div></td><td><strong>Sales Intelligence Agent</strong></td><td><span class="impact-tag">Pipeline visibility</span> &mdash; lead scoring, deal stage tracking, weekly digest</td><td>{{CRM_TOOL}}, {{PM_TOOL}}</td></tr>
         </tbody>
       </table>
     </div>
@@ -463,8 +478,8 @@
 <section class="section" id="agents">
   <div class="container">
     <p class="section-label">Your AI System</p>
-    <h2 class="section-title">6 AI Agents Built for {{BUSINESS_NAME}}</h2>
-    <p class="section-sub">Each agent maps directly to a specific workflow inside {{BUSINESS_NAME}}'s operations. Brand voice is built instantly from {{DOMAIN}} and your existing customer language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
+    <h2 class="section-title">6 AI Employees Built for {{BUSINESS_NAME}}</h2>
+    <p class="section-sub">Each AI Employee maps directly to a specific workflow inside {{BUSINESS_NAME}}'s operations. Brand voice is built instantly from {{DOMAIN}} and your existing customer language &mdash; 90% accurate on Day 1, no slow learning curve required.</p>
     <div class="agents-grid">
 <!-- Agent 1: Speed-to-Lead -->
       <div class="agent-card"><div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="agent-name">Speed-to-Lead Agent</div><div class="agent-desc">Monitors your inquiry inbox and website forms. The moment a prospect submits interest in {{BUSINESS_NAME}}, this agent drafts and sends a personalized, professional response within 60 seconds &mdash; day, night, or weekend. Qualifies the lead and routes to the right pipeline stage.</div><div class="agent-outcome">Responds in under 60 sec &mdash; 24/7, no staff required</div></div>
@@ -529,19 +544,19 @@
       <div class="calc-inputs-grid">
         <div>
           <div class="calc-label-row"><span class="calc-slider-label">Avg Customer Value (Annual)</span></div>
-          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="{{ROI_MIN}}" step="{{ROI_STEP}}" value="{{ROI_MIN}}" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
+          <div class="calc-fill-wrap"><span class="calc-fill-prefix">$</span><input type="number" class="calc-fill-input" id="sl-contract" min="{{ROI_MIN}}" step="{{ROI_STEP}}" value="{{ROI_CONTRACT}}" oninput="updateLabel('contract'); calcROI();" aria-label="Average annual customer value in dollars"></div>
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">10</span></div>
-          <input type="range" class="calc-slider" id="sl-leads" min="2" max="100" step="1" value="10" oninput="updateLabel('leads'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Monthly New Leads</span><span class="calc-slider-val" id="lbl-leads">{{ROI_LEADS}}</span></div>
+          <input type="range" class="calc-slider" id="sl-leads" min="2" max="{{ROI_LEADS_MAX}}" step="1" value="{{ROI_LEADS}}" oninput="updateLabel('leads'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">18%</span></div>
-          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="18" oninput="updateLabel('rate'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Current Close Rate</span><span class="calc-slider-val" id="lbl-rate">{{ROI_RATE}}%</span></div>
+          <input type="range" class="calc-slider" id="sl-rate" min="5" max="60" step="1" value="{{ROI_RATE}}" oninput="updateLabel('rate'); calcROI();">
         </div>
         <div>
-          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">15 hrs</span></div>
-          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="15" oninput="updateLabel('hours'); calcROI();">
+          <div class="calc-label-row"><span class="calc-slider-label">Admin Hours / Week (team)</span><span class="calc-slider-val" id="lbl-hours">{{ROI_HOURS}} hrs</span></div>
+          <input type="range" class="calc-slider" id="sl-hours" min="2" max="40" step="1" value="{{ROI_HOURS}}" oninput="updateLabel('hours'); calcROI();">
         </div>
       </div>
       <div class="calc-results">
@@ -702,10 +717,14 @@
 </div>
 
 <script>
+  // BLUEPRINT-ROI-PRESET-FROM-FORM-20260727: every scenario starts from the LEAD'S OWN
+  // stated intake numbers. Scenarios differ ONLY by `lift`. Never hardcode a lead-agnostic
+  // contract/leads/rate/hours here -- that shipped 2388/10/18/15 to every lead and violated
+  // Rule 14 (no hardcoded ROI defaults) and Rule 18 (avg-ticket honesty).
   const PRESETS = {
-    conservative: { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 0.5 },
-    expected:     { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.0 },
-    stretch:      { contract: 2388, leads: 10, rate: 18, hours: 15, lift: 1.3 }
+    conservative: { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 0.5 },
+    expected:     { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 1.0 },
+    stretch:      { contract: {{ROI_CONTRACT}}, leads: {{ROI_LEADS}}, rate: {{ROI_RATE}}, hours: {{ROI_HOURS}}, lift: 1.3 }
   };
   let currentLift = 1.0;
 

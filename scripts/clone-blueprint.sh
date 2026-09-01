@@ -179,6 +179,7 @@ import json
 import re
 import urllib.parse
 import datetime
+import math
 import os
 
 output_file = sys.argv[1]
@@ -198,6 +199,27 @@ business_name = profile['business_name']
 first_name = lead_name.split()[0]
 accent_color = profile.get('accent_color', '#007AFF')
 industry = profile.get('industry', 'professional services')
+
+# ── HUMANIZE THE INDUSTRY FOR CUSTOMER-FACING COPY ───────────────────────────
+# PERMANENT FIX 2026-07-28 (marker BLUEPRINT-NO-TEXT-OVERFLOW-20260728,
+# EC-BLUEPRINT-RAW-SLUG-OVERFLOW-20260728):
+# `industry` doubles as the ROI-banding KEY (scripts/roi-industry-config.json), so it is a
+# snake_case slug like `professional_services`. It was rendered VERBATIM into two customer-facing
+# places — the Industry snapshot card and the "businesses in the ___ space" line. A snake_case
+# slug is one unbreakable token, so it blew past its 147px card (254px of text) and read like a
+# database field to the prospect. Same class as the raw-GHL-value leak the second-person gate
+# already guards (`u250k`).
+# The banding key stays raw; only the DISPLAY strings are humanized.
+_industry_raw = str(industry or '').strip()
+_industry_words = _industry_raw.replace('_', ' ').replace('-', ' ').split()
+industry_phrase = ' '.join(w.lower() for w in _industry_words) or 'professional services'
+_SMALL = {'and', 'or', 'of', 'for', 'to', 'in', 'the', 'a', 'an'}
+industry_display = ' '.join(
+    w.capitalize() if (i == 0 or w.lower() not in _SMALL) else w.lower()
+    for i, w in enumerate(industry_phrase.split())
+)
+industry = industry_display  # {{INDUSTRY}} is customer-facing from here on
+print(f"  Industry display: raw='{_industry_raw}' -> card='{industry_display}' prose='{industry_phrase}'")
 phone = profile.get('phone', '')
 email = profile.get('email', '')
 services = profile.get('services', [])
@@ -210,12 +232,96 @@ key_metric = profile.get('key_metric', '—')
 key_metric_label = profile.get('key_metric_label', 'Projects Completed')
 team_size = profile.get('team_size', '—')
 monthly_leads = profile.get('monthly_leads', '—')
+primary_goal = str(profile.get('primary_goal') or profile.get('quiz', {}).get('biggest_goal') or '—').strip().title()
 
 # Derived values
 method_name = business_name.split()[-1] if len(business_name.split()) > 1 else business_name
 domain_slug = business_name.lower().replace(' ', '').replace("'", '')
+
+# PERMANENT FIX 2026-07-30 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-DOMAIN-FABRICATED-FROM-BUSINESS-NAME-20260730,
+# EC-BLUEPRINT-INVENTED-DOMAIN-PRESENTED-AS-LEAD-SITE-20260730:
+# {{DOMAIN}} was ALWAYS `business_name.lower().replace(' ','') + '.com'` — a GUESS. It is
+# rendered to the customer 5 times as a statement of fact ("Brand voice built from X",
+# "a structured review of X"). When the guess is wrong we tell the prospect we reviewed a
+# website that is not theirs. Caught on lisa-red-carpet-auto: business name yields
+# `lisasredcarpetautoexperience.com` while her real, live site is `drivewithlisa.com`.
+# It only ever "worked" by luck when the name slug happened to equal the real domain
+# (e.g. william-diggers-catch -> diggerscatch.com). Same bug-class as the ROI/stack
+# template-default leaks: per-lead content that was never sourced from the lead.
+# Rule: use the lead's REAL website when the profile has one; guess only as a last resort.
+#
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803,
+# EC-BLUEPRINT-DOMAIN-GUESS-FALLBACK-STILL-LIVE-20260803):
+# The 7/30 fix resolved the domain from profile['website'] but LEFT THE GUESS FALLBACK LIVE, so
+# the defect simply moved: any lead with a missing OR PLACEHOLDER website re-inherited it.
+# Proven on cindy-broken-in-treasures (FB paid lead): her submitted website was the placeholder
+# "https://000000000", and the builder printed `brokenintreasures.com` and stated it to the
+# customer as fact 6 times -- a domain that does not resolve (NXDOMAIN on .com/.net/.org/.co/
+# .shop/llc.com; brokentreasures.com is a GoDaddy parked page). Paid-ad leads routinely leave the
+# website field blank or garbage, so this is the common case, not the edge case.
+# Rule now: a domain is used ONLY if it is structurally a real domain. There is NO guess, ever.
+# When absent, domain_display is empty and the domain-bearing sentences are rewritten to neutral
+# copy below (same approach as the no-CRM prose fix), then hard-asserted.
+_site_raw = str(profile.get('website') or profile.get('domain') or '').strip()
+_d = ''
+if _site_raw:
+    _d = re.sub(r'^https?://', '', _site_raw, flags=re.I).strip('/')
+    _d = re.sub(r'^www\.', '', _d, flags=re.I).split('/')[0].strip().lower()
+# Structural validity: must have a dot, a >=2-char alphabetic TLD, and a label that is not all
+# digits/zeros. Catches "000000000", "0", "n/a", "none", "tbd", bare words, and IP-ish junk.
+_valid_domain = bool(
+    _d
+    and re.match(r'^(?=.{4,253}$)([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$', _d)
+    and not re.match(r'^[0-9.]+$', _d)
+    and _d.split('.')[0] not in ('none', 'na', 'tbd', 'null', 'example', 'test')
+    and not re.match(r'^0+$', _d.split('.')[0])
+)
+if _valid_domain:
+    domain_display = _d
+    domain_provenance = 'lead_website'
+else:
+    domain_display = ''
+    domain_provenance = ('absent_no_usable_website' if not _site_raw
+                         else f'absent_rejected_placeholder({_site_raw[:40]})')
+print(f"  Domain: '{domain_display}'  provenance={domain_provenance}")
 services_str = ', '.join(services) if services else f'{industry} services'
+# tools may be a list (normal profile shape, e.g. ["CRM","Email","Phone"]) or a str.
+# Coerce to a string so {{CRM_TOOL}} html.replace() never sees a list (was TypeError,
+# CL#4 2026-07-17 Madison CC — restores main's coercion so this branch matches main).
 tools_str = ', '.join(tools) if isinstance(tools, list) else tools
+# PERMANENT FIX 2026-07-17 (Madison, blueprint-ai project): when the lead's form
+# answer for CRM / project-management tool is "none"/"other"/"n-a"/blank, render the
+# clean literal "None" — NEVER the generic "your CRM". Truthful to the form, cleaner,
+# less confusing. Applies to every future blueprint build (fleet-wide).
+_tv = (tools_str or '').strip()
+_NONE_SET = ('', 'none', 'n/a', 'na', 'n-a', 'other', 'no', 'not applicable', 'nothing')
+crm_display = 'None' if _tv.lower() in _NONE_SET else _tv
+
+# PERMANENT FIX 2026-07-23 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723: the stack cards for
+# Project/SOP (was hardcoded "Notion"), Team Communication (was "Slack"), and
+# File Storage (was "Google Drive") are now driven by the lead's REAL quiz answers,
+# with the same none/other/blank -> literal "None" coercion as CRM. NEVER ship a
+# branded tool the lead did not submit. Root cause: those three cards were hardcoded
+# in TEMPLATE.html and never tokenized, so every lead inherited fake Notion/Slack.
+_quiz = profile.get('quiz', {}) or {}
+def _tool_display(v):
+    s = (', '.join(v) if isinstance(v, list) else (v or '')).strip()
+    return 'None' if s.lower() in _NONE_SET else s
+pm_display = _tool_display(_quiz.get('project_management_tools'))
+# PERMANENT FIX 2026-08-09 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-STACK-COMMS-KEY-MISMATCH-20260809: this read ONLY
+# 'communication_channels', a key that no lead profile and no GHL custom field has
+# ever used — the field is 'communication_tools'. So the 2026-07-23 de-hardcoding
+# fix swapped a fake "Slack" for a silently wrong "None", and EVERY lead built since
+# has rendered "Team Communication: None" while their own form listed real channels
+# (karen-melting-pot-studio shipped this way with Slack/Text/WhatsApp/Email on file).
+# Read the canonical key first, keep the old one as a fallback so nothing regresses.
+team_comms_display = _tool_display(
+    _quiz.get('communication_tools') or _quiz.get('communication_channels')
+)
+storage_display = _tool_display(_quiz.get('storage_tools'))
 
 # Accent color derivatives
 def lighten_hex(hex_color, factor=0.4):
@@ -314,7 +420,118 @@ except Exception:
     pass
 
 # ── SIMPLE PLACEHOLDER REPLACEMENT (no more 700-line find-and-replace) ──
+# ── AI Prompt section fill (FIX 2026-07-17 Madison CC): TEMPLATE has {{PROMPT_ONE/TWO/THREE}}
+#    (+ _TITLE) but the engine had NO mapping → every build hard-failed at the unfilled-placeholder
+#    gate (sys.exit(1)). Source from profile['ai_prompts']=[{title,prompt},...]; fall back to
+#    ai_agents' prompts; final generic fallback so this can never silently break a build again. ──
+def _html_esc(s):
+    return (str(s).replace('&', '&amp;').replace('<', '&lt;')
+            .replace('>', '&gt;').replace('"', '&quot;'))
+_ai_prompts = profile.get('ai_prompts') or []
+def _prompt_at(i, field):
+    if i < len(_ai_prompts) and isinstance(_ai_prompts[i], dict):
+        v = _ai_prompts[i].get(field)
+        if v:
+            return v
+    # fall back to ai_agents prompt/name
+    if i < len(ai_agents) and isinstance(ai_agents[i], dict):
+        if field == 'title':
+            return ai_agents[i].get('name') or f'AI Workflow #{i+1}'
+        return ai_agents[i].get('prompt') or ''
+    if field == 'title':
+        return ['Speed-to-Lead', 'Follow-Up & Reactivation', 'Admin & Content Automation'][i] if i < 3 else f'AI Workflow #{i+1}'
+    return f'You are an AI assistant for {business_name}, a {industry} business. Help handle the task described above end to end, asking for any missing detail before acting.'
+p1t, p1 = _prompt_at(0, 'title'), _prompt_at(0, 'prompt')
+p2t, p2 = _prompt_at(1, 'title'), _prompt_at(1, 'prompt')
+p3t, p3 = _prompt_at(2, 'title'), _prompt_at(2, 'prompt')
+
+# ── ROI CALCULATOR PRESETS FROM THE LEAD'S OWN FORM ──────────────────────────
+# PERMANENT FIX 2026-07-27 (marker BLUEPRINT-ROI-PRESET-FROM-FORM-20260727,
+# EC-BLUEPRINT-ROI-TEMPLATE-DEFAULT-LEAK-20260727):
+# The calculator inputs AND the PRESETS object were hardcoded in TEMPLATE.html
+# (contract 2388 / leads 10 / rate 18 / hours 15), so EVERY lead saw the same
+# lead-agnostic numbers no matter what they submitted. Carlos told us 50 monthly
+# leads and the page still showed 10. Same bug-class as the 2026-07-23 stack leak
+# (BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723): content hardcoded in the
+# template and never tokenized.
+# Rule: a value the lead ACTUALLY PROVIDED is preset. A value they did NOT provide
+# is never fabricated — it falls back to a neutral, user-adjustable starting point,
+# and never to a banned constant (18 close rate, 2388/45000 contract — Rules 14/18).
+def _roi_num(*keys, default=None):
+    """First numeric value found across profile top level then profile['quiz']."""
+    quiz = profile.get('quiz') or {}
+    for k in keys:
+        for src in (profile, quiz):
+            v = src.get(k)
+            if v in (None, '', '—'):
+                continue
+            m = re.search(r'\d+(?:\.\d+)?', str(v).replace(',', ''))
+            if m:
+                return float(m.group(0))
+    return default
+
+_leads_val = _roi_num('monthly_leads', 'lead_volume', 'avg_monthly_lead_volume')
+_rate_val = _roi_num('close_rate', 'current_close_rate')
+_hours_val = _roi_num('admin_hours', 'admin_hours_per_week', 'weekly_admin_hours')
+_contract_val = _roi_num('avg_contract_value', 'avg_ticket', 'average_customer_value')
+
+# Clamp to each control's real min/max so a stated number can never render off-slider.
+def _clamp(v, lo, hi):
+    return max(lo, min(hi, v))
+
+# PERMANENT FIX 2026-08-17 (marker BLUEPRINT-ROI-LEADS-SLIDER-MAX-ADAPTIVE-20260817,
+# EC-BLUEPRINT-ROI-LEADS-CLAMPED-BELOW-STATED-20260817)
+# DEFECT: the Monthly New Leads slider was hardcoded max="100" in TEMPLATE.html, so ANY lead
+# stating more than 100 monthly leads had their own number silently clamped down. Proven on
+# corky-main-street-online-marketing: form said 150, page rendered 100 -- the lead reads a
+# number they contradicted on their own intake. Same class as the Carlos 50-vs-10 defect
+# (BLUEPRINT-ROI-PRESET-FROM-FORM-20260727): per-lead content pinned by a template constant.
+# The 7/27 rule said "clamp to the control's min/max", which quietly LICENSED this; the
+# governing rule is "every ROI control the lead PROVIDED a number for must render that number".
+# FIX: the ceiling is now derived per lead with headroom, so the stated value always renders.
+_leads_ceiling = 100
+if _leads_val is not None and _leads_val > 100:
+    _leads_ceiling = int(math.ceil((_leads_val * 1.5) / 50.0) * 50)
+ROI_LEADS_MAX = _leads_ceiling
+ROI_LEADS = int(_clamp(_leads_val, 2, ROI_LEADS_MAX)) if _leads_val is not None else 10
+ROI_RATE = int(_clamp(_rate_val, 5, 60)) if _rate_val is not None else 20
+ROI_HOURS = int(_clamp(_hours_val, 2, 40)) if _hours_val is not None else 15
+ROI_CONTRACT = int(_contract_val) if _contract_val is not None else int(roi_min)
+
+roi_preset_provenance = {
+    'leads': 'form' if _leads_val is not None else 'neutral_default_not_provided',
+    'rate': 'form' if _rate_val is not None else 'neutral_default_not_provided',
+    'hours': 'form' if _hours_val is not None else 'neutral_default_not_provided',
+    'contract': 'form' if _contract_val is not None else 'industry_band_min_not_provided',
+}
+print(f"  ROI presets: leads={ROI_LEADS} rate={ROI_RATE} hours={ROI_HOURS} "
+      f"contract={ROI_CONTRACT}  provenance={roi_preset_provenance}")
+print(f"  ROI leads slider ceiling: max={ROI_LEADS_MAX} "
+      f"({'widened for stated value' if ROI_LEADS_MAX != 100 else 'template default'}); "
+      f"stated={_leads_val} renders={ROI_LEADS} "
+      f"{'OK' if (_leads_val is None or int(_leads_val) == ROI_LEADS) else 'CLAMPED — INVESTIGATE'}")
+
+# Per-lead note slot (BLUEPRINT-LEAD-NOTE-SLOT-20260824). Empty for every lead that does not
+# set `lead_note`, so this is additive and changes no existing page. Content lives in the lead
+# JSON, never in the template -- same contract as blueprint_render_sections.py.
+_lead_note = (profile.get('lead_note') or '').strip()
+lead_note_html = (
+    '<p style="font-size:0.92rem;color:var(--text-muted);margin-top:1rem;'
+    'padding-top:0.85rem;border-top:1px solid var(--border, #d2d2d7);">' + _lead_note.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;') + '</p>'
+) if _lead_note else ''
+
 replacements = {
+    '{{ROI_LEADS_MAX}}': str(ROI_LEADS_MAX),
+    '{{ROI_LEADS}}': str(ROI_LEADS),
+    '{{ROI_RATE}}': str(ROI_RATE),
+    '{{ROI_HOURS}}': str(ROI_HOURS),
+    '{{ROI_CONTRACT}}': str(ROI_CONTRACT),
+    '{{PROMPT_ONE_TITLE}}': p1t,
+    '{{PROMPT_ONE}}': _html_esc(p1),
+    '{{PROMPT_TWO_TITLE}}': p2t,
+    '{{PROMPT_TWO}}': _html_esc(p2),
+    '{{PROMPT_THREE_TITLE}}': p3t,
+    '{{PROMPT_THREE}}': _html_esc(p3),
     '{{ROI_MIN}}': str(roi_min),
     '{{ROI_MAX}}': str(roi_max),
     '{{ROI_STEP}}': str(roi_step),
@@ -329,19 +546,25 @@ replacements = {
     '{{ACCENT_LIGHT}}': accent_light,
     '{{ACCENT_MID}}': accent_mid,
     '{{INDUSTRY}}': industry,
+    '{{INDUSTRY_PHRASE}}': industry_phrase,
     '{{YEARS_IN_BUSINESS}}': str(years_in_business),
     '{{KEY_METRIC}}': str(key_metric),
     '{{KEY_METRIC_LABEL}}': key_metric_label,
     '{{TEAM_SIZE}}': str(team_size),
     '{{MONTHLY_LEADS}}': str(monthly_leads),
+    '{{PRIMARY_GOAL}}': primary_goal,
     '{{APPLY_URL}}': qualify_url,
     '{{QUALIFY_URL}}': qualify_url,
     '{{MAILTO_LINK}}': mailto_link,
     '{{SERVICES_LIST}}': services_str,
-    '{{DOMAIN}}': f'{domain_slug}.com',
-    '{{CRM_TOOL}}': tools_str if tools_str else 'your CRM',
+    '{{DOMAIN}}': domain_display,
+    '{{CRM_TOOL}}': crm_display,
+    '{{PM_TOOL}}': pm_display,
+    '{{TEAM_COMMS_TOOL}}': team_comms_display,
+    '{{STORAGE_TOOL}}': storage_display,
     '{{METHOD_NAME}}': method_name,
     '{{URGENCY_TEXT}}': urgency_text,
+    '{{LEAD_NOTE}}': lead_note_html,
 }
 
 for placeholder, value in replacements.items():
@@ -350,6 +573,98 @@ for placeholder, value in replacements.items():
     if isinstance(value, list):
         value = ', '.join(str(v) for v in value)
     html = html.replace(placeholder, value)
+
+# PERMANENT FIX 2026-07-30 (Madison, blueprint-ai project) — marker
+# BLUEPRINT-NO-CRM-BROKEN-PROSE-20260730, EC-BLUEPRINT-YOUR-NONE-SENTENCES-20260730:
+# The 2026-07-23 stack fix correctly coerces a missing CRM to the literal "None" for the
+# STACK CARD and the oppmap tools cells (a label, where "None" is right). But {{CRM_TOOL}}
+# is ALSO dropped into five running SENTENCES, where "None" is not a label — it is a noun.
+# Those render as broken English to the customer: "wired into your None", "your None data",
+# "initial None configuration", "your None forms", "built on your None account".
+# Verified live 2026-07-30 on the already-DELIVERED william-diggers-catch page, which shows
+# "your None account", "your None data", "your None forms" and "your None that answers".
+# Any lead who answers no-CRM hits this, and no-CRM is common on the Advaita intake form.
+# Fix: when there is no CRM, rewrite those five SENTENCE slots into grammatical copy that
+# promises nothing the lead did not say and invents no tool name. Label slots keep "None".
+if crm_display == 'None':
+    _no_crm_prose = [
+        ('wired into your None that answers every inbound',
+         'wired into your website and text inquiries that answers every inbound'),
+        ('pulled directly from your None data',
+         'pulled directly from the customer records we set up with you'),
+        ('and initial None configuration',
+         'and initial CRM setup'),
+        ('connected to your None forms',
+         'connected to your website and text inquiries'),
+        ('built on your None account',
+         'built on the CRM account we set up for you'),
+    ]
+    _fixed = 0
+    for _bad, _good in _no_crm_prose:
+        if _bad in html:
+            html = html.replace(_bad, _good)
+            _fixed += 1
+    print(f"  no-CRM prose: rewrote {_fixed}/{len(_no_crm_prose)} sentence slots "
+          f"(stack card + tools cells keep the literal 'None')")
+    if 'your None' in html or ' None configuration' in html:
+        import sys as _sys
+        print("ERROR: a 'None' sentence slot survived the no-CRM prose fix.", file=_sys.stderr)
+        _sys.exit(1)
+
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803):
+# When the lead has NO usable website, the template's domain-bearing sentences must not name a
+# domain at all. Rewrite them to neutral, still-true copy, then hard-fail if any address survives.
+if not domain_display:
+    import re as _re2
+    _domain_prose = [
+        (r'Brand voice is calibrated from\s+and the language your customers already use',
+         'Brand voice is calibrated from your own words and the language your customers already use'),
+        (r'Brand voice is built instantly from\s+and your existing customer language',
+         'Brand voice is built from your own words and your existing customer language'),
+        (r'Brand voice built from\s+and your existing ([^<]{1,80}?) messaging',
+         r'Brand voice built from your own words in the kickoff call'),
+        (r'based on your intake answers and a structured review of\s*\.',
+         'based on your intake answers.'),
+        (r'a structured review of\s+([A-Za-z0-9.-]*)\.', 'a structured review of what you told us.'),
+        (r'trained on your brand voice from\s+that converts', 'trained on your brand voice that converts'),
+        (r'\bfrom\s+and\b', 'from your own words and'),
+        (r'\breview of\s+\.', 'review of what you told us.'),
+    ]
+    _dfix = 0
+    for _pat, _rep in _domain_prose:
+        html, _n = _re2.subn(_pat, _rep, html)
+        _dfix += _n
+    # collapse any doubled spaces the empty token left behind, inside text only
+    html = _re2.sub(r'(?<=[a-z,])  +(?=[a-z])', ' ', html)
+    print(f"  no-domain prose: rewrote {_dfix} sentence slot(s) (no website supplied -> no domain named)")
+    # HARD ASSERT: no fabricated domain may survive. The business-name guess is the exact string
+    # the old fallback would have produced; if it appears anywhere, the build is lying to the customer.
+    _guess = f'{domain_slug}.com'
+    if _guess.lower() in html.lower():
+        import sys as _sys
+        print(f"ERROR: fabricated domain '{_guess}' present although the lead supplied no usable "
+              f"website (BLUEPRINT-DOMAIN-NO-GUESS-EVER-20260803).", file=_sys.stderr)
+        _sys.exit(1)
+
+# PERMANENT FIX 2026-07-23 (marker BLUEPRINT-STACK-NO-TEMPLATE-DEFAULT-LEAK-20260723):
+# After tokens resolve, the oppmap "Tools It Connects" cells can contain repeats or
+# multiple "None" (e.g. "None, None, Email"). Dedup each plain-text tools cell and drop
+# "None" whenever a real tool is present, so cells stay truthful + tidy. Never invents a tool.
+import re as _re
+def _clean_tools_cell(m):
+    parts = [p.strip() for p in m.group(1).split(',') if p.strip()]
+    seen = []
+    for p in parts:
+        if p.lower() not in [s.lower() for s in seen]:
+            seen.append(p)
+    reals = [p for p in seen if p.lower() != 'none']
+    out = reals if reals else (['None'] if seen else [])
+    return '<td>' + ', '.join(out) + '</td>'
+def _clean_oppmap(h):
+    def _repl(mt):
+        return _re.sub(r'<td>([^<]*)</td>', _clean_tools_cell, mt.group(0))
+    return _re.sub(r'<table class="opp-table">.*?</table>', _repl, h, flags=_re.S)
+html = _clean_oppmap(html)
 
 # ── AI Agent Cards: Replace template agents with lead-specific ones ──
 if ai_agents and len(ai_agents) > 0:
@@ -363,16 +678,22 @@ if ai_agents and len(ai_agents) > 0:
         for i, agent in enumerate(ai_agents[:6], 1):
             a_name = agent.get('name', f'AI Agent #{i}')
             a_desc = agent.get('desc', f'Custom AI agent for your {industry} business.')
-            a_prompt = agent.get('prompt', f'You are an AI agent for {business_name}.')
-            a_result = agent.get('result', f'Automates key {industry} workflows.')
-            a_time = agent.get('time', '5 minutes')
-            a_prompt_escaped = (a_prompt
-                .replace('&', '&amp;').replace('<', '&lt;')
-                .replace('>', '&gt;').replace('"', '&quot;'))
+            a_result = agent.get('result') or agent.get('outcome') or f'Automates key {industry} workflows.'
+            a_desc_escaped = (str(a_desc)
+                .replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+            a_result_escaped = (str(a_result)
+                .replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
 
+            # v3.42 (Madison 2026-07-01) HARD RED-LINE D2-03: the 6 agent squares are
+            # CONDENSED, outcome-first cards — icon + name + desc + outcome ONLY. They
+            # must NEVER carry a raw "Copy-paste prompt:" block / "You are an AI agent…"
+            # boilerplate (that reads as a lazy paste and hard-fails
+            # blueprint_agent_prompt_quality_gate.check_agent_cards_no_boilerplate).
+            # The full copy-paste operating runbooks live ONLY in the 3 ready-to-use
+            # dropdown prompts (prompt-pre, from ai_prompts / {{PROMPT_ONE..THREE}}).
             icon_svg = '<div class="agent-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>'
             agent_cards_html += f'''    <!-- Agent {i} -->
-      <div class="agent-card">{icon_svg}<div class="agent-name">{a_name}</div><div class="agent-desc" style="margin-bottom:0.75rem;">{a_desc}</div><div class="agent-prompt" style="background:var(--bg, #F5F5F7);border:1px solid var(--border, #E5E5EA);border-radius:10px;padding:1rem;font-size:0.85rem;line-height:1.55;color:var(--text-mid, #6E6E73);margin-bottom:0.75rem;"><strong style="display:block;margin-bottom:0.4rem;color:var(--text, #1D1D1F);">Copy-paste prompt:</strong>{a_prompt_escaped}</div><div class="agent-outcome">{a_result}</div><div class="agent-time" style="font-size:0.8rem;color:var(--text-mid, #6E6E73);margin-top:0.5rem;">Setup time: ~{a_time}</div></div>
+      <div class="agent-card">{icon_svg}<div class="agent-name">{a_name}</div><div class="agent-desc">{a_desc_escaped}</div><div class="agent-outcome">{a_result_escaped}</div></div>
 
 '''
         html = html[:start_idx] + agent_cards_html + html[end_idx:]
@@ -448,6 +769,22 @@ with open(output_file, 'w') as f:
 
 print(f"  Replacements complete. Output: {output_file}")
 PYTHON_SCRIPT
+
+# PERMANENT FIX 2026-08-03 (marker BLUEPRINT-TEMPLATE-SECTIONS-PER-LEAD-20260803, Madison directive):
+# Render gaps/oppmap/results/ignore/timeline FROM THE LEAD PROFILE. TEMPLATE.html hardcoded these
+# five sections as lead-agnostic B2B-agency copy, so every build shipped a different AI-employee
+# roster than the lead's own six, two FABRICATED "You flagged X as a top stress" claims, "Agent"
+# instead of "AI Employee", and plural-team copy on solo operators -- and run-audit.py scored those
+# pages 19/19 anyway. Both janet-drawn-logic and cindy-broken-in-treasures had to be hand-repaired.
+# This makes it structural. BLOCKING: a surviving leak refuses the build.
+RENDER_SECTIONS="$SCRIPT_DIR/blueprint_render_sections.py"
+if [[ -f "$RENDER_SECTIONS" ]]; then
+  python3 "$RENDER_SECTIONS" --lead "$LEAD_SLUG" --html "$OUTPUT_FILE" || {
+    echo "ERROR: per-lead section render failed its own leak check -- refusing to continue" >&2
+    echo "       (BLUEPRINT-TEMPLATE-SECTIONS-PER-LEAD-20260803)" >&2
+    exit 1
+  }
+fi
 
 # Convert legacy event-design/B2B sections into a home-services page before any
 # gate can pass. The frame is still canonical; this patch removes wrong-industry
@@ -552,6 +889,31 @@ else
   echo "  ROI fill-in gate: FAIL -- no <input type=\"number\" id=\"sl-contract\"> fill-in found for Avg Customer Value."
   GATE_FAIL=1
 fi
+
+# 3b. ROI PRESET-FROM-FORM gate (BLUEPRINT-ROI-PRESET-FROM-FORM-20260727, HARD)
+# Blocks the template-default leak: a number the lead actually stated (e.g. Carlos's
+# 50 monthly leads) must render on the page, PRESETS must not carry lead-agnostic
+# literals, and banned ROI constants (18 rate / 2388 / 45000 contract) must not ship.
+if python3 "$SCRIPT_DIR/blueprint_roi_preset_gate.py" --lead "$LEAD_SLUG" --html "$OUTPUT_FILE" --profile "$PROFILE_JSON" >/tmp/roi-preset-gate.$$ 2>&1; then
+  echo "  ROI preset gate: PASS -- calculator matches the lead's stated intake numbers."
+else
+  echo "  ROI preset gate: FAIL -- calculator is showing template defaults, not this lead's numbers:"
+  sed 's/^/    /' /tmp/roi-preset-gate.$$
+  GATE_FAIL=1
+fi
+rm -f /tmp/roi-preset-gate.$$
+
+# 3c. TEXT-OVERFLOW / RAW-TOKEN gate (BLUEPRINT-NO-TEXT-OVERFLOW-20260728, HARD)
+# Renders the built page in a real browser at desktop AND mobile widths and fails on any
+# text wider than its own box, or any raw snake_case identifier in customer-facing copy.
+if python3 "$SCRIPT_DIR/blueprint_text_overflow_gate.py" --lead "$LEAD_SLUG" --local >/tmp/overflow-gate.$$ 2>&1; then
+  echo "  text-overflow gate: PASS -- no clipped text, no raw internal tokens."
+else
+  echo "  text-overflow gate: FAIL -- customer-visible text problem:"
+  sed 's/^/    /' /tmp/overflow-gate.$$
+  GATE_FAIL=1
+fi
+rm -f /tmp/overflow-gate.$$
 
 # 4a. Auto-heal generator reverts before gating
 AUTOFIX="/Users/openclaw/Documents/New project/scripts/blueprint_autofix.py"

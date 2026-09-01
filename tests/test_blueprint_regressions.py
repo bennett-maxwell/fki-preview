@@ -208,50 +208,64 @@ def check_production_summary_no_send_guard():
 
 
 def check_delivery_email_escapes_ampersand_tokens():
-    """14. build-delivery-email.sh injects free-text profile values into the
-    delivery-email template via `sed -i ''`. In a sed replacement RHS the bare
-    `&` is the whole-match operator, so a value like "Photography & Video"
-    (rush-evans) silently expands `&` back into the token itself, leaving the
-    {{INDUSTRY}} placeholder UNRENDERED (D5-20 fail). The fix is a sed_esc()
-    helper that backslash-escapes `&`, applied to EVERY free-text token. This
-    check pins both the helper's presence and its actual runtime behavior."""
-    script = os.path.join(REPO, "scripts", "build-delivery-email.sh")
-    src = _read(script)
-    # (a) helper defined and escapes the whole-match operator
-    assert "sed_esc()" in src and r"sed 's/&/\\&/g'" in src, \
-        "build-delivery-email.sh missing sed_esc() that escapes the sed & operator"
-    # (b) every free-text token substitution pipes through sed_esc (ACCENT_COLOR
-    # is a hex color with no free text, so it is legitimately exempt).
-    free_text_tokens = [
-        "LEAD_FIRST_NAME", "BUSINESS_NAME", "INDUSTRY", "BLUEPRINT_URL",
-        "PODCAST_URL", "WEBSITE_URL", "APPLY_SUBJECT", "APPLY_URL", "QUALIFY_URL",
-    ]
-    for tok in free_text_tokens:
-        line = next((l for l in src.splitlines()
-                     if ("{{%s}}" % tok) in l and "sed -i" in l), None)
-        assert line is not None, f"no sed substitution line for {{{{{tok}}}}}"
-        assert "sed_esc " in line, \
-            f"{tok} substitution does not pass through sed_esc (& would corrupt it): {line.strip()}"
-    # (c) runtime tripwire: replicate the exact mechanism with a &-bearing value
-    # and prove it renders literally with no leftover placeholder.
-    bash = r'''
-set -e
-tmp=$(mktemp)
-printf '%s' 'X {{INDUSTRY}} Y' > "$tmp"
-sed_esc() { printf '%s' "$1" | sed 's/&/\\&/g'; }
-val='Photography & Video'
-sed -i.bak "s|{{INDUSTRY}}|$(sed_esc "$val")|g" "$tmp" && rm -f "$tmp.bak"
-cat "$tmp"
-rm -f "$tmp"
-'''
-    out = subprocess.run(["bash", "-c", bash], capture_output=True, text=True, timeout=30)
-    assert out.returncode == 0, f"ampersand render harness errored: {out.stderr}"
-    rendered = out.stdout.strip()
-    assert rendered == "X Photography & Video Y", \
-        f"&-bearing token did not render literally: got {rendered!r}"
-    assert "{{" not in rendered, \
-        f"placeholder left unrendered after &-bearing substitution: {rendered!r}"
+    """14. SUPERSEDED 2026-08-03 -- now asserts the RETIREMENT it was written against.
 
+    This check originally pinned a sed_esc() helper inside scripts/build-delivery-email.sh (a bare
+    `&` in a sed replacement RHS is the whole-match operator, so "Photography & Video" corrupted
+    {{INDUSTRY}} -- the rush-evans D5-20 defect).
+
+    That script was deliberately RETIRED on 2026-07-17 by RL-DE1/RL-DE2
+    (BLUEPRINT-DELIVERY-EMAIL-DRIVE-STAGE7-ONLY-20260717, repo commit de31b437a): the Stage-7
+    delivery email is now built from the canonical Drive design every run, never a local template.
+    So the old assertions could NEVER pass again -- the check has been failing on a MISSING FILE
+    since 7/29 and was counted among the "pre-existing" failures, which is exactly how a dead test
+    hides a live one.
+
+    Inverted to enforce the rule that replaced it: NO local build-*-email script may exist in, or be
+    invoked from, the send path. The original &-corruption class is now structurally impossible
+    because no local sed-templating step exists at all.
+    """
+    retired = os.path.join(REPO, "scripts", "build-delivery-email.sh")
+    assert not os.path.exists(retired), (
+        "scripts/build-delivery-email.sh is RETIRED by RL-DE2 but exists again -- the Stage-7 email "
+        "must be built from the canonical Drive design, never a local template")
+    # no resurrected variant anywhere in scripts/
+    import glob as _g
+    strays = [os.path.basename(f) for f in _g.glob(os.path.join(REPO, "scripts", "build-*-email*"))]
+    assert not strays, f"local delivery-email builder(s) resurrected in scripts/: {strays}"
+    # and nothing in the repo may invoke one
+    callers = []
+    for f in _g.glob(os.path.join(REPO, "scripts", "*")) + _g.glob(os.path.join(REPO, "*.py")):
+        if os.path.isfile(f) and os.path.basename(f) != os.path.basename(__file__):
+            try:
+                if "build-delivery-email.sh" in _read(f):
+                    callers.append(os.path.basename(f))
+            except Exception:
+                pass
+    # 2026-08-03: all 8 dead callers were REWIRED (marker BLUEPRINT-RLDE2-DEAD-CALLERS-REWIRED-20260803).
+    # A bare filename mention in a comment is fine and expected -- the rewire deliberately documents
+    # WHY the path is retired. What must never come back is an executable invocation, so distinguish
+    # the two instead of flagging every mention.
+    live = []
+    for f in _g.glob(os.path.join(REPO, "scripts", "*")):
+        if not os.path.isfile(f) or os.path.basename(f) == os.path.basename(__file__):
+            continue
+        try:
+            for i, line in enumerate(_read(f).splitlines(), 1):
+                bare = line.strip()
+                if bare.startswith("#") or "build-delivery-email.sh" not in bare:
+                    continue
+                # an invocation looks like: bash/sh <path>, "$SCRIPT_DIR/...", or run_script("...")
+                if re.search(r'(?:bash|sh|exec)\s+[^\s]*build-delivery-email\.sh'
+                             r'|run_script\(\s*["\']build-delivery-email\.sh'
+                             r'|^\s*"\$SCRIPT_DIR/build-delivery-email\.sh"', bare):
+                    live.append(f"{os.path.basename(f)}:{i}")
+        except Exception:
+            pass
+    # blueprint-batch.sh keeps one invocation inside an `if false;` block purely as a wiring marker.
+    live = [x for x in live if not x.startswith("blueprint-batch.sh")]
+    assert not live, ("RL-DE2 violation: live build-delivery-email.sh invocation(s) resurrected at "
+                      + ", ".join(live))
 
 def check_precommit_ov_skip_path_intact():
     """The pre-commit hook must scope its orchestrator/strict gates to STAGED
@@ -362,7 +376,11 @@ def check_agent_prompt_quality_gate_wired():
     starter prompts. The generator blocks weak profile content and the strict
     gatekeeper runs a dedicated quality gate before production tokening."""
     generator = _read(os.path.join(REPO, "scripts", "gen-blueprint.py"))
-    gatekeeper = _read(os.path.join(REPO, "scripts", "blueprint_gatekeeper_100.py"))
+    # RETARGETED 2026-08-11 (BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
+    # was blueprint_gatekeeper_100.py, which is now a fail-closed retirement shim. The token
+    # authority — and therefore the surface that must run the D2-03 quality gate — is audit-gate.sh.
+    # This assertion is what proves the retirement transferred coverage instead of dropping it.
+    gatekeeper = _read(os.path.join(REPO, "scripts", "audit-gate.sh"))
     quality_gate_path = os.path.join(REPO, "scripts", "blueprint_agent_prompt_quality_gate.py")
     quality_gate = _read(quality_gate_path)
     for token in [
@@ -403,8 +421,17 @@ def check_clone_engine_coerces_list_tools():
     # (a) the tools_str coercion exists (list -> ', '.join, else passthrough)
     assert "tools_str = ', '.join(tools) if isinstance(tools, list) else tools" in script, \
         "clone-blueprint.sh missing tools_str list coercion"
-    assert "'{{CRM_TOOL}}': tools_str if tools_str else 'your CRM'" in script, \
-        "{{CRM_TOOL}} replacement no longer uses the coerced tools_str"
+    # SUPERSEDED 2026-08-03: this used to assert the {{CRM_TOOL}} fallback was `'your CRM'`.
+    # RL-DE3 (BLUEPRINT-DELIVERY-EMAIL-DRIVE-STAGE7-ONLY-20260717) BANS exactly that: a none/other/
+    # blank CRM answer must render the literal string `None`, "never invented, never blanked, never a
+    # placeholder/example tool name". The 7/23-7/30 no-CRM work replaced the fallback with
+    # `crm_display`, so this assertion had been pinning behaviour the rules now FORBID -- if it ever
+    # passed again we would be violating RL-DE3. Second dead test found in the same audit as
+    # DELIVERY_EMAIL_ESCAPES_AMPERSAND_TOKENS. Re-pointed at the current contract:
+    assert "'{{CRM_TOOL}}': crm_display" in script, \
+        "{{CRM_TOOL}} must resolve via crm_display (RL-DE3 literal-None handling)"
+    assert "'your CRM'" not in script, \
+        "RL-DE3 violation: the invented placeholder 'your CRM' is back in clone-blueprint.sh"
     # (a) the replace loop defensively joins ANY list value (future array fields)
     assert "if isinstance(value, list):" in script and \
         "value = ', '.join(str(v) for v in value)" in script, \
@@ -451,6 +478,31 @@ def check_no_sub7day_golive_promise_in_blueprints():
     )
 
 
+
+def check_intake_url_is_canonical():
+    """22. ONE intake form, ONE URL: https://blueprint.meetadvaita.com/ (Madison, stated twice).
+
+    Delegates to scripts/blueprint_intake_url_gate.py (marker BLUEPRINT-INTAKE-URL-CANONICAL-20260805),
+    which enforces RL-IU1/2/3: no live file links a retired intake path, retired paths exist only as
+    redirect stubs, and no live file ships intake form fields of its own.
+
+    WHY WIRED HERE: the gate landed as a standalone script but was not in this suite, so nothing ran it
+    on every change. That is the same shape as the two DEAD TESTS found on 8/3 -- a rule with no
+    executing check rots. Its own --self-test covers both directions and kills always-allow /
+    always-block mutants; this wiring makes sure it actually runs.
+
+    NOTE the gate checks the REPO. Repo-green is not live-green: on 8/5 the fix commit was pushed and
+    the gate passed while hub.aiblueprintmarketing.com/apply/ was STILL serving the 67KB stale form,
+    because the Pages deploy had not finished. Always verify the live customer URL separately.
+    """
+    gate = os.path.join(REPO, "scripts", "blueprint_intake_url_gate.py")
+    assert os.path.exists(gate), "scripts/blueprint_intake_url_gate.py is missing"
+    import subprocess
+    r = subprocess.run([sys.executable, gate], capture_output=True, text=True)
+    assert r.returncode == 0, "non-canonical intake URL:\n" + (r.stdout or r.stderr)[-900:]
+    st = subprocess.run([sys.executable, gate, "--self-test"], capture_output=True, text=True)
+    assert st.returncode == 0, "intake-url gate self-test FAILED:\n" + (st.stdout or st.stderr)[-600:]
+
 CHECKS = [
     ("CLONE_ENGINE_COERCES_LIST_TOOLS", check_clone_engine_coerces_list_tools),
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
@@ -473,6 +525,7 @@ CHECKS = [
     ("PODCAST_DURATION_STANDARD_IS_8_TO_12", check_podcast_duration_standard_is_8_to_12),
     ("AGENT_PROMPT_QUALITY_GATE_WIRED", check_agent_prompt_quality_gate_wired),
     ("NO_SUB7DAY_GOLIVE_PROMISE", check_no_sub7day_golive_promise_in_blueprints),
+    ("INTAKE_URL_IS_CANONICAL", check_intake_url_is_canonical),
 ]
 
 
