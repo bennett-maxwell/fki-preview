@@ -71,6 +71,7 @@ LEAD_INDUSTRY = {
     "rey-31-consulting":"consulting",
     "chris-lpnw":       "consulting",         # LPNW LLC (best-known: services)
     "mike-norton-origins-pilot-20260901": "consulting",  # Origins (theorigins.one)
+    "david-brown-twins-talk-it-up": "consulting",  # Twins Talk it Up (appmeetup.com); intake primary_service_category=Other, classified from site per janet-drawn-logic precedent
     "brent-attaway":    "crm_software",       # CRMX
     "alex-ramos":       "medical_devices",    # DePuy Synthes
     "zachary-oldham":   "property_mgmt",      # Red Sands Vacation Properties
