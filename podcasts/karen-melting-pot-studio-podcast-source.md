@@ -1,6 +1,6 @@
 <!-- v1.9 -->
 PRIVATE AUDIO BRIEFING / AI Roadmap for Karen — The Melting Pot Studio / Prepared by Franchise Ki
-Generated: 2026-08-06T16:05:24.209873+00:00
+Generated: 2026-08-14T14:40:45.702229+00:00
 
 Open the audio with EXACTLY these words: "Hi Karen, welcome. This walkthrough was built for you and The Melting Pot Studio, from what you told us."
 
