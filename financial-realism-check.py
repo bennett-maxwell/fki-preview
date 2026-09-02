@@ -70,6 +70,7 @@ LEAD_INDUSTRY = {
     "paul-muus":        "consulting",
     "rey-31-consulting":"consulting",
     "chris-lpnw":       "consulting",         # LPNW LLC (best-known: services)
+    "mike-norton-origins-pilot-20260901": "consulting",  # Origins (theorigins.one)
     "brent-attaway":    "crm_software",       # CRMX
     "alex-ramos":       "medical_devices",    # DePuy Synthes
     "zachary-oldham":   "property_mgmt",      # Red Sands Vacation Properties

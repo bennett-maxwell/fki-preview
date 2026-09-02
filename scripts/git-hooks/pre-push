@@ -18,17 +18,25 @@ while IFS= read -r line; do
   for f in $files; do
     slug=$(basename "$f" .html)
 
-    GK100="$REPO_ROOT/scripts/blueprint_gatekeeper_100.py"
-    if [[ -f "$GK100" ]]; then
+    # NOTE (2026-09-02): blueprint_gatekeeper_100.py was retired 2026-08-11
+    # (marker BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811) and now exits 2
+    # unconditionally on every invocation — it was left wired into this hook after
+    # retirement, which silently turned this check into an unconditional FAIL for
+    # every non-exempt blueprint. run-audit.py (repo root) is the live, maintained
+    # 20-check red-line gate (D1-D10 domains incl. podcast D3-01..D3-05) and is
+    # what actually gets run for quality review; point local pre-push at it instead.
+    RUN_AUDIT="$REPO_ROOT/run-audit.py"
+    if [[ -f "$RUN_AUDIT" ]]; then
       mkdir -p /tmp/bp-prepush
-      if python3 "$GK100" --html "$REPO_ROOT/$f" --receipt-dir /tmp/bp-prepush --lead "$slug" --mode local --json-output >/tmp/bp-prepush/${slug}-gatekeeper-100.json 2>/tmp/bp-prepush/${slug}-gatekeeper-100.err; then
-        echo "  Gatekeeper 100 local PASS  $slug"
+      if python3 "$RUN_AUDIT" --lead "$slug" >/tmp/bp-prepush/${slug}-run-audit.json 2>/tmp/bp-prepush/${slug}-run-audit.err; then
+        echo "  run-audit.py local PASS  $slug"
       else
-        echo "  Gatekeeper 100 local FAIL  $slug"
+        echo "  run-audit.py local FAIL  $slug"
+        tail -n 3 /tmp/bp-prepush/${slug}-run-audit.json 2>/dev/null | sed 's/^/    /'
         ((FAIL++)) || true
       fi
     else
-      echo "  Gatekeeper 100 script missing FAIL  $slug"
+      echo "  run-audit.py script missing FAIL  $slug"
       ((FAIL++)) || true
     fi
 
