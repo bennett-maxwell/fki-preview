@@ -1,6 +1,7 @@
 #!/bin/bash
 # pre-push hook: verify all staged blueprint HTML files return HTTP 200 on GitHub Pages
-# build: 2026-05-28
+# and validate podcast-source.md metadata format
+# build: 2026-09-02 (v2 adds podcast-source validation)
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 BASE_URL="https://bennett-maxwell.github.io/fki-preview/blueprints"
@@ -8,12 +9,16 @@ FAIL=0
 WARN=0
 CHECKED=0
 
-# Get list of blueprint HTML files being pushed
+# Get list of blueprint HTML files AND podcast-source.md files being pushed
 while IFS= read -r line; do
   sha=$(echo "$line" | awk '{print $2}')
   [[ "$sha" == "0000000000000000000000000000000000000000" ]] && continue
-  
+
+  # Get blueprint HTML files
   files=$(git diff --name-only "$sha"~1.."$sha" 2>/dev/null | grep '^blueprints/.*\.html$' | grep -v TEMPLATE | grep -v '/chris\.' | grep -v '/melissa-tash\.' | grep -v '/rey\.' || true)
+
+  # Get podcast-source.md files
+  podcast_files=$(git diff --name-only "$sha"~1.."$sha" 2>/dev/null | grep '^podcasts/.*-source.*\.md$' || true)
   
   for f in $files; do
     slug=$(basename "$f" .html)
@@ -67,15 +72,77 @@ while IFS= read -r line; do
       fi
     fi
   done
+
+  # Validate podcast-source.md files
+  for psrc in $podcast_files; do
+    slug=$(basename "$psrc" -source-*.md | sed 's/-source.*//')
+    echo "Validating podcast source: $slug"
+
+    # Check required fields in podcast-source.md
+    if grep -q "# AUDIO WALKTHROUGH BRIEF" "$REPO_ROOT/$psrc"; then
+      echo "  ✓ Title format OK"
+      ((CHECKED++)) || true
+    else
+      echo "  ✗ Missing '# AUDIO WALKTHROUGH BRIEF' header"
+      ((FAIL++)) || true
+    fi
+
+    if grep -q "Hi .*, welcome\." "$REPO_ROOT/$psrc"; then
+      echo "  ✓ Opening greeting format OK"
+      ((CHECKED++)) || true
+    else
+      echo "  ✗ Missing opening greeting"
+      ((FAIL++)) || true
+    fi
+
+    if grep -q "Speaker direction:" "$REPO_ROOT/$psrc"; then
+      echo "  ✓ Speaker direction present"
+      ((CHECKED++)) || true
+    else
+      echo "  ✗ Missing 'Speaker direction' section"
+      ((FAIL++)) || true
+    fi
+
+    if grep -q "Audience context:" "$REPO_ROOT/$psrc"; then
+      echo "  ✓ Audience context present"
+      ((CHECKED++)) || true
+    else
+      echo "  ✗ Missing 'Audience context' section"
+      ((FAIL++)) || true
+    fi
+
+    if grep -q "NotebookLM Artifact ID:" "$REPO_ROOT/$psrc"; then
+      echo "  ✓ NotebookLM artifact ID present"
+      artifact_id=$(grep "NotebookLM Artifact ID:" "$REPO_ROOT/$psrc" | awk -F': ' '{print $2}' | tr -d ' ')
+      if [[ -n "$artifact_id" && "$artifact_id" != "artifact_id_here" ]]; then
+        echo "    Artifact: $artifact_id"
+        ((CHECKED++)) || true
+      else
+        echo "  ✗ NotebookLM Artifact ID is empty or placeholder"
+        ((FAIL++)) || true
+      fi
+    else
+      echo "  ✗ Missing 'NotebookLM Artifact ID' field"
+      ((FAIL++)) || true
+    fi
+
+    if grep -q "Audio Output Path:" "$REPO_ROOT/$psrc"; then
+      echo "  ✓ Audio output path present"
+      ((CHECKED++)) || true
+    else
+      echo "  ✗ Missing 'Audio Output Path' field"
+      ((FAIL++)) || true
+    fi
+  done
 done
 
 if [[ $FAIL -gt 0 ]]; then
   echo ""
-  echo "Pre-push BLOCKED: $FAIL local Gatekeeper 100 check(s) failed. Fix before push."
+  echo "Pre-push BLOCKED: $FAIL validation check(s) failed. Fix before push."
   exit 1
 fi
 
-[[ $CHECKED -gt 0 ]] && echo "Pre-push: $CHECKED blueprint(s) verified HTTP 200."
+[[ $CHECKED -gt 0 ]] && echo "Pre-push: $CHECKED file(s) verified."
 if [[ $WARN -gt 0 ]]; then
   echo "Pre-push warning: $WARN public URL check(s) need post-push verification."
   echo "Before any send or ready claim, run: python3 scripts/blueprint_gatekeeper_100.py --mode production --lead <slug> --html blueprints/<slug>.html --receipt-dir <receipts>"
