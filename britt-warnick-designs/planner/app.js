@@ -211,7 +211,7 @@ function feeOnly(v) { return hasPrice(v) && !v.price_from.guests_basis && !FULL_
 function tierLabel(v) { return v.budget_tier === 'unknown' ? 'Tier unknown' : v.budget_tier + (feeOnly(v) ? ' · starting fee only' : ''); }
 /* Climate text follows the couple's month. The data only has a written December note, so it shows only for December. */
 const DEC_RE = /\bdecember\b/i;
-function stripDecember(t) { return String(t || '').replace(/[;,]?\s*\b(december|dec)\s+is\b[^;.)]*(\([^)]*\))?/gi, '').replace(/\s{2,}/g, ' ').trim(); }
+function stripDecember(t) { return String(t || '').replace(/[;,]?\s*\b(december|dec)\s+is\b[^;.()]*(\([^)]*\))?/gi, '').replace(/\s{2,}/g, ' ').trim(); }
 
 /* 100-point venue score (ported partner rubric; AUTO parts computed, MANUAL parts rated on tour) */
 function scoreVenue(v, ctx) {
