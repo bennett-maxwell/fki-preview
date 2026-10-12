@@ -236,9 +236,11 @@
     var n = sc.beats.length, idx = Math.min(n - 1, Math.floor(p * n * 0.999));
     if (v) { v.setAngle(angleAt(p)); v.setHighlight(idx === 1); }
     if (sc.cv) {
-      var s = 0.9 + 0.16 * easeInOut(clamp(p / 0.85)), ty = (1 - easeOut(clamp(p / 0.5))) * 3;
+      var s = 0.98 + 0.05 * easeInOut(clamp(p / 0.85)), ty = -easeOut(clamp(p / 0.5)) * 1.5;
       sc.cv.style.transform = 'translate3d(0,' + ty.toFixed(2) + 'vh,0) scale(' + s.toFixed(4) + ')';
     }
+    sc.el.classList.toggle('is-scrolled', p > 0.02);
+    root.classList.toggle('hero-on', p < 0.97 && r.bottom > vh * 0.5);
     if (idx !== sc.idx) {
       sc.idx = idx;
       sc.beats.forEach(function (b, i) { b.classList.toggle('is-on', i === idx); b.classList.toggle('was-on', i < idx); });
@@ -315,7 +317,7 @@
   function frame() {
     ticking = false;
     if (!root.classList.contains('motion')) return;
-    if (sc && live.indexOf(sc.el) > -1) sceneFrame();
+    if (sc && live.indexOf(sc.el) > -1) sceneFrame(); else root.classList.remove('hero-on');
     if (rv && live.indexOf(rv) > -1) revealFrame();
   }
   function request() { if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }
@@ -337,7 +339,7 @@
     var on = !rm.matches;
     root.classList.toggle('motion', on);
     if (on) { vh = W.innerHeight; request(); }
-    else { sceneReset(); words.forEach(function (w) { w.classList.add('on'); }); qsa('[data-shelf]').forEach(function (x) { x.classList.add('is-in'); }); }
+    else { root.classList.remove('hero-on'); sceneReset(); words.forEach(function (w) { w.classList.add('on'); }); qsa('[data-shelf]').forEach(function (x) { x.classList.add('is-in'); }); }
   }
   setMotion();
   D.addEventListener('vials:ready', function () { if (root.classList.contains('motion')) { sc && (sc.idx = -1); request(); } else sceneReset(); });
