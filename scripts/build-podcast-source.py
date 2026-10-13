@@ -23,7 +23,20 @@ p = json.load(open(os.path.join(REPO, "leads", f"{slug}.json"), encoding="utf-8"
 first = p.get("first_name") or p.get("lead_first_name") or p["lead_name"].split()[0]
 biz = p["business_name"]
 calc = p.get("calc", {})
-agents = p.get("agents", [])
+# Tier-aware (FKI-BLUEPRINT-TIER1-SINGLE-AGENT-v1-20260910): Tier 1 = ONE AI Employee.
+sys.path.insert(0, os.path.join(REPO, "scripts"))
+from blueprint_tier import expected_agent_count
+_n_agents = expected_agent_count(p)
+agents = [a for a in (p.get("agents") or p.get("ai_agents") or []) if isinstance(a, dict)][:_n_agents]
+_NUM = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six"}
+_count_word = _NUM.get(len(agents), str(len(agents)))
+if len(agents) == 1:
+    _length_line = ("Spend the heart of the episode on your one AI Employee: each moment it handles, what changes "
+                    "in your week once it is running, and how it hands off to a person.")
+    _walk_line = f"Body: walk through your one AI Employee by name — {agents[0].get('name', '')}."
+else:
+    _length_line = (f"Roughly eighty seconds on EACH of the {_count_word} AI Employees — do not shortchange the last two.")
+    _walk_line = None
 stack = p.get("stack", [])
 gaps = p.get("gaps", [])
 opening = f"Hi {first}, welcome. This walkthrough was built for you and {biz}, from what you told us."
@@ -84,16 +97,17 @@ def _build_leaks_body():
     if gaps:
         return " ".join(f"{clean(g['title'])}: {clean(g['desc'])}" for g in gaps[:4])
     leaks = []
-    if not _has(quiz.get("crm_tools")):
+    if "crm_tools" in quiz and not _has(quiz.get("crm_tools")):
         leaks.append("With no CRM, every new inquiry starts life inside a conversation thread, so "
                      "the record has to be reconstructed by hand later instead of just existing.")
     if _has(quiz.get("response_speed")):
         leaks.append(f"Answering new inquiries {clean(quiz['response_speed'])} is a standard held by a person, "
                      "not a system — so it holds only when someone on your team is free to hold it.")
-    if not _has(quiz.get("project_management_tools")):
+    if "project_management_tools" in quiz and not _has(quiz.get("project_management_tools")):
         leaks.append("With no project-management tool, coordination happens ad hoc, so the next step "
                      "lives in someone's memory instead of somewhere everyone can see it.")
-    if str(quiz.get("automation_maturity", "")).strip().lower() in ("none", "low", ""):
+    # Only when ASKED: an absent key means the question was never put to the lead (never assert).
+    if "automation_maturity" in quiz and str(quiz.get("automation_maturity", "")).strip().lower() in ("none", "low", ""):
         leaks.append("With automation maturity at none, every piece of repeat admin is still being "
                      "done by hand.")
     for area in (quiz.get("operational_stress_areas") or [])[:2]:
@@ -113,9 +127,9 @@ sections.append(f"3. Industry Context\n{biz} operates in {clean(p.get('industry'
 _leaks_body = _build_leaks_body()
 if _leaks_body.strip():
     sections.append("4. Where Time Is Leaking\n" + _leaks_body)
-sections.append("5. Six Recommended Agents\n" + ", ".join(a["name"] for a in agents[:6]) + ".")
-for i, a in enumerate(agents[:6]):
-    sections.append(f"{6+i}. Agent {i+1}: {a['name']}\n{clean(a['desc'])} Outcome for {biz}: {clean(a.get('outcome',''))}")
+sections.append(f"5. Your {_count_word.capitalize()} Recommended AI Employee{'' if len(agents) == 1 else 's'}\n" + ", ".join(a["name"] for a in agents) + ".")
+for i, a in enumerate(agents):
+    sections.append(f"{6+i}. AI Employee {i+1}: {a['name']}\n{clean(a['desc'])} Outcome for {biz}: {clean(a.get('outcome') or a.get('result') or '')}")
 # PERMANENT FIX 2026-07-28: only name a number the lead actually submitted, and
 # state the withheld ones as explicit DO-NOT-INVENT bans. The old version emitted
 # blank placeholders ("  monthly leads,  average value") because calc was always {},
@@ -184,9 +198,8 @@ NEVER use first-person-plural examination phrasing. Banned openings include "we 
 you are talking with {first} about {first}'s own business. Say "you told us", "you said", "you run".
 (Added 2026-07-29: a host said "we are looking at" on calvin-disruption-schools, failing D3-02 and
 costing a regeneration, because only the analyse-family was banned and the look-family was not.)
-LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Spend roughly
-eighty seconds on EACH of the six AI Employees — do not shortchange the last two. This is a complete
-walkthrough, not a summary.
+LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. {_length_line}
+This is a complete walkthrough, not a summary.
 MANDATORY CLOSING: the episode must end with an explicit spoken wrap-up and sign-off — say "to wrap up",
 give {first} the next step in the words "your next step is", and close by thanking {first} for listening.
 Never stop immediately after the call to action; the final words must be a real sign-off.
@@ -211,7 +224,7 @@ print(f"wrote {out} ({len(doc)} bytes)")
 # run passes the SAME text to NotebookLM instead of improvising it.
 # Usage: notebooklm generate audio -n <nb> --length short --format deep-dive \
 #          --json "$(cat podcasts/<slug>-podcast-steer.txt)"
-_agent_names = [a.get("name", "") for a in agents[:6] if a.get("name")]
+_agent_names = [a.get("name", "") for a in agents if a.get("name")]
 _agent_list = ", ".join(_agent_names[:-1]) + (" and " + _agent_names[-1] if len(_agent_names) > 1 else "")
 
 steer = f"""Open with EXACTLY these words, spoken naturally in your own host voice: "{opening}"
@@ -228,9 +241,9 @@ These EXACT phrases are FORBIDDEN and will get the episode thrown out. Do not sa
 Instead ALWAYS say: "your business", "your company", "your team", "you have", "you run", "you need", and "what you told us".
 Read your closing line back to yourself before you say it — the ending is where hosts slip into "the business". Keep it second person all the way to the final word.
 
-LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. Roughly eighty seconds on EACH of the six AI Employees — do not shortchange the last two.
+LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. {_length_line}
 
-Body: walk through all six by name in order — {_agent_list}. For EACH one lead with the payoff for you: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
+{_walk_line or ("Body: walk through all " + _count_word + " by name in order — " + _agent_list + ".")} For EACH one lead with the payoff for you: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
 
 Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what you do operationally — your customers, your equipment, your locations, your coverage — unless that was explicitly provided.
 
