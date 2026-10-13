@@ -237,14 +237,16 @@ These EXACT phrases are FORBIDDEN and will get the episode thrown out. Do not sa
 - "her business" / "his business" / "their business" / "her team" / "his team" / "their team"
 - "{first} has" / "{first} is" / "{first} runs" / "{first} needs" / "{first} wants"
 - "source" / "sources" / "source material" / "this document" / "the report" / "the brief" / "we are analyzing"
+- "we are looking at" / "we're looking at" / "let's look at" / "taking a look at" / "what we have here" / "we see here" — you are not examining anything; say "your AI Employee", "you get", "here is what changes for you"
 - NEVER put the word "owner" or "client" anywhere near {first}'s name. No "the owner, {first}", no "a business owner like {first}", no "our client {first}", no "the client, {first}". {first} is never described to a third party — {first} is the person you are speaking to. Say "you", never a label.
 Instead ALWAYS say: "your business", "your company", "your team", "you have", "you run", "you need", and "what you told us".
 Read your closing line back to yourself before you say it — the ending is where hosts slip into "the business". Keep it second person all the way to the final word.
 
 LENGTH: a full, unhurried deep dive of AT LEAST NINE MINUTES and no more than twelve. {_length_line}
 
-{_walk_line or ("Body: walk through all " + _count_word + " by name in order — " + _agent_list + ".")} For EACH one lead with the payoff for you: the time it gives you back, the revenue it protects or recovers for you, the specific bottleneck it removes from your week, and what a normal week looks like for you once it is running.
+{_walk_line or ("Body: walk through all " + _count_word + " by name in order — " + _agent_list + ".")} For EACH one lead with the payoff for you: the time it gives you back, the revenue it protects or recovers for you, the specific work it takes off your plate, and what a normal week looks like for you once it is running.
 
+Never claim something at {biz} is broken, slow, manual, or a bottleneck today unless {first} said so — describe what the AI Employee does and what it gives {first}, not a problem nobody mentioned.
 Ground everything ONLY in what {first} told us on the intake form. Do NOT invent an average ticket, a close rate, admin hours, dollar figures, or percentages unless they were explicitly provided. Do NOT describe what you do operationally — your customers, your equipment, your locations, your coverage — unless that was explicitly provided.
 
 Sell the outcome, not the technology. Do not explain how the tech works. Do not talk about AI in general. Conversational and warm, never salesy, no marketing buzzwords. Never speak or spell out any web address, domain, or file name — refer to it only as "the qualifier page".
