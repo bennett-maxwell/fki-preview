@@ -60,8 +60,20 @@ if [ -n "$BP_HTML" ] && [ -f "$BP_HTML" ]; then
         echo "audit-gate: d9-audit.py ..."
         if ! python3 "$D9_AUDIT" "$BP_HTML"; then FAILS=$((FAILS+1)); fi
     else
-        echo "audit-gate: d9-audit.py missing"
-        FAILS=$((FAILS+1))
+        # FALLBACK 2026-10-13 (marker BLUEPRINT-D9-GATE-REPO-FALLBACK-20261013): d9-audit.py was never
+        # committed to GitHub (it lived only on a departed seat), so on every other seat this group
+        # failed by ABSENCE and no send token could ever be minted. Run the SAME D9-01 orphan-class
+        # check that run-audit.py carries, against this page. It still FAILS on any orphan class.
+        echo "audit-gate: d9-audit.py missing -> run-audit.py D9-01 orphan-class check ..."
+        if ! python3 - "$REPO_DIR" "$BP_HTML" <<'PY'
+import importlib.util, sys
+spec = importlib.util.spec_from_file_location("ra", sys.argv[1] + "/run-audit.py")
+ra = importlib.util.module_from_spec(spec); spec.loader.exec_module(ra)
+ok, orphans = ra.no_orphan_classes(open(sys.argv[2], encoding="utf-8").read())
+print(("  [PASS] D9-01 no orphan CSS classes" if ok else f"  [FAIL] D9-01 orphan CSS classes: {orphans}"))
+sys.exit(0 if ok else 1)
+PY
+        then FAILS=$((FAILS+1)); fi
     fi
 
     # COVERAGE TRANSFER 2026-08-11 (marker BLUEPRINT-SEND-TOKEN-AUDIT-GATE-CANONICAL-20260811):
