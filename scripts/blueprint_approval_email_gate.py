@@ -17,7 +17,7 @@ BANNED_INTERNAL = [
 REQUIRED_PHRASES = [
     'Your AI Blueprint is Ready', 'Built specifically for', 'Hi ', 'I put together a complete AI implementation blueprint',
     'Your AI Playbook', 'View Your AI Playbook', 'Your AI Audio Walkthrough', 'Listen to Your Walkthrough',
-    'What To Do Next', 'See If You Qualify', 'Madison Lanz | Franchise KI'
+    'What To Do Next', 'See If You Qualify', 'Bennett Maxwell | Franchise KI'
 ]
 
 def main():

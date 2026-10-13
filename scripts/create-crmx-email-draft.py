@@ -6,7 +6,7 @@ Spec: docs/crmx-blueprint-delivery-and-automation.md §2.
 
 CANONICAL LAYOUT (moved here 2026-07-28, marker BLUEPRINT-EMAIL-INTERNAL-COMMENT-LEAK-20260728):
 Playbook card FIRST, Audio Walkthrough SECOND, NO outcome-bullet callout lines, centered
-cards (no grey box), centered table-buttons, signed "Madison Lanz | Franchise KI".
+cards (no grey box), centered table-buttons, signed "Bennett Maxwell | Franchise KI" (sign-off changed from Madison Lanz 2026-10-13, Kay Labang: Madison has left FKI).
 This spec used to live as an HTML comment inside templates/delivery-email-template.html and
 therefore SHIPPED INSIDE EVERY CLIENT EMAIL — including the names of two other clients it
 cited as the reference format. HTML comments do not render, but they are plainly readable in
