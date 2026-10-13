@@ -93,7 +93,11 @@ class Lead:
         self.q = q
         self.biz = p.get("business_name") or "your business"
         self.first = p.get("first_name") or (p.get("lead_name") or "").split(" ")[0]
-        self.agents = [a for a in (p.get("ai_agents") or p.get("agents") or []) if isinstance(a, dict)][:6]
+        # Tier-aware (FKI-BLUEPRINT-TIER1-SINGLE-AGENT-v1-20260910): Tier 1 renders ONE AI Employee.
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from blueprint_tier import expected_agent_count
+        self.agent_count = expected_agent_count(p)
+        self.agents = [a for a in (p.get("ai_agents") or p.get("agents") or []) if isinstance(a, dict)][:self.agent_count]
         self.industry_phrase = str(p.get("industry") or "").replace("_", " ").strip().lower()
 
         self.team_size = self._num(p.get("team_size"), q.get("team_size"))
@@ -266,6 +270,12 @@ def build_timeline(L: Lead) -> str:
     rest_li = "".join("<li>%s deployed</li>" % r for r in rest)
     who = "you" if L.solo else "your team"
     walkthrough = "Walkthrough with you" if L.solo else "Team walkthrough"
+    if len(L.agents) <= 1:
+        live_result = ("Your AI Employee goes live in week 2 and is fully running by the end of week 3 &mdash; "
+                       "and %s know how to steer it." % who)
+    else:
+        live_result = ("Your first AI Employee goes live in week 2. By the end of week 3 all of them are "
+                       "running &mdash; and %s know how to steer them." % who)
     return ('<section class="section section-alt" id="timeline">\n  <div class="container">\n'
             '    <p class="section-label">How It Happens</p>\n'
             '    <h2 class="section-title">Your Implementation Roadmap</h2>\n'
@@ -283,12 +293,11 @@ def build_timeline(L: Lead) -> str:
             '          <tr>\n            <td><div class="m-phase">Weeks 2&ndash;3 &middot; Days 8&ndash;21</div>'
             '<div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">AI Employees Go Live</div></td>\n'
             '            <td><ul class="m-list">%s<li>%s: 30 minutes, no technical knowledge required</li></ul></td>\n'
-            '            <td class="m-result">Your first AI Employee goes live in week 2. By the end of week 3 all '
-            'of them are running &mdash; and %s know how to steer them.</td>\n          </tr>\n'
+            '            <td class="m-result">%s</td>\n          </tr>\n'
             '          <tr>\n            <td><div class="m-phase">Day 30</div>'
             '<div style="font-size:0.82rem;color:var(--text-light);margin-top:0.2rem;">Fully Calibrated</div></td>\n'
             '            <td><ul class="m-list"><li>30-day review: response times, hours returned, work booked</li>'
-            '<li>AI Employees refined against your real conversations</li>'
+            '<li>Every AI Employee refined against your real conversations</li>'
             '<li>Expansion roadmap: what to hand over next as %s grows</li></ul></td>\n'
             '            <td class="m-result">The system knows your business. Every AI Employee calibrated to real '
             '%s data.</td>\n          </tr>\n'
@@ -299,7 +308,7 @@ def build_timeline(L: Lead) -> str:
             '<li>You own the system &mdash; we stay as your AI operations team</li></ul></td>\n'
             '            <td class="m-result">AI runs like a trained colleague who never forgets and never has a '
             'bad day.</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</section>'
-            % (esc(L.biz), esc(first), rest_li, walkthrough, who, esc(L.biz), esc(L.biz), who))
+            % (esc(L.biz), esc(first), rest_li, walkthrough, live_result, esc(L.biz), esc(L.biz), who))
 
 
 def build_results(L: Lead) -> str:

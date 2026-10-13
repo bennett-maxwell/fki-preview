@@ -503,6 +503,31 @@ def check_intake_url_is_canonical():
     st = subprocess.run([sys.executable, gate, "--self-test"], capture_output=True, text=True)
     assert st.returncode == 0, "intake-url gate self-test FAILED:\n" + (st.stdout or st.stderr)[-600:]
 
+def check_tier_aware_agent_count_and_no_pricing():
+    """23. FKI-BLUEPRINT-TIER1-SINGLE-AGENT-v1-20260910 + D2-29 page_no_pricing_or_tier.
+    Tier 1 = exactly ONE AI Employee; the template must not hardcode a count; the generator,
+    the format-3 gate and run-audit.py must all take the count from scripts/blueprint_tier.py;
+    and the D2-29 pricing/tier red-line must be wired and pass its both-direction self-test."""
+    import subprocess
+    tier = os.path.join(REPO, "scripts", "blueprint_tier.py")
+    st = subprocess.run([sys.executable, tier, "--self-test"], capture_output=True, text=True)
+    assert st.returncode == 0, "blueprint_tier self-test FAILED:\n" + (st.stdout or st.stderr)[-600:]
+    tpl = open(os.path.join(REPO, "blueprints", "TEMPLATE.html"), encoding="utf-8").read()
+    for bad in ("All 6 Agents", "6 AI Employees", "all 6 agents"):
+        assert bad not in tpl, f"TEMPLATE.html hardcodes an agent count: {bad!r}"
+    for tok in ("{{AGENTS_HEADLINE}}", "{{AGENTS_INTRO}}", "{{AGENTS_LIVE_LABEL}}", "{{PARTNER_SYSTEM_PHRASE}}"):
+        assert tok in tpl, f"TEMPLATE.html missing tier token {tok}"
+    audit = open(os.path.join(REPO, "run-audit.py"), encoding="utf-8").read()
+    assert "expected_agent_count(lead)" in audit, "run-audit D2-02 not tier-aware"
+    assert "len(_cards) >= 6" not in audit, "run-audit still hardcodes >=6 agent cards"
+    assert "D2-29_page_no_pricing_or_tier_RL" in audit, "D2-29 red-line not wired in run-audit"
+    fc = open(os.path.join(REPO, "scripts", "format-conformance-check.py"), encoding="utf-8").read()
+    assert "expected_agent_count_for_html" in fc, "format-3 FC-04 agent-card not tier-aware"
+    clone = open(os.path.join(REPO, "scripts", "clone-blueprint.sh"), encoding="utf-8").read()
+    assert "expected_agent_count(profile)" in clone, "clone-blueprint.sh not tier-aware"
+    assert "enumerate(ai_agents[:6]" not in clone, "clone-blueprint.sh still hardcodes 6 cards"
+
+
 CHECKS = [
     ("CLONE_ENGINE_COERCES_LIST_TOOLS", check_clone_engine_coerces_list_tools),
     ("PRECOMMIT_OV_SKIP_PATH_INTACT", check_precommit_ov_skip_path_intact),
@@ -526,6 +551,7 @@ CHECKS = [
     ("AGENT_PROMPT_QUALITY_GATE_WIRED", check_agent_prompt_quality_gate_wired),
     ("NO_SUB7DAY_GOLIVE_PROMISE", check_no_sub7day_golive_promise_in_blueprints),
     ("INTAKE_URL_IS_CANONICAL", check_intake_url_is_canonical),
+    ("TIER_AWARE_AGENT_COUNT_AND_NO_PRICING", check_tier_aware_agent_count_and_no_pricing),
 ]
 
 

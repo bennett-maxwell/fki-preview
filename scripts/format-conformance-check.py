@@ -95,10 +95,23 @@ def check(html_path: pathlib.Path, podcast_path: Optional[pathlib.Path] = None):
     checks.append(("FC-03", f"[RL] exactly one id=\"listen\" (found {listen_n})", listen_n == 1, listen_n))
 
     # FC-04 component DNA — red-dense-scroll layout present at expected density.
+    # agent-card is TIER-AWARE (FKI-AUDIT-TIER-AWARE-AGENT-COUNT-v1-20260910): it must EQUAL the
+    # lead profile's expected count (Tier 1 => exactly 1; absent tier => legacy 6), never a floor.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from blueprint_tier import expected_agent_count_for_html
+    expected_agents = expected_agent_count_for_html(html_path)
     dna_fail = []
     for cls, minimum in COMPONENT_DNA.items():
         n = len(re.findall(rf'class="[^"]*\b{re.escape(cls)}\b', body))
-        if n < minimum:
+        if cls == "agent-card":
+            if n != expected_agents:
+                dna_fail.append(f"agent-card={n}(!={expected_agents} expected by lead tier)")
+        elif cls == "gap-card" and expected_agents < 6:
+            # results renders one gap-card per AI Employee, so the floor scales with the roster
+            # (legacy 6 unchanged): gaps section floor (2) + one per expected AI Employee.
+            if n < 2 + expected_agents:
+                dna_fail.append(f"gap-card={n}(<{2 + expected_agents} for {expected_agents} AI Employee)")
+        elif n < minimum:
             dna_fail.append(f"{cls}={n}(<{minimum})")
     checks.append(("FC-04", "component DNA at gold density", len(dna_fail) == 0, dna_fail))
 

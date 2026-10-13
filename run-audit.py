@@ -4,6 +4,8 @@
 import sys, os, subprocess, re, json, urllib.request, hashlib, glob
 
 REPO = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(REPO, "scripts"))
+from blueprint_tier import expected_agent_count, pricing_or_tier_findings  # noqa: E402
 BP_DIR = os.path.join(REPO, "blueprints")
 HISTORY = os.path.expanduser("~/.openclaw/logs/blueprint-audit-history.jsonl")
 THRESHOLD = 0.90  # 90% of non-red-line checks
@@ -614,13 +616,18 @@ def audit_lead(slug):
     # ready-to-use dropdown cards (prompt-pre). So substance now = 6 lead-specific cards
     # (each >=120 chars) AND >=3 substantive dropdown prompts (each >=900 chars).
     # See ~/Desktop/fki-preview/OVERRIDE-D2-02.md. Restore inline check if Bennett reinstates D2-02.
+    # TIER-AWARE 2026-10-13 (FKI-AUDIT-TIER-AWARE-AGENT-COUNT-v1-20260910): card count must EQUAL the
+    # lead profile's expected count (Tier 1 => exactly 1, >=1 dropdown prompt; absent tier => legacy
+    # 6 cards + >=3 prompts). Per-card (>=120) and per-prompt (>=900) substance floors are UNCHANGED.
+    _expected_agents = expected_agent_count(lead)
+    _min_prompts = 1 if _expected_agents == 1 else 3
     _cards = re.findall(r'<div class="agent-card">(.*?)</div>\s*</div>', html, re.S)
     _dropdown = re.findall(r'<pre id="prompt\d+" class="prompt-pre">(.*?)</pre>', html, re.S)
     agent_substance_ok = (
-        len(_cards) >= 6
-        and len(_dropdown) >= 3
-        and all(len(re.sub(r'<[^>]+>', '', c)) >= 120 for c in _cards[:6])
-        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 900 for pr in _dropdown[:3])
+        len(_cards) == _expected_agents
+        and len(_dropdown) >= _min_prompts
+        and all(len(re.sub(r'<[^>]+>', '', c)) >= 120 for c in _cards)
+        and all(len(re.sub(r'<[^>]+>', '', pr)) >= 900 for pr in _dropdown)
     )
     results["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
     redlines["D2-02_agent_cards_substantive_RL"] = agent_substance_ok
@@ -631,6 +638,10 @@ def audit_lead(slug):
     acpq_ok, acpq_detail = agent_card_prompt_quality_gate(slug, html_path)
     results["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
     redlines["D2-03_agent_card_prompt_quality_RL"] = acpq_ok
+    # D2-29 [RL] page_no_pricing_or_tier (Madison 2026-09-10 flat ban, no approval path).
+    pricing_findings = pricing_or_tier_findings(html)
+    results["D2-29_page_no_pricing_or_tier_RL"] = not pricing_findings
+    redlines["D2-29_page_no_pricing_or_tier_RL"] = not pricing_findings
     # D2-27 [RL] shared-template leak (fabricated stress claim / foreign roster / solo+plural copy)
     leak_ok, leak_detail = template_leak_gate(html, lead)
     results["D2-27_template_leak_RL"] = leak_ok
@@ -683,6 +694,8 @@ def audit_lead(slug):
             "podcast_audio_detail": podcast_audio_detail,
             "podcast_clean_ending_detail": clean_end_detail,
             "agent_card_prompt_quality_detail": acpq_detail,
+            "agent_count_detail": f"cards={len(_cards)} expected={_expected_agents} prompts={len(_dropdown)}",
+            "pricing_or_tier_detail": pricing_findings,
             "template_leak_detail": leak_detail}
 
 def main():
@@ -709,6 +722,10 @@ def main():
         if status == "FAIL":
             any_fail = True
         rl_detail = r.get("financial_detail", "")
+        if "D2-02_agent_cards_substantive_RL" in rl_fail:
+            rl_detail = (rl_detail + " | " if rl_detail else "") + r.get("agent_count_detail", "")
+        if "D2-29_page_no_pricing_or_tier_RL" in rl_fail:
+            rl_detail = (rl_detail + " | " if rl_detail else "") + "; ".join(r.get("pricing_or_tier_detail") or [])
         if "D2-27_template_leak_RL" in rl_fail and r.get("template_leak_detail"):
             rl_detail = (rl_detail + " | " if rl_detail else "") + r["template_leak_detail"]
         extra = f"  RED-LINE FAIL: {rl_fail} ({rl_detail})" if rl_fail else ""

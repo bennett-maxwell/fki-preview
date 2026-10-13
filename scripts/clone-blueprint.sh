@@ -224,12 +224,60 @@ phone = profile.get('phone', '')
 email = profile.get('email', '')
 services = profile.get('services', [])
 ai_agents = profile.get('ai_agents', [])
+
+# ── TIER-AWARE AGENT COUNT (FKI-BLUEPRINT-TIER1-SINGLE-AGENT-v1-20260910) ──
+# Tier 1 = exactly ONE AI Employee. `tier` is internal only and never rendered (D2-29).
+# Absent tier keeps the legacy six-agent build. Count comes from scripts/blueprint_tier.py so the
+# generator, format-3 gate and run-audit.py can never disagree.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(output_file))), 'scripts'))
+from blueprint_tier import expected_agent_count
+agent_count = expected_agent_count(profile)
+ai_agents = [a for a in ai_agents if isinstance(a, dict)][:agent_count]
+if len(ai_agents) < agent_count:
+    print(f"ERROR: profile tier needs {agent_count} AI Employee(s) in ai_agents, found {len(ai_agents)}", file=sys.stderr)
+    sys.exit(1)
+if agent_count == 1:
+    _a0 = ai_agents[0]
+    # {PRIMARY_USE_CASE}: ONE real job from the lead's own roster, never invented. Explicit field wins;
+    # otherwise it is read off the agent's name (lead qualification / follow-up / scheduling).
+    _use_case = str(_a0.get('primary_use_case') or profile.get('primary_use_case') or '').strip().rstrip('.')
+    if not _use_case:
+        _nm = str(_a0.get('name') or '').lower()
+        if re.search(r'speed|lead|inquir|intake|qualif', _nm):
+            _use_case = 'lead qualification and instant follow-up'
+        elif re.search(r'follow|nurture|reactivat|re-engag', _nm):
+            _use_case = 'follow-up'
+        elif re.search(r'schedul|book|appointment|calendar|dispatch', _nm):
+            _use_case = 'scheduling'
+        else:
+            _use_case = re.sub(r'\s*(ai employee|ai agent|agent)\s*$', '', _nm).strip() or 'your highest-leverage workflow'
+    _use_case = _use_case[:1].lower() + _use_case[1:]
+    agents_live_label = 'Your AI Employee<br>Live'
+    agents_headline = f'Your AI Employee, Built for {business_name}'
+    agents_intro = (f"Your Franchise KI setup includes 1 dedicated AI Employee, custom-built for {business_name}'s workflow. "
+                    f"It handles {_use_case} &mdash; fully automated, running 24/7.")
+    partner_system_phrase = 'your AI Employee built, connected to your tools'
+else:
+    agents_live_label = f'All {agent_count} AI Employees<br>Live'
+    agents_headline = f'{agent_count} AI Employees Built for {business_name}'
+    agents_intro = f"Each AI Employee maps directly to a specific workflow inside {business_name}'s operations."
+    partner_system_phrase = f'the full system &mdash; all {agent_count} AI Employees connected'
+print(f"  AI Employees: {agent_count} (tier={profile.get('tier', 'absent -> legacy')})")
 tools = profile.get('tools', 'your current tools')
 
 # Stat card fields (from lead data — NEVER from template)
 years_in_business = profile.get('years_in_business', '—')
 key_metric = profile.get('key_metric', '—')
 key_metric_label = profile.get('key_metric_label', 'Projects Completed')
+# D2-29 page_no_pricing_or_tier (Madison 2026-09-10 flat ban): no dollar figure may render on the page,
+# including the prospect's own revenue band. A money-valued key metric falls back to a non-money stat.
+if re.search(r'\$\s?\d', str(key_metric)):
+    _ml = profile.get('monthly_leads') or (profile.get('quiz') or {}).get('monthly_leads')
+    if _ml not in (None, '', '—'):
+        key_metric, key_metric_label = str(_ml), 'Leads Per Month'
+    else:
+        key_metric, key_metric_label = str(profile.get('years_in_business') or '—'), 'Years in Business'
+    print(f"  Key metric: money value replaced by '{key_metric_label}' (D2-29 no dollar figures)")
 team_size = profile.get('team_size', '—')
 monthly_leads = profile.get('monthly_leads', '—')
 primary_goal = str(profile.get('primary_goal') or profile.get('quiz', {}).get('biggest_goal') or '—').strip().title()
@@ -344,7 +392,7 @@ def host_scoped_url(profile_key, path):
 
 def q7_agent_names():
     names = []
-    for agent in profile.get('ai_agents', []) or []:
+    for agent in ai_agents or []:  # tier-trimmed roster, never the raw profile list
         if isinstance(agent, dict):
             names.append(agent.get('name') or agent.get('title') or agent.get('usecase') or '')
         else:
@@ -541,6 +589,10 @@ replacements = {
     '{{LEAD_NAME}}': lead_name,
     '{{FIRST_NAME}}': first_name,
     '{{BUSINESS_NAME}}': business_name,
+    '{{AGENTS_LIVE_LABEL}}': agents_live_label,
+    '{{AGENTS_HEADLINE}}': agents_headline,
+    '{{AGENTS_INTRO}}': agents_intro,
+    '{{PARTNER_SYSTEM_PHRASE}}': partner_system_phrase,
     '{{BIZ_NAME}}': business_name,
     '{{ACCENT_COLOR}}': accent_color,
     '{{ACCENT_LIGHT}}': accent_light,
@@ -675,7 +727,7 @@ if ai_agents and len(ai_agents) > 0:
 
     if start_idx != -1 and end_idx != -1:
         agent_cards_html = ""
-        for i, agent in enumerate(ai_agents[:6], 1):
+        for i, agent in enumerate(ai_agents[:agent_count], 1):
             a_name = agent.get('name', f'AI Agent #{i}')
             a_desc = agent.get('desc', f'Custom AI agent for your {industry} business.')
             a_result = agent.get('result') or agent.get('outcome') or f'Automates key {industry} workflows.'
