@@ -405,16 +405,67 @@ function priceHTML(v, long) {
   const basis = p.guests_basis ? ` · based on ${p.guests_basis} guests` : '';
   return `<p class="price"><strong>${esc(amt)}</strong> — ${esc(p.what_it_covers)}${esc(basis)}<br><small>Price ${esc(per)}, <a href="${esc(p.source_url)}" target="_blank" rel="noopener">source</a> dated ${esc(fmtDate(p.source_date))}</small></p>`;
 }
+
+/* Verified CC/Wikimedia Commons licensed wedding scene photos (ceremony aisles, floral arches, reception tablescapes) */
+const WEDDING_SCENES_POOL = [
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Country_wedding_aisle.JPG/960px-Country_wedding_aisle.JPG", file_page: "https://commons.wikimedia.org/wiki/File%3ACountry_wedding_aisle.JPG", author: "Jina Lee", license: "CC BY-SA 3.0", alt: "Rustic country wedding aisle with floral decor" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Church_on_the_morning_of_the_wedding_%28Unsplash%29.jpg/960px-Church_on_the_morning_of_the_wedding_%28Unsplash%29.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3AChurch_on_the_morning_of_the_wedding_%28Unsplash%29.jpg", author: "Jez Timms", license: "CC0", alt: "Cathedral wedding ceremony flowers & morning light" },
+  { image_url: "https://upload.wikimedia.org/wikipedia/commons/7/74/Centerpiece_pure_love.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", file_page: "https://commons.wikimedia.org/wiki/File%3ACenterpiece_pure_love.png", author: "Purelovefloraldesign", license: "CC BY-SA 4.0", alt: "Floral wedding centerpiece & candlelit tablescape" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Decorative_flowers_and_fruits_on_the_wedding_table_with_blurry_background.jpg/960px-Decorative_flowers_and_fruits_on_the_wedding_table_with_blurry_background.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3ADecorative_flowers_and_fruits_on_the_wedding_table_with_blurry_background.jpg", author: "Shixart1985", license: "CC BY 2.0", alt: "Wedding dinner reception tablescape with florals" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Decoration_for_a_wedding_in_the_cathedral_of_Trieste_01.jpg/960px-Decoration_for_a_wedding_in_the_cathedral_of_Trieste_01.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3ADecoration_for_a_wedding_in_the_cathedral_of_Trieste_01.jpg", author: "Kritzolina", license: "CC BY-SA 4.0", alt: "Grand cathedral aisle floral ceremony installation" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Courtyard_wedding.jpg/960px-Courtyard_wedding.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3ACourtyard_wedding.jpg", author: "Pinybal", license: "CC BY-SA 3.0", alt: "Courtyard garden wedding ceremony setup" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Boda_en_Casapueblo_-_Wedding_Planner_Uruguay.JPG/960px-Boda_en_Casapueblo_-_Wedding_Planner_Uruguay.JPG", file_page: "https://commons.wikimedia.org/wiki/File%3ABoda_en_Casapueblo_-_Wedding_Planner_Uruguay.JPG", author: "Irenuchi", license: "CC BY-SA 3.0", alt: "Sunset oceanfront wedding reception setup" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Flowers_for_a_Wedding.jpg/960px-Flowers_for_a_Wedding.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3AFlowers_for_a_Wedding.jpg", author: "Kullatan Kin", license: "CC0", alt: "White floral wedding installation & ceremony arch" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Arya-ti-hanjuang-wedding-wotgali-2019-01.jpg/960px-Arya-ti-hanjuang-wedding-wotgali-2019-01.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3AArya-ti-hanjuang-wedding-wotgali-2019-01.jpg", author: "Aris riyanto", license: "CC BY-SA 4.0", alt: "Outdoor garden wedding stage & ceremony floral arch" },
+  { image_url: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Chinese_Restaurant_Wedding_Reception.jpg/960px-Chinese_Restaurant_Wedding_Reception.jpg", file_page: "https://commons.wikimedia.org/wiki/File%3AChinese_Restaurant_Wedding_Reception.jpg", author: "Kenneth Lu", license: "CC BY 2.0", alt: "Wedding celebration reception dinner banquet" }
+];
+
+function getVenuePhotoList(v) {
+  const list = [];
+  if (v.photo && v.photo.image_url) {
+    list.push({ ...v.photo, alt: `${v.name}, ${v.city}`, tag: 'Venue Photo' });
+  }
+  const a = venueArea(v);
+  if (list.length === 0 && a && a.photo) {
+    list.push({ ...a.photo, alt: `Area photo: ${a.name}, not venue itself`, tag: `Area: ${a.name}` });
+  }
+  let h = 0;
+  const key = v.id || v.name || '';
+  for (let i = 0; i < key.length; i++) {
+    h = ((h << 5) - h) + key.charCodeAt(i);
+    h |= 0;
+  }
+  h = Math.abs(h);
+  const needed = Math.max(3 - list.length, 2);
+  for (let i = 0; i < needed; i++) {
+    const scene = WEDDING_SCENES_POOL[(h + i * 3) % WEDDING_SCENES_POOL.length];
+    list.push({ ...scene, tag: 'Style inspiration, not this venue' });
+  }
+  return list;
+}
+
 function photoFig(photo, alt, tag) {
   if (!photo || !photo.image_url) return '';
   return `<figure><div class="ph">${tag ? `<span class="tag">${esc(tag)}</span>` : ''}<img src="${esc(photo.image_url)}" alt="${esc(alt)}" loading="lazy" decoding="async" width="960" height="640"></div>` +
     `<figcaption class="credit">${tag ? esc(tag) + ' — ' : ''}Photo: <a href="${esc(photo.file_page)}" target="_blank" rel="noopener">${esc(photo.author)} · ${esc(photo.license)} · Wikimedia Commons</a></figcaption></figure>`;
 }
+
 function venuePhoto(v) {
-  if (v.photo && v.photo.image_url) return photoFig(v.photo, `${v.name}, ${v.city}`, '');
-  const a = venueArea(v);
-  if (a && a.photo) return photoFig(a.photo, `Area photo of ${a.name}, not the venue itself`, `Area photo: ${a.name}`);
-  return '';
+  const list = getVenuePhotoList(v);
+  if (!list.length) return '';
+  if (list.length === 1) return photoFig(list[0], list[0].alt, list[0].tag);
+  
+  return `<div class="v-gallery" role="region" aria-label="Photos for ${esc(v.name)}">
+    <button class="v-gallery-nav v-gallery-prev" type="button" aria-label="Previous photo">‹</button>
+    <div class="v-gallery-track">
+      ${list.map((p) => `<figure class="v-gallery-slide"><div class="ph">${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ''}<img src="${esc(p.image_url)}" alt="${esc(p.alt || v.name)}" loading="lazy" decoding="async" width="960" height="640"></div>` +
+        `<figcaption class="credit">${p.tag ? esc(p.tag) + ' — ' : ''}Photo: <a href="${esc(p.file_page)}" target="_blank" rel="noopener">${esc(p.author)} · ${esc(p.license)} · Wikimedia Commons</a></figcaption></figure>`).join('')}
+    </div>
+    <button class="v-gallery-nav v-gallery-next" type="button" aria-label="Next photo">›</button>
+    <div class="v-gallery-dots" role="tablist" aria-label="Photo indicators">
+      ${list.map((_, i) => `<button class="v-gallery-dot ${i === 0 ? 'active' : ''}" type="button" role="tab" aria-label="Photo ${i + 1}"></button>`).join('')}
+    </div>
+  </div>`;
 }
 function swatchRow(p) {
   const names = p.color_names || [];
@@ -423,7 +474,80 @@ function swatchRow(p) {
 }
 function styleNames(ids) { return (ids || []).map(id => D.styleById[id] ? D.styleById[id].name : id).join(', '); }
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('on'), 2600); }
-function setView(html) { $('#view').innerHTML = html; }
+function setView(html) {
+  const el = $('#view');
+  el.innerHTML = html;
+  el.classList.remove('view-transition');
+  void el.offsetWidth;
+  el.classList.add('view-transition');
+  initScrollEffects();
+}
+
+function initScrollEffects() {
+  if (typeof window === 'undefined') return;
+  $$('.v-gallery').forEach(gal => {
+    if (gal.dataset.bound) return;
+    gal.dataset.bound = '1';
+    const track = $('.v-gallery-track', gal);
+    const dots = $$('.v-gallery-dot', gal);
+    const prev = $('.v-gallery-prev', gal);
+    const next = $('.v-gallery-next', gal);
+    if (!track) return;
+    track.addEventListener('scroll', () => {
+      const w = track.clientWidth || 1;
+      const idx = Math.round(track.scrollLeft / w);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }, { passive: true });
+    if (prev) prev.addEventListener('click', (e) => { e.stopPropagation(); track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }); });
+    if (next) next.addEventListener('click', (e) => { e.stopPropagation(); track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }); });
+    dots.forEach((d, i) => d.addEventListener('click', (e) => { e.stopPropagation(); track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); }));
+  });
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          o.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+    $$('.card, .sec, .pick, .hero, .quiz, .v-card, .area-card').forEach(el => {
+      el.classList.add('reveal');
+      obs.observe(el);
+    });
+
+    const secnav = $('.secnav');
+    const sections = $$('section.sec[id]');
+    if (secnav && sections.length) {
+      const links = $$('.secnav a[href^="#sec-"]');
+      const secObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sid = entry.target.id;
+            links.forEach(a => {
+              const active = a.getAttribute('href') === `#${sid}`;
+              a.classList.toggle('active', active);
+              if (active) a.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '-40px 0px -40% 0px' });
+      sections.forEach(s => secObs.observe(s));
+    }
+  }
+
+  const hero = $('.hero');
+  if (hero && !hero.dataset.parallaxBound) {
+    hero.dataset.parallaxBound = '1';
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 600) hero.style.setProperty('--hero-parallax', `${(y * 0.18).toFixed(1)}px`);
+    }, { passive: true });
+  }
+}
 function focusMain(sel) { const h = $(sel || '#view h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 
 /* ---------------- routing ---------------- */

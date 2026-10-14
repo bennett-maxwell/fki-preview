@@ -308,3 +308,159 @@ details.ms.fold > summary{color:var(--terracotta)}
 .sticky-britt{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:20;box-shadow:0 6px 20px rgba(43,43,43,.25);background:var(--burgundy);border-color:var(--burgundy);transition:opacity .2s,transform .2s}
 .sticky-britt.hide{opacity:0;transform:translateY(12px);pointer-events:none;visibility:hidden}
 .sticky-pad{height:80px}
+
+/* Scroll motion effects & gallery styles (v7) */
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Fade / Slide scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 2. Parallax hero */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-fig {
+    transform: translateY(var(--hero-parallax, 0px));
+    transition: transform 0.12s ease-out;
+    will-change: transform;
+  }
+
+  /* 3. Staggered card entry */
+  .stagger-cards .card {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stagger-cards .card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 5. Sticky section progress */
+  .secnav a.active {
+    background: var(--burgundy);
+    color: var(--white);
+    border-radius: 999px;
+  }
+
+  /* 6. Smooth page transitions */
+  #view.view-transition {
+    animation: viewEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes viewEnter {
+    from {
+      opacity: 0.15;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* 4. Swipeable photo carousel / gallery */
+.v-gallery {
+  position: relative;
+  background: var(--sand);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: var(--s3);
+}
+.v-gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  aspect-ratio: 3/2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.v-gallery-track::-webkit-scrollbar { display: none; }
+.v-gallery-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  margin: 0;
+}
+.v-gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.v-gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(43,43,43,0.7);
+  color: #fff;
+  border: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.2s, transform 0.15s;
+}
+.v-gallery-nav:hover {
+  background: var(--burgundy);
+  transform: translateY(-50%) scale(1.08);
+}
+.v-gallery-prev { left: 8px; }
+.v-gallery-next { right: 8px; }
+.v-gallery-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.v-gallery-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.v-gallery-dot.active {
+  background: #fff;
+  transform: scale(1.25);
+}
+.v-gallery-caption {
+  padding: 6px 4px 0;
+  font-size: .75rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.v-gallery-caption a {
+  color: var(--muted);
+  display: inline-block;
+  padding: 2px 0;
+}
