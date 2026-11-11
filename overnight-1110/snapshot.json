@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T03:59:32.415870+00:00",
+  "generated_at": "2026-11-11T04:04:34.693762+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -13,7 +13,7 @@
             "yellow",
             "yellow",
             "green",
-            "yellow",
+            "green",
             "green"
           ],
           "lane_names": [
@@ -23,11 +23,11 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-11T03:58:40.205865+00:00",
+          "ts": "2026-11-11T04:03:41.196241+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 ticks running | efficiency going up vs previous hour | the live page refreshed",
           "last_action": "checked 0 state file(s) across 0 agent(s); not armed: kiwi, astro, qwen-st, qwen-tiff, gemini-a, gemini-b, meta-ai, dot; 0 alert(s) this tick",
           "shipped_last_hour": 0,
-          "runs_last_hour": 7,
+          "runs_last_hour": 12,
           "model_calls": 0,
           "project": "claude",
           "all_green": false
@@ -40,14 +40,14 @@
         "work": {
           "agent": "kiwi",
           "timer": "work",
-          "armed": false,
-          "status": "not armed",
+          "armed": true,
+          "status": "live",
           "lanes": [
-            "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "green",
+            "green",
+            "yellow",
+            "yellow",
+            "yellow"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -56,25 +56,26 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": null,
-          "checking": null,
-          "last_action": null,
+          "ts": "2026-11-11T04:03:48.889439+00:00",
+          "checking": "engine queue + gui lock + own claims",
+          "last_action": "idle_handoff:6ffe4267-8bea-4a06-a95d-0dc773451e44 [CHECK-ONLY, not sent]",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
+          "project": "kiwi",
           "all_green": false
         },
         "doctor": {
           "agent": "kiwi",
           "timer": "doctor",
-          "armed": false,
-          "status": "not armed",
+          "armed": true,
+          "status": "live",
           "lanes": [
-            "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "green",
+            "yellow",
+            "green",
+            "yellow",
+            "yellow"
           ],
           "lane_names": [
             "its own work ticks moved rows",
@@ -83,12 +84,13 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": null,
-          "checking": null,
-          "last_action": null,
+          "ts": "2026-11-11T04:04:03.679764+00:00",
+          "checking": "own claimed/owned rows for 15-min stall or failed done-test",
+          "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
+          "project": "kiwi",
           "all_green": false
         }
       }
@@ -558,10 +560,9 @@
   "bed_ready": {
     "green": false,
     "reasons": [
-      "claude doctor: red on its own work ticks moved rows, shipped count went up this hour, a FIX row exists for every failure, different agent, woken live",
-      "kiwi work: not armed",
-      "kiwi doctor: not armed",
-      "kiwi: no shipped row in last 30 min and no claim moved in last 15 min",
+      "claude doctor: red on its own work ticks moved rows, shipped count went up this hour",
+      "kiwi work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "kiwi doctor: red on shipped count went up this hour, a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
       "astro work: not armed",
       "astro doctor: not armed",
       "astro: no shipped row in last 30 min and no claim moved in last 15 min",
