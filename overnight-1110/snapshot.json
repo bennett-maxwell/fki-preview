@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T04:55:10.172997+00:00",
+  "generated_at": "2026-11-11T05:00:12.568302+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,9 +23,9 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-11T04:55:04.264845+00:00",
+          "ts": "2026-11-11T05:00:05.068884+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 4 state file(s) across 3 agent(s); not armed: astro, qwen-tiff, gemini-a, gemini-b, meta-ai, dot; 0 alert(s) this tick",
+          "last_action": "checked 7 state file(s) across 5 agent(s); not armed: astro, qwen-tiff, gemini-b, dot; 0 alert(s) this tick",
           "shipped_last_hour": 0,
           "runs_last_hour": 61,
           "model_calls": 0,
@@ -56,7 +56,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-11T04:54:37.109895+00:00",
+          "ts": "2026-11-11T04:59:41.576183+00:00",
           "checking": "engine queue + gui lock + own claims",
           "last_action": "idle_handoff:df4bb6de-8cb5-4008-81a9-1c4f85dc3ad2",
           "shipped_last_hour": 0,
@@ -84,7 +84,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-11T04:54:29.810948+00:00",
+          "ts": "2026-11-11T04:59:30.264616+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 0,
@@ -279,14 +279,14 @@
         "work": {
           "agent": "gemini-a",
           "timer": "work",
-          "armed": false,
-          "status": "not armed",
+          "armed": true,
+          "status": "live",
           "lanes": [
+            "green",
+            "green",
+            "yellow",
             "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "yellow"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -295,25 +295,26 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": null,
-          "checking": null,
-          "last_action": null,
+          "ts": "2026-11-11T04:59:12.010615+00:00",
+          "checking": "engine queue + own claims + bridge status",
+          "last_action": "idle_handoff:fbf9593f-e063-44ea-8c6b-9a18b97bc6b7 [CHECK-ONLY, not sent]",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
+          "project": "gemini-a",
           "all_green": false
         },
         "doctor": {
           "agent": "gemini-a",
           "timer": "doctor",
-          "armed": false,
-          "status": "not armed",
+          "armed": true,
+          "status": "live",
           "lanes": [
-            "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "green",
+            "yellow",
+            "green",
+            "yellow",
+            "yellow"
           ],
           "lane_names": [
             "its own work ticks moved rows",
@@ -322,12 +323,13 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": null,
-          "checking": null,
-          "last_action": null,
+          "ts": "2026-11-11T04:59:59.348054+00:00",
+          "checking": "own claimed/owned rows for 15-min stall or failed done-test",
+          "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
+          "project": "gemini-a",
           "all_green": false
         }
       }
@@ -397,14 +399,14 @@
         "work": {
           "agent": "meta-ai",
           "timer": "work",
-          "armed": false,
-          "status": "not armed",
+          "armed": true,
+          "status": "live",
           "lanes": [
+            "green",
+            "green",
+            "yellow",
             "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "yellow"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -413,12 +415,13 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": null,
-          "checking": null,
-          "last_action": null,
+          "ts": "2026-11-11T04:59:34.280798+00:00",
+          "checking": "engine queue + own claims + bridge status",
+          "last_action": "idle_handoff:a5fd728d-72cf-4cf4-a0ea-badead6a7c0c [CHECK-ONLY, not sent]",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
+          "project": "meta-ai",
           "all_green": false
         },
         "doctor": {
@@ -573,15 +576,13 @@
       "qwen-tiff work: not armed",
       "qwen-tiff doctor: not armed",
       "qwen-tiff: no shipped row in last 30 min and no claim moved in last 15 min",
-      "gemini-a work: not armed",
-      "gemini-a doctor: not armed",
-      "gemini-a: no shipped row in last 30 min and no claim moved in last 15 min",
+      "gemini-a work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "gemini-a doctor: red on shipped count went up this hour, a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
       "gemini-b work: not armed",
       "gemini-b doctor: not armed",
       "gemini-b: no shipped row in last 30 min and no claim moved in last 15 min",
-      "meta-ai work: not armed",
+      "meta-ai work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "meta-ai doctor: not armed",
-      "meta-ai: no shipped row in last 30 min and no claim moved in last 15 min",
       "dot work: not armed",
       "dot doctor: not armed",
       "dot: no shipped row in last 30 min and no claim moved in last 15 min"
