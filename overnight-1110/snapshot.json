@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T04:29:59.171764+00:00",
+  "generated_at": "2026-11-11T04:35:01.322516+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,11 +23,11 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-11T04:28:59.567654+00:00",
+          "ts": "2026-11-11T04:35:00.561281+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 2 state file(s) across 1 agent(s); not armed: astro, qwen-st, qwen-tiff, gemini-a, gemini-b, meta-ai, dot; 0 alert(s) this tick",
+          "last_action": "checked 3 state file(s) across 2 agent(s); not armed: astro, qwen-tiff, gemini-a, gemini-b, meta-ai, dot; 0 alert(s) this tick",
           "shipped_last_hour": 0,
-          "runs_last_hour": 38,
+          "runs_last_hour": 44,
           "model_calls": 0,
           "project": "claude",
           "all_green": false
@@ -56,7 +56,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-11T04:29:15.789983+00:00",
+          "ts": "2026-11-11T04:34:19.989422+00:00",
           "checking": "engine queue + gui lock + own claims",
           "last_action": "idle_handoff:df4bb6de-8cb5-4008-81a9-1c4f85dc3ad2",
           "shipped_last_hour": 0,
@@ -84,7 +84,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-11T04:29:26.373641+00:00",
+          "ts": "2026-11-11T04:34:27.838062+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 0,
@@ -161,13 +161,13 @@
           "agent": "qwen-st",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
-            "green",
-            "yellow",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -177,7 +177,7 @@
             "a different agent graded or shipped it"
           ],
           "ts": "2026-11-11T04:29:49.597440+00:00",
-          "checking": "row 5418f4f4-8344-4214-b0aa-3f3019fa24d4 (doctor-timers-skill), maker nova",
+          "checking": "stale since 2026-11-11T04:29:49.597440+00:00",
           "last_action": "dry-run composed prompt",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
@@ -567,7 +567,7 @@
       "astro work: not armed",
       "astro doctor: not armed",
       "astro: no shipped row in last 30 min and no claim moved in last 15 min",
-      "qwen-st work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "qwen-st work: stale",
       "qwen-st doctor: not armed",
       "qwen-tiff work: not armed",
       "qwen-tiff doctor: not armed",
