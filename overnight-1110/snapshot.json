@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T15:47:04.342498+00:00",
+  "generated_at": "2026-11-13T15:52:07.262416+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,9 +23,9 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:46:45.951652+00:00",
+          "ts": "2026-11-13T15:51:47.280482+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 1 alert(s) this tick",
+          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 5 alert(s) this tick",
           "shipped_last_hour": 0,
           "runs_last_hour": 60,
           "model_calls": 0,
@@ -56,7 +56,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:49.295242+00:00",
+          "ts": "2026-11-13T15:51:56.660182+00:00",
           "checking": "engine queue + gui lock + own claims",
           "last_action": "no_work",
           "shipped_last_hour": 14,
@@ -84,7 +84,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:42:07.981578+00:00",
+          "ts": "2026-11-13T15:47:24.617929+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 1,
@@ -117,7 +117,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:40.859119+00:00",
+          "ts": "2026-11-13T15:52:02.601309+00:00",
           "checking": "engine queue + gui lock + own claims",
           "last_action": "no_work",
           "shipped_last_hour": 8,
@@ -145,7 +145,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:44:25.715084+00:00",
+          "ts": "2026-11-13T15:49:26.625723+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 0,
@@ -178,11 +178,11 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:45:56.939936+00:00",
-          "checking": "Engine task row 047f410c-5b02-4704-a11b-a6af6392f8eb (OVERNIGHT-1110, review)",
-          "last_action": "task row via model grade of the proof text against the done-test: posted",
-          "shipped_last_hour": 15,
-          "runs_last_hour": 46,
+          "ts": "2026-11-13T15:50:47.829860+00:00",
+          "checking": "row c7351bab-122a-41d1-93c4-9f6911d655b0 (doctor-timers-skill), maker claude-code",
+          "last_action": "graded doctor-timers-skill (c7351bab): score 60.0, FAIL",
+          "shipped_last_hour": 16,
+          "runs_last_hour": 45,
           "model_calls": 1,
           "project": "qwen-st",
           "all_green": false
@@ -223,13 +223,13 @@
           "agent": "qwen-tiff",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
-            "yellow",
-            "yellow",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -238,9 +238,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:11.307055+00:00",
-          "checking": "engine_seat_ml_queue (live, state=staged) where maker != this seat; also no eligible Engine task row",
-          "last_action": "idle: no eligible candidate row (none staged by someone else, or all superseded/graded)",
+          "ts": "2026-11-13T15:49:13.998137+00:00",
+          "checking": "stale since 2026-11-13T15:49:13.998137+00:00",
+          "last_action": "task row via evidence-or-cooloff-or-claim-skip: every eligible candidate this tick lacked evidence, is in cool-off, or is claimed by the other grader seat right now -- nothing to grade this tick",
           "shipped_last_hour": 7,
           "runs_last_hour": 38,
           "model_calls": 0,
@@ -298,9 +298,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:22.693857+00:00",
+          "ts": "2026-11-13T15:50:29.057756+00:00",
           "checking": "engine queue + own claims + bridge status",
-          "last_action": "idle_handoff:7a228426-2760-4ccc-888f-ab7986dd5c10 [BLOCKED: gemini tab <240s old, age=184.339503]",
+          "last_action": "idle_handoff:7a228426-2760-4ccc-888f-ab7986dd5c10 [BLOCKED: gemini tab <240s old, age=184.336238]",
           "shipped_last_hour": 41,
           "runs_last_hour": 0,
           "model_calls": 0,
@@ -311,13 +311,13 @@
           "agent": "gemini-a",
           "timer": "doctor",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
-            "green",
-            "green",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "its own work ticks moved rows",
@@ -327,7 +327,7 @@
             "FIX rows are closing"
           ],
           "ts": "2026-11-13T15:39:17.030515+00:00",
-          "checking": "own claimed/owned rows for 15-min stall or failed done-test",
+          "checking": "stale since 2026-11-13T15:39:17.030515+00:00",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 32,
           "runs_last_hour": 0,
@@ -418,7 +418,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:24.553807+00:00",
+          "ts": "2026-11-13T15:51:30.179701+00:00",
           "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 14,
@@ -446,7 +446,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:43:12.207925+00:00",
+          "ts": "2026-11-13T15:48:30.399385+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 7,
@@ -604,7 +604,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:44:47.688221+00:00",
+          "ts": "2026-11-13T15:49:48.723660+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 32,
@@ -632,7 +632,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:45:05.021499+00:00",
+          "ts": "2026-11-13T15:51:36.440016+00:00",
           "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 44,
@@ -665,7 +665,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:43:05.996580+00:00",
+          "ts": "2026-11-13T15:48:06.858955+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 32,
@@ -693,7 +693,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:45:24.893789+00:00",
+          "ts": "2026-11-13T15:51:56.491059+00:00",
           "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 41,
@@ -739,13 +739,13 @@
           "agent": "gemini-personal-1",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
             "red",
-            "yellow",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -755,7 +755,7 @@
             "a different agent graded or shipped it"
           ],
           "ts": "2026-11-13T15:46:35.716972+00:00",
-          "checking": "engine queue + own claims + bridge status",
+          "checking": "stale since 2026-11-13T15:46:35.716972+00:00",
           "last_action": "no_work",
           "shipped_last_hour": 41,
           "runs_last_hour": 0,
@@ -800,13 +800,13 @@
           "agent": "gemini-personal-2",
           "timer": "work",
           "armed": true,
-          "status": "stale",
+          "status": "live",
           "lanes": [
+            "green",
             "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "yellow",
+            "yellow",
+            "yellow"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -815,8 +815,8 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:44:49.927814+00:00",
-          "checking": "stale since 2026-11-13T15:44:49.927814+00:00",
+          "ts": "2026-11-13T15:50:56.096189+00:00",
+          "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 41,
           "runs_last_hour": 0,
@@ -881,7 +881,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:47:00.562547+00:00",
+          "ts": "2026-11-13T15:52:00.953670+00:00",
           "checking": "merge line: rows graded 95+, PASS, current base, three seats",
           "last_action": "nothing ready to merge",
           "shipped_last_hour": 0,
@@ -942,7 +942,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:29.691962+00:00",
+          "ts": "2026-11-13T15:51:35.814289+00:00",
           "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 16,
@@ -975,7 +975,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-13T15:42:11.874424+00:00",
+          "ts": "2026-11-13T15:47:12.990553+00:00",
           "checking": "own claimed/owned rows for 15-min stall or failed done-test",
           "last_action": "0 fix(es) considered, 0 self-repair(s)",
           "shipped_last_hour": 7,
@@ -1003,7 +1003,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:45:51.546925+00:00",
+          "ts": "2026-11-13T15:50:08.311151+00:00",
           "checking": "engine queue + own claims + bridge status",
           "last_action": "no_work",
           "shipped_last_hour": 19,
@@ -1036,7 +1036,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:27.759815+00:00",
+          "ts": "2026-11-13T15:51:23.615590+00:00",
           "checking": "pool.json + every armed agent's own queue file length",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
@@ -1069,7 +1069,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-13T15:46:20.334845+00:00",
+          "ts": "2026-11-13T15:51:38.458331+00:00",
           "checking": null,
           "last_action": null,
           "shipped_last_hour": 0,
@@ -1093,7 +1093,7 @@
       },
       "qwen-st": {
         "since_last_snapshot": 0,
-        "since_1900": 15
+        "since_1900": 16
       },
       "qwen-tiff": {
         "since_last_snapshot": 0,
@@ -1161,7 +1161,19 @@
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
       },
-      "FKI Seat Brain v4.0 Core Memory and 3-Day Hourly Behavior Audit": {
+      "Do-or-Die 2026-11-04": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 3,
+        "engine_shipped_last_hour": 0
+      },
+      "Survival Mode \u2014 Ad spend to qualified appointment audit (30d/6m/12m/18m) + messaging that sells": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 0
+      },
+      "2-year idea capture + widen the trail (2026-11-02)": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
@@ -1173,41 +1185,29 @@
         "engine_shipped_since_1900": 3,
         "engine_shipped_last_hour": 0
       },
-      "Do-or-Die 2026-11-04": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 3,
-        "engine_shipped_last_hour": 0
-      },
       "Engine lanes v1: Trail, asks, lanes, gates, autonomous skills": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 16,
         "engine_shipped_last_hour": 0
       },
-      "2-year idea capture + widen the trail (2026-11-02)": {
+      "FKI Seat Brain v4.0 Core Memory and 3-Day Hourly Behavior Audit": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
-      },
-      "Survival Mode \u2014 Ad spend to qualified appointment audit (30d/6m/12m/18m) + messaging that sells": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "Clock-In cutover 2026-10-27": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 48,
-        "engine_shipped_last_hour": 1
       },
       "Legal matters outside the company": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 3,
         "engine_shipped_last_hour": 3
+      },
+      "Clock-In cutover 2026-10-27": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 48,
+        "engine_shipped_last_hour": 1
       }
     },
     "engine_shipped_since_1900_total": 77,
@@ -1217,7 +1217,7 @@
   "efficiency": {
     "kiwi": null,
     "astro": null,
-    "qwen-st": 0.326,
+    "qwen-st": 0.356,
     "qwen-tiff": 0.184,
     "gemini-a": null,
     "gemini-b": null,
@@ -1244,10 +1244,10 @@
       "astro doctor: red on shipped count went up this hour, a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
       "qwen-st work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "qwen-st doctor: not armed",
-      "qwen-tiff work: red on agent busy or just handed work, the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "qwen-tiff work: stale",
       "qwen-tiff doctor: not armed",
       "gemini-a work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
-      "gemini-a doctor: red on a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
+      "gemini-a doctor: stale",
       "gemini-b work: not armed",
       "gemini-b doctor: not armed",
       "gemini-b: no shipped row in last 30 min and no claim moved in last 15 min",
@@ -1263,9 +1263,9 @@
       "gemini-p-2 doctor: red on a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
       "gemini-p-2 work: red on agent busy or just handed work, the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "gemini-personal-1 doctor: red on a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
-      "gemini-personal-1 work: red on agent busy or just handed work, the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "gemini-personal-1 work: stale",
       "gemini-personal-2 doctor: red on a FIX row exists for every failure, different agent, woken live, FIX rows are closing",
-      "gemini-personal-2 work: stale",
+      "gemini-personal-2 work: red on agent busy or just handed work, the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
       "merger work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
