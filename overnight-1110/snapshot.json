@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T11:43:30.689538+00:00",
+  "generated_at": "2026-11-19T11:48:33.514839+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,9 +23,9 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-19T11:42:40.135309+00:00",
+          "ts": "2026-11-19T11:47:41.133591+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 2 alert(s) this tick",
+          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 0 alert(s) this tick",
           "shipped_last_hour": 0,
           "runs_last_hour": 60,
           "model_calls": 0,
@@ -866,13 +866,13 @@
           "agent": "merger",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
-            "green",
-            "green",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -881,9 +881,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-19T11:42:16.823844+00:00",
-          "checking": "merge line: rows graded 95+, PASS, current base, three seats",
-          "last_action": "merged 2 row(s)",
+          "ts": "2026-11-19T11:46:19.980261+00:00",
+          "checking": "stale since 2026-11-19T11:46:19.980261+00:00",
+          "last_action": "merged 1 row(s)",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
@@ -1036,8 +1036,8 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-19T11:41:00.098176+00:00",
-          "checking": "stale since 2026-11-19T11:41:00.098176+00:00",
+          "ts": "2026-11-19T11:46:00.101019+00:00",
+          "checking": "stale since 2026-11-19T11:46:00.101019+00:00",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
@@ -1154,47 +1154,11 @@
       "ship": {
         "since_last_snapshot": 0,
         "since_1900": 0
-      },
-      "Clock-In cutover 2026-10-27": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "Fleet Timers (LA lanes)": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 2,
-        "engine_shipped_last_hour": 0
-      },
-      "Weekend autonomy order 2026-10-30 (91 items)": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "FKI Seat Brain v4.0 Core Memory and 3-Day Hourly Behavior Audit": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "AUDIT-LA fleet audit loop findings": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "TK1117-C Lane closer check": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
       }
     },
-    "engine_shipped_since_1900_total": 7,
+    "engine_shipped_since_1900_total": null,
     "engine_shipped_last_hour_total": 0,
-    "engine_door_note": "engine_seat_shipped_counts, live"
+    "engine_door_note": "door call failed: 'str' object has no attribute 'get'"
   },
   "efficiency": {
     "kiwi": null,
@@ -1260,7 +1224,7 @@
       "gemini-personal-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
-      "merger work: red on proof attached and opens, a different agent graded or shipped it",
+      "merger work: stale",
       "meta-ai-2 doctor: stale",
       "meta-ai-2 work: stale",
       "meta-ai-2: no shipped row in last 30 min and no claim moved in last 15 min",
