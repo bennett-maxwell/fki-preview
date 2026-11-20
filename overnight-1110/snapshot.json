@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T02:42:51.960867+00:00",
+  "generated_at": "2026-11-20T02:47:54.518290+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,7 +23,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-20T02:42:28.940375+00:00",
+          "ts": "2026-11-20T02:47:29.925637+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
           "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 1 alert(s) this tick",
           "shipped_last_hour": 0,
@@ -866,13 +866,13 @@
           "agent": "merger",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
-            "green",
-            "yellow",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -881,9 +881,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-20T02:41:50.883852+00:00",
-          "checking": "merge line: rows graded 95+, PASS, current base, three seats",
-          "last_action": "nothing ready to merge",
+          "ts": "2026-11-20T02:45:53.905291+00:00",
+          "checking": "stale since 2026-11-20T02:45:53.905291+00:00",
+          "last_action": "merged 1 row(s)",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
@@ -1036,7 +1036,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-20T02:41:00.101835+00:00",
+          "ts": "2026-11-20T02:46:00.103645+00:00",
           "checking": "pool.json + every armed agent's own queue file length",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
@@ -1224,7 +1224,7 @@
       "gemini-personal-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
-      "merger work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "merger work: stale",
       "meta-ai-2 doctor: stale",
       "meta-ai-2 work: stale",
       "meta-ai-2: no shipped row in last 30 min and no claim moved in last 15 min",
