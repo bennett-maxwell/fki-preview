@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T18:01:47.477278+00:00",
+  "generated_at": "2026-11-20T18:06:50.619208+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,7 +23,7 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-20T18:01:15.346733+00:00",
+          "ts": "2026-11-20T18:06:16.333660+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
           "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 1 alert(s) this tick",
           "shipped_last_hour": 0,
@@ -870,7 +870,7 @@
           "lanes": [
             "green",
             "green",
-            "green",
+            "yellow",
             "yellow",
             "yellow"
           ],
@@ -881,9 +881,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-20T18:01:04.346312+00:00",
+          "ts": "2026-11-20T18:05:10.236217+00:00",
           "checking": "merge line: rows graded 95+, PASS, current base, three seats",
-          "last_action": "merged 2 row(s)",
+          "last_action": "nothing ready to merge",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
@@ -1036,7 +1036,7 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-20T18:01:00.102847+00:00",
+          "ts": "2026-11-20T18:06:00.106997+00:00",
           "checking": "pool.json + every armed agent's own queue file length",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
@@ -1155,6 +1155,36 @@
         "since_last_snapshot": 0,
         "since_1900": 0
       },
+      "LA TIMER astro 4: review no grade page": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 1
+      },
+      "LA TIMER astro 5: shipped 24h page": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 1
+      },
+      "LA TIMER Murphy 2: rows page": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 0
+      },
+      "LA TIMER kiwi 1: communication triage report": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 0
+      },
+      "LA TIMER Murphy 3: refusals counter page": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 0
+      },
       "LA TIMER astro 2: merge line age page": {
         "since_last_snapshot": 0,
         "since_1900": 0,
@@ -1165,18 +1195,6 @@
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 2,
-        "engine_shipped_last_hour": 0
-      },
-      "LA TIMER Murphy 2: rows page": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "LA TIMER Murphy 1: question gate scoreboard": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
       },
       "LA TIMER Murphy 5: handoff rows page": {
@@ -1191,19 +1209,13 @@
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
       },
-      "LA TIMER kiwi 5: open rows age page": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 1
-      },
-      "LA TIMER astro 1: merge line report": {
+      "LA TIMER Murphy 1: question gate scoreboard": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
       },
-      "LA TIMER kiwi 1: communication triage report": {
+      "LA TIMER astro 1: merge line report": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
@@ -1215,19 +1227,7 @@
         "engine_shipped_since_1900": 2,
         "engine_shipped_last_hour": 0
       },
-      "LA TIMER astro 4: review no grade page": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 1
-      },
-      "LA TIMER Murphy 3: refusals counter page": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "LA TIMER astro 5: shipped 24h page": {
+      "LA TIMER kiwi 5: open rows age page": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
@@ -1302,7 +1302,7 @@
       "gemini-personal-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
-      "merger work: red on proof attached and opens, a different agent graded or shipped it",
+      "merger work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "meta-ai-2 doctor: stale",
       "meta-ai-2 work: stale",
       "meta-ai-2: no shipped row in last 30 min and no claim moved in last 15 min",
