@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T09:54:43.219442+00:00",
+  "generated_at": "2026-11-22T09:59:45.564785+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,9 +23,9 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-22T09:54:06.303927+00:00",
+          "ts": "2026-11-22T09:59:07.368572+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 0 alert(s) this tick",
+          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 2 alert(s) this tick",
           "shipped_last_hour": 0,
           "runs_last_hour": 60,
           "model_calls": 0,
@@ -866,13 +866,13 @@
           "agent": "merger",
           "timer": "work",
           "armed": true,
-          "status": "stale",
+          "status": "live",
           "lanes": [
-            "red",
-            "red",
-            "red",
-            "red",
-            "red"
+            "green",
+            "green",
+            "yellow",
+            "yellow",
+            "yellow"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -881,8 +881,8 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-22T09:52:43.081476+00:00",
-          "checking": "stale since 2026-11-22T09:52:43.081476+00:00",
+          "ts": "2026-11-22T09:58:44.087628+00:00",
+          "checking": "merge line: rows graded 95+, PASS, current base, three seats",
           "last_action": "nothing ready to merge",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
@@ -1036,8 +1036,8 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-22T09:51:00.115774+00:00",
-          "checking": "stale since 2026-11-22T09:51:00.115774+00:00",
+          "ts": "2026-11-22T09:56:02.096521+00:00",
+          "checking": "stale since 2026-11-22T09:56:02.096521+00:00",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
@@ -1224,7 +1224,7 @@
       "gemini-personal-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
-      "merger work: stale",
+      "merger work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
       "meta-ai-2 doctor: stale",
       "meta-ai-2 work: stale",
       "meta-ai-2: no shipped row in last 30 min and no claim moved in last 15 min",
