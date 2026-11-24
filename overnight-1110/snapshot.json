@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T04:57:56.234990+00:00",
+  "generated_at": "2026-11-24T05:03:00.873691+00:00",
   "agents": [
     {
       "agent": "claude",
@@ -23,9 +23,9 @@
             "a FIX row exists for every failure, different agent, woken live",
             "FIX rows are closing"
           ],
-          "ts": "2026-11-24T04:57:27.867310+00:00",
+          "ts": "2026-11-24T05:02:29.034697+00:00",
           "checking": "every armed doctor ticked in the last 6 minutes | every armed doctor made or closed a fix this hour | no lane of any armed timer red 2 distinct ticks running | efficiency going up vs previous hour | the live page refreshed",
-          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 10 alert(s) this tick",
+          "last_action": "checked 30 state file(s) across 20 agent(s); not armed: gemini-b, dot; 0 alert(s) this tick",
           "shipped_last_hour": 0,
           "runs_last_hour": 60,
           "model_calls": 0,
@@ -870,7 +870,7 @@
           "lanes": [
             "green",
             "green",
-            "yellow",
+            "green",
             "yellow",
             "yellow"
           ],
@@ -881,9 +881,9 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-24T04:57:10.759295+00:00",
+          "ts": "2026-11-24T05:01:20.402411+00:00",
           "checking": "merge line: rows graded 95+, PASS, current base, three seats",
-          "last_action": "nothing ready to merge",
+          "last_action": "merged 1 row(s)",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
           "model_calls": 0,
@@ -1021,13 +1021,13 @@
           "agent": "seeder",
           "timer": "work",
           "armed": true,
-          "status": "live",
+          "status": "stale",
           "lanes": [
-            "green",
             "red",
-            "green",
-            "yellow",
-            "yellow"
+            "red",
+            "red",
+            "red",
+            "red"
           ],
           "lane_names": [
             "ran in the last 2 min",
@@ -1036,8 +1036,8 @@
             "proof attached and opens",
             "a different agent graded or shipped it"
           ],
-          "ts": "2026-11-24T04:56:00.101343+00:00",
-          "checking": "pool.json + every armed agent's own queue file length",
+          "ts": "2026-11-24T05:01:00.107674+00:00",
+          "checking": "stale since 2026-11-24T05:01:00.107674+00:00",
           "last_action": "pool empty",
           "shipped_last_hour": 0,
           "runs_last_hour": 0,
@@ -1155,37 +1155,19 @@
         "since_last_snapshot": 0,
         "since_1900": 0
       },
+      "AUDIT-LA fleet audit loop findings": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 2,
+        "engine_shipped_last_hour": 2
+      },
       "Survival Mode \u2014 Ad spend to qualified appointment audit (30d/6m/12m/18m) + messaging that sells": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 5,
         "engine_shipped_last_hour": 0
       },
-      "Weekend autonomy order 2026-10-30 (91 items)": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 5,
-        "engine_shipped_last_hour": 2
-      },
-      "Bennett ranked 75: top 50 projects and next 25 items (2026-11-01)": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "Do-or-Die 2026-11-04": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 7,
-        "engine_shipped_last_hour": 3
-      },
       "Snoball / Landon Taylor proposal packet 2026-11-09": {
-        "since_last_snapshot": 0,
-        "since_1900": 0,
-        "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 0
-      },
-      "Engine lanes v1: Trail, asks, lanes, gates, autonomous skills": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
@@ -1197,19 +1179,19 @@
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
       },
-      "Fleet Timers (LA lanes)": {
+      "Bennett revenue + autonomy list (2026-11-01 22:21)": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
-        "engine_shipped_last_hour": 1
+        "engine_shipped_last_hour": 0
       },
-      "AUDIT-LA fleet audit loop findings": {
+      "Engine lanes v1: Trail, asks, lanes, gates, autonomous skills": {
         "since_last_snapshot": 0,
         "since_1900": 0,
-        "engine_shipped_since_1900": 2,
-        "engine_shipped_last_hour": 2
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 0
       },
-      "Bennett revenue + autonomy list (2026-11-01 22:21)": {
+      "Bennett ranked 75: top 50 projects and next 25 items (2026-11-01)": {
         "since_last_snapshot": 0,
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
@@ -1220,10 +1202,28 @@
         "since_1900": 0,
         "engine_shipped_since_1900": 1,
         "engine_shipped_last_hour": 0
+      },
+      "Fleet Timers (LA lanes)": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 1,
+        "engine_shipped_last_hour": 1
+      },
+      "Weekend autonomy order 2026-10-30 (91 items)": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 5,
+        "engine_shipped_last_hour": 1
+      },
+      "Do-or-Die 2026-11-04": {
+        "since_last_snapshot": 0,
+        "since_1900": 0,
+        "engine_shipped_since_1900": 7,
+        "engine_shipped_last_hour": 1
       }
     },
     "engine_shipped_since_1900_total": 26,
-    "engine_shipped_last_hour_total": 8,
+    "engine_shipped_last_hour_total": 5,
     "engine_door_note": "engine_seat_shipped_counts, live"
   },
   "efficiency": {
@@ -1290,14 +1290,14 @@
       "gemini-personal-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "gemini-w-1 work: stale",
       "gemini-w-1: no shipped row in last 30 min and no claim moved in last 15 min",
-      "merger work: red on the piece moved one stage, proof attached and opens, a different agent graded or shipped it",
+      "merger work: red on proof attached and opens, a different agent graded or shipped it",
       "meta-ai-2 doctor: stale",
       "meta-ai-2 work: stale",
       "meta-ai-2: no shipped row in last 30 min and no claim moved in last 15 min",
       "meta-ai-3 doctor: stale",
       "meta-ai-3 work: stale",
       "meta-ai-3: no shipped row in last 30 min and no claim moved in last 15 min",
-      "seeder work: red on agent busy or just handed work, proof attached and opens, a different agent graded or shipped it",
+      "seeder work: stale",
       "ship work: stale",
       "ship: no shipped row in last 30 min and no claim moved in last 15 min"
     ]
